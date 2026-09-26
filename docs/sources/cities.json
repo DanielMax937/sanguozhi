@@ -1,0 +1,867 @@
+{
+  "source": "https://vincecarter0315.pixnet.net/blog/posts/14215527290",
+  "developmentSource": "https://w.atwiki.jp/sangokushi11/pages/77.html",
+  "difficulty": "上级",
+  "count": 42,
+  "notes": [
+    "金、粮、耐久、最大士兵、州、邻接来自瑜云，与日文 wiki 上级表一致。初级收入 +25%，超级 −25%。",
+    "开发地、港关数、特色来自日文 wiki。developmentPatches 为空表示 wiki 没有写出分片。分片之间不能当邻居。",
+    "港和关的金、粮是所属城市的 20%。大都市驻兵上限 150000，可建大市场。枪戟弩军马造价 −20% 且月初自动获得兵装；兵器和水军造价 −20%，没有自动获得。"
+  ],
+  "cities": [
+    {
+      "name": "襄平",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 5000,
+      "durability": 2600,
+      "province": "幽州",
+      "neighbors": [
+        "北平"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        8,
+        4
+      ],
+      "portsAndGates": 1,
+      "specialty": "軍馬"
+    },
+    {
+      "name": "北平",
+      "maxSoldiers": 100000,
+      "gold": 500,
+      "food": 6000,
+      "durability": 3000,
+      "province": "幽州",
+      "neighbors": [
+        "襄平",
+        "薊",
+        "南皮"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": [
+        10,
+        5
+      ],
+      "portsAndGates": 0,
+      "specialty": "軍馬"
+    },
+    {
+      "name": "薊",
+      "maxSoldiers": 100000,
+      "gold": 500,
+      "food": 5000,
+      "durability": 3400,
+      "province": "幽州",
+      "neighbors": [
+        "北平",
+        "南皮",
+        "晉陽"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        5,
+        7
+      ],
+      "portsAndGates": 0,
+      "specialty": "戟"
+    },
+    {
+      "name": "南皮",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 6000,
+      "durability": 3600,
+      "province": "冀州",
+      "neighbors": [
+        "北平",
+        "薊",
+        "平原",
+        "鄴"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": [
+        9,
+        6
+      ],
+      "portsAndGates": 0,
+      "specialty": "兵器"
+    },
+    {
+      "name": "平原",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 6000,
+      "durability": 2700,
+      "province": "冀州",
+      "neighbors": [
+        "南皮",
+        "鄴",
+        "北海",
+        "濮陽"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        8,
+        4
+      ],
+      "portsAndGates": 1,
+      "specialty": "弩"
+    },
+    {
+      "name": "晉陽",
+      "maxSoldiers": 100000,
+      "gold": 500,
+      "food": 4000,
+      "durability": 2600,
+      "province": "冀州",
+      "neighbors": [
+        "薊",
+        "鄴"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        8,
+        4
+      ],
+      "portsAndGates": 2,
+      "specialty": "軍馬"
+    },
+    {
+      "name": "鄴",
+      "maxSoldiers": 150000,
+      "gold": 600,
+      "food": 7000,
+      "durability": 4000,
+      "province": "冀州",
+      "neighbors": [
+        "南皮",
+        "平原",
+        "晉陽",
+        "濮陽",
+        "陳留"
+      ],
+      "developmentLots": 20,
+      "developmentPatches": [
+        7,
+        8,
+        5
+      ],
+      "portsAndGates": 1,
+      "specialty": "大都市"
+    },
+    {
+      "name": "北海",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 7000,
+      "durability": 2400,
+      "province": "青徐",
+      "neighbors": [
+        "平原",
+        "下邳"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": null,
+      "portsAndGates": 2,
+      "specialty": "戟"
+    },
+    {
+      "name": "下邳",
+      "maxSoldiers": 150000,
+      "gold": 500,
+      "food": 8000,
+      "durability": 3700,
+      "province": "青徐",
+      "neighbors": [
+        "北海",
+        "小沛",
+        "壽春"
+      ],
+      "developmentLots": 18,
+      "developmentPatches": [
+        11,
+        7
+      ],
+      "portsAndGates": 2,
+      "specialty": "大都市"
+    },
+    {
+      "name": "小沛",
+      "maxSoldiers": 100000,
+      "gold": 300,
+      "food": 6000,
+      "durability": 2200,
+      "province": "青徐",
+      "neighbors": [
+        "下邳",
+        "壽春",
+        "濮陽",
+        "陳留"
+      ],
+      "developmentLots": 10,
+      "developmentPatches": [
+        5,
+        5
+      ],
+      "portsAndGates": 0,
+      "specialty": "兵器"
+    },
+    {
+      "name": "壽春",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 6000,
+      "durability": 2800,
+      "province": "青徐",
+      "neighbors": [
+        "下邳",
+        "小沛",
+        "汝南",
+        "建業",
+        "廬江"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": [
+        8,
+        7
+      ],
+      "portsAndGates": 1,
+      "specialty": "弩"
+    },
+    {
+      "name": "濮陽",
+      "maxSoldiers": 100000,
+      "gold": 600,
+      "food": 4000,
+      "durability": 3900,
+      "province": "兗予",
+      "neighbors": [
+        "平原",
+        "鄴",
+        "小沛",
+        "陳留"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": [
+        9,
+        6
+      ],
+      "portsAndGates": 1,
+      "specialty": "槍"
+    },
+    {
+      "name": "陳留",
+      "maxSoldiers": 100000,
+      "gold": 500,
+      "food": 5000,
+      "durability": 3600,
+      "province": "兗予",
+      "neighbors": [
+        "鄴",
+        "小沛",
+        "濮陽",
+        "許昌",
+        "洛陽",
+        "宛"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": [
+        10,
+        5
+      ],
+      "portsAndGates": 1,
+      "specialty": "兵器"
+    },
+    {
+      "name": "許昌",
+      "maxSoldiers": 150000,
+      "gold": 600,
+      "food": 5000,
+      "durability": 4000,
+      "province": "兗予",
+      "neighbors": [
+        "陳留",
+        "汝南",
+        "洛陽",
+        "宛"
+      ],
+      "developmentLots": 18,
+      "developmentPatches": [
+        9,
+        9
+      ],
+      "portsAndGates": 0,
+      "specialty": "大都市"
+    },
+    {
+      "name": "汝南",
+      "maxSoldiers": 100000,
+      "gold": 500,
+      "food": 6000,
+      "durability": 2700,
+      "province": "兗予",
+      "neighbors": [
+        "壽春",
+        "許昌",
+        "新野"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        7,
+        5
+      ],
+      "portsAndGates": 0,
+      "specialty": "戟"
+    },
+    {
+      "name": "洛陽",
+      "maxSoldiers": 150000,
+      "gold": 700,
+      "food": 4000,
+      "durability": 5000,
+      "province": "司隸",
+      "neighbors": [
+        "陳留",
+        "許昌",
+        "宛",
+        "長安"
+      ],
+      "developmentLots": 22,
+      "developmentPatches": [
+        8,
+        8,
+        6
+      ],
+      "portsAndGates": 3,
+      "specialty": "大都市"
+    },
+    {
+      "name": "宛",
+      "maxSoldiers": 100000,
+      "gold": 500,
+      "food": 5000,
+      "durability": 3800,
+      "province": "京兆",
+      "neighbors": [
+        "許昌",
+        "洛陽",
+        "長安",
+        "上庸",
+        "新野",
+        "陳留"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": [
+        6,
+        5,
+        4
+      ],
+      "portsAndGates": 0,
+      "specialty": "槍"
+    },
+    {
+      "name": "長安",
+      "maxSoldiers": 150000,
+      "gold": 600,
+      "food": 5000,
+      "durability": 5000,
+      "province": "京兆",
+      "neighbors": [
+        "洛陽",
+        "宛",
+        "安定",
+        "漢中"
+      ],
+      "developmentLots": 22,
+      "developmentPatches": [
+        10,
+        12
+      ],
+      "portsAndGates": 5,
+      "specialty": "大都市"
+    },
+    {
+      "name": "上庸",
+      "maxSoldiers": 100000,
+      "gold": 300,
+      "food": 6000,
+      "durability": 2400,
+      "province": "京兆",
+      "neighbors": [
+        "宛",
+        "新野",
+        "漢中"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        8,
+        4
+      ],
+      "portsAndGates": 1,
+      "specialty": "兵器"
+    },
+    {
+      "name": "安定",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 5000,
+      "durability": 2800,
+      "province": "涼州",
+      "neighbors": [
+        "長安",
+        "天水",
+        "武威"
+      ],
+      "developmentLots": 10,
+      "developmentPatches": [
+        5,
+        5
+      ],
+      "portsAndGates": 0,
+      "specialty": "軍馬"
+    },
+    {
+      "name": "天水",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 6000,
+      "durability": 2600,
+      "province": "涼州",
+      "neighbors": [
+        "安定",
+        "武威",
+        "漢中"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        7,
+        5
+      ],
+      "portsAndGates": 0,
+      "specialty": "軍馬"
+    },
+    {
+      "name": "武威",
+      "maxSoldiers": 100000,
+      "gold": 500,
+      "food": 7000,
+      "durability": 3600,
+      "province": "涼州",
+      "neighbors": [
+        "安定",
+        "天水"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": [
+        9,
+        6
+      ],
+      "portsAndGates": 0,
+      "specialty": "軍馬"
+    },
+    {
+      "name": "建業",
+      "maxSoldiers": 150000,
+      "gold": 500,
+      "food": 8000,
+      "durability": 4100,
+      "province": "揚州",
+      "neighbors": [
+        "壽春",
+        "吳",
+        "廬江",
+        "柴桑"
+      ],
+      "developmentLots": 18,
+      "developmentPatches": null,
+      "portsAndGates": 2,
+      "specialty": "大都市"
+    },
+    {
+      "name": "吳",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 7000,
+      "durability": 3400,
+      "province": "揚州",
+      "neighbors": [
+        "建業",
+        "會稽"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": [
+        8,
+        7
+      ],
+      "portsAndGates": 1,
+      "specialty": "水軍"
+    },
+    {
+      "name": "會稽",
+      "maxSoldiers": 100000,
+      "gold": 500,
+      "food": 6000,
+      "durability": 3000,
+      "province": "揚州",
+      "neighbors": [
+        "吳"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": null,
+      "portsAndGates": 1,
+      "specialty": "弩"
+    },
+    {
+      "name": "廬江",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 6000,
+      "durability": 3000,
+      "province": "揚州",
+      "neighbors": [
+        "壽春",
+        "建業",
+        "柴桑",
+        "江夏"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": [
+        10,
+        5
+      ],
+      "portsAndGates": 1,
+      "specialty": "水軍"
+    },
+    {
+      "name": "柴桑",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 6000,
+      "durability": 2800,
+      "province": "揚州",
+      "neighbors": [
+        "建業",
+        "廬江",
+        "江夏",
+        "江陵",
+        "長沙"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        6,
+        6
+      ],
+      "portsAndGates": 4,
+      "specialty": "水軍"
+    },
+    {
+      "name": "江夏",
+      "maxSoldiers": 100000,
+      "gold": 500,
+      "food": 5000,
+      "durability": 3400,
+      "province": "荊北",
+      "neighbors": [
+        "廬江",
+        "柴桑",
+        "襄陽",
+        "江陵",
+        "長沙"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        6,
+        6
+      ],
+      "portsAndGates": 1,
+      "specialty": "戟"
+    },
+    {
+      "name": "新野",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 6000,
+      "durability": 2400,
+      "province": "荊北",
+      "neighbors": [
+        "汝南",
+        "宛",
+        "上庸",
+        "襄陽"
+      ],
+      "developmentLots": 10,
+      "developmentPatches": [
+        5,
+        5
+      ],
+      "portsAndGates": 1,
+      "specialty": "槍"
+    },
+    {
+      "name": "襄陽",
+      "maxSoldiers": 150000,
+      "gold": 600,
+      "food": 7000,
+      "durability": 4600,
+      "province": "荊北",
+      "neighbors": [
+        "江夏",
+        "新野",
+        "江陵"
+      ],
+      "developmentLots": 18,
+      "developmentPatches": [
+        14,
+        4
+      ],
+      "portsAndGates": 1,
+      "specialty": "大都市"
+    },
+    {
+      "name": "江陵",
+      "maxSoldiers": 100000,
+      "gold": 500,
+      "food": 7000,
+      "durability": 4000,
+      "province": "荊北",
+      "neighbors": [
+        "柴桑",
+        "江夏",
+        "襄陽",
+        "長沙",
+        "武陵",
+        "永安"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": [
+        8,
+        7
+      ],
+      "portsAndGates": 3,
+      "specialty": "水軍"
+    },
+    {
+      "name": "長沙",
+      "maxSoldiers": 100000,
+      "gold": 500,
+      "food": 4000,
+      "durability": 3600,
+      "province": "荊南",
+      "neighbors": [
+        "柴桑",
+        "江夏",
+        "江陵",
+        "武陵",
+        "桂陽"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        6,
+        6
+      ],
+      "portsAndGates": 1,
+      "specialty": "水軍"
+    },
+    {
+      "name": "武陵",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 5000,
+      "durability": 3000,
+      "province": "荊南",
+      "neighbors": [
+        "江陵",
+        "長沙",
+        "零陵",
+        "永安"
+      ],
+      "developmentLots": 10,
+      "developmentPatches": [
+        6,
+        4
+      ],
+      "portsAndGates": 2,
+      "specialty": "戟"
+    },
+    {
+      "name": "桂陽",
+      "maxSoldiers": 100000,
+      "gold": 300,
+      "food": 6000,
+      "durability": 2800,
+      "province": "荊南",
+      "neighbors": [
+        "長沙",
+        "零陵"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        7,
+        5
+      ],
+      "portsAndGates": 0,
+      "specialty": "槍"
+    },
+    {
+      "name": "零陵",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 5000,
+      "durability": 2400,
+      "province": "荊南",
+      "neighbors": [
+        "武陵",
+        "桂陽"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        7,
+        5
+      ],
+      "portsAndGates": 0,
+      "specialty": "弩"
+    },
+    {
+      "name": "永安",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 7000,
+      "durability": 3000,
+      "province": "益州",
+      "neighbors": [
+        "江陵",
+        "武陵",
+        "江州"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        8,
+        4
+      ],
+      "portsAndGates": 1,
+      "specialty": "弩"
+    },
+    {
+      "name": "漢中",
+      "maxSoldiers": 100000,
+      "gold": 500,
+      "food": 8000,
+      "durability": 4600,
+      "province": "益州",
+      "neighbors": [
+        "長安",
+        "上庸",
+        "天水",
+        "梓潼"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": [
+        10,
+        5
+      ],
+      "portsAndGates": 1,
+      "specialty": "戟"
+    },
+    {
+      "name": "梓潼",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 7000,
+      "durability": 3000,
+      "province": "益州",
+      "neighbors": [
+        "漢中",
+        "江州",
+        "成都"
+      ],
+      "developmentLots": 10,
+      "developmentPatches": [
+        6,
+        4
+      ],
+      "portsAndGates": 2,
+      "specialty": "弩"
+    },
+    {
+      "name": "江州",
+      "maxSoldiers": 100000,
+      "gold": 300,
+      "food": 7000,
+      "durability": 2600,
+      "province": "益州",
+      "neighbors": [
+        "永安",
+        "梓潼",
+        "成都",
+        "建寧"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        7,
+        5
+      ],
+      "portsAndGates": 0,
+      "specialty": "槍"
+    },
+    {
+      "name": "成都",
+      "maxSoldiers": 150000,
+      "gold": 500,
+      "food": 8000,
+      "durability": 4800,
+      "province": "益州",
+      "neighbors": [
+        "梓潼",
+        "江州",
+        "建寧"
+      ],
+      "developmentLots": 18,
+      "developmentPatches": [
+        12,
+        6
+      ],
+      "portsAndGates": 2,
+      "specialty": "大都市"
+    },
+    {
+      "name": "建寧",
+      "maxSoldiers": 100000,
+      "gold": 300,
+      "food": 8000,
+      "durability": 2600,
+      "province": "南中",
+      "neighbors": [
+        "成都",
+        "雲南",
+        "江州"
+      ],
+      "developmentLots": 12,
+      "developmentPatches": [
+        8,
+        4
+      ],
+      "portsAndGates": 0,
+      "specialty": "槍"
+    },
+    {
+      "name": "雲南",
+      "maxSoldiers": 100000,
+      "gold": 400,
+      "food": 7000,
+      "durability": 3000,
+      "province": "南中",
+      "neighbors": [
+        "建寧"
+      ],
+      "developmentLots": 15,
+      "developmentPatches": [
+        9,
+        6
+      ],
+      "portsAndGates": 0,
+      "specialty": "兵器"
+    }
+  ]
+}
