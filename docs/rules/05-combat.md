@@ -614,3 +614,77 @@ deathRate = A + B + C + D + E
 来源：https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html
 
 这使“战死率 2–5%”的旧粗略区间失效；后续应按具体死亡来源分别建模。
+
+## 14. 非骑兵来源的武将负伤 / 战死
+
+`[PC-PK1.1][reverse-engineered]`
+
+### 14.1 不存在“普通击破统一伤亡率”的已知依据
+
+普通攻击、普通战法、设施攻击把部队兵力打到0后，按俘虏/逃走流程处理；不要额外添加全局武将负伤/战死 RNG。
+
+已检查的 `函数[部队攻击].txt`、`函数[战法效果].txt` 不调用业火 casualty 函数 `00597350`、候选函数 `005971F0` 或战死处理 `004ACBE0`。原作可确认的武将伤亡必须按来源单独结算。
+
+### 14.2 业火种 / 业火球
+
+只有业火种(ID16)和业火球(ID15)在火陷阱伤害后调用 `00597350`。
+
+先通过 `005971F0 DesignateInjuredPersonnel` 指定一名合法候选；护卫/强运在这一层过滤。
+
+```ts
+M = max(target.leadership, target.strength, target.intelligence)
+
+abilityProtection =
+  M <= 70 ? 0 :
+  M <= 80 ? 1 :
+  M <= 90 ? 2 : 3
+
+personality =
+  timid ? 0 :
+  calm ? 1 :
+  bold ? 2 : 3 // reckless
+```
+
+战死：
+
+```ts
+if (deathMode !== "none") {
+  const baseDeath = deathMode === "high" ? 4 : 2
+  deathChance = max(0, baseDeath + personality - abilityProtection)
+  if (chance(deathChance)) battleDeath(candidate)
+}
+```
+
+随后会再次选候选并独立判负伤：
+
+```ts
+injuryChance = max(0, 2 + personality - abilityProtection)
+if (chance(injuryChance)) applyInjury(candidate)
+```
+
+因此：
+
+- 普通战死模式并不是所有人固定2%；最终 conditional death chance 为0～5%。
+- 高战死模式为1～7%上下，取决于性格和能力。
+- 无战死只关闭战死阶段，不关闭炸伤。
+- 高统/武/智会**降低**概率，因为汇编是 `sub personality, abilityProtection`；网上流传“能力越高越容易炸死”的加号公式与汇编相反。
+- 一次爆炸的战死与负伤会重新选候选，因此理论上可死一人后再伤另一人。
+
+伤病成功后的具体等级由 `005963E0` 决定，公开文本尚未展开。
+
+逆向来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[火陷阱炸伤炸死].txt
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+
+### 14.3 其他明确来源
+
+- 猛者：推动敌军的战法成功后，50%概率造成敌将负伤。
+- 骑兵突击/突进：使用第13节专用战死公式，不和业火式混用。
+- 单挑：使用 `10-duel.md` 的专用负伤/战死结算。
+- 普通火计、火矢、普通火种/火球、格子持续火伤：没有证据进入 `00597350`，只结算兵力/耐久等火伤。
+- 火船：25%混乱，但不进入业火炸伤/炸死分支。
+
+来源：
+- https://www.gamersky.com/handbook/200603/21610.shtml
+- https://w.atwiki.jp/sangokushi11/pages/13.html
+
