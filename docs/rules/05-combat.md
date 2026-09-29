@@ -112,7 +112,32 @@ damage = INT(
 来源：https://w.atwiki.jp/sangokushi11/pages/92.html
 交叉核对：https://w.atwiki.jp/sangokushi11/pages/91.html
 
-火焰持续的完整内部 RNG 仍未取得；但没有找到原版存在“风向式自然向相邻格扩散”的可靠证据。第一版引擎默认 `naturalSpreadProbability=0`，火罠/火球的范围与链式触发单独结算。普通燃烧先按 1–2 旬、会心 3 旬的 fallback，详见 `16-unresolved-rules-fallbacks.md`。
+火焰持续的完整内部 RNG 仍未取得，但持续规则已经能再收紧两步：
+
+- `[empirical-high]` 火计会心使同一次点火的持续时间**增加 1 回合**，而不是“固定变成 3 回合”。专项实测的三组普通火为 1/3/3 回合，对应强制会心后为 2/4/4。
+- `[negative-evidence-high]` 没有可靠原作证据支持“已着火格每旬按风向/地形自动点燃邻格”。原作所谓连烧来自火种/火球作用范围、落雷范围和火罠连锁触发。
+
+因此 fidelity 模式：
+
+```ts
+naturalAdjacentSpread = false
+criticalBonusTurns = 1
+```
+
+基础持续时间仍为 fallback。初版可用可配置的 `1回合70% / 2回合30%` 作为内部基准，再在会心时 +1；该权重来自现代 San11 重制项目的工程参考，不冒充原版常量。不同点火来源必须保留独立 `fireLifetimeProfile`，详见 `16-unresolved-rules-fallbacks.md`。
+
+持续时间来源：
+- https://w.atwiki.jp/sangokushi11/pages/85.html
+- https://w.atwiki.jp/sangokushi11/pages/2166.html
+- https://www.bilibili.com/opus/374609164980707553
+
+原版连锁火攻来源：
+- https://www.gamersky.com/handbook/200603/21652.shtml
+- https://w.atwiki.jp/sangokushi11/pages/2166.html
+
+SIRE/逆向交叉：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[火陷阱炸伤炸死].txt
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/修改记录by%20sjn4048.txt
 
 ## 7. 攻城与陷落
 
