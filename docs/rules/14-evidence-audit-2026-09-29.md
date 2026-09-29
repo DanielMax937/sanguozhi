@@ -109,14 +109,31 @@
 ## 第四轮补证：治安、灾害、事件、单挑边界
 
 ### 换季治安
-升级为 `empirical-high`：
-- 治安仅在换季自然下降；
-- 下降范围实测0–5；
-- 太守魅力100约0–2；
-- 无太守固定5。
-精确魅力→概率分布仍 open。
+升级为 `reverse-engineered`（PC-PK1.1）：
 
-来源：https://w.atwiki.jp/sangokushi11/pages/1152.html
+311MemoryResearch 已整理原函数 `0058D6D0`：
+
+```ts
+C = governor ? governor.charisma : 0
+base = floor(max(1, 90 - C) / 10)
+loss = min(5, base + GetRandomX(3))
+```
+
+只在1/4/7/10月月初执行。完整档位：
+
+- 魅力81+：0/1/2 各1/3；
+- 71–80：1/2/3 各1/3；
+- 61–70：2/3/4 各1/3；
+- 51–60：3/4/5 各1/3；
+- 41–50：4为1/3、5为2/3；
+- 0–40及无太守：固定5。
+
+PK“政令整备”在上述公式之前执行 `ProbabilityCheck(50)`，命中直接跳过本季自然下降。因此 50% 是原程序常量，不再是社区近似值。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动05-城市治安下降.txt
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- https://w.atwiki.jp/sangokushi11/pages/1152.html
 
 ### 贼与异民族
 机制升级：
