@@ -1560,7 +1560,7 @@ onCalmdownSuccess(target) {
 
 ### 结论：核心连续公式已找到，不再需要自拟 ratio fallback
 
-`[PC-PK-oriented][reverse-engineered-high / decompiled-C++ port]`
+`[PC-PK-oriented][reverse-engineered]`
 
 公开项目 `tankyc/sango_infinity` 的单挑子系统不是按攻略重新猜参数。其 `Duel.cs` 文件头明确写明：
 
@@ -1890,18 +1890,50 @@ for (i = 0; i < actionCount; i++) {
 n = trunc(actionRatio * 20 / 55)
 ```
 
-然后：
+原函数的整数运算顺序是：
 
 ```ts
-必杀技      n = trunc(n * 6 / 5)
-急所        n = n
-无双        n = n * 3
-暗器        n = trunc(n * 6 / 5)
-假退却      n = trunc(n * 3 / 2)
-气合/坚守   n = 0
+n = trunc(actionRatio * 20 / 55)
+
+// 先处理持续 buff
+if (attackerHasAttackBuff)
+  n = trunc(n * 5 / 4)
+if (defenderHasDefenseBuff)
+  n = trunc(n * 3 / 4)
+
+// 再处理武器
+if (hasCrescentHalberd)         // 方天画戟
+  n = trunc(n * 9 / 8)
+else if (hasLongWeapon)
+  n = trunc(n * 10 / 9)
+
+// 特定人物 hook 在这里；通用基线为 ×1
+
+// 然后处理必杀类型
+switch (special) {
+  case DEADLY_MOVE:   n = trunc(n * 6 / 5); break
+  case WEAK_POINT:    n = n;                 break
+  case PEERLESS:      n = n * 3;             break
+  case HIDDEN_WEAPON: n = trunc(n * 6 / 5); break
+  case FEINT_RETREAT: n = trunc(n * 3 / 2); break
+  case FIGHTING_SPIRIT:
+  case STEADFAST:     n = 0;                 break
+}
+
+// 初级难度修正
+if (difficulty === "easy") {
+  if (playerAttacksAI) n = trunc(n * 11 / 10)
+  if (aiAttacksPlayer) n = trunc(n * 4 / 5)
+}
+
+// 对手当前选择防御重视
+if (defenderStance === DEFENSE)
+  n = trunc(n * 3 / 4)
+
+n = min(n, 80)
 ```
 
-再应用气合 ×5/4、对手坚守 ×3/4、宝物、初级难度以及“对手当前方针为防御重视”时的额外 ×3/4，最终伤害上限 80。
+必须保留这个顺序，因为多次整数截断会让“先乘谁”影响最终 1 点级结果。
 
 同武力 `actionRatio=50`：
 
@@ -1982,7 +2014,7 @@ damage =
 因此：
 
 ```ts
-pcPkGenericDuelCore.status = "reverse-engineered-high"
+pcPkGenericDuelCore.status = "reverse-engineered"
 vanillaGenericDuelCore.status =
   "compatibility-assumption"
 ```
