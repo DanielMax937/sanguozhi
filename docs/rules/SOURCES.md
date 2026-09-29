@@ -15,6 +15,10 @@
   https://www.gamersky.com/handbook/200603/21610.shtml
 - PK相关攻略资料
   https://www.gamersky.com/handbook/200609/33179.shtml
+- 全剧情发生条件官方资料
+  https://www.gamersky.com/handbook/200809/124174_7.shtml
+  https://www.gamersky.com/handbook/200809/124174_8.shtml
+  https://www.gamersky.com/handbook/200809/124174_10.shtml
 
 ## 日文三國志11攻略Wiki
 
@@ -33,6 +37,9 @@
 - 各种经验 https://w.atwiki.jp/sangokushi11/pages/79.html
 - 遗迹/庙 https://w.atwiki.jp/sangokushi11/pages/968.html
 - 历史事件 https://w.atwiki.jp/sangokushi11/pages/88.html
+- Q&A（换季治安实测） https://w.atwiki.jp/sangokushi11/pages/1152.html
+- 特技一覧（踏破/解毒） https://w.atwiki.jp/sangokushi11/pages/13.html
+- 单挑检证补充（错误简单武力差表撤回） https://w.atwiki.jp/sangokushi11/pages/2484.html
 
 ## 逆向/实测研究
 
