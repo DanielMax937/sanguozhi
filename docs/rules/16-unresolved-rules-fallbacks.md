@@ -136,38 +136,192 @@ B = 1.0
 
 ## 2. 普通登用概率
 
-### 已确认
+### 结论：硬门槛与最终判定链已反汇编；仅内部连续概率函数仍缺函数体
 
-先走硬门槛：配偶、义兄弟、亲爱、嫌恶、`忠诚+义理>96` 等已有明确优先级。魅力、相性、忠诚、义理确实影响普通登用。
+`[PC-PK1.1][reverse-engineered-partial]`
 
-来源：
-- https://w.atwiki.jp/sangokushi11/pages/95.html
-- https://w.atwiki.jp/sangokushi11/pages/1886.html
-- https://www.gamersky.com/handbook/200603/21923.shtml
+311MemoryResearch 已定位并逐指令整理原版 PK 的登用调用链：
 
-### 没找到
+- `004AFD60`：计算登用是否成功
+- `004AF7D0`：先处理“必成功 / 必失败”关系门槛
+- `005C4F80`：`GetHiringSuccessRate`，计算 0–100 的连续成功概率
+- `005BA4C0`：正常登用最终使用的确定性比较值生成器
 
-未找到 San11 普通登用“硬门槛之后”的连续概率源码级公式。注意不要混用《三国志12》的登用公式。
+后续 SIRE 开发资料也把 `005C4F80` 命名为 `GetHiringSuccessRate`，确认它就是原游戏的登用成功率函数。
 
-### provisional-engine-rule
+### 1. 硬门槛优先于概率
 
-硬门槛全部不命中后：
+`[COMMON mechanism / PC-PK reverse + empirical-high]`
+
+反汇编显示 `004AFD60` **一定先调用 `004AF7D0`**；只有既非必成也非必败时才进入连续概率函数。日文攻略 Wiki / 旧 2ch 长期整理给出的判定顺序为：
+
+1. 目标配偶属于第三方势力，且目标原势力仍有支配都市 → 失败
+2. 目标配偶是执行者或执行势力君主 → 成功
+3. 目标嫌恶执行者或执行势力君主 → 失败
+4. 执行者或执行势力君主是目标义兄弟 → 成功
+5. 目标 `忠诚 + 义理 > 96` → 普通登用失败
+6. 目标义兄弟的长兄已在执行势力 → 成功
+7. 目标配偶已在执行势力 → 成功
+8. 目标亲爱当前君主 → 失败
+9. 目标同时亲爱执行势力君主与执行者 → 成功
+
+亲爱/嫌恶专题还能交叉确认：
+- 亲爱某君主时对该君主存在强制成功关系；
+- 同时通常拒绝其他君主；
+- 配偶/义兄弟可覆盖部分普通关系限制；
+- 未发现登用失败、逃亡、下野等还存在“禁止仕官期”。
+
+因此这些关系**不应该折算成 +20%、-30% 之类分数**，而应作为概率计算之前的硬分支。
+
+### 2. 正常玩家登用不是每次重新 Math.random()
+
+`[PC-PK1.1][reverse-engineered]`
+
+正常“人才→登用”调用 `004AFD60` 时第三参数固定为 0，并传入：
 
 ```ts
-giri = clamp(target.giriInternal, 0, 4)
-loyaltyRoom = clamp((96 - target.loyalty - giri) / 60, 0, 1)
-affinity = 1 - circularAffinityDistance(target, ruler) / 75
-charm = 0.75 + executor.charisma / 200
-
-p = loyaltyRoom * (0.5 + 0.5 * affinity) * charm
-p = clamp(p, 0.02, 0.90)
+dateKey = day * 7 + month * 5 + year * 3
 ```
 
-这保证：
-- 忠诚越低越易登；
-- 相性越近越易登；
-- 执行者魅力越高越易登；
-- 不突破已确认的亲爱/嫌恶/义兄弟等硬规则。
+如果是异地登用，发出命令时的 `dateKey` 会写入任务，抵达后继续用同一个值判定。
+
+在硬门槛未命中、`GetHiringSuccessRate` 返回 `p` 后，程序读取：
+
+- 目标武将 ID
+- 执行武将 ID
+- 目标忠诚
+- 执行武将魅力
+- 执行者 ↔ 目标的相性差
+- 上述 `dateKey`
+
+并送入 `005BA4C0` 产生确定性比较值；汇编最终逻辑是：
+
+```ts
+success = deterministicValue < p
+```
+
+所以**同一组状态、同一执行者、同一目标、同一 dateKey 反复读档，结果应保持稳定**。改变日期、执行者、忠诚、魅力或相性差，都可能改变该确定值。
+
+引擎因此绝不能为正常登用简单使用无种子的 `Math.random()`。
+
+### 3. 义理的另一条反汇编分支
+
+`004AFD60` 在第三参数非 0 的调用路径中，还会对 `GetHiringSuccessRate` 的结果做：
+
+```ts
+factor10 = min(10, 15 - 2 * giriInternal)
+p2 = min(100, floor(p * factor10 / 10))
+```
+
+若内部义理为 0..4，则倍率分别约为：
+
+```
+1.0, 1.0, 1.0, 0.9, 0.7
+```
+
+但**正常玩家登用第三参数就是 0**，所以不能把这条外层倍率直接套到普通登用上；普通登用中义理是否、以及如何再次进入 `005C4F80`，仍需函数体才能完全确定。
+
+### 4. 目前唯一仍缺失的东西
+
+没有找到可公开检索、可交叉验证的 `005C4F80 GetHiringSuccessRate` 完整函数体。
+
+可以确认它返回整数型 0–100 概率，而且目标/执行者完整指针都传入，因此它可以读取忠诚、义理、相性、魅力等数据；但在没有函数体的情况下，**不能把网上流传的“政治/魅力各加 X%”写成原版公式**。
+
+现代 SIRE 的“新忠诚/登用意愿系统”提供了另一套可配置评分，但它明确是 MOD 新系统，不是原作 `005C4F80`，因此只可作为工程校准参考。
+
+### 5. provisional-engine-rule：仅替代 GetHiringSuccessRate
+
+硬门槛完全照上面执行；只有进入普通连续概率时才调用 fallback：
+
+```ts
+function fallbackHiringRate(target, executor, ruler) {
+  const giri = clamp(target.giriInternal, 0, 4)
+
+  // 在野/亡国无所属者没有可直接复刻的原版连续忠诚口径；
+  // 60 仅为可配置的 engine baseline，不冒充原作常量。
+  const effectiveLoyalty = target.hasForce
+    ? target.loyalty
+    : rules.hiring.unaffiliatedLoyaltyBaseline // default 60
+
+  const loyaltyRoom = clamp(
+    (96 - effectiveLoyalty - giri) / 60,
+    0,
+    1
+  )
+
+  const rulerAffinity = 1 -
+    circularAffinityDistance(target.affinity, ruler.affinity) / 75
+
+  const charismaFactor = 0.75 + executor.charisma / 200
+
+  let p = loyaltyRoom
+    * (0.5 + 0.5 * rulerAffinity)
+    * charismaFactor
+
+  // 只有硬关系才能得到真正 100%。
+  p = clamp(p, 0, 0.95)
+
+  return Math.floor(p * 100)
+}
+```
+
+最终判定不使用运行时随机流，而模仿原版调用形状：
+
+```ts
+const p = fallbackHiringRate(target, executor, ruler)
+
+const executorTargetAffinity =
+  circularAffinityDistance(executor.affinity, target.affinity)
+
+const roll = stablePercentHash(
+  dateKey,
+  target.id,
+  executor.id,
+  target.loyalty,
+  executor.charisma,
+  executorTargetAffinity
+)
+
+success = roll < p
+```
+
+这样至少满足目前所有可靠边界：
+
+- `忠诚+义理>96` 在前置门槛直接失败；
+- 忠诚越低，长期期望成功率越高；
+- 君主相性越近，长期期望成功率越高；
+- 执行者魅力提高长期期望成功率；
+- 只有配偶/义兄弟/亲爱等硬关系产生真正必成；
+- 相同状态下反复 S/L 结果固定；
+- 换旬、换执行者或改变忠诚/魅力/相性后结果可变化。
+
+这比旧 fallback 最大的改进不是某个系数，而是**恢复了原作“概率阈值 + 确定性伪随机比较值”的两层结构**。今后若取得 `005C4F80` 函数体，只需替换 `fallbackHiringRate()`，不改最终判定接口。
+
+### Vanilla 边界
+
+`[VANILLA][empirical-high / compatibility-assumption]`
+
+当前逐指令证据来自 PC-PK。2006 年 Vanilla 游民星空实验已经确认忠诚、亲爱、婚姻、义兄弟等核心关系对登用存在同类行为，但尚未取得 Vanilla EXE 的 `GetHiringSuccessRate` 二进制回归。
+
+因此 Vanilla 暂复用同一硬门槛、fallback 与 deterministic-roll 结构，并标记版本兼容假设。
+
+来源：
+- 311MemoryResearch：`Func-人才01-计算登用是否成功.txt`
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才01-计算登用是否成功.txt
+- 311MemoryResearch：`Func-人才03-执行登用.txt`
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才03-执行登用.txt
+- 311MemoryResearch：`Func-人才04-执行登用完成.txt`
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才04-执行登用完成.txt
+- 311MemoryResearch：`Func-人才08-探索发现人才并登用.txt`
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才08-探索发现人才并登用.txt
+- SIRE 开发地址表：`005C4F80 = GetHiringSuccessRate`
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- 日文 Wiki / 旧 2ch 硬门槛：
+  https://w.atwiki.jp/sangokushi11/pages/1886.html
+- 日文 Wiki 亲爱/嫌恶：
+  https://w.atwiki.jp/sangokushi11/pages/95.html
+- Vanilla 时代 100 忠诚挖人实验：
+  https://www.gamersky.com/handbook/200603/21923.shtml
 
 ---
 
