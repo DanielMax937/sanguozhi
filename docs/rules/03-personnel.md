@@ -1,0 +1,210 @@
+# 武将生命周期、人际关系、忠诚、登用、俘虏、官职
+
+## 1. 武将状态机
+
+建议统一为：
+
+`未登场 -> 未发现 -> 在野 -> 所属 -> 俘虏 -> 释放/登用/处斩/逃亡`
+
+所属身份可为一般、军师、太守、都督、君主。并行状态包括健康、出征、调动、执行任务、死亡。
+
+## 2. 登场、寿命与死亡
+
+### 数据与运行时状态
+
+`[PC-PK1.1][reverse-engineered-partial]`
+
+SIRE 开发资料确认武将静态结构同时保存：
+
+- `YearOfBirth`
+- `YearOfDeath`
+- `CauseOfDeath`
+
+并且原程序另外存在：
+
+- `0048A000 GetDeathYear`：取得角色死亡年；
+- `00489160 IsMarkedForDeath`：判断是否已“预定死亡”；
+- 独立的运行时“健康状态”字段。
+
+因此“史实没年”不能直接等价为“本局最终死亡日期”。生命周期应按：
+
+```text
+基础没年 / 死因
+→ 计算死亡阈值
+→ 运行时预定死亡 flag
+→ 健康恶化 / 普通死亡
+```
+
+实现。
+
+逆向来源：
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/数据汇总.md
+
+### 自然死 / 不自然死
+
+`[COMMON][empirical-high]`
+
+- **自然死**：基础没年后开始容易生病，多数在当年死亡，少数延后约 2–3 年。
+- **不自然死**：基础没年并不是立即进入普通死亡；额外寿命与“没年时年龄”负相关，年轻武将通常延得更久。
+- 旧资料常说额外上限约15年，但实际玩家记录存在 16–20 年级别的最终延寿，因此 15 不能当 actual-death hard cap。
+- 孙策等历史事件直接以“预定死亡年”为触发条件，并可继续延寿；于吉事件胜利后寿命 +20。
+- 从较早存档重跑后，同一武将的实际死亡结果可能改变，所以禁止在 scenario init 时一次性预抽最终死亡旬。
+- 战死设置另外影响战场死亡，不与自然寿命 RNG 混算。
+
+主要来源：
+- https://w.atwiki.jp/sangokushi11/pages/983.html
+- https://w.atwiki.jp/sangokushi11/pages/2527.html
+- https://w.atwiki.jp/sangokushi11/pages/918.html
+- https://www.gamersky.com/handbook/200809/124174_6.shtml
+
+精确 fallback 与剩余缺口见：
+`16-unresolved-rules-fallbacks.md#6-自然死亡精确-rng`
+
+### 健康能力修正
+
+`[COMMON][empirical-high]`
+
+按当前攻略 Wiki 与决战制霸关卡可直接反算：
+
+- 健康：100%
+- 轻伤：80%（-20%）
+- 重伤：50%（-50%）
+- 濒死：20%（-80%）
+
+关卡实证：甘宁原武力94，重伤时显示47，恢复轻伤后显示75，正好对应 50% / 80%。
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/1598.html
+- https://w.atwiki.jp/sangokushi11/pages/2165.html
+
+旧隐藏数据页的 -20/-40/-60 与实际关卡数值冲突，因此不采用。
+
+## 3. 五维、适性与成长
+
+- 五维：统率、武力、智力、政治、魅力。
+- 能力经验满 100 后对应能力 +1，超过部分保留；能力自然成长到 100 后停止。
+- 适性：C→B 150、B→A 200、A→S 250。
+- 经验获得表沿用 `docs/rules.md`。
+
+## 4. 人际关系
+
+`[COMMON][confirmed/empirical-high]`
+
+### 亲爱
+
+- 不同部队主将之间有亲爱关系时，支援攻击约 30%。
+- 副将亲爱主将时，副将能力补正更高并提升会心倾向。
+- 武将亲爱某君主时，对该君主登用具有强制成功关系，并通常不会被其他君主登用（配偶/义兄弟例外）。
+- 在野/亡国俘虏或满足“忠诚+义理≤96”等条件时，目标亲爱执行者可覆盖普通军师失败判定。
+
+### 嫌恶
+
+- 同部队存在互相嫌恶者时，副将补正全部失效，并不会在单挑中互相援助。
+- 武将嫌恶君主时通常不能被该君主登用；配偶/义兄弟可构成例外，但初始忠诚很低。
+- COM 君主与俘虏互相嫌恶时可导致必处斩。
+- 君主被另一君主嫌恶时，友好极难上升，无论客通常无法结盟（停战仍可）。
+
+来源：https://w.atwiki.jp/sangokushi11/pages/95.html
+
+## 5. 登用：优先级门槛
+
+下面这些规则可从原来的“模糊评分”升级为 `[empirical-high]` 的确定优先级：
+
+1. 目标配偶在第三方势力且目标原势力仍有城市 → 失败。
+2. 目标配偶是执行者或执行势力君主 → 成功。
+3. 目标嫌恶执行者或执行君主 → 失败。
+4. 执行者/执行君主是目标义兄弟 → 成功。
+5. 目标忠诚 + 义理 > 96 → 普通登用失败。
+6. 目标义兄弟长兄在执行势力 → 成功。
+7. 目标配偶在执行势力 → 成功。
+8. 目标亲爱当前君主 → 失败。
+9. 目标同时亲爱执行君主和执行者 → 成功。
+
+来源：https://w.atwiki.jp/sangokushi11/pages/74.html
+交叉核对：https://w.atwiki.jp/sangokushi11/pages/95.html
+
+### 普通连续概率：反汇编到函数边界
+
+`[PC-PK1.1][reverse-engineered-partial]`
+
+以上强制门槛都不命中后，原程序进入 `005C4F80 GetHiringSuccessRate`，返回一个 0–100 的成功率。公开的 SIRE/311MemoryResearch 资料已确认函数地址、调用关系和最终比较过程，但当前可检索资料**没有完整展开该函数体**，所以内部连续评分仍不能标成 exact。
+
+正常登用发令时会计算：
+
+`dateKey = day*7 + month*5 + year*3`
+
+最终不是每次重新取全局随机数，而是把 dateKey、双方武将 ID、目标忠诚、执行者魅力、执行者与目标的相性差等送入确定性值生成函数，再做：
+
+`success = deterministicValue < successRate`
+
+异地登用会保存发令时的 dateKey，到任务完成时继续使用。因此同一状态下读档重试应保持相同结果。
+
+引擎 fallback 与详细证据见 `16-unresolved-rules-fallbacks.md#2-普通登用概率`。禁止重新引入网上无来源的“政治/魅力各加若干点”公式。
+
+逆向来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才01-计算登用是否成功.txt
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才03-执行登用.txt
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才04-执行登用完成.txt
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才08-探索发现人才并登用.txt
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+
+## 6. 相性、义理、野望、汉室
+
+- 相性越近越容易登用；相性还影响自然忠诚变化。
+- 义理越高越不易下降/背叛。
+- 野望越高越易独立。
+- 汉室态度分无视/普通/重视，影响爵位与汉帝事件。
+
+来源：https://w.atwiki.jp/sangokushi11/pages/983.html
+
+## 7. 太守、都督、军师
+
+- 太守/都督自动决定时优先看官职/指挥兵力，再比较统率等。
+- 军师智力影响行动力和建议准确性。
+- 军师建议不是决定论；特殊人际关系的强制门槛优先。
+
+## 8. 忠诚、俸禄、奖赏
+
+- 官职附带俸禄。
+- 忠诚受相性、义理、野望、奖赏、宝物、人心掌握等影响。
+- 俘虏忠诚随时间下降；PK 符节台加速。
+- `[PK][empirical]` 人心掌握并非绝对免疫；原文为“忠诚更不容易下降”。社区长期整理常见值为换季约 **67%** 概率免除本次自然忠诚下降；SIRE 也暴露了可调整的独立免降概率参数。
+
+### 自然忠诚下降的触发条件
+
+`[COMMON][empirical-high]`
+
+可靠长期实测显示，**忠诚自然变化发生在换季时**。武将满足以下任一条件时会进入下降候选：
+
+1. 与君主相性差 ≥25；
+2. 义理为“低/较低”，且野望为“高/较高”。
+
+下降幅度还受**君主义理/野望**影响；吕布、董卓这类君主实测下降更明显。
+
+另外，显示忠诚上限虽然是100，但内部忠诚可高于100；爵位/事件等可以把内部值继续向上叠加，因此“显示100”并不代表内部值刚好100。长期保持100的武将往往能形成内部缓冲。
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/15.html
+- https://w.atwiki.jp/sangokushi11/pages/74.html
+- https://w.atwiki.jp/sangokushi11/pages/983.html
+
+### 仍 open
+
+- 单次换季具体下降多少的封闭公式。
+- 欠薪时忠诚下降的精确函数。
+- 俘虏每旬忠诚下降与符节台的精确数值。
+- 人心掌握 67% 的 PC-PK 版本边界仍需存档回归，因此当前不标 confirmed。
+
+## 9. 俘虏
+
+可登用、释放、处斩、外交交换或逃亡。战场俘虏受捕缚、强运、名马、包围、戟兵等影响。精确概率仍列 open。
+
+## 10. 官职
+
+- 爵位决定可授官范围。
+- 功绩决定任官资格。
+- 官职提供带兵上限与能力加成并产生俸禄。
+- 升降官本身不直接改变忠诚。
+- 军制改革 +3000 可与官职叠加。
