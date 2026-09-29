@@ -3921,47 +3921,501 @@ function generateCouncilProposal(officer, state, existing) {
 
 ## 14. 委任 AI 权重
 
-### 已确认
+### 结论：删除“统一 utility 分数表”；原作更接近多阶段规则系统
 
-- 委任 COM 会强行追求每城至少市场×3、农场×3；缺地时会拆别的设施。
-- 实战建议通常先准备“3市3田1兵舍1锻冶”。
-- 委任军团会赏赐武将，常把忠诚补到 96 以上。
-- 多城军团会向前线输送资源。
-- 超级难度 AI 本身并没有大幅变聪明，主要是资源倍率不同。
+这一项取得了明显突破。311MemoryResearch 已经整理出一整组 San11PK AI 专题反汇编：
 
-来源：
-- https://www.gamersky.com/handbook/200706/66728.shtml
-- https://w.atwiki.jp/sangokushi11/pages/8.html
-- https://w.atwiki.jp/sangokushi11/pages/1878.html
+- `函数[AI出兵策略].txt`
+- `函数[AI势力强度设定].txt`
+- `函数[AI行动部队].txt`
+- `函数[AI选择主将].txt`
 
-### 没找到
-
-没有公开的原版 AI utility 权重表。
-
-### provisional-engine-rule
-
-用可解释 deterministic utility：
+因此旧 fallback：
 
 ```text
-治安 <85                 → 巡查 100
-前线防御不足              → 征兵/训练/生产 95
-缺“3市3田”基础设施        → 建设 90
-粮食可支撑月数 <6          → 农业/输送 90
-兵力 <30000               → 征兵 75
-各基础兵装 <15000          → 生产 65
-后方 surplus 可输前线       → 输送 70
-搜索/登用人才              → 45
-普通经济扩建                → 50
+巡查 100
+征兵/训练/生产 95
+建设 90
+农业/输送 90
+征兵 75
+生产 65
+输送 70
+搜索/登用 45
+普通经济 50
 ```
 
-出征阈值按军团方针：
-- 防守：我方可投入/目标守军 ≥1.5
-- 标准：≥1.2
-- 攻击重视：≥1.0
+以及：
 
-所有行为仍由同一个 `enumerateCommands()` 生成，AI 不得绕过规则。
+```text
+防守：兵力比>=1.5才出兵
+标准：>=1.2
+攻击：>=1.0
+```
+
+都应删除。原版至少在战争 AI 上不是这种单一 utility/兵力比阈值。
 
 ---
+
+### 14A. 玩家委任野外部队与 COM 共用同一个核心行动器
+
+`[PC-PK1.1][reverse-engineered]`
+
+`函数[AI行动部队].txt` 明确整理了两条调用链。
+
+玩家点击“委任部队行动”时：
+
+```text
+005746A0 循环部队
+→ 状态过滤
+→ 005AD980 部队行动
+```
+
+正常 COM / 军团 AI：
+
+```text
+005EC370 按军团循环部队
+→ 005DEF90 任务方针判断/改写
+→ 005DDCF0
+→ 005AD980 部队行动
+```
+
+所以至少**野外部队的微观行动器是共用的**。这与日文 Wiki 的长期观察“委任战争只是行动模式变成 COM 一样”完全一致。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI行动部队].txt
+- https://w.atwiki.jp/sangokushi11/pages/74.html
+
+---
+
+### 14B. 委任内政不是任意 utility，而是有非常强的目标状态
+
+`[COMMON][empirical-high]`
+
+委任城市会强制追求一组非常稳定的城市模板：
+
+```text
+市场 x3
+农场 x3
+兵舍 x1
+锻冶 x1
+```
+
+如果允许生产军马但没有厩舍，或允许生产兵器但没有工房，也会主动补建；空地不足时甚至会拆掉玩家原有设施。
+
+委任军备也存在稳定的数量目标：
+
+```text
+兵装=轻视 → 各约15000
+士兵=轻视 → 约30000
+士兵=轻视 + 设置输送 → 约保留20000，再输送余量
+```
+
+治安则通常维持在 `80~90` 左右。
+
+军团长还会使用褒赏，把军团武将忠诚推到约96以上。
+
+多城军团即使未指定输送目标，也会把后方 surplus 往同军团更靠前线的据点送。
+
+这些行为重复性很高，更适合建模成**目标状态 / deficit queue**，而不是人为给每个命令一个全局 utility 数字。
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/74.html
+- https://www.gamersky.com/handbook/200706/66728.shtml
+
+---
+
+### 14C. 军团行动仍消耗正常行动力
+
+`[PC-PK1.1][reverse-engineered]`
+
+311MemoryResearch 已定位：
+
+```text
+004A1820  改变军团行动力
+005B9340  军团行动（内部调用行动力扣减）
+5CBF95   巡查
+5BC4C1   市场等内政建设
+5C3CAB   征兵
+5C67B3   生产
+5D8F68   研究技巧
+```
+
+因此委任 AI 不应拥有“免费执行命令”的隐藏路径。它仍受军团行动力、武将是否已行动、普通命令合法性和资源约束。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/修改记录by%20sjn4048.txt
+
+---
+
+### 14D. 出兵不是固定兵力比阈值，而是概率门 + 一系列硬门槛
+
+`[PC-PK1.1][reverse-engineered-partial]`
+
+`函数[AI出兵策略].txt` 在 `005EF8B0` 以后直接标注：
+
+```text
+君主性格、战略倾向、等级决定出兵倾向，并随机决定是否出兵
+```
+
+这里的“等级”实际读取的是剧本难度。
+
+设：
+
+- `D` = 难度内部值：初级0、上级1、超级2；
+- `P` = 君主性格：小心0、冷静1、刚胆2、莽撞3；
+- `A` = 君主野望：0..4。
+
+在战略倾向与目标修正之前，汇编可化为：
+
+```ts
+p = (D + 3) * 5 * (P + 2)
+
+switch (A) {
+  case 0: p = trunc(p / 3); break
+  case 1: p = trunc(p / 2); break
+  case 2: break
+  case 3: p = trunc(p * 6 / 5); break
+  case 4: p = trunc(p * 7 / 5); break
+}
+```
+
+这意味着：
+
+- 难度越高，初始出兵倾向越高；
+- 性格从小心到莽撞，倾向递增；
+- 低野望显著压低，高野望提高出兵倾向。
+
+随后读取 `person+0x10C StrategicTendency`：
+
+```text
+0 中华/全国统一
+1 地方统一
+2 州统一
+3 现状维持
+```
+
+其中“现状维持”会直接把当前出兵倾向压到 **5**。地方统一/州统一会调用 `005F6660` 做州域目标判定，在不符合战略目标时也可能把倾向降到5。2020年的独立控制变量实测也观察到：现状维持最保守，州统一次之。
+
+之后还会结合目标/势力强度等数据继续修正，最后：
+
+```ts
+p = clamp(p, 5, 100)
+sortie = ProbabilityCheck(p)
+```
+
+所以**最低仍保留5%尝试率，最高100%**。
+
+当前 `005F6660 / 005F7BC0` 的完整语义尚未全部命名，因此只把“难度+性格+野望”和最终5..100 clamp标成 exact；中间目标强度修正保持 reverse-engineered-partial。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI出兵策略].txt
+- https://game.ali213.net/thread-6594040-1-6.html
+
+---
+
+### 14E. 超级难度不只是资源作弊：它确实进入出兵概率
+
+旧文档说：
+
+> 超级难度 AI 本身并没有大幅变聪明，主要是资源倍率不同。
+
+这句话需要改成更精确的版本：
+
+> **AI 架构没有换成另一套更聪明的 planner，但难度值直接进入原版出兵倾向公式；超级同时还有资源/产量等优势。**
+
+也就是说：
+
+```text
+同一套决策代码 != 完全相同的决策概率
+```
+
+不能再把超级差异只归结为钱粮兵倍率。
+
+---
+
+### 14F. 原版存在“势力强度”中间评分，而且带大量君主硬编码
+
+`[PC-PK1.1][reverse-engineered]`
+
+`函数[AI势力强度设定].txt` 先根据据点总兵力计算基础强度：
+
+```ts
+baseStrength =
+  ceil(totalGarrisonTroops / 10000) * 10
+```
+
+然后原 EXE 对大量历史君主直接增加固定 bonus。例如：
+
+| 君主 | bonus |
+|---|---:|
+| 曹操 / 孙策 / 曹睿 / 曹丕 / 刘备 | +2000 |
+| 孙坚 / 孙权 | +1900 |
+| 诸葛亮 / 周瑜 / 曹彰 / 司马懿 | +1800 |
+| 董卓 / 吕布 | +1700 |
+| 张角 / 袁绍 | +1600 |
+| 马超 / 公孙瓒 | +1500 |
+| 刘谌 / 刘封 | +1400 |
+| 孙登 / 刘禅 | +1300 |
+| 袁术 | +1200 |
+| 钟会 / 邓艾 / 关羽 / 陆逊 | +1100 |
+| 司马师 / 司马昭 / 司马炎 | +1000 |
+
+若诸葛亮属于该势力，还另有 `+1000` 分支。
+
+程序随后把各势力排序/归一化，把一个 `0..100` 的强度位置值写回 AI 工作区；出兵函数会读取这个值。
+
+这说明原版 AI 明显存在**历史人物硬编码偏置**，不能用纯“兵力比 + 经济分”完全替代。
+
+另有若干弱君主分支看起来会把基础强度清零，但当前反汇编注释本身标了“猜测”，所以暂不把那部分写成 confirmed。
+
+SIRE v1.28 后来增加“AI强度可配置”，并特别说明该字段与战略倾向地址有关，进一步印证了这一套原版 AI 强度机制。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI势力强度设定].txt
+- https://game.ali213.net/thread-6379202-1-2.html
+
+---
+
+### 14G. 出征还有一组硬性资源门槛
+
+`[PC-PK1.1][reverse-engineered]`
+
+即使概率门通过，也不代表一定能出兵。
+
+#### 最小出征兵力
+
+```ts
+troops = max(calculatedTroops, 5000)
+```
+
+如果最终无法组成至少5000人的合法部队，则不出征。
+
+这与轩辕春秋玩家改官职带兵上限后的独立实测完全一致：低于5000整队时 AI 不会出兵。
+
+#### 治安门槛
+
+正常分支要求来源城市：
+
+```text
+publicOrder >= 90
+```
+
+若本势力 AI 强度位置值 `<50`，门槛放宽为：
+
+```text
+publicOrder >= 80
+```
+
+所以原版 AI 的“治安保持80~90”与出兵门槛其实能在反汇编层互相解释。
+
+#### 兵粮
+
+先通过 `005F6C90` 计算到目标的移动旬数，再按：
+
+```ts
+foodHorizonDekads = travelDekads * 5 + 15
+food = ConsumptionCalculationUsedByAI(
+  troops,
+  foodHorizonDekads
+)
+
+food = min(food, 50000)
+```
+
+同时会给来源据点保留一部分粮；可用粮不足时直接取消本队出征。
+
+SIRE v1.28 后来专门增加“电脑出征攻击带粮草旬数可定制”，与这个调用链一致。
+
+#### 金钱
+
+普通作战部队：
+
+```ts
+if (cityGold >= 10000 && chance(75))
+  carriedGold = (15 + GetRandomX(6)) * 100 // 1500..2000
+else if (cityGold >= 2000 && chance(50))
+  carriedGold = 1000
+else
+  carriedGold = 0
+```
+
+冲车/井阑/木兽/投石等兵器部队不走普通携金分支。
+
+对港关等非都市来源，程序还会计算随队武将俸禄；来源金不足**8倍随队俸禄**时，本队不出征。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI出兵策略].txt
+- https://www.xycq.org.cn/forum/thread-241027-1-1.html
+- https://game.ali213.net/thread-6379202-1-2.html
+
+---
+
+### 14H. AI 选主将/兵种也不是随机：已有评分函数
+
+`[PC-PK1.1][reverse-engineered]`
+
+`函数[AI选择主将].txt` 显示，AI 为预定主将和兵种计算攻防得分。
+
+关键结构：
+
+```text
+适性 C/B/A/S = 0/1/2/3
++ 势力兵科科技修正
++ 7
+```
+
+攻击得分主要使用：
+
+```text
+武力 × 适性因子 × 兵装攻击
+```
+
+防御得分主要使用：
+
+```text
+统率 × 适性因子 × 兵装防御
+```
+
+兵种克制时，两项都：
+
+```text
+优势 ×1.3
+劣势 ×0.7
+```
+
+如果主将特技与该兵种契合：
+
+```ts
+attackScore  += skillLevel * 1000
+defenseScore += skillLevel * 1000
+```
+
+所以 fallback 不应该再“随机选一个能带兵最多的人”。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI选择主将].txt
+
+---
+
+### 14I. 新的委任 fallback：状态机 + 原版战争公式，而不是全局分数表
+
+第一版 fidelity 引擎改成：
+
+```ts
+function delegatedTurn(corps) {
+  while (corps.actionPower > 0) {
+    // 1. 先补原版高度稳定的城市目标
+    const maintenance = findMaintenanceDeficit(corps)
+    if (maintenance) {
+      executeNormalCommand(maintenance)
+      continue
+    }
+
+    // 2. 后方 surplus 输送
+    const transport = findTransportNeed(corps)
+    if (transport) {
+      executeNormalCommand(transport)
+      continue
+    }
+
+    // 3. 再评估出征；使用原版 sortie probability + hard gates
+    const sortie = evaluateOriginalStyleSortie(corps)
+    if (sortie) {
+      executeNormalCommand(sortie)
+      continue
+    }
+
+    // 4. 搜索/登用等低紧迫行为
+    const opportunistic = findLegalLowPriorityAction(corps)
+    if (opportunistic) {
+      executeNormalCommand(opportunistic)
+      continue
+    }
+
+    break
+  }
+}
+```
+
+`findMaintenanceDeficit()` 不使用 100/95/90 这种伪原版分数，而使用目标状态：
+
+```ts
+cityTargets = {
+  markets: 3,
+  farms: 3,
+  barracks: 1,
+  smithy: 1,
+  publicOrderBand: [80, 90],
+  loyaltyFloor: 96,
+}
+
+若委任设置为轻视：
+
+```ts
+equipmentTargetEach = 15000
+troopTarget = transportEnabled ? 20000 : 30000
+```
+
+当多个 deficit 同时存在时，它们之间的**精确原版排序**仍未逆出；初版使用：
+
+```text
+治安/忠诚危险
+> 缺必要设施
+> 当前设置要求的征兵/生产
+> 运输
+> 搜索/登用
+```
+
+仅作为 `provisional-engine-rule`。
+
+战争部分则必须尽量走本节已恢复的原版概率、资源门槛和主将评分，不再使用自拟 `1.5/1.2/1.0` 兵力比阈值。
+
+---
+
+### 14J. 输送：方向已知，精确 chooser 仍 open
+
+`[COMMON][empirical-high / open-exactness]`
+
+社区长期观察：
+
+- 明确设置输送目标时，轻视兵士的军团会约留20000，再把余量发往目标；
+- 多城军团即使没有显式输送目标，也会向更靠近前线的同军团城市输送。
+
+但目前 AI 专题公开文本没有整理出“后方据点A/B/C谁优先给前线X多少资源”的完整函数。
+
+所以：
+
+```ts
+transportTarget =
+  explicitDelegationTarget ??
+  nearestThreatenedFrontlineCity
+```
+
+资源量采用：
+
+```ts
+troops = max(0, sourceTroops - sourceReserve)
+food   = max(0, sourceFood   - sourceFoodReserve)
+gold   = max(0, sourceGold   - sourceGoldReserve)
+```
+
+其中 `sourceReserve` 从委任设置的20k/30k等经验目标派生；粮金 reserve 继续配置化。
+
+这一段仍是 fallback，不冒充原版。
+
+---
+
+### 第14项剩余 exactness
+
+现在真正没完全解决的是：
+
+1. 城市内政命令之间的精确原版优先级；
+2. `005F6660 / 005F7BC0` 等目标/势力修正函数的完整语义；
+3. 自动输送目标和数量函数；
+4. 军团委任方针如何逐项改变各内政模块的权重；
+5. Vanilla / 主机版与 PC-PK AI 常量是否一致。
+
+但“AI 完全未知，只能自己写 utility”已经不成立。
 
 ## 15. 太守魅力 → 换季治安下降概率分布
 
