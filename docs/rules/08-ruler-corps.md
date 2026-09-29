@@ -134,23 +134,126 @@ return eldestStable(legal)
 
 ## 5. 军团 / 委任
 
+### 5.1 不是一张统一 utility 表
+
+`[PC-PK1.1][reverse-engineered + empirical-high]`
+
+AI 专题反汇编显示，委任逻辑由多个专用模块组成：城市维护、出兵、野外部队行动、主将/兵种选择、资源携带等，并不是“给所有命令一个统一分数后取最大值”。
+
+因此旧的 `巡查100 / 征兵95 / 建设90 / 输送70...` 自拟表已删除。
+
+### 5.2 委任野外战斗与 COM 共用核心
+
+玩家委任部队与正常 COM 军团最终都会调用 `005AD980` 做野外部队行动；COM 路径会先经过 `005DEF90` 调整任务方针。
+
+所以战争委任应复用同一战术 AI，不另写一套“玩家委任专用聪明AI”。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI行动部队].txt
+- https://w.atwiki.jp/sangokushi11/pages/74.html
+
+### 5.3 内政/军备目标
+
 `[COMMON][empirical-high]`
 
-委任 AI 会自动执行内政、军备、搜索/登用、输送和按方针战争。
+委任城市稳定追求：
 
-已观察到的稳定委任行为：
+- 市场×3、农场×3、兵舍×1、锻冶×1；
+- 对应生产被允许时补厩舍/工房；
+- 治安约80～90；
+- 军团武将忠诚约96以上；
+- 兵装轻视时各约15000；
+- 士兵轻视时约30000；若设置输送则约留20000并发送余量；
+- 多城军团会向同军团前线城市运输 surplus。
 
-- 各城倾向至少建设：兵舍、锻冶、市场×3、农场×3。
-- 空地不足时会自行拆设施以满足目标。
-- 治安倾向维持在 80–90 左右。
-- 兵装设为轻视时通常做到各约 15000。
-- 士兵轻视时通常征到约 30000；若有输送设置则约留 20000，并把余量送往前线。
-- 多城军团即使未明确设运输，也会向同军团更靠前线城市输送。
-- PC 与 PS2 在“玩家能否用委任军团行动力直接下达某些命令”上有平台差异。
+空地不够时 AI 会拆除其他设施以补齐基础模板。
 
-来源：https://w.atwiki.jp/sangokushi11/pages/74.html
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/74.html
+- https://www.gamersky.com/handbook/200706/66728.shtml
 
-这些是 AI 行为模板，不代表权重公式已逆向；第一版委任 AI 使用可解释 utility 权重，见 `16-unresolved-rules-fallbacks.md`。
+### 5.4 出兵倾向：难度 / 性格 / 野望 / 战略倾向
+
+`[PC-PK1.1][reverse-engineered-partial]`
+
+原版 `005EF440` 出兵策略中，初始概率为：
+
+```ts
+p = (difficulty + 3) * 5 * (personality + 2)
+
+// ambition: 0..4
+p = ambition === 0 ? trunc(p/3) :
+    ambition === 1 ? trunc(p/2) :
+    ambition === 2 ? p :
+    ambition === 3 ? trunc(p*6/5) :
+                     trunc(p*7/5)
+```
+
+`StrategicTendency` 为：
+
+```text
+0 全国统一
+1 地方统一
+2 州统一
+3 现状维持
+```
+
+现状维持会把当前出兵倾向压到5；地方/州统一根据州域目标判定也可能压到5。随后还有目标/势力强度修正，最终 `clamp(5,100)` 后做概率判定。
+
+因此超级难度与上级不是“完全相同AI只多资源”：同一 planner 架构下，难度直接影响出兵概率。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI出兵策略].txt
+- https://game.ali213.net/thread-6594040-1-6.html
+
+### 5.5 出兵硬门槛/携带资源
+
+`[PC-PK1.1][reverse-engineered]`
+
+- 单支出征部队最低5000兵。
+- 来源都市通常需治安>=90；弱势力分支放宽到>=80。
+- 路程由 `005F6C90` 计算。
+- 攻击携粮按 `移动旬数*5+15` 个旬的耗粮估算，最多携带50000粮；粮不足则放弃该队。
+- 城市>=10000金时75%概率带1500～2000金；>=2000金时50%概率带1000金。
+- 兵器部队不走普通携金逻辑。
+- 非都市据点还会校验随队武将约8倍俸禄的资金储备。
+
+SIRE 地址表已正式命名 `005F6470 ConsumptionCalculationUsedByAI` 和 `005DB840 GetExpeditionActionPointCost`。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI出兵策略].txt
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- https://www.xycq.org.cn/forum/thread-241027-1-1.html
+
+### 5.6 AI 势力强度与主将评分
+
+`[PC-PK1.1][reverse-engineered]`
+
+势力基础强度先按：
+
+```ts
+ceil(totalGarrisonTroops / 10000) * 10
+```
+
+再叠加大量历史君主硬编码 bonus，并归一化成0～100的AI强度位置值；出兵逻辑会读取该值。SIRE v1.28 后来也开放了“AI强度可配置”。
+
+出征主将/兵种则根据武力、统率、兵种适性、势力科技、兵装攻防、兵种克制和特技契合度评分；克制优势×1.3，劣势×0.7，契合特技按特技等级给攻防加分。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI势力强度设定].txt
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI选择主将].txt
+- https://game.ali213.net/thread-6379202-1-2.html
+
+### 5.7 剩余未知
+
+仍未完整逆出的主要是：
+
+- 城市内政多个 deficit 同时存在时的精确优先顺序；
+- 自动输送的目标选择/资源量函数；
+- 出兵中 `005F6660 / 005F7BC0` 等目标修正函数完整语义；
+- 各委任方针如何改变内部模块参数。
+
+详细 fallback 与证据边界见 `16-unresolved-rules-fallbacks.md#14-委任-ai-权重`。
 
 ## 6. 势力灭亡
 
