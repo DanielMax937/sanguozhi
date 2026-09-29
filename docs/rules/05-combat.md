@@ -112,7 +112,7 @@ damage = INT(
 来源：https://w.atwiki.jp/sangokushi11/pages/92.html
 交叉核对：https://w.atwiki.jp/sangokushi11/pages/91.html
 
-火焰“持续多少旬/自然蔓延概率”仍未取得足够精确证据。
+火焰持续的完整内部 RNG 仍未取得；但没有找到原版存在“风向式自然向相邻格扩散”的可靠证据。第一版引擎默认 `naturalSpreadProbability=0`，火罠/火球的范围与链式触发单独结算。普通燃烧先按 1–2 旬、会心 3 旬的 fallback，详见 `16-unresolved-rules-fallbacks.md`。
 
 ## 7. 攻城与陷落
 
@@ -134,7 +134,25 @@ damage = INT(
 
 来源：https://w.atwiki.jp/sangokushi11/pages/1598.html
 
-攻城耐久伤害、陷落后金粮/兵装继承的**通用闭式**仍 open，但已有高质量回归基准。
+攻城耐久伤害的**统一闭式**仍 open，但已有高质量回归基准。
+
+### 攻陷后物资保留
+
+`[PC-PK][empirical-high]`
+
+游民星空 190 刘虞开局的实测攻略给出：
+
+```text
+保留物资 = 攻陷前物资 / 100 × floor(攻陷部队主将魅力 / 10)
+```
+
+即魅力100约保留10%，90–99约9%。这解释了为什么高魅力主将补刀仍会丢失绝大部分金粮物资。
+
+来源：
+- https://www.gamersky.com/handbook/200703/57518.shtml
+- https://3g.ali213.net/gl/html/6354.html
+
+具体到兵装/兵器/舰船的小数量整数取整边界仍需 golden test；引擎应保存每个资源类型的 round policy。
 
 ### 攻城回归基准
 
@@ -187,7 +205,7 @@ damage = INT(
 
 来源：https://w.atwiki.jp/sangokushi11/pages/85.html
 
-基础持续时长和逐旬恢复概率仍 open。
+基础持续时长的精确概率仍 open。多处攻略把普通扰乱/伪报描述为 1–2 旬、会心约 3 旬；第一版引擎不再采用旧“每旬50%清醒”，而采用 `normal=1+Bernoulli(0.25)`、`critical=3` 的 fallback。详见 `16-unresolved-rules-fallbacks.md`。
 
 ### 兵力过低导致的自动混乱
 
