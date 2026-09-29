@@ -10,8 +10,6 @@
 - 嫌恶/亲爱君主关系
 - 援军/共同作战目标（如适用）
 
-官方手册确认外交友好度有 5 档：亲密、好意、中立、不和、险恶；同盟与停战都会阻止正常互攻。
-
 ## 2. 亲善
 
 `[PC-PK/后期版本][empirical-high]`
@@ -109,8 +107,6 @@ c：
 - https://zhidao.ali213.net/q/13047392.html
 - https://zhidao.baidu.com/question/693845718520080364/answer/2870151990.html
 
-官方手册（机制交叉核对）：
-https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
 
 ## 7. 论客
 
