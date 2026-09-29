@@ -26,6 +26,8 @@
 - 80 = 5
 - 90 = 6
 
+反编译 C++ 里内部 `maxCardCount` 实际是 4/5/6/7，因为第 0 格固定给“再考”；扣掉这格后，玩家看到的可出牌数量正好仍是 3/4/5/6。
+
 旧文档“>90 / >80 / >70”的边界是错误的，已删除。
 
 PCPK 1.1 有特殊场景诸葛亮 7 张的报告；PS2PK 也可能存在平台差异。
@@ -58,22 +60,142 @@ PCPK 1.1 有特殊场景诸葛亮 7 张的报告；PS2PK 也可能存在平台�
 
 ## 5. 性格与憤激
 
-可靠攻略总结：
+`[PC-PK-oriented][reverse-engineered]`
 
-- 冷静：持续约 3 回合；牌攻击增强，可频繁再考，并抑制对方话术。
-- 刚胆：约 3 回合；普通话题牌具有极强优先级，但无法使用话术/再考。
-- 小心：即时打出多张非话术牌的组合攻击。
-- 猪突：即时造成心理伤害，伤害还受武力影响。
+内部 `angerTimer`：
 
-来源：https://w.atwiki.jp/sangokushi11/pages/141.html
+- 小心：1
+- 猪突：1
+- 冷静：4
+- 刚胆：4
 
-## 6. 智力差
+触发回合末也会递减，因此攻略中“冷静/刚胆约持续3回合”的观察与内部 timer=4 不矛盾。
 
-- 智力低于约 50 时，COM 会出现明显非理性出牌。
-- 智力差过大可能不进入完整舌战而直接“一喝”决胜；PCPK 有约 15 智力差触发的实测报告，但概率未知。
+效果：
 
-## 7. 精确伤害仍 open
+- **小心**：进入连续攻击，把手中所有普通话题牌逐张打出；每张使用正常心理伤害公式，但愤激时 `topicCoef=10`。
+- **刚胆**：愤激期间自己的牌力强制为100；普通牌伤害 `topicCoef=10`。无视120、大喝110仍可压过。
+- **冷静**：`angerCoef=15`，并每回合恢复再考；再考后 40% 概率额外获得当前话题“大”牌。
+- **猪突**：进入愤激时立刻造成：
+  ```ts
+  hpDamage = 200 + martial
+  stressDamage = trunc(hpDamage / 15)
+  ```
 
-普通数字牌、“大伤害/中伤害”等对应的**精确心理点数函数**仍未锁定。
+来源：
+- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
+- https://w.atwiki.jp/sangokushi11/pages/141.html
 
-因此可确认手牌、回合、再考、话术和性格机制，但连续心理伤害公式仍保持 `empirical/provisional`。
+## 6. 智力差与舌战一击决胜
+
+### 舌战攻击力
+
+`[PC-PK-oriented][reverse-engineered]`
+
+```ts
+attack =
+  100
+  + trunc(
+      40 * (myINT - opponentINT)
+      / (131 - myINT)
+    )
+```
+
+双方同智力时 `attack=100`；智力差相同但绝对智力不同，结果可不同。
+
+### 开场一击决胜
+
+原代码条件：
+
+```ts
+if (
+  myINT > 80 &&
+  myINT > opponentINT + 10 &&
+  attack + randInt(0,199) >= 270
+) {
+  instantWin()
+}
+```
+
+因此在前两个硬门槛成立时：
+
+```ts
+pInstantWin =
+  clamp((attack - 70) / 200, 0, 1)
+```
+
+例如 `attack=100` 时约15%；attack越高概率越大。
+
+所以旧文档“约15智力差、概率未知”已删除。
+
+来源：
+- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
+
+## 7. 普通话题牌心理伤害：精确公式
+
+`[PC-PK-oriented][reverse-engineered]`
+
+心理槽内部上限为1000。
+
+话题牌等级系数：
+
+```ts
+small  = 10
+medium = 15
+large  = 20
+```
+
+未愤激时：
+
+```ts
+topicCoef =
+  cardTopic === currentTopic
+    ? 10
+    : 6
+
+angerCoef = 10
+```
+
+伤害：
+
+```ts
+hpDamage =
+  trunc(
+    (attack + randInt(0,4))
+    * angerCoef
+    * levelCoef
+    * topicCoef
+    / 1000
+  )
+```
+
+同智力（`attack=100`）时：
+
+| 牌 | 当前话题 | 非当前话题 |
+|---|---:|---:|
+| 小 | 100～104 | 60～62 |
+| 中 | 150～156 | 90～93 |
+| 大 | 200～208 | 120～124 |
+
+牌力只决定胜负，不把“牌力差”加进心理伤害。
+
+普通话题牌同时增加败方愤怒：
+
+```text
+小 +10
+中 +15
+大 +20
+```
+
+平局双方各 +15。
+
+大喝使用固定 `levelCoef=15`、`topicCoef=12`；同智力时约180～187心理伤害，仍受 attack 与 0～4 随机扰动，不是所有武将绝对固定扣同一个数。
+
+来源：
+- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
+- https://www.4gamer.net/games/024/G002453/20060210150000/
+- https://www.gamersky.com/handbook/200604/22092.shtml
+
+### 版本边界
+
+上述连续常量来自 PC-PK 导向的 C++ 移植。Vanilla 同期资料确认机制高度一致，但在无印 EXE 回归前，Vanilla 仍标 `compatibility-assumption`。
