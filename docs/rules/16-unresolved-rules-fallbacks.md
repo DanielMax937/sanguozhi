@@ -696,36 +696,232 @@ const retained =
 
 ## 5. 火焰持续与“自然蔓延”
 
-### 已确认
+### 结论：会心“+1回合”高置信；自然邻格扩散应为 0
 
-- 官方说明书描述的是主动火计、火罠、落雷点火以及消火。
-- 火计会心会延长燃烧回合。
-- 社区实测常见：普通燃烧 1–2 旬，会心明显更长，常见 3 旬。
-- 火伤约 400±100、会心约 ×1.2 等已有独立伤害实测。
+这一项需要把三个容易混在一起的机制拆开：
 
-来源：
-- 官方说明书
-- https://w.atwiki.jp/sangokushi11/pages/92.html
-- https://forum.gamer.com.tw/Co.php?bsn=60001&sn=380559
+1. **点火后该格火焰持续多久**
+2. **火罠/火球一次攻击覆盖多少格，以及是否引爆其他火罠**
+3. **已经着火的地格是否会在之后的回合自行向相邻格扩散**
 
-### 重要结论
+目前证据只支持 1 和 2；没有可靠原作证据支持第 3 项。
 
-没有找到原版《三国志11》存在“火会像有风向系统一样随机向相邻格自然扩散”的可靠证据。原作的“连烧”主要来自火种/火球等陷阱的**作用范围和链式点燃**。
+---
 
-因此不应凭空增加 natural fire spread。
+### 5A. 会心对持续时间：+1 回合
 
-### provisional-engine-rule
+`[COMMON][empirical-high]`
+
+日文攻略 Wiki 对火计的说明明确写：
+
+> 火计会心会增加火焰的持续回合数。
+
+五丈原决战制霸攻略也明确建议用深谋点火，因为火计会心能让火持续更久。
+
+更重要的是，一组专门的火计实测给出了成对数据：
+
+```text
+无深谋：1 / 3 / 3 回合后熄灭
+有深谋：2 / 4 / 4 回合后熄灭
+```
+
+即同样的三组火，强制会心后全部**严格 +1 回合**。
+
+因此旧 fallback：
 
 ```ts
-naturalSpreadProbability = 0
-
-normalFireDuration = 1 + Bernoulli(0.25) // 1~2旬
 criticalFireDuration = 3
 ```
 
-火罠/火球命中的每个格子分别建立自己的燃烧状态；链式触发是陷阱规则，不是自然蔓延。
+是错误建模，应改为：
+
+```ts
+criticalDuration = baseDuration + 1
+```
+
+注意：这并没有解决 `baseDuration` 自身的精确随机函数。实测中的 1/3/3 也说明不能把“所有普通火都固定限制在内部 1~2 计数”冒充源码事实；显示回合与内部计数的结算时点、点火来源都可能影响玩家看到的持续长度。
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/85.html
+- https://w.atwiki.jp/sangokushi11/pages/2166.html
+- https://www.bilibili.com/opus/374609164980707553
+- https://game.ali213.net/thread-1568503-1-1.html
 
 ---
+
+### 5B. 基础持续时间 RNG：仍未 exact
+
+`[COMMON][open-exactness]`
+
+目前没有在公开的 311MemoryResearch/SIRE 文本资料里找到“点火时如何生成剩余燃烧回合”的原函数。
+
+已检查的逆向资料能定位：
+
+- 火计/火矢点火后的火伤处理；
+- 火神对着火格、火计、火罠的免疫/增伤；
+- 火种、火球、业火种、业火球的爆炸伤害；
+- 火船/业火种造成眩晕、负伤、战死的概率；
+
+但没有暴露一个可直接引用的“燃烧持续回合参数”。
+
+因此基础持续时间仍必须保持可替换 profile。
+
+### provisional-engine-rule
+
+作为**工程 fallback，而不是原作事实**，采用现代 San11 重制项目的保守权重：
+
+```ts
+const defaultTacticalFireLifetime = {
+  1: 0.70,
+  2: 0.30
+}
+
+baseDuration = weightedChoice(defaultTacticalFireLifetime)
+
+duration =
+  baseDuration
+  + (isCriticalIgnition ? 1 : 0)
+```
+
+理由：
+
+- 社区长期描述普通火以 1~2 回合作为常见长度；
+- 会心后的常见描述是 2~3 回合；
+- 公开重制项目 `sango_infinity` 对火计、火矢、木兽放射、落雷统一使用普通 `[1,2]`、权重 `70/30`，会心 `[2,3]`、同样 `70/30`；
+- 这正好满足“会心只把基础结果 +1”这一实测约束。
+
+但这组 70/30 **不是原版反汇编常量**，且不能完全解释所有玩家观察到的 3/4 回合显示值，所以必须：
+
+```ts
+fireLifetimeProfile[source]
+```
+
+按点火来源可配置，而不是把 70/30 写死在 engine。
+
+建议至少区分：
+
+```ts
+type FireSource =
+  | "strategy"
+  | "fire-arrow"
+  | "fire-trap"
+  | "lightning"
+  | "scripted-event"
+```
+
+初版前四类可共享同一 fallback；历史事件火焰由事件脚本显式指定。
+
+工程参考：
+- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Object/Skill/Effect/SetFire.cs
+- https://github.com/tankyc/sango_infinity/blob/master/Build/Content/Data/Common/Skills.json
+
+---
+
+### 5C. “自然蔓延”：原作 fidelity 模式设为 0
+
+`[COMMON][negative-evidence-high]`
+
+经过原版时期攻略、日文 Wiki、SIRE/311MemoryResearch 交叉检索，没有找到《三国志11》存在下面这种机制的可靠证据：
+
+```text
+一格已经着火
+→ 每旬根据风向/地形概率
+→ 自动点燃相邻格
+```
+
+相反，原作资料对“火势扩展”的描述都落在**攻击范围和连锁触发**：
+
+- 火种/火炎种/业火种有固定爆炸范围；
+- 火球/业火球沿线路滚动并点燃经过区域；
+- 落雷点燃目标及周围格；
+- 多个火罠可以被火计或火球**连锁引爆**；
+- 五丈原攻略直接称为“火球からの連鎖”。
+
+因此“连烧”应建模为：
+
+```ts
+igniteByAttackArea()
+triggerAdjacentFireTrapChain()
+```
+
+而不是：
+
+```ts
+spreadFireEveryTurn()
+```
+
+原作 fidelity profile：
+
+```ts
+naturalAdjacentSpread.enabled = false
+naturalAdjacentSpread.probability = 0
+```
+
+来源：
+- https://www.gamersky.com/handbook/200603/21652.shtml
+- https://w.atwiki.jp/sangokushi11/pages/2166.html
+- https://w.atwiki.jp/sangokushi11/pages/79.html
+
+### 不要被现代重制项目的 SpreadFire() 混淆
+
+`sango_infinity` 当前确实实现了：
+
+- 每回合向相邻格扩散；
+- 按地形可燃性计算概率；
+- 扩散代数衰减；
+- 可配置最大蔓延概率和寿命；
+- `fireSpreadEnabled` 开关。
+
+但这属于该重制项目自己的可配置扩展。其代码/更新记录本身把“火焰蔓延开关”作为新增剧本参数。因此这个模块**不能反向证明 San11 原作有自然蔓延**。
+
+如果我们的项目未来想提供 MOD 模式，可以单独保留：
+
+```ts
+ruleset.extensions.naturalFireSpread
+```
+
+但 Vanilla/PK fidelity 模式必须关闭。
+
+---
+
+### 5D. SIRE/逆向侧目前能确认什么
+
+311MemoryResearch 已经明确定位很多火系原程序入口，例如：
+
+- `005AEBAF`：火神对火计免疫相关；
+- `005AEC19`：火神对低智目标火计必中；
+- `005B1263`：火计/火矢点火、着火格对部队/据点火伤；
+- `005B1686`：火罠伤害与火神；
+- `005B178B`：火罠对火神相关处理；
+- `005AE540`：火神通过着火格不减兵；
+- `00583008`：火神船只着火不减兵。
+
+以及 `函数[火陷阱炸伤炸死].txt` 中的业火种、火船眩晕/负伤/战死逻辑。
+
+但公开文本研究没有出现“自然扩散”调用链，也没有找到燃烧寿命的原始随机函数。这进一步支持：
+
+- **自然扩散不要添加**；
+- **持续时间继续保留一个很小的可替换 fallback**。
+
+逆向来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[火陷阱炸伤炸死].txt
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/修改记录by%20sjn4048.txt
+
+---
+
+### 剩余 exactness
+
+第 5 项现在只剩一个真正未解决的问题：
+
+> 原版在不同点火来源下，`baseDuration` 的内部 RNG / 计数时点到底是什么。
+
+其余两点可以锁定：
+
+```ts
+criticalBonusTurns = 1          // empirical-high
+naturalAdjacentSpread = false  // negative-evidence-high
+```
+
 
 ## 6. 自然死亡精确 RNG
 
