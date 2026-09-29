@@ -82,13 +82,30 @@
 来源：https://w.atwiki.jp/sangokushi11/pages/74.html
 交叉核对：https://w.atwiki.jp/sangokushi11/pages/95.html
 
-### 仍未 confirmed
+### 普通连续概率：反汇编到函数边界
 
-当以上强制门槛都不命中时，普通登用的**连续概率函数**仍未知。
+`[PC-PK1.1][reverse-engineered-partial]`
 
-因此必须删除旧的自拟：
-`(100-忠诚)*2 + ...`
-这只能作为 AI heuristic，不能作为游戏规则。
+以上强制门槛都不命中后，原程序进入 `005C4F80 GetHiringSuccessRate`，返回一个 0–100 的成功率。公开的 SIRE/311MemoryResearch 资料已确认函数地址、调用关系和最终比较过程，但当前可检索资料**没有完整展开该函数体**，所以内部连续评分仍不能标成 exact。
+
+正常登用发令时会计算：
+
+`dateKey = day*7 + month*5 + year*3`
+
+最终不是每次重新取全局随机数，而是把 dateKey、双方武将 ID、目标忠诚、执行者魅力、执行者与目标的相性差等送入确定性值生成函数，再做：
+
+`success = deterministicValue < successRate`
+
+异地登用会保存发令时的 dateKey，到任务完成时继续使用。因此同一状态下读档重试应保持相同结果。
+
+引擎 fallback 与详细证据见 `16-unresolved-rules-fallbacks.md#2-普通登用概率`。禁止重新引入网上无来源的“政治/魅力各加若干点”公式。
+
+逆向来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才01-计算登用是否成功.txt
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才03-执行登用.txt
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才04-执行登用完成.txt
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才08-探索发现人才并登用.txt
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
 
 ## 6. 相性、义理、野望、汉室
 
