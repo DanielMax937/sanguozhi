@@ -925,39 +925,291 @@ naturalAdjacentSpread = false  // negative-evidence-high
 
 ## 6. 自然死亡精确 RNG
 
-### 已确认
+### 结论：死亡状态机已能确认，精确随机函数仍缺函数体
 
-- “自然死”：到没年后开始多病，多数当年死亡，最长常见再延 2–3 年。
-- “不自然死”：到没年会病倒后恢复，再延寿；越年轻延寿越长，资料称最大约 15 年。
-- 历史死亡事件可覆盖普通死亡。
+这一项最重要的修正是：**不能在剧本初始化时直接预抽一个最终死亡年/旬。**
 
-来源：https://w.atwiki.jp/sangokushi11/pages/983.html
+SIRE 开发资料已经给出原版 PK 的关键函数名和运行时字段：
 
-### 没找到
+- `0048A000 GetDeathYear`：返回角色死亡年；
+- `00489160 IsMarkedForDeath`：判断武将是否已经“预定死亡”；
+- 武将静态数据同时保存 `YearOfBirth`、`YearOfDeath`、`CauseOfDeath`；
+- GetInfo 运行时字段另外暴露“是否预定死亡”和“健康状态”。
 
-未找到每旬死亡概率和“不自然死 +a 年”的精确抽样函数。
+这说明原作至少存在如下分层：
 
-### provisional-engine-rule
-
-不要每旬独立乱掷；开局时按 seed 预先决定死亡时间，利于回放：
-
-```ts
-if (deathCause === "natural") {
-  extraYear = weightedChoice({0:0.65, 1:0.25, 2:0.08, 3:0.02})
-}
-
-if (deathCause === "unnatural") {
-  ageAtRecordedDeath = deathYear - birthYear
-  extraMax = clamp(15 - floor(max(ageAtRecordedDeath - 30, 0) / 10), 10, 15)
-  extraYear = uniformInt(10, extraMax)
-}
-
-deathDekad = uniformInt(1, 36)
+```text
+剧本基础数据
+YearOfBirth / YearOfDeath / CauseOfDeath
+              ↓
+        GetDeathYear()
+              ↓
+到达死亡阈值后的运行时判定
+              ↓
+      IsMarkedForDeath
+              ↓
+       健康恶化 / 死亡
 ```
 
-历史事件满足条件时，事件日期优先。
+而不是：
+
+```text
+开局
+→ 一次性抽出最终死亡日期
+→ 到日期直接死亡
+```
+
+`[PC-PK1.1][reverse-engineered-partial]`
+
+逆向来源：
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/数据汇总.md
 
 ---
+
+### 6A. 自然死 / 不自然死是不同寿命 profile
+
+`[COMMON][empirical-high]`
+
+日文攻略 Wiki 长期整理：
+
+- **自然死**：到基础没年后开始容易生病，多数在当年死亡，少数延后约 2–3 年；
+- **不自然死**：到基础没年附近会出现一次病情变化，但不会按普通自然死立即退场，而会再获得一段寿命；
+- 不自然死的额外寿命与“基础没年时年龄”负相关：死得越年轻，通常延寿越长；高龄武将延寿很少；
+- 旧资料常把额外上限描述为“约 15 年”，但玩家记录存在实际死亡比基础没年晚 16–20 年的案例，因此 **15 不能作为 actual-death hard cap**。
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/983.html
+- https://w.atwiki.jp/sangokushi11/pages/886.html
+- https://w.atwiki.jp/sangokushi11/pages/579.html
+- https://w.atwiki.jp/sangokushi11/pages/1950.html
+- https://w.atwiki.jp/sangokushi11/pages/1928.html
+
+孙策是很好的回归锚点：
+
+- 生年 175、基础没年 200、死因“不自然死”；
+- 玩家把没年改为 189 后，十次左右测试的于吉事件集中在 205–206；
+- 另有 PK 实测正常数据时事件在 216 年附近；
+- 于吉事件舌战获胜后，游戏明确把孙策寿命再延长 **20 年**。
+
+这说明事件和普通寿命系统操作的是同一条“死亡阈值 / 寿命”链，而不是另做一个固定历史日期。
+
+事件来源：
+- https://w.atwiki.jp/sangokushi11/pages/918.html
+- https://w.atwiki.jp/sangokushi11/pages/886.html
+
+---
+
+### 6B. “预定死亡年”是原作真实概念
+
+`[COMMON][confirmed source language / PC-PK reverse]`
+
+游民星空转载的官方事件条件直接使用：
+
+- “刘备预定死亡年到临”
+- “诸葛亮预定死亡年到临”
+- “孙策预定死亡年之后或 200 年到临”
+
+这与 SIRE 命名的 `IsMarkedForDeath` 完全一致：**基础没年、计算后的死亡时点、运行时死亡 flag 不是同一个概念。**
+
+来源：
+- https://www.gamersky.com/handbook/200809/124174_6.shtml
+- https://wap.gamersky.com/gl/Content-124174_12.html
+- https://wap.gamersky.com/gl/content-134257_10.html
+
+因此事件系统也必须查询统一的 lifespan/death service，不得直接写：
+
+```ts
+if (currentYear >= person.yearOfDeath) die()
+```
+
+---
+
+### 6C. 死亡不是开局永久固定
+
+`[COMMON][empirical-high]`
+
+日文 Wiki 的问答记录中，玩家明确报告：
+
+- 从足够早的存档重新推进后，原本已经死亡的武将可能继续活；
+- 反之亦然；
+- 具体哪一个时点固定死亡结果不明。
+
+这与运行时 `IsMarkedForDeath` 字段相符：死亡结果至少有一部分是在游戏推进过程中决定，而不是 scenario load 时永久写死。
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/2527.html
+
+因此旧 fallback 的：
+
+```ts
+// WRONG
+onScenarioInit() {
+  deathYear = ...
+  deathDekad = uniformInt(1, 36)
+}
+```
+
+删除。
+
+---
+
+### 6D. 目前真正缺失的两个函数
+
+1. `0048A000 GetDeathYear` 的完整函数体尚未在公开文本资料中展开，因此“不自然死 +a 年”的**原版年龄函数**仍未知；
+2. 到达死亡阈值以后，原程序究竟在年初/月初/每旬用什么概率立 `markedForDeath`，以及立 flag 后多久真正死亡，仍未取得逐指令公式。
+
+SIRE 仓库公开了已命名的 IDA 数据库，但当前公开 Markdown/TXT 只给函数地址与语义，不足以把函数体冒充已逆向。
+
+---
+
+### 6E. provisional-engine-rule：按原作状态机，而不是预抽日期
+
+#### 第一步：计算死亡阈值
+
+自然死：
+
+```ts
+deathThresholdYear = person.yearOfDeath
+```
+
+不自然死暂采用一个**工程年龄曲线**：
+
+```ts
+ageAtBaseDeath =
+  person.yearOfDeath - person.yearOfBirth
+
+unnaturalExtraYears = clamp(
+  floor((100 - ageAtBaseDeath) / 3),
+  0,
+  15
+)
+
+deathThresholdYear =
+  person.yearOfDeath + unnaturalExtraYears
+```
+
+这个式子不是原版公式，只是满足目前可靠方向的 fallback：
+
+- 年轻的“不自然死”人物接近 +15 年；
+- 约 60–70 岁时约 +10～13 年；
+- 90 多岁时只延 0～3 年；
+- 不自然死阈值之后还会进入自然死亡阶段，所以实际死亡可以晚于“+15”。
+
+孙策若按 175→200，则年龄25，fallback 给 +15，阈值 215；与“210 年以后、常见约 216”这一批实测处在同一量级。
+
+#### 第二步：到阈值后才做运行时死亡判定
+
+为了同时满足“多数当年死、少数拖 2–3 年”和 `markedForDeath` 独立状态，fallback 不预抽最终日期，而在每年第一次寿命结算时做：
+
+```ts
+const markChanceByOverdueYear = [
+  0.65,      // 阈值年
+  0.7142857, // 若首年未中，则第二年；累计死亡年权重约25%
+  0.80,      // 第三年；累计约8%
+  1.00       // 第四年兜底；累计约2%
+]
+
+function updateNaturalDeathAtYearBoundary(person, year, rng) {
+  if (person.dead || person.markedForDeath) return
+
+  const threshold = getFallbackDeathThresholdYear(person)
+  if (year < threshold) return
+
+  const overdue = min(year - threshold, 3)
+
+  if (rng.chance(markChanceByOverdueYear[overdue])) {
+    person.markedForDeath = true
+
+    // 只在 flag 立起时决定本年度的死亡旬；
+    // 不在剧本初始化阶段预抽。
+    person.pendingDeathDekad = rng.int(0, 35)
+  }
+}
+```
+
+这组 conditional chance 对应最终年份分布约：
+
+```text
+阈值年   65%
++1年     25%
++2年      8%
++3年      2%
+```
+
+它继承旧 fallback 的经验权重，但**语义已经变成原作式“逐年立死亡 flag”**。
+
+#### 第三步：flag 与健康状态分开
+
+```ts
+if (person.markedForDeath) {
+  updateIllnessPresentation(person)
+
+  if (currentDekadIndex >= person.pendingDeathDekad) {
+    resolveNaturalDeath(person)
+  }
+}
+```
+
+健康状态是独立 runtime state。当前没有证据给出“健康→轻伤/重伤/濒死→死亡”的精确转换概率，因此：
+
+- 健康恶化主要用于 UI/能力修正；
+- 不再让健康状态另掷一个独立死亡概率；
+- 真正死亡统一由 lifespan state machine 决定。
+
+这样避免“寿命 RNG + 健康 RNG”重复计算死亡风险。
+
+---
+
+### 6F. RNG 与回放
+
+死亡 roll 必须使用模拟器正常 PRNG 状态，而不是：
+
+```ts
+hash(personId, year) // 永远固定
+```
+
+原因是旧玩家实测表明，从更早时间重跑可能改变死亡结果。
+
+引擎仍可通过保存 PRNG state 保证**同一完整游戏轨迹可重放**；但改变此前行动、事件和 RNG 消耗后，未来死亡结果允许变化，这更符合原作表现。
+
+---
+
+### 6G. 历史事件优先级
+
+历史死亡事件满足条件时，可以：
+
+- 直接死亡；
+- 修改寿命/死亡阈值；
+- 拦截普通死亡流程。
+
+例如孙策于吉事件胜利是“延寿 +20”，失败则死亡。因此统一接口应为：
+
+```ts
+getEffectiveDeathThreshold(person)
+markForNaturalDeath(person)
+extendLife(person, years)
+killPerson(person, cause)
+```
+
+而不是事件脚本直接修改若干互不相干字段。
+
+---
+
+### 剩余 exactness
+
+第 6 项现在真正只剩：
+
+1. `0048A000 GetDeathYear` 中“不自然死 +a”的原版闭式；
+2. `markedForDeath` 的原版触发时点与概率；
+3. flag 后病情恶化到实际死亡的精确时序；
+4. Vanilla EXE 是否与 PC-PK 完全相同。
+
+当前 fallback 已经恢复正确的**状态结构**；以后拿到函数体时，只替换 `getFallbackDeathThresholdYear()` 和 `updateNaturalDeathAtYearBoundary()`，不改生命周期接口。
+
+---
+
 
 ## 7. 混乱 / 伪报持续与恢复
 
