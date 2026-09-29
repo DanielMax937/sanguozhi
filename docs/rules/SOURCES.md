@@ -43,6 +43,11 @@
 
 ## 逆向/实测研究
 
+- 311MemoryResearch：三国志11PK 内存/汇编逆向资料
+  https://github.com/sjn4048/311MemoryResearch
+  - Func-内政01-计算征兵数量
+  - Func-内政02-执行征兵
+
 - PTT 精华区：战法、俘虏、强制单挑、战死等概率公式
   https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html
 - 日文 Wiki 小技巧：忠诚自然下降触发条件
