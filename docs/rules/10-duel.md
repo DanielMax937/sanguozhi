@@ -8,50 +8,229 @@
 - 体力归零败北；成功撤退也结束单挑。
 - 50 合未决出则平局。
 
-## 2. 作战方针
+## 2. 通用单挑核心：反编译 C++ 移植
 
-可靠实测区分四类：
+`[PC-PK-oriented][reverse-engineered-high]`
 
-| 方针 | 防御 | 会心 | 攻击频率 | 斗志增长 |
-|---|---|---|---|---|
-| 攻击重视 | 无额外 | 3–4 连击 | 高 | 低 |
-| 防御重视 | 非普通命中伤害约 -25% | 一定时间普攻无效 | 低 | 中 |
-| 斗志重视 | 无额外 | 斗志 +1 阶 | 中 | 高 |
-| 一击重视 | 无额外 | 随机触发上三类一种 | 不普通攻击 | 中 |
+`sango_infinity` 的 `Duel.cs` 明确标注由 `s11_sys_duel.h + s11_sys_duel.cpp` 翻译而来，并保留原 C++ 命名、数据地址与代码区间。以下只采用其中**通用核心**；该项目后来新增的数据驱动人物特殊行为不自动视为原版规则。
 
-来源：https://w.atwiki.jp/sangokushi11/pages/2481.html
+来源：
+- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
+- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Duel/DuelEnum.cs
 
-## 3. 必杀动作
+### 2.1 四方针底层系数
 
-`[COMMON][empirical-high]`
+原表 `8b1750 StanceCoef`：
 
-| 动作 | 斗志消耗 | 攻击基准值 | 附加 |
-|---|---:|---:|---|
-| 必杀技 | 100 | 21 | 强攻击 |
-| 急所 | 200 | 18 | 可能负伤 |
-| 无双 | 300 | 54 | 可能负伤；解除对方气合/坚守 |
-| 假退却 | 0 | 27 | 第15合以后仅一次；需弓；较高负伤率 |
-| 暗器 | 0 | 21 | 需暗器；稀有负伤；解除气合/坚守 |
+| 方针 | speed | hit | attack | block | attackSub | spiritGain |
+|---|---:|---:|---:|---:|---:|---:|
+| 攻击重视 | 42 | 71 | 16 | 12 | 3 | 4 |
+| 防御重视 | 10 | 200 | 14 | 90 | 2 | 8 |
+| 斗志重视 | 15 | 125 | 14 | 55 | 3 | 10 |
+| 一击重视 | 5 | 71 | 16 | 22 | 3 | 7 |
 
-### 辅助动作
+另两个未命名字段暂不赋予语义。
 
-- 气合（100）：后续造成伤害约 +20%。
-- 坚守（100）：受到伤害约 -25%。
-- 名马：撤退保证成功。
+### 2.2 武力 → actionRatio
 
-来源：https://w.atwiki.jp/sangokushi11/pages/2481.html
+所有运算按原 C/C# 整数截断。
 
-## 4. 普攻基准与武器
+```ts
+function duelScore(selfStr, otherStr) {
+  const hi = max(selfStr, otherStr)
+  const lo = min(selfStr, otherStr)
 
-同武力附近的实测表显示：
+  const curve =
+    trunc(max(hi - 5, 0) ** 2 / 1500)
 
-- 攻击重视普通命中基准约 12，格挡约 6。
-- 防御重视普通命中约 7。
-- 斗志重视普通命中约 10。
-- 防御方针还能进一步降低非普通命中伤害。
-- 长柄武器攻击约 +10%。
+  const decadeGap =
+    max(trunc(hi / 10) - trunc(lo / 10), 1)
 
-这些适合作为 `empirical-high` 基线，但“武力差→命中/伤害”的完整公式仍 open。
+  const x = selfStr - lo
+
+  const c =
+    max(x + decadeGap - curve - 1, 0)
+    * decadeGap
+
+  const y = min(x, curve)
+  const z = y + decadeGap - curve
+
+  const d =
+      y * (curve - y)
+    + trunc(y * (y + 1) / 2)
+    + trunc(max(z, 0) * max(z - 1, 0) / 2)
+
+  return 180 + c + d
+}
+
+a = duelScore(atkMartial, defMartial) ** 2
+d = duelScore(defMartial, atkMartial) ** 2
+
+if (a >= d)
+  actionRatio = min(trunc(a * 100 / (a + d)), 99)
+else
+  actionRatio = 100 - min(trunc(d * 100 / (a + d)), 99)
+```
+
+锚点：
+
+- 1/1 → 50
+- 100/100 → 50
+- 100/95 → 55
+- 80/75 → 52
+- 100/80 → 62
+- 80/60 → 60
+
+所以“同武力差不一定同伤害”与“武力差0时绝对值不影响基础伤害”可以同时成立。
+
+实测交叉：
+- https://w.atwiki.jp/sangokushi11/pages/30.html
+- https://w.atwiki.jp/sangokushi11/pages/2484.html
+
+## 3. 普攻：命中 / 格挡 / 闪避 / 伤害
+
+### 3.1 基础伤害
+
+```ts
+n = stance.attack
+n = trunc(n * actionRatio / 50)
+n = trunc(n * stance.attackSub * 7 / 27)
+damage = max(n, 3)
+```
+
+同武力 `actionRatio=50`：
+
+- 攻击重视：12
+- 防御重视：7
+- 斗志重视：10
+- 一击重视：12
+
+与旧实测表完全一致。
+
+### 3.2 命中结果
+
+```ts
+pHit = atkStance.hit
+pHit = trunc(pHit * (100 - defStance.block) / 80)
+pHit = trunc(pHit * actionRatio / 50)
+pHit += randInt(0, 9)
+pHit = clamp(pHit, 10, 99)
+
+if (chance(pHit)) {
+  result = HIT
+} else if (chance(calcDodgeChance(defender))) {
+  result = DODGE
+} else {
+  result = BLOCK
+}
+```
+
+闪避：
+
+```ts
+pDodge =
+  10 + trunc((defMartial - atkMartial) / 3)
+
+pDodge = clamp(pDodge, 5, 30)
+
+if (defStance === DEFENSE)
+  pDodge += 25
+```
+
+### 3.3 格挡伤害
+
+```ts
+HIT:
+  damage = n
+
+BLOCK:
+  if (defStance === DEFENSE)
+    damage = max(trunc(n * 3 / 10), 1)
+  else
+    damage = trunc(n / 2)
+
+DODGE:
+  damage = 0
+```
+
+同武力攻击重视：
+
+- 完整命中 12
+- 普通格挡 6
+- 对手防御重视格挡 3
+
+### 3.4 气合、坚守与武器
+
+通用核心：
+
+```ts
+if (attackerHasAttackBuff)
+  damage = trunc(damage * 5 / 4)
+
+if (defenderHasDefenseBuff)
+  damage = trunc(damage * 3 / 4)
+
+if (hasCrescentHalberd)
+  damage = trunc(damage * 9 / 8)
+else if (hasLongWeapon)
+  damage = trunc(damage * 10 / 9)
+```
+
+初级难度还存在玩家/COM 的 11/10 与 4/5 单挑伤害修正；其他难度不在这段函数中加伤害倍率。
+
+## 4. 会心连击与必杀
+
+### 4.1 攻击重视会心
+
+```ts
+actionCount =
+  action === ATTACK_CRITICAL
+    ? 3 + randInt(0, 1)
+    : 1
+```
+
+会心为 3 或 4 连击，但**每一下独立重新判 Hit / Dodge / Block**。
+
+每一下先：
+
+```ts
+damage = trunc(normalDamage * 3 / 4)
+```
+
+再按该下的 Hit/Block/Dodge 结果结算。
+
+所以同武力攻击重视无其他修正时：
+
+- 会心单次完整命中：9
+- 普通格挡：4
+- 对手防御重视格挡：2
+
+### 4.2 必杀动作
+
+通用基础：
+
+```ts
+n = trunc(actionRatio * 20 / 55)
+```
+
+动作倍率：
+
+| 动作 | 斗志消耗 | 倍率/效果 | 同武力基础伤害 |
+|---|---:|---|---:|
+| 必杀技 | 100 | ×6/5 | 21 |
+| 急所 | 200 | ×1 | 18 |
+| 无双 | 300 | ×3 | 54 |
+| 暗器 | 0 | ×6/5 | 21 |
+| 假退却 | 0 | ×3/2 | 27 |
+| 气合 | 100 | 伤害0，赋攻击 buff | 0 |
+| 坚守 | 100 | 伤害0，赋防御 buff | 0 |
+
+随后再应用 buff、宝物、初级难度；对手当前方针为防御重视时，攻击型必杀额外 ×3/4。最终单次必杀伤害上限 80。
+
+急所、无双、假退却的负伤率属于另一条函数，不和本节普通命中公式混合。
+
+实测来源：https://w.atwiki.jp/sangokushi11/pages/2481.html
+
 
 ## 5. 援助/换人
 
@@ -119,10 +298,13 @@ forcedDuelRate = (A + B) * 0.05 - C + D
 来源：
 https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html
 
-## 8. 仍未确认
+## 8. 剩余未确认
 
-- 武力差对应的完整攻击/防御/命中公式。
-- 各性格对接受挑战的准确概率。
-- 所有平台一致的俘虏概率。
+核心“武力→攻击比例→命中/格挡/闪避→普通伤害”已不再 open。
 
-因此单挑不再是“几乎全 provisional”，但核心连续公式仍标 open。
+剩余主要是：
+
+- 吕布、关羽、张飞、黄忠等**特定人物例外**在原 C++ 中的完整硬编码；当前开源移植已将其重构为数据驱动配置，需要单独逐人核回原作。
+- 各性格对接受玩家主动挑战的准确概率。
+- 单挑结束后的所有平台一致俘虏概率。
+- Vanilla EXE 与上述 PC-PK 导向通用核心是否逐字一致；在无印二进制回归前标 `compatibility-assumption`。
