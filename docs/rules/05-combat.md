@@ -379,19 +379,101 @@ retainedFacilities =
 
 ## 8. 异常状态
 
-### 混乱
-- 不正常攻击/反击；会乱跑；ZOC 消失。
-- 战法对其必中/极易命中。
-- 会心扰乱至少持续 2 旬。
+### 混乱 / 伪报的运行时恢复：反汇编确认
 
-### 伪报
-- 自动向所属据点撤退数旬。
-- 无法反击，战法对其必中。
-- 会心伪报必定至少持续 2 旬。
+`[PC-PK1.1][reverse-engineered]`
+
+部队异常状态有独立的“剩余回合计数”。
+
+每旬 `00599B90` 按以下顺序处理：
+
+```ts
+if (status === CONFUSED && !unit.hasActed) {
+  unit.hasActed = true
+}
+
+if (status === FALSE_REPORT && !unit.hasActed) {
+  moveTowardHomeBase(unit)
+  unit.hasActed = true
+}
+
+let recoverySpeed = 1
+
+if (
+  ruleset === "pk" &&
+  insideFriendlyDefensiveFacilityAura(unit)
+) {
+  recoverySpeed = 2
+}
+
+statusTurnCount =
+  max(0, statusTurnCount - recoverySpeed)
+
+if (statusTurnCount === 0) {
+  clearAbnormalStatus(unit)
+}
+```
+
+所以原作没有“每旬50%自然恢复”这一层随机数。
+
+PK 的阵/砦/城塞恢复加速在官方说明书里描述为“恢复概率提高”，但反汇编实现是**倒计时速度从1变2**。该效果是 PK 新增；Vanilla 仍按每旬 -1。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动03-部队异常状态处理.txt
+- https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+
+SIRE 地址表：
+- `004AEA70 SetTroopStatus`
+- `00496350 SetTroopTurnCount`
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+
+### 初始持续回合
+
+`[reverse-engineered-partial / empirical-high]`
+
+已经定位：
+
+- `005917D0`：伪报实际处理；
+- `00591A20`：扰乱实际处理。
+
+但公开 TXT 没有展开这两个函数体，所以初始 count 的精确分布仍 open。
+
+可靠边界：
+
+- 普通伪报/扰乱主要持续 1～2 回合；
+- 会心后至少 2 回合；
+- 性格和智力影响**会心率**，不是异常后的恢复速度。
+
+反汇编还给出施法方性格对会心的修正：
+
+| 性格 | 伪报会心修正 | 扰乱会心修正 |
+|---|---:|---:|
+| 胆小 | +10 | -5 |
+| 冷静 | +5 | 0 |
+| 刚胆 | 0 | +5 |
+| 莽撞 | -5 | +10 |
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[计策爆击率].txt
+- https://w.atwiki.jp/sangokushi11/pages/85.html
+
+引擎 fallback 暂采用可配置的：
+
+```ts
+base = weightedChoice({1: 0.70, 2: 0.30})
+initialCount = base + (critical ? 1 : 0)
+```
+
+即普通 1/2、会心 2/3。70/30 来自现代重制项目的工程参考，不标为原作事实。
+
+旧的“重复施放再 +1，最多5回合”没有依据，已删除；重复施放的 exact setter 行为继续列 open。
+
+### 镇静
+
+成功后直接解除目标异常；会心时连带目标邻接友军。
 
 来源：https://w.atwiki.jp/sangokushi11/pages/85.html
 
-基础持续时长的精确概率仍 open。多处攻略把普通扰乱/伪报描述为 1–2 旬、会心约 3 旬；第一版引擎不再采用旧“每旬50%清醒”，而采用 `normal=1+Bernoulli(0.25)`、`critical=3` 的 fallback。详见 `16-unresolved-rules-fallbacks.md`。
 
 ### 兵力过低导致的自动混乱
 
