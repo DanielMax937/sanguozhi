@@ -181,7 +181,7 @@ adviserParam = 1.2 - 0.01 * (50 - intParam)
 
 - 治安影响收入和征兵量。
 - 巡查提高治安；征兵降低治安。
-- `[PK]` 政令整备使治安不再自然下降。
+- `[PK][empirical-high/reverse]` 政令整备并非“绝对不下降”；原文是“治安更不容易下降”。SIRE 暴露了独立的“有政令整备时本季不下降概率”参数，长期社区整理指向默认约 **50%**。
 
 ### 换季自然下降
 
@@ -197,7 +197,19 @@ adviserParam = 1.2 - 0.01 * (50 - intParam)
 - https://w.atwiki.jp/sangokushi11/pages/1152.html
 - https://w.atwiki.jp/sangokushi11/pages/79.html
 
-精确“太守魅力→0–5分布”的闭式仍 open。
+精确“太守魅力→0–5分布”的原作闭式仍 open；引擎 fallback 见 `16-unresolved-rules-fallbacks.md#15-太守魅力--换季治安下降概率分布`。
+
+### PK 政令整备
+
+`[PK][empirical-high/reverse]`
+
+- 不是永久锁死治安。
+- 每次换季先做一次独立判定；社区逆向/修改器参数说明与长期整理一致，默认可按 **50% 概率跳过本季自然治安下降**。
+- 未跳过时，仍按太守魅力决定的自然下降规则结算。
+
+来源：
+- https://dl.3dmgame.com/patch/26091.html
+- https://www.sohu.com/a/411270684_120015190
 
 ### 贼与异民族
 
