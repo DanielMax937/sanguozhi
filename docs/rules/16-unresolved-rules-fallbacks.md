@@ -3225,37 +3225,219 @@ vanillaTerrainHazard.status =
 
 ## 12. 普通君主继承
 
-### 已确认
+### 结论：玩家选择已确认；COM 自动继承可收敛为“关系层级 + 年长者”
 
-历史事件有自己的明确优先级：
-- 曹操：曹昂 > 曹丕 > 曹植 > 曹冲 > 曹彰。
-- 刘备：刘禅 > 刘封。
-- 连环计等事件甚至会让玩家在候选后继势力之间做选择。
+这一项不再需要旧的“血缘 +10000、官职×10、功绩、魅力/统率”综合评分 fallback。
+
+目前可靠资料把普通继承拆成两条：
+
+1. **玩家势力**：非历史事件死亡时，由玩家从合法候选中选择后继者。
+2. **COM 势力**：长期玩家批量观察高度一致地指向：`血缘 > 义兄弟 > 配偶 > 年长者`。
+
+历史事件仍然优先覆盖普通逻辑。
+
+### 12A. 玩家势力：普通死亡后由玩家选后继
+
+`[COMMON][empirical-high]`
+
+PC 与 PS2 老玩家均明确报告：
+
+- 君主普通死亡后会进入后继者选择；
+- 玩家可以自己选；
+- 不要求一定是儿子、亲族、功绩最高或魅力最高；
+- 新武将也可以成为后继者，只要属于合法候选。
+
+旧 2ch 还明确记录：刘备之死历史事件条件不满足时，刘备普通死亡后可以自行选择后继者。
+
+因此：
+
+```ts
+if (historicalSuccessionEventMatched) {
+  resolveHistoricalSuccession(eventData)
+} else if (force.isPlayerControlled) {
+  successor = playerChoose(
+    enumerateLegalSuccessors(force)
+  )
+}
+```
+
+来源：
+- https://gamefaqs.gamespot.com/boards/931351-romance-of-the-three-kingdoms-xi/45353339
+- https://w.atwiki.jp/sangokushi11/pages/1952.html
+- https://w.atwiki.jp/sangokushi11/pages/31.html
+
+### 12B. 历史事件使用固定顺序
+
+`[confirmed as event data]`
+
+例如：
+
+- 曹操：`曹昂 > 曹丕 > 曹植 > 曹冲 > 曹彰`
+- 刘备：`刘禅 > 刘封`
+
+这些只在对应历史事件条件满足时生效。刘备案例构成一个很强的边界：满足历史事件时自动刘禅>刘封；不满足条件而普通死亡时则由玩家选择。
 
 来源：
 - https://www.gamersky.com/handbook/200809/124174_9.shtml
 - https://w.atwiki.jp/sangokushi11/pages/942.html
 - https://w.atwiki.jp/sangokushi11/pages/100.html
 
-### 没找到
+### 12C. COM：关系层级优先
 
-COM 在**非历史普通死亡**时的完整自动后继排序没有可靠公式。
+`[COMMON][empirical-high]`
 
-### provisional-engine-rule
+2008年前后旧2ch的连续测试直接总结：
 
-- 玩家势力：非事件死亡时，向玩家显示所有合法在职武将作为候选，**由玩家选择**；不替玩家制造一个“历史正确”后继。
-- COM：
-  1. 事件指定候选优先；
-  2. 直系/养子血缘 +10000；
-  3. 同族 +5000；
-  4. 当前官职指挥兵力 ×10；
-  5. 功绩；
-  6. 魅力 ×20 + 统率 ×10；
-  7. officerId 作为稳定 tie-break。
+```text
+COM：
+血缘 > 义兄弟 > 配偶 > 年长者
+```
 
-这只用于 AI fallback。
+另一轮测试进一步指出：没有一族以后，确实按年龄顺。多个反直觉案例都与此一致：
 
----
+- 董卓/牛辅系后，刚加入不久的韩遂也可能因年长继位；
+- 吕布没有可用血缘后会出现王忠这类年长武将继位；
+- 刘琦亲族候选被杀/俘后，出现黄忠继位；
+- 韩馥之后甚至有潘凤继承的记录。
+
+这些案例与“功绩最大 / 魅力最高 / 都督优先”模型不符。
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/1952.html
+- https://w.atwiki.jp/sangokushi11/pages/1941.html
+- https://w.atwiki.jp/sangokushi11/pages/2452.html
+- https://w.atwiki.jp/sangokushi11/pages/2356.html
+- https://w.atwiki.jp/sangokushi11/pages/1878.html
+
+### 12D. COM fallback：改成分层选择
+
+```ts
+function chooseAiSuccessor(oldLord, force) {
+  const candidates = enumerateLegalSuccessors(force)
+
+  const blood = candidates.filter(p => isBloodRelative(oldLord, p))
+  if (blood.length) return eldestStable(blood)
+
+  const sworn = candidates.filter(p => isSwornSibling(oldLord, p))
+  if (sworn.length) return eldestStable(sworn)
+
+  const spouse = candidates.filter(p => isSpouse(oldLord, p))
+  if (spouse.length) return eldestStable(spouse)
+
+  return eldestStable(candidates)
+}
+
+function eldestStable(candidates) {
+  return candidates.sort(ageDesc, birthYearAsc, personIdAsc)[0]
+}
+```
+
+证据边界：
+
+- 关系类别顺序：`empirical-high`；
+- “同一关系类别内也按年龄”：目前与所有已见案例相容，但未取得原函数体，标 `compatibility-assumption`；
+- `personId` 只作同龄 deterministic tie-break，不声称原作就是 ID 小者优先。
+
+### 12E. 功绩、能力、官职退出主排序
+
+旧 fallback 的以下项删除：
+
+```text
+血缘 +10000
+同族 +5000
+官职指挥 ×10
+功绩
+魅力 ×20
+统率 ×10
+```
+
+老玩家已经专门指出“没有血缘时是年长者，而不是功绩”；也存在新近加入却因年长而继位的案例。因此 `merit / charisma / command / office` 不再参与当前 fidelity fallback 的 COM successor ranking。
+
+### 12F. 合法候选：被俘排除；出阵/任务状态仍需收紧
+
+`[partial-known]`
+
+可以可靠确认至少排除：
+
+- 已死亡；
+- 非本势力；
+- 被敌方俘虏。
+
+玩家战报明确指出：君主亲族即使仍活着，只要被敌方俘虏，也会从后继候选中排除。
+
+另有较新的 PC 玩家记录：想让毌丘俭继位，但他当时在军中，结果没有出现在后继者选择列表。这说明出阵部队成员或某类任务状态可能被过滤，但目前只有个案证据。
+
+第一版：
+
+```ts
+function enumerateLegalSuccessors(force) {
+  return force.officers.filter(p =>
+    p.alive &&
+    p.forceId === force.id &&
+    !p.isCaptive &&
+    !p.isSpecialEventPerson
+  )
+}
+```
+
+`excludeFieldTroopMember` / `excludeMissionPerson` 作为 profile 参数保留；PC-PK profile 暂先排除当前出阵部队成员，等待最小存档回归。
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/2356.html
+- https://medaka.5ch.net/test/read.cgi/gamehis/1640245995/265-n
+
+### 12G. 继位后的忠诚：不要制造“立即随机叛变”
+
+玩家记录显示：选择相性差的新君主以后，部下忠诚会严重恶化，之后可能下野/被挖；但君主死亡当场并不是一个独立的“随机叛变事件”。
+
+因此结构应为：
+
+```text
+确定新君主
+→ 更新 force.lord
+→ 后续忠诚系统改以新君主为基准
+→ 正常忠诚下降 / 下野 / 登用流程继续
+```
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/1950.html
+- https://w.atwiki.jp/sangokushi11/pages/2463.html
+- https://w.atwiki.jp/sangokushi11/pages/1993.html
+
+### 12H. 原程序入口线索
+
+`[PC-PK1.1][reverse-engineered-partial]`
+
+311MemoryResearch 的“禅让 DEMO”为复用原版君主死亡流程，直接调用 `004B9080`，并注明当前会使用“君主死亡”的 MSG。调用参数中包含势力指针，说明原版存在集中式君主死亡/后继处理入口。
+
+当前 SIRE 公共地址表没有给 `004B9080` 正式命名，也没有公开文本函数体，因此不能把上面的 COM 四层排序宣称为源码级确认。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/新功能[禅让](DEMO).txt
+
+### 12I. 零合法候选
+
+如果没有合法后继者，当前引擎保留统一的 leaderless-force 处理接口，不凭空创造继承者：
+
+```ts
+if (legalSuccessors.length === 0) {
+  eliminateOrResolveLeaderlessForce(force)
+}
+```
+
+San11 专属公开资料对零配下时的精确结束流程仍不够完整，所以此处保持 open。
+
+### 第12项剩余 exactness
+
+现在只剩：
+
+1. 血缘组内部的精确优先级；
+2. 同龄 tie-break；
+3. 出阵 / 任务中武将的完整候选过滤；
+4. `004B9080` 函数体；
+5. 零合法候选的精确势力结束流程。
+
+原综合评分 fallback 已废弃。
 
 ## 13. 评定完整提案池
 
