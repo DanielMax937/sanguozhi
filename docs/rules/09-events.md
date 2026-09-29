@@ -80,11 +80,99 @@
 
 ## 4. 评定
 
-评定确实存在“方针提出→采决→具体提案”的流程，但完整提案池、触发与效果表尚未找到足够系统的可靠表。
+### 4.1 流程
 
-角色台词页足以确认一级方针至少包含“内政 / 出阵 / 外交・计略”，但不足以证明完整具体案池。
+`[COMMON][confirmed-static/manual]`
 
-第一版引擎把评定实现为“从正常合法 Command 中产生建议”，不创造额外魔法效果：先选方针，再从开发/巡查/征兵/训练/生产/出征/输送/亲善/计略等合法命令中给出 1–3 个具体案；被采纳的方案仍支付正常成本。完整 fallback 见 `16-unresolved-rules-fallbacks.md`。
+评定是两阶段决策，不是单层建议：
+
+```text
+方针提案
+→ 君主采决（单个 / 部分 / 全部 / 全否）
+→ 具体案提案
+→ 君主采决（单个 / 部分 / 全部 / 全否）
+→ 被采纳提案执行
+```
+
+官方 PK 手册：君主在据点时可以召开，最多6人参加；评定命令本身不耗金钱、行动力，结束后配下根据结果行动。
+
+来源：
+- https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- https://w.atwiki.jp/sangokushi11/pages/202.html
+- https://w.atwiki.jp/sangokushi11/pages/639.html
+
+### 4.2 原版具体提案池：22类
+
+`[COMMON][confirmed-static-message-data]`
+
+原版 `msg2966~3288 君主评定` 可恢复：
+
+```text
+内政建设
+征兵
+生产兵装
+巡查
+训练
+侵略
+迎击
+军事建设
+探索
+登用
+献上（亲善/赠礼）
+同盟
+同盟破弃
+停战
+劝降
+交换俘虏
+求援
+二虎竞食
+驱虎吞狼
+流言
+任命军师
+撤除设施
+```
+
+并有独立“赞同他人 / 赞同提议 / 中止评定”文本。
+
+旧 fallback 的 `技巧研究 / 输送 / 褒赏` 不在评定 MSG 提案段，已从 fidelity pool 删除。
+
+来源：https://www.sanguogame.com.cn/special/san11/1920.html
+
+### 4.3 第一阶段方针
+
+角色页显示三大类：
+
+```text
+内政 / 出阵 / 外交・计略
+```
+
+MSG 内部又区分“建议攻击 / 建议迎击 / 建议内政 / 建议外交”，所以引擎把攻击与迎击作为 `出阵` 的两个内部子类保存。
+
+### 4.4 执行与成本
+
+`[manual + empirical-high]`
+
+评定本身成本为0，但采纳的实际方案并非免费行动。原版时期玩家明确抱怨“如果采纳评定进言不消耗行动力还说得过去”，说明实际采纳会消耗行动力。
+
+因此采纳 proposal 后必须 dispatch 到对应普通 Command，并至少沿用其行动力和合法性校验；金钱/兵粮/技巧P等资源成本也走普通 Command service，后者在拿到原评定调用图前标兼容假设。
+
+评定本身获得技巧P +10。
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/1875.html
+- https://www.sanguogame.com.cn/special/san11/san11-xd14.html
+
+### 4.5 谁会提什么：仍 open
+
+SIRE 能确认武将有隐藏 `StrategicTendency` 字段，但尚未找到它被评定 selector 读取的 xref。旧玩家也只是在猜性格/知力是否参与。
+
+因此不把 `战略倾向 / 性格 / 五维` 写成 confirmed proposal 权重。
+
+第一版只在**原版22类 + 当前合法目标**中，使用局势 urgency + 小幅稳定武将偏好 + 随机扰动生成方案；重复方案转为“赞同他人”。详细 fallback 见 `16-unresolved-rules-fallbacks.md#13-评定完整提案池`。
+
+来源：
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+- https://w.atwiki.jp/sangokushi11/pages/1919.html
 
 ## 5. 通用事件
 
