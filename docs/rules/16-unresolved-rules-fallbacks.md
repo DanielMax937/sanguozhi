@@ -2879,43 +2879,349 @@ Vanilla 同期已经存在：
 
 ## 11. 毒泉 / 栈道 / 落石伤害
 
-### 已确认
+### 结论：PK1.1 的核心伤害参数已恢复；旧 fallback 全部撤回
 
-- 难所行军：栈道通行无伤。
-- 解毒：毒泉无伤。
-- 踏破：降低落石/火罠伤害；PK 下火罠减伤关系更明确。
+`[PC-PK1.1][reverse-engineered-parameters / reconstructed]`
 
-来源：
-- https://w.atwiki.jp/sangokushi11/pages/90.html
-- https://w.atwiki.jp/sangokushi11/pages/13.html
+2008 年针对**繁中 PK1.1** 的内存地址研究明确给出了：
 
-### 没找到
+- 栈道每走一格的固定基本伤害与随机变动范围；
+- 毒泉每走一格的固定基本伤害与随机变动范围；
+- 落石对部队 / 建筑各自独立的固定基本威力与随机变动范围；
+- 踏破对落石的减伤分支；
+- 踏破、难所行军、解毒对应的判定地址。
 
-没有找到能稳定交叉验证的原版精确兵损随机函数。
+SIRE 后续地址表又确认原版通用随机函数：
 
-### provisional-engine-rule
-
-保留目前社区常用量级，但明确改名为 fallback：
-
-```ts
-poisonSpring:
-  troops -= 1000
-  energy -= 5
-  if hasAntidote: damage = 0
-
-plankPath:
-  troops -= uniformInt(300, 500)
-  if hasDifficultMarch: damage = 0
-
-rockfall:
-  troops -= uniformInt(1000, 2000)
-  confusionChance = 0.30
-  if hasTraverse: damage *= 0.5
+```text
+00472150 GetRandomX(X) = 0 .. X-1
 ```
 
-所有数字放版本配置，不写死在 engine。
+因此旧的：
+
+```text
+毒泉固定1000兵 + 气力-5
+栈道随机300~500
+落石随机1000~2000 + 30%混乱
+踏破落石仅减半
+```
+
+全部删除。
+
+主要逆向来源：
+- https://game.ali213.net/thread-2168294-1-1.html
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
 
 ---
+
+### 11A. 栈道：每进入一格 100～299 兵
+
+`[PC-PK1.1][reverse-engineered]`
+
+地址：
+
+```text
+005AE58D  栈道(terrain 11)行军损伤
+005AE597  踏破判定
+005AE5A4  难所行军判定
+005AE5C6  每走一格固定基本伤害 100
+005AE5AF  每走一格附加变动范围 200
+```
+
+按原随机函数：
+
+```ts
+function plankPathEntryDamage(unit) {
+  if (
+    unit.hasSkill(TRAVERSE) ||
+    unit.force.hasTechnology(DIFFICULT_MARCH)
+  ) {
+    return 0
+  }
+
+  return 100 + GetRandomX(200)
+  // 100..299
+}
+```
+
+关键点：
+
+- 是**每走 / 每进入一格栈道**结算，不是每旬站在栈道上固定扣血；
+- 随机部分是 `0..199`，所以总范围 **100..299**；
+- PK 下“踏破”与势力技巧“难所行军”都应免除栈道通行损伤。
+
+后期技术攻略也明确写“难所行军：通过栈道时不受伤害”。
+
+来源：
+- https://game.ali213.net/thread-2168294-1-1.html
+- https://www.gamersky.com/handbook/200809/114545_2.shtml
+
+---
+
+### 11B. 毒泉：每进入一格 200～399 兵
+
+`[PC-PK1.1][reverse-engineered]`
+
+地址：
+
+```text
+005AE588  毒泉(terrain 4)行军损伤
+005AE5D9  解毒判定
+005AE5F8  每走一格固定基本伤害 200
+005AE5E2  每走一格附加变动范围 200
+```
+
+因此：
+
+```ts
+function poisonSpringEntryDamage(unit) {
+  if (unit.hasSkill(ANTIDOTE)) {
+    return 0
+  }
+
+  return 200 + GetRandomX(200)
+  // 200..399
+}
+```
+
+同样是**按经过的格数**结算。
+
+### 删除“气力 -5”
+
+旧 fallback：
+
+```ts
+troops -= 1000
+energy -= 5
+```
+
+没有可靠来源。
+
+PK1.1 的地址研究把毒泉的行军伤害参数完整列为：
+
+- 固定兵损 200；
+- 随机范围 200；
+- 解毒判定；
+
+但没有出现毒泉独立的气力下降常量。与此同时同一份地址表对“扫荡 -5”“威风 -20”等气力变化都能明确列出对应地址。
+
+因此 fidelity 模式不再凭空增加：
+
+```ts
+poisonSpring.energyDamage = 5
+```
+
+当前设为：
+
+```ts
+poisonSpring.energyDamage = 0
+```
+
+证据标签为 `negative-evidence-high`，不是“已找到一条显式写0的源码”。
+
+来源：
+- https://game.ali213.net/thread-2168294-1-1.html
+- https://w.atwiki.jp/sangokushi11/pages/13.html
+
+---
+
+### 11C. 落石：部队与建筑使用两套参数
+
+`[PC-PK1.1][reverse-engineered-parameters / reconstructed]`
+
+逆向地址：
+
+```text
+005B16D2  落石对部队固定基本威力 1500
+005B16D7  落石对部队伤害附加变动范围 500
+
+005B171D  落石对建筑固定基本威力 800
+005B1722  落石对建筑伤害附加变动范围 1000
+
+005B1844  落石对部队伤害资料地址指标
+005B1864  落石对建筑伤害资料地址指标
+```
+
+第一版 fidelity 实现：
+
+```ts
+function rockfallTroopDamage(unit) {
+  let damage =
+    1500 + GetRandomX(500)
+    // 1500..1999
+
+  if (unit.hasSkill(TRAVERSE)) {
+    damage = trunc(damage / 10)
+  }
+
+  return damage
+}
+
+function rockfallBuildingDamage(building) {
+  return 800 + GetRandomX(1000)
+  // 800..1799 durability
+}
+```
+
+“1500 + 0..499 / 800 + 0..999”是目前最合理的直接还原。该内存研究还记录了“全陷阱共通基本伤害50”参数，因此在完整 `GetTrapDamage` 函数体被文本化以前，仍保留一个很小的 exactness：
+
+> 共通50是否在落石最终式中作为独立项再次参与，以及它在最终整数顺序中的位置。
+
+不过玩家实测出现过 **1725** 的落石兵损，正落在 1500..1999 区间内，因此当前直接采用上述落石专用参数对游戏表现是高置信吻合。
+
+来源：
+- https://game.ali213.net/thread-2168294-1-1.html
+- https://www.sohu.com/a/394347085_100186910
+
+---
+
+### 11D. 踏破对落石：只承受 10%
+
+`[PC-PK1.1][reverse-engineered]`
+
+内存地址研究直接记录：
+
+```text
+005B17C0  踏破
+对落石、火陷阱伤害降至10%
+```
+
+对于本项的**落石**，因此：
+
+```ts
+if (hasTraverse) {
+  rockfallDamage =
+    trunc(rawRockfallDamage / 10)
+}
+```
+
+也就是约：
+
+```text
+150～199兵
+```
+
+而不是旧 fallback 的：
+
+```ts
+damage *= 0.5
+```
+
+社区实测也明确观察到踏破约免疫 90% 的落石伤害。
+
+注意：不要仅凭这一个旧地址注释，把“所有火系伤害”也统一写成 ×0.1。火陷阱与持续火伤另有多条技能/科技分支，第5/10项已经分别建模；这里仅锁定落石。
+
+---
+
+### 11E. 落石不再附加“30%混乱”
+
+旧 fallback：
+
+```ts
+confusionChance = 0.30
+```
+
+没有找到原作依据。
+
+检查结果：
+
+- PK1.1 落石地址区明确列出了部队 / 建筑伤害参数；
+- 没有同时列出落石混乱概率参数；
+- 早期攻略对落石的说明集中在“击破山岩后沿方向滚落造成大伤害”，没有把混乱列为固定效果；
+- 能造成混乱的石兵八阵、螺旋突、业火种、火船等，逆向资料都会出现独立状态判定。
+
+因此 fidelity 默认：
+
+```ts
+rockfall.confusionChance = 0
+```
+
+证据标签：
+
+`[negative-evidence-high]`
+
+如果未来完整落石函数体显示另有状态分支，再替换这一值。
+
+---
+
+### 11F. 触发方式不要混淆
+
+#### 栈道 / 毒泉
+
+是**移动路径逐格伤害**：
+
+```text
+每进入一格
+→ 判断免伤技能 / 技巧
+→ 生成该格伤害
+→ 扣兵
+```
+
+被枪/骑位移战法强制推进到这些地形时，只要原程序把它计作进入该格，也应走同一 terrain-entry damage service；老玩家已经观察到被推入毒泉会受毒泉伤害。
+
+#### 落石
+
+地图落石本身是特殊陷阱对象：
+
+- 耐久极低；
+- 被可触发的近战攻击破坏后沿预设方向滚落；
+- 对路径上的敌我目标都可造成伤害；
+- 使用后经过一段时间可恢复。
+
+不要把它实现成“站在山地每旬随机落石”。
+
+---
+
+### 11G. Vanilla / PK 边界
+
+这次的内存地址明确注明：
+
+`繁中 PK1.1`
+
+所以：
+
+```ts
+pcPk11TerrainHazard.status =
+  "reverse-engineered"
+
+vanillaTerrainHazard.status =
+  "compatibility-assumption"
+```
+
+2006 年 Vanilla 资料已经确认：
+
+- 栈道会造成通行损伤；
+- 踏破减轻/免除栈道损伤并减轻落石；
+- 解毒防御毒泉伤害；
+- 难所行军降低/处理栈道损伤。
+
+但早期无印攻略有时只写“难所行军使栈道损伤降低”，后期 PK 攻略则明确写“不受伤害”。因此在未取得 Vanilla EXE 前：
+
+- 可以让 Vanilla 暂复用 PK 数值以保持引擎闭环；
+- 必须标 `compatibilityAssumption=true`；
+- 不把 PK1.1 的 100/200/1500/800 常量标成 Vanilla 源码事实。
+
+---
+
+### 第11项剩余 exactness
+
+现在只剩很小的几个问题：
+
+1. 完整落石伤害函数中，“全陷阱共通基本伤害50”与落石专用1500/800的最终组合顺序；
+2. 落石对多个路径目标逐格结算的精确顺序；
+3. Vanilla / 各主机版的常量是否与繁中 PK1.1 完全一致。
+
+原来的四个 fallback：
+
+- 毒泉1000；
+- 毒泉气力-5；
+- 栈道300～500；
+- 落石1000～2000 + 30%混乱 + 踏破减半；
+
+全部废弃。
+
+---
+
 
 ## 12. 普通君主继承
 
