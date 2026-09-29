@@ -100,13 +100,73 @@
 
 ## 8. 地形伤害
 
-机制可确认，精确伤害随机范围仍未完全统一：
+### PC-PK1.1：栈道 / 毒泉
 
-- 毒泉：造成兵损并降气力；解毒免疫。
-- 栈道：造成兵损；难所行军处理/免除相应伤害。
-- 落石：较大兵损并可能混乱；踏破减轻。
+`[reverse-engineered]`
 
-因此伤害数值仍留在 `13-open-exactness.md`，不要把旧候选 1000/300–500/1000–2000 当作 confirmed。
+繁中 PK1.1 内存地址已经恢复逐格行军伤害参数：
+
+```ts
+// 栈道：每进入一格
+plankDamage =
+  hasTraverse || hasDifficultMarch
+    ? 0
+    : 100 + GetRandomX(200) // 100..299
+
+// 毒泉：每进入一格
+poisonDamage =
+  hasAntidote
+    ? 0
+    : 200 + GetRandomX(200) // 200..399
+```
+
+这里是“每走一格”的 entry damage，不是每旬站在地形上定时扣血。
+
+旧规则中的“毒泉固定 -1000兵、-5气力”没有逆向依据，已删除；目前毒泉只扣兵，不额外扣气力。
+
+地址来源：
+- 栈道：`005AE58D / 005AE5C6 / 005AE5AF`
+- 踏破：`005AE597`
+- 难所行军：`005AE5A4`
+- 毒泉：`005AE588 / 005AE5F8 / 005AE5E2`
+- 解毒：`005AE5D9`
+
+来源：https://game.ali213.net/thread-2168294-1-1.html
+
+### PC-PK1.1：落石
+
+`[reverse-engineered-parameters / reconstructed]`
+
+专用参数：
+
+```ts
+troopDamage =
+  1500 + GetRandomX(500) // 1500..1999
+
+buildingDurabilityDamage =
+  800 + GetRandomX(1000) // 800..1799
+```
+
+踏破：
+
+```ts
+troopDamage =
+  trunc(troopDamage / 10)
+```
+
+也就是只承受约10%的落石伤害。
+
+当前没有可靠证据支持“落石固定30%混乱”，因此 fidelity 模式不附加混乱状态。
+
+来源：
+- https://game.ali213.net/thread-2168294-1-1.html
+- https://www.sohu.com/a/394347085_100186910
+
+### 剩余边界
+
+落石逆向资料另外暴露一个“全陷阱共通基本伤害50”参数。完整函数体尚未文本化，所以是否还需独立叠加该50、以及最终整数顺序，仍保留为小型 exactness gap。
+
+上述具体常量来自**繁中 PK1.1**。Vanilla 机制层确认相同，但未取得无印 EXE 的精确常量；Vanilla 暂复用时必须标 `compatibilityAssumption=true`。
 
 ## 9. 堤防与水攻
 
