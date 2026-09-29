@@ -1,5 +1,7 @@
 # 外交关系与外交指令
 
+> 外交是已确认存在**版本平衡差异**的系统：Vanilla 1.1 调整势力友好增减，Vanilla 1.2 又直接调整“计略及外交成功率”。公式必须按 `rulesetVersion` 选择，不能只按 Vanilla / PK 二分。
+
 ## 1. 外交状态
 
 每对势力保存：
@@ -12,7 +14,7 @@
 
 ## 2. 亲善
 
-`[PC-PK/后期版本][empirical-high]`
+`[PC-PK1.0/1.1][empirical-high]`
 
 玩家逆向公式：
 
@@ -101,8 +103,30 @@ c：
 
 ### 版本注意
 
-以上完整公式主要来自 PK/后期玩家逆向与转载，**不得直接标成 Vanilla 1.0 confirmed**。引擎应按 `rulesetVersion` 保存。
+`[versioned]`
 
+当前完整公式族默认绑定 `pk-1.0-1.1-late-empirical`。
+
+版本证据：
+
+- KOEI 官方 Vanilla 1.1：调整势力间友好增减平衡；
+- KOEI/同期 Vanilla 1.2 补丁：再次调整友好增减，并明确调整“计略及外交成功率”；
+- Vanilla 1.3 未发现再次调整外交成功率的公开更新项；
+- PK 1.1/1.1.1 官方更新项未列外交成功率调整；
+- 完整公式资料含 `超级=0.7` 难度系数，而超级难度属于 PK。
+
+因此引擎使用四个 profile：
+
+```ts
+"vanilla-1.0-pre-balance"
+"vanilla-1.1-friendship-rebalanced"
+"vanilla-1.2-plus-post-success-rebalance"
+"pk-1.0-1.1-late-empirical"
+```
+
+前三个 Vanilla profile 尚无逐版本完整常量表。为了让模拟运行，可 fallback 到 PK 后期公式，但必须标记 `compatibilityAssumption=true`；不得声称 Vanilla 1.0/1.1/1.2 与 PK 完全一致。
+
+PK“外交府”只降低外交行动力与亲善费用，不加入外交成功率乘数。
 主要来源：
 - https://zhidao.ali213.net/q/13047392.html
 - https://zhidao.baidu.com/question/693845718520080364/answer/2870151990.html
