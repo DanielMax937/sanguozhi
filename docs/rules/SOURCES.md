@@ -62,3 +62,31 @@
 - 缺少的数据.md
 - docs/open-questions.md
 - docs/sources/*
+
+
+## 第五轮未决规则专项来源
+
+- 游民星空：100忠诚挖人实验
+  https://www.gamersky.com/handbook/200603/21923.shtml
+- 游民星空：190刘虞开局（攻陷物资保留公式）
+  https://www.gamersky.com/handbook/200703/57518.shtml
+- 游民星空：军团委任心得
+  https://www.gamersky.com/handbook/200706/66728.shtml
+- 游民星空：全剧情条件（曹操之死等）
+  https://www.gamersky.com/handbook/200809/124174_9.shtml
+- 日文Wiki：委任/内政 FAQ
+  https://w.atwiki.jp/sangokushi11/pages/8.html
+- 日文Wiki：换季治安实测
+  https://w.atwiki.jp/sangokushi11/pages/1152.html
+- 日文Wiki：单挑连续公式负证据
+  https://w.atwiki.jp/sangokushi11/pages/2484.html
+- 日文Wiki：刘备之死/继承
+  https://w.atwiki.jp/sangokushi11/pages/942.html
+- 3DM：SIRE v1.26 参数说明（换季治安上限、政令整备概率）
+  https://dl.3dmgame.com/patch/26091.html
+- 轩辕春秋：San11Sire 修改器讨论
+  https://www.xycq.org.cn/forum/viewthread.php?tid=209820
+- 社区长期整理：PK内政技巧概率
+  https://www.sohu.com/a/411270684_120015190
+- 巴哈姆特：计略会心延长异常/燃烧
+  https://forum.gamer.com.tw/Co.php?bsn=60001&sn=380559
