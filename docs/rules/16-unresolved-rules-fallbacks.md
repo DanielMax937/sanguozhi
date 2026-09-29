@@ -4345,61 +4345,112 @@ console.aiDelegationUi = platformSpecific
 
 ## 15. 太守魅力 → 换季治安下降概率分布
 
-### 已确认
+### 结论：PC-PK 已由原函数反汇编完整锁定
 
-这正回答“是不是魅力越低，概率越大”：**是。**
+`[PC-PK1.1][reverse-engineered]`
 
-- 换季自然下降原始上限是 5。
-- 太守魅力越高，治安越不容易掉。
-- 太守魅力 100：实测下降范围约 **0–2**。
-- 无太守：实测**固定 -5**。
-- SIRE 反汇编级参数明确暴露了“换季治安下降上限”和“有政令整备时本季不下降的概率”两个独立参数。
-- PK“政令整备”不是绝对免疫；高质量社区整理与 SIRE 参数一致地指向**约 50% 概率跳过本季自然下降**。
+311MemoryResearch 已逐指令整理原函数：
 
-来源：
-- https://w.atwiki.jp/sangokushi11/pages/1152.html
-- https://w.atwiki.jp/sangokushi11/pages/79.html
-- https://dl.3dmgame.com/patch/26091.html
-- https://www.sohu.com/a/411270684_120015190
+`0058D6D0  季初城市治安下降`
 
-### 没找到
+它只在 **1、4、7、10 月月初**执行。PK 若势力拥有“政令整备”，会先执行一次 `ProbabilityCheck(50)`；命中时本季直接不掉治安。未命中后才进入太守魅力计算。
 
-没有找到“魅力 0~100 → P(掉0),P(掉1)…P(掉5)”的原版完整概率表。
-
-### provisional-engine-rule
-
-采用一个满足全部锚点、并且对魅力单调的平滑分布：
+原函数可直接整理为：
 
 ```ts
-if (!governor) return 5
+function seasonalPublicOrderLoss(city, ruleset) {
+  if (
+    ruleset === "pk" &&
+    city.force.hasAdministrativeReform &&
+    probabilityCheck(50)
+  ) {
+    return 0
+  }
 
-C = clamp(governor.charisma, 0, 100)
+  // 原函数在取不到合法太守时 charisma 保持为 0。
+  const C = city.governor ? city.governor.charisma : 0
 
-// 低魅力的下降上限接近5；魅力100时下降上限=2
-effectiveCap = 2 + 3 * (100 - C) / 100
-lo = floor(effectiveCap)
-hi = ceil(effectiveCap)
+  // 90以上会把 (90-C) 强制至少设为1；
+  // 随后是整数除10，因此 81~100 最终都处在同一档。
+  const base = Math.floor(Math.max(1, 90 - C) / 10)
 
-// 在相邻两个上限之间随机插值，避免能力只在几个断点生效
-cap = Bernoulli(effectiveCap - lo) ? hi : lo
+  // 00472150 GetRandomX(3) => 0,1,2
+  const jitter = getRandomX(3)
 
-loss = uniformInt(0, cap)
-
-if (ruleset === "pk" && hasAdministrativeReform && Bernoulli(0.50)) {
-  loss = 0
+  return Math.min(5, base + jitter)
 }
-
-return loss
 ```
 
-性质：
-- 魅力100 → 均匀 0/1/2，完全吻合已知范围；
-- 魅力0 → 均匀 0~5；
-- 魅力越低，`effectiveCap` 单调提高，**期望治安损失单调变大**；
-- 无太守直接 -5；
-- PK 政令整备再独立提供 50% 免降机会。
+SIRE 开发地址表同时确认：
 
-这是目前比“魅力越低随便多掉几点”更可测、更容易以后替换的方案。
+- `00472150 = GetRandomX(X)`：返回 0～X-1 的随机整数；
+- `004721D0 = ProbabilityCheck(p)`：生成 0～99 随机值，小于 p 时成功。
+
+因此“政令整备 50%”不是攻略近似，而是原程序直接传入常量 **50**。
+
+### 完整概率分布
+
+按 `GetRandomX(3)` 的三值随机口径，未触发政令整备免降时：
+
+| 太守魅力 | 自然治安下降 | 概率 | 期望下降 |
+|---:|---|---:|---:|
+| 81+ | 0 / 1 / 2 | 各 1/3 | 1 |
+| 71–80 | 1 / 2 / 3 | 各 1/3 | 2 |
+| 61–70 | 2 / 3 / 4 | 各 1/3 | 3 |
+| 51–60 | 3 / 4 / 5 | 各 1/3 | 4 |
+| 41–50 | 4：1/3；5：2/3 | — | 14/3 ≈ 4.667 |
+| 0–40 | 固定 5 | 100% | 5 |
+| 无太守 | 固定 5 | 100% | 5 |
+
+所以之前的问题“**魅力越低，概率是不是越大**”需要更精确地说：
+
+> **总体上是，但不是每降低 1 点都连续变差，而是约每 10 点跨一个台阶。**
+
+例如魅力 80 与 71 完全同分布；从 81 降到 80 才会整体把损失从 `0/1/2` 推到 `1/2/3`。
+
+原 TXT 备注写“魅力89及以上按89计算”，而逐指令代码更准确：90以上把中间量至少设为1；由于随后做整数除10，**81～100 最终都得到同一个 base=0**，所以实际概率档位从81开始就相同。
+
+### PK“政令整备”后的最终分布
+
+因为它在自然下降公式前独立做一次 **50% 直接返回**：
+
+| 太守魅力 | 最终分布（拥有政令整备） |
+|---:|---|
+| 81+ | 0：2/3；1：1/6；2：1/6 |
+| 71–80 | 0：1/2；1/2/3：各1/6 |
+| 61–70 | 0：1/2；2/3/4：各1/6 |
+| 51–60 | 0：1/2；3/4/5：各1/6 |
+| 41–50 | 0：1/2；4：1/6；5：1/3 |
+| 0–40 / 无太守 | 0：1/2；5：1/2 |
+
+所以“政令整备”不是把下降值减半，而是**有一半概率完全跳过本季自然下降**。
+
+### Vanilla 边界
+
+`[VANILLA][empirical-high / compatibility-assumption]`
+
+上述逐指令证据来自 PC-PK1.1。无印时期的玩家资料已经确认：
+
+- 换季才自然下降；
+- 太守魅力决定下降幅度；
+- 魅力100常见 0～2；
+- 无太守固定5。
+
+这些行为与 PK 原函数完全吻合，因此在拿到 Vanilla EXE 反证前，引擎复用同一基础公式。
+
+但“政令整备”属于 PK 新增内政技巧，Vanilla **不执行**前置 50% 免降判定。
+
+### 证据来源
+
+- 311MemoryResearch：`Func-自动05-城市治安下降.txt`
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动05-城市治安下降.txt
+- 311SireCustomizedPackageDev：`内存地址汇总.md`（GetRandomX / ProbabilityCheck）
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- 日文 Wiki 实测锚点：
+  https://w.atwiki.jp/sangokushi11/pages/1152.html
+- PK 官方说明书：政令整备为 PK 内政技巧，效果为“治安更不容易下降”
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+
 
 ---
 
