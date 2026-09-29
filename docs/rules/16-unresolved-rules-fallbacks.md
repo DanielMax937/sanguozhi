@@ -1556,41 +1556,441 @@ onCalmdownSuccess(target) {
 **自然恢复本身已经解决，不再是概率问题。**
 
 
-## 8. 单挑连续伤害公式
+## 8. 单挑连续命中 / 伤害函数
 
-### 已确认
+### 结论：核心连续公式已找到，不再需要自拟 ratio fallback
 
-方针、50 合、斗志、必杀、气合、坚守、假退却、暗器、援助等离散机制已经很完整。
+`[PC-PK-oriented][reverse-engineered-high / decompiled-C++ port]`
 
-日文 Wiki 曾尝试“只按武力差”建伤害表，但后来撤回，因为相同武力差（例如 100/95 与 80/75）并不产生相同结果。
+公开项目 `tankyc/sango_infinity` 的单挑子系统不是按攻略重新猜参数。其 `Duel.cs` 文件头明确写明：
 
-来源：https://w.atwiki.jp/sangokushi11/pages/2484.html
+```text
+单挑(Duel)系统主体
+由 s11_sys_duel.h + s11_sys_duel.cpp 翻译而来
+```
 
-### 没找到
+并且：
 
-没找到武力绝对值、武力差、命中、格挡到伤害的完整连续公式。
+- 枚举/常量保留原始 C++ 命名；
+- 代码区按原地址区间标注，例如“伤害 / 登场 / 行动（508cc0 - 50c490）”；
+- 方针静态表直接标出原数据地址 `8b1750 StanceCoef`；
+- 必杀斗志表标出 `837398 SpecialSpiritCost`。
 
-### provisional-engine-rule
+项目的数据导出脚本也直接以 `San11pk` 目录为输入。因此这套连续核心可作为 PC-PK 原作逆向实现的高置信来源。
 
-为了符合“相同武力差但绝对值不同，结果不同”这一负证据：
+注意：该项目后来把吕布、关羽、张飞等**特定武将例外**改成了 `DuelPersonBehaviours` 数据驱动 hook。以下公式只抽取 hook 之前/之外的**通用原作核心**，不把该项目新增 MOD 配置反向当成原版事实。
+
+来源：
+- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
+- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Duel/DuelEnum.cs
+- https://github.com/tankyc/sango_infinity/blob/master/Data/事件系统-项目变更影响评估.md
+- https://github.com/tankyc/sango_infinity/blob/master/Data/Export/export311Scenario.bat
+
+---
+
+### 8A. 武力不是简单“相减”或“相除”，而是先生成 actionRatio
+
+设：
 
 ```ts
-ratio = ((attackerMartial + 50) / (defenderMartial + 50)) ** 2
-ratio = clamp(sqrt(ratio), 0.65, 1.35)
+SA = attackerMartialAfterInjury
+SD = defenderMartialAfterInjury
+```
 
-damage = round(
-  actionBaseDamage
-  * ratio
-  * stanceModifier
-  * injuryModifier
-  * weaponModifier
-  * buffModifier
+所有除法均为 C/C# 整数除法（向 0 截断）。
+
+原函数可整理成：
+
+```ts
+function duelScore(selfStr, otherStr) {
+  const hi = max(selfStr, otherStr)
+  const lo = min(selfStr, otherStr)
+
+  const curve =
+    trunc(max(hi - 5, 0) ** 2 / 1500)
+
+  const decadeGap =
+    max(trunc(hi / 10) - trunc(lo / 10), 1)
+
+  const x = selfStr - lo
+
+  const c =
+    max(x + decadeGap - curve - 1, 0)
+    * decadeGap
+
+  const y = min(x, curve)
+  const z = y + decadeGap - curve
+
+  const d =
+      y * (curve - y)
+    + trunc(y * (y + 1) / 2)
+    + trunc(max(z, 0) * max(z - 1, 0) / 2)
+
+  return 180 + c + d
+}
+
+a = duelScore(SA, SD) ** 2
+d = duelScore(SD, SA) ** 2
+sum = a + d
+
+if (a >= d) {
+  actionRatio =
+    min(trunc(a * 100 / sum), 99)
+} else {
+  actionRatio =
+    100 - min(trunc(d * 100 / sum), 99)
+}
+```
+
+`actionRatio` 最终范围 1～99；两边武力完全相同时严格为 **50**。
+
+可复算锚点：
+
+| 武力 | 攻方 actionRatio |
+|---|---:|
+| 1 vs 1 | 50 |
+| 100 vs 100 | 50 |
+| 100 vs 95 | 55 |
+| 80 vs 75 | 52 |
+| 100 vs 80 | 62 |
+| 80 vs 60 | 60 |
+
+这恰好解释了日文 Wiki 旧实测里看似矛盾的两条记录：
+
+- 武力差 0 时，1/1 与 100/100 的普通伤害相同；
+- 但同样差 5，100/95 与 80/75 的伤害并不相同。
+
+原因就是原公式不是只看 `SA-SD`，而是通过上面的非线性 score 同时使用绝对武力和档位差。
+
+实测交叉：
+- https://w.atwiki.jp/sangokushi11/pages/30.html
+- https://w.atwiki.jp/sangokushi11/pages/2484.html
+
+---
+
+### 8B. 四种方针的底层系数表
+
+`8b1750 StanceCoef`：
+
+| 方针 | speed | hit | attack | block | attackSub | spiritGain |
+|---|---:|---:|---:|---:|---:|---:|
+| 攻击重视 | 42 | 71 | 16 | 12 | 3 | 4 |
+| 防御重视 | 10 | 200 | 14 | 90 | 2 | 8 |
+| 斗志重视 | 15 | 125 | 14 | 55 | 3 | 10 |
+| 一击重视 | 5 | 71 | 16 | 22 | 3 | 7 |
+
+另有两个尚未命名的字段 `_10/_14`，不应为了“完整”擅自赋予语义。
+
+---
+
+### 8C. 普通攻击伤害：闭式解决
+
+通用原函数：
+
+```ts
+n = stance.attack
+n = trunc(n * actionRatio / 50)
+n = trunc(n * stance.attackSub * 7 / 27)
+
+baseDamage = max(n, 3)
+```
+
+因此同武力 `actionRatio=50` 时：
+
+```text
+攻击重视：16 * 50/50 * 3*7/27 = 12
+防御重视：14 * 50/50 * 2*7/27 = 7
+斗志重视：14 * 50/50 * 3*7/27 = 10
+一击重视：16 * 50/50 * 3*7/27 = 12
+```
+
+这与日文 Wiki 实测的 12 / 7 / 10 完全吻合。
+
+### 后续通用倍率
+
+原核心继续按整数顺序应用：
+
+```ts
+damage = baseDamage
+
+// 初级难度才有这组单挑伤害修正
+if (difficulty === "easy") {
+  if (playerAttacksAI) damage = trunc(damage * 11 / 10)
+  if (aiAttacksPlayer) damage = trunc(damage * 4 / 5)
+}
+
+// 宝物
+if (hasCrescentHalberd)
+  damage = trunc(damage * 9 / 8)
+else if (hasLongWeapon)
+  damage = trunc(damage * 10 / 9)
+
+// 气合
+if (attackerHasAttackBuff)
+  damage = trunc(damage * 5 / 4)
+
+// 坚守
+if (defenderHasDefenseBuff)
+  damage = trunc(damage * 3 / 4)
+
+// 攻击重视会心连击的每一击
+if (action === ATTACK_CRITICAL)
+  damage = trunc(damage * 3 / 4)
+```
+
+所以旧文档的：
+
+- “气合约 +20%”应改为**核心代码 ×5/4**；
+- “坚守约 -25%”可以升级为**×3/4**。
+
+特定武将的额外伤害修正不并入此通用式，另列人物 exception data。
+
+---
+
+### 8D. 命中 / 格挡 / 闪避：完整流程
+
+普通攻击并不是一个简单“命中率”。
+
+先计算命中阈值：
+
+```ts
+ratio = actionRatio
+hit = attackerStance.hit
+block = defenderStance.block
+
+pHit = hit
+pHit = trunc(pHit * (100 - block) / 80)
+pHit = trunc(pHit * ratio / 50)
+
+// 每次攻击额外加一个 0..9 的随机整数
+pHit += randInt(0, 9)
+
+pHit = clamp(pHit, 10, 99)
+```
+
+随后：
+
+```ts
+if (chance(pHit)) {
+  result = HIT
+} else if (chance(calcDodgeChance(defender))) {
+  result = DODGE
+} else {
+  result = BLOCK
+}
+```
+
+也就是说“未命中”还要再拆成**闪避**和**格挡**。
+
+闪避率：
+
+```ts
+pDodge =
+  10 + trunc((defenderMartial - attackerMartial) / 3)
+
+pDodge = clamp(pDodge, 5, 30)
+
+if (defenderStance === DEFENSE) {
+  pDodge += 25
+}
+```
+
+注意防御重视的 +25 是在 5～30 clamp **之后**加，所以最终防御重视闪避率可到 30～55%。
+
+---
+
+### 8E. 格挡不是 0 伤害
+
+命中后：
+
+```ts
+damage = n
+```
+
+普通格挡：
+
+```ts
+damage = trunc(n / 2)
+```
+
+若**防守方当前方针就是防御重视**：
+
+```ts
+damage = max(trunc(n * 3 / 10), 1)
+```
+
+闪避：
+
+```ts
+damage = 0
+```
+
+这直接复算 Wiki 同武力测试：
+
+```text
+攻击重视：
+命中12
+普通格挡6
+防御重视格挡3
+
+斗志重视：
+命中10
+普通格挡5
+防御重视格挡3
+
+防御重视攻击：
+命中7
+普通格挡3
+防御重视格挡2
+```
+
+---
+
+### 8F. “攻击重视会心 3～4 连击”每一下都独立判定
+
+原 `UpdateAction()`：
+
+```ts
+actionCount = 1
+
+if (action === ATTACK_CRITICAL) {
+  actionCount = 3 + randInt(0, 1)
+}
+
+for (i = 0; i < actionCount; i++) {
+  result[i] =
+    calcActionResult(attacker, defender)
+}
+```
+
+所以“3～4 连击”**不是 3～4 下必中**：
+
+- 连击数先随机为 3 或 4；
+- 每一下重新计算/抽取 Hit / Dodge / Block；
+- 每一下的攻击重视会心伤害再 ×3/4。
+
+例如同武力攻击重视、无其他修正：
+
+```text
+普通完整命中：12
+会心连击单次完整命中：9
+普通格挡：4
+防御重视格挡：2
+```
+
+这正是旧 Wiki 实测里“攻击方针会心单击约 9、格挡约 4”的来源。
+
+---
+
+### 8G. 必杀伤害也由同一个 actionRatio 驱动
+
+通用基础：
+
+```ts
+n = trunc(actionRatio * 20 / 55)
+```
+
+然后：
+
+```ts
+必杀技      n = trunc(n * 6 / 5)
+急所        n = n
+无双        n = n * 3
+暗器        n = trunc(n * 6 / 5)
+假退却      n = trunc(n * 3 / 2)
+气合/坚守   n = 0
+```
+
+再应用气合 ×5/4、对手坚守 ×3/4、宝物、初级难度以及“对手当前方针为防御重视”时的额外 ×3/4，最终伤害上限 80。
+
+同武力 `actionRatio=50`：
+
+```text
+base = trunc(50 * 20 / 55) = 18
+
+必杀技 = 21
+急所   = 18
+无双   = 54
+暗器   = 21
+假退却 = 27
+```
+
+恰好与原作实测表全部一致。
+
+---
+
+### 8H. 原 fallback 删除
+
+旧：
+
+```ts
+ratio = sqrt(
+  ((attackerMartial + 50)
+  / (defenderMartial + 50)) ** 2
 )
 ```
 
-`actionBaseDamage` 直接用 `10-duel.md` 已实测的动作基准值。命中/格挡另做 seeded roll。
+属于为了闭环自拟的近似，现在没有继续保留的必要。
+
+单挑核心接口改为：
+
+```ts
+actionRatio =
+  calcOriginalDuelActionRatio(atkMartial, defMartial)
+
+actionResult =
+  calcOriginalDuelActionResult(
+    actionRatio,
+    atkStance,
+    defStance,
+    rng
+  )
+
+damage =
+  calcOriginalDuelDamage(
+    actionRatio,
+    actionResult,
+    atkStance,
+    defStance,
+    buffs,
+    items,
+    difficulty
+  )
+```
 
 ---
+
+### 8I. 版本边界与剩余 exactness
+
+当前可以升级为高置信 reverse-engineered 的是：
+
+- 通用 `actionRatio`；
+- 四方针系数表；
+- 普攻基础伤害；
+- Hit / Dodge / Block；
+- 格挡减伤；
+- 攻击重视会心 3/4 连击；
+- 通用必杀伤害；
+- 气合/坚守倍率。
+
+仍需单独审计：
+
+1. 吕布、关羽、张飞、黄忠等人物特例在原 C++ 中的硬编码原貌；当前开源项目已重构成数据文件；
+2. Vanilla EXE 是否与该 PC-PK 导向 C++ 版本完全逐字一致；
+3. 各主机版是否同式。
+
+因此：
+
+```ts
+pcPkGenericDuelCore.status = "reverse-engineered-high"
+vanillaGenericDuelCore.status =
+  "compatibility-assumption"
+```
+
+但第 8 项原本真正关心的“连续命中 / 普通伤害连续公式”已经解决。
+
+---
+
 
 ## 9. 舌战普通牌心理伤害
 
