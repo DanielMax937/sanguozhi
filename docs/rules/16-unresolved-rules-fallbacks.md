@@ -2481,24 +2481,20 @@ vanillaDebateCore.status =
 
 ## 10. 非骑战法来源的负伤 / 战死概率
 
-### 已确认
+### 结论：删除“部队击破统一伤亡率”；按明确来源分别结算
 
-- 特技“猛者”：能推动敌部队的战法成功后，**50%** 概率使敌将负伤。
-- 强运：避免战死/被俘/负伤。
-- 护卫：同部队武将避免战死/负伤。
-- 骑兵突击/突进的直接战死率已有独立逆向式。
+这一项最大的纠错是：**没有证据支持原版在每次普通攻击/普通战法击破部队后，再统一掷一次 2%/4% 战死与 12% 负伤。**
 
-来源：
-- https://www.gamersky.com/handbook/200603/21610.shtml
-- https://w.atwiki.jp/sangokushi11/pages/593.html
+目前 PC-PK 逆向能明确识别的武将战场伤亡来源包括：
 
-### 没找到
+1. 骑兵“突击 / 突进”的专用战死判定；
+2. 特技“猛者”的 50% 负伤；
+3. 业火种 / 业火球的专用炸伤 / 炸死函数；
+4. 单挑中的急所 / 无双 / 假退却等专用负伤与单挑结果。
 
-普通攻击、普通战法、火焰、设施攻击在“击破瞬间”造成负伤/战死的全局通用概率仍没有一致资料。
+普通部队兵力归零主要进入**俘虏 / 逃走 / 返回所属地**的击破结算，而不是再套一个通用战死 RNG。
 
-### provisional-engine-rule
-
-只在**部队被击破**时做通用伤亡 roll，避免每次攻击都额外掷死：
+因此旧 fallback：
 
 ```ts
 deathChance =
@@ -2509,9 +2505,377 @@ deathChance =
 injuryChance = 0.12
 ```
 
-然后先应用强运/护卫/名马等保护，再应用明确的特殊来源（猛者50%、骑兵战死式、单挑结果），特殊来源不与通用 roll 重复叠加。
+整体删除。
 
 ---
+
+### 10A. 业火种 / 业火球：专用 casualty 函数已逐指令确认
+
+`[PC-PK1.1][reverse-engineered]`
+
+311MemoryResearch 的：
+
+`内存资料/函数[火陷阱炸伤炸死].txt`
+
+明确显示，火陷阱伤害处理结束后只有：
+
+- ID 16：业火种
+- ID 15：业火球
+
+会调用：
+
+`00597350`
+
+进行武将炸死 / 炸伤判定。
+
+普通火种、火焰种、火球、火焰球、火船都**不会进入这条 casualty 分支**。
+
+其中火船另有 25% 混乱判定；业火种另有 50% 混乱判定，但这是状态异常，不是武将伤亡。
+
+---
+
+### 10B. 候选武将先经过护卫 / 强运过滤
+
+`00597350` 在战死和负伤阶段都会分别调用：
+
+`005971F0 DesignateInjuredPersonnel`
+
+SIRE 地址表也明确把该函数命名为“预定受伤人员”。
+
+311MemoryResearch 的逐指令注释确认这里会考虑：
+
+- 护卫
+- 强运
+
+所以流程不是：
+
+```text
+每名武将各自独立掷一次
+```
+
+而是：
+
+```text
+从部队中指定一名合法候选
+→ 对该候选计算概率
+→ 掷一次
+```
+
+战死判定结束以后，负伤阶段会**再次调用 005971F0**，所以两个阶段可以指定不同候选。
+
+这意味着一次业火爆炸理论上可以：
+
+- 一人战死；
+- 随后另一名合法武将再负伤。
+
+公开文本尚未展开 `005971F0` 的完整“多名合法候选时如何挑人”算法，所以**单个指定武将的最终 unconditional 概率**还要乘上候选选中概率；下面给出的百分比是“该武将已经被指定为候选”后的 conditional chance。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[火陷阱炸伤炸死].txt
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+
+---
+
+### 10C. 能力保护档：取统 / 武 / 智最大值
+
+`00596380` 读取目标武将：
+
+```ts
+M = max(leadership, strength, intelligence)
+```
+
+并返回：
+
+```ts
+abilityProtection =
+  M <= 70 ? 0 :
+  M <= 80 ? 1 :
+  M <= 90 ? 2 :
+            3
+```
+
+注意这个值在汇编里是被 **SUB** 掉：
+
+```asm
+call 00596380
+sub  esi, eax
+```
+
+所以能力越高，炸伤 / 炸死概率越低。
+
+网上有一篇流传较广的火攻文章把这里写成：
+
+`A + 性格 + 能力档`
+
+并得出“属性越高反而越容易炸死/炸伤”的结论；这与 `00597350` 的实际 `sub esi,eax` 冲突，因此 repo 不采用该转载公式。
+
+---
+
+### 10D. 性格内部值
+
+原枚举顺序：
+
+```ts
+Timid    = 0 // 小心/胆小
+Calm     = 1 // 冷静
+Bold     = 2 // 刚胆
+Reckless = 3 // 莽撞/猪突
+```
+
+因此性格越莽撞，火陷阱 casualty chance 越高。
+
+这也与老玩家长期观察“猪突更容易被骑兵突死、谨慎更安全”的方向一致。
+
+---
+
+### 10E. 业火炸死率：精确条件式
+
+战死设置：
+
+```ts
+baseDeath =
+  deathMode === "none"   ? null :
+  deathMode === "normal" ? 2 :
+  deathMode === "high"   ? 4 :
+                           0
+```
+
+若 `deathMode === "none"`，整个战死阶段直接跳过。
+
+其余情况：
+
+```ts
+deathChance =
+  max(
+    0,
+    baseDeath
+      + personalityInternal
+      - abilityProtection
+  )
+```
+
+然后：
+
+```ts
+if (chance(deathChance)) {
+  battleDeath(candidate)
+}
+```
+
+#### 普通战死设置
+
+| max(统,武,智) | 小心 | 冷静 | 刚胆 | 莽撞 |
+|---|---:|---:|---:|---:|
+| ≤70 | 2% | 3% | 4% | 5% |
+| 71–80 | 1% | 2% | 3% | 4% |
+| 81–90 | 0% | 1% | 2% | 3% |
+| >90 | 0% | 0% | 1% | 2% |
+
+#### 高战死设置
+
+| max(统,武,智) | 小心 | 冷静 | 刚胆 | 莽撞 |
+|---|---:|---:|---:|---:|
+| ≤70 | 4% | 5% | 6% | 7% |
+| 71–80 | 3% | 4% | 5% | 6% |
+| 81–90 | 2% | 3% | 4% | 5% |
+| >90 | 1% | 2% | 3% | 4% |
+
+这里按概率语义对 `<=0` 统一视为 0。
+
+---
+
+### 10F. 业火炸伤率：与战死设置无关
+
+即使设置为“无战死”，仍然会进入受伤阶段。
+
+同样先重新指定合法候选，然后：
+
+```ts
+injuryChance =
+  max(
+    0,
+    2
+      + personalityInternal
+      - abilityProtection
+  )
+```
+
+因此：
+
+| max(统,武,智) | 小心 | 冷静 | 刚胆 | 莽撞 |
+|---|---:|---:|---:|---:|
+| ≤70 | 2% | 3% | 4% | 5% |
+| 71–80 | 1% | 2% | 3% | 4% |
+| 81–90 | 0% | 1% | 2% | 3% |
+| >90 | 0% | 0% | 1% | 2% |
+
+成功后调用：
+
+`005963E0`
+
+执行具体伤病处理。
+
+`005963E0` 的“到底升到轻伤/重伤/濒危哪一级”的完整函数体尚未在公开 TXT 中展开，因此**概率已解决，伤病等级分布仍 open**。
+
+---
+
+### 10G. 猛者：50% 是独立专用来源
+
+`[COMMON][confirmed/empirical-high]`
+
+猛者的官方/同期攻略描述长期一致：
+
+> 使用能够推动敌部队的战法并成功产生位移后，50% 概率使敌将负伤。
+
+因此：
+
+```ts
+if (
+  attackerHasFierceWarrior &&
+  tacticSuccessfullyMovedTarget
+) {
+  if (chance(50)) {
+    resolveMightyWarriorInjury(targetUnit)
+  }
+}
+```
+
+不能把猛者 50% 和业火 2～5% 再叠成一条“通用攻击负伤率”。
+
+来源：
+- https://www.gamersky.com/handbook/200603/21610.shtml
+- https://w.atwiki.jp/sangokushi11/pages/593.html
+
+猛者最终伤到三人部队中的哪一人，以及具体伤病等级，当前仍可复用统一 casualty-candidate / injury-severity 接口，等待对应原函数进一步展开。
+
+---
+
+### 10H. 普通攻击 / 普通战法 / 攻击设施：不添加额外武将 casualty roll
+
+`[PC-PK1.1][negative-reverse-evidence-high]`
+
+已经逐项检查：
+
+- `函数[部队攻击].txt`
+- `函数[战法效果].txt`
+- `函数[强制单挑].txt`
+
+都没有调用：
+
+- `00597350` 火陷阱伤死函数；
+- `005971F0` casualty candidate selector；
+- `005963E0` 伤病处理；
+- `004ACBE0` 战死处理。
+
+而火陷阱文件只有在 ID15/16 的明确分支才调用 `00597350`。
+
+社区机制资料同样把可主动造成武将伤亡的主要来源单列为：
+
+- 骑兵战法 → 战死；
+- 猛者 → 负伤；
+- 业火系 → 负伤/战死；
+- 单挑 → 负伤/战死。
+
+普通部队壊灭相关特技“血路”处理的是**不被俘虏**，早期“捕缚”攻略也把普通最后一击描述为捕获武将，而不是额外产生随机战死。
+
+更强的旁证是后来的 San11 PK2.2 MOD 把：
+
+- “全兵种战法负伤系统”
+- “全兵种战法讨杀系统”
+
+明确当作**新增功能**宣传。如果原版本来就有全兵种通用伤亡 roll，这两项就不应是新增系统。
+
+因此 fidelity 引擎采用：
+
+```ts
+function resolveOrdinaryTroopDestruction(...) {
+  resolveCaptureOrEscape(...)
+  // no generic injury/death roll
+}
+```
+
+而不是旧：
+
+```ts
+rollGenericDeath()
+rollGenericInjury()
+```
+
+注意这句话只针对“普通攻击/普通战法/设施伤害导致兵力归零”的**额外通用武将伤亡 roll**。如果最后一击本身属于骑兵突击/突进、猛者位移、业火种/业火球、单挑等专用来源，仍先/另行执行对应专用规则。
+
+资料：
+- https://w.atwiki.jp/sangokushi11/pages/13.html
+- https://www.gamersky.com/handbook/200603/21633.shtml
+- https://www.bilibili.com/video/BV1yq4y1S7Mr/
+- https://www.bilibili.com/video/BV14P4y1s762/
+
+---
+
+### 10I. 火计 / 火矢 / 普通着火格
+
+当前公开逆向把：
+
+- 火计 / 火矢点火；
+- 格子持续火伤；
+- 普通火种 / 火焰种 / 火球 / 火焰球；
+- 火船
+
+的兵力伤害与“业火种/业火球 casualty”分开。
+
+`00597350` 的 call-site 明确只接受 ID15/16。
+
+因此第一版 fidelity 规则：
+
+```ts
+ordinaryFireDamage:
+  troopDamageOnly
+
+wildfireTileTick:
+  troopDamageOnly
+
+basicFireTrap:
+  troopDamageOnly
+
+fireShip:
+  troopDamage + confusion25
+
+hellfireSeed:
+  troopDamage + confusion50 + casualtyCheck
+
+hellfireBall:
+  troopDamage + casualtyCheck
+```
+
+不再给“站在普通火里”每旬额外添加一个我们自拟的武将战死/负伤率。
+
+---
+
+### 版本边界
+
+逐指令证据来自 PC-PK。
+
+Vanilla 同期已经存在：
+
+- 猛者；
+- 强运；
+- 护卫；
+- 骑兵战法战死。
+
+但业火种/业火球属于后期技巧链的具体代码仍应按版本资料核对；无印/主机版在未做二进制回归前，不把 PC-PK 的 `00597350` 常量跨版本标成源码级 confirmed。
+
+---
+
+### 剩余 exactness
+
+第 10 项现在只剩：
+
+1. `005971F0` 多名合法武将时，候选人的精确选择算法；
+2. `005963E0` 负伤成功后的伤病等级分布；
+3. 猛者具体“选中哪名敌将 / 伤到哪一级”的原函数；
+4. Vanilla 与各主机版是否完全共用 PC-PK casualty 常量。
+
+但原来的“普通击破统一 2%/4% 战死 + 12% 负伤”已经可以删除。
+
 
 ## 11. 毒泉 / 栈道 / 落石伤害
 
