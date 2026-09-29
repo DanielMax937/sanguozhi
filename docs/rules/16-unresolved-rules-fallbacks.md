@@ -327,28 +327,105 @@ success = roll < p
 
 ## 3. 外交公式的 Vanilla / PK 版本边界
 
-### 已确认
+### 结论：Vanilla 本身就必须按补丁版本分 profile
 
-后期 PC / PK 社区存在可完整计算的亲善、同盟、停战、交换俘虏、劝降逆向公式，当前已写入 `07-diplomacy.md`。
+这一项找到的关键证据不是另一套完整公式，而是 KOEI 官方补丁记录明确证明外交相关规则至少发生过两轮调整：
 
-### 没找到
+- Vanilla Ver.1.1（2006-04-10）：调整“势力间友好的增减平衡”。
+- Vanilla Ver.1.2（2006-05-01）：再次调整“势力友好的增减平衡”，并明确调整“计略及外交的成功率”。
+- Vanilla Ver.1.3（2006-07-06）：公开更新项目未再列外交成功率调整。
+- PK Ver.1.1（2006-10-04）与 Ver.1.1.1（2007-03-14）：官方更新项目也未列外交成功率调整。
 
-没有找到足够证据证明 **Vanilla 1.0 与后续补丁/PK 的所有常量完全相同**。
+因此旧规则“Vanilla 1.0 直接复用 pc-late-empirical”证据不足，撤回。
 
-### provisional-engine-rule
+### 版本 profile
 
-不另造第二套公式。使用：
+引擎至少区分：
 
 ```ts
-diplomacyProfile = "pc-late-empirical"
+type DiplomacyProfile =
+  | "vanilla-1.0-pre-balance"
+  | "vanilla-1.1-friendship-rebalanced"
+  | "vanilla-1.2-plus-post-success-rebalance"
+  | "pk-1.0-1.1-late-empirical"
 ```
 
-- Vanilla 1.0 暂时复用同一公式；
-- 标记 `compatibilityAssumption=true`；
-- 日后只要找到 Vanilla 1.0 存档反例，就新增 profile，不改旧 profile。
+#### A. Vanilla 1.0
 
-这是比凭空制造“Vanilla 公式”更稳妥的做法。
+`[VANILLA-1.0][unknown-exact]`
 
+1.1 官方说明明确后续调整了势力间友好增减，所以 1.0 的亲善/关系变化常量不能假定等于后期版本。完整的 1.0 外交成功率函数目前也没有找到源码级资料。
+
+#### B. Vanilla 1.1
+
+`[VANILLA-1.1][partial-known]`
+
+友好度增减平衡已经相对 1.0 改过；但 1.2 又明确调整“计略及外交成功率”。因此 1.1 是独立过渡 profile，不能与 1.0 合并，也不能直接称为 PK 公式。
+
+#### C. Vanilla 1.2 / 1.3
+
+`[VANILLA-1.2+][post-success-rebalance / compatibility-assumption]`
+
+1.2 是外交成功率的硬版本分界。1.3 更新列表未再声明外交成功率调整，所以没有反例前，可把 1.2/1.3 归为同一个 post-1.2 family。
+
+但目前找到的完整亲善/同盟/停战/交换俘虏/劝降公式，主要来自后期攻略与 PK/超级难度语境资料；因此仍不能声称 Vanilla 1.2/1.3 的所有常量与 PK 完全相同。
+
+#### D. PK 1.0 / 1.1
+
+`[PC-PK][empirical-high]`
+
+现有完整外交公式最适合绑定到这一 profile。尤其“超级难度系数 0.7”只能属于 PK，因为超级难度是 PK 新增。
+
+PK 官方 1.1/1.1.1 更新项目没有列外交成功率调整，因此当前把 PK 1.0/1.1 视作同一外交 formula family；这是高置信兼容判断，不是源码级证明。
+
+### 完整公式如何落地
+
+`07-diplomacy.md` 中亲善、同盟、停战、俘虏交换、劝降的完整公式保留，并默认绑定：
+
+```ts
+formulaProfile = "pk-1.0-1.1-late-empirical"
+```
+
+Vanilla 不另造一套未经证实的常量，而采用显式 fallback：
+
+```ts
+function resolveDiplomacyProfile(version) {
+  if (version === "vanilla-1.0")
+    return { profile: "vanilla-1.0-pre-balance", exact: false, fallback: "pk-1.0-1.1-late-empirical" }
+
+  if (version === "vanilla-1.1")
+    return { profile: "vanilla-1.1-friendship-rebalanced", exact: false, fallback: "pk-1.0-1.1-late-empirical" }
+
+  if (version === "vanilla-1.2" || version.startsWith("vanilla-1.3"))
+    return { profile: "vanilla-1.2-plus-post-success-rebalance", exact: false, fallback: "pk-1.0-1.1-late-empirical" }
+
+  return { profile: "pk-1.0-1.1-late-empirical", exact: false }
+}
+```
+
+Vanilla fallback 被触发时，simulation report 必须输出 `compatibilityAssumption=true`，并记录 `reason="exact vanilla diplomacy constants not recovered"`。不要为了区分版本而凭空制造三套系数。
+
+### PK 外交府不能混进成功率
+
+`[PK][confirmed/empirical-high]`
+
+外交府的效果是外交类行动力消耗减半、亲善费用减半。日文 Wiki 与 PK 攻略都把“计略府：提高流言成功率”和“外交府：AP/亲善费用减半”分开描述，所以没有证据把外交府当成同盟、停战、换俘等成功率 multiplier。
+
+### 论客也要版本化
+
+- Vanilla 时代已经存在论客与外交舌战机制。
+- `超级`是 PK 新增难度；超级下资料长期一致为约 20% 进入外交舌战，因此 `debateEntryRate.super = 0.20` 只属于 PK super profile。
+
+### 证据来源
+
+- KOEI 官方 Vanilla Ver.1.1 更新：https://www.gamecity.ne.jp/regist_c/user/san11/san11_update.htm
+- Vanilla Ver.1.2 更新：https://down.gamersky.com/pc/200605/4524.shtml
+- Vanilla 1.2/1.3 更新整理：https://forum.gamer.com.tw/C.php?bsn=6331&snA=5789
+- KOEI 官方 PK Ver.1.1/1.1.1 更新：https://www.gamecity.ne.jp/regist_c/user/san11/pk/san11pk_update.htm
+- PK 同盟完整判定公式：https://zhidao.ali213.net/q/13047392.html
+- 完整外交公式汇总：https://zhidao.baidu.com/question/693845718520080364/answer/2870151990.html
+- PK 外交府：https://w.atwiki.jp/sangokushi11/pages/74.html
+- PK 建筑攻略：https://www.gamersky.com/handbook/200609/33180.shtml
 ---
 
 ## 4. 攻城统一公式与陷落资源
