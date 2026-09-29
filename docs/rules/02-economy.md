@@ -185,31 +185,62 @@ adviserParam = 1.2 - 0.01 * (50 - intParam)
 
 ### 换季自然下降
 
-`[COMMON][empirical-high]`
+`[PC-PK1.1][reverse-engineered]`
 
-- 治安的自然下降发生在**换季**。
-- 长期实测的下降幅度为 **0–5**。
-- 太守魅力越高，下降越小；魅力100时实测约 **0–2**。
-- **无太守时固定下降5**。
-- 因此太守魅力必须进入季度治安结算；旧“每月随机下降”模型不采用。
+311MemoryResearch 已逆出原函数 `0058D6D0`。自然治安下降只在 **1/4/7/10 月月初**执行。
+
+若没有触发 PK“政令整备”的免降判定，精确式为：
+
+```ts
+C = governor ? governor.charisma : 0
+base = floor(max(1, 90 - C) / 10)
+loss = min(5, base + GetRandomX(3)) // GetRandomX(3) = 0..2
+```
+
+因此未触发政令整备时的分布为：
+
+| 太守魅力 | 自然下降 |
+|---:|---|
+| 81+ | 0 / 1 / 2，各1/3 |
+| 71–80 | 1 / 2 / 3，各1/3 |
+| 61–70 | 2 / 3 / 4，各1/3 |
+| 51–60 | 3 / 4 / 5，各1/3 |
+| 41–50 | 4：1/3；5：2/3 |
+| 0–40 | 固定5 |
+| 无太守 | 固定5 |
+
+所以魅力影响是**阶梯式**而非连续线性：大约每跨 10 点才改变一档；魅力81～100最终同为 `0/1/2`。
 
 来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动05-城市治安下降.txt
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
 - https://w.atwiki.jp/sangokushi11/pages/1152.html
-- https://w.atwiki.jp/sangokushi11/pages/79.html
 
-精确“太守魅力→0–5分布”的原作闭式仍 open；引擎 fallback 见 `16-unresolved-rules-fallbacks.md#15-太守魅力--换季治安下降概率分布`。
+Vanilla 尚未取得 EXE 级复核；无印时期实测与这套公式的边界完全吻合，因此暂按 `empirical-high / compatibility-assumption` 复用基础公式。
 
 ### PK 政令整备
 
-`[PK][empirical-high/reverse]`
+`[PK][reverse-engineered]`
 
-- 不是永久锁死治安。
-- 每次换季先做一次独立判定；社区逆向/修改器参数说明与长期整理一致，默认可按 **50% 概率跳过本季自然治安下降**。
-- 未跳过时，仍按太守魅力决定的自然下降规则结算。
+原函数在自然下降计算**之前**检查“政令整备”，直接调用：
 
-来源：
-- https://dl.3dmgame.com/patch/26091.html
-- https://www.sohu.com/a/411270684_120015190
+```text
+ProbabilityCheck(50)
+```
+
+命中则立即返回，本季自然治安下降为0；未命中才执行上面的太守魅力公式。
+
+因此它不是“下降值×0.5”，而是：
+
+```ts
+if (hasAdministrativeReform && ProbabilityCheck(50)) {
+  loss = 0
+} else {
+  loss = seasonalLossByGovernorCharisma()
+}
+```
+
+其中 `004721D0 ProbabilityCheck(p)` 的逆向定义就是生成0～99随机数并判断是否小于 `p`，所以 **50% 是精确常量**，不是约数。
 
 ### 贼与异民族
 
