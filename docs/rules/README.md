@@ -34,6 +34,8 @@
 12. `11-debate.md` 舌战
 13. `12-pk.md` PK 专属系统总表
 14. `13-open-exactness.md` 尚缺精确内部公式与引擎临时采用值
+15. `14-evidence-audit-2026-09-29.md` 证据审计：哪些 provisional 已升级
+16. `15-pk-ability-research.md` PK 能力研究完整机制、次数与隐藏节点
 15. `14-evidence-audit-2026-09-29.md` 证据审计与升级记录
 16. `15-pk-ability-research.md` PK 能力研究完整机制、隐藏特技与培育上限
 
