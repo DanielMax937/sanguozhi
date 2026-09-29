@@ -3441,44 +3441,483 @@ San11 专属公开资料对零配下时的精确结束流程仍不够完整，�
 
 ## 13. 评定完整提案池
 
-### 已确认
+### 结论：具体提案词汇已经能从原版 MSG 完整恢复；真正仍未知的是“谁在什么局势下提哪一个”的选择函数
 
-游戏文本明确存在两阶段：
+这一项需要把三个问题分开：
 
-1. 方针提案：**内政 / 出阵 / 外交・计略**
-2. 选定方针后提出具体案并采决。
+1. 评定流程结构；
+2. 原版允许出现哪些具体提案；
+3. 武将如何从这些提案中选择。
 
-评定本身可获得技巧 P（现有表 +10）。
-
-来源：
-- https://w.atwiki.jp/sangokushi11/pages/202.html
-- https://w.atwiki.jp/sangokushi11/pages/639.html
-
-### 没找到
-
-没有发现官方“所有具体案 + 触发条件”的完整表，老玩家讨论也承认武将的提案倾向不透明。
-
-### provisional-engine-rule
-
-评定不新增魔法效果，而是**从合法 Command 中产生候选**：
-
-- 内政：开发、巡查、征兵、训练、生产、技巧研究
-- 人材：搜索、登用、褒赏
-- 出阵：出征、输送、野外建设
-- 外交・计略：亲善、同盟、停战、流言、二虎竞食、驱虎吞狼
-
-流程：
-
-```text
-每位参评武将根据 起用/战略倾向/五维 + 当前局势
-→ 提 1 个方针
-→ 君主/玩家选方针
-→ 该方针下枚举 1~3 个合法具体命令
-→ 选中后仍走普通 Command 校验和正常成本
-→ 评定事件 +10 技巧P
-```
+前两项现在已经大幅收敛；第3项仍没有找到公开文本反汇编。
 
 ---
+
+### 13A. 评定是“两阶段 + 可多选”的正式命令系统
+
+`[COMMON][confirmed-static / manual]`
+
+官方 PK 手册确认：
+
+- 君主在据点时可执行评定；
+- 最多6名武将参加；
+- 评定命令本身：期间、金钱、行动力均为“无”；
+- 评定结束后，配下武将会根据评定结果采取行动。
+
+原版武将台词进一步确认两个阶段：
+
+```text
+第一阶段：战略方针提案
+→ 君主采决
+→ 第二阶段：具体案提案
+→ 君主采决
+→ 被采纳方案执行
+```
+
+而且两层都不是简单“只能选一个”：MSG 中明确存在：
+
+- 单独采纳某人；
+- 部分采纳；
+- 全部采纳；
+- 全部否决；
+- 中止评定。
+
+角色台词页也有“全选”与“全部否决”的专门台词。
+
+来源：
+- 官方 PK 手册：https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- https://w.atwiki.jp/sangokushi11/pages/202.html
+- https://w.atwiki.jp/sangokushi11/pages/639.html
+- https://www.sanguogame.com.cn/special/san11/1920.html
+
+---
+
+### 13B. 第一阶段方针：UI 是三大类，但 MSG 内部有“攻击 / 迎击”两个出阵子类
+
+`[COMMON][confirmed-static-message-data]`
+
+角色页把评定方针统一标成：
+
+```text
+内政
+出阵
+外交・计略
+```
+
+但完整 MSG 目录又把第一阶段台词拆成：
+
+```text
+2975～2980  建议攻击
+2981～2986  建议迎击
+2987～2992  建议内政
+2993～2998  建议外交
+2999～3002  赞同他人
+```
+
+因此引擎最好保留：
+
+```ts
+type CouncilPolicyKind =
+  | "domestic"
+  | "sortie-attack"
+  | "sortie-defense"
+  | "diplomacy-strategy"
+
+function policyDisplayGroup(kind) {
+  if (kind === "sortie-attack" || kind === "sortie-defense")
+    return "sortie"
+  return kind
+}
+```
+
+这样既保留内部“攻击/迎击”的区别，又符合玩家看到的“出阵”大类。
+
+---
+
+### 13C. 具体提案池：22 类
+
+`[COMMON][confirmed-static-message-data]`
+
+完整 `msg2966～3288 君主评定` 目录恢复出以下 **22 类具体提案**：
+
+#### 内政 / 人事 / 城市管理类
+
+1. 内政建设
+2. 征兵
+3. 生产兵装
+4. 巡查
+5. 训练
+6. 探索
+7. 登用
+8. 任命军师
+9. 撤除设施
+
+#### 出阵 / 军事类
+
+10. 侵略
+11. 迎击
+12. 军事建设
+
+#### 外交・计略类
+
+13. 献上（亲善/赠礼）
+14. 同盟
+15. 摒弃（同盟破弃）
+16. 停战
+17. 劝降
+18. 交换俘虏
+19. 求援
+20. 二虎竞食
+21. 驱虎吞狼
+22. 流言
+
+对应 MSG 范围：
+
+```text
+3043       推荐内政建设
+3034~3054  提议征兵
+3055~3065  提议生产兵装
+3066~3076  提议巡查
+3077~3087  提议训练
+3088~3098  提议侵略
+3099~3104  提议迎击
+3105~3110  提议军事建设
+3111~3117  提议探索
+3118~3124  提议登用
+3125~3131  提议献上
+3132~3138  提议同盟
+3139~3145  提议摒弃
+3146~3152  提议停战
+3153~3159  提议劝降
+3160~3172  提议交换俘虏
+3173~3179  提议求援
+3180~3186  提议二虎竞食
+3187~3193  提议驱虎吞狼
+3194~3200  提议流言
+3201~3206  提议任命军师
+3207~3209  提议撤除设施
+3210~3213  赞同提议
+```
+
+目录在“内政建设/征兵”附近存在一个编号排版重叠/错位，但提案类型本身没有歧义。
+
+“献上”与普通外交 MSG 中的“推荐亲善 / 前往亲善”对应，工程层映射为 `amicabilityGift`；“摒弃”与普通外交中的同盟破弃流程对应。
+
+来源：
+- https://www.sanguogame.com.cn/special/san11/1920.html
+
+---
+
+### 13D. 三个旧 fallback 提案应该删除
+
+旧文档曾把以下也加入评定池：
+
+```text
+技巧研究
+输送
+褒赏
+```
+
+但完整君主评定 MSG 段没有这三类专用提案文本。
+
+相反，旧文档漏掉了：
+
+```text
+任命军师
+撤除设施
+同盟破弃
+迎击
+军事建设
+```
+
+因此 fidelity proposal pool 现在固定使用上述22类。
+
+如果未来反汇编证明某个无专用 MSG 的命令复用了通用提案台词，再单独恢复；在此之前不要从整个 Command 集合任意扩展评定池。
+
+---
+
+### 13E. “赞同他人”是原生结果，不是每人都必须产生新方案
+
+`[COMMON][confirmed-static-message-data]`
+
+两个阶段都存在专门的“赞同某人/赞同提议”台词。
+
+张飞等武将的角色页也直接列出：
+
+```text
+评定方针・具体案提案（同意）
+```
+
+所以每位参加武将并不一定制造一个新 proposal。
+
+引擎要支持：
+
+```ts
+type CouncilSpeech =
+  | { kind: "new-proposal", proposal: CouncilProposal }
+  | { kind: "agree", proposerId: PersonId }
+  | { kind: "abort" }
+```
+
+如果后续武将生成了与已有方案完全相同的 `type + target`，fallback 优先转成 `agree`，而不是重复显示两条等价方案。
+
+---
+
+### 13F. 评定本身免费，但被采纳提案不是“免费行动”
+
+`[COMMON][manual + empirical-high]`
+
+官方手册把“评定”菜单本身标成：
+
+```text
+必要金：—
+行动力：—
+最大执行武将：6
+```
+
+并明确说：
+
+```text
+评定后，配下武将按评定结果行动。
+```
+
+同时 2006 年原版时期玩家明确吐槽：
+
+> 如果采纳评定进言时不消耗行动力，那还说得过去。
+
+这构成很强的反证：**采纳后的实际行为会消耗行动力**。
+
+2026 年 PC-PK 实测也发现：只要还有行动力和未行动武将，开评定就会进入选人提案；把行动力先用光后，配下会直接建议不要开会、赶紧行动。
+
+因此 engine 应分开：
+
+```ts
+openCouncil():
+  actionPowerCost = 0
+  moneyCost = 0
+
+executeAcceptedProposal(p):
+  dispatchToNormalCommand(p)
+```
+
+`dispatchToNormalCommand()` 至少必须沿用普通命令的行动力与合法性校验。金钱、兵粮、技巧P、设施条件等也建议走同一个 Command service；这一点在未取得评定函数调用图前标 `compatibility-assumption`，但禁止实现成“评定采纳后免费生成兵/设施/外交效果”。
+
+来源：
+- 官方 PK 手册
+- https://w.atwiki.jp/sangokushi11/pages/1875.html
+- https://www.ptt.cc/bbs/Koei/M.1776854540.A.47B.html
+
+---
+
+### 13G. 技巧P：开评定本身 +10
+
+`[COMMON][empirical-high]`
+
+早期中文技巧P整理记录：
+
+```text
+评定：+10P
+```
+
+因此：
+
+```ts
+onCouncilHeld() {
+  force.techniquePoints += 10
+}
+```
+
+被采纳的具体方案如果本身又会产生技巧P，则继续走对应普通 Command 的收益，不与“评定+10”互相替代。
+
+来源：
+- https://www.sanguogame.com.cn/special/san11/san11-xd14.html
+
+---
+
+### 13H. 提案选择公式：仍未找到原函数
+
+`[PC-PK][open-exactness]`
+
+当前 `311MemoryResearch` / SIRE 公共文本资料没有整理出评定 proposal selector 的函数体。
+
+SIRE 确认武将结构里确实存在隐藏字段：
+
+```text
++0x10C StrategicTendency  战略倾向
++0x110 EarthElementTenacity 地域执着
+```
+
+但目前**没有找到它们被评定函数读取的 xref**。
+
+因此旧 fallback 直接写：
+
+```text
+起用 + 战略倾向 + 五维
+→ 决定评定提案
+```
+
+没有证据，应删除。
+
+同样，2006 年玩家曾猜测“也许性格或知力参与”，但这只是玩家猜测，不能标成事实。
+
+来源：
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/数据汇总.md
+- https://w.atwiki.jp/sangokushi11/pages/2460.html
+
+---
+
+### 13I. 玩家观察说明“能力映射”不能做得太机械
+
+`[COMMON][empirical-anecdotal]`
+
+2007 年旧 2ch 有一个很有价值的观察：
+
+- 李儒参加评定时几乎总提侵攻他国；
+- 张飞却会冷静提出“多生产一些兵装做准备”。
+
+回复者还评价评定建议经常“很随意、经常不合时宜”。
+
+这至少排除了简单规则：
+
+```text
+高武力武将 = 必定出阵
+高智力武将 = 必定外交计略
+高政治武将 = 必定内政
+```
+
+另外 2008 年玩家用韩玄、孙皓、夏侯楙、曹爽、黄皓、张昭参加评定时，记录到多数低质量武将只是说“军师的提案最好”，只有张昭提出独立意见。这能支持“agree 是常见真实结果”，但不足以逆出能力阈值。
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/1919.html
+- https://w.atwiki.jp/sangokushi11/pages/1950.html
+
+---
+
+### 13J. provisional-engine-rule：固定原版池，未知的只剩 chooser
+
+不再从整个 Command 集合动态发明 proposal type。
+
+```ts
+const ORIGINAL_COUNCIL_PROPOSALS = [
+  "domestic-build",
+  "recruit",
+  "produce-equipment",
+  "patrol",
+  "train",
+  "invade",
+  "intercept",
+  "military-build",
+  "search",
+  "hire",
+  "amicability-gift",
+  "alliance",
+  "break-alliance",
+  "ceasefire",
+  "demand-surrender",
+  "exchange-prisoner",
+  "request-reinforcement",
+  "two-tigers",
+  "drive-tiger",
+  "rumor",
+  "appoint-strategist",
+  "remove-facility"
+]
+```
+
+生成步骤：
+
+```ts
+function generateCouncilProposal(officer, state, existing) {
+  // 1. 只保留当前能映射到合法普通 Command 的原版22类模板
+  const legal = ORIGINAL_COUNCIL_PROPOSALS
+    .map(t => materializeTargets(t, state))
+    .flat()
+    .filter(p => normalCommandCanExecute(p, officer, state))
+
+  if (!legal.length)
+    return { kind: "abort" }
+
+  // 2. 局势需求是主项；不要伪装成已知原版AI
+  for (const p of legal) {
+    p.score =
+        situationUrgency(p, state)       // 0..100
+      + stableOfficerBias(officer.id,p) // -15..15
+      + rng.int(-10, 10)
+  }
+
+  const proposal = maxBy(legal, p => p.score)
+
+  // 3. 原版有专门“赞同他人”分支
+  const same = existing.find(x =>
+    x.type === proposal.type &&
+    x.targetId === proposal.targetId
+  )
+
+  if (same)
+    return { kind: "agree", proposerId: same.proposerId }
+
+  return { kind: "new-proposal", proposal }
+}
+```
+
+这里故意不用：
+
+- `StrategicTendency` 直接决定三大类；
+- 性格直接决定三大类；
+- 五维做硬门槛。
+
+因为都还没有 xref 证据。
+
+`stableOfficerBias` 只是让同一个人在相近局势下有一定持续偏好，模拟“李儒经常提侵攻”这种观察；必须标 `provisional-engine-rule`。
+
+一旦以后逆出原 selector，只替换 chooser，22类 proposal schema、两阶段 UI 和 normal Command dispatcher 都不需要改。
+
+---
+
+### 13K. 合法性 / 触发条件：使用普通 Command 规则，不另造第二套效果
+
+在没有原 proposal-trigger table 的情况下，每个具体案至少满足对应 Command 的必要条件：
+
+- 征兵：存在可征兵据点/兵舍、容量与资金等；
+- 生产：对应生产设施与容量/资金；
+- 巡查：可执行巡查；
+- 训练：气力尚可提升；
+- 侵略：存在合法敌对/空白目标；
+- 迎击：存在需要防御的敌军威胁；
+- 军事建设：有合法建设格与资源；
+- 探索：搜索命令合法；
+- 登用：存在合法目标；
+- 同盟：不能已同盟；
+- 破弃：必须已有同盟；
+- 停战：存在可停战对象；
+- 交换俘虏：必须存在可交换俘虏；
+- 求援：存在符合条件的友好/同盟关系；
+- 二虎竞食、驱虎吞狼、流言：对应计略目标合法；
+- 任命军师：候选智力至少70（官方手册）；
+- 撤除设施：存在己方可撤设施。
+
+但“满足普通 Command 条件后，原版评定是否还有额外隐藏阈值”仍 open。
+
+尤其 2006 年玩家记录过评定竟然建议拆造币厂改建别的设施，说明原版 proposal AI 可以给出**合法但很差**的方案，所以 fallback 不应把 utility 阈值设得过高。
+
+来源：
+- 官方 PK 手册
+- https://w.atwiki.jp/sangokushi11/pages/1875.html
+
+---
+
+### 第13项剩余 exactness
+
+现在真正还没解决的只剩：
+
+1. proposal selector 的原始函数地址与权重；
+2. `StrategicTendency / 性格 / 智力 / 其他隐藏属性` 是否实际进入 selector；
+3. 22类 proposal 与四个内部方针子类的精确映射表；
+4. 参与武将的完整过滤条件（未行动、所在据点、任务中等的逐条规则）；
+5. 多个被采纳 proposal 的执行顺序，以及执行前后资源不足时的精确行为。
+
+但**提案池本身已经不再 open**。
 
 ## 14. 委任 AI 权重
 
