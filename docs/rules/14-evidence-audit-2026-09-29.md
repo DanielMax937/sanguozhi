@@ -104,3 +104,49 @@
 - 贼/异族攻陷城市后，该城市变为空白地。
 
 来源：https://w.atwiki.jp/sangokushi11/pages/74.html
+
+
+## 第四轮补证：治安、灾害、事件、单挑边界
+
+### 换季治安
+升级为 `empirical-high`：
+- 治安仅在换季自然下降；
+- 下降范围实测0–5；
+- 太守魅力100约0–2；
+- 无太守固定5。
+精确魅力→概率分布仍 open。
+
+来源：https://w.atwiki.jp/sangokushi11/pages/1152.html
+
+### 贼与异民族
+机制升级：
+- 治安<80才可能生成根城；
+- 根城未毁时，即使治安100仍持续出兵；
+- 乌丸/羌骑兵，山越/南蛮枪/戟；
+- 贼/异民族攻陷都市后都市变空白。
+
+来源：https://w.atwiki.jp/sangokushi11/pages/74.html
+
+### 自然灾害边界
+确认随机自然灾害主要是蝗灾、疫病；地图堤防水攻不属于随机洪水系统。
+
+来源：https://w.atwiki.jp/sangokushi11/pages/74.html
+
+### 历史事件静态数据
+游民星空已发布“全剧情发生条件官方资料”，能够直接结构化诸葛亮三顾、徐庶登场、魏帝即位等大量事件。因此“历史事件”从“资料缺失”降级为“数据录入/版本核对”。
+
+来源：
+- https://www.gamersky.com/handbook/200809/124174_7.shtml
+- https://www.gamersky.com/handbook/200809/124174_8.shtml
+- https://www.gamersky.com/handbook/200809/124174_10.shtml
+
+### 单挑连续公式继续保持 open
+日文 Wiki 曾尝试建立“武力差→伤害”表，但后来撤下，因为相同武力差在不同绝对武力组合下伤害不同。这反而构成了重要负证据：不得把简单线性武力差模型升级为规则。
+
+来源：https://w.atwiki.jp/sangokushi11/pages/2484.html
+
+### 地形免疫边界
+- 踏破：桟道无伤，落石/火罠减伤；PK 火罠减半。
+- 解毒：毒泉无伤。
+
+来源：https://w.atwiki.jp/sangokushi11/pages/13.html
