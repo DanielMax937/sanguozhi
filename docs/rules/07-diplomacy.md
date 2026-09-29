@@ -127,7 +127,16 @@ c：
 前三个 Vanilla profile 尚无逐版本完整常量表。为了让模拟运行，可 fallback 到 PK 后期公式，但必须标记 `compatibilityAssumption=true`；不得声称 Vanilla 1.0/1.1/1.2 与 PK 完全一致。
 
 PK“外交府”只降低外交行动力与亲善费用，不加入外交成功率乘数。
-主要来源：
+
+版本边界来源：
+- KOEI Vanilla Ver.1.1：https://www.gamecity.ne.jp/regist_c/user/san11/san11_update.htm
+- Vanilla Ver.1.2：https://down.gamersky.com/pc/200605/4524.shtml
+- Vanilla 1.2/1.3 整理：https://forum.gamer.com.tw/C.php?bsn=6331&snA=5789
+- KOEI PK Ver.1.1/1.1.1：https://www.gamecity.ne.jp/regist_c/user/san11/pk/san11pk_update.htm
+- PK 外交府：https://w.atwiki.jp/sangokushi11/pages/74.html
+- PK 外交府中文攻略：https://www.gamersky.com/handbook/200609/33180.shtml
+
+公式来源：
 - https://zhidao.ali213.net/q/13047392.html
 - https://zhidao.baidu.com/question/693845718520080364/answer/2870151990.html
 
