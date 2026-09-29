@@ -1,5 +1,10 @@
 # 主要来源
 
+## 官方资料
+
+- 《三國志11 with パワーアップキット》官方说明书（Steam 附带）
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+
 ## 游民星空（优先中文核对）
 
 - 行动力点数相关计算公式深入研究
@@ -30,6 +35,11 @@
 - 历史事件 https://w.atwiki.jp/sangokushi11/pages/88.html
 
 ## 逆向/实测研究
+
+- PTT 精华区：战法、俘虏、强制单挑、战死等概率公式
+  https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html
+- 日文 Wiki 小技巧：忠诚自然下降触发条件
+  https://w.atwiki.jp/sangokushi11/pages/15.html
 
 - 游侠论坛：三国志11战斗伤害计算公式
   https://game.ali213.net/thread-5983352-1-1.html
