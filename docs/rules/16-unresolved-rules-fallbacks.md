@@ -10,46 +10,127 @@
 
 ## 1. 征兵精确数量 / 治安下降
 
-### 已确认
+### 结论：PC-PK 已由反汇编锁定
 
-- 官方 PK 说明书：兵舍是征兵前置；一次 300 金、20 行动力；最多 3 名武将；**执行武将魅力合计越高，征兵越多**；城市周围 2 格有敌军时征兵量下降。
-- 特技“名声”：征兵量 ×1.5，同时治安下降也 ×1.5。
-- PK 兵舍 Lv2 / Lv3 的内政效果按 1.2 / 1.5 档提升。
-- 实战资料给出强锚点：**魅力 100×3、Lv3 兵舍约 4200 人**；Lv3 + 名声常见约 5000 级别。
+`[PC-PK1.1][reverse-engineered]`
 
-来源：
-- 官方说明书：https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
-- https://w.atwiki.jp/sangokushi11/pages/13.html
-- https://w.atwiki.jp/sangokushi11/pages/1598.html
-- https://w.atwiki.jp/sangokushi11/pages/1937.html
+本项不再使用 fallback。311MemoryResearch 对 `San11PK.exe` 的两个原函数做了逐指令标注：
 
-### 没找到
+- `005C3610`：计算征兵数量
+- `005C3A50`：执行征兵
 
-未找到能跨 Vanilla/PK、治安、邻敌条件复算的唯一闭式。
+定义：
 
-### provisional-engine-rule
+- `O` = 征兵前城市治安
+- `C` = 最多 3 名执行武将的魅力之和
+- `F` = 名声倍率：任一执行武将有“名声”则 1.5，否则 1.0
+- `B` = 兵舍等级倍率：Lv1=1.0、Lv2=1.2、Lv3=1.5
 
-先用以下可解释式：
+核心数量：
 
 ```ts
-charmSum = sum(upTo3Executors.map(x => x.charisma))
-barracks = vanillaOrLv1 ? 1.0 : lv2 ? 1.2 : 1.5
-enemyPressure = enemyWithin2Hex ? 0.8 : 1.0
+base = 1000 + floor((O + 20) * C / 20)
+withFame = floor(base * F)
+recruits = floor(withFame * B)
 
-base = 1000 + 6 * charmSum
-recruits = round(base * barracks * enemyPressure)
+if (difficulty === "super" && owner === "AI") {
+  recruits *= 2
+}
 
-if (hasFame) recruits = round(recruits * 1.5)
+if (underEnemyPressure) {
+  recruits = floor(recruits / 2)
+}
 
-orderLoss = ceil(recruits / 500)
+actualAdded = min(recruits, troopCap - currentTroops)
 ```
 
-锚点：魅力 100×3、Lv3 → `(1000+1800)×1.5=4200`。
+因此旧 fallback 中两点已被推翻：
 
-注意：
-- 当前**不再额外乘治安系数**，因为“治安影响征兵量”的精确证据尚不足；治安通过征兵后下降、贼乱风险形成间接反馈。
-- 名声直接基于最终征兵量和下降量 ×1.5 的原作关系。
-- 邻敌 0.8 是 fallback 参数，必须配置化。
+1. **治安直接进入征兵数量公式**，不是只通过后续风险间接作用。
+2. **兵临城下是直接减半**，不是旧 fallback 的 ×0.8。
+
+### 征兵导致的治安下降
+
+`[PC-PK1.1][reverse-engineered]`
+
+执行函数直接给出：
+
+```ts
+orderLoss = floor(actualAdded / (C + 100))
+publicOrder -= orderLoss
+```
+
+注意分子是**考虑城市兵力上限后实际加入的兵力**，不是未裁剪的理论征兵量。
+
+“名声使治安下降约增加 50%”不是另有一条独立的 `×1.5` 治安惩罚；实际是名声先令征兵量 ×1.5，随后治安损失按实际征兵量计算，所以在整数取整边界外通常表现为约 1.5 倍。
+
+### 可复算锚点
+
+治安100、魅力100×3、Lv3、无名声：
+
+```
+C = 300
+base = 1000 + floor(120 * 300 / 20) = 2800
+recruits = floor(2800 * 1.5) = 4200
+orderLoss = floor(4200 / 400) = 10
+```
+
+与日文攻略 Wiki/旧玩家实测“魅力100三人、Lv3一次 4200”吻合。
+
+同条件任一人有名声：
+
+```
+recruits = 6300
+orderLoss = floor(6300 / 400) = 15
+```
+
+这也解释了社区长期记录的“名声征兵量 +50%，治安下降也约 +50%”。
+
+### 兵临城下范围：只剩一个边界口径需要回归测试
+
+减半本身已由汇编确认。范围口径存在资料表述差异：
+
+- 官方 PK 说明书明确写“都市周围 **2 格** 有敌部队时征兵量下降”；
+- 311MemoryResearch 对被调用通用判定函数的注释写作“城市 3 格、港关 2 格”。
+
+由于征兵只发生在都市，且官方说明书的玩家口径更直接，引擎暂采用“**城市周围 2 格**”；同时保留一个边界 golden test，后续直接用距离 2/3 的敌军存档验证。不要把逆向文件里的“3格”注释直接升级成已确认的游戏口径。
+
+### 其他同函数副作用
+
+- 300 金、20 行动力、最多 3 人。
+- 每名执行武将：魅力经验 +2、功绩 +50。
+- 新征士兵气力 = `floor(征兵前治安 / 2)`。
+- 新旧士兵气力按人数混合，最终城市气力最低为 20。
+- 超级难度 AI 征兵量 ×2。
+
+### Vanilla 版本边界
+
+`[VANILLA][empirical-high / compatibility-assumption]`
+
+目前取得的是 PC-PK 可执行文件反汇编，不是 Vanilla EXE。2006 年无印时期资料已经确认魅力、治安、名声、300金、20行动力、最多3人等同一套机制；无印也不存在 Lv2/Lv3 兵舍。
+
+因此在拿到 Vanilla 二进制反证之前：
+
+```ts
+vanillaFormula = sameCoreFormula
+B = 1.0
+```
+
+但证据标签保持 `empirical-high`，不把 PK 反汇编跨版本冒充 Vanilla 源码事实。
+
+来源：
+- 311MemoryResearch：`内存资料/整理/Func-内政01-计算征兵数量.txt`
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-内政01-计算征兵数量.txt
+- 311MemoryResearch：`内存资料/整理/Func-内政02-执行征兵.txt`
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-内政02-执行征兵.txt
+- 官方 PK 说明书：
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 日文 Wiki：名声 +50%
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+- 日文 Wiki/旧 2ch 实测：魅力100×3、Lv3=4200
+  https://w.atwiki.jp/sangokushi11/pages/1937.html
+- SIRE v1.26/1.27 参数说明：兵营征兵倍率、兵临城下征兵数量正常等开关
+  https://dl.3dmgame.com/patch/26091.html
 
 ---
 
