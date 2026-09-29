@@ -83,23 +83,99 @@
 
 ## 6. 行动力
 
-已确认的组成项：
+`[COMMON][empirical-high]`
 
-- 上限 255；剩余行动力可结转。
-- 君主取统率与魅力中较高者参与恢复。
-- 对魅力/统率项：34 以下贡献 +6；35 为 +7，此后每提升 5 点再 +1，100 达 +20。
-- 武将人数提供恢复量，最多计 10 人。
-- 直辖城市数影响恢复；委任城不计。
-- 军师智力影响恢复。
-- `[PK]` 每座符节台 +5，且多城效果叠加。
+2006 年原版时期的逆向研究给出了完整公式，2023 年又用多个实际存档（包括 PK 符节台）复算成功，因此从 open 升级为高置信实测规则。
 
-来源：https://w.atwiki.jp/sangokushi11/pages/1598.html
-https://w.atwiki.jp/sangokushi11/pages/102.html
-https://w.atwiki.jp/sangokushi11/pages/74.html
+### 每旬新增行动力
 
-### 仍未 confirmed
+```
+base = rulerParam + cityParam + officerParam
 
-**军师智力项 + 城市数项的完整封闭公式**存在互相冲突的玩家推导，因此不能升级为 confirmed。当前应保留锚点回归测试，不使用旧的“基础20+第一城20+智力/10”。
+newAP = floor(base * adviserParam)
+
+[PK] newAP += 5 * talismanPlatformCount
+```
+
+当前行动力：
+
+`currentAP = min(255, previousRemainingAP + newAP)`
+
+### 君主 / 都督参数
+
+```
+ability = max(统率, 魅力)
+abilityParam = floor(ability / 5)
+step = max(abilityParam - 6, 0)
+
+rulerParam = 40 * (0.65 + 0.025 * step)
+```
+
+边界：
+- 统率/魅力最高项 ≤34：26
+- 35：27
+- 此后每跨 5 点 +1
+- 100：40
+
+军团独立计算时，以**都督**代替君主计算该项。
+
+### 城市参数
+
+`cityParam = min(10 * (directCityCount - 1), 50)`
+
+- 1 城：0
+- 2 城：10
+- …
+- 6 城及以上：50
+
+只算该军团/直辖军团实际支配的城市。
+
+### 武将参数
+
+取该军团所属、且其主城也在本军团控制下的城市/港/关：
+
+1. 每个据点最多计 10 名武将；
+2. 按据点武将数由高到低取前 6 个；
+3. 相加，最大 60。
+
+君主、军师也算人头；武将能力本身不影响这一项。
+
+### 军师参数
+
+无军师：
+
+`adviserParam = 1.0`
+
+有军师：
+
+```
+intParam = floor(军师智力 / 2)
+adviserParam = 1.2 - 0.01 * (50 - intParam)
+```
+
+例如：
+- 智力100 → 1.20
+- 智力60 → 1.00
+- 低于60时甚至不如不设军师
+
+所有军团共用势力军师修正。
+
+### PK 符节台
+
+每座符节台最终固定 **+5 行动力**，是在前面乘算并取整之后追加。
+
+实测例：刘禅直辖3城，君主30 + 城20 + 武将22，诸葛亮1.2：
+
+`floor((30+20+22)*1.2)=86`
+
+另有1座符节台 → 91，与游戏显示一致。
+
+来源：
+- 2006 原版逆向：https://game.ali213.net/thread-988399-1-1.html
+- 存档复算与 PK 符节台验证：https://www.bilibili.com/opus/828103788131778665
+- 游民星空早期实测（影响因素交叉核对）：https://www.gamersky.com/handbook/200603/21611.shtml
+
+> 证据等级保持 `empirical-high` 而非 `confirmed`：公式来自逆向/复算而非官方源码，但已跨原版时期与 PK 存档相互验证。
 
 ## 7. 治安
 
