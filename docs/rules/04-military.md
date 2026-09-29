@@ -5,12 +5,15 @@
 ### 已确认
 
 - 前置：城市有兵舍。
+- 官方说明书明确：一次征兵消耗金300、行动力20，最多3名执行武将；**执行武将魅力合计越高，一次征兵越多**。
+- 官方说明书明确：城市周围2格内存在敌部队时，征兵量会下降。
 - `[COMMON][confirmed]` **魅力**影响征兵增加量，也影响治安下降量；政治不是征兵主能力。
 - `[PK][confirmed]` 兵舍 Lv 越高，一次征兵量越大，同时治安下降也更大。
 - `[COMMON][confirmed]` 特技“名声”：征兵量 ×1.5；对应治安下降量也 ×1.5。
 - 征兵获得魅力经验。
 
 来源：
+- 官方 PK 说明书（Steam 附带 PDF）
 - https://w.atwiki.jp/sangokushi11/pages/1598.html
 - https://w.atwiki.jp/sangokushi11/pages/13.html
 - https://w.atwiki.jp/sangokushi11/pages/74.html
