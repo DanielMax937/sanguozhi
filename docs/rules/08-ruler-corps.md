@@ -45,29 +45,92 @@
 
 ## 4. 君主继承
 
-### 历史事件指定继承
+### 4.1 历史事件指定继承
 
 `[confirmed as event data]`
 
-部分君主死亡事件存在明确继承顺序，例如：
+历史死亡事件覆盖普通继承：
 
-- 刘备自然死亡事件：刘禅 > 刘封。
-- 曹操死亡事件：曹昂 > 曹丕 > 曹植 > 曹冲 > 曹彰。
+- 刘备：刘禅 > 刘封。
+- 曹操：曹昂 > 曹丕 > 曹植 > 曹冲 > 曹彰。
+- 连环计等事件有自己的分裂、后继与玩家选择逻辑。
 
 来源：
 - https://w.atwiki.jp/sangokushi11/pages/942.html
-- https://w.atwiki.jp/sangokushi11/pages/88.html
+- https://w.atwiki.jp/sangokushi11/pages/100.html
+- https://w.atwiki.jp/sangokushi11/pages/893.html
 
-这些应由历史事件覆盖普通继承逻辑。
+### 4.2 玩家普通继承
 
-### 普通继承
+`[COMMON][empirical-high]`
 
-COM/非历史事件情况下的完整排序尚未找到可靠公式。玩家经验提到年龄、功绩等，但证据不足。因此：
+历史事件不命中时，玩家君主死亡会弹出后继者选择，由玩家从合法候选中选新君主；并不强制儿子、亲族、功绩最高或能力最高。
 
-- **不要随机选继承人**。
-- **不要把“血缘优先”写成 confirmed**。
-- 先以事件覆盖明确继承；普通继承继续列 `13-open-exactness.md` 并建立实测矩阵。
-- 第一版引擎 fallback：玩家非事件死亡时让玩家从合法武将中选择；COM 使用“血缘 > 同族 > 官职/指挥 > 功绩 > 魅力/统率”的稳定评分。具体权重见 `16-unresolved-rules-fallbacks.md`。
+刘备之死是很好的边界：满足历史事件时自动刘禅 > 刘封；条件不满足而普通死亡时玩家自行选择。
+
+来源：
+- https://gamefaqs.gamespot.com/boards/931351-romance-of-the-three-kingdoms-xi/45353339
+- https://w.atwiki.jp/sangokushi11/pages/1952.html
+
+### 4.3 COM 普通继承
+
+`[COMMON][empirical-high]`
+
+长期玩家实测总结为：
+
+```text
+血缘 > 义兄弟 > 配偶 > 年长者
+```
+
+没有上述关系时，COM 明显按年长者而不是功绩、魅力或官职选人。
+
+当前实现：
+
+```ts
+blood = legal.filter(isBloodRelative)
+if (blood.length) return eldestStable(blood)
+
+sworn = legal.filter(isSwornSibling)
+if (sworn.length) return eldestStable(sworn)
+
+spouse = legal.filter(isSpouse)
+if (spouse.length) return eldestStable(spouse)
+
+return eldestStable(legal)
+```
+
+同关系组内“也按年龄”仍标 compatibility-assumption；同龄用 personId 做稳定 tie-break，仅为工程需要。
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/1952.html
+- https://w.atwiki.jp/sangokushi11/pages/1941.html
+- https://w.atwiki.jp/sangokushi11/pages/2452.html
+- https://w.atwiki.jp/sangokushi11/pages/2356.html
+
+### 4.4 候选过滤
+
+`[partial-known]`
+
+至少排除死亡者、非本势力武将、敌方俘虏。亲族被俘后也会退出候选。
+
+另有 PC 玩家记录：出阵部队中的武将没有出现在后继选择列表；该规则仍需最小存档回归，因此用 profile 开关处理。
+
+### 4.5 继位后的忠诚
+
+不要实现“选完后继者立即随机叛变”。更符合原作记录的结构是：新君主确立后，普通忠诚/相性系统改以新君主为基准，后续若忠诚继续下降才发生下野或被挖。
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/1950.html
+- https://w.atwiki.jp/sangokushi11/pages/2463.html
+
+### 4.6 原程序入口
+
+`[PC-PK1.1][reverse-engineered-partial]`
+
+311MemoryResearch 的“禅让 DEMO”直接调用 `004B9080` 复用原版君主死亡消息/流程，说明原作有集中式后继处理入口；函数体尚未公开文本化。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/新功能[禅让](DEMO).txt
 
 ## 5. 军团 / 委任
 
