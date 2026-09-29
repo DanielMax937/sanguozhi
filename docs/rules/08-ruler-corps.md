@@ -67,6 +67,7 @@ COM/非历史事件情况下的完整排序尚未找到可靠公式。玩家经�
 - **不要随机选继承人**。
 - **不要把“血缘优先”写成 confirmed**。
 - 先以事件覆盖明确继承；普通继承继续列 `13-open-exactness.md` 并建立实测矩阵。
+- 第一版引擎 fallback：玩家非事件死亡时让玩家从合法武将中选择；COM 使用“血缘 > 同族 > 官职/指挥 > 功绩 > 魅力/统率”的稳定评分。具体权重见 `16-unresolved-rules-fallbacks.md`。
 
 ## 5. 军团 / 委任
 
@@ -86,7 +87,7 @@ COM/非历史事件情况下的完整排序尚未找到可靠公式。玩家经�
 
 来源：https://w.atwiki.jp/sangokushi11/pages/74.html
 
-这些是 AI 行为模板，不代表权重公式已逆向；具体权重仍 open。
+这些是 AI 行为模板，不代表权重公式已逆向；第一版委任 AI 使用可解释 utility 权重，见 `16-unresolved-rules-fallbacks.md`。
 
 ## 6. 势力灭亡
 
