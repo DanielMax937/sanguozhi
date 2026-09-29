@@ -10,14 +10,57 @@
 
 ## 2. 登场、寿命与死亡
 
+### 数据与运行时状态
+
+`[PC-PK1.1][reverse-engineered-partial]`
+
+SIRE 开发资料确认武将静态结构同时保存：
+
+- `YearOfBirth`
+- `YearOfDeath`
+- `CauseOfDeath`
+
+并且原程序另外存在：
+
+- `0048A000 GetDeathYear`：取得角色死亡年；
+- `00489160 IsMarkedForDeath`：判断是否已“预定死亡”；
+- 独立的运行时“健康状态”字段。
+
+因此“史实没年”不能直接等价为“本局最终死亡日期”。生命周期应按：
+
+```text
+基础没年 / 死因
+→ 计算死亡阈值
+→ 运行时预定死亡 flag
+→ 健康恶化 / 普通死亡
+```
+
+实现。
+
+逆向来源：
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/数据汇总.md
+
+### 自然死 / 不自然死
+
 `[COMMON][empirical-high]`
 
-- 武将数据含生年、登场年、没年、死因。
-- **自然死**：到没年后会开始多病，通常当年死亡，最长常见约再延 2–3 年。
-- **不自然死**：到没年会先病倒后恢复，并在自然死规则基础上额外存活若干年；延寿与年龄负相关，资料称最大约 15 年但仍标“需验证”。
-- 战死设置另外影响战场死亡，不应与自然死混成同一个 RNG。
+- **自然死**：基础没年后开始容易生病，多数在当年死亡，少数延后约 2–3 年。
+- **不自然死**：基础没年并不是立即进入普通死亡；额外寿命与“没年时年龄”负相关，年轻武将通常延得更久。
+- 旧资料常说额外上限约15年，但实际玩家记录存在 16–20 年级别的最终延寿，因此 15 不能当 actual-death hard cap。
+- 孙策等历史事件直接以“预定死亡年”为触发条件，并可继续延寿；于吉事件胜利后寿命 +20。
+- 从较早存档重跑后，同一武将的实际死亡结果可能改变，所以禁止在 scenario init 时一次性预抽最终死亡旬。
+- 战死设置另外影响战场死亡，不与自然寿命 RNG 混算。
 
-来源：https://w.atwiki.jp/sangokushi11/pages/983.html
+主要来源：
+- https://w.atwiki.jp/sangokushi11/pages/983.html
+- https://w.atwiki.jp/sangokushi11/pages/2527.html
+- https://w.atwiki.jp/sangokushi11/pages/918.html
+- https://www.gamersky.com/handbook/200809/124174_6.shtml
+
+精确 fallback 与剩余缺口见：
+`16-unresolved-rules-fallbacks.md#6-自然死亡精确-rng`
 
 ### 健康能力修正
 
