@@ -430,45 +430,269 @@ Vanilla fallback 被触发时，simulation report 必须输出 `compatibilityAss
 
 ## 4. 攻城统一公式与陷落资源
 
-### 已确认 / 新升级
+### 结论
 
-日文 Wiki 已有大量攻城 golden tests（攻击 80、无太守条件）：普通、弩、火矢、贯矢、乱射、冲车、井阑、木兽、投石、霹雳等的耐久/城兵伤害均可直接做回归测试。
+本项从“几乎全靠 fallback”缩小为三个不同证据等级的问题：
+
+1. **破城资源保留：已反汇编精确解决。**
+2. **攻城伤害：统一调用链和绝大部分倍率已反汇编，耐久基础式只剩两个子函数未公开文本展开。**
+3. **内政设施：保留数量档位已稳定实测，具体抽取哪几座的 RNG 仍未知。**
+
+---
+
+### 4A. 破城资源保留：resolved
+
+`[PC-PK1.1][reverse-engineered]`
+
+311MemoryResearch 的 `函数[破坏内政设施和破城获取资源].txt` 直接整理了原函数 `004B329B`。
+
+精确规则：
+
+```ts
+retainPct = max(5, floor(commanderCharisma / 10))
+
+money  = floor(oldMoney  * retainPct / 100)
+food   = floor(oldFood   * retainPct / 100)
+troops = floor(oldTroops * retainPct / 100)
+
+for (i = 0; i < 12; i++) {
+  equipment[i] =
+    floor(oldEquipment[i] * retainPct / 100)
+}
+```
+
+最低保留率为 **5%**；这是旧攻略公式遗漏的边界。
+
+因此：
+- 魅力 0–59 → 5%
+- 60–69 → 6%
+- 70–79 → 7%
+- 80–89 → 8%
+- 90–99 → 9%
+- 100–109 → 10%
+
+原函数未看到 10% 上限。
+
+若无法取得合法陷城部队/主将，默认仍保留 5%。
+
+来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[破坏内政设施和破城获取资源].txt
+- https://www.gamersky.com/handbook/200703/57518.shtml
+
+---
+
+### 4B. 城兵伤害：统一公式已确认
+
+`[PC-PK1.1][reverse-engineered]`
+
+攻打据点守兵仍调用战斗核心 `005ADC30`，不是单独 lookup。
+
+流程：
+
+```text
+攻击部队
+→ 取得太守防守能力 / 实际可指挥守兵
+→ 005ADC30 基础伤害
+→ 井阑 / 投石 / 据点类型倍率
+→ 会心 / 科技 / 难度
+→ 城兵损失
+```
+
+太守统率影响城兵损失，但不影响耐久，和 Wiki golden tests 一致。
+
+因此 engine 应复用 `calculateCombatCoreDamage()`，不要维护第二套“城兵伤害公式”。
+
+---
+
+### 4C. 耐久伤害：只剩 base 子函数 exactness
+
+`[PC-PK1.1][reverse-engineered-partial]`
+
+已确认调用结构：
+
+```text
+普通兵种/井阑/投石 → 005ADDC0
+冲车/木兽          → 005ADE20
+                    ↓
+目标设施倍率
+                    ↓
+会心 1.15
+                    ↓
+云梯 1.4 / 1.2
+                    ↓
+超级玩家 0.75
+```
+
+基础耐久威力参数：
+
+- 远程/默认普通攻击：5
+- 相邻普通攻击：15
+- 战法：读取战法数据 `+0x2f`
+
+已逆出的外层倍率：
+
+```ts
+critical = 1.15
+ladderNormalArmy = 1.40
+ladderSiegeOrLater = 1.20
+superPlayer = 0.75
+```
+
+普通目标：
+
+```ts
+city       = 0.70
+gate       = 0.60
+port       = 0.80
+formation  = 0.80
+fort       = 0.70
+fortress   = 0.60
+earthWall  = 0.90
+stoneWall  = 0.70
+domestic   = 1.10
+fireTrap   = 1.60
+dike       = 0.70
+```
+
+冲车/木兽会绕过城市、港、关等普通据点的常规耐久衰减分支。
+
+### ordinary durability：高置信 reconstructed
+
+公开复刻项目根据这套逆向资料实现：
+
+```ts
+base =
+  sqrt(attackerTroops)
+  * attackerAttack
+  * sqrt(1 / 1500)
+  * (1 + durabilityPower / 25)
+
+damage =
+  floor(
+    base
+    * targetTypeMultiplier
+    * troopDurabilityMultiplier
+    * techModifier
+    * criticalModifier
+    * difficultyModifier
+  )
+```
+
+它不是官方源码，但两个独立 golden test 可直接反算：
+
+```text
+T=10000, A=80, 城市倍率=.7
+
+相邻普攻 P=15:
+sqrt(10000)*80*sqrt(1/1500)*1.6*.7
+≈ 231
+
+弩远程 P=5:
+sqrt(10000)*80*sqrt(1/1500)*1.2*.7
+≈ 173
+```
+
+与原作实测一字不差。
+
+因此 ordinary durability 可以标 `empirical-high/reconstructed`，不必继续使用武器 lookup。
+
+### ram / wooden-beast fallback
+
+公开文本逆向只显示它们调用 `005ADE20`，没有展开函数体。
+
+第一版引擎采用公开复刻项目的候选结构，但明确标 `provisional-engine-rule`：
+
+```ts
+specialBase =
+    attackerTroops / 25
+  + sqrt(attackerTroops)
+  + min(sqrt(attackerTroops), 40)
+    * attackerAttack
+    * sqrt(1 / 1500)
+    * (1 + durabilityPower / 25)
+    * specialMultipliers
+```
+
+最终参数必须用下面的原作 golden tests 校准，尤其：
+
+- 冲车：1012
+- 木兽：1094
+
+一旦以后把 IDA 中 `005ADE20` 转成文本伪代码，只替换 `specialBase()`。
+
+逆向来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[部队攻击].txt
+
+公开复刻候选：
+- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Object/Troop/Troop.cs
+
+高质量公式研究：
+- https://game.ali213.net/thread-5983352-1-1.html
+
+---
+
+### 4D. 内政设施保留：数量 resolved，选择 RNG open
+
+`[COMMON][empirical-high]`
+
+数量规则：
+
+```ts
+keepCount =
+  charisma >= 100 ? 5 :
+  charisma >= 80  ? 4 :
+  charisma >= 60  ? 3 :
+  charisma >= 40  ? 2 : 1
+```
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/1598.html
+- https://w.atwiki.jp/sangokushi11/pages/2469.html
+
+没有找到原版“具体哪几座留下”的排序/RNG函数。
+
+fallback：
+
+```ts
+const retained =
+  seededSampleWithoutReplacement(
+    existingDomesticFacilities,
+    min(keepCount, existingDomesticFacilities.length)
+  )
+```
+
+不要按“最贵/等级最高/最靠近造币谷仓”做人为偏置；现有玩家记录只支持“数量由魅力决定，具体项目不可控”。
+
+---
+
+### 4E. Golden tests
+
+日文 Wiki 的攻城表继续保留，但角色从“运行时规则”改为“回归测试”。
+
+核心样本（攻击80、无太守）：
+
+```text
+直接攻击  耐久231  城兵708
+弩普通    耐久173  城兵708
+冲车      耐久1012 城兵708
+井阑      耐久260  城兵2431
+木兽      耐久1094 城兵708
+投石      耐久665  城兵1621
+```
 
 来源：https://w.atwiki.jp/sangokushi11/pages/92.html
 
-**攻陷后物资保留找到了明确实战公式：**
-
-```text
-保留物资 = 攻陷前物资 / 100 × floor(攻陷部队主将魅力 / 10)
-```
-
-即主将魅力 100 时约保留 10%，魅力 90–99 时约 9%。
-
-来源：
-- https://www.gamersky.com/handbook/200703/57518.shtml
-- https://3g.ali213.net/gl/html/6354.html
-
-设施保留数量仍按现有实测魅力档位。
-
-### 仍没找到
-
-未找到一个能统一复算全部攻城方式的底层闭式。
-
-### provisional-engine-rule
-
-**不要强行拟合一个统一公式。** 第一版引擎使用版本化 attack-profile / lookup table：
-
-```ts
-siegeDamage = goldenTable[weaponOrTactic]
-              * attackPanelCorrection
-              * techModifier
-              * difficultyModifier
-              * governorDefenseModifier
-```
-
-先以 Wiki golden table 为 80 攻击面板锚点，通过少量回归再拟合 `attackPanelCorrection`。这比编一个错误的统一公式更忠于原作数据。
-
 ---
+
+### 剩余 exactness
+
+第4项现在只剩：
+
+1. `005ADE20` 冲车/木兽基础耐久函数的逐指令闭式；
+2. 内政设施具体保留对象的 RNG/排序；
+3. Vanilla EXE 与 PC-PK 这套伤害/资源代码是否逐字一致。
+
+以上三点不能阻止引擎运行，而且都已有明确可替换接口。
 
 ## 5. 火焰持续与“自然蔓延”
 
