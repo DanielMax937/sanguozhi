@@ -2026,30 +2026,458 @@ vanillaGenericDuelCore.status =
 
 ## 9. 舌战普通牌心理伤害
 
-### 已确认
+### 结论：普通话题牌心理伤害公式已恢复，不再需要 provisional fallback
 
-手牌数、先后手、话题、再考、足场、话术以及四性格愤激机制已经确认。
+`[PC-PK-oriented][reverse-engineered]`
 
-来源：https://w.atwiki.jp/sangokushi11/pages/141.html
+公开项目 `tankyc/sango_infinity` 的 `Debate.cs` 文件头明确写明：
 
-### 没找到
-
-没有找到普通数字牌与话术的精确心理伤害闭式。
-
-### provisional-engine-rule
-
-```ts
-intRatio = clamp((attackerINT + 50) / (defenderINT + 50), 0.70, 1.40)
-
-ordinaryBase = 10 + 2 * max(cardAdvantage, 0)
-psychDamage = round(ordinaryBase * intRatio)
+```text
+舌战(Debate)系统主体
+由 s11_sys_debate.h + s11_sys_debate.cpp 翻译而来
 ```
 
-- 无视/诡辩/镇静优先按机制改变本回合，而不是都当成“伤害牌”。
-- 大喝等特殊牌的 base 值单独配置，不埋进代码。
-- 猪突愤激可额外加入武力项，但仍标 fallback。
+并保留原 C++ 数据结构、枚举语义和原数据地址注释，例如：
+
+- `8b3380`：话题牌等级伤害系数；
+- `8b338c`：话题牌愤怒伤害系数；
+- `5201c0`：舌战初始化入口标注。
+
+和单挑一样，该项目后续加入了 `DebatePersonBehaviours` 数据驱动人物 hook。下面只取 hook 之前的**通用核心**，不把后来新增的人物 MOD 修正冒充原作。
+
+来源：
+- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
+- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs
 
 ---
+
+### 9A. 心理槽内部值是 1000
+
+通用常量：
+
+```ts
+MaxHP = 1000
+MinHP = -100
+MaxStress = 100
+```
+
+所以画面中的“心理槽”不是按 0～100 的整数伤害结算；普通一张大话题牌造成 150～300 左右的内部伤害是正常量级。
+
+当心理值每累计减少约 250，足场崩坏一级：
+
+```ts
+crumbledLevel =
+  clamp(trunc((1000 - hp) / 250), 0, 3)
+```
+
+这也解释了“心理槽每掉约1/4，足场崩一次”的攻略观察。
+
+---
+
+### 9B. 双方智力先生成各自固定的舌战 attack
+
+设：
+
+- `I` = 自己智力
+- `J` = 对手智力
+
+进入舌战时：
+
+```ts
+attack =
+  100
+  + trunc(
+      40 * (I - J)
+      / (131 - I)
+    )
+```
+
+原代码注释范围约为 70～227。
+
+几个重要性质：
+
+1. **双方同智力时，不论是 30/30 还是 100/100，attack 都是 100。**
+2. 智力差相同但绝对智力不同，attack 不一定相同，因为分母是 `131-I`。
+3. 高智力方的优势是非线性的。
+
+示例：
+
+```text
+I=80, J=80  → attack=100
+I=100,J=100 → attack=100
+I=100,J=80  → attack=125
+I=80, J=100 → attack=85
+```
+
+注意 `attack` 是在舌战初始化时基于双方智力算出的运行时字段，普通牌伤害直接读取它。
+
+---
+
+### 9C. 牌力只决定“谁赢”，牌差不进入伤害
+
+普通话题牌的比较 power：
+
+```ts
+power =
+  1 + cardLevel // 小/中/大 => 1/2/3
+
+if (cardTopic === currentTopic)
+  power += 10
+```
+
+所以：
+
+```text
+非当前话题：小1 / 中2 / 大3
+当前话题：  小11 / 中12 / 大13
+```
+
+因此任何当前话题的小牌都压过任何非当前话题的大牌。
+
+特殊牌 power：
+
+```text
+无视   120
+大喝   110
+诡辩    20
+普通牌 1～13
+镇静/激昂等 0
+```
+
+这与官方/同期攻略长期总结的优先级：
+
+`无视 > 大喝 > 诡辩 > 话题牌 > 镇静/激昂`
+
+一致。
+
+关键点：
+
+> **赢了多少并不会额外增加心理伤害。**
+
+例如当前话题“大”13 打败非当前话题“小”1，并不会因为“差12点”再加伤害。伤害只看胜者自己的 attack、自己的牌等级、自己的话题匹配和愤激状态。
+
+所以旧 fallback 中的：
+
+```ts
+ordinaryBase =
+  10 + 2 * max(cardAdvantage, 0)
+```
+
+应删除。
+
+机制交叉：
+- https://www.4gamer.net/games/024/G002453/20060210150000/
+- https://www.gamersky.com/handbook/200604/22092.shtml
+- https://w.atwiki.jp/sangokushi11/pages/141.html
+
+---
+
+### 9D. 普通话题牌的精确心理伤害
+
+先定义牌等级系数：
+
+```ts
+levelCoef = {
+  small:  10,
+  medium: 15,
+  large:  20
+}
+```
+
+原数据地址注释：`8b3380`。
+
+普通、未愤激状态下的话题系数：
+
+```ts
+topicCoef =
+  cardTopic === currentTopic
+    ? 10
+    : 6
+```
+
+正常 `angerCoef = 10`。
+
+每次实际攻击还有一个很小的独立随机扰动：
+
+```ts
+roll = randInt(0, 4)
+```
+
+最终：
+
+```ts
+hpDamage =
+  trunc(
+    (attack + roll)
+    * angerCoef
+    * levelCoef
+    * topicCoef
+    / 1000
+  )
+```
+
+因此非愤激的普通牌可简写为：
+
+```ts
+hpDamage =
+  trunc(
+    (attack + randInt(0,4))
+    * 10
+    * levelCoef
+    * (matchesTopic ? 10 : 6)
+    / 1000
+  )
+```
+
+必须保留整数运算口径。
+
+---
+
+### 9E. 同智力 golden table
+
+双方智力相同：
+
+```ts
+attack = 100
+roll = 0..4
+```
+
+得到：
+
+| 普通话题牌 | 当前话题匹配 | 非当前话题 |
+|---|---:|---:|
+| 小 | 100～104 | 60～62 |
+| 中 | 150～156 | 90～93 |
+| 大 | 200～208 | 120～124 |
+
+这张表非常适合作为 engine golden tests。
+
+例如同智力，“当前话题小牌”虽然能在牌力上打赢“非当前话题大牌”，但前者造成约100伤害；如果后者在别的回合获胜，它自身的非当前大牌伤害约120。**比较优先级和伤害强度是两套不同计算。**
+
+---
+
+### 9F. 愤怒值也有精确数值
+
+普通话题牌命中时，败方同时增加：
+
+```ts
+stressDamage = {
+  small:  10,
+  medium: 15,
+  large:  20
+}
+```
+
+原数据地址注释：`8b338c`。
+
+平局：
+
+```ts
+both.stress += 15
+```
+
+大喝：
+
+```ts
+stressDamage = 15
+```
+
+所以心理伤害和怒气增加虽然都与牌大小相关，但不是同一个数值字段。
+
+---
+
+### 9G. 大喝伤害也可直接由同一函数解释
+
+大喝使用：
+
+```ts
+topicCoef = 12
+levelCoef = 15
+angerCoef = 10
+```
+
+所以：
+
+```ts
+shoutDamage =
+  trunc(
+    (attack + randInt(0,4))
+    * 10 * 15 * 12
+    / 1000
+  )
+```
+
+同智力时约：
+
+```text
+180～187
+```
+
+因此攻略里“大喝攻击力固定”的准确含义更接近：
+
+> 它不使用普通牌的小/中/大等级，而使用固定 `levelCoef=15, topicCoef=12`；
+
+但最终心理伤害仍会受双方智力生成的 attack 和 0～4 随机扰动影响，并不是所有武将永远扣完全相同的 HP。
+
+---
+
+### 9H. 愤激状态对普通伤害的精确修正
+
+原运行时 `angerTimer`：
+
+```ts
+Timid / Reckless : 1
+Calm / Bold      : 4
+```
+
+玩家观察到的“约3回合”与内部 timer 在触发回合末也会递减有关。
+
+对 `CalcHpDamage()`：
+
+#### 小心 / 刚胆
+
+愤激时：
+
+```ts
+topicCoef = 10
+angerCoef = 10
+```
+
+即普通话题牌不再吃“非当前话题 ×0.6”的伤害惩罚。
+
+刚胆的牌力在愤激时还被强制设为：
+
+```ts
+power = 100
+```
+
+因此几乎所有普通/诡辩话题都压过，只低于无视120、大喝110。
+
+小心则进入连续出话题牌流程；每张仍调用同一个 `CalcHpDamage()`。
+
+#### 冷静
+
+愤激时：
+
+```ts
+angerCoef = 15
+topicCoef = 6
+```
+
+即心理伤害基础乘数相对普通非当前牌提高 50%。同时每回合恢复再考，且有 40% 机会把当前话题“大”牌塞入手牌。
+
+#### 猪突
+
+不是普通牌倍率，而是在进入愤激时直接：
+
+```ts
+hpDamage = 200 + martial
+stressDamage = trunc(hpDamage / 15)
+```
+
+这一条可以把旧文档的“伤害受武力影响”升级成精确式。
+
+---
+
+### 9I. 手牌数量旧结论无需推翻，但要说明内部口径
+
+原代码：
+
+```ts
+maxCardCount =
+  I < 70 ? 4 :
+  I < 80 ? 5 :
+  I < 90 ? 6 : 7
+```
+
+其中 `card[0]` 固定留给“再考”。
+
+所以真正可出的普通/话术手牌仍是：
+
+```text
+智力 <70：3张
+70～79：4张
+80～89：5张
+>=90：6张
+```
+
+这正好解释了为什么攻略写 3～6，而内部数组却是 4～7。
+
+---
+
+### 9J. 原 fallback 删除
+
+旧：
+
+```ts
+intRatio =
+  clamp((attackerINT + 50)/(defenderINT + 50), 0.70, 1.40)
+
+ordinaryBase =
+  10 + 2 * max(cardAdvantage, 0)
+
+psychDamage =
+  round(ordinaryBase * intRatio)
+```
+
+全部删除。
+
+引擎改为：
+
+```ts
+debateAttack =
+  calcOriginalDebateAttack(myINT, opponentINT)
+
+winner =
+  compareOriginalCardPower(currentTopic, myCard, opponentCard)
+
+if (winner) {
+  hpDamage =
+    calcOriginalDebateHpDamage(
+      debateAttack,
+      myCard,
+      currentTopic,
+      angerState,
+      rng
+    )
+}
+```
+
+---
+
+### 9K. 版本边界
+
+当前这套 C++ 移植与项目数据导出明确面向 `San11pk`，因此：
+
+```ts
+pcPkDebateCore.status = "reverse-engineered"
+vanillaDebateCore.status =
+  "compatibility-assumption"
+```
+
+同期 2006 Vanilla 攻略已经确认：
+
+- 话题匹配优先；
+- 小/中/大；
+- 无视 > 大喝 > 诡辩 > 话题牌；
+- 心理槽 / 愤怒槽；
+- 四种性格愤激。
+
+所以 Vanilla 机制层高度一致；但在没有 Vanilla EXE 回归前，不把 `131`、`40`、`8b3380` 等 PK 连续常量跨版本标成源码 confirmed。
+
+---
+
+### 剩余 exactness
+
+第 9 项“普通牌心理伤害公式”本身已经解决。
+
+后续舌战仍可单独继续审计：
+
+1. 特定武将的 `DebatePersonBehaviours` 是否对应原版隐藏硬编码；
+2. 不同平台的手牌数量差异；
+3. Vanilla 二进制连续常量；
+4. 舌战胜利后的追击/留情、负伤等结算边界。
+
 
 ## 10. 非骑战法来源的负伤 / 战死概率
 
