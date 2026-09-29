@@ -150,3 +150,41 @@
 - 解毒：毒泉无伤。
 
 来源：https://w.atwiki.jp/sangokushi11/pages/13.html
+
+
+## 第五轮补证：征兵函数直接逆向
+
+`[PC-PK1.1][confirmed-by-disassembly]`
+
+通过 311MemoryResearch 的原游戏函数逆向，征兵数量与治安下降已经从 open 移除。
+
+精确核心：
+
+```
+C = 最多3名执行者魅力和
+O = 当前治安
+F = 1.5 if 名声 else 1.0
+B = 1.0 / 1.2 / 1.5  // 兵舍Lv1/2/3
+
+R = floor(floor((1000 + floor((O+20)*C/20)) * F) * B)
+
+超级AI: R *= 2
+兵临城下: R = floor(R/2)
+兵力上限: R = min(R, capacity-current)
+
+orderLoss = floor(actualRecruited / (C+100))
+```
+
+实战交叉：
+- 治安100、魅力100×3、Lv3：4200兵、掉10治安。
+- 加名声：6300兵、掉15治安。
+
+逆向：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-内政01-计算征兵数量.txt
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-内政02-执行征兵.txt
+
+实战交叉：
+- https://w.atwiki.jp/sangokushi11/pages/1937.html
+- https://w.atwiki.jp/sangokushi11/pages/1190.html
+
+Vanilla 未做二进制对比，因此只把 PK1.1 升到 confirmed-by-disassembly；Vanilla 固定 B=1.0，暂列 empirical-high。
