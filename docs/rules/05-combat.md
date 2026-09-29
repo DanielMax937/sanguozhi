@@ -224,8 +224,107 @@ damage = INT(
 
 来源：https://w.atwiki.jp/sangokushi11/pages/92.html
 
-## 10. 击破后的武将
+## 10. 击破后的武将：俘虏率
 
-可能安全撤回、负伤、战死或被俘。捕缚、强运、名马、包围、戟兵等会改变结果。
+`[PC-PK中心][empirical-high]`
 
-精确概率仍不能升级为 confirmed。
+在先处理血路、强运、名马等“不能被俘/可脱出”条件后，普通野战击破的捕获率可按逆向公式：
+
+```
+A = (120 - max(targetMartial, targetIntelligence)) / 3
+B = surroundingEnemyUnits              // 1..6
+if targetHasIronWall: B = 1
+C = 2 if difficulty == SUPER else 1
+D = 1.5 if terrain in {湿地, 毒泉} else 1
+E = 100 if attackerHasCaptureSkill else 0
+F = 30 if finishingHitIsHalberdTactic else 0
+
+captureRate = A * (B / C) * D + E + F
+```
+
+按概率意义截到 0–100%。
+
+关键结论：
+
+- 包围数最多计 6。
+- 铁壁使包围数按 1 计算。
+- 超级难度把包围贡献减半。
+- 湿地/毒泉 ×1.5。
+- 捕缚直接 +100。
+- **任意戟兵战法**作为最后一击均 +30；熊手并不比横扫/旋风更容易抓。
+- 战法是否会心**不影响**俘虏率。
+
+例：上级、六队包围诸葛亮（武/智最高100）并以戟战法击破：
+`(120-100)/3 × 6 + 30 = 70%`。
+
+来源（逆向公式镜像）：
+https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html
+
+> 该公式来自底层逆向资料，可靠度远高于旧“30%/40%/70%”粗估；但 Vanilla/主机版是否完全一致仍需版本回归，因此标 `empirical-high` 而非全平台 confirmed。
+
+## 11. 战法会心率
+
+`[PC-PK中心][empirical-high]`
+
+若有对应必会心特技则 100%；否则：
+
+`criticalRate = martialBonus + aptitudeBonus + relationshipBonus`
+
+武力：
+- ≤60：0%
+- 61–79：+1%
+- ≥80：+2%
+
+适性：
+- C 0%
+- B +1%
+- A +2%
+- S +3%
+
+每名副将分别计算关系：
+- 亲爱主将 +2%
+- 义兄弟/配偶 +4%
+- 嫌恶主将 -5%
+
+两个副将效果相加。
+
+来源：https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html
+交叉核对：日文 Wiki 明确会心率受适性与同队人际关系影响
+https://w.atwiki.jp/sangokushi11/pages/85.html
+
+## 12. 螺旋突混乱
+
+`[PC-PK中心][empirical-high]`
+
+- 非会心且战法成功：实际约 **15%** 造成 1 旬混乱。
+- 会心：**100%** 混乱；持续 1 或 2 旬，各约一半。
+
+逆向说明：普通成功先以约30%进入眩晕判定，其中一半实际持续0旬，因此最终有效约15%。
+
+来源：https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html
+
+## 13. 骑兵战法战死率
+
+`[PC-PK中心][empirical-high]`
+
+只有突击/突进可在战法中直接“突死”武将；突破不会。
+
+```
+deathRate = A + B + C + D + E
+```
+
+- A：突击 0，突进 +2
+- B：高战死设定 +2，普通 0；无战死设定直接禁止
+- C：会心 +2，否则 0
+- D：目标性格 小心 -1 / 冷静0 / 刚胆0 / 莽撞 +1
+- E：比较攻击方部队 `max(统率,武力)` 与目标武将 `max(统率,武力)`
+  - 高 ≥12：+1
+  - 高 7–11：0
+  - 高 1–6：-1
+  - 不高于目标：-3
+
+强运、护卫等保护先行判定。结果按概率下限 0 处理。
+
+来源：https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html
+
+这使“战死率 2–5%”的旧粗略区间失效；后续应按具体死亡来源分别建模。
