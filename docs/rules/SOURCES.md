@@ -89,6 +89,10 @@
   https://w.atwiki.jp/sangokushi11/pages/942.html
 - 3DM：SIRE v1.26 参数说明（换季治安上限、政令整备概率）
   https://dl.3dmgame.com/patch/26091.html
+- 311MemoryResearch：季初城市治安下降原函数 `0058D6D0`
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动05-城市治安下降.txt
+- 311SireCustomizedPackageDev：`GetRandomX` / `ProbabilityCheck` 地址与语义
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
 - 轩辕春秋：San11Sire 修改器讨论
   https://www.xycq.org.cn/forum/viewthread.php?tid=209820
 - 社区长期整理：PK内政技巧概率
