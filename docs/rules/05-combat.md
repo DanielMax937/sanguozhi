@@ -116,13 +116,174 @@ damage = INT(
 
 ## 7. 攻城与陷落
 
-`[COMMON][confirmed]` 据点有驻兵和耐久；任一归零都可导致陷落。
+`[COMMON][confirmed mechanism]` 据点有驻兵和耐久；任一归零都可导致陷落。
 
-### 内政设施保留
+### 7.1 城兵伤害：与野战共用核心伤害函数
+
+`[PC-PK1.1][reverse-engineered]`
+
+311MemoryResearch 的 `函数[部队攻击].txt` 显示，对城市/港/关的**守兵伤害**并不是另一套独立 lookup：
+
+1. 先读取据点太守相关防御能力与实际可指挥守兵；
+2. 调用与野战相同的核心伤害函数 `005ADC30`；
+3. 再根据攻击兵器、据点类型、科技、会心、难度等做倍率修正。
+
+因此本文件第 4 节的战斗伤害核心式同样是攻城守兵伤害的底层。
+
+特殊分支包括：
+
+- 井阑：对据点守兵有专用伤害倍率；
+- 投石：对据点守兵有专用伤害倍率；
+- 普通兵种攻击城市/港/关分别应用据点类型倍率；
+- 超级难度下玩家造成的非火伤仍 ×0.75。
+
+太守统率影响守兵损失，但**不影响耐久损失**，与日文 Wiki 的实测完全一致。
+
+逆向来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[部队攻击].txt
+
+交叉验证：
+- https://w.atwiki.jp/sangokushi11/pages/92.html
+
+### 7.2 耐久伤害：统一调用链已确认
+
+`[PC-PK1.1][reverse-engineered-partial]`
+
+原程序不是“每种攻城方式一张伤害表”，而是统一走耐久伤害分支：
+
+- 普通兵种、井阑、投石等 → `005ADDC0`
+- 冲车、木兽 → 专用 `005ADE20`
+- 然后再统一叠加目标类型、会心、云梯、难度等修正
+
+反汇编还确认：
+
+- 无战法/远程普通攻击的基础耐久威力参数先取 **5**；
+- 相邻普通攻击会改成 **15**；
+- 有战法时从战法数据 `+0x2f` 读取其耐久威力参数；
+- 会心对建筑耐久 ×**1.15**；
+- 技巧“云梯”：
+  - 剑/枪/戟/弩/骑等普通陆军对设施伤害 ×**1.4**
+  - 兵器等后续兵科 ×**1.2**
+- 超级难度玩家方耐久伤害 ×**0.75**。
+
+普通目标类型的耐久倍率也能从跳转表直接还原：
+
+| 目标 | 耐久倍率 |
+|---|---:|
+| 城市 | 0.7 |
+| 关所 | 0.6 |
+| 港 | 0.8 |
+| 阵 | 0.8 |
+| 砦 | 0.7 |
+| 城塞 | 0.6 |
+| 土垒 | 0.9 |
+| 石壁 | 0.7 |
+| 内政设施 | 1.1 |
+| 火种/火球等火罠 | 1.6 |
+| 堤防 | 0.7 |
+
+其中冲车/木兽对城市、关所、港等普通据点会跳过普通兵种的这层据点耐久衰减，这也是它们耐久破坏极高的重要原因。
+
+公开的现代复刻项目 `tankyc/sango_infinity` 根据相同逆向资料，把普通耐久伤害还原为以下形式：
+
+```ts
+ordinaryDurability =
+  floor(
+    sqrt(attackerTroops)
+    * attackerAttack
+    * sqrt(1 / 1500)
+    * (1 + durabilityPower / 25)
+    * targetTypeMultiplier
+    * troopDurabilityMultiplier
+    * extraModifiers
+  )
+```
+
+这个结构能直接复算两个很强的原作锚点（10000兵、攻击80、城市）：
+
+- 相邻普通攻击：`durabilityPower=15` → **231**
+- 弩远程普通攻击：`durabilityPower=5` → **173**
+
+与日文 Wiki 实测完全一致。
+
+不过，公开文本版 311MemoryResearch **没有展开 `005ADDC0` / `005ADE20` 两个函数体本身**；IDA 数据库里有完整函数，但当前没有可直接引用的文本反编译。因此：
+
+- “统一调用链、参数、外层倍率”可标 `reverse-engineered`；
+- 普通耐久闭式可标 `empirical-high/reconstructed`；
+- 冲车/木兽的内部基础式仍保留一个很小的 exactness 缺口。
+
+不得再把旧的“按武器 lookup table 直接给伤害”当作主引擎规则；golden table 改为回归测试。
+
+逆向来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[部队攻击].txt
+- https://github.com/sjn4048/311MemoryResearch/tree/master/IDA%20Related
+
+公开复刻交叉验证：
+- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Object/Troop/Troop.cs
+
+研究公式：
+- https://game.ali213.net/thread-5983352-1-1.html
+
+### 7.3 攻陷后物资保留：反汇编精确公式
+
+`[PC-PK1.1][reverse-engineered]`
+
+这一项已经不需要 empirical fallback。
+
+原函数 `004B329B`（311MemoryResearch 标注为“破城保留资源”）先设置默认保留率 **5%**，再读取陷城部队主将魅力：
+
+```ts
+retainPct = max(5, floor(commanderCharisma / 10))
+```
+
+然后对资源逐项做整数除法：
+
+```ts
+newMoney  = floor(oldMoney  * retainPct / 100)
+newFood   = floor(oldFood   * retainPct / 100)
+newTroops = floor(oldTroops * retainPct / 100)
+
+for (const equipment of all12EquipmentSlots) {
+  equipment.amount =
+    floor(equipment.oldAmount * retainPct / 100)
+}
+```
+
+也就是说，**金、粮、兵、12类兵装全部使用同一个保留百分比**。
+
+魅力档位实际为：
+
+| 主将魅力 | 保留率 |
+|---:|---:|
+| 0–59 | 5% |
+| 60–69 | 6% |
+| 70–79 | 7% |
+| 80–89 | 8% |
+| 90–99 | 9% |
+| 100–109 | 10% |
+
+函数本身没有看到“10%封顶”；若能力 getter 允许魅力超过109，则该式会继续上升。
+
+如果无法取得有效的陷城部队/主将指针，则保留率维持默认 **5%**。
+
+这修正了旧攻略式：
+
+`攻陷前物资 / 100 × floor(主将魅力/10)`
+
+旧式在低魅力时漏掉了原程序的 **最低5%保护**。
+
+逆向来源：
+- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[破坏内政设施和破城获取资源].txt
+
+早期玩家实测（高魅力区间与逆向式一致）：
+- https://www.gamersky.com/handbook/200703/57518.shtml
+- https://3g.ali213.net/gl/html/6354.html
+
+### 7.4 内政设施保留数
 
 `[COMMON][empirical-high]`
 
-攻城主将魅力决定陷落后保留的内政设施数量：
+攻陷部队主将魅力决定陷落后最多保留的内政设施数量：
 
 - 魅力 ≥100：5
 - 80–99：4
@@ -130,31 +291,31 @@ damage = INT(
 - 40–59：2
 - ≤39：1
 
-保留哪几座设施仍具有随机性。
+日文 Wiki 明确给出这五档；旧 2ch 讨论也确认魅力100时上限为5，而且玩家不能选择具体保留哪座。
 
-来源：https://w.atwiki.jp/sangokushi11/pages/1598.html
+当前**尚未找到“从现有设施集合中具体抽哪几座”的原版 RNG/排序函数**。
 
-攻城耐久伤害的**统一闭式**仍 open，但已有高质量回归基准。
+引擎 fallback：
 
-### 攻陷后物资保留
+```ts
+keepCount = min(existingFacilities.length,
+  charisma >= 100 ? 5 :
+  charisma >= 80  ? 4 :
+  charisma >= 60  ? 3 :
+  charisma >= 40  ? 2 : 1
+)
 
-`[PC-PK][empirical-high]`
-
-游民星空 190 刘虞开局的实测攻略给出：
-
-```text
-保留物资 = 攻陷前物资 / 100 × floor(攻陷部队主将魅力 / 10)
+retainedFacilities =
+  seededSampleWithoutReplacement(existingFacilities, keepCount)
 ```
 
-即魅力100约保留10%，90–99约9%。这解释了为什么高魅力主将补刀仍会丢失绝大部分金粮物资。
+这里必须用可回放 seed；以后若逆出原作选择算法，只替换 `seededSampleWithoutReplacement()`。
 
 来源：
-- https://www.gamersky.com/handbook/200703/57518.shtml
-- https://3g.ali213.net/gl/html/6354.html
+- https://w.atwiki.jp/sangokushi11/pages/1598.html
+- https://w.atwiki.jp/sangokushi11/pages/2469.html
 
-具体到兵装/兵器/舰船的小数量整数取整边界仍需 golden test；引擎应保存每个资源类型的 round policy。
-
-### 攻城回归基准
+### 7.5 攻城 golden tests
 
 `[PC-PK][empirical-high]`
 
@@ -179,11 +340,11 @@ damage = INT(
 | 业火球 | 689 | 0 | - |
 | 火神业火球 | 1302 | 0 | - |
 
-这张表应作为 engine golden test；在通用耐久公式完全逆向前，不再使用“冲车300–800、投石200–500”这类粗估范围。
+这张表现在作为**公式回归测试**，不再作为主运行时 lookup。
 
 来源：https://w.atwiki.jp/sangokushi11/pages/92.html
 
-### 捕缚在攻城中的 Vanilla / PK 差异
+### 7.6 捕缚在攻城中的 Vanilla / PK 差异
 
 `[VANILLA][confirmed]` 捕缚持有部队即便用投石、弩等间接攻击或火球令据点陷落，也可触发捕缚。
 
