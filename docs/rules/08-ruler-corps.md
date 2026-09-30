@@ -132,6 +132,23 @@ return eldestStable(legal)
 来源：
 - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/新功能[禅让](DEMO).txt
 
+## 4.7 都督 / 太守 / 军师的层级关系
+
+`[COMMON/PK][reverse-engineered structure + empirical-high selection]`
+
+三个角色属于不同层级：
+
+```text
+势力：AdvisorID      -> 军师
+军团：CorpsLeaderID  -> 都督/军团长
+据点：PrefectID      -> 太守
+```
+
+第一军团由君主承担 leader 语义；委任军团使用各自都督。C9 行动力恢复中，第一军团使用君主 `max(统率,魅力)`，委任军团用都督替换君主；军师倍率则因 `AdvisorID` 属于势力而被所有军团共享。
+
+太守/都督正常玩法不能直接点名任命；自动选择以可指挥兵数为主、同值统率优先，并存在有官职者相对无官职者的优先边界。军师则可直接任免，官方门槛智力>=70。
+
+不要把“太守/都督自动任命”与军团委任 AI 混成同一个 selector；前者是岗位归属，后者是已任命军团的行动决策。
 ## 5. 军团 / 委任
 
 ### 5.1 AI 结构
