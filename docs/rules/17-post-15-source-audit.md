@@ -27,6 +27,7 @@
 | C5 | PK十设施 | 十设施基础数据与效果已分项核；练兵所舰船工期、符节台+2副作用、军事府实际AP覆盖、人才府/计略府原地址均已锁 | PC-PK1.1 reverse-engineered + confirmed-data | ✅ |
 | C6 | PK吸收合并 | 五类设施、独立ID升级链、合法组合、城市2格敌军禁用、10AP+100金、10/20日边界与合并中前一级效果已核 | official-confirmed + reverse-engineered-structure + empirical-high timing | ✅ |
 | C7 | 各设施精确开发日数 | 综合政治、全门槛表与统一耐久进度模型已核；全表可由25%初始耐久+每旬floor(1.5P)逐格精确重建，原函数体仍open | empirical-exact table reconstruction + reverse-engineered-structure | ✅ |
+| C8 | 商人 / 粮食交易 | 20AP、都市2格敌军禁用、每城每旬一次、TradePrice/HasMerchant状态、买粮无损/卖粮×0.8及政治非线性交易效果已核；闭式仍open | official-confirmed + empirical-high + reverse-engineered-structure | ✅ |
 
 ## A1 关键纠错
 
@@ -774,3 +775,55 @@ days = turns * 10
 311MemoryResearch 目前只定位到内政建设执行路径 `005BC4C1`，没有公开完整开发日数函数体。因此本式标 `empirical-exact table reconstruction`，不标 `reverse-engineered function`。
 
 下一项：C8 商人 / 粮食交易。
+
+## C8 关键结论
+
+商人命令已经从“只有买卖公式”补成完整动作边界：
+
+```text
+都市命令
+AP 20
+固定费用 0
+即时结算
+城市周围2格有敌军 -> 禁止
+每都市每旬最多1次
+```
+
+结构证据：
+
+```text
+city +0x7C TradePrice
+city +0x7D HasMerchant
+city +0xA4 CityActions
+  bit1 = 已商人
+```
+
+交易主体公式：
+
+```ts
+buyFood = gold * price * b
+sellGold = food / price * b * 0.8
+```
+
+其中 `b = tradeEffect(politics)`。
+
+已锁定：
+
+- 政治50 -> b=100%；
+- 买粮没有固定手续费；
+- 卖粮固定损失20%；
+- UI显示百分比会丢失真实小数精度；
+- 政治97/98/99实际效果约113.3154%/113.6374%/113.9612%；
+- 同价往返盈利条件 `0.8*b²>1`，边界约政治93；
+- 商人 +5 政治经验，36旬/年与“单城年最大180”再次验证每旬一次。
+
+明确未锁：
+
+- `tradeEffect(politics)` 原始闭式；
+- 整数截断完整顺序；
+- 商人随机出现/消失概率；
+- 每月粮价的精确转移分布。
+
+SIRE 后来的“交易优势”“商贸城市25%商人出现”等属于扩展参数，不作为原作证据。
+
+下一项：C9 行动力。
