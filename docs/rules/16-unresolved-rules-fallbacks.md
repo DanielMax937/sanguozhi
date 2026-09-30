@@ -2683,7 +2683,9 @@ resolveOrdinaryDestruction() {
 
 详见 `31-non-cavalry-casualty-sources.md`。
 
-## 11. 毒泉 / 栈道 / 落石伤害
+## 11. 毒泉 / 栈道 / 落石伤害（E17 已闭合主问题）
+
+E17 专项证据：`32-terrain-hazard-damage.md`；结构化数据：`../sources/terrain-hazard-damage.json`。
 
 ### 结论：PK1.1 的核心伤害参数已恢复；旧 fallback 全部撤回
 
