@@ -126,7 +126,14 @@ c：
 
 前三个 Vanilla profile 尚无逐版本完整常量表。为了让模拟运行，可 fallback 到 PK 后期公式，但必须标记 `compatibilityAssumption=true`；不得声称 Vanilla 1.0/1.1/1.2 与 PK 完全一致。
 
-PK“外交府”只降低外交行动力与亲善费用，不加入外交成功率乘数。
+PK“外交府”规则已收紧为 `[PC-PK1.1]`：
+
+- 原函数已定位为 `005BD040 GetDiplomacyActionPointCost`；
+- 从**拥有外交府的执行城市**发起外交时，外交 AP 消耗减半；
+- “亲善”的金钱费用减半；
+- 没有证据表明外交府提高亲善增长量、同盟/停战/交换/劝降成功率或论客触发率，因此不加入任何成功率乘数。
+
+作用域是发令城市，不是势力全局。
 
 版本边界来源：
 - KOEI Vanilla Ver.1.1：https://www.gamecity.ne.jp/regist_c/user/san11/san11_update.htm
