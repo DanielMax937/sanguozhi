@@ -681,7 +681,7 @@ for each category:
 - 副将即使统武很差，只要目标兵科适性高，就能直接把该兵科适性抬高；
 - 即使队内存在嫌恶，副将的最高适性仍然会被使用。
 
-这一点与日文/中文长期实机结论完全一致。citeturn712966search0turn712966search4
+这一点与日文/中文长期实机结论完全一致。
 
 ### 5.7 适性倍率：C/B/A/S = 0.7/0.8/0.9/1.0
 
@@ -904,7 +904,7 @@ construction =
 - 311MemoryResearch：`内存资料/地址资料.txt`；
 - 311SireCustomizedPackageDev：`00496570 GetTroopCapabilities`、`00495AB0`、`00495B90` 及人物属性 helper；
 - 日文 Wiki《検証》：副将关系1/2、1/3、1/4与适性实测；
-- 日文 Wiki FAQ / 中文早期实测：义兄弟/夫妻取最高、智力取最高。citeturn712966search0turn712966search2turn712966search4
+- 日文 Wiki FAQ / 中文早期实测：义兄弟/夫妻取最高、智力取最高。
 
 ## 6. 训练与气力
 
