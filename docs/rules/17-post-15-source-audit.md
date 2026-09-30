@@ -16,7 +16,8 @@
 | B3 | 地形移动成本 | 12×32 lookup；运输陆地用剑表、水上用小船表；火格×4；玩家设施不改底层地形成本 | reverse-engineered | ✅ |
 | B4 | 移动力加成叠加 | 原`计算部队属性`函数锁定技巧/特技加法顺序；强行覆盖长驱；搬运+操舵可叠加 | PC-PK1.1 reverse-engineered | ✅ |
 | B5 | ZOC | 相邻六格控制；进入ZOC后终止本回合继续移动；陆/水ZOC分离；飞将/遁走/推进边界已核；伪报是否继续发出ZOC仍冲突 | reverse-engineered-parameters + empirical-high | ✅ |
-| B6 | 高度与高低差 | 下一项 | pending | ⬜ |
+| B6 | 高度与高低差 | 高低差仅进入部分强制位移战法成功率；判定取行动开始格；旧“每级固定±5”降级；原高度静态字段位置仍 open | empirical-high + original function located | ✅ |
+| B7 | 水陆切换、舰船切换 | 下一项 | pending | ⬜ |
 
 ## A1 关键纠错
 
@@ -230,3 +231,36 @@ PC-PK1.1 原参数地址：
 - 混乱：ZOC消失，empirical-high；
 - 伪报：中文老实测写“消失”，日文长期Wiki写“保留”，当前公开逆向未恢复状态判断，保留 `conflicting-evidence`。
 - 为使引擎可运行，暂用 `falseReportRetainsZOC=true`，明确标 `provisional-engine-rule / compatibilityAssumption`。
+
+
+## B6 关键纠错
+
+原函数已定位：
+
+```text
+005AF850 TacticSuccessRate
+```
+
+高度/地势不是通用攻防倍率，而主要作用于强制位移战法：
+
+```text
+枪：突刺、二段突
+戟：熊手
+骑：突击、突破、突进
+```
+
+方向：
+
+```text
+枪/骑：攻击者越高越有利
+熊手：攻击者越低越有利
+```
+
+关键实现点：
+
+- 判定使用本次行动开始格，而不是移动后实际发动格；
+- 一级有利高差常见 +5；
+- 二级常见 +10；
+- 二段突/突进存在二级高差 +15 的稳定实测；
+- 因此旧 `5 * heightDiff` 不能作为完整原作公式；
+- 当前公开 `struct_map_grid` 尚未有被正式命名为 Height 的字段，原始 elevation 数据存储位置仍 open。
