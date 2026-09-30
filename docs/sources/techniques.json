@@ -22,7 +22,12 @@
       2000,
       3000
     ],
-    "timeEvidence": "super-difficulty empirical-exact only; full matrix open"
+    "timeEvidence": "E11 source-bounded matrix; see docs/sources/technique-research-time.json",
+    "talentOffice": {
+      "subtractDays": 20,
+      "minimumDays": 10,
+      "evidence": "reverse"
+    }
   },
   "notes": [
     "IDs 0..31 are the eight Vanilla branches; PK adds IDs 32..35 as the domestic branch.",
@@ -31,7 +36,8 @@
     "Explosive Refining has a known PC-PK1.1 original-code attacker/defender bug; patch/version details belong to E8.",
     "Effects marked wiki-high/reverse-partial are not promoted to full-disassembly exactness.",
     "Engineer Training (ID24) is exact for the studied PC-PK target: domestic facilities x2, fixed city/port/gate recovery x2.5; Vanilla 1.0's reported 4x belongs to a separate patch profile.",
-    "Response Fire (ID9): PC address 00584DC8 is known; detailed arrow-family/range/terrain/support boundaries are source-graded in E10, while the complete PC caller remains open."
+    "Response Fire (ID9): PC address 00584DC8 is known; detailed arrow-family/range/terrain/support boundaries are source-graded in E10, while the complete PC caller remains open.",
+    "E11 retracts a universal 30/40/60/90 timing assumption; timing is ability-dependent and only partially recovered."
   ],
   "techniques": [
     {
