@@ -1049,23 +1049,283 @@ function getActualAttr(person, attr, health): number
 
 ## 4. 人际关系
 
-`[COMMON][confirmed/empirical-high]`
+`[PC-PK1.1][reverse-engineered relation structure + reverse-engineered support parameters + empirical-high relation behavior]`
 
-### 亲爱
+人际关系不是一个统一“好感分”。原 `struct_person` 同时保存亲爱/厌恶列表、血缘树、配偶、义兄弟和相性；不同系统读取不同关系 predicate。
 
-- 不同部队主将之间有亲爱关系时，支援攻击约 30%。
-- 副将亲爱主将时，副将能力补正更高并提升会心倾向。
-- 武将亲爱某君主时，对该君主登用具有强制成功关系，并通常不会被其他君主登用（配偶/义兄弟例外）。
-- 在野/亡国俘虏或满足“忠诚+义理≤96”等条件时，目标亲爱执行者可覆盖普通军师失败判定。
+### 4.1 底层关系字段
 
-### 嫌恶
+`struct_person`：
 
-- 同部队存在互相嫌恶者时，副将补正全部失效，并不会在单挑中互相援助。
-- 武将嫌恶君主时通常不能被该君主登用；配偶/义兄弟可构成例外，但初始忠诚很低。
-- COM 君主与俘虏互相嫌恶时可导致必处斩。
-- 君主被另一君主嫌恶时，友好极难上升，无论客通常无法结盟（停战仍可）。
+```text
++0x54 BloodRelation
++0x58 FatherID
++0x5C MotherID
++0x60 SpouseID
++0x64 SwornSiblingID
++0x68 Generation
++0x69 Compatibility     // SIRE字段名Personality，注释为相性
++0x6C IntimatePersonsID[5]
++0x80 HatedPersonsID[5]
+```
 
-来源：https://w.atwiki.jp/sangokushi11/pages/95.html
+对应原 helper：
+
+```text
+00488790 IsSpouse
+004887D0 IsSwornBrother
+00488890 GetFriendlyPersonID
+004888B0 GetNumberOfFriendlyPersons
+00488910 IsFriendlyWith
+00488950 GetDislikePersonID
+00488970 GetNumberOfDislikePersons
+004889E0 IsPerson1HatesPerson2
+
+0048BB70 IsBloodRelation
+0048BC10 IsAConsort
+0048BCA0 IsParent
+0048BD80 IsChild
+0048BDF0 IsAChildOrParent
+0048C040 IsBrother
+```
+
+因此实现应有独立 relation service，而不是只存：
+
+```ts
+relationScore[A][B] = number
+```
+
+### 4.2 亲爱 / 厌恶是有方向的
+
+`IntimatePersonsID[5] / HatedPersonsID[5]` 属于**武将A自己的列表**。
+
+所以：
+
+```ts
+likes(A, B) !== likes(B, A)
+hates(A, B) !== hates(B, A)
+```
+
+除非数据两边都明确设置。
+
+支援攻击给出了最直接的方向性实测：只有**支援方主将亲爱攻击方主将**时，亲爱支援才成立；攻击方单方面亲爱支援方不成立。
+
+这也意味着登用必须写成“目标是否亲爱执行君主/执行者”，不能用无方向的 `areFriends(a,b)`。
+
+### 4.3 配偶 / 义兄弟 / 血缘不是亲爱列表的别名
+
+配偶、义兄弟、血缘均有独立字段和 helper。即使两名武将没有彼此写进 `IntimatePersonsID`，这些关系仍会独立参与：
+
+- 副将能力补正；
+- 支援攻击；
+- 登用硬分支；
+- 单挑援助等关系判定。
+
+因此不要为了简化把：
+
+```text
+配偶 = 自动互相亲爱
+义兄弟 = 自动互相亲爱
+血缘 = 自动互相亲爱
+```
+
+写回数据层。
+
+`0048A5F0 GetRelationWithLord` 还直接把与君主关系分类为父母、兄弟、儿子、女儿、其他血亲、配偶、义兄弟、无关系，进一步证明这些关系是独立离散分支。
+
+### 4.4 支援攻击：PC-PK1.1 参数已经逆出
+
+`[PC-PK1.1][reverse-engineered-parameters]`
+
+游侠 2008 对繁中 PK1.1 的内存定位：
+
+```text
+00585555 辅佐(26)；只有主将之间关系影响支援攻击
+0058557B 辅佐 / 亲爱：30
+0058559B 血缘：20
+005855A8 义兄弟 / 夫妇：50
+```
+
+所以关系分支的原参数为：
+
+| 支援方主将与攻击方主将 | PC-PK1.1 参数 |
+|---|---:|
+| 配偶 / 义兄弟 | 50% |
+| 亲爱 | 30% |
+| 特技「辅佐」 | 30% |
+| 血缘 | 20% |
+
+PS2PK 大样本实测约得到亲爱31%、辅佐28.8%、义兄弟约45%、血缘约20%，与 PC-PK 参数方向一致。
+
+关系条件还包括：
+
+- **只看双方主将**，副将关系不触发支援；
+- 亲爱必须是 `likes(supporterMain, attackerMain)`；
+- 血缘实测包括父子与兄弟；
+- 支援部队必须在对目标可普通攻击的范围内；
+- 兵器部队不能支援；
+- 连战已经发动时不再触发支援；
+- 辅佐主将若嫌恶攻击方主将，则不触发辅佐支援。
+
+支援伤害/防御技巧等属于战斗层，D4 只负责关系资格与概率参数。
+
+### 4.5 副将能力补正：旧规则漏了“血缘 = 1/3”
+
+`[PS2][empirical-exact; PC-PK function body still open]`
+
+现有独立实测对统率/武力给出：若副将该能力高于主将，副将贡献主副差值的一部分。
+
+```ts
+candidate = mainStat + floor((subStat - mainStat) / divisor)
+```
+
+关系 divisor：
+
+| 副将→主将关系 | divisor | 差值贡献 |
+|---|---:|---:|
+| 配偶 / 义兄弟 | 1 | 100% |
+| 亲爱 | 2 | 1/2 |
+| 血缘 | 3 | 1/3 |
+| 普通 | 4 | 1/4 |
+
+若副将能力不高于主将，则该项不会把主将能力拉低。两名副将都可提供候选值，取较高结果。
+
+旧仓库此前写成：
+
+```text
+夫妻/义兄弟=1；亲爱=2；其他=4
+```
+
+把血缘错误并入普通。本轮已改成独立 `/3`。
+
+注意：这套 1/2、1/3、1/4 的精确测值来自 PS2 实测；PC-PK1.1 当前只恢复了关系 helper 与支援概率参数，尚未公开副将补正函数体，因此跨版本仍标 `empirical-high`，不冒充 PC 逐指令确认。
+
+### 4.6 嫌恶的优先级高于任何正面副将关系
+
+长期实测：同一部队三人中**任意一对存在嫌恶关系**（包括两个副将互相嫌恶），则：
+
+```text
+所有副将能力补正 = 0
+```
+
+不是只忽略那一个嫌恶武将。
+
+即使另一名副将是主将的配偶或义兄弟，也同样全部失效。
+
+同一嫌恶覆盖还会让相关武将在单挑时不来援助。
+
+所以正确顺序应先检查：
+
+```ts
+if (anyHatePairInTroop) disableAllDeputyRelationBonus()
+```
+
+再去计算配偶/义兄弟/亲爱/血缘/普通 divisor。
+
+### 4.7 登用里关系是硬分支，不是分数加成
+
+D5 会继续核完整登用优先级；D4 先锁定关系语义：
+
+- 目标亲爱执行君主：该君主存在强制成功关系，并通常阻止其他君主普通登用；配偶/义兄弟是重要例外；
+- 目标亲爱执行武将：当目标为在野/亡国俘虏，或满足特定低忠诚+义理门槛时，可以越过普通军师失败判断；
+- 目标嫌恶执行君主：普通登用直接失败；
+- 配偶/义兄弟可以覆盖部分嫌恶/忠诚普通分支。
+
+这些都应发生在连续成功率计算**之前**。
+
+禁止实现成：
+
+```text
+亲爱 +20%
+嫌恶 -30%
+配偶 +40%
+```
+
+这种统一打分模型。
+
+完整先后顺序留给 D5。
+
+### 4.8 嫌恶还影响 COM 处斩与君主外交
+
+旧总规则写过“处斩俘虏没有厌恶或报复”，这句话需要拆成两件事：
+
+1. **处斩不会自动新生成嫌恶关系**：例如处断配偶会解除配偶关系，但没有“因此新增嫌恶”的通用惩罚；
+2. **已有嫌恶会影响 COM 的处置**：COM 君主嫌恶俘虏，或俘虏嫌恶该 COM 君主，长期实测会走必处斩分支。
+
+所以不能写成“嫌恶与处斩无关”。
+
+外交侧也有稳定行为：若某君主嫌恶另一君主，则双方友好极难上升；无「论客」时通常无法结盟，但停战仍可。
+
+这部分的连续外交公式/版本边界继续由外交专项负责。
+
+### 4.9 关系可以在运行中改变，不能只当静态人物表
+
+游戏内“仲介”可以建立结婚/结义关系；旧实测还确认出征中的武将也可通过仲介结婚或结义。
+
+因此：
+
+```text
+Spouse / SwornSibling
+```
+
+属于 Runtime Scenario State，而不只是 Scenario.s11 的初始静态资料。
+
+结义最多三人这一组关系的内部表达应通过 `IsSwornBrother()` 查询，不要假定裸 `SwornSiblingID` 只能表示一对一。
+
+### 4.10 推荐关系服务
+
+```ts
+relation.likes(a, b)
+relation.hates(a, b)
+relation.isSpouse(a, b)
+relation.isSwornSibling(a, b)
+relation.isBloodRelative(a, b)
+relation.isParent(a, b)
+relation.isChild(a, b)
+relation.isSibling(a, b)
+relation.relationToLord(person, lord)
+```
+
+各系统调用 predicate，不把关系压缩成一个标量。
+
+### 4.11 D4 当前结论
+
+已经锁定：
+
+- 亲爱/厌恶各最多5个显式槽位，且是有方向关系；
+- 配偶/义兄弟/血缘有独立字段与 helper，不等价于亲爱；
+- PC-PK1.1 支援参数：配偶/义兄弟50、亲爱30、辅佐30、血缘20；只看主将；
+- 亲爱支援方向为“支援主将亲爱攻击主将”；
+- 副将关系补正应区分：配偶/义兄弟100%、亲爱1/2、血缘1/3、普通1/4；
+- 任意嫌恶 pair 会让整队全部副将能力补正归零；
+- 亲爱/嫌恶/配偶/义兄弟在登用里是概率前硬分支，不是统一百分比加减；
+- 已有嫌恶影响 COM 处斩与君主外交，但执行处斩本身不会自动创建新嫌恶；
+- 婚姻/结义可在运行中建立，必须进入 Runtime State。
+
+仍 open：
+
+- PC-PK1.1 副将 1/2、1/3、1/4 补正的完整函数体与所有取整边界；
+- 亲爱导致会心率提高的精确数值；
+- 血缘支援在更远亲属上的完整边界（当前明确父子/兄弟）；
+- Vanilla PC 与 PK1.1 支援概率是否完全一致；
+- 登用关系分支的完整先后顺序（D5继续）；
+- 外交嫌恶修正的连续公式。
+
+来源：
+- 311SireCustomizedPackageDev `struct_person` 与 Person relation helpers
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 游侠 PC-PK1.1 内存研究：支援攻击关系参数 50/30/20，只有主将关系生效
+  https://game.ali213.net/thread-2168294-1-1.html
+- 日文 Wiki《支援攻击》：方向性、主将条件、PS2PK大样本概率及攻击范围边界
+  https://w.atwiki.jp/sangokushi11/pages/1584.html
+- 日文 Wiki《検証》：副将亲爱/血缘/普通 1/2、1/3、1/4 实测
+  https://w.atwiki.jp/sangokushi11/pages/30.html
+- 日文 Wiki《亲爱・嫌恶》：副将嫌恶覆盖、登用/处斩/外交关系语义
+  https://w.atwiki.jp/sangokushi11/pages/95.html
+- 日文 Wiki《内政》：登用关系优先级与“处斩不自动新增嫌恶”
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki《小ネタ》：出征武将仍可仲介结婚/结义
+  https://w.atwiki.jp/sangokushi11/pages/15.html
 
 ## 5. 登用：优先级门槛
 
