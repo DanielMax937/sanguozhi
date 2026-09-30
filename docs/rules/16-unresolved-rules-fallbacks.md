@@ -2043,7 +2043,7 @@ vanillaGenericDuelCore.status =
 ---
 
 
-## 9. 舌战普通牌心理伤害
+## 9. 舌战普通牌心理伤害（E15 已闭合通用核心）
 
 ### 结论：普通话题牌心理伤害公式已恢复，不再需要 provisional fallback
 
@@ -2483,6 +2483,37 @@ vanillaDebateCore.status =
 - 四种性格愤激。
 
 所以 Vanilla 机制层高度一致；但在没有 Vanilla EXE 回归前，不把 `131`、`40`、`8b3380` 等 PK 连续常量跨版本标成源码 confirmed。
+
+---
+
+### 9L. E15 额外边界：power / hp / stress / effect 必须分层
+
+实现层必须至少拆成：
+
+```ts
+cardPower
+hpDamage
+stressDamage
+specialEffect
+```
+
+不能复用一个 `damage` 字段。
+
+典型反例：
+
+```text
+无视：
+power=120
+hpDamage=0
+stressDamage=30
+
+激昂：
+power=0
+hpDamage=0
+stressDamage=40
+```
+
+诡辩也不是固定伤害牌，而是条件式反弹普通话题伤害模板。
 
 ---
 
