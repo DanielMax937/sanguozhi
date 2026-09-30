@@ -853,9 +853,17 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   - 隐藏忠诚可高于100甚至到255，因此显示100可长期不动。
   https://w.atwiki.jp/sangokushi11/pages/1926.html
   https://w.atwiki.jp/sangokushi11/pages/2378.html
+- 311MemoryResearch `整理/Func-自动06-武将忠诚下降.txt`：
+  - `0058E510` 完整逐指令文本；
+  - 普通武将季初 gate 与俘虏跳过季初 gate；
+  - 俘虏跳过仁政，但保留亲爱/配偶/义兄弟/父母子女豁免；
+  - 人心掌握：`Random(0..2)>=1` 跳过，精确2/3免降；
+  - 两个独立 `Random(0..2)`、符节台`+2`；
+  - 君主义理最低且野望最高时追加 `floor((4-targetIdeals)/2)`。
+  https://github.com/sjn4048/311MemoryResearch
 - SIRE 原作者更新说明：
   - 换季忠诚下降参数、符节台附加减忠、人心掌握不下降概率均可独立调整；
-  - 证明这些不是一个统一loyalty布尔。
+  - 与上述原EXE逐指令结果交叉一致。
   https://www.xycq.org.cn/forum/viewthread.php?authoruid=374759&tid=209820
 - 日文 Wiki《魏帝即位》：
   - 曹家称帝后汉室无视武将忠诚+20、汉室重视-20。
@@ -865,14 +873,10 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   - 援助/拒绝会让汉室重视配下分别涨/掉忠，幅度因人而异。
   https://w.atwiki.jp/sangokushi11/pages/958.html
 - 二次“代码研究”转载：
-  - 自然忠诚基础损失0..4三角分布候选；
-  - 人心掌握约2/3跳过；
-  - 符节台+2；
-  - 最低义理最高野望君主的额外义理项；
-  - 只作为secondary cross-check/fallback，不替代未公开主逆向函数体。
+  - 现仅作为历史cross-check；其中两个0..2随机、人心掌握约2/3、符节台+2、最低义理最高野望君主附加项均已被 `0058E510` 原EXE逐指令文本直接确认。
   https://wenku.baidu.com/view/ad1f1482561252d381eb6edb?bfetype=new
 
-证据等级：相性公式与忠诚0..255/UI100为reverse-engineered；换季触发与义理/野望语义为empirical-high；汉室爵位/拥废/特定事件常量为documented exact；完整自然掉忠gate、君主义理野望附加项、人心掌握原函数、俘虏月度闭式仍open。
+证据等级：相性公式、忠诚0..255/UI100与 `0058E510` 忠诚下降主路径均为PC-PK1.1 reverse-engineered；换季候选语义由原函数+日文Wiki交叉确认；汉室爵位/拥废/特定事件常量为documented exact。欠薪/流言/事件等非自然忠诚路径仍open。
 
 ### D7 太守 / 都督 / 军师专项
 
@@ -961,3 +965,63 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://blog.id774.net/entry/2021/01/08/1703/
 
 证据等级：褒赏/授予的命令成本和资格、俸禄每月为official-confirmed；月度收支调度为PC-PK1.1 reverse-engineered；褒赏忠诚增量的随机性与魅力影响为empirical-high，精确闭式仍open。
+
+
+### D9 俘虏专项
+
+- 311MemoryResearch `内存资料/函数[捕获].txt`：
+  - PC-PK1.1 `004B1280`；
+  - 同一函数覆盖部队击破与据点陷落后的武将捕获；
+  - 目标能力取 `max(武力,智力)`；
+  - 合围部队数直接进入倍率，目标有铁壁时倍率回到1；
+  - context id 3/4 时×1.5（业务语义未命名）；
+  - 超级难度“玩家击破AI”方向再÷2；
+  - 捕缚+100并封顶100；
+  - 戟兵战法最终+30并再次封顶100；
+  - 强运(skill 32)为不可捕获硬分支。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `内存资料/地址资料.txt`：
+  - `004B15B9` 捕缚(19)；
+  - `004B17B1` 强运(32)：部队击破不被俘虏；
+  - `004B18A0` 戟兵战法捕获成功率+30。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `整理/Func-自动07-俘虏逃走.txt`：
+  - `00582BE0` 每月俘虏自然逃走；
+  - `CaptiveMonths<2` 不判定；
+  - `q=max(1,m-2)`；
+  - `stat=max(30,max(WAR,INT))`；
+  - 概率参数 `max(1,floor(q*q*stat/150))`；
+  - 必须能从人物Location解析到有效城市/港/关设施，因此野外部队携带俘虏不走该据点逃亡roll。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `函数[每月例行处理].txt`：
+  - 月初先 `0058BB30` 更新俘虏/禁仕月份；
+  - 后 `00582BE0` 自然逃亡；
+  - 再进入 `00590490` 月度收入/支出。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `整理/Func-收支03-每月钱粮兵装收支.txt`：
+  - 据点俘虏维护50金/人；
+  - 可支付人数 `min(count,floor(gold/50))`；
+  - 不足人数进入 `0058C320 -> 0058D1D0` 准备，最终 `0058D430` 实际释放/逃走处理；
+  - 自然逃亡与资金不足释放是两条独立路径。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `整理/Func-自动06-武将忠诚下降.txt`：
+  - 俘虏跳过季初限制与仁政；
+  - 关系豁免仍生效；
+  - 人心掌握精确2/3免降；
+  - 两个0..2随机、符节台+2、特定君主义理/野望附加项。
+  https://github.com/sjn4048/311MemoryResearch
+- 日文 Wiki《特技一覧》/武将页：
+  - 捕缚对没有强运、没有名马的武将必捕；
+  - 野外出阵部队携带的俘虏不会自然逃亡，回据点后才有逃亡风险。
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+  https://w.atwiki.jp/sangokushi11/pages/718.html
+- 日文 Wiki《小ネタ》：
+  - 主动释放俘虏会产生登用禁止期间。
+  https://w.atwiki.jp/sangokushi11/pages/15.html
+- 日文 Wiki 评论/Q&A：
+  - 血路对部队壊滅的反捕获语义稳定；
+  - 对据点陷落是否同样有效存在长期版本/场景争议，因此不升级成统一硬免疫。
+  https://w.atwiki.jp/sangokushi11/pages/28.html
+  https://w.atwiki.jp/sangokushi11/pages/2526.html
+
+证据等级：捕获主公式、强运、戟战法+30、自然逃亡公式、月度掉忠与50金维护均为PC-PK1.1 reverse-engineered；名马反制捕缚与野外携俘不逃为长期稳定wiki/实机交叉验证。仍open：`004A0590`精确语义、context 3/4、血路城陷边界、概率helper超100、资金不足释放排序、释放禁仕月数与释放技巧P。
