@@ -1090,21 +1090,315 @@ getTroopMobilityEquipID(troop, targetCoord)
 - `005A4540` 在一次路径跨陆水边界时如何处理两套“总移动力上限”的所有边界；
 - 开发投石完成瞬间对既有楼船库存/在外部队的内部重解释时点。
 
-## 7A. 港关容量
+## 7A. 港关容量与所属关系
 
-`[COMMON][confirmed]` 基础：
+### 7A.1 “所属城市”与“当前势力”是两套独立关系
 
-- 金 10,000
-- 粮 100,000
-- 士兵 30,000
-- 各兵装 30,000
+`[PC-PK1.1][reverse-engineered]`
 
-`[PK][confirmed]` 港关扩张后：
+城市结构体保存：
 
-- 金 40,000
-- 粮 400,000
-- 士兵 60,000
-- 各兵装 60,000
+```text
+struct_city + D4
+SubordinateHarborAndPassID[5]
+```
+
+也就是每座城市最多静态列出 5 个“地理/行政上从属于该城”的港口或关隘。
+
+而港口 / 关隘结构体本身并**没有**存 `ParentCityID` 或 `ForceID`，而是保存：
+
+```text
+struct_harbor / struct_pass
++20 CorpsID
+```
+
+当前政治归属通过：
+
+```text
+港关 CorpsID
+↓
+struct_corp.PowerID
+↓
+ForceID
+```
+
+得到。原程序还存在：
+
+- `0047B2B0 GetForceID`：城市/港/关统一取当前势力；
+- `00483810 GetCorpIDForHarborOrPass`；
+- `0065D6C0 GetForceIDOfCrop`；
+- `0047BC50 GetNthHarborIDOfCity`：从城市静态下属列表取第 N 个港关。
+
+因此必须分别建模：
+
+```ts
+harbor.parentCityId   // 静态地理关系
+harbor.corpsId        // 当前军团
+harbor.forceId        // 由 corpsId 派生
+```
+
+而不能写成：
+
+```ts
+harbor.forceId = city.forceId
+```
+
+### 7A.2 母城易手不会把“地理所属”改掉
+
+`[COMMON][empirical-high + structure-supported]`
+
+“虎牢关属于洛阳”“白马港属于邺”这种 `parentCityId` 是地图/剧本拓扑关系；战争中港关可以与母城处于**不同势力**控制下。
+
+社区攻略明确把“控制母城”和“控制该城所有港关”区分开，例如长安只有在所属 5 个港关也全部控制时才取得对应全部附属收入。
+
+原程序月度收支又专门比较：
+
+```text
+port.forceId == parentCity.forceId ?
+```
+
+如果游戏逻辑保证母城与港关永远同势力，这个分支本身就没有必要。
+
+因此攻陷母城时不要重写 `SubordinateHarborAndPassID`；港关自己的当前军团/势力按据点占领流程独立变化。
+
+### 7A.3 同一势力、不同军团仍视为同方
+
+`[PC-PK1.1][reverse-engineered]`
+
+月度收入判断在 `005906AC-005906C4`：
+
+```text
+GetForceID(port/pass)
+GetForceID(parentCity)
+compare ForceID
+```
+
+比较的不是：
+
+```text
+CorpsID
+```
+
+所以：
+
+> 港关和母城只要属于**同一个势力**，即使分别属于该势力不同军团，仍满足附属收入条件。
+
+### 7A.4 港关收入必须与母城当前同势力
+
+`[PC-PK1.1][reverse-engineered]`
+
+`00590490 MonthlyIncomeAndExpend` 的精确流程：
+
+```text
+遍历城市
+↓
+根据 city.SubordinateHarborAndPassID 逐个取得港关
+↓
+取得港关当前 ForceID
+↓
+取得母城当前 ForceID
+↓
+若不同：跳过该港关本次附属收入
+若相同：继续结算
+```
+
+基础附属收入：
+
+```ts
+harborMoney = trunc(parentCityMoneyTick / 5)
+harborFood  = trunc(parentCityFoodTick / 5)
+```
+
+也就是母城当次收入的 20%。
+
+这里的 `parentCityMoneyTick / FoodTick` 已经走过征税/征收/丰作等当前 tick 分支；富豪/米道的港关额外部分又在后续分支处理。
+
+所以“所属城市20%”不是港关自己拥有一套独立基础产值。
+
+### 7A.5 港关是完整独立据点，不只是城市附加数字
+
+`[PC-PK1.1][reverse-engineered]`
+
+`struct_harbor` 与 `struct_pass` 均为独立 `0x90` 结构，自己保存：
+
+- `CorpsID`
+- 兵力
+- 金钱
+- 兵粮
+- 枪/戟/弩/马库存
+- 冲车～斗舰库存
+- 耐久 / 最大耐久
+- 气力
+- 太守
+- 训练状态
+- 独立武将链表
+
+并且有独立：
+
+- `SetHarborTroops`
+- `SetHarborMoney / Food`
+- `SetHarborEquipment`
+- `GetSPPersonList`
+- `GetSPPrefectID`
+
+因此港关可以独立驻将、驻兵、存钱粮、存兵装、被单独攻陷；不能把它实现为母城对象上的一个简单 bonus flag。
+
+### 7A.6 基础容量
+
+`[COMMON][confirmed-game-data; source functions located]`
+
+未研究 PK“扩展港关”时：
+
+| 项目 | 港 / 关上限 |
+|---|---:|
+| 金 | 10,000 |
+| 兵粮 | 100,000 |
+| 士兵 | 30,000 |
+| 枪 | 30,000 |
+| 戟 | 30,000 |
+| 弩 | 30,000 |
+| 军马 | 30,000 |
+
+原程序有独立上限函数：
+
+- `0048D7E0 GetHarborTroopLimit`
+- `0048D820 GetBuildingMoneyLimit`
+- `0048D860 GetHarborFoodLimit`
+- `0048D8A0 GetHarborEquipmentLimit`
+- 通用包装 `00486A30 / 00486BC0 / 00486D30 / 00486EA0`
+
+### 7A.7 PK“扩展港关”
+
+`[PK][confirmed-game-data]`
+
+研究后：
+
+| 项目 | 基础 | 扩展后 |
+|---|---:|---:|
+| 金 | 10,000 | 40,000 |
+| 兵粮 | 100,000 | 400,000 |
+| 士兵 | 30,000 | 60,000 |
+| 枪 | 30,000 | 60,000 |
+| 戟 | 30,000 | 60,000 |
+| 弩 | 30,000 | 60,000 |
+| 军马 | 30,000 | 60,000 |
+
+日文 Wiki 与中文 PK 技巧表均给出完全一致的数值。citeturn559057search7turn476170search2
+
+注意：
+
+> 这里的“兵装 3万→6万”指**枪、戟、弩、军马四类数量型兵装**。
+
+原结构把：
+
+```text
+EquipmentCounts[4]      // 枪～马
+SiegeWeaponCounts[7]    // 冲车～斗舰
+```
+
+分开保存。
+
+因此不能把“扩展港关”误写成：
+
+```text
+冲车 60000
+井阑 60000
+楼船 60000
+```
+
+这显然不是原数据语义。攻城兵器/舰船的小数量库存上限需要继续从 `GetHarborEquipmentLimit` 的完整函数体或实机边界测试中提取；本项不编造具体值。
+
+### 7A.8 “扩展港关”不等于增加耐久
+
+`[PK][confirmed-mechanism]`
+
+扩展港关的说明只提高：
+
+- 金
+- 粮
+- 士兵
+- 四类数量兵装
+
+港关耐久另有独立：
+
+```text
+MaxDurability
+GetMaxDurabilityForHarborOrPass
+```
+
+而据点耐久提升属于防御系“城壁强化”等机制，不要把它并入“扩展港关”。
+
+### 7A.9 当前实现建议
+
+```ts
+interface HarborPass {
+  id: number
+
+  // 永久地图关系
+  parentCityId: number
+
+  // 当前政治关系
+  corpsId: number
+  forceId: number
+
+  troops: number
+  money: number
+  food: number
+
+  massEquipment: {
+    spear: number
+    halberd: number
+    crossbow: number
+    horse: number
+  }
+
+  siegeAndShips: Record<EquipmentId, number>
+
+  durability: number
+  maxDurability: number
+  morale: number
+  prefectId: number
+}
+
+function getsParentIncome(sp, parentCity) {
+  return sp.forceId >= 0 &&
+         sp.forceId === parentCity.forceId
+}
+```
+
+容量不要写死在结构体里，应通过当前势力技巧动态查询：
+
+```ts
+getHarborPassLimits(sp.forceId)
+```
+
+这样港关被另一势力占领后，会自然按**当前占领势力**是否拥有“扩展港关”来决定容量规则，而不是继续读取母城势力的技巧。
+
+### 7A.10 证据边界
+
+已经锁定：
+
+- 城市静态保存下属港关列表；
+- 港/关自己保存 CorpsID，当前 ForceID 独立派生；
+- 母城与港关可以不同势力；
+- 月度收入只比较 ForceID，不比较 CorpsID；
+- 同势力不同军团仍有附属收入；
+- 港关基础收入为母城当次钱粮的20%；
+- 基础与扩展后的金/粮/兵/枪戟弩马容量。
+
+仍 open：
+
+- 冲车/井阑/投石/木兽/楼船/斗舰等小数量兵器在港关的精确库存上限；
+- 占领港关时各类现有物资的完整继承/损失函数（与前一轮“攻陷资源继承”专项存在交集，不在 B8 重复展开）；
+- Vanilla EXE 的容量 getter 是否逐字与 PC-PK 相同。
+
+来源：
+- 311SireCustomizedPackageDev `material/结构体汇总.md`
+- 311SireCustomizedPackageDev `material/内存地址汇总.md`
+- 311MemoryResearch `Func-收支03-每月钱粮兵装收支.txt`
+- https://w.atwiki.jp/sangokushi11/pages/77.html
+- https://w.atwiki.jp/sangokushi11/pages/90.html
+- https://w.atwiki.jp/sangokushi11/pages/165.html
 
 ## 8. 地形伤害
 
