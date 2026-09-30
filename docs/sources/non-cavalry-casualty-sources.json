@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "audit": "E16",
+  "target": "PC-PK1.1 non-cavalry battlefield officer casualties",
+  "genericPostDestructionRoll": {
+    "exists": false,
+    "evidence": "negative-reverse-evidence-high",
+    "engineRule": "do not add a universal injury/death roll after ordinary attack/tactic/facility destruction"
+  },
+  "sharedCandidateSelector": {
+    "address": "005971F0",
+    "name": "DesignateInjuredPersonnel",
+    "knownFilters": [
+      "Guard/护卫",
+      "Lucky/强运"
+    ],
+    "multiCandidateAlgorithm": "open",
+    "probabilityInterpretation": "source formulas are conditional on the designated candidate"
+  },
+  "archerSniping": {
+    "function": "005974C0",
+    "result": "injury-only",
+    "eligible": [
+      {
+        "context": "crossbow fire arrow",
+        "base": 0
+      },
+      {
+        "context": "siege tower fire arrow",
+        "base": 0
+      },
+      {
+        "context": "ship fire arrow",
+        "base": 0
+      },
+      {
+        "context": "penetrating shot",
+        "base": 1
+      },
+      {
+        "context": "scatter shot",
+        "base": 2
+      }
+    ],
+    "formula": "tacticBase + statComparisonTier + personality + criticalBonus - 1",
+    "comparison": {
+      "input": "attacker leader max(leadership,strength) - designated target max(leadership,strength)",
+      "outputTiers": [
+        -2,
+        -1,
+        0,
+        1
+      ],
+      "thresholds": {
+        "evidence": "secondary-corroborated",
+        "rules": [
+          {
+            "condition": "diff <= 0",
+            "tier": -2
+          },
+          {
+            "condition": "1 <= diff <= 6",
+            "tier": -1
+          },
+          {
+            "condition": "7 <= diff <= 12",
+            "tier": 0
+          },
+          {
+            "condition": "diff > 12",
+            "tier": 1
+          }
+        ]
+      }
+    },
+    "personality": {
+      "timid": 0,
+      "calm": 1,
+      "bold": 2,
+      "reckless": 3
+    },
+    "critical": {
+      "false": 0,
+      "true": 1,
+      "opcode": {
+        "address": "0059753A",
+        "bytes": "0F 95 C1",
+        "mnemonic": "SETNE CL",
+        "note": "old disassembly comment calling it setnc is a mnemonic typo"
+      }
+    },
+    "maximumConditionalPercent": 6,
+    "injuryHandler": "005963E0",
+    "deathHandler": null
+  },
+  "hellfire": {
+    "callerFunction": "00597350",
+    "eligibleTrapIds": {
+      "hellfireBall": 15,
+      "hellfireSeed": 16
+    },
+    "abilityProtection": {
+      "input": "max(leadership,strength,intelligence)",
+      "tiers": [
+        {
+          "maxStat": "<=70",
+          "value": 0
+        },
+        {
+          "maxStat": "71-80",
+          "value": 1
+        },
+        {
+          "maxStat": "81-90",
+          "value": 2
+        },
+        {
+          "maxStat": ">90",
+          "value": 3
+        }
+      ],
+      "helper": "00596380"
+    },
+    "personality": {
+      "timid": 0,
+      "calm": 1,
+      "bold": 2,
+      "reckless": 3
+    },
+    "death": {
+      "none": "skip death stage",
+      "normalBase": 2,
+      "highBase": 4,
+      "formula": "max(0, baseDeath + personality - abilityProtection)",
+      "handler": "004ACBE0"
+    },
+    "injury": {
+      "formula": "max(0, 2 + personality - abilityProtection)",
+      "independentOfDeathSetting": true,
+      "reselectsCandidate": true,
+      "handler": "005963E0"
+    }
+  },
+  "mightyWarrior": {
+    "skillId": 51,
+    "triggerAddress": "0059781A",
+    "chanceAddress": "00597725",
+    "chancePercent": 50,
+    "trigger": "a tactic successfully moves the enemy unit",
+    "result": "injury",
+    "candidateAndSeverity": "open"
+  },
+  "fireBoundary": {
+    "fireArrow": "no 00597350 hellfire casualty, but eligible for 005974C0 archer sniping",
+    "ordinaryFire": "troop/durability damage only; no generic casualty identified",
+    "fireShip": "25% confusion; no 00597350",
+    "hellfireSeed": "50% confusion + 00597350",
+    "hellfireBall": "00597350"
+  },
+  "excludedSpecialSources": {
+    "cavalry": "005975E0 specialized death resolver; audited separately",
+    "duel": "duel subsystem has its own wound/death resolution"
+  },
+  "open": [
+    "005971F0 exact multi-candidate selection",
+    "005963E0 injury severity distribution",
+    "00596480 direct instruction-level thresholds; 1/7/12 currently secondary-corroborated",
+    "Mighty Warrior target selector and severity caller",
+    "Vanilla/PS2/Wii equivalence"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[弓兵狙伤].txt",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[火陷阱炸伤炸死].txt",
+    "https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md",
+    "https://www.xycq.org.cn/forum/viewthread.php?authoruid=374759&tid=209820",
+    "https://www.bilibili.com/opus/827377857051230209",
+    "https://games.sina.com.cn/j/h/2006-03-22/14333934.shtml"
+  ]
+}
