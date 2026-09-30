@@ -80,5 +80,6 @@
 - B1 200×200 六角地图、area→city
 - B2 Tactic terrain mask / Equipment tactic 表
 - B3 12×32 地形移动成本与火格×4
+- B4 原部队属性函数中的移动力技巧/特技叠加与优先级
 
-下一项：B4 移动力加成叠加。
+下一项：B5 ZOC。
