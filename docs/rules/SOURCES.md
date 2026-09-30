@@ -1353,7 +1353,7 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   - D6人心掌握；
   - B8港关扩张。
 
-证据等级：技巧ID和多数核心常量为PC-PK1.1地址/反汇编级；完整技巧树、费用和若干行为由Wiki/Gamersky交叉。E8已把PK1.1工兵育成闭合为内政设施×2、城市港关×2.5；当前仍open的是完整研究时间函数、兵粮袭击随机闭式、应射细边界与技巧研究功绩逐地址。爆药炼成原PC判定BUG与补丁差异见E8。
+证据等级：技巧ID和多数核心常量为PC-PK1.1地址/反汇编级；完整技巧树、费用和若干行为由Wiki/Gamersky交叉。E8已把PK1.1工兵育成闭合为内政设施×2、城市港关×2.5；当前仍open的是完整研究时间函数、兵粮袭击 `005ADB20` 的原RNG/资源边界、应射细边界与技巧研究功绩逐地址。爆药炼成原PC判定BUG与补丁差异见E8。
 
 
 ### E8 技巧补丁版本差异专项
@@ -1392,3 +1392,39 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://github.com/sjn4048/311MemoryResearch
 
 证据等级：官方页面只证明官方版本链和公开变更大类；Ver1.0→后期技巧差异来自当年攻略回顾；PK1.1工兵育成与爆药/盾类原逻辑来自逆向。精确1.1/1.2 transition patch、地区发行版差异和主机版逐项常量仍open。
+
+
+### E9 兵粮袭击专项
+
+- 311MemoryResearch `函数[部队攻击].txt`：
+  - 主攻击函数 `005AFC70` 同时处理普通攻击与战法；
+  - 目标为部队时，附加效果段 `005B03F5～005B0401` 调用 `005ADB20`；
+  - 反击/反伤支路明确跳过“扫讨、威风和袭击兵粮”等判定；
+  - 设施目标走另一条分支，不进入该 helper。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `地址资料.txt`：
+  - `005ADB55`：技术ID1=袭击兵粮。
+  https://github.com/sjn4048/311MemoryResearch
+- 日文 Wiki《技巧研究》：
+  - 枪兵每次攻击会让敌军兵粮减少；
+  - 数量非常小。
+  https://w.atwiki.jp/sangokushi11/pages/90.html
+- 游民星空 / 游侠 2008《技术详解》：
+  - 每次敌减/己增 `攻击力×R`；
+  - `R=1～2`；
+  - 每2名己兵最多抢1粮，即自身兵力/2封顶；
+  - 攻击105时最大210的示例。
+  https://wap.gamersky.com/gl/Content-114545.html
+  https://3g.ali213.net/gl/html/7604.html
+- 现代枪兵专项实测：
+  - 攻击84的部队，普通攻击和战法多次结果都位于84～168；
+  - 200兵时上限100；
+  - 连击可发生两次抢粮。
+  https://k.sina.com.cn/article_6551359332_1867dcf64001013y31.html
+- `tankyc/sango_infinity` 独立复刻：
+  - 使用 `k=10..20` 整数随机档；
+  - `min(troops/2, Attack*k/10)`；
+  - 仅作为 compatibility reconstruction，不作为原EXE反汇编证据。
+  https://github.com/tankyc/sango_infinity
+
+证据等级：触发位置、目标类型、普通/战法共用与反击跳过为PC-PK1.1 reverse-engineered；Attack×R、R∈[1,2]、兵力/2封顶为 documented + empirical-high。`005ADB20` 本体尚未恢复，因此原RNG粒度、目标缺粮/攻方满粮、盾类零伤害、支援/水战边界仍open。
