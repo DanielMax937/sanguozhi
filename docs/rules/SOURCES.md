@@ -650,3 +650,66 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/1945.html
 
 证据等级：`reverse-engineered-structure + official-event-semantics + empirical-high timing`。仍缺普通登场 caller、Lifetime/ComeOnStage/IgnoreAge 枚举、GetDeathYear函数体、死亡flag RNG与一般沙盘伤病恢复。
+
+### D3 五维 / 适性 / 成长专项
+
+- 311SireCustomizedPackageDev `struct_person`：
+  - `FiveBasicAttrs[5]`；
+  - `FiveBasicAttrGrowthTypes[5]`；
+  - `FiveBasicAttrExp[5]`；
+  - `UnitCategoryProficiency[6] / UnitCategoryExp[6]`；
+  - `ActualAttrs[5] / BasicAttrs[5]`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311SireCustomizedPackageDev 原函数/helper：
+  - `00488D40 GetPersonUnitCategoryProficiencyLevel`；
+  - `00488D60 GetPersonDispositionExperience`；
+  - `00488D80 GetPersonBaseAttr`；
+  - `00489030 GetPersonActualAttr`；
+  - `00489050 GetPersonBasicAttr`；
+  - `004890C0 GetPersonAttrIncreaseRelativeToBase`；
+  - `00489180 GetPersonAttrExperience`；
+  - `004891A0 GetPersonAttrChangeType`；
+  - `0048A030 GetPersonAttrChangeCoef`；
+  - `0048A390 GetPersonGrowthAttr`；
+  - `004A6DB0 IncreasePersonSkillExperience`；
+  - `004A70D0 IncreasePersonAttrExperience`。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- SIRE 成长类型编号：
+  - 0超持续 / 1持续 / 2早熟 / 3早熟持续 / 4普通 / 5普通持续 / 6晚成 / 7超晚成 / 8开眼。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/数据汇总.md
+- 日文 Wiki《各種経験値》：
+  - 五维100经验+1；
+  - 超额经验保留；
+  - 适性 C→B 150 / B→A 200 / A→S 250；
+  - 指导只对野外同队经验×2，据点命令无效；
+  - PK能力研究直接升适性时保留已有适性经验。
+  https://w.atwiki.jp/sangokushi11/pages/79.html
+- 日文 Wiki《素質盛衰表》：
+  - 6～101岁逐年实测；
+  - 盛衰按素质百分比；
+  - 早熟18岁峰值、维持25、普通30、晚成长型40/50、开眼41～55二次成长；
+  - 低素质按比例变化，峰值/衰退年龄不随素质改变。
+  https://w.atwiki.jp/sangokushi11/pages/1787.html
+- PTT 旧文重贴《三國志11成長類型》：
+  - 中文九种成长型与峰值/衰退周期交叉核对；
+  - 晚成约40岁峰值、超晚成约50岁峰值。
+  https://www.ptt.cc/bbs/Koei/M.1425532487.A.9C8.html
+- 日文 Wiki《能力研究》与 Q&A：
+  - PK能力研究本身一般累计约+20，档位边界可到约+24；
+  - 能力研究+经验总培养增量约+30；
+  - 经验单独也可吃满+30。
+  https://w.atwiki.jp/sangokushi11/pages/46.html
+  https://w.atwiki.jp/sangokushi11/pages/2527.html
+- 刘禅 / 育成实录：
+  - 刘禅统率素质3，普通培养最终约33，直接反证“低能力可无限刷到100”。
+  https://w.atwiki.jp/sangokushi11/pages/834.html
+  https://w.atwiki.jp/sangokushi11/pages/2796.html
+- 遗迹/庙事件：
+  - 遗迹+1的是“素质”而非经验；
+  - 已达到普通经验+30培养额度的武将仍可通过遗迹继续提高。
+  https://w.atwiki.jp/sangokushi11/pages/968.html
+- 2ch旧实测：
+  - 场景“能力变动=无效”只关闭随年龄上升/下降；经验成长继续发生。
+  https://w.atwiki.jp/sangokushi11/pages/1978.html
+
+证据等级：`reverse-engineered-structure + empirical-exact thresholds + empirical-exact age table`。尚缺年龄系数函数体、低素质整数取整、最终多层能力合成顺序以及自然适性升档的超额余数。
