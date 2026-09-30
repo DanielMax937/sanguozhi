@@ -196,6 +196,43 @@ PC-PK1.1还确认：矢盾/大盾30%、良马+4、骑射射程+1、熟练兵气�
 
 完整36项见 `docs/rules/22-techniques.md` 与 `docs/sources/techniques.json`。
 
+## 技巧版本与补丁（E8）
+
+同一技巧不能只按 `vanilla|pk` 两档处理。引擎至少应带：
+
+```text
+rulesetVersion
+patchVersion
+fixProfile
+```
+
+Vanilla Ver1.0 与后期资料明确存在：
+
+```text
+枪兵锻炼：1.20 -> 1.10
+精锐枪/戟/弩移动：+2 -> +6
+云梯：+20% -> 后期约140%
+工兵育成：400% -> 后期概括250%
+防御强化：120% -> 200%
+```
+
+这些差异具体在哪个官方补丁发生仍open；不能都写成“Ver1.2修改”。
+
+PC-PK reverse 基准独立使用 E7/E8 的当前常量，不受 Vanilla 1.0覆盖。
+
+PK1.1 工兵育成原函数已经闭合：
+
+```text
+内政设施恢复：相对 ×2
+城市/港/关恢复：相对 ×2.5
+```
+
+爆药炼成在研究目标 PC 二进制中保留原BUG：火伤加成错误地看被烧/防守方是否有该技巧。社区修复把判定改为点火/攻击方；这两者必须用不同 `fixProfile`，不得把社区修复静默当作官方规则。
+
+同理，矢盾/大盾“可挡战法”是社区修改；官方/reverse fidelity 默认不挡战法。
+
+完整矩阵见 `docs/rules/23-technique-patch-differences.md` 和 `docs/sources/technique-version-deltas.json`。
+
 ## 技巧点
 
 火矢有出处，优先于下面的游民星空表：战法成功 +10，点燃再 +15。断绝同盟 −50。
