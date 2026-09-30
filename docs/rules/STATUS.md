@@ -31,7 +31,7 @@
 2. Vanilla外交/战斗公式版本回归
 3. 攻城耐久与资源继承
 4. 火焰持续/自然蔓延
-5. 自然死亡逐旬 RNG
+5. 登场 / 自然死亡逐旬 RNG 与寿命模式
 6. 单挑连续命中/伤害函数
 7. 舌战普通牌心理伤害
 8. 负伤/战死/俘虏概率
@@ -111,4 +111,6 @@ C11 灾害已完成：SIRE结构锁定城市 current/scheduled 两套疫病/蝗�
 
 D1 武将生命周期 / 状态字段已完成：`struct_person` 的 Identity 精确锁定为君主/都督/太守/一般/在野/俘虏/未登场/未发现/死亡9种；军师实际由 `struct_force.AdvisorID` 独立表示，出征/任务/健康/已行动/死亡预定/禁仕期/俘虏月数也都是独立维度。旧“未登场→未发现→在野→所属→俘虏”的固定线性状态机已撤回；登场年与当前 Identity 也已明确分离。
 
-下一项：D2 登场 / 寿命 / 死亡。
+D2 登场 / 寿命 / 死亡已完成：`YearOfDebut` 与 current Identity 分离，诸葛亮20岁/沙摩柯34岁仍未登场直接否定“成年自动登场”；`struct_scenario` 独立保存 `IgnoreAge / ComeOnStage / Lifetime / DieInBattleSetting`，自然寿命与战死必须分开。`YearOfDeath / GetDeathYear / markedForDeath / Identity=DEAD` 为不同层次；官方事件“预定死亡年”与孙策延寿20年支持有效寿命概念，但不能把事件术语直接等同 flag。健康倍率以夷陵甘宁94→47→75实机锚点继续采用100/80/50/20。普通登场 caller、GetDeathYear函数体、寿命模式枚举、死亡flag触发与伤病自然恢复仍 open。
+
+下一项：D3 五维 / 适性 / 成长。
