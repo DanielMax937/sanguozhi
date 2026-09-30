@@ -180,3 +180,25 @@
   https://w.atwiki.jp/sangokushi11/pages/149.html
 - 赤壁决战数据：同一部队明确同时记录陆兵科+舰船
   https://w.atwiki.jp/sangokushi11/pages/2159.html
+
+
+### B8 港关容量 / 所属专项
+
+- SIRE 结构体：
+  - `struct_city.SubordinateHarborAndPassID[5]`
+  - `struct_harbor / struct_pass.CorpsID`
+  - `struct_corp.PowerID`
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+- SIRE 地址表：
+  - `0047B2B0 GetForceID`
+  - `0047BC50 GetNthHarborIDOfCity`
+  - `00483810 GetCorpIDForHarborOrPass`
+  - `0048D7E0 / 4820 / 4860 / 48A0` 港关各容量上限 getter
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- 311MemoryResearch：`Func-收支03-每月钱粮兵装收支.txt`，含港关20%与同势力判断
+- 日文 Wiki 都市数据：港关与母城对应、20%收入
+  https://w.atwiki.jp/sangokushi11/pages/77.html
+- 日文 Wiki 技巧研究：扩展港关容量
+  https://w.atwiki.jp/sangokushi11/pages/90.html
+- 中文 PK 技巧表：扩展港关 10000/100000/30000 → 40000/400000/60000
+  https://read01.com/zh-hk/m6LA4P.html
