@@ -5,7 +5,7 @@
 
 ## 最新审计入口
 
-[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E20委任AI架构](35-delegated-ai-architecture.md)。
+[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [P0-1普通登用概率exactness](36-hiring-probability-exactness.md)。
 
 A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原blob复用，无历史段落丢失。历史快照不是当前进度指针。
 
@@ -40,6 +40,8 @@ E18普通君主继承以 `33-ruler-succession-priority.md` 为当前专项规范
 E19评定完整提案池以 `34-council-proposal-pool.md` 为当前专项规范，结构化证据为 `../sources/council-proposal-pool.json`。原版评定MSG恢复22类具体案和两阶段多选采决；chooser、参与者过滤与采纳案执行链仍open。
 
 E20委任AI权重/决策架构以 `35-delegated-ai-architecture.md` 为当前专项规范，结构化证据为 `../sources/delegated-ai-architecture.json`。统一utility表假设已撤回；战争AI恢复为hard gate+概率+局部selector的procedural架构，城市内政scheduler仍open。
+
+P0-1普通登用概率exactness以 `36-hiring-probability-exactness.md` 为专项记录，结构化证据为 `../sources/hiring-probability-exactness.json`。004AFD60外层与normal/nonzero模式已源码级收窄；005C4F80本体仍open，现代SIRE登用意愿公式已隔离为MOD-only。
 
 ## 版本标记
 
@@ -95,6 +97,7 @@ E20委任AI权重/决策架构以 `35-delegated-ai-architecture.md` 为当前专
 34. `33-ruler-succession-priority.md` E18历史/玩家/COM君主继承路径与自动后继类别优先
 35. `34-council-proposal-pool.md` E19君主评定22类具体提案、两阶段采决与chooser边界
 36. `35-delegated-ai-architecture.md` E20委任/COM AI procedural架构、出兵gate/概率与局部主将评分
+37. `36-hiring-probability-exactness.md` P0-1普通登用原版外层判定链与005C4F80未决边界
 
 ## 来源优先级
 
