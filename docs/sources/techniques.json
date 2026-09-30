@@ -1,0 +1,679 @@
+{
+  "schemaVersion": 1,
+  "ruleset": "PC-PK1.1-primary",
+  "audit": "E7",
+  "techniquePointCap": 10000,
+  "research": {
+    "officers": 3,
+    "actionPoints": 50,
+    "sequentialWithinBranch": true,
+    "goldDiscountSkill": "指导",
+    "goldDiscountMultiplier": 0.5,
+    "abilityExperienceByLevel": [
+      10,
+      20,
+      30,
+      50
+    ],
+    "abilityExperienceRule": "consumed technique points / 100",
+    "meritByLevel": [
+      500,
+      1000,
+      2000,
+      3000
+    ],
+    "timeEvidence": "super-difficulty empirical-exact only; full matrix open"
+  },
+  "notes": [
+    "IDs 0..31 are the eight Vanilla branches; PK adds IDs 32..35 as the domestic branch.",
+    "Damage multiplier 1.15 on elite spear/halberd/crossbow/cavalry replaces the 1.10 training damage multiplier; do not multiply 1.10*1.15.",
+    "Elite unit base attack/defense +10 is a separate panel-layer effect from the 1.15 combat damage multiplier.",
+    "Explosive Refining has a known PC-PK1.1 original-code attacker/defender bug; patch/version details belong to E8.",
+    "Effects marked wiki-high/reverse-partial are not promoted to full-disassembly exactness."
+  ],
+  "techniques": [
+    {
+      "id": 0,
+      "branchId": 0,
+      "branchKey": "spear",
+      "branchName": "枪兵",
+      "level": 1,
+      "name": "枪兵锻炼",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 1000,
+      "goldCost": 1000,
+      "pkOnly": false,
+      "effect": {
+        "damageMultiplier": 1.1
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 1,
+      "branchId": 0,
+      "branchKey": "spear",
+      "branchName": "枪兵",
+      "level": 2,
+      "name": "兵粮袭击",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 2000,
+      "goldCost": 2000,
+      "pkOnly": false,
+      "effect": {
+        "foodRaid": true
+      },
+      "evidence": "wiki-high"
+    },
+    {
+      "id": 2,
+      "branchId": 0,
+      "branchKey": "spear",
+      "branchName": "枪兵",
+      "level": 3,
+      "name": "奇袭",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 3000,
+      "goldCost": 5000,
+      "pkOnly": false,
+      "effect": {
+        "forestNoCounter": true
+      },
+      "evidence": "wiki-high"
+    },
+    {
+      "id": 3,
+      "branchId": 0,
+      "branchKey": "spear",
+      "branchName": "枪兵",
+      "level": 4,
+      "name": "精锐枪兵",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 5000,
+      "goldCost": 10000,
+      "pkOnly": false,
+      "effect": {
+        "damageMultiplier": 1.15,
+        "overridesTrainingDamage": true,
+        "baseAttackDelta": 10,
+        "baseDefenseDelta": 10,
+        "mobilityDelta": 6
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 4,
+      "branchId": 1,
+      "branchKey": "halberd",
+      "branchName": "戟兵",
+      "level": 1,
+      "name": "戟兵锻炼",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 1000,
+      "goldCost": 1000,
+      "pkOnly": false,
+      "effect": {
+        "damageMultiplier": 1.1
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 5,
+      "branchId": 1,
+      "branchKey": "halberd",
+      "branchName": "戟兵",
+      "level": 2,
+      "name": "矢盾",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 2000,
+      "goldCost": 2000,
+      "pkOnly": false,
+      "effect": {
+        "blockProbability": 0.3,
+        "scope": "crossbow normal/support; not tactics"
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 6,
+      "branchId": 1,
+      "branchKey": "halberd",
+      "branchName": "戟兵",
+      "level": 3,
+      "name": "大盾",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 3000,
+      "goldCost": 5000,
+      "pkOnly": false,
+      "effect": {
+        "blockProbability": 0.3,
+        "scope": "normal/support; not tactics"
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 7,
+      "branchId": 1,
+      "branchKey": "halberd",
+      "branchName": "戟兵",
+      "level": 4,
+      "name": "精锐戟兵",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 5000,
+      "goldCost": 10000,
+      "pkOnly": false,
+      "effect": {
+        "damageMultiplier": 1.15,
+        "overridesTrainingDamage": true,
+        "baseAttackDelta": 10,
+        "baseDefenseDelta": 10,
+        "mobilityDelta": 6
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 8,
+      "branchId": 2,
+      "branchKey": "crossbow",
+      "branchName": "弩兵",
+      "level": 1,
+      "name": "弩兵锻炼",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 1000,
+      "goldCost": 1000,
+      "pkOnly": false,
+      "effect": {
+        "damageMultiplier": 1.1
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 9,
+      "branchId": 2,
+      "branchKey": "crossbow",
+      "branchName": "弩兵",
+      "level": 2,
+      "name": "应射",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 2000,
+      "goldCost": 2000,
+      "pkOnly": false,
+      "effect": {
+        "returnFire": true
+      },
+      "evidence": "reverse-partial+wiki"
+    },
+    {
+      "id": 10,
+      "branchId": 2,
+      "branchKey": "crossbow",
+      "branchName": "弩兵",
+      "level": 3,
+      "name": "强弩",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 3000,
+      "goldCost": 5000,
+      "pkOnly": false,
+      "effect": {
+        "rangeDelta": 1,
+        "targetRange": 3
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 11,
+      "branchId": 2,
+      "branchKey": "crossbow",
+      "branchName": "弩兵",
+      "level": 4,
+      "name": "精锐弩兵",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 5000,
+      "goldCost": 10000,
+      "pkOnly": false,
+      "effect": {
+        "damageMultiplier": 1.15,
+        "overridesTrainingDamage": true,
+        "baseAttackDelta": 10,
+        "baseDefenseDelta": 10,
+        "mobilityDelta": 6
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 12,
+      "branchId": 3,
+      "branchKey": "cavalry",
+      "branchName": "骑兵",
+      "level": 1,
+      "name": "骑兵锻炼",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 1000,
+      "goldCost": 1000,
+      "pkOnly": false,
+      "effect": {
+        "damageMultiplier": 1.1
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 13,
+      "branchId": 3,
+      "branchKey": "cavalry",
+      "branchName": "骑兵",
+      "level": 2,
+      "name": "良马产出",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 2000,
+      "goldCost": 2000,
+      "pkOnly": false,
+      "effect": {
+        "mobilityDelta": 4
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 14,
+      "branchId": 3,
+      "branchKey": "cavalry",
+      "branchName": "骑兵",
+      "level": 3,
+      "name": "骑射",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 3000,
+      "goldCost": 5000,
+      "pkOnly": false,
+      "effect": {
+        "normalAttackRangeDelta": 1,
+        "targetRange": 2
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 15,
+      "branchId": 3,
+      "branchKey": "cavalry",
+      "branchName": "骑兵",
+      "level": 4,
+      "name": "精锐骑兵",
+      "relatedAbility": "leadership",
+      "techniquePointCost": 5000,
+      "goldCost": 10000,
+      "pkOnly": false,
+      "effect": {
+        "damageMultiplier": 1.15,
+        "overridesTrainingDamage": true,
+        "baseAttackDelta": 10,
+        "baseDefenseDelta": 10,
+        "mobilityDelta": 2
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 16,
+      "branchId": 4,
+      "branchKey": "training",
+      "branchName": "练兵",
+      "level": 1,
+      "name": "熟练兵",
+      "relatedAbility": "war",
+      "techniquePointCost": 1000,
+      "goldCost": 1000,
+      "pkOnly": false,
+      "effect": {
+        "moraleCap": 120,
+        "baseMoraleCap": 100
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 17,
+      "branchId": 4,
+      "branchKey": "training",
+      "branchName": "练兵",
+      "level": 2,
+      "name": "难所行军",
+      "relatedAbility": "war",
+      "techniquePointCost": 2000,
+      "goldCost": 2000,
+      "pkOnly": false,
+      "effect": {
+        "difficultTerrain": true,
+        "trestleDamageImmune": true
+      },
+      "evidence": "reverse-partial+wiki"
+    },
+    {
+      "id": 18,
+      "branchId": 4,
+      "branchKey": "training",
+      "branchName": "练兵",
+      "level": 3,
+      "name": "军制改革",
+      "relatedAbility": "war",
+      "techniquePointCost": 3000,
+      "goldCost": 5000,
+      "pkOnly": false,
+      "effect": {
+        "commandCapacityDelta": 3000
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 19,
+      "branchId": 4,
+      "branchKey": "training",
+      "branchName": "练兵",
+      "level": 4,
+      "name": "云梯",
+      "relatedAbility": "war",
+      "techniquePointCost": 5000,
+      "goldCost": 10000,
+      "pkOnly": false,
+      "effect": {
+        "buildingDamageMultiplierOrdinary": 1.4,
+        "buildingDamageMultiplierSiegeAndShip": 1.2
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 20,
+      "branchId": 5,
+      "branchKey": "invention",
+      "branchName": "发明",
+      "level": 1,
+      "name": "车轴强化",
+      "relatedAbility": "intelligence",
+      "techniquePointCost": 1000,
+      "goldCost": 1000,
+      "pkOnly": false,
+      "effect": {
+        "siegeMobilityDelta": 4
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 21,
+      "branchId": 5,
+      "branchKey": "invention",
+      "branchName": "发明",
+      "level": 2,
+      "name": "石造建筑",
+      "relatedAbility": "intelligence",
+      "techniquePointCost": 2000,
+      "goldCost": 2000,
+      "pkOnly": false,
+      "effect": {
+        "unlocks": [
+          "石墙",
+          "石兵八阵"
+        ]
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 22,
+      "branchId": 5,
+      "branchKey": "invention",
+      "branchName": "发明",
+      "level": 3,
+      "name": "投石开发",
+      "relatedAbility": "intelligence",
+      "techniquePointCost": 3000,
+      "goldCost": 5000,
+      "pkOnly": false,
+      "effect": {
+        "unlocks": [
+          "投石",
+          "斗舰",
+          "投石台"
+        ]
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 23,
+      "branchId": 5,
+      "branchKey": "invention",
+      "branchName": "发明",
+      "level": 4,
+      "name": "霹雳",
+      "relatedAbility": "intelligence",
+      "techniquePointCost": 5000,
+      "goldCost": 10000,
+      "pkOnly": false,
+      "effect": {
+        "splash": true,
+        "genericAdjacentDamageRatio": "1/3",
+        "cityCenterTotalRatio": 1.6
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 24,
+      "branchId": 6,
+      "branchKey": "defense",
+      "branchName": "防卫",
+      "level": 1,
+      "name": "工兵育成",
+      "relatedAbility": "politics",
+      "techniquePointCost": 1000,
+      "goldCost": 1000,
+      "pkOnly": false,
+      "effect": {
+        "durabilityRecoveryBoost": true
+      },
+      "evidence": "reverse-partial+wiki"
+    },
+    {
+      "id": 25,
+      "branchId": 6,
+      "branchKey": "defense",
+      "branchName": "防卫",
+      "level": 2,
+      "name": "设施强化",
+      "relatedAbility": "politics",
+      "techniquePointCost": 2000,
+      "goldCost": 2000,
+      "pkOnly": false,
+      "effect": {
+        "unlocks": [
+          "砦",
+          "连弩楼"
+        ]
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 26,
+      "branchId": 6,
+      "branchKey": "defense",
+      "branchName": "防卫",
+      "level": 3,
+      "name": "城壁强化",
+      "relatedAbility": "politics",
+      "techniquePointCost": 3000,
+      "goldCost": 5000,
+      "pkOnly": false,
+      "effect": {
+        "unlocks": [
+          "城塞"
+        ],
+        "baseMaxDurabilityDelta": 3000
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 27,
+      "branchId": 6,
+      "branchKey": "defense",
+      "branchName": "防卫",
+      "level": 4,
+      "name": "防御强化",
+      "relatedAbility": "politics",
+      "techniquePointCost": 5000,
+      "goldCost": 10000,
+      "pkOnly": false,
+      "effect": {
+        "baseCounterDamageMultiplier": 2
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 28,
+      "branchId": 7,
+      "branchKey": "fire",
+      "branchName": "火攻",
+      "level": 1,
+      "name": "木兽开发",
+      "relatedAbility": "intelligence",
+      "techniquePointCost": 1000,
+      "goldCost": 1000,
+      "pkOnly": false,
+      "effect": {
+        "unlocks": [
+          "木兽"
+        ]
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 29,
+      "branchId": 7,
+      "branchKey": "fire",
+      "branchName": "火攻",
+      "level": 2,
+      "name": "神火计",
+      "relatedAbility": "intelligence",
+      "techniquePointCost": 2000,
+      "goldCost": 2000,
+      "pkOnly": false,
+      "effect": {
+        "firePlanRangeDelta": 2,
+        "targetRange": 3
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 30,
+      "branchId": 7,
+      "branchKey": "fire",
+      "branchName": "火攻",
+      "level": 3,
+      "name": "火药炼成",
+      "relatedAbility": "intelligence",
+      "techniquePointCost": 3000,
+      "goldCost": 5000,
+      "pkOnly": false,
+      "effect": {
+        "unlocks": [
+          "火炎种",
+          "火炎球"
+        ]
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 31,
+      "branchId": 7,
+      "branchKey": "fire",
+      "branchName": "火攻",
+      "level": 4,
+      "name": "爆药炼成",
+      "relatedAbility": "intelligence",
+      "techniquePointCost": 5000,
+      "goldCost": 10000,
+      "pkOnly": false,
+      "effect": {
+        "unlocks": [
+          "业火种",
+          "业火球"
+        ],
+        "fireDamageModifier": true,
+        "pcPk11BugSensitive": true
+      },
+      "evidence": "reverse-bug-sensitive"
+    },
+    {
+      "id": 32,
+      "branchId": 8,
+      "branchKey": "domestic",
+      "branchName": "内政",
+      "level": 1,
+      "name": "木牛流马",
+      "relatedAbility": "politics",
+      "techniquePointCost": 1000,
+      "goldCost": 1000,
+      "pkOnly": true,
+      "effect": {
+        "transportMobilityDelta": 3
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 33,
+      "branchId": 8,
+      "branchKey": "domestic",
+      "branchName": "内政",
+      "level": 2,
+      "name": "港关扩张",
+      "relatedAbility": "politics",
+      "techniquePointCost": 2000,
+      "goldCost": 2000,
+      "pkOnly": true,
+      "effect": {
+        "portPassLimits": {
+          "money": [
+            10000,
+            40000
+          ],
+          "food": [
+            100000,
+            400000
+          ],
+          "troops": [
+            30000,
+            60000
+          ],
+          "equipment": [
+            30000,
+            60000
+          ]
+        }
+      },
+      "evidence": "reverse+wiki"
+    },
+    {
+      "id": 34,
+      "branchId": 8,
+      "branchKey": "domestic",
+      "branchName": "内政",
+      "level": 3,
+      "name": "政令整备",
+      "relatedAbility": "politics",
+      "techniquePointCost": 3000,
+      "goldCost": 5000,
+      "pkOnly": true,
+      "effect": {
+        "naturalOrderLossImmunityProbability": 0.5
+      },
+      "evidence": "reverse"
+    },
+    {
+      "id": 35,
+      "branchId": 8,
+      "branchKey": "domestic",
+      "branchName": "内政",
+      "level": 4,
+      "name": "人心掌握",
+      "relatedAbility": "politics",
+      "techniquePointCost": 5000,
+      "goldCost": 10000,
+      "pkOnly": true,
+      "effect": {
+        "loyaltyLossImmunityProbability": "2/3",
+        "scope": "reverse-engineered natural/prisoner loyalty-loss check"
+      },
+      "evidence": "reverse"
+    }
+  ]
+}
