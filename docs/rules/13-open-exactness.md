@@ -595,12 +595,64 @@ levelCoef：小10 / 中15 / 大20
 
 详见 `30-debate-psychological-damage.md`。
 
-### 10. 非骑战法来源的负伤 / 战死概率
+### 10. 非骑战法来源的负伤 / 战死（E16 主问题已闭合）
 
-骑兵突击/突进的直接战死率已有逆向公式；普通击破后的俘虏率也已有高置信逆向公式。
+E16 证明原问题不能用“普攻/战法/火焰/设施各自有一个统一伤亡率”来回答。
 
-仍未知：
-- 普攻、其他战法、火焰、设施攻击等造成武将负伤/战死的精确版本化概率。
+PC-PK1.1 已确认是**来源分流**：
+
+```text
+弩系火矢/贯射/乱射 -> 005974C0 狙伤
+猛者成功位移      -> 50%负伤
+业火种/业火球      -> 00597350 战死+独立负伤
+骑兵突击/突进      -> 005975E0 专用战死
+单挑               -> 单挑专用结算
+```
+
+普通攻击、一般战法、设施攻击导致部队壊灭后，不再额外添加一个自拟“2～5%战死 / 15%负伤”roll。
+
+弩系狙伤核心：
+
+```ts
+P =
+  tacticBase
+  + statTier
+  + personality
+  + critical
+  - 1
+```
+
+```text
+火矢0 / 贯射1 / 乱射2
+性格0/1/2/3
+会心+1
+statTier=-2/-1/0/+1
+理论峰值6%
+```
+
+业火 conditional casualty：
+
+```ts
+death =
+  max(0, baseDeath + personality - abilityProtection)
+
+injury =
+  max(0, 2 + personality - abilityProtection)
+```
+
+其中普通/高战死 base=2/4；无战死仅跳过 death，不跳过 injury。
+
+因此本项原“普攻、其他战法、火焰、设施攻击的精确版本化概率全部未知”从 open 移除。
+
+仍 open 的是更细粒度：
+
+- `005971F0` 多候选 selector；
+- `005963E0` 伤病等级；
+- `00596480` 的1/7/12阈值原指令；
+- 猛者候选/伤病等级；
+- Vanilla/PS2/Wii等价性。
+
+详见 `31-non-cavalry-casualty-sources.md`。
 
 ### 11. 地形伤害随机值
 
@@ -640,6 +692,7 @@ levelCoef：小10 / 中15 / 大20
 
 以下已从 provisional 升级：
 
+- 非骑兵武将伤亡来源分流、弩系狙伤与业火conditional casualty（E16）
 - 单挑通用连续核心：actionRatio、命中/闪避/格挡、普通/必杀伤害与斗志增长（E14）
 - 征兵数量与征兵治安下降公式（PC-PK1.1 confirmed-by-disassembly；Vanilla empirical-high）
 - 行动力完整恢复公式（empirical-high；原版逆向 + PK 存档复算）
