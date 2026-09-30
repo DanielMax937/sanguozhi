@@ -29,6 +29,7 @@
 | C7 | 各设施精确开发日数 | 综合政治、全门槛表与统一耐久进度模型已核；全表可由25%初始耐久+每旬floor(1.5P)逐格精确重建，原函数体仍open | empirical-exact table reconstruction + reverse-engineered-structure | ✅ |
 | C8 | 商人 / 粮食交易 | 20AP、都市2格敌军禁用、每城每旬一次、TradePrice/HasMerchant状态、买粮无损/卖粮×0.8及政治非线性交易效果已核；闭式仍open | official-confirmed + empirical-high + reverse-engineered-structure | ✅ |
 | C9 | 行动力 | 军团独立AP、君主/都督+城市+武将×军师公式、最终向下取整、PK符节台取整后+5及255上限已核；主恢复函数体仍open | empirical-exact formula + reverse-engineered-structure + PK save cross-validation | ✅ |
+| C10 | 治安 | 巡查边界/公式、征兵量与掉治安精确式、收入倍率、换季自然下降、PK整备政令、贼80阈值与根城持续已核；巡查敌军半减/贼生成概率等仍open | reverse-engineered core + official-confirmed + empirical-high patrol | ✅ |
 
 ## A1 关键纠错
 
@@ -855,3 +856,40 @@ SIRE结构确认：`ActionPoints` 属于 `struct_corp`，军团长也属于 corp
 证据边界：跨军团拆分母城/港关时武将参数归属、官职/宝物修正读取 base 还是 display stat、行动力恢复主函数体仍 open。
 
 下一项：C10 治安。
+
+## C10 关键结论
+
+治安系统已拆成四条独立精确链：巡查、征兵副作用、收入倍率、换季自然下降。
+
+巡查：
+
+```ts
+patrolGain = floor(sumLeadership / 28) + 2
+```
+
+官方锁定100金、20AP、最多3人、每都市每旬一次；敌军2格内效果下降。普通公式来自长期实测，敌军半减的奇数取整仍保留 empirical-high。
+
+征兵掉治安由 PC-PK1.1 `005C3A50` 直接锁定：
+
+```ts
+orderLoss = floor(actualRecruited / (sumCharisma + 100))
+```
+
+`actualRecruited` 已经过名声/兵舍/超级AI/兵临城下/城市上限修正，所以名声并不存在独立第二次“治安×1.5”，而是先放大实际征兵数。
+
+收入：`effectiveSecurity=max(security,50)`，50～100线性，因此80只是防贼安全线，不是收入断点。
+
+换季下降：
+
+```ts
+base=floor(max(1,90-governorCharm)/10)
+loss=min(5, base + GetRandomX(3))
+```
+
+PK整备政令为精确50%整次免降，不是损失减半。
+
+贼/异民族：治安<80才可能新出根城；已有根城不会因治安恢复到100而消失。亲○防对应异族根城；威压的80→60阈值模型采用 empirical-high，并保留早期资料冲突标记。
+
+没有可靠证据证明低治安直接提高瘟疫/蝗灾概率；该问题留到 C11 灾害。
+
+下一项：C11 灾害。
