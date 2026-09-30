@@ -20,7 +20,8 @@
 | B7 | 水陆切换、舰船切换 | 陆/水两套兵装并存；当前坐标选 active profile；仅河/海触发 naval；运输水上固定走舸行军表；渡/浅滩不切船 | reverse-engineered-structure + empirical-high | ✅ |
 | B8 | 港关容量与所属关系 | 静态母城关系与当前势力归属分离；收入按同ForceID判定；基础/扩展容量已核；四类数量兵装与小数量兵器分离 | reverse-engineered + confirmed-game-data | ✅ |
 | B9 | 堤防、水攻机制 | 静态 flood 标记、四城堤防、800耐久、击破即一次性水攻、野外受淹部队全灭、每旬恢复10%并10旬回满 | reverse-engineered + empirical-high | ✅ |
-| C1 | 金钱收入完整公式 | 下一项 | pending | ⬜ |
+| C1 | 金钱收入完整公式 | 基础金+市场类产量→造币→难度→治安；征税/富豪逐旬取整；港关20%与同势力条件均已锁 | PC-PK1.1 reverse-engineered | ✅ |
+| C2 | 粮食收入完整公式 | 下一项 | pending | ⬜ |
 
 ## A1 关键纠错
 
@@ -384,3 +385,70 @@ restore = trunc(maxDurability / 10)
 ```
 
 800耐久即每旬 +80；击破后10旬回满。该分支绕过普通“附近有敌军则不恢复”判断，回满后重新设为完成、中立陷阱。
+
+
+## C1 关键结论
+
+原函数：
+
+```text
+0049E590 GetCityMoneyIncome
+```
+
+精确主公式：
+
+```ts
+rawMoney =
+  city.BaseMoneyProduction
+  + Σ(effectiveMarketYield)
+
+M = floor(
+  rawMoney
+  * difficultyPercent
+  * max(city.security, 50)
+  / 10000
+)
+```
+
+市场原始产量：
+
+```text
+Lv1 100
+Lv2 120
+Lv3 150
+鱼市场 200
+大市场 300
+黑市 80
+```
+
+造币只加成 Lv1/2/3：
+
+```text
+100→150
+120→180
+150→225
+```
+
+大市场/鱼市场/黑市不吃造币。
+
+市场合并未完成：
+
+```text
+Lv2未完成 → 按Lv1
+Lv3未完成 → 按Lv2
+```
+
+征税/富豪：
+
+```ts
+H = floor(M/2)
+
+普通 = M
+富豪 = M + floor(M/2)
+征税 = 3*H
+富豪+征税 = 3*H + floor(H/2)
+```
+
+富豪只在月初触发，11日/21日只结征税半额。
+
+港关每个 tick 取母城当次 base tick 的20%，且必须与母城当前 ForceID 相同；富豪的额外50%同样只在月初触发。
