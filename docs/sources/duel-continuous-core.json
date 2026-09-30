@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "audit": "E14",
+  "target": "PC-PK-oriented generic duel core",
+  "evidenceLevel": "reverse-transcribed-cross-validated",
+  "provenance": {
+    "translatedCore": {
+      "repository": "tankyc/sango_infinity",
+      "path": "Project/Assets/Sango/Scripts/Game/Duel/Duel.cs",
+      "sourceClaim": "translated from s11_sys_duel.h + s11_sys_duel.cpp",
+      "notes": [
+        "keeps original-style names and address-region annotations",
+        "generic core extracted before/around later data-driven person hooks"
+      ]
+    },
+    "directAddressCorroboration": {
+      "repository": "sjn4048/311MemoryResearch",
+      "path": "内存资料/地址资料.txt",
+      "addresses": [
+        "005097C3",
+        "005097EB"
+      ],
+      "originalBytes": "6B C0 64 99 F7 F9",
+      "decoded": [
+        "imul eax,eax,100",
+        "cdq",
+        "idiv ecx"
+      ],
+      "semantic": "positive-value integer ratio = trunc(100*numerator/denominator)"
+    }
+  },
+  "stances": {
+    "attack": {
+      "speed": 42,
+      "hit": 71,
+      "attack": 16,
+      "block": 12,
+      "attackSub": 3,
+      "spiritGain": 4
+    },
+    "defense": {
+      "speed": 10,
+      "hit": 200,
+      "attack": 14,
+      "block": 90,
+      "attackSub": 2,
+      "spiritGain": 8
+    },
+    "spirit": {
+      "speed": 15,
+      "hit": 125,
+      "attack": 14,
+      "block": 55,
+      "attackSub": 3,
+      "spiritGain": 10
+    },
+    "fury": {
+      "speed": 5,
+      "hit": 71,
+      "attack": 16,
+      "block": 22,
+      "attackSub": 3,
+      "spiritGain": 7
+    }
+  },
+  "actionRatio": {
+    "range": [
+      1,
+      99
+    ],
+    "equalStrength": 50,
+    "anchors": [
+      {
+        "attacker": 1,
+        "defender": 1,
+        "ratio": 50
+      },
+      {
+        "attacker": 80,
+        "defender": 80,
+        "ratio": 50
+      },
+      {
+        "attacker": 100,
+        "defender": 100,
+        "ratio": 50
+      },
+      {
+        "attacker": 100,
+        "defender": 95,
+        "ratio": 55
+      },
+      {
+        "attacker": 80,
+        "defender": 75,
+        "ratio": 52
+      },
+      {
+        "attacker": 100,
+        "defender": 80,
+        "ratio": 62
+      },
+      {
+        "attacker": 80,
+        "defender": 60,
+        "ratio": 60
+      }
+    ],
+    "formulaId": "duelScoreSquaredShare"
+  },
+  "ordinaryDamage": {
+    "formula": "max(trunc(trunc(stance.attack*ratio/50)*stance.attackSub*7/27),3)",
+    "equalStrength": {
+      "attack": 12,
+      "defense": 7,
+      "spirit": 10
+    },
+    "sameGapExample": {
+      "high": {
+        "attacker": 100,
+        "defender": 95,
+        "ratio": 55,
+        "attackStanceDamage": 13
+      },
+      "middle": {
+        "attacker": 80,
+        "defender": 75,
+        "ratio": 52,
+        "attackStanceDamage": 12
+      }
+    },
+    "resultMultipliers": {
+      "normalBlock": "trunc(damage/2)",
+      "defenseStanceBlock": "max(trunc(damage*3/10),1)",
+      "dodge": 0
+    },
+    "genericBuffs": {
+      "attackBuff": "*5/4",
+      "defenseBuff": "*3/4",
+      "attackCriticalPerHit": "*3/4"
+    },
+    "longWeapons": {
+      "crescentHalberd": "*9/8",
+      "genericLongWeapon": "*10/9"
+    }
+  },
+  "actionResult": {
+    "hitThreshold": [
+      "n=attackerStance.hit",
+      "n=trunc(n*(100-defenderStance.block)/80)",
+      "n=trunc(n*actionRatio/50)",
+      "n+=RandInt(10) // 0..9",
+      "n=clamp(n,10,99)"
+    ],
+    "resolutionOrder": [
+      "hit",
+      "dodge",
+      "block"
+    ],
+    "dodgeFormula": [
+      "n=10+trunc((defenderStrength-attackerStrength)/3)",
+      "n=clamp(n,5,30)",
+      "if defender stance is defense: n+=25"
+    ]
+  },
+  "attackCritical": {
+    "hitCount": "3+RandInt(2)",
+    "possibleHits": [
+      3,
+      4
+    ],
+    "eachHitResolvesSeparately": true
+  },
+  "specialDamage": {
+    "base": "trunc(actionRatio*20/55)",
+    "cap": 80,
+    "equalStrength": {
+      "base": 18,
+      "deadlyMove": 21,
+      "weakPoint": 18,
+      "peerless": 54,
+      "hiddenWeapon": 21,
+      "feintRetreat": 27
+    }
+  },
+  "spiritGain": {
+    "stanceCoefficients": {
+      "attack": 4,
+      "defense": 8,
+      "spirit": 10,
+      "fury": 7
+    },
+    "swordMultiplier": "*3/2",
+    "hpBelow50": "*3/2",
+    "hpBelow30": "*2",
+    "receivingMultiplier": "*5/4",
+    "minimumInput": {
+      "ordinary": 3,
+      "receivingDefenseOrSpiritStance": 5
+    },
+    "difficulty": {
+      "easyPlayer": "*6/5",
+      "hardPlayer": "*4/5",
+      "hardAI": "*6/5"
+    }
+  },
+  "versionBoundary": {
+    "pcPkGenericCore": "reverse-transcribed-cross-validated",
+    "vanilla": "compatibility-assumption until binary-level confirmation",
+    "console": "open"
+  },
+  "open": [
+    "original hard-coded person exceptions before modern data-driven refactor",
+    "Vanilla binary-level equivalence",
+    "PS2/Wii formula differences"
+  ],
+  "sources": [
+    "https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/地址资料.txt",
+    "https://w.atwiki.jp/sangokushi11/pages/2481.html",
+    "https://w.atwiki.jp/sangokushi11/pages/30.html",
+    "https://w.atwiki.jp/sangokushi11/pages/2484.html"
+  ]
+}
