@@ -873,3 +873,47 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://wenku.baidu.com/view/ad1f1482561252d381eb6edb?bfetype=new
 
 证据等级：相性公式与忠诚0..255/UI100为reverse-engineered；换季触发与义理/野望语义为empirical-high；汉室爵位/拥废/特定事件常量为documented exact；完整自然掉忠gate、君主义理野望附加项、人心掌握原函数、俘虏月度闭式仍open。
+
+### D7 太守 / 都督 / 军师专项
+
+- 《三國志11 with パワーアップキット》官方说明书：
+  - “军师”命令直接任命势力军师；
+  - 仅智力>=70的武将可任命；
+  - 智力越高，助言越准确；
+  - 期间/必要金/行动力/执行武将均无；
+  - 驱虎吞狼针对敌都市太守，太守野望高且忠诚低时更易成功。
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 311SireCustomizedPackageDev：
+  - `struct_force.AdvisorID`；
+  - `struct_corp.CorpsLeaderID`；
+  - `struct_city.PrefectID`；
+  - `0047C310 GetCityPrefectID` / `00485160 GetPrefectIDForHarborOrPass`；
+  - `00488C10 IsGovernor / 00488C20 IsPrefect / 00488CF0 IsAdvisorOfForce`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 日文 Wiki FAQ：
+  - 太守/都督不能直接手选，而是自动决定；
+  - 港/关/堤防无太守则耐久不恢复，恢复量受太守政治影响。
+  https://w.atwiki.jp/sangokushi11/pages/8.html
+- 日文 Wiki 爵位・官职：
+  - 都督/太守自动选候选中可指挥兵数最大者；
+  - 同值时统率高者优先；
+  - 有官职者相对无官职者存在优先边界。
+  https://w.atwiki.jp/sangokushi11/pages/111.html
+- 日文 Wiki 内政/委任：
+  - 都督任命优先级再次记录为可指挥兵数→统率，有官职者优遇。
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki 据点伤害：
+  - 太守统率>=66开始降低守兵损失；
+  - 太守武力>=66开始提高反击伤害；
+  - 太守统率不影响耐久伤害；
+  - 超过太守可指挥兵数的驻兵不继续贡献据点攻防。
+  https://w.atwiki.jp/sangokushi11/pages/92.html
+- 日文 Wiki 各种经验：
+  - 军师智力影响助言命中率，也影响行动力恢复。
+  https://w.atwiki.jp/sangokushi11/pages/79.html
+- 旧2ch排序讨论：
+  - 太守存在“君主>都督>一般→指挥兵数→统率”的更细描述；
+  - 都督有“官职顺序”说法，与后期Wiki统一口径存在细节冲突，因此只作selector exactness边界。
+  https://w.atwiki.jp/sangokushi11/pages/1938.html
+
+证据等级：角色字段/helper为PC-PK1.1 reverse-engineered；军师70门槛/助言语义/零成本为official-confirmed；太守/都督自动selector主排序为empirical-high，完整EXE comparator仍open。
