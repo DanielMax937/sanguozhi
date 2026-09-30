@@ -350,3 +350,40 @@
 - 游民星空 PK 建筑篇：
   - 合并 +10 技巧P、合并阶段的短期收益变化等同期实测。
   https://www.gamersky.com/handbook/200609/33180.shtml
+
+
+### C7 内政设施开发日数专项
+
+- 《三國志11 with パワーアップキット》官方说明书：
+  - 开发最多选择3名武将；
+  - 政治越高，开发期间越短；
+  - 多人开发可缩短显示日数。
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 日文 Wiki 内政：
+  - 综合政治 = 最高政治 + 其余两人政治之和/3（四舍五入）；
+  - 10～90日完整门槛表；
+  - 不足90日最低门槛时固定100日；
+  - 编辑器255政治时综合政治上限425，造币/谷仓与铜雀台仍无法10日完成。
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 旧2ch/Wiki存档：
+  - 市场开始建设时125/500耐久的实测记录。
+  https://w.atwiki.jp/sangokushi11/pages/1869.html
+- 311SireCustomizedPackageDev：
+  - `struct_building_type +C2` 为最大耐久；
+  - `struct_building.Durability / ConstructionStatus` 保存建设进度状态。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311MemoryResearch：
+  - `内存资料/修改记录by sjn4048.txt` 定位“市场等内政建设”路径 `005BC4C1`；
+  - 当前公开资料未展开开发日数完整函数体。
+  https://github.com/sjn4048/311MemoryResearch
+
+全表精确重建模型：
+
+```ts
+P = highestPolitics + floor((otherPoliticsSum + 1) / 3)
+initial = roundHalfUp(maxDurability / 4)
+gainPerTurn = floor(3 * P / 2)
+days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
+```
+
+该式对日文 Wiki 所有设施类别、所有10～90日门槛逐格一致；证据等级标为 `empirical-exact table reconstruction`，不冒充已恢复原函数体。
