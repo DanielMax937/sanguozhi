@@ -30,6 +30,7 @@
 | C8 | 商人 / 粮食交易 | 20AP、都市2格敌军禁用、每城每旬一次、TradePrice/HasMerchant状态、买粮无损/卖粮×0.8及政治非线性交易效果已核；闭式仍open | official-confirmed + empirical-high + reverse-engineered-structure | ✅ |
 | C9 | 行动力 | 军团独立AP、君主/都督+城市+武将×军师公式、最终向下取整、PK符节台取整后+5及255上限已核；主恢复函数体仍open | empirical-exact formula + reverse-engineered-structure + PK save cross-validation | ✅ |
 | C10 | 治安 | 巡查边界/公式、征兵量与掉治安精确式、收入倍率、换季自然下降、PK整备政令、贼80阈值与根城持续已核；巡查敌军半减/贼生成概率等仍open | reverse-engineered core + official-confirmed + empirical-high patrol | ✅ |
+| C11 | 灾害 | current/scheduled 疫病/蝗灾/丰作状态结构、月初状态→收入顺序、丰作×1.5、风水/祈愿边界及蝗灾/疫病已确认效果已核；发生率/持续/精确损失仍open | reverse-engineered state structure + reverse-engineered harvest effect + confirmed/empirical damage semantics | ✅ |
 
 ## A1 关键纠错
 
@@ -567,7 +568,7 @@ struct_city.DisasterPredictions bit2 = 丰作预定
 → 港关取20%
 ```
 
-丰作状态更新函数位于月度收入之前；产生概率、持续期、祈愿概率和早期无印丰作flag bug留到 C12 灾害专项。
+丰作状态更新函数位于月度收入之前；产生概率、持续期、祈愿概率和早期无印丰作flag bug留到 C11 灾害专项。
 
 
 ## C4 关键结论
@@ -893,3 +894,45 @@ PK整备政令为精确50%整次免降，不是损失减半。
 没有可靠证据证明低治安直接提高瘟疫/蝗灾概率；该问题留到 C11 灾害。
 
 下一项：C11 灾害。
+
+## C11 关键结论
+
+灾害系统不是季初即时 roll 后立刻丢弃，而是城市持久状态：
+
+```text
+struct_city +0x9C Disasters
+  bit0 疫病 / bit1 蝗灾 / bit2 丰作
+
+struct_city +0xA0 DisasterPredictions
+  bit0 疫病预定 / bit1 蝗灾预定 / bit2 丰作预定
+```
+
+月初调用顺序已定位：
+
+```text
+00590C30 MonthlyAction
+→ 0058F4E0 季节/丰作状态处理
+→ 00590490 钱粮收入
+```
+
+丰作 current flag 的收入效果为源码级：
+
+```ts
+food = floor(baseFoodTick * 3 / 2)
+```
+
+之后才进入征收、米道与港关20%。
+
+风水只阻止新的疫病/蝗灾，不会治疗已经发生的灾害；祈愿只确认提高丰作倾向，精确概率修正仍 open。
+
+蝗灾：确认破坏农场并损失粮食；Lv1 被拆时 -30P，Lv3 不拆，Lv2及直接粮损量仍 open。
+
+疫病：确认减少驻军并恶化武将健康；精确兵损、患病 RNG 与持续时间仍 open。
+
+旧 provisional `蝗灾5% / 疫病5% / 丰作10% / 每年1月判定 / 疫病每旬5–10%兵损 / 30%患病 / 持续1–2季` 已从规则正文撤回。
+
+SIRE 的 `00911238 ReducePopDueToDisaster / 009112E0 DisasterPopLossFactors` 属于扩展代码区，只能说明 SIRE 支持灾害人口损失扩展，不能反推 San11PK.exe 原版百分比。
+
+C 维度完成。
+
+下一项进入 D 维度：D1 武将生命周期 / 状态字段。
