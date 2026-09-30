@@ -787,13 +787,310 @@ terrainMoveCostHeightModifier = 0
 - https://dl.3dmgame.com/patch/26091.html
 - https://vincecarter0315.pixnet.net/blog/posts/14217116027
 
-## 7. 水陆切换与港关
+## 7. 水陆切换与舰船
 
-- 陆军进入可航行水域后按舰船配置转为水军兵科；无高级舰船时使用走舸。
-- 水上使用水军适性与舰船战法。
-- 港/关可驻兵、存储金粮兵装，并可被攻陷。
+### 7.1 原程序保存的是“陆/水两套兵装”，不是一次性变身
 
-### 港关容量
+`[PC-PK1.1][reverse-engineered-structure]`
+
+SIRE 已命名以下原函数：
+
+~~~text
+00495480 GetLandMobilityEquipID
+          取得部队陆上行军兵装
+
+00495490 GetNavalMobilityEquipID
+          取得部队水上行军兵装
+
+00496160 GetTroopMobilityEquipID(troop, coord)
+          按指定坐标取得当时应使用的行军兵装
+
+00912FE8 getTroopEquipmentIDs(mainSlot, secondarySlot, onWater)
+          根据主/副装备栏与 onWater 返回当前正确的
+          “行军兵装 + 武器兵装”组合
+~~~
+
+`struct_troop` 同时保存：
+
+- `EquipmentStatus`；
+- `CurrentUnitType`（当前实际使用兵种，区分水陆）；
+- 六兵科实际适性；
+- 当前实际攻击/防御/移动力。
+
+因此 fidelity 模型应理解成：
+
+~~~text
+一支部队
+├─ 陆上兵装 / 陆战兵科
+└─ 水上兵装 / 舰船
+
+当前坐标
+↓
+选择当前 active equipment / unit category
+↓
+派生当前攻防、移动、战法、适性
+~~~
+
+部队从水面重新上陆后，恢复使用原来的陆上兵装；不是把原陆兵装永久替换为舰船。
+
+### 7.2 真正触发“水上行军兵装”的地形只有河 / 海
+
+`[PC-PK1.1][reverse-engineered]`
+
+原“进入目标格移动力消耗”函数直接写死：
+
+~~~text
+terrain 7 = 河 → naval branch
+terrain 8 = 海 → naval branch
+其余 terrain → land branch
+~~~
+
+也就是：
+
+~~~ts
+const onWater =
+  targetTerrainId === TERRAIN_RIVER ||
+  targetTerrainId === TERRAIN_SEA
+~~~
+
+这带来三个重要纠错：
+
+1. **渡所**不是水军切换格；
+2. **浅滩**不是水军切换格；
+3. **港**也不是普通“水面格”的 naval branch。
+
+所以：
+
+~~~text
+渡所 / 浅滩：
+仍按陆上兵装、陆上移动表处理
+
+河 / 海：
+切到舰船/水上兵装
+
+川：
+不可正常通行，不等于“河”
+~~~
+
+港口本身是据点/建筑交互；低层 terrain ID 为“港”时不会因为名字里有“港”就走 `GetNavalMobilityEquipID`。
+
+### 7.3 水上使用水军适性，而不是原陆兵科适性
+
+`[PC-PK1.1][reverse-engineered]`
+
+原 `00496570 计算部队属性` 对兵装 ID 9（走舸）有明确分支：
+
+- 正常战斗部队上船时，走正常兵科适性计算；
+- 此时使用的是**水军兵科适性**；
+- 运输队则走运输专用衰减分支，不按正常水军战斗部队计算。
+
+因此不能实现成：
+
+~~~ts
+// 错误
+waterAttack = landAttack
+waterDefence = landDefence
+waterTacticLevel = landUnitAptitude
+~~~
+
+正确模型是分别派生：
+
+~~~ts
+landProfile = deriveBy(landEquipment, landAptitude)
+waterProfile = deriveBy(shipEquipment, waterAptitude)
+
+activeProfile =
+  onWater ? waterProfile : landProfile
+~~~
+
+长期实测的舰船基础值也与此结构一致：
+
+| 舰船 | 攻击系数 | 防御系数 | 基础移动 |
+|---|---:|---:|---:|
+| 走舸 | 0.75 | 0.75 | 16 |
+| 楼船 | 0.90 | 0.85 | 20 |
+| 斗舰 | 1.00 | 0.95 | 20 |
+
+### 7.4 舰船战法同样按“舰船 + 水军适性”判定
+
+`[COMMON][empirical-high; structure reverse-engineered]`
+
+标准水军战法：
+
+~~~text
+走舸：
+  火矢，水军B
+
+楼船：
+  火矢，水军B
+  猛撞/激突，水军A
+
+斗舰：
+  火矢，水军B
+  猛撞/激突，水军A
+  投石，水军S
+~~~
+
+所以陆上即使是：
+
+~~~text
+骑兵S
+枪兵S
+井阑
+投石车
+~~~
+
+进入河/海以后，当前可用战法仍改由：
+
+~~~text
+当前舰船
++
+水军适性
+~~~
+
+决定。
+
+### 7.5 走舸是标准低级水上 profile；楼船/斗舰是高级舰船
+
+`[COMMON][empirical-high]`
+
+长期资料与决战剧本数据都显示，同一支陆军编成可以组合：
+
+~~~text
+枪兵 + 走舸
+骑兵 + 楼船
+井阑 + 楼船
+……
+~~~
+
+也就是说陆上兵装与水上舰船是**并列保存**，并非一套装备二选一。
+
+没有配高级舰船时，普通战斗部队以走舸作为基础水上 profile。楼船需要舰船准备；“开发投石”完成后，楼船在战斗 profile 上升级为斗舰，获得更高攻防与投石战法。
+
+这一条的玩法行为为 `empirical-high`；库存扣减、已存在楼船在研究完成瞬间如何重解释的内部函数，留到后续技巧/兵装专项继续核。
+
+### 7.6 运输队水上固定使用走舸行军兵装
+
+`[PC-PK1.1][reverse-engineered]`
+
+这是 B3/B4 已经锁死、这里补齐语义。
+
+`00495490 GetNavalMobilityEquipID` 的逆向显示：
+
+~~~text
+运输队 → 返回兵装ID 9（走舸）
+其他部队 → 返回其水上舰船兵装
+~~~
+
+因此：
+
+- 运输队不会因为势力拥有楼船/斗舰，就把**行军移动表**改成高级舰船；
+- 水上运输基础移动来自走舸16；
+- 再加运输队固定 +5；
+- 木牛流马 +3；
+- 搬运 +5；
+- 水上还可叠加操舵 +4。
+
+全条件时：
+
+~~~text
+16 + 5 + 3 + 5 + 4 = 33
+~~~
+
+### 7.7 上下水本身没有发现独立“换船手续费/额外移动税”
+
+`[PC-PK1.1][negative-evidence-high]`
+
+已逆出的逐格移动成本函数，在跨越水陆边界时只做：
+
+~~~text
+读取目标格 terrain
+↓
+目标是河/海 → 取水上行军兵装
+否则 → 取陆上行军兵装
+↓
+查对应 terrain move cost
+~~~
+
+没有看到：
+
+~~~text
+上船额外 -N 移动力
+下船额外 -N 移动力
+额外消耗行动力
+额外消耗气力
+~~~
+
+因此当前 fidelity 模式**不要另造 embark/disembark cost**。
+
+不过完整可移动范围函数 `005A4540` 尚未逐指令恢复，所以“跨边界后剩余移动预算如何在陆/水两套总移动力之间比较”的每一个内部细节仍保留为小型 exactness gap。
+
+### 7.8 从水上攻击陆地时，攻击者仍是水军 profile
+
+当前兵种按**攻击者所在格**选择，而不是按目标格选择。
+
+因此：
+
+~~~text
+攻击者在河/海
+目标在岸上/港/城市附近
+~~~
+
+攻击者仍使用：
+
+- 舰船攻防；
+- 水军适性；
+- 舰船战法；
+- 水上专属特技/技巧边界。
+
+这也是斗舰可以从水上投石攻击沿岸城市、港口与设施的基础。
+
+### 7.9 当前实现接口
+
+建议不要在“进入水格”事件里直接修改永久兵种，而是让派生层按坐标选择：
+
+~~~ts
+function isNavalCoordinate(cell) {
+  return (
+    cell.terrainId === TERRAIN_RIVER ||
+    cell.terrainId === TERRAIN_SEA
+  )
+}
+
+function getActiveEquipmentProfile(troop, cell) {
+  return isNavalCoordinate(cell)
+    ? troop.navalProfile
+    : troop.landProfile
+}
+~~~
+
+路径搜索则对每个**目标格**调用对应的：
+
+~~~ts
+getTroopMobilityEquipID(troop, targetCoord)
+~~~
+
+这与原函数职责最接近。
+
+### 7.10 当前证据边界
+
+已源码/结构确认：
+
+- 陆上/水上行军兵装是独立函数；
+- 当前坐标可决定使用哪一套行军兵装；
+- 河/海才进入水上移动分支；
+- 渡所/浅滩不触发水上兵装；
+- 运输队水上行军映射为走舸；
+- 水军适性与陆军适性是独立兵科。
+
+仍待完整原函数：
+
+- `00912FE8 getTroopEquipmentIDs` 的完整主/副装备解析细节；
+- 出征时高级舰船库存扣减的原函数；
+- `005A4540` 在一次路径跨陆水边界时如何处理两套“总移动力上限”的所有边界；
+- 开发投石完成瞬间对既有楼船库存/在外部队的内部重解释时点。
+
+## 7A. 港关容量
 
 `[COMMON][confirmed]` 基础：
 
