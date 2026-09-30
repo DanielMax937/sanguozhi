@@ -1,12 +1,323 @@
 # 武将生命周期、人际关系、忠诚、登用、俘虏、官职
 
-## 1. 武将状态机
+## 1. 武将生命周期 / 状态字段
 
-建议统一为：
+`[PC-PK1.1][reverse-engineered-structure]`
+
+旧文档把武将写成一条线性状态机：
 
 `未登场 -> 未发现 -> 在野 -> 所属 -> 俘虏 -> 释放/登用/处斩/逃亡`
 
-所属身份可为一般、军师、太守、都督、君主。并行状态包括健康、出征、调动、执行任务、死亡。
+这个抽象过于粗糙。PC-PK1.1 的 `struct_person` 实际把武将状态拆成多个**正交维度**；其中只有 `Identity` 是单值身份枚举，其余如军师、任务、出征、健康、死亡预定都不是 Identity。
+
+### 1.1 Identity 是唯一主身份枚举
+
+`struct_person +0xA0 = Identity`。
+
+| ID | 原身份 | 引擎建议名 |
+|---:|---|---|
+| 0 | 君主 | `LORD` |
+| 1 | 都督 | `GOVERNOR` |
+| 2 | 太守 | `PREFECT` |
+| 3 | 一般 | `NORMAL` |
+| 4 | 在野 | `WILD` |
+| 5 | 俘虏 | `PRISONER` |
+| 6 | 未登场 | `NOT_INTRODUCED` |
+| 7 | 未发现 | `NOT_DISCOVERED` |
+| 8 | 死亡 | `DEAD` |
+
+原程序有一整组直接 identity helper：
+
+```text
+00488C00 IsLord
+00488C10 IsGovernor
+00488C20 IsPrefect
+00488C30 IsNormalPerson
+00488C40 IsInWilderness
+00488C50 IsNotIntroduced
+00488C60 IsNotDiscovered
+00488C70 IsPrisoner
+00488C80 IsDead
+004898F0 SetPersonIdentity
+```
+
+因此实现里不要再使用模糊的 `所属` 作为第十种身份；“所属势力的现役武将”本质上是 Identity 0～3。
+
+### 1.2 军师不是 Identity
+
+这是旧状态机最重要的纠错之一。
+
+`struct_person.Identity` 中没有“军师”。军师保存在势力结构：
+
+```text
+struct_force +0x08 AdvisorID
+00488CF0 IsAdvisorOfForce
+```
+
+所以一个武将可以同时：
+
+```text
+Identity = NORMAL / PREFECT / ...
+并且
+force.AdvisorID = personId
+```
+
+军师是**势力角色引用**，不是武将生命周期身份。
+
+### 1.3 出征 / 在部队不是 Identity
+
+武将是否在野外部队由独立关系判断：
+
+```text
+004891C0 IsInArmy
+00489220 GetPersonArmyID
+00489280 IsArmyLeader
+004A6340 GetPersonLocatedSPID
+```
+
+`struct_person` 还保存：
+
+```text
++0x94 Legion      // 军团
++0x98 BuildingID  // 所属建筑
++0x9C Location    // 当前所在关系字段
+```
+
+因此“出征”不能建成 `Identity=EXPEDITION`。现役身份仍是君主/都督/太守/一般，同时通过 troop/location 关系表示人在部队中。
+
+### 1.4 执行任务不是 Identity
+
+任务有独立运行时字段：
+
+```text
++0x13C Mission             // -1 = 无任务；任务编码 0..43
++0x140 MissionParameters[6]
++0x158 MissionDuration
+```
+
+并存在：
+
+```text
+004897B0 GetPersonNthMissionParameter
+004A5780 ClearPersonTasks
+004A73A0 SetPersonTask
+004A7410 SetPersonTask
+005B8250 GetPersonsPtrArrayForMissionAndTarget
+005BA320 GetMissonDestBuildingID
+```
+
+所以外交、登用、调动、召唤等“人在路上”的状态，应由 Mission + 参数 + duration 表示，而不是再创造一组 lifecycle identity。
+
+### 1.5 已行动 / 已褒奖 / 死亡预定是 Flags
+
+`struct_person +0x124 Flags` 至少包含：
+
+```text
+已行动
+已褒奖
+死亡预定
+舌战五种话术 flag
+```
+
+对应：
+
+```text
+00489120 HasActed
+00489140 HasPraised
+00489160 IsMarkedForDeath
+00489B40 SetPersonActionStatus
+```
+
+因此尤其要区分：
+
+```text
+IsMarkedForDeath == true
+!= Identity == DEAD
+```
+
+“死亡预定”只是运行时 flag；真正死亡才把 Identity 变为 8。
+
+### 1.6 健康与体力也是独立维度
+
+```text
++0x15C HealthLevel
+  0 健康
+  1 轻伤
+  2 重伤
+  3 濒危
+
++0x128 Stamina / Vitality
+  0..100
+```
+
+原函数还明确区分：
+
+```text
+00489030 GetPersonActualAttr        // 受伤病影响
+00489050 GetPersonBasicAttr         // 不受伤病影响
+0048A110 GetPersonAttr(...health...)
+0048A2D0 UpdateTroopParameters      // 健康变化后同步实际五维/部队参数
+```
+
+所以健康不是 `Identity` 的子状态，也不能只在 UI 临时扣属性。
+
+### 1.7 俘虏与禁仕需要保留专门计数器
+
+`struct_person` 直接保存：
+
+```text
++0x160 FormerAllegiance
++0x164 ForbiddenLord
++0x168 ForbiddenMonths
++0x169 CaptiveMonths
+```
+
+并存在：
+
+```text
+0048A940 setCaptiveMonths
+004A7340 SetCaptiveMonths
+```
+
+`00590C30 MonthlyAction` 月初还会先调用 `0058BB30` 处理“俘虏月份 / 禁仕月份计数器”。
+
+因此：
+
+- “俘虏”不只是一个身份标签，还伴随俘虏时长；
+- “刚拒绝/逃离某君主后暂时不能再仕官”不能靠一个 boolean 表示；
+- `FormerAllegiance` 与当前 Identity / 当前势力必须分开。
+
+### 1.8 登场年、出生年、没年是静态生命周期数据，不是当前状态
+
+`struct_person` 保存：
+
+```text
++0x44 YearOfDebut
++0x48 YearOfBirth
++0x4C YearOfDeath
++0x50 CauseOfDeath
++0xA8 ScheduledLord   // 登场预定君主
+```
+
+这些字段描述生命周期的**基础剧本数据**；当前是否未登场、未发现、在野、所属或死亡仍看 `Identity`。
+
+日文事件条件也明确把两件事分开写：
+
+```text
+已达到登场预定年
+AND
+身份为 在野 或 未发现
+```
+
+说明 `currentYear >= YearOfDebut` 并不能替代 Identity 判定。
+
+同一武将在不同剧本里也可以分别以未登场、未发现、在野、一般、死亡等不同 Identity 开局。
+
+### 1.9 生命周期不是固定单向链
+
+可以确认的显式转换至少包括：
+
+```text
+未发现 -> 在野
+  004A5B20 SetPersonAsNomadicPerson
+
+未发现 / 在野 -> 现役
+  登用或事件可直接成为所属武将
+
+现役 -> 俘虏
+  战败/城陷等捕获路径
+
+俘虏 -> 现役 / 非所属状态
+  登用、释放、逃亡等路径
+
+任意存活身份 -> 死亡
+  最终 Identity = DEAD
+```
+
+而且事件可以直接改变 Identity，因此不要写死成每个人必须经历：
+
+```text
+未登场 -> 未发现 -> 在野 -> 一般
+```
+
+例如推荐类事件明确允许“已到登场年且 Identity=未发现”的武将直接被登用；推荐失败又可能把未发现武将转成在野。
+
+### 1.10 推荐的引擎模型
+
+```ts
+interface PersonRuntimeState {
+  identity: PersonIdentity;
+
+  corpsId: number;
+  buildingId: number;
+  location: number;
+
+  mission: number;          // -1 or 0..43
+  missionParams: number[];  // 6
+  missionDuration: number;
+
+  hasActed: boolean;
+  hasPraised: boolean;
+  markedForDeath: boolean;
+
+  health: 0 | 1 | 2 | 3;
+  stamina: number;
+
+  formerAllegiance: number;
+  forbiddenLord: number;
+  forbiddenMonths: number;
+  captiveMonths: number;
+}
+```
+
+势力侧另外保存：
+
+```ts
+force.advisorId
+```
+
+不要把军师塞回 `identity`。
+
+### 1.11 D1 当前结论
+
+D1 可以标为：
+
+```text
+PC-PK1.1 reverse-engineered-structure
+```
+
+已经锁定：
+
+- 9 个 Identity 枚举及原 helper；
+- 军师不属于 Identity；
+- 出征/在部队不属于 Identity；
+- Mission/参数/期间是独立任务维度；
+- 已行动、已褒奖、死亡预定属于 flags；
+- 真正死亡与死亡预定严格分离；
+- 健康0～3、体力0～100独立保存；
+- FormerAllegiance / ForbiddenLord / ForbiddenMonths / CaptiveMonths 独立保存；
+- YearOfDebut / Birth / Death / CauseOfDeath / ScheduledLord 与当前 Identity 分离；
+- 生命周期不是固定单向链，事件和命令可以直接发生身份转换。
+
+仍 open / 留给后续 D 项：
+
+- `未登场` 在普通月度流程中转成 `未发现/现役` 的完整 caller 与 ScheduledLord 分支；
+- 自然死亡、死亡预定 flag 和 Identity=DEAD 的精确逐旬转换；
+- 伤病自然恢复/恶化时序；
+- 各 Mission 0..43 的完整名称、参数语义与完成 caller；
+- 俘虏/禁仕计数器的每月精确更新与重置条件。
+
+来源：
+- 311SireCustomizedPackageDev `struct_person`、身份/健康枚举、Person helper 地址表
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311SireCustomizedPackageDev：`004A5B20 SetPersonAsNomadicPerson`、任务 setter/clear、军师判定
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311MemoryResearch `函数[每月例行处理].txt`：月初俘虏/禁仕计数处理入口
+  https://github.com/sjn4048/311MemoryResearch
+- 日文 Wiki 推荐事件：登场年条件与在野/未发现 Identity 分离
+  https://w.atwiki.jp/sangokushi11/pages/952.html
+- 日文 Wiki 武将剧本页：同一人物可在不同剧本以未登场/未发现/在野/所属/死亡开局
+  https://w.atwiki.jp/sangokushi11/pages/869.html
 
 ## 2. 登场、寿命与死亡
 
@@ -14,28 +325,14 @@
 
 `[PC-PK1.1][reverse-engineered-partial]`
 
-SIRE 开发资料确认武将静态结构同时保存：
+D1 已确认 `YearOfDebut / YearOfBirth / YearOfDeath / CauseOfDeath / ScheduledLord` 是基础生命周期字段，而当前 `Identity / HealthLevel / markedForDeath` 是独立运行时状态。
 
-- `YearOfBirth`
-- `YearOfDeath`
-- `CauseOfDeath`
-
-并且原程序另外存在：
+另外已定位：
 
 - `0048A000 GetDeathYear`：取得角色死亡年；
-- `00489160 IsMarkedForDeath`：判断是否已“预定死亡”；
-- 独立的运行时“健康状态”字段。
+- `00489160 IsMarkedForDeath`：读取“预定死亡” flag。
 
-因此“史实没年”不能直接等价为“本局最终死亡日期”。生命周期应按：
-
-```text
-基础没年 / 死因
-→ 计算死亡阈值
-→ 运行时预定死亡 flag
-→ 健康恶化 / 普通死亡
-```
-
-实现。
+所以“史实没年”不能直接等价为“本局最终死亡日期”。死亡 RNG、寿命设置和健康恶化的精确流程放到 D2 继续核。
 
 逆向来源：
 - https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
