@@ -1428,28 +1428,444 @@ interface CitySeasonState {
 - https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
 - https://w.atwiki.jp/sangokushi11/pages/1828.html
 
-## 4. 内政设施
+## 4. 无印内政设施
 
-无印共有：市场、造币、农场、谷仓、兵舍、锻冶、厩舍、工房、造船。
+`[VANILLA][confirmed-mechanism / empirical-high-data]`
 
-`[PK][confirmed]` 新增：大市场、鱼市场、黑市、军屯农、练兵所、符节台、军事府、人才府、外交府、计略府。
+无印《三國志11》的都市开发体系包含 9 类标准内政设施；PK 保留这 9 类，再在其上新增特殊设施与吸收合并。
 
-### PK 已确认细节
+原设施类型 ID（PC-PK1.1 数据层沿用同一基础序列）：
+
+| ID | 设施 |
+|---:|---|
+| 31 | 市场 Lv1 |
+| 32 | 农场 Lv1 |
+| 33 | 兵舍 |
+| 34 | 锻冶 |
+| 35 | 厩舍 |
+| 36 | 工房 |
+| 37 | 造船厂 |
+| 38 | 造币厂 |
+| 39 | 谷仓 |
+
+### 4.1 基础数据
+
+无印/PK Lv1 共通基础值：
+
+| 设施 | 建造金 | 耐久 | 防御 | 完成时技巧P | 核心作用 |
+|---|---:|---:|---:|---:|---|
+| 市场 | 200 | 500 | 6 | +30 | 增加每月金收入 |
+| 农场 | 200 | 500 | 6 | +30 | 增加季度兵粮收入 |
+| 兵舍 | 300 | 800 | 6 | +30 | 允许执行征兵 |
+| 锻冶 | 300 | 800 | 6 | +30 | 允许生产枪 / 戟 / 弩 |
+| 厩舍 | 300 | 800 | 6 | +30 | 允许生产军马 |
+| 工房 | 300 | 800 | 6 | +30 | 允许生产攻城兵器 |
+| 造船厂 | 300 | 800 | 6 | +30 | 允许生产舰船 |
+| 造币厂 | 400 | 1000 | 6 | +50 | 邻接市场效果 ×1.5 |
+| 谷仓 | 400 | 1000 | 6 | +50 | 邻接农场效果 ×1.5 |
+
+技巧 P 的无印数值在 2006 年原版时期资料已经有明确记录：
+
+```text
+市场 / 农场 / 兵舍 / 锻冶 / 厩舍 / 工房 / 造船 = +30P
+造币 / 谷仓 = +50P
+```
+
+### 4.2 市场与农场
+
+无印机制：
+
+```text
+市场
+→ 每月1日进入城市金收入
+
+农场
+→ 1/4/7/10月1日进入城市粮收入
+```
+
+完整 PC-PK1.1 数值公式已经在 C1 / C2 逆出；C4 不再重复。
+
+无印 2006 年的原始攻略也明确记录：
+
+- 市场按月产金；
+- 农场按季产粮；
+- 收入设施需要在对应结算日前完成，才能参与之后的收入 tick。
+
+不同无印补丁/难度资料在“UI显示的市场/农场单体数值”上存在口径混用，因此 C4 不用早期攻略中的显示值反推二进制 `yield` 常量；版本化的 PC-PK1.1 数值以 C1/C2 为准。
+
+### 4.3 造币厂 / 谷仓：六角邻接 1 格
+
+`[VANILLA][confirmed-behavior]`
+
+造币和谷仓不是“整座城市全局加成”。
+
+规则：
+
+```text
+造币厂：
+仅影响与其六角相邻一格的市场
+
+谷仓：
+仅影响与其六角相邻一格的农场
+```
+
+原 PC-PK1.1 收入函数调用 `0049E500`：
+
+```text
+判断目标设施坐标周边一格有无指定设施
+```
+
+因此一个位置合适的造币/谷仓理论上最多覆盖周围 6 个开发格。
+
+加成：
+
+```ts
+yieldWithSupport = floor(baseYield * 3 / 2)
+```
+
+无印 2006 年实测还明确确认：
+
+> 同一个市场/农场即使同时邻接多个造币/谷仓，也不会重复叠加。
+
+底层应按 boolean：
+
+```ts
+hasAdjacentMint
+hasAdjacentGranary
+```
+
+而不是统计数量后指数叠乘。
+
+### 4.4 无印没有吸收合并 / Lv2 / Lv3
+
+这条是版本边界。
+
+无印只有：
+
+```text
+市场 Lv1
+农场 Lv1
+兵舍 Lv1
+锻冶 Lv1
+厩舍 Lv1
+```
+
+不存在玩家通过吸收合并得到：
+
+```text
+Lv2
+Lv3
+```
+
+PK 才加入：
+
+- 市场 / 农场 / 兵舍 / 锻冶 / 厩舍的吸收合并；
+- Lv2 / Lv3 数据；
+- 新增十类特殊内政设施。
+
+因此 fidelity 模式必须有：
+
+```ts
+if (ruleset === VANILLA) {
+  absorptionMergeEnabled = false
+}
+```
+
+而不能仅通过“玩家不去点合并”模拟无印。
+
+### 4.5 兵舍 / 锻冶 / 厩舍的真正作用：增加本回合可执行次数
+
+`[VANILLA][empirical-high + reverse-engineered-structure]`
+
+2006 年无印专项实测明确指出：
+
+> 同类军需设施并不直接放大“每次征兵/生产的数量”，而是增加一回合内该命令可使用的次数。
+
+原城市结构也直接保存：
+
+```text
++A8 EmptyBarracks
++A9 EmptyForge
++AA EmptyStable
++AB EmptyWorkshop
++AC EmptyShipyard
+```
+
+并存在：
+
+```text
+0047B820 AdjustCityBarracksCount
+004B3EE0 AdjustCityBuilding
+```
+
+用于增减城市当前空闲的征兵/生产设施数量。
+
+因此应拆成：
+
+```ts
+recruitAmount = recruitmentFormula(officers, city, ...)
+recruitCommandSlots = availableBarracks
+
+weaponAmount = productionFormula(officers, city, ...)
+weaponCommandSlots = availableForgeOrStable
+```
+
+不要写成：
+
+```ts
+recruitAmount *= barracksCount
+weaponAmount *= forgeCount
+```
+
+### 4.6 兵舍
+
+兵舍解锁：
+
+```text
+征兵
+```
+
+每个当前可用兵舍提供一次征兵命令槽。
+
+征兵量本身由：
+
+- 执行武将魅力；
+- 治安；
+- 特技；
+- 难度 / AI 修正等
+
+另一套公式决定，留到后续征兵专项。
+
+多个兵舍的价值是让同一回合可以多次执行征兵，不是单次征兵直接 ×N。
+
+### 4.7 锻冶
+
+锻冶解锁普通兵装：
+
+```text
+枪
+戟
+弩
+```
+
+每个当前可用锻冶提供一次对应生产命令槽。
+
+单次最多生产多少由武将政治/生产公式、能吏等另一层规则决定，不由锻冶数量直接乘算。
+
+### 4.8 厩舍
+
+厩舍解锁：
+
+```text
+军马
+```
+
+其设施数量同样影响可执行生产次数，而非把一次军马生产量直接乘设施数。
+
+### 4.9 工房
+
+工房解锁攻城兵器生产。
+
+基础技术状态下至少包括：
+
+```text
+冲车
+井阑
+```
+
+后续技巧会改变可生产/实际使用的高级兵器：
+
+```text
+冲车 → 木兽
+井阑 → 投石
+```
+
+一个生产命令的产物数量为 1 件攻城兵器，而不是几千“兵装”。
+
+生产需要时间；精确工期与执行武将能力放到 E2“兵器舰船工期”专项。
+
+### 4.10 造船厂
+
+造船厂解锁舰船生产。
+
+基础舰船：
+
+```text
+楼船
+```
+
+研究相应技巧后：
+
+```text
+楼船 profile → 斗舰
+```
+
+每次生产以“1艘”为单位，且存在生产工期；具体时间留到 E2。
+
+### 4.11 工房/造船与“当前空闲设施”状态
+
+城市结构单独保存：
+
+```text
+EmptyWorkshop
+EmptyShipyard
+```
+
+所以工房/造船也不能简单建模为：
+
+```ts
+city.hasWorkshop = true
+```
+
+至少需要保留：
+
+```ts
+availableWorkshopCount
+availableShipyardCount
+```
+
+无印玩家资料把兵舍及各种装备生产设施统一描述为“设施数量决定一回合可执行次数”。
+
+具体长工期生产任务开始后，空闲计数如何占用/恢复的逐指令 caller 仍留给 E2，不在 C4 伪造。
+
+### 4.12 开发用地属于城市，不是任意地图格
+
+原城市结构：
+
+```text
+DomesticLandCount
+DevelopedLandCount
+DomesticLands[30]
+```
+
+说明都市开发使用的是预定义的城市内政用地。
+
+因此无印开发不是：
+
+```text
+在城市领域任意草地都能放市场
+```
+
+而是只能在该城预置的开发格中进行。
+
+各城开发地数量并不相同；现有 `docs/sources/cities.json.developmentLots` 已保存城市开发格数量。
+
+### 4.13 建造完成才生效
+
+市场/农场/造币/谷仓的收入函数都会检查设施：
+
+```text
+constructionStatus == completed
+```
+
+未完成则跳过。
+
+兵舍和生产设施同样只有完成后才进入可用设施计数。
+
+因此：
+
+```ts
+underConstructionFacility.effectActive = false
+```
+
+无印不存在“半完成市场按耐久比例产生收入”的机制。
+
+### 4.14 C4 权威模型
+
+建议把九类设施分三类：
+
+```ts
+IncomeFacility:
+  Market
+  Farm
+
+AdjacencyMultiplierFacility:
+  Mint
+  Granary
+
+CommandCapacityFacility:
+  Barracks
+  Forge
+  Stable
+  Workshop
+  Shipyard
+```
+
+这比一个统一的：
+
+```ts
+building.effectValue
+```
+
+更接近原作结构。
+
+### 4.15 C4 当前结论
+
+已经锁定：
+
+- 无印标准内政设施就是 9 类；
+- 31～39 的基础设施 ID 序列；
+- 基础费用、耐久、防御；
+- 完成开发技巧 P；
+- 市场按月、农场按季；
+- 造币/谷仓只作用相邻一格；
+- 1.5倍且不叠加；
+- 无印没有吸收合并和 Lv2/Lv3；
+- 兵舍/锻冶/厩舍/工房/造船数量控制可用命令槽，而非直接乘单次产量；
+- 工房生产攻城兵器、造船生产舰船；
+- 开发只能使用城市预定义内政格；
+- 未完成设施不生效。
+
+留到后续专项：
+
+- C7：各设施精确开发日数；
+- E1：枪/戟/弩/马的生产价格和单次数量；
+- E2：攻城兵器/舰船工期与空闲工房/船厂恢复时点；
+- C5：PK 新增十设施；
+- C6：PK 吸收合并。
+
+来源：
+- 311SireCustomizedPackageDev `material/数据汇总.md`
+- 311SireCustomizedPackageDev `material/结构体汇总.md`
+- 311SireCustomizedPackageDev `material/内存地址汇总.md`
+- 311MemoryResearch `Func-收支04/05`
+- https://w.atwiki.jp/sangokushi11/pages/74.html
+- https://www.gamersky.com/handbook/200604/22088.shtml
+- https://www.gamersky.com/handbook/200603/21634.shtml
+- https://www.gamersky.com/handbook/200603/21665.shtml
+- https://3g.ali213.net/gl/html/5805.html
+
+## 5. PK 新增十设施（待 C5 专项核对）
+
+当前已有摘要，C5 将逐项核对源码/实测：
+
+- 大市场
+- 鱼市场
+- 黑市
+- 军屯农
+- 练兵所
+- 符节台
+- 军事府
+- 人才府
+- 外交府
+- 计略府
+
+当前旧摘要仅作为待核材料：
 
 - 大市场：大都市限定；不吃造币加成。
 - 鱼市场：有港城市限定；不吃造币加成。
-- 黑市：低成本，次年 1 月强制撤去；不会额外降低治安。
-- 军屯农：季度产粮，兵 ≤15000 时 1500；超过时约为驻兵 10%。
-- 练兵所：训练效果 +50%；舰船制造日数缩短 20 日。
-- 符节台：行动力恢复 +5；多城可叠加，并加快俘虏忠诚下降。
-- 军事府：军事指令行动力减半；陷阱/军事设施建设费 -20%。
-- 人才府：人才指令行动力减半；**技巧研究时间固定缩短 20 日**。
-- 外交府：外交行动力减半；亲善费用减半。
-- 计略府：计略行动力减半；提高流言成功率（精确概率增量仍未 confirmed）。
+- 黑市：低成本，次年 1 月强制撤去。
+- 军屯农：产粮与驻兵相关。
+- 练兵所：训练与舰船制造修正。
+- 符节台：行动力与俘虏忠诚。
+- 军事府：军事行动力与设置费用。
+- 人才府：人才行动力与技巧研究时间。
+- 外交府：外交行动力与亲善费用。
+- 计略府：计略行动力与流言成功率。
 
-来源：https://w.atwiki.jp/sangokushi11/pages/74.html
+这些细节在 C5 完成前不要再统一标 `confirmed`。
 
-## 5. PK 吸收合并
+## 6. PK 吸收合并
 
 `[PK][confirmed]`
 
@@ -1462,7 +1878,7 @@ interface CitySeasonState {
 
 来源：https://w.atwiki.jp/sangokushi11/pages/74.html
 
-## 6. 建设时间
+## 7. 建设时间
 
 `[COMMON/PK设施同公式][confirmed]`
 
@@ -1474,7 +1890,7 @@ interface CitySeasonState {
 
 来源：https://w.atwiki.jp/sangokushi11/pages/74.html
 
-## 7. 商人 / 粮食交易
+## 8. 商人 / 粮食交易
 
 机制与公式已从 provisional 升为 `[empirical-high]`。
 
@@ -1501,7 +1917,7 @@ interface CitySeasonState {
 
 政治 → 交易效果的**精确闭式函数**仍未取得；因此引擎应使用实测 lookup/interpolation，而不是文章中的线性近似式冒充内部公式。
 
-## 8. 行动力
+## 9. 行动力
 
 `[COMMON][empirical-high]`
 
@@ -1597,7 +2013,7 @@ adviserParam = 1.2 - 0.01 * (50 - intParam)
 
 > 证据等级保持 `empirical-high` 而非 `confirmed`：公式来自逆向/复算而非官方源码，但已跨原版时期与 PK 存档相互验证。
 
-## 9. 治安
+## 10. 治安
 
 - 治安影响收入和征兵量。
 - 巡查提高治安；征兵降低治安。
@@ -1676,7 +2092,7 @@ if (hasAdministrativeReform && ProbabilityCheck(50)) {
 
 生成概率、根城选格和每次兵力仍 open。
 
-## 10. 灾害
+## 11. 灾害
 
 `[COMMON][confirmed mechanism]`
 
