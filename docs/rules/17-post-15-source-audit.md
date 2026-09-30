@@ -41,6 +41,7 @@
 | D8 | 忠诚 / 俸禄 / 褒赏 | 褒赏100金/人+5AP/人/每回合一次与随机加忠、授予10AP、隐藏忠诚>100、月度俸禄与00590490收支顺序、欠薪专门掉忠路径已核；褒赏增量/欠薪点数仍open | official-confirmed reward semantics + reverse-engineered monthly salary dispatcher + empirical-random reward gain | ✅ |
 | D9 | 俘虏 | 捕获主概率、强运硬免疫、合围/铁壁/超级难度/戟战法修正、自然逃亡平方公式、月度掉忠、人心掌握2/3、50金维护与资金不足释放路径已核；名马 helper/血路城陷边界/释放排序等仍open | reverse-engineered capture + escape + loyalty + maintenance, wiki corroboration | ✅ |
 | D10 | 官职 | 80官职表、81项原数组结构、4000功绩阶梯、60000功绩上限、无官5000、军制改革+3000、能力加成入实际五维、自动封官忠诚90硬门槛与双评分分支已核；资格helper/候选排序/caller flag仍open | reverse-engineered office structure + auto-selector + confirmed static table | ✅ |
+| E1 | 部队编成 | struct_troop三将槽/TroopType、战斗出兵1兵下限与主将/据点/1~4兵装三重上限、金1万粮5万、输送6万兵/10万金/50万粮、陆水装备并存已核；最终资源提交与运输兵装逐类容量仍open | PC-PK1.1 reverse-engineered structure + sortie UI + confirmed gameplay | ✅ |
 
 ## A1 关键纠错
 
@@ -1361,4 +1362,57 @@ struct_office[81]
 
 D维度到此完成。
 
-下一项进入 E1：部队编成。
+## E1 关键结论
+
+PC-PK1.1 `struct_troop` 已确认一支部队固定三个人员槽：
+
+```text
+MainGeneralID
+SubGeneral1ID
+SubGeneral2ID
+```
+
+并以 `TroopType=0/1` 区分战斗部队与输送队。
+
+玩家出征界面 `00647250` 精确计算战斗部队兵力范围：
+
+```ts
+max = min(mainGeneralCommandCap, sourceTroops)
+
+if (unitType >= 1 && unitType <= 4) {
+  max = min(max, sourceEquipment[unitType])
+}
+
+min = max >= 1 ? 1 : max
+```
+
+所以枪/戟/弩/马要求兵装数量至少等于出兵数；剑与攻具不走这条数量限制。出兵下限源码写死为1。
+
+资源上限也已恢复：
+
+```text
+战斗部队：
+  金 10,000
+  粮 50,000
+
+输送队：
+  兵 60,000
+  金 100,000
+  粮 500,000
+```
+
+输送队同样可以携1主将+2副将；携带武器/马/攻具只是货物，不改变 `TroopType=1`。
+
+部队结构保留12组兵装 type+quantity，并有独立陆/水装备 getter；因此楼船/斗舰是按部队件数准备，入水后切换 active naval profile，不永久覆盖陆上兵装。
+
+旧 open“战斗部队携金到底多少”“无官带兵5000”“枪戟弩马是否与士兵一一对应”到此都已解决。
+
+仍 open：
+
+- 玩家按“确定”后的完整资源事务 finalizer；
+- 攻具/高级舰船的精确扣除与归还 caller；
+- 输送队兵装货物逐类型容量；
+- 出征武将候选过滤的完整函数体。
+
+下一项：E2 部队能力合成。
+
