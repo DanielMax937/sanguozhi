@@ -5,7 +5,7 @@
 
 ## 最新审计入口
 
-[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E13混乱/伪报持续与恢复](28-status-duration-recovery.md)。
+[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E14单挑连续公式](29-duel-continuous-formulas.md)。
 
 A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原blob复用，无历史段落丢失。历史快照不是当前进度指针。
 
@@ -26,6 +26,8 @@ E11技巧研究时间以 `26-technique-research-time.md` 为当前专项规范�
 E12技巧研究完成功绩以 `27-technique-research-merit.md` 为当前专项规范，结构化冲突证据为 `../sources/technique-research-merit.json`。现行500/1000/2000/3000仅是当前Wiki候选，早期500/1000/1500/2500同时保留；Lv3/Lv4的PC-PK1.1 exact值不得冒充已确认。
 
 E13混乱/伪报持续与恢复以 `28-status-duration-recovery.md` 为当前专项规范，结构化证据为 `../sources/status-duration-recovery.json`。PC-PK1.1自然恢复已确认是确定性倒计时：普通每旬-1、合资格阵系范围-2、到0恢复；普通计略初始duration和重复施放刷新语义仍保持open。
+
+E14单挑连续公式以 `29-duel-continuous-formulas.md` 为当前专项规范，结构化证据为 `../sources/duel-continuous-core.json`。PC-PK导向通用核心已闭合武力→actionRatio→Hit/Dodge/Block→伤害→斗志链；人物隐藏补正与Vanilla/主机版差异继续open。
 
 ## 版本标记
 
@@ -71,8 +73,10 @@ E13混乱/伪报持续与恢复以 `28-status-duration-recovery.md` 为当前专
 24. `23-technique-patch-differences.md` E8 Vanilla/PK补丁链、技巧版本差异、原BUG与社区修复profile
 25. `24-food-raid.md` E9兵粮袭击触发路径、数量模型与RNG边界
 26. `25-response-fire.md` E10应射箭类触发、射程/地形/支援边界与平台差异
-27. `26-technique-research-time.md` E11技巧研究时间分档、人才府修正与证据矩阵\n28. `27-technique-research-merit.md` E12技巧研究完成功绩冲突表、版本边界与PC exact缺口
+27. `26-technique-research-time.md` E11技巧研究时间分档、人才府修正与证据矩阵
+28. `27-technique-research-merit.md` E12技巧研究完成功绩冲突表、版本边界与PC exact缺口
 29. `28-status-duration-recovery.md` E13混乱/伪报状态计数、每旬恢复、阵系加速与初始duration边界
+30. `29-duel-continuous-formulas.md` E14单挑actionRatio、命中/闪避/格挡、伤害与斗志连续公式
 
 ## 来源优先级
 
