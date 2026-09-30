@@ -471,6 +471,520 @@ PC-PK1.1 reverse-engineered
 - https://w.atwiki.jp/sangokushi11/pages/13.html
 - https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
 
+## 3. 粮食收入完整公式
+
+`[PC-PK1.1][reverse-engineered]`
+
+### 2.1 城市原始季度粮收入 F0
+
+原函数：
+
+```text
+0049E810 计算城市收粮
+```
+
+城市静态字段：
+
+```text
+struct_city + 0x80 = BaseFoodProduction
+```
+
+当前 `docs/sources/cities.json.food` 对应的就是这项城市基础季度粮收入。例如：
+
+- 洛阳 4000
+- 许昌 5000
+- 成都 8000
+- 建业 8000
+
+### 2.2 农场 / 谷仓
+
+原版农场基础产量：
+
+| 设施 | 基础季度粮 |
+|---|---:|
+| 农场 Lv1 | 1500 |
+| 农场 Lv2 | 1800 |
+| 农场 Lv3 | 2250 |
+
+谷仓只对相邻一格的普通农场 Lv1/2/3 生效：
+
+```ts
+effectiveFarmYield = floor(baseFarmYield * 3 / 2)
+```
+
+因此：
+
+| 农场 | 无谷仓 | 有谷仓 |
+|---|---:|---:|
+| Lv1 | 1500 | 2250 |
+| Lv2 | 1800 | 2700 |
+| Lv3 | 2250 | 3375 |
+
+多个谷仓不会重复叠加；原函数只做“周围是否存在谷仓”的布尔判断。
+
+### 2.3 军屯农不吃谷仓
+
+`[PC-PK1.1][reverse-engineered]`
+
+军屯农在设施类型分支中会直接跳到自己的兵力公式，**不会进入谷仓邻接加成分支**。
+
+原函数等价为：
+
+```ts
+militaryFarmYield =
+  floor(
+    max(city.troops, 15000)
+    * 1500
+    / 15000
+  )
+```
+
+即：
+
+```ts
+militaryFarmYield =
+  floor(max(city.troops, 15000) / 10)
+```
+
+所以：
+
+- 0～14999兵：固定1500；
+- 15000兵：1500；
+- 20000兵：2000；
+- 30000兵：3000；
+- 100000兵：10000；
+- 150000兵：15000。
+
+这与长期实测“兵力一成、15000以下固定1500”完全一致。
+
+### 2.4 农场合并建设中的收入
+
+和市场完全同型：
+
+```text
+农场 Lv2 未完成
+→ 按 Lv1 计算
+
+农场 Lv3 未完成
+→ 按 Lv2 计算
+```
+
+所以吸收合并期间继续保留前一级产粮，而不是暂时归零。
+
+### 2.5 原始设施加总
+
+定义：
+
+```ts
+rawFood =
+  city.BaseFoodProduction
+  + Σ(effectiveFarmYield)
+  + Σ(militaryFarmYield)
+```
+
+在原版规则下军屯农通常一城只能建一个，但公式本身按遍历到的设施累加。
+
+### 2.6 难度修正
+
+`0049E810` 随后应用难度：
+
+```ts
+difficultyAdjustedFood =
+  EASY
+    ? ConvertFloatToInteger(rawFood * 1.25)
+    : NORMAL
+      ? rawFood
+      : SUPER_PLAYER
+        ? floor(rawFood * 75 / 100)
+        : SUPER_AI
+          ? floor(rawFood * 125 / 100)
+          : rawFood
+```
+
+其中 `00707A74 ConvertFloatToInteger` 是原程序自己的浮点转整数 helper。为了做到逐点一致，Easy 分支最好保留这个 helper 语义，不要擅自改成 JS 的 `Math.round`。
+
+### 2.7 治安修正
+
+和金收入一致：
+
+```ts
+effectiveSecurity = max(city.security, 50)
+
+F = floor(
+  difficultyAdjustedFood
+  * effectiveSecurity
+  / 100
+)
+```
+
+这里的 `F` 就是：
+
+> 当前城市在“本次粮食收入 tick”进入丰作 / 征收 / 米道之前的基础粮收入。
+
+所以治安低于50时一律按50计算。
+
+### 2.8 主公式顺序
+
+```text
+城市基础粮
++ 普通农场
++ 谷仓对普通农场的1.5倍
++ 军屯农（兵力/10，最低1500）
+↓
+难度
+↓
+治安（最低50）
+↓
+F
+↓
+丰作
+↓
+征收
+↓
+米道（城市仅季初）
+↓
+实际入账
+```
+
+### 2.9 正常季初收入
+
+没有征收时，只有：
+
+```text
+1 / 4 / 7 / 10 月 1 日
+```
+
+才进入粮食结算。
+
+令：
+
+```ts
+G =
+  hasHarvest
+    ? floor(F * 3 / 2)
+    : F
+```
+
+则普通季初：
+
+```ts
+cityBaseTick = G
+```
+
+若有米道：
+
+```ts
+cityQuarterStartIncome =
+  G + floor(G / 2)
+```
+
+否则：
+
+```ts
+cityQuarterStartIncome = G
+```
+
+### 2.10 征收：每月都结一次“半份季度粮”
+
+有征收时，不再要求季初；每个月1日都会结算。
+
+每个结算月先算丰作，再减半：
+
+```ts
+G =
+  hasHarvest
+    ? floor(F * 3 / 2)
+    : F
+
+H = floor(G / 2)
+```
+
+然后：
+
+```ts
+cityBaseTick = H
+```
+
+所以无丰作时，一个季度：
+
+```ts
+3 * floor(F / 2)
+```
+
+约等于普通季度粮的150%。
+
+### 2.11 米道 + 征收：城市只在季初再加50%
+
+城市本体有一个明确的“是否季度初”检查。
+
+因此：
+
+#### 季初月
+
+```ts
+income =
+  H + floor(H / 2)
+```
+
+#### 季度第2、3个月
+
+```ts
+income = H
+```
+
+所以一个季度：
+
+```ts
+cityQuarter =
+  3 * H
+  + floor(H / 2)
+```
+
+在无丰作、忽略取整时约为：
+
+```text
+1.75 × F
+```
+
+这正是长期攻略所说的“米道+征收≈1.75倍”。
+
+### 2.12 丰作与征收的运算顺序
+
+源码顺序明确：
+
+```text
+F
+↓
+丰作 ×1.5
+↓
+征收 ÷2
+↓
+米道（若本月满足）
+```
+
+因此有丰作+征收时不能先把 `F/2` 再乘1.5；奇数值会出现取整差异。
+
+例如：
+
+```ts
+G = floor(F * 3 / 2)
+H = floor(G / 2)
+```
+
+### 2.13 港 / 关基础粮收入
+
+港关仍然要求：
+
+```ts
+port.forceId === parentCity.forceId
+```
+
+否则本次没有母城附属粮收入。
+
+港关基础值使用的是母城**当次已经经过丰作与征收的 cityBaseTick**：
+
+```ts
+portBase =
+  floor(cityBaseTick / 5)
+```
+
+即20%。
+
+因此：
+
+- 丰作会自然放大港关基础粮；
+- 征收会使港关跟着每月有一份半额基数；
+- 港关自己没有独立农场/谷仓公式。
+
+### 2.14 PC-PK1.1 一个非常隐蔽的米道港关特例
+
+这是源码比攻略更细的一点。
+
+城市米道分支前有：
+
+```text
+是否季度初？
+```
+
+所以“征收”导致的季度第2、3个月，**城市本体不会触发米道**。
+
+但是港关米道分支：
+
+```text
+0059072B-00590744
+```
+
+没有再次检查“是否季度初”。
+
+它只判断：
+
+1. 本月城市粮 tick 是否非0；
+2. 母城是否有米道；
+3. 然后直接给港关再加 `floor(portBase/2)`。
+
+因此在 PC-PK1.1：
+
+> **若母城同时有征收+米道，港关在季度第2、3个月的征收 tick 也会继续吃米道 +50%。**
+
+也就是说，Wiki 常说的“米道只在季初生效”对**城市本体**是对的；但原月度函数里的港关分支存在这个额外行为。
+
+这是一个非常适合做实机 golden test 的原作细节，但从当前公开反汇编的控制流看已经相当明确。
+
+### 2.15 港关米道公式
+
+令：
+
+```ts
+P = floor(cityBaseTick / 5)
+```
+
+只要本月存在粮食 tick 且母城有米道：
+
+```ts
+portIncome =
+  P + floor(P / 2)
+```
+
+因此：
+
+#### 无征收
+
+只有季初月有粮 tick，所以米道仍表现成“一季一次”。
+
+#### 有征收
+
+三个月都有粮 tick，于是港关三个月都会触发米道。
+
+这使“征收+米道”对附属港关的季度增益比城市本体更强。
+
+### 2.16 米道武将必须在母城
+
+特技数组是在处理城市时从**母城设施中的武将**取得。
+
+所以：
+
+- 米道武将在城市 → 城市与同势力下属港关都能吃效果；
+- 米道武将只驻扎在港/关 → 不会因此让母城或该港关获得米道。
+
+这一点也与老玩家长期实测一致。
+
+### 2.17 季度组合公式
+
+忽略丰作时，令：
+
+```ts
+H = floor(F / 2)
+```
+
+城市：
+
+| 组合 | 一季度城市粮 |
+|---|---:|
+| 无特技 | `F` |
+| 米道 | `F + floor(F/2)` |
+| 征收 | `3H` |
+| 征收+米道 | `3H + floor(H/2)` |
+
+若有丰作，则先：
+
+```ts
+G = floor(F * 3 / 2)
+```
+
+再把上表中的 `F` 替换为 `G`，并重新逐次做整数取整。
+
+### 2.18 Golden tests
+
+假设上级、治安100：
+
+```text
+BaseFoodProduction = 5000
+农场Lv3 = 2250
+邻接谷仓 → 3375
+兵力20000 + 军屯农 → 2000
+```
+
+则：
+
+```text
+rawFood =
+  5000 + 3375 + 2000
+= 10375
+
+F = 10375
+```
+
+若有丰作：
+
+```text
+G = floor(10375 * 1.5)
+  = 15562
+```
+
+若同时有征收：
+
+```text
+H = floor(15562 / 2)
+  = 7781
+```
+
+季初再有米道：
+
+```text
+7781 + floor(7781/2)
+= 11671
+```
+
+季度第2、3月城市各：
+
+```text
+7781
+```
+
+城市一季总计：
+
+```text
+11671 + 7781 + 7781
+= 27233
+```
+
+### 2.19 C2 当前结论
+
+本项可标：
+
+```text
+PC-PK1.1 reverse-engineered
+```
+
+已经锁定：
+
+- `BaseFoodProduction`；
+- 农场 Lv1/2/3 数值；
+- 谷仓 1.5 倍与只作用普通农场；
+- 军屯农 = 驻兵10%，最低1500；
+- 农场合并中的前一级保留；
+- 难度与治安顺序；
+- 丰作 → 征收 → 米道顺序；
+- 征收每月半份季度粮；
+- 城市米道只季初；
+- 港关20%与同势力条件；
+- 港关米道在征收的非季初月份仍会触发这一 PC-PK1.1 源码特例；
+- 所有关键整数取整位置。
+
+仍留一个极小实现边界：
+
+- `00707A74 ConvertFloatToInteger` 在 Easy 分支的具体舍入模式最好后续直接展开 helper；当前 fidelity 实现应保留该 helper，而不是自行用语言默认 rounding 替代。
+
+来源：
+- 311MemoryResearch `整理/Func-收支05-计算城市收粮.txt`
+- 311MemoryResearch `整理/Func-收支03-每月钱粮兵装收支.txt`
+- 311MemoryResearch `整理/Func-收支06-计算城市、港、关兵粮收入.txt`
+- 311SireCustomizedPackageDev `00707A74 ConvertFloatToInteger`
+- https://w.atwiki.jp/sangokushi11/pages/74.html
+- https://w.atwiki.jp/sangokushi11/pages/13.html
+- https://w.atwiki.jp/sangokushi11/pages/2445.html
+- https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
+
 ## 2. 内政设施
 
 无印共有：市场、造币、农场、谷仓、兵舍、锻冶、厩舍、工房、造船。
@@ -492,7 +1006,7 @@ PC-PK1.1 reverse-engineered
 
 来源：https://w.atwiki.jp/sangokushi11/pages/74.html
 
-## 3. PK 吸收合并
+## 4. PK 吸收合并
 
 `[PK][confirmed]`
 
@@ -505,7 +1019,7 @@ PC-PK1.1 reverse-engineered
 
 来源：https://w.atwiki.jp/sangokushi11/pages/74.html
 
-## 4. 建设时间
+## 5. 建设时间
 
 `[COMMON/PK设施同公式][confirmed]`
 
@@ -517,7 +1031,7 @@ PC-PK1.1 reverse-engineered
 
 来源：https://w.atwiki.jp/sangokushi11/pages/74.html
 
-## 5. 商人 / 粮食交易
+## 6. 商人 / 粮食交易
 
 机制与公式已从 provisional 升为 `[empirical-high]`。
 
@@ -544,7 +1058,7 @@ PC-PK1.1 reverse-engineered
 
 政治 → 交易效果的**精确闭式函数**仍未取得；因此引擎应使用实测 lookup/interpolation，而不是文章中的线性近似式冒充内部公式。
 
-## 6. 行动力
+## 7. 行动力
 
 `[COMMON][empirical-high]`
 
@@ -640,7 +1154,7 @@ adviserParam = 1.2 - 0.01 * (50 - intParam)
 
 > 证据等级保持 `empirical-high` 而非 `confirmed`：公式来自逆向/复算而非官方源码，但已跨原版时期与 PK 存档相互验证。
 
-## 7. 治安
+## 8. 治安
 
 - 治安影响收入和征兵量。
 - 巡查提高治安；征兵降低治安。
@@ -719,7 +1233,7 @@ if (hasAdministrativeReform && ProbabilityCheck(50)) {
 
 生成概率、根城选格和每次兵力仍 open。
 
-## 8. 灾害
+## 9. 灾害
 
 `[COMMON][confirmed mechanism]`
 
