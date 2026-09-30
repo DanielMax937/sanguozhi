@@ -1329,6 +1329,8 @@ relation.relationToLord(person, lord)
 
 ## 5. 登用优先级与普通概率
 
+> P0-1 exactness 专项：`36-hiring-probability-exactness.md`。该专项进一步锁定 `004AFD60` 外层、普通/非0模式分流、`005BA4C0` 七个入参与现代 SIRE 新忠诚系统的 MOD-only 边界；`005C4F80` 本体仍 open。
+
 `[PC-PK1.1][reverse-engineered control flow + deterministic final check + empirical-high forced-branch order]`
 
 D5 最重要的结论是：原作登用不是一个“把所有因素加成一个分数，再 Math.random()”的系统。
