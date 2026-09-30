@@ -17,7 +17,8 @@
 | B4 | 移动力加成叠加 | 原`计算部队属性`函数锁定技巧/特技加法顺序；强行覆盖长驱；搬运+操舵可叠加 | PC-PK1.1 reverse-engineered | ✅ |
 | B5 | ZOC | 相邻六格控制；进入ZOC后终止本回合继续移动；陆/水ZOC分离；飞将/遁走/推进边界已核；伪报是否继续发出ZOC仍冲突 | reverse-engineered-parameters + empirical-high | ✅ |
 | B6 | 高度与高低差 | 高低差仅进入部分强制位移战法成功率；判定取行动开始格；旧“每级固定±5”降级；原高度静态字段位置仍 open | empirical-high + original function located | ✅ |
-| B7 | 水陆切换、舰船切换 | 下一项 | pending | ⬜ |
+| B7 | 水陆切换、舰船切换 | 陆/水两套兵装并存；当前坐标选 active profile；仅河/海触发 naval；运输水上固定走舸行军表；渡/浅滩不切船 | reverse-engineered-structure + empirical-high | ✅ |
+| B8 | 港关容量与所属关系 | 下一项 | pending | ⬜ |
 
 ## A1 关键纠错
 
@@ -264,3 +265,36 @@ PC-PK1.1 原参数地址：
 - 二段突/突进存在二级高差 +15 的稳定实测；
 - 因此旧 `5 * heightDiff` 不能作为完整原作公式；
 - 当前公开 `struct_map_grid` 尚未有被正式命名为 Height 的字段，原始 elevation 数据存储位置仍 open。
+
+
+## B7 关键纠错
+
+原程序不是“部队下水后永久把陆兵种改成船”，而是同时保留陆上/水上两套兵装信息：
+
+```text
+00495480 GetLandMobilityEquipID
+00495490 GetNavalMobilityEquipID
+00496160 GetTroopMobilityEquipID(troop, coord)
+00912FE8 getTroopEquipmentIDs(..., onWater)
+```
+
+目标格地形决定行军兵装：
+
+```text
+7 河 → 水上
+8 海 → 水上
+其他 → 陆上
+```
+
+因此：
+
+- 渡所不切到水军；
+- 浅滩不切到水军；
+- 港 terrain 本身也不是 naval branch；
+- 川不可正常通行，不等于河。
+
+水上战斗使用舰船 + 水军适性，不继续使用陆上枪/戟/弩/骑/兵器 profile。
+
+运输队水上移动原函数固定映射兵装9（走舸），不会因为楼船/斗舰库存改变水上行军成本。
+
+当前没有发现额外上船/下船移动税；但完整 `005A4540` 尚未逐指令恢复，所以跨陆水边界时两套总移动力上限的内部比较仍保留 exactness gap。
