@@ -31,7 +31,36 @@ SIRE 已命名 `0049E590 GetCityMoneyIncome`，粮食函数与其结构一致；
 
 ### 港关
 
-月度收支函数确认港关基础钱粮按所属城市收入的 20% 计算，且只有港关与对应城市属于同一势力时取得该收入。更完整的港关收入顺序在后续 C1/C2 专项继续核。
+`[PC-PK1.1][reverse-engineered]`
+
+港关的“所属城市”与“当前占领势力”必须分开。
+
+城市静态保存 `SubordinateHarborAndPassID[5]`；港/关自己保存 `CorpsID`，当前 `ForceID` 由军团所属势力派生。
+
+月度收支函数 `00590490` 对每个母城的下属港关：
+
+```text
+GetForceID(port/pass)
+GetForceID(parentCity)
+↓
+ForceID 不同 → 本次无该母城附属钱粮收入
+ForceID 相同 → 继续结算
+```
+
+比较的是**势力 ID**，不是军团 ID，因此同一势力下即便母城与港关属于不同军团，也能取得附属收入。
+
+基础值：
+
+```ts
+portMoney = trunc(parentCityMoneyForThisTick / 5)
+portFood  = trunc(parentCityFoodForThisTick / 5)
+```
+
+即母城当次 tick 的20%。这里的母城值已经走过当前征税/征收/丰作分支；富豪/米道对港关的额外部分随后另行处理。
+
+所以港关收入不是“港关有固定基础产量”，也不是“只要地理上属于该城就一定有收入”。
+
+结构与容量的完整说明见 `01-map.md#7a-港关容量与所属关系`。
 
 ## 2. 内政设施
 
