@@ -36,6 +36,7 @@
 | D3 | 五维 / 适性 / 成长 | 五维/成长型/经验/适性分层、9种成长型、年龄lookup、能力经验100→+1余数保留、普通培养+30上限、适性150/200/250、指导×2已核 | reverse-engineered-structure + empirical-exact thresholds + empirical-exact age table | ✅ |
 | D4 | 人际关系 | 亲爱/厌恶方向性、夫妻/义兄弟/血缘独立结构、PC-PK支援50/30/20参数、副将1/2/1/3/1/4补正及嫌恶整队覆盖、登用/处斩硬分支已核 | reverse-engineered relation structure + reverse-engineered support parameters + empirical-high relation behavior | ✅ |
 | D5 | 登用优先级与普通概率 | hard gate→005C4F80→deterministic compare 控制流、dateKey与异地锁发令日、非0参数义理倍率/随机分支、探索失败舌战>80已核；005C4F80闭式仍open | reverse-engineered control flow + deterministic final check + empirical-high hard-gate order | ✅ |
+| D6 | 相性 / 义理 / 野望 / 汉室 | 相性150环精确式、忠诚0..255/UI100、换季掉忠>=25/低义理高野望门槛、己方/俘虏schedule、仁政/人心掌握边界、汉室爵位与拥废常量已核 | reverse-engineered compatibility/storage + empirical-high loyalty behavior + documented Han constants | ✅ |
 
 ## A1 关键纠错
 
@@ -1155,3 +1156,26 @@ executorCharm - affinityDiff(executor, executorLord) + p > 80
 仍 open：`004AF7D0` 函数体、`005C4F80` 连续概率闭式、`005BA410/005BA4C0` 确定性生成算法、96门槛的义理编码映射、非0 caller 完整业务语义。
 
 下一项：D6 相性 / 义理 / 野望 / 汉室。
+
+## D6 关键结论
+
+相性函数 `00489F80` 已逐指令恢复：
+
+```ts
+raw = abs(a-b)
+diff = min(raw, 150-raw)
+```
+
+原作正常相性域最大差75；1与149只差2。
+
+忠诚数据层也已锁定：`struct_person+0xAC` 为 byte 0..255，原列表 getter 只在显示时把>=100压成100。因此隐藏忠诚>100是真实状态，不能在引擎数据层 clamp 到100。
+
+自然掉忠：己方普通武将只在换季判定；相性差>=25，或低/较低义理+高/较高野望时进入候选。旧“每月、相性>30”已从总规则撤回。`仁政`阻止同都市自然掉忠；PK`人心掌握`约2/3跳过继续标empirical。
+
+俘虏是独立的月度掉忠流程，不是每旬。符节台明确加速俘虏掉忠；现有PC-PK1.1逆向锁定进入掉忠数值路径后+2。旧“每旬-1~2、符节台翻倍”已撤回。
+
+汉室是三档事件mask而非持续倍率：普通授予/自称+3/+3，重视+6/+1，无视+1/+6；王/公×2，皇帝×3。拥立/废立对汉室重视武将+10/-10；魏帝即位等历史事件可另有专用±20。
+
+仍open：完整自然掉忠gate函数、君主义理/野望附加项主函数体、人心掌握原EXE概率、俘虏月度基础闭式、野望→独立连续函数。
+
+下一项：D7 太守 / 都督 / 军师。
