@@ -221,6 +221,40 @@ p2 = min(100, floor(p * factor10 / 10))
 
 但**正常玩家登用第三参数就是 0**，所以不能把这条外层倍率直接套到普通登用上；普通登用中义理是否、以及如何再次进入 `005C4F80`，仍需函数体才能完全确定。
 
+### 3.1 普通第三参数=0；非0路径不要混进普通登用
+
+`004AFD60` 的外层已经进一步锁定：
+
+```text
+第三参数 = 0
+→ factor10 固定10
+→ 正常 deterministic compare
+
+第三参数 != 0
+→ factor10=min(10,15-2*Ideals)
+→ p=floor(p*factor10/10)
+→ 004721D0 运行时随机判定
+```
+
+因此旧资料里若把高义理 0.9 / 0.7 外层倍率直接套给普通“人才→登用”，是错误的。当前普通本地登用和异地登用完成路径都明确传0。
+
+非0 caller 的完整业务语义尚未全部命名，继续 open。
+
+### 3.2 探索发现人才后当场登用的失败分支
+
+`005D5220` 探索登用 wrapper 先计算 `p` 并做 deterministic compare；若第一次失败，还会计算：
+
+```ts
+debateScore = executorCharm
+  - compatibilityDifference(executor, executorLord)
+  + p
+
+if (debateScore > 80) enterDebate()
+```
+
+这是探索发现人才后的特殊分支，不属于普通人才菜单登用。
+
+
 ### 4. 目前唯一仍缺失的东西
 
 没有找到可公开检索、可交叉验证的 `005C4F80 GetHiringSuccessRate` 完整函数体。
@@ -231,11 +265,14 @@ p2 = min(100, floor(p * factor10 / 10))
 
 ### 5. provisional-engine-rule：仅替代 GetHiringSuccessRate
 
-硬门槛完全照上面执行；只有进入普通连续概率时才调用 fallback：
+硬门槛按上面的长期稳定顺序执行；PC-PK1.1 已确认 hard-gate 函数一定先执行，但 `004AF7D0` 函数体尚未公开，因此 9 条顺序继续标 `empirical-high`。只有进入普通连续概率时才调用 fallback：
 
 ```ts
-function fallbackHiringRate(target, executor, ruler) {
+function fallbackHiringRate(target, executor, ruler, dateKey) {
   const giri = clamp(target.giriInternal, 0, 4)
+
+  // 原版 005C4F80 同时接收 dateKey；当前闭式未恢复，fallback 暂不使用它，
+  // 但接口必须保留，未来替换函数体时不改调用层。
 
   // 在野/亡国无所属者没有可直接复刻的原版连续忠诚口径；
   // 60 仅为可配置的 engine baseline，不冒充原作常量。
@@ -268,7 +305,7 @@ function fallbackHiringRate(target, executor, ruler) {
 最终判定不使用运行时随机流，而模仿原版调用形状：
 
 ```ts
-const p = fallbackHiringRate(target, executor, ruler)
+const p = fallbackHiringRate(target, executor, ruler, dateKey)
 
 const executorTargetAffinity =
   circularAffinityDistance(executor.affinity, target.affinity)
