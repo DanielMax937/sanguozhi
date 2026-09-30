@@ -113,4 +113,6 @@ D1 武将生命周期 / 状态字段已完成：`struct_person` 的 Identity 精
 
 D2 登场 / 寿命 / 死亡已完成：`YearOfDebut` 与 current Identity 分离，诸葛亮20岁/沙摩柯34岁仍未登场直接否定“成年自动登场”；`struct_scenario` 独立保存 `IgnoreAge / ComeOnStage / Lifetime / DieInBattleSetting`，自然寿命与战死必须分开。`YearOfDeath / GetDeathYear / markedForDeath / Identity=DEAD` 为不同层次；官方事件“预定死亡年”与孙策延寿20年支持有效寿命概念，但不能把事件术语直接等同 flag。健康倍率以夷陵甘宁94→47→75实机锚点继续采用100/80/50/20。普通登场 caller、GetDeathYear函数体、寿命模式枚举、死亡flag触发与伤病自然恢复仍 open。
 
-下一项：D3 五维 / 适性 / 成长。
+D3 五维 / 适性 / 成长已完成：SIRE结构锁定五维基础/成长型/经验、六适性/经验以及 Basic/Actual 多层属性；9种成长型编号已核，`AttrChange` 只关闭年龄盛衰而不关闭经验成长。年龄曲线采用 growthType×age 实测表；能力经验每100点+1且余数保留，但旧“不到100即可无限刷”已纠正为普通经验/PK研究培养增量约 +30。遗迹直接加素质可绕过该额度。适性 C→B/B→A/A→S 为150/200/250，研究升适性保留既有经验；指导只翻倍野外同队经验。
+
+下一项：D4 人际关系。
