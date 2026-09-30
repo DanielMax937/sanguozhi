@@ -1089,10 +1089,38 @@ E20 关闭的是统一权重表假设；仍 open：
 
 至此，当前 A1～E20 的55个逐点审计项全部完成写回。
 
+## Post-E20 exactness cleanup
 
+55个 A1～E20 主审计点已经完成；后续不继续制造 E21，而是逐项清理 `13-open-exactness.md` 的真实缺口。
 
+### P0-1 普通登用概率
 
+状态：**外层源码级收窄，内部连续函数仍open。**
 
+新增确认：
 
+```text
+004AFD60
+→ 004AF7D0 hard gate
+→ 005C4F80 successRate
+→ normal: 005BA4C0 deterministicValue < p
+→ nonzero-mode: giri multiplier + 004721D0 runtime probability
+```
 
+普通人才命令第三参数为0，所以不套非0模式义理外层倍率。
+
+`005BA4C0` 七个入参已明确，dateKey 为 `day*7+month*5+year*3`，异地登用保存发令日。
+
+最新 SIRE“基准60登用意愿”公式已确认属于**新忠诚度 MOD 系统**，禁止当作原版 `005C4F80`。
+
+仍缺：
+
+- `004AF7D0` 函数体；
+- `005C4F80`；
+- `005BA410`；
+- `005BA4C0` generator。
+
+详见 [P0-1专项](36-hiring-probability-exactness.md)。
+
+下一 exactness gap：P0-2 外交公式的版本边界。
 
