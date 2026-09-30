@@ -2,23 +2,35 @@
 
 更新：2026-10-01。
 
-## 最新完成：E20 委任 AI 权重 / 决策架构
+## A1–E20 主审计已完成；正在清理 exactness gaps
 
-当前逐点审计已写回 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20，共55个审计点。
+A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
+当前不新增 E21；后续按 [open exactness](13-open-exactness.md) 逐项清理剩余真实缺口。
+
+### 最新完成：P0-1 普通登用概率 exactness 收窄
+
+- [P0-1 正文](36-hiring-probability-exactness.md)
+- [P0-1 结构化证据](../sources/hiring-probability-exactness.json)
+- [P0-1 校验脚本](../../scripts/check_hiring_probability_exactness.py)
+- [人才主规则](03-personnel.md)
 - [当前总表](17-post-15-source-audit.md)
-- [E20 规则正文](35-delegated-ai-architecture.md)
-- [E20 结构化证据](../sources/delegated-ai-architecture.json)
-- [E20 校验脚本](../../scripts/check_delegated_ai_architecture.py)
-- [君主/军团主规则](08-ruler-corps.md)
-- [E19 评定提案池](34-council-proposal-pool.md)
 
-E20 已撤回“委任/COM AI 应该存在一张全局 action utility 权重表”的错误前提。
+本轮没有伪造 `005C4F80` 的成功率闭式，而是把原版 PC-PK1.1 外层锁定为：
 
-PC-PK1.1 已恢复的是 procedural/modular 架构：COM军团与玩家委任野外部队最终共享 `005AD980` 战术行动 core；`005EF440` 出兵策略读取 difficulty、君主野望、StrategicTendency、城市/目标态势及资源，经过 hard gate 后才进入5～100概率层；`005F6CF0` 则是“已决定兵装后选择主将”的局部评分器。
+```text
+004AF7D0 hard gate
+→ 005C4F80 successRate
+→ normal: 005BA4C0 deterministicValue < p
+→ nonzero-mode: giri multiplier + runtime ProbabilityCheck
+```
 
-出兵关键常量包括：计划兵力最低5000、80/90治安 gate、`travelTime*5+15` 兵粮 horizon、携粮上限50000、粮不足 abort、普通非兵器部队的携金75%/50%规则，以及冲车90%、井阑/木兽/投石80%的编成概率。
+普通人才命令第三参数=0，因此不使用非0模式外层义理0.9/0.7倍率。
 
-AI势力强度还存在君主ID硬编码 bonus，因此不能用一套纯资源 utility 冒充原作。
+`005BA4C0` 的七个入参已恢复；`005B9C00` 的 dateKey 为 `day*7+month*5+year*3`，异地登用保存发令日。
 
-当前 A1～E20 共55个逐点审计项已全部完成。剩余工作转为各项内部 exactness gap 与静态数据补全，不再新增一个“E21统一权重表”之类的伪问题。
+2025年以来新版 SIRE/血色衣冠的“基准60、忠诚/相性/魅力系数、仕官第一年-20、浮动值6”已明确隔离为 **MOD 新忠诚系统**，禁止回填原版。
+
+真正仍 open：`004AF7D0` 函数体、`005C4F80`、`005BA410`、`005BA4C0` deterministic generator 与跨平台差异。
+
+下一项：P0-2 外交公式的版本边界。
