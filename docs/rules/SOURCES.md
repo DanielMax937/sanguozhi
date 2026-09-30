@@ -202,3 +202,25 @@
   https://w.atwiki.jp/sangokushi11/pages/90.html
 - 中文 PK 技巧表：扩展港关 10000/100000/30000 → 40000/400000/60000
   https://read01.com/zh-hk/m6LA4P.html
+
+
+### B9 堤防 / 水攻专项
+
+- 311MemoryResearch：`整理/Func-自动01-耐久恢复.txt`
+  - 原设施类型 `0x18` 堤防专用恢复分支
+  - 每旬恢复最大耐久 1/10
+  - 回满后重设建设完成 / 中立
+- sango_infinity：San11GridData 静态地图兼容结构
+  - `trap: 0无 / 1堤防 / 2落石`
+  - `flood: 水淹格`
+  https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Map/Render/Map/MapGrid.cs
+- PK bin 编辑器说明：水淹=1 表示水坝破坏时被淹
+  https://www.3h3.com/patch/264861.html
+- 日文 Wiki 都市表：只有襄平、邺、下邳、寿春有堤防
+  https://w.atwiki.jp/sangokushi11/pages/77.html
+- 日文 Wiki 小ネタ：破堤即水攻、范围内敌我部队全灭
+  https://w.atwiki.jp/sangokushi11/pages/15.html
+- 游民星空 2006 实测：800耐久、破堤水攻、堤防回满后可再次发动
+  https://www.gamersky.com/handbook/200603/21911.shtml
+- PTT 实测：寿春水攻会同时降低城内兵力、气力、治安、耐久
+  https://www.ptt.cc/bbs/Koei/M.1218858498.A.BEB.html
