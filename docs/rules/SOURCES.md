@@ -224,3 +224,18 @@
   https://www.gamersky.com/handbook/200603/21911.shtml
 - PTT 实测：寿春水攻会同时降低城内兵力、气力、治安、耐久
   https://www.ptt.cc/bbs/Koei/M.1218858498.A.BEB.html
+
+
+### C1 金钱收入专项
+
+- 311MemoryResearch：
+  - `整理/Func-收支04-计算城市收钱.txt`：0049E590 完整城市金收入
+  - `整理/Func-收支01-每旬收钱.txt`：00599600 征税 11/21 日 tick
+  - `整理/Func-收支03-每月钱粮兵装收支.txt`：月初征税/富豪及港关结算
+  - `整理/Func-收支07-计算城市、港、关金钱收入.txt`：港关20%与同势力条件
+- 日文 Wiki 内政：市场100/120/150、鱼200、大300、黑80、造币1.5倍
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki 特技：富豪/征税与 1.75 倍组合
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+- 游侠 2006 新手技术：富豪、征税、组合语义
+  https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
