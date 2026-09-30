@@ -5,7 +5,7 @@
 
 ## 最新审计入口
 
-[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E17地形伤害随机值](32-terrain-hazard-damage.md)。
+[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E18普通君主继承](33-ruler-succession-priority.md)。
 
 A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原blob复用，无历史段落丢失。历史快照不是当前进度指针。
 
@@ -34,6 +34,8 @@ E15舌战普通牌心理伤害以 `30-debate-psychological-damage.md` 为当前�
 E16非骑战法来源的负伤/战死以 `31-non-cavalry-casualty-sources.md` 为当前专项规范，结构化证据为 `../sources/non-cavalry-casualty-sources.json`。普通击破统一伤亡roll已撤回；弩系狙伤、猛者、业火、骑兵与单挑按来源分流。
 
 E17地形伤害随机值以 `32-terrain-hazard-damage.md` 为当前专项规范，结构化证据为 `../sources/terrain-hazard-damage.json`。栈道100～299/格与毒泉200～399/格已源码级闭合；落石专用参数与踏破×0.1已恢复，但common50 finalizer仍open。
+
+E18普通君主继承以 `33-ruler-succession-priority.md` 为当前专项规范，结构化证据为 `../sources/ruler-succession-priority.json`。历史事件、玩家普通死亡、COM自动继承三路已分离；COM血缘>义兄弟>配偶>年长者为empirical-high，组内tie与004B9080函数体仍open。
 
 ## 版本标记
 
@@ -86,6 +88,7 @@ E17地形伤害随机值以 `32-terrain-hazard-damage.md` 为当前专项规范�
 31. `30-debate-psychological-damage.md` E15舌战牌力、心理伤害、怒气与话术反弹连续公式
 32. `31-non-cavalry-casualty-sources.md` E16弩系狙伤、猛者、业火与普通击破武将伤亡来源分流
 33. `32-terrain-hazard-damage.md` E17栈道、毒泉、落石随机伤害与免伤边界
+34. `33-ruler-succession-priority.md` E18历史/玩家/COM君主继承路径与自动后继类别优先
 
 ## 来源优先级
 
