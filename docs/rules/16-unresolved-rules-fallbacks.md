@@ -661,7 +661,7 @@ specialBase =
 - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[部队攻击].txt
 
 公开复刻候选：
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Object/Troop/Troop.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Object/Troop/Troop.cs
 
 高质量公式研究：
 - https://game.ali213.net/thread-5983352-1-1.html
@@ -849,8 +849,8 @@ type FireSource =
 初版前四类可共享同一 fallback；历史事件火焰由事件脚本显式指定。
 
 工程参考：
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Object/Skill/Effect/SetFire.cs
-- https://github.com/tankyc/sango_infinity/blob/master/Build/Content/Data/Common/Skills.json
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Object/Skill/Effect/SetFire.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Build/Content/Data/Common/Skills.json
 
 ---
 
@@ -1541,7 +1541,7 @@ remaining = max(currentRemaining, newlyRolledDuration)
 
 详细专项见 `28-status-duration-recovery.md`。
 
-## 8. 单挑连续命中 / 伤害函数
+## 8. 单挑连续命中 / 伤害函数（E14 已闭合通用核心）
 
 ### 结论：核心连续公式已找到，不再需要自拟 ratio fallback
 
@@ -1566,10 +1566,10 @@ remaining = max(currentRemaining, newlyRolledDuration)
 注意：该项目后来把吕布、关羽、张飞等**特定武将例外**改成了 `DuelPersonBehaviours` 数据驱动 hook。以下公式只抽取 hook 之前/之外的**通用原作核心**，不把该项目新增 MOD 配置反向当成原版事实。
 
 来源：
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Duel/DuelEnum.cs
-- https://github.com/tankyc/sango_infinity/blob/master/Data/事件系统-项目变更影响评估.md
-- https://github.com/tankyc/sango_infinity/blob/master/Data/Export/export311Scenario.bat
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/DuelEnum.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Data/事件系统-项目变更影响评估.md
+- https://github.com/tankyc/sango_infinity/blob/main/Data/Export/export311Scenario.bat
 
 ---
 
@@ -1936,7 +1936,41 @@ base = trunc(50 * 20 / 55) = 18
 
 ---
 
-### 8H. 原 fallback 删除
+### 8H. 斗志增长也已闭合
+
+E14 还恢复：
+
+```ts
+n = max(value, minimum)
+n = trunc(n * stance.spiritGain / 7)
+
+if (receivingHit)
+  n = trunc(n * 5 / 4)
+
+if (hp < 30)
+  n = n * 2
+else if (hp < 50)
+  n = trunc(n * 3 / 2)
+
+if (hasSword)
+  n = trunc(n * 3 / 2)
+```
+
+难度另有：
+
+```text
+初级玩家 ×6/5
+超级玩家 ×4/5
+超级AI ×6/5
+```
+
+其中 `minimum` 通常为3；被击且处于防御/斗志重视时为5。
+
+因此“剑提高斗志的系数”也不再 open，精确为最终增长 `×3/2`。
+
+---
+
+### 8I. 原 fallback 删除
 
 旧：
 
@@ -1977,7 +2011,7 @@ damage =
 
 ---
 
-### 8I. 版本边界与剩余 exactness
+### 8J. 版本边界与剩余 exactness
 
 当前可以升级为高置信 reverse-engineered 的是：
 
@@ -2031,8 +2065,8 @@ vanillaGenericDuelCore.status =
 和单挑一样，该项目后续加入了 `DebatePersonBehaviours` 数据驱动人物 hook。下面只取 hook 之前的**通用核心**，不把后来新增的人物 MOD 修正冒充原作。
 
 来源：
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs
 
 ---
 
