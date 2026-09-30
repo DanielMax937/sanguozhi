@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "audit": "E10",
+  "target": "PC-PK1.1 primary; platform notes explicit",
+  "techniqueId": 9,
+  "name": "应射",
+  "reverseEvidence": {
+    "techIdAddress": "00584DC8",
+    "exactCallerBodyRecovered": false,
+    "meaning": "technique check exists in original PC address map"
+  },
+  "coreRule": {
+    "defenderMustBeCrossbowUnit": true,
+    "triggerFamily": "arrow/ranged-arrow attack",
+    "requiresLegalCounterattack": true,
+    "automatic": true,
+    "probability": 1
+  },
+  "documentedTriggerClasses": [
+    {
+      "attack": "crossbow indirect normal attack",
+      "triggers": true,
+      "evidence": "wiki-high"
+    },
+    {
+      "attack": "cavalry shooting normal attack",
+      "triggers": true,
+      "evidence": "historical-log-high"
+    },
+    {
+      "attack": "ship indirect arrow normal attack",
+      "triggers": true,
+      "evidence": "historical-log-high"
+    },
+    {
+      "attack": "crossbow tactics including Fire Arrow/Piercing Arrow/Volley",
+      "triggers": true,
+      "evidence": "historical-log-high"
+    },
+    {
+      "attack": "siege/naval Fire Arrow tactics",
+      "triggers": true,
+      "evidence": "historical-log-high"
+    },
+    {
+      "attack": "support attack",
+      "triggers": false,
+      "evidence": "historical-log-high"
+    }
+  ],
+  "legalityGates": {
+    "range": {
+      "required": true,
+      "description": "source must be inside responder's current legal attack range",
+      "strongCrossbowCanExtendResponseReach": true
+    },
+    "terrain": {
+      "required": true,
+      "description": "response must be a legal attack on the source tile",
+      "forestExample": "source in forest may prevent response unless responder has Archer/Shooter-type permission"
+    },
+    "abnormalStatus": {
+      "confusedOrFalseReportCannotNormallyRespond": true,
+      "evidence": "general counterattack rules plus support-attack verification"
+    }
+  },
+  "responseForm": {
+    "usesLegalAvailableCounterForm": true,
+    "adjacentSourceMayProduceMeleeLikeCounterAnimation": true
+  },
+  "interactions": {
+    "fireArrow": "explicitly can be answered by 应射 when other legality gates pass",
+    "rapidAttackAvoidance": {
+      "skill": "急袭",
+      "pcPkProbabilityToAvoidResponseDamage": 0.5,
+      "evidence": "wiki-high"
+    },
+    "supportAttack": {
+      "responseToSupportAttack": false,
+      "attackerSupportSuppression": {
+        "indirectNormalAttackAgainstResponseCrossbow": true,
+        "exceptions": [
+          "close normal attack",
+          "close tactic attack",
+          "indirect tactic attack",
+          "target confused",
+          "target false report"
+        ]
+      }
+    },
+    "doubleStrike": {
+      "ps2PkCanChainWhenBothSidesHaveResponseAndDoubleStrike": true,
+      "pcExactChainDepth": "open"
+    }
+  },
+  "navalBoundary": {
+    "exactPcBranch": "open",
+    "fidelityDefault": "do not force land-crossbow response fire through an active naval profile without a recovered PC branch"
+  },
+  "open": [
+    "00584DC8 surrounding original caller/disassembly",
+    "exact numeric unit-type/attack-type gates in PC binary",
+    "PC behavior for naval active profiles",
+    "PC chain depth/order when both sides have 应射 and 连战",
+    "exact handling of collateral hit vs primary target for every tactic",
+    "Vanilla/console byte-identical equivalence"
+  ],
+  "sources": [
+    "https://w.atwiki.jp/sangokushi11/pages/90.html",
+    "https://w.atwiki.jp/sangokushi11/pages/85.html",
+    "https://w.atwiki.jp/sangokushi11/pages/1956.html",
+    "https://w.atwiki.jp/sangokushi11/pages/1584.html",
+    "https://www.gamersky.com/handbook/200806/114545_2.shtml",
+    "https://game.ali213.net/thread-2168294-1-1.html",
+    "https://github.com/sjn4048/311MemoryResearch"
+  ]
+}
