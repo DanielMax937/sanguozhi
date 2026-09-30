@@ -2,24 +2,24 @@
 
 更新：2026-09-30。
 
-## 最新完成：E8 技巧补丁版本差异
+## 最新完成：E9 兵粮袭击
 
-当前逐点审计已写回 A1–A5、B1–B9、C1–C11、D1–D10、E1–E8，共43个审计点。
+当前逐点审计已写回 A1–A5、B1–B9、C1–C11、D1–D10、E1–E9，共44个审计点。
 
 - [当前总表](17-post-15-source-audit.md)
-- [E8 规则正文](23-technique-patch-differences.md)
-- [E8 结构化版本差异](../sources/technique-version-deltas.json)
-- [E8 校验脚本](../../scripts/check_technique_patch_profiles.py)
-- [E7 技巧系统](22-techniques.md)
+- [E9 规则正文](24-food-raid.md)
+- [E9 结构化证据](../sources/food-raid.json)
+- [E9 参考校验脚本](../../scripts/check_food_raid.py)
+- [E8 技巧补丁版本差异](23-technique-patch-differences.md)
 
-E8 已确认官方 Vanilla 与 PK 是两条独立更新链。Vanilla Ver1.0→后期资料有7条明确技巧差异，但官方changelog没有逐项说明它们分别在哪个补丁改变，因此 transition patch 继续标 unknown，不能一律写成“Ver1.2修改”。
+E9 已确认 PC-PK1.1 在部队攻击结果链的 `005B03F9` 调用 `005ADB20`：只对部队目标，普通攻击/战法共用；反击分支明确跳过兵粮袭击。
 
-PK1.1 工兵育成已从原函数闭合：内政设施相对恢复×2，城市/港/关×2.5。爆药炼成在研究目标PC二进制中存在“判定被烧方而非点火方”的原BUG；社区修复必须放入独立 fixProfile，不能冒充官方规则。矢盾/大盾挡战法也属于社区patch。
+数量主模型由长期技术详解和现代实测交叉确认：`min(攻击面板×R, floor(己方兵力/2))`，R位于1～2。原 `005ADB20` 函数体尚未公开，所以RNG粒度、目标缺粮/攻方满粮裁剪、盾类零伤害、支援攻击与水上profile仍open。
 
-推荐版本键至少包含 rulesetVersion + patchVersion + fixProfile。
+兼容fallback采用10～20整数档并标 `compatibility-reconstruction`，不能冒充原EXE。连击两次抢粮保持 empirical-high。
 
-下一项：E9 兵粮袭击。
+下一项：E10 应射。
 
 ## 证据边界
 
-仍缺 Vanilla 1.0/1.1/1.2 EXE 技巧地址diff、戟/弩/骑Lv1的Ver1.0明确倍率、Vanilla 1.0工兵育成内部双支路、爆药BUG的地区版官方修复情况，以及主机版逐项技巧差异。
+E9 已把“是否触发/哪些主路径触发”和数量范围从泛攻略升级到源码调用+多来源交叉；真正未闭合的是 `005ADB20` 内部RNG和资源边界。
