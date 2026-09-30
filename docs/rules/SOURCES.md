@@ -1246,3 +1246,56 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/15.html
 
 证据等级：旬级调度、/10 /20 /40、屯田、阵系倍率、着火额外耗粮均为PC-PK1.1 reverse-engineered；粮尽逃兵闭式仍未找到原函数，旧约76%保留率继续只标 empirical-high。
+
+
+### E6 补给与输送专项
+
+- 311MemoryResearch `地址资料.txt`：
+  - `004BF522`：输送队抵达据点，功绩+200；
+  - 输送队兵/金/粮容量与出阵上限；
+  - `006157C1/006157D8` 出阵兵装上限地址；
+  - `004962CF/004962D6` 运行时兵装上限；
+  - `00496306/0D/28/2F` 补给后兵装封顶；
+  - `005DB107` 军事府使输送AP减半；
+  - `005DB86E` 军事府使出征AP减半。
+  https://github.com/sjn4048/311MemoryResearch
+- 311SireCustomizedPackageDev：
+  - `GetTroopStrengthLimit / GetTroopMoneyLimit / GetTroopFoodLimit`；
+  - `GetSPEquipmentLimit / GetSPTroopStrengthLimit / GetSPMoneyLimit / GetSPFoodLimit`；
+  - `AdjustSPSoldier / AdjustSPEquipment / AdjustTroopStrength / AdjustTroopMoney / AdjustTroopFood`；
+  - `004B9840 GetBuildingCombinedStrength` 以原兵力/气力与新增兵力/气力计算混合气力；
+  - `005DB840 GetExpeditionActionPointCost`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 游侠NETSHOW《三国志11pk内存修改》：
+  - 再次记录 `004BF522` 输送抵达+200；
+  - `005DB107/005DB86E` 军事府对输送/出征AP减半。
+  https://game.ali213.net/thread-2168294-1-1.html
+- 日文 Wiki《功績値》：
+  - 輸送・到着=200；
+  - 補給=100；
+  - 补给另有统率经验+2实测记录。
+  https://w.atwiki.jp/sangokushi11/pages/113.html
+- 日文 Wiki《各種経験値》：
+  - “輸送部隊を率いての補給”统率经验+2；
+  - PC手动补给同样获得+2的实测记录。
+  https://w.atwiki.jp/sangokushi11/pages/79.html
+- 日文 Wiki《戦争》：
+  - PC补给量可调；
+  - 补兵后气力按新旧兵数平均；
+  - 2500兵气力0补到5000、供应气力100 => 最终气力50。
+  https://w.atwiki.jp/sangokushi11/pages/85.html
+- 日文 Wiki《兵科》：
+  - PC可任意调节补给量，CS不可；
+  - 输送队是独立TroopType的后勤单位。
+  https://w.atwiki.jp/sangokushi11/pages/91.html
+- 日文 Wiki 2ch历史日志：
+  - PC相邻手动补给有滑块；
+  - 直接把目标部队作为移动目标会自动向最大兵数/物资补给；
+  - 补士兵要求等量当前兵科物资（枪、戟等）。
+  https://w.atwiki.jp/sangokushi11/pages/1950.html
+- 日文 Wiki《戦争/コメントログ1》：
+  - 输送队不能接受普通补给；
+  - 输送队粮尽/地形消灭时货物消失，被敌军击破时货物可被掠夺。
+  https://w.atwiki.jp/sangokushi11/pages/1471.html
+
+证据等级：输送到据点+200、容量/封顶地址、军事府输送AP减半为PC-PK1.1地址级；PC补给交互、兵装约束、气力平均、补给+100/统率EXP+2为长期可复现实测/high。完整PC supply/arrival finalizer与逐类兵装容量仍open。
