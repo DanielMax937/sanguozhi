@@ -277,3 +277,23 @@
   https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
 - 2ch/Wiki 早期无印丰作 flag bug 记录
   https://w.atwiki.jp/sangokushi11/pages/1828.html
+
+
+### C4 无印内政设施专项
+
+- SIRE 数据/结构/地址：
+  - 基础设施 ID 31～39
+  - `struct_city.EmptyBarracks / EmptyForge / EmptyStable / EmptyWorkshop / EmptyShipyard`
+  - `0047B820 AdjustCityBarracksCount`
+  - `004B3EE0 AdjustCityBuilding`
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 2006 无印攻略：市场按月、农场按季、造币/谷仓相邻1格1.5倍
+  https://www.gamersky.com/handbook/200604/22088.shtml
+- 2006 无印实测：造币/谷仓可覆盖周围最多6格且效果不叠加
+  https://www.gamersky.com/handbook/200603/21634.shtml
+- 2006 无印实测：兵舍及军需生产设施数量控制一回合可执行次数，不直接放大单次产量
+  https://3g.ali213.net/gl/html/5805.html
+- 2006 技巧P记录：基础7设施+30P，造币/谷仓+50P
+  https://www.gamersky.com/handbook/200603/21665.shtml
+- 日文 Wiki 内政设施表：基础费用、耐久、防御、功能
+  https://w.atwiki.jp/sangokushi11/pages/74.html
