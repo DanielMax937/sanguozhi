@@ -3031,7 +3031,9 @@ vanillaTerrainHazard.status =
 ---
 
 
-## 12. 普通君主继承
+## 12. 普通君主继承（E18 已闭合主机制）
+
+E18 专项证据：`33-ruler-succession-priority.md`；结构化数据：`../sources/ruler-succession-priority.json`。
 
 ### 结论：玩家选择已确认；COM 自动继承可收敛为“关系层级 + 年长者”
 
@@ -3124,19 +3126,21 @@ function chooseAiSuccessor(oldLord, force) {
   const candidates = enumerateLegalSuccessors(force)
 
   const blood = candidates.filter(p => isBloodRelative(oldLord, p))
-  if (blood.length) return eldestStable(blood)
+  if (blood.length) return chooseWithinBloodFallback(blood)
 
   const sworn = candidates.filter(p => isSwornSibling(oldLord, p))
-  if (sworn.length) return eldestStable(sworn)
+  if (sworn.length) return chooseWithinSwornFallback(sworn)
 
   const spouse = candidates.filter(p => isSpouse(oldLord, p))
-  if (spouse.length) return eldestStable(spouse)
+  if (spouse.length) return chooseWithinSpouseFallback(spouse)
 
+  // 只有无特殊关系的普通候选，“年长者优先”是 empirical-high
   return eldestStable(candidates)
 }
 
 function eldestStable(candidates) {
-  return candidates.sort(ageDesc, birthYearAsc, personIdAsc)[0]
+  // 同龄 personId 仅为 deterministic engine fallback
+  return candidates.sort(birthYearAsc, personIdAsc)[0]
 }
 ```
 
