@@ -588,3 +588,65 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/869.html
 
 证据等级：`PC-PK1.1 reverse-engineered-structure`。普通登场 caller、死亡预定→真正死亡、健康自然恢复与 Mission 0..43 完整语义留给后续 D 项。
+
+### D2 登场 / 寿命 / 死亡专项
+
+- 311SireCustomizedPackageDev `struct_person`：
+  - `YearOfDebut / YearOfBirth / YearOfDeath / CauseOfDeath / ScheduledLord`；
+  - `Flags.markedForDeath`；
+  - `HealthLevel`；
+  - `Identity`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311SireCustomizedPackageDev `struct_scenario`：
+  - `IgnoreAge`；
+  - `DieInBattleSetting`；
+  - `Lifetime`；
+  - `ComeOnStage`。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+- 原函数/helper：
+  - `00488A20 GetPersonAge`；
+  - `00488C50 IsNotIntroduced`；
+  - `00488C60 IsNotDiscovered`；
+  - `00488C80 IsDead`；
+  - `00489160 IsMarkedForDeath`；
+  - `0048A000 GetDeathYear`；
+  - `00489030 GetPersonActualAttr / 00489050 GetPersonBasicAttr / 0048A2D0 UpdateTroopParameters`。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- 311MemoryResearch `函数[每月例行处理].txt`：
+  - `00590C30` 月初存在年龄/死亡相关处理入口 `005833D0`；当前公开文本未展开该函数体。
+  https://github.com/sjn4048/311MemoryResearch
+- 游民星空官方剧情条件整理：
+  - 孙策条件使用“预定死亡年之后或200年到临”；
+  - 舌战胜于吉后寿命精确延长20年。
+  https://www.gamersky.com/handbook/200809/124174_6.shtml
+- 日文 Wiki 诸葛亮 / 沙摩柯剧本表：
+  - 诸葛亮200年20岁仍未登场；
+  - 沙摩柯200年34岁仍未登场；
+  - 反证通用“成年自动登场”。
+  https://w.atwiki.jp/sangokushi11/pages/123.html
+  https://w.atwiki.jp/sangokushi11/pages/447.html
+- 日文 Wiki mask data：
+  - 自然死通常有效没年当年死亡，少数延后2～3年；
+  - 不自然死额外延寿与年龄负相关；
+  - 其健康 -20/-40/-60 表与决战制霸直接显示值冲突，因此不用于倍率。
+  https://w.atwiki.jp/sangokushi11/pages/983.html
+- 日文 Wiki Q&A：
+  - 从足够早的存档重跑后，未来死亡结果可发生变化。
+  https://w.atwiki.jp/sangokushi11/pages/2527.html
+- 日文 Wiki 孙策 / 孙策之死：
+  - 不自然死实际延寿的多次实测；
+  - 于吉事件胜利延寿约20年、失败立即死亡。
+  https://w.atwiki.jp/sangokushi11/pages/886.html
+  https://w.atwiki.jp/sangokushi11/pages/918.html
+- 日文 Wiki PS2事件：
+  - 诸葛亮北伐要求死亡flag未立；
+  - 诸葛亮之死等待军师诸葛亮迎来自然死后才真正死亡。
+  https://w.atwiki.jp/sangokushi11/pages/21.html
+- 日文 Wiki 夷陵决战：
+  - 甘宁基础武94，重伤显示47；3回合后轻伤显示75，直接支持重伤50%/轻伤80%。
+  https://w.atwiki.jp/sangokushi11/pages/2165.html
+- 旧2ch寿命模式讨论：
+  - “长寿约+20、假想约99岁”为社区经验，仅作 empirical 参考，不写成 exact 常量。
+  https://w.atwiki.jp/sangokushi11/pages/1945.html
+
+证据等级：`reverse-engineered-structure + official-event-semantics + empirical-high timing`。仍缺普通登场 caller、Lifetime/ComeOnStage/IgnoreAge 枚举、GetDeathYear函数体、死亡flag RNG与一般沙盘伤病恢复。
