@@ -1025,3 +1025,48 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/2526.html
 
 证据等级：捕获主公式、强运、戟战法+30、自然逃亡公式、月度掉忠与50金维护均为PC-PK1.1 reverse-engineered；名马反制捕缚与野外携俘不逃为长期稳定wiki/实机交叉验证。仍open：`004A0590`精确语义、context 3/4、血路城陷边界、概率helper超100、资金不足释放排序、释放禁仕月数与释放技巧P。
+
+
+### D10 官职专项
+
+- 311SireCustomizedPackageDev `struct_person` / `struct_office`：
+  - Person `+A4 OfficeID`、`+AE Merit`；
+  - PC-PK1.1 `struct_office[81]`；
+  - `+2C TroopNumber`、`+30 AttrIncreaseType`、`+34 AttrIncrease`、`+35 Salary`、`+36 Rank`；
+  - `00490C10 GetOfficePtrFromID`、`005B3BD0 GetMeritByOfficialID`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311MemoryResearch `内存资料/地址资料.txt`：
+  - `004CB6F7 / 005B3BBB / 005B3C03` 的所需功绩阶梯均直接使用 `0xFA0=4000`；
+  - `004A6D89/8E`、`0048A7B5/BB` 锁定功绩上限 `0xEA60=60000`；
+  - `0049D57D` 军制改革技术ID18；
+  - `0049D58B` 实际部队上限+3000；
+  - `004CB636` 封官界面上限+3000。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `函数[计算武将属性].txt`：
+  - `0048A22B -> 00490C10` 读取OfficeID；
+  - 匹配 `AttrIncreaseType` 后增加 `AttrIncrease`；
+  - 官职后还有后段加成，最后统一进入原版100能力封顶。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `函数[自动封官].txt`：
+  - `005FAF00`；
+  - `005FA4D0` 先做任官资格；
+  - 真实忠诚<90直接剔除；
+  - 专门评分分支：最高档统+智>=150；武官max(统,武)>=60；文官max(智,政)>=70；
+  - 忠诚权重为 `9*min(trueLoyalty-90,10)`；
+  - 另一分支按 `max(统,武)` / `max(智,政)` 作倾向分流；
+  - 同分不替换，候选列表顺序由尚未展开的 `005FA650` 决定。
+  https://github.com/sjn4048/311MemoryResearch
+- 日文 Wiki《爵位・官職》：
+  - 80个有名官职完整表；
+  - 爵位都市门槛；
+  - 升降官不改忠；
+  - 官职指挥上限与军制改革叠加，普通最大18000；
+  - 无爵位为仅1都市；
+  - 黄巾无普通爵位/官职。
+  https://w.atwiki.jp/sangokushi11/pages/111.html
+- 日文 Wiki《技巧研究》：
+  - 军制改革+3000；
+  - 无官职5000 -> 8000。
+  https://w.atwiki.jp/sangokushi11/pages/90.html
+
+证据等级：官职结构、4000功绩阶梯、60000功绩上限、军制改革+3000、实际能力加成与 `005FAF00` 主selector均为PC-PK1.1 reverse-engineered；80官职/爵位表由日文Wiki与仓库旧表交叉确认。自动封官的资格helper、候选顺序和caller flag仍open。
