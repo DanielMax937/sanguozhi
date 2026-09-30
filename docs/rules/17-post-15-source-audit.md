@@ -14,7 +14,8 @@
 | B1 | 六角坐标、邻接、城市领域 | 200×200、x*200+y、六方向邻接、96项 area→city 映射已锁；缺40,000格静态 dump | reverse-engineered | ✅ |
 | B2 | 地形×兵种战法可用性 | 底层为 Equipment tactic表 × Tactic terrain mask × target flags；骑兵浅滩仍冲突 | reverse-engineered-structure + empirical-high | ✅ |
 | B3 | 地形移动成本 | 12×32 lookup；运输陆地用剑表、水上用小船表；火格×4；玩家设施不改底层地形成本 | reverse-engineered | ✅ |
-| B4 | 移动力加成叠加 | 下一项 | pending | ⬜ |
+| B4 | 移动力加成叠加 | 原`计算部队属性`函数锁定技巧/特技加法顺序；强行覆盖长驱；搬运+操舵可叠加 | PC-PK1.1 reverse-engineered | ✅ |
+| B5 | ZOC | 下一项 | pending | ⬜ |
 
 ## A1 关键纠错
 
@@ -143,3 +144,53 @@ cityId = Tbl_GridToCityID[areaCode]
 - https://github.com/sean2077/311SireCustomizedPackageDev
 - https://github.com/tankyc/sango_infinity
 - https://w.atwiki.jp/sangokushi11/
+
+
+## B4 关键纠错
+
+原函数 `00496570 计算部队属性` 已恢复移动力分支。
+
+技巧修正：
+
+```text
+精锐枪兵 +6
+精锐戟兵 +6
+精锐弩兵 +6
+出产良马 +4
+精锐骑兵 +2
+强化车轴 +4
+木牛流马 +3（运输陆/水）
+```
+
+行军特技：
+
+```text
+强行 +5
+长驱 +3
+搬运 +5
+操舵 +4
+```
+
+全部为直接整数加法。
+
+特别规则：
+
+```text
+骑兵同时有强行和长驱：
+先判强行
+强行命中后直接跳过长驱
+=> 只 +5，不是 +8
+```
+
+运输：
+
+```text
+陆上：剑兵基础20 + 运输固定5
+水上：走舸基础16 + 运输固定5
+
+木牛流马 +3
+搬运 +5
+水上再可叠加操舵 +4
+```
+
+因此木牛流马+搬运的陆上运输为33；水上再配操舵也是33。
