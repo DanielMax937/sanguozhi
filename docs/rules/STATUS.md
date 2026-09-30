@@ -2,21 +2,24 @@
 
 更新：2026-09-30。
 
-## 最新完成：E7 技巧系统
+## 最新完成：E8 技巧补丁版本差异
 
-当前逐点审计已写回 A1–A5、B1–B9、C1–C11、D1–D10、E1–E7，共42个审计点。
+当前逐点审计已写回 A1–A5、B1–B9、C1–C11、D1–D10、E1–E8，共43个审计点。
 
 - [当前总表](17-post-15-source-audit.md)
-- [E7 规则正文](22-techniques.md)
-- [E7 结构化数据](../sources/techniques.json)
-- [E7 数据校验脚本](../../scripts/check_techniques.py)
+- [E8 规则正文](23-technique-patch-differences.md)
+- [E8 结构化版本差异](../sources/technique-version-deltas.json)
+- [E8 校验脚本](../../scripts/check_technique_patch_profiles.py)
+- [E7 技巧系统](22-techniques.md)
 
-E7 已将技巧系统锁为36个ID：无印8系×4级，PK追加内政系32～35。研究费用、50AP、三执行武将、指导减金、技巧P上限10000与研究能力经验规则已整理。
+E8 已确认官方 Vanilla 与 PK 是两条独立更新链。Vanilla Ver1.0→后期资料有7条明确技巧差异，但官方changelog没有逐项说明它们分别在哪个补丁改变，因此 transition patch 继续标 unknown，不能一律写成“Ver1.2修改”。
 
-兵科锻炼伤害×1.10；精锐伤害×1.15且覆盖1.10，同时E3面板层另有基础攻防+10和移动加成。矢盾/大盾30%、良马+4、军制改革+3000、云梯1.4/1.2、车轴+4、城壁强化+3000、防御强化×2、神火计+2范围、木牛+3、政令整备50%等均已有PC地址级证据。
+PK1.1 工兵育成已从原函数闭合：内政设施相对恢复×2，城市/港/关×2.5。爆药炼成在研究目标PC二进制中存在“判定被烧方而非点火方”的原BUG；社区修复必须放入独立 fixProfile，不能冒充官方规则。矢盾/大盾挡战法也属于社区patch。
 
-D6的人心掌握也已同步为精确2/3，而非旧“约67% empirical”。
+推荐版本键至少包含 rulesetVersion + patchVersion + fixProfile。
 
-仍open：完整技巧研究时间函数与70/140/非超级矩阵、工兵育成完整PC倍率、兵粮袭击随机闭式、应射细边界、技巧研究完成功绩逐地址。爆药炼成原PC BUG与早期补丁差异转入E8。
+下一项：E9 兵粮袭击。
 
-下一项：E8 技巧补丁版本差异。
+## 证据边界
+
+仍缺 Vanilla 1.0/1.1/1.2 EXE 技巧地址diff、戟/弩/骑Lv1的Ver1.0明确倍率、Vanilla 1.0工兵育成内部双支路、爆药BUG的地区版官方修复情况，以及主机版逐项技巧差异。
