@@ -1417,7 +1417,9 @@ getHarborPassLimits(sp.forceId)
 - https://w.atwiki.jp/sangokushi11/pages/90.html
 - https://w.atwiki.jp/sangokushi11/pages/165.html
 
-## 8. 地形伤害
+## 8. 地形伤害（E17）
+
+完整E17证据矩阵与校验见 `32-terrain-hazard-damage.md`；本节保留地图语境下的摘要。
 
 ### PC-PK1.1：栈道 / 毒泉
 
