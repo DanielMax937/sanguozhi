@@ -33,6 +33,7 @@
 | C11 | 灾害 | current/scheduled 疫病/蝗灾/丰作状态结构、月初状态→收入顺序、丰作×1.5、风水/祈愿边界及蝗灾/疫病已确认效果已核；发生率/持续/精确损失仍open | reverse-engineered state structure + reverse-engineered harvest effect + confirmed/empirical damage semantics | ✅ |
 | D1 | 武将生命周期 / 状态字段 | 9种Identity、军师/部队/任务/flags/健康/禁仕/俘虏计数等正交字段已核；旧线性状态机撤回 | PC-PK1.1 reverse-engineered-structure | ✅ |
 | D2 | 登场 / 寿命 / 死亡 | YearOfDebut与Identity分离、成年不自动登场、Lifetime与战死独立、YearOfDeath/GetDeathYear/死亡flag/真正死亡分层、健康100/80/50/20已核；核心寿命函数仍open | reverse-engineered-structure + official-event-semantics + empirical-high timing | ✅ |
+| D3 | 五维 / 适性 / 成长 | 五维/成长型/经验/适性分层、9种成长型、年龄lookup、能力经验100→+1余数保留、普通培养+30上限、适性150/200/250、指导×2已核 | reverse-engineered-structure + empirical-exact thresholds + empirical-exact age table | ✅ |
 
 ## A1 关键纠错
 
@@ -1026,3 +1027,37 @@ Lifetime
 仍 open：普通登场 caller、Lifetime/ComeOnStage/IgnoreAge 枚举、`GetDeathYear` 函数体、markedForDeath触发概率与真正死亡延迟、一般沙盘伤病恢复。
 
 下一项：D3 五维 / 适性 / 成长。
+
+## D3 关键结论
+
+原 `struct_person` 明确把五维拆成：基础/素质、五维成长型、五维经验、成长后属性、无伤病显示值、实际显示值等多个层次。
+
+九种成长型编号已锁定：
+
+```text
+0 超持续
+1 持续
+2 早熟
+3 早熟持续
+4 普通
+5 普通持续
+6 晚成
+7 超晚成
+8 开眼
+```
+
+`struct_scenario.AttrChange` 只控制年龄盛衰；能力变动关闭后，经验成长仍继续。
+
+年龄成长：`0048A030 GetPersonAttrChangeCoef` + `0048A390 GetPersonGrowthAttr` 已定位；日文 Wiki 的 6～101 岁实测表可作为 growthType×age lookup。早熟18岁峰值、维持25、普通30、晚成40、超晚成50；开眼41～55岁存在二次成长。低素质乘百分比的精确整数取整仍 open。
+
+五维经验：每100经验能力+1，超过部分保留；但旧“没到100即可无限练”已撤回。普通经验单独或与PK能力研究合计，对同一能力的培养增量约封顶 +30；刘禅统率素质3最多约33是直接回归锚点。
+
+遗迹属于 `raiseTalent(+1)`，明确增加“素质”而不是经验，因此可绕过普通培养 +30 限制。
+
+适性经验：C→B 150、B→A 200、A→S 250；无五维+30上限。PK能力研究直接升适性时保留已有适性经验，例如B+192经验研究到A后距S只剩58。
+
+指导：只对同一野外部队的出阵经验×2；据点命令不加倍；本人通常不吃自身指导，两名指导同队时可互相生效但不×4。
+
+仍 open：年龄系数函数体、低素质取整、年龄/培养/官职宝物/伤病最终合成顺序、自然适性跨档的超额余数、Vanilla/PK +30边界。
+
+下一项：D4 人际关系。
