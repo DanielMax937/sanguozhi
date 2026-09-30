@@ -765,3 +765,48 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/15.html
 
 证据等级：关系字段/helper与支援50/30/20参数为 PC-PK1.1 reverse-engineered；副将1/2、1/3、1/4为PS2 empirical-exact，PC函数体仍open；登用/处斩/外交关系行为为长期 empirical-high。
+
+### D5 登用优先级与普通概率专项
+
+- 311MemoryResearch `Func-人才01-计算登用是否成功.txt`：
+  - `004AFD60` 为核心是否成功函数；
+  - 先调用 `004AF7D0` 做必成/必败 hard gate；
+  - 再调用 `005C4F80 GetHiringSuccessRate`；
+  - 正常第三参数=0时使用 `005BA4C0` 确定性值比较，机器码为 `cmp eax,ecx / setl`，即 `deterministicValue < p`；
+  - 第三参数非0时额外乘 `min(10,15-2*Ideals)/10` 并调用 `004721D0` 随机判定。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `Func-人才03-执行登用.txt`：
+  - `dateKey = day*7 + month*5 + year*3`；
+  - 本地人才登用传 `third=0`；
+  - 异地登用将发令日 dateKey 保存为登用任务参数；
+  - 普通本地成功/失败：功绩+200/+10，魅力经验+5/+1。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `Func-人才04-执行登用完成.txt`：
+  - 异地任务完成时读取 MissionParameter[2] 中的发令日 dateKey，继续传给 `004AFD60`。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `Func-人才08-探索发现人才并登用.txt`：
+  - 探索发现后的当场登用使用 `005C51C0` wrapper；
+  - 同样做 hard gate / `005C4F80` / deterministic compare；
+  - 首次失败后 `执行者魅力 - 与本君主相性差 + p > 80` 进入舌战；
+  - 探索登用的功绩/经验奖励与普通人才命令不同。
+  https://github.com/sjn4048/311MemoryResearch
+- 311SireCustomizedPackageDev 地址表：
+  - `005C4F80 = GetHiringSuccessRate`；
+  - 内部调用 `005BA410`；
+  - `005C4840 ProcessPersonHiredSuccessfully`；
+  - `005DB0E0 GetRecruitingActionPointCost`。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- 日文 Wiki《内政》：
+  - 9条登用 hard gate 的长期整理顺序；
+  - 配偶第三方、嫌恶、义兄弟、忠诚+义理>96、当前君主亲爱等硬分支。
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki《亲爱・嫌恶》：
+  - 亲爱执行者在特定无所属/低忠诚条件下可覆盖军师×而必成；
+  - 亲爱当前君主通常阻止第三方登用；
+  - 嫌恶当前执行君主为硬失败；配偶/义兄弟存在例外。
+  https://w.atwiki.jp/sangokushi11/pages/95.html
+- Vanilla 2006“100忠诚挖人”实验：
+  - 忠诚、亲爱、婚姻、义兄弟是 Vanilla 已存在的核心登用关系变量。
+  https://www.gamersky.com/handbook/200603/21923.shtml
+
+证据等级：普通控制流、dateKey、异地锁发令日、两类最终判定、探索失败舌战阈值均为 PC-PK1.1 reverse-engineered；9条 hard gate 顺序为 empirical-high，因 `004AF7D0` 函数体未公开；`005C4F80` 连续概率闭式仍 open。
