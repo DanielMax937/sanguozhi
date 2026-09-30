@@ -40,6 +40,7 @@
 | D7 | 太守 / 都督 / 军师 | corps/city/force三层角色结构、太守都督自动选择、军师智力70任命门槛与势力级唯一引用、AP倍率、太守治安/守城/耐久恢复职责已核 | reverse-engineered role structure + official advisor rules + empirical-high automatic selection | ✅ |
 | D8 | 忠诚 / 俸禄 / 褒赏 | 褒赏100金/人+5AP/人/每回合一次与随机加忠、授予10AP、隐藏忠诚>100、月度俸禄与00590490收支顺序、欠薪专门掉忠路径已核；褒赏增量/欠薪点数仍open | official-confirmed reward semantics + reverse-engineered monthly salary dispatcher + empirical-random reward gain | ✅ |
 | D9 | 俘虏 | 捕获主概率、强运硬免疫、合围/铁壁/超级难度/戟战法修正、自然逃亡平方公式、月度掉忠、人心掌握2/3、50金维护与资金不足释放路径已核；名马 helper/血路城陷边界/释放排序等仍open | reverse-engineered capture + escape + loyalty + maintenance, wiki corroboration | ✅ |
+| D10 | 官职 | 80官职表、81项原数组结构、4000功绩阶梯、60000功绩上限、无官5000、军制改革+3000、能力加成入实际五维、自动封官忠诚90硬门槛与双评分分支已核；资格helper/候选排序/caller flag仍open | reverse-engineered office structure + auto-selector + confirmed static table | ✅ |
 
 ## A1 关键纠错
 
@@ -1064,7 +1065,7 @@ Lifetime
 
 指导：只对同一野外部队的出阵经验×2；据点命令不加倍；本人通常不吃自身指导，两名指导同队时可互相生效但不×4。
 
-仍 open：年龄系数函数体、低素质取整、年龄/培养/官职宝物/伤病最终合成顺序、自然适性跨档的超额余数、Vanilla/PK +30边界。
+仍 open：年龄系数函数体、低素质取整、宝物/伤病等其余后段修正的完整合成顺序、自然适性跨档的超额余数、Vanilla/PK +30边界。D10 已锁定官职加成位于核心属性后段并在最终100封顶之前。
 
 下一项：D4 人际关系。
 
@@ -1308,4 +1309,54 @@ Random(0..2)
 
 仍 open：`004A0590`精确语义、context 3/4的业务名、血路城陷边界、概率helper超100行为、资金不足释放排序、释放后的默认禁仕月数与释放技巧P。
 
-下一项：D10 官职。
+## D10 关键结论
+
+D10 已从“静态表”推进到原数据结构与自动 selector。
+
+数据层：
+
+```text
+person +A4 = OfficeID
+person +AE = Merit
+struct_office[81]
+  +2C TroopNumber
+  +30 AttrIncreaseType
+  +34 AttrIncrease
+  +35 Salary
+  +36 Rank
+```
+
+公开有名官职为80个；第81项内部语义仍不命名。
+
+功绩门槛由原EXE的 `×0xFA0 = ×4000` 直接锁定，对应0/4000/.../36000；人物功绩上限 `0xEA60=60000`。
+
+指挥兵数：
+
+```text
+无官 = 5000
+有官 = office.TroopNumber
+军制改革 = +3000
+普通最高 = 15000 + 3000 = 18000
+```
+
+原地址同时确认军制改革+3000作用于实际部队上限和封官界面。
+
+官职能力加成也不是UI装饰。`0048A110` 的原属性计算明确读取 OfficeID/AttrIncreaseType/AttrIncrease；官职加成位于核心能力计算之后，最后仍进入原版五维100封顶。
+
+自动封官 `005FAF00`：
+
+- 先调用 `005FA4D0` 检查任官资格；
+- 真实忠诚<90直接不选；
+- 一个评分模式中：
+  - 最高档：统率+智力>=150，分数=统率+智力+忠诚权重；
+  - 武官：max(统,武)>=60，分数=统率+武力+忠诚权重；
+  - 文官：max(智,政)>=70，分数=max(智,政)+忠诚权重；
+  - 忠诚权重 = `9 * min(trueLoyalty-90,10)`；
+- 另一模式用 `max(统,武)` 与 `max(智,政)` 做文武倾向分流；
+- 最佳候选用严格“大于”替换，因此同分保留上游列表中先出现者。
+
+重要证据边界：60/70/150属于其中一个 caller 分支，**不能强行套给所有自动封官场景**；`005FA4D0`、`005FA650` 和 caller flag 语义仍open。
+
+静态数据同步修正：`ranks.json` 的“无爵位”从错误的 `citiesRequired=0` 改为原表“仅1都市”。
+
+D维度到此完成。
