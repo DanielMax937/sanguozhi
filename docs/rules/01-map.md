@@ -596,12 +596,196 @@ function stopsOnZOC(mover, targetCell) {
 - https://w.atwiki.jp/sangokushi11/pages/13.html
 - https://w.atwiki.jp/sangokushi11/pages/85.html
 
-## 6. 高度
+## 6. 高度与高低差
 
-- 地图格包含高度。
-- 枪/骑位移战法受双方高度差影响；现有兵科规则按每级 ±5% 处理。
-- 戟位移类战法方向相反时按兵科表处理。
-- 完整高度静态表仍需从地图数据导入。
+### 6.1 规则作用范围
+
+`[PC-PK中心][empirical-high / reverse-engineered-function-known]`
+
+原程序已经定位到 `005AF850 TacticSuccessRate`（战法成功率函数），而 SIRE/长期逆向资料一致表明：**高低差不是全局攻防倍率**，主要作用于会强制改变双方位置的若干陆战战法成功率。
+
+受高低差影响：
+
+- 枪兵：突刺、二段突；
+- 戟兵：熊手；
+- 骑兵：突击、突破、突进。
+
+不受这层高低差修正：
+
+- 螺旋突；
+- 横扫、旋风；
+- 弩兵贯射/乱射；
+- 攻城兵器常规战法；
+- 水军常规战法。
+
+火矢会受“目标地形类型”影响点火/战法成功率，但那是 terrain type 修正，不是本节的 elevation 修正。
+
+### 6.2 有利方向
+
+稳定结论：
+
+```text
+枪兵 / 骑兵：
+攻击者地势越高越有利
+
+熊手：
+攻击者地势越低越有利
+```
+
+即：
+
+```ts
+// 概念方向，不代表已经锁定完整闭式
+spearOrCavalryBonus ∝ attackerElevation - defenderElevation
+hookBonus           ∝ defenderElevation - attackerElevation
+```
+
+### 6.3 “行动开始位置”而不是“发动位置”
+
+这是最容易做错的一点。
+
+日文长期实测明确指出：
+
+> 高低差判定使用该部队**本次行动开始前所在格**，不是移动之后实际发动战法的格子。
+
+所以不能写：
+
+```ts
+heightDiff =
+  currentAttackCell.height - targetCell.height
+```
+
+更接近：
+
+```ts
+heightDiff =
+  actionStartCell.elevationClass - targetCell.elevationClass
+```
+
+例如部队从坡下移动到坡上再突击，UI 成功率仍可能保留“坡下开局”对应的不利修正。
+
+因此部队一次行动至少需要保留：
+
+```ts
+troop.actionStartCoord
+```
+
+直到该次行动结束。
+
+### 6.4 数值关系：旧“每级固定 ±5%”需要降级
+
+当前文档以前写“每级 ±5%”，这只能作为近似摘要，不能继续标精确公式。
+
+多组 PCPK 实测稳定支持：
+
+- 有利高差 1 级：常见 +5%；
+- 有利高差 2 级：常见 +10%；
+- 不利方向对枪/骑会降低成功率；
+- 熊手方向相反。
+
+但针对**二段突 / 突进**，存在稳定实测：
+
+```text
+高差2级时可达到 +15%
+```
+
+而不是简单 +10%。
+
+社区深入测试将地势大致分类为：
+
+```text
+凹地 ≈ -1
+平地 ≈  0
+凸地 ≈ +1
+坡地 ≈ +2
+```
+
+并观察到城池格在部分场景按“凸地”处理。
+
+因此当前不能用一个无条件：
+
+```ts
+bonus = 5 * (attackerHeight - defenderHeight)
+```
+
+替代原作。
+
+### 6.5 目前最安全的 fidelity 接口
+
+在完整 `005AF850` 高低差子分支尚未逐指令恢复前，应保留离散 hook：
+
+```ts
+getElevationTacticModifier({
+  tacticId,
+  actionStartCell,
+  targetCell,
+  displacementDestinationCells
+})
+```
+
+而不是把高度直接乘进普通战斗伤害。
+
+当前建议数据层至少允许：
+
+```ts
+interface TacticalElevation {
+  class: -1 | 0 | 1 | 2
+}
+```
+
+但这个 `-1/0/1/2` 分类目前来自高质量实测整理，**尚未确认就是原二进制直接存储的字段值**。
+
+### 6.6 原始高度数据存储位置仍未锁定
+
+这里要纠正旧文档的“地图格包含高度”。
+
+已公开的 `struct_map_grid` 目前明确命名的部分只有：
+
+- terrain / area；
+- 占用对象；
+- 内政用地；
+- 着火/陷阱等 flag。
+
+它**没有一个已经被 SIRE 结构体资料明确命名为 Height 的字段**。
+
+现代原作兼容实现是从地图几何/高度场读取每格中心高度来渲染，但这不能反推原作逻辑一定把 elevation class 直接存进 `struct_map_grid`。
+
+所以当前应区分：
+
+```text
+规则层：高低差确实参与部分战法成功率 —— 已确认
+静态数据层：每格原始 elevation class / 高度值存在哪里 —— 仍 open
+```
+
+这也是 N1“全地图坐标/地形/高度静态数据”后续仍必须导出的原因。
+
+### 6.7 高低差不应直接影响普通攻击伤害
+
+目前没有可靠原版证据支持：
+
+```text
+站得更高 → 普攻伤害统一增加
+站得更高 → 防御统一增加
+站得更高 → 每格移动成本变化
+```
+
+长期实测讨论反而把高低差效果集中在上述位移战法成功率；弩的普通/战法高低差也未显示统一加成。
+
+因此 fidelity 模式目前：
+
+```ts
+normalAttackHeightMultiplier = 1
+terrainMoveCostHeightModifier = 0
+```
+
+除非后续原函数提供相反证据。
+
+来源：
+- `005AF850 TacticSuccessRate`：311SireCustomizedPackageDev 地址表
+- https://w.atwiki.jp/sangokushi11/pages/91.html
+- https://w.atwiki.jp/sangokushi11/pages/1945.html
+- https://dl.3dmgame.com/patch/26091.html
+- https://vincecarter0315.pixnet.net/blog/posts/14217116027
 
 ## 7. 水陆切换与港关
 
