@@ -1327,47 +1327,438 @@ relation.relationToLord(person, lord)
 - 日文 Wiki《小ネタ》：出征武将仍可仲介结婚/结义
   https://w.atwiki.jp/sangokushi11/pages/15.html
 
-## 5. 登用：优先级门槛
+## 5. 登用优先级与普通概率
 
-下面这些规则可从原来的“模糊评分”升级为 `[empirical-high]` 的确定优先级：
+`[PC-PK1.1][reverse-engineered control flow + deterministic final check + empirical-high forced-branch order]`
 
-1. 目标配偶在第三方势力且目标原势力仍有城市 → 失败。
-2. 目标配偶是执行者或执行势力君主 → 成功。
-3. 目标嫌恶执行者或执行君主 → 失败。
-4. 执行者/执行君主是目标义兄弟 → 成功。
-5. 目标忠诚 + 义理 > 96 → 普通登用失败。
-6. 目标义兄弟长兄在执行势力 → 成功。
-7. 目标配偶在执行势力 → 成功。
-8. 目标亲爱当前君主 → 失败。
-9. 目标同时亲爱执行君主和执行者 → 成功。
+D5 最重要的结论是：原作登用不是一个“把所有因素加成一个分数，再 Math.random()”的系统。
 
-来源：https://w.atwiki.jp/sangokushi11/pages/74.html
-交叉核对：https://w.atwiki.jp/sangokushi11/pages/95.html
+实际至少分成三层：
 
-### 普通连续概率：反汇编到函数边界
+```text
+第一层：004AF7D0 必成功 / 必失败关系门槛
+第二层：005C4F80 GetHiringSuccessRate -> 0..100 连续成功率
+第三层：正常登用用 005BA4C0 生成确定性比较值，再与成功率比较
+```
 
-`[PC-PK1.1][reverse-engineered-partial]`
+只有第一层既不必成也不必败，才进入第二层。
 
-以上强制门槛都不命中后，原程序进入 `005C4F80 GetHiringSuccessRate`，返回一个 0–100 的成功率。公开的 SIRE/311MemoryResearch 资料已确认函数地址、调用关系和最终比较过程，但当前可检索资料**没有完整展开该函数体**，所以内部连续评分仍不能标成 exact。
+### 5.1 反汇编已经锁定的总控制流
 
-正常登用发令时会计算：
+`004AFD60` 是普通登用的核心“是否成功”函数。
 
-`dateKey = day*7 + month*5 + year*3`
+逐指令流程：
 
-最终不是每次重新取全局随机数，而是把 dateKey、双方武将 ID、目标忠诚、执行者魅力、执行者与目标的相性差等送入确定性值生成函数，再做：
+```text
+校验目标 / 执行者 / 执行势力君主
+↓
+004AF7D0
+  → 若命中硬分支，直接返回成功或失败
+↓
+005C4F80 GetHiringSuccessRate
+  → 返回整数型概率 p
+↓
+根据调用模式做最终判定
+```
 
-`success = deterministicValue < successRate`
+SIRE 地址表也独立将：
 
-异地登用会保存发令时的 dateKey，到任务完成时继续使用。因此同一状态下读档重试应保持相同结果。
+```text
+005C4F80 = GetHiringSuccessRate
+```
 
-引擎 fallback 与详细证据见 `16-unresolved-rules-fallbacks.md#2-普通登用概率`。禁止重新引入网上无来源的“政治/魅力各加若干点”公式。
+并注明其内部还会调用 `005BA410`。
 
-逆向来源：
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才01-计算登用是否成功.txt
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才03-执行登用.txt
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才04-执行登用完成.txt
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才08-探索发现人才并登用.txt
-- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+当前公开文本仍没有展开 `005C4F80` 完整函数体，所以**连续概率闭式依然 open**；但函数外层和最终判定已经远比旧“评分公式”精确。
+
+### 5.2 硬分支优先级
+
+`[COMMON][empirical-high order; PC-PK confirms hard-branch function executes first]`
+
+日文 Wiki / 旧实测长期一致的优先顺序为：
+
+1. **目标配偶属于第三方势力，且目标原势力仍有支配都市** → 失败。
+2. **目标配偶就是执行者，或执行势力君主** → 成功。
+3. **目标嫌恶执行者，或嫌恶执行势力君主** → 失败。
+4. **执行者或执行君主是目标的义兄弟** → 成功。
+5. **目标忠诚 + 义理 > 96** → 普通登用失败。
+6. **目标义兄弟的长兄在执行势力** → 成功。
+7. **目标配偶在执行势力** → 成功。
+8. **目标亲爱当前君主** → 失败。
+9. **目标同时亲爱执行君主与执行者** → 成功。
+
+另外 `004AF7D0` 的调用注释和关系实测都确认还会处理：
+
+- 禁止仕官期；
+- 逃亡 / 下野 / 未发现登用失败后的禁止再登用状态；
+- 配偶 / 义兄弟 / 亲爱 / 嫌恶的强制覆盖。
+
+因此上述关系不能写成：
+
+```text
+亲爱 +20%
+嫌恶 -30%
+夫妻 +40%
+```
+
+而必须先跑硬门槛。
+
+### 5.3 “忠诚 + 义理 > 96”边界不要过度源码化
+
+这条 96 门槛来自长期稳定实测和 Wiki 的优先级表；当前公开资料虽然确认 `004AF7D0` 会处理义理/忠诚类硬条件，但**没有展开该函数体逐指令验证 96 与内部义理编码的换算**。
+
+因此当前状态应是：
+
+```text
+门槛行为：empirical-high
+004AF7D0 在概率前执行：reverse-engineered
+内部五档义理值如何映射到 96：exactness gap
+```
+
+不要把 Wiki 的 1～5 显示档位和内存 `Ideals` 编码在没有函数体时强行当成同一个整数。
+
+### 5.4 普通人才→登用：不是运行时随机，而是确定性比较
+
+`[PC-PK1.1][reverse-engineered]`
+
+正常“人才→登用”调用 `004AFD60` 时：
+
+```text
+第三参数 = 0
+第四参数 = dateKey
+```
+
+其中：
+
+```ts
+dateKey = day * 7 + month * 5 + year * 3
+```
+
+硬分支未命中后，先得到：
+
+```ts
+p = GetHiringSuccessRate(target, executor, 0, dateKey)
+```
+
+然后程序读取：
+
+- 目标武将 ID；
+- 执行武将 ID；
+- 目标忠诚；
+- 执行武将魅力；
+- 执行者与目标的相性差；
+- `dateKey`；
+
+送入 `005BA4C0`，最终：
+
+```ts
+success = deterministicValue < p
+```
+
+汇编是：
+
+```text
+cmp eax, ecx
+setl dl
+```
+
+其中 `eax = deterministicValue`、`ecx = p`。
+
+所以当前代码注释里若出现“值大于成功率则成功”，那只是旧注释笔误；**机器码本身明确是 `< p` 成功**。
+
+### 5.5 同状态 S/L 为什么通常不改变结果
+
+因为普通登用不是每次调用全局随机：
+
+```text
+同日期
++ 同目标
++ 同执行者
++ 同忠诚
++ 同魅力
++ 同相性差
+```
+
+会送入同一确定性生成器。
+
+因此：
+
+```text
+同一状态反复读档重试
+→ 结果应保持相同
+```
+
+而下面任一变化都可能改变结果：
+
+- 换日期；
+- 换执行者；
+- 目标忠诚变化；
+- 执行者魅力变化；
+- 双方相性差变化。
+
+注意：`dateKey` 同时也作为第四参数传给 `005C4F80`，所以日期理论上既可能改变成功率 `p`，也会改变最终确定性比较值；在函数体恢复前不能假定日期只影响“roll”。
+
+### 5.6 异地登用锁定的是“发令日” dateKey
+
+`[PC-PK1.1][reverse-engineered]`
+
+若目标与执行城市不在同一城市区域，执行者不会当场判定，而是建立任务：
+
+```text
+Mission = 0x0C  // 登用
+MissionParameter[2] = 发令时 dateKey
+```
+
+任务完成函数 `005C5300...` 再读取这个第三个任务参数，并调用：
+
+```ts
+004AFD60(target, executor, 0, savedDateKey)
+```
+
+所以：
+
+```text
+走了20/30/...天以后才到达目标
+≠ 用抵达日重新掷一次
+```
+
+而是保留发令时的日期键。
+
+这也是模拟器任务系统必须保存 `dateKey` 的理由。
+
+### 5.7 第三参数非0的路径是另一种判定模式
+
+`[PC-PK1.1][reverse-engineered]`
+
+`004AFD60` 在第三参数不为0时，会在 `005C4F80` 结果外再施加一个义理倍率：
+
+```ts
+factor10 = min(10, 15 - 2 * idealsInternal)
+p2 = min(100, floor(p * factor10 / 10))
+```
+
+若内部义理编码按当前常见 0..4 解释，则倍率为：
+
+```text
+0 -> 1.0
+1 -> 1.0
+2 -> 1.0
+3 -> 0.9
+4 -> 0.7
+```
+
+随后这条路径不是 `005BA4C0` deterministic compare，而是调用：
+
+```text
+004721D0 0～100随机函数
+```
+
+也就是说：
+
+```text
+第三参数 = 0
+→ 正常登用的 deterministic check
+
+第三参数 != 0
+→ 额外义理倍率 + 真随机/运行时随机判定
+```
+
+当前公开调用点里正常玩家人才→登用和异地登用都明确传0；其他非0 caller 的完整业务语义尚未全部命名，所以**绝不能把这条 0.9/0.7 外层倍率套到普通玩家登用**。
+
+### 5.8 探索发现人才后的“当场登用”是独立流程
+
+`[PC-PK1.1][reverse-engineered]`
+
+`005D5220`“探索发现人才并登用”没有直接复用普通人才命令的完整最终判定。
+
+它先调用 `005C51C0` 取得成功率：
+
+```text
+004AF7D0 硬分支
+→ 必成返回100 / 必败返回0
+→ 否则 005C4F80
+```
+
+然后自己计算当前：
+
+```ts
+dateKey = day * 7 + month * 5 + year * 3
+```
+
+再调用 `005BA4C0` 做 deterministic compare。
+
+因此“探索后当场登用”仍然具有同状态确定性，但调用结构与普通人才命令并不完全相同。
+
+### 5.9 探索登用失败后可能进入舌战
+
+更重要的是，探索当场登用第一次判定失败后，并不是总直接失败。
+
+源码继续计算：
+
+```ts
+debateScore =
+  executorCharm
+  - compatibilityDifference(executor, executorLord)
+  + hiringSuccessRate
+```
+
+然后：
+
+```ts
+if (debateScore > 80) {
+  enterDebate()
+} else {
+  failHire()
+}
+```
+
+原注释里 `cmp eax, 0x50` 已直接给出阈值 80。
+
+玩家第一军团进入实际舌战；非玩家分支走 AI 舌战结果计算。
+
+所以不能把：
+
+```text
+探索发现人才后的当场登用
+```
+
+和：
+
+```text
+人才菜单普通登用
+```
+
+当成完全同一条失败处理。
+
+### 5.10 军师“推荐成功/失败”不能替代真实硬分支
+
+`004AFD60` 同时被军师推荐路径调用；而亲爱等硬关系实测已经证明：
+
+```text
+军师显示 ×
+但若目标亲爱执行者并满足可覆盖条件
+→ 实际仍可必成功
+```
+
+因此军师建议是 UI/预测层，不能成为最终规则源。
+
+引擎应始终让：
+
+```text
+hardHiringGate()
+→ GetHiringSuccessRate()
+→ finalHiringCheck()
+```
+
+决定真实结果。
+
+### 5.11 成功/失败的执行副作用也有路径差异
+
+普通人才命令本地登用：
+
+```text
+成功：功绩 +200，魅力经验 +5
+失败：功绩 +10，魅力经验 +1
+```
+
+探索发现人才后的当场登用走 `005D3C90`：
+
+```text
+成功：功绩 +200，政治经验 +3，魅力经验 +5
+失败：功绩 +100，政治经验 +3
+```
+
+这说明两个 UI 上都叫“登用”的路径不能粗暴只保留一个 reward table。
+
+### 5.12 旧自拟“登用分数公式”正式撤回
+
+旧总规则曾保留：
+
+```text
+(100-忠诚)*2
++ (100-义理*20)
++ (75-相性差)
++ floor(魅力*0.5)
+```
+
+并用“分数>0即可能成功”闭环。
+
+这组公式没有原作函数体支持，且与已经恢复的：
+
+```text
+硬分支
++ GetHiringSuccessRate
++ deterministicValue
+```
+
+结构不一致。
+
+本轮从总规则正式移除。
+
+### 5.13 当前唯一核心 exactness gap
+
+真正影响普通概率 fidelity 的核心缺口已经收缩到：
+
+```text
+005C4F80 GetHiringSuccessRate
+```
+
+完整函数体。
+
+目前可以确认：
+
+- 返回整数 0..100；
+- 参数包含目标/执行者指针、调用模式参数和第四整数参数；
+- 内部调用 `005BA410`；
+- 外层硬关系与最终判定已经恢复；
+- 相性、忠诚、魅力等至少会影响最终普通登用链；
+- 不能据此反推出网上任何线性评分闭式。
+
+因此现有 `16-unresolved-rules-fallbacks.md#2` 只允许替换**第二层成功率函数**，不得重新替换第一层硬分支和第三层 deterministic check。
+
+### 5.14 D5 当前结论
+
+已经锁定：
+
+- 硬关系/禁仕 gate 一定先于连续概率；
+- 9条长期稳定关系门槛及其顺序保留为 empirical-high；
+- 普通人才登用第三参数=0；
+- `dateKey = day*7 + month*5 + year*3`；
+- 普通最终判定 `deterministicValue < p`；
+- 异地登用保存发令日 dateKey，到达时复用；
+- 第三参数非0路径存在 `min(10,15-2*义理)` 外层倍率，并改用运行时随机；不能套给普通玩家登用；
+- 探索发现人才后的当场登用走独立 wrapper；
+- 探索首次登用失败后，`魅力 - 与本君主相性差 + p > 80` 可进入舌战；
+- 普通登用与探索登用的功绩/能力经验奖励不同；
+- 军师建议不能覆盖真正硬关系规则；
+- 旧自拟连续“登用分数”撤回。
+
+仍 open：
+
+- `004AF7D0` 完整函数体，用来逐指令确认9条 empirical 顺序和禁止仕官细节；
+- `005C4F80 GetHiringSuccessRate` 完整闭式；
+- `005BA410 / 005BA4C0` 的完整确定性生成算法；
+- 96门槛使用的义理显示档位与内部编码精确映射；
+- 第三参数非0的所有原版 caller 业务语义；
+- Vanilla EXE 与 PC-PK1.1 是否完全同链。
+
+来源：
+- 311MemoryResearch `Func-人才01-计算登用是否成功.txt`：004AFD60、硬gate→005C4F80→两类最终判定
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `Func-人才03-执行登用.txt`：本地/异地、dateKey保存、普通奖励
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `Func-人才04-执行登用完成.txt`：异地抵达后读取任务中的发令日dateKey
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `Func-人才08-探索发现人才并登用.txt`：探索wrapper、deterministic compare及失败后舌战阈值
+  https://github.com/sjn4048/311MemoryResearch
+- 311SireCustomizedPackageDev：`005C4F80 GetHiringSuccessRate`、`005DB0E0 GetRecruitingActionPointCost`
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 日文 Wiki 内政：9条登用优先级
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki 亲爱/嫌恶：亲爱覆盖军师×、嫌恶/配偶/义兄弟边界
+  https://w.atwiki.jp/sangokushi11/pages/95.html
+- 2006 Vanilla 100忠诚挖人实测：忠诚/亲爱/婚姻/义兄弟核心行为
+  https://www.gamersky.com/handbook/200603/21923.shtml
 
 ## 6. 相性、义理、野望、汉室
 
