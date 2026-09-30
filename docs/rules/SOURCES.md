@@ -257,3 +257,23 @@
   https://w.atwiki.jp/sangokushi11/pages/2445.html
 - 游侠新手技术：米道/征收基础语义
   https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
+
+
+### C3 特殊收入特技 / 丰作专项
+
+- 311MemoryResearch：
+  - `整理/Func-收支01-每旬收钱.txt`
+  - `整理/Func-收支03-每月钱粮兵装收支.txt`
+- SIRE 地址表：
+  - `004CEAE0 GetSPSpecialSkillsArray`
+  - `0047B3C0 IsCityInSpecificState`
+  - `0047B3F0 IsCityInScheduledState`
+- SIRE `struct_city`：
+  - `Disasters`
+  - `DisasterPredictions`
+- 日文 Wiki 特技：富豪/米道/征税/征收的所属都市、触发周期及组合
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+- 游侠新手技术：收入类特技作用语义
+  https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
+- 2ch/Wiki 早期无印丰作 flag bug 记录
+  https://w.atwiki.jp/sangokushi11/pages/1828.html
