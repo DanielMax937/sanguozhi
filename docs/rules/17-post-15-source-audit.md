@@ -36,7 +36,7 @@
 | D3 | 五维 / 适性 / 成长 | 五维/成长型/经验/适性分层、9种成长型、年龄lookup、能力经验100→+1余数保留、普通培养+30上限、适性150/200/250、指导×2已核 | reverse-engineered-structure + empirical-exact thresholds + empirical-exact age table | ✅ |
 | D4 | 人际关系 | 亲爱/厌恶方向性、夫妻/义兄弟/血缘独立结构、PC-PK支援50/30/20参数、副将1/2/1/3/1/4补正及嫌恶整队覆盖、登用/处斩硬分支已核 | reverse-engineered relation structure + reverse-engineered support parameters + empirical-high relation behavior | ✅ |
 | D5 | 登用优先级与普通概率 | hard gate→005C4F80→deterministic compare 控制流、dateKey与异地锁发令日、非0参数义理倍率/随机分支、探索失败舌战>80已核；005C4F80闭式仍open | reverse-engineered control flow + deterministic final check + empirical-high hard-gate order | ✅ |
-| D6 | 相性 / 义理 / 野望 / 汉室 | 相性150环精确式、忠诚0..255/UI100、换季掉忠>=25/低义理高野望门槛、己方/俘虏schedule、仁政/人心掌握边界、汉室爵位与拥废常量已核 | reverse-engineered compatibility/storage + empirical-high loyalty behavior + documented Han constants | ✅ |
+| D6 | 相性 / 义理 / 野望 / 汉室 | 相性150环精确式、忠诚0..255/UI100、换季掉忠>=25/低义理高野望门槛、己方/俘虏schedule、仁政边界、人心掌握精确2/3及掉忠数值主路径、汉室爵位与拥废常量已核 | reverse-engineered compatibility/storage/loyalty core + empirical-high behavior cross-check + documented Han constants | ✅ |
 | D7 | 太守 / 都督 / 军师 | corps/city/force三层角色结构、太守都督自动选择、军师智力70任命门槛与势力级唯一引用、AP倍率、太守治安/守城/耐久恢复职责已核 | reverse-engineered role structure + official advisor rules + empirical-high automatic selection | ✅ |
 | D8 | 忠诚 / 俸禄 / 褒赏 | 褒赏100金/人+5AP/人/每回合一次与随机加忠、授予10AP、隐藏忠诚>100、月度俸禄与00590490收支顺序、欠薪专门掉忠路径已核；褒赏增量/欠薪点数仍open | official-confirmed reward semantics + reverse-engineered monthly salary dispatcher + empirical-random reward gain | ✅ |
 | D9 | 俘虏 | 捕获主概率、强运硬免疫、合围/铁壁/超级难度/戟战法修正、自然逃亡平方公式、月度掉忠、人心掌握2/3、50金维护与资金不足释放路径已核；名马 helper/血路城陷边界/释放排序等仍open | reverse-engineered capture + escape + loyalty + maintenance, wiki corroboration | ✅ |
