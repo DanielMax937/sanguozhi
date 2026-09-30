@@ -32,6 +32,7 @@
 | C10 | 治安 | 巡查边界/公式、征兵量与掉治安精确式、收入倍率、换季自然下降、PK整备政令、贼80阈值与根城持续已核；巡查敌军半减/贼生成概率等仍open | reverse-engineered core + official-confirmed + empirical-high patrol | ✅ |
 | C11 | 灾害 | current/scheduled 疫病/蝗灾/丰作状态结构、月初状态→收入顺序、丰作×1.5、风水/祈愿边界及蝗灾/疫病已确认效果已核；发生率/持续/精确损失仍open | reverse-engineered state structure + reverse-engineered harvest effect + confirmed/empirical damage semantics | ✅ |
 | D1 | 武将生命周期 / 状态字段 | 9种Identity、军师/部队/任务/flags/健康/禁仕/俘虏计数等正交字段已核；旧线性状态机撤回 | PC-PK1.1 reverse-engineered-structure | ✅ |
+| D2 | 登场 / 寿命 / 死亡 | YearOfDebut与Identity分离、成年不自动登场、Lifetime与战死独立、YearOfDeath/GetDeathYear/死亡flag/真正死亡分层、健康100/80/50/20已核；核心寿命函数仍open | reverse-engineered-structure + official-event-semantics + empirical-high timing | ✅ |
 
 ## A1 关键纠错
 
@@ -987,3 +988,41 @@ C 维度完成。
 仍 open：普通登场 caller、死亡预定→真正死亡、伤病自然恢复、Mission 0..43 完整语义、俘虏/禁仕计数器精确更新。
 
 下一项：D2 登场 / 寿命 / 死亡。
+
+## D2 关键结论
+
+登场：
+
+- `YearOfDebut` 是时间门槛，与 `Identity` 分离；
+- 诸葛亮在200年已20岁仍未登场，沙摩柯34岁仍未登场，因此不存在通用“15岁自动登场”；
+- `struct_scenario` 另有 `IgnoreAge / ComeOnStage`，`struct_person` 另有 `ScheduledLord`；普通自动登场 caller 仍未公开展开。
+
+寿命与死亡：
+
+```text
+struct_person.YearOfDeath / CauseOfDeath
+0048A000 GetDeathYear
+Flags.markedForDeath
+Identity = DEAD
+```
+
+属于不同层次，不能合并。
+
+`struct_scenario` 又明确分开：
+
+```text
+DieInBattleSetting
+Lifetime
+```
+
+所以自然寿命 RNG 与战场战死概率必须分开。
+
+经验边界：自然死通常在有效没年当年死亡，少数延后2～3年；不自然死会额外延寿且与没年年龄负相关。旧“最多15年”不是 hard cap。孙策事件官方条件使用“预定死亡年”，胜于吉明确延寿20年。
+
+死亡 flag 也不是死亡本身：诸葛亮北伐要求死亡flag未立，诸葛亮之死则等到自然死条件后才真正死亡。
+
+健康：原结构 `HealthLevel=0..3`，夷陵决战甘宁94武力在重伤时47、轻伤时75，直接支持当前 100% / 80% / 50% / 20% 模型；旧 -20/-40/-60 表与实机冲突，继续不采用。
+
+仍 open：普通登场 caller、Lifetime/ComeOnStage/IgnoreAge 枚举、`GetDeathYear` 函数体、markedForDeath触发概率与真正死亡延迟、一般沙盘伤病恢复。
+
+下一项：D3 五维 / 适性 / 成长。
