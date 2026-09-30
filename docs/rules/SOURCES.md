@@ -427,3 +427,47 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/79.html
 
 注意：SIRE/PK2.2 后续加入的“交易优势”“商贸城市”“非商贸城市25%出现商人”等属于 MOD 扩展，不作为 PC-PK1.1 原作默认参数。
+
+### C9 行动力专项
+
+- 《三國志11 with パワーアップキット》官方说明书：
+  - 1回合=10天；
+  - 行动力每回合恢复；
+  - 最大行动力255。
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 游侠 2006-06-14《行动力计算详解》：
+  - 每旬恢复 = (君主参数 + 城市参数 + 武将参数) × 军师参数；
+  - 君主参数只看统率/魅力较高项；
+  - 城市参数每城+10、最大50；
+  - 武将参数前6据点、每据点最多10、最大60；
+  - 军师参数线性步进；
+  - 无印核心恢复理论最大180。
+  https://game.ali213.net/thread-988399-1-1.html
+- 游侠《311中文版新手入门技术》：公式交叉整理。
+  https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
+- 游民星空 2006-03-23 早期研究：
+  - 行动力可累积；
+  - 早期影响因素实测；
+  - 其中“多项能力共同影响”的早期解释被6月后续专项纠正。
+  https://www.gamersky.com/handbook/200603/21611.shtml
+- Bilibili 2023 PK存档复算：
+  - 刘禅直辖3城例 `(30+20+22)*1.2=86.4 -> 86`；
+  - 1座符节台后实际91，锁定符节台在核心取整后+5；
+  - 委任军团独立行动力，军团长替代君主，势力军师共用。
+  https://www.bilibili.com/opus/828103788131778665
+- 日文 Wiki 内政：
+  - 行动力影响因素；
+  - 符节台每回合恢复+5。
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 311SireCustomizedPackageDev：
+  - `struct_force.AdvisorID`；
+  - `struct_corp.CorpsLeaderID / ActionPoints / PersonList`；
+  - `0047E3E0 SetCorpsActionPoints`；
+  - `005B9340 DeductCorpActionPoints`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311MemoryResearch：
+  - `004A1820` 军团行动力修改点；
+  - `005B9340` 军团行动力扣除路径。
+  https://github.com/sjn4048/311MemoryResearch
+
+当前证据等级：`empirical-exact formula + reverse-engineered-structure + PK save cross-validation`。尚未公开展开 PC-PK1.1 行动力恢复主函数体。
