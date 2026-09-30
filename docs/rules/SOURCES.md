@@ -1464,3 +1464,29 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://www.gamersky.com/handbook/200806/114545_2.shtml
 
 证据等级：techId与地址为PC地址级；箭类攻击集合、射程/地形/支援/异常/急袭边界为多来源长期实测high。`00584DC8` 完整caller、水上active profile、PC连战链序仍open。
+
+
+### E11 技巧研究时间专项
+
+- 日文 Wiki《技巧研究/コメント》：
+  - 超级难度下相关能力和在70/140/210/280处分档；
+  - 能力和210、无人材府时30/40/60/90日；
+  - 210或280 + 人材府时Lv1都可10日；
+  - 280 + 人材府时Lv4为60日；
+  - 评论明确说其他难度差异未确认。
+  https://w.atwiki.jp/sangokushi11/pages/337.html
+- 游侠 NETSHOW《三国志11pk内存修改》：
+  - `005D7ED7`：人才府使技巧研究-20日；
+  - `005D7EF0 / 005D7EF4`：有人才府时最低1旬。
+  https://game.ali213.net/thread-2168294-1-1.html
+- 2006 无印技巧攻略：
+  - 明确提示技巧研究时间并非固定；
+  - 枪/戟/弩/骑/练兵通常显示30/40/60/90；
+  - 发明/防卫/火攻通常显示40/50/70/100。
+  https://www.gamersky.com/handbook/200603/21607.shtml
+- 2006 PK 技巧攻略：
+  - PK新增内政系通常显示40/50/70/100；
+  - 再次提供各系通常显示时长。
+  https://www.gamersky.com/handbook/200609/33179.shtml
+
+证据等级：人才府-20日/最低10日为PC地址级；70/140/210/280及210/280锚点为Super empirical-high；两组通常时长为documented-guide。完整PC计算函数与完整矩阵仍open。
