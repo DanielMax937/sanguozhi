@@ -5,7 +5,7 @@
 
 ## 最新审计入口
 
-[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E10应射](25-response-fire.md)。
+[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E11技巧研究时间](26-technique-research-time.md)。
 
 A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原blob复用，无历史段落丢失。历史快照不是当前进度指针。
 
@@ -20,6 +20,8 @@ E6补给与输送以 `21-supply-transport.md` 为当前专项规范；参考校�
 E7技巧系统以 `22-techniques.md` 为基础规范，结构化表为 `../sources/techniques.json`。E8版本差异以 `23-technique-patch-differences.md` 和 `../sources/technique-version-deltas.json` 覆盖；实现时必须区分 `rulesetVersion + patchVersion + fixProfile`，社区修复不得静默覆盖 fidelity。校验命令分别为 `python scripts/check_techniques.py` 与 `python scripts/check_technique_patch_profiles.py`。
 
 E9兵粮袭击见 `24-food-raid.md`；E10应射以 `25-response-fire.md` 为当前专项规范，结构化证据为 `../sources/response-fire.json`，兼容判定校验命令为 `python scripts/check_response_fire.py`。
+
+E11技巧研究时间以 `26-technique-research-time.md` 为当前专项规范，结构化证据为 `../sources/technique-research-time.json`；只保存已知阈值/锚点与人才府精确修正，不填满未知矩阵。
 
 ## 版本标记
 
@@ -65,6 +67,7 @@ E9兵粮袭击见 `24-food-raid.md`；E10应射以 `25-response-fire.md` 为当�
 24. `23-technique-patch-differences.md` E8 Vanilla/PK补丁链、技巧版本差异、原BUG与社区修复profile
 25. `24-food-raid.md` E9兵粮袭击触发路径、数量模型与RNG边界
 26. `25-response-fire.md` E10应射箭类触发、射程/地形/支援边界与平台差异
+27. `26-technique-research-time.md` E11技巧研究时间分档、人才府修正与证据矩阵
 
 ## 来源优先级
 
