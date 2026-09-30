@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "audit": "E11",
+  "target": "PC-PK1.1 primary; Super timing observations",
+  "turnDays": 10,
+  "researcherCount": 3,
+  "relatedAbilityByBranch": {
+    "0": "leadership",
+    "1": "leadership",
+    "2": "leadership",
+    "3": "leadership",
+    "4": "war",
+    "5": "intelligence",
+    "6": "politics",
+    "7": "intelligence",
+    "8": "politics"
+  },
+  "evidence": {
+    "exactReverse": {
+      "talentOffice": {
+        "facility": "人才府",
+        "addressReduce": "005D7ED7",
+        "subtractDays": 20,
+        "addressMinimum": "005D7EF0/005D7EF4",
+        "minimumTurns": 1,
+        "minimumDays": 10
+      }
+    },
+    "superEmpirical": {
+      "bucketThresholds": [
+        70,
+        140,
+        210,
+        280
+      ],
+      "thresholdSemantics": "days change when the three researchers' related-ability sum crosses these values; confirmed on Super only",
+      "anchors": [
+        {
+          "relatedAbilitySum": 210,
+          "talentOffice": false,
+          "levelDays": [
+            30,
+            40,
+            60,
+            90
+          ],
+          "scopeCaveat": "branch not identified in the 2021 wiki comment; do not globalize"
+        },
+        {
+          "relatedAbilitySum": 210,
+          "talentOffice": true,
+          "level": 1,
+          "days": 10
+        },
+        {
+          "relatedAbilitySum": 280,
+          "talentOffice": true,
+          "level": 1,
+          "days": 10
+        },
+        {
+          "relatedAbilitySum": 280,
+          "talentOffice": true,
+          "level": 4,
+          "days": 60
+        },
+        {
+          "relatedAbilitySum": 280,
+          "talentOffice": false,
+          "level": 4,
+          "days": 80,
+          "derivation": "60 observed + exact 20-day Talent Office reduction"
+        }
+      ]
+    },
+    "guideDisplayAnchors": {
+      "note": "Guides explicitly say research time is not fixed; these are usual displayed values.",
+      "familyA": {
+        "branches": [
+          "spear",
+          "halberd",
+          "crossbow",
+          "cavalry",
+          "training"
+        ],
+        "levelDays": [
+          30,
+          40,
+          60,
+          90
+        ]
+      },
+      "familyB": {
+        "branches": [
+          "invention",
+          "defense",
+          "fire",
+          "domestic"
+        ],
+        "levelDays": [
+          40,
+          50,
+          70,
+          100
+        ]
+      }
+    }
+  },
+  "hardRules": [
+    "Research time is not a fixed per-level table.",
+    "Three researchers' related-ability total affects time.",
+    "Super has observed breakpoints at 70/140/210/280.",
+    "Talent Office subtracts exactly 20 days after base-time calculation and clamps to at least one 10-day turn.",
+    "Do not fabricate the complete 5x4 timing matrix.",
+    "Do not copy Super timing to Beginner/Advanced without evidence."
+  ],
+  "open": [
+    "original PC research-time calculation function body",
+    "complete Super matrix for all buckets/families",
+    "Beginner/Advanced behavior",
+    "whether base time is per-technique data or code branch",
+    "exact ability getter layer",
+    "exact inequality semantics at bucket boundaries",
+    "Vanilla/console equivalence"
+  ],
+  "sources": [
+    "https://w.atwiki.jp/sangokushi11/pages/337.html",
+    "https://www.gamersky.com/handbook/200603/21607.shtml",
+    "https://www.gamersky.com/handbook/200609/33179.shtml",
+    "https://game.ali213.net/thread-2168294-1-1.html"
+  ]
+}
