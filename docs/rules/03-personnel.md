@@ -1959,68 +1959,102 @@ B. 义理 = 低 / 较低
 + 换季判定
 ```
 
-### 6.8 自然掉忠的免疫/抑制层
+### 6.8 仁政 / 人心掌握：对己方与俘虏的边界不同
 
-`仁政` 的原效果非常明确：
+`[PC-PK1.1][confirmed-by-disassembly]`
 
-```text
-与仁政持有者同一都市的己方武将
-→ 不发生自然忠诚下降
-```
+`0058E510` 的完整逐指令文本已经可以恢复这一段，不再只依赖社区经验。
 
-这里的关键词是**自然下降**。流言、事件、欠薪等主动/特殊忠诚变化不应因为仁政而自动免疫。
-
-`[PK] 人心掌握` 则不是绝对免疫，而是“忠诚变得不易下降”。SIRE 后续把它暴露成独立的“忠诚不下降概率”参数，说明其机制应是概率抑制。
-
-社区/SIRE 参数说明长期把原始默认解释为：
+`仁政` 的处理：
 
 ```text
-约 2/3 概率跳过
-≈ 67% 免降
+普通己方武将：
+  同设施存在仁政 -> 跳过自然忠诚下降
+
+俘虏：
+  先判定“是否俘虏”
+  是俘虏 -> 直接跳过仁政判定
 ```
 
-当前继续标 `empirical`，不升级为源码 confirmed。
+所以仁政只保护同设施的己方武将，**不保护俘虏**。
 
-### 6.9 己方换季掉忠与俘虏掉忠必须分成两个 schedule
-
-旧仓库把：
-
-```text
-己方每月掉忠
-俘虏每旬掉忠
-```
-
-混在一起，这不符合长期实测。
-
-正确周期边界：
-
-```text
-己方普通武将：季初自然下降
-俘虏：每月可能下降
-```
-
-PK 符节台明确让俘虏忠诚下降更快；现有 PC-PK1.1 逆向还锁定通用忠诚下降数值分支中的：
-
-```text
-hasTokenPlatform -> loss += 2
-```
-
-且该 +2 位于通用掉忠数值路径，所以己方武将在本来已经进入季初自然掉忠结算时也可能吃到这 +2；它并不会凭空把一个本来不掉忠的人变成下降候选。
-
-俘虏基础每月下降的完整关系/RNG闭式仍保留 open。
-
-### 6.10 掉忠数值：已恢复一部分，完整 gate 仍保留证据边界
-
-现有 PC-PK1.1 逆向记录把掉忠数值核心定位在 `0058E510`，已恢复的数值结构包括：
+`[PK] 人心掌握` 位于普通武将/俘虏共用的后段：
 
 ```text
 Random(0..2)
-+ 符节台(+2 if present)
-+ 君主义理/野望相关附加项（条件命中时）
-+ Random(0..2)
+>= 1 -> 本次不下降
+== 0 -> 继续计算下降值
 ```
 
-两个 0..2 独立随机之和构成基础三角分布：
+因此原版 PC-PK1.1 的免降概率是精确的：
+
+```text
+2/3
+```
+
+这条现在升级为 reverse-engineered confirmed，不再标 empirical。
+
+### 6.9 己方换季掉忠与俘虏月度掉忠是同函数里的不同 schedule
+
+`0058E510` 被月初 dispatcher `00590C30 MonthlyAction` 调用。
+
+普通己方武将：
+
+```text
+不是季初 -> 跳过
+季初 -> 再走相性/义理/野望 gate
+```
+
+俘虏：
+
+```text
+Identity=PRISONER
+-> 跳过季初 gate
+-> 跳过普通武将的相性/义理/野望候选 gate
+-> 每个月都可以进入后续忠诚下降判定
+```
+
+所以正确周期是：
+
+```text
+己方普通武将：季初
+俘虏：月初
+```
+
+不是旧稿的“己方每月 / 俘虏每旬”。
+
+俘虏虽然跳过普通候选 gate，但仍保留一组关系豁免。对当前所属/看守势力君主，若满足任一项则本月不降：
+
+- `00488910` 亲爱/亲善关系；
+- 配偶；
+- 义兄弟；
+- 父母子女。
+
+### 6.10 忠诚下降数值：主函数已恢复
+
+`[PC-PK1.1][confirmed-by-disassembly]`
+
+进入数值分支后：
+
+```ts
+loss = Random(0..2)
+
+if (city.hasTokenPlatform) {
+  loss += 2
+}
+
+if (
+  captorLord.ideals === 0 &&
+  captorLord.ambition === 4
+) {
+  loss += floor((4 - target.ideals) / 2)
+}
+
+loss += Random(0..2)
+target.loyalty -= loss
+```
+
+其中两次 `Random(0..2)` 独立，因此没有额外项时基础下降量为：
 
 | 基础损失 | 概率 |
 |---:|---:|
@@ -2030,13 +2064,12 @@ Random(0..2)
 | 3 | 2/9 |
 | 4 | 1/9 |
 
-二次资料中还有一个“基于代码”的完整候选：当君主内部义理最低且野望最高时，再追加 `4 - subordinateIdeals`；它与 Wiki“吕布/董卓下降幅度更大”方向一致。
+注意：
 
-但当前公开主逆向仓库没有把这段完整函数逐指令文本化，因此：
-
-- 两个 `Random(0..2)` 与符节台 +2：沿用现有 PC-PK1.1 逆向结论；
-- `4 - subordinateIdeals` 条件：只作为 secondary code-derived candidate / fallback；
-- 不把整个忠诚下降闭式升成 fully reverse-engineered。
+- 符节台 `+2` 是进入掉忠数值分支后的附加值，不负责把原本不满足 gate 的普通武将“变成会掉忠”；
+- 人心掌握在这段数值计算**之前**以 2/3 概率直接跳过；
+- 俘虏不吃仁政，但仍吃人心掌握和上面的关系豁免；
+- 欠薪、流言、事件等不是这条自然/月度忠诚路径，仍应分开建模。
 
 ### 6.11 汉室：三档，是事件/爵位分支，不是每旬忠诚倍率
 
@@ -2979,7 +3012,237 @@ salarySum > remainingGold
 
 ## 9. 俘虏
 
-可登用、释放、处斩、外交交换或逃亡。战场俘虏受捕缚、强运、名马、包围、戟兵等影响。精确概率仍列 open。
+`[PC-PK1.1][reverse-engineered capture + escape + maintenance + loyalty]`
+
+俘虏不是只有一个“是否被抓”的布尔状态。至少要保存：
+
+```text
+Identity = PRISONER(5)
+FormerAllegiance
+ForbiddenLord
+ForbiddenMonths
+CaptiveMonths
+Location
+```
+
+其中 `CaptiveMonths` 直接进入逃亡概率；`Location` 决定是否处在据点俘虏流程。
+
+### 9.1 野战 / 据点击破捕获：主概率函数已恢复
+
+PC-PK1.1 的主函数位于 `004B1280`。它同时处理部队被击破与据点陷落后的武将捕获。
+
+普通概率路径的已确认核心：
+
+```ts
+stat = max(target.war, target.intelligence)
+
+surround = 1
+if (surroundingFriendlyUnits > 0 && !target.hasSkill("铁壁")) {
+  surround = surroundingFriendlyUnits
+}
+
+contextMultiplier = (unknownContextId === 3 || unknownContextId === 4)
+  ? 1.5
+  : 1.0
+
+difficultyDivisor =
+  (difficulty === "超级" &&
+   attackerIsPlayer &&
+   defenderIsAI)
+  ? 2
+  : 1
+
+p = toInt(
+  floor((120 - stat) / 3)
+  * surround
+  * contextMultiplier
+  / difficultyDivisor
+)
+
+if (attackingUnit.hasSkill("捕缚")) {
+  p += 100
+}
+p = min(p, 100)
+
+if (isHalberdTactic) {
+  p += 30
+}
+p = min(p, 100)
+
+capture = ProbabilityRoll(p)
+```
+
+说明：
+
+- 目标武将取**武力、智力较高者**；能力越高，普通被俘率越低。
+- 合围会按周围己方部队数线性放大；目标有`铁壁`时，合围倍率被压回1，但铁壁不是绝对免疫。
+- 超级难度中仅“玩家击破AI”这一方向再除以2。
+- `捕缚`在普通概率路径直接加100，因此在没有更前面的逃脱/免疫硬分支时等价于必捕。
+- 戟兵战法在最终概率上再`+30`，然后再次封顶100。
+- `unknownContextId==3/4 -> ×1.5` 已由反汇编确认，但该 context 的业务语义还没有可靠命名，暂不猜成某个战法/地形。
+- 浮点转整数 helper `00707A74` 的边界舍入语义仍沿用全项目统一 open，不在这里自造 round/floor 差异。
+
+旧总规则里的：
+
+```text
+近战约30%
+位移战法约40%
+包围约70%
+```
+
+只能视为旧经验样本，**不能继续作为 PC-PK1.1 的主公式**。
+
+### 9.2 强运 / 名马 / 血路不能混成一个百分比修正
+
+`强运`是源码级硬边界：
+
+```text
+004B17B1 skill 32 强运
+-> 部队击破捕获流程中直接走不可捕获分支
+```
+
+`捕缚`的日文特技说明长期一致表述为“对没有强运、没有名马的武将必定捕获”，因此**名马是高置信反捕获条件**；但主捕获函数中位于强运之前的 `004A0590` 保护检查尚未完成语义映射，当前不把它擅自命名成“名马检查”。
+
+`血路`另有独立函数/特技入口，社区资料也明确存在“部队壊滅时有效、城陷落时边界不同”的版本/场景争议。因此：
+
+- 不把血路简单塞进上面的概率公式；
+- 部队全灭、据点陷落分别建模；
+- 血路对据点陷落的精确边界继续 open。
+
+### 9.3 据点俘虏的自然逃亡概率已恢复
+
+月初 dispatcher 的顺序是：
+
+```text
+0058BB30 俘虏月数/禁仕月数计数
+-> ...
+-> 00582BE0 俘虏自然逃亡
+-> ...
+-> 00590490 月度收入/支出
+```
+
+`00582BE0` 只对能解析为城市/港/关设施的俘虏做自然逃亡 roll。
+
+因此野外部队携带的俘虏不进入这条据点逃亡判定；日文 Wiki 的长期实测“出阵部队携带的俘虏不会自行逃亡，回城后才可能逃亡”与源码结构一致。
+
+精确公式：
+
+```ts
+if (!isValidFacility(prisoner.location)) {
+  return NO_NATURAL_ESCAPE_ROLL
+}
+
+if (prisoner.captiveMonths < 2) {
+  return NO_NATURAL_ESCAPE_ROLL
+}
+
+q = max(1, prisoner.captiveMonths - 2)
+stat = max(30, max(prisoner.war, prisoner.intelligence))
+
+p = max(1, floor(q * q * stat / 150))
+
+escape = ProbabilityRoll(p)
+```
+
+即：
+
+- 被俘月数不足2：不会走自然逃亡 roll；
+- 武力/智力取较高值，低于30按30；
+- 随被俘时间**平方增长**，随武/智最大值线性增长；
+- 本函数只设最小概率1，没有本地 `min(100)`；当算式超过100时，最终行为取决于共用概率 helper `004721D0` 对超范围参数的处理，这一极端边界仍 open。
+
+### 9.4 俘虏月度掉忠：不再 open
+
+俘虏忠诚使用 D6 已恢复的 `0058E510`：
+
+```text
+月初
+-> 俘虏跳过季初限制
+-> 俘虏跳过仁政
+-> 关系豁免（亲爱/配偶/义兄弟/父母子女）
+-> 人心掌握 2/3 免降
+-> Random(0..2)
+   + 符节台 2
+   + 特定君主义理/野望附加
+   + Random(0..2)
+```
+
+特定附加项：
+
+```ts
+if (captorLord.ideals === 0 && captorLord.ambition === 4) {
+  loss += floor((4 - prisoner.ideals) / 2)
+}
+```
+
+所以旧“俘虏每旬 -1～2”“符节台翻倍”“基础月度闭式未知”均撤回。
+
+### 9.5 50金维护与“养不起”释放/逃走是另一条路径
+
+`00590490 MonthlyIncomeAndExpend` 在每个城市/港/关按设施俘虏数计算：
+
+```ts
+payable = min(
+  prisonerCount,
+  floor(currentGold / 50)
+)
+
+prisonerCost = payable * 50
+unpaidPrisoners = prisonerCount - payable
+currentGold -= prisonerCost
+```
+
+若 `unpaidPrisoners > 0`：
+
+```text
+0058C320 comparator / list preparation
+-> 0058D1D0
+-> 全设施循环结束
+-> 0058D430 实际俘虏逃走/释放处理
+```
+
+因此应明确区分：
+
+1. `00582BE0`：按被俘月份/能力计算的**自然逃亡**；
+2. `00590490 -> 0058D430`：据点资金不足导致的**无法维持俘虏处理**。
+
+已确认“会有多少人付不起”：
+
+```text
+max(0, prisonerCount - floor(currentGold / 50))
+```
+
+但`0058C320`具体如何排序、优先放走哪几个俘虏仍 open。
+
+这段支出是按城市/港/关设施枚举俘虏；野外部队携带的俘虏不属于该设施俘虏列表，因此当前实现应把50金理解为**据点俘虏维护费**。
+
+### 9.6 登用 / 释放 / 处斩 / 交换
+
+- 登用：继续走 D5 的俘虏登用 hard gate 与普通概率流程。
+- 释放：人物结构中的 `ForbiddenLord / ForbiddenMonths` 与日文 Wiki“释放后会产生登用禁止期”一致；具体默认月数仍 open。
+- 处斩：D4 已确认“处斩本身不自动新增嫌恶”，但已有君主↔俘虏嫌恶可进入 COM 必处斩分支。
+- 交换：属于外交系统，成功时政治经验 +8；交换价格/谈判公式继续使用外交章节的版本化规则。
+- 释放会增加少量技巧点，但精确点数仍 open。
+
+### 9.7 D9 仍 open 的最小集合
+
+- 捕获函数中 `004A0590` 的精确业务语义，以及它与名马/其他逃脱条件的映射；
+- `unknownContextId==3/4 -> ×1.5` 的业务语义；
+- 血路在“部队壊滅 vs 据点陷落”两条路径的精确版本边界；
+- `004721D0` 对 `p>100` 的精确处理；
+- 资金不足时 `0058C320` 的俘虏释放排序；
+- 释放产生的 `ForbiddenMonths` 默认值；
+- 释放俘虏增加多少技巧点。
+
+### 9.8 本节依据
+
+- 311MemoryResearch：`内存资料/函数[捕获].txt`
+- 311MemoryResearch：`内存资料/整理/Func-自动07-俘虏逃走.txt`
+- 311MemoryResearch：`内存资料/整理/Func-自动06-武将忠诚下降.txt`
+- 311MemoryResearch：`内存资料/整理/Func-收支03-每月钱粮兵装收支.txt`
+- 311MemoryResearch：`内存资料/函数[每月例行处理].txt`
+- 311MemoryResearch：`内存资料/地址资料.txt`
+- 日文 Wiki 特技一覧 / 小ネタ：捕缚、名马、野外部队携带俘虏、释放禁仕期的实机语义交叉验证。
 
 ## 10. 官职
 
