@@ -63,94 +63,234 @@
 
 汉帝援助等事件有独立日期、城市数、金、汉室态度等条件，应放事件数据，不硬编码进爵位函数。
 
-## 4. 君主继承
+## 4. 君主继承（E18）
+
+E18 已把继承拆成三条不同路径：
+
+```text
+历史事件
+→ 事件自己的固定后继 / 分裂脚本
+
+玩家普通死亡
+→ 玩家自行选择合法后继者
+
+COM普通死亡
+→ 自动选择
+```
+
+完整证据矩阵见 `33-ruler-succession-priority.md`。
 
 ### 4.1 历史事件指定继承
 
 `[confirmed as event data]`
 
-历史死亡事件覆盖普通继承：
+历史死亡事件覆盖普通继承。
 
-- 刘备：刘禅 > 刘封。
-- 曹操：曹昂 > 曹丕 > 曹植 > 曹冲 > 曹彰。
-- 连环计等事件有自己的分裂、后继与玩家选择逻辑。
+例如：
+
+```text
+刘备：
+刘禅 > 刘封
+
+曹操：
+曹昂 > 曹丕 > 曹植 > 曹冲 > 曹彰
+```
+
+连环计等事件还会同时处理分裂势力、迁都与玩家继续控制哪一方，不能反推出一般 successor selector。
 
 来源：
 - https://w.atwiki.jp/sangokushi11/pages/942.html
-- https://w.atwiki.jp/sangokushi11/pages/100.html
+- https://w.atwiki.jp/sangokushi11/pages/21.html
 - https://w.atwiki.jp/sangokushi11/pages/893.html
 
 ### 4.2 玩家普通继承
 
 `[COMMON][empirical-high]`
 
-历史事件不命中时，玩家君主死亡会弹出后继者选择，由玩家从合法候选中选新君主；并不强制儿子、亲族、功绩最高或能力最高。
+历史事件不命中时，玩家君主死亡会弹出后继者选择，由玩家从合法候选中自行选择。
 
-刘备之死是很好的边界：满足历史事件时自动刘禅 > 刘封；条件不满足而普通死亡时玩家自行选择。
+刘备之死是最强边界案例：
+
+```text
+事件条件满足
+→ 刘禅 > 刘封自动继承
+
+事件条件未满足而刘备普通死亡
+→ 玩家可以选择后继
+```
+
+所以玩家普通死亡不存在“系统自动按血缘/功绩/魅力排序”的规则。
 
 来源：
-- https://gamefaqs.gamespot.com/boards/931351-romance-of-the-three-kingdoms-xi/45353339
 - https://w.atwiki.jp/sangokushi11/pages/1952.html
+- https://w.atwiki.jp/sangokushi11/pages/942.html
 
 ### 4.3 COM 普通继承
 
 `[COMMON][empirical-high]`
 
-长期玩家实测总结为：
+长期实测主顺序：
 
 ```text
-血缘 > 义兄弟 > 配偶 > 年长者
+血缘
+>
+义兄弟
+>
+配偶
+>
+无上述关系时的年长者
 ```
 
-没有上述关系时，COM 明显按年长者而不是功绩、魅力或官职选人。
+这与多个反直觉案例一致：
 
-当前实现：
+- 吕布无可用血缘后出现王忠继位；
+- 董卓/牛辅系后，刚加入不久但年长的韩遂可继位；
+- 刘琦亲族候选死亡/被俘后，出现黄忠继位。
 
-```ts
-blood = legal.filter(isBloodRelative)
-if (blood.length) return eldestStable(blood)
+因此旧：
 
-sworn = legal.filter(isSwornSibling)
-if (sworn.length) return eldestStable(sworn)
-
-spouse = legal.filter(isSpouse)
-if (spouse.length) return eldestStable(spouse)
-
-return eldestStable(legal)
+```text
+功绩最高
+魅力最高
+官职最高
+仕官时间最长
 ```
 
-同关系组内“也按年龄”仍标 compatibility-assumption；同龄用 personId 做稳定 tie-break，仅为工程需要。
+不作为 fidelity 主排序。
 
 来源：
 - https://w.atwiki.jp/sangokushi11/pages/1952.html
 - https://w.atwiki.jp/sangokushi11/pages/1941.html
-- https://w.atwiki.jp/sangokushi11/pages/2452.html
 - https://w.atwiki.jp/sangokushi11/pages/2356.html
 
-### 4.4 候选过滤
+### 4.4 COM 实现边界
+
+真正有高置信证据的是：
+
+```text
+类别优先：
+blood > sworn > spouse > ordinary
+
+ordinary 组：
+年长者优先
+```
+
+当前还没有证据证明：
+
+```text
+两个血缘候选之间
+两个义兄弟之间
+多个配偶候选之间
+```
+
+也一定按年龄。
+
+因此不要把旧实现：
+
+```ts
+if (blood.length) return eldestStable(blood)
+if (sworn.length) return eldestStable(sworn)
+if (spouse.length) return eldestStable(spouse)
+```
+
+误写成原版 confirmed。
+
+允许的兼容实现：
+
+```ts
+categoryPriority =
+  blood > sworn > spouse > ordinary
+
+withinCategoryFallback =
+  birthYearAscending
+  then personIdAscending
+```
+
+但其中：
+
+```text
+关系组内按年龄
+同龄personId
+```
+
+都只是 engine deterministic fallback。
+
+### 4.5 候选过滤
 
 `[partial-known]`
 
-至少排除死亡者、非本势力武将、敌方俘虏。亲族被俘后也会退出候选。
+至少确认：
 
-另有 PC 玩家记录：出阵部队中的武将没有出现在后继选择列表；该规则仍需最小存档回归，因此用 profile 开关处理。
+```text
+存活
+属于当前势力
+不是敌方俘虏
+```
 
-### 4.5 继位后的忠诚
+被敌方俘虏的亲族即使仍存活，也会退出普通后继候选。
 
-不要实现“选完后继者立即随机叛变”。更符合原作记录的结构是：新君主确立后，普通忠诚/相性系统改以新君主为基准，后续若忠诚继续下降才发生下野或被挖。
+出阵部队成员、执行任务中的武将是否全部排除，当前只有个案证据，继续 open。
 
 来源：
-- https://w.atwiki.jp/sangokushi11/pages/1950.html
-- https://w.atwiki.jp/sangokushi11/pages/2463.html
+- https://w.atwiki.jp/sangokushi11/pages/2356.html
 
 ### 4.6 原程序入口
 
 `[PC-PK1.1][reverse-engineered-partial]`
 
-311MemoryResearch 的“禅让 DEMO”直接调用 `004B9080` 复用原版君主死亡消息/流程，说明原作有集中式后继处理入口；函数体尚未公开文本化。
+311MemoryResearch 的“禅让 DEMO”直接调用：
+
+```asm
+push 0
+push 0
+push forcePtr
+mov ecx, 755895C
+call 4B9080
+```
+
+并备注该调用目前会使用“君主死亡”的 MSG。
+
+因此原作存在集中式君主死亡/后继处理入口 `004B9080`。
+
+但公开资料没有该函数完整函数体，所以：
+
+```text
+COM 血缘>义兄弟>配偶>年长者
+= empirical-high
+```
+
+不是 disassembly-confirmed。
 
 来源：
 - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/新功能[禅让](DEMO).txt
+
+### 4.6.1 继位后的忠诚
+
+不要额外制造：
+
+```text
+君主死亡
+→ 部下立即随机叛变
+```
+
+当前结构：
+
+```text
+确定后继
+→ force.lord切换
+→ 后续忠诚系统改以新君主为基准
+→ 正常掉忠 / 下野 / 被挖继续
+```
+
+### 4.6.2 剩余 exactness
+
+- 血缘组内部精确顺序；
+- 义兄弟组内部精确顺序；
+- 同龄 tie-break；
+- 出阵/任务状态 candidate gate；
+- `004B9080` 完整函数体；
+- 零合法候选时的势力结束流程；
+- 各平台/版本差异。
 
 ## 4.7 都督 / 太守 / 军师的层级关系
 
