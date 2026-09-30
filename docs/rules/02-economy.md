@@ -985,6 +985,449 @@ PC-PK1.1 reverse-engineered
 - https://w.atwiki.jp/sangokushi11/pages/2445.html
 - https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
 
+## 3. 特殊收入特技与丰作
+
+`[PC-PK1.1][reverse-engineered]`
+
+本节只处理**特殊收支如何作用到收入**；丰作/灾害的随机生成概率与生命周期放到后续 C12。
+
+### 3.1 特技作用域不是势力全局，而是“当前城市据点”
+
+月初 `00590490 MonthlyIncomeAndExpend` 处理每座城市时，会先调用：
+
+```text
+004CEAE0 GetSPSpecialSkillsArray
+```
+
+对**当前城市据点**生成一个特技存在数组。
+
+SIRE 对该函数的说明是：
+
+> 获取城港关的武将所拥有的特技数组；若存在某特技，则对应 index 置为 1。
+
+随后富豪 / 米道 / 征税 / 征收都读取这份城市特技结果。
+
+因此这些特技不是：
+
+```text
+势力拥有一次 → 全势力城市生效
+```
+
+而是：
+
+```text
+哪座城市当前检出该特技
+→ 哪座城市获得对应收入效果
+```
+
+这与游戏文本长期写的“所属都市”一致。citeturn347358search0turn347358search1
+
+### 3.2 同城多个同名收入特技不会叠加
+
+`[PC-PK1.1][reverse-engineered]`
+
+`GetSPSpecialSkillsArray` 输出的是**有/无标志**：
+
+```ts
+hasSkill[skillId] = 1
+```
+
+不是：
+
+```ts
+skillCount[skillId]++
+```
+
+所以：
+
+- 两个富豪同城，不会变成 ×2；
+- 两个米道同城，不会变成 ×2；
+- 两个征税同城，不会变成每旬再多结一次；
+- 两个征收同城，不会变成每月再多结一次。
+
+引擎必须按 boolean effect 建模。
+
+### 3.3 港/关里的收入特技持有人不会单独激活港关效果
+
+`[PC-PK1.1][reverse-engineered]`
+
+月度主循环先对**母城**调用一次 `GetSPSpecialSkillsArray`，之后遍历该城下属港关时，继续复用母城已经算好的：
+
+- 富豪标志；
+- 米道标志；
+- 征税/征收造成的母城当前 tick 基数。
+
+代码没有为每个港/关重新生成一份收入特技数组。
+
+因此：
+
+> 港关能继承母城收入效果，但不是因为“港关自己拥有该特技”。
+
+如果富豪/米道武将只驻在港/关，而母城没有该特技，则不能靠港关驻将让母城和本港关吃到对应加成。
+
+这一点对米道尤其重要；老玩家实测也长期记录“米道必须放都市，不是放港关”。  
+
+### 3.4 特技是在每个实际收入 tick 重新判定，不是永久缓存
+
+征税的非月初函数 `00599600` 在每次 11 日 / 21 日循环城市时都会重新检查：
+
+```text
+当前城市是否有征税
+```
+
+月初的富豪/米道/征税/征收则由本次 `00590490` 重新生成城市特技数组。
+
+因此效果取决于**结算时点的当前城市特技状态**。
+
+这解释了社区长期存在的操作：
+
+> 月初把征税武将暂时移出主收入城市，使该城先按富豪取得完整 1.5 倍；之后再把征税武将调回，11日和21日继续各收半份。
+
+日文 Wiki 给出的理论结果为：
+
+```text
+1.5 + 0.5 + 0.5 = 2.5
+```
+
+这不是另一个隐藏倍率，而是各 tick 独立重新检查武将所在城市造成的。citeturn830277search0
+
+### 3.5 富豪：只增加月初这一次的实际收入
+
+`[PC-PK1.1][reverse-engineered]`
+
+设 `M` 为 C1 的完整城市月金基础值。
+
+无征税：
+
+```ts
+income_day1 =
+  M + floor(M / 2)
+```
+
+有征税时，月初先把基数减半：
+
+```ts
+H = floor(M / 2)
+
+income_day1 =
+  H + floor(H / 2)
+```
+
+富豪不会在 11 日 / 21 日再次触发。
+
+所以：
+
+```text
+富豪 + 征税
+≈ 0.75 + 0.5 + 0.5
+≈ 1.75倍/月
+```
+
+而不是把征税的整月总收入最后统一 ×1.5。citeturn347358search0
+
+### 3.6 征税：作用于完整城市收入，不只是市场设施
+
+这是一个需要明确纠正的旧社区说法。
+
+原 `00599600` 的步骤是：
+
+```text
+0049E590 GetCityMoneyIncome
+↓
+返回 M = 城市基础金 + 市场类设施，已含难度/治安
+↓
+floor(M / 2)
+```
+
+因此征税每旬拿的是**完整 M 的一半**。
+
+所以城市自身 `BaseMoneyProduction` 同样被包含在征税节奏里。
+
+某些 Wiki 旧注释称“征税只让相关设施数值变成1.5倍”，对 PC-PK1.1 的实际函数并不准确；原函数没有把城市基础金拆出去。citeturn202106search2turn347358search0
+
+### 3.7 米道：只对实际发生的粮食 tick 加50%
+
+`[PC-PK1.1][reverse-engineered]`
+
+米道不是改 `BaseFoodProduction` 字段，也不是只改农场。
+
+它在粮食基础 tick 已经完成后：
+
+```ts
+extra = floor(cityBaseTick / 2)
+```
+
+因此它会一起放大：
+
+- 城市基础粮；
+- 普通农场；
+- 谷仓加成后的农场；
+- 军屯农；
+- 丰作加成后的结果；
+- 若有征收，则是在征收减半后的该次 tick 上再加50%。
+
+对**城市本体**，米道前还有明确“是否季度初”判断，所以只有 1/4/7/10 月1日触发。citeturn347358search0
+
+### 3.8 征收：同样作用于完整城市粮收入
+
+原顺序：
+
+```text
+0049E810 GetCityFoodIncome
+↓
+F = 城市基础粮 + 农场 + 军屯农，已含难度/治安
+↓
+若丰作：×1.5
+↓
+若征收：floor(... / 2)
+```
+
+因此征收不是只复制“农场产量”的一半，而是对**完整本次城市粮收入**减半后，改为每月结算。
+
+社区长期总结“每月半份，因此季度约1.5倍”是正确的；但“只影响设施粮”不是 PC-PK1.1 的真实实现。citeturn202106search1turn202106search2
+
+### 3.9 丰作是城市状态位，不是设施效果
+
+`[PC-PK1.1][reverse-engineered-structure]`
+
+`struct_city`：
+
+```text
++9C Disasters
+  bit 0 = 疫病
+  bit 1 = 灾害/蝗灾
+  bit 2 = 丰作
+
++A0 DisasterPredictions
+  bit 0 = 疫病预定
+  bit 1 = 灾害预定
+  bit 2 = 丰作预定
+```
+
+对应函数：
+
+```text
+0047B3C0 IsCityInSpecificState
+  0 = 疫病
+  1 = 灾害
+  2 = 丰作
+
+0047B3F0 IsCityInScheduledState
+```
+
+所以丰作应建模为城市状态：
+
+```ts
+city.states.harvest = true
+```
+
+而不是：
+
+```ts
+farm.harvestBonus = 1.5
+```
+
+### 3.10 丰作放大的是完整粮食基础 tick
+
+月度收支中先：
+
+```text
+0049E810 → F
+```
+
+再检查：
+
+```text
+IsCityInSpecificState(2) // 丰作
+```
+
+若命中：
+
+```ts
+harvestAdjusted =
+  floor(F * 3 / 2)
+```
+
+所以丰作同时放大：
+
+- 城市基础粮；
+- 农场；
+- 谷仓后的农场；
+- 军屯农。
+
+不是“只有农田产量 +50%”。
+
+### 3.11 丰作、征收、米道的固定顺序
+
+原函数控制流已经明确：
+
+```text
+F
+↓
+丰作 ×1.5
+↓
+征收 ÷2
+↓
+城市入账
+↓
+若季初且有米道
+  再 + 当前 cityBaseTick / 2
+```
+
+即：
+
+```ts
+G = hasHarvest ? floor(F * 3 / 2) : F
+H = hasLevy ? floor(G / 2) : G
+
+cityIncome =
+  H
+  + (
+      isQuarterStart && hasRiceWay
+        ? floor(H / 2)
+        : 0
+    )
+```
+
+顺序不能交换，因为奇数值会产生不同取整结果。
+
+### 3.12 港关继承母城效果时使用的基数
+
+母城完成：
+
+```text
+丰作
+→ 征收
+```
+
+之后，代码才计算：
+
+```ts
+portBase =
+  floor(cityBaseTick / 5)
+```
+
+所以港关20%天然继承：
+
+- 丰作；
+- 征收。
+
+随后港关再根据母城的米道/富豪 flag 增加自己的50%。
+
+这和“港关自己算一套经济公式”完全不同。
+
+### 3.13 PC-PK1.1 港关米道特例继续成立
+
+C2 已锁定：
+
+城市米道前会检查季度初，但港关米道分支没有这个检查。
+
+因此同时有：
+
+```text
+征收 + 米道
+```
+
+时，季度第2/3个月：
+
+- 城市：只有征收半份，没有米道；
+- 同势力下属港关：征收半份的20%之后，**仍再吃米道 +50%**。
+
+这是原控制流的特殊行为，不应为了“规则更整齐”而主动修正掉。
+
+### 3.14 丰作状态更新发生在收入之前
+
+A2 已恢复的 `00590C30 MonthlyAction` 顺序中：
+
+```text
+...
+0058F4E0 丰作/灾害状态相关处理
+↓
+00590490 MonthlyIncomeAndExpend
+...
+```
+
+所以本月收入读取的是**本次月度状态处理之后的当前丰作 flag**。
+
+但：
+
+- 丰作何时生成；
+- current/scheduled 两组 bit 如何转换；
+- 持续多久；
+- 祈愿具体把概率提高多少；
+
+仍属于 C12 灾害专项，C3 不提前伪造公式。
+
+早期无印初版曾有“丰作 flag 不被正常清除、同一城市长期丰作”的著名 bug；旧 2006 讨论甚至直接分析为“其他灾害有平息时的 flag-off，但丰作没有”。这不能直接外推到 PC-PK1.1，应作为**历史版本差异**保留。citeturn388677search4turn388677search5
+
+### 3.15 当前实现建议
+
+```ts
+interface CityIncomeEffects {
+  wealthy: boolean
+  riceWay: boolean
+  taxation: boolean
+  levy: boolean
+}
+
+function collectCityIncomeEffects(city) {
+  // 对应 GetSPSpecialSkillsArray 的 boolean 语义
+  return detectIncomeSkillsAtStrategicPoint(city)
+}
+```
+
+不要建模成：
+
+```ts
+wealthyCount: number
+riceWayCount: number
+```
+
+丰作则独立：
+
+```ts
+interface CitySeasonState {
+  plague: boolean
+  locust: boolean
+  harvest: boolean
+}
+```
+
+### 3.16 C3 当前结论
+
+本项已经锁定：
+
+- 四种收入特技按城市据点生效，不是势力全局；
+- 同名收入特技多人不叠加；
+- 港关不单独扫描收入特技，继承母城当前判定；
+- 每个实际收入 tick 会重新检查对应特技；
+- 富豪只月初；
+- 米道对城市只季初；
+- 征税作用于完整 `GetCityMoneyIncome`；
+- 征收作用于完整 `GetCityFoodIncome`；
+- 丰作是城市状态位，放大完整粮食 tick；
+- 丰作 → 征收 → 米道顺序；
+- 港关20%位于丰作/征收之后；
+- PC-PK1.1 港关米道的非季初特例；
+- 丰作状态在月度收入前更新。
+
+仍留给 C12：
+
+- 丰作/疫病/蝗灾的产生概率；
+- current/scheduled 状态位精确迁移；
+- 丰作持续时间；
+- 祈愿概率修正；
+- Vanilla 初版丰作 flag bug 与后续补丁的精确版本边界。
+
+来源：
+- 311MemoryResearch `整理/Func-收支01-每旬收钱.txt`
+- 311MemoryResearch `整理/Func-收支03-每月钱粮兵装收支.txt`
+- 311SireCustomizedPackageDev `004CEAE0 GetSPSpecialSkillsArray`
+- 311SireCustomizedPackageDev `struct_city.Disasters / DisasterPredictions`
+- https://w.atwiki.jp/sangokushi11/pages/13.html
+- https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
+- https://w.atwiki.jp/sangokushi11/pages/1828.html
+
 ## 3. 内政设施
 
 无印共有：市场、造币、农场、谷仓、兵舍、锻冶、厩舍、工房、造船。
@@ -1006,7 +1449,7 @@ PC-PK1.1 reverse-engineered
 
 来源：https://w.atwiki.jp/sangokushi11/pages/74.html
 
-## 4. PK 吸收合并
+## 5. PK 吸收合并
 
 `[PK][confirmed]`
 
@@ -1019,7 +1462,7 @@ PC-PK1.1 reverse-engineered
 
 来源：https://w.atwiki.jp/sangokushi11/pages/74.html
 
-## 5. 建设时间
+## 6. 建设时间
 
 `[COMMON/PK设施同公式][confirmed]`
 
@@ -1031,7 +1474,7 @@ PC-PK1.1 reverse-engineered
 
 来源：https://w.atwiki.jp/sangokushi11/pages/74.html
 
-## 6. 商人 / 粮食交易
+## 7. 商人 / 粮食交易
 
 机制与公式已从 provisional 升为 `[empirical-high]`。
 
@@ -1058,7 +1501,7 @@ PC-PK1.1 reverse-engineered
 
 政治 → 交易效果的**精确闭式函数**仍未取得；因此引擎应使用实测 lookup/interpolation，而不是文章中的线性近似式冒充内部公式。
 
-## 7. 行动力
+## 8. 行动力
 
 `[COMMON][empirical-high]`
 
@@ -1154,7 +1597,7 @@ adviserParam = 1.2 - 0.01 * (50 - intParam)
 
 > 证据等级保持 `empirical-high` 而非 `confirmed`：公式来自逆向/复算而非官方源码，但已跨原版时期与 PK 存档相互验证。
 
-## 8. 治安
+## 9. 治安
 
 - 治安影响收入和征兵量。
 - 巡查提高治安；征兵降低治安。
@@ -1233,7 +1676,7 @@ if (hasAdministrativeReform && ProbabilityCheck(50)) {
 
 生成概率、根城选格和每次兵力仍 open。
 
-## 9. 灾害
+## 10. 灾害
 
 `[COMMON][confirmed mechanism]`
 
