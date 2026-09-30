@@ -5,7 +5,7 @@
 
 ## 最新审计入口
 
-[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E5兵粮消耗](20-food-consumption.md)。
+[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E6补给与输送](21-supply-transport.md)。
 
 A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原blob复用，无历史段落丢失。历史快照不是当前进度指针。
 
@@ -14,6 +14,8 @@ A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原bl
 E4训练与气力以 `19-training-morale.md` 为当前专项规范；参考校验命令为 `python scripts/check_training_morale.py`。该脚本只验证解出的整数表达式与测试向量，不代替原游戏EXE回归。
 
 E5兵粮消耗以 `20-food-consumption.md` 为当前专项规范；参考校验命令为 `python scripts/check_food_consumption.py`。粮尽逃兵仍保持实测层，不因基础耗粮公式已恢复而自动升级。
+
+E6补给与输送以 `21-supply-transport.md` 为当前专项规范；参考校验命令为 `python scripts/check_supply_transport.py`。脚本只验证已确认的容量约束与气力加权样例，不代替尚未恢复的PC finalizer。
 
 ## 版本标记
 
@@ -54,6 +56,7 @@ E5兵粮消耗以 `20-food-consumption.md` 为当前专项规范；参考校验�
 19. `18-unit-panels.md` E3兵种基础参数、面板公式、修改器隔离和测试边界
 20. `19-training-morale.md` E4训练闭式、气力上限、军乐/奏乐/诗想与气力特技
 21. `20-food-consumption.md` E5旬级兵粮消耗、阵系减粮、着火烧粮与粮尽边界
+22. `21-supply-transport.md` E6补给/输送路径、补兵约束、气力混合与平台差异
 
 ## 来源优先级
 
