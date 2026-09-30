@@ -29,7 +29,8 @@
     "Damage multiplier 1.15 on elite spear/halberd/crossbow/cavalry replaces the 1.10 training damage multiplier; do not multiply 1.10*1.15.",
     "Elite unit base attack/defense +10 is a separate panel-layer effect from the 1.15 combat damage multiplier.",
     "Explosive Refining has a known PC-PK1.1 original-code attacker/defender bug; patch/version details belong to E8.",
-    "Effects marked wiki-high/reverse-partial are not promoted to full-disassembly exactness."
+    "Effects marked wiki-high/reverse-partial are not promoted to full-disassembly exactness.",
+    "Engineer Training (ID24) is exact for the studied PC-PK target: domestic facilities x2, fixed city/port/gate recovery x2.5; Vanilla 1.0's reported 4x belongs to a separate patch profile."
   ],
   "techniques": [
     {
@@ -460,9 +461,11 @@
       "goldCost": 1000,
       "pkOnly": false,
       "effect": {
-        "durabilityRecoveryBoost": true
+        "domesticFacilityRelativeMultiplier": 2,
+        "fixedBaseRelativeMultiplier": 2.5,
+        "sourceFunction": "00599710"
       },
-      "evidence": "reverse-partial+wiki"
+      "evidence": "reverse"
     },
     {
       "id": 25,
