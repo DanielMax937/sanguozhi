@@ -2617,30 +2617,206 @@ Lv1→Lv2 / Lv2→Lv3
 
 ## 8. 商人 / 粮食交易
 
-机制与公式已从 provisional 升为 `[empirical-high]`。
+`[COMMON/PK][official-confirmed command semantics + empirical-high formula + reverse-engineered-structure]`
 
-### 买粮
+C8 处理原版/PK 的都市“商人”命令，不把 SIRE 后续的“交易优势”“商贸城市”等 MOD 扩展倒推成原作。
 
-`买入粮 = 支付金 × 粮价 × 交易效果`
+### 8.1 命令边界
 
-### 卖粮
+官方 PK 说明书确认：
 
-`卖粮所得金 = 卖出粮 ÷ 粮价 × 交易效果 × 0.8`
+```text
+行动力：20
+额外固定金钱费用：无
+期间：无（即时结算）
+城市周围2格以内存在敌军部队：不可执行
+执行武将政治越高：交易越有利
+```
 
-结论：
+原数据结构还保存：
 
-- 买粮没有固定 20% 损失。
-- **卖粮固定损失名义所得的 20%**。
-- 政治 50 时交易效果 = 100%。
-- 政治越高交易效果越高，而且是非线性；UI 显示值会截断/近似，不应反推为真实计算值。
-- 例：政治 97/98/99 的实测实际交易效果约 113.3154% / 113.6374% / 113.9612%。
+```text
+struct_city +0x7C TradePrice   // 粮价
+struct_city +0x7D HasMerchant  // 是否有商人
+struct_city +0xA4 CityActions
+  bit0 = 已巡查
+  bit1 = 已商人
+  bit4 = 已训练
+```
 
-来源（游民星空实测）：https://www.gamersky.com/handbook/200712/89446.shtml
-交叉核对：https://w.atwiki.jp/sangokushi11/pages/74.html
+并已定位：
 
-### 尚未 confirmed
+```text
+0047B6F0 SetCityMerchantStatus
+0047BD50 SetCityTradePrice
+005CAD1B 商人命令执行路径
+```
 
-政治 → 交易效果的**精确闭式函数**仍未取得；因此引擎应使用实测 lookup/interpolation，而不是文章中的线性近似式冒充内部公式。
+### 8.2 每座都市每旬最多一次
+
+`CityActions.bit1 = 已商人` 是结构级证据，说明商人和巡查、训练一样有本旬执行状态。
+
+日文 Wiki 的经验数据也独立吻合：商人每次政治经验 +5，一年36旬，单都市全年最大180，正好是 `36 × 5`。
+
+因此 fidelity 应按每都市每旬一次建模，而不能把“买卖数量没有很低的额外配额”误读成同城同旬可无限重复点击。
+
+### 8.3 商人是都市命令，不是港 / 关原生命令
+
+`TradePrice / HasMerchant / CityActions` 都是 `struct_city` 字段，官方说明也以都市为执行据点。
+
+因此原作默认：
+
+```text
+城市：满足商人状态时可交易
+港 / 关：没有原生商人命令
+```
+
+后来的 PK2.2 / SIRE“支城粮食交易”属于 MOD 扩展。
+
+### 8.4 商人存在状态与粮价状态
+
+城市独立保存 `HasMerchant` 与 `TradePrice`，所以两者都应进入 Runtime City State，而不是每次打开界面临时生成。
+
+老玩家资料一致表明商人并非所有城市永久常驻，粮价会随月份变化；但公开 PC-PK1.1 逆向尚未恢复商人出现/消失的精确概率和粮价转移分布。
+
+特别注意：SIRE 后来的“商贸城市商人常驻、非商贸城市25%出现”等是 MOD 规则，不能写进原作默认 fidelity。
+
+### 8.5 粮价的含义
+
+原作相场通常为 `3..7`，其语义是：
+
+```text
+1 金可以买 TradePrice 兵粮
+```
+
+因此数字越大越适合买粮，数字越小越适合卖粮。经典“7买3卖”就是利用这个方向。
+
+### 8.6 买粮公式
+
+2007 年大样本实测锁定主体结构：
+
+```ts
+b = tradeEffect(executorPolitics)
+boughtFood = paidGold * city.tradePrice * b
+```
+
+买粮没有额外固定20%损失。政治50时 `b = 1.00`。
+
+### 8.7 卖粮公式
+
+卖粮则存在稳定的20%折损：
+
+```ts
+receivedGold = soldFood / city.tradePrice * b * 0.8
+```
+
+所以20%损失只在卖粮侧；不是买卖各扣10%，也不是所有交易统一先乘0.8。
+
+### 8.8 政治对买卖使用同一交易效果 b
+
+实测显示交易效果随政治非线性提高，且 UI 整数百分比会丢掉真实小数精度。
+
+| 政治 | 实测交易效果 |
+|---:|---:|
+| 20 | 约93.024% |
+| 50 | 100% |
+| 51 | 约100.2516% |
+| 60 | 约102.565% |
+| 70 | 约105.2642% |
+| 80 | 约108.109% |
+| 90 | 约111.1122% |
+| 92 | 约111.7328% |
+| 97 | 约113.3154% |
+| 98 | 约113.6374% |
+| 99 | 约113.9612% |
+| 100 | 约114.2868% |
+
+例如政治97/98/99在 UI 上可能都显示113%，但实际成交量并不相同。
+
+### 8.9 同价往返的盈利阈值
+
+若粮价不变且买卖使用同一个 `b`：
+
+```ts
+finalGold = initialGold * b * b * 0.8
+```
+
+所以盈利条件是：
+
+```text
+0.8 * b² > 1
+b > sqrt(1.25)
+b > 1.118033...
+```
+
+政治92的实测约111.7328%，略低于临界值；长期实测边界约在政治93。
+
+### 8.10 跨城粮价差
+
+若在城市A买粮、城市B卖粮：
+
+```ts
+finalGold = initialGold
+  * (priceA / priceB)
+  * buyEffect
+  * sellEffect
+  * 0.8
+```
+
+同一执行政治时就是 `initialGold * (priceA/priceB) * b² * 0.8`。但粮价按月变化，因此跨月运输必须使用实际卖出时的 `TradePrice`。
+
+### 8.11 仍未取得的精确闭式
+
+当前仍没有公开反汇编锁定 `tradeEffect(politics)` 的内部闭式函数。
+
+2007 文章里的 `1 + (政治-50) × 0.285736%` 是作者明确说明的线性近似，不能冒充原作公式。
+
+现阶段 fidelity 优先级：
+
+1. 以后若恢复原函数，直接替换；
+2. 当前使用已测政治点 lookup；
+3. 中间值使用单调插值；
+4. 明确标 `empirical`。
+
+同样，最终资源变化的逐步整数截断顺序目前也没有完整函数体支持。
+
+### 8.12 C8 当前结论
+
+已经锁定：
+
+- 商人命令20AP、无固定费用、即时结算；
+- 都市周围2格有敌军时禁止；
+- 城市保存 `TradePrice / HasMerchant`；
+- `CityActions.bit1` 表示本旬已商人，因此每都市每旬最多一次；
+- 港/关没有原作商人命令；
+- 粮价语义为1金兑换3～7粮；
+- 买粮无20%损失，卖粮固定×0.8；
+- 买卖共享政治交易效果；
+- 政治50=100%，交易效果随政治非线性提高；
+- UI百分比不是内部精确值；
+- 同价往返盈利阈值 `b > sqrt(1.25)`，实战边界约政治93；
+- 跨城倒粮可由两城价格比直接推导。
+
+仍 open：
+
+- 政治→交易效果的原始闭式函数；
+- 每一步整数取整/截断顺序；
+- 原版商人出现/消失概率与生命周期；
+- 粮价每月变化的精确转移概率。
+
+来源：
+- 《三國志11 with パワーアップキット》官方说明书
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 311SireCustomizedPackageDev：`struct_city.TradePrice / HasMerchant / CityActions`、`0047B6F0`、`0047BD50`
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311MemoryResearch：商人执行路径 `005CAD1B`
+  https://github.com/sjn4048/311MemoryResearch
+- 游民星空 2007 大样本交易实测
+  https://www.gamersky.com/handbook/200712/89446.shtml
+- 日文 Wiki 内政 / 相场
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki 各种经验
+  https://w.atwiki.jp/sangokushi11/pages/79.html
 
 ## 9. 行动力
 
