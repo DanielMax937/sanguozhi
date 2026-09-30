@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "audit": "E19",
+  "target": "council proposal type pool",
+  "evidenceLevel": "confirmed-static-message-data",
+  "command": {
+    "cost": {
+      "money": 0,
+      "actionPower": 0,
+      "duration": "none"
+    },
+    "maxParticipants": 6,
+    "requiresLordAtBase": true,
+    "afterCouncil": "subordinates act according to council result",
+    "evidence": "official-manual"
+  },
+  "stages": {
+    "policy": {
+      "displayGroups": [
+        "domestic",
+        "sortie",
+        "diplomacy-strategy"
+      ],
+      "messageSpeechSubtypes": [
+        "sortie-attack",
+        "sortie-defense",
+        "domestic",
+        "diplomacy-strategy"
+      ],
+      "agreeMsg": "2999~3002",
+      "decisionModes": [
+        "accept-one",
+        "accept-subset",
+        "accept-all",
+        "reject-all",
+        "abort"
+      ]
+    },
+    "concrete": {
+      "agreeMsg": "3210~3213",
+      "decisionModes": [
+        "accept-one",
+        "accept-subset",
+        "accept-all",
+        "reject-all",
+        "abort"
+      ]
+    }
+  },
+  "proposalCount": 22,
+  "proposals": [
+    {
+      "id": "domestic-build",
+      "name": "内政建设",
+      "displayGroup": "domestic",
+      "msgRange": "3043"
+    },
+    {
+      "id": "recruit",
+      "name": "征兵",
+      "displayGroup": "domestic",
+      "msgRange": "3034~3054 (source index overlaps domestic-build; type is unambiguous)"
+    },
+    {
+      "id": "produce-equipment",
+      "name": "生产兵装",
+      "displayGroup": "domestic",
+      "msgRange": "3055~3065"
+    },
+    {
+      "id": "patrol",
+      "name": "巡查",
+      "displayGroup": "domestic",
+      "msgRange": "3066~3076"
+    },
+    {
+      "id": "train",
+      "name": "训练",
+      "displayGroup": "domestic",
+      "msgRange": "3077~3087"
+    },
+    {
+      "id": "search",
+      "name": "探索",
+      "displayGroup": "domestic",
+      "msgRange": "3111~3117"
+    },
+    {
+      "id": "hire",
+      "name": "登用",
+      "displayGroup": "domestic",
+      "msgRange": "3118~3124"
+    },
+    {
+      "id": "appoint-strategist",
+      "name": "任命军师",
+      "displayGroup": "domestic",
+      "msgRange": "3201~3206"
+    },
+    {
+      "id": "remove-facility",
+      "name": "撤除设施",
+      "displayGroup": "domestic",
+      "msgRange": "3207~3209"
+    },
+    {
+      "id": "invade",
+      "name": "侵略",
+      "displayGroup": "sortie",
+      "msgRange": "3088~3098"
+    },
+    {
+      "id": "intercept",
+      "name": "迎击",
+      "displayGroup": "sortie",
+      "msgRange": "3099~3104"
+    },
+    {
+      "id": "military-build",
+      "name": "军事建设",
+      "displayGroup": "sortie",
+      "msgRange": "3105~3110"
+    },
+    {
+      "id": "amicability-gift",
+      "name": "献上/亲善",
+      "displayGroup": "diplomacy-strategy",
+      "msgRange": "3125~3131"
+    },
+    {
+      "id": "alliance",
+      "name": "同盟",
+      "displayGroup": "diplomacy-strategy",
+      "msgRange": "3132~3138"
+    },
+    {
+      "id": "break-alliance",
+      "name": "摒弃/破弃同盟",
+      "displayGroup": "diplomacy-strategy",
+      "msgRange": "3139~3145"
+    },
+    {
+      "id": "ceasefire",
+      "name": "停战",
+      "displayGroup": "diplomacy-strategy",
+      "msgRange": "3146~3152"
+    },
+    {
+      "id": "demand-surrender",
+      "name": "劝降",
+      "displayGroup": "diplomacy-strategy",
+      "msgRange": "3153~3159"
+    },
+    {
+      "id": "exchange-prisoner",
+      "name": "交换俘虏",
+      "displayGroup": "diplomacy-strategy",
+      "msgRange": "3160~3172"
+    },
+    {
+      "id": "request-reinforcement",
+      "name": "求援",
+      "displayGroup": "diplomacy-strategy",
+      "msgRange": "3173~3179"
+    },
+    {
+      "id": "two-tigers",
+      "name": "二虎竞食",
+      "displayGroup": "diplomacy-strategy",
+      "msgRange": "3180~3186"
+    },
+    {
+      "id": "drive-tiger",
+      "name": "驱虎吞狼",
+      "displayGroup": "diplomacy-strategy",
+      "msgRange": "3187~3193"
+    },
+    {
+      "id": "rumor",
+      "name": "流言",
+      "displayGroup": "diplomacy-strategy",
+      "msgRange": "3194~3200"
+    }
+  ],
+  "excludedOldFallbackTypes": [
+    "technique-research",
+    "transport",
+    "reward/praise"
+  ],
+  "techniquePointGain": {
+    "value": 10,
+    "evidence": "contemporary-guide/empirical-high"
+  },
+  "selector": {
+    "status": "open",
+    "noConfirmedInputs": [
+      "StrategicTendency",
+      "EarthElementTenacity",
+      "personality",
+      "five stats",
+      "employment tendency"
+    ],
+    "compatibilityStrategy": "normal-command hard gates + situation urgency + deterministic officer bias + optional RNG",
+    "compatibilityEvidence": "provisional-engine-rule"
+  },
+  "execution": {
+    "acceptedProposalResourceAndApCallChain": "open",
+    "compatibilityStrategy": "dispatch through normal command services",
+    "evidence": "compatibility-assumption"
+  },
+  "sourceIndexNotes": [
+    "public MSG directory has a numbering/format overlap around domestic-build/recruit, but the proposal types are unambiguous"
+  ],
+  "open": [
+    "proposal chooser function/address and weights",
+    "proposal-specific council availability gates",
+    "hidden-field xrefs into chooser",
+    "exact mapping of all 22 proposals to four policy speech subtypes",
+    "participant filters",
+    "execution order for multiple accepted proposals",
+    "resource/AP call chain for accepted proposals",
+    "platform/version differences"
+  ],
+  "sources": [
+    "https://www.sanguogame.com.cn/special/san11/1920.html",
+    "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf",
+    "https://w.atwiki.jp/sangokushi11/pages/202.html",
+    "https://w.atwiki.jp/sangokushi11/pages/639.html",
+    "https://www.gamersky.com/handbook/200604/22088.shtml",
+    "https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md"
+  ]
+}
