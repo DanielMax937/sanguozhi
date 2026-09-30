@@ -318,3 +318,35 @@
   https://w.atwiki.jp/sangokushi11/pages/74.html
 - 游侠 PC-PK1.1 内存研究：练兵所、军事府、人才府、计略府、符节台具体地址
   https://game.ali213.net/thread-2168294-1-1.html
+
+
+### C6 PK 吸收合并专项
+
+- 《三國志11 with パワーアップキット》官方说明书：
+  - 同类相邻设施合并；
+  - 被吸收侧必须 Lv1；
+  - Lv1+Lv1→Lv2、Lv2+Lv1→Lv3；
+  - 城市周围2格有敌军时不可执行；
+  - 固定 10 行动力 + 100 金；
+  - 合并中仍发挥升级前效果；
+  - Lv2/Lv3 为 Lv1 的 1.2/1.5。
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 311SireCustomizedPackageDev `material/数据汇总.md`：
+  - actionId 1 = 吸收合并；
+  - Lv1/Lv2/Lv3 原设施类型 ID：31～35、50～59。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/数据汇总.md
+- 311MemoryResearch `内存资料/修改记录by sjn4048.txt`：
+  - PC-PK1.1 吸收合并关键地址 `005D758B`。
+  https://github.com/sjn4048/311MemoryResearch
+- 日文 Wiki 内政：
+  - 五类可合并设施；
+  - Lv2/Lv3 倍率；
+  - 合并中按前一级生效；
+  - 政治70以上一旬完成。
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文旧实测：
+  - 政治70/69对应10日/20日边界。
+  https://w.atwiki.jp/sangokushi11/
+- 游民星空 PK 建筑篇：
+  - 合并 +10 技巧P、合并阶段的短期收益变化等同期实测。
+  https://www.gamersky.com/handbook/200609/33179.shtml
