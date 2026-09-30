@@ -3251,7 +3251,9 @@ San11 专属公开资料对零配下时的精确结束流程仍不够完整，�
 
 原综合评分 fallback 已废弃。
 
-## 13. 评定完整提案池
+## 13. 评定完整提案池（E19 静态池已闭合）
+
+E19 专项证据：`34-council-proposal-pool.md`；结构化数据：`../sources/council-proposal-pool.json`。
 
 ### 结论：具体提案词汇已经能从原版 MSG 完整恢复；真正仍未知的是“谁在什么局势下提哪一个”的选择函数
 
@@ -3606,7 +3608,7 @@ SIRE 确认武将结构里确实存在隐藏字段：
 
 ---
 
-### 13J. provisional-engine-rule：固定原版池，未知的只剩 chooser
+### 13J. provisional-engine-rule：固定E19的22类原版消息池，未知的只剩 chooser
 
 不再从整个 Command 集合动态发明 proposal type。
 
