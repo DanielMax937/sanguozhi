@@ -2820,99 +2820,301 @@ finalGold = initialGold
 
 ## 9. 行动力
 
-`[COMMON][empirical-high]`
+`[COMMON/PK][empirical-exact formula + reverse-engineered-structure + PK cross-validation]`
 
-2006 年原版时期的逆向研究给出了完整公式，2023 年又用多个实际存档（包括 PK 符节台）复算成功，因此从 open 升级为高置信实测规则。
+这一项的主体公式不是 PC-PK1.1 完整函数体逆向，而是 2006 年后期的大量实测精确公式；2023 年又用 PK 存档和符节台重新复算。SIRE 的结构体/函数地址进一步确认了“行动力按军团保存、军师按势力保存”的底层结构。
 
-### 每旬新增行动力
+### 9.1 每旬结算与 255 上限
 
-```
-base = rulerParam + cityParam + officerParam
+官方说明书确认：
 
-newAP = floor(base * adviserParam)
-
-[PK] newAP += 5 * talismanPlatformCount
-```
-
-当前行动力：
-
-`currentAP = min(255, previousRemainingAP + newAP)`
-
-### 君主 / 都督参数
-
-```
-ability = max(统率, 魅力)
-abilityParam = floor(ability / 5)
-step = max(abilityParam - 6, 0)
-
-rulerParam = 40 * (0.65 + 0.025 * step)
+```text
+1回合 = 10天
+行动力每回合恢复
+行动力最大值 = 255
+未使用的行动力可累积
 ```
 
-边界：
-- 统率/魅力最高项 ≤34：26
-- 35：27
-- 此后每跨 5 点 +1
-- 100：40
+因此：
 
-军团独立计算时，以**都督**代替君主计算该项。
+```ts
+currentAP = min(255, previousRemainingAP + recoveredAP)
+```
 
-### 城市参数
+SIRE 结构进一步确认行动力属于军团：
 
-`cityParam = min(10 * (directCityCount - 1), 50)`
+```text
+struct_corp +0x2C ActionPoints
+0047E3E0 SetCorpsActionPoints
+005B9340 DeductCorpActionPoints
+```
 
-- 1 城：0
-- 2 城：10
-- …
-- 6 城及以上：50
+所以不是整个势力只有一个共用 AP 池。
 
-只算该军团/直辖军团实际支配的城市。
+### 9.2 每旬恢复的核心公式
 
-### 武将参数
+对一个军团：
 
-取该军团所属、且其主城也在本军团控制下的城市/港/关：
+```ts
+coreRecovery = floor(
+  (leaderParam + cityParam + officerParam)
+  * adviserParam
+)
 
-1. 每个据点最多计 10 名武将；
-2. 按据点武将数由高到低取前 6 个；
-3. 相加，最大 60。
+[PK] recoveredAP =
+  coreRecovery
+  + 5 * completedTalismanPlatformsInThisCorps
+```
 
-君主、军师也算人头；武将能力本身不影响这一项。
+最终再与上回合剩余行动力相加并封顶255。
 
-### 军师参数
+### 9.3 君主 / 都督参数
+
+第一军团使用君主；委任军团使用该军团的军团长/都督。
+
+令：
+
+```ts
+A = max(leadership, charisma)
+band = max(floor(A / 5) - 6, 0)
+leaderParam = 26 + band
+```
+
+这与旧写法完全等价：
+
+```text
+40 × [0.65 + 0.025 × (floor(A/5)-6)]
+```
+
+其中负值部分按0处理。
+
+正常0～100能力范围下：
+
+| 统率/魅力较高值 | leaderParam |
+|---:|---:|
+| 0～34 | 26 |
+| 35～39 | 27 |
+| 40～44 | 28 |
+| ... | ... |
+| 95～99 | 39 |
+| 100 | 40 |
+
+因此只看统率与魅力两者较高项；武力、智力、政治不进入这一项。
+
+2006年3月的早期探索曾误以为“多项高能力”共同影响行动力；6月的后续专项实测已经明确推翻，C9 以6月精确公式为准。
+
+### 9.4 城市参数
+
+```ts
+cityParam = min(10 * (corpsCityCount - 1), 50)
+```
+
+即：
+
+```text
+1城 -> 0
+2城 -> 10
+3城 -> 20
+...
+6城及以上 -> 50
+```
+
+这里按**当前军团**控制的城市数计算；第一军团即玩家直辖城市。城市本身是哪一座不重要，只看数量。
+
+### 9.5 武将参数
+
+对该军团可计入的城、港、关，先把每个据点人数截到10：
+
+```ts
+countAtBase = min(officersAtBase, 10)
+```
+
+再从人数最多的据点中取前6个求和：
+
+```ts
+officerParam = sum(top6(countAtBase))
+```
+
+所以最大：
+
+```text
+6 × 10 = 60
+```
+
+君主、军师都算人头；武将身份和五维不影响这一项。
+
+港/关的证据边界要特别写清：
+
+- 港/关本身不会增加 `cityParam`；
+- 港/关驻将可以增加 `officerParam`；
+- 实测要求其所属母城也在本势力控制下，单独占港/关而母城不属于本势力时不计；
+- “母城与港关被人为拆到同势力不同军团”这一极端配置，公开资料没有独立回归，因此不要把跨军团母城条件写成源码 confirmed。
+
+### 9.6 军师参数
+
+`struct_force` 只有一个势力级：
+
+```text
++0x08 AdvisorID
+```
+
+而 `struct_corp` 没有独立军师字段。这与实测“所有军团共用势力军师”一致。
 
 无军师：
 
-`adviserParam = 1.0`
+```ts
+adviserParam = 1.0
+```
 
 有军师：
 
+```ts
+intelBand = floor(adviserIntelligence / 2)
+adviserParam = 1.2 - 0.01 * (50 - intelBand)
+// 等价：0.70 + 0.01 * intelBand
 ```
-intParam = floor(军师智力 / 2)
-adviserParam = 1.2 - 0.01 * (50 - intParam)
+
+常见值：
+
+| 军师智力 | adviserParam |
+|---:|---:|
+| 70 | 1.05 |
+| 80 | 1.10 |
+| 90 | 1.15 |
+| 100 | 1.20 |
+
+公式理论上在智力低于60时会低于1.0，但正常游戏任命军师本身要求智力至少70，因此“低智军师反而减成”主要是编辑器/MOD边界，不是正常流程。
+
+军师和君主/都督的亲爱、义兄弟、厌恶关系不影响该倍率。
+
+### 9.7 最终乘算向下取整
+
+最终核心恢复量取整数向下。
+
+PK 实测给出非常好的边界例：
+
+```text
+刘禅参数 30
+直辖3城 -> 20
+武将参数 -> 22
+诸葛亮军师 -> 1.20
+
+(30+20+22) × 1.20
+= 86.4
+-> 核心恢复 86
 ```
 
-例如：
-- 智力100 → 1.20
-- 智力60 → 1.00
-- 低于60时甚至不如不设军师
+这直接证明最终乘算不是四舍五入。
 
-所有军团共用势力军师修正。
+### 9.8 PK 符节台的插入位置
 
-### PK 符节台
+同一实测中，宛城有1座符节台，游戏实际增加91：
 
-每座符节台最终固定 **+5 行动力**，是在前面乘算并取整之后追加。
+```text
+核心公式 86
++ 符节台 5
+= 91
+```
 
-实测例：刘禅直辖3城，君主30 + 城20 + 武将22，诸葛亮1.2：
+因此符节台不是先进入军师倍率，而是在核心乘算并取整后追加：
 
-`floor((30+20+22)*1.2)=86`
+```ts
+recoveredAP = floor(base * adviserParam) + 5 * platformCount
+```
 
-另有1座符节台 → 91，与游戏显示一致。
+如果把 +5 放在乘算前，诸葛亮1.2会算出92而不是91，所以插入位置可以视为高置信实测。
+
+### 9.9 “新增行动力上限180”的正确版本边界
+
+无印核心公式的理论最大值：
+
+```text
+leader 40
++ city 50
++ officer 60
+= 150
+
+150 × 1.20
+= 180
+```
+
+所以2006资料写“每回合新增最多180”对**无印核心公式**是正确的。
+
+但 PK 符节台是核心公式之后再加，因此不能把180当作 PK 的统一恢复硬上限。当前明确的最终限制仍是：
+
+```text
+当前军团行动力 <= 255
+```
+
+### 9.10 委任军团独立计算
+
+SIRE 数据结构：
+
+```text
+struct_corp.CorpsLeaderID
+struct_corp.ActionPoints
+struct_corp.PersonList
+struct_force.AdvisorID
+```
+
+与长期实测完全一致：
+
+- 每个军团有自己的行动力池；
+- 每个军团分别按自己的城市数、据点武将数计算；
+- 第一军团用君主作为 leader；
+- 委任军团把君主替换为该军团长/都督；
+- 势力军师是全军团共用倍率。
+
+因此把超过6城的后方城市拆成委任军团，确实可能提高全势力所有军团行动力之和，但玩家在 PC 版并不能像第一军团一样自由消费委任军团的全部行动力。
+
+### 9.11 C9 当前结论
+
+已经锁定：
+
+- 行动力按军团独立保存；
+- 每旬恢复、剩余可累积、最终上限255；
+- 君主/都督参数只看统率与魅力较高项；
+- 城市参数每多1城+10，最多50；
+- 武将参数取据点前6名、每据点最多10，最大60；
+- 港/关只通过驻将影响武将参数，不直接增加城市参数；
+- 军师是势力级单一 AdvisorID，所有军团共用；
+- 军师倍率为线性0.01步进，智力100=1.20；
+- 核心乘算结果向下取整；
+- PK符节台在取整后每座+5；
+- 委任军团用军团长替换君主独立计算；
+- 无印核心恢复最大180，但180不能当作PK含符节台后的统一硬上限。
+
+证据等级仍不是“完整函数逐指令 reverse-engineered”，而是：
+
+```text
+empirical-exact formula
++ reverse-engineered data structure
++ PK save cross-validation
+```
+
+仍 open：
+
+- PC-PK1.1 行动力恢复主函数的完整反汇编地址/函数体；
+- 跨军团拆分母城与附属港关时，港关驻将计数的极端边界；
+- 官职/宝物导致的显示能力修正究竟读取 base 还是 affected display stat 的逐指令确认。
 
 来源：
-- 2006 原版逆向：https://game.ali213.net/thread-988399-1-1.html
-- 存档复算与 PK 符节台验证：https://www.bilibili.com/opus/828103788131778665
-- 游民星空早期实测（影响因素交叉核对）：https://www.gamersky.com/handbook/200603/21611.shtml
-
-> 证据等级保持 `empirical-high` 而非 `confirmed`：公式来自逆向/复算而非官方源码，但已跨原版时期与 PK 存档相互验证。
+- 《三國志11 with パワーアップキット》官方说明书：每旬恢复、最大255
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 游侠 2006-06-14《行动力计算详解》：精确四参数公式及指令AP表
+  https://game.ali213.net/thread-988399-1-1.html
+- 游侠《311中文版新手入门技术》：公式交叉整理
+  https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
+- 游民星空 2006-03-23 早期研究：早期影响因素与存量累积实测（其中能力解释已被6月资料纠正）
+  https://www.gamersky.com/handbook/200603/21611.shtml
+- Bilibili 2023 PK存档复算：符节台+5位于核心乘算取整之后、军团独立计算
+  https://www.bilibili.com/opus/828103788131778665
+- 日文 Wiki 内政：行动力影响因素与符节台
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 311SireCustomizedPackageDev：`struct_force.AdvisorID`、`struct_corp.CorpsLeaderID/ActionPoints/PersonList`、`0047E3E0`、`005B9340`
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311MemoryResearch：`004A1820` 军团行动力修改点、`005B9340` 扣行动力路径
+  https://github.com/sjn4048/311MemoryResearch
 
 ## 10. 治安
 
