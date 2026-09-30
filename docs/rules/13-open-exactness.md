@@ -515,12 +515,85 @@ actionRatio = 50
 
 详见 `29-duel-continuous-formulas.md`。
 
-### 9. 舌战普通牌心理伤害
+### 9. 舌战普通牌心理伤害（E15 通用核心已闭合）
 
-已确认手牌区间、先后手、足场/再考、话术与性格怒气行为。
+E15 已恢复 PC-PK 导向通用心理伤害链：
 
-仍未知：
-- 普通数字牌与话术的精确心理伤害函数。
+```text
+双方智力
+→ 每方固定 debateAttack
+→ 牌力只决定本回合胜负
+→ 胜方按牌模板计算 hpDamage
+→ 独立计算 stressDamage / 特殊效果
+```
+
+智力攻击值：
+
+```ts
+attack =
+  100
+  + trunc(
+      40*(myINT-opponentINT)
+      /(131-myINT)
+    )
+```
+
+普通话题牌：
+
+```ts
+hpDamage =
+  trunc(
+    (attack + RandInt(5))
+    * angerCoef
+    * levelCoef
+    * topicCoef
+    / 1000
+  )
+```
+
+其中：
+
+```text
+levelCoef：小10 / 中15 / 大20
+普通 angerCoef：10
+当前话题 topicCoef：10
+非当前话题 topicCoef：6
+```
+
+同智力 golden table：
+
+```text
+当前话题：
+小100～104 / 中150～156 / 大200～208
+
+非当前：
+小60～62 / 中90～93 / 大120～124
+```
+
+牌力与伤害严格分离：
+
+```text
+当前话题小牌 power 11 > 非当前大牌 power 3
+但其心理伤害约100 < 非当前大牌约120
+```
+
+大喝、诡辩、无视、镇静、激昂也已拆清：
+
+- 大喝固定牌模板，但仍读取出牌者 attack；
+- 诡辩用自己的 attack + 对手普通话题牌模板反弹；
+- 无视不造成HP伤害，只使对方怒气+30；
+- 镇静/激昂属于怒气效果层，不是普通心理伤害。
+
+因此本项原“精确心理伤害函数未知”从 open 移除。
+
+仍 open：
+
+- 特定人物隐藏修正；
+- Vanilla 连续常量的二进制等价性；
+- PS2/Wii 平台差异；
+- 追击/留情等结束结算的逐平台差异。
+
+详见 `30-debate-psychological-damage.md`。
 
 ### 10. 非骑战法来源的负伤 / 战死概率
 
