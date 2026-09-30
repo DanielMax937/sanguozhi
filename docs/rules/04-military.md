@@ -460,30 +460,451 @@ createRuntimeTroop()
 
 ## 5. 部队能力合成
 
-`[COMMON][PS2 empirical-exact relationship formula; PC-PK relation structure confirmed]`
+`[PC-PK1.1][reverse-engineered GetTroopCapabilities + relation helper partial + cross-platform exact relation tests]`
 
-兵种适性取队内该兵种最高适性。
+E2 现在以 PC-PK1.1 原函数：
 
-统率/武力的副将关系补正按“副将高于主将的差值”计算：
-
-```ts
-candidate = mainStat + floor((subStat - mainStat) / divisor)
+```text
+00496570 GetTroopCapabilities
 ```
 
-| 副将→主将关系 | divisor |
-|---|---:|
-| 夫妻 / 义兄弟 | 1 |
-| 亲爱 | 2 |
-| 血缘 | 3 |
-| 普通 | 4 |
+为主链。这个函数一次计算：
 
-副将不高于主将时不拉低主将；两名副将取较高候选结果。
+- 部队五维；
+- 六兵科适性；
+- 攻击；
+- 防御；
+- 建设力；
+- 后续移动力。
 
-亲爱是有方向的，这里按“副将亲爱主将”判定。
+本节只写到建设力；移动力继续沿用 B4/E3。
 
-嫌恶优先级最高：只要主将+两副将中任意一对存在嫌恶（含两个副将互相嫌恶），**整队全部副将能力补正归零**，即使另一名副将与主将是夫妻/义兄弟也不保留。
+### 5.1 输入的武将能力层：是否计算伤病由参数决定
 
-这套 1/2、1/3、1/4 精确式来自 PS2 实测；PC-PK1.1 已恢复亲爱/嫌恶/血缘/夫妻/义兄弟 helper，但公开资料尚未展开副将补正函数体，因此保留跨版本验证标记。
+原函数有一个 `useActualAttr` 类参数。
+
+若需要计算伤病等当前实际状态：
+
+```text
+00489030 GetPersonActualAttr
+```
+
+若不计算伤病：
+
+```text
+00489050 GetPersonBasicAttr
+```
+
+因此部队合成不是直接读取人物最原始“素质”，而是读取 D3 已经经过年龄、经验、官职等人物属性链后的 **Basic / Actual display attr 层**。
+
+也就是说：
+
+```text
+人物成长/经验/官职...
+-> person Basic/Actual Attr
+-> E2 主副将合成
+-> 部队五维
+```
+
+### 5.2 单将部队：五维直接等于主将对应属性
+
+若没有副将，原函数对统/武/智/政/魅逐项读取主将：
+
+```ts
+troopAttr[i] = useActualAttr
+  ? main.actualAttr[i]
+  : main.basicAttr[i]
+```
+
+没有额外“单将补正”。
+
+### 5.3 多将部队第一步：先检查三组嫌恶 pair
+
+有副将时，`00496570` 在真正合成前先调用：
+
+```text
+00495B90 ArePersonsMutuallyHateful
+```
+
+检查三组可能的 pair：
+
+```text
+主将 ↔ 副将1
+主将 ↔ 副将2
+副将1 ↔ 副将2
+```
+
+这个 helper 是**双向嫌恶**：
+
+```text
+A厌恶B 或 B厌恶A
+-> true
+```
+
+只要任意一组返回 true，函数立即跳到：
+
+```text
+00496865
+```
+
+并把**五维全部改为只读取主将**。
+
+所以 D4 旧的：
+
+> “两名副将互相嫌恶也会让整队副将能力补正归零”
+
+现在已经升级为 **PC-PK1.1 原函数确认**。
+
+但要注意一个非常重要的边界：
+
+**嫌恶只把五维副将补正清掉，不会清掉副将提供的兵科适性。**
+
+因为跳到主将五维分支后，程序仍继续进入 `0049688D` 的三人适性取最大循环。
+
+### 5.4 统率 / 武力与智力 / 政治 / 魅力不是同一种合成算法
+
+这是本轮最重要的纠错。
+
+原函数对五维分成两组处理。
+
+#### 统率、武力：调用主副将关系 helper
+
+对每一名副将，统率和武力调用：
+
+```text
+00495AB0 GetHighestAttrOfMgAndDg
+```
+
+然后两名副将的候选结果再取较高值。
+
+因此结构是：
+
+```ts
+leadership = max(
+  combineMainDeputy(main, sub1, LEADERSHIP),
+  combineMainDeputy(main, sub2, LEADERSHIP)
+)
+
+war = max(
+  combineMainDeputy(main, sub1, WAR),
+  combineMainDeputy(main, sub2, WAR)
+)
+```
+
+不存在“直接把队内最高统率/武力拿来用”的普通规则。
+
+#### 智力、政治、魅力：直接取队内最大值
+
+原 `00496738～004967D5` 对索引2～4不调用关系 helper，而是直接比较主将与当前副将，再在两名副将结果间取最大值。
+
+所以：
+
+```ts
+intelligence = max(main.int, sub1.int, sub2.int)
+politics     = max(main.pol, sub1.pol, sub2.pol)
+charisma     = max(main.cha, sub1.cha, sub2.cha)
+```
+
+前提仍是**队内没有任何嫌恶 pair**；如果有嫌恶，五维整体退回主将。
+
+旧资料把“智力/政治/魅力也统一套1/2、1/3、1/4关系除数”写成通用公式，是错误的。
+
+### 5.5 统武关系 helper：当前证据边界
+
+PC 地址资料已经直接确认：
+
+```text
+普通关系：
+  副将高于主将的差值 × 1/4
+  地址 00495B65
+
+亲爱关系：
+  差值 × 1/2
+  地址 00495B79
+```
+
+PS2PK 的逐值实测进一步锁定完整关系表：
+
+| 副将→主将关系 | 统/武补正 |
+|---|---|
+| 夫妻 / 义兄弟 | 直接取更高值，相当于差值×1 |
+| 亲爱 | 差值×1/2 |
+| 血缘 | 差值×1/3 |
+| 普通 | 差值×1/4 |
+
+且副将低于主将时**不会拉低**主将。
+
+因此当前实现：
+
+```ts
+candidate = mainStat
+
+if (subStat > mainStat) {
+  candidate =
+    mainStat
+    + floor((subStat - mainStat) / divisor)
+}
+```
+
+其中：
+
+```text
+夫妻/义兄弟 divisor=1
+亲爱       divisor=2
+血缘       divisor=3
+普通       divisor=4
+```
+
+证据等级应分开：
+
+- 普通1/4、亲爱1/2：PC-PK1.1 地址级逆向确认；
+- 血缘1/3、夫妻/义兄弟1：PS2PK empirical-exact + PC关系分支结构一致；
+- `00495AB0` 完整逐指令文本仍未公开，因此后两项保留跨平台回归标记。
+
+### 5.6 六兵科适性：完全无视上述关系，三人直接取最高
+
+`0049688D～004968CD` 对6个兵科逐一循环3名武将：
+
+```ts
+for each category:
+  troopProficiency[category] =
+    max(
+      main.proficiency[category],
+      sub1.proficiency[category],
+      sub2.proficiency[category]
+    )
+```
+
+因此：
+
+- 适性不做1/2、1/3、1/4折算；
+- 副将即使统武很差，只要目标兵科适性高，就能直接把该兵科适性抬高；
+- 即使队内存在嫌恶，副将的最高适性仍然会被使用。
+
+这一点与日文/中文长期实机结论完全一致。citeturn712966search0turn712966search4
+
+### 5.7 适性倍率：C/B/A/S = 0.7/0.8/0.9/1.0
+
+原函数：
+
+```text
+aptitudeLevel + 7
+× 0.1
+```
+
+内部：
+
+```text
+C=0 -> 0.7
+B=1 -> 0.8
+A=2 -> 0.9
+S=3 -> 1.0
+```
+
+两个特例：
+
+```text
+剑兵：
+  固定0.6
+
+输送队使用走舸：
+  固定0.6
+```
+
+普通战斗水军不是固定0.6；会正常读取部队最高水军适性。
+
+### 5.8 混乱状态：攻、防、建设力统一 ×0.8
+
+`struct_troop.Status` 已确认：
+
+```text
+0 = 正常
+1 = 混乱
+2 = 伪报
+```
+
+`00496911` 读取状态：
+
+```ts
+statusMultiplier =
+  troop.status === CONFUSED
+    ? 0.8
+    : 1.0
+```
+
+这个倍率后面同时进入：
+
+- 攻击；
+- 防御；
+- 建设力。
+
+所以原作 PC-PK1.1 的精确行为是：
+
+```text
+混乱 -> 攻击×0.8、防御×0.8、建设力×0.8
+伪报 -> 本函数不走这条0.8
+```
+
+这也意味着旧文档里“混乱防御不下降”的描述需要撤回。
+
+### 5.9 输送队面板衰减
+
+原参数：
+
+```text
+00496932  输送攻击倍率 0.4
+004969F2  输送防御/建设倍率 1/3
+```
+
+因此：
+
+```text
+输送队攻击     × 0.4
+输送队防御     × 1/3
+输送队建设力   × 1/3
+```
+
+再与状态倍率相乘。
+
+### 5.10 精锐枪/戟/弩/骑：先给兵种基础攻防各 +10
+
+原函数先读取兵装基础：
+
+```text
+equipment.baseAttack
+equipment.baseDefense
+```
+
+若是枪/戟/弩/骑且所属势力拥有对应精锐技巧：
+
+```text
+baseAttack  += 10
+baseDefense += 10
+```
+
+然后才进入武力/统率、适性、输送、状态乘算。
+
+因此：
+
+**精锐 +10 是加在兵装基础攻防，不是最后面板统一 +10。**
+
+### 5.11 PC-PK1.1 原攻击 / 防御 / 建设力链
+
+不考虑 SIRE 修改代码时，原函数结构为：
+
+#### 攻击
+
+```ts
+attackRaw =
+  troopWar
+  * effectiveBaseAttack
+  * aptitudeMultiplier
+  * 0.01
+  * troopTypeAttackMultiplier
+  * statusMultiplier
+
+attack = max(1, ConvertFloatToInteger(attackRaw))
+```
+
+其中：
+
+```text
+troopTypeAttackMultiplier:
+  战斗 = 1
+  输送 = 0.4
+```
+
+#### 防御
+
+```ts
+defenseRaw =
+  troopLeadership
+  * effectiveBaseDefense
+  * aptitudeMultiplier
+  * 0.01
+  * troopTypeDefenseMultiplier
+  * statusMultiplier
+
+defense = max(1, ConvertFloatToInteger(defenseRaw))
+```
+
+其中：
+
+```text
+troopTypeDefenseMultiplier:
+  战斗 = 1
+  输送 = 1/3
+```
+
+#### 建设力
+
+原地址直接锁定：
+
+```text
+00496A47  × 2/3
+00496A4D  + 50
+```
+
+所以：
+
+```ts
+constructionRaw =
+  (troopPolitics * (2/3) + 50)
+  * troopTypeDefenseMultiplier
+  * statusMultiplier
+
+construction =
+  max(1, ConvertFloatToInteger(constructionRaw))
+```
+
+注意这里使用的是 E2 已合成的**部队政治**。无嫌恶时实际上就是三将政治最高值；有任意嫌恶 pair 时退回主将政治。
+
+### 5.12 整数取整仍沿用统一 helper gap
+
+攻击、防御最终调用：
+
+```text
+00707A74 ConvertFloatToInteger
+```
+
+建设力也调用同 helper。
+
+我们已经知道很多官方面板值能与“整数化”吻合，但 `00707A74` 对所有正数边界究竟是 floor / trunc / 特定FPU rounding 尚未完全单独恢复。
+
+所以 E2 的运算顺序现在已精确，**极端小数边界的最后一步整数模式继续沿用项目统一 exactness gap**，不要在此自行宣称 floor。
+
+### 5.13 E2 当前结论
+
+已经锁定：
+
+- 单将直接取主将五维；
+- 多将时先检查三组双向嫌恶，任意命中则五维只取主将；
+- 嫌恶不会取消副将提供的最高兵科适性；
+- 统率/武力走主副关系 helper；
+- 智力/政治/魅力直接取三人最高；
+- 普通1/4、亲爱1/2为PC地址级确认，血缘1/3、夫妻/义兄弟1为PS2精确实测并与PC结构一致；
+- 六兵科适性直接取三人最高；
+- C/B/A/S倍率精确0.7/0.8/0.9/1.0；
+- 剑兵固定0.6；输送走舸固定0.6；
+- 混乱使攻击/防御/建设力×0.8；
+- 输送攻击×0.4、防御/建设×1/3；
+- 精锐枪戟弩骑在基础攻防上各+10；
+- 原攻击看部队武力，原防御看部队统率；
+- 建设力核心为 `政治×2/3+50`。
+
+仍 open：
+
+- `00495AB0` 完整逐指令文本，用于把血缘1/3、夫妻/义兄弟1从跨平台 empirical-exact 再升级成PC逐指令；
+- `00707A74` 最终浮点转整数的精确边界模式；
+- Vanilla / 主机版是否在混乱0.8、输送0.4/1/3上完全同值。
+
+来源：
+
+- 311MemoryResearch：`内存资料/函数[计算部队属性].txt`；
+- 311MemoryResearch：`内存资料/地址资料.txt`；
+- 311SireCustomizedPackageDev：`00496570 GetTroopCapabilities`、`00495AB0`、`00495B90` 及人物属性 helper；
+- 日文 Wiki《検証》：副将关系1/2、1/3、1/4与适性实测；
+- 日文 Wiki FAQ / 中文早期实测：义兄弟/夫妻取最高、智力取最高。citeturn712966search0turn712966search2turn712966search4
 
 ## 6. 训练与气力
 
