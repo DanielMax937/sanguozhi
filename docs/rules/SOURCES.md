@@ -159,3 +159,24 @@
   https://dl.3dmgame.com/patch/26091.html
 - 三国瑜云：坡地/凸地/平地分类与二段突/突进两级高差 +15 实测
   https://vincecarter0315.pixnet.net/blog/posts/14217116027
+
+
+### B7 水陆/舰船切换专项
+
+- SIRE 地址表：
+  - `00495480 GetLandMobilityEquipID`
+  - `00495490 GetNavalMobilityEquipID`
+  - `00496160 GetTroopMobilityEquipID`
+  - `00912FE8 getTroopEquipmentIDs`
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- SIRE `struct_troop`：EquipmentStatus / CurrentUnitType / ActualUnitCategoryProficiency
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+- 311MemoryResearch：
+  - `函数[计算部队进入某地格消耗的移动力].txt`
+  - `函数[计算部队属性].txt`
+- 日文 Wiki 兵科：走舸/楼船/斗舰、水军适性与舰船战法
+  https://w.atwiki.jp/sangokushi11/pages/91.html
+- 日文 Wiki 地理：渡、浅滩、河/海的地形移动区分
+  https://w.atwiki.jp/sangokushi11/pages/149.html
+- 赤壁决战数据：同一部队明确同时记录陆兵科+舰船
+  https://w.atwiki.jp/sangokushi11/pages/2159.html
