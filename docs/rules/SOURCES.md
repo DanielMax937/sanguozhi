@@ -1299,3 +1299,58 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/1471.html
 
 证据等级：输送到据点+200、容量/封顶地址、军事府输送AP减半为PC-PK1.1地址级；PC补给交互、兵装约束、气力平均、补给+100/统率EXP+2为长期可复现实测/high。完整PC supply/arrival finalizer与逐类兵装容量仍open。
+
+
+### E7 技巧系统专项
+
+- 311MemoryResearch `内存资料/地址资料.txt`：
+  - 技巧ID 0～35及大量PC-PK1.1效果入口；
+  - 锻炼类战斗伤害1.10，精锐1.15并覆盖锻炼；
+  - 精锐枪/戟/弩/骑基础攻防+10，移动+6/+6/+6/+2；
+  - 矢盾/大盾30%；
+  - 良马+4、骑射射程+1；
+  - 熟练兵100→120、军制改革+3000；
+  - 云梯1.4/1.2；
+  - 车轴+4、城壁强化+3000、强化防御反击×2；
+  - 神火计距离+2、木牛流马+3；
+  - 政令整备50%、人心掌握ID35；
+  - 技巧P上限10000；
+  - 技术研究能力经验=消费技巧P/100。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `函数[计算部队属性].txt`：
+  - 精锐四兵科基础攻防+10的面板链。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `函数[部队攻击].txt` / 地址资料战斗段：
+  - 锻炼1.10；
+  - 精锐1.15；
+  - 精锐覆盖锻炼而非相乘；
+  - 云梯建筑伤害层。
+  https://github.com/sjn4048/311MemoryResearch
+- 日文 Wiki《技巧研究》：
+  - 9系×4级完整表；
+  - Lv1～4技巧P/金费用；
+  - 技巧效果与研究时间实测；
+  - PK内政系。
+  https://w.atwiki.jp/sangokushi11/pages/90.html
+- 日文 Wiki《技巧研究/コメント》：
+  - 超级难度相关能力和70/140/210/280分档；
+  - 210能力和无人才府的30/40/60/90日锚点；
+  - 人才府与280能力和的高档锚点。
+  https://w.atwiki.jp/sangokushi11/pages/337.html
+- 日文 Wiki《功績値》：
+  - 技巧研究Lv1～4主表功绩500/1000/2000/3000。
+  https://w.atwiki.jp/sangokushi11/pages/113.html
+- 游民星空《技术详解》：
+  - 8系费用、效果与早期PC补丁差异；
+  - 用作Wiki/逆向交叉来源，补丁差异转E8。
+  https://www.gamersky.com/handbook/200806/114545.shtml
+- 本项目既有专项：
+  - E3精锐面板；
+  - E4熟练兵；
+  - B3/B4难所行军与移动；
+  - D10军制改革；
+  - C10政令整备；
+  - D6人心掌握；
+  - B8港关扩张。
+
+证据等级：技巧ID和多数核心常量为PC-PK1.1地址/反汇编级；完整技巧树、费用和若干行为由Wiki/Gamersky交叉。完整研究时间函数、工兵育成倍率、兵粮袭击随机闭式、应射细边界与技巧研究功绩逐地址仍open。爆药炼成原PC判定BUG与补丁差异留E8。
