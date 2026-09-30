@@ -35,6 +35,7 @@
 | D2 | 登场 / 寿命 / 死亡 | YearOfDebut与Identity分离、成年不自动登场、Lifetime与战死独立、YearOfDeath/GetDeathYear/死亡flag/真正死亡分层、健康100/80/50/20已核；核心寿命函数仍open | reverse-engineered-structure + official-event-semantics + empirical-high timing | ✅ |
 | D3 | 五维 / 适性 / 成长 | 五维/成长型/经验/适性分层、9种成长型、年龄lookup、能力经验100→+1余数保留、普通培养+30上限、适性150/200/250、指导×2已核 | reverse-engineered-structure + empirical-exact thresholds + empirical-exact age table | ✅ |
 | D4 | 人际关系 | 亲爱/厌恶方向性、夫妻/义兄弟/血缘独立结构、PC-PK支援50/30/20参数、副将1/2/1/3/1/4补正及嫌恶整队覆盖、登用/处斩硬分支已核 | reverse-engineered relation structure + reverse-engineered support parameters + empirical-high relation behavior | ✅ |
+| D5 | 登用优先级与普通概率 | hard gate→005C4F80→deterministic compare 控制流、dateKey与异地锁发令日、非0参数义理倍率/随机分支、探索失败舌战>80已核；005C4F80闭式仍open | reverse-engineered control flow + deterministic final check + empirical-high hard-gate order | ✅ |
 
 ## A1 关键纠错
 
@@ -1107,3 +1108,50 @@ PC-PK1.1 支援攻击参数已由内存地址锁定：
 仍 open：PC-PK 副将补正函数体、亲爱会心率精确加成、远亲血缘支援边界、Vanilla支援率版本差异、外交嫌恶连续公式。
 
 下一项：D5 登用优先级与普通概率。
+
+## D5 关键结论
+
+PC-PK1.1 普通登用控制流：
+
+```text
+004AFD60
+→ 004AF7D0 hard gate（必成/必败、关系、禁仕）
+→ 005C4F80 GetHiringSuccessRate
+→ 正常第三参数0时，用005BA4C0确定性值比较
+```
+
+普通人才登用：
+
+```ts
+dateKey = day*7 + month*5 + year*3
+p = GetHiringSuccessRate(target, executor, 0, dateKey)
+success = deterministicValue(dateKey, IDs, loyalty, charm, affinityDiff, ...) < p
+```
+
+异地登用把发令日 dateKey 存进 MissionParameter[2]，抵达后继续复用，不按抵达日重算日期键。
+
+第三参数非0时是另一种模式：
+
+```ts
+factor10 = min(10, 15 - 2*Ideals)
+p2 = floor(p*factor10/10)
+result = runtimeRandom(p2)
+```
+
+正常本地/异地人才登用都明确传0，所以该义理倍率不能套到普通玩家登用。
+
+探索发现人才后的当场登用走独立 wrapper；首次 deterministic 判定失败后：
+
+```ts
+executorCharm - affinityDiff(executor, executorLord) + p > 80
+```
+
+则进入舌战。
+
+9条关系/忠诚硬门槛的顺序继续按长期 Wiki/2ch 实测保留 empirical-high；PC 反汇编只确认 `004AF7D0` 一定在概率函数之前，尚未公开该函数体。
+
+旧总规则自拟“(100-忠诚)*2 + ...”登用分数已正式删除。
+
+仍 open：`004AF7D0` 函数体、`005C4F80` 连续概率闭式、`005BA410/005BA4C0` 确定性生成算法、96门槛的义理编码映射、非0 caller 完整业务语义。
+
+下一项：D6 相性 / 义理 / 野望 / 汉室。
