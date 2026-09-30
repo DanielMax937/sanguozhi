@@ -6,22 +6,102 @@
 
 ## A. P0：仍影响长期模拟准确性
 
-### 1. 普通登用概率
+### 1. 普通登用概率（外层已源码级收窄；005C4F80本体仍open）
 
-已确认：
-- `004AFD60` 一定先调用 `004AF7D0` 处理必成/必败，再调用 `005C4F80 GetHiringSuccessRate`。
-- 配偶、义兄弟、亲爱、嫌恶、“忠诚+义理>96”等强制优先级门槛有长期稳定实测；禁仕期也属于 hard gate。
-- 正常人才登用第三参数为0，`dateKey=day*7+month*5+year*3`，最终使用 `005BA4C0` 确定性比较值：`deterministicValue < p`。
-- 异地登用把发令日 dateKey 写入任务，抵达后继续复用，因此不会按抵达日重新掷。
-- 第三参数非0时存在 `min(10,15-2*义理)` 外层倍率，并改走运行时随机；不能套到普通玩家登用。
-- 探索发现人才后当场登用是独立 wrapper；首次失败后满足 `执行者魅力-与本君主相性差+p>80` 可进入舌战。
+P0-1 专项见 `36-hiring-probability-exactness.md`。
 
-仍未知：
-- `004AF7D0` 完整函数体，用于逐指令确认 hard gate 全顺序和96门槛内部义理编码。
-- `005C4F80` 内部连续成功率闭式。
-- `005BA410 / 005BA4C0` 的完整确定性值生成算法。
+当前 PC-PK1.1 已能把真实外层固定为：
 
-旧自拟评分公式已从总规则删除；当前 fallback 只替换 `005C4F80`，不得替换已恢复的 hard gate 与 deterministic final check。
+```text
+004AF7D0
+硬成功/硬失败
+  ↓ 未命中
+005C4F80 GetHiringSuccessRate -> p
+  ↓
+第三参数=0？
+  ├─ 是：005BA4C0 deterministicValue < p
+  └─ 否：义理外层倍率 -> 004721D0 runtime probability
+```
+
+正常人才命令第三参数明确为0，因此**不吃非0模式的0.9/0.7外层义理倍率**。
+
+非0模式精确为：
+
+```ts
+factor10 =
+  min(10, 15 - 2*giriInternal)
+
+p2 =
+  min(100, trunc(p*factor10/10))
+```
+
+正常模式送入 `005BA4C0` 的七个参数已经恢复：
+
+```text
+dateKey
+targetId
+executorId
+targetLoyalty
+executorCharm
+executorTargetCompatibilityDifference
+0
+```
+
+最后机器码：
+
+```asm
+cmp eax,ecx
+setl dl
+```
+
+所以严格是：
+
+```text
+deterministicValue < successRate
+```
+
+`005B9C00 GetTimeValue` 还确认：
+
+```ts
+dateKey =
+  day*7 + month*5 + year*3
+```
+
+异地登用保存的是发令日 dateKey。
+
+### 必须隔离的现代 MOD 公式
+
+2025年以来新版 SIRE/血色衣冠出现的：
+
+```text
+基准60
+忠诚-100%
+相性差-50%
+魅力+20%
+仕官第一年-20
+浮动值6
+...
+```
+
+被其更新日志明确描述为“新忠诚度系统 / 登用意愿”的可配置规则。
+
+因此其证据标签固定为：
+
+```text
+SIRE-modern-mod-system
+```
+
+不得回填成原版 `005C4F80`。
+
+### 仍未知
+
+- `004AF7D0` 完整函数体；
+- `005C4F80` 内部连续成功率闭式；
+- `005BA410`；
+- `005BA4C0` deterministic generator；
+- Vanilla / 主机版等价性。
+
+所以本项被**显著收窄但未虚假关闭**。
 
 ### 2. 外交公式的版本边界
 
