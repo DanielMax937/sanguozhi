@@ -688,10 +688,364 @@ HealthLevel
 
 ## 3. 五维、适性与成长
 
-- 五维：统率、武力、智力、政治、魅力。
-- 能力经验满 100 后对应能力 +1，超过部分保留；能力自然成长到 100 后停止。
-- 适性：C→B 150、B→A 200、A→S 250。
-- 经验获得表沿用 `docs/rules.md`。
+`[COMMON/PK][reverse-engineered-structure + empirical-exact thresholds + empirical-exact age table]`
+
+D3 必须把“素质/基础值”“年龄盛衰”“经验培养”“PK能力研究”“健康/宝物等最终显示修正”拆开。旧规则把它们都叫“能力成长”，容易产生错误。
+
+### 3.1 五维与底层字段
+
+五维固定为：
+
+```text
+0 统率
+1 武力
+2 智力
+3 政治
+4 魅力
+```
+
+`struct_person` 至少保存四组不同数据：
+
+```text
++0xC8  FiveBasicAttrs[5]            // 五维基础/素质
++0xD0  FiveBasicAttrGrowthTypes[5]  // 每一维自己的成长类型
++0x12A FiveBasicAttrExp[5]          // 五维经验
++0x170 ActualAttrs[5]               // SIRE标注：考虑伤病/宝物等后的实际值
++0x175 BasicAttrs[5]                // SIRE标注：基础显示值
+```
+
+相关原函数：
+
+```text
+00488D80 GetPersonBaseAttr
+00489030 GetPersonActualAttr
+00489050 GetPersonBasicAttr
+004890C0 GetPersonAttrIncreaseRelativeToBase
+00489180 GetPersonAttrExperience
+004891A0 GetPersonAttrChangeType
+0048A030 GetPersonAttrChangeCoef
+0048A110 GetPersonAttr
+0048A2D0 UpdateTroopParameters
+0048A390 GetPersonGrowthAttr
+0048A7D0 SetAttr
+0048A810 SetAttrExperience
+004A70D0 IncreasePersonAttrExperience
+```
+
+因此引擎不能只有一个 `person.stats[5]`。至少要保留：
+
+```ts
+talent/base
+growthType
+ageAdjusted
+earnedIncrease/exp
+uninjuredCurrent
+actualAfterHealthAndTemporaryBonuses
+```
+
+公开函数表已经证明这些层存在；但“年龄系数、经验/研究增量、官职/宝物”的精确逐指令合成顺序还没有完整函数体，所以不要凭字段名伪造最终公式。
+
+### 3.2 场景“能力变动”只控制年龄盛衰
+
+`struct_scenario`：
+
+```text
++0x28 AttrChange   // 能力变化
+```
+
+原版时期实测明确：
+
+```text
+能力变动 = 无效
+→ 停止随年龄上升/下降
+→ 经验值带来的能力提升仍然发生
+```
+
+所以：
+
+```ts
+scenario.attrChange === false
+```
+
+不能实现成“冻结所有能力变化”。它只关闭年龄曲线。
+
+### 3.3 九种成长类型是逐能力独立保存的
+
+SIRE 数据表给出精确编号：
+
+| ID | 名称 | 日文Wiki对应 |
+|---:|---|---|
+| 0 | 超持续 | 维持・长 |
+| 1 | 持续 | 维持・短 |
+| 2 | 早熟 | 早熟・短 |
+| 3 | 早熟持续 | 早熟・长 |
+| 4 | 普通 | 普通・短 |
+| 5 | 普通持续 | 普通・长 |
+| 6 | 晚成 | 晚成・长 |
+| 7 | 超晚成 | 晚成・短 |
+| 8 | 开眼 | 开眼 |
+
+每名武将不是只有一个总成长型，而是**统/武/智/政/魅五项各自一个 growthType**。例如同一武将可以统率“维持・长”、武力“普通・长”、智力“晚成・长”。
+
+### 3.4 年龄曲线本质是“素质 × 年龄系数”
+
+`0048A030 GetPersonAttrChangeCoef` 已被命名为“取得武将属性成长系数”，`0048A390 GetPersonGrowthAttr` 则返回成长后属性。
+
+日文 Wiki 用“素质=100”的新武将逐岁实测，证明盛衰按**百分比系数**决定；素质较低时也按比例缩放，峰值年龄/衰退开始年龄不因素质大小改变。
+
+核心曲线：
+
+- **早熟**：18岁达到峰值100%；短型36岁起按4/5年交替 -1个百分点，长型41岁起每8年 -1。
+- **维持**：25岁到峰值；短型51岁起每10年 -1，长型峰值后不衰退。
+- **普通**：30岁到峰值；短型46岁起按3/4年交替 -1，长型51岁起每6年 -1。
+- **晚成（ID6）**：约40岁到峰值，之后不衰退。
+- **超晚成（ID7）**：约50岁到峰值，之后不衰退。
+- **开眼**：25岁先到第一次峰值，41～55岁再次成长，最多可成长到原素质约130%。
+
+年龄6附近的系数锚点：
+
+```text
+维持 / 开眼 ≈ 90%
+早熟         ≈ 88%
+普通         ≈ 88%
+晚成         ≈ 83%
+```
+
+完整 6～101 岁逐年表已经有稳定实测，fidelity 实现应优先做 **growthType × age lookup**，而不是自己拟一条平滑曲线。
+
+仍需保留的 exactness gap：
+
+- `GetPersonAttrChangeCoef` 完整函数体未公开；
+- 对低素质乘百分比后的精确整数取整顺序没有逐指令确认；
+- “晚成/超晚成”在极少数登场当年的特殊 +2 表现应按原逐年表处理，不自行简化。
+
+### 3.5 五维经验：每100经验 +1，余数保留
+
+`FiveBasicAttrExp` 是 `short[5]`，并有：
+
+```text
+00489180 GetPersonAttrExperience
+0048A810 SetAttrExperience
+004A70D0 IncreasePersonAttrExperience
+```
+
+长期实测精确确认：
+
+```ts
+exp += gained
+
+while (exp >= 100 && trainingCapNotReached) {
+  exp -= 100
+  trainedStat += 1
+}
+```
+
+超过100的部分会保留。例如智力经验99，再获得3点：
+
+```text
+能力 +1
+剩余经验 = 2
+```
+
+### 3.6 旧规则“只要没到100就能一直练”错误：培养总增量约 +30
+
+旧文档只写：
+
+```text
+能力100之后不再涨
+```
+
+这不完整，而且会让低能力武将无限刷高。
+
+PK长期实测明确：
+
+```text
+普通经验 + 能力研究
+相对初始素质的培养增量合计上限 ≈ +30
+```
+
+而且：
+
+```text
+经验单独也可以把这 +30 全部吃满
+```
+
+刘禅是最直观回归锚点：统率素质3，通过普通培养最多约到33，而不是最终刷到100。
+
+因此至少需要：
+
+```ts
+earnedTrainingIncrease <= 30
+```
+
+同时还有绝对能力值约100的普通成长封顶边界；二者取先达到者。
+
+PK能力研究本身一般最多贡献 +20；因为各“低/中/高”档位有70/80/95封顶，最后一次实际增长不足5时可利用边界做到约 +24，但研究+经验仍受约 +30 总培养额度。
+
+### 3.7 遗迹提高的是“素质”，不是经验，因此不走 +30 培养额度
+
+遗迹事件明确写：
+
+```text
+能力上升的不是经验，而是“素质”
+即使该武将经验培养已达到 +30，仍可上升
+```
+
+每次对应能力素质 +1。
+
+所以模型必须区分：
+
+```text
+raiseTalent(+1)     // 遗迹等
+gainAttrExp(+N)     // 行动经验
+trainAttr(+5)       // PK能力研究
+```
+
+不能全部调用同一个 `addStat()`。
+
+### 3.8 兵科适性与适性经验也是两套字段
+
+`struct_person`：
+
+```text
++0xB0  UnitCategoryProficiency[6]
++0x134 UnitCategoryExp[6]   // byte[6]
+```
+
+六类固定为：
+
+```text
+枪 / 戟 / 弩 / 骑 / 兵器 / 水军
+```
+
+相关函数：
+
+```text
+00488D40 GetPersonUnitCategoryProficiencyLevel
+00488D60 GetPersonDispositionExperience
+004A6DB0 IncreasePersonSkillExperience
+```
+
+实测阈值：
+
+```text
+C -> B : 150
+B -> A : 200
+A -> S : 250
+```
+
+适性没有五维那种“+30培养上限”：只要持续获得对应兵科经验，C武将最终也可以练到S。
+
+### 3.9 自然升适性与能力研究升适性的经验处理不同
+
+日文 Wiki 给出了非常强的边界例：
+
+```text
+弩兵 B
+当前适性经验 192
+→ 用 PK 能力研究直接升为 A
+→ 原192经验仍保留
+→ 距离 S 的250只剩58
+```
+
+因此：
+
+```text
+PK研究升适性
+!= 清空 UnitCategoryExp
+```
+
+反过来，自然靠经验跨档后资料明确提醒“要重新积累”；即自然 C→B、B→A 后进入下一档时，上一档进度不会作为整条累计600经验直接继续使用。
+
+当前仍没有原 `IncreasePersonSkillExperience` 函数体来锁定**跨阈值那一次的超额余数**究竟清零还是扣除阈值后保留，所以该一格继续标 exactness gap。
+
+### 3.10 指导：只给“出阵中的同部队经验”×2
+
+长期实测：
+
+```text
+同一野外部队中有“指导”持有者
+→ 其他武将获得的出阵经验 ×2
+```
+
+包括战斗行为和部队在外时触发的经验事件。
+
+但：
+
+- 据点命令不翻倍；巡查、训练、生产等即使和指导武将一起执行也不翻倍；
+- 指导持有者本人通常不享受自己的×2；
+- 同一部队若有两名或以上指导持有者，则指导武将也能从另一名指导获得×2；
+- 同名效果不进一步变成×4。
+
+这条同时作用五维经验和对应兵科适性经验。
+
+### 3.11 基础值 / 年龄值 / 当前值不要混用
+
+当前建议接口：
+
+```ts
+type PersonAbility = {
+  talent: number;          // 素质/基础源值
+  growthType: number;      // 0..8
+  attrExp: number;
+  trainingIncrease: number;
+}
+
+function getGrowthAttr(person, attr, age): number
+function getBasicDisplayedAttr(person, attr): number
+function getActualAttr(person, attr, health): number
+```
+
+使用哪一层必须由具体原函数决定。例如 D2 已确认伤病读取的是受伤病影响的 actual/display 层；而某些公式明确读“基础魅力/基础政治”时不能拿受伤后的值替换。
+
+目前对所有系统做统一“永远用界面显示值”或“永远用素质”都不符合原结构。
+
+### 3.12 D3 当前结论
+
+已经锁定：
+
+- 五维各有独立基础值、成长类型、经验；
+- 成长类型是每个能力分别保存，不是每武将一个总类型；
+- 九种成长类型 ID 0～8 已锁定；
+- `AttrChange` 只控制年龄盛衰，关闭后经验培养仍有效；
+- 年龄盛衰按素质百分比系数，完整逐年表可用于 lookup；
+- 原程序存在 `GetPersonAttrChangeCoef / GetPersonGrowthAttr`；
+- 五维经验每100点 +1，超额余数保留；
+- 旧“没到100即可无限经验成长”撤回，普通经验/PK研究培养总增量约 +30；
+- PK研究自身通常约 +20、边界最高约 +24，但与经验共享 +30培养额度；
+- 遗迹直接 +1 素质，不走普通经验 +30额度；
+- 六适性拥有独立 level 与 byte exp；C→B 150、B→A 200、A→S 250；
+- PK研究提升适性不会清已有适性经验；
+- 指导仅对出阵同部队经验×2，据点命令不吃。
+
+仍 open：
+
+- `0048A030 GetPersonAttrChangeCoef` 与 `0048A390 GetPersonGrowthAttr` 完整函数体；
+- 年龄百分比应用到低素质时的精确整数取整；
+- 年龄盛衰、培养增量、官职/宝物、伤病的最终逐指令合成顺序；
+- 自然适性升档时超出阈值的余数处理；
+- Vanilla 与 PK 的 +30 培养上限是否存在细小版本差异。
+
+来源：
+- 311SireCustomizedPackageDev：`struct_person` 五维/成长型/经验/适性字段及 00488D40～0048A390 系列函数
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 日文 Wiki《各種経験値》：五维100经验+1、余数保留、适性150/200/250、指导×2、研究升适性保留经验
+  https://w.atwiki.jp/sangokushi11/pages/79.html
+- 日文 Wiki《素質盛衰表》：6～101岁完整 growthType×age 百分比表
+  https://w.atwiki.jp/sangokushi11/pages/1787.html
+- PTT《三國志11成長類型》：九种中文成长型与峰值/衰退语义交叉核对
+  https://www.ptt.cc/bbs/Koei/M.1425532487.A.9C8.html
+- 日文 Wiki《能力研究》：研究+经验总培养上限约+30、研究单项上限
+  https://w.atwiki.jp/sangokushi11/pages/46.html
+- 日文 Wiki Q&A：经验单独也可吃满+30
+  https://w.atwiki.jp/sangokushi11/pages/2527.html
+- 日文 Wiki 刘禅/育成实录：素质3统率最终约33的直接回归锚点
+  https://w.atwiki.jp/sangokushi11/pages/834.html
+  https://w.atwiki.jp/sangokushi11/pages/2796.html
+- 日文 Wiki 遗迹/庙：遗迹增加的是素质而非经验，可绕过经验+30培养限制
+  https://w.atwiki.jp/sangokushi11/pages/968.html
+- 2ch旧实测：能力变动关闭只停止年龄升降，不停止经验成长
+  https://w.atwiki.jp/sangokushi11/pages/1978.html
 
 ## 4. 人际关系
 
