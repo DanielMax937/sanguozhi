@@ -66,8 +66,9 @@
 - 水军暴击改记在神算上。水军看水将、水神。
 
 ## 存疑稿也补不上
+- E10 应射剩余：`00584DC8`完整PC caller、精确attack-type/unit-type常量、各战法primary/collateral、水上active profile、PC双方应射+连战链序。
 - E8 版本差异剩余：Vanilla1.0/1.1/1.2二进制技巧diff、戟弩骑Lv1早期倍率、Vanilla1.0工兵400%的内部支路、爆药BUG地区版官方修复状态、主机版逐项技巧常量。
-- E7 技巧系统剩余：完整研究时间函数、70/140/非超级矩阵、兵粮袭击RNG、应射完整边界、技巧研究功绩逐地址。工兵育成PK倍率已由E8闭合。
+- E7 技巧系统剩余：完整研究时间函数、70/140/非超级矩阵、兵粮袭击RNG/资源边界、技巧研究功绩逐地址。应射主行为已由E10收窄；只剩00584DC8完整caller、内部attack-type/unit-type值、水上profile和PC连战链序。
 - E6 的完整 PC supply/arrival finalizer、运输兵装逐类容量、自动补给资源优先级、超限货物处理及补兵气力非整除取整。
 
 - E5 已确认基础耗粮与着火烧粮；粮尽逃兵的原函数仍缺。旧 `A×0.76^N` 继续只作 empirical-high fallback。
