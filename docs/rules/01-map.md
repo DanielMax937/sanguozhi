@@ -381,10 +381,220 @@ movement =
 
 ## 5. ZOC
 
-- 敌部队形成控制区域。
-- 飞将、遁走等可忽略陆上 ZOC。
-- 混乱部队 ZOC 消失。
-- ZOC 的路径搜索应直接作用于六角格寻路，不应在城市邻接图层简化。
+### 5.1 基本定义与效果
+
+`[COMMON][empirical-high]`
+
+ZOC（Zone of Control）不是额外增加某格的 terrain move cost，而是**进入敌方控制格后立即终止本回合继续移动**。
+
+长期实测描述为：
+
+```text
+敌方部队 / 会产生ZOC的敌方设施
+        ↓
+其相邻六角格（最多6格）
+        ↓
+敌军进入其中任一格
+        ↓
+该格正常 terrain cost 仍照常计算
+        ↓
+本回合剩余移动力失效，不能继续从该格向外扩展
+```
+
+所以不要实现成：
+
+```ts
+moveCost += zocPenalty
+```
+
+更接近：
+
+```ts
+payTerrainCost(targetCell)
+
+if (targetCell.isEnemyZOC && !ignoreZOC) {
+  stopFurtherMovementThisAction()
+}
+```
+
+2008 年中文移动力专项明确写“移动力消耗不变，但一进入这些格子当前回合移动力自动归0”；日文 FAQ 也说明即使尚有剩余移动力也会在 ZOC 格被迫停止。
+
+### 5.2 ZOC 来源
+
+`[COMMON][empirical-high]`
+
+正常敌部队会向相邻六格形成 ZOC。
+
+大多数有所属势力的军事/支援设施同样形成 ZOC，例如：
+
+- 阵 / 砦 / 城塞；
+- 弓橹 / 连弩橹 / 投石台；
+- 军乐台 / 太鼓台；
+- 石兵八阵等有所属设施；
+- 城市、港、关等敌方据点按同类“敌方建筑/设施”控制逻辑处理。
+
+但下面这些**阻挡物/陷阱没有 ZOC**：
+
+- 土垒；
+- 石墙；
+- 火种 / 火炎种 / 业火种；
+- 火球 / 火炎球 / 业火球等火陷阱。
+
+它们是否能直接穿越属于“格子可通行性”问题，而不是 ZOC。比如土垒会堵格但不向周围扩散 ZOC；火陷阱不靠 ZOC 阻止移动。
+
+日文战争页明确总结：“各类设施会产生ZOC，但土垒、石壁、火罠不产生ZOC”。
+
+### 5.3 PC-PK1.1 ZOC 原参数
+
+`[PC-PK1.1][reverse-engineered-parameters]`
+
+繁中 PK1.1 已有精确地址：
+
+```text
+005A369D  陆上 ZOC 开关，原值 1
+005A36A4  水上 ZOC 开关，原值 1
+
+005A36B8  陆上 ZOC 无视适用的兵装范围，原值 4
+           0..4 = 剑/枪/戟/弩/骑
+           5 才会进一步包含兵器范围
+
+005A36BE  飞将（特技0）
+005A36CB  遁走（特技1）
+005A36D7  命中上面条件后关闭本部队受到的陆上 ZOC
+
+005A36DE  推进（特技4）
+005A36EB  命中后关闭本部队受到的水上 ZOC
+```
+
+这证明原程序把**陆上 ZOC 与水上 ZOC 分成两个独立开关/分支**，不是一个全局 `ignoreZOC` bool。
+
+来源：
+https://game.ali213.net/thread-2168294-1-1.html
+
+### 5.4 飞将 / 遁走 / 推进的边界
+
+`[PC-PK1.1][reverse-engineered-parameters + empirical-high]`
+
+- **飞将**：陆上 ZOC 无视 + 其他战法会心效果；ZOC 部分与遁走共享陆上分支。
+- **遁走**：陆上 ZOC 无视。
+- **推进**：水上 ZOC 无视。
+- 飞将/遁走的原陆上范围上限排除攻城兵器，因此兵器部队不能靠这两个特技穿过陆上 ZOC。
+- 水军状态下飞将/遁走不负责水上 ZOC；需要“推进”。
+- 运输队在陆上按剑兵行军形态处理，因此“遁走”效果仍可生效；Wiki 对飞将也明确说明运输队时只保留其中的“遁走/ZOC无视”部分。
+- 运输队进入水上后若要忽略水上 ZOC，应走“推进”分支。
+
+因此引擎最好拆成：
+
+```ts
+ignoreLandZOC
+ignoreWaterZOC
+```
+
+而不是：
+
+```ts
+ignoreZOC
+```
+
+### 5.5 混乱：ZOC 明确消失
+
+`[COMMON][empirical-high]`
+
+长期实测、日文攻略和关卡攻略一致：
+
+> 混乱部队不形成 ZOC。
+
+因此可以直接实现：
+
+```ts
+if (sourceTroop.status === CONFUSED) {
+  sourceTroop.emitsZOC = false
+}
+```
+
+这也是“先扰乱前排，再让后续部队穿过敌阵”的常见战术基础。
+
+### 5.6 伪报：当前存在来源冲突
+
+`[COMMON][conflicting-evidence]`
+
+这一点不能冒充已锁定：
+
+- 2008 年中文“一兵流/移动力”研究写：敌军处于**混乱、伪报**时均不产生 ZOC。
+- 日文三国志11攻略 Wiki 的“战争”页却明确区分：
+  - 混乱：ZOC 消失；
+  - **伪报：ZOC 仍保留**。
+- 多个实际战报利用“对敌伪报后，再用我方部队/设施的 ZOC 限制其撤退路线”，证明伪报不会让被伪报部队“免疫别人 ZOC”，但这仍不能单独证明它自己是否继续向周围发出 ZOC。
+
+目前公开的 `005A36xx` 参数只确认陆/水 ZOC 与无视特技，没有恢复“异常状态 → 是否发出ZOC”的那一小段判断，因此保留 exactness gap。
+
+为了引擎可运行，当前建议默认：
+
+```ts
+falseReportRetainsZOC = true
+```
+
+并明确标记：
+
+```text
+provisional-engine-rule / compatibilityAssumption
+```
+
+理由仅是日文长期攻略对此有更明确的逐状态区分；未来一旦取得原状态分支反汇编或可靠实机 A/B 实验，立即替换。
+
+### 5.7 ZOC 与实体阻挡是两回事
+
+即使某部队能够无视 ZOC：
+
+- 仍不能穿过实际不可通行地形；
+- 仍不能穿过被敌方实体真正占用、且规则不允许穿越的格子；
+- 被六个实体完全包围时，飞将/遁走也不会“穿模”越过占用格。
+
+同理，混乱导致 ZOC 消失也只代表**相邻控制区消失**，该敌部队自己占着的那一格仍是实体阻挡。
+
+### 5.8 当前 fidelity 模型
+
+```ts
+function emitsZOC(source) {
+  if (source.isTroop) {
+    if (source.status === CONFUSED) return false
+
+    // 待原函数回归确认
+    if (source.status === FALSE_REPORT)
+      return falseReportRetainsZOC
+
+    return source.isHostileActiveUnit
+  }
+
+  if (source.isBuilding) {
+    if (source.kind in [
+      EARTH_WALL,
+      STONE_WALL,
+      FIRE_TRAP
+    ]) return false
+
+    return source.isHostileOwnedZOCFacility
+  }
+
+  return false
+}
+
+function stopsOnZOC(mover, targetCell) {
+  if (!targetCell.inEnemyZOC) return false
+
+  if (targetCell.isWater)
+    return !mover.ignoreWaterZOC
+
+  return !mover.ignoreLandZOC
+}
+```
+
+证据来源：
+- https://game.ali213.net/thread-2168294-1-1.html
+- https://www.gamersky.com/handbook/200809/124600.shtml
+- https://w.atwiki.jp/sangokushi11/pages/8.html
+- https://w.atwiki.jp/sangokushi11/pages/13.html
+- https://w.atwiki.jp/sangokushi11/pages/85.html
 
 ## 6. 高度
 
