@@ -2,24 +2,20 @@
 
 更新：2026-09-30。
 
-## 最新完成：E9 兵粮袭击
+## 最新完成：E10 应射
 
-当前逐点审计已写回 A1–A5、B1–B9、C1–C11、D1–D10、E1–E9，共44个审计点。
+当前逐点审计已写回 A1–A5、B1–B9、C1–C11、D1–D10、E1–E10，共45个审计点。
 
 - [当前总表](17-post-15-source-audit.md)
-- [E9 规则正文](24-food-raid.md)
-- [E9 结构化证据](../sources/food-raid.json)
-- [E9 参考校验脚本](../../scripts/check_food_raid.py)
-- [E8 技巧补丁版本差异](23-technique-patch-differences.md)
+- [E10 规则正文](25-response-fire.md)
+- [E10 结构化证据](../sources/response-fire.json)
+- [E10 兼容规则校验](../../scripts/check_response_fire.py)
+- [E9 兵粮袭击](24-food-raid.md)
 
-E9 已确认 PC-PK1.1 在部队攻击结果链的 `005B03F9` 调用 `005ADB20`：只对部队目标，普通攻击/战法共用；反击分支明确跳过兵粮袭击。
+E10 已定位 PC-PK1.1 技巧ID9入口 `00584DC8`。高置信规则：应射主体是弩兵，触发箭类普通攻击/战法；必须满足正常射程和地形合法性；支援攻击不触发；混乱/伪报不能正常应射；火矢是明确可被应射反击的战法。
 
-数量主模型由长期技术详解和现代实测交叉确认：`min(攻击面板×R, floor(己方兵力/2))`，R位于1～2。原 `005ADB20` 函数体尚未公开，所以RNG粒度、目标缺粮/攻方满粮裁剪、盾类零伤害、支援攻击与水上profile仍open。
+历史实测还确认超射程、森林非法目标会阻止应射，PCPK急袭可50%规避应射伤害。PS2PK双方应射+连战存在长链，但PC调用顺序/最大深度仍open。
 
-兼容fallback采用10～20整数档并标 `compatibility-reconstruction`，不能冒充原EXE。连击两次抢粮保持 empirical-high。
+完整00584DC8 caller、内部attack-type/unit-type比较值、水上active profile和各战法primary/collateral细分继续open。
 
-下一项：E10 应射。
-
-## 证据边界
-
-E9 已把“是否触发/哪些主路径触发”和数量范围从泛攻略升级到源码调用+多来源交叉；真正未闭合的是 `005ADB20` 内部RNG和资源边界。
+下一项：E11 技巧研究时间。
