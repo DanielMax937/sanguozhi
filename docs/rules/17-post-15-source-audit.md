@@ -37,6 +37,7 @@
 | D4 | 人际关系 | 亲爱/厌恶方向性、夫妻/义兄弟/血缘独立结构、PC-PK支援50/30/20参数、副将1/2/1/3/1/4补正及嫌恶整队覆盖、登用/处斩硬分支已核 | reverse-engineered relation structure + reverse-engineered support parameters + empirical-high relation behavior | ✅ |
 | D5 | 登用优先级与普通概率 | hard gate→005C4F80→deterministic compare 控制流、dateKey与异地锁发令日、非0参数义理倍率/随机分支、探索失败舌战>80已核；005C4F80闭式仍open | reverse-engineered control flow + deterministic final check + empirical-high hard-gate order | ✅ |
 | D6 | 相性 / 义理 / 野望 / 汉室 | 相性150环精确式、忠诚0..255/UI100、换季掉忠>=25/低义理高野望门槛、己方/俘虏schedule、仁政/人心掌握边界、汉室爵位与拥废常量已核 | reverse-engineered compatibility/storage + empirical-high loyalty behavior + documented Han constants | ✅ |
+| D7 | 太守 / 都督 / 军师 | corps/city/force三层角色结构、太守都督自动选择、军师智力70任命门槛与势力级唯一引用、AP倍率、太守治安/守城/耐久恢复职责已核 | reverse-engineered role structure + official advisor rules + empirical-high automatic selection | ✅ |
 
 ## A1 关键纠错
 
@@ -1179,3 +1180,33 @@ diff = min(raw, 150-raw)
 仍open：完整自然掉忠gate函数、君主义理/野望附加项主函数体、人心掌握原EXE概率、俘虏月度基础闭式、野望→独立连续函数。
 
 下一项：D7 太守 / 都督 / 军师。
+
+## D7 关键结论
+
+角色数据层分离：
+
+```text
+force.AdvisorID     -> 军师
+corps.CorpsLeaderID -> 都督
+city.PrefectID      -> 太守
+```
+
+都督/太守属于 Person Identity；军师不是 Identity。
+
+正常玩法中太守/都督不能直接点名任命。日文 Wiki 的稳定主规则是“可指挥兵数最大者优先，同值统率优先”，并存在有官职者优先于完全无官职者的边界；旧2ch对都督深层 tie-break 有“官职顺序”说法，因此 selector 完整函数体仍 open。
+
+官方说明书锁定军师：智力>=70才能任命；智力越高助言越准确；任免无金、无AP、无期间。军师是势力唯一 AdvisorID，所有军团共享。
+
+C9 行动力中军师倍率：
+
+```ts
+0.70 + 0.01*floor(INT/2)
+```
+
+正常70/80/90/100智对应1.05/1.10/1.15/1.20。
+
+太守职责已拆清：魅力控制换季治安下降；统率>=66开始降低据点守兵损失；武力>=66开始提高据点反击；超过太守可指挥兵数的驻兵不继续提高据点攻防；港关/堤防无太守不恢复耐久，恢复量看太守政治。
+
+军师助言只是预测层，D5 的硬关系登用可出现“军师×但真实必成”，因此不得用 advisorSaysYes 直接决定命令结果。
+
+下一项：D8 忠诚 / 俸禄 / 奖赏。
