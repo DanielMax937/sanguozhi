@@ -2141,11 +2141,400 @@ Random(0..2)
 - 二次“代码研究”转载：忠诚损失三角分布/人心掌握2/3/符节台+2等候选，用于交叉验证而非主逆向证据
   https://wenku.baidu.com/view/ad1f1482561252d381eb6edb?bfetype=new
 
-## 7. 太守、都督、军师
+## 7. 太守 / 都督 / 军师
 
-- 太守/都督自动决定时优先看官职/指挥兵力，再比较统率等。
-- 军师智力影响行动力和建议准确性。
-- 军师建议不是决定论；特殊人际关系的强制门槛优先。
+`[COMMON/PK][reverse-engineered role structure + official advisor rules + empirical-high automatic selection]`
+
+这三个职位在数据层不是同一种东西：
+
+```text
+都督 = Person.Identity 1 + CorpsLeaderID
+太守 = Person.Identity 2 + City/Port/Gate PrefectID
+军师 = Force.AdvisorID
+```
+
+所以军师依然不是 Identity；同一个武将可以在数据层同时是太守/都督身份，并被势力 `AdvisorID` 引用为军师。
+
+### 7.1 原结构：三个角色分别挂在 corps / city / force
+
+SIRE 结构已经直接锁定：
+
+```text
+struct_force +0x08 AdvisorID
+struct_corp  +0x0C CorpsLeaderID
+struct_city  +0x34 PrefectID
+```
+
+港、关也有独立太守 getter：
+
+```text
+0047C310 GetCityPrefectID
+00485160 GetPrefectIDForHarborOrPass
+```
+
+Person helper：
+
+```text
+00488C10 IsGovernor
+00488C20 IsPrefect
+00488C90 IsLordGovernorOrPrefect
+00488CB0 IsLordOrGovernor
+00488CF0 IsAdvisorOfForce
+```
+
+因此不要让“城市太守”“军团都督”“势力军师”共用一个 `person.role` 单值字段。
+
+### 7.2 太守 / 都督在正常游戏里不能直接点名任命
+
+`[COMMON][empirical-high UI/selection behavior]`
+
+日文 FAQ 明确回答：
+
+```text
+太守和都督能不能自己选？
+→ 不能。
+```
+
+两者会自动决定。玩家真正能直接操作的是**官职**、军团编成/委任等外围条件，因此可以间接影响谁成为太守/都督。
+
+这与军师不同：军师有独立“军师”命令，可以直接任免。
+
+### 7.3 自动选择：首先看可指挥兵数，其次统率
+
+`[COMMON][empirical-high; original selector body open]`
+
+日文 Wiki 的整理规则：
+
+```text
+都督 / 太守
+→ 候选中可指挥兵数最大者优先
+→ 同值时统率更高者优先
+```
+
+另外存在一个重要的“有官职者优先于完全无官职者”边界：最低文官即使不增加指挥兵数，也可能压过无官职者。
+
+因此最安全的模拟接口不是只写：
+
+```ts
+maxBy(candidates, leadership)
+```
+
+而是把：
+
+```text
+身份资格
+官职有无 / 官职带来的指挥兵数
+统率
+```
+
+作为显式比较维度。
+
+旧 2ch 进一步记录过：
+
+```text
+太守：君主 > 都督 > 一般
+      然后指挥兵数 > 统率
+```
+
+以及“都督更偏官职顺序”的说法。它和后期 Wiki 的统一“指挥兵数→统率、且有官职者优先”表述存在细节差异，所以：
+
+- `可指挥兵数优先、同值统率`：采用 empirical-high；
+- `君主/都督身份在本城的太守优先`：采用 empirical-high；
+- “都督具体比较官职等级还是只比较最终可指挥兵数”的深层 tie-break：继续 open。
+
+### 7.4 玩家可通过官职间接控制太守 / 都督
+
+官职会改变：
+
+```text
+可指挥兵数
+能力补正
+俸禄
+```
+
+而都督/太守自动选择又高度依赖可指挥兵数，所以玩家可以通过授官/撤官操纵自动结果。
+
+这也是为什么 Wiki 建议：若不想某个低义理武将自动成为太守，可给目标武将预留能增加指挥兵数的官职。
+
+因此：
+
+```text
+不能手动选太守
+```
+
+不等于：
+
+```text
+玩家完全无法影响太守人选
+```
+
+### 7.5 第一军团与委任军团的都督边界
+
+C9 已经确认行动力按军团保存。
+
+第一军团的 leader 语义由君主承担；委任军团则使用该军团 `CorpsLeaderID` / 都督。
+
+所以行动力恢复中的：
+
+```ts
+leaderParam =
+  firstCorps
+    ? rulerParam
+    : governorParam
+```
+
+其中都督/君主都只取：
+
+```ts
+max(leadership, charisma)
+```
+
+进入 C9 的行动力 leader 参数。
+
+都督不是全势力共用：每个委任军团有自己的 `CorpsLeaderID`。
+
+### 7.6 军师可以直接任命，智力至少70
+
+`[COMMON/PK][official-confirmed]`
+
+官方说明书对“军师”命令明确：
+
+```text
+作用：任命在执行命令时提供助言的军师
+资格：智力 >= 70
+智力越高，助言越准确
+期间：无
+必要金：无
+行动力：无
+执行武将：无
+```
+
+也就是说，军师任免是**即时、无AP、无金钱消耗**的势力级设置。
+
+注意：智力70是**任命资格门槛**，不是“70以上助言就可靠”的保证。Wiki 对70智军师的长期评价恰恰是助言仍经常出错。
+
+### 7.7 军师是势力级，一个军师服务所有军团
+
+`struct_force` 只有一个：
+
+```text
+AdvisorID
+```
+
+而 `struct_corp` 没有自己的 advisor 字段。
+
+所以：
+
+- 一个势力同一时刻只有一个军师；
+- 第一军团和所有委任军团共享同一军师；
+- 军师被任命后不会把原本的 `Identity=NORMAL/PREFECT/GOVERNOR` 改成新的身份。
+
+这也是 C9 为什么所有军团都共享同一 `adviserParam`。
+
+### 7.8 军师对行动力的精确作用
+
+C9 已锁定：
+
+```ts
+adviserParam =
+  advisor
+    ? 0.70 + 0.01 * floor(advisorIntelligence / 2)
+    : 1.0
+```
+
+正常任命门槛 `INT >= 70` 下：
+
+| 军师智力 | AP倍率 |
+|---:|---:|
+| 70 | 1.05 |
+| 80 | 1.10 |
+| 90 | 1.15 |
+| 100 | 1.20 |
+
+然后：
+
+```ts
+coreRecovery = floor(
+  (leaderParam + cityParam + officerParam)
+  * adviserParam
+)
+```
+
+所以军师不仅影响 UI 助言准确度，还真实影响每个军团每旬行动力恢复。
+
+### 7.9 军师助言不是最终判定规则
+
+D5 已经给出一个重要反例：登用最终成功由：
+
+```text
+hard gate
+→ GetHiringSuccessRate
+→ final check
+```
+
+决定。
+
+亲爱/配偶/义兄弟等硬关系可以出现：
+
+```text
+军师预测失败
+但真实规则必成功
+```
+
+因此引擎绝不能实现：
+
+```ts
+success = advisorSaysYes
+```
+
+军师助言只能视为对真实结果的**预测/UI信息层**。
+
+官方只确认“智力越高越准确”；当前没有恢复：
+
+```text
+INT -> 助言正确率
+```
+
+的完整原 EXE 闭式。不要用 `accuracy=INT%` 等线性式冒充。
+
+### 7.10 太守的能力真实影响哪些系统
+
+太守不是单纯 UI 头衔。已经锁定至少四组作用。
+
+#### A. 换季治安：魅力
+
+C10 的 PC-PK1.1 逆向：
+
+```ts
+C = prefect ? prefect.charisma : 0
+base = floor(max(1, 90 - C) / 10)
+seasonalOrderLoss = min(5, base + Random(0..2))
+```
+
+无太守按魅力0处理，因此固定掉5。
+
+#### B. 据点守兵防御：统率
+
+稳定实测：
+
+- 太守统率 <=65：无额外减伤；
+- >=66：开始减少守兵受到的伤害；
+- 统率越高减伤越明显；
+- 城内其他武将统率不参与；
+- 太守统率不影响据点耐久伤害。
+
+#### C. 据点反击：武力
+
+- 太守武力 <=65：无额外反击加成；
+- >=66：开始增加据点反击伤害；
+- 武力越高越强；
+- 城内其他武将武力不参与。
+
+#### D. 有效守兵上限：太守可指挥兵数
+
+据点兵越多攻防越高，但：
+
+```text
+超过太守可指挥兵数的那部分驻兵
+→ 不再继续贡献据点攻防成长
+```
+
+所以“给高指挥兵数武将官职→自动成为太守”不仅影响人事，还会直接改变守城强度。
+
+### 7.11 港关 / 堤防恢复：需要太守，政治决定恢复量
+
+`[COMMON][empirical-high]`
+
+FAQ 明确：
+
+```text
+没有太守
+→ 堤防、港、关耐久不恢复
+
+有太守
+→ 恢复量受太守政治影响
+```
+
+当前还没有恢复“政治→每旬耐久恢复”的完整闭式，因此不要填一个自拟线性系数。
+
+### 7.12 太守智力与城市计略防御
+
+官方说明书在“流言”说明里把目标都市：
+
+```text
+太守 / 君主 / 军师的智力
+```
+
+列为影响成功难易的因素；日文 Wiki 也长期记录“太守智力高会更容易挡住流言”。
+
+所以太守智力确实属于城市计略防御相关数据。
+
+但具体的：
+
+```text
+军师 -> 太守 -> 君主
+```
+
+抵抗者回退链以及各自如何进入最终流言闭式，目前在现代逆向复刻中有明确实现，但原公开 EXE 文本还未完成同等级核对，因此 D7 只锁“这些角色会参与”，不把复刻项目的回退链冒充原程序逐指令事实。
+
+### 7.13 驱虎吞狼直接以太守为目标
+
+官方说明书明确：
+
+```text
+驱虎吞狼
+→ 让敌方都市太守独立
+→ 太守野望高、忠诚低时更容易成功
+```
+
+因此“太守”是计略系统的真实状态节点；不能只通过 `city.officers[0]` 临时推导。
+
+精确成功率留城市计略专项。
+
+### 7.14 D7 当前结论
+
+已经锁定：
+
+- 都督、太守是 Person Identity；军师是 force-level AdvisorID，不属于 Identity；
+- corps / city / force 分别持有 CorpsLeaderID / PrefectID / AdvisorID；
+- 正常玩法不能直接点名太守/都督，但可以通过官职/军团编成间接影响；
+- 自动都督/太守高置信主排序为可指挥兵数优先、同值统率，且有官职者相对无官职者存在优先边界；
+- 第一军团用君主，委任军团用都督计算行动力 leader 参数；
+- 军师可直接任免，智力 >=70，立即生效、0金、0AP；
+- 军师是全势力唯一引用，所有军团共享；
+- 军师智力70/80/90/100对应行动力倍率1.05/1.10/1.15/1.20；
+- 军师助言只是预测层，不能替代真实命令判定；助言准确率闭式仍open；
+- 太守魅力影响换季治安、统率影响守兵防御、武力影响反击、指挥兵数封顶有效守兵；
+- 港关/堤防无太守不恢复，恢复量看太守政治；
+- 太守智力参与城市计略防御；
+- 驱虎吞狼直接针对太守的野望/忠诚。
+
+仍 open：
+
+- PC-PK1.1 自动太守/都督 selector 的完整函数体与最终 tie-break；
+- 都督“官职顺序”与“最终指挥兵数优先”旧资料差异的逐指令消歧；
+- 军师助言准确率的原函数；
+- 太守政治→港关/堤防耐久恢复量闭式；
+- 太守/都督死亡、被俘、调离后原作精确的自动重选时点；
+- Vanilla 与 PK 在上述 selector / advice 规则上是否有版本差异。
+
+来源：
+- 官方 PK 说明书：军师智力>=70、智力越高助言越准确、军师命令无金/AP/期间；驱虎吞狼针对高野望低忠诚太守
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 311SireCustomizedPackageDev：Identity、AdvisorID、CorpsLeaderID、PrefectID与角色helper
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 日文 Wiki FAQ：太守/都督不能直接选；港关/堤防恢复需太守且看政治
+  https://w.atwiki.jp/sangokushi11/pages/8.html
+- 日文 Wiki 爵位/官职：都督/太守按可指挥兵数、同值统率自动任命及有官职优先边界
+  https://w.atwiki.jp/sangokushi11/pages/111.html
+- 日文 Wiki 内政/委任：都督任命优先级
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki 据点伤害：太守统率66+/武力66+/可指挥兵数实测
+  https://w.atwiki.jp/sangokushi11/pages/92.html
+- 日文 Wiki 各种经验：军师智力同时影响助言准确度与行动力恢复
+  https://w.atwiki.jp/sangokushi11/pages/79.html
+- 旧2ch：太守身份→指挥兵数→统率、都督官职相关排序细节（作为冲突边界，不作为唯一真值）
+  https://w.atwiki.jp/sangokushi11/pages/1938.html
 
 ## 8. 忠诚、俸禄、奖赏
 
