@@ -1353,7 +1353,7 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   - D6人心掌握；
   - B8港关扩张。
 
-证据等级：技巧ID和多数核心常量为PC-PK1.1地址/反汇编级；完整技巧树、费用和若干行为由Wiki/Gamersky交叉。E8已把PK1.1工兵育成闭合为内政设施×2、城市港关×2.5；当前仍open的是完整研究时间函数、兵粮袭击 `005ADB20` 的原RNG/资源边界、应射细边界与技巧研究功绩逐地址。爆药炼成原PC判定BUG与补丁差异见E8。
+证据等级：技巧ID和多数核心常量为PC-PK1.1地址/反汇编级；完整技巧树、费用和若干行为由Wiki/Gamersky交叉。E8已把PK1.1工兵育成闭合为内政设施×2、城市港关×2.5；当前仍open的是完整研究时间函数、兵粮袭击 `005ADB20` 的原RNG/资源边界、应射PC caller/水战/连锁细边界与技巧研究功绩逐地址。爆药炼成原PC判定BUG与补丁差异见E8。
 
 
 ### E8 技巧补丁版本差异专项
@@ -1428,3 +1428,39 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://github.com/tankyc/sango_infinity
 
 证据等级：触发位置、目标类型、普通/战法共用与反击跳过为PC-PK1.1 reverse-engineered；Attack×R、R∈[1,2]、兵力/2封顶为 documented + empirical-high。`005ADB20` 本体尚未恢复，因此原RNG粒度、目标缺粮/攻方满粮、盾类零伤害、支援/水战边界仍open。
+
+
+### E10 应射专项
+
+- 311MemoryResearch `地址资料.txt`：
+  - `00584DC8`：应射/还射，techId=9。
+  https://github.com/sjn4048/311MemoryResearch
+- 游侠 NETSHOW《三国志11pk内存修改》：
+  - 独立转录同一地址 `00584DC8`，用于地址交叉确认。
+  https://game.ali213.net/thread-2168294-1-1.html
+- 日文 Wiki《技巧研究》：
+  - 弩兵受到弩攻击时反击；
+  - 与连战存在互动。
+  https://w.atwiki.jp/sangokushi11/pages/90.html
+- 日文 Wiki《戦争》：
+  - 火矢通常不受反击，应射弩兵是明确例外。
+  https://w.atwiki.jp/sangokushi11/pages/85.html
+- 日文 Wiki《支援攻击》：
+  - 对应射弩兵做间接普通攻击时，攻击方支援攻击会被抑制；
+  - 近接普通、近接战法、间接战法仍可触发支援；
+  - 目标混乱/伪报时该抑制消失。
+  https://w.atwiki.jp/sangokushi11/pages/1584.html
+- 2ch 历史日志 Part54：
+  - 应射覆盖弩/舰船间接攻击、骑射和箭类战法；
+  - 超射程与森林目标合法性会阻止；
+  - 支援攻击不触发应射；
+  - 邻接贯矢/乱射卷入时可出现近身回应形式。
+  https://w.atwiki.jp/sangokushi11/pages/1956.html
+- Wiki《特技一覧》：
+  - PCPK 急袭可50%规避应射反击伤害。
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+- 游民星空/游侠《技术详解》：
+  - 应射只限弩兵队，且包括战法。
+  https://www.gamersky.com/handbook/200806/114545_2.shtml
+
+证据等级：techId与地址为PC地址级；箭类攻击集合、射程/地形/支援/异常/急袭边界为多来源长期实测high。`00584DC8` 完整caller、水上active profile、PC连战链序仍open。
