@@ -99,3 +99,34 @@
   https://www.sohu.com/a/411270684_120015190
 - 巴哈姆特：计略会心延长异常/燃烧
   https://forum.gamer.com.tw/Co.php?bsn=60001&sn=380559
+
+
+## 2026-09-30 排除原15项后的源码审计来源
+
+- 311MemoryResearch：月度/旬度自动处理、收支、地形移动、地图格研究
+  https://github.com/sjn4048/311MemoryResearch
+  - `函数[每月例行处理].txt`
+  - `整理/Func-收支01-每旬收钱.txt`
+  - `整理/Func-收支03-每月钱粮兵装收支.txt`
+  - `整理/Func-内政01-计算征兵数量.txt`
+  - `整理/Func-内政11-计算生产数量.txt`
+  - `AI专题/函数[AI出兵策略].txt`
+  - `函数[部队攻击].txt`
+  - `函数[设施攻击].txt`
+  - `函数[计算部队进入某地格消耗的移动力].txt`
+  - `地形研究.txt`
+
+- 311SireCustomizedPackageDev：原函数命名、结构体、地图/战法/兵装字段
+  https://github.com/sean2077/311SireCustomizedPackageDev
+  - `material/内存地址汇总.md`
+  - `material/结构体汇总.md`
+  - `material/数据汇总.md`
+
+- sango_infinity：原 311 数据兼容层以及标注由 s11_sys_duel.h / cpp 翻译的单挑核心
+  https://github.com/tankyc/sango_infinity
+  - `Project/Assets/Sango/Scripts/Game/Duel/Duel.cs`
+  - `Project/Assets/Sango/Scripts/Map/Render/Map/MapGrid.cs`
+  - `Build/Content/Data/Common/TroopTypes.json`
+
+- 日文三國志11攻略Wiki：行动顺序、兵科/地形/移动交叉实测
+  https://w.atwiki.jp/sangokushi11/
