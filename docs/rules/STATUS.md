@@ -2,25 +2,23 @@
 
 更新：2026-10-01。
 
-## 最新完成：E19 评定完整提案池
+## 最新完成：E20 委任 AI 权重 / 决策架构
 
-当前逐点审计已写回 A1–A5、B1–B9、C1–C11、D1–D10、E1–E19，共54个审计点。
+当前逐点审计已写回 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20，共55个审计点。
 
 - [当前总表](17-post-15-source-audit.md)
-- [E19 规则正文](34-council-proposal-pool.md)
-- [E19 结构化证据](../sources/council-proposal-pool.json)
-- [E19 校验脚本](../../scripts/check_council_proposal_pool.py)
+- [E20 规则正文](35-delegated-ai-architecture.md)
+- [E20 结构化证据](../sources/delegated-ai-architecture.json)
+- [E20 校验脚本](../../scripts/check_delegated_ai_architecture.py)
 - [君主/军团主规则](08-ruler-corps.md)
-- [E18 普通君主继承](33-ruler-succession-priority.md)
+- [E19 评定提案池](34-council-proposal-pool.md)
 
-E19 已关闭“评定具体提案池未知”这一静态问题。
+E20 已撤回“委任/COM AI 应该存在一张全局 action utility 权重表”的错误前提。
 
-原版专用君主评定 MSG 段恢复出22类具体案：内政/人事/城市9类、出阵/军事3类、外交・计略10类。评定是“方针→采决→具体案→采决→执行”的两阶段结构；参与者可赞同他人，君主可采纳一个、部分、全部，或全部否决/中止。
+PC-PK1.1 已恢复的是 procedural/modular 架构：COM军团与玩家委任野外部队最终共享 `005AD980` 战术行动 core；`005EF440` 出兵策略读取 difficulty、君主野望、StrategicTendency、城市/目标态势及资源，经过 hard gate 后才进入5～100概率层；`005F6CF0` 则是“已决定兵装后选择主将”的局部评分器。
 
-官方手册确认评定本身0金、0行动力、最多6人参加，君主必须在据点。同期资料记录评定+10技巧P。
+出兵关键常量包括：计划兵力最低5000、80/90治安 gate、`travelTime*5+15` 兵粮 horizon、携粮上限50000、粮不足 abort、普通非兵器部队的携金75%/50%规则，以及冲车90%、井阑/木兽/投石80%的编成概率。
 
-旧 fallback 中的“技巧研究、输送、褒赏”不再列入评定提案池。
+AI势力强度还存在君主ID硬编码 bonus，因此不能用一套纯资源 utility 冒充原作。
 
-仍 open 的是 proposal chooser：武将为何提某一案、隐藏属性/五维是否参与、参与者过滤、额外 availability gate、多案执行顺序以及采纳案资源/AP调用链。
-
-下一项：E20 委任 AI 权重。
+当前 A1～E20 共55个逐点审计项已全部完成。剩余工作转为各项内部 exactness gap 与静态数据补全，不再新增一个“E21统一权重表”之类的伪问题。
