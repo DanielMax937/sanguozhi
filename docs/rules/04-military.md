@@ -1415,7 +1415,7 @@ Lv4精锐：
 - 技巧研究时间完整函数；
 - 超级70/140档与非超级完整矩阵；
 - 兵粮袭击随机闭式；
-- 应射完整攻击类型边界；
+- 应射完整PC caller、attack-type数值、水上profile与连战链序；
 - 技巧研究完成功绩的PC逐地址；
 
 ## 10. 技巧补丁版本差异
@@ -1646,4 +1646,86 @@ empirical-high：
 - 大盾/矢盾等把伤害置0时是否仍抢；
 - 原RNG粒度；
 - 满粮/缺粮原作裁剪。
+
+
+
+## 12. 应射
+
+`[PC-PK1.1 address-level + documented/empirical-high behavior]`
+
+E10 完整专项见 `25-response-fire.md`，结构化证据见 `docs/sources/response-fire.json`。
+
+### 12.1 技巧ID与入口
+
+```text
+00584DC8 = 应射 / 还射
+techniqueId = 9
+```
+
+当前没有完整 caller 逐指令，因此不能把下面所有边界都标成 PC disassembly。
+
+### 12.2 核心条件
+
+当前兼容判断结构：
+
+```ts
+defender.force.hasTechnique(9)
+&& defender.currentProfile === CROSSBOW
+&& incomingAttack.isArrowFamily
+&& incomingAttack.kind !== SUPPORT
+&& !defender.isConfused
+&& !defender.isFalseReport
+&& canLegallyAttack(defender, attacker.position)
+```
+
+这意味着：
+
+- 应射不是“所有远程攻击都反击”；
+- 防守主体是弩兵；
+- 必须满足正常射程/地形攻击合法性；
+- 支援攻击不触发；
+- 混乱/伪报不能正常应射。
+
+### 12.3 可触发攻击
+
+高置信包括：
+
+- 弩兵间接普通射击；
+- 骑射；
+- 舰船箭类普通攻击；
+- 弩战法：火矢 / 贯矢 / 乱射；
+- 井阑/舰船等火矢类战法。
+
+火矢通常不会被反击，但应射弩兵是明确例外。
+
+### 12.4 射程与地形
+
+应射不能无视正常攻击范围：
+
+```text
+攻击者在3格
+防守方弩射程只有2
+=> 不能应射
+```
+
+防守方拥有强弩时，当前合法射程扩大，对应可应射距离也扩大。
+
+攻击者站在森林、而防守弩兵没有合法攻击森林的能力时，也会因为无法攻击源格而不能应射。
+
+### 12.5 回应形式与互动
+
+应射更接近“获得一次合法反击机会”，不保证固定弩射动画；邻接的贯矢/乱射卷入目标，历史实测可出现近身回应。
+
+PCPK“急袭”可50%避免应射反击伤害，说明应射伤害走反击伤害语义。
+
+PS2PK 历史实测存在双方同时“应射+连战”形成长链，但 PC 的精确链顺序/深度尚未恢复。
+
+### 12.6 E10 open
+
+- `00584DC8` 周边完整PC caller；
+- 精确 attack-type / unit-type 数值比较；
+- 水上 active profile 是否保留陆上弩兵应射；
+- PC 双方应射+连战的精确链；
+- 各战法 primary/collateral 的逐路径差异；
+- Vanilla / PS2 / Wii 的逐项等价性。
 
