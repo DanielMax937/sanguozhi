@@ -38,6 +38,7 @@
 | D5 | 登用优先级与普通概率 | hard gate→005C4F80→deterministic compare 控制流、dateKey与异地锁发令日、非0参数义理倍率/随机分支、探索失败舌战>80已核；005C4F80闭式仍open | reverse-engineered control flow + deterministic final check + empirical-high hard-gate order | ✅ |
 | D6 | 相性 / 义理 / 野望 / 汉室 | 相性150环精确式、忠诚0..255/UI100、换季掉忠>=25/低义理高野望门槛、己方/俘虏schedule、仁政/人心掌握边界、汉室爵位与拥废常量已核 | reverse-engineered compatibility/storage + empirical-high loyalty behavior + documented Han constants | ✅ |
 | D7 | 太守 / 都督 / 军师 | corps/city/force三层角色结构、太守都督自动选择、军师智力70任命门槛与势力级唯一引用、AP倍率、太守治安/守城/耐久恢复职责已核 | reverse-engineered role structure + official advisor rules + empirical-high automatic selection | ✅ |
+| D8 | 忠诚 / 俸禄 / 褒赏 | 褒赏100金/人+5AP/人/每回合一次与随机加忠、授予10AP、隐藏忠诚>100、月度俸禄与00590490收支顺序、欠薪专门掉忠路径已核；褒赏增量/欠薪点数仍open | official-confirmed reward semantics + reverse-engineered monthly salary dispatcher + empirical-random reward gain | ✅ |
 
 ## A1 关键纠错
 
@@ -1210,3 +1211,44 @@ C9 行动力中军师倍率：
 军师助言只是预测层，D5 的硬关系登用可出现“军师×但真实必成”，因此不得用 advisorSaysYes 直接决定命令结果。
 
 下一项：D8 忠诚 / 俸禄 / 奖赏。
+
+## D8 关键结论
+
+官方褒赏命令已经锁定：
+
+```text
+100金 / 人
+5行动力 / 人
+即时
+无执行武将
+一次可多人
+同一武将每回合最多一次
+显示忠诚100或正在部队中时不可执行
+```
+
+`00489140 HasPraised` 是“一人每回合一次”的结构证据。
+
+褒赏忠诚增量不是固定值。Vanilla逐旬实录直接出现 +5/+8/+9，并明确通过S/L刷高结果；君主魅力影响褒赏效果，但 RNG/魅力/义理的完整闭式仍 open。
+
+忠诚底层仍按 D6 的 byte 0..255 保存，因此一次从真实99开始的褒赏可推到108而UI只显示100；数据层不能 clamp 到100。
+
+授予宝物：官方锁定10AP、0金，宝物价值越高忠诚上升越多；value→gain精确映射仍open。没收宝物会降忠，-30有稳定PC/PK实机记录，但当前只标 empirical-high。
+
+普通武将官职升降本身不改变忠诚；爵位授予/自称造成的忠诚变化属于势力事件，不与普通任官混用。
+
+PC-PK1.1 `00590490 MonthlyIncomeAndExpend` 已锁定月度支出顺序：
+
+```text
+本月钱粮收入
+→ 俘虏维护费（50金/人）
+→ 现役武将官职俸禄（0049F2A0求和）
+→ 资金不足后果
+```
+
+俸禄够钱则直接全额扣除；不足时转 `0058D5E0` 欠薪忠诚下降准备，后段 `0058C190` 处理忠诚。旧“季度付俸、钱不够全城-10～30”已撤回。
+
+同时修正旧行动力表：人才府只减探索/登用，不减褒赏/移动/召唤/授予。官方值为褒赏5AP/人、移动20AP、召唤20AP、授予10AP。
+
+仍 open：褒赏增量闭式、宝物value→忠诚映射、没收-30原函数、欠薪具体影响对象与点数、欠薪时是否存在更细的部分支付逻辑。
+
+下一项：D9 俘虏。
