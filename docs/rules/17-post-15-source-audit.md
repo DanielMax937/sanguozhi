@@ -18,7 +18,8 @@
 | B5 | ZOC | 相邻六格控制；进入ZOC后终止本回合继续移动；陆/水ZOC分离；飞将/遁走/推进边界已核；伪报是否继续发出ZOC仍冲突 | reverse-engineered-parameters + empirical-high | ✅ |
 | B6 | 高度与高低差 | 高低差仅进入部分强制位移战法成功率；判定取行动开始格；旧“每级固定±5”降级；原高度静态字段位置仍 open | empirical-high + original function located | ✅ |
 | B7 | 水陆切换、舰船切换 | 陆/水两套兵装并存；当前坐标选 active profile；仅河/海触发 naval；运输水上固定走舸行军表；渡/浅滩不切船 | reverse-engineered-structure + empirical-high | ✅ |
-| B8 | 港关容量与所属关系 | 下一项 | pending | ⬜ |
+| B8 | 港关容量与所属关系 | 静态母城关系与当前势力归属分离；收入按同ForceID判定；基础/扩展容量已核；四类数量兵装与小数量兵器分离 | reverse-engineered + confirmed-game-data | ✅ |
+| B9 | 堤防、水攻机制 | 下一项 | pending | ⬜ |
 
 ## A1 关键纠错
 
@@ -298,3 +299,45 @@ PC-PK1.1 原参数地址：
 运输队水上移动原函数固定映射兵装9（走舸），不会因为楼船/斗舰库存改变水上行军成本。
 
 当前没有发现额外上船/下船移动税；但完整 `005A4540` 尚未逐指令恢复，所以跨陆水边界时两套总移动力上限的内部比较仍保留 exactness gap。
+
+
+## B8 关键纠错
+
+港关“属于哪座城市”与“当前属于哪个势力”是两套字段/关系：
+
+```text
+City.SubordinateHarborAndPassID[5]  // 静态母城
+Harbor/Pass.CorpsID                 // 当前军团
+Corps.PowerID                       // 当前势力
+```
+
+月度收入源码：
+
+```text
+GetForceID(port/pass)
+GetForceID(parentCity)
+→ 不同势力：本次无附属收入
+→ 同势力：按母城当次钱粮的20%结算
+```
+
+比较的是 ForceID，不是 CorpsID，因此同势力不同军团仍有收入。
+
+港关基础容量：
+
+```text
+金       10000
+兵粮     100000
+士兵     30000
+枪戟弩马 各30000
+```
+
+PK扩展港关：
+
+```text
+金       40000
+兵粮     400000
+士兵     60000
+枪戟弩马 各60000
+```
+
+注意“兵装3万→6万”只对应 `EquipmentCounts[4]`（枪戟弩马）。冲车～斗舰存于独立 `SiegeWeaponCounts[7]`，不能误写成6万；其精确库存上限本项仍 open。
