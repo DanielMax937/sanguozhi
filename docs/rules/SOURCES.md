@@ -239,3 +239,21 @@
   https://w.atwiki.jp/sangokushi11/pages/13.html
 - 游侠 2006 新手技术：富豪、征税、组合语义
   https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
+
+
+### C2 粮食收入专项
+
+- 311MemoryResearch：
+  - `整理/Func-收支05-计算城市收粮.txt`：0049E810 城市粮收入
+  - `整理/Func-收支03-每月钱粮兵装收支.txt`：丰作/征收/米道与港关顺序
+  - `整理/Func-收支06-计算城市、港、关兵粮收入.txt`：港关20%与同势力判断
+- SIRE 地址表：
+  - `00707A74 ConvertFloatToInteger`
+- 日文 Wiki 内政：农场1500/1800/2250、谷仓1.5倍、军屯农=兵力10%且最低1500
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki 特技：米道/征收触发周期
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+- 2ch/Wiki 实测：军屯农兵力10%
+  https://w.atwiki.jp/sangokushi11/pages/2445.html
+- 游侠新手技术：米道/征收基础语义
+  https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
