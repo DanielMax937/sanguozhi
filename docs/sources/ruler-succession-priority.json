@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "audit": "E18",
+  "target": "ordinary ruler succession",
+  "routing": {
+    "historicalEvent": {
+      "priority": "first",
+      "behavior": "event-specific scripted succession / split / player choice",
+      "evidence": "confirmed-event-data"
+    },
+    "playerOrdinaryDeath": {
+      "behavior": "player chooses from legal candidates",
+      "automaticRanking": false,
+      "evidence": "empirical-high"
+    },
+    "aiOrdinaryDeath": {
+      "behavior": "automatic category selection",
+      "evidence": "empirical-high",
+      "categoryPriority": [
+        "blood-relative",
+        "sworn-sibling",
+        "spouse",
+        "ordinary-eldest"
+      ],
+      "withinBlood": "open",
+      "withinSworn": "open",
+      "withinSpouse": "open",
+      "ordinaryTieBreaker": "eldest is empirical-high; exact same-age tie-break open"
+    }
+  },
+  "legalCandidate": {
+    "confirmedRequired": [
+      "alive",
+      "belongs to force",
+      "not enemy captive"
+    ],
+    "openFilters": [
+      "field troop membership",
+      "active mission/task state",
+      "other hidden state gates"
+    ]
+  },
+  "eventExamples": {
+    "liuBei": [
+      "Liu Shan",
+      "Liu Feng"
+    ],
+    "caoCao": [
+      "Cao Ang",
+      "Cao Pi",
+      "Cao Zhi",
+      "Cao Chong",
+      "Cao Zhang"
+    ]
+  },
+  "reverseEntry": {
+    "address": "004B9080",
+    "evidence": "reverse-engineered-partial",
+    "knownCallShape": [
+      "push 0",
+      "push 0",
+      "push forcePtr",
+      "mov ecx, 0x0755895C",
+      "call 0x004B9080"
+    ],
+    "note": "311MemoryResearch abdication demo reuses this path and reports ruler-death message",
+    "body": "not publicly expanded"
+  },
+  "removedFallbackWeights": [
+    "blood +10000",
+    "same-clan +5000",
+    "office/command weight",
+    "merit weight",
+    "charisma weight",
+    "leadership weight"
+  ],
+  "engineCompatibilityFallback": {
+    "sameCategory": "eldest first",
+    "sameAge": "personId ascending",
+    "evidence": "engine-deterministic-fallback only; not original-game confirmed"
+  },
+  "open": [
+    "exact order within blood relatives",
+    "exact order within sworn siblings",
+    "same-age tie-break",
+    "field/mission candidate filters",
+    "004B9080 complete body",
+    "zero-legal-successor force resolution",
+    "platform/version differences"
+  ],
+  "sources": [
+    "https://w.atwiki.jp/sangokushi11/pages/1952.html",
+    "https://w.atwiki.jp/sangokushi11/pages/1941.html",
+    "https://w.atwiki.jp/sangokushi11/pages/2356.html",
+    "https://w.atwiki.jp/sangokushi11/pages/942.html",
+    "https://w.atwiki.jp/sangokushi11/pages/21.html",
+    "https://w.atwiki.jp/sangokushi11/pages/893.html",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/新功能[禅让](DEMO).txt"
+  ]
+}
