@@ -28,6 +28,7 @@
 | C6 | PK吸收合并 | 五类设施、独立ID升级链、合法组合、城市2格敌军禁用、10AP+100金、10/20日边界与合并中前一级效果已核 | official-confirmed + reverse-engineered-structure + empirical-high timing | ✅ |
 | C7 | 各设施精确开发日数 | 综合政治、全门槛表与统一耐久进度模型已核；全表可由25%初始耐久+每旬floor(1.5P)逐格精确重建，原函数体仍open | empirical-exact table reconstruction + reverse-engineered-structure | ✅ |
 | C8 | 商人 / 粮食交易 | 20AP、都市2格敌军禁用、每城每旬一次、TradePrice/HasMerchant状态、买粮无损/卖粮×0.8及政治非线性交易效果已核；闭式仍open | official-confirmed + empirical-high + reverse-engineered-structure | ✅ |
+| C9 | 行动力 | 军团独立AP、君主/都督+城市+武将×军师公式、最终向下取整、PK符节台取整后+5及255上限已核；主恢复函数体仍open | empirical-exact formula + reverse-engineered-structure + PK save cross-validation | ✅ |
 
 ## A1 关键纠错
 
@@ -827,3 +828,30 @@ sellGold = food / price * b * 0.8
 SIRE 后来的“交易优势”“商贸城市25%商人出现”等属于扩展参数，不作为原作证据。
 
 下一项：C9 行动力。
+
+## C9 关键结论
+
+行动力已从“经验公式”进一步拆分证据层级。
+
+核心：
+
+```ts
+leaderParam = 26 + max(floor(max(leadership, charisma)/5) - 6, 0)
+cityParam = min(10 * (corpsCityCount - 1), 50)
+officerParam = sum(top6(min(officersAtBase, 10)))
+adviserParam = adviser ? 0.70 + 0.01 * floor(adviserIntelligence/2) : 1.0
+
+coreRecovery = floor((leaderParam + cityParam + officerParam) * adviserParam)
+[PK] recovery = coreRecovery + 5 * completedTalismanPlatforms
+currentAP = min(255, previousRemainingAP + recovery)
+```
+
+SIRE结构确认：`ActionPoints` 属于 `struct_corp`，军团长也属于 corp；军师 `AdvisorID` 属于 `struct_force`。这与“每军团独立计算、势力军师共用”的实测一致。
+
+刘禅存档：`(30+20+22)*1.2=86.4 -> 86`，再加1座符节台得到91，锁定了最终向下取整与符节台在取整之后追加的顺序。
+
+2006资料的“新增行动力最大180”只适用于无印核心公式 `150*1.2=180`；PK符节台追加后不能再把180当统一硬上限，明确的最终当前AP上限是255。
+
+证据边界：跨军团拆分母城/港关时武将参数归属、官职/宝物修正读取 base 还是 display stat、行动力恢复主函数体仍 open。
+
+下一项：C10 治安。
