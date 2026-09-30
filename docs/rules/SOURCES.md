@@ -1209,3 +1209,40 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/85.html
 
 证据等级：训练闭式、练兵所倍率、训练AP/经验/功绩/技巧P、据点/部队100/120上限均为PC-PK1.1 reverse-engineered；军乐台/奏乐/诗想和主要气力特技为原地址参数 + 日文Wiki语义交叉确认。`005C4100`资格gate、已训练状态重置caller与跨平台同值仍open。
+
+
+### E5 兵粮消耗专项
+
+- 311MemoryResearch `整理/Func-收支02-每旬耗粮.txt`：
+  - `0059BF40` 旬级调度；
+  - 先城市/港/关，再地图部队；
+  - 当前粮>0才进入耗粮；
+  - 本旬扣到0时记录粮尽对象；
+  - 港/关有屯田时直接跳过耗粮函数。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `整理/Func-收支09-计算城市、港、关兵粮支出.txt`：
+  - `0049D200`；
+  - 据点驻屯基础 `兵力×0.025`；
+  - 着火额外 `currentFood*(6-prefectPolitics*0.05)*0.01`；
+  - 兵力>0时最低支出1。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `整理/Func-收支10-计算部队兵粮支出.txt`：
+  - `0049D2E0`；
+  - 普通野外战斗 multiplier=2 -> /10；
+  - 输送 multiplier=1 -> /20；
+  - 阵≈5/3、砦≈4/3、城塞=1，再统一×0.05；
+  - 输送队直接跳过阵/砦/城塞分支；
+  - 着火额外 `currentFood*(6-troopPolitics*0.05)*0.01`；
+  - 兵力>0时最低支出1。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `整理/Func-自动04-兵临城下逃兵处理.txt`：
+  - 确认兵临城下逃兵是独立机制，不能拿它解释粮尽逃兵。
+  https://github.com/sjn4048/311MemoryResearch
+- 日文 Wiki《戦争》《小ネタ》：
+  - 长期实机规则：战斗/10、输送/20、驻屯/40、港关屯田0；
+  - 攻略表把阵/砦/城塞减粮写15%/30%/50%，本轮以PC原浮点常量为更高精度来源；
+  - 粮尽后每旬兵力大幅下降，但未给闭式。
+  https://w.atwiki.jp/sangokushi11/pages/85.html
+  https://w.atwiki.jp/sangokushi11/pages/15.html
+
+证据等级：旬级调度、/10 /20 /40、屯田、阵系倍率、着火额外耗粮均为PC-PK1.1 reverse-engineered；粮尽逃兵闭式仍未找到原函数，旧约76%保留率继续只标 empirical-high。
