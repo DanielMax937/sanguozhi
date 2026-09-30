@@ -3733,7 +3733,9 @@ function generateCouncilProposal(officer, state, existing) {
 
 但**提案池本身已经不再 open**。
 
-## 14. 委任 AI 权重
+## 14. 委任 AI 权重（E20：统一权重表假设已撤回）
+
+E20 专项证据：`35-delegated-ai-architecture.md`；结构化数据：`../sources/delegated-ai-architecture.json`。
 
 ### 结论：原作不是统一 utility 分数表，而是“分阶段硬门槛 + 概率 + 专用选择函数”
 
