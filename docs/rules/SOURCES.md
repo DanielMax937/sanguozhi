@@ -1160,3 +1160,52 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://gl.ali213.net/html/2006/5840.html
 
 证据等级：嫌恶分支、统武vs智政魅分流、适性取高、混乱0.8、输送倍率、建设力与精锐+10均为PC-PK1.1 reverse-engineered；普通1/4与亲爱1/2另有PC地址级参数；血缘1/3与夫妻/义兄弟1继续标PS2 empirical-exact，待 `00495AB0` 完整逐指令公开后再升级。
+
+
+### E4 训练效果与气力专项
+
+- 311MemoryResearch `整理/Func-内政03-计算训练效果.txt`：
+  - `005C3F50`；
+  - 最多3名执行武将，只取武力；
+  - 武力和与最高武力分别累计；
+  - 据点兵力经magic division得到 `floor(T/2000)`，再+20并封顶100；
+  - 训练基础 `floor((sumWAR+maxWAR)/D)+3`；
+  - PK城市有练兵所时结果×1.5后整数化；
+  - 最终按据点气力上限裁剪。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `整理/Func-内政04-执行训练.txt`：
+  - 调用同一 `005C3F50`；
+  - 每名执行者武力经验+2、功绩+50、置已行动；
+  - 写入据点已训练状态；
+  - 技巧P为 `floor(actualGain/2)+5`；
+  - AP 20，PK城市有军事府时10；
+  - 当前执行路径无固定金钱支出。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `整理/Func-公共06-获取城市港关气力上限.txt` / `Func-公共07-增加城市港关气力.txt`：
+  - 城市/港/关气力上限100；
+  - 熟练兵后120；
+  - 增减据点气力时同样封顶。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `地址资料.txt`：
+  - 部队气力上限100/熟练兵120；
+  - 军乐台范围2、每旬+10；
+  - 奏乐+5；
+  - 诗想在军乐台范围额外+10；
+  - 扫荡-5、威风-20、昂扬+10、怒发+5；
+  - 单挑胜负+15/-15、被拒绝方两侧+10/-5。
+  https://github.com/sjn4048/311MemoryResearch
+- 311SireCustomizedPackageDev：
+  - `00486F60 GetSPMorale` / `00487010 GetSPMoraleLimit` / `00488010 IncreaseSPMorale`；
+  - `00496020 GetTroopMorale` / `00496490 SetTroopMorale` / `004964F0 AdjustTroopMorale`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 日文 Wiki《技巧研究》：
+  - 熟练兵使气力上限100→120，研究完成并不会把当前气力直接补到120。
+  https://w.atwiki.jp/sangokushi11/pages/90.html
+- 日文 Wiki《特技一覧》《戦争》：
+  - 奏乐、诗想、扫荡、威风及军乐台恢复语义；
+  - 奏乐不与军乐台恢复叠加；
+  - 补兵后气力按新旧兵力加权平均。
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+  https://w.atwiki.jp/sangokushi11/pages/85.html
+
+证据等级：训练闭式、练兵所倍率、训练AP/经验/功绩/技巧P、据点/部队100/120上限均为PC-PK1.1 reverse-engineered；军乐台/奏乐/诗想和主要气力特技为原地址参数 + 日文Wiki语义交叉确认。`005C4100`资格gate、已训练状态重置caller与跨平台同值仍open。
