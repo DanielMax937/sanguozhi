@@ -34,6 +34,7 @@
 | D1 | 武将生命周期 / 状态字段 | 9种Identity、军师/部队/任务/flags/健康/禁仕/俘虏计数等正交字段已核；旧线性状态机撤回 | PC-PK1.1 reverse-engineered-structure | ✅ |
 | D2 | 登场 / 寿命 / 死亡 | YearOfDebut与Identity分离、成年不自动登场、Lifetime与战死独立、YearOfDeath/GetDeathYear/死亡flag/真正死亡分层、健康100/80/50/20已核；核心寿命函数仍open | reverse-engineered-structure + official-event-semantics + empirical-high timing | ✅ |
 | D3 | 五维 / 适性 / 成长 | 五维/成长型/经验/适性分层、9种成长型、年龄lookup、能力经验100→+1余数保留、普通培养+30上限、适性150/200/250、指导×2已核 | reverse-engineered-structure + empirical-exact thresholds + empirical-exact age table | ✅ |
+| D4 | 人际关系 | 亲爱/厌恶方向性、夫妻/义兄弟/血缘独立结构、PC-PK支援50/30/20参数、副将1/2/1/3/1/4补正及嫌恶整队覆盖、登用/处斩硬分支已核 | reverse-engineered relation structure + reverse-engineered support parameters + empirical-high relation behavior | ✅ |
 
 ## A1 关键纠错
 
@@ -1061,3 +1062,48 @@ Lifetime
 仍 open：年龄系数函数体、低素质取整、年龄/培养/官职宝物/伤病最终合成顺序、自然适性跨档的超额余数、Vanilla/PK +30边界。
 
 下一项：D4 人际关系。
+
+## D4 关键结论
+
+关系层不是一个统一好感分。`struct_person` 分开保存：
+
+```text
+FatherID / MotherID / SpouseID / SwornSiblingID
+IntimatePersonsID[5]
+HatedPersonsID[5]
+BloodRelation / Generation / Compatibility
+```
+
+亲爱/嫌恶是有方向的；夫妻、义兄弟、血缘使用独立 helper。
+
+PC-PK1.1 支援攻击参数已由内存地址锁定：
+
+```text
+夫妻/义兄弟 50%
+亲爱         30%
+辅佐         30%
+血缘         20%
+```
+
+并且只有主将关系生效；亲爱必须是支援主将亲爱攻击主将。
+
+副将统率/武力补正的 PS2 精确实测：
+
+```text
+夫妻/义兄弟：差值 100%
+亲爱：       差值 1/2
+血缘：       差值 1/3
+普通：       差值 1/4
+```
+
+旧仓库漏掉“血缘=1/3”，已同步修正 `docs/rules.md`、`确定规则.md`、`04-military.md`。
+
+若部队任意两人之间存在嫌恶，包括两名副将互相嫌恶，则整队全部副将能力补正归零；另一名配偶/义兄弟副将也不能保留补正。
+
+登用中的亲爱/嫌恶/夫妻/义兄弟是连续概率之前的硬分支，不应折算为统一百分比加减。完整优先级留 D5。
+
+旧“处斩俘虏没有厌恶或报复”已拆开：处斩本身不会自动新增嫌恶，但已有君主↔俘虏嫌恶会让 COM 走必处斩分支。
+
+仍 open：PC-PK 副将补正函数体、亲爱会心率精确加成、远亲血缘支援边界、Vanilla支援率版本差异、外交嫌恶连续公式。
+
+下一项：D5 登用优先级与普通概率。
