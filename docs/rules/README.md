@@ -5,7 +5,7 @@
 
 ## 最新审计入口
 
-[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E14单挑连续公式](29-duel-continuous-formulas.md)。
+[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E15舌战心理伤害](30-debate-psychological-damage.md)。
 
 A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原blob复用，无历史段落丢失。历史快照不是当前进度指针。
 
@@ -28,6 +28,8 @@ E12技巧研究完成功绩以 `27-technique-research-merit.md` 为当前专项�
 E13混乱/伪报持续与恢复以 `28-status-duration-recovery.md` 为当前专项规范，结构化证据为 `../sources/status-duration-recovery.json`。PC-PK1.1自然恢复已确认是确定性倒计时：普通每旬-1、合资格阵系范围-2、到0恢复；普通计略初始duration和重复施放刷新语义仍保持open。
 
 E14单挑连续公式以 `29-duel-continuous-formulas.md` 为当前专项规范，结构化证据为 `../sources/duel-continuous-core.json`。PC-PK导向通用核心已闭合武力→actionRatio→Hit/Dodge/Block→伤害→斗志链；人物隐藏补正与Vanilla/主机版差异继续open。
+
+E15舌战普通牌心理伤害以 `30-debate-psychological-damage.md` 为当前专项规范，结构化证据为 `../sources/debate-psychological-damage.json`。牌力只决定胜负，心理伤害另走智力attack×牌等级×话题系数×愤激系数；大喝、诡辩、无视/镇静/激昂边界已拆开。
 
 ## 版本标记
 
@@ -77,6 +79,7 @@ E14单挑连续公式以 `29-duel-continuous-formulas.md` 为当前专项规范�
 28. `27-technique-research-merit.md` E12技巧研究完成功绩冲突表、版本边界与PC exact缺口
 29. `28-status-duration-recovery.md` E13混乱/伪报状态计数、每旬恢复、阵系加速与初始duration边界
 30. `29-duel-continuous-formulas.md` E14单挑actionRatio、命中/闪避/格挡、伤害与斗志连续公式
+31. `30-debate-psychological-damage.md` E15舌战牌力、心理伤害、怒气与话术反弹连续公式
 
 ## 来源优先级
 
