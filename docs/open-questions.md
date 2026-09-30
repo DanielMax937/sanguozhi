@@ -66,6 +66,7 @@
 - 水军暴击改记在神算上。水军看水将、水神。
 
 ## 存疑稿也补不上
+- E19 已闭合评定22类具体提案池、两阶段采决和赞同/多选结构；剩余 open 是 proposal chooser、参与者过滤、额外 gate 与采纳案资源/AP调用链。
 - E11 技巧研究时间剩余：完整PC函数、超级5档全矩阵、初级/上级、基础时长字段来源、属性getter层和跨平台差异。
 - E10 应射剩余：`00584DC8`完整PC caller、精确attack-type/unit-type常量、各战法primary/collateral、水上active profile、PC双方应射+连战链序。
 - E8 版本差异剩余：Vanilla1.0/1.1/1.2二进制技巧diff、戟弩骑Lv1早期倍率、Vanilla1.0工兵400%的内部支路、爆药BUG地区版官方修复状态、主机版逐项技巧常量。
