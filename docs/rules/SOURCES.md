@@ -514,3 +514,41 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://dl.3dmgame.com/patch/26091.html
 
 当前证据等级：巡查基础公式 `empirical-high`；征兵掉治安、换季自然下降、整备政令为 PC-PK1.1 `reverse-engineered`。未把“治安影响瘟疫/蝗灾概率”写成规则。
+
+### C11 灾害专项
+
+- 311SireCustomizedPackageDev：
+  - `struct_city +0x9C Disasters`：bit0疫病 / bit1蝗灾 / bit2丰作；
+  - `struct_city +0xA0 DisasterPredictions`：对应三种预定状态；
+  - `0047B3C0 IsCityInSpecificState`；
+  - `0047B3F0 IsCityInScheduledState`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311MemoryResearch `函数[每月例行处理].txt`：
+  - `00590C30 MonthlyAction` 在月初先调用 `0058F4E0` 丰作/季节状态处理，再调用 `00590490` 钱粮收入。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `整理/Func-收支03-每月钱粮兵装收支.txt`：
+  - `0047B3C0(city,2)` 检查当前丰作；
+  - 丰作将完整城市基础粮 tick ×1.5；
+  - 顺序在征收、米道、港关20%之前。
+  https://github.com/sjn4048/311MemoryResearch
+- 日文 Wiki 内政：
+  - 自然有害灾害主要为疫病、蝗灾；
+  - 蝗灾破坏农场并损失兵粮；
+  - 疫病减少驻军并恶化武将健康；
+  - Lv1农场蝗灾可被拆，Lv3不拆。
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki 特技：
+  - 风水阻止所属都市新发生疫病/蝗灾，不能治疗已发生灾害；
+  - 祈愿提高丰作发生倾向；精确概率未给。
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+- 日文 Wiki 事件/旅人：
+  - 灾害状态被事件条件直接读取，支持其为持续 Runtime State。
+  https://w.atwiki.jp/sangokushi11/pages/960.html
+  https://w.atwiki.jp/sangokushi11/pages/970.html
+- 早期无印丰作 flag bug：
+  - 部分早期版本存在丰作 flag 不正常清除的记录；只作为 patch-version 历史兼容。
+  https://w.atwiki.jp/sangokushi11/pages/1828.html
+
+明确排除：SIRE 扩展区 `00911238 ReducePopDueToDisaster / 009112E0 DisasterPopLossFactors` 不能反推 San11PK.exe 原版灾害百分比；`sango_infinity` 的祈愿 chance=50 / duration=3 亦为重制实现参数，不作为原作证据。
+
+本轮撤回旧 provisional：蝗灾5%、疫病5%、丰作10%、每年1月独立判定、疫病每旬5～10%兵损、30%患病、持续1～2季。
