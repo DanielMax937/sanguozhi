@@ -1,5 +1,7 @@
 # 单挑（一骑讨）
 
+> E14 已完成通用连续公式专项审计；完整证据矩阵与地址交叉见 `29-duel-continuous-formulas.md`。
+
 ## 1. 胜负与回合
 
 `[COMMON][empirical-high]`
@@ -15,8 +17,8 @@
 `sango_infinity` 的 `Duel.cs` 明确标注由 `s11_sys_duel.h + s11_sys_duel.cpp` 翻译而来，并保留原 C++ 命名、数据地址与代码区间。以下只采用其中**通用核心**；该项目后来新增的数据驱动人物特殊行为不自动视为原版规则。
 
 来源：
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Duel/DuelEnum.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/DuelEnum.cs
 
 ### 2.1 四方针底层系数
 
@@ -86,6 +88,41 @@ else
 实测交叉：
 - https://w.atwiki.jp/sangokushi11/pages/30.html
 - https://w.atwiki.jp/sangokushi11/pages/2484.html
+
+### 2.3 SIRE 原地址交叉验证
+
+311MemoryResearch 的 SIRE 地址资料直接记录：
+
+```text
+005097C3: 6B C0 64 99 F7 F9
+005097EB: 6B C0 64 99 F7 F9
+```
+
+原字节可解码为：
+
+```asm
+imul eax,eax,100
+cdq
+idiv ecx
+```
+
+也就是正值情况下的：
+
+```text
+trunc(100 * numerator / denominator)
+```
+
+社区补丁把这里替换成使用更宽中间值的乘除实现，是为了修正极端参数时的计算异常；数学语义仍然是“分数 ×100 / 总量”。这与上面的 `score² / (双方score²之和)` 末端完全吻合。
+
+因此 E14 的证据不是只依赖现代重实现，而是：
+
+```text
+C++逆向翻译
++ 原PC地址字节
++ Wiki实测结果
+```
+
+三层互证。
 
 ## 3. 普攻：命中 / 格挡 / 闪避 / 伤害
 
@@ -197,6 +234,60 @@ else if (hasLongWeapon)
 因此“超级单挑更难”主要来自斗志与必杀相关分支，并不是把所有伤害统一乘一个系数。
 
 对应代码区间见 `Duel.cs` 的 `CalcDuelFtkTeam`、普通伤害、斗志增长和必杀尝试相关函数。
+
+### 3.6 斗志增长连续公式
+
+E14 进一步恢复了普通攻防链后的斗志增长：
+
+```ts
+if (value <= 0) return 0
+
+n = value
+minimum = 3
+
+if (
+  receivingHit &&
+  (stance === DEFENSE || stance === SPIRIT)
+)
+  minimum = 5
+
+n = max(n, minimum)
+n = trunc(n * stance.spiritGain / 7)
+
+if (receivingHit)
+  n = trunc(n * 5 / 4)
+
+if (hp < 30)
+  n = n * 2
+else if (hp < 50)
+  n = trunc(n * 3 / 2)
+
+if (difficulty === EASY && player)
+  n = trunc(n * 6 / 5)
+
+if (difficulty === HARD) {
+  if (player) n = trunc(n * 4 / 5)
+  else n = trunc(n * 6 / 5)
+}
+
+if (hasSword)
+  n = trunc(n * 3 / 2)
+
+return max(n, 1)
+```
+
+因此旧“剑提高斗志但系数未知”撤回：**剑使该次斗志增长 ×3/2**。
+
+方针 `spiritGain` 为：
+
+```text
+攻击重视 4
+防御重视 8
+斗志重视 10
+一击重视 7
+```
+
+Block/Dodge 还会先改变送入该函数的 `value`，所以斗志增长不是单纯按最终体力伤害做线性换算。
 
 ## 4. 会心连击与必杀
 
@@ -339,7 +430,7 @@ https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html
 
 ## 8. 剩余未确认
 
-核心“武力→攻击比例→命中/格挡/闪避→普通伤害”已不再 open。
+E14 后，核心“武力→攻击比例→命中/格挡/闪避→普通伤害→斗志增长”已不再 open。
 
 剩余主要是：
 
