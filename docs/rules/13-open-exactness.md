@@ -53,16 +53,25 @@ PK/后期 PC 的亲善、同盟、停战、劝降、俘虏交换已有长期流�
 
 本轮未找到原版存在“随机自然向相邻格蔓延”的可靠证据；因此引擎默认自然蔓延为 0，火罠/火球范围和链式触发另行处理。
 
-### 5. 自然死亡精确 RNG
+### 5. 登场 / 自然死亡精确 RNG
 
 已确认：
-- 自然死武将到没年后多病，通常当年、最迟常见2–3年内死亡。
-- 不自然死会在没年病倒后恢复，并有额外寿命。
-- 史实事件可覆盖普通死亡流程，例如郭嘉之死、孙策之死等。
+- `YearOfDebut` 与 current Identity 分离；成年并不自动登场（20岁诸葛亮、34岁沙摩柯仍可未登场）。
+- `struct_scenario` 独立保存 `IgnoreAge / ComeOnStage / Lifetime / DieInBattleSetting`。
+- `YearOfDeath` 是基础/参考没年；另有 `0048A000 GetDeathYear`。
+- `markedForDeath` 与 `Identity=DEAD` 分离，死亡 flag 可先影响历史事件。
+- 自然死武将到有效没年后多病，通常当年、最迟常见2–3年内死亡。
+- 不自然死会在没年附近病倒后恢复，并有额外寿命；额外寿命与年龄负相关。
+- 史实事件可覆盖普通死亡流程，例如孙策之死胜利明确延寿20年。
+- 较早存档重跑可能改变未来死亡结果，因此最终死亡日期不是开局永久预抽。
 
 仍未知：
-- 每旬死亡概率。
-- 不自然死延寿 a 的抽样函数。
+- 普通 `NOT_INTRODUCED -> NOT_DISCOVERED/现役` caller 与 `ScheduledLord` 精确分支。
+- `IgnoreAge / ComeOnStage / Lifetime` 原始枚举和数值变换。
+- `0048A000 GetDeathYear` 完整函数体。
+- 不自然死延寿 a 的原始年龄函数。
+- `markedForDeath` 的触发时点/概率，以及 flag 后真正死亡的延迟。
+- 一般沙盘伤病自然恢复/恶化公式。
 
 ## B. P1：局部系统精度
 
