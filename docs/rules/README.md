@@ -5,7 +5,7 @@
 
 ## 最新审计入口
 
-[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E7技巧系统](22-techniques.md)。
+[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E8技巧补丁版本差异](23-technique-patch-differences.md)。
 
 A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原blob复用，无历史段落丢失。历史快照不是当前进度指针。
 
@@ -17,7 +17,7 @@ E5兵粮消耗以 `20-food-consumption.md` 为当前专项规范；参考校验�
 
 E6补给与输送以 `21-supply-transport.md` 为当前专项规范；参考校验命令为 `python scripts/check_supply_transport.py`。脚本只验证已确认的容量约束与气力加权样例，不代替尚未恢复的PC finalizer。
 
-E7技巧系统以 `22-techniques.md` 为当前专项规范，结构化表为 `../sources/techniques.json`，校验命令为 `python scripts/check_techniques.py`。E8将单独处理早期PC补丁与爆药炼成BUG等版本差异。
+E7技巧系统以 `22-techniques.md` 为基础规范，结构化表为 `../sources/techniques.json`。E8版本差异以 `23-technique-patch-differences.md` 和 `../sources/technique-version-deltas.json` 覆盖；实现时必须区分 `rulesetVersion + patchVersion + fixProfile`，社区修复不得静默覆盖 fidelity。校验命令分别为 `python scripts/check_techniques.py` 与 `python scripts/check_technique_patch_profiles.py`。
 
 ## 版本标记
 
@@ -60,6 +60,7 @@ E7技巧系统以 `22-techniques.md` 为当前专项规范，结构化表为 `..
 21. `20-food-consumption.md` E5旬级兵粮消耗、阵系减粮、着火烧粮与粮尽边界
 22. `21-supply-transport.md` E6补给/输送路径、补兵约束、气力混合与平台差异
 23. `22-techniques.md` E7 36技巧ID、研究成本、效果分层与证据等级
+24. `23-technique-patch-differences.md` E8 Vanilla/PK补丁链、技巧版本差异、原BUG与社区修复profile
 
 ## 来源优先级
 
