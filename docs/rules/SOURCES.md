@@ -349,4 +349,4 @@
   https://w.atwiki.jp/sangokushi11/
 - 游民星空 PK 建筑篇：
   - 合并 +10 技巧P、合并阶段的短期收益变化等同期实测。
-  https://www.gamersky.com/handbook/200609/33179.shtml
+  https://www.gamersky.com/handbook/200609/33180.shtml
