@@ -3118,27 +3118,240 @@ empirical-exact formula
 
 ## 10. 治安
 
-- 治安影响收入和征兵量。
-- 巡查提高治安；征兵降低治安。
-- `[PK][empirical-high/reverse]` 政令整备并非“绝对不下降”；原文是“治安更不容易下降”。SIRE 暴露了独立的“有政令整备时本季不下降概率”参数，长期社区整理指向默认约 **50%**。
+`[COMMON/PK][mixed: PC-PK1.1 reverse-engineered + official-confirmed + empirical-high patrol]`
 
-### 换季自然下降
+治安不是单一“防贼数值”。原作里它同时进入：
+
+1. 城市金收入；
+2. 城市粮收入；
+3. 征兵数量；
+4. 征兵后的新兵初始气力；
+5. 贼 / 异民族根城生成门槛；
+6. 换季自然下降。
+
+但目前**没有可靠证据证明治安直接改变瘟疫/蝗灾的发生概率**；自然灾害放到 C11 单独处理。
+
+### 10.1 运行时字段与范围
+
+SIRE 结构确认：
+
+```text
+struct_city +0x85 CitySecurity
+0047BD70 SetCityPublicOrder
+```
+
+游戏正常范围为：
+
+```text
+0 <= security <= 100
+```
+
+### 10.2 巡查命令边界
+
+官方说明书确认：
+
+```text
+费用：100金
+行动力：20
+期间：无（即时）
+执行武将：最多3人
+每都市每旬只能执行1次
+```
+
+且：
+
+- 巡查看执行武将的**统率合计**；
+- 都市周围2格有敌军时仍可执行，但治安上升值变小；
+- 治安达到80以上即可避免新的普通贼根城生成。
+
+结构上：
+
+```text
+struct_city.CityActions bit0 = 已巡查
+004815F0 SetCityPatrolStatus
+```
+
+因此“每旬一次”不是 UI 约定，而是城市状态。
+
+### 10.3 巡查治安上升公式
+
+`[COMMON][empirical-high]`
+
+长期日文实测给出的普通状态公式：
+
+```ts
+patrolGain = floor(sumLeadership / 28) + 2
+```
+
+其中 `sumLeadership` 是最多3名执行武将的统率合计。
+
+锚点：
+
+| 统率合计 | 基础治安上升 |
+|---:|---:|
+| 0～27 | 2 |
+| 28～55 | 3 |
+| 56～83 | 4 |
+| 84～111 | 5 |
+| 140 | 7 |
+| 196 | 9 |
+| 252 | 11 |
+| 280～300 | 12 |
+
+正常能力上限下三人统率合计最多300，因此普通巡查理论最大上升为12；最终仍受治安100封顶。
+
+官方说明书只给出“敌军在都市周围2格时上升量减少”；同期玩家实测称巡查效果约减半。由于当前公开逆向只定位到巡查执行点 `005CBF95`，没有展开完整公式体，所以当前 fidelity 可采用：
+
+```ts
+if (enemyWithin2) {
+  patrolGain = floor(patrolGain / 2)
+}
+```
+
+但这条的**奇数取整边界仍标 empirical-high**，不能写成源码 confirmed。
+
+### 10.4 征兵量如何吃治安
+
+`[PC-PK1.1][confirmed-by-disassembly]`
+
+C4 / 军事规则已经锁定征兵核心：
+
+```ts
+C = sumCharismaOfUpTo3Officers
+O = city.security
+
+A = 1000 + floor((O + 20) * C / 20)
+```
+
+随后才进入名声、兵舍等级、超级AI、兵临城下和兵力上限修正。
+
+所以治安并不是仅在80这个门槛上起作用；从0到100都直接影响征兵基础量。
+
+例如同样 `C=300`：
+
+```text
+治安100 -> 1000 + 120*300/20 = 2800
+治安80  -> 1000 + 100*300/20 = 2500
+治安50  -> 1000 +  70*300/20 = 2050
+```
+
+### 10.5 征兵导致的精确治安下降
+
+`[PC-PK1.1][confirmed-by-disassembly]`
+
+`005C3A50` 在所有征兵量修正完成之后，使用**实际最终增加进城市的兵力**计算治安损失：
+
+```ts
+C = sumCharismaOfExecutingOfficers
+orderLoss = floor(actualRecruited / (C + 100))
+security -= orderLoss
+```
+
+这里的 `actualRecruited` 已经经过：
+
+- 名声倍率；
+- 兵舍等级；
+- 超级难度 AI 倍率；
+- 兵临城下减半；
+- 城市兵力上限裁剪。
+
+因此名声没有另一条隐藏的“治安再×1.5”代码。
+
+正确顺序是：
+
+```text
+名声 -> 征兵数×1.5
+↓
+使用放大后的实际征兵数计算治安下降
+```
+
+所以常见体验上治安损失也约放大1.5倍。
+
+例：治安100、三名魅力100、Lv3兵舍：
+
+```text
+无名声：4200兵 -> floor(4200/400)=10治安
+有名声：6300兵 -> floor(6300/400)=15治安
+```
+
+这与同期玩家记录完全吻合。
+
+### 10.6 征兵还会用征兵前治安决定新兵气力
+
+`[PC-PK1.1][confirmed-by-disassembly]`
+
+在扣除本次征兵导致的治安之前，源码先读取当前治安：
+
+```ts
+newRecruitMorale = floor(preRecruitSecurity / 2)
+```
+
+然后与原驻军气力按新旧兵力人数加权混合；最终城市气力最低保证20。
+
+所以顺序是：
+
+```text
+旧治安
+→ 算新兵气力
+→ 混合城市气力
+→ 再按实际征兵数扣治安
+```
+
+### 10.7 治安对金 / 粮收入
 
 `[PC-PK1.1][reverse-engineered]`
 
-311MemoryResearch 已逆出原函数 `0058D6D0`。自然治安下降只在 **1/4/7/10 月月初**执行。
+C1 / C2 已经锁定：
 
-若没有触发 PK“政令整备”的免降判定，精确式为：
+```ts
+effectiveSecurity = max(city.security, 50)
+```
+
+金收入和粮收入都在难度修正后再乘：
+
+```ts
+effectiveSecurity / 100
+```
+
+因此：
+
+- 治安100 -> 100%收入；
+- 治安80 -> 80%；
+- 治安50 -> 50%；
+- 治安0～49 -> 都按50%，不会继续降到零收入。
+
+这也纠正了“治安<80收入突然腰斩”的说法：**80不是收入断点，只是贼生成安全线；收入在50～100之间线性变化。**
+
+### 10.8 季初自然下降
+
+`[PC-PK1.1][reverse-engineered]`
+
+原函数：
+
+```text
+0058D6D0 季初城市治安下降
+```
+
+只在：
+
+```text
+1月1日 / 4月1日 / 7月1日 / 10月1日
+```
+
+执行。
+
+若没有被 PK“整备政令”挡掉：
 
 ```ts
 C = governor ? governor.charisma : 0
 base = floor(max(1, 90 - C) / 10)
-loss = min(5, base + GetRandomX(3)) // GetRandomX(3) = 0..2
+loss = min(5, base + GetRandomX(3))
+// GetRandomX(3) = 0,1,2
 ```
 
-因此未触发政令整备时的分布为：
+分布：
 
-| 太守魅力 | 自然下降 |
+| 太守魅力 | 换季自然下降 |
 |---:|---|
 | 81+ | 0 / 1 / 2，各1/3 |
 | 71–80 | 1 / 2 / 3，各1/3 |
@@ -3148,52 +3361,163 @@ loss = min(5, base + GetRandomX(3)) // GetRandomX(3) = 0..2
 | 0–40 | 固定5 |
 | 无太守 | 固定5 |
 
-所以魅力影响是**阶梯式**而非连续线性：大约每跨 10 点才改变一档；魅力81～100最终同为 `0/1/2`。
+所以太守魅力是**十点档阶梯**，不是连续线性。
 
-来源：
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动05-城市治安下降.txt
-- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
-- https://w.atwiki.jp/sangokushi11/pages/1152.html
-
-Vanilla 尚未取得 EXE 级复核；无印时期实测与这套公式的边界完全吻合，因此暂按 `empirical-high / compatibility-assumption` 复用基础公式。
-
-### PK 政令整备
+### 10.9 PK 整备政令
 
 `[PK][reverse-engineered]`
 
-原函数在自然下降计算**之前**检查“政令整备”，直接调用：
-
-```text
-ProbabilityCheck(50)
-```
-
-命中则立即返回，本季自然治安下降为0；未命中才执行上面的太守魅力公式。
-
-因此它不是“下降值×0.5”，而是：
+原函数在计算太守魅力前检查技巧 `0x22 = 整备政令`：
 
 ```ts
 if (hasAdministrativeReform && ProbabilityCheck(50)) {
-  loss = 0
+  seasonalLoss = 0
 } else {
-  loss = seasonalLossByGovernorCharisma()
+  seasonalLoss = seasonalLossByGovernorCharisma()
 }
 ```
 
-其中 `004721D0 ProbabilityCheck(p)` 的逆向定义就是生成0～99随机数并判断是否小于 `p`，所以 **50% 是精确常量**，不是约数。
+`ProbabilityCheck(50)` 是精确50%概率。
 
-### 贼与异民族
+所以整备政令不是：
 
-`[COMMON][confirmed mechanism / empirical-high behavior]`
+```text
+自然下降值减半
+```
 
-- 治安 **<80** 时，领内才可能生成贼或异民族**根城**。
-- 根城一旦出现，即使治安恢复到100，也会继续生成部队，直到根城被摧毁。
-- 普通贼为剑兵。
-- 北方乌丸、羌使用骑兵；南方山越、南蛮使用枪/戟。
-- 贼/异民族若攻陷城市，该城变为**空白都市**，不是建立正常势力。
+而是：
 
-来源：https://w.atwiki.jp/sangokushi11/pages/74.html
+```text
+50%整次跳过换季下降
+50%照原公式下降
+```
 
-生成概率、根城选格和每次兵力仍 open。
+### 10.10 季初收入与自然下降的调用顺序
+
+C1 月度主函数已恢复顺序：
+
+```text
+城市金收入
+→ 城市粮收入
+→ 季初自然治安下降
+→ 港关收入
+→ 后续支出
+```
+
+因此 1/4/7/10 月1日的**城市本体本次收入使用下降前的治安**。
+
+换季治安下降不会反过来重算刚刚已经结算的城市收入。
+
+### 10.11 贼 / 异民族根城
+
+`[COMMON][official-confirmed threshold + empirical-high behavior]`
+
+官方说明书明确：
+
+```text
+治安 >= 80
+→ 不会新生成普通贼根城
+```
+
+日文 Wiki 与长期实测补充：
+
+- 治安 <80 时才进入新的贼 / 异民族根城生成可能；
+- 根城已经生成后，把治安重新拉到100**不会自动拆掉根城**；
+- 根城仍可继续刷新部队，必须摧毁根城本体；
+- 普通贼通常为剑兵；
+- 乌丸、羌多为骑兵；山越、南蛮多为枪/戟；
+- 贼/异民族攻陷城市后，该城变成空白城市，而不是形成普通势力。
+
+具体每旬生成概率、根城候选格、生成部队兵力/武将、刷新周期仍 open。
+
+### 10.12 亲○ / 威压的边界
+
+`[COMMON][mixed evidence]`
+
+日文 Wiki 长期实测：
+
+- 亲乌：阻止所属都市对应的乌丸根城；
+- 亲羌：阻止羌；
+- 亲越：阻止山越；
+- 亲蛮：阻止南蛮；
+- 这些特技**不阻止普通治安自然下降，也不阻止普通贼**。
+
+“威压”存在早期资料与后期实测冲突：
+
+- 2006早期攻略曾写成“阻止贼根城、对异民族有BUG”；
+- 后期日文 Wiki 实测与 SIRE 参数化更支持：威压不是100%防止，而是把安全阈值从治安80降低到约60。
+
+因此当前 fidelity 不应把威压写成绝对免疫。推荐：
+
+```text
+PC-PK1.1 default：按 threshold 80 -> 60 的 empirical-high 规则
+并保留版本回归标记
+```
+
+### 10.13 与自然灾害严格分离
+
+低治安与瘟疫/蝗灾是否有关，旧玩家讨论长期存在“感觉更容易发生”的说法，但没有稳定公式或当前逆向证据支持。
+
+因此：
+
+```text
+治安 <80 -> 贼/异民族根城风险
+```
+
+可以写死；
+
+但：
+
+```text
+治安越低 -> 瘟疫/蝗灾概率越高
+```
+
+目前**不能**写成原作规则。灾害进入 C11 专项。
+
+### 10.14 C10 当前结论
+
+已经锁定：
+
+- `CitySecurity` 是独立城市运行时字段，正常0～100；
+- 巡查100金、20AP、最多3人、每城市每旬一次；
+- 普通巡查上升 `floor(统率和/28)+2`，正常最高12，标 empirical-high；
+- 敌军2格内巡查效果降低，当前半减规则标 empirical-high；
+- 治安直接进入征兵量公式；
+- 征兵掉治安精确为 `floor(actualRecruited/(魅力和+100))`；
+- 名声通过实际征兵数间接放大治安损失，不存在第二次独立1.5倍；
+- 新兵初始气力使用征兵前治安的一半；
+- 收入治安倍率最低按50，50～100线性；
+- 80只是贼生成安全线，不是收入断点；
+- 换季自然下降精确公式及太守魅力分布；
+- PK整备政令精确50%整次免降；
+- 季初城市收入先于自然下降结算；
+- 已出现根城不会因治安恢复而自动消失。
+
+仍 open：
+
+- 巡查在敌军2格内的精确整数取整顺序；
+- PC-PK1.1 巡查治安上升完整函数体；
+- 贼/异民族根城每旬生成概率、候选格算法、刷新周期与兵力；
+- 威压不同 PC 版本的精确边界；
+- 任何“治安影响自然灾害概率”的直接公式。
+
+来源：
+- 官方 PK 说明书：巡查100金/20AP/最多3人/每旬一次、统率合计、治安80防贼、敌军2格效果下降
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 311MemoryResearch `Func-内政01-计算征兵数量.txt` / `Func-内政02-执行征兵.txt`
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `Func-自动05-城市治安下降.txt`
+  https://github.com/sjn4048/311MemoryResearch
+- 311SireCustomizedPackageDev：`CitySecurity` / `CityActions bit0` / `SetCityPatrolStatus` / `SetCityPublicOrder`
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 日文 Wiki：巡查公式、贼/异民族、亲○与威压长期实测
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+  https://w.atwiki.jp/sangokushi11/pages/1239.html
+- 2ch旧实测：敌军逼城时巡查/征兵效果约半减
+  https://w.atwiki.jp/sangokushi11/pages/1941.html
+- SIRE v1.26 参数说明：换季治安上限、整备政令概率、巡查倍率、威压阈值参数
+  https://dl.3dmgame.com/patch/26091.html
 
 ## 11. 灾害
 
