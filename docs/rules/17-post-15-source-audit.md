@@ -26,6 +26,7 @@
 | C4 | 无印内政设施 | 九类基础设施、费用/耐久/技巧P、邻接增益、命令槽机制与无印/PK边界已锁 | Vanilla confirmed-mechanism + empirical-high + reverse-engineered-structure | ✅ |
 | C5 | PK十设施 | 十设施基础数据与效果已分项核；练兵所舰船工期、符节台+2副作用、军事府实际AP覆盖、人才府/计略府原地址均已锁 | PC-PK1.1 reverse-engineered + confirmed-data | ✅ |
 | C6 | PK吸收合并 | 五类设施、独立ID升级链、合法组合、城市2格敌军禁用、10AP+100金、10/20日边界与合并中前一级效果已核 | official-confirmed + reverse-engineered-structure + empirical-high timing | ✅ |
+| C7 | 各设施精确开发日数 | 综合政治、全门槛表与统一耐久进度模型已核；全表可由25%初始耐久+每旬floor(1.5P)逐格精确重建，原函数体仍open | empirical-exact table reconstruction + reverse-engineered-structure | ✅ |
 
 ## A1 关键纠错
 
@@ -733,3 +734,43 @@ AP 10
 该精确边界目前标 empirical-high；311MemoryResearch 只公开定位到 005D758B，未公布完整函数体。
 
 每次合并 +10 技巧P 亦有多份同期资料一致记录，但同样暂不标 reverse-engineered。
+
+
+## C7 关键结论
+
+普通内政设施开发日数不再只保留一张 lookup 表。
+
+综合政治：
+
+```ts
+P = p1 + floor((p2 + p3 + 1) / 3)
+```
+
+其中 `p1` 为最高政治，最多3名武将。
+
+日文 Wiki 的全部开发门槛可以被下面模型逐格精确重建：
+
+```ts
+initialDurability = roundHalfUp(maxDurability / 4)
+gainPerTurn = floor(P * 3 / 2)
+turns = min(
+  10,
+  ceil((maxDurability - initialDurability) / gainPerTurn)
+)
+days = turns * 10
+```
+
+关键验证：
+
+- 市场 D500：20日门槛126；P125时两旬后恰为499；
+- 黑市 D200：40日门槛26；P25时四旬后恰为198；
+- 铜雀台 D1300：20日门槛326；P325时两旬后恰为1299；
+- 市场/农场、黑市、造币/谷仓、大/鱼/军屯农、五类军需、六类PK功能设施、铜雀台的全部门槛均精确吻合；
+- 旧2ch实测直接记录市场开工时125/500，支持初始25%耐久解释；
+- SIRE结构确认设施类型有最大耐久、建筑实例有当前耐久和ConstructionStatus。
+
+证据边界：
+
+311MemoryResearch 目前只定位到内政建设执行路径 `005BC4C1`，没有公开完整开发日数函数体。因此本式标 `empirical-exact table reconstruction`，不标 `reverse-engineered function`。
+
+下一项：C8 商人 / 粮食交易。
