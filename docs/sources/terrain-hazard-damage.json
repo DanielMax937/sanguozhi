@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "audit": "E17",
+  "target": "PC-PK1.1 terrain hazard random damage",
+  "random": {
+    "helper": "00472150",
+    "name": "GetRandomX",
+    "semantics": "0..X-1"
+  },
+  "plankPath": {
+    "terrainId": 11,
+    "addresses": {
+      "branch": "005AE58D",
+      "traverse": "005AE597",
+      "difficultMarch": "005AE5A4",
+      "randomRange": "005AE5AF",
+      "fixedBase": "005AE5C6"
+    },
+    "fixedBase": 100,
+    "randomRange": 200,
+    "exactRange": [
+      100,
+      299
+    ],
+    "trigger": "per entered tile",
+    "immunities": [
+      "Traverse/踏破",
+      "Difficult March/难所行军"
+    ],
+    "evidence": "reverse-engineered"
+  },
+  "poisonSpring": {
+    "terrainId": 4,
+    "addresses": {
+      "branch": "005AE588",
+      "antidote": "005AE5D9",
+      "randomRange": "005AE5E2",
+      "fixedBase": "005AE5F8"
+    },
+    "fixedBase": 200,
+    "randomRange": 200,
+    "exactRange": [
+      200,
+      399
+    ],
+    "trigger": "per entered tile",
+    "immunities": [
+      "Antidote/解毒"
+    ],
+    "energyDamage": 0,
+    "energyEvidence": "negative-evidence-high",
+    "evidence": "reverse-engineered"
+  },
+  "rockfall": {
+    "addresses": {
+      "troopBase": "005B16D2",
+      "troopRandomRange": "005B16D7",
+      "buildingBase": "005B171D",
+      "buildingRandomRange": "005B1722",
+      "troopDataPointer": "005B1844",
+      "buildingDataPointer": "005B1864",
+      "traverse": "005B17C0",
+      "traverseMultiplier": "005B17CF",
+      "commonTrapBase": "005B1632"
+    },
+    "troop": {
+      "base": 1500,
+      "randomRange": 500,
+      "reconstructedRange": [
+        1500,
+        1999
+      ]
+    },
+    "building": {
+      "base": 800,
+      "randomRange": 1000,
+      "reconstructedRange": [
+        800,
+        1799
+      ]
+    },
+    "traverseMultiplier": 0.1,
+    "confusionChance": 0,
+    "confusionEvidence": "negative-evidence-high",
+    "evidence": "reverse-engineered-parameters/reconstructed-finalizer",
+    "unresolved": [
+      "whether common trap base 50 participates independently in final rockfall damage",
+      "exact integer order of the finalizer"
+    ]
+  },
+  "oldFallbacksRemoved": [
+    "poison=1000 troops",
+    "poison energy=-5",
+    "plank=300..500",
+    "rockfall=1000..2000",
+    "rockfall confusion=30%",
+    "Traverse rockfall multiplier=0.5"
+  ],
+  "versionBoundary": {
+    "pcPk11": "primary reverse target",
+    "vanilla": "compatibility-assumption",
+    "console": "open"
+  },
+  "sources": [
+    "https://game.ali213.net/thread-2168294-1-1.html",
+    "https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md",
+    "https://w.atwiki.jp/sangokushi11/pages/13.html",
+    "https://www.gamersky.com/handbook/200806/114545_2.shtml",
+    "https://www.sohu.com/a/394347085_100186910"
+  ]
+}
