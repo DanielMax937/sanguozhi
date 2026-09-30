@@ -145,3 +145,17 @@
   https://w.atwiki.jp/sangokushi11/pages/13.html
 - 日文 Wiki 战争：土垒/石壁/火罠无ZOC；混乱无ZOC；伪报ZOC保留的冲突证据
   https://w.atwiki.jp/sangokushi11/pages/85.html
+
+
+### B6 高度 / 地势专项
+
+- SIRE 地址表：`005AF850 TacticSuccessRate`
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- 日文 Wiki 兵科：位移战法高低差方向、行动开始格判定
+  https://w.atwiki.jp/sangokushi11/pages/91.html
+- 日文旧帖：高低差只显著影响枪/戟/骑的位移战法，弩未观察到同类修正
+  https://w.atwiki.jp/sangokushi11/pages/1945.html
+- SIRE v1.26 参数说明：原战法基础成功率与高低关系摘要
+  https://dl.3dmgame.com/patch/26091.html
+- 三国瑜云：坡地/凸地/平地分类与二段突/突进两级高差 +15 实测
+  https://vincecarter0315.pixnet.net/blog/posts/14217116027
