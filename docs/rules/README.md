@@ -5,11 +5,13 @@
 
 ## 最新审计入口
 
-[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E3攻防面板/兵种基础参数](18-unit-panels.md)。
+[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E4训练效果与气力](19-training-morale.md)。
 
 A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原blob复用，无历史段落丢失。历史快照不是当前进度指针。
 
 相同平台/版本的面板规则，E3的明确分项运算优先于旧总规则或旧对照表中的宽泛缩写。E2的人物合成继续由 `04-military.md` 管理，E3静态参数在 `../sources/unit-panels.json`。参考校验命令：`python scripts/check_unit_panels.py`；该脚本不是原游戏EXE测试。
+
+E4训练与气力以 `19-training-morale.md` 为当前专项规范；参考校验命令为 `python scripts/check_training_morale.py`。该脚本只验证解出的整数表达式与测试向量，不代替原游戏EXE回归。
 
 ## 版本标记
 
@@ -48,6 +50,7 @@ A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原bl
 17. `16-unresolved-rules-fallbacks.md` 15项未决规则逐项核对与引擎 fallback
 18. `17-post-15-source-audit.md` 后续逐点审计当前总表与历史记录入口
 19. `18-unit-panels.md` E3兵种基础参数、面板公式、修改器隔离和测试边界
+20. `19-training-morale.md` E4训练闭式、气力上限、军乐/奏乐/诗想与气力特技
 
 ## 来源优先级
 
