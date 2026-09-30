@@ -1115,3 +1115,48 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/74.html
 
 证据等级：部队结构、玩家出征兵力上下限、战斗/输送金粮兵上限均为PC-PK1.1 reverse-engineered；数量型兵装损耗与件数型攻具/舰船行为由源码结构与长期实机资料交叉确认。最终出征资源提交和运输兵装逐类容量仍open。
+
+
+### E2 部队能力合成专项
+
+- 311MemoryResearch `函数[计算部队属性].txt`：
+  - `00496570 GetTroopCapabilities` 完整主链；
+  - 单将直接读取主将 Basic/Actual Attr；
+  - 多将先用 `00495B90` 检查主-副1、主-副2、副1-副2三组双向嫌恶；
+  - 任意嫌恶命中则五维退回主将，但随后六适性仍遍历三人取最高；
+  - 统率/武力对每名副将调用 `00495AB0`；
+  - 智力/政治/魅力直接比较取高；
+  - 六兵科适性三人逐项取最高；
+  - C/B/A/S 由 `(level+7)*0.1` 得到0.7/0.8/0.9/1.0；
+  - 剑兵与输送走舸固定0.6；
+  - 混乱状态倍率0.8；
+  - 输送攻击0.4、防御/建设1/3；
+  - 精锐枪戟弩骑基础攻防各+10；
+  - 建设力 `政治*2/3+50`。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `地址资料.txt`：
+  - `00495B65` 普通关系副将差值1/4；
+  - `00495B79` 亲爱关系差值1/2；
+  - `00496932` 输送攻击0.4；
+  - `004969F2` 输送防御/建设1/3；
+  - `00496A49 / 00496A4F` 建设力2/3与+50。
+  https://github.com/sjn4048/311MemoryResearch
+- 311SireCustomizedPackageDev：
+  - `00489030 GetPersonActualAttr`；
+  - `00489050 GetPersonBasicAttr`；
+  - `00495AB0 GetHighestAttrOfMgAndDg`；
+  - `00495B90 ArePersonsMutuallyHateful`；
+  - `00496570 GetTroopCapabilities`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 日文 Wiki《検証》：
+  - 亲爱差值1/2、血缘1/3、普通1/4；
+  - 夫妻/义兄弟取最高能力；
+  - 适性由队内最高者提供。
+  https://w.atwiki.jp/sangokushi11/pages/30.html
+- 日文 Wiki FAQ / 中文早期实测：
+  - 义兄弟/夫妻可互补统武；
+  - 副将智力高于主将时部队智力直接取高。
+  https://w.atwiki.jp/sangokushi11/pages/8.html
+  https://gl.ali213.net/html/2006/5840.html
+
+证据等级：嫌恶分支、统武vs智政魅分流、适性取高、混乱0.8、输送倍率、建设力与精锐+10均为PC-PK1.1 reverse-engineered；普通1/4与亲爱1/2另有PC地址级参数；血缘1/3与夫妻/义兄弟1继续标PS2 empirical-exact，待 `00495AB0` 完整逐指令公开后再升级。
