@@ -31,6 +31,7 @@
 | C9 | 行动力 | 军团独立AP、君主/都督+城市+武将×军师公式、最终向下取整、PK符节台取整后+5及255上限已核；主恢复函数体仍open | empirical-exact formula + reverse-engineered-structure + PK save cross-validation | ✅ |
 | C10 | 治安 | 巡查边界/公式、征兵量与掉治安精确式、收入倍率、换季自然下降、PK整备政令、贼80阈值与根城持续已核；巡查敌军半减/贼生成概率等仍open | reverse-engineered core + official-confirmed + empirical-high patrol | ✅ |
 | C11 | 灾害 | current/scheduled 疫病/蝗灾/丰作状态结构、月初状态→收入顺序、丰作×1.5、风水/祈愿边界及蝗灾/疫病已确认效果已核；发生率/持续/精确损失仍open | reverse-engineered state structure + reverse-engineered harvest effect + confirmed/empirical damage semantics | ✅ |
+| D1 | 武将生命周期 / 状态字段 | 9种Identity、军师/部队/任务/flags/健康/禁仕/俘虏计数等正交字段已核；旧线性状态机撤回 | PC-PK1.1 reverse-engineered-structure | ✅ |
 
 ## A1 关键纠错
 
@@ -936,3 +937,53 @@ SIRE 的 `00911238 ReducePopDueToDisaster / 009112E0 DisasterPopLossFactors` 属
 C 维度完成。
 
 下一项进入 D 维度：D1 武将生命周期 / 状态字段。
+
+## D1 关键结论
+
+旧的线性状态机：
+
+```text
+未登场 -> 未发现 -> 在野 -> 所属 -> 俘虏 -> ...
+```
+
+已撤回。PC-PK1.1 的 `struct_person` 是多维正交状态。
+
+真正的 `Identity` 只有9种：
+
+```text
+0 君主
+1 都督
+2 太守
+3 一般
+4 在野
+5 俘虏
+6 未登场
+7 未发现
+8 死亡
+```
+
+重要纠错：
+
+- 军师不在 Identity 枚举里，而是 `struct_force.AdvisorID`；
+- 出征/在部队由 `IsInArmy / GetPersonArmyID / Location` 表示；
+- 执行任务由 `Mission + MissionParameters[6] + MissionDuration` 表示；
+- 已行动、已褒奖、死亡预定位于 `Flags`；
+- `markedForDeath` 与 `Identity=DEAD` 是两回事；
+- 健康为独立 `HealthLevel=0..3`，体力为独立 0..100；
+- `FormerAllegiance / ForbiddenLord / ForbiddenMonths / CaptiveMonths` 均为独立运行时字段；
+- `YearOfDebut / YearOfBirth / YearOfDeath / CauseOfDeath / ScheduledLord` 是基础生命周期数据，不等于当前 Identity。
+
+已定位显式转换 helper：
+
+```text
+004898F0 SetPersonIdentity
+004A5B20 SetPersonAsNomadicPerson  // 未发现 -> 在野
+004A5780 ClearPersonTasks
+004A73A0 / 004A7410 SetPersonTask
+```
+
+日文推荐事件也明确把“已到登场年”与“Identity=在野/未发现”分开判断，并允许未发现武将直接被登用；失败时又可能转成在野。因此生命周期不能硬编码成固定顺序链。
+
+仍 open：普通登场 caller、死亡预定→真正死亡、伤病自然恢复、Mission 0..43 完整语义、俘虏/禁仕计数器精确更新。
+
+下一项：D2 登场 / 寿命 / 死亡。
