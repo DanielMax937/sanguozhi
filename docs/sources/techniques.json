@@ -61,9 +61,16 @@
       "goldCost": 2000,
       "pkOnly": false,
       "effect": {
-        "foodRaid": true
+        "foodRaid": true,
+        "helper": "005ADB20",
+        "troopTargetOnly": true,
+        "normalAndTacticAttack": true,
+        "counterattack": false,
+        "highConfidenceFormula": "min(attackerTroops/2, attackerAttack*R), R in [1,2]",
+        "exactRng": "open",
+        "details": "docs/rules/24-food-raid.md"
       },
-      "evidence": "wiki-high"
+      "evidence": "reverse-trigger+documented-high"
     },
     {
       "id": 2,
