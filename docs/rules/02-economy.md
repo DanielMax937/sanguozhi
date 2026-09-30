@@ -989,7 +989,7 @@ PC-PK1.1 reverse-engineered
 
 `[PC-PK1.1][reverse-engineered]`
 
-本节只处理**特殊收支如何作用到收入**；丰作/灾害的随机生成概率与生命周期放到后续 C12。
+本节只处理**特殊收支如何作用到收入**；丰作/灾害的随机生成概率与生命周期放到后续 C11。
 
 ### 3.1 特技作用域不是势力全局，而是“当前城市据点”
 
@@ -1356,7 +1356,7 @@ A2 已恢复的 `00590C30 MonthlyAction` 顺序中：
 - 持续多久；
 - 祈愿具体把概率提高多少；
 
-仍属于 C12 灾害专项，C3 不提前伪造公式。
+仍属于 C11 灾害专项，C3 不提前伪造公式。
 
 早期无印初版曾有“丰作 flag 不被正常清除、同一城市长期丰作”的著名 bug；旧 2006 讨论甚至直接分析为“其他灾害有平息时的 flag-off，但丰作没有”。这不能直接外推到 PC-PK1.1，应作为**历史版本差异**保留。citeturn388677search4turn388677search5
 
@@ -1411,7 +1411,7 @@ interface CitySeasonState {
 - PC-PK1.1 港关米道的非季初特例；
 - 丰作状态在月度收入前更新。
 
-仍留给 C12：
+仍留给 C11：
 
 - 丰作/疫病/蝗灾的产生概率；
 - current/scheduled 状态位精确迁移；
@@ -3521,14 +3521,317 @@ PC-PK1.1 default：按 threshold 80 -> 60 的 empirical-high 规则
 
 ## 11. 灾害
 
-`[COMMON][confirmed mechanism]`
+`[COMMON/PK][reverse-engineered state structure + reverse-engineered harvest effect + confirmed/empirical damage semantics]`
 
-随机自然灾害主要是**蝗灾、疫病**；不要把地图上的堤防水攻误建模成随机“洪水/台风/地震”。
+本项把“灾害”严格分成三类城市状态：
 
-- 蝗灾：破坏农田并造成粮食损失；Lv3 农场可避免被拆。现有技巧点扣减按已核对表处理。
-- 疫病：减少城市驻兵并恶化武将健康。
-- 丰收：作为正面季节事件提高粮产。
+```text
+0 疫病（plague）
+1 蝗灾（locust / disaster）
+2 丰作（harvest，正面状态）
+```
 
-来源：https://w.atwiki.jp/sangokushi11/pages/74.html
+随机自然灾害只有**疫病、蝗灾**两种；丰作是同一状态系统里的正面季节状态。地图堤防水攻不属于这套随机灾害系统，也不存在通用随机“洪水 / 台风 / 地震”规则。
 
-具体发生率、疫病逐旬兵损、丰收倍率的版本化精确值仍保留 empirical/open。
+### 11.1 原作不是一次性事件，而是 current + scheduled 两层状态
+
+SIRE 对 PC-PK1.1 城市结构已经明确：
+
+```text
+struct_city +0x9C Disasters
+  bit0 = 疫病
+  bit1 = 蝗灾
+  bit2 = 丰作
+
+struct_city +0xA0 DisasterPredictions
+  bit0 = 疫病预定
+  bit1 = 蝗灾预定
+  bit2 = 丰作预定
+```
+
+对应 getter：
+
+```text
+0047B3C0 IsCityInSpecificState
+0047B3F0 IsCityInScheduledState
+```
+
+因此正确的数据模型至少应保留：
+
+```ts
+interface CitySeasonState {
+  current: { plague: boolean; locust: boolean; harvest: boolean }
+  scheduled: { plague: boolean; locust: boolean; harvest: boolean }
+}
+```
+
+而不能只在季初临时 `rollDisaster()` 后立刻伤害并丢弃状态。
+
+但公开逆向**尚未展开** current/scheduled 的完整迁移函数，所以“预定提前多久出现、持续几个月、何时清 flag”仍是 exactness gap。
+
+### 11.2 月初状态处理先于收入
+
+`00590C30 MonthlyAction` 已确认：
+
+```text
+月初
+→ 俘虏/禁仕等处理
+→ 年龄/死亡
+→ 俘虏逃跑
+→ 0058F4E0 丰作/季节状态相关处理
+→ 00590490 钱粮收入
+```
+
+所以本月收入读取的是**本次月初状态处理之后**的当前丰作 flag。
+
+这点很重要：丰作不是季度收入结算完成后才附加的动画事件。
+
+### 11.3 丰作效果：粮食基础 tick ×1.5
+
+`[PC-PK1.1][reverse-engineered]`
+
+`00590490` 在取得完整城市基础粮 `F` 后直接检查：
+
+```text
+0047B3C0 IsCityInSpecificState(city, 2)
+```
+
+命中丰作后：
+
+```ts
+harvestAdjustedFood = floor(F * 3 / 2)
+```
+
+随后才进入：
+
+```text
+征收
+→ 米道
+→ 港关20%
+```
+
+因此丰作影响的是**城市基础粮 + 农场/谷仓 + 军屯农 + 难度 + 治安之后的完整粮食 tick**，不是只给农场加50%。
+
+顺序继续沿用 C2：
+
+```text
+完整F
+→ 丰作×1.5
+→ 征收÷2
+→ 米道
+→ 港关20%
+```
+
+### 11.4 祈愿：提高丰作概率，但精确倍率仍未恢复
+
+日文 Wiki、同期特技表一致：
+
+```text
+祈愿
+→ 所属都市更容易发生丰作
+```
+
+当前没有可靠的 PC-PK1.1 原函数证明：
+
+```text
+基础丰作概率 = X%
+祈愿后 = Y%
+```
+
+因此仓库旧 provisional 的“丰收10%”以及任何固定“祈愿50%”都不能作为 fidelity 原作常量。
+
+`sango_infinity` 中的 `chance=50 / durationMonths=3` 是该重制项目自己的实现参数，不能反向当成 San11.exe 原始数据。
+
+### 11.5 风水：阻止新发生的疫病与蝗灾，不负责治疗
+
+长期日文资料对风水的边界非常明确：
+
+```text
+所属都市不会新发生疫病 / 蝗灾
+```
+
+并且：
+
+- 风水是**预防**；
+- 已经处于疫病/蝗灾的城市，再把风水武将调入，不会立即解除当前状态；
+- 风水不影响丰作。
+
+这比部分中文旧表只写“不受疫病”更完整。
+
+因此 fidelity 应把风水放在“新灾害生成 / scheduled state 生成”路径上，而不是每月把 `current.plague/current.locust` 强制清零。
+
+### 11.6 蝗灾：农场破坏 + 兵粮损失
+
+`[COMMON][confirmed behavior / exact amount partially open]`
+
+稳定资料一致确认：
+
+- 蝗灾会破坏农场；
+- 会造成城市兵粮损失；
+- PK 的 Lv1 农场被蝗灾拆除时按撤去处理，并扣 **30 技巧P**；
+- Lv3 农场不会被蝗灾拆除，因此吸收到 Lv3 是明确的抗灾手段。
+
+旧文档曾写：
+
+```text
+蝗灾 = 农场无收入 + 每旬掉10%粮
+```
+
+这组数字没有可靠出处，继续明确撤回。
+
+当前还不能把 **Lv2 农场是否必定被拆** 写死：公开 Wiki正文只明确点名 Lv1 会拆、Lv3 不拆；旧讨论有“低等级会坏”的说法，但不足以提升为 confirmed。
+
+蝗灾造成的直接兵粮损失量、是否逐月/逐旬结算、持续时间也仍 open。
+
+### 11.7 疫病：驻军减少 + 武将健康恶化
+
+`[COMMON][confirmed behavior / exact amount open]`
+
+日文 Wiki 长期稳定描述：
+
+- 疫病会减少城市驻屯兵；
+- 会使城市中的武将健康状态恶化；
+- 超级难度下体感损失尤其明显。
+
+但当前没有公开的 PC-PK1.1 原函数给出：
+
+```text
+每次兵力损失百分比
+武将患病概率
+轻伤/重伤分布
+持续月份
+```
+
+所以根目录旧规则中的：
+
+```text
+每旬病死5%～10%
+30%武将轻/重伤
+持续1～2季
+```
+
+全部降级为**撤回的 provisional 候选**，不能继续作为实现值。
+
+### 11.8 SIRE 的灾害人口损失参数不是原作城市灾害公式
+
+SIRE 扩展层存在：
+
+```text
+00911238 ReducePopDueToDisaster
+009112E0 DisasterPopLossFactors
+```
+
+并按瘟疫/蝗灾区分人口损耗系数。
+
+但这些 `0091xxxx` 地址属于 SIRE/扩展代码区，且原版 `struct_city` 本身没有对应的公开人口字段。
+
+因此它们只能证明 **SIRE 后续支持灾害人口系统扩展**，不能拿来反推 San11PK.exe 原版灾害损失百分比。
+
+### 11.9 发生概率：旧 5% / 5% / 10% 全部撤回
+
+旧仓库曾暂写：
+
+```text
+蝗灾约5%
+疫病约5%
+丰作约10%
+每年1月判定
+```
+
+本轮检索没有找到能把这组数字提升为原作事实的源码、官方表或稳定实测。
+
+而现有结构反而表明灾害有 current/scheduled 状态，并且月初存在状态处理函数；因此“每年1月独立roll一次”的简化模型证据不足。
+
+当前正确状态：
+
+```text
+plague occurrence probability = open
+locust occurrence probability = open
+harvest occurrence probability = open
+prayer modifier = open
+state transition timing = open
+```
+
+### 11.10 治安与灾害概率：当前没有直接关系证据
+
+C10 已确认：
+
+```text
+治安 <80
+→ 贼 / 异民族根城风险
+```
+
+但没有找到原函数或稳定表格证明：
+
+```text
+治安越低
+→ 疫病 / 蝗灾概率越高
+```
+
+所以不要把“低治安容易灾害”的玩家直觉接进灾害 RNG。
+
+### 11.11 灾害与其他系统的真实联动
+
+已经可以确认的联动包括：
+
+- 疫病/蝗灾是城市状态，多个探索/旅人事件明确要求城市当前**没有**这两种灾害；
+- “灾害援助”事件要求玩家至少有一座城市正在发生疫病或蝗灾；
+- 丰作当前 flag 会在收入函数中直接放大粮食；
+- 风水阻止新疫病/蝗灾；
+- 祈愿提高丰作发生倾向。
+
+这些都说明灾害状态必须作为持续 Runtime State 暴露给事件系统，而不能只做资源扣减。
+
+### 11.12 Vanilla 早期丰作 flag bug
+
+`[VANILLA-PC early patch][historical-version-bug]`
+
+2006 年早期玩家记录过一个著名异常：部分版本的丰作 flag 可能没有像疫病/蝗灾一样正常清除，导致同一城市长期维持丰作。
+
+这属于**早期无印版本 bug**，不能外推到 PC-PK1.1。
+
+实现时应把它放在 `patchVersion` 兼容层，而不是把“永久丰作”写成通用规则。
+
+### 11.13 C11 当前结论
+
+已经锁定：
+
+- 原作随机有害自然灾害只有疫病、蝗灾；丰作是同状态系统的正面状态；
+- 城市同时保存 current 与 scheduled 两套 `疫病/蝗灾/丰作` bit；
+- 月初状态处理位于钱粮收入之前；
+- 丰作精确使完整城市粮食 tick ×1.5，再进入征收/米道/港关；
+- 风水同时预防新疫病和新蝗灾，但不能治疗已发生灾害；
+- 祈愿提高丰作发生倾向，但精确倍率未知；
+- 蝗灾会破坏农场并损失兵粮；Lv1被拆会扣30P，Lv3不拆；
+- 疫病会减少驻军并恶化武将健康；
+- 灾害状态会被事件系统读取；
+- 低治安与灾害概率没有已证实的直接公式；
+- 旧 5%/5%/10%、疫病5～10%旬损、30%患病、1～2季持续等 provisional 全部撤回。
+
+仍 open：
+
+- current/scheduled 的精确迁移函数与时间点；
+- 疫病/蝗灾/丰作基础发生概率；
+- 祈愿的数值修正；
+- 疫病驻军损失与健康恶化的精确 RNG；
+- 蝗灾直接兵粮损失量；
+- Lv2 农场的蝗灾拆除边界；
+- 疫病/蝗灾持续时间；
+- Vanilla 各补丁对早期丰作 flag bug 的精确修复版本。
+
+来源：
+- 311SireCustomizedPackageDev：`struct_city.Disasters / DisasterPredictions`、`0047B3C0 / 0047B3F0`
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311MemoryResearch：`00590C30 MonthlyAction` 月初调用 `0058F4E0` 后才进入 `00590490` 收支
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch：`Func-收支03-每月钱粮兵装收支.txt`，丰作 current flag ×1.5 的原控制流
+  https://github.com/sjn4048/311MemoryResearch
+- 日文 Wiki 内政：疫病/蝗灾基本伤害、Lv1/Lv3农场蝗灾边界
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki 特技：风水/祈愿
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+- 日文 Wiki 事件/旅人：灾害状态作为事件条件
+  https://w.atwiki.jp/sangokushi11/pages/960.html
+  https://w.atwiki.jp/sangokushi11/pages/970.html
+- 早期无印丰作 flag bug 记录
+  https://w.atwiki.jp/sangokushi11/pages/1828.html
