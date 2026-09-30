@@ -471,7 +471,7 @@ PC-PK1.1 reverse-engineered
 - https://w.atwiki.jp/sangokushi11/pages/13.html
 - https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
 
-## 3. 粮食收入完整公式
+## 2. 粮食收入完整公式
 
 `[PC-PK1.1][reverse-engineered]`
 
@@ -985,7 +985,7 @@ PC-PK1.1 reverse-engineered
 - https://w.atwiki.jp/sangokushi11/pages/2445.html
 - https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
 
-## 2. 内政设施
+## 3. 内政设施
 
 无印共有：市场、造币、农场、谷仓、兵舍、锻冶、厩舍、工房、造船。
 
