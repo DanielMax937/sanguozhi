@@ -810,3 +810,66 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://www.gamersky.com/handbook/200603/21923.shtml
 
 证据等级：普通控制流、dateKey、异地锁发令日、两类最终判定、探索失败舌战阈值均为 PC-PK1.1 reverse-engineered；9条 hard gate 顺序为 empirical-high，因 `004AF7D0` 函数体未公开；`005C4F80` 连续概率闭式仍 open。
+
+### D6 相性 / 义理 / 野望 / 汉室专项
+
+- 311MemoryResearch / SIRE tutorial：
+  - `00489F80 GetCompatibilityDifference` 完整反汇编；
+  - `raw=abs(A-B)`；
+  - 最终 `min(raw,150-raw)`，证明相性是150点环。
+  https://github.com/sjn4048/311MemoryResearch
+- 311SireCustomizedPackageDev `struct_person`：
+  - `+0x69` 相性；
+  - `+0xAC Loyalty`；
+  - `+0xF0 Ideals`；
+  - `+0xF4 Ambition`；
+  - `+0x108 HanDynastyAttention`。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+- 311SireCustomizedPackageDev loyalty helper / UI汇编：
+  - `0048A770 SetLoyalty` 标注0..255；
+  - 原列表getter读取byte忠诚后仅在显示时把>=100截到100。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/tutorial/1.%20Sire%20自定义包的原理.md
+- 日文 Wiki《マスクデータ》：
+  - 相性越近越易登用，远离君主会导致自然忠诚下降；
+  - 义理高时忠诚较难下降也较难上升、较难背叛；
+  - 野望高时较易独立；
+  - 汉室无视/普通/重视三档；
+  - 爵位授予/自称忠诚：普通+3/+3、重视+6/+1、无视+1/+6；王/公×2、皇帝×3；
+  - 拥立/废立汉帝对汉室重视武将+10/-10；汉室无视COM会废立。
+  https://w.atwiki.jp/sangokushi11/pages/983.html
+- 日文 Wiki《小ネタ》：
+  - 己方自然忠诚下降发生在季节转换；
+  - 候选为相性差>=25，或低/较低义理+高/较高野望；
+  - 下降幅度还受君主义理/野望影响。
+  https://w.atwiki.jp/sangokushi11/pages/15.html
+- 日文 Wiki《内政》/仁政武将页：
+  - 仁政阻止同都市己方武将的自然忠诚下降。
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+  https://w.atwiki.jp/sangokushi11/pages/554.html
+- 日文旧讨论：
+  - 俘虏为月度忠诚下降流程；
+  - 符节台加速俘虏忠诚下降；
+  - 隐藏忠诚可高于100甚至到255，因此显示100可长期不动。
+  https://w.atwiki.jp/sangokushi11/pages/1926.html
+  https://w.atwiki.jp/sangokushi11/pages/2378.html
+- SIRE 原作者更新说明：
+  - 换季忠诚下降参数、符节台附加减忠、人心掌握不下降概率均可独立调整；
+  - 证明这些不是一个统一loyalty布尔。
+  https://www.xycq.org.cn/forum/viewthread.php?authoruid=374759&tid=209820
+- 日文 Wiki《魏帝即位》：
+  - 曹家称帝后汉室无视武将忠诚+20、汉室重视-20。
+  https://w.atwiki.jp/sangokushi11/pages/937.html
+- 日文 Wiki《汉帝援助》：
+  - 玩家君主汉室重视为事件条件；
+  - 援助/拒绝会让汉室重视配下分别涨/掉忠，幅度因人而异。
+  https://w.atwiki.jp/sangokushi11/pages/958.html
+- 二次“代码研究”转载：
+  - 自然忠诚基础损失0..4三角分布候选；
+  - 人心掌握约2/3跳过；
+  - 符节台+2；
+  - 最低义理最高野望君主的额外义理项；
+  - 只作为secondary cross-check/fallback，不替代未公开主逆向函数体。
+  https://wenku.baidu.com/view/ad1f1482561252d381eb6edb?bfetype=new
+
+证据等级：相性公式与忠诚0..255/UI100为reverse-engineered；换季触发与义理/野望语义为empirical-high；汉室爵位/拥废/特定事件常量为documented exact；完整自然掉忠gate、君主义理野望附加项、人心掌握原函数、俘虏月度闭式仍open。
