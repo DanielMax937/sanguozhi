@@ -21,7 +21,8 @@
 | B8 | 港关容量与所属关系 | 静态母城关系与当前势力归属分离；收入按同ForceID判定；基础/扩展容量已核；四类数量兵装与小数量兵器分离 | reverse-engineered + confirmed-game-data | ✅ |
 | B9 | 堤防、水攻机制 | 静态 flood 标记、四城堤防、800耐久、击破即一次性水攻、野外受淹部队全灭、每旬恢复10%并10旬回满 | reverse-engineered + empirical-high | ✅ |
 | C1 | 金钱收入完整公式 | 基础金+市场类产量→造币→难度→治安；征税/富豪逐旬取整；港关20%与同势力条件均已锁 | PC-PK1.1 reverse-engineered | ✅ |
-| C2 | 粮食收入完整公式 | 下一项 | pending | ⬜ |
+| C2 | 粮食收入完整公式 | 基础粮+农场/谷仓/军屯农→难度→治安；丰作→征收→米道；港关20%及非季初米道源码特例已锁 | PC-PK1.1 reverse-engineered | ✅ |
+| C3 | 征税/征收/富豪/米道/丰作等特殊收支 | 下一项 | pending | ⬜ |
 
 ## A1 关键纠错
 
@@ -452,3 +453,61 @@ H = floor(M/2)
 富豪只在月初触发，11日/21日只结征税半额。
 
 港关每个 tick 取母城当次 base tick 的20%，且必须与母城当前 ForceID 相同；富豪的额外50%同样只在月初触发。
+
+
+## C2 关键结论
+
+原函数：
+
+```text
+0049E810 计算城市收粮
+```
+
+基础公式：
+
+```ts
+rawFood =
+  city.BaseFoodProduction
+  + Σ(farmYieldWithGranary)
+  + Σ(militaryFarmYield)
+
+difficultyAdjusted = difficulty(rawFood)
+
+F =
+  floor(
+    difficultyAdjusted
+    * max(city.security, 50)
+    / 100
+  )
+```
+
+设施：
+
+```text
+农场Lv1 1500
+农场Lv2 1800
+农场Lv3 2250
+谷仓：普通农场 ×1.5
+军屯农：floor(max(兵力,15000)/10)
+```
+
+军屯农不吃谷仓。
+
+结算顺序：
+
+```text
+F
+→ 丰作 ×1.5
+→ 征收 ÷2
+→ 米道
+```
+
+城市米道只在季初触发；但 PC-PK1.1 港关分支没有季度判断，因此“征收+米道”时港关在季度第2、3个月也会再 +50%，这是源码级特殊行为。
+
+港关基础粮：
+
+```ts
+floor(cityBaseTick / 5)
+```
+
+且必须与母城同 ForceID。
