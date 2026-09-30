@@ -2325,7 +2325,7 @@ Lv3 = Lv1 效果 ×1.5
 - 日文旧实测：政治70/69对应10日/20日
   https://w.atwiki.jp/sangokushi11/
 - 游民星空 PK 建筑篇：合并收益、技巧P与短期收入变化
-  https://www.gamersky.com/handbook/200609/33179.shtml
+  https://www.gamersky.com/handbook/200609/33180.shtml
 
 ## 7. 建设时间
 
