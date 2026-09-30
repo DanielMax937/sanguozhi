@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "audit": "E15",
+  "target": "PC-PK-oriented generic debate psychological-damage core",
+  "evidenceLevel": "reverse-transcribed-cross-validated",
+  "provenance": {
+    "translatedCore": {
+      "repository": "tankyc/sango_infinity",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "sourceClaim": "translated from s11_sys_debate.h + s11_sys_debate.cpp"
+    },
+    "publicCrosscheck": [
+      "2006 4Gamer official release material",
+      "2006 GamerSky debate guide",
+      "Japanese SAN11 strategy wiki"
+    ]
+  },
+  "gauges": {
+    "maxHp": 1000,
+    "minHp": -100,
+    "maxStress": 100,
+    "crumbleStep": 250,
+    "crumbleMaxLevel": 3
+  },
+  "attack": {
+    "formula": "100 + trunc(40*(myINT-opponentINT)/(131-myINT))",
+    "anchors": [
+      {
+        "my": 30,
+        "opponent": 30,
+        "attack": 100
+      },
+      {
+        "my": 80,
+        "opponent": 80,
+        "attack": 100
+      },
+      {
+        "my": 100,
+        "opponent": 100,
+        "attack": 100
+      },
+      {
+        "my": 100,
+        "opponent": 80,
+        "attack": 125
+      },
+      {
+        "my": 80,
+        "opponent": 100,
+        "attack": 85
+      }
+    ]
+  },
+  "cardPower": {
+    "topic": {
+      "offTopic": {
+        "small": 1,
+        "medium": 2,
+        "large": 3
+      },
+      "currentTopic": {
+        "small": 11,
+        "medium": 12,
+        "large": 13
+      }
+    },
+    "rhetoric": {
+      "ignore": 120,
+      "shout": 110,
+      "sophistry": 20,
+      "compose": 0,
+      "agitate": 0
+    },
+    "rule": "power determines round winner only; power difference is not an hpDamage input"
+  },
+  "topicDamage": {
+    "levelCoef": {
+      "small": 10,
+      "medium": 15,
+      "large": 20
+    },
+    "normalTopicCoef": {
+      "matching": 10,
+      "nonMatching": 6
+    },
+    "normalAngerCoef": 10,
+    "randomAdd": {
+      "min": 0,
+      "max": 4
+    },
+    "formula": "trunc((attack+RandInt(5))*angerCoef*levelCoef*topicCoef/1000)",
+    "equalIntelligenceGolden": {
+      "matching": {
+        "small": [
+          100,
+          104
+        ],
+        "medium": [
+          150,
+          156
+        ],
+        "large": [
+          200,
+          208
+        ]
+      },
+      "nonMatching": {
+        "small": [
+          60,
+          62
+        ],
+        "medium": [
+          90,
+          93
+        ],
+        "large": [
+          120,
+          124
+        ]
+      }
+    }
+  },
+  "stress": {
+    "topicCard": {
+      "small": 10,
+      "medium": 15,
+      "large": 20
+    },
+    "drawBoth": 15,
+    "shout": 15,
+    "ignoreToOpponent": 30,
+    "agitate": 40,
+    "compose": "-max(opponentStress/2,30)"
+  },
+  "shout": {
+    "levelCoef": 15,
+    "topicCoef": 12,
+    "formula": "trunc((attack+RandInt(5))*angerCoef*15*12/1000)",
+    "equalIntelligenceNormal": [
+      180,
+      187
+    ]
+  },
+  "sophistry": {
+    "hpDamage": "uses sophistry user's attack but opponent topic card as level/topic template",
+    "onlyReflectsTopicCardDamage": true
+  },
+  "anger": {
+    "timid": {
+      "timer": 1,
+      "topicCoef": 10,
+      "angerCoef": 10,
+      "comboTopicCards": true
+    },
+    "calm": {
+      "timer": 4,
+      "topicCoef": 6,
+      "angerCoef": 15,
+      "rethinkEveryTurn": true,
+      "rethinkCurrentTopicLargeChance": 40
+    },
+    "bold": {
+      "timer": 4,
+      "topicCoef": 10,
+      "angerCoef": 10,
+      "forcedPower": 100
+    },
+    "reckless": {
+      "timer": 1,
+      "directDamage": "200+martial",
+      "directStress": "trunc(hpDamage/15)"
+    }
+  },
+  "visibleHandCount": {
+    "<70": 3,
+    "70-79": 4,
+    "80-89": 5,
+    ">=90": 6,
+    "internalIncludesRethinkSlot": true
+  },
+  "versionBoundary": {
+    "pcPkGenericCore": "reverse-transcribed-cross-validated",
+    "vanilla": "mechanism corroborated; continuous constants compatibility-assumption",
+    "console": "open"
+  },
+  "open": [
+    "original hard-coded person exceptions before modern data-driven refactor",
+    "Vanilla binary-level continuous constants",
+    "PS2/Wii formula differences",
+    "cross-platform closing critical result differences"
+  ],
+  "sources": [
+    "https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+    "https://www.4gamer.net/games/024/G002453/20060210150000/",
+    "https://www.gamersky.com/handbook/200604/22092.shtml",
+    "https://w.atwiki.jp/sangokushi11/pages/141.html"
+  ]
+}
