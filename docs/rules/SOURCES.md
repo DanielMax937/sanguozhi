@@ -387,3 +387,43 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
 ```
 
 该式对日文 Wiki 所有设施类别、所有10～90日门槛逐格一致；证据等级标为 `empirical-exact table reconstruction`，不冒充已恢复原函数体。
+
+### C8 商人 / 粮食交易专项
+
+- 《三國志11 with パワーアップキット》官方说明书：
+  - 商人命令行动力20；
+  - 固定所需金钱“无”；
+  - 即时结算；
+  - 都市周围2格有敌军时不可执行；
+  - 执行武将政治越高交易越有利。
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 311SireCustomizedPackageDev：
+  - `struct_city.TradePrice`；
+  - `struct_city.HasMerchant`；
+  - `struct_city.CityActions bit1 = 已商人`；
+  - `0047B6F0 SetCityMerchantStatus`；
+  - `0047BD50 SetCityTradePrice`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311MemoryResearch：
+  - 商人命令执行路径 `005CAD1B`。
+  https://github.com/sjn4048/311MemoryResearch
+- 游民星空 2007 实测：
+  - 买粮无20%损失；
+  - 卖粮固定×0.8；
+  - 买/卖粮主体公式；
+  - 政治50=100%；
+  - 多个政治点交易效果锚点；
+  - UI显示值不是精确计算值。
+  https://www.gamersky.com/handbook/200712/89446.shtml
+- 日文 Wiki 内政：
+  - 金→米按相场，米→金8折；
+  - 同价往返约112%交易效果开始转正；
+  - 政治93附近为实战盈利边界；
+  - 粮价按月变化。
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki 各种经验：
+  - 商人命令政治经验+5；
+  - 单都市全年最大180，支持每旬一次限制。
+  https://w.atwiki.jp/sangokushi11/pages/79.html
+
+注意：SIRE/PK2.2 后续加入的“交易优势”“商贸城市”“非商贸城市25%出现商人”等属于 MOD 扩展，不作为 PC-PK1.1 原作默认参数。
