@@ -1,10 +1,13 @@
 {
-  "source": "https://vincecarter0315.pixnet.net/blog/posts/14205896702",
+  "source": "https://w.atwiki.jp/sangokushi11/pages/111.html",
   "count": 80,
   "notes": [
+    "主表改以日文Wiki《爵位・官职》为直接表源，并与旧瑜云表、PC-PK1.1 struct_office/内存地址交叉核对。",
+    "原PC-PK1.1为 struct_office[81]；本文件只录入80个有名官职，第81项内部/空位语义暂不命名。",
+    "功绩门槛由原EXE的×4000阶梯直接支持；人物功绩上限为60000。",
+    "无爵位表项原先写 citiesRequired=0，现按原表“1都市のみ”修正为1。",
     "空白格按原表的 rowspan 向下填充。同一爵位下，俸禄和功绩常常盖住文官、武官两段；指挥兵力和能力上升只盖住四格，下一段会另起。",
-    "游民星空官职表末段把功绩列错位。这里用瑜云：左仆射、右仆射、典农校尉、议郎是指挥 5000、政治 +1、俸禄 10、功绩 0；奋威、长水、破贼、武卫校尉是指挥 6000、俸禄 10、功绩 0，能力上升栏为空。",
-    "原表用字照录，包括「太学博士」「黄門侍郎」「安国將軍」「太楽令」「建議校尉」。游民星空把建议校尉记成建义校尉，把谒者仆射记成曷者仆射。"
+    "末段采用日文Wiki/瑜云一致值：左仆射、右仆射、典农校尉、议郎为指挥5000、政治+1、俸禄10、功绩0；奋威、长水、破贼、武卫校尉为指挥6000、俸禄10、功绩0。"
   ],
   "offices": [
     {
@@ -730,7 +733,7 @@
     {
       "rulerTitle": "無",
       "rulerCommand": 10000,
-      "citiesRequired": 0,
+      "citiesRequired": 1,
       "office": "左僕射",
       "command": 5000,
       "bonus": "政治+1",
@@ -740,7 +743,7 @@
     {
       "rulerTitle": "無",
       "rulerCommand": 10000,
-      "citiesRequired": 0,
+      "citiesRequired": 1,
       "office": "右僕射",
       "command": 5000,
       "bonus": "政治+1",
@@ -750,7 +753,7 @@
     {
       "rulerTitle": "無",
       "rulerCommand": 10000,
-      "citiesRequired": 0,
+      "citiesRequired": 1,
       "office": "典農校尉",
       "command": 5000,
       "bonus": "政治+1",
@@ -760,7 +763,7 @@
     {
       "rulerTitle": "無",
       "rulerCommand": 10000,
-      "citiesRequired": 0,
+      "citiesRequired": 1,
       "office": "議郎",
       "command": 5000,
       "bonus": "政治+1",
@@ -770,7 +773,7 @@
     {
       "rulerTitle": "無",
       "rulerCommand": 10000,
-      "citiesRequired": 0,
+      "citiesRequired": 1,
       "office": "奮威校尉",
       "command": 6000,
       "bonus": null,
@@ -780,7 +783,7 @@
     {
       "rulerTitle": "無",
       "rulerCommand": 10000,
-      "citiesRequired": 0,
+      "citiesRequired": 1,
       "office": "長水校尉",
       "command": 6000,
       "bonus": null,
@@ -790,7 +793,7 @@
     {
       "rulerTitle": "無",
       "rulerCommand": 10000,
-      "citiesRequired": 0,
+      "citiesRequired": 1,
       "office": "破賊校尉",
       "command": 6000,
       "bonus": null,
@@ -800,12 +803,17 @@
     {
       "rulerTitle": "無",
       "rulerCommand": 10000,
-      "citiesRequired": 0,
+      "citiesRequired": 1,
       "office": "武衛校尉",
       "command": 6000,
       "bonus": null,
       "salary": 10,
       "merit": 0
     }
+  ],
+  "crossSources": [
+    "https://vincecarter0315.pixnet.net/blog/posts/14205896702",
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/sjn4048/311MemoryResearch"
   ]
 }
