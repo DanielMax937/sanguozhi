@@ -552,3 +552,39 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
 明确排除：SIRE 扩展区 `00911238 ReducePopDueToDisaster / 009112E0 DisasterPopLossFactors` 不能反推 San11PK.exe 原版灾害百分比；`sango_infinity` 的祈愿 chance=50 / duration=3 亦为重制实现参数，不作为原作证据。
 
 本轮撤回旧 provisional：蝗灾5%、疫病5%、丰作10%、每年1月独立判定、疫病每旬5～10%兵损、30%患病、持续1～2季。
+
+### D1 武将生命周期 / 状态字段专项
+
+- 311SireCustomizedPackageDev `struct_person`：
+  - `Identity`、`Legion`、`BuildingID`、`Location`；
+  - `Flags`（已行动/已褒奖/死亡预定等）；
+  - `Mission / MissionParameters[6] / MissionDuration`；
+  - `HealthLevel / Stamina`；
+  - `FormerAllegiance / ForbiddenLord / ForbiddenMonths / CaptiveMonths`；
+  - `YearOfDebut / YearOfBirth / YearOfDeath / CauseOfDeath / ScheduledLord`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311SireCustomizedPackageDev 身份枚举：
+  - 0君主 / 1都督 / 2太守 / 3一般 / 4在野 / 5俘虏 / 6未登场 / 7未发现 / 8死亡；
+  - 健康 0健康 / 1轻伤 / 2重伤 / 3濒危。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/数据汇总.md
+- 原函数/helper：
+  - `00488C00..00488C80` 各 Identity 判断；
+  - `00488CF0 IsAdvisorOfForce`；
+  - `004891C0 IsInArmy` / `00489220 GetPersonArmyID`；
+  - `004898F0 SetPersonIdentity`；
+  - `004A5B20 SetPersonAsNomadicPerson`（未发现→在野）；
+  - `004A5780 ClearPersonTasks`；
+  - `004A73A0 / 004A7410 SetPersonTask`。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- 311MemoryResearch `函数[每月例行处理].txt`：
+  - 月初调用 `0058BB30` 处理俘虏月份/禁止仕官月份计数。
+  https://github.com/sjn4048/311MemoryResearch
+- 日文 Wiki 推荐事件：
+  - 条件同时要求“达到登场预定年”与“身份为在野或未发现”，证明登场年与 current Identity 是两个维度；
+  - 推荐失败时未发现武将可能转为在野。
+  https://w.atwiki.jp/sangokushi11/pages/952.html
+- 日文 Wiki 鲁肃剧本页：
+  - 同一武将在不同剧本可分别以未登场、未发现、在野、一般、死亡等身份开局。
+  https://w.atwiki.jp/sangokushi11/pages/869.html
+
+证据等级：`PC-PK1.1 reverse-engineered-structure`。普通登场 caller、死亡预定→真正死亡、健康自然恢复与 Mission 0..43 完整语义留给后续 D 项。
