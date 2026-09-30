@@ -1263,16 +1263,17 @@ killPerson(person, cause)
 
 ## 7. 混乱 / 伪报持续与恢复
 
-### 结论：恢复机制已反汇编精确；初始持续计数仍缺两个效果函数体
+### 结论：自然恢复已由 PC-PK1.1 原函数闭合；只剩初始计数与重复施放语义
 
-这一项可以拆成：
+这一项必须拆成：
 
-1. 施加异常时写入多少“剩余回合计数”；
-2. 每旬如何减少；
-3. 什么时候恢复正常；
-4. PK 的阵/砦/城塞到底如何加速恢复。
+1. 施加异常时写入多少剩余计数；
+2. 每旬状态行为；
+3. 每旬怎样减少计数；
+4. 什么时候恢复正常；
+5. 重复施放如何刷新已有异常。
 
-其中 2～4 已由 PC-PK 反汇编锁定。
+当前第2～4项已由 `00599B90` 完整恢复；第1项对“少兵自动混乱”也已恢复，但普通伪报/扰乱仍缺效果函数体。
 
 ---
 
@@ -1280,331 +1281,265 @@ killPerson(person, cause)
 
 `[PC-PK1.1][reverse-engineered]`
 
-311MemoryResearch 的：
+311MemoryResearch 的 `Func-自动03-部队异常状态处理.txt` 给出每旬处理函数：
 
-`Func-自动03-部队异常状态处理.txt`
-
-直接给出每旬处理函数 `00599B90`。
-
-部队有一个独立的：
-
-`statusTurnCount`
-
-计数。正常情况下每旬固定：
-
-```ts
-statusTurnCount -= 1
+```text
+00599B90
 ```
 
-而不是：
+部队结构明确分开保存：
+
+```text
++0x24 status
++0x28 statusTurnCount
+```
+
+自然恢复是：
+
+```ts
+remaining = Math.max(0, remaining - recoveryStep)
+
+if (remaining === 0) {
+  clearAbnormalStatus(unit)
+}
+```
+
+不存在：
 
 ```ts
 if (random() < recoveryChance) recover()
 ```
 
-当计数减到 0 时，程序立即调用正常化处理。
-
-精确结构：
-
-```ts
-recoverySpeed = 1
-
-if (ruleset === "pk" && insideFriendlyDefensiveFacilityAura(unit)) {
-  recoverySpeed = 2
-}
-
-statusTurnCount =
-  max(0, statusTurnCount - recoverySpeed)
-
-if (statusTurnCount === 0) {
-  clearAbnormalStatus(unit)
-}
-```
-
-因此旧 fallback：
-
-`每旬 50% 概率清醒`
-
-应彻底删除。
-
-逆向来源：
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动03-部队异常状态处理.txt
+因此旧 fallback“每旬50%清醒”等概率模型全部删除。
 
 ---
 
-### 7B. 混乱 / 伪报在“减计数之前”先执行状态效果
+### 7B. 本旬状态行为发生在倒计时之前
 
 `[PC-PK1.1][reverse-engineered]`
 
-同一函数还确认了结算顺序。
+混乱：
 
-#### 混乱
-
-如果部队本旬尚未行动：
-
-```ts
-unit.hasActed = true
+```text
+若本旬尚未行动
+-> 直接设置为已行动
 ```
 
-也就是直接失去正常行动机会。
+伪报：
 
-#### 伪报
+```text
+若本旬尚未行动
+-> 取得所属据点
+-> 执行朝所属据点退却的移动处理
+-> 设置为已行动
+```
 
-如果尚未行动：
+然后才进入统一的 `statusTurnCount` 减少。
 
-1. 取得所属据点；
-2. 执行朝所属据点撤退的 AI 移动处理；
-3. 设置为已行动。
-
-之后才进入统一的 `statusTurnCount` 减少。
-
-所以引擎结算必须是：
+所以结算顺序必须是：
 
 ```text
 异常行为
-→ 标记已行动
-→ 剩余计数减少
-→ 若到0，恢复正常
+→ 已行动
+→ 倒计时
+→ 0时恢复正常
 ```
-
-不能先清异常再决定本旬是否行动。
 
 ---
 
-### 7C. PK 防御设施：不是“概率提高”，而是计数每旬 -2
+### 7C. PC-PK1.1 阵/砦/城塞：每旬 -2，不是“恢复概率提高”
 
-`[PK][reverse-engineered]`
+`00599C25` 先把恢复步长设为1。
 
-PK 官方说明书说，阵、砦、城塞影响范围内的己方部队“从伪报/混乱恢复的概率提高”。
-
-原程序实现其实更具体：
-
-```ts
-normalRecoverySpeed = 1
-facilityAuraRecoverySpeed = 2
-```
-
-即每旬多消掉 1 点异常计数。
-
-原函数会根据势力已经研究的防御设施科技确定当前设施类型，并读取该设施的有效范围，在范围内才启用 `recoverySpeed=2`。
-
-因此如果剩余计数为 3：
+随后原函数根据势力已研究技巧选择当前阵系设施：
 
 ```text
-普通位置：3 → 2 → 1 → 0
-设施范围：3 → 1 → 0
+默认：阵 ID3
+技巧25 强化设施：砦 ID4
+技巧26 强化城墙：城塞 ID5
 ```
 
-官方 PK 手册还明确说这是“本体功能之外追加”的效果，所以：
+再读取对应设施最大有效范围，检查部队是否位于同势力合资格设施范围内。
 
-- Vanilla：默认每旬 -1；
-- PK：满足防御设施范围时每旬 -2。
+命中时：
 
-官方来源：
-- https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+```text
+00599CAB recoveryStep = 2
+```
 
-反汇编来源：
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动03-部队异常状态处理.txt
+所以：
 
-社区交叉：
-- https://forum.gamer.com.tw/Co.php?bsn=60001&sn=380559
+```text
+普通位置：每旬 -1
+PK合资格阵系范围：每旬 -2
+```
+
+例如剩余3：
+
+```text
+普通：3 -> 2 -> 1 -> 0
+设施：3 -> 1 -> 0
+```
+
+日文 Wiki 对玩家只描述为“状态异常恢复率增加”；原 EXE 把它具体实现成双倍倒计时步长。日文 Wiki 还明确记录 PC 无印的阵系没有这一异常恢复加速，因此不能把 PK 的 `-2` 静默套给 PC Vanilla。
 
 ---
 
-### 7D. 状态 setter 也已定位
+### 7D. setter 与结构字段
 
-SIRE 地址表确认：
+SIRE 地址表：
 
-- `004AEA70 SetTroopStatus`：设置部队状态与状态回合数；
-- `00496350 SetTroopTurnCount`：直接设置状态回合计数。
+```text
+004AEA70 SetTroopStatus
+00496350 SetTroopTurnCount
+00472150 GetRandomX(X) => 0..X-1
+```
 
-因此“状态类型”和“剩余回合计数”在原作数据结构中是两个明确字段，不是根据状态类型每旬重新算概率。
-
-来源：
-- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+这再次确认状态类型和持续计数是独立数据。
 
 ---
 
-### 7E. 施加时的初始计数：仍缺 exact
+### 7E. 少兵自动混乱的初始计数已经精确
 
-普通计略主流程已经定位：
+`函数[自动眩晕].txt` 的原代码：
 
-- `005917D0`：伪报演示与实际处理；
-- `00591A20`：扰乱演示与实际处理；
-- `00591C70`：镇静；
-- 上层 `00593424` 会先算是否会心，再把会心 flag 传进上述效果函数。
+```text
+0059A1F5 push 02
+0059A1F7 call 00472150
+0059A1FF inc al
+...
+0059A207 push 01
+0059A20B call 004AEA70
+```
 
-但是 311MemoryResearch 的公开 TXT 只把调用点整理出来，没有展开 `005917D0 / 00591A20` 的完整函数体。
+因此：
 
-所以目前不能源码级回答：
+```text
+duration = GetRandomX(2) + 1
+         = 1 或 2
+```
 
-> 普通扰乱究竟是 1/2 各多少概率？会心究竟是 2/3 各多少概率？
-
-可靠边界只有：
-
-- 普通扰乱/伪报玩家长期观察主要为 **1～2 回合**；
-- 日文 Wiki 明确说会心后**至少持续 2 回合**；
-- 旧 2ch 同样说明计略会心的核心效果是“混乱/火计/伪报至少持续2回合”；
-- 部分后期专项实测认为会心常见为 2～3 或固定观察到 3。
-
-来源：
-- https://w.atwiki.jp/sangokushi11/pages/85.html
-- https://w.atwiki.jp/sangokushi11/pages/1964.html
-- https://www.gamersky.com/handbook/200604/22297.shtml
+这条只属于“少兵自动混乱”来源，不能反推出普通计略的伪报/扰乱也使用同一分布。
 
 ---
 
-### 7F. 性格 / 智力：影响会心率，不进入恢复函数
+### 7F. 普通伪报 / 扰乱的初始计数仍缺 exact
 
-`[PC-PK1.1][reverse-engineered]`
-
-`函数[计策爆击率].txt` 明确显示，施法方主将性格进入“伪报/扰乱的会心率”计算。
-
-伪报的性格修正：
+普通计略效果入口已定位：
 
 ```text
-胆小 +10
-冷静  +5
-刚胆   0
-莽撞  -5
+005917D0  伪报
+00591A20  扰乱
+00591C70  镇静
 ```
 
-扰乱正好偏向另一端：
+但公开逆向记录没有展开前两个函数体内“初始 duration 怎样生成”的逐指令。
+
+目前可靠边界：
+
+- 日文 Wiki 只写普通伪报/扰乱持续“数回合”；
+- 会心伪报/扰乱至少持续2回合；
+- 2007旧讨论里有“会心3回合”的玩家记忆，只作为历史经验，不升级为精确常量。
+
+所以不能源码级填：
 
 ```text
-胆小  -5
-冷静   0
-刚胆  +5
-莽撞 +10
+普通1/2的概率
+会心2/3的概率
 ```
 
-施法方/受术方智力也进入会心率计算。
+---
 
-但是已经进入异常状态以后，`00599B90` 的恢复逻辑没有读取智力、性格、适性或兵种，只读取：
+### 7G. 性格 / 智力影响会心，不进入后续恢复函数
 
-- 当前异常计数；
-- 是否处于 PK 防御设施加速范围。
+计策爆击率逆向显示，性格和双方智力参与伪报/扰乱的会心判定。
 
-所以正确建模是：
+但 `00599B90` 的后续倒计时不读取这些属性。
+
+正确分层是：
 
 ```text
-性格/智力
-→ 影响是否会心
-→ 会心影响初始异常持续值
-→ 后续每旬固定倒计时
+属性/性格
+-> 是否成功/是否会心
+-> 初始 duration（此处部分open）
+-> 每旬固定倒计时（已exact）
 ```
 
 而不是：
 
 ```text
-智力高 → 每旬更容易随机清醒
+智力高 -> 每旬更容易随机恢复
 ```
-
-逆向来源：
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[计策爆击率].txt
 
 ---
 
-### 7G. provisional-engine-rule：只替代“初始计数生成”
+### 7H. provisional-engine-rule：只替代初始 duration
 
-第一版不再模拟随机恢复，只对设置时的 duration 使用 fallback。
-
-公开 San11 重制项目 `sango_infinity` 对伪报与扰乱采用：
+开源复刻项目 `tankyc/sango_infinity` 的公开 `Skills.json` 对 ID24伪报、ID25扰乱采用：
 
 ```text
-普通：1回合 70%，2回合 30%
-会心：2回合 70%，3回合 30%
-```
-
-这不是原作反汇编常量，但满足目前所有可靠边界，因此可作为工程默认：
-
-```ts
-function fallbackAbnormalDuration(isCritical) {
-  const base =
-    weightedChoice({
-      1: 0.70,
-      2: 0.30
-    })
-
-  return base + (isCritical ? 1 : 0)
-}
-```
-
-来源仅作为工程参考：
-- https://github.com/tankyc/sango_infinity/blob/master/Build/Content/Data/Common/Skills.json
-
-必须配置成：
-
-```ts
-rules.abnormal.initialDurationProfile
-```
-
-而不是写死在状态系统中。
-
----
-
-### 7H. 重复施放：旧 fallback 的“额外 +1”删除
-
-旧规则：
-
-```ts
-duration =
-  min(5, max(oldDuration, newDuration) + 1)
-```
-
-没有可靠原作依据，删除。
-
-当前在 `005917D0 / 00591A20 / SetTroopStatus` 函数体未完全展开前，重施策略保持独立 open-exactness。
-
-初版建议只做保守刷新：
-
-```ts
-remaining =
-  max(currentRemaining, newlyRolledDuration)
-```
-
-并明确标记 `provisional-engine-rule`。
-
-这样不会因为重复施放人为制造一个原版未证实的“每次叠 +1、最多5回合”系统。
-
----
-
-### 7I. 镇静
-
-`[COMMON][confirmed mechanism]`
-
-镇静是主动解除混乱/伪报，不走自然倒计时。
-
-会心镇静会把效果扩展到目标邻接友军，这一点日文 Wiki 明确。
-
-所以：
-
-```ts
-onCalmdownSuccess(target) {
-  clearAbnormalStatus(target)
-
-  if (critical) {
-    for (const ally of adjacentAllies(target)) {
-      clearAbnormalStatus(ally)
-    }
-  }
-}
+普通：1回合70%，2回合30%
+会心：2回合70%，3回合30%
 ```
 
 来源：
-- https://w.atwiki.jp/sangokushi11/pages/85.html
+
+- https://github.com/tankyc/sango_infinity/blob/main/Build/Content/Data/Common/Skills.json
+
+这不是原作证据，只能作为工程 fallback：
+
+```ts
+function fallbackInitialDuration(critical) {
+  const base = weightedChoice({1: 0.70, 2: 0.30})
+  return critical ? base + 1 : base
+}
+```
+
+随后必须回到 exact 倒计时。
 
 ---
 
-### 剩余 exactness
+### 7I. 重复施放
 
-第 7 项现在只剩两个真正未知点：
+旧 fallback：
 
-1. `005917D0` 伪报初始回合数生成；
-2. `00591A20` 扰乱初始回合数生成，以及重复施放时 setter 的覆盖策略。
+```text
+min(5, max(old,new)+1)
+```
+
+没有原作证据，删除。
+
+在 `005917D0 / 00591A20 / 004AEA70` 覆盖语义完全恢复前，工程上可暂用：
+
+```text
+remaining = max(currentRemaining, newlyRolledDuration)
+```
+
+但必须标 `provisional-engine-rule`。
+
+---
+
+### 7J. 镇静
+
+镇静是主动清除混乱/伪报，不走自然倒计时。
+
+日文 Wiki 记录会心镇静会扩展到目标邻接友军。该行为与自然恢复系统分开实现。
+
+---
+
+### 第7项剩余 exactness
+
+现在真正剩下：
+
+1. `005917D0` 普通伪报初始 duration 原函数；
+2. `00591A20` 普通扰乱初始 duration 原函数；
+3. `004AEA70` 对已有异常的精确刷新/覆盖语义；
+4. 原版螺旋突刺混乱 duration 的逐指令链；
+5. Vanilla/主机版逐指令差异。
 
 **自然恢复本身已经解决，不再是概率问题。**
 
+详细专项见 `28-status-duration-recovery.md`。
 
 ## 8. 单挑连续命中 / 伤害函数
 
