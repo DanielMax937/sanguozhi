@@ -1070,3 +1070,48 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/90.html
 
 证据等级：官职结构、4000功绩阶梯、60000功绩上限、军制改革+3000、实际能力加成与 `005FAF00` 主selector均为PC-PK1.1 reverse-engineered；80官职/爵位表由日文Wiki与仓库旧表交叉确认。自动封官的资格helper、候选顺序和caller flag仍open。
+
+
+### E1 部队编成专项
+
+- 311SireCustomizedPackageDev `struct_troop`：
+  - `TroopType 0=战斗 / 1=输送`；
+  - `MainGeneralID / SubGeneral1ID / SubGeneral2ID`；
+  - 兵力、金、粮独立字段；
+  - `EquipmentStatus` 为12个 type+quantity 兵装栏；
+  - `CurrentUnitType` 与陆/水装备 getter 分离。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311SireCustomizedPackageDev troop helper：
+  - `00495310 IsTroopLeader`；
+  - `00495340 IsTroopFollower`；
+  - `00495390 IsPersonInTroop`；
+  - `004957B0 GetTroopStrengthLimit`；
+  - `004957F0 GetTroopMoneyLimit`；
+  - `00495810 GetTroopFoodLimit`；
+  - `00495480/490` 陆/水行军兵装；
+  - `00496160` 按坐标选择当前行军兵装。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 311MemoryResearch `出征窗口部分界面代码.txt`：
+  - `00647250` 读取选定主将并调用 `0048A4F0` 获取主将可带兵上限；
+  - 与据点现有兵力取小；
+  - 兵种ID1～4再与对应枪/戟/弩/马库存取小；
+  - `006472FB` 写死出征下限1；
+  - 未选主将时 `00646E60` 仅用于UI预览据点最高指挥上限。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `地址资料.txt`：
+  - 战斗部队金上限10000、粮上限50000；
+  - 输送队兵力60000、金100000、粮500000；
+  - `004962CF/00496306...` 等运输兵装容量相关入口已定位但数值语义未展开。
+  https://github.com/sjn4048/311MemoryResearch
+- 日文 Wiki《戦争》：
+  - 普通部队粮上限50000；
+  - 输送队兵力上限60000；
+  - 可用极少兵力部队/输送队，输送队可搭载多名武将；
+  - 枪戟弩马随士兵损失等量消耗，攻城兵器不按士兵损失消耗。
+  https://w.atwiki.jp/sangokushi11/pages/85.html
+- 日文 Wiki《技巧研究》《内政》：
+  - 高级舰船按需要装备的出征部队数准备，而不是按士兵数量准备。
+  https://w.atwiki.jp/sangokushi11/pages/90.html
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+
+证据等级：部队结构、玩家出征兵力上下限、战斗/输送金粮兵上限均为PC-PK1.1 reverse-engineered；数量型兵装损耗与件数型攻具/舰船行为由源码结构与长期实机资料交叉确认。最终出征资源提交和运输兵装逐类容量仍open。
