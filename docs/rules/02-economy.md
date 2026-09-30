@@ -1428,7 +1428,7 @@ interface CitySeasonState {
 - https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
 - https://w.atwiki.jp/sangokushi11/pages/1828.html
 
-## 3. 内政设施
+## 4. 内政设施
 
 无印共有：市场、造币、农场、谷仓、兵舍、锻冶、厩舍、工房、造船。
 
