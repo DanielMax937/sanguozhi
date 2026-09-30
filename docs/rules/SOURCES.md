@@ -297,3 +297,24 @@
   https://www.gamersky.com/handbook/200603/21665.shtml
 - 日文 Wiki 内政设施表：基础费用、耐久、防御、功能
   https://w.atwiki.jp/sangokushi11/pages/74.html
+
+
+### C5 PK 新增十设施专项
+
+- 311MemoryResearch：
+  - `整理/Func-收支04-计算城市收钱.txt`：大市场/鱼市场/黑市
+  - `整理/Func-收支05-计算城市收粮.txt`：军屯农
+  - `整理/Func-内政03-计算训练效果.txt`：练兵所训练×1.5
+  - `整理/Func-内政13-计算生产耗时.txt`：练兵所仅作用舰船，10-q→max(2,8-q)
+  - `整理/Func-自动06-武将忠诚下降.txt`：符节台忠诚下降+2及本方副作用
+  - `函数[计算流言是否成功].txt`：计略府参数10→12
+  - `修改记录by sjn4048.txt`：四府/符节台/练兵所关键地址
+- SIRE 地址表：
+  - `005BD040 GetDiplomacyActionPointCost`
+  - `005BFF10 GetStrategyActionPointCost`
+  - 其他据点/设施 helper
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- 日文 Wiki PK 设施表：费用、耐久、数量限制与说明
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 游侠 PC-PK1.1 内存研究：练兵所、军事府、人才府、计略府、符节台具体地址
+  https://game.ali213.net/thread-2168294-1-1.html
