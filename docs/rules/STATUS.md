@@ -2,28 +2,37 @@
 
 更新：2026-10-01。
 
-## 最新完成：E17 地形伤害随机值
+## 最新完成：E18 普通君主继承优先级
 
-当前逐点审计已写回 A1–A5、B1–B9、C1–C11、D1–D10、E1–E17，共52个审计点。
+当前逐点审计已写回 A1–A5、B1–B9、C1–C11、D1–D10、E1–E18，共53个审计点。
 
 - [当前总表](17-post-15-source-audit.md)
-- [E17 规则正文](32-terrain-hazard-damage.md)
-- [E17 结构化证据](../sources/terrain-hazard-damage.json)
-- [E17 校验脚本](../../scripts/check_terrain_hazard_damage.py)
-- [地图主规则](01-map.md)
-- [E16 非骑战法武将伤亡](31-non-cavalry-casualty-sources.md)
+- [E18 规则正文](33-ruler-succession-priority.md)
+- [E18 结构化证据](../sources/ruler-succession-priority.json)
+- [E18 校验脚本](../../scripts/check_ruler_succession_priority.py)
+- [君主/军团主规则](08-ruler-corps.md)
+- [E17 地形伤害](32-terrain-hazard-damage.md)
 
-E17 已闭合 PC-PK1.1 的栈道/毒泉随机兵损：
+E18 已关闭“普通君主继承完全无可靠规则”这一主问题。
+
+继承必须先区分：
 
 ```text
-栈道 = 100 + GetRandomX(200) = 100..299 / 每进入一格
-毒泉 = 200 + GetRandomX(200) = 200..399 / 每进入一格
+历史事件 -> 事件专用脚本
+玩家普通死亡 -> 玩家手选
+COM普通死亡 -> 自动选择
 ```
 
-`GetRandomX(X)` 已确认返回 `0..X-1`。踏破/难所行军使栈道无伤，解毒使毒泉无伤。旧“毒泉1000兵+气力-5”“栈道300～500”全部撤回。
+COM 长期实测主类别顺序为：
 
-落石专用地址参数为：对部队base1500/range500、对建筑base800/range1000；当前直接还原为1500～1999与800～1799。踏破使落石伤害约×0.1，而不是减半；固定30%混乱旧fallback撤回。
+```text
+血缘 > 义兄弟 > 配偶 > 年长者
+```
 
-落石仍保留一个小型 exactness：全陷阱共通基本50在最终落石算式中的参与位置尚未由完整函数体确认。
+无特殊关系时年长者优先有多个案例支持，旧功绩/魅力/官职/统率综合评分 fallback 撤回。被敌方俘虏的武将会退出普通后继候选。
 
-下一项：E18 普通君主继承优先级。
+PC-PK1.1 的集中式处理入口 `004B9080` 已由 311MemoryResearch 禅让 DEMO 定位，但函数体未公开，所以 COM 顺序仍标 `empirical-high`，不升级成源码级。
+
+剩余 exactness：关系组内部排序、同龄 tie-break、出阵/任务 candidate gate、`004B9080` 函数体、零合法候选流程与平台差异。
+
+下一项：E19 评定完整提案池。
