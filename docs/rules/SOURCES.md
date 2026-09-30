@@ -1354,3 +1354,41 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   - B8港关扩张。
 
 证据等级：技巧ID和多数核心常量为PC-PK1.1地址/反汇编级；完整技巧树、费用和若干行为由Wiki/Gamersky交叉。完整研究时间函数、工兵育成倍率、兵粮袭击随机闭式、应射细边界与技巧研究功绩逐地址仍open。爆药炼成原PC判定BUG与补丁差异留E8。
+
+
+### E8 技巧补丁版本差异专项
+
+- 光荣 GameCity Vanilla Windows Ver1.1 官方更新页：
+  - 2006-04-10；
+  - 1.0→1.1；
+  - AI与BUG修复；
+  - 已安装PK时不需本体更新。
+  https://www.gamecity.ne.jp/regist_c/user/san11/san11_update.htm
+- 光荣 GameCity Vanilla 更新历史：
+  - Ver1.2 2006-05-01明确写“攻击等伤害平衡”调整；
+  - 后续1.3～1.3.3继续AI/BUG平衡；
+  - 官方未提供逐技巧常量变更表。
+  https://www.gamecity.ne.jp/regist_c/user/san11/san11_update02_history.htm
+- 光荣 GameCity PK 官方更新页：
+  - PK Ver1.1 2006-10-04；
+  - PK Ver1.1.1 2007-03-14；
+  - 1.1.1修复兵粮预测/消耗、怒髪、贯矢技巧P等；
+  - 未列技巧树常量重平衡或爆药炼成判定BUG修复。
+  https://www.gamecity.ne.jp/regist_c/user/san11/pk/san11pk_update.htm
+- 游民星空《三国志11 技术详解》：
+  - 明确回顾 Vanilla Ver1.0 与后期差异：枪兵锻炼20→10%、精锐枪/戟/弩移动2→6、云梯20%→后期约140%、工兵育成400%→250%、防御强化120%→200%；
+  - 只对枪兵锻炼明确写Ver1.0=20%，不据此强推戟/弩/骑Lv1。
+  https://www.gamersky.com/handbook/200806/114545.shtml
+- 311MemoryResearch `整理/Func-自动01-耐久恢复.txt`：
+  - 工兵育成ID24；
+  - 内政设施有技巧×0.30、无技巧×0.15 => 相对×2；
+  - 城市/港/关无技巧路径额外×0.4，有技巧跳过 => 相对×2.5。
+  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch `地址资料.txt`：
+  - 爆药炼成ID31原BUG与修复说明；
+  - 社区修复地址 `005B1227 / 005B1239`；
+  - 矢盾对战法社区修改 `005AE01B`；
+  - 大盾对战法社区修改 `005AE083`。
+  https://github.com/sjn4048/311MemoryResearch
+
+证据等级：官方页面只证明官方版本链和公开变更大类；Ver1.0→后期技巧差异来自当年攻略回顾；PK1.1工兵育成与爆药/盾类原逻辑来自逆向。精确1.1/1.2 transition patch、地区发行版差异和主机版逐项常量仍open。
