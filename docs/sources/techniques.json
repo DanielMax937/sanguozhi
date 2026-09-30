@@ -30,7 +30,8 @@
     "Elite unit base attack/defense +10 is a separate panel-layer effect from the 1.15 combat damage multiplier.",
     "Explosive Refining has a known PC-PK1.1 original-code attacker/defender bug; patch/version details belong to E8.",
     "Effects marked wiki-high/reverse-partial are not promoted to full-disassembly exactness.",
-    "Engineer Training (ID24) is exact for the studied PC-PK target: domestic facilities x2, fixed city/port/gate recovery x2.5; Vanilla 1.0's reported 4x belongs to a separate patch profile."
+    "Engineer Training (ID24) is exact for the studied PC-PK target: domestic facilities x2, fixed city/port/gate recovery x2.5; Vanilla 1.0's reported 4x belongs to a separate patch profile.",
+    "Response Fire (ID9): PC address 00584DC8 is known; detailed arrow-family/range/terrain/support boundaries are source-graded in E10, while the complete PC caller remains open."
   ],
   "techniques": [
     {
@@ -206,9 +207,19 @@
       "goldCost": 2000,
       "pkOnly": false,
       "effect": {
-        "returnFire": true
+        "responseFire": true,
+        "defenderProfile": "crossbow",
+        "triggerFamily": "arrow-family attacks",
+        "requiresLegalCounterattack": true,
+        "excludesSupportAttack": true,
+        "disabledBy": [
+          "confused",
+          "false-report"
+        ],
+        "exactPcCallerRecovered": false,
+        "evidenceDoc": "docs/rules/25-response-fire.md"
       },
-      "evidence": "reverse-partial+wiki"
+      "evidence": "reverse-address+empirical-high"
     },
     {
       "id": 10,
