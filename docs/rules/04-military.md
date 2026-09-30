@@ -1548,14 +1548,102 @@ pk-pc-community-fixed
 - 爆药炼成BUG是否被某地区官方发行版静默修复；
 - 主机版逐项技巧常量差异。
 
-### 兵粮袭击
+## 11. 兵粮袭击
 
-`[COMMON/后期PC][empirical-high]`
+`[PC-PK1.1 reverse trigger path + documented/empirical quantity + compatibility fallback]`
 
-枪兵技巧“兵粮袭击”：
+E9 完整专项见 `24-food-raid.md`，结构化证据见 `docs/sources/food-raid.json`。
 
-`抢粮 = 攻击力 × R`，其中 `R` 为 1–2 的随机值。
+### 11.1 原调用路径
 
-同时受“每 2 名士兵最多抢 1 粮”的上限约束；若兵力不足则按 `士兵/2` 封顶。敌方扣粮与己方获得粮对应。
+PC主攻击函数：
 
-来源：https://www.gamersky.com/handbook/200806/114545.shtml
+```text
+005B03F5 target troop
+005B03F7 attacker troop
+005B03F9 call 005ADB20
+```
+
+`005ADB55` 锁定 techId=1。
+
+该调用只在“目标是部队”的分支，因此不对设施触发。
+
+普通攻击和战法共享这段附加效果；**反击支路明确跳过兵粮袭击**。
+
+### 11.2 数量主模型
+
+长期攻略与后续实测一致：
+
+```ts
+raw = attacker.attack * R
+R ∈ [1, 2]
+
+raid = min(
+  raw,
+  floor(attacker.troops / 2)
+)
+```
+
+这里的 `attack` 是当前部队攻击面板，不是本次实际伤害。
+
+参考：
+
+```text
+攻击84，兵10000 -> 约84..168
+攻击105，兵10000 -> 最大210
+攻击100，兵200   -> 被兵数/2封顶为100
+```
+
+### 11.3 原 RNG 尚未恢复
+
+`005ADB20` 函数体尚未公开，所以不能声称原EXE一定是0.1一档、连续浮点或其他分布。
+
+兼容 fallback 采用：
+
+```ts
+k = uniformInteger(10, 20)
+raw = floor(attack * k / 10)
+raid = min(floor(troops/2), raw)
+```
+
+这是 `compatibility-reconstruction`，不是 reverse-engineered。
+
+### 11.4 资源转移边界
+
+正常情况下攻略明确为敌方减N、己方加N。
+
+但目标粮不足或攻击方已接近50000粮上限时，原helper如何裁剪仍open。
+
+非fidelity安全fallback：
+
+```ts
+actual = min(
+  raid,
+  target.food,
+  attacker.foodLimit - attacker.food
+)
+```
+
+确保不凭空造粮；未来恢复 `005ADB20` 后由原行为替换。
+
+### 11.5 其他边界
+
+已确认：
+
+- 目标必须是部队；
+- 普攻与战法进入；
+- 反击不进入。
+
+empirical-high：
+
+- 连击两次攻击可造成两次抢粮。
+
+仍 open：
+
+- 支援攻击；
+- 水上active舰船profile；
+- 战法失败；
+- 大盾/矢盾等把伤害置0时是否仍抢；
+- 原RNG粒度；
+- 满粮/缺粮原作裁剪。
+
