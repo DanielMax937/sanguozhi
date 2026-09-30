@@ -15,7 +15,8 @@
 | B2 | 地形×兵种战法可用性 | 底层为 Equipment tactic表 × Tactic terrain mask × target flags；骑兵浅滩仍冲突 | reverse-engineered-structure + empirical-high | ✅ |
 | B3 | 地形移动成本 | 12×32 lookup；运输陆地用剑表、水上用小船表；火格×4；玩家设施不改底层地形成本 | reverse-engineered | ✅ |
 | B4 | 移动力加成叠加 | 原`计算部队属性`函数锁定技巧/特技加法顺序；强行覆盖长驱；搬运+操舵可叠加 | PC-PK1.1 reverse-engineered | ✅ |
-| B5 | ZOC | 下一项 | pending | ⬜ |
+| B5 | ZOC | 相邻六格控制；进入ZOC后终止本回合继续移动；陆/水ZOC分离；飞将/遁走/推进边界已核；伪报是否继续发出ZOC仍冲突 | reverse-engineered-parameters + empirical-high | ✅ |
+| B6 | 高度与高低差 | 下一项 | pending | ⬜ |
 
 ## A1 关键纠错
 
@@ -194,3 +195,38 @@ cityId = Tbl_GridToCityID[areaCode]
 ```
 
 因此木牛流马+搬运的陆上运输为33；水上再配操舵也是33。
+
+
+## B5 关键纠错
+
+ZOC 不应实现成 terrain cost 额外加值。
+
+```text
+正常支付目标格地形移动成本
+→ 若目标格处于敌方ZOC且未被无视
+→ 本回合停止继续扩展移动
+```
+
+PC-PK1.1 原参数地址：
+
+```text
+005A369D 陆上ZOC开关
+005A36A4 水上ZOC开关
+005A36B8 陆上ZOC无视兵装范围
+005A36BE 飞将
+005A36CB 遁走
+005A36D7 陆上ZOC无视命中
+005A36DE 推进
+005A36EB 水上ZOC无视命中
+```
+
+设施方面：
+
+- 阵/砦/城塞、橹/投石台、军乐台/太鼓台等敌方所属设施会形成ZOC；
+- 土垒、石墙、火种/火球等火陷阱无ZOC。
+
+状态方面：
+
+- 混乱：ZOC消失，empirical-high；
+- 伪报：中文老实测写“消失”，日文长期Wiki写“保留”，当前公开逆向未恢复状态判断，保留 `conflicting-evidence`。
+- 为使引擎可运行，暂用 `falseReportRetainsZOC=true`，明确标 `provisional-engine-rule / compatibilityAssumption`。
