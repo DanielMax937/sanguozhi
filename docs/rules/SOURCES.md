@@ -713,3 +713,55 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/1978.html
 
 证据等级：`reverse-engineered-structure + empirical-exact thresholds + empirical-exact age table`。尚缺年龄系数函数体、低素质整数取整、最终多层能力合成顺序以及自然适性升档的超额余数。
+
+### D4 人际关系专项
+
+- 311SireCustomizedPackageDev `struct_person`：
+  - `BloodRelation / FatherID / MotherID / SpouseID / SwornSiblingID / Generation`；
+  - `IntimatePersonsID[5] / HatedPersonsID[5]`；
+  - 相性字段。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+- 311SireCustomizedPackageDev relation helpers：
+  - `00488790 IsSpouse`；
+  - `004887D0 IsSwornBrother`；
+  - `00488910 IsFriendlyWith`；
+  - `004889E0 IsPerson1HatesPerson2`；
+  - `0048BB70 IsBloodRelation`；
+  - `0048BC10 IsAConsort`；
+  - `0048BCA0 / 0048BD80 / 0048BDF0 / 0048C040` 父母/子女/兄弟；
+  - `0048A5F0 GetRelationWithLord`。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- 游侠繁中 PC-PK1.1 内存研究：
+  - `00585555`：支援只看主将关系；
+  - `0058557B`：辅佐/亲爱支援参数30；
+  - `0058559B`：血缘20；
+  - `005855A8`：义兄弟/夫妇50。
+  https://game.ali213.net/thread-2168294-1-1.html
+- 日文 Wiki《支援攻击》：
+  - 夫妻/义兄弟50%、亲爱30%、辅佐30%、血缘20%的PS2PK交叉实测；
+  - 只看主将；
+  - 亲爱方向必须是支援方亲爱攻击方；
+  - 血缘明确父子/兄弟可触发；
+  - 支援范围、连战和兵器边界。
+  https://w.atwiki.jp/sangokushi11/pages/1584.html
+- 日文 Wiki《検証》副将能力：
+  - 亲爱取主副差值1/2；
+  - 血缘1/3；
+  - 普通1/4；
+  - 夫妻/义兄弟使用双方最优能力，相当于差值100%。
+  https://w.atwiki.jp/sangokushi11/pages/30.html
+- 日文 Wiki《亲爱・嫌恶》：
+  - 嫌恶 pair 包括副将之间时，整队所有副将补正归零；
+  - 登用亲爱/嫌恶硬分支；
+  - COM君主与俘虏任一方向嫌恶时必处断；
+  - 君主嫌恶对友好/同盟的影响。
+  https://w.atwiki.jp/sangokushi11/pages/95.html
+- 日文 Wiki《内政》：
+  - 完整登用关系优先级；
+  - 处断配偶会解除配偶关系，但处断本身不会新增嫌恶关系。
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki《小ネタ》：
+  - 仲介结婚/结义可作用于出征中的武将，说明关系是运行时可变状态。
+  https://w.atwiki.jp/sangokushi11/pages/15.html
+
+证据等级：关系字段/helper与支援50/30/20参数为 PC-PK1.1 reverse-engineered；副将1/2、1/3、1/4为PS2 empirical-exact，PC函数体仍open；登用/处斩/外交关系行为为长期 empirical-high。
