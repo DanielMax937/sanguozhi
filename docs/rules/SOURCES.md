@@ -131,3 +131,17 @@
 
 - 日文三國志11攻略Wiki：行动顺序、兵科/地形/移动交叉实测
   https://w.atwiki.jp/sangokushi11/
+
+
+### B5 ZOC 专项
+
+- 游侠 sergi：PC-PK1.1 ZOC 开关与飞将/遁走/推进地址
+  https://game.ali213.net/thread-2168294-1-1.html
+- 游民星空：一兵流移动力/ZOC 实测
+  https://www.gamersky.com/handbook/200809/124600.shtml
+- 日文 Wiki FAQ：ZOC 为部队/设施相邻6格，进入即停止
+  https://w.atwiki.jp/sangokushi11/pages/8.html
+- 日文 Wiki 特技：飞将/遁走/推进陆水边界
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+- 日文 Wiki 战争：土垒/石壁/火罠无ZOC；混乱无ZOC；伪报ZOC保留的冲突证据
+  https://w.atwiki.jp/sangokushi11/pages/85.html
