@@ -936,22 +936,19 @@ SIRE 开发资料已经给出原版 PK 的关键函数名和运行时字段：
 - 武将静态数据同时保存 `YearOfBirth`、`YearOfDeath`、`CauseOfDeath`；
 - GetInfo 运行时字段另外暴露“是否预定死亡”和“健康状态”。
 
-这说明原作至少存在如下分层：
+这说明原作至少存在多个分离层次：
 
 ```text
-剧本基础数据
 YearOfBirth / YearOfDeath / CauseOfDeath
-              ↓
-        GetDeathYear()
-              ↓
-到达死亡阈值后的运行时判定
-              ↓
-      IsMarkedForDeath
-              ↓
-       健康恶化 / 死亡
+GetDeathYear()
+markedForDeath flag
+HealthLevel
+Identity = DEAD
 ```
 
-而不是：
+当前公开资料**还不足以证明这几个层次始终按固定单向顺序逐步经过**；fallback 可以采用分层状态机，但不得把该顺序标成原作逐指令事实。
+
+可以确定它不是：
 
 ```text
 开局
@@ -1011,7 +1008,7 @@ YearOfBirth / YearOfDeath / CauseOfDeath
 - “诸葛亮预定死亡年到临”
 - “孙策预定死亡年之后或 200 年到临”
 
-这与 SIRE 命名的 `IsMarkedForDeath` 完全一致：**基础没年、计算后的死亡时点、运行时死亡 flag 不是同一个概念。**
+这与 SIRE 暴露的 `GetDeathYear / IsMarkedForDeath / Identity=DEAD` 分层结构相容：**基础没年、计算后的死亡时点、运行时死亡 flag 不是同一个概念。** 但事件文本里的“预定死亡年”不能直接等同于 `markedForDeath` bit；当前没有 caller 证明两者一一映射。
 
 来源：
 - https://www.gamersky.com/handbook/200809/124174_6.shtml
@@ -1055,6 +1052,22 @@ onScenarioInit() {
 
 ---
 
+### 6C.1 寿命模式与战死模式必须分开
+
+`struct_scenario` 独立保存：
+
+```text
+IgnoreAge
+DieInBattleSetting
+Lifetime
+ComeOnStage
+```
+
+因此本 fallback 只处理**自然寿命**。战场战死率必须走 combat 的 `DieInBattleSetting` 规则，不能与本节 RNG 混用。
+
+社区常见“长寿约+20年 / 假想约活到99岁”只保留参考；在 `Lifetime` 原函数未恢复前，不能把这些值标成 fidelity exact。
+
+---
 ### 6D. 目前真正缺失的两个函数
 
 1. `0048A000 GetDeathYear` 的完整函数体尚未在公开文本资料中展开，因此“不自然死 +a 年”的**原版年龄函数**仍未知；
