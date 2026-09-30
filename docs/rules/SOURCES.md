@@ -917,3 +917,47 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/1938.html
 
 证据等级：角色字段/helper为PC-PK1.1 reverse-engineered；军师70门槛/助言语义/零成本为official-confirmed；太守/都督自动selector主排序为empirical-high，完整EXE comparator仍open。
+
+### D8 忠诚 / 俸禄 / 褒赏专项
+
+- 《三國志11 with パワーアップキット》官方说明书：
+  - 褒赏：100金/人、5AP/人、即时、无执行武将；
+  - 可一次多人；同一武将每回合最多一次；
+  - 显示忠诚100和部队中武将不能褒赏；
+  - 授予宝物：10AP，宝物价值越高忠诚上升越多；
+  - 移动/召唤均20AP；
+  - 官职俸禄是每月支付，金不足会造成忠诚下降。
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 311MemoryResearch `Func-收支03-每月钱粮兵装收支.txt`：
+  - `00590490 MonthlyIncomeAndExpend`；
+  - 每据点先处理俘虏维护费，每俘虏50金；
+  - 再以 `0049F2A0` 求现役君主/都督/太守/一般武将俸禄总和；
+  - 够钱直接扣总俸禄；不足转 `0058D5E0` 欠薪忠诚下降准备，后段 `0058C190` 处理忠诚。
+  https://github.com/sjn4048/311MemoryResearch
+- 311SireCustomizedPackageDev：
+  - `00489140 HasPraised`，支持“一人每回合最多一次褒赏”的状态位；
+  - loyalty setter / modifier 与 D6 的0..255真实忠诚结构。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 日文 Wiki 能力值 / 各种经验：
+  - 君主魅力会影响褒赏时忠诚上升量。
+  https://w.atwiki.jp/sangokushi11/pages/1598.html
+  https://w.atwiki.jp/sangokushi11/pages/79.html
+- 日文 Wiki 内政：
+  - 褒赏与宝物是独立忠诚管理路径。
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki 爵位・官职：
+  - 普通武将升官/降官本身不改变忠诚；官职影响指挥兵数、能力与月俸。
+  https://w.atwiki.jp/sangokushi11/pages/111.html
+- Vanilla 刘备逐旬实录：
+  - 褒赏实例 +5/+8/+9；
+  - 作者明确说明忠诚上升量随机并用S/L刷高结果。
+  https://note.com/juicy_fox4269/n/nf69a4b2b4dae
+- PC-PK 隐藏忠诚实测：
+  - 真实忠诚99经COM褒赏可变为108，而UI仍显示100。
+  https://www.ptt.cc/bbs/Koei/M.1776854540.A.47B.html
+- PC/PK宝物没收实录：
+  - 没收导致忠诚下降；-30有多次稳定实机记录，当前只标empirical-high。
+  https://blog.id774.net/entry/2020/11/06/1676/
+  https://blog.id774.net/entry/2021/01/08/1703/
+
+证据等级：褒赏/授予的命令成本和资格、俸禄每月为official-confirmed；月度收支调度为PC-PK1.1 reverse-engineered；褒赏忠诚增量的随机性与魅力影响为empirical-high，精确闭式仍open。
