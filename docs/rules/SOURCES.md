@@ -471,3 +471,46 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://github.com/sjn4048/311MemoryResearch
 
 当前证据等级：`empirical-exact formula + reverse-engineered-structure + PK save cross-validation`。尚未公开展开 PC-PK1.1 行动力恢复主函数体。
+
+### C10 治安专项
+
+- 《三國志11 with パワーアップキット》官方说明书：
+  - 巡查费用100金、20行动力、最多3人；
+  - 每都市每回合仅1次；
+  - 统率合计越高，上升越多；
+  - 都市周围2格有敌军时上升值减小；
+  - 治安80以上不会新发生普通贼。
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 311MemoryResearch：
+  - `整理/Func-内政01-计算征兵数量.txt`：治安直接进入征兵量 `(security+20)`；
+  - `整理/Func-内政02-执行征兵.txt`：征兵后治安下降 `floor(actualRecruited/(魅力和+100))`；
+  - `整理/Func-自动05-城市治安下降.txt`：季初自然下降函数 `0058D6D0`，整备政令 `ProbabilityCheck(50)`。
+  https://github.com/sjn4048/311MemoryResearch
+- 311SireCustomizedPackageDev：
+  - `struct_city.CitySecurity`；
+  - `struct_city.CityActions bit0 = 已巡查`；
+  - `004815F0 SetCityPatrolStatus`；
+  - `0047BD70 SetCityPublicOrder`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 日文 Wiki 能力育成实测：
+  - 巡查治安上升 `floor(执行武将统率和/28)+2`。
+  https://w.atwiki.jp/sangokushi11/pages/1239.html
+- 日文 Wiki 内政：
+  - 治安<80时可能出现贼/异民族根城；
+  - 根城生成后治安恢复到100也不会自动消失，仍可继续刷新部队。
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+- 日文 Wiki 特技：
+  - 亲乌/亲羌/亲越/亲蛮只阻止对应异族根城，不阻止普通治安下降或普通贼；
+  - 后期实测支持威压把安全治安阈值由80降至约60，而非绝对免疫。
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+- 2ch 旧实测：
+  - 敌军逼城时巡查和征兵效果约半减。
+  https://w.atwiki.jp/sangokushi11/pages/1941.html
+- SIRE v1.26 参数说明：
+  - 换季治安下降上限；
+  - 整备政令免降概率；
+  - 巡查效果倍率；
+  - 威压降低贼军出现治安阈值。
+  https://dl.3dmgame.com/patch/26091.html
+
+当前证据等级：巡查基础公式 `empirical-high`；征兵掉治安、换季自然下降、整备政令为 PC-PK1.1 `reverse-engineered`。未把“治安影响瘟疫/蝗灾概率”写成规则。
