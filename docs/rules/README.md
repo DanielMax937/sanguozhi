@@ -5,7 +5,7 @@
 
 ## 最新审计入口
 
-[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E11技巧研究时间](26-technique-research-time.md)。
+[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [E12技巧研究完成功绩](27-technique-research-merit.md)。
 
 A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原blob复用，无历史段落丢失。历史快照不是当前进度指针。
 
@@ -21,7 +21,7 @@ E7技巧系统以 `22-techniques.md` 为基础规范，结构化表为 `../sourc
 
 E9兵粮袭击见 `24-food-raid.md`；E10应射以 `25-response-fire.md` 为当前专项规范，结构化证据为 `../sources/response-fire.json`，兼容判定校验命令为 `python scripts/check_response_fire.py`。
 
-E11技巧研究时间以 `26-technique-research-time.md` 为当前专项规范，结构化证据为 `../sources/technique-research-time.json`；只保存已知阈值/锚点与人才府精确修正，不填满未知矩阵。
+E11技巧研究时间以 `26-technique-research-time.md` 为当前专项规范，结构化证据为 `../sources/technique-research-time.json`；只保存已知阈值/锚点与人才府精确修正，不填满未知矩阵。\n\nE12技巧研究完成功绩以 `27-technique-research-merit.md` 为当前专项规范，结构化冲突证据为 `../sources/technique-research-merit.json`。现行500/1000/2000/3000仅是当前Wiki候选，早期500/1000/1500/2500同时保留；Lv3/Lv4的PC-PK1.1 exact值不得冒充已确认。
 
 ## 版本标记
 
@@ -67,7 +67,7 @@ E11技巧研究时间以 `26-technique-research-time.md` 为当前专项规范�
 24. `23-technique-patch-differences.md` E8 Vanilla/PK补丁链、技巧版本差异、原BUG与社区修复profile
 25. `24-food-raid.md` E9兵粮袭击触发路径、数量模型与RNG边界
 26. `25-response-fire.md` E10应射箭类触发、射程/地形/支援边界与平台差异
-27. `26-technique-research-time.md` E11技巧研究时间分档、人才府修正与证据矩阵
+27. `26-technique-research-time.md` E11技巧研究时间分档、人才府修正与证据矩阵\n28. `27-technique-research-merit.md` E12技巧研究完成功绩冲突表、版本边界与PC exact缺口
 
 ## 来源优先级
 
