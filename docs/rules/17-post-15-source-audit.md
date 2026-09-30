@@ -1360,3 +1360,5 @@ struct_office[81]
 静态数据同步修正：`ranks.json` 的“无爵位”从错误的 `citiesRequired=0` 改为原表“仅1都市”。
 
 D维度到此完成。
+
+下一项进入 E1：部队编成。
