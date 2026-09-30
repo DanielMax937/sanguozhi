@@ -58,6 +58,23 @@ cityId = Tbl_GridToCityID[areaCode]
 
 因此本项的缺口已经从“地图规则未知”收缩为“静态地图数据未导入”。
 
+另外，原 311 地图静态数据（常见头 `SHEX0008`）的兼容解析已经明确存在逐格字段：
+
+```text
+terrain
+areaId
+trap      // 0无 / 1堤防 / 2落石
+dir
+interior
+defence
+thief
+flood     // 水淹范围标记
+fire
+ruins
+```
+
+这组静态字段与运行时 `struct_map_grid` 的 bit-packed 结构不是同一层表示。尤其 `flood` 说明水攻覆盖范围在地图数据中有预标记，不能只靠运行时高度临时 flood-fill 猜测。
+
 ## 2. 地形战法可用性
 
 ### 底层机制
@@ -1472,5 +1489,318 @@ troopDamage =
 
 ## 9. 堤防与水攻
 
-- 原作存在地图固定堤防及破坏后的水攻效果。
-- 完整堤防坐标、洪水覆盖格、耐久与逐格伤害仍缺静态/实测数据。
+### 9.1 堤防是地图固定陷阱，不能由玩家建造
+
+`[PC-PK1.1][reverse-engineered-structure + confirmed-game-data]`
+
+原建筑数据中：
+
+```text
+原设施类型 ID 0x18 = 堤防
+类别 = 陷阱
+玩家不可建设
+最大耐久 = 800
+```
+
+兼容数据同样记录：
+
+```text
+Name = 堤防
+canBuild = false
+durabilityLimit = 800
+canFire = false
+```
+
+因此堤防不是普通“军事设施”，也不是某势力的永久资产；它是地图预置机关。
+
+城市资料长期一致确认原作只有四座城市带堤防：
+
+- 襄平
+- 邺
+- 下邳
+- 寿春
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/77.html
+- https://www.gamersky.com/handbook/200603/21911.shtml
+
+### 9.2 水攻触发条件：堤防耐久被打到 0
+
+`[COMMON][empirical-high; mechanism supported by recovery reverse]`
+
+只有在堤防被真正击破时才触发水攻。
+
+只是把 800 耐久打低但没有归零，不会提前放水。
+
+触发后是**一次性即时结算**，不是“今后数旬地图持续处于洪水状态”。
+
+社区资料长期一致：
+
+- 水攻不分敌我；
+- 被水淹范围覆盖的野外部队会立即壊灭/全灭；
+- 兵种、兵力多少都不能抵消该效果；
+- 舰船部队在被标记的受淹格中也没有普通的“船所以免疫”规则；
+- 特技“水神”没有被验证出对堤防水攻免疫。
+
+因此野外单位建议建模为：
+
+```ts
+if (cell.floodFlag && cellBelongsToTriggeredFloodZone(cell, dam)) {
+  destroyTroopCompletely(troop)
+}
+```
+
+而不是：
+
+```ts
+troop -= fixedFloodDamage
+```
+
+来源：
+- https://w.atwiki.jp/sangokushi11/pages/15.html
+- https://w.atwiki.jp/sangokushi11/pages/2046.html
+- https://www.sohu.com/a/312807420_120099906
+
+### 9.3 水淹范围是静态地图数据，不应只按高度动态推导
+
+`[PC-map-data][reverse-engineered-format]`
+
+这是本轮最重要的静态数据发现。
+
+311 地图格式兼容解析里，每一格存在：
+
+```text
+trap   // 0无 / 1堤防 / 2落石
+flood  // 水淹标记
+```
+
+第三方 PK bin 编辑器对同一字段的说明也是：
+
+> 水淹=1：水坝破坏时，该格会被淹。
+
+因此原作至少预先保存了“哪些格属于可水淹范围”的静态标记。
+
+这意味着 fidelity 模式不能用：
+
+```ts
+if (cell.height < dam.height) flood(cell)
+```
+
+这样一个纯高度算法替代原作。
+
+高度可以帮助玩家视觉判断，PC 版也不直接显示水攻范围；但真正复刻必须导入原地图的 `flood` 标志。
+
+当前仍缺的一小步是：
+
+> 同一张世界地图上四座堤防触发时，原函数如何从全体 `flood=1` 格中筛选“本次这座堤防”的对应子集。
+
+最合理的候选是再结合城市领域 / 陷阱关系过滤，但在取得触发函数之前保持 open，不自行创造关联算法。
+
+来源：
+- https://www.3h3.com/patch/264861.html
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Map/Render/Map/MapGrid.cs
+
+### 9.4 城市本身也会受水攻，但精确数值还不能冒充源码公式
+
+`[COMMON][empirical-medium/high]`
+
+稳定现象：
+
+- 对应城市耐久大幅下降；
+- 城内兵力下降；
+- 老玩家实测还记录治安、气力等同时下降。
+
+常见整理写作：
+
+```text
+城市耐久 -1000
+城市士兵 -2000
+```
+
+但早期 2006 实测写的是“城防减 1000 多”，另有攻略概括成“约最大耐久一半”，说明社区材料在“耐久到底固定 -1000 还是另有版本/取整/附加处理”上并不完全一致。
+
+因此当前规则应写：
+
+```text
+野外受淹部队：全灭 —— empirical-high
+城市耐久/兵力/治安/气力具体扣减：exact value open
+```
+
+不要现在就把：
+
+```ts
+city.durability -= 1000
+city.troops -= 2000
+```
+
+标成 reverse-engineered。
+
+来源：
+- https://www.gamersky.com/handbook/200603/21911.shtml
+- https://www.ptt.cc/bbs/Koei/M.1218858498.A.BEB.html
+- https://www.sohu.com/a/312807420_120099906
+
+### 9.5 堤防击破后会自动重建：每旬恢复最大耐久的 1/10
+
+`[PC-PK1.1][reverse-engineered]`
+
+原每旬设施耐久恢复函数 `00599710` 有堤防专用分支：
+
+```text
+005999F9:
+  if buildingType != 0x18:
+      skip
+
+  if constructionStatus != 0:
+      skip
+
+  restore = trunc(maxDurability / 10)
+  durability += restore
+```
+
+堤防最大耐久 800，因此：
+
+```text
+每旬 +80
+0 → 80 → 160 → ... → 800
+```
+
+从完全击破开始，需要 **10旬** 才恢复满。
+
+达到最大耐久后：
+
+```text
+SetBuildingConstructionStatus(1)
+```
+
+重新设为完成状态，之后才能再次正常作为堤防被击破触发水攻。
+
+这也精确解释了早期攻略：
+
+> 第二次水攻必须等堤防耐久重新回满。
+
+### 9.6 堤防恢复不受“附近有敌军”阻止
+
+`[PC-PK1.1][reverse-engineered]`
+
+普通据点/内政设施的自动恢复会先检查附近敌军，有敌人就可能停止恢复。
+
+但堤防特殊逻辑不同：
+
+```text
+constructionStatus == 0
+→ 直接跳到 005999F9 堤防恢复
+→ 不经过 nearby-enemy 阻止恢复的普通分支
+```
+
+因此被击破后的堤防会继续按每旬 1/10 最大耐久恢复，即使战场仍在附近。
+
+### 9.7 堤防恢复满后重新成为中立陷阱
+
+`[PC-PK1.1][reverse-engineered]`
+
+当恢复到最大耐久后调用：
+
+```text
+00487CA0 SetBuildingConstructionStatus(1)
+```
+
+SIRE 对该函数的说明：
+
+> 障碍物或陷阱在建设完成时，所属势力被设为无（-1）。
+
+所以堤防恢复满后本质上仍是**中立地图机关**，不是“谁最后打过/守过就归谁”。
+
+这也意味着任何能攻击该机关的一方都可能再次触发水攻。
+
+### 9.8 水攻不是持续地形转换
+
+`[COMMON][empirical-high / negative-evidence]`
+
+目前没有原版证据支持：
+
+- 洪水持续 N 旬；
+- 草地长期变浅滩；
+- 浅滩长期变河；
+- 每旬重复对水淹格造成伤害。
+
+原作表现是：
+
+```text
+堤防击破
+→ 播放水攻演出
+→ 即时结算受淹单位/城市效果
+→ 堤防进入重建状态
+→ 地图正常继续
+```
+
+不要把其他“三国志”作品或手游里的动态蓄水/地形改变机制混入《三国志11》。
+
+### 9.9 当前实现建议
+
+```ts
+interface San11StaticGrid {
+  // ...
+  trapType: 0 | 1 | 2
+  flood: boolean
+}
+
+interface DamBuilding {
+  typeId: 0x18
+  maxDurability: 800
+  durability: number
+  completed: boolean
+  forceId: -1
+}
+
+function onDamDestroyed(dam: DamBuilding) {
+  dam.completed = false
+  dam.durability = 0
+
+  const affected = getStaticFloodCellsForDam(dam) // exact filter still open
+
+  for (const cell of affected) {
+    if (cell.troop) destroyTroopCompletely(cell.troop)
+  }
+
+  applyFloodEffectToAssociatedCity(dam) // exact city numeric effect still open
+}
+
+function recoverDamEachDekad(dam: DamBuilding) {
+  if (dam.completed) return
+
+  dam.durability = Math.min(
+    dam.maxDurability,
+    dam.durability + Math.trunc(dam.maxDurability / 10)
+  )
+
+  if (dam.durability === dam.maxDurability) {
+    dam.completed = true
+    dam.forceId = -1
+  }
+}
+```
+
+### 9.10 B9 当前证据边界
+
+已经锁定：
+
+- 堤防是固定、不可建设的地图陷阱；
+- 原设施类型 ID = `0x18`；
+- 最大耐久 800；
+- 只有襄平、邺、下邳、寿春有堤防；
+- 耐久归零触发一次性水攻；
+- 水攻不分敌我，受淹野外部队全灭；
+- 静态地图存在独立 `flood` 水淹范围标记；
+- 堤防击破后每旬恢复最大耐久的 1/10；
+- 800耐久即每旬 +80，10旬回满；
+- 恢复不受附近敌军阻止；
+- 回满后重新设为完成、中立陷阱。
+
+仍 open：
+
+- 四座堤防各自的**完整坐标 + flood 格列表**尚未导入 repo；
+- 触发函数如何把 `flood=1` 格精确归属到某一座堤防；
+- 城市耐久、兵力、治安、气力的精确原函数和整数顺序；
+- Vanilla/主机版是否在城市数值效果上完全一致。
+
