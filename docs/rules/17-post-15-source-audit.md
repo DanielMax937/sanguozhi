@@ -1347,3 +1347,45 @@ release-forbidden-route-conflict
 
 下一 exactness gap：P0-8 官职自动分配资格 / candidate selector / tie-break。
 
+### P0-8 官职自动分配资格 / selector / tie-break
+
+状态：
+
+```text
+P0-8-audit-complete
+selector-scoring-exact
+selector-final-tie-exact
+office-classifier-role-corrected
+candidate-list-generator-attribution-corrected
+caller-list-order-open
+qualification-helper-open
+mode-caller-mapping-open
+```
+
+本轮重要纠错 / 收敛：
+
+- `005FA650` 不是候选列表生成/排序，而是 `005FA650(office)->officeType`；
+- candidate list 是 caller 作为 arg1 直接传给 `005FAF00`；
+- arg3 是独立 scoring-mode flag；
+- 两种 mode 的完整能力门、score、忠诚权重已逐指令整理；
+- military 的 threshold=max(统,武)，但 weighted score=统+武+忠诚项；
+- ordinary civil 用 max(智,政)，不是智+政；
+- top-civil 门槛为统+智>=150；
+- `loyaltyBonus=9*min(loyalty-90,10)`；
+- affinity mode 文武相等时只允许武官侧；
+- candidate 最终同分时 first-in-list wins，selector 自身 tie-break 已 exact；
+- merit 不进入 final score，只属于前置资格体系。
+
+仍 open：
+
+- `005FA4D0` body；
+- `005FAF00` caller/xref；
+- caller list 顺序；
+- arg3业务语义；
+- 多官职 scheduler；
+- 第81项与跨版本。
+
+详见 [P0-8专项](43-auto-office-selector-exactness.md)。
+
+下一 exactness gap：P0-9 部队编成最终资源事务。
+
