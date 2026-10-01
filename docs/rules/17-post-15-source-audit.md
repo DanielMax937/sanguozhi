@@ -1317,3 +1317,33 @@ blanket-rumor-model-rejected
 
 下一 exactness gap：P0-7 俘虏资金不足释放排序 / 主动释放后的禁仕与技巧点。
 
+### P0-7 俘虏资金不足释放 / 主动释放
+
+状态：
+
+```text
+P0-7-audit-complete
+forced-release-count-exact
+forced-release-selection-architecture-resolved
+forced-release-priority-open
+manual-release-tp-positive-official
+manual-release-tp-value-open
+release-forbidden-route-conflict
+```
+
+本轮确认 / 收紧：
+
+- 资金不足释放人数完整闭式：`max(0, prisonerCount-floor(gold/50))`；
+- `0058C320 -> 004AA200 -> 004A8E10` 证明原作先 comparator 处理候选，再裁剪到恰好 releaseCount；
+- 每据点 `0058D1D0` 累计，全部据点后 `0058D430` 统一 finalizer；
+- comparator 具体排序仍未恢复，因此不猜“先放弱将/强将/低忠/高忠”；
+- 官方“追放”命令释放敌俘不耗金/AP/执行武将、最多6人，并明确增加技巧P；
+- “释放+3技巧P”只保留 empirical compatibility candidate；
+- `ForbiddenLord / ForbiddenMonths` 结构与月度计数确认；
+- 主动释放的禁仕资料存在直接冲突，不能继续写成无条件“3个月 confirmed”；
+- 自然逃亡 / 资金不足 / 主动追放 / 即时捕获释放 / 势力灭亡 / 外交换俘必须分 cause。
+
+详见 [P0-7专项](42-captive-release-exactness.md)。
+
+下一 exactness gap：P0-8 官职自动分配资格 / candidate selector / tie-break。
+
