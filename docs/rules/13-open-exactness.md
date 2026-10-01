@@ -460,15 +460,31 @@ P0-6 专项见 [41-nonnatural-loyalty-exactness.md](41-nonnatural-loyalty-exactn
 
 因此 E1 的“资源事务语义”已经可以高置信复现，但 exact opcode finalizer 继续显式 open。
 
-### 6.4 部队能力合成剩余边界
+### 6.4 部队主副将关系合成 / FPU取整（P0-10）
 
-E2 已恢复 `00496570` 主链，当前不再 open 的包括：嫌恶三pair hard override、统武vs智政魅分流、六适性取高、适性倍率、混乱0.8、输送0.4/1/3、精锐基础攻防+10与建设力 `政治*2/3+50`。
+专项见 [45-deputy-rounding-exactness.md](45-deputy-rounding-exactness.md)。
 
-仍未知：
+已确认 / 收紧：
 
-- `00495AB0` 完整逐指令文本，主要用于把血缘1/3、夫妻/义兄弟1从PS2 empirical-exact升级为PC逐指令；
-- `00707A74 ConvertFloatToInteger` 对所有正小数边界的精确FPU rounding模式；
-- Vanilla/主机版是否在混乱0.8与输送0.4/1/3上完全同常量。
+- `00495AB0` 只用于统率/武力；智/政/魅在无嫌恶时直接取三人最高；
+- 普通关系 `00495B65 = sar eax,2`，即正差值/4向下截断，为PC opcode exact；
+- 亲爱 `00495B79 = sar eax,1`，即正差值/2向下截断，为PC opcode exact；
+- 夫妻/义兄弟 full-share 除PS2精确实测外，又获PC SIRE原版规则说明交叉，升级为PC-high；
+- 血缘/3仍保持cross-platform-high，PC opcode继续open；
+- 两名副将分别与主将算candidate后取最大，不叠加bonus；
+- 任一主/副、副/副嫌恶pair仍触发五维主将-only hard override，但适性继续三人取高；
+- `00707A74` 已通过原IDB内部label与Microsoft CRT源码识别为 `_ftol2`；
+- `_ftol2` 语义是 toward-zero truncation，因此正常正攻防/建设/耗粮 raw 的最终转换就是 exact floor；
+- 旧“00707A74 rounding mode open”撤回。
+
+仍 open：
+
+- `00495AB0` 完整PC body；
+- 血缘/3 PC opcode；
+- 夫妻/义兄弟full-share PC精确branch/opcode；
+- relation check方向性；
+- x87中间 extended precision / 原常量 bit pattern 极端边界；
+- Vanilla / PS2 / Wii等价性。
 
 ### 6.6 训练 / 气力剩余边界
 
@@ -510,7 +526,7 @@ E5 已确认：
 仍未知：
 
 - `0049D180` 在多个不同等级阵系设施重叠时的优先级；
-- `00707A74` 浮点转整数边界；
+- 防御设施浮点常量 bit pattern / x87 中间精度极端边界；`00707A74` 最终转换已由P0-10闭合为正值floor；
 - 粮尽逃兵的PC-PK1.1原函数与闭式；
 - Vanilla/主机版阵系常量是否完全一致。
 
