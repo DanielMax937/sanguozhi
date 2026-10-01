@@ -474,6 +474,9 @@ AP ×0.5
 
 ## 4. 攻城统一公式与陷落资源
 
+
+P0-3 专项证据：`38-siege-capture-exactness.md`；结构化数据：`../sources/siege-capture-exactness.json`。
+
 ### 结论
 
 本项从“几乎全靠 fallback”缩小为三个不同证据等级的问题：
