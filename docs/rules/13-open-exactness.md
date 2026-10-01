@@ -280,25 +280,33 @@ P0-4 审计已完成，行为边界已明显收紧：
 
 详见 [P0-4专项](39-fire-lifetime-spread-exactness.md)。
 
-### 5. 登场 / 自然死亡精确 RNG
+### 5. 登场 / 自然死亡精确 RNG（P0-5 审计完成）
 
-已确认：
-- `YearOfDebut` 与 current Identity 分离；成年并不自动登场（20岁诸葛亮、34岁沙摩柯仍可未登场）。
-- `struct_scenario` 独立保存 `IgnoreAge / ComeOnStage / Lifetime / DieInBattleSetting`。
-- `YearOfDeath` 是基础/参考没年；另有 `0048A000 GetDeathYear`。
-- `markedForDeath` 与 `Identity=DEAD` 分离，死亡 flag 可先影响历史事件。
-- 自然死武将到有效没年后多病，通常当年、最迟常见2–3年内死亡。
-- 不自然死会在没年附近病倒后恢复，并有额外寿命；额外寿命与年龄负相关。
-- 史实事件可覆盖普通死亡流程，例如孙策之死胜利明确延寿20年。
-- 较早存档重跑可能改变未来死亡结果，因此最终死亡日期不是开局永久预抽。
+P0-5 专项见 [40-debut-death-exactness.md](40-debut-death-exactness.md)。
 
-仍未知：
-- 普通 `NOT_INTRODUCED -> NOT_DISCOVERED/现役` caller 与 `ScheduledLord` 精确分支。
-- `IgnoreAge / ComeOnStage / Lifetime` 原始枚举和数值变换。
-- `0048A000 GetDeathYear` 完整函数体。
-- 不自然死延寿 a 的原始年龄函数。
-- `markedForDeath` 的触发时点/概率，以及 flag 后真正死亡的延迟。
-- 一般沙盘伤病自然恢复/恶化公式。
+已确认 / 收紧：
+
+- PC-PK1.1 `00590C30 MonthlyAction` 只在月初进入人员生命周期链，其中 `00590C82 -> 005833D0` 是明确的**年龄 / 死亡相关处理入口**；因此自然寿命主处理不是任意旬独立 dispatcher。
+- `YearOfDebut / Identity / ScheduledLord` 为独立字段；史实模式仍使用人物原 `YearOfDebut` 与剧本位置/身份。
+- `ComeOnStage` 的用户语义可分史实 / 假想；假想模式会随机化未发现/在野人物位置，并把登场年统一提前到成人年。成人年龄按现有资料采用 **15岁**（empirical-high），但 raw enum 仍open。
+- `IgnoreAge` 是独立场景字段；英雄集结类“无视年龄”场景至少绕过普通时间登场 gate 与普通自然寿命，不与 `Lifetime` 合并。
+- `Lifetime` 用户模式分 Historical / Longevity / Fictional；Longgevity 约 +20 年、Fictional 约 99 岁目前只作为 documented/empirical compatibility profile，不冒充 `0048A000` 原函数常量。
+- 自然死 / 不自然死是不同 lifespan profile；不自然死不会在史实没年直接退场，且额外寿命与基础没年年龄负相关。
+- 孙策实测排除“最终实际死亡最多只比基础没年晚15年”的 hard cap。
+- `YearOfDeath / GetDeathYear / markedForDeath / HealthLevel / Identity=DEAD` 必须分层。
+- 从较早存档重跑可能改变未来死亡结果，禁止 scenario init 时永久预抽最终死亡日期。
+
+仍 open：
+
+- `005833D0` 完整函数体；
+- `0048A000 GetDeathYear` 完整函数体；
+- `ComeOnStage / Lifetime / IgnoreAge` raw numeric enum；
+- 史实普通登场时 `ScheduledLord` 精确分支与 setter；
+- Longgevity +20 与死因修正的先后顺序；
+- Fictional 99岁是进入死亡流程的 threshold 还是实际 hard date；
+- `markedForDeath` 的触发概率 / 时点；
+- flag 后健康恶化到真正死亡的精确时序；
+- Vanilla / PS2 / Wii 差异。
 
 ### 6. 忠诚下降主函数
 
