@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-10-exactness",
+  "target": "deputy relationship stat composition and float-to-integer conversion",
+  "status": {
+    "audit": "complete",
+    "ftol2Identity": "resolved",
+    "floatToIntegerSemantics": "truncate-toward-zero",
+    "positiveFloatConversion": "floor-exact",
+    "normalDeputyQuarter": "pc-opcode-exact",
+    "loveDeputyHalf": "pc-opcode-exact",
+    "spouseSwornFullShare": "pc-high-plus-ps2-exact",
+    "bloodDeputyThird": "cross-platform-high-pc-opcode-open",
+    "relationshipHelperBody": "partial"
+  },
+  "floatConversion": {
+    "san11Address": "00707A74",
+    "idbName": "ConvertFloatToIntegerAndStoreInEAX",
+    "identifiedRuntimeHelper": "_ftol2",
+    "nextFunction": "00707AE9",
+    "localLabels": [
+      "00707A97 arg_is_not_integer_QnaN",
+      "00707ABB positive",
+      "00707AD3 integer_QnaN_or_zero",
+      "00707AE7 localexit"
+    ],
+    "semantics": "truncate toward zero",
+    "positiveDomainEquivalent": "floor",
+    "negativeDomainEquivalent": "ceil"
+  },
+  "relationship": {
+    "hateOverride": {
+      "function": "00495B90",
+      "pairScope": [
+        "main-sub1",
+        "main-sub2",
+        "sub1-sub2"
+      ],
+      "result": "all five attributes fall back to main; proficiency still takes team maximum"
+    },
+    "leadershipAndWar": {
+      "helper": "00495AB0",
+      "normal": {
+        "divisor": 4,
+        "address": "00495B65",
+        "opcode": "C1 F8 02",
+        "operation": "sar eax,2",
+        "evidence": "pc-opcode-exact"
+      },
+      "love": {
+        "divisor": 2,
+        "address": "00495B79",
+        "opcode": "D1 F8",
+        "operation": "sar eax,1",
+        "evidence": "pc-opcode-exact"
+      },
+      "blood": {
+        "divisor": 3,
+        "evidence": "ps2-empirical-exact-cross-platform-high",
+        "pcOpcode": "open"
+      },
+      "spouseOrSworn": {
+        "divisor": 1,
+        "behavior": "max(main, deputy)",
+        "evidence": "pc-reverse-author-documented-high-plus-ps2-empirical-exact",
+        "pcOpcode": "open"
+      },
+      "lowerDeputyNeverReducesMain": true,
+      "twoDeputies": "max(combine(main,sub1), combine(main,sub2)); bonuses do not add"
+    },
+    "intelligencePoliticsCharisma": {
+      "behavior": "team maximum",
+      "usesRelationshipDivisor": false,
+      "precondition": "no mutual-hate pair"
+    }
+  },
+  "crossRuleClosures": {
+    "troopPanels": "positive final conversion via 00707A74 is floor-exact",
+    "foodConsumption": "positive final expenditure conversion via 00707A74 is floor-exact",
+    "siegeDurability": "where caller reaches 00707A74, final positive conversion is floor-exact; intermediate x87 precision remains separate"
+  },
+  "open": [
+    "00495AB0 complete PC body",
+    "blood /3 PC opcode",
+    "spouse/sworn full-share PC branch/opcode",
+    "directionality of love/sworn checks inside 00495AB0",
+    "x87 intermediate extended-precision edge cases",
+    "Vanilla/PS2/Wii helper/function equivalence"
+  ]
+}
