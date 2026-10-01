@@ -1196,3 +1196,27 @@ PK 外交府继续只确认 AP×0.5 与亲善金×0.5，不加入外交成功率
 
 下一 exactness gap：P0-3 攻城统一公式与据点接管资源。
 
+### P0-3 攻城统一公式与据点接管资源
+
+状态：
+
+```text
+siege-call-chain-resolved
+capture-resource-formula-resolved
+durability-inner-functions-still-open
+```
+
+确认：
+- 城兵伤害共用 `005ADC30`；
+- 普通耐久 `005ADDC0`、冲车/木兽 `005ADE20`；
+- durabilityPower 5/15/战法字段；
+- 目标倍率、会心、云梯、超级难度；
+- `004B329B` 的资源保留率 `max(5,trunc(CHA/10))`；
+- 金/粮/兵/12兵装统一按该比例保留。
+
+仍缺 `005ADDC0/005ADE20` 内部函数体、小数取整与据点接管耐久细节。
+
+详见 [P0-3专项](38-siege-capture-exactness.md)。
+
+下一 exactness gap：P0-4 火焰持续与自然蔓延。
+
