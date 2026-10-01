@@ -425,29 +425,40 @@ P0-6 专项见 [41-nonnatural-loyalty-exactness.md](41-nonnatural-loyalty-exactn
 - 流言 target selector、单人忠诚损失分布与治安下降分布；
 - Vanilla / PK / 主机版差异。
 
-### 6.3 部队编成最终资源事务
+### 6.3 部队编成最终资源事务（P0-9）
 
-E1 已确认：
+专项见 [44-troop-resource-transaction-exactness.md](44-troop-resource-transaction-exactness.md)。
 
-- `struct_troop` 固定1主将+最多2副将，`TroopType=0/1` 区分战斗/输送；
-- 玩家战斗出兵下限精确为1；
-- 上限先取主将可指挥兵数与据点现有兵力较小值；
-- 枪/戟/弩/马再与对应据点兵装库存取小；
-- 剑不按士兵数要求库存；
-- 攻具/高级舰船按部队件数建模，不按士兵数消耗；
-- 普通战斗部队金10000、粮50000；
-- 输送队兵60000、金100000、粮500000；
-- 陆/水兵装可同时保存在同一部队结构。
+已确认 / 收紧：
 
-仍未知：
+- battle troop-count draft = sub_647250；
+- battle money/food draft 位于 sub_647AC0；
+- transport cargo draft 位于 sub_615790 / sub_615A10；
+- 战斗部队金10000、粮50000，runtime helper 也会封顶，不只是 UI 值；
+- 输送兵60000、金100000、粮500000；
+- 输送 ordinary equipment quantity cap 可由地址表 + SIRE reverse-history 收紧为 **100000**；
+- troop strength 另有65535硬边界；
+- 据点侧 004AE2A0/300/3C0/430 与 troop侧 004AE4A0/510/570 等资源 primitive 已定位；
+- ID1～4 枪戟弩马为数量型，出征资源量与士兵数等量；
+- ID5～8与10～11为件数型，一支对应部队一件/一艘是 documented/empirical-high；
+- 回城资源并入据点，存活件数型装备可重新入库；
+- 入库超过据点容量会产生超额损失，为长期原作实测；
+- 现代 sango_infinity 的 commit/return 调用顺序只作 reconstruction 对照，不标原作。
 
-- 玩家点击“确定”后的完整资源事务 finalizer；
-- 攻具/楼船/斗舰从据点扣除、回城归还的逐指令 caller；
-- 输送队各兵装货物的逐类型容量；
-- 出征武将候选列表的完整资格过滤顺序；
-- PC/主机版输送货物 UI 的具体差异。
+仍 open：
 
-因此 E1 的**合法编成范围**已经可精确实现；尚不能把 UI 上限函数冒充成完整 create/return resource transaction。
+- battle / transport actual commit finalizer 地址和 body；
+- 据点扣兵/金/粮/兵装与 runtime troop 创建的精确顺序；
+- commit rollback；
+- 件数型扣1 caller；
+- transport 全12类兵装是否完全共享100000路径；
+- enter-building/disband finalizer；
+- 数量型兵装返还量、伤兵与兵装顺序；
+- 多资源同时超容量的裁剪顺序；
+- 出征武将完整过滤；
+- Vanilla / 主机版。
+
+因此 E1 的“资源事务语义”已经可以高置信复现，但 exact opcode finalizer 继续显式 open。
 
 ### 6.4 部队能力合成剩余边界
 
