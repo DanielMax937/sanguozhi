@@ -360,28 +360,40 @@ P0-5 专项见 [40-debut-death-exactness.md](40-debut-death-exactness.md)。
 
 详见 [P0-7专项](42-captive-release-exactness.md)。
 
-### 6.2 官职自动分配的最后缺口
+### 6.2 官职自动分配资格 / selector / tie-break（P0-8）
 
-D10 已确认：
+专项见 [43-auto-office-selector-exactness.md](43-auto-office-selector-exactness.md)。
 
-- `OfficeID`、`Merit` 与 `struct_office` 字段；
-- 官职功绩门槛为4000点阶梯，功绩上限60000；
-- 无官5000、军制改革+3000；
-- 官职能力加成进入实际五维并最终封顶100；
-- `005FAF00` 自动 selector 中忠诚<90为硬拒绝；
-- 一个评分模式存在武官 `max(统,武)>=60`、文官 `max(智,政)>=70`、最高档 `统+智>=150` 门槛，并加入 `9*min(忠诚-90,10)`；
-- 另一模式按 `max(统,武)` 与 `max(智,政)` 对人物作文武倾向分流；
-- 同分不替换先前候选。
+已确认 / 收紧：
 
-仍未知：
+- `005FAF00` 参数角色已经恢复：arg1=candidate list、arg2=office、arg3=scoring mode flag；
+- 旧“`005FA650` 生成/排序候选列表”说法错误，已撤回；它实际接收 office 并返回 office type；
+- 对80个有名官职，type0=丞相/司空/太尉/司徒，type1=武官，type2=普通文官；
+- `005FA4D0(person,office)` 先做资格 gate，随后 true loyalty <90 共用硬拒绝；
+- arg3!=0 的 weighted-threshold mode：
+  - top civil：统+智>=150，score=统+智+忠诚项；
+  - military：max(统,武)>=60，score=统+武+忠诚项；
+  - civil：max(智,政)>=70，score=max(智,政)+忠诚项；
+  - 忠诚项=`9*min(trueLoyalty-90,10)`；
+- arg3==0 的 role-affinity mode：
+  - military 仅在 max(统,武)>=max(智,政) 时参与；
+  - civil/top-civil 仅在 max(智,政)>max(统,武) 时参与；
+  - 相等时武官侧获分类优势；
+  - 不加忠诚 score bonus；
+- final score 相等时不替换：**caller list first-in wins**；
+- merit 负责前置资格，不进入 `005FAF00` final score。
 
-- `005FA4D0` 的完整资格判定；
-- `005FA650` 候选列表生成/排序；
-- 两种评分模式 caller flag 的业务含义；
-- 原 `struct_office[81]` 中第81项的内部语义；
-- Vanilla/主机版是否完全同 selector。
+仍 open：
 
-因此当前可以精确复现官职数据与大部分自动评分，但**不能伪造最终同分 tie-break，也不能把60/70/150门槛套给所有 caller**。
+- `005FA4D0` 完整资格 body；
+- `005FA650` 完整 opcode与第81项；
+- `005FAF00` caller / xref；
+- caller candidate list 构造与顺序；
+- arg3 的业务语义；
+- 多官职连续自动分配时的 office 顺序、candidate removal；
+- Vanilla / 主机版。
+
+因此当前 selector 的**单个官职选人核心已经可以 exact 实现**；尚不能伪造跨多个官职的完整自动任官 scheduler。
 
 ### 6.1 褒赏 / 欠薪 / 流言等非自然忠诚变动（P0-6）
 
