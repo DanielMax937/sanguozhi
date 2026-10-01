@@ -173,19 +173,89 @@ version-boundary-resolved
 constants-still-open
 ```
 
-### 3. 攻城统一公式与据点接管资源
+### 3. 攻城统一公式与据点接管资源（P0-3 主链已收窄）
 
-已确认：
-- 城兵或耐久归零均可陷落。
-- 有完整的多种攻击手段 golden-test 表。
-- 主将魅力决定保留内政设施数量：≥100为5，80–99为4，60–79为3，40–59为2，≤39为1。
+P0-3 专项见 `38-siege-capture-exactness.md`。
 
-新找到：
-- 攻陷后物资保留已有 PC-PK 实战公式：`攻陷前物资 / 100 × floor(主将魅力/10)`，已写入 `05-combat.md`。
+当前 PC-PK1.1 已确认：
 
-仍未知：
-- 普攻/冲车/木兽/井阑/投石对城兵与耐久的统一闭式。
-- 小数量兵装/兵器/舰船的整数取整边界，以及耐久接管的所有路径。
+```text
+城兵伤害：
+005ADC30 通用战斗伤害核心
++ 据点/兵器/难度外层修正
+
+耐久伤害：
+普通兵种/井阑/投石 -> 005ADDC0
+冲车/木兽          -> 005ADE20
+```
+
+耐久外层已恢复：
+
+- 远程普通攻击/无战法 durabilityPower=5；
+- 相邻普通攻击=15；
+- 战法取 tacticData+0x2F；
+- 目标类型倍率；
+- 会心×1.15；
+- 云梯普通陆军×1.4、兵器等×1.2；
+- 超级难度玩家×0.75。
+
+普通耐久闭式目前可用逆向重构：
+
+```ts
+trunc(
+  sqrt(troops)
+  * attack
+  * sqrt(1/1500)
+  * (1+power/25)
+  * targetMultiplier
+  * troopMultiplier
+  * extraModifiers
+)
+```
+
+10000兵、攻击80、城市目标：
+- 相邻普攻=231；
+- 弩远程普攻=173；
+与原作实测一致。
+
+攻陷资源保留已由 `004B329B` 完整闭合：
+
+```ts
+retainPct =
+  max(5, trunc(commanderCharisma/10))
+
+retained =
+  trunc(oldAmount*retainPct/100)
+```
+
+统一作用于：
+
+```text
+金
+兵粮
+兵力
+12类兵装
+```
+
+旧“魅力/10直接作为百分比、低魅力可能0%”错误；原程序有最低5%。
+
+当前真正仍 open：
+
+- `005ADDC0` 函数体；
+- `005ADE20` 函数体；
+- 小兵力/x87取整；
+- 小数量兵器/舰船整数边界；
+- 内政设施具体保留哪几座的 selector；
+- 据点耐久接管时的所有重置路径；
+- Vanilla/主机版差异。
+
+状态：
+
+```text
+siege-call-chain-resolved
+capture-resource-formula-resolved
+durability-inner-functions-still-open
+```
 
 ### 4. 火焰持续与自然蔓延
 
