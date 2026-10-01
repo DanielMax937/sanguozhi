@@ -103,15 +103,75 @@ SIRE-modern-mod-system
 
 所以本项被**显著收窄但未虚假关闭**。
 
-### 2. 外交公式的版本边界
+### 2. 外交公式的版本边界（P0-2 边界已解决；常量仍open）
 
-PK/后期 PC 的亲善、同盟、停战、劝降、俘虏交换已有长期流传且互相一致的逆向公式，已标 `empirical-high`。
+P0-2 专项见 `37-diplomacy-version-boundaries.md`。
 
-仍未知：
-- Vanilla 1.0 是否完全同公式。
-- 各官方补丁版本是否调整过常量。
+官方补丁记录现在可以把 PC Vanilla 精确切成：
 
-因此外交公式必须带 `rulesetVersion`，不能无版本全局复用。
+```text
+1.0
+↓
+1.1：友好增减平衡调整
+↓
+1.2：友好增减再次调整
+     + 计略・外交成功率调整
+↓
+1.3～1.3.3：公开changelog未再列外交专项
+```
+
+所以“Vanilla 一套公式”已明确错误。
+
+同时，PK 当年明确新增“超级”难度，而现有完整外交公式族包含：
+
+```text
+初级1.0 / 上级0.8 / 超级0.7
+```
+
+因此该完整公式族只能安全标：
+
+```text
+pk-era-formula-corpus
+```
+
+不能反推成 Vanilla 1.0/1.1 原公式。
+
+当前 profile：
+
+```text
+vanilla-pc-1.0
+vanilla-pc-1.1
+vanilla-pc-1.2-plus
+pk-pc-formula-corpus
+pk-pc-reverse-support
+console-separate-open
+```
+
+Vanilla 如为了闭环临时复用 PK 公式，必须显式：
+
+```text
+compatibilityAssumption=true
+```
+
+PK1.1/1.1.1 官方补丁没有公开外交专项变化，但这只支持“公开changelog无变更”，不证明 PK1.0/1.1/1.1.1 二进制公式 identical。
+
+本项版本**边界问题已解决**；仍 open 的是各版本 exact constants：
+
+- Vanilla 1.0；
+- Vanilla 1.1；
+- Vanilla 1.2 实际改了哪些常量；
+- Vanilla 1.2～1.3.3 二进制等价性；
+- 现有 PK 公式 corpus 的 exact build；
+- late Vanilla 与 PK 的具体共享范围；
+- 主机版；
+- 历史公式族的原 EXE 入口。
+
+状态：
+
+```text
+version-boundary-resolved
+constants-still-open
+```
 
 ### 3. 攻城统一公式与据点接管资源
 
