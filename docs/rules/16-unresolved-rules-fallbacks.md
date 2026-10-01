@@ -1435,6 +1435,112 @@ remaining = max(currentRemaining, newlyRolledDuration)
 
 详细专项见 `28-status-duration-recovery.md`。
 
+## 7.5 褒赏 / 欠薪 / 流言非自然忠诚（P0-6）
+
+> P0-6 专项见 [41-nonnatural-loyalty-exactness.md](41-nonnatural-loyalty-exactness.md)。
+
+### 结论
+
+当前不再允许以下三个旧式 fallback：
+
+```text
+褒赏 = 固定 +3..10
+欠薪 = 剩余资金部分支付后统一 -10..30
+流言 = 成功后全城所有武将统一 -N
+```
+
+### 金钱褒赏
+
+命令层固定：
+
+```ts
+costGold = 100 * count
+costAP   = 5 * count
+```
+
+忠诚增量必须 profile 化：
+
+```ts
+gain = cashRewardProfile.roll({
+  rulerCharm,
+  target,
+  rng,
+})
+```
+
+当前没有精确原函数。已有 +5/+8/+9 原作实测，因此不要采用现代复刻“保底11”的规则。
+
+### 月俸事务
+
+PC-PK1.1 外层精确：
+
+```ts
+function settleSalary(postCaptiveGold, salarySum) {
+  if (salarySum <= postCaptiveGold) {
+    return {
+      gold: postCaptiveGold - salarySum,
+      shortfall: false,
+    }
+  }
+
+  return {
+    gold: postCaptiveGold, // 不扣部分工资
+    shortfall: true,
+  }
+}
+```
+
+欠薪时：
+
+```text
+0058D5E0
+→ 累计待处理武将
+→ 所有据点扫描完
+→ 0058C190
+```
+
+受罚 selector 与 loss 值仍 open，不能自拟为“全员固定掉忠”。
+
+### 流言
+
+第一版只能把接口写对：
+
+```ts
+const targets =
+  rumorProfile.selectTargets(city, rng)
+
+for (const person of targets) {
+  changeLoyalty(
+    person,
+    -rumorProfile.rollLoss(person, rng)
+  )
+}
+
+rumorProfile.applySecurity(city, rng)
+```
+
+不能写：
+
+```ts
+for (const person of city.officers) {
+  person.loyalty -= random(8, 15)
+}
+```
+
+百人都市在300+成功流言后仍只有少数武将明显掉忠，已足以否定 blanket-all-officer 模型。
+
+现代复刻中的“全员8..15+义理加权”继续标 `mod/reconstruction-only`。
+
+### 剩余 exactness
+
+- 褒赏原 RNG/魅力/义理公式；
+- 宝物授予/没收 exact value mapping；
+- `0058D5E0 / 0058C190`；
+- `005D05B0 / 005D05F0`；
+- 流言 target selector / loyalty loss / security loss。
+
+---
+
 ## 8. 单挑连续命中 / 伤害函数（E14 已闭合通用核心）
 
 ### 结论：核心连续公式已找到，不再需要自拟 ratio fallback
