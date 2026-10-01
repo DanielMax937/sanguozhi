@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-3-exactness",
+  "target": "PC-PK1.1 siege durability and capture resources",
+  "status": {
+    "siegeCallChain": "resolved",
+    "captureResourceFormula": "resolved",
+    "durabilityInnerFunctions": "open"
+  },
+  "garrisonDamage": {
+    "core": "005ADC30",
+    "rule": "uses common combat damage core then facility/siege-specific modifiers",
+    "evidence": "reverse-engineered"
+  },
+  "durability": {
+    "ordinaryHelper": "005ADDC0",
+    "ramWoodBeastHelper": "005ADE20",
+    "powerInputs": {
+      "rangedNormal": 5,
+      "adjacentNormal": 15,
+      "tactic": "tacticData+0x2F"
+    },
+    "targetMultipliers": {
+      "city": 0.7,
+      "gate": 0.6,
+      "port": 0.8,
+      "camp": 0.8,
+      "fort": 0.7,
+      "fortress": 0.6,
+      "earthenWall": 0.9,
+      "stoneWall": 0.7,
+      "domesticFacility": 1.1,
+      "fireTrap": 1.6,
+      "levee": 0.7
+    },
+    "ladder": {
+      "regularLand": 1.4,
+      "siegeAndLaterTypes": 1.2
+    },
+    "critical": 1.15,
+    "superDifficultyPlayer": 0.75,
+    "reconstructedOrdinaryFormula": "trunc(sqrt(troops)*attack*sqrt(1/1500)*(1+power/25)*targetMultiplier*troopMultiplier*extraModifiers)",
+    "anchorTests": [
+      {
+        "troops": 10000,
+        "attack": 80,
+        "target": "city",
+        "power": 15,
+        "damage": 231
+      },
+      {
+        "troops": 10000,
+        "attack": 80,
+        "target": "city",
+        "power": 5,
+        "damage": 173
+      }
+    ],
+    "exactness": "outer-chain reverse-engineered; inner 005ADDC0/005ADE20 bodies still open"
+  },
+  "captureResources": {
+    "function": "004B329B",
+    "retainPercent": "max(5,trunc(commanderCharisma/10))",
+    "invalidAttackerFallbackPercent": 5,
+    "appliesTo": [
+      "money",
+      "food",
+      "troops",
+      "all12EquipmentSlots"
+    ],
+    "amountFormula": "trunc(oldAmount*retainPercent/100)",
+    "explicitUpperCap": false,
+    "evidence": "reverse-engineered"
+  },
+  "domesticFacilityRetention": {
+    "countByCharisma": [
+      {
+        "condition": "CHA>=100",
+        "count": 5
+      },
+      {
+        "condition": "80<=CHA<=99",
+        "count": 4
+      },
+      {
+        "condition": "60<=CHA<=79",
+        "count": 3
+      },
+      {
+        "condition": "40<=CHA<=59",
+        "count": 2
+      },
+      {
+        "condition": "CHA<=39",
+        "count": 1
+      }
+    ],
+    "exactSpecificFacilitySelector": "open"
+  },
+  "open": [
+    "005ADDC0 complete body",
+    "005ADE20 complete body",
+    "small-troop x87/00707A74 rounding",
+    "small siege/ship integer boundaries",
+    "specific domestic facilities retained selector",
+    "durability reset on capture",
+    "Vanilla/console equivalence"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[部队攻击].txt",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[破坏内政设施和破城获取资源].txt",
+    "https://game.ali213.net/thread-5983352-1-1.html",
+    "https://w.atwiki.jp/sangokushi11/pages/92.html"
+  ]
+}
