@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-5-exactness",
+  "target": "officer debut and natural-death lifecycle",
+  "status": {
+    "audit": "complete",
+    "monthlyLifecycleDispatcher": "resolved",
+    "debutProfileSemantics": "resolved-high",
+    "lifespanProfileSemantics": "resolved-high",
+    "deathYearInnerFormula": "open",
+    "markedDeathTiming": "open"
+  },
+  "reverse": {
+    "monthlyAction": "00590C30",
+    "monthStartCheck": "00482680",
+    "ageDeathHandler": "005833D0",
+    "getAge": "00488A20",
+    "isNotIntroduced": "00488C50",
+    "isNotDiscovered": "00488C60",
+    "isDead": "00488C80",
+    "isMarkedForDeath": "00489160",
+    "getDeathYear": "0048A000"
+  },
+  "personFields": {
+    "yearOfDebut": "0x44",
+    "yearOfBirth": "0x48",
+    "yearOfDeath": "0x4C",
+    "causeOfDeath": "0x50",
+    "identity": "0xA0",
+    "scheduledLord": "0xA8",
+    "flags": "0x124",
+    "healthLevel": "0x15C"
+  },
+  "scenarioFields": {
+    "ignoreAge": "0x18",
+    "dieInBattleSetting": "0x24",
+    "lifetime": "0x38",
+    "comeOnStage": "0x50"
+  },
+  "debut": {
+    "historical": {
+      "effectiveYear": "person.yearOfDebut",
+      "location": "scenario/historical",
+      "evidence": "documented-high"
+    },
+    "fictional": {
+      "effectiveYear": "person.yearOfBirth+15",
+      "location": "randomized",
+      "evidence": "empirical-high",
+      "adultAge": 15
+    },
+    "yearGateIsNotIdentityTransition": true,
+    "scheduledLordExactBranch": "open",
+    "rawComeOnStageEnum": "open"
+  },
+  "ignoreAge": {
+    "separateScenarioField": true,
+    "bypassOrdinaryChronologicalDebut": true,
+    "bypassOrdinaryNaturalLifespan": true,
+    "evidence": "empirical-high",
+    "otherAgeSystems": "open"
+  },
+  "lifespan": {
+    "modes": ["historical", "longevity", "fictional"],
+    "historical": {
+      "usesBaseDeathYearAndCause": true,
+      "innerFormula": "open"
+    },
+    "longevity": {
+      "compatibilityExtraYears": 20,
+      "evidence": "empirical-high",
+      "exactOrderingWithCauseAdjustment": "open"
+    },
+    "fictional": {
+      "compatibilityAgeThreshold": 99,
+      "evidence": "documented-high",
+      "hardDeathDateVsThreshold": "open"
+    },
+    "rawLifetimeEnum": "open"
+  },
+  "causeOfDeath": {
+    "natural": {
+      "behavior": "illness/death around effective death year; usually same year, sometimes +2/+3 years",
+      "evidence": "empirical-high"
+    },
+    "unnatural": {
+      "behavior": "does not die directly at historical death year; receives age-dependent extra lifespan",
+      "evidence": "empirical-high",
+      "exactAgeCurve": "open",
+      "hardCap15Rejected": true
+    }
+  },
+  "sunCeAnchor": {
+    "birthYear": 175,
+    "originalDeathYear": 200,
+    "editedDeathYearTest": 189,
+    "editedObservedEventYears": [205, 206],
+    "normalObservedEventAround": [216, 217],
+    "eventWinExtensionYears": 20,
+    "note": "supports non-natural extra-life profile and rejects a final hard +15 cap"
+  },
+  "runtime": {
+    "scenarioInitPermanentDeathDate": false,
+    "normalPrngConsumption": true,
+    "monthStartDispatcher": true,
+    "exactMonthlyVsAnnualInternalRoll": "open"
+  },
+  "fallback": {
+    "fictionalDebutYear": "birth+15",
+    "longevityExtraYears": 20,
+    "fictionalAgeThreshold": 99,
+    "annualMarkDistribution": {
+      "thresholdYear": 0.65,
+      "plus1": 0.25,
+      "plus2": 0.08,
+      "plus3": 0.02
+    },
+    "annualMarkDistributionEvidence": "provisional-engine-rule",
+    "mustRunInsideMonthStartLifecycleDispatcher": true
+  },
+  "open": [
+    "005833D0 complete body",
+    "0048A000 GetDeathYear complete body",
+    "raw ComeOnStage/Lifetime/IgnoreAge enums",
+    "historical ScheduledLord debut branch",
+    "NOT_INTRODUCED transition setter/timing",
+    "Longevity +20 ordering relative to cause adjustment",
+    "Fictional age99 threshold vs hard death date",
+    "markedForDeath trigger timing/probability",
+    "health deterioration and final death timing",
+    "Vanilla/PS2/Wii version differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[每月例行处理].txt",
+    "https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md",
+    "https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md",
+    "https://gamefaqs.gamespot.com/pc/931351-romance-of-the-three-kingdoms-xi/faqs/49611",
+    "https://w.atwiki.jp/sangokushi11/pages/144.html",
+    "https://w.atwiki.jp/sangokushi11/pages/1787.html",
+    "https://w.atwiki.jp/sangokushi11/pages/983.html",
+    "https://w.atwiki.jp/sangokushi11/pages/579.html",
+    "https://w.atwiki.jp/sangokushi11/pages/918.html"
+  ]
+}
