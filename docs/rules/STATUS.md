@@ -6,33 +6,35 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-5 登场 / 自然死亡精确 RNG
+### 最新完成：P0-6 褒赏 / 欠薪 / 流言等非自然忠诚变动
 
-- [P0-5 正文](40-debut-death-exactness.md)
-- [P0-5 结构化证据](../sources/debut-death-exactness.json)
-- [P0-5 校验脚本](../../scripts/check_debut_death_exactness.py)
-- [武将主规则](03-personnel.md)
-- [回合/月初顺序](00-turn-scenario.md)
+- [P0-6 正文](41-nonnatural-loyalty-exactness.md)
+- [P0-6 结构化证据](../sources/nonnatural-loyalty-exactness.json)
+- [P0-6 校验脚本](../../scripts/check_nonnatural_loyalty_exactness.py)
+- [武将忠诚主规则](03-personnel.md)
+- [计略主规则](06-strategy.md)
 - [fallback 总表](16-unresolved-rules-fallbacks.md)
 - [当前总表](17-post-15-source-audit.md)
 
-P0-5 已锁定 PC-PK1.1 月初生命周期入口：
+P0-6 最重要的新闭合是月俸资金事务：
 
 ```text
-00590C30 MonthlyAction
-→ month-start gate
-→ 005833D0 age/death handler
+salarySum <= postCaptiveGold
+→ 全额扣 salarySum
+
+salarySum > postCaptiveGold
+→ 不扣任何部分工资
+→ 0058D5E0
+→ 0058C190 欠薪忠诚处理
 ```
 
-并把登场/寿命 profile 分离为：
+同时已经否定两个错误 fidelity 模型：
 
 ```text
-Historical debut: YearOfDebut + scenario identity/location
-Fictional debut: adult-year gate + randomized location
-IgnoreAge: separate scenario bypass
-Lifetime: Historical / Longevity / Fictional
+褒赏固定/保底11
+流言成功后全城全员统一扣固定忠诚
 ```
 
-Longgevity 约+20年、Fictional 约99岁仍只作 compatibility profile；`005833D0 / 0048A000` 函数体、death flag/illness/final-death 时序继续 open。
+褒赏忠诚闭式、欠薪每人掉忠以及流言 target selector / loss RNG 仍open。
 
-下一项：P0-6 褒赏 / 欠薪 / 流言等非自然忠诚变动。
+下一项：P0-7 俘虏资金不足释放排序 / 主动释放后的禁仕与技巧点。
