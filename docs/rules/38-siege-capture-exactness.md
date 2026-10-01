@@ -372,7 +372,7 @@ CHA >=100 -> 5
 
 1. `005ADDC0` 完整函数体；
 2. `005ADE20` 冲车/木兽内部基础式；
-3. 小兵力时 sqrt / x87 / `00707A74` 的精确取整；
+3. 小兵力时 sqrt / x87 extended intermediate precision 的极端边界；最终 `00707A74` 已由P0-10确认是 toward-zero truncation（正值即floor）；
 4. 小数量攻具/舰船的最终整数边界；
 5. 内政设施“具体保留哪几座”的 selector；
 6. 据点耐久在陷落/接管瞬间的所有重置路径；
