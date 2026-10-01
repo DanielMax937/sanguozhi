@@ -5,7 +5,7 @@
 
 ## 最新审计入口
 
-[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [P0-1普通登用概率exactness](36-hiring-probability-exactness.md)。
+[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [P0-2外交版本边界](37-diplomacy-version-boundaries.md)。
 
 A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原blob复用，无历史段落丢失。历史快照不是当前进度指针。
 
@@ -42,6 +42,8 @@ E19评定完整提案池以 `34-council-proposal-pool.md` 为当前专项规范�
 E20委任AI权重/决策架构以 `35-delegated-ai-architecture.md` 为当前专项规范，结构化证据为 `../sources/delegated-ai-architecture.json`。统一utility表假设已撤回；战争AI恢复为hard gate+概率+局部selector的procedural架构，城市内政scheduler仍open。
 
 P0-1普通登用概率exactness以 `36-hiring-probability-exactness.md` 为专项记录，结构化证据为 `../sources/hiring-probability-exactness.json`。004AFD60外层与normal/nonzero模式已源码级收窄；005C4F80本体仍open，现代SIRE登用意愿公式已隔离为MOD-only。
+
+P0-2外交公式版本边界以 `37-diplomacy-version-boundaries.md` 为专项记录，结构化证据为 `../sources/diplomacy-version-boundaries.json`。Vanilla 1.1友好度与1.2外交成功率补丁边界已官方锁定；现有完整公式绑定PK-era corpus，Vanilla复用必须标compatibility assumption。
 
 ## 版本标记
 
@@ -98,6 +100,7 @@ P0-1普通登用概率exactness以 `36-hiring-probability-exactness.md` 为专�
 35. `34-council-proposal-pool.md` E19君主评定22类具体提案、两阶段采决与chooser边界
 36. `35-delegated-ai-architecture.md` E20委任/COM AI procedural架构、出兵gate/概率与局部主将评分
 37. `36-hiring-probability-exactness.md` P0-1普通登用原版外层判定链与005C4F80未决边界
+38. `37-diplomacy-version-boundaries.md` P0-2 Vanilla补丁外交边界、PK公式corpus与版本profile
 
 ## 来源优先级
 
