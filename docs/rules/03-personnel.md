@@ -3184,7 +3184,9 @@ if (captorLord.ideals === 0 && captorLord.ambition === 4) {
 
 所以旧“俘虏每旬 -1～2”“符节台翻倍”“基础月度闭式未知”均撤回。
 
-### 9.5 50金维护与“养不起”释放/逃走是另一条路径
+### 9.5 50金维护与“养不起”释放/逃走：人数与选择架构已恢复
+
+P0-7 专项： [42-captive-release-exactness.md](42-captive-release-exactness.md)。
 
 `00590490 MonthlyIncomeAndExpend` 在每个城市/港/关按设施俘虏数计算：
 
@@ -3195,51 +3197,61 @@ payable = min(
 )
 
 prisonerCost = payable * 50
-unpaidPrisoners = prisonerCount - payable
+releaseCount = prisonerCount - payable
 currentGold -= prisonerCost
 ```
 
-若 `unpaidPrisoners > 0`：
+所以**必须释放几个人**已经是 PC-PK1.1 exact：
 
-```text
-0058C320 comparator / list preparation
--> 0058D1D0
--> 全设施循环结束
--> 0058D430 实际俘虏逃走/释放处理
+```ts
+releaseCount =
+  max(0, prisonerCount - floor(currentGold / 50))
 ```
 
-因此应明确区分：
-
-1. `00582BE0`：按被俘月份/能力计算的**自然逃亡**；
-2. `00590490 -> 0058D430`：据点资金不足导致的**无法维持俘虏处理**。
-
-已确认“会有多少人付不起”：
+当 `releaseCount > 0`，原代码继续：
 
 ```text
-max(0, prisonerCount - floor(currentGold / 50))
+0058C320 comparator
+→ 004AA200 通用列表处理
+→ 004A8E10 反复裁剪，直到列表长度 = releaseCount
+→ 0058D1D0 把本据点结果加入月度待处理集合
+→ 全部据点循环结束
+→ 0058D430 统一 finalizer
 ```
 
-但`0058C320`具体如何排序、优先放走哪几个俘虏仍 open。
+因此：
 
-这段支出是按城市/港/关设施枚举俘虏；野外部队携带的俘虏不属于该设施俘虏列表，因此当前实现应把50金理解为**据点俘虏维护费**。
+- 释放人数不再 open；
+- 选择过程是 comparator + subset 裁剪，不应实现成“直接前N名”；
+- `0058C320` 到底按能力、忠诚、ID、俘虏时间或其他字段排序仍 open；
+- `004A8E10` 裁掉哪一端与 comparator 方向也需要一起恢复；
+- `0058D1D0 / 0058D430` 的 release-side effect 仍未展开。
+
+这段支出只枚举设施俘虏；野外部队携带的俘虏不属于该设施俘虏列表。
 
 ### 9.6 登用 / 释放 / 处斩 / 交换
 
-- 登用：继续走 D5 的俘虏登用 hard gate 与普通概率流程。
-- 释放：人物结构中的 `ForbiddenLord / ForbiddenMonths` 与日文 Wiki“释放后会产生登用禁止期”一致；具体默认月数仍 open。
-- 处斩：D4 已确认“处斩本身不自动新增嫌恶”，但已有君主↔俘虏嫌恶可进入 COM 必处斩分支。
-- 交换：属于外交系统，成功时政治经验 +8；交换价格/谈判公式继续使用外交章节的版本化规则。
-- 释放会增加少量技巧点，但精确点数仍 open。
+- **登用**：继续走 D5 的俘虏登用 hard gate 与普通概率流程。
+- **主动释放**：官方 PK 手册把“追放”同时用于配下追放和敌俘释放；命令本身无期间、无金、无AP、无执行武将，最多6人。官方明确写“释放敌方俘虏会增加技巧P”，但未给具体点数。
+- **释放技巧P数值**：旧实测常见“2或3”“约3”，所以 +3 只作 compatibility fallback，不升级为原作 exact。
+- **禁仕字段**：`ForbiddenLord / ForbiddenMonths` 为真实 runtime state，月初 `0058BB30` 递减/处理。
+- **释放后的禁仕期**：资料存在直接冲突。Wiki/2009记录说释放后有禁仕期并称3个月；2011记录却明确称“自主释放不会立 flag，捕虏逃亡才会”。因此不能把所有 release path 无条件写成3个月。
+- **自然逃亡**、**资金不足强制释放**、**追放命令主动释放**、**击破/落城结算立即释放**、**势力灭亡**必须按不同 cause 建模；Forbidden 与技巧P不能在通用 release helper 中一刀切。
+- **资金不足 forced release** 是否奖励主动命令的技巧P、是否写 Forbidden 字段，当前均 open；在没有证据前不要偷偷复用主动“追放”的奖励。
+- **处斩**：D4 已确认“处斩本身不自动新增嫌恶”，已有君主↔俘虏嫌恶仍可进入 COM 必处斩分支。
+- **交换**：属于外交系统；成功时政治经验 +8，交换价格/谈判公式继续使用外交章节的版本化规则。
 
-### 9.7 D9 仍 open 的最小集合
+### 9.7 D9 仍 open 的最小集合（P0-7 更新）
 
 - 捕获函数中 `004A0590` 的精确业务语义，以及它与名马/其他逃脱条件的映射；
 - `unknownContextId==3/4 -> ×1.5` 的业务语义；
 - 血路在“部队壊滅 vs 据点陷落”两条路径的精确版本边界；
 - `004721D0` 对 `p>100` 的精确处理；
-- 资金不足时 `0058C320` 的俘虏释放排序；
-- 释放产生的 `ForbiddenMonths` 默认值；
-- 释放俘虏增加多少技巧点。
+- `0058C320` comparator 的字段、排序方向，以及 `004A8E10` 保留哪一端；
+- `0058D1D0 / 0058D430` forced-release side effect；
+- 不同 release cause 对 `ForbiddenLord / ForbiddenMonths` 的精确 setter；
+- 主动释放技巧P的原始点数；
+- 资金不足自动释放是否也给技巧P。
 
 ### 9.8 本节依据
 
