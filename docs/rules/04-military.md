@@ -795,57 +795,75 @@ charisma     = max(main.cha, sub1.cha, sub2.cha)
 
 旧资料把“智力/政治/魅力也统一套1/2、1/3、1/4关系除数”写成通用公式，是错误的。
 
-### 5.5 统武关系 helper：当前证据边界
+### 5.5 统武关系 helper：P0-10 收紧后的证据边界
 
-PC 地址资料已经直接确认：
+专项见 [45-deputy-rounding-exactness.md](45-deputy-rounding-exactness.md)。
+
+PC 地址资料已经直接给出两个原指令级 divisor：
 
 ```text
-普通关系：
-  副将高于主将的差值 × 1/4
-  地址 00495B65
+00495B65  C1 F8 02  -> sar eax,2
+普通关系：正差值 /4，向下截断
 
-亲爱关系：
-  差值 × 1/2
-  地址 00495B79
+00495B79  D1 F8     -> sar eax,1
+亲爱关系：正差值 /2，向下截断
 ```
 
-PS2PK 的逐值实测进一步锁定完整关系表：
-
-| 副将→主将关系 | 统/武补正 |
-|---|---|
-| 夫妻 / 义兄弟 | 直接取更高值，相当于差值×1 |
-| 亲爱 | 差值×1/2 |
-| 血缘 | 差值×1/3 |
-| 普通 | 差值×1/4 |
-
-且副将低于主将时**不会拉低**主将。
-
-因此当前实现：
+所以对副将高于主将的情况：
 
 ```ts
-candidate = mainStat
+normal =
+  main + floor((sub-main)/4)
 
-if (subStat > mainStat) {
-  candidate =
-    mainStat
-    + floor((subStat - mainStat) / divisor)
-}
+love =
+  main + floor((sub-main)/2)
 ```
 
-其中：
+副将不高于主将时不会拉低主将。
+
+夫妻 / 义兄弟此前主要依赖 PS2PK 精确实测；P0-10 又加入 PC SIRE 原作者基于原版代码的规则说明：原版普通副将只得到部分统/武加成，而义兄弟和夫妻是“最高统武值”的例外。因此这一项升级为：
 
 ```text
-夫妻/义兄弟 divisor=1
-亲爱       divisor=2
-血缘       divisor=3
-普通       divisor=4
+夫妻 / 义兄弟：
+  combined = max(main,sub)
+  PC reverse-author documented-high
+  + PS2 empirical-exact
 ```
 
-证据等级应分开：
+血缘仍保持：
 
-- 普通1/4、亲爱1/2：PC-PK1.1 地址级逆向确认；
-- 血缘1/3、夫妻/义兄弟1：PS2PK empirical-exact + PC关系分支结构一致；
-- `00495AB0` 完整逐指令文本仍未公开，因此后两项保留跨平台回归标记。
+```text
+main + floor((sub-main)/3)
+```
+
+但其 PC /3 指令尚未公开，所以证据等级是：
+
+```text
+PS2 empirical-exact
++ cross-platform-high
++ PC opcode open
+```
+
+当前关系表：
+
+| 副将→主将关系 | 统/武补正 | PC证据 |
+|---|---|---|
+| 夫妻 / 义兄弟 | 直接取更高值 | PC原版规则说明高置信；逐指令仍open |
+| 亲爱 | 差值×1/2 | **PC opcode exact** |
+| 血缘 | 差值×1/3 | PC opcode open |
+| 普通 | 差值×1/4 | **PC opcode exact** |
+
+两名副将的 bonus **不会相加**：
+
+```ts
+result =
+  max(
+    combine(main, sub1),
+    combine(main, sub2)
+  )
+```
+
+`00495AB0` 完整 PC body 仍值得继续恢复，主要剩血缘、夫妻/义兄弟和关系方向性分支。
 
 ### 5.6 六兵科适性：完全无视上述关系，三人直接取最高
 
@@ -1045,19 +1063,50 @@ construction =
 
 注意这里使用的是 E2 已合成的**部队政治**。无嫌恶时实际上就是三将政治最高值；有任意嫌恶 pair 时退回主将政治。
 
-### 5.12 整数取整仍沿用统一 helper gap
+### 5.12 最终浮点取整：P0-10 已闭合为 toward-zero truncation
 
-攻击、防御最终调用：
+攻击、防御、建设力最终都调用：
 
 ```text
-00707A74 ConvertFloatToInteger
+00707A74 ConvertFloatToIntegerAndStoreInEAX
 ```
 
-建设力也调用同 helper。
+P0-10 对原 IDB 的内部 label 与 Microsoft CRT 源码交叉后确认，该函数就是 MSVC `_ftol2`：
 
-我们已经知道很多官方面板值能与“整数化”吻合，但 `00707A74` 对所有正数边界究竟是 floor / trunc / 特定FPU rounding 尚未完全单独恢复。
+```text
+ftol2.asm - truncate TOS to 32-bit integer
+```
 
-所以 E2 的运算顺序现在已精确，**极端小数边界的最后一步整数模式继续沿用项目统一 exactness gap**，不要在此自行宣称 floor。
+所以精确语义是：
+
+```ts
+san11FloatToInt(x) = truncTowardZero(x)
+```
+
+对 E2 的正常正 raw 值：
+
+```text
+truncate toward zero
+==
+floor
+```
+
+因此：
+
+```ts
+attack =
+  max(1, floor(attackRaw))
+
+defense =
+  max(1, floor(defenseRaw))
+
+construction =
+  max(1, floor(constructionRaw))
+```
+
+现在是 **PC-PK1.1 exact final conversion**，不再只是兼容模型。
+
+仍 open 的是“浮点转换之前”的 bit-level 边界，例如 x87 extended intermediate precision / 原常量精确 bit pattern；不要把它与已经闭合的最终转换混为一项。
 
 ### 5.13 E2 当前结论
 
@@ -1080,9 +1129,9 @@ construction =
 
 仍 open：
 
-- `00495AB0` 完整逐指令文本，用于把血缘1/3、夫妻/义兄弟1从跨平台 empirical-exact 再升级成PC逐指令；
-- `00707A74` 最终浮点转整数的精确边界模式；
-- Vanilla / 主机版是否在混乱0.8、输送0.4/1/3上完全同值。
+- `00495AB0` 完整逐指令文本，主要剩血缘1/3、夫妻/义兄弟full-share及关系方向性分支；
+- x87中间 extended precision / 浮点常量 bit-exact 极端边界；
+- Vanilla / 主机版是否在关系 helper、混乱0.8、输送0.4/1/3与转换helper上完全同值。
 
 来源：
 
