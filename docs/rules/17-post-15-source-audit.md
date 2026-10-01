@@ -1252,3 +1252,40 @@ natural-adjacent-spread-disabled
 
 下一 exactness gap：P0-5 登场 / 自然死亡精确 RNG。
 
+### P0-5 登场 / 自然死亡精确 RNG
+
+状态：
+
+```text
+P0-5-audit-complete
+monthly-lifecycle-dispatcher-resolved
+debut-profile-semantics-resolved-high
+lifespan-profile-semantics-resolved-high
+death-inner-functions-open
+```
+
+本轮确认 / 收紧：
+
+- `00590C30 MonthlyAction` 的月初链中，`00590C82 -> 005833D0` 明确负责年龄/死亡相关处理；
+- 史实登场继续以人物 `YearOfDebut` / 剧本身份为主，不存在通用15岁自动登场；
+- 假想登场是独立 profile：未发现/在野位置随机，登场年统一到成人年，当前成人年龄按15岁 empirical-high；
+- `IgnoreAge` 是独立场景级 bypass，英雄集结类至少绕过普通时间登场和自然寿命；
+- `Lifetime` 的 Historical / Longevity / Fictional 用户语义已分层；约+20年与约99岁只作 compatibility profile；
+- 自然死 / 不自然死分支保持分离，孙策样本排除最终死亡+15 hard cap；
+- `YearOfDeath / GetDeathYear / markedForDeath / HealthLevel / DEAD` 分层保持；
+- 死亡未来值不得在开局永久预抽。
+
+仍 open：
+
+- `005833D0` / `0048A000` 函数体；
+- raw enums；
+- ScheduledLord / 普通登场 setter；
+- Longgevity/死因修正顺序；
+- Fictional 99岁 phase；
+- death flag / illness / actual death 精确时序；
+- 跨版本/平台。
+
+详见 [P0-5专项](40-debut-death-exactness.md)。
+
+下一 exactness gap：P0-6 褒赏 / 欠薪 / 流言等非自然忠诚变动。
+
