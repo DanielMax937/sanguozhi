@@ -1435,6 +1435,68 @@ remaining = max(currentRemaining, newlyRolledDuration)
 
 详细专项见 `28-status-duration-recovery.md`。
 
+## 7.2 部队出征 / 回城资源事务（P0-9）
+
+> 专项： [44-troop-resource-transaction-exactness.md](44-troop-resource-transaction-exactness.md)。
+
+### 可以固定的容量与资源语义
+
+~~~text
+battle:
+  money <= 10000
+  food  <= 50000
+
+transport:
+  troops <= 60000
+  money <= 100000
+  food <= 500000
+  ordinary equipment quantity <= 100000
+~~~
+
+战斗兵装成本 fallback：
+
+~~~text
+ID0      0
+ID1..4   selectedTroops
+ID5..8   1
+ID9      0
+ID10..11 1
+~~~
+
+其中 1..4 等量为 official/gameplay-high；件数型=1 为 documented/empirical-high。
+
+### finalizer 未恢复前的工程事务
+
+~~~text
+1. commit 时重新校验 source inventory
+2. 原子扣除据点资源
+3. 写入 runtime troop
+4. 任一步失败则工程层 rollback
+~~~
+
+这四步是 engineering safety profile，不能标成原 EXE 顺序。
+
+### 回城 overflow fallback
+
+~~~text
+accepted = min(incoming, remainingCapacity)
+overflow = incoming - accepted
+overflow -> discard + warning
+~~~
+
+“超过容量会损失”有原作实测支持；逐资源处理顺序仍 open。
+
+### 禁止事项
+
+不能：
+
+- 把 sub_647250 / sub_647AC0 / sub_615790 当 finalizer；
+- 把现代 sango_infinity 的 Cost/Remove/EnterCity 顺序当原版；
+- 把 woundedTroops 的现代返还策略反推为 San11；
+- 把 transport 件数型舰船/攻具无条件套普通100000 quantity语义。
+
+---
+
 ## 7.3 官职自动分配 selector（P0-8）
 
 > 专项： [43-auto-office-selector-exactness.md](43-auto-office-selector-exactness.md)。
