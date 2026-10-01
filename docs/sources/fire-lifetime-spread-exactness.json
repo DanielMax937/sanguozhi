@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-4-exactness",
+  "target": "fire lifetime and ambient spread boundaries",
+  "status": {
+    "audit": "complete",
+    "criticalDurationTransform": "resolved-empirical-high",
+    "baseLifetimeRng": "open",
+    "naturalAdjacentSpread": "disabled-in-fidelity"
+  },
+  "fireDamageContext": {
+    "strategyApproxDamage": "400+-100",
+    "criticalApproxMultiplier": 1.2,
+    "evidence": "empirical-high",
+    "note": "retained from existing combat audit; P0-4 focuses on duration/spread"
+  },
+  "duration": {
+    "criticalTransform": "baseDuration+1",
+    "criticalBonusTurns": 1,
+    "evidence": "empirical-high",
+    "pairedObservation": {
+      "normalVisibleTurns": [1, 3, 3],
+      "criticalVisibleTurns": [2, 4, 4]
+    },
+    "originalBaseRng": "open",
+    "originalSetter": "open",
+    "visibleTurnVsInternalCounterPhase": "open",
+    "fallbackProfile": {
+      "evidence": "secondary-code-reconstruction",
+      "notOriginalConstant": true,
+      "normalStoredCounterWeights": {
+        "1": 0.7,
+        "2": 0.3
+      },
+      "criticalRule": "shift each base result by +1 with same weight",
+      "source": "tankyc/sango_infinity"
+    }
+  },
+  "naturalSpread": {
+    "fidelityEnabled": false,
+    "fidelityProbability": 0,
+    "evidence": "negative-evidence-high",
+    "separateFrom": [
+      "fire-trap blast area",
+      "fireball rolling/area ignition",
+      "lightning area ignition",
+      "fire-trap chain detonation",
+      "direct fire-plan/fire-arrow ignition"
+    ]
+  },
+  "reverseEvidence": {
+    "buildingOnFire": "00486320",
+    "troopOnFire": "00495CA0",
+    "knownFireHooks": [
+      "005AEBAF",
+      "005AEC19",
+      "005B1263",
+      "005B1686",
+      "005B178B",
+      "005AE540",
+      "00583008"
+    ],
+    "genericCounterRoutineExcluded": "00599CF0",
+    "fireLifetimeSetterFound": false,
+    "ambientSpreadCallChainFound": false
+  },
+  "implementation": {
+    "mustParameterizeLifetimeBySource": true,
+    "minimumSources": [
+      "strategy",
+      "fire-arrow",
+      "fire-trap",
+      "lightning",
+      "scripted-event"
+    ],
+    "extensionsNamespace": "ruleset.extensions.naturalFireSpread"
+  },
+  "open": [
+    "PC-PK1.1 fire lifetime setter",
+    "original base lifetime probability distribution",
+    "internal counter to visible-turn phase mapping",
+    "re-igniting an already burning cell setter semantics",
+    "source-specific lifetime RNG differences",
+    "Vanilla/PS2/Wii equivalence"
+  ],
+  "sources": {
+    "originalEmpirical": [
+      "https://w.atwiki.jp/sangokushi11/pages/92.html",
+      "https://w.atwiki.jp/sangokushi11/pages/85.html",
+      "https://w.atwiki.jp/sangokushi11/pages/2166.html",
+      "https://forum.gamer.com.tw/Co.php?bsn=60001&sn=380559",
+      "https://www.bilibili.com/opus/374609164980707553",
+      "https://www.gamersky.com/handbook/200603/21652.shtml"
+    ],
+    "reverseEngineering": [
+      "https://github.com/sjn4048/311MemoryResearch",
+      "https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md"
+    ],
+    "secondaryReconstruction": [
+      "https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Object/Skill/Effect/SetFire.cs",
+      "https://github.com/tankyc/sango_infinity/blob/main/Build/Content/Data/Common/Skills.json"
+    ]
+  }
+}
