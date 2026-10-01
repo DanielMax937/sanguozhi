@@ -104,6 +104,7 @@ P0-3攻城统一公式与据点接管资源以 `38-siege-capture-exactness.md` �
 37. `36-hiring-probability-exactness.md` P0-1普通登用原版外层判定链与005C4F80未决边界
 38. `37-diplomacy-version-boundaries.md` P0-2 Vanilla补丁外交边界、PK公式corpus与版本profile
 39. `38-siege-capture-exactness.md` P0-3攻城耐久调用链、城兵共用核心与陷落资源保留公式
+40. `39-fire-lifetime-spread-exactness.md` P0-4火焰寿命会心+1、基础RNG边界与自然邻格蔓延隔离
 
 ## 来源优先级
 
