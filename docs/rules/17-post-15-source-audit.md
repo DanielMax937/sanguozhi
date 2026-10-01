@@ -1389,3 +1389,47 @@ mode-caller-mapping-open
 
 下一 exactness gap：P0-9 部队编成最终资源事务。
 
+### P0-9 部队编成最终资源事务
+
+状态：
+
+~~~text
+P0-9-audit-complete
+draft-function-boundaries-resolved
+battle-resource-caps-exact
+transport-basic-caps-exact
+transport-equipment-100000-high
+resource-mutation-primitives-resolved
+commit-semantics-high
+commit-opcode-order-open
+return-semantics-high
+return-finalizer-open
+~~~
+
+本轮确认 / 收紧：
+
+- battle troop draft=sub_647250；battle资源draft=sub_647AC0；transport draft=sub_615790/sub_615A10；
+- 战斗金10000/粮50000与 runtime cap 同源；
+- 输送兵60000/金100000/粮500000；
+- SIRE reverse-history 暴露 transport equipment 原100000硬上限，旧“兵装容量完全open”收窄；
+- troop strength 65535 hard boundary；
+- building/troop 两侧资源 mutation helper 已恢复；
+- 枪戟弩马数量型、攻具和高级舰船件数型继续分层；
+- commit 的 source→troop 资源守恒语义可固定，但 exact caller/order/rollback 未恢复；
+- 回城资源入库、存活件装备可回收、容量溢出损失为高置信行为；
+- 现代重制 finalizer 顺序明确隔离。
+
+仍 open：
+
+- battle/transport commit finalizer；
+- piece扣1 caller；
+- transport件数型特殊边界；
+- return/disband finalizer；
+- 伤兵/数量型兵装返还；
+- overflow处理顺序；
+- 跨版本。
+
+详见 [P0-9专项](44-troop-resource-transaction-exactness.md)。
+
+下一 exactness gap：P0-10 部队主副将关系合成 / FPU 取整边界。
+
