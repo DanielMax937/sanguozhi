@@ -743,6 +743,8 @@ const retained =
 
 ## 5. 火焰持续与“自然蔓延”
 
+> P0-4 专项证据矩阵与当前 exactness 状态见 [39-fire-lifetime-spread-exactness.md](39-fire-lifetime-spread-exactness.md)。本节保留工程 fallback；任何 70/30 权重都不得升级成原版常量。
+
 ### 结论：会心“+1回合”高置信；自然邻格扩散应为 0
 
 这一项需要把三个容易混在一起的机制拆开：
