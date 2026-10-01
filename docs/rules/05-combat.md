@@ -193,6 +193,8 @@ SIRE/逆向交叉：
 - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[火陷阱炸伤炸死].txt
 - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/修改记录by%20sjn4048.txt
 
+P0-4 专项证据矩阵、70/30 fallback 的证据边界、自然蔓延 negative evidence 与剩余原函数缺口，见 [39-fire-lifetime-spread-exactness.md](39-fire-lifetime-spread-exactness.md)。
+
 ## 7. 攻城与陷落
 
 `[COMMON][confirmed mechanism]` 据点有驻兵和耐久；任一归零都可导致陷落。
