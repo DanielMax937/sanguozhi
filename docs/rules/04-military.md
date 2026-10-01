@@ -392,71 +392,257 @@ AI 输送代码也直接用同一组 60000 / 100000 / 500000 封顶，形成独�
 
 但这些分支的数值语义尚未完整展开，因此本轮不伪造“每种兵装最多多少”。
 
-### 4.8 出征面板规则与 Runtime 写入要分层
+### 4.8 出征面板规则与 Runtime 写入要分层（P0-9 更新）
 
-当前已经恢复的是玩家出征界面的**兵力合法范围计算**：
+专项见 [44-troop-resource-transaction-exactness.md](44-troop-resource-transaction-exactness.md)。
 
-```text
-00647250
-```
+当前已经恢复的函数层级应明确分开：
 
-它精确解决：
+~~~text
+00647250 / sub_647250
+  战斗部队兵力 draft
 
-- 主将上限；
-- 据点剩余兵力；
-- 枪戟弩马库存；
-- 最低1兵。
+00647AC0 / sub_647ac0
+  战斗部队钱粮等 resource draft
+  其中 00647D8E/9E = 粮上限
+       00647E2A/3A = 金上限
 
-但最终按下“确定”以后：
+00615790 / sub_615790
+00615A10 / sub_615a10
+  输送 cargo draft
 
-- 具体如何从据点扣金/粮；
-- 攻具/舰船那1件如何扣除；
-- 部队回城时如何归还件数型兵装；
-- 输送队各兵装货物的逐类型封顶；
+未知函数
+  实际 commit finalizer
 
-对应 finalizer 尚未得到同等完整的逐指令文本。
+未知函数
+  进入据点 / 解散后的 return finalizer
+~~~
 
-因此实现时应拆为：
+因此实现必须继续拆成：
 
-```text
+~~~text
 validateSortieDraft()
 commitSortieResources()
 createRuntimeTroop()
-```
+~~~
 
-不要把 UI 上限函数误当成完整资源事务函数。
+不能把 slider 上限函数直接当资源扣除函数。
 
-### 4.9 E1 当前结论
+### 4.9 战斗/输送 runtime 容量边界
+
+战斗部队：
+
+| 资源 | 上限 |
+|---|---:|
+| 金 | 10000 |
+| 粮 | 50000 |
+
+输送队：
+
+| 资源 | 上限 |
+|---|---:|
+| 兵 | 60000 |
+| 金 | 100000 |
+| 粮 | 500000 |
+| 普通兵装数量 | **100000（reverse-history-high）** |
+
+其中输送兵装 100000 的关键证据来自早期 SIRE 修复记录：
+
+~~~text
+“运输队兵装上限设定超过100000后，
+补给过后会变回100000”
+~~~
+
+与原地址表：
+
+~~~text
+006157C1 / 006157D8   出阵兵装上限
+004962CF / 004962D6   runtime兵装上限
+00496306/0D/28/2F    补给后兵装上限
+~~~
+
+相互吻合。
+
+所以旧“运输兵装每种最大容量完全未知”需要收窄为：
+
+~~~text
+普通数量型 cargo 上限 100000：高置信
+攻具 / 高级舰船件数型逐路径：仍 open
+~~~
+
+原研究还明确注明部队兵力底层无法突破 65535；输送设计上限 60000 低于该 hard boundary。
+
+### 4.10 commit 时资源语义：守恒确定，指令顺序 open
+
+原作 resource mutation primitives 已定位。
+
+据点侧：
+
+~~~text
+00486B10 GetSPTroopStrength
+00486C80 GetSPMoney
+00486DF0 GetSPFood
+00486950 GetSPEquipment
+
+00487230 SetSPTroopStrength
+00487310 SetSPMoney
+004873F0 SetSPFood
+004874D0 SetSPEquipment
+
+004AE2A0 IncreaseSPMoney
+004AE300 AdjustSPFood
+004AE3C0 AdjustSPSoldier
+004AE430 AdjustSPEquipment
+~~~
+
+部队侧：
+
+~~~text
+00496010 GetTroopStrength
+004954E0 GetTroopEquipmentNum
+00496280 SetTroopFood
+
+004AE4A0 AdjustTroopStrength
+004AE510 AdjustTroopMoney
+004AE570 AdjustTroopFood
+~~~
+
+因此“据点资源转入 runtime troop”这一守恒语义可以固定：
+
+~~~text
+source building:
+  - selected troops
+  - selected money
+  - selected food
+  - selected equipment
+
+runtime troop:
+  + same selected resources
+~~~
+
+但还不能写死原 EXE 的具体调用顺序或 rollback。
+
+### 4.11 兵装扣除模型必须按数量型 / 件数型分开
+
+~~~text
+ID0 剑：
+  默认装备，不按兵数扣库存
+
+ID1～4 枪/戟/弩/马：
+  数量型
+  selected equipment = selected troops
+
+ID5～8 冲车/井栏/投石/木兽：
+  件数型
+  1 支对应部队占 1 件（documented/empirical-high）
+
+ID9 走舸：
+  默认水上 profile
+
+ID10～11 楼船/斗舰：
+  件数型
+  1 支高级舰船部队占 1 艘（documented/empirical-high）
+~~~
+
+ID1～4 的“等量”同时有 UI 代码和官方/实机行为支持。
+
+件数型“扣1”的业务行为很稳定，但原 EXE decrement caller 尚未公开，因此仍不能标 opcode-exact。
+
+### 4.12 回城资源入库与容量溢出
+
+原作长期实机行为确认：
+
+- 部队进入己方据点后，持有兵、金、粮会并入据点；
+- 存活的攻具/高级舰船可重新进入库存，不是一出征就永久消耗；
+- 若入库后超过据点容量，会提示超出部分损失。
+
+因此第一版兼容接口至少要有：
+
+~~~text
+accepted = min(incoming, capacity-current)
+overflow = incoming-accepted
+~~~
+
+并保留：
+
+~~~text
+overflow lost / warning
+= empirical-high
+~~~
+
+但以下仍 open：
+
+- 普通枪戟弩马回城到底按 current troops、独立 equipment quantity 还是伤兵链返还；
+- wounded troops 与兵装先后；
+- 多种资源同时满仓的逐类处理顺序；
+- 攻具/舰船满仓的 exact behavior；
+- enter-building finalizer 地址与完整 body。
+
+### 4.13 现代重制实现只作架构对照
+
+当前 sango_infinity 在玩家出征时直接：
+
+~~~text
+扣陆/水 costItems
+扣 city troops / food / gold
+EnsureTroop
+~~~
+
+输送则：
+
+~~~text
+扣 city troops / food / gold
+Remove transport itemStore
+EnsureTroop
+~~~
+
+回城再将 troop 资源加回据点。
+
+这是一套合理 reconstruction，但不是原版 San11PK.exe 逐指令证据；尤其 woundedTroops 的兵装返还、rollback、overflow 不可反向写成 fidelity。
+
+### 4.14 E1 当前结论（P0-9 更新）
 
 已经锁定：
 
-- 战斗/输送为独立 `TroopType`；
-- 固定1主将+最多2副将；
-- 战斗部队最小出兵1；
-- 战斗部队最大兵力 = 主将上限与据点兵力取小，枪戟弩马还要与对应库存取小；
-- 剑不要求按士兵数准备库存；
-- 枪戟弩马为数量型兵装；
-- 攻具与楼船/斗舰为部队级件数型装备；
-- 普通战斗部队金10000、粮50000；
-- 输送队兵60000、金100000、粮500000；
-- 输送队可带最多3名武将；
-- 陆/水装备同时保存，地形只切换 active profile，不永久改兵种。
+- 战斗/输送为独立 TroopType；
+- 1主将+最多2副将；
+- 战斗部队最小1兵；
+- 战斗部队最大兵数的主将/据点/数量型兵装三重约束；
+- 剑不按士兵库存；
+- 枪戟弩马数量型；
+- 攻具与高级舰船件数型；
+- 战斗金10000、粮50000；
+- 输送兵60000、金100000、粮500000；
+- 输送普通兵装 quantity cap 100000（reverse-history-high）；
+- troop strength 底层 65535 hard boundary；
+- 据点/部队两侧资源 mutation primitive 已恢复；
+- UI/draft 函数边界与 finalizer 分层；
+- commit 的资源守恒语义；
+- 回城资源入库与容量 overflow 损失行为；
+- 现代重制 commit/return 顺序已隔离为非 fidelity。
 
 仍 open：
 
-- 玩家出征最终资源提交函数的完整逐指令文本；
-- 攻具/高级舰船出征与回城时的精确扣除/归还 caller；
-- 输送队各兵装货物的逐类型最大容量；
-- 玩家/COM/主机版在输送货物 UI 上的版本差异；
-- 出征可选武将列表的完整资格过滤函数（现役/任务/已行动等全部顺序）。
+- 玩家战斗出征 commit finalizer；
+- 玩家输送出征 commit finalizer；
+- 原 EXE 各资源扣除顺序与 rollback；
+- 件数型攻具/高级舰船扣1的逐指令 caller；
+- transport 12种兵装是否完全共用100000路径；
+- return/disband finalizer；
+- 数量型兵装回城精确返还量；
+- 伤兵与兵装返还顺序；
+- 满仓逐资源裁剪顺序；
+- 出征武将完整资格过滤；
+- Vanilla / PS2 / Wii 差异。
 
 来源：
-
-- 311MemoryResearch：`内存资料/出征窗口部分界面代码.txt`；
-- 311MemoryResearch：`内存资料/地址资料.txt`；
-- 311SireCustomizedPackageDev：`struct_troop` 与 troop helper；
-- 日文 Wiki《戦争》：1兵部队、输送3武将、50000粮、输送60000兵及兵装损耗；
-- 日文 Wiki《技巧研究》《内政》：高级舰船按出征部队数准备。
+- 311MemoryResearch 出征窗口、地址资料；
+- 311SireCustomizedPackageDev struct_troop / resource helpers；
+- 311resource IDB functions.csv；
+- 官方 PK 手册；
+- 日文 Wiki《戦争》；
+- SIRE 原作者早期 reverse-history；
+- 2006 原作容量溢出实测。
 
 ## 5. 部队能力合成
 
