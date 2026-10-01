@@ -59,6 +59,8 @@ P0-8自动官职 selector 以 `43-auto-office-selector-exactness.md` 为专项�
 
 P0-9部队资源事务以 `44-troop-resource-transaction-exactness.md` 为专项记录，结构化证据为 `../sources/troop-resource-transaction-exactness.json`；战斗/输送容量与draft函数边界、transport普通兵装100000上限及resource primitives已收紧，原commit/return finalizer仍open。
 
+P0-10主副将关系/FPU取整以 `45-deputy-rounding-exactness.md` 为专项记录，结构化证据为 `../sources/deputy-rounding-exactness.json`；`00707A74` 已识别为MSVC `_ftol2`，正值最终floor闭合；普通/亲爱PC指令精确，血缘/3仍保留PC opcode gap。
+
 ## 版本标记
 
 - `[COMMON]`：无印与 PK 共通。
@@ -122,6 +124,7 @@ P0-9部队资源事务以 `44-troop-resource-transaction-exactness.md` 为专项
 43. `42-captive-release-exactness.md` P0-7资金不足俘虏释放人数/选择管线、主动释放技巧P与禁仕路径冲突
 44. `43-auto-office-selector-exactness.md` P0-8自动封官单官职评分、first-wins同分与caller列表边界
 45. `44-troop-resource-transaction-exactness.md` P0-9出征/输送draft容量、资源守恒、100000兵装上限与finalizer边界
+46. `45-deputy-rounding-exactness.md` P0-10主副将关系补正与MSVC _ftol2正值floor闭合
 
 ## 来源优先级
 
