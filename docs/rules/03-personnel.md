@@ -632,59 +632,57 @@ HealthLevel
 - 疫病造成哪一级伤病的分布；
 - markedForDeath 与 HealthLevel 的精确先后关系。
 
-### 2.14 D2 当前结论
+### 2.14 D2 当前结论（P0-5 更新）
 
-已经锁定：
+专项： [40-debut-death-exactness.md](40-debut-death-exactness.md)。
+
+已经锁定 / 收紧：
 
 - `YearOfDebut` 是时间门槛，与 current Identity 独立；
-- 没有通用“15岁自动登场”规则；20岁诸葛亮、34岁沙摩柯仍可未登场；
-- 普通登场还受剧本 Identity、`ScheduledLord` 与全局 `ComeOnStage/IgnoreAge` 体系约束；
+- **史实模式**不存在“15岁自动登场”：成年后的诸葛亮、沙摩柯等仍可按剧本保持未登场；
+- **假想登场模式**是另一条 profile：未发现/在野人物位置随机化，登场年统一改为成人年；成人年龄当前按15岁 empirical-high；
+- 普通史实登场仍受 `Identity / ScheduledLord / ComeOnStage` 体系约束；
+- `00590C30 MonthlyAction` 在月初调用 `005833D0` 处理年龄/死亡，生命周期主 dispatcher 的时间粒度已从“未知旬级”收紧到“月初入口”；
+- `IgnoreAge` 是独立场景字段，英雄集结类 profile 至少绕过普通时间登场与自然寿命；
+- `Lifetime` 与 `DieInBattleSetting` 为不同字段；用户可见寿命模式为 Historical / Longevity / Fictional；
+- Longgevity 约+20年、Fictional 约99岁只标 documented/empirical compatibility profile，不能冒充 `0048A000` 精确式；
 - `YearOfDeath` 是基础/参考没年，不等于最终死亡 tick；
 - 存在原 `0048A000 GetDeathYear`；
-- `Lifetime` 与 `DieInBattleSetting` 为不同剧本字段；
 - 自然死/不自然死是不同 lifespan profile；
-- 不自然死额外寿命与年龄负相关，但精确函数未知；
-- “预定死亡年”、`markedForDeath`、`Identity=DEAD` 不能合并成一个字段；
-- 死亡 flag 可作为事件前置状态而不立即死亡；
+- 不自然死额外寿命与年龄负相关，孙策实测排除最终死亡“最多+15年”的 hard cap；
+- “预定死亡年”、`markedForDeath`、`HealthLevel`、`Identity=DEAD` 不能合并；
 - 从较早存档重跑可改变未来死亡结果，禁止开局一次性预抽最终死亡日期；
-- 历史事件可延寿或直接死亡；孙策事件精确 +20 年；
+- 历史事件可延寿或直接死亡；孙策事件 +20 年；
 - 健康0/1/2/3与基础属性分离；当前能力倍率采用100/80/50/20。
 
 仍 open：
 
-- 普通 `NOT_INTRODUCED -> NOT_DISCOVERED/现役` 的原 caller；
-- `ScheduledLord` 在普通登场流程的精确优先级；
-- `IgnoreAge / ComeOnStage / Lifetime` 的原始枚举值与所有分支；
+- `005833D0` 完整函数体；
 - `0048A000 GetDeathYear` 完整函数体；
-- 自然死/不自然死有效死亡年的精确闭式；
+- `ComeOnStage / Lifetime / IgnoreAge` 原始枚举；
+- `ScheduledLord` 在普通史实登场的精确分支；
+- 普通 `NOT_INTRODUCED -> NOT_DISCOVERED/现役` 的 setter 与时点；
+- Longgevity +20 与死因修正先后；
+- Fictional 99岁 phase；
 - `markedForDeath` 触发时点、概率及真正死亡延迟；
 - 一般沙盘健康自然恢复/恶化公式；
-- Vanilla EXE 与 PC-PK1.1 的寿命处理版本差异。
+- Vanilla / 主机版寿命处理差异。
 
 精确 fallback 继续集中在：
-`16-unresolved-rules-fallbacks.md#6-自然死亡精确-rng`。
+`16-unresolved-rules-fallbacks.md#6-登场--自然死亡精确-rngp0-5`。
 
 来源：
-- 311SireCustomizedPackageDev `struct_person` / `struct_scenario` / Person helper 地址
-  https://github.com/sean2077/311SireCustomizedPackageDev
-- 311MemoryResearch `函数[每月例行处理].txt`：月初存在年龄/死亡相关处理入口，但公开 TXT 未展开函数体
+- 311MemoryResearch `函数[每月例行处理].txt`
   https://github.com/sjn4048/311MemoryResearch
-- 游民星空官方剧情条件整理：预定死亡年、孙策延寿20年
-  https://www.gamersky.com/handbook/200809/124174_6.shtml
-- 日文 Wiki mask data：自然死/不自然死大致时序（其中健康倍率旧表已被实机锚点覆盖）
+- 311SireCustomizedPackageDev `struct_person / struct_scenario / Person helper`
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 日文 Wiki / 早期攻略的史实/假想登场、成人年和寿命模式资料
+  https://w.atwiki.jp/sangokushi11/pages/144.html
+  https://w.atwiki.jp/sangokushi11/pages/1787.html
+- 日文 Wiki 自然死/不自然死与孙策实测
   https://w.atwiki.jp/sangokushi11/pages/983.html
-- 日文 Wiki Q&A：较早存档重跑可改变死亡结果
-  https://w.atwiki.jp/sangokushi11/pages/2527.html
-- 日文 Wiki 孙策/孙策之死：不自然死延寿实测与事件 +20
-  https://w.atwiki.jp/sangokushi11/pages/886.html
+  https://w.atwiki.jp/sangokushi11/pages/579.html
   https://w.atwiki.jp/sangokushi11/pages/918.html
-- 日文 Wiki 诸葛亮、沙摩柯剧本表：成年仍可未登场
-  https://w.atwiki.jp/sangokushi11/pages/123.html
-  https://w.atwiki.jp/sangokushi11/pages/447.html
-- 日文 Wiki PS2事件：北伐检查死亡flag、诸葛亮之死等待自然死
-  https://w.atwiki.jp/sangokushi11/pages/21.html
-- 日文 Wiki 夷陵决战：甘宁94→重伤47→轻伤75
-  https://w.atwiki.jp/sangokushi11/pages/2165.html
 
 ## 3. 五维、适性与成长
 
