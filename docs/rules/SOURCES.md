@@ -1054,7 +1054,7 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   - 专门评分分支：最高档统+智>=150；武官max(统,武)>=60；文官max(智,政)>=70；
   - 忠诚权重为 `9*min(trueLoyalty-90,10)`；
   - 另一分支按 `max(统,武)` / `max(智,政)` 作倾向分流；
-  - 同分不替换，候选列表顺序由尚未展开的 `005FA650` 决定。
+  - 同分不替换；候选列表由 caller 直接传入，`005FA650` 实际是 office classifier，不负责候选排序。
   https://github.com/sjn4048/311MemoryResearch
 - 日文 Wiki《爵位・官職》：
   - 80个有名官职完整表；
@@ -1069,7 +1069,7 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   - 无官职5000 -> 8000。
   https://w.atwiki.jp/sangokushi11/pages/90.html
 
-证据等级：官职结构、4000功绩阶梯、60000功绩上限、军制改革+3000、实际能力加成与 `005FAF00` 主selector均为PC-PK1.1 reverse-engineered；80官职/爵位表由日文Wiki与仓库旧表交叉确认。自动封官的资格helper、候选顺序和caller flag仍open。
+证据等级：官职结构、4000功绩阶梯、60000功绩上限、军制改革+3000、实际能力加成与 `005FAF00` 主selector均为PC-PK1.1 reverse-engineered；80官职/爵位表由日文Wiki与仓库旧表交叉确认。P0-8已闭合单官职score与first-wins tie，并纠正`005FA650`角色；`005FA4D0`、caller顺序和mode业务映射仍open。
 
 
 ### E1 部队编成专项
@@ -1635,3 +1635,34 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/2219.html
 
 证据等级：forced release人数与选择管线为PC-PK1.1 reverse-engineered；主动释放增加技巧P为official-confirmed；+3仅empirical candidate；主动释放3个月禁仕为conflicted，不标exact。
+
+### P0-8 自动封官专项
+
+- 311MemoryResearch `函数[自动封官].txt`：
+  - `005FAF00` 完整 selector；
+  - arg1候选列表、arg2官职、arg3 mode；
+  - `005FA650(office)` 返回 office type；
+  - `005FA4D0(person,office)` 前置资格；
+  - 忠诚<90硬拒绝；
+  - weighted-threshold 与 role-affinity 两套 score；
+  - 最终只在 candidateScore > bestScore 时替换，因此同分 first-in wins。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[自动封官].txt
+- 311MemoryResearch `地址资料.txt`：
+  - 4000功绩阶梯；
+  - `005FAF78` 忠诚90门；
+  - officeId 0x2C=军师将军等 ID 锚点。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/地址资料.txt
+- SIRE struct_office：
+  - named office静态布局与字段。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+- 311resource IDB functions 导出：
+  - 确认 `005FA4D0 / 005FA650 / 005FAF00` 函数边界；
+  - 当前导出不含xref/decompiler，因此caller仍open。
+  https://github.com/fudanglp/311resource/blob/master/extractor/ida/data/python_idb/san11pk_dump.exe_functions.csv
+- SIRE v1.26历史更新：
+  - 明确“电脑自动封官规则可设定”；
+  - 只作为 mode 业务方向的旁证，不能替代 caller xref。
+  https://games.sina.com.cn/d/e/pc/140457.shtml
+  https://patch.ali213.net/showpatch/18430.html
+
+证据等级：单官职 selector score、忠诚门、两种 mode 和 final same-score first-wins 为PC-PK1.1 reverse-engineered；office type mapping为reverse-inferred-high；candidate caller order、arg3业务映射与多官职scheduler仍open。
