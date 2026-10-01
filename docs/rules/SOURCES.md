@@ -1603,3 +1603,35 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://github.com/tankyc/sango_infinity
 
 证据等级：月俸支付事务为PC-PK1.1 reverse-engineered；褒赏命令语义为official；褒赏增量为empirical-high、公式open；流言 blanket-all-officer 模型由强反例否定，原 target/loss/security 函数仍open。
+
+### P0-7 俘虏释放专项
+
+- 311MemoryResearch `Func-收支03-每月钱粮兵装收支.txt`：
+  - 俘虏维护50金/人；
+  - releaseCount = unpaid count；
+  - `0058C320 -> 004AA200 -> 004A8E10` subset 选择架构；
+  - `0058D1D0` 每据点累计；
+  - `0058D430` 全据点后的 finalizer。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-收支03-每月钱粮兵装收支.txt
+- SIRE / IDB导出：
+  - `ForbiddenLord +0x164`、`ForbiddenMonths +0x168`；
+  - IDB functions.csv 确认 `0058C320 / 0058D1D0 / 0058D430` 函数边界，但没有公开函数体。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+  https://github.com/fudanglp/311resource/blob/master/extractor/ida/data/python_idb/san11pk_dump.exe_functions.csv
+- 官方 PK 手册：
+  - “追放”可以释放敌方俘虏；
+  - 无期间/金/AP/执行武将、最多6人；
+  - 释放敌俘会增加技巧P。
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 技巧P数值：
+  - 旧讨论记录“2或3”“约3”；只作 empirical candidate。
+  https://w.atwiki.jp/sangokushi11/pages/1993.html
+- 禁仕冲突：
+  - Wiki小ネタ与2009记录支持释放后禁仕、其中一条称3个月；
+  - 2011记录明确称自主释放不立禁仕flag、逃亡才立；
+  - 因此按 release cause/version 继续open。
+  https://w.atwiki.jp/sangokushi11/pages/15.html
+  https://w.atwiki.jp/sangokushi11/pages/1965.html
+  https://w.atwiki.jp/sangokushi11/pages/2219.html
+
+证据等级：forced release人数与选择管线为PC-PK1.1 reverse-engineered；主动释放增加技巧P为official-confirmed；+3仅empirical candidate；主动释放3个月禁仕为conflicted，不标exact。
