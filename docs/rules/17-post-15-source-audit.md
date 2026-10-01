@@ -1433,3 +1433,34 @@ return-finalizer-open
 
 下一 exactness gap：P0-10 部队主副将关系合成 / FPU 取整边界。
 
+### P0-10 部队主副将关系合成 / FPU 取整
+
+状态：
+
+~~~text
+P0-10-audit-complete
+ftol2-identity-resolved
+positive-rounding-floor-exact
+normal-quarter-pc-exact
+love-half-pc-exact
+spouse-sworn-full-share-pc-high
+blood-third-cross-platform-high
+relationship-helper-body-partial
+~~~
+
+本轮核心收敛：
+
+- 原IDB在00707A74的内部label与Microsoft CRT `_ftol2`完全对应；
+- 因此浮点→整数语义闭合为toward-zero truncation，正常正值即exact floor；
+- E2/E3攻防建设、E5耗粮等已证明调用该helper的最终rounding gap可关闭；
+- 普通副将 `00495B65 sar eax,2` = 正差值/4；
+- 亲爱 `00495B79 sar eax,1` = 正差值/2；
+- 夫妻/义兄弟full-share获得PC SIRE原版规则说明交叉，不再只靠PS2；
+- 血缘/3仍缺PC opcode，继续诚实保留cross-platform-high；
+- 两副将candidate取最大，不叠加；
+- 嫌恶hard override和智政魅直接取高边界保持。
+
+详见 [P0-10专项](45-deputy-rounding-exactness.md)。
+
+下一 exactness gap：P0-11 训练资格 gate / 已训练 reset / 野外气力恢复 caller。
+
