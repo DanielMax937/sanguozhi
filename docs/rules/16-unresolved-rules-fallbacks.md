@@ -1435,6 +1435,57 @@ remaining = max(currentRemaining, newlyRolledDuration)
 
 详细专项见 `28-status-duration-recovery.md`。
 
+## 7.1 部队主副将关系 / 浮点取整（P0-10）
+
+> 专项： [45-deputy-rounding-exactness.md](45-deputy-rounding-exactness.md)。
+
+### 不再需要 rounding fallback
+
+`00707A74` 已识别为 MSVC `_ftol2`：
+
+~~~text
+san11FloatToInt(x) = trunc toward zero
+~~~
+
+正常正值：
+
+~~~text
+= floor(x)
+~~~
+
+所以不要再提供可切换的 `round/floor/trunc` profile。
+
+### 关系 helper
+
+可直接实现：
+
+~~~text
+普通：main + floor(max(sub-main,0)/4)
+亲爱：main + floor(max(sub-main,0)/2)
+夫妻/义兄弟：max(main,sub)
+血缘：main + floor(max(sub-main,0)/3)
+~~~
+
+其中血缘/3仍标 cross-platform-high，而非 PC opcode exact。
+
+两副将：
+
+~~~text
+max(combine(main,sub1), combine(main,sub2))
+~~~
+
+不能相加。
+
+### 仍需 profile 化的只剩
+
+- 血缘PC opcode；
+- 夫妻/义兄弟PC exact branch；
+- 单向亲爱/结义关系检查方向；
+- Vanilla/主机版；
+- x87中间精度极端边界。
+
+---
+
 ## 7.2 部队出征 / 回城资源事务（P0-9）
 
 > 专项： [44-troop-resource-transaction-exactness.md](44-troop-resource-transaction-exactness.md)。
