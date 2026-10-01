@@ -1122,5 +1122,77 @@ E20 关闭的是统一权重表假设；仍 open：
 
 详见 [P0-1专项](36-hiring-probability-exactness.md)。
 
-下一 exactness gap：P0-2 外交公式的版本边界。
+### P0-2 外交公式的版本边界
+
+状态：**version-boundary-resolved / constants-still-open**。
+
+官方补丁记录已经把 Vanilla 外交分成明确阶段：
+
+```text
+Vanilla 1.0
+↓
+1.1：
+  友好增减平衡调整
+↓
+1.2：
+  友好增减再次调整
+  + 计略/外交成功率调整
+↓
+1.3～1.3.3：
+  公开changelog未再列外交专项调整
+```
+
+因此“Vanilla一套公式”已明确错误。
+
+PK 当年新增“超级”难度，而现有完整外交公式族包含：
+
+```text
+初级1.0
+上级0.8
+超级0.7
+```
+
+所以现有完整公式 corpus 正确绑定到：
+
+```text
+pk-era-formula-corpus
+```
+
+不能直接称作 Vanilla 1.0/1.1 原公式。
+
+当前 profile：
+
+```text
+vanilla-pc-1.0
+vanilla-pc-1.1
+vanilla-pc-1.2-plus
+pk-pc-formula-corpus
+pk-pc-reverse-support
+console-separate-open
+```
+
+Vanilla 临时复用 PK formula 必须标：
+
+```text
+compatibilityAssumption=true
+```
+
+官方 PK1.1/1.1.1 更新项没有公开外交专项变化，但这只能标“public changelog无显式变化”，不能证明 binary-identical。
+
+PK 外交府继续只确认 AP×0.5 与亲善金×0.5，不加入外交成功率 bonus。
+
+仍 open：
+
+- Vanilla 1.0 exact constants；
+- Vanilla 1.1 友好增减 exact constants；
+- Vanilla 1.2 实际改动常量；
+- 1.2～1.3.3 binary diff；
+- PK formula corpus exact build；
+- late Vanilla / PK 共享范围；
+- 主机版；
+- 历史公式族的原 EXE 入口。
+
+详见 [P0-2专项](37-diplomacy-version-boundaries.md)。
+
+下一 exactness gap：P0-3 攻城统一公式与据点接管资源。
 
