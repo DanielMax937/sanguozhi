@@ -1706,3 +1706,41 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://github.com/tankyc/sango_infinity
 
 证据等级：battle/transport基础容量与draft地址为PC-PK1.1 reverse-engineered；transport equipment 100000为reverse-history-high；commit/return资源守恒为official/structure/gameplay-high；actual finalizer opcode/order继续open。
+
+### P0-10 主副将关系 / FPU取整专项
+
+- 311MemoryResearch `函数[计算部队属性].txt`：
+  - `00496570 GetTroopCapabilities`；
+  - 统/武调用`00495AB0`；
+  - 智/政/魅直接取高；
+  - 最终攻防/建设调用`00707A74`。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[计算部队属性].txt
+- 311MemoryResearch `地址资料.txt`：
+  - `00495B65 C1 F8 02`：普通关系正差值/4；
+  - `00495B79 D1 F8`：亲爱正差值/2。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/地址资料.txt
+- 311resource IDB names/functions：
+  - `00707A74 ConvertFloatToIntegerAndStoreInEAX`；
+  - 内部label为`arg_is_not_integer_QnaN / positive / integer_QnaN_or_zero / localexit`；
+  - 下一函数从00707AE9开始。
+  https://github.com/fudanglp/311resource/blob/master/extractor/ida/data/python_idb/san11pk_dump.exe_functions.csv
+  https://github.com/fudanglp/311resource/blob/master/extractor/ida/data/python_idb/san11pk_dump.exe_names.csv
+- Microsoft CRT `ftol2.asm`：
+  - 原标题明确为“truncate TOS to 32-bit integer”；
+  - 控制流/label与San11 IDB完全对应；
+  - 因此`00707A74`最终语义为toward-zero truncation。
+  https://github.com/tongzx/nt5src/blob/master/Source/XPSP1/NT/base/crts/fpw32/tran/i386/ftol2.asm
+- 日文Wiki PS2精确副将测试：
+  - 亲爱1/2、血缘1/3、普通1/4；
+  - 加成小数舍去；
+  - 夫妻/义兄弟full-share另有长期实测。
+  https://w.atwiki.jp/sangokushi11/pages/30.html
+  https://w.atwiki.jp/sangokushi11/pages/8.html
+- SIRE PC原版规则说明：
+  - “最高武统值计算”修改把普通非嫌恶组合提升到最高值；
+  - 原版义兄弟/夫妻本身就是例外/full-share；
+  - 作为PC侧高置信交叉，不代替`00495AB0`完整opcode。
+  https://patch.ali213.net/showpatch/18430.html
+  https://www.53miji.com/contents/201502/15507.html
+
+证据等级：`00707A74=_ftol2`和toward-zero转换为runtime-level exact；普通/亲爱divisor为PC opcode exact；夫妻/义兄弟为PC reverse-author documented-high + PS2 empirical-exact；血缘/3仍缺PC逐指令。
