@@ -6,37 +6,39 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-9 部队编成最终资源事务
+### 最新完成：P0-10 部队主副将关系合成 / FPU 取整
 
-- [P0-9 正文](44-troop-resource-transaction-exactness.md)
-- [P0-9 结构化证据](../sources/troop-resource-transaction-exactness.json)
-- [P0-9 校验脚本](../../scripts/check_troop_resource_transaction_exactness.py)
-- [军事/编成主规则](04-military.md)
+- [P0-10 正文](45-deputy-rounding-exactness.md)
+- [P0-10 结构化证据](../sources/deputy-rounding-exactness.json)
+- [P0-10 校验脚本](../../scripts/check_deputy_rounding_exactness.py)
+- [军事/部队能力主规则](04-military.md)
+- [单位面板专项](18-unit-panels.md)
+- [耗粮专项](20-food-consumption.md)
 - [open exactness](13-open-exactness.md)
-- [fallback 总表](16-unresolved-rules-fallbacks.md)
 - [当前总表](17-post-15-source-audit.md)
 
-P0-9 已把 UI/draft 与真正资源 finalizer 明确分层：
+P0-10 最大的新闭合：
 
 ~~~text
-sub_647250            battle troop draft
-sub_647AC0            battle resource draft
-sub_615790/615A10     transport cargo draft
-unknown               actual commit finalizer
-unknown               return/disband finalizer
+00707A74
+= MSVC _ftol2
+= truncate toward zero
+
+对正常正值：
+= floor
 ~~~
 
-容量方面：
+因此 E2/E3攻防建设和 E5耗粮里重复存在的最终 rounding gap 已关闭。
+
+关系层：
 
 ~~~text
-battle money 10000
-battle food 50000
-transport troops 60000
-transport money 100000
-transport food 500000
-transport ordinary equipment quantity 100000 (reverse-history-high)
+普通  /4  PC opcode exact
+亲爱  /2  PC opcode exact
+夫妻/义兄弟 full-share PC-high + PS2-exact
+血缘  /3  cross-platform-high，PC opcode仍open
 ~~~
 
-据点与 troop 两侧资源 mutation primitives 已恢复，commit/return 的资源守恒语义可高置信实现；真正仍 open 的是原 EXE finalizer 地址、调用顺序、件数型装备路径、伤兵返还和 overflow 逐项处理。
+两副将分别算 candidate 后取最大，不叠加。
 
-下一项：P0-10 部队主副将关系合成 / FPU 取整边界。
+下一项：P0-11 训练资格 gate / 已训练 reset / 野外气力恢复 caller。
