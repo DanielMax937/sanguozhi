@@ -45,6 +45,8 @@ P0-1普通登用概率exactness以 `36-hiring-probability-exactness.md` 为专�
 
 P0-2外交公式版本边界以 `37-diplomacy-version-boundaries.md` 为专项记录，结构化证据为 `../sources/diplomacy-version-boundaries.json`。Vanilla 1.1友好度与1.2外交成功率补丁边界已官方锁定；现有完整公式绑定PK-era corpus，Vanilla复用必须标compatibility assumption。
 
+P0-3攻城统一公式与据点接管资源以 `38-siege-capture-exactness.md` 为专项记录，结构化证据为 `../sources/siege-capture-exactness.json`。城兵共用005ADC30、耐久外层链与004B329B资源最低5%保留已收窄；005ADDC0/005ADE20内部函数体仍open。
+
 ## 版本标记
 
 - `[COMMON]`：无印与 PK 共通。
@@ -101,6 +103,7 @@ P0-2外交公式版本边界以 `37-diplomacy-version-boundaries.md` 为专项�
 36. `35-delegated-ai-architecture.md` E20委任/COM AI procedural架构、出兵gate/概率与局部主将评分
 37. `36-hiring-probability-exactness.md` P0-1普通登用原版外层判定链与005C4F80未决边界
 38. `37-diplomacy-version-boundaries.md` P0-2 Vanilla补丁外交边界、PK公式corpus与版本profile
+39. `38-siege-capture-exactness.md` P0-3攻城耐久调用链、城兵共用核心与陷落资源保留公式
 
 ## 来源优先级
 
