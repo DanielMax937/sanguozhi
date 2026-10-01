@@ -1289,3 +1289,31 @@ death-inner-functions-open
 
 下一 exactness gap：P0-6 褒赏 / 欠薪 / 流言等非自然忠诚变动。
 
+### P0-6 褒赏 / 欠薪 / 流言等非自然忠诚变动
+
+状态：
+
+```text
+P0-6-audit-complete
+salary-payment-transaction-resolved
+reward-gain-formula-open
+salary-penalty-formula-open
+rumor-effect-formula-open
+blanket-rumor-model-rejected
+```
+
+本轮核心收敛：
+
+- 金钱褒赏命令层100金/人、5AP/人等保持官方 confirmed；`005B5D60` 定位到扣AP/金钱执行链；
+- 原作褒赏有 +5/+8/+9 实测，现代复刻“保底11”与原作冲突，隔离为非 fidelity；
+- 月俸支付的外层事务由 `005909A3～005909BD` 源码级闭合：够钱整笔扣，不够钱完全跳过工资扣款并进入 `0058D5E0`；
+- 欠薪月据点金钱保持“扣完俘虏维护后的余额”，不是剩余金钱先按比例发工资；
+- 后段统一 `00590A27 -> 0058C190` 执行欠薪忠诚处理；具体受罚者和损失仍open；
+- 流言 effect helper `005D05B0 / 005D05F0` 已定位但未展开；
+- 百人都市+300次成功流言的实测否定“全城所有武将统一扣固定忠诚”，需要 target selector + per-target loss；
+- 隐藏忠诚>100同时适用于褒赏与流言。
+
+详见 [P0-6专项](41-nonnatural-loyalty-exactness.md)。
+
+下一 exactness gap：P0-7 俘虏资金不足释放排序 / 主动释放后的禁仕与技巧点。
+
