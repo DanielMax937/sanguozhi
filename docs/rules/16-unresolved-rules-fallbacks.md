@@ -1435,6 +1435,103 @@ remaining = max(currentRemaining, newlyRolledDuration)
 
 详细专项见 `28-status-duration-recovery.md`。
 
+## 7.4 俘虏资金不足释放 / 主动释放（P0-7）
+
+> 专项： [42-captive-release-exactness.md](42-captive-release-exactness.md)。
+
+### 资金不足：人数 exact，排序 profile 化
+
+```ts
+paidCount =
+  min(prisonerCount, floor(gold / 50))
+
+releaseCount =
+  prisonerCount - paidCount
+```
+
+原作已经确认存在：
+
+```text
+0058C320 comparator
+→ 004AA200
+→ 004A8E10 裁剪到 releaseCount
+→ 0058D1D0
+→ 月末段 0058D430 finalizer
+```
+
+但 comparator 字段/方向未恢复。
+
+因此 fallback 只允许：
+
+```ts
+maintenanceReleaseSelector =
+  stablePersonIdOrder
+```
+
+并必须标：
+
+```text
+provisional-engine-rule
+```
+
+不能自拟“低能力先放 / 高能力先放 / 低忠先放”。
+
+### 主动释放技巧P
+
+官方只确认正向增加技巧P，未给点数。
+
+兼容 fallback：
+
+```ts
+manualReleaseTechniquePointGain = 3
+```
+
+证据等级仅：
+
+```text
+empirical-compatibility
+```
+
+### Forbidden 按 cause 分离
+
+不要写：
+
+```ts
+releaseCaptive() {
+  forbiddenMonths = 3
+}
+```
+
+建议至少：
+
+```ts
+type CaptiveExitCause =
+  | "natural-escape"
+  | "maintenance-shortfall"
+  | "manual-exile-command"
+  | "immediate-after-capture"
+  | "force-destruction"
+  | "diplomatic-exchange"
+```
+
+兼容 profile 可暂用：
+
+```ts
+{
+  "natural-escape": 3,
+  "manual-exile-command": 3, // disputed candidate
+  "maintenance-shortfall": null,
+  "immediate-after-capture": null,
+  "force-destruction": 0,
+}
+```
+
+`null` 表示 exact open，不等于0。
+
+资金不足自动释放默认**不要发主动命令的技巧P奖励**，除非后续恢复 `0058D430` 证明它会走相同奖励函数。
+
+---
+
 ## 7.5 褒赏 / 欠薪 / 流言非自然忠诚（P0-6）
 
 > P0-6 专项见 [41-nonnatural-loyalty-exactness.md](41-nonnatural-loyalty-exactness.md)。
