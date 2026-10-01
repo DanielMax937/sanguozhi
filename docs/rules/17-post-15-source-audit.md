@@ -1220,3 +1220,35 @@ durability-inner-functions-still-open
 
 下一 exactness gap：P0-4 火焰持续与自然蔓延。
 
+### P0-4 火焰持续与自然蔓延
+
+状态：
+
+```text
+P0-4-audit-complete
+critical-duration-transform-resolved
+base-lifetime-rng-open
+natural-adjacent-spread-disabled
+```
+
+本轮确认：
+
+- 原作火计会心除即时火伤 modifier 外，燃烧持续时间按**基础结果 +1 回合**处理；
+- 公开 311MemoryResearch / SIRE 能定位着火查询、火伤、火神、火罠等路径，但尚未定位 PC-PK1.1 点火寿命 setter；
+- `00599CF0` 普通计数器处理排除为已知地面火寿命路径；
+- `sango_infinity` 的普通 `[1,2] 70/30`、会心 `[2,3] 70/30` 只作为二级工程重建 fallback；
+- 原版 fidelity 默认自然邻格蔓延为0；火种/火球/落雷范围与火罠连锁独立建模；
+- 现代复刻的 `SpreadFire()` 是可配置扩展，不能反向证明原作存在自然扩散。
+
+仍 open：
+
+- 原版基础寿命 RNG；
+- 内部 counter 与可见回合的 phase；
+- 重复点火 setter；
+- 不同点火来源差异；
+- 跨版本/平台。
+
+详见 [P0-4专项](39-fire-lifetime-spread-exactness.md)。
+
+下一 exactness gap：P0-5 登场 / 自然死亡精确 RNG。
+
