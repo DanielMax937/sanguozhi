@@ -1114,7 +1114,7 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/90.html
   https://w.atwiki.jp/sangokushi11/pages/74.html
 
-证据等级：部队结构、玩家出征兵力上下限、战斗/输送金粮兵上限均为PC-PK1.1 reverse-engineered；数量型兵装损耗与件数型攻具/舰船行为由源码结构与长期实机资料交叉确认。最终出征资源提交和运输兵装逐类容量仍open。
+证据等级：部队结构、玩家出征兵力上下限、战斗/输送金粮兵上限均为PC-PK1.1 reverse-engineered；数量型兵装损耗与件数型攻具/舰船行为由源码结构与长期实机资料交叉确认。P0-9进一步恢复transport普通兵装100000 hard-cap的reverse-history证据，并定位UI/draft函数边界；actual commit/return finalizer仍open。
 
 
 ### E2 部队能力合成专项
@@ -1666,3 +1666,43 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://patch.ali213.net/showpatch/18430.html
 
 证据等级：单官职 selector score、忠诚门、两种 mode 和 final same-score first-wins 为PC-PK1.1 reverse-engineered；office type mapping为reverse-inferred-high；candidate caller order、arg3业务映射与多官职scheduler仍open。
+
+### P0-9 部队资源事务专项
+
+- 311MemoryResearch 出征窗口：
+  - 00647250 / sub_647250 为 battle troop-count draft；
+  - 枪戟弩马库存限制与最小1兵。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/出征窗口部分界面代码.txt
+- 311MemoryResearch 地址资料：
+  - battle money 10000 / food 50000；
+  - transport troops 60000 / money 100000 / food 500000；
+  - transport equipment cap地址006157C1/D8、004962CF/D6、补给后00496306/0D/28/2F；
+  - troop strength无法突破65535的研究注记。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/地址资料.txt
+- 311SireCustomizedPackageDev：
+  - building getters/setters/adjust helpers 00486950、00486B10、00486C80、00486DF0、00487230、00487310、004873F0、004874D0、004AE2A0、004AE300、004AE3C0、004AE430；
+  - troop resource helpers 004954E0、00496010、00496280、004AE4A0、004AE510、004AE570。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- 311resource IDB functions.csv：
+  - 00647D8E/00647E2A落在sub_647AC0；
+  - transport cap地址分别落在sub_615790/sub_615A10；
+  - 当前导出只有函数/名称/结构体，没有xref/decompiler，故不能据此虚构finalizer。
+  https://github.com/fudanglp/311resource/blob/master/extractor/ida/data/python_idb/san11pk_dump.exe_functions.csv
+  https://github.com/fudanglp/311resource/blob/master/docs/analysis/ida_resource_hints.md
+- SIRE early reverse-history：
+  - 明确修复“transport equipment cap配置超过100000，补给后会回到100000”，暴露原硬编码100000路径。
+  https://www.xycq.org.cn/forum/viewthread.php?action=printable&tid=209820
+- 官方 PK 手册 / 日文Wiki：
+  - 出征可编辑兵/钱/粮/陆水兵装；
+  - 输送用于运输兵装/资金/兵粮；
+  - 数量型装备与士兵数相匹配。
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+  https://w.atwiki.jp/sangokushi11/pages/85.html
+- 2006原作实测：
+  - 部队进入容量已满据点时，超出部分会提示损失。
+  https://forum.gamer.com.tw/Co.php?bsn=6331&sn=41312
+- tankyc/sango_infinity：
+  - 当前commit/return代码仅作现代architecture对照，不作为原EXE证据。
+  https://github.com/tankyc/sango_infinity
+
+证据等级：battle/transport基础容量与draft地址为PC-PK1.1 reverse-engineered；transport equipment 100000为reverse-history-high；commit/return资源守恒为official/structure/gameplay-high；actual finalizer opcode/order继续open。
