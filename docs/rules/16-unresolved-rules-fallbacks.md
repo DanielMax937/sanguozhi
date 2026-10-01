@@ -1435,6 +1435,87 @@ remaining = max(currentRemaining, newlyRolledDuration)
 
 详细专项见 `28-status-duration-recovery.md`。
 
+## 7.3 官职自动分配 selector（P0-8）
+
+> 专项： [43-auto-office-selector-exactness.md](43-auto-office-selector-exactness.md)。
+
+### 不再 fallback 的核心
+
+单个官职的 `005FAF00` scoring/tie 已恢复，不再自拟“按功绩排序”。
+
+实现：
+
+```ts
+best = null
+bestScore = INT_MIN
+
+for (person of callerCandidates) {
+  if (!qualification005FA4D0(person, office))
+    continue
+
+  if (person.trueLoyalty < 90)
+    continue
+
+  score =
+    mode === "weighted-threshold"
+      ? originalWeightedScore(person, office)
+      : originalAffinityScore(person, office)
+
+  if (score == null)
+    continue
+
+  if (score > bestScore) {
+    best = person
+    bestScore = score
+  }
+}
+```
+
+相同 score 不替换。
+
+### 仍需 fallback 的只有 caller 层
+
+未知：
+
+```text
+candidate list 的原始顺序
+arg3 的业务映射
+多个 office 的遍历顺序
+已分配武将何时移出后续候选
+```
+
+若引擎必须先闭环：
+
+```ts
+callerCandidateOrder =
+  stablePersonIdAscending
+
+officeTraversal =
+  officeIdAscending
+
+removeSelectedImmediately =
+  true
+```
+
+全部标：
+
+```text
+provisional-caller-scheduler
+```
+
+不要把这些 fallback 混入已经闭合的 `005FAF00` selector。
+
+模式字段必须写：
+
+```text
+weighted-threshold
+role-affinity
+```
+
+在 caller xref 恢复前不要改名成 `AI/player`。
+
+---
+
 ## 7.4 俘虏资金不足释放 / 主动释放（P0-7）
 
 > 专项： [42-captive-release-exactness.md](42-captive-release-exactness.md)。
