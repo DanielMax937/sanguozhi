@@ -1521,3 +1521,38 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://github.com/tankyc/sango_infinity/blob/main/Build/Content/Data/Common/Skills.json
 
 证据等级：会心持续+1为empirical-high；原版自然邻格扩散为negative-evidence-high并在fidelity关闭；70/30为secondary-code-reconstruction fallback；原始PC-PK1.1寿命RNG仍open。
+
+### P0-5 登场 / 自然死亡专项
+
+- 311MemoryResearch `函数[每月例行处理].txt`：
+  - `00590C30` 月初例行处理；
+  - `00590C82 -> 005833D0` 被原研究注释为武将年龄/死亡相关处理。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[每月例行处理].txt
+- 311SireCustomizedPackageDev：
+  - `struct_person` 的 YearOfDebut / Birth / Death / Cause / Identity / ScheduledLord / Flags / Health；
+  - `struct_scenario` 的 IgnoreAge / DieInBattleSetting / Lifetime / ComeOnStage；
+  - `0048A000 GetDeathYear`、`00489160 IsMarkedForDeath` 等 helper。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- 早期攻略 / 日文 Wiki：
+  - 登场设置分史实 / 假想；
+  - 假想时未发现/在野位置随机并把登场年改为成人年；
+  - 成人年龄15作为高置信实测口径。
+  https://gamefaqs.gamespot.com/pc/931351-romance-of-the-three-kingdoms-xi/faqs/49611
+  https://w.atwiki.jp/sangokushi11/pages/144.html
+  https://w.atwiki.jp/sangokushi11/pages/1787.html
+- 寿命资料：
+  - Lifetime 分 Historical / Longevity / Fictional；
+  - Longgevity约+20年、Fictional约99岁为 documented/empirical compatibility profile；
+  - 自然死/不自然死行为分离。
+  https://w.atwiki.jp/sangokushi11/pages/983.html
+  https://gamefaqs.gamespot.com/boards/931351-romance-of-the-three-kingdoms-xi/54844812
+  https://gamefaqs.gamespot.com/boards/931351-romance-of-the-three-kingdoms-xi/47785604
+- 孙策 lifespan anchor：
+  - 编辑没年189后于吉事件集中205～206；
+  - 正常数据有216年前后样本；
+  - 事件胜利延寿20年。
+  https://w.atwiki.jp/sangokushi11/pages/579.html
+  https://w.atwiki.jp/sangokushi11/pages/918.html
+
+证据等级：月初 dispatcher 为PC-PK1.1 reverse-engineered-partial；登场/寿命模式语义为documented/empirical-high；+20/99岁与65/25/8/2均不是原EXE exact；`005833D0 / 0048A000` 内部函数继续open。
