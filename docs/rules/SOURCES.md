@@ -1490,3 +1490,34 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://www.gamersky.com/handbook/200609/33179.shtml
 
 证据等级：人才府-20日/最低10日为PC地址级；70/140/210/280及210/280锚点为Super empirical-high；两组通常时长为documented-guide。完整PC计算函数与完整矩阵仍open。
+
+### P0-4 火焰持续与自然蔓延专项
+
+- 日文 Wiki《戦争》《ダメージ検証》《決戦制覇》：
+  - 火计/火罠伤害实测；
+  - 会心延长燃烧；
+  - 火球与火罠连锁属于主动范围/陷阱链。
+  https://w.atwiki.jp/sangokushi11/pages/85.html
+  https://w.atwiki.jp/sangokushi11/pages/92.html
+  https://w.atwiki.jp/sangokushi11/pages/2166.html
+- 巴哈姆特旧资料：
+  - 火计会心会延长燃烧回合。
+  https://forum.gamer.com.tw/Co.php?bsn=60001&sn=380559
+- 火系统专项实测：
+  - 成对观察普通1/3/3、强制会心2/4/4，支持“基础结果+1”而非固定持续值。
+  https://www.bilibili.com/opus/374609164980707553
+- 311MemoryResearch：
+  - 已定位火神、着火格火伤、火罠/业火 casualty 等路径；
+  - 公开文本未恢复点火寿命 setter。
+  https://github.com/sjn4048/311MemoryResearch
+- SIRE 地址表：
+  - `00486320 IsBuildingOnFire`；
+  - `00495CA0 IsTroopOnFire`。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- `tankyc/sango_infinity`：
+  - `SetFire` 使用普通[1,2]、70/30，会心[2,3]、70/30；
+  - 当前 `SpreadFire` 是可配置的现代扩展，不能当作原作证明。
+  https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Object/Skill/Effect/SetFire.cs
+  https://github.com/tankyc/sango_infinity/blob/main/Build/Content/Data/Common/Skills.json
+
+证据等级：会心持续+1为empirical-high；原版自然邻格扩散为negative-evidence-high并在fidelity关闭；70/30为secondary-code-reconstruction fallback；原始PC-PK1.1寿命RNG仍open。
