@@ -6,24 +6,26 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-3 攻城统一公式与据点接管资源
+### 最新完成：P0-4 火焰持续与自然蔓延
 
-- [P0-3 正文](38-siege-capture-exactness.md)
-- [P0-3 结构化证据](../sources/siege-capture-exactness.json)
-- [P0-3 校验脚本](../../scripts/check_siege_capture_exactness.py)
+- [P0-4 正文](39-fire-lifetime-spread-exactness.md)
+- [P0-4 结构化证据](../sources/fire-lifetime-spread-exactness.json)
+- [P0-4 校验脚本](../../scripts/check_fire_lifetime_spread_exactness.py)
 - [战斗主规则](05-combat.md)
+- [fallback 总表](16-unresolved-rules-fallbacks.md)
 - [当前总表](17-post-15-source-audit.md)
 
-P0-3 已确认城兵伤害共用 `005ADC30`，耐久分为 `005ADDC0` 与 `005ADE20` 两条 helper，外层 power、目标倍率、会心、云梯、超级难度修正已恢复。
+P0-4 已把火系统拆成“点火寿命 / 主动范围与连锁 / 自然邻格蔓延”三层。
 
-攻陷资源 `004B329B` 已闭合：
+已固定的 fidelity 边界：
 
 ```text
-retainPct = max(5, trunc(CHA/10))
+criticalFireDuration = baseDuration + 1
+naturalAdjacentSpread = false
 ```
 
-统一作用于金、粮、兵和12类兵装。旧低魅力可能0%保留的公式撤回。
+PC-PK1.1 的基础寿命 setter / RNG 仍未找到，因此 `1/2 @ 70/30` 继续只作为可替换工程 fallback，不标原版精确常量。
 
-仍 open：`005ADDC0/005ADE20` 内部函数体、小兵力/x87取整、内政设施具体保留 selector、接管耐久重置与跨平台差异。
+仍 open：原始寿命概率、内部 counter 与可见回合 phase、重复点火 setter、不同点火来源差异、跨版本/平台等价性。
 
-下一项：P0-4 火焰持续与自然蔓延。
+下一项：P0-5 登场 / 自然死亡精确 RNG。
