@@ -8,29 +8,47 @@ A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完
 
 当前不新增 E21；后续按 [open exactness](13-open-exactness.md) 逐项清理剩余真实缺口。
 
-### 最新完成：P0-1 普通登用概率 exactness 收窄
+### 最新完成：P0-2 外交公式的版本边界
 
-- [P0-1 正文](36-hiring-probability-exactness.md)
-- [P0-1 结构化证据](../sources/hiring-probability-exactness.json)
-- [P0-1 校验脚本](../../scripts/check_hiring_probability_exactness.py)
-- [人才主规则](03-personnel.md)
+- [P0-2 正文](37-diplomacy-version-boundaries.md)
+- [P0-2 结构化证据](../sources/diplomacy-version-boundaries.json)
+- [P0-2 校验脚本](../../scripts/check_diplomacy_version_boundaries.py)
+- [外交主规则](07-diplomacy.md)
 - [当前总表](17-post-15-source-audit.md)
 
-本轮没有伪造 `005C4F80` 的成功率闭式，而是把原版 PC-PK1.1 外层锁定为：
+本轮解决的是**版本边界**，不是伪造各版本未知常量。
+
+官方补丁记录确认：
 
 ```text
-004AF7D0 hard gate
-→ 005C4F80 successRate
-→ normal: 005BA4C0 deterministicValue < p
-→ nonzero-mode: giri multiplier + runtime ProbabilityCheck
+Vanilla 1.1：
+友好增减平衡调整
+
+Vanilla 1.2：
+友好增减再次调整
++ 计略/外交成功率调整
+
+Vanilla 1.3～1.3.3：
+公开changelog未再列外交专项变化
 ```
 
-普通人才命令第三参数=0，因此不使用非0模式外层义理0.9/0.7倍率。
+PK 新增“超级”难度；现有完整外交公式 corpus 含初级1.0 / 上级0.8 / 超级0.7，因此正确标签是 `pk-era-formula-corpus`，不能无版本覆盖 Vanilla。
 
-`005BA4C0` 的七个入参已恢复；`005B9C00` 的 dateKey 为 `day*7+month*5+year*3`，异地登用保存发令日。
+当前 profile：
 
-2025年以来新版 SIRE/血色衣冠的“基准60、忠诚/相性/魅力系数、仕官第一年-20、浮动值6”已明确隔离为 **MOD 新忠诚系统**，禁止回填原版。
+```text
+vanilla-pc-1.0
+vanilla-pc-1.1
+vanilla-pc-1.2-plus
+pk-pc-formula-corpus
+pk-pc-reverse-support
+console-separate-open
+```
 
-真正仍 open：`004AF7D0` 函数体、`005C4F80`、`005BA410`、`005BA4C0` deterministic generator 与跨平台差异。
+Vanilla 如果为了模拟闭环复用 PK 公式，必须显式 `compatibilityAssumption=true`。
 
-下一项：P0-2 外交公式的版本边界。
+PK1.1/1.1.1 官方 changelog 没有外交专项变化，但这不等于二进制确认相同。外交府仍只确认 AP减半与亲善金减半，不增加外交成功率。
+
+仍 open：Vanilla 各阶段 exact constants、PK formula corpus exact build、late Vanilla/PK共享范围、主机版与原EXE公式入口。
+
+下一项：P0-3 攻城统一公式与据点接管资源。
