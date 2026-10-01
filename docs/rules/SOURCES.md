@@ -1556,3 +1556,50 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/918.html
 
 证据等级：月初 dispatcher 为PC-PK1.1 reverse-engineered-partial；登场/寿命模式语义为documented/empirical-high；+20/99岁与65/25/8/2均不是原EXE exact；`005833D0 / 0048A000` 内部函数继续open。
+
+### P0-6 非自然忠诚变动专项
+
+- KOEI PK说明书：
+  - 金钱褒赏100金/人、5AP/人；
+  - 可多人、每人每回合一次；
+  - 显示忠诚100和部队从军武将不可；
+  - 宝物授予10AP、价值越高加忠越多。
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 311MemoryResearch `修改记录by sjn4048.txt`：
+  - `005B5D60` 位于褒赏扣行动力/扣钱执行链。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/修改记录by%20sjn4048.txt
+- 311MemoryResearch `Func-收支03-每月钱粮兵装收支.txt`：
+  - `004CF360` 获取现役列表；
+  - `0049F2A0` 计算总俸禄；
+  - `005909AA` 不足时跳过唯一的 `sub edi,eax`；
+  - `0058D5E0` 准备欠薪；
+  - `0058C190` 后段统一忠诚下降。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-收支03-每月钱粮兵装收支.txt
+- 311MemoryResearch `函数[计算流言是否成功].txt`：
+  - 成功率计算与效果结算分离；
+  - 标出 `005D05B0 / 005D05F0` 两个流言相关 helper，但未展开函数体。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[计算流言是否成功].txt
+- 日文 Wiki：
+  - 君主魅力影响褒赏忠诚上升量；
+  - 宝物价值影响授予加忠；
+  - 君主亲爱/义理等与流言效果有明显关系。
+  https://w.atwiki.jp/sangokushi11/pages/1598.html
+  https://w.atwiki.jp/sangokushi11/pages/79.html
+  https://w.atwiki.jp/sangokushi11/pages/74.html
+  https://w.atwiki.jp/sangokushi11/pages/95.html
+- PC-PK实测：
+  - 隐藏忠诚99经褒赏可到108；
+  - 流言可削减>100的隐藏忠诚；
+  - 成功流言的目标与下降量存在随机性。
+  https://www.ptt.cc/bbs/Koei/M.1776854540.A.47B.html
+- 2018百人都市极端实测：
+  - 100+武将城市承受300+成功流言，治安归0但大多数武将忠诚几乎不变，只有少数显著下降；
+  - 否定“每次成功对全城全员统一扣忠”的实现。
+  https://www.ptt.cc/bbs/Koei/M.1526989285.A.762.html
+- 现代复刻 `sango_infinity`：
+  - 当前褒赏“保底11+额外”与原作+5/+8/+9样本冲突；
+  - 当前流言“全员8..15+义理”配置注释本身就是工程调参；
+  - 两者仅作 negative/reconstruction 对照，不作 fidelity 证据。
+  https://github.com/tankyc/sango_infinity
+
+证据等级：月俸支付事务为PC-PK1.1 reverse-engineered；褒赏命令语义为official；褒赏增量为empirical-high、公式open；流言 blanket-all-officer 模型由强反例否定，原 target/loss/security 函数仍open。
