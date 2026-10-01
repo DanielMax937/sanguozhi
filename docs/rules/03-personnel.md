@@ -3467,123 +3467,323 @@ commandCap =
 
 官职真正改变的是：指挥兵数、指定五维加成、每月俸禄，以及间接影响太守/都督自动选择和据点有效守兵上限。
 
-### 10.7 自动封官不是“按功绩从高到低”
+### 10.7 自动封官不是“按功绩从高到低”（P0-8）
+
+P0-8 专项： [43-auto-office-selector-exactness.md](43-auto-office-selector-exactness.md)。
 
 PC-PK1.1 已公开 `005FAF00` 自动选人函数。
 
-每个候选首先经过：
+本轮首先纠正一个旧误标：
+
+```text
+005FA650
+```
+
+**不是候选列表生成/排序函数**。
+
+`005FAF00` 的真实参数结构可恢复为：
+
+```text
+arg1 = caller 已经构造好的候选武将列表
+arg2 = 目标官职指针
+arg3 = scoring mode flag
+```
+
+函数开头先：
+
+```text
+005FA650(office)
+→ officeType
+```
+
+然后直接遍历 arg1。
+
+因此最终同分结果依赖 caller 提供的候选顺序；不是 `005FA650` 内部再排序。
+
+### 10.8 officeType 与 scoringModeFlag 是两个独立量
+
+对80个有名官职，`005FA650` 的分类行为可高置信整理为：
+
+```text
+type 0:
+  丞相 / 司空 / 太尉 / 司徒
+  即 officeId 0..3
+
+type 1:
+  武官
+  named office 中 officeId % 8 >= 4
+
+type 2:
+  其余文官
+```
+
+已知 `officeId=0x2C(44)` 是军师将军，与“每层8官、后4为武官”的静态表完全吻合。
+
+注意：
+
+```text
+officeType = 005FA650(office)
+scoringModeFlag = 005FAF00 arg3
+```
+
+不能混成一个“官职类型参数”。
+
+第81个内部 office entry 的分类仍 open。
+
+### 10.9 两种 mode 共用的 hard gate
+
+每个候选先调用：
 
 ```text
 005FA4D0(person, office)
 ```
 
-该 helper 的现有注释表明会检查功绩、所在、状态等资格；完整函数体仍未公开。
+现有逆向注释确认它主要检查：
 
-通过资格后，还有一条**源码级硬门槛**：
+- 功绩；
+- 所在；
+- 状态；
+- 其他任官资格。
+
+完整函数体仍 open。
+
+随后无论哪种 mode：
+
+```ts
+if (trueLoyalty < 90)
+  reject
+```
+
+读取的是 `struct_person +0xAC` 的真实忠诚 byte。
+
+### 10.10 arg3 != 0：weighted-threshold mode
+
+忠诚权重：
+
+```ts
+loyaltyBonus =
+  9 * min(trueLoyalty - 90, 10)
+```
+
+所以：
 
 ```text
-trueLoyalty < 90
--> 自动封官 selector 直接不选
+90 -> +0
+91 -> +9
+...
+100及以上 -> +90
 ```
 
-注意这里读取的是底层真实忠诚 byte，不是 UI 的 `min(loyalty,100)`。
-
-### 10.8 自动封官存在两种评分模式
-
-`005FAF00` 还读取一个 caller flag。该 flag 的业务名称尚未恢复，因此不能把两条分支都说成“所有自动封官永远如此”。
-
-#### 模式A：带忠诚权重的专门评分
-
-设：
+#### type 0：顶级四文官
 
 ```ts
-loyaltyBonus = min(trueLoyalty - 90, 10) * 9
+base = leadership + intelligence
+
+if (base < 150)
+  reject
+
+score =
+  base + loyaltyBonus
 ```
 
-因为忠诚<90已提前剔除，所以该项为0～90。
+门槛是**>=150**，不是 >150。
 
-最高一档 / 特殊 type 0：
+#### type 1：武官
 
 ```ts
-if (leadership + intelligence < 150) reject
-score = leadership + intelligence + loyaltyBonus
+if (max(leadership, war) < 60)
+  reject
+
+score =
+  leadership
+  + war
+  + loyaltyBonus
 ```
 
-武官 type 1：
-
-```ts
-if (max(leadership, war) < 60) reject
-score = leadership + war + loyaltyBonus
-```
-
-文官 type 2：
-
-```ts
-if (max(intelligence, politics) < 70) reject
-score = max(intelligence, politics) + loyaltyBonus
-```
-
-因此此前社区常见的“AI只按功绩封官”明显过度简化；功绩主要决定**是否有资格**，通过资格后的自动人选还会看能力和忠诚。
-
-#### 模式B：文武倾向比较
-
-另一分支计算：
-
-```ts
-martial = max(leadership, war)
-civil   = max(intelligence, politics)
-```
-
-武官分支要求 `martial >= civil`，并以 `martial` 作为分值；文官侧要求 `civil > martial` 并以 `civil` 作为分值。
-
-这说明原作确实会按人物的“文/武能力侧”分流，而不是单纯按统率、功绩或官职ID排序。
-
-### 10.9 自动封官同分时：保持候选列表中先出现的人
-
-最终更新最佳候选使用严格比较：
+必须区分：
 
 ```text
-if currentBest < candidateScore:
-    replace
+资格门 = max(统,武)
+排序分 = 统+武
 ```
 
-相等时**不会替换**。
+#### type 2：普通文官
 
-因此真正 tie-break 是上游候选列表的迭代顺序；但列表来自 `005FA650`，其完整生成/排序尚未恢复。禁止现在就写“同分personId小者 / 年长者 / 功绩更高者”。
+```ts
+civil =
+  max(intelligence, politics)
 
-### 10.10 D10 当前结论
+if (civil < 70)
+  reject
+
+score =
+  civil + loyaltyBonus
+```
+
+不是“智+政”。
+
+因此功绩的主要作用在更前面的**资格 gate**；`005FAF00` final score 本身没有 merit 项。
+
+### 10.11 arg3 == 0：role-affinity mode
+
+先算：
+
+```ts
+martial =
+  max(leadership, war)
+
+civil =
+  max(intelligence, politics)
+```
+
+武官：
+
+```ts
+if (martial < civil)
+  reject
+
+score = martial
+```
+
+type0 + 普通文官：
+
+```ts
+if (civil <= martial)
+  reject
+
+score = civil
+```
+
+因此：
+
+```text
+martial == civil
+→ 武官侧允许
+→ 文官侧拒绝
+```
+
+这一 mode 仍保留公共忠诚>=90门槛，但没有90～100的忠诚 score bonus。
+
+### 10.12 mode 的 caller 业务含义仍 open
+
+从行为看：
+
+```text
+arg3 != 0
+→ 能力门槛 + 忠诚权重
+
+arg3 == 0
+→ 文武倾向 partition
+```
+
+SIRE v1.26 的历史更新说明也明确写过：
+
+```text
+电脑自动封官的规则可设定
+```
+
+但当前公开 IDB / TXT 没有 `005FAF00` caller xref，因此不能正式把：
+
+```text
+arg3=1
+arg3=0
+```
+
+硬命名成：
+
+```text
+AI
+玩家自动按钮
+```
+
+当前规则名保持中性：
+
+```text
+weighted-threshold
+role-affinity
+```
+
+直到 caller 闭合。
+
+### 10.13 最终同分规则已经 exact：first-in-list wins
+
+`005FAF00` 初始化：
+
+```text
+bestScore = INT_MIN
+bestPerson = null
+```
+
+最终只在：
+
+```ts
+candidateScore > bestScore
+```
+
+时替换。
+
+相等时不替换。
+
+因此 selector 自身的 tie-break：
+
+```text
+相同 score
+→ caller list 中先出现的 candidate 获胜
+```
+
+这是源码级 exact。
+
+仍未知的是：
+
+```text
+caller list 本身按什么顺序构造
+```
+
+所以不能继续写“同分ID小者 / 年长者 / 功绩高者”。
+
+### 10.14 D10 当前结论（P0-8 更新）
 
 已经锁定：
 
 - Person 的 `OfficeID` 与 `Merit` 独立保存；
-- 官职结构直接保存指挥兵数、能力加成类型/数值、俸禄、等级；
+- 官职结构保存指挥兵数、能力加成、俸禄、等级；
 - PC-PK1.1 原数组81项，公开有名官职80项；
-- 爵位决定可开放官职层级；
-- 官职功绩门槛按4000点一档，从0到36000；
-- 人物功绩硬上限60000；
-- 无官职指挥5000；
-- 军制改革精确 +3000，封官界面与实际部队上限均生效；
-- 普通最大可指挥兵数18000；
-- 官职能力加成确实进入实际属性计算，最终仍受100上限；
+- 官职功绩门槛按4000点一档，功绩上限60000；
+- 无官职指挥5000、军制改革+3000；
+- 官职能力加成进入实际属性，最终100封顶；
 - 升降官本身不改忠诚；
-- 自动封官先跑资格 helper，且忠诚<90直接不选；
-- 自动 selector 存在两种评分模式；其中专门模式有武官60、文官70、最高档统智和150门槛及90～100忠诚权重；
-- 同分不替换，真正 tie-break 取决于尚未恢复的候选列表顺序。
+- `005FAF00` 的 candidate list / office / mode 三个参数角色；
+- `005FA650` 是 office classifier，不是候选排序器；
+- true loyalty <90 为两种 mode 共用硬拒绝；
+- weighted-threshold mode 的三类门槛与 score 已完整恢复；
+- military 门槛用 max(统,武)，但 score 用统+武；
+- ordinary civil 用 max(智,政)，不是智+政；
+- top-civil 为统+智>=150；
+- loyalty bonus = `9*min(loyalty-90,10)`；
+- role-affinity mode 的文武倾向比较已恢复；
+- 文武相等时武官侧胜；
+- 最终同 score 为稳定 first-wins；
+- merit 不进入 `005FAF00` final score。
 
 仍 open：
 
 - `005FA4D0` 完整资格函数；
-- `005FA650` 候选列表生成与排序；
-- 两种自动评分模式的 caller flag 精确业务语义；
-- 第81个 office struct 的内部语义/ID；
-- Vanilla / 主机版自动封官 selector 是否与 PC-PK1.1 完全一致；
-- 黄巾特殊“无爵位/无官职”属于势力特例，继续放 `08-ruler-corps.md`，不并入普通官职公式。
+- `005FA650` 完整 opcode（有名80官分类行为已高置信恢复）；
+- `005FAF00` 所有 caller / xref；
+- caller candidate list 的构造与原始顺序；
+- arg3 在每个 caller 的业务语义；
+- 自动连续分配多个官职时已选武将如何移出后续候选；
+- 多官职遍历顺序；
+- 第81个 office entry；
+- Vanilla / 主机版差异；
+- 黄巾特殊无爵位/无普通官职继续放 `08-ruler-corps.md`。
 
-### 10.11 本节依据
+### 10.15 本节依据
 
-- 311SireCustomizedPackageDev：`struct_person` / `struct_office[81]` / office helper 地址。
 - 311MemoryResearch：`内存资料/函数[自动封官].txt`。
-- 311MemoryResearch：`内存资料/函数[计算武将属性].txt`。
-- 311MemoryResearch：`内存资料/地址资料.txt`，功绩4000阶梯、60000上限、军制改革+3000。
-- 日文 Wiki《爵位・官职》：80官职完整表、爵位都市门槛、升降官不改忠、18000上限。
-- 日文 Wiki《技巧研究》：军制改革+3000、无官5000→8000。
+- 311MemoryResearch：`内存资料/地址资料.txt`。
+- 311SireCustomizedPackageDev：`struct_person / struct_office[81]`。
+- 311resource：原 IDB 函数边界轻量导出。
+- 日文 Wiki《爵位・官职》：80官职静态表。
+- SIRE v1.26 更新记录：电脑自动封官规则可设置；仅作 caller 业务语义的旁证，不替代 xref。
+
