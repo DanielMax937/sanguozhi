@@ -486,29 +486,32 @@ P0-6 专项见 [41-nonnatural-loyalty-exactness.md](41-nonnatural-loyalty-exactn
 - x87中间 extended precision / 原常量 bit pattern 极端边界；
 - Vanilla / PS2 / Wii等价性。
 
-### 6.6 训练 / 气力剩余边界
+### 6.6 训练 / 气力剩余边界（P0-11）
 
-E4 已确认：
+专项见 [46-training-morale-exactness.md](46-training-morale-exactness.md)。
 
-- `005C3F50` 单次训练闭式；
-- 训练只看最多3名执行者武力；
-- 据点兵力通过 `floor(T/2000)` 进入分母；
-- 练兵所精确×1.5；
-- 据点/部队气力上限100，熟练兵120；
-- 训练AP 20，军事府10；
-- 每名执行者武力经验+2、功绩+50；
-- 技巧P = `floor(actualGain/2)+5`；
-- 军乐台+10、诗想军乐台合计+20、奏乐无军乐台时+5；
-- 扫荡/威风/昂扬/怒发主要气力常量。
+已确认 / 收紧：
 
-仍未知：
+- `005C4100` 是训练的**据点级 eligibility gate**，函数边界 `005C4100..005C421F`；
+- `005C4220` 执行训练先调用 `005C4100(SP)`，随后才由 `005B8320` 校验命令参数；
+- 官方手册明确训练“每回合只能执行一次”，20AP、最多3人；
+- 城市 `CityActions.bit4`、港关 `+0x68` 为已训练状态；
+- 执行时 `004AD080(SP,1)` 置位；
+- 下一回合恢复可训练的 reset cadence 已闭合，但置0的 exact caller 仍open；
+- `00599CF0` 的公开 body 可排除为该 reset caller；
+- 军乐台/奏乐/诗想的 local handler 已定位到 `0059A230`；
+- 军乐台+10、奏乐+5、诗想在军乐台额外+10；
+- 奏乐不与军乐台叠加，诗想+军乐台合计20；
+- 气力仍受100/120上限。
 
-- `005C4100` 完整训练资格gate；
-- 据点“已训练”状态的完整重置caller；
-- 军乐台/奏乐/诗想每旬处理主函数的完整逐指令文本；
-- Vanilla/主机版训练公式与常量是否逐项一致。
+仍 open：
 
-旧“训练=5+统率×0.15”“城内自然每旬+5”“训练技巧P固定7～10”均不再作为 fallback。
+- `005C4100` 完整 body；
+- `005B8320` 训练参数验证细节；
+- training reset exact caller/xref；
+- `0059A230` 完整 body/签名；
+- `0059A230` top-level scheduler xref；
+- Vanilla/主机版差异。
 
 ### 6.7 兵粮消耗剩余边界
 
