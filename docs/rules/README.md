@@ -61,6 +61,8 @@ P0-9部队资源事务以 `44-troop-resource-transaction-exactness.md` 为专项
 
 P0-10主副将关系/FPU取整以 `45-deputy-rounding-exactness.md` 为专项记录，结构化证据为 `../sources/deputy-rounding-exactness.json`；`00707A74` 已识别为MSVC `_ftol2`，正值最终floor闭合；普通/亲爱PC指令精确，血缘/3仍保留PC opcode gap。
 
+P0-11训练/气力以 `46-training-morale-exactness.md` 为专项记录，结构化证据为 `../sources/training-morale-exactness.json`；训练gate边界、每回合一次cadence及`0059A230`野外恢复local handler已收紧，reset/top scheduler xref仍open。
+
 ## 版本标记
 
 - `[COMMON]`：无印与 PK 共通。
@@ -124,6 +126,8 @@ P0-10主副将关系/FPU取整以 `45-deputy-rounding-exactness.md` 为专项记
 43. `42-captive-release-exactness.md` P0-7资金不足俘虏释放人数/选择管线、主动释放技巧P与禁仕路径冲突
 44. `43-auto-office-selector-exactness.md` P0-8自动封官单官职评分、first-wins同分与caller列表边界
 45. `44-troop-resource-transaction-exactness.md` P0-9出征/输送draft容量、资源守恒、100000兵装上限与finalizer边界
+46. `45-deputy-rounding-exactness.md` P0-10主副将关系除数、_ftol2取整与剩余PC opcode边界
+47. `46-training-morale-exactness.md` P0-11训练gate/reset cadence与0059A230野外气力恢复
 46. `45-deputy-rounding-exactness.md` P0-10主副将关系补正与MSVC _ftol2正值floor闭合
 
 ## 来源优先级
