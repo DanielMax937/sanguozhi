@@ -1208,7 +1208,7 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/13.html
   https://w.atwiki.jp/sangokushi11/pages/85.html
 
-证据等级：训练闭式、练兵所倍率、训练AP/经验/功绩/技巧P、据点/部队100/120上限均为PC-PK1.1 reverse-engineered；军乐台/奏乐/诗想和主要气力特技为原地址参数 + 日文Wiki语义交叉确认。`005C4100`资格gate、已训练状态重置caller与跨平台同值仍open。
+证据等级：训练闭式、练兵所倍率、训练AP/经验/功绩/技巧P、据点/部队100/120上限均为PC-PK1.1 reverse-engineered；P0-11进一步锁定`005C4100`据点gate边界、官方每回合一次cadence及`0059A230`野外恢复local handler。reset/top scheduler xref与`005C4100`完整body仍open。
 
 
 ### E5 兵粮消耗专项
@@ -1744,3 +1744,33 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://www.53miji.com/contents/201502/15507.html
 
 证据等级：`00707A74=_ftol2`和toward-zero转换为runtime-level exact；普通/亲爱divisor为PC opcode exact；夫妻/义兄弟为PC reverse-author documented-high + PS2 empirical-exact；血缘/3仍缺PC逐指令。
+
+### P0-11 训练/气力 exactness专项
+
+- 311MemoryResearch `Func-内政04-执行训练.txt`：
+  - `005C4220` 入口先调用 `005C4100(SP)`；
+  - 之后才调用 `005B8320` 参数校验；
+  - `004AD080(SP,1)` 设置已训练。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-内政04-执行训练.txt
+- 311MemoryResearch `Func-自动02-计数器处理【未】.txt`：
+  - `00599CF0` 完整公开body不清 CityActions+0xA4 / 港关+0x68，因此排除为训练reset。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动02-计数器处理【未】.txt
+- 311resource IDB functions.csv：
+  - `005C4100..005C421F` 独立gate函数；
+  - `0059A230..0059A4AF` 覆盖军乐台/奏乐/诗想全部已知地址。
+  https://github.com/fudanglp/311resource/blob/master/extractor/ida/data/python_idb/san11pk_dump.exe_functions.csv
+- SIRE struct/address：
+  - CityActions bit4=已训练；
+  - 港/关 +0x68 TrainingCompleted；
+  - `0047B710 SetCityTrainingStatus`、`004AD080 SetSPTrainingStatus`。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- KOEI PK官方手册：
+  - 训练每回合仅一次、20AP、最多3人、武力合计影响效果。
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 日文Wiki《特技一覧》：
+  - 奏乐每回合+5；
+  - 奏乐不与军乐台同时生效；
+  - 诗想使军乐台恢复翻倍到20。
+  https://w.atwiki.jp/sangokushi11/pages/13.html
+
+证据等级：training once-per-turn=official；gate function boundary=PC IDB exact；morale local handler address=PC IDB/reverse high；reset xref与global scheduler xref继续open。
