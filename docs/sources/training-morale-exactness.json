@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-11-exactness",
+  "target": "training eligibility/reset and per-turn troop morale recovery",
+  "status": {
+    "audit": "complete",
+    "trainingGateBoundary": "resolved",
+    "trainingGateInnerConditions": "partial",
+    "trainingOncePerTurn": "official-confirmed",
+    "trainingResetCadence": "resolved-behaviorally",
+    "trainingResetCaller": "open",
+    "moraleRecoveryLocalFunction": "resolved",
+    "moraleRecoveryPriority": "resolved-high",
+    "moraleTopSchedulerXref": "open"
+  },
+  "training": {
+    "gate": {
+      "function": "005C4100",
+      "functionEnd": "005C4220",
+      "approximateSize": "0x120",
+      "input": "strategic point/building pointer only",
+      "role": "strategic-point-level eligibility gate",
+      "completeBody": "open"
+    },
+    "execution": {
+      "function": "005C4220",
+      "parameterValidatorAfterGate": "005B8320",
+      "setTrainingStatus": "004AD080",
+      "setTrainingStatusValue": 1
+    },
+    "state": {
+      "city": {
+        "offset": "0xA4",
+        "bit": 4,
+        "name": "CityActions.trainingCompleted"
+      },
+      "portGate": {
+        "offset": "0x68",
+        "name": "TrainingCompleted"
+      }
+    },
+    "setters": {
+      "genericSP": "004AD080",
+      "citySpecific": "0047B710"
+    },
+    "cadence": {
+      "oncePerTurn": true,
+      "evidence": "official-confirmed",
+      "resetBeforeNextUsableTurn": true,
+      "resetCaller": "open"
+    },
+    "resetExclusions": {
+      "00599CF0": "does not clear CityActions+0xA4 or port/gate+0x68 in public body"
+    }
+  },
+  "moraleRecovery": {
+    "function": "0059A230",
+    "functionEnd": "0059A4B0",
+    "approximateSize": "0x280",
+    "functionSignature": "open",
+    "topSchedulerXref": "open",
+    "musicPlatform": {
+      "facilityId": 12,
+      "range": 2,
+      "gain": 10,
+      "address": "0059A325"
+    },
+    "musicSkill": {
+      "skillId": 75,
+      "checkAddress": "0059A2B1",
+      "gain": 5,
+      "gainAddress": "0059A40D"
+    },
+    "poetrySkill": {
+      "skillId": 76,
+      "checkAddress": "0059A2BE",
+      "extraPlatformGain": 10,
+      "gainAddress": "0059A3C5"
+    },
+    "priority": {
+      "inPlatformNoPoetry": 10,
+      "inPlatformWithPoetry": 20,
+      "inPlatformWithMusicOnly": 10,
+      "outsidePlatformWithMusic": 5,
+      "outsidePlatformWithPoetryOnly": 0,
+      "rule": "music does not stack with platform; poetry doubles platform"
+    },
+    "moraleCaps": {
+      "normal": 100,
+      "trainedSoldiersTech": 120
+    }
+  },
+  "open": [
+    "005C4100 complete body",
+    "whether 005C4100 directly gates morale cap / zero troops / ownership and other SP conditions",
+    "005B8320 complete training parameter validation semantics",
+    "training status reset exact caller/xref",
+    "city vs port/gate reset helper path",
+    "0059A230 complete body/signature",
+    "0059A230 top-level per-turn scheduler xref",
+    "multiple music platforms exact selector semantics",
+    "Vanilla/PS2/Wii differences"
+  ]
+}
