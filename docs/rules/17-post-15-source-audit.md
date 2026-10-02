@@ -1464,3 +1464,32 @@ relationship-helper-body-partial
 
 下一 exactness gap：P0-11 训练资格 gate / 已训练 reset / 野外气力恢复 caller。
 
+### P0-11 训练资格 / 已训练 reset / 野外气力恢复
+
+状态：
+
+```text
+P0-11-audit-complete
+training-gate-boundary-resolved
+training-once-per-turn-official
+training-reset-cadence-resolved
+training-reset-xref-open
+morale-recovery-function-59A230-resolved
+music-poetry-platform-priority-resolved-high
+morale-top-scheduler-xref-open
+```
+
+本轮确认：
+
+- `005C4100` 是据点级训练 gate，不是执行武将列表 validator；
+- 官方确认训练每回合最多一次；
+- 城市bit4/港关+68已训练状态与 `004AD080(...,1)` 置位路径闭合；
+- reset cadence 可按下回合恢复可用实现，但 exact 置0 caller 继续open；
+- `00599CF0` 排除为该 reset caller；
+- `0059A230` 锁定为军乐台/奏乐/诗想所在的野外气力恢复 local handler；
+- 优先级：军乐台10；诗想+军乐台20；无军乐台时奏乐5；奏乐不与军乐台相加。
+
+详见 [P0-11专项](46-training-morale-exactness.md)。
+
+下一 exactness gap：P0-12 阵/砦/城塞耗粮重叠优先级 / 粮尽逃兵。
+
