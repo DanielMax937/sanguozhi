@@ -1435,6 +1435,48 @@ remaining = max(currentRemaining, newlyRolledDuration)
 
 详细专项见 `28-status-duration-recovery.md`。
 
+## 7.0 训练资格 / 已训练重置 / 野外气力恢复（P0-11）
+
+> 专项： [46-training-morale-exactness.md](46-training-morale-exactness.md)。
+
+训练状态：
+
+```ts
+if (sp.trainingCompleted)
+  rejectTraining()
+
+// 成功执行后
+sp.trainingCompleted = true
+
+// 下一回合/旬可操作前
+sp.trainingCompleted = false
+```
+
+“每回合一次”是 official-confirmed；但 reset 的原 caller 仍open。
+
+据点 gate 必须 profile 化：
+
+```ts
+canTrainAtSP = fidelity005C4100Profile
+```
+
+不要自行把“满气力/零兵力”等条件标成原函数 exact，直到 `005C4100` body 恢复。
+
+野外恢复：
+
+```ts
+if (inMusicPlatformRange)
+  gain = hasPoetry ? 20 : 10
+else if (hasMusic)
+  gain = 5
+else
+  gain = 0
+```
+
+最后按100/120气力上限裁剪。
+
+---
+
 ## 7.1 部队主副将关系 / 浮点取整（P0-10）
 
 > 专项： [45-deputy-rounding-exactness.md](45-deputy-rounding-exactness.md)。
