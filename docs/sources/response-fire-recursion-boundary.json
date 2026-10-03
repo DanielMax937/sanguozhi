@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-40",
+  "target": "PC-PK1.1 response-fire caller and double-strike recursion boundary",
+  "status": "audit-complete-xref-open",
+  "reverse": {
+    "responseFireAddress": "00584DC8",
+    "responseFireContainingFunction": [
+      "0x584D70",
+      "0x584E80"
+    ],
+    "doubleStrikeSuppressionAddress": "00586E12",
+    "doubleStrikeProbabilityAddress": "00586F0F",
+    "doubleStrikeContainingFunction": [
+      "0x5860A0",
+      "0x587170"
+    ]
+  },
+  "resolved": {
+    "responseFireAndDoubleStrikeDifferentFunctions": true,
+    "attackerIndirectVsCrossbowDoubleStrikeSuppressed": true,
+    "supportAttackDoubleStrikeExcluded": true,
+    "failedTacticFollowupNormalAttackCanDoubleStrike": true,
+    "responseFireExecutorXrefResolved": false,
+    "recursiveChainDepthResolved": false
+  },
+  "open": [
+    "00584D70 full body",
+    "005860A0 full body",
+    "response-fire to attack-executor xref",
+    "whether response attacks re-enter response-fire gate",
+    "recursive termination condition",
+    "maximum chain depth",
+    "arrow tactic primary/collateral handling",
+    "naval profile",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/fudanglp/311resource",
+    "https://github.com/sjn4048/311MemoryResearch"
+  ]
+}
