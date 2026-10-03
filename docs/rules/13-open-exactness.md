@@ -513,27 +513,32 @@ P0-6 专项见 [41-nonnatural-loyalty-exactness.md](41-nonnatural-loyalty-exactn
 - `0059A230` top-level scheduler xref；
 - Vanilla/主机版差异。
 
-### 6.7 兵粮消耗剩余边界
+### 6.7 阵系耗粮重叠 / 粮尽逃兵（P0-12）
 
-E5 已确认：
+专项见 [47-food-overlap-starvation-exactness.md](47-food-overlap-starvation-exactness.md)。
 
-- 战斗部队 /10；
-- 输送队 /20；
-- 据点驻屯 /40；
-- 港/关有屯田时0；
-- 阵/砦/城塞原EXE倍率约为普通耗粮的5/6、2/3、1/2；
-- 输送队不吃阵系减粮；
-- 着火额外耗粮看当前存粮与政治；
-- 兵力>0时最低耗粮1。
+已确认 / 收紧：
 
-仍未知：
+- `0049D180` 返回一个防御系列设施 type，`0049D2E0` 只消费一个 multiplier，因此重叠阵/砦/城塞**不叠乘**；
+- 原 multiplier bit pattern：
+  - 无 `0x40000000`；
+  - 阵 `0x3FD55555`；
+  - 砦 `0x3FAAAAAB`；
+  - 城塞 `0x3F800000`；
+- 公共 `0.05f = 0x3D4CCCCD`；
+- 配合 P0-10 `_ftol2`，18000兵结果精确为1800/1499/1200/900；
+- `0059BF40` 对进入旬时0粮的对象直接跳过；本旬扣到0也只记录粮尽消息，不扣兵；
+- 因此粮尽掉兵存在独立 handler；
+- `00599AA0` 是围城断粮据点人口衰减，不是野外 troop starvation；
+- 旧 `A*0.76^N` 缺乏可信出处，从 empirical-high 降为 legacy-compatibility-only。
 
-- `0049D180` 在多个不同等级阵系设施重叠时的优先级；
-- 防御设施浮点常量 bit pattern / x87 中间精度极端边界；`00707A74` 最终转换已由P0-10闭合为正值floor；
-- 粮尽逃兵的PC-PK1.1原函数与闭式；
-- Vanilla/主机版阵系常量是否完全一致。
+仍 open：
 
-旧攻略15%/30%/50%在PC-PK1.1 fidelity层不再作为精确常量；旧 `A*0.76^N` 粮尽逃兵仍保留为 empirical-high，而不是 reverse-engineered。
+- `0049D180` 不同等级覆盖重叠时的 winner priority；
+- 野外粮尽掉兵 handler 地址与闭式/RNG；
+- 战斗/输送 starvation 是否同规则；
+- 首旬与持续粮尽是否不同；
+- Vanilla/主机版。
 
 ### 6.8 补给 / 输送剩余边界
 
