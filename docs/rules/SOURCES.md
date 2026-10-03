@@ -1245,7 +1245,7 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/85.html
   https://w.atwiki.jp/sangokushi11/pages/15.html
 
-证据等级：旬级调度、/10 /20 /40、屯田、阵系倍率、着火额外耗粮均为PC-PK1.1 reverse-engineered；粮尽逃兵闭式仍未找到原函数，旧约76%保留率继续只标 empirical-high。
+证据等级：旬级调度、/10 /20 /40、屯田、阵系倍率、着火额外耗粮均为PC-PK1.1 reverse-engineered；P0-12进一步锁定阵/砦/城塞 float32 bit pattern与单一selector不叠乘。粮尽原函数仍open；旧约76%因出处无法验证已降为legacy-compatibility-only。
 
 
 ### E6 补给与输送专项
@@ -1774,3 +1774,28 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/13.html
 
 证据等级：training once-per-turn=official；gate function boundary=PC IDB exact；morale local handler address=PC IDB/reverse high；reset xref与global scheduler xref继续open。
+
+### P0-12 阵系耗粮 / 粮尽专项
+
+- 311MemoryResearch `Func-收支10-计算部队兵粮支出.txt`：
+  - `0049D311 -> 0049D180` 返回单一阵系设施type；
+  - `0049D32B/35/3F` 分别写城塞/砦/阵单一 multiplier；
+  - bit pattern：2.0=`0x40000000`、阵=`0x3FD55555`、砦=`0x3FAAAAAB`、城塞=`0x3F800000`；
+  - 公共0.05f=`0x3D4CCCCD`。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-收支10-计算部队兵粮支出.txt
+- 311MemoryResearch `Func-收支02-每旬耗粮.txt`：
+  - 0粮对象本旬直接跳过；
+  - 正粮扣到0只进入粮尽消息列表；
+  - 公开函数体无 troop-strength reduction。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-收支02-每旬耗粮.txt
+- SIRE：
+  - `00599AA0 ReducePopForStarvedBesiegedSP` 明确是围城断粮据点人口衰减，不是野外部队粮尽掉兵。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- KOEI PK官方说明书：
+  - 无兵粮会导致士兵减少；未给具体比例。
+  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+- 日文Wiki《戦争》：
+  - 0粮时兵力每回合大幅下降；未给闭式。
+  https://w.atwiki.jp/sangokushi11/pages/85.html
+
+证据等级：防御设施单一selector/不叠乘、float32常量、0059BF40与starvation分层为PC-PK1.1 source-level；overlap winner与starvation exact函数继续open；0.76不再属于empirical-high。
