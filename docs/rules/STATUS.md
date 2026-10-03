@@ -6,29 +6,26 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-21 非自然忠诚：褒赏忠诚增量 caller / RNG 边界
+### 最新完成：P0-22 欠薪 loyalty selector / 0058D5E0→0058C190 边界
 
-- [P0-21 正文](56-cash-reward-loyalty-boundary.md)
-- [P0-21 结构化证据](../sources/cash-reward-loyalty-boundary.json)
-- [P0-21 校验脚本](../../scripts/check_cash_reward_loyalty_boundary.py)
+- [P0-22 正文](57-salary-shortfall-loyalty-boundary.md)
+- [P0-22 结构化证据](../sources/salary-shortfall-loyalty-boundary.json)
+- [P0-22 校验脚本](../../scripts/check_salary_shortfall_loyalty_boundary.py)
 - [P0-6 非自然忠诚](41-nonnatural-loyalty-exactness.md)
 
-P0-21 新收敛：
+P0-22 新收敛：
 
 ```text
-005B5D60..005B5F9F
-  = cash reward execution containing function
+0058D5E0:
+  欠薪据点逐次调用
+  arg = facility + active-officer list
+  this = 跨据点累计容器
 
-0048A770
-  = SetLoyalty(0..255)
-
-004A6CF0
-  = ModifyPersonLoyalty(delta)
-
-struct_person +0xAC
-  = Loyalty byte
+0058C190:
+  所有设施循环完成后调用一次
+  只接收累计容器
 ```
 
-因此真实忠诚层与 UI 100 显示上限已经结构级分离；褒赏必须作用于 true loyalty，不能先 clamp 到100。真正仍 open 的是 `005B5D60` 到 loyalty primitive 的 exact xref、delta calculator、RNG/魅力/义理公式。
+因此欠薪忠诚不是在每个据点循环中即时逐人写回，而是 prepare/accumulate → monthly batch finalize 两阶段。受罚人员 selector、君主过滤、每人掉忠公式和 RNG 仍 open。
 
-下一项：P0-22 欠薪 loyalty selector / 0058D5E0→0058C190 边界。
+下一项：P0-23 流言 effect helper / target-selector 边界。
