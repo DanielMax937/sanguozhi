@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-16",
+  "target": "PC-PK1.1 food raid caller and zero-damage boundary",
+  "status": "audit-complete-helper-body-open",
+  "addresses": {
+    "defenseSkillCheck": "005B03BA",
+    "zeroDamageWrite": "005B03C6",
+    "foodRaidTargetLoad": "005B03F5",
+    "foodRaidAttackerLoad": "005B03F7",
+    "foodRaidCall": "005B03F9",
+    "foodRaidResultField1": "005B03FE",
+    "foodRaidResultField2": "005B0401",
+    "counterBypassTarget": "005B0404"
+  },
+  "exact": {
+    "defenseSkillCanSetTroopDamageZeroBeforeFoodRaid": true,
+    "callerStillInvokesFoodRaidAfterZeroDamage": true,
+    "foodRaidStoredSeparatelyFromTroopDamage": true,
+    "explicitDamageArgumentAtRecoveredCallSite": false,
+    "counterattackBypassSkipsFoodRaid": true
+  },
+  "interpretation": {
+    "foodRaidIsIndependentAdditionalEffect": "caller-level-exact",
+    "damageZeroImpliesSkip": "false-at-caller-level",
+    "helperCanNeverInspectDamage": "not-proven"
+  },
+  "documentedQuantityModel": {
+    "formula": "min(floor(attackerTroops/2), attackerAttack*R)",
+    "rRange": [
+      1,
+      2
+    ],
+    "evidence": "documented-and-empirical-high"
+  },
+  "compatibilityFallback": {
+    "randomIntegerInclusive": [
+      10,
+      20
+    ],
+    "formula": "min(floor(attackerTroops/2), floor(attackerAttack*k/10))",
+    "evidence": "compatibility-reconstruction"
+  },
+  "open": [
+    "005ADB20 full body",
+    "helper-internal additional gates",
+    "original RNG granularity/distribution",
+    "target food shortage clamp",
+    "attacker food capacity clamp",
+    "support attack path",
+    "naval active-profile tech gate",
+    "failed tactic path",
+    "Vanilla/PS2/Wii equivalence"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://wap.gamersky.com/gl/Content-114545.html",
+    "https://3g.ali213.net/gl/html/7604.html"
+  ]
+}
