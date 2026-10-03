@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-39",
+  "target": "PC-PK1.1 fire lifetime base RNG and setter candidate boundary",
+  "status": "audit-complete-setter-open",
+  "reverse": {
+    "facilityFireQuery": "00486320",
+    "facilityFireQueryBounds": [
+      "0x486320",
+      "0x4863C0"
+    ],
+    "troopFireQuery": "00495CA0",
+    "troopFireQueryBounds": [
+      "0x495CA0",
+      "0x495CE0"
+    ],
+    "ignitionCandidateFamily": [
+      "005AECxx fire-strategy execution",
+      "005B12xx fire/fire-arrow ignition damage chain",
+      "005B16xx-005B17xx fire-trap chain"
+    ]
+  },
+  "resolved": {
+    "queryFunctionsAreStateChecks": true,
+    "queryFunctionsAreLifetimeSetters": false,
+    "setterCandidateFamilyNarrowed": true,
+    "baseLifetimeRngResolved": false,
+    "reigniteSemanticsResolved": false,
+    "criticalPlusOneOpcodeResolved": false
+  },
+  "open": [
+    "fire lifetime setter address/body",
+    "base lifetime RNG distribution",
+    "RNG helper/constants",
+    "decrement/extinguish caller",
+    "reignite semantics",
+    "source-specific setter differences",
+    "critical +1 exact opcode order",
+    "visible/internal phase mapping",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/fudanglp/311resource",
+    "https://github.com/sjn4048/311MemoryResearch"
+  ]
+}
