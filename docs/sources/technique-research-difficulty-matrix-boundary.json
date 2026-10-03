@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-37",
+  "target": "PC-PK1.1 technique research difficulty matrix and Super thresholds boundary",
+  "status": "audit-complete-matrix-open",
+  "reverse": {
+    "calculator": "005D7DD0",
+    "calculatorBounds": [
+      "0x5D7DD0",
+      "0x5D7F00"
+    ],
+    "scenarioDifficultyField": "struct_scenario +0x20 DifficultyLevel"
+  },
+  "resolved": {
+    "calculatorBoundaryExact": true,
+    "talentOfficeTailExact": true,
+    "difficultyFieldExists": true,
+    "calculatorDifficultyReadProven": false,
+    "superThresholdsEvidence": "empirical-high",
+    "beginnerMatrixResolved": false,
+    "advancedMatrixResolved": false
+  },
+  "superObservedThresholds": [
+    70,
+    140,
+    210,
+    280
+  ],
+  "open": [
+    "005D7DD0 full body",
+    "calculator signature",
+    "DifficultyLevel xref from calculator",
+    "PC opcode constants/comparators for thresholds",
+    "complete Super matrix",
+    "Beginner matrix",
+    "Advanced matrix",
+    "Basic vs Actual attr getter",
+    "struct_technology +0x68 meaning",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/fudanglp/311resource",
+    "https://github.com/sean2077/311SireCustomizedPackageDev"
+  ]
+}
