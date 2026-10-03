@@ -250,3 +250,6 @@ P0-42攻城耐久 `005ADDC0 / 005ADE20` inner helper 以 `77-siege-durability-in
 
 
 P0-43兵临城下出城 / AI 3格与1.2倍规则以 `78-ai-defense-sortie-boundary.md` 为专项记录，结构化证据为 `../sources/ai-defense-sortie-boundary.json`；旧“3格+1.2倍兵力比”已撤回为不受支持的 legacy fallback，AI 出兵必须走已逆出的多阶段 procedural pipeline；固定3格守城trigger仍open。
+
+
+P0-44据点陷落 takeover reset 以 `79-facility-takeover-reset-boundary.md` 为专项记录，结构化证据为 `../sources/facility-takeover-reset-boundary.json`；`00487E20` 耐久 setter 与 `004B329B` 资源保留路径已分层，资源保留 exact，但两种陷落入口的 reset writer、10%耐久重置与守兵归零保留耐久都继续 open。
