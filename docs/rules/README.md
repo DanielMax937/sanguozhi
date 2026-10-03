@@ -73,6 +73,8 @@ P0-17应射/连击方向性以 `52-response-fire-double-strike-exactness.md` 为
 
 P0-18火焰寿命setter边界以 `53-fire-lifetime-setter-boundary.md` 为专项记录，结构化证据为 `../sources/fire-lifetime-setter-boundary.json`；`00486320/00495CA0` 只确认着火状态查询，未恢复寿命setter/reignite helper，`00599CF0` 继续不能冒充火焰ticker。
 
+P0-19登场/自然死亡生命周期层级以 `54-death-lifecycle-layer-boundary.md` 为专项记录，结构化证据为 `../sources/death-lifecycle-layer-boundary.json`；月初`005833D0`、`0048A000 GetDeathYear`、`00489160 IsMarkedForDeath`、HealthLevel与最终DEAD identity分层确认，内部transition仍open。
+
 P0-12阵系耗粮/粮尽以 `47-food-overlap-starvation-exactness.md` 为专项记录，结构化证据为 `../sources/food-overlap-starvation-exactness.json`；阵/砦/城塞单一selector、float32常量与不叠乘已闭合，overlap winner与starvation原函数仍open；旧0.76降为legacy-only。
 
 P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为专项记录，结构化证据为 `../sources/supply-transport-finalizer-exactness.json`；`004BF522` 已归入 `sub_4BF1F0`，到达满仓overflow丢弃行为与野外补给target-cap语义已收紧，troop气力非整除rounding和field-supply finalizer仍open。
@@ -149,6 +151,7 @@ P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为�
 52. `51-food-raid-caller-exactness.md` P0-16兵粮袭击caller、零伤害与反击绕过边界
 53. `52-response-fire-double-strike-exactness.md` P0-17应射caller、主动/防守连击方向性与支援边界
 54. `53-fire-lifetime-setter-boundary.md` P0-18火焰寿命setter、状态查询与重复点火边界
+55. `54-death-lifecycle-layer-boundary.md` P0-19登场/自然死亡RNG层级、死亡年/flag/健康/DEAD边界
 48. `47-food-overlap-starvation-exactness.md` P0-12阵系耗粮bit-exact、重叠不叠乘与粮尽逃兵证据降级
 49. `48-supply-transport-finalizer-exactness.md` P0-13野外补给、输送抵达函数范围、overflow与气力加权边界
 
