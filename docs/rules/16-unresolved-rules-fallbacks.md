@@ -1479,6 +1479,38 @@ overflow discard 是PC empirical-high；逐字段 opcode/order仍open。
 
 ---
 
+## 6.9 技巧研究时间（P0-14）
+
+> 专项： [49-technique-research-time-exactness.md](49-technique-research-time-exactness.md)。
+
+时间 calculator containing function：
+
+```text
+005D7DD0 .. 005D7EFF
+```
+
+人才府末端修正 exact：
+
+```ts
+if (hasTalentOffice)
+  turns -= 2
+
+turns = max(1, turns)
+```
+
+基础矩阵未恢复前，兼容 fallback 继续：
+
+```text
+枪戟弩骑练兵：3/4/6/9旬
+发明防卫火攻内政：4/5/7/10旬
+```
+
+然后 exact 应用人才府 -2旬、最低1旬。
+
+超级70/140/210/280仅作为 empirical-high profile；不要复制给初级/上级。
+
+---
+
 ## 7.0 训练资格 / 已训练重置 / 野外气力恢复（P0-11）
 
 > 专项： [46-training-morale-exactness.md](46-training-morale-exactness.md)。
