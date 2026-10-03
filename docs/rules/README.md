@@ -217,3 +217,6 @@ P0-31 `005FA650` office classifier 以 `66-office-classifier-entry80-boundary.md
 
 
 P0-32部队资源事务 finalizer 以 `67-troop-resource-finalizer-boundary.md` 为专项记录，结构化证据为 `../sources/troop-resource-finalizer-boundary.json`；据点/部队资源 adjust functions 只确认到单项 primitive，不能冒充出征commit或回城return finalizer；事务顺序、rollback与return caller继续open。
+
+
+P0-33主副将血缘 `/3` PC opcode 以 `68-deputy-blood-third-pc-opcode-boundary.md` 为专项记录，结构化证据为 `../sources/deputy-blood-third-pc-opcode-boundary.json`；`00495AB0..00495B8F` 边界、普通 `/4` 与亲爱 `/2` 的 PC opcode 保持 exact，血缘 `/3` 继续只标 PS2 empirical-exact / cross-platform-high，PC 指令仍 open。
