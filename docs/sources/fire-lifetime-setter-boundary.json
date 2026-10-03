@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-18",
+  "target": "PC-PK1.1 fire lifetime setter and reignition semantics",
+  "status": "audit-complete-setter-open",
+  "reverseEvidence": {
+    "isBuildingOnFire": "00486320",
+    "isTroopOnFire": "00495CA0",
+    "genericCounterRoutine": "00599CF0",
+    "genericCounterRoutineContainsKnownFireLifetimeLogic": false,
+    "publishedFireLifetimeSetter": null,
+    "publishedFireLifetimeGetter": null,
+    "publishedReigniteHelper": null
+  },
+  "resolved": {
+    "fireStateQueryLayerExists": true,
+    "fireStateQueryIsNotLifetimeSetter": true,
+    "genericCounterReuseSupported": false,
+    "criticalDurationPlusOneEvidence": "empirical-high"
+  },
+  "open": {
+    "baseLifetimeRng": true,
+    "setterBody": true,
+    "decrementCaller": true,
+    "visiblePhaseMapping": true,
+    "reigniteSemantics": true,
+    "sourceSpecificSetterDifferences": true,
+    "criticalPlusOneOpcodeOrder": true,
+    "platformEquivalence": true
+  },
+  "forbiddenAssumptions": [
+    "store fire lifetime in generic troop abnormal-status counter",
+    "reuse 00599CF0 as proven fire lifetime ticker",
+    "assume reignition overwrites old lifetime",
+    "assume reignition takes max(old,new)",
+    "assume all fire sources share one lifetime RNG"
+  ],
+  "sources": [
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/sjn4048/311MemoryResearch"
+  ]
+}
