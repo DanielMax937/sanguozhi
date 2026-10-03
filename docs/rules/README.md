@@ -238,3 +238,6 @@ P0-38技巧研究完成功绩 writer 以 `73-technique-research-completion-write
 
 
 P0-39火焰寿命 base RNG / setter 候选以 `74-fire-lifetime-rng-setter-candidate-boundary.md` 为专项记录，结构化证据为 `../sources/fire-lifetime-rng-setter-candidate-boundary.json`；两个 fire-state query 边界已锁定且不能冒充 lifetime setter，setter 搜索范围收窄到火计/火矢/火陷阱成功点火执行链，base RNG / reignite / critical+1 opcode继续open。
+
+
+P0-40应射/还射 caller / 连击递归深度以 `75-response-fire-recursion-boundary.md` 为专项记录，结构化证据为 `../sources/response-fire-recursion-boundary.json`；`00584DC8` 与 `00586E12/00586F0F` 已分别归入两个不同 containing function，应射 helper 与攻击/连击 core 分层确认，但二者 xref、response re-entry 与最大 chain depth 继续 open。
