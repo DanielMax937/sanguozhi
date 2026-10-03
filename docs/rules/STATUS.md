@@ -6,20 +6,23 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-18 火焰寿命 setter / 重复点火刷新边界
+### 最新完成：P0-19 登场 / 自然死亡 RNG 内部函数边界
 
-- [P0-18 正文](53-fire-lifetime-setter-boundary.md)
-- [P0-18 结构化证据](../sources/fire-lifetime-setter-boundary.json)
-- [P0-18 校验脚本](../../scripts/check_fire_lifetime_setter_boundary.py)
-- [P0-4 火焰持续/蔓延](39-fire-lifetime-spread-exactness.md)
+- [P0-19 正文](54-death-lifecycle-layer-boundary.md)
+- [P0-19 结构化证据](../sources/death-lifecycle-layer-boundary.json)
+- [P0-19 校验脚本](../../scripts/check_death_lifecycle_layer_boundary.py)
+- [P0-5 登场/自然死亡](40-debut-death-exactness.md)
 
-P0-18 新收敛：
+P0-19 新收敛：
 
 ```text
-00486320 IsBuildingOnFire
-00495CA0 IsTroopOnFire
+005833D0 = 月初 lifecycle handler
+0048A000 = GetDeathYear
+00489160 = IsMarkedForDeath
+00488C80 = IsDead
++0x15C = HealthLevel
 ```
 
-公开逆向资料确认了独立的 fire-state 查询层，但仍没有公开 fire lifetime setter / getter / reignite helper。并且 `00599CF0` 继续没有证据可作为地面火寿命 ticker。因此重复点火的 overwrite/max/add/ignore 语义必须继续 open，不能从现代复刻反推原作。
+因此 effective death year、预定死亡 flag、健康状态、最终 DEAD identity 必须分层，禁止继续用单一 finalDeathDate 合并。真正仍 open 的是 `005833D0 / 0048A000` 内部 transition 顺序与概率。
 
-下一项：P0-19 登场 / 自然死亡 RNG 内部函数边界。
+下一项：P0-20 俘虏 forced-release comparator / 选择方向。
