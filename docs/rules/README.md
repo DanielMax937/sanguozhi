@@ -131,7 +131,6 @@ P0-12阵系耗粮/粮尽以 `47-food-overlap-starvation-exactness.md` 为专项�
 46. `45-deputy-rounding-exactness.md` P0-10主副将关系除数、_ftol2取整与剩余PC opcode边界
 47. `46-training-morale-exactness.md` P0-11训练gate/reset cadence与0059A230野外气力恢复
 48. `47-food-overlap-starvation-exactness.md` P0-12阵系耗粮bit-exact、重叠不叠乘与粮尽逃兵证据降级
-46. `45-deputy-rounding-exactness.md` P0-10主副将关系补正与MSVC _ftol2正值floor闭合
 
 ## 来源优先级
 
