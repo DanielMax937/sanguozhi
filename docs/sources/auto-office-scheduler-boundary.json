@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-29",
+  "target": "PC-PK1.1 multi-office scheduler and candidate construction boundary",
+  "status": "audit-complete-scheduler-open",
+  "resolved": {
+    "selector": "005FAF00",
+    "candidateListPassedByCaller": true,
+    "selectorBuildsCandidateList": false,
+    "selectorWritesOfficeAssignment": false,
+    "selectorRemovesWinner": false,
+    "singleOfficeTieDependsOnCallerOrder": true
+  },
+  "open": [
+    "005FAF00 callers/xrefs",
+    "office traversal order",
+    "candidate list construction",
+    "candidate original iteration order",
+    "winner office-write function",
+    "assigned-person removal semantics",
+    "scoringMode mapping per caller",
+    "internal office entry 80",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "fallback": {
+    "officeOrder": "officeId ascending",
+    "candidateOrder": "personId ascending",
+    "removeWinnerForLaterOffices": true,
+    "evidence": "provisional-scheduler-fallback"
+  },
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/fudanglp/311resource"
+  ]
+}
