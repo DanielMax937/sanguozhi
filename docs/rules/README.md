@@ -244,3 +244,6 @@ P0-40应射/还射 caller / 连击递归深度以 `75-response-fire-recursion-bo
 
 
 P0-41兵粮袭击 `005ADB20` helper 以 `76-food-raid-helper-boundary.md` 为专项记录，结构化证据为 `../sources/food-raid-helper-boundary.json`；helper 边界、caller寄存器契约和techId=1检查位置已锁定，但RNG、Attack×R精确算术以及双方粮食clamp顺序继续open。
+
+
+P0-42攻城耐久 `005ADDC0 / 005ADE20` inner helper 以 `77-siege-durability-inner-helper-boundary.md` 为专项记录，结构化证据为 `../sources/siege-durability-inner-helper-boundary.json`；两个基础helper边界、3参数调用形态、x87浮点返回与外层倍率后置均已锁定，helper内部公式和x87小值边界继续open。
