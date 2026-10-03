@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-19",
+  "target": "PC-PK1.1 debut/death lifecycle layer separation",
+  "status": "audit-complete-inner-transitions-open",
+  "reverse": {
+    "monthlyAction": "00590C30",
+    "monthStartCheck": "00482680",
+    "lifecycleHandler": "005833D0",
+    "getDeathYear": "0048A000",
+    "isMarkedForDeath": "00489160",
+    "isDead": "00488C80",
+    "healthLevelField": "0x15C",
+    "deathFlagField": "0x124",
+    "identityField": "0xA0"
+  },
+  "resolved": {
+    "lifecycleHandlerRunsAtMonthStart": true,
+    "getDeathYearIsSeparateQueryLayer": true,
+    "markedForDeathIsSeparateRuntimeLayer": true,
+    "healthLevelIsSeparateRuntimeLayer": true,
+    "finalDeadIdentityIsSeparateLayer": true,
+    "scenarioInitPermanentFinalDeathDateSupported": false
+  },
+  "layerModel": [
+    "effective death-year query",
+    "month-start lifecycle evaluation",
+    "marked-for-death flag",
+    "health state",
+    "final DEAD identity"
+  ],
+  "open": [
+    "005833D0 full body",
+    "0048A000 full body",
+    "exact CauseOfDeath/Lifetime/IgnoreAge ordering",
+    "markedForDeath trigger conditions/probability",
+    "health deterioration/recovery transitions",
+    "markedForDeath to final DEAD timing",
+    "whether debut transition is in same handler",
+    "ScheduledLord exact branch",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/sean2077/311SireCustomizedPackageDev"
+  ]
+}
