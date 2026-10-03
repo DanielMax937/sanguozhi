@@ -208,3 +208,6 @@ P0-28 `004AF7D0` hard recruitment gate 以 `63-hard-recruitment-gate-boundary.md
 
 
 P0-29自动封官跨官职scheduler以 `64-auto-office-scheduler-boundary.md` 为专项记录，结构化证据为 `../sources/auto-office-scheduler-boundary.json`；`005FAF00` 只负责单官职selector，candidate list由caller传入，官职遍历、候选构造、winner写回与后续移除均属于尚未恢复的上层scheduler。
+
+
+P0-30 `005FA4D0` 任官资格 helper 以 `65-auto-office-qualification-helper-boundary.md` 为专项记录，结构化证据为 `../sources/auto-office-qualification-helper-boundary.json`；helper 只做 `(person, office)` 资格判定且发生在评分前，忠诚90 gate 明确在其外部；功绩门槛与所在/身份/任务等内部规则仍待 body 恢复。
