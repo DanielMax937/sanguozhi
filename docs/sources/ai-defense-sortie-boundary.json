@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-43",
+  "target": "PC-PK1.1 defensive sortie 3-tile / 1.2 troop-ratio boundary",
+  "status": "audit-complete-legacy-rule-rejected",
+  "reverse": {
+    "aiSortieRoutineAnchor": "005EF440",
+    "minimumPlannedTroops": 5000,
+    "foodPlanningHelper": "005F6470",
+    "foodHorizon": "travelTime*5+15"
+  },
+  "resolved": {
+    "legacyThreeTileOnePointTwoRuleSupported": false,
+    "singleTroopRatioGateSupported": false,
+    "minimumPlannedTroopsExact": true,
+    "multiStageResourceAndProbabilityPipeline": true,
+    "recruitUnderSiegeRadiusCanBeReusedForAiSortie": false,
+    "fixedThreeTileDefenseTriggerResolved": false
+  },
+  "open": [
+    "defense/intercept branch exact business mapping",
+    "near-enemy hard distance gate if any",
+    "exact defense radius if any",
+    "remaining unnamed locals in 005EF440",
+    "number-of-defending-sorties generation",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch"
+  ]
+}
