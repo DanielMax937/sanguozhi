@@ -85,6 +85,8 @@ P0-23流言 effect helper 以 `58-rumor-effect-helper-boundary.md` 为专项记�
 
 P0-24宝物授予/没收忠诚以 `59-treasure-loyalty-opcode-boundary.md` 为专项记录，结构化证据为 `../sources/treasure-loyalty-opcode-boundary.json`；TreasureValue `+0x3C`、宝物owner/city setter、state setter与`004A6CF0 ModifyPersonLoyalty`独立，确认ownership/state mutation与loyalty side effect分层；gain=value与没收-30仍非opcode exact。
 
+P0-25普通登用成功率签名以 `60-hiring-success-rate-signature-boundary.md` 为专项记录，结构化证据为 `../sources/hiring-success-rate-signature-boundary.json`；`005C4F80` 精确签名为 `(targetPtr, executorPtr, mode, dateKey)`，忠诚/魅力/相性差并非显式标量参数；`005BA4C0` 的7个deterministic输入与success-rate函数输入已明确分层。
+
 P0-12阵系耗粮/粮尽以 `47-food-overlap-starvation-exactness.md` 为专项记录，结构化证据为 `../sources/food-overlap-starvation-exactness.json`；阵/砦/城塞单一selector、float32常量与不叠乘已闭合，overlap winner与starvation原函数仍open；旧0.76降为legacy-only。
 
 P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为专项记录，结构化证据为 `../sources/supply-transport-finalizer-exactness.json`；`004BF522` 已归入 `sub_4BF1F0`，到达满仓overflow丢弃行为与野外补给target-cap语义已收紧，troop气力非整除rounding和field-supply finalizer仍open。
@@ -167,6 +169,7 @@ P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为�
 58. `57-salary-shortfall-loyalty-boundary.md` P0-22欠薪prepare/accumulate与月度batch-finalizer边界
 59. `58-rumor-effect-helper-boundary.md` P0-23流言success/effect函数分层与target-selector边界
 60. `59-treasure-loyalty-opcode-boundary.md` P0-24宝物授予/没收ownership-state与loyalty side-effect边界
+61. `60-hiring-success-rate-signature-boundary.md` P0-25普通登用005C4F80四参数签名与内部输入边界
 48. `47-food-overlap-starvation-exactness.md` P0-12阵系耗粮bit-exact、重叠不叠乘与粮尽逃兵证据降级
 49. `48-supply-transport-finalizer-exactness.md` P0-13野外补给、输送抵达函数范围、overflow与气力加权边界
 
