@@ -67,6 +67,8 @@ P0-14技巧研究时间以 `49-technique-research-time-exactness.md` 为专项�
 
 P0-15技巧研究完成功绩以 `50-technique-research-merit-exactness.md` 为专项记录，结构化证据为 `../sources/technique-research-merit-exactness.json`；`005D8F68` 仅锁定研究命令/AP路径，公开逆向功绩地址表未暴露研究完成常量，因此Lv3/Lv4两套表冲突继续open，禁止伪造Vanilla→PK改值。
 
+P0-16兵粮袭击caller以 `51-food-raid-caller-exactness.md` 为专项记录，结构化证据为 `../sources/food-raid-caller-exactness.json`；防御技能将兵损置0后 caller 仍调用 `005ADB20`，food raid 与 troop damage 字段分离；helper 内部RNG与资源裁剪仍open。
+
 P0-12阵系耗粮/粮尽以 `47-food-overlap-starvation-exactness.md` 为专项记录，结构化证据为 `../sources/food-overlap-starvation-exactness.json`；阵/砦/城塞单一selector、float32常量与不叠乘已闭合，overlap winner与starvation原函数仍open；旧0.76降为legacy-only。
 
 P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为专项记录，结构化证据为 `../sources/supply-transport-finalizer-exactness.json`；`004BF522` 已归入 `sub_4BF1F0`，到达满仓overflow丢弃行为与野外补给target-cap语义已收紧，troop气力非整除rounding和field-supply finalizer仍open。
@@ -140,6 +142,7 @@ P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为�
 49. `48-supply-transport-finalizer-exactness.md` P0-13补给/输送finalizer与气力加权
 50. `49-technique-research-time-exactness.md` P0-14研究时间calculator、人才府减时与难度边界
 51. `50-technique-research-merit-exactness.md` P0-15技巧研究完成功绩caller、两套表冲突与参与者分配边界
+52. `51-food-raid-caller-exactness.md` P0-16兵粮袭击caller、零伤害与反击绕过边界
 48. `47-food-overlap-starvation-exactness.md` P0-12阵系耗粮bit-exact、重叠不叠乘与粮尽逃兵证据降级
 49. `48-supply-transport-finalizer-exactness.md` P0-13野外补给、输送抵达函数范围、overflow与气力加权边界
 
