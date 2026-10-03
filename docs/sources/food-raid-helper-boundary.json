@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-41",
+  "target": "PC-PK1.1 food-raid helper body and RNG/resource-clamp boundary",
+  "status": "audit-complete-helper-body-open",
+  "reverse": {
+    "helper": "005ADB20",
+    "helperBounds": [
+      "0x5ADB20",
+      "0x5ADBE0"
+    ],
+    "nextFunction": "005ADBE0 GetAttackedTroopStrength",
+    "techniqueCheckAddress": "005ADB55",
+    "techniqueId": 1,
+    "caller": {
+      "targetRegister": "EAX",
+      "attackerRegister": "ESI",
+      "callAddress": "005B03F9"
+    }
+  },
+  "resolved": {
+    "helperBoundaryExact": true,
+    "techniqueCheckInsideHelper": true,
+    "explicitDamageArgument": false,
+    "callerInvokesAfterZeroDamage": true,
+    "rngResolved": false,
+    "resourceClampResolved": false
+  },
+  "fallback": {
+    "rng": "uniform integer 10..20 inclusive",
+    "rngEvidence": "compatibility-reconstruction",
+    "safeTransfer": "min(raid,targetFood,attackerFoodRoom)",
+    "safeTransferEvidence": "engine-safety-fallback"
+  },
+  "open": [
+    "005ADB20 full body",
+    "original RNG helper/distribution/granularity",
+    "exact Attack*R arithmetic",
+    "exact troop/2 arithmetic",
+    "target-food shortage clamp",
+    "attacker-food-cap clamp",
+    "clamp ordering/conservation behavior",
+    "helper internal zero-damage/state gate",
+    "support/failed-tactic/naval paths",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/fudanglp/311resource"
+  ]
+}
