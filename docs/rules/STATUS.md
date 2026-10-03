@@ -6,26 +6,28 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-37 技巧研究时间完整难度矩阵 / Super 阈值边界
+### 最新完成：P0-38 技巧研究完成功绩 writer / participant distribution 边界
 
-- [P0-37 正文](72-technique-research-difficulty-matrix-boundary.md)
-- [P0-37 结构化证据](../sources/technique-research-difficulty-matrix-boundary.json)
-- [P0-37 校验脚本](../../scripts/check_technique_research_difficulty_matrix_boundary.py)
-- [P0-14 技巧研究时间](49-technique-research-time-exactness.md)
+- [P0-38 正文](73-technique-research-completion-writer-boundary.md)
+- [P0-38 结构化证据](../sources/technique-research-completion-writer-boundary.json)
+- [P0-38 校验脚本](../../scripts/check_technique_research_completion_writer_boundary.py)
+- [P0-15 技巧研究完成功绩](50-technique-research-merit-exactness.md)
 
-P0-37 新收敛：
+P0-38 新收敛：
 
 ```text
-005D7DD0..005D7EFF
-  = research-time calculator
+00599CF0 技巧研究分支：
+  ResearchTimeLeft > 0 -> -1
+  归零后该分支内没有 completion call
 
-struct_scenario +0x20
-  = DifficultyLevel
+能力研究分支：
+  归零 -> 005CE600 completion handler
 ```
 
-但当前没有证据证明 calculator 实际读取 DifficultyLevel。Super 的 70/140/210/280 仍只来自受控实测，继续标 empirical-high；Beginner / Advanced 不能复制 Super，也不能凭难度字段存在就补三套矩阵。
+因此技巧研究的技术解锁、完成功绩、提示与参与者结算必然在另一条 completion path；`005D8F68` 继续明确只是研究命令/AP anchor。mission=5 研究武将的生命周期会读取 force ResearchTimeLeft，但当前仍无 merit write 证据。
 
-下一项：P0-38 技巧研究完成功绩 writer / participant distribution 边界。
+下一项：P0-39 火焰寿命 base RNG / setter 候选边界。
+
 
 
 
