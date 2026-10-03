@@ -202,3 +202,6 @@ P0-26 `005BA410` 共享数值 helper 以 `61-shared-numeric-helper-005ba410-boun
 
 
 P0-27 `005BA4C0` deterministic generator 以 `62-hiring-deterministic-generator-boundary.md` 为专项记录，结构化证据为 `../sources/hiring-deterministic-generator-boundary.json`；函数仅约0x30字节，普通登用七参数输入与 `< successRate` 判定已锁定，非0 mode 则走 `004721D0` runtime probability；具体混合算法与返回范围仍 open。
+
+
+P0-28 `004AF7D0` hard recruitment gate 以 `63-hard-recruitment-gate-boundary.md` 为专项记录，结构化证据为 `../sources/hard-recruitment-gate-boundary.json`；函数通过 handled-return + out-result 短路 forced success/fail，只有未命中才进入 `005C4F80`，因此关系/禁仕条件不是概率修正；内部优先级仍 open。
