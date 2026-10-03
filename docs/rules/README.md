@@ -229,3 +229,6 @@ P0-35阵系 overlap / starvation 原函数边界以 `70-food-overlap-starvation-
 
 
 P0-36补给/输送气力非整除 rounding 以 `71-morale-weighted-merge-rounding-boundary.md` 为专项记录，结构化证据为 `../sources/morale-weighted-merge-rounding-boundary.json`；`004B9840` building morale merge helper 边界已锁定，兵力加权核心保持 high-confidence，但 building/troop 非整除 rounding 与 troop→troop helper 继续 open，禁止无 xref 套用 `_ftol2`。
+
+
+P0-37技巧研究时间难度矩阵以 `72-technique-research-difficulty-matrix-boundary.md` 为专项记录，结构化证据为 `../sources/technique-research-difficulty-matrix-boundary.json`；`005D7DD0` calculator 边界与 `DifficultyLevel` 场景字段已锁定，但 calculator 是否读取难度仍无 xref；Super 70/140/210/280 保持 empirical-high，Beginner/Advanced 矩阵继续 open。
