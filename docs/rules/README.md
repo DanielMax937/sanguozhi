@@ -214,3 +214,6 @@ P0-30 `005FA4D0` 任官资格 helper 以 `65-auto-office-qualification-helper-bo
 
 
 P0-31 `005FA650` office classifier 以 `66-office-classifier-entry80-boundary.md` 为专项记录，结构化证据为 `../sources/office-classifier-entry80-boundary.json`；classifier 边界与 `struct_office[81]` 已锁定，index80 确认为真实原数组成员；0..79分类模式仍为高置信逆向推断，index80 类型与用途继续 open。
+
+
+P0-32部队资源事务 finalizer 以 `67-troop-resource-finalizer-boundary.md` 为专项记录，结构化证据为 `../sources/troop-resource-finalizer-boundary.json`；据点/部队资源 adjust functions 只确认到单项 primitive，不能冒充出征commit或回城return finalizer；事务顺序、rollback与return caller继续open。
