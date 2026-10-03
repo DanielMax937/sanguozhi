@@ -1555,3 +1555,32 @@ wild-supply-finalizer-open
 
 下一 exactness gap：P0-14 技巧研究时间 PC 函数 / 人才府减时 / 难度矩阵。
 
+### P0-14 技巧研究时间 PC 函数 / 人才府减时 / 难度矩阵
+
+状态：
+
+```text
+P0-14-audit-complete
+research-time-function-5D7DD0-resolved
+talent-office-minus20-exact
+minimum10days-exact
+runtime-turn-unit-exact
+static-time-field-not-recovered
+base-time-code-derived-high
+super-thresholds-empirical-high
+beginner-advanced-open
+```
+
+本轮确认：
+
+- `005D7DD0..005D7EFF` 锁定为技巧研究时间 calculator containing function；
+- 人才府 `-2旬` 与最低 `1旬` 是 calculator 末端 exact 修正；
+- ResearchTimeLeft 以旬为单位，每旬-1；
+- 当前恢复的 `struct_technology` 没有研究时间字段，基础时间改判为代码派生；
+- 超级70/140/210/280继续保持 empirical-high，初级/上级不擅自复制；
+- 210与280的已知锚点保留，未知格禁止插值。
+
+详见 [P0-14专项](49-technique-research-time-exactness.md)。
+
+下一 exactness gap：P0-15 技巧研究完成功绩 PC caller / 两套表冲突。
+
