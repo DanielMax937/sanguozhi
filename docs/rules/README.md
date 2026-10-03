@@ -235,3 +235,6 @@ P0-37技巧研究时间难度矩阵以 `72-technique-research-difficulty-matrix-
 
 
 P0-38技巧研究完成功绩 writer 以 `73-technique-research-completion-writer-boundary.md` 为专项记录，结构化证据为 `../sources/technique-research-completion-writer-boundary.json`；`00599CF0` 的技巧研究段只做倒计时，不在归零时调用 completion handler；能力研究则显式 `005CE600` 完成处理，因此技巧研究 writer 必在另一条链上，participant distribution 与两套功绩表冲突继续 open。
+
+
+P0-39火焰寿命 base RNG / setter 候选以 `74-fire-lifetime-rng-setter-candidate-boundary.md` 为专项记录，结构化证据为 `../sources/fire-lifetime-rng-setter-candidate-boundary.json`；两个 fire-state query 边界已锁定且不能冒充 lifetime setter，setter 搜索范围收窄到火计/火矢/火陷阱成功点火执行链，base RNG / reignite / critical+1 opcode继续open。
