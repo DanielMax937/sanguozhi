@@ -6,33 +6,30 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-33 主副将血缘 `/3` PC opcode 边界
+### 最新完成：P0-34 训练 reset / top scheduler xref 边界
 
-- [P0-33 正文](68-deputy-blood-third-pc-opcode-boundary.md)
-- [P0-33 结构化证据](../sources/deputy-blood-third-pc-opcode-boundary.json)
-- [P0-33 校验脚本](../../scripts/check_deputy_blood_third_pc_opcode_boundary.py)
-- [P0-10 主副将关系/FPU](45-deputy-rounding-exactness.md)
+- [P0-34 正文](69-training-reset-scheduler-boundary.md)
+- [P0-34 结构化证据](../sources/training-reset-scheduler-boundary.json)
+- [P0-34 校验脚本](../../scripts/check_training_reset_scheduler_boundary.py)
+- [P0-11 训练/气力](46-training-morale-exactness.md)
 
-P0-33 新收敛：
+P0-34 新收敛：
 
 ```text
-00495AB0..00495B8F
-  = 主副将关系属性合成 helper
+004AD080..004AD15F
+  = SetSPTrainingStatus
 
-00495B65: C1 F8 02
-  = /4 PC opcode exact
+0047B710..0047B72F
+  = SetCityTrainingStatus
 
-00495B79: D1 F8
-  = /2 PC opcode exact
-
-blood /3:
-  PS2 empirical-exact / cross-platform-high
-  PC opcode 仍 open
+0059A230..0059A4AF
+  = 野外气力恢复 local handler
 ```
 
-因此血缘 `/3` 继续不能升级为 PC opcode-exact。当前没有公开 `idiv 3`、magic multiply 或其他等价指令序列；夫妻/义兄弟 full-share 同样仍缺 PC branch opcode。
+训练每回合一次与下一回合 reset 的行为语义已闭合，但当前公开资料仍没有 setter(value=0) 的 exact caller/xref；`0059A230` 的 top-level 每旬 scheduler xref 也仍未恢复。地址邻近关系不能代替调用证据，`00599CF0` 继续明确排除为训练 reset caller。
 
-下一项：P0-34 训练 reset / top scheduler xref 边界。
+下一项：P0-35 阵系 overlap winner / starvation original function 边界。
+
 
 
 
