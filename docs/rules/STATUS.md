@@ -6,28 +6,27 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-31 `005FA650` office classifier / 第81内部官职边界
+### 最新完成：P0-32 部队资源事务 finalizer / commit-return 边界
 
-- [P0-31 正文](66-office-classifier-entry80-boundary.md)
-- [P0-31 结构化证据](../sources/office-classifier-entry80-boundary.json)
-- [P0-31 校验脚本](../../scripts/check_office_classifier_entry80_boundary.py)
-- [P0-8 自动官职 selector](43-auto-office-selector-exactness.md)
+- [P0-32 正文](67-troop-resource-finalizer-boundary.md)
+- [P0-32 结构化证据](../sources/troop-resource-finalizer-boundary.json)
+- [P0-32 校验脚本](../../scripts/check_troop_resource_finalizer_boundary.py)
+- [P0-9 部队资源事务](44-troop-resource-transaction-exactness.md)
 
-P0-31 新收敛：
+P0-32 新收敛：
 
 ```text
-005FA650..005FA6DF
-  = office classifier
-
-struct_office_ARRAY:
-  count = 81
-  struct size = 0x3C
-  index 80 确实存在
+004AE2A0 / 004AE300 / 004AE3C0 / 004AE430
+004AE4A0 / 004AE510 / 004AE570
+  = 单项 resource mutation primitives
+  != sortie commit finalizer
+  != return finalizer
 ```
 
-因此第81项不是文档推导出来的虚构项，而是原程序真实数组成员。已命名0..79官职的 top-civil / military / civil 分类模式继续保持 reverse-inferred-high；但由于缺 `005FA650` body 和 index80 实际字段 dump，第81项的名称、用途、classifier result 与 scheduler 是否使用都继续 open。
+因此 draft/UI、commit、return 必须维持三层分离。当前公开资料仍没有 battle/transport commit finalizer 与 enter-building/disband return finalizer 的地址/body，也没有 mutation 顺序或 rollback 语义，不能用底层 adjust helper 冒充最终事务。
 
-下一项：P0-32 部队资源事务 finalizer / commit-return 边界。
+下一项：P0-33 主副将血缘 /3 PC opcode 边界。
+
 
 
 
