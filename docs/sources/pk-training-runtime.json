@@ -1,0 +1,473 @@
+{
+  "schemaVersion": 1,
+  "profileId": "pk-training-slice-v1",
+  "baseline": {
+    "repository": "DanielMax937/sanguozhi",
+    "branch": "main",
+    "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+    "note": "New normalized constants from Markdown + reference script, not pre-existing training JSON. Unmerged PR3 capture draft excluded."
+  },
+  "evidenceLevels": [
+    "opcode-exact",
+    "address-level",
+    "reverse-engineered-partial",
+    "empirical-high",
+    "documented-guide",
+    "compatibility-assumption",
+    "compatibility-reconstruction",
+    "provisional-engine-rule",
+    "open"
+  ],
+  "rules": {
+    "train.formula": {
+      "id": "train.formula",
+      "level": "opcode-exact",
+      "target": "PC-PK1.1",
+      "originalEvidence": "PC-PK1.1 reverse-engineered original formula",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/19-training-morale.md",
+        "section": "§3; 005C3F50",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/19-training-morale.md",
+        "originalUrls": [
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政03-计算训练效果.txt"
+        ]
+      },
+      "note": "Effective/current WAR, highest WAR counted twice; integer operations, no core RNG.",
+      "value": {
+        "troopsDivisor": 2000,
+        "denominatorBase": 20,
+        "denominatorCap": 100,
+        "flatGain": 3,
+        "minOfficers": 1,
+        "maxOfficers": 3
+      }
+    },
+    "train.drill": {
+      "id": "train.drill",
+      "level": "opcode-exact",
+      "target": "PC-PK1.1",
+      "originalEvidence": "PC-PK1.1 reverse-engineered",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/19-training-morale.md",
+        "section": "§3.1",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/19-training-morale.md",
+        "originalUrls": [
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政03-计算训练效果.txt"
+        ]
+      },
+      "note": "City drill ground only; completed facility required by bounded model.",
+      "value": {
+        "numerator": 3,
+        "denominator": 2
+      }
+    },
+    "train.ap": {
+      "id": "train.ap",
+      "level": "opcode-exact",
+      "target": "PC-PK1.1",
+      "originalEvidence": "PC-PK1.1 reverse-engineered",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/19-training-morale.md",
+        "section": "§5; 005C4220",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/19-training-morale.md",
+        "originalUrls": [
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政04-执行训练.txt"
+        ]
+      },
+      "note": "Complete city military office reduces AP cost; gold cost is zero.",
+      "value": {
+        "ordinary": 20,
+        "militaryOffice": 10,
+        "gold": 0
+      }
+    },
+    "train.rewards": {
+      "id": "train.rewards",
+      "level": "opcode-exact",
+      "target": "PC-PK1.1",
+      "originalEvidence": "PC-PK1.1 reverse-engineered",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/19-training-morale.md",
+        "section": "§5; 005C4220",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/19-training-morale.md",
+        "originalUrls": [
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政04-执行训练.txt"
+        ]
+      },
+      "note": "Each selected officer receives WAR XP and merit and is marked acted; base marked trained.",
+      "value": {
+        "warXp": 2,
+        "merit": 50
+      }
+    },
+    "train.tp": {
+      "id": "train.tp",
+      "level": "opcode-exact",
+      "target": "PC-PK1.1",
+      "originalEvidence": "PC-PK1.1 reverse-engineered",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/19-training-morale.md",
+        "section": "§5",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/19-training-morale.md",
+        "originalUrls": [
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政04-执行训练.txt"
+        ]
+      },
+      "note": "TP computed from actual morale gain after clipping.",
+      "value": {
+        "divisor": 2,
+        "flat": 5
+      }
+    },
+    "train.moraleCap": {
+      "id": "train.moraleCap",
+      "level": "opcode-exact",
+      "target": "PC-PK1.1",
+      "originalEvidence": "PC-PK1.1 reverse-engineered",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/19-training-morale.md",
+        "section": "§2; 00487010/00488010; techniques.json ID16",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/19-training-morale.md",
+        "originalUrls": [
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政04-执行训练.txt",
+          "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/sources/techniques.json"
+        ]
+      },
+      "note": "Existing techniques.json identifies trained-soldiers as technique ID16; no automatic morale increase.",
+      "value": {
+        "ordinary": 100,
+        "trainedSoldiers": 120,
+        "techniqueId": 16
+      }
+    },
+    "resource.tpCap": {
+      "id": "resource.tpCap",
+      "level": "address-level",
+      "target": "PC-PK1.1",
+      "originalEvidence": "PC reverse address/constant evidence",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/22-techniques.md",
+        "section": "§2; 00481A97/00481A9C,004B64B8/004B64BF",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/22-techniques.md",
+        "originalUrls": []
+      },
+      "note": "A cap constant is evidenced; this record does not claim full setter opcode recovery.",
+      "value": 10000
+    },
+    "resource.meritCap": {
+      "id": "resource.meritCap",
+      "level": "address-level",
+      "target": "PC-PK1.1",
+      "originalEvidence": "PC reverse address/constant evidence",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/03-personnel.md",
+        "section": "§10.2; 004A6D89/004A6D8E,0048A7B5/0048A7BB",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/03-personnel.md",
+        "originalUrls": []
+      },
+      "note": "Merit clamps at 0xEA60.",
+      "value": 60000
+    },
+    "train.once": {
+      "id": "train.once",
+      "level": "documented-guide",
+      "target": "PC-PK1.1",
+      "originalEvidence": "official-confirmed",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/46-training-morale-exactness.md",
+        "section": "§3; official manual",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/46-training-morale-exactness.md",
+        "originalUrls": [
+          "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf"
+        ]
+      },
+      "note": "Official manual: once per turn. The normalized enum maps official-confirmed to documented-guide without discarding the original label.",
+      "value": true
+    },
+    "train.gateOpen": {
+      "id": "train.gateOpen",
+      "level": "open",
+      "target": "PC-PK1.1",
+      "originalEvidence": "trainingGateInnerConditions partial; completeBody open",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/46-training-morale-exactness.md",
+        "section": "§2/§10; 005C4100/005B8320",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/46-training-morale-exactness.md",
+        "originalUrls": []
+      },
+      "note": "Base eligibility and full parameter-validator bodies remain open; no invented full original gate.",
+      "value": {
+        "baseGate": "005C4100",
+        "parameterGate": "005B8320"
+      }
+    },
+    "engine.gate": {
+      "id": "engine.gate",
+      "level": "provisional-engine-rule",
+      "target": "training-sandbox-v1",
+      "originalEvidence": "provisional-engine-rule",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/16-unresolved-rules-fallbacks.md",
+        "section": "§7.0; proposed replaceable gate",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/16-unresolved-rules-fallbacks.md",
+        "originalUrls": []
+      },
+      "note": "Conservative replaceable gate: owned active-corps base, positive troops, below morale cap, untrained; 1–3 distinct present own officers, unacted, sufficient AP. These extra gates are not original opcode claims.",
+      "value": {
+        "profile": "conservative-training-v1"
+      }
+    },
+    "turn.reset": {
+      "id": "turn.reset",
+      "level": "documented-guide",
+      "target": "PC-PK1.1",
+      "originalEvidence": "exact behavior; reset xref open",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/69-training-reset-scheduler-boundary.md",
+        "section": "§6",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/69-training-reset-scheduler-boundary.md",
+        "originalUrls": [
+          "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf"
+        ]
+      },
+      "note": "Training flag cleared before next usable turn; exact global order/scope not recovered.",
+      "value": true
+    },
+    "turn.schedulerOpen": {
+      "id": "turn.schedulerOpen",
+      "level": "open",
+      "target": "PC-PK1.1",
+      "originalEvidence": "training-reset-xref-open",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/69-training-reset-scheduler-boundary.md",
+        "section": "§8",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/69-training-reset-scheduler-boundary.md",
+        "originalUrls": []
+      },
+      "note": "No original global scheduler/caller or field-morale-recovery xref claimed.",
+      "value": true
+    },
+    "ap.recovery": {
+      "id": "ap.recovery",
+      "level": "empirical-high",
+      "target": "PC-PK1.1",
+      "originalEvidence": "empirical-exact formula + reverse-engineered-structure + PK cross-validation",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/02-economy.md",
+        "section": "§9.1–9.11",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/02-economy.md",
+        "originalUrls": [
+          "https://game.ali213.net/thread-988399-1-1.html",
+          "https://www.bilibili.com/opus/828103788131778665",
+          "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf"
+        ]
+      },
+      "note": "Per-corps C9 formula; no PK180 hard cap; floor core before talisman bonus. AP ability getter and extreme cross-corps port-parent edge remain open.",
+      "value": {
+        "leaderBase": 26,
+        "leaderDivisor": 5,
+        "leaderOffset": 6,
+        "cityStep": 10,
+        "cityCap": 50,
+        "officersPerBase": 10,
+        "baseCount": 6,
+        "adviserBasePercent": 70,
+        "adviserDivisor": 2,
+        "noAdviserPercent": 100,
+        "talismanBonus": 5,
+        "bankCap": 255
+      }
+    },
+    "engine.apScope": {
+      "id": "engine.apScope",
+      "level": "provisional-engine-rule",
+      "target": "training-sandbox-v1",
+      "originalEvidence": "bounded adapter; unresolved getter/split-corps edges",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/02-economy.md",
+        "section": "§9.5/§9.11",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/02-economy.md",
+        "originalUrls": []
+      },
+      "note": "Only one first corps of one force, present synthetic officers and unmodified 0..100 abilities. At least one controlled city. Port/gate headcount requires controlled parent city. Unsupported split corps/state is rejected.",
+      "value": {
+        "profile": "single-first-corps-c9-v1"
+      }
+    },
+    "engine.calendar": {
+      "id": "engine.calendar",
+      "level": "documented-guide",
+      "target": "training-sandbox-v1",
+      "originalEvidence": "Documented xun calendar from main00-turn-scenario.md",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/00-turn-scenario.md",
+        "section": "§1; 1/11/21 and seasons 1/4/7/10",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/00-turn-scenario.md",
+        "originalUrls": [
+          "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf"
+        ]
+      },
+      "note": "Integer xun calendar 1→11→21→next month, with seasons beginning1/4/7/10. Month/season markers do not execute omitted economy.",
+      "value": {
+        "days": [
+          1,
+          11,
+          21
+        ],
+        "months": 12
+      }
+    },
+    "engine.progression": {
+      "id": "engine.progression",
+      "level": "provisional-engine-rule",
+      "target": "training-sandbox-v1",
+      "originalEvidence": "five-stat experience >=100 converts to growth; +30 combined cultivation bound",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/03-personnel.md",
+        "section": "§3.5–3.6",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/03-personnel.md",
+        "originalUrls": []
+      },
+      "note": "This short synthetic slice refuses any Train reaching XP100, preventing silent accumulation or unimplemented stat growth.",
+      "value": {
+        "conversionThreshold": 100,
+        "profile": "reject-stat-growth-v1"
+      }
+    },
+    "engine.scheduler": {
+      "id": "engine.scheduler",
+      "level": "provisional-engine-rule",
+      "target": "training-sandbox-v1",
+      "originalEvidence": "new bounded engine adapter, not recovered top scheduler",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/69-training-reset-scheduler-boundary.md",
+        "section": "§6–§8",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/69-training-reset-scheduler-boundary.md",
+        "originalUrls": []
+      },
+      "note": "EndTurn advances calendar, resets owned-base training and synthetic officer acted flags, and restores this corps AP only. No economy, AI, field units, aging, events or historical scenario.",
+      "value": {
+        "profile": "training-only-turn-v1"
+      }
+    },
+    "engine.rng": {
+      "id": "engine.rng",
+      "level": "provisional-engine-rule",
+      "target": "training-sandbox-v1",
+      "originalEvidence": "new engineering mechanism; no original RNG algorithm claim",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": null,
+        "path": "docs/engine/pk-training-slice.md",
+        "section": "Engineering RNG contract",
+        "url": null,
+        "originalUrls": [],
+        "introducedWith": "pk-training-slice-v1"
+      },
+      "note": "Serializable xorshift32 is injectable and reserved for future core rules; training/AP/calendar do not draw. It is not the game PRNG or its sequence.",
+      "value": {
+        "algorithm": "xorshift32-engine-v1",
+        "zeroSeedReplacement": 1831565813
+      }
+    },
+    "engine.presentationOmitted": {
+      "id": "engine.presentationOmitted",
+      "level": "provisional-engine-rule",
+      "target": "training-sandbox-v1",
+      "originalEvidence": "original player-first-corps execution has cosmetic RNG; omitted from core",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": null,
+        "path": "docs/engine/pk-training-slice.md",
+        "section": "Presentation RNG boundary",
+        "url": null,
+        "originalUrls": [
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政04-执行训练.txt#L202-L217"
+        ],
+        "introducedWith": "pk-training-slice-v1"
+      },
+      "note": "Original 005C4442 calls00472150(3) for a speaking officer and can retry an empty slot. This kernel deliberately omits that presentation path; zero core draws does NOT preserve the full game shared RNG stream.",
+      "value": {
+        "profile": "omit-training-presentation-v1"
+      }
+    },
+    "engine.scope": {
+      "id": "engine.scope",
+      "level": "provisional-engine-rule",
+      "target": "training-sandbox-v1",
+      "originalEvidence": "new engineering contract",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": null,
+        "path": "docs/engine/pk-training-slice.md",
+        "section": "Bounded state and serialization contract",
+        "url": null,
+        "originalUrls": [],
+        "introducedWith": "pk-training-slice-v1"
+      },
+      "note": "Validated serializable synthetic state, atomic commands, replay trace, and save format are engineering mechanisms. Unsupported systems are not approximated.",
+      "value": {
+        "schemaVersion": 1,
+        "maxTroops": 150000,
+        "maxStat": 100,
+        "maxYear": 9998
+      }
+    },
+    "engine.version": {
+      "id": "engine.version",
+      "level": "open",
+      "target": "training-sandbox-v1",
+      "originalEvidence": "Vanilla / PS2 / Wii differences open",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
+        "path": "docs/rules/46-training-morale-exactness.md",
+        "section": "§10.9",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/46-training-morale-exactness.md",
+        "originalUrls": []
+      },
+      "note": "Only PC-PK1.1 original fix profile is enabled. Vanilla is explicitly unsupported in this slice; never inherits PK effects.",
+      "value": {
+        "supported": "pk",
+        "patchVersion": "1.1",
+        "fixProfile": "original"
+      }
+    }
+  }
+}

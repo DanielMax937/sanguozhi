@@ -1,11 +1,23 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
-> Branch: `rules-audit-a1-b3`
-> PR: #2
+> Working policy: one fresh theme branch from the latest GitHub `main`
+> Current theme branch: `rules-engine-pk-training`
+> History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
+> Publication: open a new draft PR for each theme; no automatic merge
 > Primary target: PC-PK1.1
-> Updated: 2026-10-04
+> Updated: 2026-10-03 (UTC)
 
 ## 1. Current progress
+
+### Bounded implementation: PK training kernel
+
+- Added a main-only `pk-training-slice-v1` TypeScript kernel and short synthetic text sandbox
+- Implemented Train, bounded EndTurn, preview/inspect, serializable state/evidence, save and deterministic replay
+- New normalized constants preserve fixed-main provenance; open gates, scheduler and omitted presentation RNG stay explicit
+- Vanilla is unsupported in this slice; XP-to-stat growth is rejected at the boundary
+- Guide: `docs/engine/pk-training-slice.md`; run `npm run check` and `npm run demo`
+- This is an implementation slice, not a complete game or a closure of P0-46
+- Follow-on prerequisites: recover/adapter-test gate bodies, full scheduler and XP growth before extending simulation length or commands
 
 Main audit is complete:
 
@@ -306,7 +318,9 @@ Do not merge platform/version behavior without evidence.
 
 ---
 
-## 7. Working procedure for each new P0 item
+## 7. Working procedure for each new theme / P0 item
+
+Before editing, verify the latest GitHub `main` commit and create a fresh theme branch from it. Read `TODO.md`, `STATUS.md`, the rule index, `13-open-exactness.md` and `16-unresolved-rules-fallbacks.md`. Do not use another unmerged PR as the baseline. Keep implementation slices separate from unresolved research closure.
 
 1. Read live `docs/rules/STATUS.md`.
 2. Read the existing related rule/evidence files.
@@ -330,8 +344,9 @@ Do not merge platform/version behavior without evidence.
 8. Update:
    - `docs/rules/STATUS.md`
    - `docs/rules/README.md`
-   - PR #2 body.
-9. Do not merge PR #2 unless explicitly requested.
+   - the new theme PR body, including test results, evidence boundaries and any parallel-PR index conflicts.
+9. Open a new draft PR for this theme. PR #2 is merged history, not the current work target.
+10. Do not merge or enable auto-merge on any PR without explicit user authorization.
 
 ---
 

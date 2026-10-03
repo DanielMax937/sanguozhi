@@ -2,6 +2,12 @@
 
 更新：2026-10-03。
 
+## 新增可运行切片：PK训练内核（不是完整游戏）
+
+[切片指南](../engine/pk-training-slice.md) · [归一化运行规则](../sources/pk-training-runtime.json)。
+
+以main `5c5611bb067c0dfe13cea1126ad69a12dade697c` 为基线，新增Train、有限EndTurn、纯文本短目标、preview、存档/重放和逐命令证据。原资格gate/完整scheduler仍open；原训练表现层的发言武将RNG被明示省略，不声称整条原命令随机流一致。Vanilla不静默继承PK；XP达到100的未实现成长路径会原子拒绝。该实现不包含未合并PR3，不改变下列P0研究状态。
+
 ## A1–E20 主审计已完成；正在清理 exactness gaps
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。

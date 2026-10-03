@@ -5,6 +5,9 @@
 
 ## 最新审计入口
 
+新增运行入口：[PK训练切片与纯文本沙盒](../engine/pk-training-slice.md)。仅Train与有限EndTurn，非完整游戏；`npm run check`、`npm run demo`、`npm run play`。新常量表为 `../sources/pk-training-runtime.json`，参考校验 `python scripts/check_pk_training_runtime.py`；保持原gate、全局scheduler、Vanilla与表现层RNG边界透明。
+
+
 [当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [P0-2外交版本边界](37-diplomacy-version-boundaries.md)。
 
 A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原blob复用，无历史段落丢失。历史快照不是当前进度指针。
