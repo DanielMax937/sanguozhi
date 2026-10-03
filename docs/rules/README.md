@@ -63,6 +63,8 @@ P0-10主副将关系/FPU取整以 `45-deputy-rounding-exactness.md` 为专项记
 
 P0-11训练/气力以 `46-training-morale-exactness.md` 为专项记录，结构化证据为 `../sources/training-morale-exactness.json`；训练gate边界、每回合一次cadence及`0059A230`野外恢复local handler已收紧，reset/top scheduler xref仍open。
 
+P0-12阵系耗粮/粮尽以 `47-food-overlap-starvation-exactness.md` 为专项记录，结构化证据为 `../sources/food-overlap-starvation-exactness.json`；阵/砦/城塞单一selector、float32常量与不叠乘已闭合，overlap winner与starvation原函数仍open；旧0.76降为legacy-only。
+
 ## 版本标记
 
 - `[COMMON]`：无印与 PK 共通。
@@ -128,6 +130,7 @@ P0-11训练/气力以 `46-training-morale-exactness.md` 为专项记录，结构
 45. `44-troop-resource-transaction-exactness.md` P0-9出征/输送draft容量、资源守恒、100000兵装上限与finalizer边界
 46. `45-deputy-rounding-exactness.md` P0-10主副将关系除数、_ftol2取整与剩余PC opcode边界
 47. `46-training-morale-exactness.md` P0-11训练gate/reset cadence与0059A230野外气力恢复
+48. `47-food-overlap-starvation-exactness.md` P0-12阵系耗粮bit-exact、重叠不叠乘与粮尽逃兵证据降级
 46. `45-deputy-rounding-exactness.md` P0-10主副将关系补正与MSVC _ftol2正值floor闭合
 
 ## 来源优先级
