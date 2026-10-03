@@ -79,6 +79,8 @@ P0-20俘虏 forced-release 排序/裁剪以 `55-captive-forced-release-ordering-
 
 P0-21现金褒赏忠诚以 `56-cash-reward-loyalty-boundary.md` 为专项记录，结构化证据为 `../sources/cash-reward-loyalty-boundary.json`；`005B5D60` 为执行 containing function，`0048A770 SetLoyalty(0..255)` 与 `004A6CF0 ModifyPersonLoyalty(delta)` 证明 true loyalty 与UI100分层；增量RNG/魅力/义理公式仍open。
 
+P0-22欠薪忠诚以 `57-salary-shortfall-loyalty-boundary.md` 为专项记录，结构化证据为 `../sources/salary-shortfall-loyalty-boundary.json`；`0058D5E0` 逐欠薪据点准备并写入跨据点累计容器，`0058C190` 在全部设施扫描后统一finalize；selector与每人掉忠公式仍open。
+
 P0-12阵系耗粮/粮尽以 `47-food-overlap-starvation-exactness.md` 为专项记录，结构化证据为 `../sources/food-overlap-starvation-exactness.json`；阵/砦/城塞单一selector、float32常量与不叠乘已闭合，overlap winner与starvation原函数仍open；旧0.76降为legacy-only。
 
 P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为专项记录，结构化证据为 `../sources/supply-transport-finalizer-exactness.json`；`004BF522` 已归入 `sub_4BF1F0`，到达满仓overflow丢弃行为与野外补给target-cap语义已收紧，troop气力非整除rounding和field-supply finalizer仍open。
@@ -158,6 +160,7 @@ P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为�
 55. `54-death-lifecycle-layer-boundary.md` P0-19登场/自然死亡RNG层级、死亡年/flag/健康/DEAD边界
 56. `55-captive-forced-release-ordering-boundary.md` P0-20俘虏forced-release comparator排序与固定方向裁剪边界
 57. `56-cash-reward-loyalty-boundary.md` P0-21现金褒赏true-loyalty写回primitive与RNG公式边界
+58. `57-salary-shortfall-loyalty-boundary.md` P0-22欠薪prepare/accumulate与月度batch-finalizer边界
 48. `47-food-overlap-starvation-exactness.md` P0-12阵系耗粮bit-exact、重叠不叠乘与粮尽逃兵证据降级
 49. `48-supply-transport-finalizer-exactness.md` P0-13野外补给、输送抵达函数范围、overflow与气力加权边界
 
