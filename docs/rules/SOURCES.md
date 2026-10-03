@@ -1838,3 +1838,32 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/1471.html
 
 证据等级：arrival +200为PC地址级；arrival containing function range为IDB exact；到达overflow discard、手动/自动补给、输送队不可补给为PC empirical-high；气力加权核心为wiki+原building helper high；troop非整除rounding、wild-supply finalizer和sub_4BF1F0资源写入顺序仍open。
+
+### P0-14 技巧研究时间专项
+
+- 311resource IDB functions.csv：
+  - `005D7DD0..005D7EFF` 包含人才府减时与最低1旬逻辑；
+  - `005D8C50..005D8F9F` 为研究命令执行相关函数范围。
+  https://github.com/fudanglp/311resource/blob/master/extractor/ida/data/python_idb/san11pk_dump.exe_functions.csv
+- 311MemoryResearch：
+  - `005D8F68` 技巧研究行动力路径；
+  - `00599CF0` 每旬 ResearchTimeLeft -1。
+  https://github.com/sjn4048/311MemoryResearch
+- 311SireCustomizedPackageDev：
+  - struct_force +0x9C ResearchingTech / +0xA0 ResearchTimeLeft；
+  - struct_technology[36] size0x6C，目前仅明确+0x60 RequiredPoints，未恢复研究时间字段。
+  https://github.com/sean2077/311SireCustomizedPackageDev
+- 日文Wiki《技巧研究》：
+  - 超级实测相关能力合计70/140/210/280处分档；
+  - 210无人材府30/40/60/90；
+  - 280+人才府Lv4=60；
+  - 明确写“难度による変化は未確認”。
+  https://w.atwiki.jp/sangokushi11/pages/90.html
+- 早期攻略：
+  - 枪戟弩骑练兵一般30/40/60/90；
+  - 发明防卫火攻/PK内政一般40/50/70/100；
+  - 同时声明研究时间不是固定值。
+  https://www.gamersky.com/handbook/200603/21607.shtml
+  https://gl.ali213.net/html/2006/5914.html
+
+证据等级：人才府-20日/最低10日为PC地址级exact；containing function由原IDB边界确认；超级阈值为empirical-high；完整base-time函数/矩阵、初级上级仍open。
