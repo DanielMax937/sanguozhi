@@ -1524,3 +1524,34 @@ legacy-retention-0.76-downgraded
 
 下一 exactness gap：P0-13 野外补给 / 输送抵达 finalizer / 气力加权取整。
 
+### P0-13 野外补给 / 输送抵达 finalizer / 气力加权
+
+状态：
+
+```text
+P0-13-audit-complete
+transport-arrival-containing-function-resolved
+transport-arrival-merit-exact
+transport-arrival-overflow-high
+manual-auto-supply-separated-high
+supply-capacity-and-equipment-high
+morale-weighted-core-high
+morale-rounding-open
+wild-supply-finalizer-open
+```
+
+本轮确认：
+
+- `004BF522` 位于 `sub_4BF1F0..004BF6EF`，输送抵达处理所在函数范围已锁定；
+- 到达据点+200功绩为PC地址级确认；
+- 满仓到达时超出资源会提示并消失，不能留在输送队；
+- PC手动slider与直接目标自动补给是不同入口；
+- 自动补给按target cap填充，野外未转移资源留在supplier；
+- 数量型兵装匹配、输送队不可作为补给目标继续成立；
+- 气力加权平均核心成立，`004B9840`提供原程序同类模型证据；
+- 非整除 rounding 仍open，不能借P0-10的_ftol2无xref强行关闭。
+
+详见 [P0-13专项](48-supply-transport-finalizer-exactness.md)。
+
+下一 exactness gap：P0-14 技巧研究时间 PC 函数 / 人才府减时 / 难度矩阵。
+
