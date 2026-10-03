@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-24",
+  "target": "PC-PK1.1 treasure grant/confiscation loyalty opcode boundary",
+  "status": "audit-complete-delta-xref-open",
+  "reverse": {
+    "commandId": 14,
+    "commandHex": "0x0E",
+    "commandName": "授予没收",
+    "treasureValueField": "0x3C",
+    "treasureOwnerField": "0x40",
+    "treasureCityField": "0x44",
+    "treasureStateField": "0x48",
+    "setTreasureOwnerAndCity": "004A0A40",
+    "lowLevelOwnerCitySetter": "00484DE0",
+    "setTreasureStatus": "004A0A70",
+    "lowLevelStateSetter": "00484E20",
+    "modifyPersonLoyalty": "004A6CF0",
+    "setLoyalty": "0048A770"
+  },
+  "resolved": {
+    "treasureOwnershipMutationSeparateFromLoyalty": true,
+    "treasureStateMutationSeparateFromOwnership": true,
+    "treasureValueIsExplicitDataField": true,
+    "grantHigherValueRaisesLoyaltyMore": "official-confirmed",
+    "grantGainEqualsValue": "empirical-high-candidate",
+    "confiscationCausesLoyaltyLoss": "empirical-high",
+    "confiscationMinus30": "empirical-high-not-reverse"
+  },
+  "open": [
+    "grant/confiscation execution caller",
+    "exact xref from treasure command to ModifyPersonLoyalty",
+    "grant gain==TreasureValue opcode",
+    "confiscation -30 opcode",
+    "confiscation modifiers by value/relation/giri",
+    "ownership vs loyalty exact execution order",
+    "state setter path coverage",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/fudanglp/311resource",
+    "https://github.com/sjn4048/311MemoryResearch"
+  ]
+}
