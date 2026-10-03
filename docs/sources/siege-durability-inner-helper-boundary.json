@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-42",
+  "target": "PC-PK1.1 siege durability inner helper boundary",
+  "status": "audit-complete-inner-bodies-open",
+  "reverse": {
+    "ordinaryHelper": "005ADDC0",
+    "ordinaryBounds": [
+      "0x5ADDC0",
+      "0x5ADE20"
+    ],
+    "ramWoodBeastHelper": "005ADE20",
+    "ramWoodBeastBounds": [
+      "0x5ADE20",
+      "0x5ADEB0"
+    ],
+    "ordinaryCaller": "005B04E9",
+    "ramWoodBeastCaller": "005B04FF",
+    "finalFloatToInt": "005B057E -> 00707A74"
+  },
+  "resolved": {
+    "ordinaryHelperThreeScalarArgs": true,
+    "ramWoodBeastHelperThreeScalarArgs": true,
+    "helperReturnsX87Float": true,
+    "criticalAppliedAfterHelper": true,
+    "targetTypeMultiplierAppliedAfterHelper": true,
+    "finalConversionAfterOuterMultipliers": true,
+    "finalPositiveConversion": "truncate-toward-zero / floor"
+  },
+  "open": [
+    "005ADDC0 full body",
+    "005ADE20 full body",
+    "exact caller scalar parameter identities",
+    "ordinary sqrt/constants opcodes",
+    "ram/wood-beast internal formula",
+    "x87 extended-precision boundaries",
+    "small-troop/small-attack exact rounding",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/fudanglp/311resource"
+  ]
+}
