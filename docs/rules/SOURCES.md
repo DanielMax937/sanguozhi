@@ -1799,3 +1799,42 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/85.html
 
 证据等级：防御设施单一selector/不叠乘、float32常量、0059BF40与starvation分层为PC-PK1.1 source-level；overlap winner与starvation exact函数继续open；0.76不再属于empirical-high。
+
+### P0-13 补给 / 输送 finalizer专项
+
+- 311MemoryResearch `地址资料.txt`：
+  - `004BF522` 输送队抵达据点功绩+200；
+  - 输送/补给后的兵装上限相关地址；
+  - `005DB840` 周边出征/输送AP信息。
+  https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/地址资料.txt
+- 311resource IDB functions.csv：
+  - `004BF522` 落在 `sub_4BF1F0` 内；
+  - 下一函数 `004BF6F0`，因此 arrival completion path 的 containing function 范围已锁定。
+  https://github.com/fudanglp/311resource/blob/master/extractor/ida/data/python_idb/san11pk_dump.exe_functions.csv
+- 311SireCustomizedPackageDev：
+  - `004B9840 GetBuildingCombinedStrength`，按原/新增兵力和气力计算混合气力；
+  - target troop/SP 资源 limit/getter/adjust helper；
+  - `005DB840 GetExpeditionActionPointCost`。
+  https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+- 日文Wiki《戦争》《兵科》：
+  - 补兵后气力按兵数平均；
+  - PC手动补给量可调；
+  - 输送队不可作为普通补给目标。
+  https://w.atwiki.jp/sangokushi11/pages/85.html
+  https://w.atwiki.jp/sangokushi11/pages/91.html
+- 日文Wiki旧2ch日志：
+  - 直接以目标部队为移动目标会自动向最大兵/物资方向补给；
+  - 目标据点已满时输送的兵/金等超出部分会提示并消失；
+  - COM会继续往满仓据点输送，造成物资损失。
+  https://w.atwiki.jp/sangokushi11/pages/1950.html
+  https://w.atwiki.jp/sangokushi11/pages/1992.html
+  https://w.atwiki.jp/sangokushi11/pages/1958.html
+- 日文Wiki《功績値》：
+  - 输送到达+200、野外补给+100。
+  https://w.atwiki.jp/sangokushi11/pages/113.html
+- 战争评论日志：
+  - 输送队因粮尽/栈道等消灭时货物消失；
+  - 被敌军击破时货物可能被掠夺。
+  https://w.atwiki.jp/sangokushi11/pages/1471.html
+
+证据等级：arrival +200为PC地址级；arrival containing function range为IDB exact；到达overflow discard、手动/自动补给、输送队不可补给为PC empirical-high；气力加权核心为wiki+原building helper high；troop非整除rounding、wild-supply finalizer和sub_4BF1F0资源写入顺序仍open。
