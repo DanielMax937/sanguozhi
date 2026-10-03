@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-45",
+  "target": "PC-PK1.1 retained domestic facility selector after city capture",
+  "status": "audit-complete-selector-open",
+  "retainedCountBins": {
+    "100+": 5,
+    "80-99": 4,
+    "60-79": 3,
+    "40-59": 2,
+    "0-39": 1,
+    "evidence": "documented-empirical-high"
+  },
+  "excludedFunctions": {
+    "singleFacilityLoot": "004BA610",
+    "capturedResourceRetention": "004B329B"
+  },
+  "resolved": {
+    "retainedCountBinsHighConfidence": true,
+    "singleFacilityLootIsSelector": false,
+    "capturedResourceRetentionIsSelector": false,
+    "playerChoiceSelector": false,
+    "uniformRandomSelectorProven": false
+  },
+  "fallback": {
+    "selector": "seededSampleWithoutReplacement",
+    "evidence": "provisional-engine-rule"
+  },
+  "open": [
+    "retained-facility selector address",
+    "candidate list construction/order",
+    "random vs deterministic ordering",
+    "RNG helper/xref",
+    "facility type/level priority",
+    "special-facility protection",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://w.atwiki.jp/sangokushi11/pages/1598.html",
+    "https://w.atwiki.jp/sangokushi11/pages/2469.html"
+  ]
+}

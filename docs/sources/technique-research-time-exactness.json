@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-14-exactness",
+  "target": "technology research duration",
+  "status": {
+    "audit": "complete",
+    "researchTimeContainingFunction": "resolved",
+    "talentOfficeReduction": "exact",
+    "minimumTurn": "exact",
+    "runtimeUnit": "exact-turn",
+    "staticTechnologyTimeField": "not-recovered",
+    "baseTimeDerivation": "code-derived-high",
+    "superThresholds": "empirical-high",
+    "beginnerAdvanced": "open"
+  },
+  "functions": {
+    "researchTimeCalculator": {
+      "start": "005D7DD0",
+      "endExclusive": "005D7F00",
+      "name": "sub_5d7dd0"
+    },
+    "researchCommand": {
+      "start": "005D8C50",
+      "endExclusive": "005D8FA0",
+      "name": "sub_5d8c50"
+    },
+    "researchActionPointSite": "005D8F68",
+    "perTurnCountdown": "00599CF0"
+  },
+  "talentOffice": {
+    "reductionTurns": 2,
+    "reductionDays": 20,
+    "reductionAddress": "005D7ED7",
+    "minimumTurns": 1,
+    "minimumDays": 10,
+    "minimumCheckAddress": "005D7EF0",
+    "minimumFallbackAddress": "005D7EF4",
+    "ordering": "after base duration calculation"
+  },
+  "runtime": {
+    "forceResearchingTechOffset": "0x9C",
+    "forceResearchTimeLeftOffset": "0xA0",
+    "researchTimeLeftType": "short",
+    "unit": "turn/ten-day period",
+    "decrementPerTurn": 1
+  },
+  "technologyStruct": {
+    "count": 36,
+    "size": "0x6C",
+    "requiredPointsOffset": "0x60",
+    "unknownOffset68": "0x68",
+    "recoveredResearchTimeField": false
+  },
+  "superDifficulty": {
+    "thresholds": [
+      70,
+      140,
+      210,
+      280
+    ],
+    "thresholdEvidence": "empirical-high",
+    "exactComparators": "open",
+    "knownAnchors": [
+      {
+        "attributeSum": 210,
+        "talentOffice": false,
+        "daysByLevel": [
+          30,
+          40,
+          60,
+          90
+        ]
+      },
+      {
+        "attributeSum": 210,
+        "talentOffice": true,
+        "level": 1,
+        "days": 10
+      },
+      {
+        "attributeSum": 280,
+        "talentOffice": true,
+        "level": 1,
+        "days": 10
+      },
+      {
+        "attributeSum": 280,
+        "talentOffice": true,
+        "level": 4,
+        "days": 60
+      },
+      {
+        "attributeSum": 280,
+        "talentOffice": false,
+        "level": 4,
+        "days": 80,
+        "derivedFromExactTalentOfficeReduction": true
+      }
+    ]
+  },
+  "documentedBaseGroups": {
+    "militaryTraining": {
+      "categories": [
+        "spear",
+        "halberd",
+        "crossbow",
+        "cavalry",
+        "training"
+      ],
+      "daysByLevel": [
+        30,
+        40,
+        60,
+        90
+      ]
+    },
+    "inventionDefenseFireDomestic": {
+      "categories": [
+        "invention",
+        "defense",
+        "fire",
+        "domestic"
+      ],
+      "daysByLevel": [
+        40,
+        50,
+        70,
+        100
+      ]
+    },
+    "evidence": "documented-guide-general-values-not-fixed"
+  },
+  "difficulty": {
+    "super": "partially-observed",
+    "beginner": "open",
+    "advanced": "open",
+    "doNotCopySuperThresholds": true
+  },
+  "fallback": {
+    "militaryTrainingTurns": [
+      3,
+      4,
+      6,
+      9
+    ],
+    "inventionDefenseFireDomesticTurns": [
+      4,
+      5,
+      7,
+      10
+    ],
+    "thenApplyTalentOfficeExact": true,
+    "evidence": "compatibility-guide-fallback"
+  },
+  "open": [
+    "005D7DD0 complete body",
+    "research time calculator signature",
+    "Basic vs Actual related attribute getter",
+    "exact threshold comparison operators",
+    "complete Super 5-bin x 36-tech matrix",
+    "Beginner/Advanced thresholds and matrix",
+    "category/level base-time code branches",
+    "struct_technology +0x68 meaning",
+    "Vanilla/PS2/Wii differences"
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "audit": "E13",
+  "target": "PC-PK1.1 primary",
+  "statusFields": {
+    "status": {
+      "offset": "0x24",
+      "values": {
+        "normal": 0,
+        "confused": 1,
+        "falseReport": 2
+      }
+    },
+    "remainingTurns": {
+      "offset": "0x28"
+    }
+  },
+  "exactReverse": {
+    "perTurnHandler": {
+      "address": "00599B90",
+      "order": [
+        "apply status behavior if unit has not acted",
+        "mark acted",
+        "resolve recovery step",
+        "decrement remaining count",
+        "clamp to zero",
+        "clear abnormal status at zero"
+      ]
+    },
+    "recovery": {
+      "normalStep": 1,
+      "pkQualifiedDefenseFacilityStep": 2,
+      "addressNormalInit": "00599C25",
+      "addressAuraStep": "00599CAB",
+      "addressReadRemaining": "00599CB3",
+      "addressSetRemaining": "00599CD0",
+      "addressClearAtZero": "00599CDC/00599CE4",
+      "setRemainingFunction": "00496350"
+    },
+    "defenseFacilitySelection": {
+      "baseFacility": {
+        "id": 3,
+        "name": "阵"
+      },
+      "technique25": {
+        "id": 25,
+        "name": "强化设施",
+        "facilityId": 4,
+        "facilityName": "砦"
+      },
+      "technique26": {
+        "id": 26,
+        "name": "强化城墙",
+        "facilityId": 5,
+        "facilityName": "城塞"
+      },
+      "usesFacilityTypeMaxEffectiveRange": true
+    },
+    "lowTroopAutoConfusion": {
+      "durationExpression": "GetRandomX(2)+1",
+      "possibleCounts": [
+        1,
+        2
+      ],
+      "randomFunction": "00472150",
+      "statusSetter": "004AEA70",
+      "callSite": "0059A1F5-0059A20B"
+    }
+  },
+  "documented": {
+    "ordinaryStrategyDuration": "several turns; exact distribution unresolved",
+    "criticalMinimumTurns": 2,
+    "vanillaPcDefenseFacilityRecoveryAcceleration": false,
+    "calmdown": "clears confusion/false-report; critical expands to adjacent allies"
+  },
+  "ordinaryStrategyEntrypoints": {
+    "falseReport": "005917D0",
+    "disturb": "00591A20",
+    "calmdown": "00591C70"
+  },
+  "compatibilityFallback": {
+    "evidence": "provisional-engine-rule from open-source reimplementation, not original EXE",
+    "normal": {
+      "durations": [
+        1,
+        2
+      ],
+      "weights": [
+        70,
+        30
+      ]
+    },
+    "critical": {
+      "durations": [
+        2,
+        3
+      ],
+      "weights": [
+        70,
+        30
+      ]
+    },
+    "repeatedApplication": "max(currentRemaining,newlyRolledDuration)"
+  },
+  "hardRules": [
+    "Natural recovery is deterministic countdown, not a per-turn recovery probability.",
+    "PC-PK1.1 decrements one count normally and two inside the qualifying friendly defense-facility aura.",
+    "Status behavior occurs before the countdown decrement in the per-turn handler.",
+    "Do not infer ordinary False Report/Disturb initial-duration probabilities from low-troop auto-confusion.",
+    "Do not promote the 70/30 reimplementation fallback to original-game evidence."
+  ],
+  "open": [
+    "005917D0 original false-report initial-duration generation",
+    "00591A20 original disturb initial-duration generation",
+    "004AEA70 exact refresh/overwrite behavior when a target is already abnormal",
+    "original spiral-thrust confusion duration chain",
+    "Vanilla/console instruction-level equivalence"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动03-部队异常状态处理.txt",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[自动眩晕].txt",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[计策施放全过程].txt",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/地址资料.txt",
+    "https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md",
+    "https://w.atwiki.jp/sangokushi11/pages/85.html",
+    "https://w.atwiki.jp/sangokushi11/pages/1964.html",
+    "https://w.atwiki.jp/sangokushi11/pages/1890.html",
+    "https://github.com/tankyc/sango_infinity/blob/main/Build/Content/Data/Common/Skills.json"
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-8-exactness",
+  "target": "automatic office assignment selector",
+  "status": {
+    "audit": "complete",
+    "selectorScoring": "resolved",
+    "selectorFinalTie": "resolved",
+    "officeClassifierRole": "corrected",
+    "candidateListGeneratorAttribution": "corrected",
+    "qualificationHelper": "open",
+    "callerListOrder": "open",
+    "modeCallerMapping": "open"
+  },
+  "functions": {
+    "selector": "005FAF00",
+    "qualification": "005FA4D0",
+    "officeClassifier": "005FA650",
+    "candidateIterator": "0047BED0"
+  },
+  "selectorSignature": {
+    "arg1": "candidate person list",
+    "arg2": "office pointer",
+    "arg3": "scoring mode flag",
+    "this": "selector context"
+  },
+  "officeType": {
+    "source": "005FA650(office)",
+    "namedOfficeMapping": {
+      "0": "top civil: office IDs 0..3 (丞相/司空/太尉/司徒)",
+      "1": "military: named office IDs with officeId%8>=4",
+      "2": "ordinary civil: named office IDs >=8 with officeId%8<4"
+    },
+    "completeOpcode": "open",
+    "internalOffice81": "open"
+  },
+  "commonGates": {
+    "qualificationHelper": "005FA4D0(person, office)",
+    "trueLoyaltyMinimum": 90
+  },
+  "weightedThresholdMode": {
+    "enabledWhenArg3Nonzero": true,
+    "loyaltyBonus": "9 * min(trueLoyalty - 90, 10)",
+    "topCivil": {
+      "gate": "leadership + intelligence >= 150",
+      "score": "leadership + intelligence + loyaltyBonus"
+    },
+    "military": {
+      "gate": "max(leadership, war) >= 60",
+      "score": "leadership + war + loyaltyBonus"
+    },
+    "civil": {
+      "gate": "max(intelligence, politics) >= 70",
+      "score": "max(intelligence, politics) + loyaltyBonus"
+    }
+  },
+  "roleAffinityMode": {
+    "enabledWhenArg3Zero": true,
+    "martial": "max(leadership, war)",
+    "civil": "max(intelligence, politics)",
+    "military": {
+      "gate": "martial >= civil",
+      "score": "martial"
+    },
+    "topCivilAndCivil": {
+      "gate": "civil > martial",
+      "score": "civil"
+    },
+    "equalMartialCivilFavoursMilitary": true,
+    "loyaltyBonus": 0
+  },
+  "finalSelection": {
+    "initialScore": "INT_MIN",
+    "replaceCondition": "candidateScore > bestScore",
+    "equalScoreReplaces": false,
+    "tieRule": "first candidate in caller-provided iteration order wins",
+    "callerProvidedOrder": "open"
+  },
+  "merit": {
+    "qualificationRole": true,
+    "finalScoreRole": false,
+    "tierStep": 4000
+  },
+  "correctedClaims": [
+    "005FA650 does not generate/sort the candidate list",
+    "candidate list is passed as arg1 into 005FAF00",
+    "officeType and scoringModeFlag are separate values",
+    "military gate uses max(L,W) but weighted score uses L+W",
+    "top-civil threshold is >=150, not >150",
+    "final same-score tie is stable first-wins"
+  ],
+  "fallback": {
+    "candidateOrder": "personId ascending",
+    "candidateOrderEvidence": "provisional-caller-order-only",
+    "modeNames": ["weighted-threshold", "role-affinity"],
+    "doNotAliasModeToAIUntilCallerResolved": true
+  },
+  "open": [
+    "005FA4D0 complete body",
+    "005FA650 complete body",
+    "005FAF00 callers/xrefs",
+    "caller candidate list construction/order",
+    "arg3 business meaning per caller",
+    "internal office entry 80 classification",
+    "removal of already assigned officers during multi-office assignment",
+    "office traversal order in automatic multi-assign",
+    "Vanilla/PS2/Wii differences"
+  ]
+}

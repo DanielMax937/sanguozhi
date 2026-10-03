@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-28",
+  "target": "PC-PK1.1 hard recruitment gate and relationship-priority boundary",
+  "status": "audit-complete-priority-open",
+  "reverse": {
+    "function": "004AF7D0",
+    "functionBounds": [
+      "0x4AF7D0",
+      "0x4AFD60"
+    ],
+    "caller": "004AFD60",
+    "outResultPointer": true,
+    "handledReturn": true,
+    "successRateCalledOnlyWhenUnhandled": true
+  },
+  "confirmedDomains": [
+    "hate",
+    "sworn relation",
+    "affection/friendly relation",
+    "forbidden service period"
+  ],
+  "runtimeState": {
+    "forbiddenLordField": "0x164",
+    "forbiddenMonthsField": "0x168",
+    "monthlyForbiddenCounterHandler": "0058BB30"
+  },
+  "relatedHelpers": {
+    "getRelationWithLord": "0048A5F0",
+    "getCompatibilityDifference": "00489F80"
+  },
+  "resolved": {
+    "hardGateIsShortCircuit": true,
+    "hardGateIsNotProbabilityModifier": true,
+    "threeStateDecisionRequired": true,
+    "internalPriorityResolved": false
+  },
+  "open": [
+    "004AF7D0 full body",
+    "exact priority among hate/forbidden/spouse/sworn/affection",
+    "exact callsite of GetRelationWithLord",
+    "affection/hate list ordering",
+    "loyalty+giri threshold opcode",
+    "mode influence",
+    "compatibility participation in hard gate",
+    "Vanilla/PS2/Wii equivalence"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/fudanglp/311resource"
+  ]
+}

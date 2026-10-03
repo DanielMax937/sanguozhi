@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-25",
+  "target": "PC-PK1.1 GetHiringSuccessRate signature and internal-input boundary",
+  "status": "audit-complete-formula-open",
+  "reverse": {
+    "function": "005C4F80",
+    "functionBounds": [
+      "0x5C4F80",
+      "0x5C51C0"
+    ],
+    "signature": "int __cdecl GetHiringSuccessRate(void *target, void *executor, int mode, int dateKey)",
+    "internalHelper": "005BA410",
+    "internalHelperBounds": [
+      "0x5BA410",
+      "0x5BA4C0"
+    ],
+    "caller": "004AFD60",
+    "callSite": "004AFDEB"
+  },
+  "arguments": [
+    "target person pointer",
+    "executor person pointer",
+    "mode",
+    "dateKey"
+  ],
+  "outerGiri": {
+    "readAddress": "004AFDE1",
+    "fieldOffset": "0xF0",
+    "usedInNonzeroModeOuterMultiplier": true,
+    "usedInNormalModeOuterMultiplier": false
+  },
+  "resolved": {
+    "loyaltyIsExplicitScalarArgument": false,
+    "charmIsExplicitScalarArgument": false,
+    "compatibilityIsExplicitScalarArgument": false,
+    "deterministicSevenInputsBelongTo005BA4C0Not005C4F80": true,
+    "dateKeyPassedToSuccessRate": true
+  },
+  "open": [
+    "005C4F80 full body",
+    "005BA410 full body",
+    "whether loyalty/charm/compatibility/giri/ambition are read internally",
+    "weights and integer rounding",
+    "whether dateKey materially affects success rate",
+    "004AF7D0 full body",
+    "005BA4C0 deterministic generator",
+    "Vanilla/PS2/Wii equivalence"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/fudanglp/311resource"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-31",
+  "target": "PC-PK1.1 office classifier and internal 81st office entry boundary",
+  "status": "audit-complete-entry80-classification-open",
+  "reverse": {
+    "classifier": "005FA650",
+    "classifierBounds": [
+      "0x5FA650",
+      "0x5FA6E0"
+    ],
+    "officeArrayStart": "0x0727F334",
+    "officeArrayEnd": "0x07280630",
+    "officeStructSize": "0x3C",
+    "officeArrayCount": 81
+  },
+  "resolved": {
+    "classifierRole": "office -> officeType",
+    "namedOfficePattern0to79": "reverse-inferred-high",
+    "internalEntry80Exists": true,
+    "internalEntry80ClassificationResolved": false
+  },
+  "fallback": {
+    "namedOffice0to79": {
+      "topCivil": "0..3",
+      "military": "id<80 && id%8>=4",
+      "civil": "remaining id<80"
+    },
+    "internalEntry80Type": null,
+    "evidence": "explicit-open-not-defaulted"
+  },
+  "open": [
+    "005FA650 full body",
+    "office index80 field values",
+    "office index80 name/use",
+    "office index80 classifier result",
+    "whether scheduler uses office index80",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/fudanglp/311resource"
+  ]
+}

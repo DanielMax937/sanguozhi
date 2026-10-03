@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-6-exactness",
+  "target": "non-natural loyalty changes: cash reward, item transfer, salary shortfall, rumor",
+  "status": {
+    "audit": "complete",
+    "salaryPaymentTransaction": "resolved",
+    "rewardGainFormula": "open",
+    "salaryPenaltyFormula": "open",
+    "rumorEffectFormula": "open",
+    "blanketAllOfficerRumorModel": "rejected"
+  },
+  "trueLoyalty": {
+    "storageRange": "0..255 byte",
+    "displayCap": 100,
+    "cashRewardCanCrossDisplay100": true,
+    "observedCashReward": {
+      "before": 99,
+      "after": 108,
+      "gain": 9
+    },
+    "observedRumorHiddenLoyalty": {
+      "before": 120,
+      "after": 109
+    }
+  },
+  "cashReward": {
+    "goldPerPerson": 100,
+    "apPerPerson": 5,
+    "multiSelect": true,
+    "oncePerPersonPerTurn": true,
+    "display100Ineligible": true,
+    "unitOfficerIneligible": true,
+    "hasPraisedHelper": "00489140",
+    "executionFunction": "005B5D60",
+    "gain": {
+      "random": true,
+      "rulerCharmAffectsAmount": true,
+      "observedGains": [5, 8, 9],
+      "exactFormula": "open"
+    },
+    "rejectedModernFallback": {
+      "rule": "guaranteed 11 plus possible 1..5",
+      "reason": "contradicted by observed original-game gains below 11"
+    }
+  },
+  "itemTransfer": {
+    "grantAp": 10,
+    "higherValueRaisesLoyaltyMore": true,
+    "gainEqualsItemValue": "empirical-high-candidate",
+    "confiscationCausesLoss": true,
+    "confiscationMinus30": "empirical-high-not-reverse",
+    "exactOpcodes": "open"
+  },
+  "salary": {
+    "monthly": true,
+    "order": [
+      "monthly income",
+      "captive maintenance",
+      "active officer salary",
+      "shortfall consequences"
+    ],
+    "activeIdentityMask": "0x0F",
+    "activeIdentities": ["lord", "governor", "prefect", "normal"],
+    "listFunction": "004CF360",
+    "salarySumFunction": "0049F2A0",
+    "shortfallPrepare": "0058D5E0",
+    "shortfallApply": "0058C190",
+    "paymentMode": "all-or-nothing-per-facility",
+    "enoughFunds": "goldAfterSalary = goldAfterCaptive - salarySum",
+    "insufficientFunds": "goldAfterSalary = goldAfterCaptive; no partial salary deduction",
+    "affectedOfficerSelector": "open",
+    "perOfficerLoyaltyLoss": "open"
+  },
+  "rumor": {
+    "successFormulaSeparateFromEffect": true,
+    "effectHelpers": ["005D05B0", "005D05F0"],
+    "effectHelperBodies": "open",
+    "blanketAllOfficersSameLoss": false,
+    "targetSelector": "open",
+    "loyaltyLossDistribution": "open",
+    "securityLossDistribution": "open",
+    "evidenceAgainstBlanketModel": {
+      "cityOfficerCount": "100+",
+      "successfulRumors": "300+",
+      "securityReachedZero": true,
+      "mostOfficerLoyaltyStayedHigh": true,
+      "onlySubsetDroppedSubstantially": true
+    },
+    "relationshipAndGiriGate": "empirical-supported-exact-formula-open"
+  },
+  "modernReconstructionBoundary": {
+    "sangoInfinityRewardBase11": "not-fidelity",
+    "sangoInfinityRumorAllLivingOfficers8to15": "not-fidelity",
+    "reason": "project comments describe tuned reconstruction and original-game evidence conflicts with blanket behavior"
+  },
+  "open": [
+    "005B5D60 reward loyalty calculation body",
+    "cash reward RNG/charm/giri exact formula",
+    "item value to loyalty original opcode",
+    "confiscation loyalty function and -30 version boundary",
+    "0058D5E0 complete body",
+    "0058C190 complete body",
+    "salary shortfall affected officer selector",
+    "salary shortfall per-officer loyalty loss",
+    "005D05B0/005D05F0 rumor effect bodies",
+    "rumor loyalty target selector",
+    "rumor per-target loyalty loss distribution",
+    "rumor security loss distribution",
+    "Vanilla/PK/console differences"
+  ]
+}

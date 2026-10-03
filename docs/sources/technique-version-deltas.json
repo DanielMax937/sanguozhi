@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "audit": "E8",
+  "asOf": "2026-09-30",
+  "naming": {
+    "communityReverseTarget": "PC-PK1.1",
+    "officialJapanesePkLatestPatch": "Ver.1.1.1",
+    "warning": "Community shorthand PC-PK1.1 is not assumed byte-identical to every locale's official Ver.1.1.1 binary."
+  },
+  "officialTimeline": [
+    {
+      "product": "Vanilla Windows",
+      "version": "1.1",
+      "date": "2006-04-10",
+      "source": "https://www.gamecity.ne.jp/regist_c/user/san11/san11_update.htm",
+      "listedTechniqueConstantChanges": [],
+      "notes": [
+        "AI improvements and listed bug fixes; official notes do not enumerate technique-parameter changes."
+      ]
+    },
+    {
+      "product": "Vanilla Windows",
+      "version": "1.2",
+      "date": "2006-05-01",
+      "source": "https://www.gamecity.ne.jp/regist_c/user/san11/san11_update02_history.htm",
+      "listedTechniqueConstantChanges": [],
+      "notes": [
+        "Official notes explicitly mention damage-balance adjustments but do not enumerate which technique constants changed."
+      ]
+    },
+    {
+      "product": "Vanilla Windows",
+      "version": "1.3..1.3.3",
+      "dateRange": "2006-07-06..2007-03-14",
+      "source": "https://www.gamecity.ne.jp/regist_c/user/san11/san11_update02_history.htm",
+      "listedTechniqueConstantChanges": [],
+      "notes": [
+        "Further AI, duel, Fire God and other bug/balance fixes; no per-technique constant table in official history."
+      ]
+    },
+    {
+      "product": "Power-Up Kit Windows",
+      "version": "1.1",
+      "date": "2006-10-04",
+      "source": "https://www.gamecity.ne.jp/regist_c/user/san11/pk/san11pk_update.htm",
+      "listedTechniqueConstantChanges": [],
+      "notes": [
+        "Movement/bug fixes; no listed technique parameter rebalance."
+      ]
+    },
+    {
+      "product": "Power-Up Kit Windows",
+      "version": "1.1.1",
+      "date": "2007-03-14",
+      "source": "https://www.gamecity.ne.jp/regist_c/user/san11/pk/san11pk_update.htm",
+      "listedTechniqueConstantChanges": [],
+      "notes": [
+        "Fixes food/predicted food, Rage activation, Piercing Arrow technique points and other bugs; no listed technique-tree constant rebalance."
+      ]
+    }
+  ],
+  "vanillaPc10ReportedDeltas": [
+    {
+      "techniqueId": 0,
+      "name": "枪兵锻炼",
+      "vanilla10": {
+        "damageMultiplier": 1.2
+      },
+      "laterDocumented": {
+        "damageMultiplier": 1.1
+      },
+      "evidence": "Gamersky 2008 retrospective exact wording",
+      "transitionPatch": "unknown"
+    },
+    {
+      "techniqueId": 3,
+      "name": "精锐枪兵",
+      "vanilla10": {
+        "mobilityDelta": 2
+      },
+      "laterDocumented": {
+        "mobilityDelta": 6
+      },
+      "evidence": "Gamersky 2008 retrospective exact wording",
+      "transitionPatch": "unknown"
+    },
+    {
+      "techniqueId": 7,
+      "name": "精锐戟兵",
+      "vanilla10": {
+        "mobilityDelta": 2
+      },
+      "laterDocumented": {
+        "mobilityDelta": 6
+      },
+      "evidence": "Gamersky 2008 retrospective exact wording",
+      "transitionPatch": "unknown"
+    },
+    {
+      "techniqueId": 11,
+      "name": "精锐弩兵",
+      "vanilla10": {
+        "mobilityDelta": 2
+      },
+      "laterDocumented": {
+        "mobilityDelta": 6
+      },
+      "evidence": "Gamersky 2008 retrospective exact wording",
+      "transitionPatch": "unknown"
+    },
+    {
+      "techniqueId": 19,
+      "name": "云梯",
+      "vanilla10": {
+        "reportedBuildingDamageIncrease": 0.2
+      },
+      "laterDocumented": {
+        "reportedBuildingDamageMultiplier": 1.4
+      },
+      "evidence": "Gamersky 2008 retrospective; per-unit-type internal split not recovered for Vanilla 1.0",
+      "transitionPatch": "unknown"
+    },
+    {
+      "techniqueId": 24,
+      "name": "工兵育成",
+      "vanilla10": {
+        "reportedRecoveryMultiplier": 4
+      },
+      "laterDocumented": {
+        "reportedRecoveryMultiplier": 2.5
+      },
+      "evidence": "Gamersky 2008 retrospective; summary does not distinguish fixed bases vs domestic facilities",
+      "transitionPatch": "unknown"
+    },
+    {
+      "techniqueId": 27,
+      "name": "防御强化",
+      "vanilla10": {
+        "counterDamageMultiplier": 1.2
+      },
+      "laterDocumented": {
+        "counterDamageMultiplier": 2
+      },
+      "evidence": "Gamersky 2008 retrospective exact wording",
+      "transitionPatch": "unknown"
+    }
+  ],
+  "vanillaAmbiguities": [
+    "Only spear training explicitly carries the Ver1.0 20% note; do not silently force ids 4/8/12 to 1.20 without a binary or explicit version source.",
+    "The guide mentions Ver1.2-era behavior, but official patch notes do not identify the exact patch where each technique constant changed."
+  ],
+  "pkPc11ReverseBaseline": {
+    "source": "https://github.com/sjn4048/311MemoryResearch",
+    "constants": {
+      "trainingDamageMultiplier": 1.1,
+      "eliteDamageMultiplier": 1.15,
+      "eliteOverridesTrainingDamage": true,
+      "eliteBaseAttackDefenseDelta": 10,
+      "eliteMobilityDeltasByTechniqueId": {
+        "3": 6,
+        "7": 6,
+        "11": 6,
+        "15": 2
+      },
+      "goodHorseMobilityDelta": 4,
+      "militaryReformCommandDelta": 3000,
+      "ladderOrdinaryLandBuildingDamageMultiplier": 1.4,
+      "ladderSiegeShipBuildingDamageMultiplier": 1.2,
+      "axleMobilityDelta": 4,
+      "wallFortificationDurabilityDelta": 3000,
+      "defenseFortificationCounterMultiplier": 2,
+      "divineFirePlanRangeDelta": 2,
+      "woodenOxTransportMobilityDelta": 3
+    },
+    "engineerTraining": {
+      "domesticFacilityRelativeMultiplier": 2,
+      "fixedBaseRelativeMultiplier": 2.5,
+      "evidence": "00599710 disassembly: domestic 0.30 vs 0.15; city/port/gate tech path vs no-tech x0.4 path"
+    },
+    "explosiveRefiningBug": {
+      "techniqueId": 31,
+      "presentInStudiedBinary": true,
+      "originalBehavior": "fire bonus is keyed to the burned/defending side's Explosive Refining ownership rather than the fire-causing side",
+      "communityFixBehavior": "key bonus to the attacking/fire-causing force",
+      "fixAddresses": [
+        "005B1227",
+        "005B1239"
+      ],
+      "officialPatchStatus": "not listed as fixed in official PK Ver1.1/1.1.1 notes"
+    }
+  },
+  "unofficialPatchExamples": [
+    {
+      "change": "Fix Explosive Refining attacker/defender ownership bug",
+      "classification": "community/SIRE-style fix, not vanilla fidelity",
+      "addresses": [
+        "005B1227",
+        "005B1239"
+      ]
+    },
+    {
+      "change": "Make Arrow Shield apply to tactics",
+      "classification": "community patch, not original",
+      "address": "005AE01B"
+    },
+    {
+      "change": "Make Great Shield apply to tactics",
+      "classification": "community patch, not original",
+      "address": "005AE083"
+    }
+  ],
+  "recommendedProfiles": [
+    {
+      "id": "vanilla-pc-1.0",
+      "use": "Explicit unpatched Windows 1.0",
+      "caveat": "Only explicit retrospective deltas are overridden; unknown fields are not invented."
+    },
+    {
+      "id": "vanilla-pc-late",
+      "use": "Patched Vanilla behavior documented by late guides/Wiki",
+      "caveat": "Exact 1.1-vs-1.2 transition for each delta remains unknown."
+    },
+    {
+      "id": "pk-pc-reverse",
+      "use": "Fidelity to the studied PC-PK1.1 reverse-engineering target",
+      "caveat": "Preserve known original bugs such as the Explosive Refining ownership bug."
+    },
+    {
+      "id": "pk-pc-community-fixed",
+      "use": "Bug-fixed simulation",
+      "caveat": "Must be labeled non-fidelity and apply explicitly selected community fixes only."
+    }
+  ]
+}

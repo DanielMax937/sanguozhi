@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-33",
+  "target": "PC-PK1.1 blood-relation /3 deputy bonus opcode boundary",
+  "status": "audit-complete-pc-opcode-open",
+  "reverse": {
+    "helper": "00495AB0",
+    "helperBounds": [
+      "0x495AB0",
+      "0x495B90"
+    ],
+    "normalQuarter": {
+      "address": "00495B65",
+      "opcode": "C1 F8 02",
+      "operation": "sar eax,2",
+      "evidence": "pc-opcode-exact"
+    },
+    "loveHalf": {
+      "address": "00495B79",
+      "opcode": "D1 F8",
+      "operation": "sar eax,1",
+      "evidence": "pc-opcode-exact"
+    }
+  },
+  "bloodThird": {
+    "divisor": 3,
+    "evidence": "ps2-empirical-exact-cross-platform-high",
+    "pcOpcode": "open"
+  },
+  "spouseSworn": {
+    "divisor": 1,
+    "evidence": "pc-high-plus-ps2-exact",
+    "pcOpcode": "open"
+  },
+  "open": [
+    "00495AB0 full PC body",
+    "blood /3 PC instruction sequence",
+    "spouse/sworn full-share PC branch/opcode",
+    "relationship directionality",
+    "Vanilla/Wii equivalence"
+  ],
+  "sources": [
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/fudanglp/311resource",
+    "https://github.com/sjn4048/311MemoryResearch"
+  ]
+}

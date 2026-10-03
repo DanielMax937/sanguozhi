@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-35",
+  "target": "PC-PK1.1 defense-facility overlap winner and field-starvation handler boundary",
+  "status": "audit-complete-core-gaps-open",
+  "reverse": {
+    "defenseFacilitySelector": "0049D180",
+    "selectorBounds": [
+      "0x49D180",
+      "0x49D200"
+    ],
+    "perTurnFoodScheduler": "0059BF40",
+    "besiegedStarvedSPPopulationLoss": "00599AA0"
+  },
+  "resolved": {
+    "selectorReturnsSingleType": true,
+    "overlapEffectsStack": false,
+    "starvationSeparateFromFoodScheduler": true,
+    "function00599AA0IsFieldTroopStarvation": false,
+    "starvationHandlerFound": false
+  },
+  "fallback": {
+    "overlapWinner": "highest-tier-wins",
+    "overlapWinnerEvidence": "provisional-engine-rule",
+    "legacyRetentionPerTurn": 0.76,
+    "legacyRetentionEvidence": "provenance-unresolved-legacy-only"
+  },
+  "open": [
+    "0049D180 full body",
+    "overlap winner priority",
+    "field troop starvation/desertion handler address",
+    "starvation loss formula/RNG",
+    "combat vs transport differences",
+    "first starving turn vs continuing starvation",
+    "morale/person-stat influence",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/fudanglp/311resource"
+  ]
+}

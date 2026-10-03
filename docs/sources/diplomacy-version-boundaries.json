@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-2-exactness",
+  "target": "diplomacy formula version boundaries",
+  "status": "version-boundary-resolved/constants-still-open",
+  "vanilla": {
+    "1.0": {
+      "friendship": "pre-1.1 constants unknown",
+      "diplomacySuccess": "pre-1.2 constants unknown"
+    },
+    "1.1": {
+      "date": "2006-04-10",
+      "officialChanges": [
+        "friendship gain/loss balance"
+      ],
+      "friendship": "officially changed from 1.0; exact constants unknown",
+      "diplomacySuccess": "no explicit success-rate change in 1.1 notes"
+    },
+    "1.2": {
+      "date": "2006-05-01",
+      "officialChanges": [
+        "friendship gain/loss balance",
+        "strategy/diplomacy success rates"
+      ],
+      "friendship": "officially changed again",
+      "diplomacySuccess": "officially changed"
+    },
+    "1.3-plus": {
+      "versions": [
+        "1.3",
+        "1.3.1",
+        "1.3.2",
+        "1.3.3"
+      ],
+      "explicitDiplomacyChanges": false,
+      "evidence": "stable-by-public-changelog, not binary-identical"
+    }
+  },
+  "pk": {
+    "addsSuperDifficulty": true,
+    "superDifficultyEvidence": "contemporary 4Gamer PK review",
+    "patches": {
+      "1.1": "no explicit diplomacy/friendship change in public changelog",
+      "1.1.1": "no explicit diplomacy/friendship change in public changelog"
+    },
+    "formulaCorpus": {
+      "evidence": "empirical-high/historical-formula-corpus",
+      "difficultyMultipliers": {
+        "beginner": 1,
+        "advanced": 0.8,
+        "super": 0.7
+      },
+      "profile": "pk-pc-formula-corpus",
+      "exactBuild": "open"
+    },
+    "reverseSupport": {
+      "diplomacyActionPointCost": "005BD040",
+      "diplomacyOffice": {
+        "actionPointMultiplier": 0.5,
+        "amicabilityGoldMultiplier": 0.5,
+        "successRateMultiplier": 1,
+        "successRateEvidence": "no success bonus documented; not an explicit multiply-by-1 instruction"
+      }
+    }
+  },
+  "profiles": [
+    "vanilla-pc-1.0",
+    "vanilla-pc-1.1",
+    "vanilla-pc-1.2-plus",
+    "pk-pc-formula-corpus",
+    "pk-pc-reverse-support",
+    "console-separate-open"
+  ],
+  "safetyRules": [
+    "never label PK formula corpus as Vanilla 1.0/1.1 original",
+    "Vanilla compatibility reuse of PK formulas must set compatibilityAssumption=true",
+    "absence from public changelog does not prove binary identity",
+    "reverse-engineered PK helper addresses do not upgrade historical formula corpus to disassembly-confirmed"
+  ],
+  "open": [
+    "Vanilla 1.0 diplomacy constants",
+    "Vanilla 1.1 friendship constants",
+    "Vanilla 1.2 changed diplomacy constants",
+    "binary equivalence of Vanilla 1.2 through 1.3.3",
+    "exact PK build for formula corpus",
+    "formula overlap between late Vanilla and PK",
+    "console exact constants",
+    "original EXE entry points for historical diplomacy formulas"
+  ],
+  "sources": [
+    "https://www.gamecity.ne.jp/regist_c/user/san11/san11_update.htm",
+    "https://www.gamecity.ne.jp/regist_c/user/san11/san11_update02_history.htm",
+    "https://www.gamecity.ne.jp/regist_c/user/san11/pk/san11pk_update.htm",
+    "https://www.4gamer.net/review/sangokushi11pk/sangokushi11pk.shtml",
+    "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf",
+    "https://game.ali213.net/forum.php?action=printable&mod=viewthread&tid=1262010",
+    "https://www.ptt.cc/bbs/Koei/M.1217946021.A.1FA.html",
+    "https://zhidao.ali213.net/q/13047392.html"
+  ]
+}

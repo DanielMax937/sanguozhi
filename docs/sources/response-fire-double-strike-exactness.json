@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-17",
+  "target": "PC-PK1.1 response-fire / double-strike directionality",
+  "status": "audit-complete-response-fire-full-caller-open",
+  "pcAddressEvidence": {
+    "doubleStrikeSkillCheck": "00586EE8",
+    "indirectVsCrossbowSuppression": "00586E12",
+    "doubleStrikeProbability": "00586F0F",
+    "targetUnitTypeAtSuppression": 3,
+    "targetUnitTypeMeaning": "crossbow",
+    "probabilityPercent": 50,
+    "supportAttackExcluded": true,
+    "failedTacticFollowupNormalAttackEligible": true
+  },
+  "exact": {
+    "attackerDoubleStrikeDisabledOnIndirectAttackAgainstCrossbow": true,
+    "supportAttackCanDoubleStrike": false,
+    "failedTacticFollowupNormalAttackCanDoubleStrike": true
+  },
+  "documentedHigh": {
+    "responseFireCanTriggerDefenderDoubleStrike": true,
+    "doubleStrikeProbabilityPercent": 50,
+    "responseFireAndAttackerDoubleStrikeUseDifferentDirectionalGates": true
+  },
+  "interpretation": {
+    "suppressionRequiresTechnique9": "open",
+    "suppressionIsDedicatedResponseFireOpcode": "not-proven",
+    "responseFireChainDepthOnPc": "open"
+  },
+  "open": [
+    "00584DC8 full caller/body",
+    "exact unit-type and attack-type opcode around technique 9",
+    "whether 00586E12 explicitly checks technique 9",
+    "primary/collateral handling for arrow tactics",
+    "naval active profile",
+    "PC response-fire/double-strike recursion termination",
+    "Vanilla/PS2/Wii equivalence"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://game.ali213.net/thread-2168294-1-1.html",
+    "https://w.atwiki.jp/sangokushi11/pages/90.html",
+    "https://w.atwiki.jp/sangokushi11/pages/1584.html"
+  ]
+}

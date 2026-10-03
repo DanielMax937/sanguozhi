@@ -15,6 +15,8 @@
 
 - 近战普攻通常触发反击。
 - 间接攻击通常不受反击。
+
+- 技巧“应射”是这个规则的例外：应射弩兵遭受合法的箭类攻击时可自动反击，包括火矢等弩战法。它仍受正常射程、地形、异常状态和攻击类型限制；支援攻击不触发应射。完整边界见 `25-response-fire.md`。
 - 兵器不能普通攻击/反击。
 - 一齐攻击由多支相邻己军参与；发起者承担反击。
 - 一齐攻击精确伤害拆分仍需专项验证。
@@ -26,6 +28,58 @@
 - 战法适性门槛、气力、地形与成功率按兵科表执行。
 
 来源：https://w.atwiki.jp/sangokushi11/pages/91.html
+
+### 3.1 战法成功率中的高低差
+
+`[PC-PK中心][empirical-high; original function located]`
+
+SIRE 已定位原函数 `005AF850 TacticSuccessRate`。当前稳定结论：
+
+- 突刺、二段突、突击、突破、突进：攻击者相对目标地势越高越有利；
+- 熊手：方向相反，攻击者相对目标越低越有利；
+- 螺旋突、横扫、旋风、贯射、乱射等没有这层 elevation 修正；
+- 受异常状态时“战法100%成功”等更高优先级规则另行处理。
+
+常见基础成功率：
+
+```text
+突刺 70
+螺旋突 70
+二段突 60
+熊手 70
+横扫 70
+旋风 65
+弩火矢 75（另受目标地形类型修正）
+贯射 70
+乱射 65
+突击 70
+突破 65
+突进 60
+猛撞 70
+```
+
+适性常见追加：
+
+```text
+B +0
+A +5
+S +10
+```
+
+但 elevation 的**完整离散映射仍不能压缩成“每级固定±5”**：
+
+- 一级有利高差常见 +5；
+- 二级常见 +10；
+- 二段突/突进存在二级高差 +15 的稳定实测；
+- 枪/骑不利方向会扣减；
+- 熊手的负向下限与细分档仍待 `005AF850` 逐指令恢复。
+
+另一个关键实现点：高度判定使用部队**本次行动开始时的格子**，不是移动后发动战法的格子。详见 `01-map.md#6-高度与高低差`。
+
+来源：
+- https://dl.3dmgame.com/patch/26091.html
+- https://w.atwiki.jp/sangokushi11/pages/91.html
+- https://vincecarter0315.pixnet.net/blog/posts/14217116027
 
 ## 4. 最终战斗伤害：逆向公式
 
@@ -83,7 +137,7 @@ damage = INT(
 - 太鼓台：1.1
 - 会心：1.15
 - 克制：有利 1.15 / 不利 0.85；个别特殊克制 0.8
-- 熟练兵：对应兵科 1.1；精锐升级至 1.15
+- 对应兵科“锻炼”：伤害 ×1.10；对应“精锐”升级为 ×1.15，并覆盖1.10。熟练兵只负责气力上限100→120
 - 超级难度玩家方除火伤外：0.75
 
 来源（逆向研究）：https://game.ali213.net/thread-5983352-1-1.html
@@ -138,6 +192,8 @@ criticalBonusTurns = 1
 SIRE/逆向交叉：
 - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[火陷阱炸伤炸死].txt
 - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/修改记录by%20sjn4048.txt
+
+P0-4 专项证据矩阵、70/30 fallback 的证据边界、自然蔓延 negative evidence 与剩余原函数缺口，见 [39-fire-lifetime-spread-exactness.md](39-fire-lifetime-spread-exactness.md)。
 
 ## 7. 攻城与陷落
 
@@ -615,76 +671,226 @@ deathRate = A + B + C + D + E
 
 这使“战死率 2–5%”的旧粗略区间失效；后续应按具体死亡来源分别建模。
 
-## 14. 非骑兵来源的武将负伤 / 战死
+## 14. 非骑兵来源的武将负伤 / 战死（E16）
 
 `[PC-PK1.1][reverse-engineered]`
 
-### 14.1 不存在“普通击破统一伤亡率”的已知依据
+E16 的核心纠错是：**不存在已知的“所有普通攻击/战法在击破后统一再掷一次武将负伤/战死”的原版规则。**
 
-普通攻击、普通战法、设施攻击把部队兵力打到0后，按俘虏/逃走流程处理；不要额外添加全局武将负伤/战死 RNG。
+武将 casualty 必须按来源分流。
 
-已检查的 `函数[部队攻击].txt`、`函数[战法效果].txt` 不调用业火 casualty 函数 `00597350`、候选函数 `005971F0` 或战死处理 `004ACBE0`。原作可确认的武将伤亡必须按来源单独结算。
+| 来源 | 武将结果 |
+|---|---|
+| 普攻/一般战法/设施攻击导致部队壊灭 | 不额外添加通用 casualty roll |
+| 弩、井阑、舰船火矢；贯射；乱射 | 弩系狙伤 |
+| 猛者+成功位移战法 | 50%负伤 |
+| 业火种/业火球 | 专用战死+独立负伤 |
+| 骑兵突击/突进 | 第13节专用战死 |
+| 单挑 | 单挑专用结算 |
 
-### 14.2 业火种 / 业火球
+完整证据矩阵见 `31-non-cavalry-casualty-sources.md`。
 
-只有业火种(ID16)和业火球(ID15)在火陷阱伤害后调用 `00597350`。
+### 14.1 共用候选：005971F0
 
-先通过 `005971F0 DesignateInjuredPersonnel` 指定一名合法候选；护卫/强运在这一层过滤。
+`005971F0 DesignateInjuredPersonnel` 从目标部队指定一名合法武将，并处理护卫/强运等保护。
+
+因此下文的“6%”“2～7%”等，都是**候选已经被指定之后的 conditional chance**；三人部队中某一名武将的最终 unconditional chance 还依赖尚未恢复的多候选 selector。
+
+### 14.2 弩兵狙伤：005974C0
+
+可触发：
+
+```text
+弩火矢 / 井阑火矢 / 舰船火矢
+贯射
+乱射
+```
+
+原函数：
+
+```text
+0059750D  005971F0 指定候选
+0059752A  00596480 统武比较档
+00597538  test critical
+0059753A  0F 95 C1 = SETNE CL
+00597541  合成最终概率
+00597546  ProbabilityCheck
+005975A7  005963E0 负伤处理
+```
+
+公式：
 
 ```ts
-M = max(target.leadership, target.strength, target.intelligence)
+sniperChance =
+  tacticBase
+  + statComparisonTier
+  + personality
+  + criticalBonus
+  - 1
+```
+
+其中：
+
+```text
+tacticBase：
+三种火矢0 / 贯射1 / 乱射2
+
+statComparisonTier：
+-2 / -1 / 0 / +1
+
+personality：
+小心0 / 冷静1 / 刚胆2 / 莽撞3
+
+criticalBonus：
+普通0 / 会心1
+```
+
+`00596480` 比较攻击主将与候选目标各自 `max(统率,武力)`。原 SIRE 帖只锁定四个返回档；现代复核一致给阈值为：
+
+```text
+差 <=0 -> -2
+1～6   -> -1
+7～12  -> 0
+>12    -> +1
+```
+
+阈值当前标 `secondary-corroborated`，等待 `00596480` 原函数体恢复。
+
+理论峰值：
+
+```text
+乱射2 + 优势1 + 莽撞3 + 会心1 -1 = 6%
+```
+
+这条路径**只负伤，不战死**。
+
+特别纠错：旧文档说“火矢不进入业火 casualty”是对的，但不能推成“火矢绝不伤将”。箭类火矢不会调用 `00597350`，却会调用这条弩系狙伤路径。
+
+### 14.3 业火种 / 业火球：00597350
+
+只有：
+
+```text
+ID16 业火种
+ID15 业火球
+```
+
+进入 `00597350`。
+
+能力保护：
+
+```ts
+M = max(统率,武力,智力)
 
 abilityProtection =
   M <= 70 ? 0 :
   M <= 80 ? 1 :
   M <= 90 ? 2 : 3
+```
 
-personality =
-  timid ? 0 :
-  calm ? 1 :
-  bold ? 2 : 3 // reckless
+性格：
+
+```text
+小心0 / 冷静1 / 刚胆2 / 莽撞3
 ```
 
 战死：
 
 ```ts
 if (deathMode !== "none") {
-  const baseDeath = deathMode === "high" ? 4 : 2
-  deathChance = max(0, baseDeath + personality - abilityProtection)
-  if (chance(deathChance)) battleDeath(candidate)
+  base = deathMode === "high" ? 4 : 2
+  deathChance =
+    max(0, base + personality - abilityProtection)
 }
 ```
 
-随后会再次选候选并独立判负伤：
+负伤会重新调用 `005971F0`，独立计算：
 
 ```ts
-injuryChance = max(0, 2 + personality - abilityProtection)
-if (chance(injuryChance)) applyInjury(candidate)
+injuryChance =
+  max(0, 2 + personality - abilityProtection)
 ```
+
+无战死只跳过 death 阶段，**不会关闭业火负伤**。
+
+高统/武/智是保护项，因为原汇编明确是：
+
+```asm
+call 00596380
+sub  esi,eax
+```
+
+不是网上转载的加号。
+
+具体伤病等级由 `005963E0` 处理，仍 open。
+
+### 14.4 猛者
+
+原地址：
+
+```text
+0059781A 猛者(51)
+00597725 概率50
+```
+
+稳定规则：
+
+```ts
+if (
+  hasMightyWarrior
+  && tacticSuccessfullyMovedTarget
+  && Chance(50)
+) {
+  injureEnemyOfficer()
+}
+```
+
+候选和伤病等级原 caller 尚未完整展开。
+
+### 14.5 普通火焰与火陷阱边界
+
+```text
+普通火计 / 着火格：
+  兵力火伤
+  无通用武将 casualty
+
+普通火种/火焰种/火球/火焰球：
+  兵力/耐久伤害
+  无 00597350
+
+火船：
+  火伤 + 25%混乱
+  无 00597350
+
+业火种：
+  火伤 + 50%混乱 + 00597350
+
+业火球：
+  火伤 + 00597350
+```
+
+弩/井阑/舰船火矢的箭击本身另可触发狙伤，不要把“箭击狙伤”与“点燃后的火焰伤害”合并。
+
+### 14.6 普通击破不添加自拟统一伤亡
+
+公开 PC-PK 逆向中，已知伤亡入口都是专门来源；没有发现普通攻击、一般战法、设施伤害或部队兵力归零后共用的 casualty finalizer。
 
 因此：
 
-- 普通战死模式并不是所有人固定2%；最终 conditional death chance 为0～5%。
-- 高战死模式为1～7%上下，取决于性格和能力。
-- 无战死只关闭战死阶段，不关闭炸伤。
-- 高统/武/智会**降低**概率，因为汇编是 `sub personality, abilityProtection`；网上流传“能力越高越容易炸死”的加号公式与汇编相反。
-- 一次爆炸的战死与负伤会重新选候选，因此理论上可死一人后再伤另一人。
+```ts
+resolveOrdinaryTroopDestruction() {
+  resolveCaptureOrEscape()
+  // no generic injury/death roll
+}
+```
 
-伤病成功后的具体等级由 `005963E0` 决定，公开文本尚未展开。
+旧“普通击破约15%负伤、2～5%战死”不再作为 engine fallback。
 
-逆向来源：
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[火陷阱炸伤炸死].txt
-- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+### 14.7 剩余 exactness
 
-### 14.3 其他明确来源
-
-- 猛者：推动敌军的战法成功后，50%概率造成敌将负伤。
-- 骑兵突击/突进：使用第13节专用战死公式，不和业火式混用。
-- 单挑：使用 `10-duel.md` 的专用负伤/战死结算。
-- 普通火计、火矢、普通火种/火球、格子持续火伤：没有证据进入 `00597350`，只结算兵力/耐久等火伤。
-- 火船：25%混乱，但不进入业火炸伤/炸死分支。
-
-来源：
-- https://www.gamersky.com/handbook/200603/21610.shtml
-- https://w.atwiki.jp/sangokushi11/pages/13.html
+- `005971F0` 多名合法候选的精确选择；
+- `005963E0` 轻伤/重伤/濒危的具体分布；
+- `00596480` 四档阈值的原指令确认；
+- 猛者目标选择与伤病等级；
+- Vanilla / PS2 / Wii 逐项等价性。
 

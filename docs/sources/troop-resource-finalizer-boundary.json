@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-32",
+  "target": "PC-PK1.1 troop resource commit/return finalizer boundary",
+  "status": "audit-complete-finalizers-open",
+  "resolved": {
+    "buildingResourcePrimitives": [
+      "004AE2A0",
+      "004AE300",
+      "004AE3C0",
+      "004AE430"
+    ],
+    "troopResourcePrimitives": [
+      "004AE4A0",
+      "004AE510",
+      "004AE570"
+    ],
+    "resourcePrimitivesAreFinalizers": false,
+    "draftFunctionsSeparateFromCommit": true,
+    "commitAndReturnAreSeparateTransactionLayers": true
+  },
+  "open": [
+    "battle sortie commit finalizer address/body",
+    "transport sortie commit finalizer address/body",
+    "source deduction vs troop creation exact order",
+    "building resource mutation exact call order",
+    "equipment writeback order",
+    "commit rollback behavior",
+    "enter-building/disband return finalizer",
+    "regular equipment return quantity",
+    "wounded/equipment return order",
+    "multi-resource overflow order",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/sjn4048/311MemoryResearch"
+  ]
+}

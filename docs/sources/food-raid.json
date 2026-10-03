@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "audit": "E9",
+  "target": "PC-PK1.1",
+  "techniqueId": 1,
+  "name": "兵粮袭击",
+  "reverseEvidence": {
+    "helper": "005ADB20",
+    "techIdAddress": "005ADB55",
+    "troopTargetOnly": true,
+    "normalAttackPath": true,
+    "tacticAttackPath": true,
+    "counterattackSkipped": true,
+    "exactRngBodyRecovered": false
+  },
+  "highConfidenceModel": {
+    "formula": "min(attackerTroops/2, attackerAttack*R)",
+    "rRange": [
+      1,
+      2
+    ],
+    "attackField": "current troop Attack panel",
+    "symmetricTransferUnderNormalCapacity": true
+  },
+  "compatibilityFallback": {
+    "evidence": "compatibility-reconstruction",
+    "randomIntegerInclusive": [
+      10,
+      20
+    ],
+    "rawFormula": "floor(attackerAttack*k/10)",
+    "capFormula": "floor(attackerTroops/2)",
+    "safeTransferFormula": "min(rawRaid, troopCap, targetFood, attackerFoodLimit-attackerFood)"
+  },
+  "empirical": {
+    "doubleStrikeCanTriggerTwice": true
+  },
+  "open": [
+    "005ADB20 full disassembly",
+    "original RNG granularity and distribution",
+    "target-food-shortage behavior",
+    "attacker-food-capacity behavior",
+    "zero-damage/shielded attack behavior",
+    "support attack",
+    "spear unit while naval profile is active",
+    "Vanilla/console exact equivalence"
+  ]
+}

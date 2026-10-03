@@ -1,6 +1,6 @@
 # 外交关系与外交指令
 
-> 外交是已确认存在**版本平衡差异**的系统：Vanilla 1.1 调整势力友好增减，Vanilla 1.2 又直接调整“计略及外交成功率”。公式必须按 `rulesetVersion` 选择，不能只按 Vanilla / PK 二分。
+> 外交是已确认存在**补丁级版本平衡差异**的系统。P0-2 已把边界收紧到 Vanilla 1.0 / 1.1 / 1.2-plus / PK formula corpus；完整证据见 `37-diplomacy-version-boundaries.md`。
 
 ## 1. 外交状态
 
@@ -14,7 +14,7 @@
 
 ## 2. 亲善
 
-`[PC-PK1.0/1.1][empirical-high]`
+`[PK-era formula corpus][empirical-high; exact build open]`
 
 玩家逆向公式：
 
@@ -101,44 +101,112 @@ c：
 
 拥立汉帝时汉帝加成 +10。c=20（亲爱/义兄弟/配偶）、0（嫌恶）、10（其他）。
 
-### 版本注意
+### 版本注意（P0-2）
 
-`[versioned]`
+`[version-boundary-resolved / exact constants still open]`
 
-当前完整公式族默认绑定 `pk-1.0-1.1-late-empirical`。
+不要把现有完整公式族无版本地复用到所有 PC 版本。
 
-版本证据：
+官方补丁边界：
 
-- KOEI 官方 Vanilla 1.1：调整势力间友好增减平衡；
-- KOEI/同期 Vanilla 1.2 补丁：再次调整友好增减，并明确调整“计略及外交成功率”；
-- Vanilla 1.3 未发现再次调整外交成功率的公开更新项；
-- PK 1.1/1.1.1 官方更新项未列外交成功率调整；
-- 完整公式资料含 `超级=0.7` 难度系数，而超级难度属于 PK。
-
-因此引擎使用四个 profile：
-
-```ts
-"vanilla-1.0-pre-balance"
-"vanilla-1.1-friendship-rebalanced"
-"vanilla-1.2-plus-post-success-rebalance"
-"pk-1.0-1.1-late-empirical"
+```text
+Vanilla 1.0
+↓
+1.1（2006-04-10）
+  明确调整：势力间友好增减平衡
+↓
+1.2（2006-05-01）
+  再次调整：势力间友好增减
+  明确调整：计略・外交成功率
+↓
+1.3 / 1.3.1 / 1.3.2 / 1.3.3
+  公开changelog未再列外交专项调整
 ```
 
-前三个 Vanilla profile 尚无逐版本完整常量表。为了让模拟运行，可 fallback 到 PK 后期公式，但必须标记 `compatibilityAssumption=true`；不得声称 Vanilla 1.0/1.1/1.2 与 PK 完全一致。
+因此：
 
-PK“外交府”只降低外交行动力与亲善费用，不加入外交成功率乘数。
+```text
+Vanilla 1.0 != 1.1 != 1.2
+```
 
-版本边界来源：
+至少在官方声明层已经成立。
+
+1.2～1.3.3 可标：
+
+```text
+stable-by-public-changelog
+```
+
+但不能标：
+
+```text
+binary-identical
+```
+
+因为后续版本仍含“细微修正及调整”，尚无逐EXE diff。
+
+PK 的“超级”是新增难度，而本页完整公式族明确存在：
+
+```text
+t = 1.0 / 0.8 / 0.7
+初级 / 上级 / 超级
+```
+
+所以这组完整公式的正确证据标签是：
+
+```text
+pk-era-formula-corpus
+```
+
+不能拿“去掉0.7”就冒充 Vanilla 原公式。
+
+当前 profile：
+
+```text
+vanilla-pc-1.0
+vanilla-pc-1.1
+vanilla-pc-1.2-plus
+pk-pc-formula-corpus
+pk-pc-reverse-support
+console-separate-open
+```
+
+Vanilla 为了模拟闭环若临时复用 PK 公式，必须输出：
+
+```text
+compatibilityAssumption=true
+```
+
+现有 PK 公式 corpus 的 exact build（PK1.0 / 1.1 / 1.1.1）仍 open。官方 PK1.1/1.1.1 changelog 没有列外交成功率或友好度专项变化，只能说明：
+
+```text
+no-explicit-diplomacy-change-in-public-changelog
+```
+
+不能证明二进制完全一致。
+
+PK 外交府继续只确认：
+
+- `005BD040 GetDiplomacyActionPointCost`；
+- 执行城市有外交府时外交 AP 减半；
+- 亲善所需金减半；
+- 没有文档证据给同盟/停战/交换/劝降成功率额外 multiplier。
+
+详细版本矩阵：
+- `37-diplomacy-version-boundaries.md`
+- `../sources/diplomacy-version-boundaries.json`
+
+版本来源：
 - KOEI Vanilla Ver.1.1：https://www.gamecity.ne.jp/regist_c/user/san11/san11_update.htm
-- Vanilla Ver.1.2：https://down.gamersky.com/pc/200605/4524.shtml
-- Vanilla 1.2/1.3 整理：https://forum.gamer.com.tw/C.php?bsn=6331&snA=5789
+- KOEI Vanilla 1.2～1.3.3：https://www.gamecity.ne.jp/regist_c/user/san11/san11_update02_history.htm
 - KOEI PK Ver.1.1/1.1.1：https://www.gamecity.ne.jp/regist_c/user/san11/pk/san11pk_update.htm
-- PK 外交府：https://w.atwiki.jp/sangokushi11/pages/74.html
-- PK 外交府中文攻略：https://www.gamersky.com/handbook/200609/33180.shtml
+- 4Gamer PK（超级新增）：https://www.4gamer.net/review/sangokushi11pk/sangokushi11pk.shtml
+- PK 外交府手册：https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
 
 公式来源：
+- https://game.ali213.net/forum.php?action=printable&mod=viewthread&tid=1262010
+- https://www.ptt.cc/bbs/Koei/M.1217946021.A.1FA.html
 - https://zhidao.ali213.net/q/13047392.html
-- https://zhidao.baidu.com/question/693845718520080364/answer/2870151990.html
 
 
 ## 7. 论客

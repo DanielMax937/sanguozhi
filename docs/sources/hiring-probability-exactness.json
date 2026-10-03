@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-1-exactness",
+  "target": "original PC-PK1.1 ordinary hiring probability",
+  "status": "narrowed-still-open",
+  "outerControlFlow": {
+    "function": "004AFD60",
+    "forcedGate": "004AF7D0",
+    "successRate": "005C4F80",
+    "normalDeterministic": "005BA4C0",
+    "nonzeroRuntimeProbability": "004721D0"
+  },
+  "successRate": {
+    "function": "005C4F80",
+    "name": "GetHiringSuccessRate",
+    "calls": "005BA410",
+    "completeBodyPubliclyRecovered": false
+  },
+  "normalMode": {
+    "thirdParameter": 0,
+    "externalGiriFactor10": 10,
+    "finalCheck": "deterministicValue < successRate",
+    "opcode": "CMP EAX,ECX; SETL DL",
+    "deterministicFunction": "005BA4C0",
+    "deterministicInputs": [
+      "dateKey",
+      "targetPersonId",
+      "executorPersonId",
+      "targetLoyalty",
+      "executorCharm",
+      "executorTargetCompatibilityDifference",
+      0
+    ]
+  },
+  "nonzeroMode": {
+    "factorFormula": "min(10,15-2*giriInternal)",
+    "adjustedProbability": "min(100,trunc(successRate*factor10/10))",
+    "finalCheck": "004721D0 runtime probability"
+  },
+  "dateKey": {
+    "helper": "005B9C00",
+    "formula": "day*7 + month*5 + year*3",
+    "remoteHiringUsesOrderDate": true
+  },
+  "hardGate": {
+    "function": "004AF7D0",
+    "executionBeforeSuccessRate": true,
+    "completeBodyPubliclyRecovered": false,
+    "documentedConcerns": [
+      "hate",
+      "sworn siblings",
+      "affection",
+      "spouse",
+      "forbidden service period"
+    ],
+    "loyaltyPlusGiri96": "empirical-high; internal encoding still open"
+  },
+  "rejectedModernModFormula": {
+    "label": "SIRE-modern-mod-system",
+    "configurableBase60": true,
+    "reason": "documented as new loyalty/recruitment willingness system; not original 005C4F80",
+    "forbiddenOriginalConstants": [
+      "base=60",
+      "loyalty coefficient=-100%",
+      "compatibility coefficient=-50%",
+      "executor charm coefficient=+20%",
+      "first service year=-20",
+      "random span=6"
+    ]
+  },
+  "open": [
+    "004AF7D0 complete body",
+    "005C4F80 complete formula",
+    "005BA410",
+    "005BA4C0 deterministic generator",
+    "Vanilla/console equivalence"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才01-计算登用是否成功.txt",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才03-执行登用.txt",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才04-执行登用完成.txt",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-人才08-探索发现人才并登用.txt",
+    "https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md",
+    "https://c.tieba.baidu.com/p/9706421271?fr=good",
+    "https://sg.games98.com/6377.html"
+  ]
+}

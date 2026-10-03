@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-13-exactness",
+  "target": "field supply and transport-arrival finalizers",
+  "status": {
+    "audit": "complete",
+    "transportArrivalContainingFunction": "resolved",
+    "transportArrivalMerit": "pc-exact",
+    "transportArrivalOverflow": "empirical-high",
+    "manualAutoSupplySeparation": "empirical-high",
+    "supplyCapacityEquipment": "empirical-high",
+    "moraleWeightedCore": "high",
+    "moraleRounding": "open",
+    "wildSupplyFinalizer": "open"
+  },
+  "transportArrival": {
+    "containingFunction": {
+      "start": "004BF1F0",
+      "nextFunction": "004BF6F0",
+      "rewardAddress": "004BF522",
+      "note": "function contains transport-arrival +200 merit path; complete body is not public"
+    },
+    "merit": 200,
+    "destinationCapacityApplies": true,
+    "overflow": {
+      "behavior": "discard with warning",
+      "evidence": "PC-empirical-high"
+    },
+    "leftoverStaysInTransport": false,
+    "fieldWriteOrder": "open",
+    "equipmentLoop": "open"
+  },
+  "wildSupply": {
+    "modes": {
+      "manual": {
+        "adjacentCommand": true,
+        "slider": true,
+        "playerChoosesAmounts": true
+      },
+      "automatic": {
+        "targetAsMoveDestination": true,
+        "fillTowardTargetCaps": true
+      }
+    },
+    "targetTransportAllowed": false,
+    "targetTransportEvidence": "PC-empirical-high",
+    "targetCaps": {
+      "troops": "004957B0",
+      "money": "004957F0",
+      "food": "00495810"
+    },
+    "quantityEquipmentIds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "quantityEquipmentMustMatchAddedTroops": true,
+    "untransferredSupplierResourcesRemainWithSupplier": true,
+    "finalizer": "open"
+  },
+  "moraleMerge": {
+    "formula": "(oldTroops*oldMorale + addedTroops*incomingMorale)/(oldTroops+addedTroops)",
+    "coreEvidence": "wiki-example + original building merge helper",
+    "example": {
+      "oldTroops": 2500,
+      "oldMorale": 0,
+      "addedTroops": 2500,
+      "incomingMorale": 100,
+      "result": 50
+    },
+    "buildingHelper": "004B9840",
+    "buildingHelperName": "GetBuildingCombinedStrength / GetFacilityCombinedStrength",
+    "troopMergeHelper": "open",
+    "nonDivisibleRounding": "open",
+    "compatibilityRounding": "floor"
+  },
+  "rewards": {
+    "transportArrivalMerit": 200,
+    "fieldSupplyMerit": 100,
+    "fieldSupplyLeaderLeadershipExp": 2,
+    "fieldSupplyRewardEvidence": "wiki/empirical-high; PC opcode open"
+  },
+  "transportLoss": {
+    "starvationOrTerrainDestruction": "cargo disappears",
+    "enemyDestruction": "cargo may be looted",
+    "exactLootFormula": "open"
+  },
+  "actionPoint": {
+    "helper": "005DB840",
+    "helperRole": "GetExpeditionActionPointCost",
+    "completeBody": "open"
+  },
+  "open": [
+    "sub_4BF1F0 complete body",
+    "transport-arrival resource field-write order",
+    "transport-arrival 12-equipment loop and piece equipment handling",
+    "transport-arrival overflow discard/warning opcodes",
+    "manual field-supply finalizer",
+    "automatic field-supply finalizer/core sharing",
+    "target-transport hard-gate PC address",
+    "troop-to-troop morale merge helper",
+    "non-divisible morale exact rounding",
+    "field-supply +100 merit/+2 leadership-exp PC addresses",
+    "automatic supply resource priority",
+    "transport death/loot finalizer and loot ratio",
+    "Vanilla/PS2/Wii differences"
+  ]
+}

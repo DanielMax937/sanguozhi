@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-20",
+  "target": "PC-PK1.1 forced captive release ordering and shrink direction",
+  "status": "audit-complete-priority-open",
+  "callChain": {
+    "orderingCall": "0059094F -> 004AA200",
+    "comparator": "0058C320",
+    "shrinkCall": "00590964 -> 004A8E10",
+    "releaseCountRegister": "ESI",
+    "loopCondition": "repeat shrink while listCount > releaseCount"
+  },
+  "exact": {
+    "comparatorPassedAsFunctionPointer": true,
+    "orderingOccursBeforeShrinkLoop": true,
+    "shrinkReceivesOnlyListThisPointer": true,
+    "shrinkReceivesExplicitPersonOrIndex": false,
+    "shrinkRepeatedUntilExactReleaseCount": true,
+    "arbitraryBusinessReselectionEachIteration": false
+  },
+  "functionBounds": {
+    "comparator": [
+      "0x58C320",
+      "0x58C3D0"
+    ],
+    "shrinkHelper": [
+      "0x4A8E10",
+      "0x4A8EA0"
+    ],
+    "genericOrdering": [
+      "0x4AA200",
+      "0x4AA350"
+    ]
+  },
+  "open": [
+    "0058C320 comparison key",
+    "0058C320 comparison orientation",
+    "004A8E10 removes front or back",
+    "004AA200 full parameter semantics",
+    "tie-break for equal comparator keys",
+    "0058D1D0/0058D430 side effects",
+    "forced release Forbidden/technique-point behavior",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "compatibilityFallback": {
+    "ordering": "stable-person-id-order",
+    "evidence": "provisional-engine-rule"
+  },
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/fudanglp/311resource"
+  ]
+}

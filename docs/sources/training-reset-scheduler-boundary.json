@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-34",
+  "target": "PC-PK1.1 training reset and morale top-scheduler xref boundary",
+  "status": "audit-complete-xrefs-open",
+  "reverse": {
+    "setSPTrainingStatus": [
+      "0x4AD080",
+      "0x4AD160"
+    ],
+    "setCityTrainingStatus": [
+      "0x47B710",
+      "0x47B730"
+    ],
+    "moraleLocalHandler": [
+      "0x59A230",
+      "0x59A4B0"
+    ]
+  },
+  "resolved": {
+    "trainingOncePerTurnBehavior": true,
+    "trainingResetBehavior": true,
+    "trainingResetExactCaller": false,
+    "moraleLocalHandlerBoundary": true,
+    "moraleTopSchedulerExactCaller": false,
+    "addressAdjacencyIsNotXrefEvidence": true,
+    "function00599CF0IsTrainingResetCaller": false
+  },
+  "open": [
+    "city training reset caller/xref",
+    "port/gate training reset caller/xref",
+    "shared vs separate reset loop",
+    "0059A230 caller/xref",
+    "exact position in per-turn scheduler",
+    "multiple music-platform selection body",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/fudanglp/311resource"
+  ]
+}

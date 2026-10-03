@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-38",
+  "target": "PC-PK1.1 technique-research completion merit writer and participant distribution",
+  "status": "audit-complete-writer-open",
+  "reverse": {
+    "perTurnCounterFunction": "00599CF0",
+    "researchTimeLeftOffset": "0xA0",
+    "researchingTechOffset": "0x9C",
+    "setResearchTimeLeft": "004815E0",
+    "abilityResearchCompletionHandler": "005CE600",
+    "researchCommandAnchor": "005D8F68"
+  },
+  "resolved": {
+    "techResearchBranchOnlyDecrements": true,
+    "techCompletionCallInsideCountdownBranch": false,
+    "abilityResearchCompletionInlineAfterZero": true,
+    "researchMissionDependsOnForceResearchTimeLeft": true,
+    "researchCommandAnchorIsCompletionWriter": false
+  },
+  "open": [
+    "technique research completion writer address",
+    "technology unlock writer",
+    "completion merit constants/formula",
+    "participant list storage/traversal",
+    "per-participant merit allocation",
+    "completion message/write ordering",
+    "version/platform mapping of merit tables",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/sean2077/311SireCustomizedPackageDev"
+  ]
+}

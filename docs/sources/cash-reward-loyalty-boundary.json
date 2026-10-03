@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-21",
+  "target": "PC-PK1.1 cash reward loyalty gain caller/RNG boundary",
+  "status": "audit-complete-delta-formula-open",
+  "reverse": {
+    "rewardExecutionContainingFunction": [
+      "0x5B5D60",
+      "0x5B5FA0"
+    ],
+    "rewardCostPathInsideFunction": "005B5F87",
+    "deductCorpActionPoints": "005B9340",
+    "setLoyalty": "0048A770",
+    "modifyPersonLoyalty": "004A6CF0",
+    "loyaltyField": "0xAC",
+    "loyaltyStorage": "byte"
+  },
+  "resolved": {
+    "trueLoyaltyRange": "0..255",
+    "displayCap": 100,
+    "trueLoyaltyCanExceedDisplayCap": true,
+    "rewardMustNotClampToDisplay100BeforeFutureEffects": true,
+    "rewardContainingFunctionResolved": true,
+    "loyaltyWritePrimitivesResolved": true
+  },
+  "empiricalConstraints": {
+    "observedGains": [
+      5,
+      8,
+      9
+    ],
+    "resultVariesWithRng": true,
+    "rulerCharmAffectsGain": true,
+    "fixedGainModelRejected": true,
+    "modernBase11ModelRejected": true
+  },
+  "open": [
+    "005B5D60 full body",
+    "exact xref from reward execution to loyalty primitive",
+    "reward delta calculator",
+    "reward RNG helper and distribution",
+    "ruler charm contribution",
+    "target giri/relationship contribution",
+    "delta clamp/overflow order",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/fudanglp/311resource"
+  ]
+}

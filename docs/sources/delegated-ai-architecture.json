@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "audit": "E20",
+  "target": "PC-PK1.1 delegated/COM AI decision architecture",
+  "globalUtilityTable": {
+    "supported": false,
+    "conclusion": "recovered AI is procedural/modular with hard gates, local probability rolls and local selectors",
+    "removedFallbackExamples": [
+      "patrol=100",
+      "recruit=95",
+      "build=90",
+      "transport=70"
+    ]
+  },
+  "tacticalCore": {
+    "sharedExecutor": "005AD980",
+    "playerDelegatedPath": [
+      "005746A0",
+      "00572890",
+      "005AD980"
+    ],
+    "aiCorpsPath": [
+      "005EC370",
+      "005DEF90",
+      "005DDCF0",
+      "005AD980"
+    ],
+    "evidence": "reverse-engineered"
+  },
+  "sortie": {
+    "function": "005EF440",
+    "inputsConfirmed": [
+      "difficulty",
+      "ruler ambition",
+      "StrategicTendency",
+      "city/target AI state",
+      "public order",
+      "troops",
+      "food",
+      "equipment",
+      "existing missions/units",
+      "travel time"
+    ],
+    "strategicTendency": {
+      "0": "national-unification",
+      "1": "regional-unification",
+      "2": "province-unification",
+      "3": "status-quo"
+    },
+    "probability": {
+      "min": 5,
+      "max": 100,
+      "helper": "004721D0"
+    },
+    "minimumPlannedTroops": 5000,
+    "publicOrderThresholdsObserved": [
+      80,
+      90
+    ],
+    "publicOrderThresholdContext": "open",
+    "food": {
+      "helper": "005F6470",
+      "horizon": "travelTime*5+15",
+      "carryCap": 50000,
+      "insufficientFood": "abort sortie"
+    },
+    "gold": {
+      "normalUnit": [
+        {
+          "condition": "cityGold>=10000",
+          "probability": 75,
+          "amount": "(15+GetRandomX(6))*100",
+          "range": [
+            1500,
+            2000
+          ]
+        },
+        {
+          "condition": "2000<=cityGold<10000",
+          "probability": 50,
+          "amount": 1000
+        }
+      ],
+      "siegeUnit": "skips normal carry-gold branch",
+      "portGate": "city gold must cover officer salary sum * 8"
+    },
+    "siegeSelection": {
+      "ram": 90,
+      "towerWoodBeastCatapult": 80,
+      "otherBranch": "context/personality based then clamp 30..70"
+    }
+  },
+  "commanderSelector": {
+    "function": "005F6CF0",
+    "aptitudeInput": "aptitude + force-tech correction + 7",
+    "attackScore": "floor(Q*WAR*equipmentAttack/1000)*2000 + commonOffset",
+    "defenseScore": "floor(Q*LDR*equipmentDefense/1000)*1000 + commonOffset",
+    "restraint": {
+      "advantage": 1.3,
+      "disadvantage": 0.7
+    },
+    "matchingSkillBonus": "skillLevel*1000 added to attack and defense",
+    "commonOffsetMeaning": "open",
+    "evidence": "reverse-engineered"
+  },
+  "forceStrength": {
+    "baseFormula": "ceil(totalGarrisonTroops/10000)*10",
+    "rulerBonuses": [
+      {
+        "bonus": 2000,
+        "rulers": [
+          "Cao Cao",
+          "Sun Ce",
+          "Cao Rui",
+          "Cao Pi",
+          "Liu Bei"
+        ]
+      },
+      {
+        "bonus": 1900,
+        "rulers": [
+          "Sun Jian",
+          "Sun Quan"
+        ]
+      },
+      {
+        "bonus": 1800,
+        "rulers": [
+          "Zhuge Liang",
+          "Zhou Yu",
+          "Cao Zhang",
+          "Sima Yi"
+        ]
+      },
+      {
+        "bonus": 1700,
+        "rulers": [
+          "Dong Zhuo",
+          "Lu Bu"
+        ]
+      },
+      {
+        "bonus": 1600,
+        "rulers": [
+          "Zhang Jiao",
+          "Yuan Shao"
+        ]
+      },
+      {
+        "bonus": 1500,
+        "rulers": [
+          "Ma Chao",
+          "Gongsun Zan"
+        ]
+      },
+      {
+        "bonus": 1400,
+        "rulers": [
+          "Liu Chen",
+          "Liu Feng"
+        ]
+      },
+      {
+        "bonus": 1300,
+        "rulers": [
+          "Sun Deng",
+          "Liu Shan"
+        ]
+      },
+      {
+        "bonus": 1200,
+        "rulers": [
+          "Yuan Shu"
+        ]
+      },
+      {
+        "bonus": 1100,
+        "rulers": [
+          "Zhong Hui",
+          "Deng Ai",
+          "Guan Yu",
+          "Lu Xun"
+        ]
+      },
+      {
+        "bonus": 1000,
+        "rulers": [
+          "Sima Shi",
+          "Sima Zhao",
+          "Sima Yan"
+        ]
+      }
+    ],
+    "additionalWeakRulerBranches": "exist; exact business meaning partly open"
+  },
+  "cityDelegation": {
+    "reverseSchedulerStatus": "open",
+    "empiricalAnchors": {
+      "ordinaryMarketsTarget": 3,
+      "ordinaryFarmsTarget": 3,
+      "publicOrder": "generally >=80, around 90",
+      "equipmentWhenDeemphasized": 15000,
+      "troopsWhenDeemphasized": 30000,
+      "retainedTroopsWhenTransporting": 20000,
+      "loyaltyPraiseTarget": "around 96",
+      "frontwardTransfers": true
+    },
+    "evidence": "empirical-high"
+  },
+  "actionPower": {
+    "corpsMutation": "004A1820",
+    "corpsAction": "005B9340",
+    "normalCommandAddresses": {
+      "patrol": "005CBF95",
+      "domesticBuild": "005BC4C1",
+      "recruit": "005C3CAB",
+      "produce": "005C67B3",
+      "techniqueResearch": "005D8F68"
+    },
+    "rule": "delegated AI must respect normal AP/resource legality; exact direct caller reuse per city action is partly open"
+  },
+  "removedFallbacks": [
+    "single global action utility weight table",
+    "defensive/standard/aggressive 1.5/1.2/1.0 troop-ratio sortie thresholds",
+    "difficulty never affects AI decisions"
+  ],
+  "open": [
+    "complete domestic city scheduler",
+    "remaining unnamed locals in 005EF440 raw sortie probability",
+    "business meaning of 80/90 public-order threshold context flag",
+    "complete transport target/amount function",
+    "exact internal thresholds for emphasize/normal/deemphasize/forbid policies",
+    "all weak-ruler force-strength branches",
+    "Vanilla/console constants and UI differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI出兵策略].txt",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI势力强度设定].txt",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI行动部队].txt",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/AI专题/函数[AI选择主将].txt",
+    "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/修改记录by%20sjn4048.txt",
+    "https://w.atwiki.jp/sangokushi11/pages/74.html"
+  ]
+}

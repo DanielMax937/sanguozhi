@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-9-exactness",
+  "target": "sortie commit and troop return resource transactions",
+  "status": {
+    "audit": "complete",
+    "draftFunctionBoundaries": "resolved",
+    "battleResourceCaps": "resolved",
+    "transportBasicCaps": "resolved",
+    "transportEquipment100000": "reverse-history-high",
+    "resourceMutationPrimitives": "resolved",
+    "commitSemantics": "high-confidence",
+    "commitOpcodeOrder": "open",
+    "returnSemantics": "high-confidence",
+    "returnFinalizer": "open"
+  },
+  "draftFunctions": {
+    "battleTroopCount": {
+      "function": "00647250",
+      "name": "sub_647250"
+    },
+    "battleResources": {
+      "function": "00647AC0",
+      "name": "sub_647ac0",
+      "moneyCapAddresses": [
+        "00647E2A",
+        "00647E3A"
+      ],
+      "foodCapAddresses": [
+        "00647D8E",
+        "00647D9E"
+      ]
+    },
+    "transportResources": [
+      {
+        "function": "00615790",
+        "name": "sub_615790"
+      },
+      {
+        "function": "00615A10",
+        "name": "sub_615a10"
+      }
+    ]
+  },
+  "runtimeCaps": {
+    "battle": {
+      "money": 10000,
+      "food": 50000
+    },
+    "transport": {
+      "troops": 60000,
+      "money": 100000,
+      "food": 500000,
+      "equipmentQuantity": 100000,
+      "equipmentQuantityEvidence": "reverse-history-high"
+    },
+    "troopStrengthStorageHardBoundary": 65535
+  },
+  "equipment": {
+    "ids": {
+      "0": "sword",
+      "1": "spear",
+      "2": "halberd",
+      "3": "crossbow",
+      "4": "horse",
+      "5": "ram",
+      "6": "siegeTower",
+      "7": "catapult",
+      "8": "woodBeast",
+      "9": "smallBoat",
+      "10": "towerShip",
+      "11": "warship"
+    },
+    "sourceCostSemantics": {
+      "0": {
+        "kind": "default",
+        "cost": 0
+      },
+      "9": {
+        "kind": "default",
+        "cost": 0
+      },
+      "1-4": {
+        "kind": "quantity",
+        "cost": "selectedTroops"
+      },
+      "5-8": {
+        "kind": "piece",
+        "cost": 1,
+        "evidence": "documented-empirical-high"
+      },
+      "10-11": {
+        "kind": "piece",
+        "cost": 1,
+        "evidence": "documented-empirical-high"
+      }
+    },
+    "pieceEquipmentOpcodeCaller": "open"
+  },
+  "buildingMutationPrimitives": {
+    "getTroops": "00486B10",
+    "getMoney": "00486C80",
+    "getFood": "00486DF0",
+    "getEquipment": "00486950",
+    "setTroops": "00487230",
+    "setMoney": "00487310",
+    "setFood": "004873F0",
+    "setEquipment": "004874D0",
+    "adjustMoney": "004AE2A0",
+    "adjustFood": "004AE300",
+    "adjustTroops": "004AE3C0",
+    "adjustEquipment": "004AE430"
+  },
+  "troopMutationPrimitives": {
+    "getTroops": "00496010",
+    "getEquipment": "004954E0",
+    "setFood": "00496280",
+    "adjustTroops": "004AE4A0",
+    "adjustMoney": "004AE510",
+    "adjustFood": "004AE570"
+  },
+  "commit": {
+    "resourceConservationInvariant": true,
+    "sourceLosesSelectedTroopsMoneyFood": true,
+    "sourceLosesSelectedEquipment": true,
+    "troopReceivesSelectedResources": true,
+    "exactCaller": "open",
+    "exactOrder": "open",
+    "rollbackSemantics": "open"
+  },
+  "return": {
+    "resourcesMergeIntoFriendlyBuilding": true,
+    "survivingPieceEquipmentReusable": true,
+    "destinationCapacityApplies": true,
+    "overflowLoss": "empirical-high",
+    "exactCaller": "open",
+    "exactOrder": "open",
+    "regularEquipmentReturnQuantity": "open",
+    "woundedEquipmentOrder": "open"
+  },
+  "modernReconstructionBoundary": {
+    "sangoInfinityCommitOrder": "not-fidelity-evidence",
+    "sangoInfinityReturnOrder": "not-fidelity-evidence",
+    "woundedEquipmentReturn": "not-fidelity-evidence"
+  },
+  "fallback": {
+    "commit": "atomic revalidate then subtract source resources and create troop",
+    "battleQuantityEquipmentCost": "selectedTroops for IDs 1-4",
+    "battlePieceEquipmentCost": "1 for IDs 5-8 and 10-11",
+    "defaultEquipmentCost": "0 for IDs 0 and 9",
+    "returnOverflowPolicy": "clip-to-destination-cap-and-discard-overflow",
+    "returnOverflowEvidence": "empirical-high",
+    "transactionOrderEvidence": "engineering-fallback-only"
+  },
+  "open": [
+    "battle sortie finalizer address/body",
+    "transport sortie finalizer address/body",
+    "commit resource mutation order",
+    "troop creation vs source deduction order",
+    "commit rollback behavior",
+    "piece equipment decrement opcode caller",
+    "whether all 12 transport equipment types share exact 100000 path",
+    "transport siege/advanced-ship edge cases",
+    "enter-building/disband finalizer",
+    "regular equipment return quantity",
+    "wounded/equipment return ordering",
+    "multi-resource destination overflow ordering",
+    "sortie person eligibility filter",
+    "Vanilla/PS2/Wii differences"
+  ]
+}

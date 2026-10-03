@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-36",
+  "target": "PC-PK1.1 morale weighted-merge non-divisible rounding boundary",
+  "status": "audit-complete-rounding-open",
+  "reverse": {
+    "buildingMergeHelper": "004B9840",
+    "buildingMergeBounds": [
+      "0x4B9840",
+      "0x4B98A0"
+    ],
+    "inputs": [
+      "old troops",
+      "old morale",
+      "added troops",
+      "incoming morale"
+    ]
+  },
+  "resolved": {
+    "weightedMeanCore": "high-confidence",
+    "buildingMergeHelperBoundary": true,
+    "troopMergeHelperFound": false,
+    "nonDivisibleRoundingResolved": false,
+    "ftol2CanBeAssumedWithoutXref": false
+  },
+  "fallback": {
+    "rounding": "floor",
+    "evidence": "compatibility-rounding-only"
+  },
+  "open": [
+    "004B9840 full body",
+    "building merge non-divisible exact rounding",
+    "troop-to-troop morale merge helper",
+    "whether field supply reuses 004B9840",
+    "field supply non-divisible exact rounding",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/fudanglp/311resource"
+  ]
+}

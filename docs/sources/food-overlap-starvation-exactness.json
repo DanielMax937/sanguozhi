@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-12-exactness",
+  "target": "defensive-facility food overlap and zero-food desertion",
+  "status": {
+    "audit": "complete",
+    "defenseFoodSingleSelector": "resolved",
+    "defenseFoodFloat32Bits": "resolved",
+    "defenseFoodNonStacking": "resolved",
+    "defenseOverlapWinner": "open",
+    "foodSchedulerStarvationSeparation": "resolved",
+    "starvationFunction": "open",
+    "legacyRetention076": "downgraded"
+  },
+  "functions": {
+    "troopFoodConsumption": "0049D2E0",
+    "defenseFacilitySelector": "0049D180",
+    "perTurnFoodScheduler": "0059BF40",
+    "besiegedStarvedStrategicPointPopulationLoss": "00599AA0",
+    "floatToInteger": "00707A74"
+  },
+  "defenseFoodMultipliers": {
+    "none": {
+      "bits": "0x40000000",
+      "float32": 2
+    },
+    "camp": {
+      "typeId": 3,
+      "bits": "0x3FD55555",
+      "float32": 1.6666666269302368
+    },
+    "fort": {
+      "typeId": 4,
+      "bits": "0x3FAAAAAB",
+      "float32": 1.3333333730697632
+    },
+    "fortress": {
+      "typeId": 5,
+      "bits": "0x3F800000",
+      "float32": 1
+    },
+    "commonScale": {
+      "bits": "0x3D4CCCCD",
+      "float32": 0.05000000074505806
+    }
+  },
+  "selector": {
+    "returnsSingleType": true,
+    "multiplierStacking": false,
+    "overlapWinner": "open",
+    "compatibilityFallback": "highest-tier-wins",
+    "compatibilityFallbackEvidence": "provisional-engine-rule"
+  },
+  "vectors": {
+    "troops10000": {
+      "none": 1000,
+      "camp": 833,
+      "fort": 666,
+      "fortress": 500
+    },
+    "troops18000": {
+      "none": 1800,
+      "camp": 1499,
+      "fort": 1200,
+      "fortress": 900
+    }
+  },
+  "scheduler": {
+    "strategicPointFoodZeroAtStart": "skip",
+    "troopFoodZeroAtStart": "skip",
+    "ifDeductionReachesZero": "record/message only in 0059BF40",
+    "troopStrengthReductionIn0059BF40": false
+  },
+  "starvation": {
+    "existence": "official-and-gameplay-confirmed",
+    "separateHandlerRequired": true,
+    "exactFunction": "open",
+    "exactFormula": "open",
+    "legacyRetentionPerTurn": 0.76,
+    "legacyRetentionEvidence": "provenance-unresolved",
+    "legacyRetentionPolicy": "legacy-compatibility-only",
+    "strictFidelityPolicy": "unresolved-original"
+  },
+  "open": [
+    "0049D180 complete body",
+    "overlap winner priority among type 3/4/5",
+    "field troop starvation/desertion handler address",
+    "starvation loss formula and RNG",
+    "combat vs transport starvation differences",
+    "first starving turn vs continuing starvation differences",
+    "morale/person-stat involvement",
+    "Vanilla/PS2/Wii differences"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-7-exactness",
+  "target": "captive maintenance forced release and manual release side effects",
+  "status": {
+    "audit": "complete",
+    "maintenanceReleaseCount": "resolved",
+    "maintenanceSelectionArchitecture": "resolved",
+    "maintenanceComparatorSemantics": "open",
+    "manualReleaseTechniquePointDirection": "official-confirmed",
+    "manualReleaseTechniquePointAmount": "open",
+    "releaseForbiddenPeriod": "route/version-conflict"
+  },
+  "maintenance": {
+    "costPerPrisoner": 50,
+    "paidCountFormula": "min(prisonerCount, floor(gold / 50))",
+    "releaseCountFormula": "max(0, prisonerCount - floor(gold / 50))",
+    "goldAfterFormula": "gold - 50 * paidCount",
+    "selectionPipeline": {
+      "comparator": "0058C320",
+      "genericListAlgorithm": "004AA200",
+      "listShrinkHelper": "004A8E10",
+      "perFacilityAccumulator": "0058D1D0",
+      "monthlyFinalizer": "0058D430"
+    },
+    "selectionCountEqualsReleaseCount": true,
+    "comparatorBusinessMeaning": "open",
+    "sortDirectionAndShrinkSide": "open",
+    "forcedReleaseForbiddenState": "open",
+    "forcedReleaseTechniquePointReward": "open"
+  },
+  "manualReleaseCommand": {
+    "command": "exile/release",
+    "period": 0,
+    "goldCost": 0,
+    "actionPointCost": 0,
+    "executor": null,
+    "maxPersons": 6,
+    "releaseEnemyCaptiveRaisesTechniquePoints": true,
+    "techniquePointAmount": "open",
+    "empiricalTechniquePointCandidate": 3,
+    "empiricalTechniquePointEvidence": "2-or-3 / about-3 community observations",
+    "exactOpcode": "open"
+  },
+  "runtimeFields": {
+    "formerAllegianceOffset": "0x160",
+    "forbiddenLordOffset": "0x164",
+    "forbiddenMonthsOffset": "0x168",
+    "captiveMonthsOffset": "0x169",
+    "monthlyCounterHandler": "0058BB30"
+  },
+  "forbiddenPeriodEvidence": {
+    "supportsManualReleaseLock": [
+      "wiki says captive release creates recruitment-forbidden period",
+      "2009 thread says 3-month lock after captive release, force destruction excepted"
+    ],
+    "contradictsManualReleaseLock": [
+      "2011 thread explicitly says natural captive escape sets lock but voluntary release does not"
+    ],
+    "laterConfirmedThreeMonthPaths": [
+      "first-discovery immediate recruitment failure",
+      "recommendation failure",
+      "city-fall recruitment failure",
+      "captive escape"
+    ],
+    "manualReleaseExactConclusion": "disputed",
+    "compatibilityCandidateMonths": 3
+  },
+  "exitCausesMustBeSeparate": [
+    "natural-escape",
+    "maintenance-shortfall",
+    "manual-exile-command",
+    "immediate-after-capture",
+    "force-destruction",
+    "diplomatic-exchange"
+  ],
+  "fallback": {
+    "maintenanceSelector": "stable-person-id-order",
+    "maintenanceSelectorEvidence": "provisional-engine-rule",
+    "manualReleaseTechniquePointGain": 3,
+    "manualReleaseTechniquePointGainEvidence": "empirical-compatibility",
+    "forbiddenMonthsByCause": {
+      "natural-escape": 3,
+      "manual-exile-command": 3,
+      "maintenance-shortfall": null,
+      "immediate-after-capture": null,
+      "force-destruction": 0
+    },
+    "manualReleaseForbiddenEvidence": "disputed-compatibility-candidate",
+    "maintenanceReleaseTechniquePointGain": 0,
+    "maintenanceReleaseTechniquePointGainEvidence": "conservative-no-unproven-reward"
+  },
+  "open": [
+    "0058C320 comparator body",
+    "0058C320 order direction and 004A8E10 shrink side",
+    "0058D1D0 body",
+    "0058D430 body",
+    "maintenance forced-release ForbiddenLord/ForbiddenMonths behavior",
+    "maintenance forced-release technique point behavior",
+    "manual release exact technique point amount",
+    "manual release 3-month lock version/path resolution",
+    "immediate-after-capture release side effects",
+    "force-destruction forbidden-state cleanup",
+    "Vanilla/PC-PK/PS2/Wii differences"
+  ]
+}

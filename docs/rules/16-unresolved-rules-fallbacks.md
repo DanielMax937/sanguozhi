@@ -134,7 +134,10 @@ B = 1.0
 
 ---
 
-## 2. 普通登用概率
+## 2. 普通登用概率（P0-1 外层源码级收窄，内部仍open）
+
+
+P0-1 专项证据：`36-hiring-probability-exactness.md`；结构化数据：`../sources/hiring-probability-exactness.json`。
 
 ### 结论：硬门槛与最终判定链已反汇编；仅内部连续概率函数仍缺函数体
 
@@ -221,21 +224,58 @@ p2 = min(100, floor(p * factor10 / 10))
 
 但**正常玩家登用第三参数就是 0**，所以不能把这条外层倍率直接套到普通登用上；普通登用中义理是否、以及如何再次进入 `005C4F80`，仍需函数体才能完全确定。
 
+### 3.1 普通第三参数=0；非0路径不要混进普通登用
+
+`004AFD60` 的外层已经进一步锁定：
+
+```text
+第三参数 = 0
+→ factor10 固定10
+→ 正常 deterministic compare
+
+第三参数 != 0
+→ factor10=min(10,15-2*Ideals)
+→ p=floor(p*factor10/10)
+→ 004721D0 运行时随机判定
+```
+
+因此旧资料里若把高义理 0.9 / 0.7 外层倍率直接套给普通“人才→登用”，是错误的。当前普通本地登用和异地登用完成路径都明确传0。
+
+非0 caller 的完整业务语义尚未全部命名，继续 open。
+
+### 3.2 探索发现人才后当场登用的失败分支
+
+`005D5220` 探索登用 wrapper 先计算 `p` 并做 deterministic compare；若第一次失败，还会计算：
+
+```ts
+debateScore = executorCharm
+  - compatibilityDifference(executor, executorLord)
+  + p
+
+if (debateScore > 80) enterDebate()
+```
+
+这是探索发现人才后的特殊分支，不属于普通人才菜单登用。
+
+
 ### 4. 目前唯一仍缺失的东西
 
 没有找到可公开检索、可交叉验证的 `005C4F80 GetHiringSuccessRate` 完整函数体。
 
 可以确认它返回整数型 0–100 概率，而且目标/执行者完整指针都传入，因此它可以读取忠诚、义理、相性、魅力等数据；但在没有函数体的情况下，**不能把网上流传的“政治/魅力各加 X%”写成原版公式**。
 
-现代 SIRE 的“新忠诚/登用意愿系统”提供了另一套可配置评分，但它明确是 MOD 新系统，不是原作 `005C4F80`，因此只可作为工程校准参考。
+现代 SIRE 的“新忠诚/登用意愿系统”明确是可配置的 MOD 新系统，不是原作 `005C4F80`。其基准60、忠诚-100%、相性差-50%、魅力+20%、仕官第一年-20、浮动值6等常量全部禁止回填进原版 fidelity；也不再把它作为原版系数的“校准参考”。
 
 ### 5. provisional-engine-rule：仅替代 GetHiringSuccessRate
 
-硬门槛完全照上面执行；只有进入普通连续概率时才调用 fallback：
+硬门槛按上面的长期稳定顺序执行；PC-PK1.1 已确认 hard-gate 函数一定先执行，但 `004AF7D0` 函数体尚未公开，因此 9 条顺序继续标 `empirical-high`。只有进入普通连续概率时才调用 fallback：
 
 ```ts
-function fallbackHiringRate(target, executor, ruler) {
+function fallbackHiringRate(target, executor, ruler, dateKey) {
   const giri = clamp(target.giriInternal, 0, 4)
+
+  // 原版 005C4F80 同时接收 dateKey；当前闭式未恢复，fallback 暂不使用它，
+  // 但接口必须保留，未来替换函数体时不改调用层。
 
   // 在野/亡国无所属者没有可直接复刻的原版连续忠诚口径；
   // 60 仅为可配置的 engine baseline，不冒充原作常量。
@@ -268,7 +308,7 @@ function fallbackHiringRate(target, executor, ruler) {
 最终判定不使用运行时随机流，而模仿原版调用形状：
 
 ```ts
-const p = fallbackHiringRate(target, executor, ruler)
+const p = fallbackHiringRate(target, executor, ruler, dateKey)
 
 const executorTargetAffinity =
   circularAffinityDistance(executor.affinity, target.affinity)
@@ -325,110 +365,117 @@ success = roll < p
 
 ---
 
-## 3. 外交公式的 Vanilla / PK 版本边界
+## 3. 外交公式版本边界（P0-2 边界已解决，常量仍open）
 
-### 结论：Vanilla 本身就必须按补丁版本分 profile
+P0-2 专项证据：`37-diplomacy-version-boundaries.md`；结构化数据：`../sources/diplomacy-version-boundaries.json`。
 
-这一项找到的关键证据不是另一套完整公式，而是 KOEI 官方补丁记录明确证明外交相关规则至少发生过两轮调整：
+### 结论：不要再使用“Vanilla晚期≈PK”作为默认事实
 
-- Vanilla Ver.1.1（2006-04-10）：调整“势力间友好的增减平衡”。
-- Vanilla Ver.1.2（2006-05-01）：再次调整“势力友好的增减平衡”，并明确调整“计略及外交的成功率”。
-- Vanilla Ver.1.3（2006-07-06）：公开更新项目未再列外交成功率调整。
-- PK Ver.1.1（2006-10-04）与 Ver.1.1.1（2007-03-14）：官方更新项目也未列外交成功率调整。
+官方硬边界：
 
-因此旧规则“Vanilla 1.0 直接复用 pc-late-empirical”证据不足，撤回。
-
-### 版本 profile
-
-引擎至少区分：
-
-```ts
-type DiplomacyProfile =
-  | "vanilla-1.0-pre-balance"
-  | "vanilla-1.1-friendship-rebalanced"
-  | "vanilla-1.2-plus-post-success-rebalance"
-  | "pk-1.0-1.1-late-empirical"
+```text
+Vanilla 1.0
+↓
+1.1：友好增减调整
+↓
+1.2：友好增减再次调整 + 外交成功率调整
+↓
+1.3～1.3.3：无公开外交专项条目
 ```
 
-#### A. Vanilla 1.0
+现有完整外交公式含“超级=0.7”，而超级是 PK 新增，所以完整公式族默认绑定：
 
-`[VANILLA-1.0][unknown-exact]`
-
-1.1 官方说明明确后续调整了势力间友好增减，所以 1.0 的亲善/关系变化常量不能假定等于后期版本。完整的 1.0 外交成功率函数目前也没有找到源码级资料。
-
-#### B. Vanilla 1.1
-
-`[VANILLA-1.1][partial-known]`
-
-友好度增减平衡已经相对 1.0 改过；但 1.2 又明确调整“计略及外交成功率”。因此 1.1 是独立过渡 profile，不能与 1.0 合并，也不能直接称为 PK 公式。
-
-#### C. Vanilla 1.2 / 1.3
-
-`[VANILLA-1.2+][post-success-rebalance / compatibility-assumption]`
-
-1.2 是外交成功率的硬版本分界。1.3 更新列表未再声明外交成功率调整，所以没有反例前，可把 1.2/1.3 归为同一个 post-1.2 family。
-
-但目前找到的完整亲善/同盟/停战/交换俘虏/劝降公式，主要来自后期攻略与 PK/超级难度语境资料；因此仍不能声称 Vanilla 1.2/1.3 的所有常量与 PK 完全相同。
-
-#### D. PK 1.0 / 1.1
-
-`[PC-PK][empirical-high]`
-
-现有完整外交公式最适合绑定到这一 profile。尤其“超级难度系数 0.7”只能属于 PK，因为超级难度是 PK 新增。
-
-PK 官方 1.1/1.1.1 更新项目没有列外交成功率调整，因此当前把 PK 1.0/1.1 视作同一外交 formula family；这是高置信兼容判断，不是源码级证明。
-
-### 完整公式如何落地
-
-`07-diplomacy.md` 中亲善、同盟、停战、俘虏交换、劝降的完整公式保留，并默认绑定：
-
-```ts
-formulaProfile = "pk-1.0-1.1-late-empirical"
+```text
+pk-pc-formula-corpus
 ```
 
-Vanilla 不另造一套未经证实的常量，而采用显式 fallback：
+exact PK build 仍 open。
+
+### 版本 resolver
 
 ```ts
 function resolveDiplomacyProfile(version) {
-  if (version === "vanilla-1.0")
-    return { profile: "vanilla-1.0-pre-balance", exact: false, fallback: "pk-1.0-1.1-late-empirical" }
+  if (version === "vanilla-1.0") {
+    return {
+      profile: "vanilla-pc-1.0",
+      exactConstants: false,
+      fallback: "pk-pc-formula-corpus",
+      compatibilityAssumption: true,
+    }
+  }
 
-  if (version === "vanilla-1.1")
-    return { profile: "vanilla-1.1-friendship-rebalanced", exact: false, fallback: "pk-1.0-1.1-late-empirical" }
+  if (version === "vanilla-1.1") {
+    return {
+      profile: "vanilla-pc-1.1",
+      exactConstants: false,
+      fallback: "pk-pc-formula-corpus",
+      compatibilityAssumption: true,
+    }
+  }
 
-  if (version === "vanilla-1.2" || version.startsWith("vanilla-1.3"))
-    return { profile: "vanilla-1.2-plus-post-success-rebalance", exact: false, fallback: "pk-1.0-1.1-late-empirical" }
+  if (
+    version === "vanilla-1.2"
+    || version.startsWith("vanilla-1.3")
+  ) {
+    return {
+      profile: "vanilla-pc-1.2-plus",
+      exactConstants: false,
+      fallback: "pk-pc-formula-corpus",
+      compatibilityAssumption: true,
+      note: "post-1.2 public changelog stable; binary identity unproven",
+    }
+  }
 
-  return { profile: "pk-1.0-1.1-late-empirical", exact: false }
+  if (version.startsWith("pk-pc")) {
+    return {
+      profile: "pk-pc-formula-corpus",
+      exactConstants: false,
+      exactBuild: "open",
+    }
+  }
+
+  return {
+    profile: "console-separate-open",
+    exactConstants: false,
+  }
 }
 ```
 
-Vanilla fallback 被触发时，simulation report 必须输出 `compatibilityAssumption=true`，并记录 `reason="exact vanilla diplomacy constants not recovered"`。不要为了区分版本而凭空制造三套系数。
+### 不允许的实现
 
-### PK 外交府不能混进成功率
+```text
+Vanilla = PK公式
+只是没有超级
+```
 
-`[PK][confirmed/empirical-high]`
+不能标 original/fidelity。
 
-外交府的效果是外交类行动力消耗减半、亲善费用减半。日文 Wiki 与 PK 攻略都把“计略府：提高流言成功率”和“外交府：AP/亲善费用减半”分开描述，所以没有证据把外交府当成同盟、停战、换俘等成功率 multiplier。
+### PK 外交府
 
-### 论客也要版本化
+只确认：
 
-- Vanilla 时代已经存在论客与外交舌战机制。
-- `超级`是 PK 新增难度；超级下资料长期一致为约 20% 进入外交舌战，因此 `debateEntryRate.super = 0.20` 只属于 PK super profile。
+```text
+AP ×0.5
+亲善金 ×0.5
+外交成功率：无额外bonus证据
+```
 
-### 证据来源
+外交府 success multiplier 若实现字段，保持1.0只是“没有加成”的模型表达，不冒充显式原指令。
 
-- KOEI 官方 Vanilla Ver.1.1 更新：https://www.gamecity.ne.jp/regist_c/user/san11/san11_update.htm
-- Vanilla Ver.1.2 更新：https://down.gamersky.com/pc/200605/4524.shtml
-- Vanilla 1.2/1.3 更新整理：https://forum.gamer.com.tw/C.php?bsn=6331&snA=5789
-- KOEI 官方 PK Ver.1.1/1.1.1 更新：https://www.gamecity.ne.jp/regist_c/user/san11/pk/san11pk_update.htm
-- PK 同盟完整判定公式：https://zhidao.ali213.net/q/13047392.html
-- 完整外交公式汇总：https://zhidao.baidu.com/question/693845718520080364/answer/2870151990.html
-- PK 外交府：https://w.atwiki.jp/sangokushi11/pages/74.html
-- PK 建筑攻略：https://www.gamersky.com/handbook/200609/33180.shtml
----
+### 仍 open
+
+- Vanilla 1.0/1.1/1.2 exact constants；
+- 1.2～1.3.3 binary diff；
+- PK formula corpus exact build；
+- late Vanilla/PK overlap；
+- console constants；
+- 原EXE外交公式函数体。
+
 
 ## 4. 攻城统一公式与陷落资源
+
+
+P0-3 专项证据：`38-siege-capture-exactness.md`；结构化数据：`../sources/siege-capture-exactness.json`。
 
 ### 结论
 
@@ -624,7 +671,7 @@ specialBase =
 - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[部队攻击].txt
 
 公开复刻候选：
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Object/Troop/Troop.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Object/Troop/Troop.cs
 
 高质量公式研究：
 - https://game.ali213.net/thread-5983352-1-1.html
@@ -695,6 +742,8 @@ const retained =
 以上三点不能阻止引擎运行，而且都已有明确可替换接口。
 
 ## 5. 火焰持续与“自然蔓延”
+
+> P0-4 专项证据矩阵与当前 exactness 状态见 [39-fire-lifetime-spread-exactness.md](39-fire-lifetime-spread-exactness.md)。本节保留工程 fallback；任何 70/30 权重都不得升级成原版常量。
 
 ### 结论：会心“+1回合”高置信；自然邻格扩散应为 0
 
@@ -812,8 +861,8 @@ type FireSource =
 初版前四类可共享同一 fallback；历史事件火焰由事件脚本显式指定。
 
 工程参考：
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Object/Skill/Effect/SetFire.cs
-- https://github.com/tankyc/sango_infinity/blob/master/Build/Content/Data/Common/Skills.json
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Object/Skill/Effect/SetFire.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Build/Content/Data/Common/Skills.json
 
 ---
 
@@ -923,306 +972,202 @@ naturalAdjacentSpread = false  // negative-evidence-high
 ```
 
 
-## 6. 自然死亡精确 RNG
+## 6. 登场 / 自然死亡精确 RNG（P0-5）
 
-### 结论：死亡状态机已能确认，精确随机函数仍缺函数体
+> 专项证据矩阵与当前 exactness 状态见 [40-debut-death-exactness.md](40-debut-death-exactness.md)。本节只保留工程 fallback；`+20`、`99岁`、`65/25/8/2` 等均不得升级为原版 EXE exact 常量。
 
-这一项最重要的修正是：**不能在剧本初始化时直接预抽一个最终死亡年/旬。**
+### 结论：dispatcher 已锁定到月初，内部死亡函数仍 open
 
-SIRE 开发资料已经给出原版 PK 的关键函数名和运行时字段：
-
-- `0048A000 GetDeathYear`：返回角色死亡年；
-- `00489160 IsMarkedForDeath`：判断武将是否已经“预定死亡”；
-- 武将静态数据同时保存 `YearOfBirth`、`YearOfDeath`、`CauseOfDeath`；
-- GetInfo 运行时字段另外暴露“是否预定死亡”和“健康状态”。
-
-这说明原作至少存在如下分层：
+PC-PK1.1 原公开逆向已确认：
 
 ```text
-剧本基础数据
-YearOfBirth / YearOfDeath / CauseOfDeath
-              ↓
-        GetDeathYear()
-              ↓
-到达死亡阈值后的运行时判定
-              ↓
-      IsMarkedForDeath
-              ↓
-       健康恶化 / 死亡
+00590C30 MonthlyAction
+→ 00482680 月初判定
+→ 0058BB30 俘虏/禁仕月份
+→ 005833D0 年龄/死亡相关处理
 ```
 
-而不是：
-
-```text
-开局
-→ 一次性抽出最终死亡日期
-→ 到日期直接死亡
-```
-
-`[PC-PK1.1][reverse-engineered-partial]`
-
-逆向来源：
-- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
-- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/结构体汇总.md
-- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/数据汇总.md
-
----
-
-### 6A. 自然死 / 不自然死是不同寿命 profile
-
-`[COMMON][empirical-high]`
-
-日文攻略 Wiki 长期整理：
-
-- **自然死**：到基础没年后开始容易生病，多数在当年死亡，少数延后约 2–3 年；
-- **不自然死**：到基础没年附近会出现一次病情变化，但不会按普通自然死立即退场，而会再获得一段寿命；
-- 不自然死的额外寿命与“基础没年时年龄”负相关：死得越年轻，通常延寿越长；高龄武将延寿很少；
-- 旧资料常把额外上限描述为“约 15 年”，但玩家记录存在实际死亡比基础没年晚 16–20 年的案例，因此 **15 不能作为 actual-death hard cap**。
-
-来源：
-- https://w.atwiki.jp/sangokushi11/pages/983.html
-- https://w.atwiki.jp/sangokushi11/pages/886.html
-- https://w.atwiki.jp/sangokushi11/pages/579.html
-- https://w.atwiki.jp/sangokushi11/pages/1950.html
-- https://w.atwiki.jp/sangokushi11/pages/1928.html
-
-孙策是很好的回归锚点：
-
-- 生年 175、基础没年 200、死因“不自然死”；
-- 玩家把没年改为 189 后，十次左右测试的于吉事件集中在 205–206；
-- 另有 PK 实测正常数据时事件在 216 年附近；
-- 于吉事件舌战获胜后，游戏明确把孙策寿命再延长 **20 年**。
-
-这说明事件和普通寿命系统操作的是同一条“死亡阈值 / 寿命”链，而不是另做一个固定历史日期。
-
-事件来源：
-- https://w.atwiki.jp/sangokushi11/pages/918.html
-- https://w.atwiki.jp/sangokushi11/pages/886.html
-
----
-
-### 6B. “预定死亡年”是原作真实概念
-
-`[COMMON][confirmed source language / PC-PK reverse]`
-
-游民星空转载的官方事件条件直接使用：
-
-- “刘备预定死亡年到临”
-- “诸葛亮预定死亡年到临”
-- “孙策预定死亡年之后或 200 年到临”
-
-这与 SIRE 命名的 `IsMarkedForDeath` 完全一致：**基础没年、计算后的死亡时点、运行时死亡 flag 不是同一个概念。**
-
-来源：
-- https://www.gamersky.com/handbook/200809/124174_6.shtml
-- https://wap.gamersky.com/gl/Content-124174_12.html
-- https://wap.gamersky.com/gl/content-134257_10.html
-
-因此事件系统也必须查询统一的 lifespan/death service，不得直接写：
+因此第一版生命周期接口改成：
 
 ```ts
-if (currentYear >= person.yearOfDeath) die()
-```
-
----
-
-### 6C. 死亡不是开局永久固定
-
-`[COMMON][empirical-high]`
-
-日文 Wiki 的问答记录中，玩家明确报告：
-
-- 从足够早的存档重新推进后，原本已经死亡的武将可能继续活；
-- 反之亦然；
-- 具体哪一个时点固定死亡结果不明。
-
-这与运行时 `IsMarkedForDeath` 字段相符：死亡结果至少有一部分是在游戏推进过程中决定，而不是 scenario load 时永久写死。
-
-来源：
-- https://w.atwiki.jp/sangokushi11/pages/2527.html
-
-因此旧 fallback 的：
-
-```ts
-// WRONG
-onScenarioInit() {
-  deathYear = ...
-  deathDekad = uniformInt(1, 36)
+function onMonthStart(state, rng) {
+  for (const person of state.persons) {
+    updateDebutLifecycle(person, state, rng)
+    updateNaturalDeathLifecycle(person, state, rng)
+  }
 }
 ```
 
-删除。
+不能再把 fallback 描述成一个与原 dispatcher 无关的独立“年初死亡任务”。
 
----
+### 6A. 登场 profile
 
-### 6D. 目前真正缺失的两个函数
+```ts
+function getFallbackDebutGateYear(person, scenario) {
+  if (scenario.ignoreAge) return -Infinity
 
-1. `0048A000 GetDeathYear` 的完整函数体尚未在公开文本资料中展开，因此“不自然死 +a 年”的**原版年龄函数**仍未知；
-2. 到达死亡阈值以后，原程序究竟在年初/月初/每旬用什么概率立 `markedForDeath`，以及立 flag 后多久真正死亡，仍未取得逐指令公式。
+  if (scenario.comeOnStage === "fictional") {
+    return person.yearOfBirth + 15
+  }
 
-SIRE 仓库公开了已命名的 IDA 数据库，但当前公开 Markdown/TXT 只给函数地址与语义，不足以把函数体冒充已逆向。
+  return person.yearOfDebut
+}
+```
 
----
+证据边界：
 
-### 6E. provisional-engine-rule：按原作状态机，而不是预抽日期
+- 史实：`YearOfDebut` 是时间 gate，不是 Identity；
+- 假想：位置随机，登场年提前到成人年；15岁为 empirical-high 成人口径；
+- `NOT_INTRODUCED -> NOT_DISCOVERED / NORMAL` 的原 setter、具体月份与 `ScheduledLord` 分支仍 open；
+- `IgnoreAge` 至少用于无视普通时间登场/寿命的特殊场景，其他年龄系统不自动推广。
 
-#### 第一步：计算死亡阈值
+### 6B. Lifetime profile
+
+```ts
+function getFallbackLifetimeThreshold(person, scenario) {
+  if (scenario.ignoreAge) return Infinity
+
+  const historical =
+    getHistoricalCauseAdjustedFallback(person)
+
+  switch (scenario.lifetime) {
+    case "historical":
+      return historical
+
+    case "longevity":
+      return historical + 20
+      // empirical compatibility fallback
+
+    case "fictional":
+      return person.yearOfBirth + 99
+      // documented compatibility threshold
+  }
+}
+```
+
+注意：
+
+- `historical +20` 是否与不自然死修正先后叠加，原作顺序 open；
+- Fictional 的99岁是 threshold 还是实际 hard date，open；
+- `0048A000 GetDeathYear` 未展开，以上不能标 source-confirmed。
+
+### 6C. Historical cause fallback
 
 自然死：
 
 ```ts
-deathThresholdYear = person.yearOfDeath
+threshold = person.yearOfDeath
 ```
 
-不自然死暂采用一个**工程年龄曲线**：
+不自然死继续使用可替换工程曲线：
 
 ```ts
 ageAtBaseDeath =
   person.yearOfDeath - person.yearOfBirth
 
-unnaturalExtraYears = clamp(
+extra = clamp(
   floor((100 - ageAtBaseDeath) / 3),
   0,
   15
 )
 
-deathThresholdYear =
-  person.yearOfDeath + unnaturalExtraYears
+threshold = person.yearOfDeath + extra
 ```
 
-这个式子不是原版公式，只是满足目前可靠方向的 fallback：
+这里的 `15` **只是 fallback 中间阈值上限，不是实际最终死亡 hard cap**。孙策实测存在基础没年之后约16～17年才进入于吉事件的样本；普通没年200的实测也在216年前后。
 
-- 年轻的“不自然死”人物接近 +15 年；
-- 约 60–70 岁时约 +10～13 年；
-- 90 多岁时只延 0～3 年；
-- 不自然死阈值之后还会进入自然死亡阶段，所以实际死亡可以晚于“+15”。
+### 6D. 运行时死亡 gate：保留经验分布，但挂在月初链内
 
-孙策若按 175→200，则年龄25，fallback 给 +15，阈值 215；与“210 年以后、常见约 216”这一批实测处在同一量级。
-
-#### 第二步：到阈值后才做运行时死亡判定
-
-为了同时满足“多数当年死、少数拖 2–3 年”和 `markedForDeath` 独立状态，fallback 不预抽最终日期，而在每年第一次寿命结算时做：
-
-```ts
-const markChanceByOverdueYear = [
-  0.65,      // 阈值年
-  0.7142857, // 若首年未中，则第二年；累计死亡年权重约25%
-  0.80,      // 第三年；累计约8%
-  1.00       // 第四年兜底；累计约2%
-]
-
-function updateNaturalDeathAtYearBoundary(person, year, rng) {
-  if (person.dead || person.markedForDeath) return
-
-  const threshold = getFallbackDeathThresholdYear(person)
-  if (year < threshold) return
-
-  const overdue = min(year - threshold, 3)
-
-  if (rng.chance(markChanceByOverdueYear[overdue])) {
-    person.markedForDeath = true
-
-    // 只在 flag 立起时决定本年度的死亡旬；
-    // 不在剧本初始化阶段预抽。
-    person.pendingDeathDekad = rng.int(0, 35)
-  }
-}
-```
-
-这组 conditional chance 对应最终年份分布约：
+原函数尚未恢复前，若引擎需要闭环，可保留经验年份分布：
 
 ```text
-阈值年   65%
-+1年     25%
-+2年      8%
-+3年      2%
+effective threshold year   65%
++1 year                    25%
++2 years                    8%
++3 years                    2%
 ```
 
-它继承旧 fallback 的经验权重，但**语义已经变成原作式“逐年立死亡 flag”**。
+实现时它只是：
 
-#### 第三步：flag 与健康状态分开
+```text
+provisional-engine-rule
+inside 005833D0-shaped month-start lifecycle service
+```
+
+例如只有在**某年的第一次月初生命周期调用**时执行年度 gate：
 
 ```ts
-if (person.markedForDeath) {
-  updateIllnessPresentation(person)
+function maybeMarkForDeathAtMonthStart(person, date, rng) {
+  if (!isFirstMonthOfYear(date)) return
+  if (person.dead || person.markedForDeath) return
 
-  if (currentDekadIndex >= person.pendingDeathDekad) {
-    resolveNaturalDeath(person)
+  const threshold = getFallbackLifetimeThreshold(person, state.scenario)
+  if (date.year < threshold) return
+
+  const overdue = min(date.year - threshold, 3)
+  const conditional = [
+    0.65,
+    0.7142857,
+    0.80,
+    1.00,
+  ][overdue]
+
+  if (rng.chance(conditional)) {
+    person.markedForDeath = true
   }
 }
 ```
 
-健康状态是独立 runtime state。当前没有证据给出“健康→轻伤/重伤/濒死→死亡”的精确转换概率，因此：
+**这里“只在1月 roll”仍是 fallback 设计，不是 `005833D0` 原指令事实。** 原函数可能每月检查并在内部按日期 gate；以后拿到函数体必须替换。
 
-- 健康恶化主要用于 UI/能力修正；
-- 不再让健康状态另掷一个独立死亡概率；
-- 真正死亡统一由 lifespan state machine 决定。
+不再在 flag 立起时预抽“本年度死亡旬”。因为当前已确认的是月初 dispatcher，而 flag 后真正死亡是否可发生旬中、月中或只在月初，仍未恢复。
 
-这样避免“寿命 RNG + 健康 RNG”重复计算死亡风险。
+### 6E. HealthLevel 与死亡 flag 分开
 
----
-
-### 6F. RNG 与回放
-
-死亡 roll 必须使用模拟器正常 PRNG 状态，而不是：
-
-```ts
-hash(personId, year) // 永远固定
+```text
+markedForDeath
+!=
+HealthLevel
+!=
+Identity=DEAD
 ```
 
-原因是旧玩家实测表明，从更早时间重跑可能改变死亡结果。
+fallback 可让死亡 flag 影响病弱表现，但不能再额外叠一套独立“健康 RNG 导致死亡”，否则会重复计算寿命风险。
 
-引擎仍可通过保存 PRNG state 保证**同一完整游戏轨迹可重放**；但改变此前行动、事件和 RNG 消耗后，未来死亡结果允许变化，这更符合原作表现。
+健康自然恢复/恶化的 exact 公式继续 open。
 
----
+### 6F. RNG / 历史事件
 
-### 6G. 历史事件优先级
-
-历史死亡事件满足条件时，可以：
-
-- 直接死亡；
-- 修改寿命/死亡阈值；
-- 拦截普通死亡流程。
-
-例如孙策于吉事件胜利是“延寿 +20”，失败则死亡。因此统一接口应为：
-
-```ts
-getEffectiveDeathThreshold(person)
-markForNaturalDeath(person)
-extendLife(person, years)
-killPerson(person, cause)
-```
-
-而不是事件脚本直接修改若干互不相干字段。
-
----
+- 死亡判定使用模拟器正常 PRNG；不使用 `hash(personId,year)` 固定未来。
+- 同一完整存档保存 PRNG state 后仍应可回放；改变此前 RNG 消耗后，未来死亡允许变化。
+- 历史事件可直接死亡、延寿或拦截普通寿命流程。孙策于吉事件胜利的 +20 年继续作为明确事件效果。
 
 ### 剩余 exactness
 
-第 6 项现在真正只剩：
-
-1. `0048A000 GetDeathYear` 中“不自然死 +a”的原版闭式；
-2. `markedForDeath` 的原版触发时点与概率；
-3. flag 后病情恶化到实际死亡的精确时序；
-4. Vanilla EXE 是否与 PC-PK 完全相同。
-
-当前 fallback 已经恢复正确的**状态结构**；以后拿到函数体时，只替换 `getFallbackDeathThresholdYear()` 和 `updateNaturalDeathAtYearBoundary()`，不改生命周期接口。
-
----
-
+1. `005833D0` 完整函数体；
+2. `0048A000 GetDeathYear` 完整函数体；
+3. raw `ComeOnStage / Lifetime / IgnoreAge` enum；
+4. 史实 `ScheduledLord` 登场分支；
+5. 普通登场 setter / 月份；
+6. Longgevity 与死因修正顺序；
+7. Fictional 99岁 phase；
+8. `markedForDeath` 原概率和时点；
+9. flag 后病情 / 真正死亡时序；
+10. Vanilla / 主机版差异。
 
 ## 7. 混乱 / 伪报持续与恢复
 
-### 结论：恢复机制已反汇编精确；初始持续计数仍缺两个效果函数体
+### 结论：自然恢复已由 PC-PK1.1 原函数闭合；只剩初始计数与重复施放语义
 
-这一项可以拆成：
+这一项必须拆成：
 
-1. 施加异常时写入多少“剩余回合计数”；
-2. 每旬如何减少；
-3. 什么时候恢复正常；
-4. PK 的阵/砦/城塞到底如何加速恢复。
+1. 施加异常时写入多少剩余计数；
+2. 每旬状态行为；
+3. 每旬怎样减少计数；
+4. 什么时候恢复正常；
+5. 重复施放如何刷新已有异常。
 
-其中 2～4 已由 PC-PK 反汇编锁定。
+当前第2～4项已由 `00599B90` 完整恢复；第1项对“少兵自动混乱”也已恢复，但普通伪报/扰乱仍缺效果函数体。
 
 ---
 
@@ -1230,333 +1175,830 @@ killPerson(person, cause)
 
 `[PC-PK1.1][reverse-engineered]`
 
-311MemoryResearch 的：
+311MemoryResearch 的 `Func-自动03-部队异常状态处理.txt` 给出每旬处理函数：
 
-`Func-自动03-部队异常状态处理.txt`
-
-直接给出每旬处理函数 `00599B90`。
-
-部队有一个独立的：
-
-`statusTurnCount`
-
-计数。正常情况下每旬固定：
-
-```ts
-statusTurnCount -= 1
+```text
+00599B90
 ```
 
-而不是：
+部队结构明确分开保存：
+
+```text
++0x24 status
++0x28 statusTurnCount
+```
+
+自然恢复是：
+
+```ts
+remaining = Math.max(0, remaining - recoveryStep)
+
+if (remaining === 0) {
+  clearAbnormalStatus(unit)
+}
+```
+
+不存在：
 
 ```ts
 if (random() < recoveryChance) recover()
 ```
 
-当计数减到 0 时，程序立即调用正常化处理。
-
-精确结构：
-
-```ts
-recoverySpeed = 1
-
-if (ruleset === "pk" && insideFriendlyDefensiveFacilityAura(unit)) {
-  recoverySpeed = 2
-}
-
-statusTurnCount =
-  max(0, statusTurnCount - recoverySpeed)
-
-if (statusTurnCount === 0) {
-  clearAbnormalStatus(unit)
-}
-```
-
-因此旧 fallback：
-
-`每旬 50% 概率清醒`
-
-应彻底删除。
-
-逆向来源：
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动03-部队异常状态处理.txt
+因此旧 fallback“每旬50%清醒”等概率模型全部删除。
 
 ---
 
-### 7B. 混乱 / 伪报在“减计数之前”先执行状态效果
+### 7B. 本旬状态行为发生在倒计时之前
 
 `[PC-PK1.1][reverse-engineered]`
 
-同一函数还确认了结算顺序。
+混乱：
 
-#### 混乱
-
-如果部队本旬尚未行动：
-
-```ts
-unit.hasActed = true
+```text
+若本旬尚未行动
+-> 直接设置为已行动
 ```
 
-也就是直接失去正常行动机会。
+伪报：
 
-#### 伪报
+```text
+若本旬尚未行动
+-> 取得所属据点
+-> 执行朝所属据点退却的移动处理
+-> 设置为已行动
+```
 
-如果尚未行动：
+然后才进入统一的 `statusTurnCount` 减少。
 
-1. 取得所属据点；
-2. 执行朝所属据点撤退的 AI 移动处理；
-3. 设置为已行动。
-
-之后才进入统一的 `statusTurnCount` 减少。
-
-所以引擎结算必须是：
+所以结算顺序必须是：
 
 ```text
 异常行为
-→ 标记已行动
-→ 剩余计数减少
-→ 若到0，恢复正常
+→ 已行动
+→ 倒计时
+→ 0时恢复正常
 ```
-
-不能先清异常再决定本旬是否行动。
 
 ---
 
-### 7C. PK 防御设施：不是“概率提高”，而是计数每旬 -2
+### 7C. PC-PK1.1 阵/砦/城塞：每旬 -2，不是“恢复概率提高”
 
-`[PK][reverse-engineered]`
+`00599C25` 先把恢复步长设为1。
 
-PK 官方说明书说，阵、砦、城塞影响范围内的己方部队“从伪报/混乱恢复的概率提高”。
-
-原程序实现其实更具体：
-
-```ts
-normalRecoverySpeed = 1
-facilityAuraRecoverySpeed = 2
-```
-
-即每旬多消掉 1 点异常计数。
-
-原函数会根据势力已经研究的防御设施科技确定当前设施类型，并读取该设施的有效范围，在范围内才启用 `recoverySpeed=2`。
-
-因此如果剩余计数为 3：
+随后原函数根据势力已研究技巧选择当前阵系设施：
 
 ```text
-普通位置：3 → 2 → 1 → 0
-设施范围：3 → 1 → 0
+默认：阵 ID3
+技巧25 强化设施：砦 ID4
+技巧26 强化城墙：城塞 ID5
 ```
 
-官方 PK 手册还明确说这是“本体功能之外追加”的效果，所以：
+再读取对应设施最大有效范围，检查部队是否位于同势力合资格设施范围内。
 
-- Vanilla：默认每旬 -1；
-- PK：满足防御设施范围时每旬 -2。
+命中时：
 
-官方来源：
-- https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
+```text
+00599CAB recoveryStep = 2
+```
 
-反汇编来源：
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动03-部队异常状态处理.txt
+所以：
 
-社区交叉：
-- https://forum.gamer.com.tw/Co.php?bsn=60001&sn=380559
+```text
+普通位置：每旬 -1
+PK合资格阵系范围：每旬 -2
+```
+
+例如剩余3：
+
+```text
+普通：3 -> 2 -> 1 -> 0
+设施：3 -> 1 -> 0
+```
+
+日文 Wiki 对玩家只描述为“状态异常恢复率增加”；原 EXE 把它具体实现成双倍倒计时步长。日文 Wiki 还明确记录 PC 无印的阵系没有这一异常恢复加速，因此不能把 PK 的 `-2` 静默套给 PC Vanilla。
 
 ---
 
-### 7D. 状态 setter 也已定位
+### 7D. setter 与结构字段
 
-SIRE 地址表确认：
+SIRE 地址表：
 
-- `004AEA70 SetTroopStatus`：设置部队状态与状态回合数；
-- `00496350 SetTroopTurnCount`：直接设置状态回合计数。
+```text
+004AEA70 SetTroopStatus
+00496350 SetTroopTurnCount
+00472150 GetRandomX(X) => 0..X-1
+```
 
-因此“状态类型”和“剩余回合计数”在原作数据结构中是两个明确字段，不是根据状态类型每旬重新算概率。
-
-来源：
-- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+这再次确认状态类型和持续计数是独立数据。
 
 ---
 
-### 7E. 施加时的初始计数：仍缺 exact
+### 7E. 少兵自动混乱的初始计数已经精确
 
-普通计略主流程已经定位：
+`函数[自动眩晕].txt` 的原代码：
 
-- `005917D0`：伪报演示与实际处理；
-- `00591A20`：扰乱演示与实际处理；
-- `00591C70`：镇静；
-- 上层 `00593424` 会先算是否会心，再把会心 flag 传进上述效果函数。
+```text
+0059A1F5 push 02
+0059A1F7 call 00472150
+0059A1FF inc al
+...
+0059A207 push 01
+0059A20B call 004AEA70
+```
 
-但是 311MemoryResearch 的公开 TXT 只把调用点整理出来，没有展开 `005917D0 / 00591A20` 的完整函数体。
+因此：
 
-所以目前不能源码级回答：
+```text
+duration = GetRandomX(2) + 1
+         = 1 或 2
+```
 
-> 普通扰乱究竟是 1/2 各多少概率？会心究竟是 2/3 各多少概率？
-
-可靠边界只有：
-
-- 普通扰乱/伪报玩家长期观察主要为 **1～2 回合**；
-- 日文 Wiki 明确说会心后**至少持续 2 回合**；
-- 旧 2ch 同样说明计略会心的核心效果是“混乱/火计/伪报至少持续2回合”；
-- 部分后期专项实测认为会心常见为 2～3 或固定观察到 3。
-
-来源：
-- https://w.atwiki.jp/sangokushi11/pages/85.html
-- https://w.atwiki.jp/sangokushi11/pages/1964.html
-- https://www.gamersky.com/handbook/200604/22297.shtml
+这条只属于“少兵自动混乱”来源，不能反推出普通计略的伪报/扰乱也使用同一分布。
 
 ---
 
-### 7F. 性格 / 智力：影响会心率，不进入恢复函数
+### 7F. 普通伪报 / 扰乱的初始计数仍缺 exact
 
-`[PC-PK1.1][reverse-engineered]`
-
-`函数[计策爆击率].txt` 明确显示，施法方主将性格进入“伪报/扰乱的会心率”计算。
-
-伪报的性格修正：
+普通计略效果入口已定位：
 
 ```text
-胆小 +10
-冷静  +5
-刚胆   0
-莽撞  -5
+005917D0  伪报
+00591A20  扰乱
+00591C70  镇静
 ```
 
-扰乱正好偏向另一端：
+但公开逆向记录没有展开前两个函数体内“初始 duration 怎样生成”的逐指令。
+
+目前可靠边界：
+
+- 日文 Wiki 只写普通伪报/扰乱持续“数回合”；
+- 会心伪报/扰乱至少持续2回合；
+- 2007旧讨论里有“会心3回合”的玩家记忆，只作为历史经验，不升级为精确常量。
+
+所以不能源码级填：
 
 ```text
-胆小  -5
-冷静   0
-刚胆  +5
-莽撞 +10
+普通1/2的概率
+会心2/3的概率
 ```
 
-施法方/受术方智力也进入会心率计算。
+---
 
-但是已经进入异常状态以后，`00599B90` 的恢复逻辑没有读取智力、性格、适性或兵种，只读取：
+### 7G. 性格 / 智力影响会心，不进入后续恢复函数
 
-- 当前异常计数；
-- 是否处于 PK 防御设施加速范围。
+计策爆击率逆向显示，性格和双方智力参与伪报/扰乱的会心判定。
 
-所以正确建模是：
+但 `00599B90` 的后续倒计时不读取这些属性。
+
+正确分层是：
 
 ```text
-性格/智力
-→ 影响是否会心
-→ 会心影响初始异常持续值
-→ 后续每旬固定倒计时
+属性/性格
+-> 是否成功/是否会心
+-> 初始 duration（此处部分open）
+-> 每旬固定倒计时（已exact）
 ```
 
 而不是：
 
 ```text
-智力高 → 每旬更容易随机清醒
+智力高 -> 每旬更容易随机恢复
 ```
-
-逆向来源：
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[计策爆击率].txt
 
 ---
 
-### 7G. provisional-engine-rule：只替代“初始计数生成”
+### 7H. provisional-engine-rule：只替代初始 duration
 
-第一版不再模拟随机恢复，只对设置时的 duration 使用 fallback。
-
-公开 San11 重制项目 `sango_infinity` 对伪报与扰乱采用：
+开源复刻项目 `tankyc/sango_infinity` 的公开 `Skills.json` 对 ID24伪报、ID25扰乱采用：
 
 ```text
-普通：1回合 70%，2回合 30%
-会心：2回合 70%，3回合 30%
+普通：1回合70%，2回合30%
+会心：2回合70%，3回合30%
 ```
 
-这不是原作反汇编常量，但满足目前所有可靠边界，因此可作为工程默认：
+来源：
+
+- https://github.com/tankyc/sango_infinity/blob/main/Build/Content/Data/Common/Skills.json
+
+这不是原作证据，只能作为工程 fallback：
 
 ```ts
-function fallbackAbnormalDuration(isCritical) {
-  const base =
-    weightedChoice({
-      1: 0.70,
-      2: 0.30
-    })
-
-  return base + (isCritical ? 1 : 0)
+function fallbackInitialDuration(critical) {
+  const base = weightedChoice({1: 0.70, 2: 0.30})
+  return critical ? base + 1 : base
 }
 ```
 
-来源仅作为工程参考：
-- https://github.com/tankyc/sango_infinity/blob/master/Build/Content/Data/Common/Skills.json
-
-必须配置成：
-
-```ts
-rules.abnormal.initialDurationProfile
-```
-
-而不是写死在状态系统中。
+随后必须回到 exact 倒计时。
 
 ---
 
-### 7H. 重复施放：旧 fallback 的“额外 +1”删除
+### 7I. 重复施放
 
-旧规则：
+旧 fallback：
 
-```ts
-duration =
-  min(5, max(oldDuration, newDuration) + 1)
+```text
+min(5, max(old,new)+1)
 ```
 
-没有可靠原作依据，删除。
+没有原作证据，删除。
 
-当前在 `005917D0 / 00591A20 / SetTroopStatus` 函数体未完全展开前，重施策略保持独立 open-exactness。
+在 `005917D0 / 00591A20 / 004AEA70` 覆盖语义完全恢复前，工程上可暂用：
 
-初版建议只做保守刷新：
-
-```ts
-remaining =
-  max(currentRemaining, newlyRolledDuration)
+```text
+remaining = max(currentRemaining, newlyRolledDuration)
 ```
 
-并明确标记 `provisional-engine-rule`。
-
-这样不会因为重复施放人为制造一个原版未证实的“每次叠 +1、最多5回合”系统。
+但必须标 `provisional-engine-rule`。
 
 ---
 
-### 7I. 镇静
+### 7J. 镇静
 
-`[COMMON][confirmed mechanism]`
+镇静是主动清除混乱/伪报，不走自然倒计时。
 
-镇静是主动解除混乱/伪报，不走自然倒计时。
+日文 Wiki 记录会心镇静会扩展到目标邻接友军。该行为与自然恢复系统分开实现。
 
-会心镇静会把效果扩展到目标邻接友军，这一点日文 Wiki 明确。
+---
 
-所以：
+### 第7项剩余 exactness
+
+现在真正剩下：
+
+1. `005917D0` 普通伪报初始 duration 原函数；
+2. `00591A20` 普通扰乱初始 duration 原函数；
+3. `004AEA70` 对已有异常的精确刷新/覆盖语义；
+4. 原版螺旋突刺混乱 duration 的逐指令链；
+5. Vanilla/主机版逐指令差异。
+
+**自然恢复本身已经解决，不再是概率问题。**
+
+详细专项见 `28-status-duration-recovery.md`。
+
+## 6.99 野外补给 / 输送抵达（P0-13）
+
+> 专项： [48-supply-transport-finalizer-exactness.md](48-supply-transport-finalizer-exactness.md)。
+
+野外补给 fallback：
 
 ```ts
-onCalmdownSuccess(target) {
-  clearAbnormalStatus(target)
+accepted = min(requested, targetRemainingCapacity, supplierAvailable)
+supplier -= accepted
+target += accepted
+```
 
-  if (critical) {
-    for (const ally of adjacentAllies(target)) {
-      clearAbnormalStatus(ally)
-    }
+枪/戟/弩/马补兵还需：
+
+```text
+acceptedTroops <= supplierMatchingEquipment
+```
+
+未转移资源继续留在 supplier；不要套用“据点抵达 overflow 丢弃”。
+
+气力兼容取整：
+
+```ts
+mixedMorale = floor(
+  (oldTroops*oldMorale + addTroops*incomingMorale)
+  / (oldTroops+addTroops)
+)
+```
+
+这里 floor 只是 compatibility-rounding，原 troop→troop helper 未恢复。
+
+输送抵达据点：
+
+```text
+按据点容量接收
+overflow -> discard + warning
++200 merit
+transport completion
+```
+
+overflow discard 是PC empirical-high；逐字段 opcode/order仍open。
+
+---
+
+## 6.9 技巧研究时间（P0-14）
+
+> 专项： [49-technique-research-time-exactness.md](49-technique-research-time-exactness.md)。
+
+时间 calculator containing function：
+
+```text
+005D7DD0 .. 005D7EFF
+```
+
+人才府末端修正 exact：
+
+```ts
+if (hasTalentOffice)
+  turns -= 2
+
+turns = max(1, turns)
+```
+
+基础矩阵未恢复前，兼容 fallback 继续：
+
+```text
+枪戟弩骑练兵：3/4/6/9旬
+发明防卫火攻内政：4/5/7/10旬
+```
+
+然后 exact 应用人才府 -2旬、最低1旬。
+
+超级70/140/210/280仅作为 empirical-high profile；不要复制给初级/上级。
+
+---
+
+## 7.0 训练资格 / 已训练重置 / 野外气力恢复（P0-11）
+
+> 专项： [46-training-morale-exactness.md](46-training-morale-exactness.md)。
+
+训练状态：
+
+```ts
+if (sp.trainingCompleted)
+  rejectTraining()
+
+// 成功执行后
+sp.trainingCompleted = true
+
+// 下一回合/旬可操作前
+sp.trainingCompleted = false
+```
+
+“每回合一次”是 official-confirmed；但 reset 的原 caller 仍open。
+
+据点 gate 必须 profile 化：
+
+```ts
+canTrainAtSP = fidelity005C4100Profile
+```
+
+不要自行把“满气力/零兵力”等条件标成原函数 exact，直到 `005C4100` body 恢复。
+
+野外恢复：
+
+```ts
+if (inMusicPlatformRange)
+  gain = hasPoetry ? 20 : 10
+else if (hasMusic)
+  gain = 5
+else
+  gain = 0
+```
+
+最后按100/120气力上限裁剪。
+
+---
+
+## 7.0.1 阵系耗粮重叠 / 粮尽逃兵（P0-12）
+
+> 专项： [47-food-overlap-starvation-exactness.md](47-food-overlap-starvation-exactness.md)。
+
+### 防御设施 multiplier
+
+原版只选择一个设施 type；禁止倍率相乘。
+
+兼容 selector：
+
+```ts
+selectedType =
+  highestTier(overlappingFriendlyDefenseFacilities)
+```
+
+即城塞 > 砦 > 阵，但只标：
+
+```text
+provisional-engine-rule
+```
+
+倍率必须使用原 float32 bit pattern，不能替换成5/3、4/3。
+
+### starvation
+
+严格 fidelity：
+
+```text
+starvationProfile = unresolved-original
+```
+
+旧兼容模式若必须保持历史模拟：
+
+```text
+retentionPerTurn = 0.76
+```
+
+但标签必须：
+
+```text
+legacy-compatibility-only
+provenance-unresolved
+```
+
+不要再标 empirical-high。
+
+---
+
+## 7.1 部队主副将关系 / 浮点取整（P0-10）
+
+> 专项： [45-deputy-rounding-exactness.md](45-deputy-rounding-exactness.md)。
+
+### 不再需要 rounding fallback
+
+`00707A74` 已识别为 MSVC `_ftol2`：
+
+~~~text
+san11FloatToInt(x) = trunc toward zero
+~~~
+
+正常正值：
+
+~~~text
+= floor(x)
+~~~
+
+所以不要再提供可切换的 `round/floor/trunc` profile。
+
+### 关系 helper
+
+可直接实现：
+
+~~~text
+普通：main + floor(max(sub-main,0)/4)
+亲爱：main + floor(max(sub-main,0)/2)
+夫妻/义兄弟：max(main,sub)
+血缘：main + floor(max(sub-main,0)/3)
+~~~
+
+其中血缘/3仍标 cross-platform-high，而非 PC opcode exact。
+
+两副将：
+
+~~~text
+max(combine(main,sub1), combine(main,sub2))
+~~~
+
+不能相加。
+
+### 仍需 profile 化的只剩
+
+- 血缘PC opcode；
+- 夫妻/义兄弟PC exact branch；
+- 单向亲爱/结义关系检查方向；
+- Vanilla/主机版；
+- x87中间精度极端边界。
+
+---
+
+## 7.2 部队出征 / 回城资源事务（P0-9）
+
+> 专项： [44-troop-resource-transaction-exactness.md](44-troop-resource-transaction-exactness.md)。
+
+### 可以固定的容量与资源语义
+
+~~~text
+battle:
+  money <= 10000
+  food  <= 50000
+
+transport:
+  troops <= 60000
+  money <= 100000
+  food <= 500000
+  ordinary equipment quantity <= 100000
+~~~
+
+战斗兵装成本 fallback：
+
+~~~text
+ID0      0
+ID1..4   selectedTroops
+ID5..8   1
+ID9      0
+ID10..11 1
+~~~
+
+其中 1..4 等量为 official/gameplay-high；件数型=1 为 documented/empirical-high。
+
+### finalizer 未恢复前的工程事务
+
+~~~text
+1. commit 时重新校验 source inventory
+2. 原子扣除据点资源
+3. 写入 runtime troop
+4. 任一步失败则工程层 rollback
+~~~
+
+这四步是 engineering safety profile，不能标成原 EXE 顺序。
+
+### 回城 overflow fallback
+
+~~~text
+accepted = min(incoming, remainingCapacity)
+overflow = incoming - accepted
+overflow -> discard + warning
+~~~
+
+“超过容量会损失”有原作实测支持；逐资源处理顺序仍 open。
+
+### 禁止事项
+
+不能：
+
+- 把 sub_647250 / sub_647AC0 / sub_615790 当 finalizer；
+- 把现代 sango_infinity 的 Cost/Remove/EnterCity 顺序当原版；
+- 把 woundedTroops 的现代返还策略反推为 San11；
+- 把 transport 件数型舰船/攻具无条件套普通100000 quantity语义。
+
+---
+
+## 7.3 官职自动分配 selector（P0-8）
+
+> 专项： [43-auto-office-selector-exactness.md](43-auto-office-selector-exactness.md)。
+
+### 不再 fallback 的核心
+
+单个官职的 `005FAF00` scoring/tie 已恢复，不再自拟“按功绩排序”。
+
+实现：
+
+```ts
+best = null
+bestScore = INT_MIN
+
+for (person of callerCandidates) {
+  if (!qualification005FA4D0(person, office))
+    continue
+
+  if (person.trueLoyalty < 90)
+    continue
+
+  score =
+    mode === "weighted-threshold"
+      ? originalWeightedScore(person, office)
+      : originalAffinityScore(person, office)
+
+  if (score == null)
+    continue
+
+  if (score > bestScore) {
+    best = person
+    bestScore = score
   }
 }
 ```
 
-来源：
-- https://w.atwiki.jp/sangokushi11/pages/85.html
+相同 score 不替换。
+
+### 仍需 fallback 的只有 caller 层
+
+未知：
+
+```text
+candidate list 的原始顺序
+arg3 的业务映射
+多个 office 的遍历顺序
+已分配武将何时移出后续候选
+```
+
+若引擎必须先闭环：
+
+```ts
+callerCandidateOrder =
+  stablePersonIdAscending
+
+officeTraversal =
+  officeIdAscending
+
+removeSelectedImmediately =
+  true
+```
+
+全部标：
+
+```text
+provisional-caller-scheduler
+```
+
+不要把这些 fallback 混入已经闭合的 `005FAF00` selector。
+
+模式字段必须写：
+
+```text
+weighted-threshold
+role-affinity
+```
+
+在 caller xref 恢复前不要改名成 `AI/player`。
 
 ---
 
+## 7.4 俘虏资金不足释放 / 主动释放（P0-7）
+
+> 专项： [42-captive-release-exactness.md](42-captive-release-exactness.md)。
+
+### 资金不足：人数 exact，排序 profile 化
+
+```ts
+paidCount =
+  min(prisonerCount, floor(gold / 50))
+
+releaseCount =
+  prisonerCount - paidCount
+```
+
+原作已经确认存在：
+
+```text
+0058C320 comparator
+→ 004AA200
+→ 004A8E10 裁剪到 releaseCount
+→ 0058D1D0
+→ 月末段 0058D430 finalizer
+```
+
+但 comparator 字段/方向未恢复。
+
+因此 fallback 只允许：
+
+```ts
+maintenanceReleaseSelector =
+  stablePersonIdOrder
+```
+
+并必须标：
+
+```text
+provisional-engine-rule
+```
+
+不能自拟“低能力先放 / 高能力先放 / 低忠先放”。
+
+### 主动释放技巧P
+
+官方只确认正向增加技巧P，未给点数。
+
+兼容 fallback：
+
+```ts
+manualReleaseTechniquePointGain = 3
+```
+
+证据等级仅：
+
+```text
+empirical-compatibility
+```
+
+### Forbidden 按 cause 分离
+
+不要写：
+
+```ts
+releaseCaptive() {
+  forbiddenMonths = 3
+}
+```
+
+建议至少：
+
+```ts
+type CaptiveExitCause =
+  | "natural-escape"
+  | "maintenance-shortfall"
+  | "manual-exile-command"
+  | "immediate-after-capture"
+  | "force-destruction"
+  | "diplomatic-exchange"
+```
+
+兼容 profile 可暂用：
+
+```ts
+{
+  "natural-escape": 3,
+  "manual-exile-command": 3, // disputed candidate
+  "maintenance-shortfall": null,
+  "immediate-after-capture": null,
+  "force-destruction": 0,
+}
+```
+
+`null` 表示 exact open，不等于0。
+
+资金不足自动释放默认**不要发主动命令的技巧P奖励**，除非后续恢复 `0058D430` 证明它会走相同奖励函数。
+
+---
+
+## 7.5 褒赏 / 欠薪 / 流言非自然忠诚（P0-6）
+
+> P0-6 专项见 [41-nonnatural-loyalty-exactness.md](41-nonnatural-loyalty-exactness.md)。
+
+### 结论
+
+当前不再允许以下三个旧式 fallback：
+
+```text
+褒赏 = 固定 +3..10
+欠薪 = 剩余资金部分支付后统一 -10..30
+流言 = 成功后全城所有武将统一 -N
+```
+
+### 金钱褒赏
+
+命令层固定：
+
+```ts
+costGold = 100 * count
+costAP   = 5 * count
+```
+
+忠诚增量必须 profile 化：
+
+```ts
+gain = cashRewardProfile.roll({
+  rulerCharm,
+  target,
+  rng,
+})
+```
+
+当前没有精确原函数。已有 +5/+8/+9 原作实测，因此不要采用现代复刻“保底11”的规则。
+
+### 月俸事务
+
+PC-PK1.1 外层精确：
+
+```ts
+function settleSalary(postCaptiveGold, salarySum) {
+  if (salarySum <= postCaptiveGold) {
+    return {
+      gold: postCaptiveGold - salarySum,
+      shortfall: false,
+    }
+  }
+
+  return {
+    gold: postCaptiveGold, // 不扣部分工资
+    shortfall: true,
+  }
+}
+```
+
+欠薪时：
+
+```text
+0058D5E0
+→ 累计待处理武将
+→ 所有据点扫描完
+→ 0058C190
+```
+
+受罚 selector 与 loss 值仍 open，不能自拟为“全员固定掉忠”。
+
+### 流言
+
+第一版只能把接口写对：
+
+```ts
+const targets =
+  rumorProfile.selectTargets(city, rng)
+
+for (const person of targets) {
+  changeLoyalty(
+    person,
+    -rumorProfile.rollLoss(person, rng)
+  )
+}
+
+rumorProfile.applySecurity(city, rng)
+```
+
+不能写：
+
+```ts
+for (const person of city.officers) {
+  person.loyalty -= random(8, 15)
+}
+```
+
+百人都市在300+成功流言后仍只有少数武将明显掉忠，已足以否定 blanket-all-officer 模型。
+
+现代复刻中的“全员8..15+义理加权”继续标 `mod/reconstruction-only`。
+
 ### 剩余 exactness
 
-第 7 项现在只剩两个真正未知点：
+- 褒赏原 RNG/魅力/义理公式；
+- 宝物授予/没收 exact value mapping；
+- `0058D5E0 / 0058C190`；
+- `005D05B0 / 005D05F0`；
+- 流言 target selector / loyalty loss / security loss。
 
-1. `005917D0` 伪报初始回合数生成；
-2. `00591A20` 扰乱初始回合数生成，以及重复施放时 setter 的覆盖策略。
+---
 
-**自然恢复本身已经解决，不再是概率问题。**
-
-
-## 8. 单挑连续命中 / 伤害函数
+## 8. 单挑连续命中 / 伤害函数（E14 已闭合通用核心）
 
 ### 结论：核心连续公式已找到，不再需要自拟 ratio fallback
 
@@ -1581,10 +2023,10 @@ onCalmdownSuccess(target) {
 注意：该项目后来把吕布、关羽、张飞等**特定武将例外**改成了 `DuelPersonBehaviours` 数据驱动 hook。以下公式只抽取 hook 之前/之外的**通用原作核心**，不把该项目新增 MOD 配置反向当成原版事实。
 
 来源：
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Duel/DuelEnum.cs
-- https://github.com/tankyc/sango_infinity/blob/master/Data/事件系统-项目变更影响评估.md
-- https://github.com/tankyc/sango_infinity/blob/master/Data/Export/export311Scenario.bat
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/DuelEnum.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Data/事件系统-项目变更影响评估.md
+- https://github.com/tankyc/sango_infinity/blob/main/Data/Export/export311Scenario.bat
 
 ---
 
@@ -1951,7 +2393,41 @@ base = trunc(50 * 20 / 55) = 18
 
 ---
 
-### 8H. 原 fallback 删除
+### 8H. 斗志增长也已闭合
+
+E14 还恢复：
+
+```ts
+n = max(value, minimum)
+n = trunc(n * stance.spiritGain / 7)
+
+if (receivingHit)
+  n = trunc(n * 5 / 4)
+
+if (hp < 30)
+  n = n * 2
+else if (hp < 50)
+  n = trunc(n * 3 / 2)
+
+if (hasSword)
+  n = trunc(n * 3 / 2)
+```
+
+难度另有：
+
+```text
+初级玩家 ×6/5
+超级玩家 ×4/5
+超级AI ×6/5
+```
+
+其中 `minimum` 通常为3；被击且处于防御/斗志重视时为5。
+
+因此“剑提高斗志的系数”也不再 open，精确为最终增长 `×3/2`。
+
+---
+
+### 8I. 原 fallback 删除
 
 旧：
 
@@ -1992,7 +2468,7 @@ damage =
 
 ---
 
-### 8I. 版本边界与剩余 exactness
+### 8J. 版本边界与剩余 exactness
 
 当前可以升级为高置信 reverse-engineered 的是：
 
@@ -2024,7 +2500,7 @@ vanillaGenericDuelCore.status =
 ---
 
 
-## 9. 舌战普通牌心理伤害
+## 9. 舌战普通牌心理伤害（E15 已闭合通用核心）
 
 ### 结论：普通话题牌心理伤害公式已恢复，不再需要 provisional fallback
 
@@ -2046,8 +2522,8 @@ vanillaGenericDuelCore.status =
 和单挑一样，该项目后续加入了 `DebatePersonBehaviours` 数据驱动人物 hook。下面只取 hook 之前的**通用核心**，不把后来新增的人物 MOD 修正冒充原作。
 
 来源：
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs
 
 ---
 
@@ -2467,6 +2943,37 @@ vanillaDebateCore.status =
 
 ---
 
+### 9L. E15 额外边界：power / hp / stress / effect 必须分层
+
+实现层必须至少拆成：
+
+```ts
+cardPower
+hpDamage
+stressDamage
+specialEffect
+```
+
+不能复用一个 `damage` 字段。
+
+典型反例：
+
+```text
+无视：
+power=120
+hpDamage=0
+stressDamage=30
+
+激昂：
+power=0
+hpDamage=0
+stressDamage=40
+```
+
+诡辩也不是固定伤害牌，而是条件式反弹普通话题伤害模板。
+
+---
+
 ### 剩余 exactness
 
 第 9 项“普通牌心理伤害公式”本身已经解决。
@@ -2479,27 +2986,16 @@ vanillaDebateCore.status =
 4. 舌战胜利后的追击/留情、负伤等结算边界。
 
 
-## 10. 非骑战法来源的负伤 / 战死概率
+## 10. 非骑战法来源的负伤 / 战死概率（E16 已闭合主分流）
 
-### 结论：删除“部队击破统一伤亡率”；按明确来源分别结算
+### 结论：删除“部队击破统一伤亡率”，改为 source-specific resolver
 
-这一项最大的纠错是：**没有证据支持原版在每次普通攻击/普通战法击破部队后，再统一掷一次 2%/4% 战死与 12% 负伤。**
-
-目前 PC-PK 逆向能明确识别的武将战场伤亡来源包括：
-
-1. 骑兵“突击 / 突进”的专用战死判定；
-2. 特技“猛者”的 50% 负伤；
-3. 业火种 / 业火球的专用炸伤 / 炸死函数；
-4. 单挑中的急所 / 无双 / 假退却等专用负伤与单挑结果。
-
-普通部队兵力归零主要进入**俘虏 / 逃走 / 返回所属地**的击破结算，而不是再套一个通用战死 RNG。
-
-因此旧 fallback：
+旧 fallback：
 
 ```ts
 deathChance =
-  deathSetting === "none" ? 0 :
-  deathSetting === "normal" ? 0.02 :
+  none ? 0 :
+  normal ? 0.02 :
   0.04
 
 injuryChance = 0.12
@@ -2507,377 +3003,146 @@ injuryChance = 0.12
 
 整体删除。
 
----
+PC-PK1.1 当前明确来源：
 
-### 10A. 业火种 / 业火球：专用 casualty 函数已逐指令确认
+| 来源 | 处理 |
+|---|---|
+| 普通攻击/一般战法/设施攻击壊灭 | 无额外通用 casualty roll |
+| 弩/井阑/舰船火矢、贯射、乱射 | `005974C0` 狙伤 |
+| 猛者+成功位移 | 50%负伤 |
+| 业火种/业火球 | `00597350` 战死+负伤 |
+| 骑兵突击/突进 | 专用战死 |
+| 单挑 | 专用结算 |
 
-`[PC-PK1.1][reverse-engineered]`
+### 10A. 共用候选
 
-311MemoryResearch 的：
+`005971F0 DesignateInjuredPersonnel` 先从部队中指定合法候选，并处理护卫/强运。
 
-`内存资料/函数[火陷阱炸伤炸死].txt`
+所以所有概率表都是“候选已选中后的 conditional chance”；多将部队单人的 unconditional chance 仍缺 selector。
 
-明确显示，火陷阱伤害处理结束后只有：
+### 10B. 弩系狙伤
 
-- ID 16：业火种
-- ID 15：业火球
-
-会调用：
-
-`00597350`
-
-进行武将炸死 / 炸伤判定。
-
-普通火种、火焰种、火球、火焰球、火船都**不会进入这条 casualty 分支**。
-
-其中火船另有 25% 混乱判定；业火种另有 50% 混乱判定，但这是状态异常，不是武将伤亡。
-
----
-
-### 10B. 候选武将先经过护卫 / 强运过滤
-
-`00597350` 在战死和负伤阶段都会分别调用：
-
-`005971F0 DesignateInjuredPersonnel`
-
-SIRE 地址表也明确把该函数命名为“预定受伤人员”。
-
-311MemoryResearch 的逐指令注释确认这里会考虑：
-
-- 护卫
-- 强运
-
-所以流程不是：
+```ts
+P =
+  tacticBase
+  + statComparisonTier
+  + personality
+  + criticalBonus
+  - 1
+```
 
 ```text
-每名武将各自独立掷一次
+tacticBase:
+三种火矢0 / 贯射1 / 乱射2
+
+statTier:
+-2 / -1 / 0 / +1
+
+personality:
+小心0 / 冷静1 / 刚胆2 / 莽撞3
+
+critical:
+普通0 / 会心1
 ```
 
-而是：
+原码 `0059753A = 0F 95 C1` 是 `SETNE CL`，所以会心+1是有效原逻辑；旧中文汇编注释的“setnc”只是 mnemonic 写错。
+
+SIRE 原帖确认 statTier 四个输出。现代复核给出的阈值：
 
 ```text
-从部队中指定一名合法候选
-→ 对该候选计算概率
-→ 掷一次
+diff<=0 -> -2
+1..6    -> -1
+7..12   -> 0
+>12     -> +1
 ```
 
-战死判定结束以后，负伤阶段会**再次调用 005971F0**，所以两个阶段可以指定不同候选。
+阈值暂标 secondary-corroborated。
 
-这意味着一次业火爆炸理论上可以：
+理论峰值6%。
 
-- 一人战死；
-- 随后另一名合法武将再负伤。
+成功调用 `005963E0`，只负伤、不战死。
 
-公开文本尚未展开 `005971F0` 的完整“多名合法候选时如何挑人”算法，所以**单个指定武将的最终 unconditional 概率**还要乘上候选选中概率；下面给出的百分比是“该武将已经被指定为候选”后的 conditional chance。
+### 10C. 火矢特殊边界
 
-来源：
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[火陷阱炸伤炸死].txt
-- https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
+“火矢不进入业火炸伤函数”仍成立：
 
----
+```text
+no call 00597350
+```
 
-### 10C. 能力保护档：取统 / 武 / 智最大值
+但弩/井阑/舰船火矢会进入：
 
-`00596380` 读取目标武将：
+```text
+005974C0 狙伤
+```
+
+所以不能再写成“火矢只扣兵，不伤将”。
+
+### 10D. 业火 casualty
+
+能力保护：
 
 ```ts
-M = max(leadership, strength, intelligence)
+protection =
+  max(LDR,WAR,INT) <=70 ? 0 :
+  <=80 ? 1 :
+  <=90 ? 2 : 3
 ```
 
-并返回：
+战死：
 
 ```ts
-abilityProtection =
-  M <= 70 ? 0 :
-  M <= 80 ? 1 :
-  M <= 90 ? 2 :
-            3
+death =
+  max(0, base + personality - protection)
+
+base = normal?2 : high?4
 ```
 
-注意这个值在汇编里是被 **SUB** 掉：
+无战死跳过死亡。
 
-```asm
-call 00596380
-sub  esi, eax
-```
-
-所以能力越高，炸伤 / 炸死概率越低。
-
-网上有一篇流传较广的火攻文章把这里写成：
-
-`A + 性格 + 能力档`
-
-并得出“属性越高反而越容易炸死/炸伤”的结论；这与 `00597350` 的实际 `sub esi,eax` 冲突，因此 repo 不采用该转载公式。
-
----
-
-### 10D. 性格内部值
-
-原枚举顺序：
+负伤：
 
 ```ts
-Timid    = 0 // 小心/胆小
-Calm     = 1 // 冷静
-Bold     = 2 // 刚胆
-Reckless = 3 // 莽撞/猪突
+injury =
+  max(0, 2 + personality - protection)
 ```
 
-因此性格越莽撞，火陷阱 casualty chance 越高。
+负伤不受战死设置关闭影响，并重新选择候选。
 
-这也与老玩家长期观察“猪突更容易被骑兵突死、谨慎更安全”的方向一致。
+### 10E. 猛者
 
----
-
-### 10E. 业火炸死率：精确条件式
-
-战死设置：
-
-```ts
-baseDeath =
-  deathMode === "none"   ? null :
-  deathMode === "normal" ? 2 :
-  deathMode === "high"   ? 4 :
-                           0
+```text
+0059781A 猛者
+00597725 50%
 ```
 
-若 `deathMode === "none"`，整个战死阶段直接跳过。
+成功推动目标的战法后，50%造成敌将负伤。
 
-其余情况：
+### 10F. 不存在普通击破统一伤亡 roll
 
-```ts
-deathChance =
-  max(
-    0,
-    baseDeath
-      + personalityInternal
-      - abilityProtection
-  )
-```
+原版目前明确识别出的 casualty 均有专用入口。后续 MOD 又把“全兵种战法负伤/讨杀”作为新增系统，也支持不要把这种能力反投射给原作。
 
-然后：
+fidelity：
 
 ```ts
-if (chance(deathChance)) {
-  battleDeath(candidate)
+resolveOrdinaryDestruction() {
+  resolveCaptureOrEscape()
 }
 ```
-
-#### 普通战死设置
-
-| max(统,武,智) | 小心 | 冷静 | 刚胆 | 莽撞 |
-|---|---:|---:|---:|---:|
-| ≤70 | 2% | 3% | 4% | 5% |
-| 71–80 | 1% | 2% | 3% | 4% |
-| 81–90 | 0% | 1% | 2% | 3% |
-| >90 | 0% | 0% | 1% | 2% |
-
-#### 高战死设置
-
-| max(统,武,智) | 小心 | 冷静 | 刚胆 | 莽撞 |
-|---|---:|---:|---:|---:|
-| ≤70 | 4% | 5% | 6% | 7% |
-| 71–80 | 3% | 4% | 5% | 6% |
-| 81–90 | 2% | 3% | 4% | 5% |
-| >90 | 1% | 2% | 3% | 4% |
-
-这里按概率语义对 `<=0` 统一视为 0。
-
----
-
-### 10F. 业火炸伤率：与战死设置无关
-
-即使设置为“无战死”，仍然会进入受伤阶段。
-
-同样先重新指定合法候选，然后：
-
-```ts
-injuryChance =
-  max(
-    0,
-    2
-      + personalityInternal
-      - abilityProtection
-  )
-```
-
-因此：
-
-| max(统,武,智) | 小心 | 冷静 | 刚胆 | 莽撞 |
-|---|---:|---:|---:|---:|
-| ≤70 | 2% | 3% | 4% | 5% |
-| 71–80 | 1% | 2% | 3% | 4% |
-| 81–90 | 0% | 1% | 2% | 3% |
-| >90 | 0% | 0% | 1% | 2% |
-
-成功后调用：
-
-`005963E0`
-
-执行具体伤病处理。
-
-`005963E0` 的“到底升到轻伤/重伤/濒危哪一级”的完整函数体尚未在公开 TXT 中展开，因此**概率已解决，伤病等级分布仍 open**。
-
----
-
-### 10G. 猛者：50% 是独立专用来源
-
-`[COMMON][confirmed/empirical-high]`
-
-猛者的官方/同期攻略描述长期一致：
-
-> 使用能够推动敌部队的战法并成功产生位移后，50% 概率使敌将负伤。
-
-因此：
-
-```ts
-if (
-  attackerHasFierceWarrior &&
-  tacticSuccessfullyMovedTarget
-) {
-  if (chance(50)) {
-    resolveMightyWarriorInjury(targetUnit)
-  }
-}
-```
-
-不能把猛者 50% 和业火 2～5% 再叠成一条“通用攻击负伤率”。
-
-来源：
-- https://www.gamersky.com/handbook/200603/21610.shtml
-- https://w.atwiki.jp/sangokushi11/pages/593.html
-
-猛者最终伤到三人部队中的哪一人，以及具体伤病等级，当前仍可复用统一 casualty-candidate / injury-severity 接口，等待对应原函数进一步展开。
-
----
-
-### 10H. 普通攻击 / 普通战法 / 攻击设施：不添加额外武将 casualty roll
-
-`[PC-PK1.1][negative-reverse-evidence-high]`
-
-已经逐项检查：
-
-- `函数[部队攻击].txt`
-- `函数[战法效果].txt`
-- `函数[强制单挑].txt`
-
-都没有调用：
-
-- `00597350` 火陷阱伤死函数；
-- `005971F0` casualty candidate selector；
-- `005963E0` 伤病处理；
-- `004ACBE0` 战死处理。
-
-而火陷阱文件只有在 ID15/16 的明确分支才调用 `00597350`。
-
-社区机制资料同样把可主动造成武将伤亡的主要来源单列为：
-
-- 骑兵战法 → 战死；
-- 猛者 → 负伤；
-- 业火系 → 负伤/战死；
-- 单挑 → 负伤/战死。
-
-普通部队壊灭相关特技“血路”处理的是**不被俘虏**，早期“捕缚”攻略也把普通最后一击描述为捕获武将，而不是额外产生随机战死。
-
-更强的旁证是后来的 San11 PK2.2 MOD 把：
-
-- “全兵种战法负伤系统”
-- “全兵种战法讨杀系统”
-
-明确当作**新增功能**宣传。如果原版本来就有全兵种通用伤亡 roll，这两项就不应是新增系统。
-
-因此 fidelity 引擎采用：
-
-```ts
-function resolveOrdinaryTroopDestruction(...) {
-  resolveCaptureOrEscape(...)
-  // no generic injury/death roll
-}
-```
-
-而不是旧：
-
-```ts
-rollGenericDeath()
-rollGenericInjury()
-```
-
-注意这句话只针对“普通攻击/普通战法/设施伤害导致兵力归零”的**额外通用武将伤亡 roll**。如果最后一击本身属于骑兵突击/突进、猛者位移、业火种/业火球、单挑等专用来源，仍先/另行执行对应专用规则。
-
-资料：
-- https://w.atwiki.jp/sangokushi11/pages/13.html
-- https://www.gamersky.com/handbook/200603/21633.shtml
-- https://www.bilibili.com/video/BV1yq4y1S7Mr/
-- https://www.bilibili.com/video/BV14P4y1s762/
-
----
-
-### 10I. 火计 / 火矢 / 普通着火格
-
-当前公开逆向把：
-
-- 火计 / 火矢点火；
-- 格子持续火伤；
-- 普通火种 / 火焰种 / 火球 / 火焰球；
-- 火船
-
-的兵力伤害与“业火种/业火球 casualty”分开。
-
-`00597350` 的 call-site 明确只接受 ID15/16。
-
-因此第一版 fidelity 规则：
-
-```ts
-ordinaryFireDamage:
-  troopDamageOnly
-
-wildfireTileTick:
-  troopDamageOnly
-
-basicFireTrap:
-  troopDamageOnly
-
-fireShip:
-  troopDamage + confusion25
-
-hellfireSeed:
-  troopDamage + confusion50 + casualtyCheck
-
-hellfireBall:
-  troopDamage + casualtyCheck
-```
-
-不再给“站在普通火里”每旬额外添加一个我们自拟的武将战死/负伤率。
-
----
-
-### 版本边界
-
-逐指令证据来自 PC-PK。
-
-Vanilla 同期已经存在：
-
-- 猛者；
-- 强运；
-- 护卫；
-- 骑兵战法战死。
-
-但业火种/业火球属于后期技巧链的具体代码仍应按版本资料核对；无印/主机版在未做二进制回归前，不把 PC-PK 的 `00597350` 常量跨版本标成源码级 confirmed。
-
----
 
 ### 剩余 exactness
 
-第 10 项现在只剩：
+- `005971F0` selector；
+- `005963E0` severity；
+- `00596480` 阈值原指令；
+- 猛者 target/severity；
+- 跨版本/平台。
 
-1. `005971F0` 多名合法武将时，候选人的精确选择算法；
-2. `005963E0` 负伤成功后的伤病等级分布；
-3. 猛者具体“选中哪名敌将 / 伤到哪一级”的原函数；
-4. Vanilla 与各主机版是否完全共用 PC-PK casualty 常量。
+详见 `31-non-cavalry-casualty-sources.md`。
 
-但原来的“普通击破统一 2%/4% 战死 + 12% 负伤”已经可以删除。
+## 11. 毒泉 / 栈道 / 落石伤害（E17 已闭合主问题）
 
-
-## 11. 毒泉 / 栈道 / 落石伤害
+E17 专项证据：`32-terrain-hazard-damage.md`；结构化数据：`../sources/terrain-hazard-damage.json`。
 
 ### 结论：PK1.1 的核心伤害参数已恢复；旧 fallback 全部撤回
 
@@ -3223,7 +3488,9 @@ vanillaTerrainHazard.status =
 ---
 
 
-## 12. 普通君主继承
+## 12. 普通君主继承（E18 已闭合主机制）
+
+E18 专项证据：`33-ruler-succession-priority.md`；结构化数据：`../sources/ruler-succession-priority.json`。
 
 ### 结论：玩家选择已确认；COM 自动继承可收敛为“关系层级 + 年长者”
 
@@ -3316,19 +3583,21 @@ function chooseAiSuccessor(oldLord, force) {
   const candidates = enumerateLegalSuccessors(force)
 
   const blood = candidates.filter(p => isBloodRelative(oldLord, p))
-  if (blood.length) return eldestStable(blood)
+  if (blood.length) return chooseWithinBloodFallback(blood)
 
   const sworn = candidates.filter(p => isSwornSibling(oldLord, p))
-  if (sworn.length) return eldestStable(sworn)
+  if (sworn.length) return chooseWithinSwornFallback(sworn)
 
   const spouse = candidates.filter(p => isSpouse(oldLord, p))
-  if (spouse.length) return eldestStable(spouse)
+  if (spouse.length) return chooseWithinSpouseFallback(spouse)
 
+  // 只有无特殊关系的普通候选，“年长者优先”是 empirical-high
   return eldestStable(candidates)
 }
 
 function eldestStable(candidates) {
-  return candidates.sort(ageDesc, birthYearAsc, personIdAsc)[0]
+  // 同龄 personId 仅为 deterministic engine fallback
+  return candidates.sort(birthYearAsc, personIdAsc)[0]
 }
 ```
 
@@ -3439,7 +3708,9 @@ San11 专属公开资料对零配下时的精确结束流程仍不够完整，�
 
 原综合评分 fallback 已废弃。
 
-## 13. 评定完整提案池
+## 13. 评定完整提案池（E19 静态池已闭合）
+
+E19 专项证据：`34-council-proposal-pool.md`；结构化数据：`../sources/council-proposal-pool.json`。
 
 ### 结论：具体提案词汇已经能从原版 MSG 完整恢复；真正仍未知的是“谁在什么局势下提哪一个”的选择函数
 
@@ -3794,7 +4065,7 @@ SIRE 确认武将结构里确实存在隐藏字段：
 
 ---
 
-### 13J. provisional-engine-rule：固定原版池，未知的只剩 chooser
+### 13J. provisional-engine-rule：固定E19的22类原版消息池，未知的只剩 chooser
 
 不再从整个 Command 集合动态发明 proposal type。
 
@@ -3919,7 +4190,9 @@ function generateCouncilProposal(officer, state, existing) {
 
 但**提案池本身已经不再 open**。
 
-## 14. 委任 AI 权重
+## 14. 委任 AI 权重（E20：统一权重表假设已撤回）
+
+E20 专项证据：`35-delegated-ai-architecture.md`；结构化数据：`../sources/delegated-ai-architecture.json`。
 
 ### 结论：原作不是统一 utility 分数表，而是“分阶段硬门槛 + 概率 + 专用选择函数”
 

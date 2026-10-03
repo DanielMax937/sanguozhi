@@ -1,5 +1,7 @@
 # 舌战（论战）
 
+> E15 已完成普通话题牌心理伤害专项审计；结构化证据、golden table 与版本边界见 `30-debate-psychological-damage.md`。
+
 ## 1. 基本流程
 
 `[COMMON][empirical-high]`
@@ -44,18 +46,57 @@ PCPK 1.1 有特殊场景诸葛亮 7 张的报告；PS2PK 也可能存在平台�
 ## 4. 话术牌
 
 ### 无视
-完全无效化对方本回合牌效，但会显著增加愤怒。
+
+牌力 `120`，是最高优先级之一。胜回合但本身不造成心理伤害：
+
+```text
+hpDamage = 0
+对方怒气 +30
+```
 
 ### 大喝
-除无视/大喝等对应克制外压制多数牌，并造成较大心理伤害。
+
+牌力 `110`。心理伤害继续走 `CalcHpDamage`，但固定使用：
+
+```text
+levelCoef = 15
+topicCoef = 12
+```
+
+所以“大喝攻击力固定”指牌模板固定，不代表不同智力武将永远扣完全相同的心理值。
 
 ### 诡辩
-可压制多数普通牌并造成话题/反伤类效果；具体匹配表应数据化。
+
+牌力 `20`。若压过对方普通话题牌，则：
+
+- 使用诡辩者自己的 `attack`；
+- 读取对方刚出话题牌的等级/话题模板；
+- 将该伤害反弹给原话题牌使用者。
+
+因此诡辩本身没有一个独立固定 hpDamage。
 
 ### 镇静
-降低对方愤怒，资料常见约降至一半附近。
+
+不走普通 hpDamage。效果层精确为：
+
+```ts
+stressDamage = -max(opponentStress / 2, 30)
+```
+
+并存在与诡辩的反射交互。
+
+### 激昂（逆上）
+
+不走普通 hpDamage：
+
+```text
+stress +40
+```
+
+并存在与诡辩/愤怒触发的反转交互。
 
 ### 愤怒
+
 愤怒槽满后进入性格相关的憤激状态。
 
 ## 5. 性格与憤激
@@ -83,7 +124,7 @@ PCPK 1.1 有特殊场景诸葛亮 7 张的报告；PS2PK 也可能存在平台�
   ```
 
 来源：
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
 - https://w.atwiki.jp/sangokushi11/pages/141.html
 
 ## 6. 智力差与舌战一击决胜
@@ -129,7 +170,7 @@ pInstantWin =
 所以旧文档“约15智力差、概率未知”已删除。
 
 来源：
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
 
 ## 7. 普通话题牌心理伤害：精确公式
 
@@ -192,7 +233,7 @@ hpDamage =
 大喝使用固定 `levelCoef=15`、`topicCoef=12`；同智力时约180～187心理伤害，仍受 attack 与 0～4 随机扰动，不是所有武将绝对固定扣同一个数。
 
 来源：
-- https://github.com/tankyc/sango_infinity/blob/master/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
+- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
 - https://www.4gamer.net/games/024/G002453/20060210150000/
 - https://www.gamersky.com/handbook/200604/22092.shtml
 

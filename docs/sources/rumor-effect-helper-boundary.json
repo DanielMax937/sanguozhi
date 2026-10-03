@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-23",
+  "target": "PC-PK1.1 rumor effect helpers and target-selector boundary",
+  "status": "audit-complete-effect-roles-open",
+  "reverse": {
+    "successCalculatorEnd": "005D05AD",
+    "postSuccessFunction1": [
+      "0x5D05B0",
+      "0x5D05F0"
+    ],
+    "postSuccessFunction2": [
+      "0x5D05F0",
+      "0x5D07C0"
+    ]
+  },
+  "resolved": {
+    "successFormulaSeparatedFromEffects": true,
+    "postSuccessHelpersAreDistinctFunctions": true,
+    "effectRoleAssignmentResolved": false,
+    "blanketAllOfficerSameLossRejected": true
+  },
+  "architecture": {
+    "targetSelector": "open",
+    "perTargetLoyaltyLoss": "open",
+    "securityLoss": "open",
+    "trueLoyaltyWriteLayer": "0..255"
+  },
+  "open": [
+    "005D05B0 full body",
+    "005D05F0 full body",
+    "business role of each helper",
+    "rumor loyalty target selector",
+    "per-target loyalty loss",
+    "security loss",
+    "relationship/giri/compatibility gates",
+    "RNG helper/call order",
+    "exact xref to ModifyPersonLoyalty/security setter",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/fudanglp/311resource"
+  ]
+}

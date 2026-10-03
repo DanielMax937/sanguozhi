@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-27",
+  "target": "PC-PK1.1 005BA4C0 deterministic hiring generator boundary",
+  "status": "audit-complete-formula-open",
+  "reverse": {
+    "function": "005BA4C0",
+    "functionBounds": [
+      "0x5BA4C0",
+      "0x5BA4F0"
+    ],
+    "functionLengthHex": "0x30",
+    "knownCallSite": "004AFE97",
+    "finalCompare": "CMP EAX,ECX; SETL DL"
+  },
+  "inputs": [
+    "dateKey",
+    "targetPersonId",
+    "executorPersonId",
+    "targetLoyalty",
+    "executorCharm",
+    "executorTargetCompatibilityDifference",
+    0
+  ],
+  "resolved": {
+    "normalHiringUsesDeterministicHelper": true,
+    "nonzeroModeUsesDifferentRuntimeProbabilityHelper": true,
+    "knownCrossDomainCallerFound": false,
+    "uniqueCallerProven": false,
+    "smallLeafHelperInterpretation": "high-confidence-structural"
+  },
+  "open": [
+    "005BA4C0 full body",
+    "exact input mixing order",
+    "return value range",
+    "arithmetic/hash/modulo/table behavior",
+    "meaning of seventh zero argument",
+    "undocumented other callers",
+    "Vanilla/PS2/Wii equivalence"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/fudanglp/311resource"
+  ]
+}
