@@ -1435,6 +1435,50 @@ remaining = max(currentRemaining, newlyRolledDuration)
 
 详细专项见 `28-status-duration-recovery.md`。
 
+## 6.99 野外补给 / 输送抵达（P0-13）
+
+> 专项： [48-supply-transport-finalizer-exactness.md](48-supply-transport-finalizer-exactness.md)。
+
+野外补给 fallback：
+
+```ts
+accepted = min(requested, targetRemainingCapacity, supplierAvailable)
+supplier -= accepted
+target += accepted
+```
+
+枪/戟/弩/马补兵还需：
+
+```text
+acceptedTroops <= supplierMatchingEquipment
+```
+
+未转移资源继续留在 supplier；不要套用“据点抵达 overflow 丢弃”。
+
+气力兼容取整：
+
+```ts
+mixedMorale = floor(
+  (oldTroops*oldMorale + addTroops*incomingMorale)
+  / (oldTroops+addTroops)
+)
+```
+
+这里 floor 只是 compatibility-rounding，原 troop→troop helper 未恢复。
+
+输送抵达据点：
+
+```text
+按据点容量接收
+overflow -> discard + warning
++200 merit
+transport completion
+```
+
+overflow discard 是PC empirical-high；逐字段 opcode/order仍open。
+
+---
+
 ## 7.0 训练资格 / 已训练重置 / 野外气力恢复（P0-11）
 
 > 专项： [46-training-morale-exactness.md](46-training-morale-exactness.md)。
