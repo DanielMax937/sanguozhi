@@ -483,7 +483,7 @@ P0-3 专项证据：`38-siege-capture-exactness.md`；结构化数据：`../sour
 
 1. **破城资源保留：已反汇编精确解决。**
 2. **攻城伤害：统一调用链和绝大部分倍率已反汇编，耐久基础式只剩两个子函数未公开文本展开。**
-3. **内政设施：保留数量档位已稳定实测，具体抽取哪几座的 RNG 仍未知。**
+3. **内政设施：P0-46已恢复固定IDB的候选/selector/RNG；stock原性、完整事务与跨版本仍open。**
 
 ---
 
@@ -491,7 +491,7 @@ P0-3 专项证据：`38-siege-capture-exactness.md`；结构化数据：`../sour
 
 `[PC-PK1.1][reverse-engineered]`
 
-311MemoryResearch 的 `函数[破坏内政设施和破城获取资源].txt` 直接整理了原函数 `004B329B`。
+311MemoryResearch 的 `函数[破坏内政设施和破城获取资源].txt` 整理了 `004B329B` 资源段。P0-46确认它是 `004B2CA0` 内部块，不是独立函数；新IDB证据的stock原性限定见 [81-capture-selector-source-profile.md](81-capture-selector-source-profile.md)。
 
 精确规则：
 
@@ -678,37 +678,35 @@ specialBase =
 
 ---
 
-### 4D. 内政设施保留：数量 resolved，选择 RNG open
+### 4D. 内政设施保留：来源算法已恢复，stock equivalence open
 
-`[COMMON][empirical-high]`
+当前专项：[81-capture-selector-source-profile.md](81-capture-selector-source-profile.md)；结构化证据：`../sources/capture-selector-source-profile.json`。
 
-数量规则：
+`[source-idb-30d33b44-capture-selector-v1][opcode-exact within source profile]`
 
-```ts
-keepCount =
-  charisma >= 100 ? 5 :
-  charisma >= 80  ? 4 :
-  charisma >= 60  ? 3 :
-  charisma >= 40  ? 2 : 1
+IDB输入路径含“血色5.0公测”；该标签只证明固定来源字节语义，`stockOriginalVerified=false`。stock PC-PK1.1复用为 `compatibility-reconstruction`；Vanilla独立 `compatibility-assumption`；PS2/Wii仍open。
+
+来源city-only分支按全局建筑链表序，取同城、已完成、非type30的内政候选，最多30个。内政分支没有owner gate；城市归属由坐标/地图地域映射。未完成另先销毁，完成铜雀台绕过且不占quota，不能把总残存数封为5。模型只消费已资格化有序候选，不负责这些世界筛选步骤。
+
+```text
+effectiveCharm = validCommander ? max(20, charmByte) : 20
+if n > 1:
+    for i in 0..n-1:
+        swap(candidate[i], candidate[GetRandomX(n)])
+keep = min(n, floor(effectiveCharm / 20))
+destroy = n - keep
+if capturingForceId not in 0..41:
+    destroy = n
+return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 ```
 
-来源：
-- https://w.atwiki.jp/sangokushi11/pages/1598.html
-- https://w.atwiki.jp/sangokushi11/pages/2469.html
+这不是Fisher–Yates，n>=2始终消耗n次draw，即使全保留或force override全毁。没有硬性5上限，120魅力在此byte-domain内对应6；旧Wiki100+→5只是未标build的城市攻略分档观察。无主将默认20不得替换为君主魅力。
 
-没有找到原版“具体哪几座留下”的排序/RNG函数。
+来源RNG为32位 `state=state*0x6C078965+0x3039`、取高16位再 `%n`（本selector域n<=30）。初始seed与全局调用顺序仍open。参考模型接受记录draw、显式来源state，或单独标 `provisional-engine-rule` 的工程SHA-256 seed适配器；不得把工程seed称为原游戏RNG。
 
-fallback：
+可替换入口：`scripts/capture_selector_profile.py`。trace/replay绑定来源指纹、profile、输入顺序/资格来源、魅力、forceId、全部draw与结果；不重抽，不按ID偷偷排序。验证：`python scripts/check_capture_selector_profile.py`，仅为局部模型与证据检查，非原EXE回归/完整捕获引擎。
 
-```ts
-const retained =
-  seededSampleWithoutReplacement(
-    existingDomesticFacilities,
-    min(keepCount, existingDomesticFacilities.length)
-  )
-```
-
-不要按“最贵/等级最高/最靠近造币谷仓”做人为偏置；现有玩家记录只支持“数量由魅力决定，具体项目不可控”。
+旧 `seededSampleWithoutReplacement` 仅是历史 `provisional-engine-rule`，不再作为这个来源profile的实现。原始经验来源仍保留：[魅力分档](https://w.atwiki.jp/sangokushi11/pages/1598.html)、[2011讨论](https://w.atwiki.jp/sangokushi11/pages/2469.html)。
 
 ---
 
@@ -733,13 +731,14 @@ const retained =
 
 ### 剩余 exactness
 
-第4项现在只剩：
+第4项仍需区分：
 
-1. `005ADE20` 冲车/木兽基础耐久函数的逐指令闭式；
-2. 内政设施具体保留对象的 RNG/排序；
-3. Vanilla EXE 与 PC-PK 这套伤害/资源代码是否逐字一致。
+1. `005ADE20` 等攻城耐久内部函数的完整闭式；
+2. P0-46来源selector与clean stock PC-PK1.1的等价性、完整capture caller/finalizer及全局RNG回放；
+3. Vanilla各补丁及PS2/Wii自身候选、selector、伤害/资源代码；
+4. 局部selector模型之外的候选资格化和事务集成验证。
 
-以上三点不能阻止引擎运行，而且都已有明确可替换接口。
+可以按显式版本/profile运行兼容重建，但测试通过不得升级原性等级。
 
 ## 5. 火焰持续与“自然蔓延”
 

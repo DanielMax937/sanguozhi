@@ -1,9 +1,10 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
-> Branch: `rules-audit-a1-b3`
-> PR: #2
+> Branch: `rules-audit-capture-selector-p0-46`
+> PR: new follow-up PR from current main; #2 is merged history
+> Base main: `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Primary target: PC-PK1.1
-> Updated: 2026-10-04
+> Updated: 2026-10-03 UTC
 
 ## 1. Current progress
 
@@ -19,8 +20,8 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
-- P0-45 complete
-- Next: P0-46
+- P0-46 audit complete: source-bound capture caller/selector recovered
+- Stock PC-PK1.1 equivalence, full capture finalizer and cross-version validation remain open
 
 Current source of truth:
 
@@ -32,18 +33,37 @@ Current source of truth:
 
 ## 2. Immediate next items
 
-### P0-46
-City / harbor / gate capture:
-domestic-facility destruction caller / selector xref boundary.
+### P0-46 completed audit: source-bound capture selector
 
-Targets:
+Current record: `docs/rules/81-capture-selector-source-profile.md` and
+`docs/sources/capture-selector-source-profile.json`.
 
-- identify capture-time destruction caller;
-- separate city capture from ordinary single-facility destruction;
-- locate retained/destroyed facility candidate list;
-- locate selector / RNG / ordering xref if public;
-- determine whether city / harbor / gate share one path;
-- preserve exact open state when body/xref is unavailable.
+- Recovered `004B2CA0` containing body, three direct callers, city-only
+  domestic branch, ordered candidate construction, count, RNG and destruction
+- `004B329B` is an interior resource block, not an independent selector
+- Source IDB records an input under `血色5.0公测`; opcode-exact claims are
+  restricted to its fingerprint. Stock PC-PK1.1 remains unverified
+- Reference planner and replay checks exist in `scripts/capture_selector_profile.py`
+  and `scripts/check_capture_selector_profile.py`; they accept prequalified
+  ordered candidates and do not implement the full capture transaction
+- PK reuse is `compatibility-reconstruction`; Vanilla reuse is a separate
+  `compatibility-assumption`. PS2/Wii are separate open targets
+
+### Immediate next research
+
+- Obtain an independently verified clean PC-PK1.1 build/hash and compare the
+  recovered bytes, without treating a MOD-associated input path as stock proof
+- Finish caller argument/cause coverage and capture finalizer side effects;
+  the newly found late durability floor is not a full pre-to-post capture formula
+- Validate source RNG initialization/global consumption and capture savegame cases
+- Keep Vanilla patch-specific candidate/selector behavior separately open
+
+### Independent baseline validation debt
+
+`python scripts/check_techniques.py` fails on current main at line 55 with a
+literal `\n` in source causing `SyntaxError`. Baseline: 62 of 63 `check_*.py`
+scripts pass. This pre-existing technique issue is outside P0-46 and remains
+unfixed; track it separately rather than hiding it behind the new selector test.
 
 ### After P0-46
 
@@ -52,7 +72,7 @@ Do not invent a fixed P0 endpoint.
 
 Likely remaining families include:
 
-- capture / takeover reset and domestic-facility selection;
+- clean-build capture equivalence, complete takeover reset/finalizer, and versioned domestic-facility selection;
 - hiring inner probability body;
 - diplomacy per-build constants;
 - siege durability inner helper bodies;
@@ -84,7 +104,10 @@ Repository:
 
 Role:
 
-Primary public PC-PK1.1 reverse-engineering corpus used throughout this project.
+Primary public PK-oriented reverse-engineering corpus used throughout this project.
+Each executable/IDB artifact still needs its own provenance check; P0-46 found
+a MOD-directory input path in the archived IDB, so its new byte claims are
+source-profile exact, not verified stock PC-PK1.1.
 
 High-value material includes:
 
@@ -330,8 +353,10 @@ Do not merge platform/version behavior without evidence.
 8. Update:
    - `docs/rules/STATUS.md`
    - `docs/rules/README.md`
-   - PR #2 body.
-9. Do not merge PR #2 unless explicitly requested.
+   - the new follow-up PR body.
+9. Start new work from current main in a new branch. PR #2 and its old branch
+   are historical; do not resume or push to them.
+10. Do not merge the new PR unless explicitly requested.
 
 ---
 
