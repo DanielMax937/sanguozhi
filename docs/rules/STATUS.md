@@ -6,26 +6,27 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-39 火焰寿命 base RNG / setter 候选边界
+### 最新完成：P0-40 应射/还射完整 caller / 连击递归深度边界
 
-- [P0-39 正文](74-fire-lifetime-rng-setter-candidate-boundary.md)
-- [P0-39 结构化证据](../sources/fire-lifetime-rng-setter-candidate-boundary.json)
-- [P0-39 校验脚本](../../scripts/check_fire_lifetime_rng_setter_candidate_boundary.py)
-- [P0-18 火焰寿命 setter](53-fire-lifetime-setter-boundary.md)
+- [P0-40 正文](75-response-fire-recursion-boundary.md)
+- [P0-40 结构化证据](../sources/response-fire-recursion-boundary.json)
+- [P0-40 校验脚本](../../scripts/check_response_fire_recursion_boundary.py)
+- [P0-17 应射/连击方向性](52-response-fire-double-strike-exactness.md)
 
-P0-39 新收敛：
+P0-40 新收敛：
 
 ```text
-00486320..004863BF
-  = facility fire-state query
+00584D70..00584E7F
+  contains 00584DC8 response-fire
 
-00495CA0..00495CDF
-  = troop fire-state query
+005860A0..0058716F
+  contains 00586E12 / 00586F0F double-strike logic
 ```
 
-这两个 query 都很短，只支持“是否着火”读取，不支持把它们当 lifetime setter。真正 setter 的搜索范围进一步限定到成功点火执行链：`005AECxx` 火计、`005B12xx` 火计/火矢、`005B16xx~005B17xx` 火陷阱；但当前仍无完整 body/xref。base RNG、重复点火语义、critical +1 opcode order 都继续 open。
+因此应射 eligibility/helper 与连击/攻击执行 core 属于两层不同函数。当前仍没有二者之间的 xref，不能把“应射自身可连击”的 documented/empirical-high 行为升级为 opcode exact；双方应射+连击的递归终止条件与最大 chain depth 继续 open。
 
-下一项：P0-40 应射/还射完整 caller / 连击递归深度边界。
+下一项：P0-41 兵粮袭击 `005ADB20` helper body / RNG-clamp 边界。
+
 
 
 
