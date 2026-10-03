@@ -1477,6 +1477,54 @@ else
 
 ---
 
+## 7.0.1 阵系耗粮重叠 / 粮尽逃兵（P0-12）
+
+> 专项： [47-food-overlap-starvation-exactness.md](47-food-overlap-starvation-exactness.md)。
+
+### 防御设施 multiplier
+
+原版只选择一个设施 type；禁止倍率相乘。
+
+兼容 selector：
+
+```ts
+selectedType =
+  highestTier(overlappingFriendlyDefenseFacilities)
+```
+
+即城塞 > 砦 > 阵，但只标：
+
+```text
+provisional-engine-rule
+```
+
+倍率必须使用原 float32 bit pattern，不能替换成5/3、4/3。
+
+### starvation
+
+严格 fidelity：
+
+```text
+starvationProfile = unresolved-original
+```
+
+旧兼容模式若必须保持历史模拟：
+
+```text
+retentionPerTurn = 0.76
+```
+
+但标签必须：
+
+```text
+legacy-compatibility-only
+provenance-unresolved
+```
+
+不要再标 empirical-high。
+
+---
+
 ## 7.1 部队主副将关系 / 浮点取整（P0-10）
 
 > 专项： [45-deputy-rounding-exactness.md](45-deputy-rounding-exactness.md)。
