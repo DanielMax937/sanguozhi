@@ -6,26 +6,27 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-44 据点陷落 durability=0 / troops=0 takeover reset 边界
+### 最新完成：P0-45 内政设施保留 selector / retained-facility RNG 边界
 
-- [P0-44 正文](79-facility-takeover-reset-boundary.md)
-- [P0-44 结构化证据](../sources/facility-takeover-reset-boundary.json)
-- [P0-44 校验脚本](../../scripts/check_facility_takeover_reset_boundary.py)
+- [P0-45 正文](80-retained-facility-selector-boundary.md)
+- [P0-45 结构化证据](../sources/retained-facility-selector-boundary.json)
+- [P0-45 校验脚本](../../scripts/check_retained_facility_selector_boundary.py)
 - [攻城主规则](05-combat.md)
 
-P0-44 新收敛：
+P0-45 新收敛：
 
 ```text
-00487E20..00487E4F
-  = SetFacilityDurability
-
-004B329B
-  = captured-resource retention
+魅力 >=100 -> 5
+80..99      -> 4
+60..79      -> 3
+40..59      -> 2
+<=39        -> 1
 ```
 
-耐久归零和守兵归零都能导致陷落的行为边界继续成立，但 takeover reset writer 仍未恢复。`004B329B` 只闭合金/粮/兵/12类兵装的资源保留，不能证明“耐久归零后重置最大耐久10%”或“守兵归零时保留当前耐久”。两种陷落入口是否汇入同一 finalizer 也继续 open。
+保留数量档位继续是 documented/empirical-high；但具体“保留哪几座”的 selector 仍未恢复。`004BA610` 已明确是单个内政设施被破坏后的掉资源函数，`004B329B` 是破城后金/粮/兵/12类兵装保留函数，二者都不是 retained-facility selector。玩家不能手选也不能推出均匀随机，因此 seeded sample 继续仅作 provisional fallback。
 
-下一项：P0-45 内政设施保留 selector / retained-facility RNG 边界。
+下一项：P0-46 城市/港关陷落时内政设施 destruction caller / selector xref 边界。
+
 
 
 
