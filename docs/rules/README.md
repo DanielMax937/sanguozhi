@@ -196,3 +196,6 @@ P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为�
 2. 同版本内：游戏数据/官方 > 已区分原版与修改的逆向 > 可复现实测 > 单篇攻略。
 3. 找不到精确公式时保留“原作未知”，另写“引擎临时采用值”。
 4. 找到更可靠证据时只替换临时采用项；不得把修改器的新增公式冒充原作。
+
+
+P0-26 `005BA410` 共享数值 helper 以 `61-shared-numeric-helper-005ba410-boundary.md` 为专项记录，结构化证据为 `../sources/shared-numeric-helper-005ba410-boundary.json`；它同时被 `005C4F80` 登用成功率与 `005D052C` 流言成功率调用，因此不能再建模为 hiring-only 公式；完整 body 与输入业务语义仍 open。
