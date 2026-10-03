@@ -1,30 +1,32 @@
 # 规则审计当前状态
 
-更新：2026-10-01。
+更新：2026-10-03。
 
 ## A1–E20 主审计已完成；正在清理 exactness gaps
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-24 宝物授予/没收忠诚变动 opcode 边界
+### 最新完成：P0-26 `005BA410` helper / 数据组合边界
 
-- [P0-24 正文](59-treasure-loyalty-opcode-boundary.md)
-- [P0-24 结构化证据](../sources/treasure-loyalty-opcode-boundary.json)
-- [P0-24 校验脚本](../../scripts/check_treasure_loyalty_opcode_boundary.py)
-- [P0-6 非自然忠诚](41-nonnatural-loyalty-exactness.md)
+- [P0-26 正文](61-shared-numeric-helper-005ba410-boundary.md)
+- [P0-26 结构化证据](../sources/shared-numeric-helper-005ba410-boundary.json)
+- [P0-26 校验脚本](../../scripts/check_shared_numeric_helper_005ba410_boundary.py)
+- [P0-25 普通登用签名](60-hiring-success-rate-signature-boundary.md)
 
-P0-24 新收敛：
+P0-26 新收敛：
 
 ```text
-TreasureValue = +0x3C
-004A0A40 -> 00484DE0
-  = 宝物 owner/city setter
-004A0A70 -> 00484E20
-  = 宝物 state setter
-004A6CF0
-  = ModifyPersonLoyalty(delta)
+005BA410..005BA4BF
+  = shared numeric-combination helper
+
+005C4F80 GetHiringSuccessRate
+  -> 005BA410
+
+005D052C rumor-success path
+  -> 005BA410
 ```
 
-因此宝物所有权/状态变化与忠诚 side effect 是独立层。官方“价值越高加忠越多”有明确数据字段支撑，但 `gain == TreasureValue` 仍只能标 empirical-high；没收 `-30` 仍没有原 opcode 支撑。
+因此 `005BA410` 不是登用专用公式，而是至少被登用与流言成功率共同复用的通用数值组合 helper。流言 callsite 在调用前明确准备4个栈参数，其中一个 raw input = `20 * edi`。helper 完整数学运算、各输入业务语义以及登用 caller 的参数准备仍 open。
 
-下一项：P0-25 普通登用 005C4F80 内部成功率公式边界。
+下一项：P0-27 `005BA4C0` deterministic generator / 输入混合边界。
+
