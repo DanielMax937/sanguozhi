@@ -6,26 +6,26 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-22 欠薪 loyalty selector / 0058D5E0→0058C190 边界
+### 最新完成：P0-23 流言 effect helper / target-selector 边界
 
-- [P0-22 正文](57-salary-shortfall-loyalty-boundary.md)
-- [P0-22 结构化证据](../sources/salary-shortfall-loyalty-boundary.json)
-- [P0-22 校验脚本](../../scripts/check_salary_shortfall_loyalty_boundary.py)
+- [P0-23 正文](58-rumor-effect-helper-boundary.md)
+- [P0-23 结构化证据](../sources/rumor-effect-helper-boundary.json)
+- [P0-23 校验脚本](../../scripts/check_rumor_effect_helper_boundary.py)
 - [P0-6 非自然忠诚](41-nonnatural-loyalty-exactness.md)
 
-P0-22 新收敛：
+P0-23 新收敛：
 
 ```text
-0058D5E0:
-  欠薪据点逐次调用
-  arg = facility + active-officer list
-  this = 跨据点累计容器
+流言成功率 calculator：
+  在 005D05AD 前结束
 
-0058C190:
-  所有设施循环完成后调用一次
-  只接收累计容器
+005D05B0..005D05EF：
+  独立函数
+
+005D05F0..005D07BF：
+  另一独立函数
 ```
 
-因此欠薪忠诚不是在每个据点循环中即时逐人写回，而是 prepare/accumulate → monthly batch finalize 两阶段。受罚人员 selector、君主过滤、每人掉忠公式和 RNG 仍 open。
+因此成功率与成功后 effect-side 逻辑在二进制层面明确分离，并且 effect-side 至少有两个函数层。当前仍不能把两者强行命名为“目标选择/忠诚下降/治安下降”；业务角色、target selector、per-target loss 与 security loss 都保持 open。
 
-下一项：P0-23 流言 effect helper / target-selector 边界。
+下一项：P0-24 宝物授予/没收忠诚变动 opcode 边界。
