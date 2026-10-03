@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-44",
+  "target": "PC-PK1.1 facility fall takeover reset boundary",
+  "status": "audit-complete-reset-writer-open",
+  "reverse": {
+    "setFacilityDurability": "00487E20",
+    "setFacilityDurabilityBounds": [
+      "0x487E20",
+      "0x487E50"
+    ],
+    "capturedResourceRetention": "004B329B"
+  },
+  "resolved": {
+    "fallByZeroDurabilityBehavior": true,
+    "fallByZeroTroopsBehavior": true,
+    "facilityDurabilitySetterBoundary": true,
+    "resourceRetentionFormulaExact": true,
+    "takeoverResetWriterResolved": false,
+    "tenPercentDurabilityResetExact": false,
+    "troopsZeroKeepsCurrentDurabilityExact": false
+  },
+  "open": [
+    "durability-zero takeover caller",
+    "troops-zero takeover caller",
+    "common finalizer relationship",
+    "exact durability reset value",
+    "exact troop reset value",
+    "ownership/reset/resource/facility-destruction order",
+    "city/harbor/gate differences",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/fudanglp/311resource",
+    "https://github.com/sjn4048/311MemoryResearch"
+  ]
+}
