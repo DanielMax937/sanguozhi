@@ -223,3 +223,6 @@ P0-33主副将血缘 `/3` PC opcode 以 `68-deputy-blood-third-pc-opcode-boundar
 
 
 P0-34训练 reset / top scheduler xref 以 `69-training-reset-scheduler-boundary.md` 为专项记录，结构化证据为 `../sources/training-reset-scheduler-boundary.json`；训练 reset 行为语义与 `0059A230` local morale handler 边界已锁定，但 setter(value=0) caller 与 top-level morale scheduler xref 仍 open，禁止按地址邻近猜调用链。
+
+
+P0-35阵系 overlap / starvation 原函数边界以 `70-food-overlap-starvation-function-boundary.md` 为专项记录，结构化证据为 `../sources/food-overlap-starvation-function-boundary.json`；`0049D180` single-selector 边界已锁定，重叠不叠加继续 exact；粮尽 troop-loss handler 地址/body 仍未找到，`00599AA0` 明确排除，0.76继续 legacy-only。
