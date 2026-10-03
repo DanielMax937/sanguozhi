@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-26",
+  "target": "PC-PK1.1 005BA410 shared numeric-combination helper boundary",
+  "status": "audit-complete-body-open",
+  "reverse": {
+    "function": "005BA410",
+    "functionBounds": [
+      "0x5BA410",
+      "0x5BA4C0"
+    ],
+    "hiringCaller": "005C4F80",
+    "rumorCallSite": "005D052C",
+    "rumorPreparedStackArgs": 4,
+    "rumorKnownRawArg": "20 * edi"
+  },
+  "resolved": {
+    "sharedAcrossHiringAndRumor": true,
+    "hiringSpecificHelper": false,
+    "rumorCallsitePreparesFourStackInputs": true,
+    "exactBusinessSemanticsResolved": false
+  },
+  "open": [
+    "005BA410 full body",
+    "business semantics of rumor raw inputs",
+    "hiring callsite argument preparation",
+    "exact mathematical combination",
+    "clamp/normalization behavior",
+    "005C4F80 pre/post helper logic",
+    "Vanilla/PS2/Wii equivalence"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/sean2077/311SireCustomizedPackageDev",
+    "https://github.com/fudanglp/311resource"
+  ]
+}
