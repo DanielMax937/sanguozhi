@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-22",
+  "target": "PC-PK1.1 salary-shortfall loyalty prepare/finalize boundary",
+  "status": "audit-complete-selector-formula-open",
+  "callChain": {
+    "salaryListFunction": "004CF360",
+    "salaryIdentityMask": "0x0F",
+    "salarySumFunction": "0049F2A0",
+    "prepareCall": "005909BD -> 0058D5E0",
+    "finalizeCall": "00590A27 -> 0058C190"
+  },
+  "prepareStage": {
+    "functionBounds": [
+      "0x58D5E0",
+      "0x58D6D0"
+    ],
+    "argFacility": true,
+    "argActiveOfficerList": true,
+    "thisCrossFacilityAccumulator": true,
+    "calledOnlyOnSalaryShortfallPath": true
+  },
+  "finalizeStage": {
+    "functionBounds": [
+      "0x58C190",
+      "0x58C320"
+    ],
+    "calledAfterAllFacilityLoops": true,
+    "explicitExtraArgs": false,
+    "thisAccumulatedContainer": true
+  },
+  "exact": {
+    "outerPaymentMode": "all-or-nothing-per-facility",
+    "perFacilityImmediateLoyaltyWrite": false,
+    "crossFacilityBatching": true,
+    "prepareAndApplyStagesSeparated": true
+  },
+  "open": [
+    "0058D5E0 full body",
+    "0058C190 full body",
+    "affected officer selector",
+    "lord filtering",
+    "per-officer loyalty loss",
+    "RNG/giri/ambition/compatibility/salary influence",
+    "duplicate handling",
+    "0058C190 exact xref to loyalty primitive",
+    "Vanilla/PS2/Wii differences"
+  ],
+  "sources": [
+    "https://github.com/sjn4048/311MemoryResearch",
+    "https://github.com/fudanglp/311resource"
+  ]
+}
