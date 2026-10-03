@@ -1493,3 +1493,34 @@ morale-top-scheduler-xref-open
 
 下一 exactness gap：P0-12 阵/砦/城塞耗粮重叠优先级 / 粮尽逃兵。
 
+### P0-12 阵/砦/城塞耗粮重叠 / 粮尽逃兵
+
+状态：
+
+```text
+P0-12-audit-complete
+defense-food-single-selector-exact
+defense-food-float32-bits-exact
+defense-food-nonstacking-exact
+defense-overlap-winner-open
+food-scheduler-starvation-separation-exact
+starvation-function-open
+legacy-retention-0.76-downgraded
+```
+
+本轮确认：
+
+- `0049D180` single-selector → `0049D2E0` 单一 multiplier，重叠不叠加；
+- 阵/砦/城塞 bit pattern 与 `0.05f` 已 bit-exact；
+- 18000兵的阵耗粮1499由 float32 + `_ftol2` 自然得到；
+- `0059BF40` 只处理耗粮与粮尽提示，不处理0粮掉兵；
+- starvation 必须是另一条 handler；
+- `00599AA0` 排除为野外 troop starvation；
+- 旧0.76因出处无法验证，降为 legacy compatibility。
+
+仍open：`0049D180` overlap winner，以及 starvation 原函数/公式/RNG。
+
+详见 [P0-12专项](47-food-overlap-starvation-exactness.md)。
+
+下一 exactness gap：P0-13 野外补给 / 输送抵达 finalizer / 气力加权取整。
+
