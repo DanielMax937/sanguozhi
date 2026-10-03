@@ -6,30 +6,27 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-41 兵粮袭击 `005ADB20` helper body / RNG-clamp 边界
+### 最新完成：P0-42 攻城耐久 `005ADDC0 / 005ADE20` inner helper body 边界
 
-- [P0-41 正文](76-food-raid-helper-boundary.md)
-- [P0-41 结构化证据](../sources/food-raid-helper-boundary.json)
-- [P0-41 校验脚本](../../scripts/check_food_raid_helper_boundary.py)
-- [P0-16 caller/零伤害](51-food-raid-caller-exactness.md)
+- [P0-42 正文](77-siege-durability-inner-helper-boundary.md)
+- [P0-42 结构化证据](../sources/siege-durability-inner-helper-boundary.json)
+- [P0-42 校验脚本](../../scripts/check_siege_durability_inner_helper_boundary.py)
+- [战斗/攻城主规则](05-combat.md)
 
-P0-41 新收敛：
+P0-42 新收敛：
 
 ```text
-005ADB20..005ADBDF
-  = food-raid helper
+005ADDC0..005ADE1F
+  = ordinary / 井阑 / 投石耐久基础 helper
 
-caller:
-  EAX = target troop
-  ESI = attacker troop
-
-005ADB55:
-  techId = 1
+005ADE20..005ADEAF
+  = 冲车 / 木兽耐久基础 helper
 ```
 
-因此 helper 边界、寄存器调用契约与技巧检查位置都已锁定；但公开资料仍没有这约0xC0字节函数体。原 RNG 粒度/分布、Attack×R精确算术、目标缺粮与攻方满粮的 clamp 顺序仍 open。`10..20` 整数档与守恒 min-clamp 继续分别只作 compatibility-reconstruction / engine-safety-fallback。
+两个 helper 都由 caller 传3个 scalar 参数，返回值继续留在 x87 `ST(0)`；会心、目标类型等外层倍率在 helper 返回后继续 `fmul`，最后 `005B057E -> 00707A74 (_ftol2)` 才统一整数化。因此 outer modifier order 已进一步闭合，但两个 inner helper 的完整 body、sqrt/constants 与冲车/木兽基础式继续 open。
 
-下一项：P0-42 攻城耐久 `005ADDC0 / 005ADE20` inner helper body 边界。
+下一项：P0-43 兵临城下出城 / AI 3格与1.2倍出城兵力边界。
+
 
 
 
