@@ -540,33 +540,33 @@ P0-6 专项见 [41-nonnatural-loyalty-exactness.md](41-nonnatural-loyalty-exactn
 - 首旬与持续粮尽是否不同；
 - Vanilla/主机版。
 
-### 6.8 补给 / 输送剩余边界
+### 6.8 补给 / 输送剩余边界（P0-13）
 
-E6 已确认或高置信：
+专项见 [48-supply-transport-finalizer-exactness.md](48-supply-transport-finalizer-exactness.md)。
 
-- 输送到据点功绩+200，PC地址 `004BF522`；
-- 野外补给功绩+100，率领输送队者统率经验+2；
-- PC手动补给可任意调节数量；直接以目标部队为移动目标时自动补给；
-- CS版不可自由调量；
+已确认 / 收紧：
+
+- `004BF522` 输送到达+200功绩位于 `sub_4BF1F0`（下一函数 `004BF6F0`），到达处理所在函数范围已定位；
+- 输送到据点功绩+200为PC地址级确认；
+- 目标据点满仓时超出兵/金等会提示并消失，overflow discard 为PC empirical-high；
+- PC手动补给使用相邻命令+slider，直接以目标部队为移动目标时走自动最大补给；
+- 自动/手动补给均受目标兵/金/粮容量限制；
 - 枪/戟/弩/马补兵需要等量匹配兵装；
-- 补兵受目标指挥上限与供应资源共同限制；
+- 输送队不能作为普通补给目标（empirical-high）；
 - 补兵后气力按新旧兵数加权；
-- 军事府使输送AP减半；
-- 到达据点必须进入据点自身兵/金/粮/兵装容量体系。
+- `004B9840` 是原程序 building 气力混合 helper，支持“兵数加权”模型。
 
-仍未知：
+仍 open：
 
-- PC-PK1.1 野外补给完整 finalizer；
-- 输送抵达据点完整 finalizer；
-- 12类运输兵装逐类型上限；
-- 气力加权非整除时的整数化；
-- 自动补给资源优先级；
-- 据点或目标部队满仓时剩余货物如何处理；
-- “输送队不可被补给”的PC hard gate；
-- 被击破运输货物掠夺的原函数与比例；
-- `005DB840` 基础AP完整函数。
-
-CS版3000兵/1000金等固定补给数字只作为CS empirical-high，不进入PC主规则。
+- `sub_4BF1F0` 完整 body 和资源写入顺序；
+- 手动/自动野外补给 finalizer及是否共享核心；
+- troop→troop morale merge helper；
+- 非整除气力平均 exact rounding；
+- target=transport hard gate PC地址；
+- 野外补给+100功绩/+2统率经验PC地址；
+- 自动补给多资源优先级；
+- transport death/loot finalizer和掠夺比例；
+- Vanilla/主机版。
 
 ### 6.9 技巧系统剩余边界
 
