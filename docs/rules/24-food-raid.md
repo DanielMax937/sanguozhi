@@ -254,11 +254,15 @@ if damage == 0 skip raid
 
 但 helper 本体缺失，不能因此直接断言“被大盾挡掉伤害仍一定被抢粮”。
 
-当前标记：
+当前已由 P0-16 caller 审计收紧：
 
 ```text
-shielded-zero-damage raid behavior = open
+shielded-zero-damage:
+  caller still invokes 005ADB20 = exact
+  helper internal result semantics = open
 ```
+
+也就是说，不能再用 `damage == 0` 在 caller 层直接跳过兵粮袭击；但 `005ADB20` 内部是否还有独立 gate，仍待函数体恢复。
 
 ## 9. 连击
 
@@ -386,3 +390,8 @@ R范围 1..2
 - 日文攻略Wiki《技巧研究》：每次枪兵攻击减少敌军兵粮。
 - 2021后现代实测文章：攻击84落在对应范围、200兵封顶100、连击可两次。
 - `tankyc/sango_infinity`：独立复刻使用10～20整数档作为R×10，仅作兼容 reconstruction，不作为原EXE证据。
+
+
+## 14. P0-16 caller 补充
+
+详见 `51-food-raid-caller-exactness.md`。PC-PK1.1 已逐指令确认：防御技能将兵损写为0后仍继续调用 `005ADB20`；food raid 返回值写入独立 attack-result 字段。当前只剩 helper 内部 gate/RNG/resource clamp 未闭合。
