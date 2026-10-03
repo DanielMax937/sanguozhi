@@ -6,27 +6,27 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-36 补给/输送 finalizer 气力非整除 rounding 边界
+### 最新完成：P0-37 技巧研究时间完整难度矩阵 / Super 阈值边界
 
-- [P0-36 正文](71-morale-weighted-merge-rounding-boundary.md)
-- [P0-36 结构化证据](../sources/morale-weighted-merge-rounding-boundary.json)
-- [P0-36 校验脚本](../../scripts/check_morale_weighted_merge_rounding_boundary.py)
-- [P0-13 补给/输送](48-supply-transport-finalizer-exactness.md)
+- [P0-37 正文](72-technique-research-difficulty-matrix-boundary.md)
+- [P0-37 结构化证据](../sources/technique-research-difficulty-matrix-boundary.json)
+- [P0-37 校验脚本](../../scripts/check_technique_research_difficulty_matrix_boundary.py)
+- [P0-14 技巧研究时间](49-technique-research-time-exactness.md)
 
-P0-36 新收敛：
+P0-37 新收敛：
 
 ```text
-004B9840..004B989F
-  = building/facility morale weighted-merge helper
+005D7DD0..005D7EFF
+  = research-time calculator
 
-inputs:
-  old troops / old morale
-  added troops / incoming morale
+struct_scenario +0x20
+  = DifficultyLevel
 ```
 
-兵力加权气力核心继续 high-confidence；但公开资料仍没有 `004B9840` body，也没有 troop→troop morale merge helper/xref，因此非整除 rounding 继续 open。不能因为 P0-10 已确认 `_ftol2` 就在没有 xref 时直接写成 floor-exact。
+但当前没有证据证明 calculator 实际读取 DifficultyLevel。Super 的 70/140/210/280 仍只来自受控实测，继续标 empirical-high；Beginner / Advanced 不能复制 Super，也不能凭难度字段存在就补三套矩阵。
 
-下一项：P0-37 技巧研究时间完整难度矩阵 / Super阈值边界。
+下一项：P0-38 技巧研究完成功绩 writer / participant distribution 边界。
+
 
 
 
