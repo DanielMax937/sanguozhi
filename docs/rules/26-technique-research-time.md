@@ -1,6 +1,6 @@
 # E11 技巧研究时间
 
-更新：2026-09-30。主目标版本：PC-PK1.1；难度分档目前只对“超级”有明确实测。
+更新：2026-10-03。主目标版本：PC-PK1.1；难度分档目前只对“超级”有明确实测。
 
 ## 1. 撤回 E7 的过度泛化
 
@@ -77,6 +77,21 @@ Lv4 90日
 
 ## 4. 人才府是源码级精确 -20日，最低10日
 
+P0-14 专项见 [49-technique-research-time-exactness.md](49-technique-research-time-exactness.md)。
+
+原 IDB 已把人才府地址归入同一函数：
+
+```text
+005D7DD0 sub_5d7dd0
+...
+005D7ED7 人才府-20日
+005D7EF0 最低1旬判断
+005D7EF4 最低1旬
+005D7F00 next function
+```
+
+因此 `sub_5d7dd0` 可以正式标为 PC-PK1.1 **技巧研究时间 calculator containing function**。完整函数体/参数签名仍open。
+
 PC-PK1.1 地址：
 
 ```text
@@ -114,7 +129,7 @@ finalDays = finalTurns * 10
 
 这说明不能只用 level + abilitySum 两个变量武断补全公式；技巧本身或技巧系还存在基础时长类别。
 
-究竟是结构体隐藏字段、技巧ID分支还是其他数据，目前 open。
+P0-14 又检查了已恢复的 `struct_technology[36]`：当前已识别字段只有 `+0x60 RequiredPoints` 与 `+0x68 unknown int`，没有已恢复的 ResearchDays/ResearchTurns 字段。因此“基础时间直接来自已知技巧时间字段”的假设撤回；当前应视为**代码分支派生**，但 `+0x68` 的精确含义仍open。
 
 ## 6. 不允许用现有锚点插值补完整矩阵
 
@@ -195,7 +210,7 @@ finalDays = max(10, baseDays - 20)
 - 攻略明确声明这些不是固定研究时间。
 
 ### open
-- 完整PC研究时间函数；
+- `005D7DD0` 完整PC研究时间函数体（containing function 已定位）；
 - 超级五档×全部技巧完整矩阵；
 - 初级/上级；
 - 基础时长的数据来源；
