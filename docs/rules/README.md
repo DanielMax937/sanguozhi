@@ -63,6 +63,8 @@ P0-10主副将关系/FPU取整以 `45-deputy-rounding-exactness.md` 为专项记
 
 P0-11训练/气力以 `46-training-morale-exactness.md` 为专项记录，结构化证据为 `../sources/training-morale-exactness.json`；训练gate边界、每回合一次cadence及`0059A230`野外恢复local handler已收紧，reset/top scheduler xref仍open。
 
+P0-14技巧研究时间以 `49-technique-research-time-exactness.md` 为专项记录，结构化证据为 `../sources/technique-research-time-exactness.json`；`005D7DD0` calculator、人才府-20日/最低10日已收紧，完整难度矩阵仍open。
+
 P0-12阵系耗粮/粮尽以 `47-food-overlap-starvation-exactness.md` 为专项记录，结构化证据为 `../sources/food-overlap-starvation-exactness.json`；阵/砦/城塞单一selector、float32常量与不叠乘已闭合，overlap winner与starvation原函数仍open；旧0.76降为legacy-only。
 
 P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为专项记录，结构化证据为 `../sources/supply-transport-finalizer-exactness.json`；`004BF522` 已归入 `sub_4BF1F0`，到达满仓overflow丢弃行为与野外补给target-cap语义已收紧，troop气力非整除rounding和field-supply finalizer仍open。
@@ -132,6 +134,9 @@ P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为�
 45. `44-troop-resource-transaction-exactness.md` P0-9出征/输送draft容量、资源守恒、100000兵装上限与finalizer边界
 46. `45-deputy-rounding-exactness.md` P0-10主副将关系除数、_ftol2取整与剩余PC opcode边界
 47. `46-training-morale-exactness.md` P0-11训练gate/reset cadence与0059A230野外气力恢复
+48. `47-food-overlap-starvation-exactness.md` P0-12阵系耗粮重叠与粮尽逃兵边界
+49. `48-supply-transport-finalizer-exactness.md` P0-13补给/输送finalizer与气力加权
+50. `49-technique-research-time-exactness.md` P0-14研究时间calculator、人才府减时与难度边界
 48. `47-food-overlap-starvation-exactness.md` P0-12阵系耗粮bit-exact、重叠不叠乘与粮尽逃兵证据降级
 49. `48-supply-transport-finalizer-exactness.md` P0-13野外补给、输送抵达函数范围、overflow与气力加权边界
 
