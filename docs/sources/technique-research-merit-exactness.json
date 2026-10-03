@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-15",
+  "target": "PC-PK1.1 technique-research completion merit",
+  "status": "audit-complete-exact-constants-open",
+  "tables": {
+    "currentWiki": [
+      500,
+      1000,
+      2000,
+      3000
+    ],
+    "earlyGuide": [
+      500,
+      1000,
+      1500,
+      2500
+    ],
+    "consensus": {
+      "level1": 500,
+      "level2": 1000,
+      "level3": null,
+      "level4": null
+    }
+  },
+  "reverseEvidence": {
+    "researchCommandAnchor": "005D8F68",
+    "researchCommandContainingFunction": "sub_5D8C50",
+    "researchCommandMeaning": "AP/command execution anchor; not completion merit writer",
+    "exactExperienceRule": "technique research ability experience = consumed technique points / 100",
+    "publishedMeritAddressCoverage": "many other action merit addresses are explicitly enumerated",
+    "publishedTechniqueResearchCompletionMeritAddress": null
+  },
+  "claims": {
+    "currentWikiCandidateEvidence": "documented-current-wiki-candidate",
+    "earlyGuideEvidence": "documented-early-guide",
+    "pcPk11Exactness": "unresolved",
+    "participantDistribution": "unresolved",
+    "vanillaToPkTransition": "unresolved",
+    "earlyTableEqualsTechniquePointCostDiv2": "observation-not-engine-formula"
+  },
+  "compatibilityCandidate": [
+    500,
+    1000,
+    2000,
+    3000
+  ],
+  "open": [
+    "PC-PK1.1 completion merit caller",
+    "exact constants or dynamic formula",
+    "version/platform mapping of both tables",
+    "per-participant allocation",
+    "Vanilla/PS2/Wii equivalence",
+    "exact transition patch if values changed"
+  ],
+  "sources": [
+    "https://w.atwiki.jp/sangokushi11/pages/113.html",
+    "https://w.atwiki.jp/sangokushi11/pages/15.html",
+    "https://www.gamersky.com/handbook/200604/22600.shtml",
+    "https://github.com/sjn4048/311MemoryResearch"
+  ]
+}
