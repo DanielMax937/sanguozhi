@@ -6,25 +6,29 @@
 
 A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完成写回。
 
-### 最新完成：P0-20 俘虏 forced-release comparator / 选择方向
+### 最新完成：P0-21 非自然忠诚：褒赏忠诚增量 caller / RNG 边界
 
-- [P0-20 正文](55-captive-forced-release-ordering-boundary.md)
-- [P0-20 结构化证据](../sources/captive-forced-release-ordering-boundary.json)
-- [P0-20 校验脚本](../../scripts/check_captive_forced_release_ordering_boundary.py)
-- [P0-7 俘虏释放](42-captive-release-exactness.md)
+- [P0-21 正文](56-cash-reward-loyalty-boundary.md)
+- [P0-21 结构化证据](../sources/cash-reward-loyalty-boundary.json)
+- [P0-21 校验脚本](../../scripts/check_cash_reward_loyalty_boundary.py)
+- [P0-6 非自然忠诚](41-nonnatural-loyalty-exactness.md)
 
-P0-20 新收敛：
+P0-21 新收敛：
 
 ```text
-004AA200:
-  一次性接收 0058C320 comparator 做列表有序处理
+005B5D60..005B5F9F
+  = cash reward execution containing function
 
-004A8E10:
-  每次仅接收 list this/ecx
-  不传 person/index/releaseCount
-  循环直到 listCount == releaseCount
+0048A770
+  = SetLoyalty(0..255)
+
+004A6CF0
+  = ModifyPersonLoyalty(delta)
+
+struct_person +0xAC
+  = Loyalty byte
 ```
 
-因此可以排除“每轮重新按业务规则任意挑一名俘虏删除”的结构。最终优先级必须由 comparator 排序方向 + 004A8E10 固定删除哪一端联合决定；这两点仍 open。
+因此真实忠诚层与 UI 100 显示上限已经结构级分离；褒赏必须作用于 true loyalty，不能先 clamp 到100。真正仍 open 的是 `005B5D60` 到 loyalty primitive 的 exact xref、delta calculator、RNG/魅力/义理公式。
 
-下一项：P0-21 非自然忠诚：褒赏忠诚增量 caller / RNG 边界。
+下一项：P0-22 欠薪 loyalty selector / 0058D5E0→0058C190 边界。
