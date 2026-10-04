@@ -2,7 +2,15 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-51人员游离、末城逃逸与任务取消资源
+## 最新完成：P0-52六个零退款任务取消handler
+
+[正文](87-mission-cancellation-zero-refund.md) · [结构化证据](../sources/mission-cancellation-zero-refund.json)。基线main `324dd78b3c5a831cdf5d9406f63c492b7248bed4`（PR #9已合）。
+
+9/10/12/22/23/24现有独立v2有界投影：actor→实际据点→target的短路gate、零退款、异地mission37/同地reset和S2 acted hook。9/10/12没有目标有效性硬gate；24建筑getter域到16383；23城市子对象不与建筑valid混淆。旧v1保持原trace边界；回调未执行及其不干预是显式record/reject政策。
+
+验证：新增15项测试通过；TypeScript、85 Node、全部72 Python checker与两训练demo全测通过。双源六handler正文相同；新增4个source字节范围、既有manifest固定哈希和直接调用/比较opcode校验。独立审阅无待修阻断，另5760组source/gate/boundary/policy/trace和12组v1迁移/快照alias验证通过；新增四段由审阅者重新读取IDB核对。远端合并后的main仍需复测；未运行原作或真实存档。剩余0/2/5/38、41..43、mission37完成、004BF6F0完整返回/事件/force链及clean stock/Vanilla/主机版继续open。
+
+## 历史完成：P0-51人员游离、末城逃逸与任务取消资源
 
 [正文](86-personnel-detachment-source-profile.md) · [结构化证据](../sources/personnel-detachment-source-profile.json)。本组基线main `453305b2dc64927a715fc58fceb0522557815f34`（PR #8已合）。
 

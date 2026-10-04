@@ -1,0 +1,51 @@
+005B81D0  56                             push     esi
+005B81D1  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+005B81D5  56                             push     esi
+005B81D6  e8 55 24 ec ff                 call     0x47a630
+005B81DB  83 c4 04                       add      esp, 4
+005B81DE  85 c0                          test     eax, eax
+005B81E0  75 02                          jne      0x5b81e4
+005B81E2  5e                             pop      esi
+005B81E3  c3                             ret
+005B81E4  8b 06                          mov      eax, dword ptr [esi]
+005B81E6  57                             push     edi
+005B81E7  8b ce                          mov      ecx, esi
+005B81E9  ff 50 40                       call     dword ptr [eax + 0x40]
+005B81EC  50                             push     eax
+005B81ED  b9 58 19 20 07                 mov      ecx, 0x7201958
+005B81F2  e8 a9 88 ed ff                 call     0x490aa0
+005B81F7  8b f8                          mov      edi, eax
+005B81F9  57                             push     edi
+005B81FA  e8 31 24 ec ff                 call     0x47a630
+005B81FF  83 c4 04                       add      esp, 4
+005B8202  85 c0                          test     eax, eax
+005B8204  74 3f                          je       0x5b8245
+005B8206  8b 17                          mov      edx, dword ptr [edi]
+005B8208  8b cf                          mov      ecx, edi
+005B820A  ff 52 48                       call     dword ptr [edx + 0x48]
+005B820D  85 c0                          test     eax, eax
+005B820F  74 34                          je       0x5b8245
+005B8211  8b 06                          mov      eax, dword ptr [esi]
+005B8213  8b ce                          mov      ecx, esi
+005B8215  ff 50 44                       call     dword ptr [eax + 0x44]
+005B8218  50                             push     eax
+005B8219  b9 58 19 20 07                 mov      ecx, 0x7201958
+005B821E  e8 ad 88 ed ff                 call     0x490ad0
+005B8223  8b f0                          mov      esi, eax
+005B8225  56                             push     esi
+005B8226  e8 05 24 ec ff                 call     0x47a630
+005B822B  83 c4 04                       add      esp, 4
+005B822E  85 c0                          test     eax, eax
+005B8230  74 13                          je       0x5b8245
+005B8232  8b ce                          mov      ecx, esi
+005B8234  e8 97 24 ec ff                 call     0x47a6d0
+005B8239  85 c0                          test     eax, eax
+005B823B  74 08                          je       0x5b8245
+005B823D  5f                             pop      edi
+005B823E  b8 01 00 00 00                 mov      eax, 1
+005B8243  5e                             pop      esi
+005B8244  c3                             ret
+005B8245  5f                             pop      edi
+005B8246  33 c0                          xor      eax, eax
+005B8248  5e                             pop      esi
+005B8249  c3                             ret

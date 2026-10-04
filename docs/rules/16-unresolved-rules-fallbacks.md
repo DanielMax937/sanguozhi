@@ -748,6 +748,12 @@ return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 
 两个新模型都有输入校验、原子写回、幂等/冲突和全trace重放；通过不代表stock或原存档验证，Vanilla仍单独assumption。完整capture/force事务仍待组合，不能仅清空证据债来制造完成。
 
+### 4D.5 P0-52六个零退款取消handler
+
+[87-mission-cancellation-zero-refund.md](87-mission-cancellation-zero-refund.md)新增独立`mission_cancellation_v2_profile.py`，不重写v1 trace。任务9/10/12/22/23/24按actor/当前实际建筑/target逐级短路，只有通过后才调用return helper，明确refund=0。target12只检查person ID范围；target24覆盖建筑0..16383；target23必须单独给city-subtype观察，不以建筑对象valid代替。
+
+`record-zero-refund-cancellation-v2`通过`record-only|reject`保留条件展示、cache/list和004BF6F0回调边界，非干预是可替换假设。距离和S2 query267需要带来源观察；缺观察、矛盾slot、越界/重复ID均原子报错。PK重构与Vanilla假设仍独立；剩余专用handler和完整return/事件链未被假装执行。
+
 ### 4E. Golden tests
 
 日文 Wiki 的攻城表继续保留，但角色从“运行时规则”改为“回归测试”。

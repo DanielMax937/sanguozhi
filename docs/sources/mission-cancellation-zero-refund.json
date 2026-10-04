@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 1,
+  "profileId": "source-idb-S1-S2-mission-cancellation-v2",
+  "baselineCommit": "324dd78b3c5a831cdf5d9406f63c492b7248bed4",
+  "stockOriginalVerified": false,
+  "originalExeExecuted": false,
+  "recordedExeHashesIndependentlyVerified": false,
+  "adoption": {
+    "PC-PK1.1": "compatibility-reconstruction",
+    "PC-Vanilla-assumed": "compatibility-assumption",
+    "PS2-Wii": "open"
+  },
+  "sources": [
+    {
+      "source": "S1",
+      "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+      "recordedInputPath": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+      "recordedExeSha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip"
+    },
+    {
+      "source": "S2",
+      "idbSha256": "aa7f2c983b266633d6e23c494d4f8e1b03e5251632505cae103e176ae850dfd8",
+      "recordedInputPath": "C:\\Games\\san11\\血色衣冠6.0sp5(整合包240612)\\San11Pk\\san11pk_dump.exe",
+      "recordedExeSha256": "b1e9467e9612c23af83f6feda8414bc9ee99eb62c6862a84f7f4c5a8822b9da9",
+      "url": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/ida-db/san11pk_dump.exe.idb.7z"
+    }
+  ],
+  "priorEvidence": {
+    "path": "docs/sources/personnel-detachment-source-profile.json",
+    "sha256": "d793bbd6d58f794e9a6c200d2dd29db346f7b3a6b8e165dd70d157ce68c9c28e"
+  },
+  "referencedRanges": [
+    {
+      "source": "S1",
+      "start": "004A5780",
+      "endExclusive": "004A57A9",
+      "sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55"
+    },
+    {
+      "source": "S1",
+      "start": "004A5660",
+      "endExclusive": "004A5682",
+      "sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72"
+    },
+    {
+      "source": "S1",
+      "start": "004A57B0",
+      "endExclusive": "004A57E0",
+      "sha256": "36b94ffaf3fa201a0331addb7a4771889e70a34e430da7f42846a8a3e9ac9299"
+    },
+    {
+      "source": "S2",
+      "start": "004A5780",
+      "endExclusive": "004A57A9",
+      "sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55"
+    },
+    {
+      "source": "S2",
+      "start": "004A5660",
+      "endExclusive": "004A5682",
+      "sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72"
+    },
+    {
+      "source": "S2",
+      "start": "004A57B0",
+      "endExclusive": "004A57E0",
+      "sha256": "36b94ffaf3fa201a0331addb7a4771889e70a34e430da7f42846a8a3e9ac9299"
+    },
+    {
+      "source": "S1",
+      "start": "00488C70",
+      "endExclusive": "00488C7F",
+      "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a"
+    },
+    {
+      "source": "S1",
+      "start": "00490AA0",
+      "endExclusive": "00490AC2",
+      "sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db"
+    },
+    {
+      "source": "S1",
+      "start": "00490B00",
+      "endExclusive": "00490B24",
+      "sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c"
+    },
+    {
+      "source": "S1",
+      "start": "00490D00",
+      "endExclusive": "00490D21",
+      "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a"
+    },
+    {
+      "source": "S1",
+      "start": "004A5600",
+      "endExclusive": "004A5622",
+      "sha256": "469e3a076f2dd39447ed00a439df84539740067d7eb95ae2fecce1b8e7850f81"
+    },
+    {
+      "source": "S1",
+      "start": "004A73A0",
+      "endExclusive": "004A740E",
+      "sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56"
+    },
+    {
+      "source": "S1",
+      "start": "005B6D00",
+      "endExclusive": "005B6E4E",
+      "sha256": "a7ffa1b73bf30ed87dd93dfdd75e1686be5f0daf4f7415d57805383e156d40da"
+    },
+    {
+      "source": "S1",
+      "start": "005B8400",
+      "endExclusive": "005B84E2",
+      "sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0"
+    },
+    {
+      "source": "S1",
+      "start": "005B9B40",
+      "endExclusive": "005B9B8E",
+      "sha256": "f14b892a5be8603044ef0991aac7cb4d95cc577296683f06a28bf12b7f921e8b"
+    },
+    {
+      "source": "S1",
+      "start": "005BEDA0",
+      "endExclusive": "005BEEE2",
+      "sha256": "b5f6702bc864e81bd071cf85e70e5782b29f7b0716acb96b9c13e055091c601e"
+    },
+    {
+      "source": "S1",
+      "start": "005C4E70",
+      "endExclusive": "005C4F7E",
+      "sha256": "70416a83c176fe2d8535e3f834fd5ceebdcce0c290ac808741beb5d3ba742261"
+    },
+    {
+      "source": "S1",
+      "start": "005CB050",
+      "endExclusive": "005CB177",
+      "sha256": "63ef89f2b55faae9aea25c885ae229a65ed24487bca73410bbf9b3d37bbae6c9"
+    },
+    {
+      "source": "S1",
+      "start": "005CFB70",
+      "endExclusive": "005CFCB2",
+      "sha256": "1321f69bbd6dfd7b78792e8b61f2c8c80e1b3de3bd695f792dfb01f95dd953e2"
+    },
+    {
+      "source": "S1",
+      "start": "005D5DD0",
+      "endExclusive": "005D5EF7",
+      "sha256": "918f1b3d84c37b10c36ebdd81f78499ee9158c3bbb535831b3b52a6805daf6f4"
+    },
+    {
+      "source": "S2",
+      "start": "00488C70",
+      "endExclusive": "00488C7F",
+      "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a"
+    },
+    {
+      "source": "S2",
+      "start": "00490AA0",
+      "endExclusive": "00490AC2",
+      "sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db"
+    },
+    {
+      "source": "S2",
+      "start": "00490B00",
+      "endExclusive": "00490B24",
+      "sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c"
+    },
+    {
+      "source": "S2",
+      "start": "00490D00",
+      "endExclusive": "00490D21",
+      "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a"
+    },
+    {
+      "source": "S2",
+      "start": "004A5600",
+      "endExclusive": "004A5622",
+      "sha256": "ba6c6d920a0fc1aca5619eb56c8b243f55fccd20c985dfb85184f883b0750a60"
+    },
+    {
+      "source": "S2",
+      "start": "004A73A0",
+      "endExclusive": "004A740E",
+      "sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56"
+    },
+    {
+      "source": "S2",
+      "start": "005B6D00",
+      "endExclusive": "005B6E4E",
+      "sha256": "a7ffa1b73bf30ed87dd93dfdd75e1686be5f0daf4f7415d57805383e156d40da"
+    },
+    {
+      "source": "S2",
+      "start": "005B8400",
+      "endExclusive": "005B84E2",
+      "sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0"
+    },
+    {
+      "source": "S2",
+      "start": "005B9B40",
+      "endExclusive": "005B9B8E",
+      "sha256": "f14b892a5be8603044ef0991aac7cb4d95cc577296683f06a28bf12b7f921e8b"
+    },
+    {
+      "source": "S2",
+      "start": "005BEDA0",
+      "endExclusive": "005BEEE2",
+      "sha256": "b5f6702bc864e81bd071cf85e70e5782b29f7b0716acb96b9c13e055091c601e"
+    },
+    {
+      "source": "S2",
+      "start": "005C4E70",
+      "endExclusive": "005C4F7E",
+      "sha256": "70416a83c176fe2d8535e3f834fd5ceebdcce0c290ac808741beb5d3ba742261"
+    },
+    {
+      "source": "S2",
+      "start": "005CB050",
+      "endExclusive": "005CB177",
+      "sha256": "63ef89f2b55faae9aea25c885ae229a65ed24487bca73410bbf9b3d37bbae6c9"
+    },
+    {
+      "source": "S2",
+      "start": "005CFB70",
+      "endExclusive": "005CFCB2",
+      "sha256": "1321f69bbd6dfd7b78792e8b61f2c8c80e1b3de3bd695f792dfb01f95dd953e2"
+    },
+    {
+      "source": "S2",
+      "start": "005D5DD0",
+      "endExclusive": "005D5EF7",
+      "sha256": "918f1b3d84c37b10c36ebdd81f78499ee9158c3bbb535831b3b52a6805daf6f4"
+    },
+    {
+      "source": "S2",
+      "start": "0090CBA0",
+      "endExclusive": "0090CBCB",
+      "sha256": "38cc86f580a7a31281c199e697a12c9b98a073973dbb5ab94258200cf238f21f"
+    }
+  ],
+  "newRanges": [
+    {
+      "source": "S1",
+      "start": "00490A10",
+      "endExclusive": "00490A32",
+      "sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "file": "S1-00490A10.asm.txt"
+    },
+    {
+      "source": "S1",
+      "start": "005B81D0",
+      "endExclusive": "005B824A",
+      "sha256": "46e4e5388d0aa9babd6b1a2c71d1de33dd5b69aa5cddb87b3407e6a89b3817c5",
+      "file": "S1-005B81D0.asm.txt"
+    },
+    {
+      "source": "S2",
+      "start": "00490A10",
+      "endExclusive": "00490A32",
+      "sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "file": "S2-00490A10.asm.txt"
+    },
+    {
+      "source": "S2",
+      "start": "005B81D0",
+      "endExclusive": "005B824A",
+      "sha256": "46e4e5388d0aa9babd6b1a2c71d1de33dd5b69aa5cddb87b3407e6a89b3817c5",
+      "file": "S2-005B81D0.asm.txt"
+    }
+  ],
+  "handlers": [
+    {
+      "missionId": 9,
+      "handler": "005CB050",
+      "gates": [
+        "actor 0047A630 valid",
+        "location normalized to base0..86; 00490D00 building valid",
+        "arg0 signed range 0..16383 only; no target validity test"
+      ],
+      "return": {
+        "helper": "005B8400",
+        "refund": 0,
+        "order": "conditional presentation -> return helper",
+        "returnValue": 1
+      },
+      "gateFailure": "return0 without scalar changes",
+      "sourceBodyEqual": true
+    },
+    {
+      "missionId": 10,
+      "handler": "005D5DD0",
+      "gates": [
+        "actor 0047A630 valid",
+        "location normalized to base0..86; 00490D00 building valid",
+        "arg0 signed range 0..16383 only; no target validity test"
+      ],
+      "return": {
+        "helper": "005B8400",
+        "refund": 0,
+        "order": "conditional presentation -> return helper",
+        "returnValue": 1
+      },
+      "gateFailure": "return0 without scalar changes",
+      "sourceBodyEqual": true
+    },
+    {
+      "missionId": 12,
+      "handler": "005C4E70",
+      "gates": [
+        "actor 0047A630 valid",
+        "location normalized to base0..86; 00490D00 building valid",
+        "arg0 signed range 0..1099 only; target getter is not a validity gate"
+      ],
+      "return": {
+        "helper": "005B8400",
+        "refund": 0,
+        "order": "conditional presentation -> return helper",
+        "returnValue": 1
+      },
+      "gateFailure": "return0 without scalar changes",
+      "sourceBodyEqual": true
+    },
+    {
+      "missionId": 22,
+      "handler": "005BEDA0",
+      "gates": [
+        "actor 0047A630 valid",
+        "location normalized to base0..86; 00490D00 building valid",
+        "arg0 resolves valid force0..46"
+      ],
+      "return": {
+        "helper": "005B8400",
+        "refund": 0,
+        "order": "conditional presentation -> return helper",
+        "returnValue": 1
+      },
+      "gateFailure": "return0 without scalar changes",
+      "sourceBodyEqual": true
+    },
+    {
+      "missionId": 23,
+      "handler": "005B6D00",
+      "gates": [
+        "actor 0047A630 valid",
+        "location normalized to base0..86; 00490D00 building valid",
+        "arg0 normalized to city0..41, then city-subtype valid"
+      ],
+      "return": {
+        "helper": "005B8400",
+        "refund": 0,
+        "order": "conditional presentation -> return helper",
+        "returnValue": 1
+      },
+      "gateFailure": "return0 without scalar changes",
+      "sourceBodyEqual": true
+    },
+    {
+      "missionId": 24,
+      "handler": "005CFB70",
+      "gates": [
+        "actor 0047A630 valid",
+        "location normalized to base0..86; 00490D00 building valid",
+        "arg0 resolves valid building0..16383, not restricted to bases0..86"
+      ],
+      "return": {
+        "helper": "005B8400",
+        "refund": 0,
+        "order": "conditional presentation -> return helper",
+        "returnValue": 1
+      },
+      "gateFailure": "return0 without scalar changes",
+      "sourceBodyEqual": true
+    }
+  ],
+  "policy": {
+    "id": "record-zero-refund-cancellation-v2",
+    "unknownEffects": [
+      "record-only",
+      "reject"
+    ],
+    "noninterferenceAssumption": "conditional presentation, cache/list callbacks and 004BF6F0 do not affect the listed scalar projection; none is executed",
+    "legacyTrace": "v1 remains unchanged; use a new command ID to project a previously recorded unresolved handler"
+  },
+  "unresolved": [
+    "clean stock PK and cross-version equality",
+    "complete return-home 004BF6F0 and presentation/list callback execution",
+    "mission0/2/5/38 group/facility/research side effects",
+    "mission41/42/43 target helper and presentation",
+    "full capture/force extinction/AI/event composition"
+  ]
+}
