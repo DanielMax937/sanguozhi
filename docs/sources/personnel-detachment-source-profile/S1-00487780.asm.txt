@@ -1,0 +1,76 @@
+00487780  56                             push     esi
+00487781  8b f1                          mov      esi, ecx
+00487783  56                             push     esi
+00487784  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487789  e8 e2 9f 00 00                 call     0x491770
+0048778E  8b 76 08                       mov      esi, dword ptr [esi + 8]
+00487791  83 ee 00                       sub      esi, 0
+00487794  0f 84 82 00 00 00              je       0x48781c
+0048779A  4e                             dec      esi
+0048779B  74 43                          je       0x4877e0
+0048779D  4e                             dec      esi
+0048779E  0f 85 aa 00 00 00              jne      0x48784e
+004877A4  83 f8 34                       cmp      eax, 0x34
+004877A7  7c 0a                          jl       0x4877b3
+004877A9  83 f8 56                       cmp      eax, 0x56
+004877AC  7f 05                          jg       0x4877b3
+004877AE  83 c0 cc                       add      eax, -0x34
+004877B1  eb 03                          jmp      0x4877b6
+004877B3  83 c8 ff                       or       eax, 0xffffffff
+004877B6  50                             push     eax
+004877B7  b9 58 19 20 07                 mov      ecx, 0x7201958
+004877BC  e8 af 92 00 00                 call     0x490a70
+004877C1  8b f0                          mov      esi, eax
+004877C3  56                             push     esi
+004877C4  e8 67 2e ff ff                 call     0x47a630
+004877C9  83 c4 04                       add      esp, 4
+004877CC  85 c0                          test     eax, eax
+004877CE  74 7e                          je       0x48784e
+004877D0  8b 44 24 08                    mov      eax, dword ptr [esp + 8]
+004877D4  50                             push     eax
+004877D5  8b ce                          mov      ecx, esi
+004877D7  e8 c4 61 00 00                 call     0x48d9a0
+004877DC  5e                             pop      esi
+004877DD  c2 04 00                       ret      4
+004877E0  83 f8 2a                       cmp      eax, 0x2a
+004877E3  7c 0a                          jl       0x4877ef
+004877E5  83 f8 33                       cmp      eax, 0x33
+004877E8  7f 05                          jg       0x4877ef
+004877EA  83 c0 d6                       add      eax, -0x2a
+004877ED  eb 03                          jmp      0x4877f2
+004877EF  83 c8 ff                       or       eax, 0xffffffff
+004877F2  50                             push     eax
+004877F3  b9 58 19 20 07                 mov      ecx, 0x7201958
+004877F8  e8 43 92 00 00                 call     0x490a40
+004877FD  8b f0                          mov      esi, eax
+004877FF  56                             push     esi
+00487800  e8 2b 2e ff ff                 call     0x47a630
+00487805  83 c4 04                       add      esp, 4
+00487808  85 c0                          test     eax, eax
+0048780A  74 42                          je       0x48784e
+0048780C  8b 4c 24 08                    mov      ecx, dword ptr [esp + 8]
+00487810  51                             push     ecx
+00487811  8b ce                          mov      ecx, esi
+00487813  e8 88 61 00 00                 call     0x48d9a0
+00487818  5e                             pop      esi
+00487819  c2 04 00                       ret      4
+0048781C  85 c0                          test     eax, eax
+0048781E  7c 05                          jl       0x487825
+00487820  83 f8 29                       cmp      eax, 0x29
+00487823  7e 03                          jle      0x487828
+00487825  83 c8 ff                       or       eax, 0xffffffff
+00487828  50                             push     eax
+00487829  b9 58 19 20 07                 mov      ecx, 0x7201958
+0048782E  e8 dd 91 00 00                 call     0x490a10
+00487833  8b f0                          mov      esi, eax
+00487835  56                             push     esi
+00487836  e8 f5 2d ff ff                 call     0x47a630
+0048783B  83 c4 04                       add      esp, 4
+0048783E  85 c0                          test     eax, eax
+00487840  74 0c                          je       0x48784e
+00487842  8b 54 24 08                    mov      edx, dword ptr [esp + 8]
+00487846  52                             push     edx
+00487847  8b ce                          mov      ecx, esi
+00487849  e8 62 3c ff ff                 call     0x47b4b0
+0048784E  5e                             pop      esi
+0048784F  c2 04 00                       ret      4

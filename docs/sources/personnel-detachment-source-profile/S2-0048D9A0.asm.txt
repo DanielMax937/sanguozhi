@@ -1,0 +1,9 @@
+0048D9A0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0048D9A4  83 f8 ff                       cmp      eax, -1
+0048D9A7  74 0b                          je       0x48d9b4
+0048D9A9  85 c0                          test     eax, eax
+0048D9AB  7c 0a                          jl       0x48d9b7
+0048D9AD  3d 4b 04 00 00                 cmp      eax, 0x44b
+0048D9B2  7f 03                          jg       0x48d9b7
+0048D9B4  89 41 64                       mov      dword ptr [ecx + 0x64], eax
+0048D9B7  c2 04 00                       ret      4

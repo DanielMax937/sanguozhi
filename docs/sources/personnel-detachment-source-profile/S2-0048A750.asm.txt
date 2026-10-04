@@ -1,0 +1,10 @@
+0048A750  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0048A754  83 f8 ff                       cmp      eax, -1
+0048A757  74 09                          je       0x48a762
+0048A759  85 c0                          test     eax, eax
+0048A75B  7c 10                          jl       0x48a76d
+0048A75D  83 f8 50                       cmp      eax, 0x50
+0048A760  7f 0b                          jg       0x48a76d
+0048A762  89 81 a4 00 00 00              mov      dword ptr [ecx + 0xa4], eax
+0048A768  e8 63 fb ff ff                 call     0x48a2d0
+0048A76D  c2 04 00                       ret      4

@@ -1,0 +1,9 @@
+0047E110  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0047E114  83 f8 ff                       cmp      eax, -1
+0047E117  74 0b                          je       0x47e124
+0047E119  85 c0                          test     eax, eax
+0047E11B  7c 0a                          jl       0x47e127
+0047E11D  3d 4b 04 00 00                 cmp      eax, 0x44b
+0047E122  7f 03                          jg       0x47e127
+0047E124  89 41 0c                       mov      dword ptr [ecx + 0xc], eax
+0047E127  c2 04 00                       ret      4

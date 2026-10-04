@@ -1,0 +1,40 @@
+004B94E0  81 ec a8 00 00 00              sub      esp, 0xa8
+004B94E6  53                             push     ebx
+004B94E7  56                             push     esi
+004B94E8  57                             push     edi
+004B94E9  b9 58 19 20 07                 mov      ecx, 0x7201958
+004B94EE  e8 1d 75 fd ff                 call     0x490a10
+004B94F3  50                             push     eax
+004B94F4  e8 37 11 fc ff                 call     0x47a630
+004B94F9  83 c4 04                       add      esp, 4
+004B94FC  33 db                          xor      ebx, ebx
+004B94FE  33 f6                          xor      esi, esi
+004B9500  56                             push     esi
+004B9501  b9 58 19 20 07                 mov      ecx, 0x7201958
+004B9506  e8 05 75 fd ff                 call     0x490a10
+004B950B  57                             push     edi
+004B950C  8b c8                          mov      ecx, eax
+004B950E  e8 5d 27 fc ff                 call     0x47bc70
+004B9513  83 f8 01                       cmp      eax, 1
+004B9516  75 05                          jne      0x4b951d
+004B9518  89 74 9c 08                    mov      dword ptr [esp + ebx*4 + 8], esi
+004B951C  43                             inc      ebx
+004B951D  46                             inc      esi
+004B951E  83 fe 2a                       cmp      esi, 0x2a
+004B9521  7c dd                          jl       0x4b9500
+004B9523  85 db                          test     ebx, ebx
+004B9525  7e 19                          jle      0x4b9540
+004B9527  53                             push     ebx
+004B9528  e8 23 8c fb ff                 call     0x472150
+004B952D  83 c4 04                       add      esp, 4
+004B9530  0f b7 c0                       movzx    eax, ax
+004B9533  8b 44 84 08                    mov      eax, dword ptr [esp + eax*4 + 8]
+004B9537  5e                             pop      esi
+004B9538  5b                             pop      ebx
+004B9539  81 c4 a8 00 00 00              add      esp, 0xa8
+004B953F  c3                             ret
+004B9540  5e                             pop      esi
+004B9541  83 c8 ff                       or       eax, 0xffffffff
+004B9544  5b                             pop      ebx
+004B9545  81 c4 a8 00 00 00              add      esp, 0xa8
+004B954B  c3                             ret

@@ -1,0 +1,48 @@
+00489610  56                             push     esi
+00489611  8b b1 9c 00 00 00              mov      esi, dword ptr [ecx + 0x9c]
+00489617  85 f6                          test     esi, esi
+00489619  57                             push     edi
+0048961A  7c 09                          jl       0x489625
+0048961C  83 fe 56                       cmp      esi, 0x56
+0048961F  7f 04                          jg       0x489625
+00489621  8b c6                          mov      eax, esi
+00489623  eb 03                          jmp      0x489628
+00489625  83 c8 ff                       or       eax, 0xffffffff
+00489628  50                             push     eax
+00489629  b9 58 19 20 07                 mov      ecx, 0x7201958
+0048962E  e8 cd 76 00 00                 call     0x490d00
+00489633  8b f8                          mov      edi, eax
+00489635  57                             push     edi
+00489636  e8 f5 0f ff ff                 call     0x47a630
+0048963B  83 c4 04                       add      esp, 4
+0048963E  85 c0                          test     eax, eax
+00489640  74 09                          je       0x48964b
+00489642  8b 07                          mov      eax, dword ptr [edi]
+00489644  8b cf                          mov      ecx, edi
+00489646  5f                             pop      edi
+00489647  5e                             pop      esi
+00489648  ff 60 3c                       jmp      dword ptr [eax + 0x3c]
+0048964B  83 fe 57                       cmp      esi, 0x57
+0048964E  7c 0d                          jl       0x48965d
+00489650  81 fe 3e 04 00 00              cmp      esi, 0x43e
+00489656  7f 05                          jg       0x48965d
+00489658  8d 46 a9                       lea      eax, [esi - 0x57]
+0048965B  eb 03                          jmp      0x489660
+0048965D  83 c8 ff                       or       eax, 0xffffffff
+00489660  50                             push     eax
+00489661  b9 58 19 20 07                 mov      ecx, 0x7201958
+00489666  e8 05 78 00 00                 call     0x490e70
+0048966B  8b f0                          mov      esi, eax
+0048966D  56                             push     esi
+0048966E  e8 bd 0f ff ff                 call     0x47a630
+00489673  83 c4 04                       add      esp, 4
+00489676  85 c0                          test     eax, eax
+00489678  5f                             pop      edi
+00489679  74 08                          je       0x489683
+0048967B  8b 16                          mov      edx, dword ptr [esi]
+0048967D  8b ce                          mov      ecx, esi
+0048967F  5e                             pop      esi
+00489680  ff 62 3c                       jmp      dword ptr [edx + 0x3c]
+00489683  b8 4c 79 ee 06                 mov      eax, 0x6ee794c
+00489688  5e                             pop      esi
+00489689  c3                             ret
