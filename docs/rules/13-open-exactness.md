@@ -1308,3 +1308,8 @@ AI势力强度还存在君主ID硬编码 bonus，因此不能用一张现代通�
 ### P0-63原生roster/role排序与source-separated capacity
 
 [98-native-roster-sort.md](98-native-roster-sort.md)新增独立版本：固定roster参数(1,0,0,0)的virtual field0实际返回canonical person ID；按不同entry/pointer pivot身份执行两种quicksort及governor merge，保留比较调用序、相等项非稳定行为、两轮allocated过滤与clear/reappend。capacity的title/office/technique分支分别按S1/S2执行，query377/278为精确callStack/full-frame/RNG可变观察；saved left低16位、saved force pointer与后续live读取不混淆。canonical title/office的type15/16 validity固定true，person raw/status派生规则不变。旧API/trace不变；一般sort flags/vtable/分配失败、route/target-force、empty-corps/force灭亡、其他event/base/capture、stock/Vanilla与全局RNG继续open。
+
+
+### P0-64原生任务route与目标势力闭合
+
+[99-return-route-target-force.md](99-return-route-target-force.md)新增独立版本，直接执行005BA320任务分派/arg0与arg1/目标force君主live home/可选territory输出，以及00487EB0设施raw owner、领土city和canonical subtype势力链。两源地图byte分别固定，完整原生getter不再用whole-route/target-force观察；真实外部作用仍绑定full frame/callStack/RNG。新force rulerId和legion forceId与valid严格派生，旧API/trace不变。source未改表/固定vtable/不别名输出与可读map域明确；force灭亡/空军团/ruler/base/capture、其他event、stock/Vanilla/全局RNG仍open。

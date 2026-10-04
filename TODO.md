@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-63 native roster/role sort and source-separated capacity with mutable S2 hooks
-> Integration baseline: PR #20 merged; this theme starts at `fd1323511ae7f2d1a1f171e787bca2300444cc4b`
+> Current integration: P0-64 native mission route and target-force composition
+> Integration baseline: PR #21 merged; this theme starts at `28d0b0b8aa6e2c781b791886093b806e6e3d1ad3`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: native route and target-force
+
+- P0-64: executes mission route dispatch/arg0/arg1/dynamic target-ruler home and optional territory outputs in the existing recursive live frame
+- Target force executes raw facility ownership, territorial city and canonical subtype/legion paths; S1/S2 geography bytes remain separate
+- Force ruler and legion force validity aliases are strict; real external hooks retain full mutable observations/RNG, and all older APIs/traces stay unchanged
+- Guide: `docs/rules/99-return-route-target-force.md`; run both return-route-target-force checkers
+- Final 98-command regression and independent review pass; next: empty-corps/force extinction, ruler/base/capture, other events and general sort flags/vtables, with stock/global RNG still open
 
 ### Completed bounded implementation: native roster/role sort and capacity
 
@@ -17,7 +25,7 @@
 - Source-separated title/office/technique capacities execute directly; S2 query377/278 remain exact per-call mutable-frame/RNG boundaries with saved-local continuation
 - Canonical title/office validity is source-proven constant true; person raw17C/status derived validity and all older APIs/traces remain unchanged
 - Guide: `docs/rules/98-native-roster-sort.md`; run both native-roster-sort checkers
-- Next: route/target-force internals, empty-corps/force extinction, ruler/base/capture integration, other event IDs and general sort flags/vtables; stock/Vanilla/global RNG remain open
+- P0-64 separately closes route/target-force internals; next empty-corps/force extinction, ruler/base/capture integration, other event IDs and general sort flags/vtables; stock/Vanilla/global RNG remain open
 
 ### Completed bounded implementation: recursive return/list/role/event composition
 
@@ -27,7 +35,7 @@
 - Remove-first/append and count<2 sort execute; nontrivial native sorts, transitive route/target-force and external callbacks require exact stage-bound mutable observations
 - Empty force/corps, ruler ownership and engine recursion/resource guards defer atomically; guards are engineering limits, not original termination rules
 - Guide: `docs/rules/97-recursive-officer-return.md`; run both recursive-officer-return checkers
-- P0-63 separately closes fixed-domain multi-node sorts/capacity; general key/flags, route internals, empty-corps/force extinction, ruler/base/capture integration and other event IDs remain open, alongside stock/Vanilla/global RNG
+- P0-63 separately closes fixed-domain multi-node sorts/capacity and P0-64 closes route/target-force; general key/flags, empty-corps/force extinction, ruler/base/capture integration and other event IDs remain open, alongside stock/Vanilla/global RNG
 
 ### Completed bounded implementation: atomic event8/14 and handler/tail composition
 
@@ -254,7 +262,7 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop and P0-57 separate return-home scalar/list-order projection; P0-58 adds separate stable nonempty `004BE2A0` and refresh=0 governor scalar coordination; P0-59 adds event8/14 registration/dispatch/predicates/handler gates; P0-60 closes canonical notification and active-list/acted/return-tail writes with mutable presentation/observer/full-return boundaries; P0-61 now composes the event8/14 wrapper/dispatcher/known tail/post-event observer in one live-frame transaction; P0-62 now executes versioned return/list/stable-role/native recursive events; P0-63 closes fixed-domain multi-node roster/role sorting and source-separated capacity with mutable S2 hooks; next recover route/target-force and general sort-key/vtable internals and continue base destruction, full `004BF6F0` return-home role/callback effects, other `004A8110→005B9D30` event IDs, full force extinction and `004B03D0` AI disposition callees
+- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop and P0-57 separate return-home scalar/list-order projection; P0-58 adds separate stable nonempty `004BE2A0` and refresh=0 governor scalar coordination; P0-59 adds event8/14 registration/dispatch/predicates/handler gates; P0-60 closes canonical notification and active-list/acted/return-tail writes with mutable presentation/observer/full-return boundaries; P0-61 now composes the event8/14 wrapper/dispatcher/known tail/post-event observer in one live-frame transaction; P0-62 now executes versioned return/list/stable-role/native recursive events; P0-63 closes fixed-domain multi-node roster/role sorting and source-separated capacity with mutable S2 hooks; P0-64 now closes source-local route/target-force in the recursive frame; next recover general sort-key/vtable internals and continue base destruction, full `004BF6F0` return-home role/callback effects, other `004A8110→005B9D30` event IDs, full force extinction and `004B03D0` AI disposition callees
 - Complete remaining base destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open
