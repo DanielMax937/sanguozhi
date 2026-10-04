@@ -1,0 +1,3463 @@
+{
+  "schemaVersion": 1,
+  "profileId": "source-idb-S1-S2-stable-legion-roles-v1",
+  "baselineCommit": "6d62e86caddd50887b4d4792cb1918526e980722",
+  "sources": [
+    {
+      "source": "S1",
+      "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+      "recordedInputPath": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+      "recordedExeSha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip"
+    },
+    {
+      "source": "S2",
+      "idbSha256": "aa7f2c983b266633d6e23c494d4f8e1b03e5251632505cae103e176ae850dfd8",
+      "recordedInputPath": "C:\\Games\\san11\\血色衣冠6.0sp5(整合包240612)\\San11Pk\\san11pk_dump.exe",
+      "recordedExeSha256": "b1e9467e9612c23af83f6feda8414bc9ee99eb62c6862a84f7f4c5a8822b9da9",
+      "url": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/ida-db/san11pk_dump.exe.idb.7z"
+    }
+  ],
+  "stockOriginalVerified": false,
+  "originalExeExecuted": false,
+  "recordedExeHashesIndependentlyVerified": false,
+  "adoption": {
+    "PC-PK1.1": "compatibility-reconstruction",
+    "PC-Vanilla-assumed": "compatibility-assumption",
+    "PS2-Wii": "open"
+  },
+  "provenance": {
+    "verificationDate": "2026-10-04",
+    "method": "Both fingerprinted MOD-associated IDBs read by pre-existing trusted lowmem_idb/python-idb static parser; Capstone renders bounded function bytes. No EXE/machine code execution. Reused ranges are reread from source and matched by exact hash.",
+    "independentReadback": "Every range also matches an independent direct ID1 low-byte-at-four-byte-stride read, independent of IDAPython.ida_bytes and disassembly.",
+    "sourceClassification": "Recorded EXE hashes are IDB metadata, not independently verified binary hashes. Matching selected bytes does not establish equal transitive behavior, tables, callbacks, or clean-stock originals."
+  },
+  "priorEvidence": [
+    {
+      "id": "capture-personnel-source-profile",
+      "path": "docs/sources/capture-personnel-source-profile.json",
+      "sha256": "632cf7baeebd7f4e95933275405a50d6fefadeb44221f971e470bdef9d4cd140"
+    },
+    {
+      "id": "capture-relocation-source-profile",
+      "path": "docs/sources/capture-relocation-source-profile.json",
+      "sha256": "7b357eb4268490113a96aebdce152e0af1a889efb54ca77fbb5b4c9f9e6da8f5"
+    },
+    {
+      "id": "facility-mission-cancellation",
+      "path": "docs/sources/facility-mission-cancellation.json",
+      "sha256": "d00e7326ba4053781bdf608170027de4e7e83b0beab58539c31a318ac761a042"
+    },
+    {
+      "id": "mission-cancellation-zero-refund",
+      "path": "docs/sources/mission-cancellation-zero-refund.json",
+      "sha256": "96141b4710c73a9e1aeec30968d9924c48708a8e841df1b010dd622f7685a9bf"
+    },
+    {
+      "id": "officer-return-finalizer",
+      "path": "docs/sources/officer-return-finalizer.json",
+      "sha256": "f2c4cd30808b086507de3b15e0fae1c950070c1be9e34d54e92169a874a1225a"
+    },
+    {
+      "id": "personnel-detachment-source-profile",
+      "path": "docs/sources/personnel-detachment-source-profile.json",
+      "sha256": "d793bbd6d58f794e9a6c200d2dd29db346f7b3a6b8e165dd70d157ce68c9c28e"
+    },
+    {
+      "id": "return-mission-lifecycle",
+      "path": "docs/sources/return-mission-lifecycle.json",
+      "sha256": "0f502f7d32a60b035afea99def41fd399eeb43ecc6a8ddf30add817b3372d130"
+    }
+  ],
+  "referencedRanges": [
+    {
+      "source": "S1",
+      "start": "00472590",
+      "endExclusive": "004725DC",
+      "sha256": "528487c1dcf637a573414e3108a5bf6310f2596efa6013e88778438c34afb487",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "0047A600",
+      "endExclusive": "0047A626",
+      "sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "0047A630",
+      "endExclusive": "0047A656",
+      "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "0047B2B0",
+      "endExclusive": "0047B2DD",
+      "sha256": "2b871355a493a19960355b895dcbf725a6b3c931af48f71d233989991aac5017",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "0047B4B0",
+      "endExclusive": "0047B4CA",
+      "sha256": "2b29739356e22fbc66ae61b77059176dde78c24c1b9327232679a32a6bd362e5",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "0047BED0",
+      "endExclusive": "0047BF58",
+      "sha256": "8742a4036cae9f0b34f15e6e32d26dfbbdfba405e1f3f30d699ba01abaf8af10",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "0047C1B0",
+      "endExclusive": "0047C247",
+      "sha256": "29f27b91909d0e5b691616134e1e5736315e065b3b71f58c2737444e2a610d9c",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "0047C320",
+      "endExclusive": "0047C324",
+      "sha256": "7e6bda0a031f94dbe8477fe3ce3ba2b7e3d761a050d55625bc7d92212670e60c",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "0047E070",
+      "endExclusive": "0047E099",
+      "sha256": "4f60021d67009a52e6791f4ac1455a00eab1cd6f6b0ee56280c769fcf3ff0b05",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "0047E110",
+      "endExclusive": "0047E12A",
+      "sha256": "d827f2dd333951c501854b45cdb2eb2cc9a064be0e6737ba1bb3da2eec9ef114",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00483810",
+      "endExclusive": "00483814",
+      "sha256": "07ad3a50b1c271e07fb57fb47d2f0e77f3342d41bfa410990cb1320a45035fb2",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "00486400",
+      "endExclusive": "00486424",
+      "sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7",
+      "evidence": "facility-mission-cancellation"
+    },
+    {
+      "source": "S1",
+      "start": "00486680",
+      "endExclusive": "004866EC",
+      "sha256": "f0851a8423bed9ca3264c913e1a445671645a48d91630362fb46f13b60c2b839",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "004867D0",
+      "endExclusive": "0048688B",
+      "sha256": "8c7a53e95690c40aac1ca3fa7da7e324021182d1e3bca2917920f32c763f8897",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "00486890",
+      "endExclusive": "0048694B",
+      "sha256": "5d3f104b0151451cabba287017f110374072a1694662a0aec362e42c5ce7794a",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "00487780",
+      "endExclusive": "00487852",
+      "sha256": "303fdac792c9fd64c58a8d208d22f9a65f53d5fb62a46bfc3d061e00862a86b8",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00487BC0",
+      "endExclusive": "00487C81",
+      "sha256": "bf5cdf76ce6ab1b1523543e28561698827cf0a2f069b854da6ba1216549e7a8d",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00487E10",
+      "endExclusive": "00487E20",
+      "sha256": "2167cf1594b2707b337ef3d41bcacd924c77d9741485928b9cdc1fa65969b87f",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00487EB0",
+      "endExclusive": "00488008",
+      "sha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c",
+      "evidence": "facility-mission-cancellation"
+    },
+    {
+      "source": "S1",
+      "start": "004883B0",
+      "endExclusive": "004883B7",
+      "sha256": "b8daa47a1e2c23c0d84bc9ac1de08473d93f8b72166ba2ff5b06db32826f2236",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004883C0",
+      "endExclusive": "004883CC",
+      "sha256": "8395557a66b0e00c0f94fdf47165c9ef850acc8786de5bdae7bf73783f6f7717",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00488B30",
+      "endExclusive": "00488B9A",
+      "sha256": "60086366232e8841ab7c36d92a8a15da00a8946fd60c8d1ac0d3a5936e80b78c",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00488B9C",
+      "endExclusive": "00488BC4",
+      "sha256": "6e2b728d38ae9928d92d80c5df4bfff7ec9a84a935c42b088b762fdacbb0a737",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00488C00",
+      "endExclusive": "00488C0E",
+      "sha256": "76f9f18a1e8e40bc921e86166ace9acf8d9be7cc4afe36f6beee7aaa860074ec",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "00489080",
+      "endExclusive": "00489087",
+      "sha256": "28609dc1f574e61d9c6a371e89ddd235fb8328dcf4fa37b729c241791da3c747",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004890F0",
+      "endExclusive": "00489116",
+      "sha256": "28b915b82376fbebe6a95c983a5b1e9bb19d3fefb49a53a1a45312c4c0a5862f",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004897B0",
+      "endExclusive": "004897CD",
+      "sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004898F0",
+      "endExclusive": "0048990B",
+      "sha256": "569e97f5df31300fac201418f260b40cfd71c99e2040eee64a33bcc679ea9a87",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00489FE0",
+      "endExclusive": "00489FF7",
+      "sha256": "483e8c16439460cbab48ff32e0edd027dcb886d18fc66523c0427edac69ee35e",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "0048D9A0",
+      "endExclusive": "0048D9BA",
+      "sha256": "68018d668708bef43c786e54fa2a3fa79698fed6fb27d9e157afeb495396ccc3",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00490A10",
+      "endExclusive": "00490A32",
+      "sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "evidence": "mission-cancellation-zero-refund"
+    },
+    {
+      "source": "S1",
+      "start": "00490A40",
+      "endExclusive": "00490A62",
+      "sha256": "8b122a1d07e6c7372d9e85d06a6fb3025f443cd8d359c150148707def85a97d6",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "00490A70",
+      "endExclusive": "00490A92",
+      "sha256": "a7f7198f20c14dd01bd48d9f7c3a356490fafad34d0e4d7d8e40c60d9635c822",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "00490AA0",
+      "endExclusive": "00490AC2",
+      "sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00490AD0",
+      "endExclusive": "00490AF2",
+      "sha256": "d03849242416ef33815626c63a49db94f0d84740bbe3ae137b638ad756be3333",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "00490B00",
+      "endExclusive": "00490B24",
+      "sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "00490D00",
+      "endExclusive": "00490D21",
+      "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00491310",
+      "endExclusive": "0049135A",
+      "sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00491770",
+      "endExclusive": "004917BC",
+      "sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b",
+      "evidence": "facility-mission-cancellation"
+    },
+    {
+      "source": "S1",
+      "start": "0049F820",
+      "endExclusive": "0049F89C",
+      "sha256": "74a8edd3e3e4ce7073969193a1a3370fdeff55b74b14b7d6073ec396ee6babaf",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004A0940",
+      "endExclusive": "004A0972",
+      "sha256": "8ddf69330b7ff73adf4ece382771a83c83144d2f5e60ca350dc7725edc8518b0",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004A8110",
+      "endExclusive": "004A81D3",
+      "sha256": "810beb7153f032a0d21b863fe3000007f7fd7c3ce076858d3bf63eed613a7623",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004B3A20",
+      "endExclusive": "004B3A9E",
+      "sha256": "00a69c9c8094ff4765e8774dd9362b9bc72c7241f9ad4acb9c9cd3792c7aa426",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004BA1D0",
+      "endExclusive": "004BA485",
+      "sha256": "70d2f33412b51e4e1337942addf82032c79021ea9c37cf562d95ad144daea67c",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004BBAA0",
+      "endExclusive": "004BBAF8",
+      "sha256": "afa2361f9d954766bdb7e921b2afcc6d414ab7789ece1a4fbf188b20b8534a8a",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004CF360",
+      "endExclusive": "004CF3F2",
+      "sha256": "c9fbfcdc7fb4af190d97142f823e4249f6a7e6292b158086b92f20afcb1c13a5",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "005BA320",
+      "endExclusive": "005BA3D9",
+      "sha256": "15d6001729dbf43910e76f4781cdecf33eb98adb15aff70873f795bfd902911c",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "005BA3DC",
+      "endExclusive": "005BA3F0",
+      "sha256": "3eb57addbcbd5bddb75357535de1ac8bb0757dac692ef6b10e38cc38df50d67c",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "005BA3F0",
+      "endExclusive": "005BA40D",
+      "sha256": "fc0a159e0d4d2dcd909d1c04e67e929d646eac7d76d1d050f74e949467c3decc",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "0065D6C0",
+      "endExclusive": "0065D6C4",
+      "sha256": "f7e0208f5e988ae39c7a45dfddbd12921d02f9c3deb5695d4c534c8ab0ccdb0f",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "0079BF98",
+      "endExclusive": "0079BFA0",
+      "sha256": "6d34f0720c29e28d0a6b27f8a23f9d140316d5707d490881c6a7185111af4b39",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "0079BFB0",
+      "endExclusive": "0079BFFC",
+      "sha256": "05ef50c96a4085a936c0bde5ba9d590f81d5d6857ad1de49ce4acde274324d50",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "0079C1B0",
+      "endExclusive": "0079C1B8",
+      "sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "0079C718",
+      "endExclusive": "0079C760",
+      "sha256": "aa61153907812b4d7b1804b81a0fe4cf7aff466aa3ea8d01ef3723306e4f186f",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S1",
+      "start": "0079C780",
+      "endExclusive": "0079C7D0",
+      "sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "0079C810",
+      "endExclusive": "0079C818",
+      "sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "00472590",
+      "endExclusive": "004725DC",
+      "sha256": "528487c1dcf637a573414e3108a5bf6310f2596efa6013e88778438c34afb487",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "0047A600",
+      "endExclusive": "0047A626",
+      "sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "0047A630",
+      "endExclusive": "0047A656",
+      "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "0047B2B0",
+      "endExclusive": "0047B2DD",
+      "sha256": "2b871355a493a19960355b895dcbf725a6b3c931af48f71d233989991aac5017",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "0047B4B0",
+      "endExclusive": "0047B4CA",
+      "sha256": "2b29739356e22fbc66ae61b77059176dde78c24c1b9327232679a32a6bd362e5",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "0047BED0",
+      "endExclusive": "0047BF58",
+      "sha256": "8742a4036cae9f0b34f15e6e32d26dfbbdfba405e1f3f30d699ba01abaf8af10",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "0047C1B0",
+      "endExclusive": "0047C247",
+      "sha256": "29f27b91909d0e5b691616134e1e5736315e065b3b71f58c2737444e2a610d9c",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "0047C320",
+      "endExclusive": "0047C324",
+      "sha256": "7e6bda0a031f94dbe8477fe3ce3ba2b7e3d761a050d55625bc7d92212670e60c",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "0047E070",
+      "endExclusive": "0047E099",
+      "sha256": "4f60021d67009a52e6791f4ac1455a00eab1cd6f6b0ee56280c769fcf3ff0b05",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "0047E110",
+      "endExclusive": "0047E12A",
+      "sha256": "d827f2dd333951c501854b45cdb2eb2cc9a064be0e6737ba1bb3da2eec9ef114",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00483810",
+      "endExclusive": "00483814",
+      "sha256": "07ad3a50b1c271e07fb57fb47d2f0e77f3342d41bfa410990cb1320a45035fb2",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "00486400",
+      "endExclusive": "00486424",
+      "sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7",
+      "evidence": "facility-mission-cancellation"
+    },
+    {
+      "source": "S2",
+      "start": "00486680",
+      "endExclusive": "004866EC",
+      "sha256": "f0851a8423bed9ca3264c913e1a445671645a48d91630362fb46f13b60c2b839",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "004867D0",
+      "endExclusive": "0048688B",
+      "sha256": "8c7a53e95690c40aac1ca3fa7da7e324021182d1e3bca2917920f32c763f8897",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "00486890",
+      "endExclusive": "0048694B",
+      "sha256": "5d3f104b0151451cabba287017f110374072a1694662a0aec362e42c5ce7794a",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "00487780",
+      "endExclusive": "00487852",
+      "sha256": "303fdac792c9fd64c58a8d208d22f9a65f53d5fb62a46bfc3d061e00862a86b8",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00487BC0",
+      "endExclusive": "00487C81",
+      "sha256": "bf5cdf76ce6ab1b1523543e28561698827cf0a2f069b854da6ba1216549e7a8d",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00487E10",
+      "endExclusive": "00487E20",
+      "sha256": "2167cf1594b2707b337ef3d41bcacd924c77d9741485928b9cdc1fa65969b87f",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00487EB0",
+      "endExclusive": "00488008",
+      "sha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c",
+      "evidence": "facility-mission-cancellation"
+    },
+    {
+      "source": "S2",
+      "start": "004883B0",
+      "endExclusive": "004883B7",
+      "sha256": "b8daa47a1e2c23c0d84bc9ac1de08473d93f8b72166ba2ff5b06db32826f2236",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "004883C0",
+      "endExclusive": "004883CC",
+      "sha256": "8395557a66b0e00c0f94fdf47165c9ef850acc8786de5bdae7bf73783f6f7717",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00488B30",
+      "endExclusive": "00488B9A",
+      "sha256": "60086366232e8841ab7c36d92a8a15da00a8946fd60c8d1ac0d3a5936e80b78c",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00488B9C",
+      "endExclusive": "00488BC4",
+      "sha256": "6e2b728d38ae9928d92d80c5df4bfff7ec9a84a935c42b088b762fdacbb0a737",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00488C00",
+      "endExclusive": "00488C0E",
+      "sha256": "76f9f18a1e8e40bc921e86166ace9acf8d9be7cc4afe36f6beee7aaa860074ec",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "00489080",
+      "endExclusive": "00489087",
+      "sha256": "28609dc1f574e61d9c6a371e89ddd235fb8328dcf4fa37b729c241791da3c747",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "004897B0",
+      "endExclusive": "004897CD",
+      "sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "004898F0",
+      "endExclusive": "0048990B",
+      "sha256": "569e97f5df31300fac201418f260b40cfd71c99e2040eee64a33bcc679ea9a87",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00489FE0",
+      "endExclusive": "00489FF7",
+      "sha256": "483e8c16439460cbab48ff32e0edd027dcb886d18fc66523c0427edac69ee35e",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "0048D9A0",
+      "endExclusive": "0048D9BA",
+      "sha256": "68018d668708bef43c786e54fa2a3fa79698fed6fb27d9e157afeb495396ccc3",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00490A10",
+      "endExclusive": "00490A32",
+      "sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "evidence": "mission-cancellation-zero-refund"
+    },
+    {
+      "source": "S2",
+      "start": "00490A40",
+      "endExclusive": "00490A62",
+      "sha256": "8b122a1d07e6c7372d9e85d06a6fb3025f443cd8d359c150148707def85a97d6",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "00490A70",
+      "endExclusive": "00490A92",
+      "sha256": "a7f7198f20c14dd01bd48d9f7c3a356490fafad34d0e4d7d8e40c60d9635c822",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "00490AA0",
+      "endExclusive": "00490AC2",
+      "sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00490AD0",
+      "endExclusive": "00490AF2",
+      "sha256": "d03849242416ef33815626c63a49db94f0d84740bbe3ae137b638ad756be3333",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "00490B00",
+      "endExclusive": "00490B24",
+      "sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "00490D00",
+      "endExclusive": "00490D21",
+      "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00491310",
+      "endExclusive": "0049135A",
+      "sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00491770",
+      "endExclusive": "004917BC",
+      "sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b",
+      "evidence": "facility-mission-cancellation"
+    },
+    {
+      "source": "S2",
+      "start": "0049F820",
+      "endExclusive": "0049F89C",
+      "sha256": "74a8edd3e3e4ce7073969193a1a3370fdeff55b74b14b7d6073ec396ee6babaf",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "004A0940",
+      "endExclusive": "004A0972",
+      "sha256": "8ddf69330b7ff73adf4ece382771a83c83144d2f5e60ca350dc7725edc8518b0",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "004A8110",
+      "endExclusive": "004A81D3",
+      "sha256": "810beb7153f032a0d21b863fe3000007f7fd7c3ce076858d3bf63eed613a7623",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "004B3A20",
+      "endExclusive": "004B3A9E",
+      "sha256": "00a69c9c8094ff4765e8774dd9362b9bc72c7241f9ad4acb9c9cd3792c7aa426",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "004BA1D0",
+      "endExclusive": "004BA485",
+      "sha256": "70d2f33412b51e4e1337942addf82032c79021ea9c37cf562d95ad144daea67c",
+      "evidence": "personnel-detachment-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "004BBAA0",
+      "endExclusive": "004BBAF8",
+      "sha256": "afa2361f9d954766bdb7e921b2afcc6d414ab7789ece1a4fbf188b20b8534a8a",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "004CF360",
+      "endExclusive": "004CF3F2",
+      "sha256": "c9fbfcdc7fb4af190d97142f823e4249f6a7e6292b158086b92f20afcb1c13a5",
+      "evidence": "capture-personnel-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "005BA320",
+      "endExclusive": "005BA3D9",
+      "sha256": "15d6001729dbf43910e76f4781cdecf33eb98adb15aff70873f795bfd902911c",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "005BA3DC",
+      "endExclusive": "005BA3F0",
+      "sha256": "3eb57addbcbd5bddb75357535de1ac8bb0757dac692ef6b10e38cc38df50d67c",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "005BA3F0",
+      "endExclusive": "005BA40D",
+      "sha256": "fc0a159e0d4d2dcd909d1c04e67e929d646eac7d76d1d050f74e949467c3decc",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "0065D6C0",
+      "endExclusive": "0065D6C4",
+      "sha256": "f7e0208f5e988ae39c7a45dfddbd12921d02f9c3deb5695d4c534c8ab0ccdb0f",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "0079BF98",
+      "endExclusive": "0079BFA0",
+      "sha256": "6d34f0720c29e28d0a6b27f8a23f9d140316d5707d490881c6a7185111af4b39",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "0079BFB0",
+      "endExclusive": "0079BFFC",
+      "sha256": "05ef50c96a4085a936c0bde5ba9d590f81d5d6857ad1de49ce4acde274324d50",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "0079C1B0",
+      "endExclusive": "0079C1B8",
+      "sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "0079C718",
+      "endExclusive": "0079C760",
+      "sha256": "aa61153907812b4d7b1804b81a0fe4cf7aff466aa3ea8d01ef3723306e4f186f",
+      "evidence": "officer-return-finalizer"
+    },
+    {
+      "source": "S2",
+      "start": "0079C780",
+      "endExclusive": "0079C7D0",
+      "sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "0079C810",
+      "endExclusive": "0079C818",
+      "sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "evidence": "officer-return-finalizer"
+    }
+  ],
+  "newRanges": [
+    {
+      "source": "S1",
+      "start": "0041C130",
+      "endExclusive": "0041C135",
+      "sha256": "81794790c0ad77391e995d91903df71d532fdf23777b0a32cef0c4606e844a6f",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "00436740",
+      "endExclusive": "00436744",
+      "sha256": "1a293db1c37aca6b2bac74db71ba984dcb4c91aae1d31deb62e41557b557ccc9",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 6,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "0047B150",
+      "endExclusive": "0047B15E",
+      "sha256": "52dc4158e437df16124a965fac71d33f46fcbe75856c9f9e760d32cb295fa52f",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 10,
+      "lineCount": 7
+    },
+    {
+      "source": "S1",
+      "start": "0047BE50",
+      "endExclusive": "0047BEC9",
+      "sha256": "fcd87db7ebedb700d9e0fafa68623d13680256111a0f4bed22ef6c09e7da2db9",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 19,
+      "lineCount": 42
+    },
+    {
+      "source": "S1",
+      "start": "0047C310",
+      "endExclusive": "0047C314",
+      "sha256": "3b2eded1bf6b0f7390191ad1371a956a736f9d18c2a7de0db7e90886555b69e1",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 63,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "004811E0",
+      "endExclusive": "00481202",
+      "sha256": "c58d74c7230e473d11edefc36515bae8d1ccb67595250d1f4ee7fcec40718ae5",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 67,
+      "lineCount": 13
+    },
+    {
+      "source": "S1",
+      "start": "00481350",
+      "endExclusive": "00481367",
+      "sha256": "b1c70ccdddbbb96a7b31f910ed1102d26ec11b3717e118b6346a6f854f1f56ec",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 82,
+      "lineCount": 10
+    },
+    {
+      "source": "S1",
+      "start": "00485160",
+      "endExclusive": "00485164",
+      "sha256": "6ffefd5a9a063cdcc897e922db1b401a2a6c8a8fd3c47617ed3ec2fe7dd373d8",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 94,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "004883F0",
+      "endExclusive": "00488422",
+      "sha256": "1a09de9f631ef197445be47b0d0886b4b49e942d128bd27ed615a38f5290a088",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 98,
+      "lineCount": 21
+    },
+    {
+      "source": "S1",
+      "start": "00488430",
+      "endExclusive": "00488461",
+      "sha256": "7491f2b7b02c21e417945fbd0ee295ad3c5d2c24a99a159e443f306d0acb7f1f",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 121,
+      "lineCount": 20
+    },
+    {
+      "source": "S1",
+      "start": "00488C10",
+      "endExclusive": "00488C1F",
+      "sha256": "7869dd29acea8a177b86bef5214a9fe4209c9d76fd0517a22c1d69dccd2efa09",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 143,
+      "lineCount": 5
+    },
+    {
+      "source": "S1",
+      "start": "00489070",
+      "endExclusive": "00489077",
+      "sha256": "bb20b834cb470d87ae48d0e8640098e31091697db80844e9365cafbb5ebdad82",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 150,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "004896C0",
+      "endExclusive": "00489728",
+      "sha256": "c7af689d6a759f492564ab2679bd8ff54b221d2cced95a0d9ab66900449b9fa1",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 154,
+      "lineCount": 40
+    },
+    {
+      "source": "S1",
+      "start": "00489730",
+      "endExclusive": "0048977E",
+      "sha256": "a093feb7cf224a70a3f61e66a114ff7b2c58de67967582009a4752455a2f4710",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 196,
+      "lineCount": 35
+    },
+    {
+      "source": "S1",
+      "start": "0048A4F0",
+      "endExclusive": "0048A4FC",
+      "sha256": "d753e28f921d960fdffc402ff78166d98b440854f6ad7daf677f934de421dbd9",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 233,
+      "lineCount": 4
+    },
+    {
+      "source": "S1",
+      "start": "00490BF0",
+      "endExclusive": "00490C0F",
+      "sha256": "57173bdd9f28cd384cac028098370ff321b809672f7da8efc65a54b43b720a8e",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 239,
+      "lineCount": 10
+    },
+    {
+      "source": "S1",
+      "start": "00490C10",
+      "endExclusive": "00490C2F",
+      "sha256": "589e1546b543a8fc5a7945f88bf0aa9058092e3cf1a19547f98488b3e5c43c4c",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 251,
+      "lineCount": 10
+    },
+    {
+      "source": "S1",
+      "start": "00491270",
+      "endExclusive": "004912B8",
+      "sha256": "942fb0c5873734f314105ef4c735e504d1b4c0d529de369cebbb7308f2f5d438",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 263,
+      "lineCount": 29
+    },
+    {
+      "source": "S1",
+      "start": "004912C0",
+      "endExclusive": "00491308",
+      "sha256": "19360d0d0373c30434cb79322992b787627daf84282d61d0511499aab5ab73d8",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 294,
+      "lineCount": 29
+    },
+    {
+      "source": "S1",
+      "start": "0049D420",
+      "endExclusive": "0049D53B",
+      "sha256": "f08529bac0b0770bd54a4723e4368ee088c9b74e1d98611323e8d01e13cb8481",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 325,
+      "lineCount": 104
+    },
+    {
+      "source": "S1",
+      "start": "0049D540",
+      "endExclusive": "0049D59E",
+      "sha256": "42bb2dfe5953618454ecad71e6ea75d205d9b700f907eeb5d1ee06f79d377058",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 431,
+      "lineCount": 38
+    },
+    {
+      "source": "S1",
+      "start": "004A69E0",
+      "endExclusive": "004A6B61",
+      "sha256": "77e6590a501c65d2fb985add5866223a79c8b16d239b41a6b9f2d627e7841ee7",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 471,
+      "lineCount": 148
+    },
+    {
+      "source": "S1",
+      "start": "004A6B70",
+      "endExclusive": "004A6CEB",
+      "sha256": "0b1ba85e0249e2498f02098cb2fd470b7daa512f6c5e2e0428c60e86de7c673a",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 621,
+      "lineCount": 147
+    },
+    {
+      "source": "S1",
+      "start": "004A8F40",
+      "endExclusive": "004A8FE6",
+      "sha256": "b311eee88c02e8e3ce39066e3b8ef1a6ddf354fc122687dd546400334027f532",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 770,
+      "lineCount": 67
+    },
+    {
+      "source": "S1",
+      "start": "004A8FF0",
+      "endExclusive": "004A90E9",
+      "sha256": "dbd8f8d851d8130fd042b836a3691fec7822ec13dbcc32c816632a582026c44e",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 839,
+      "lineCount": 93
+    },
+    {
+      "source": "S1",
+      "start": "004AA200",
+      "endExclusive": "004AA343",
+      "sha256": "9d9037e6a79f4468fa63803a4f66ec1f7c9a4e3f396c2f73b6831eedcf65f1d8",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 934,
+      "lineCount": 102
+    },
+    {
+      "source": "S1",
+      "start": "004B2090",
+      "endExclusive": "004B21A1",
+      "sha256": "ab6151e6841d0c12d82f879601c36da357de704b5e16042876215475745f2ed0",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1038,
+      "lineCount": 77
+    },
+    {
+      "source": "S1",
+      "start": "004B9550",
+      "endExclusive": "004B95D2",
+      "sha256": "ff783cee5c57edf1572bcf6c39e1d5cb150f7e89d80c787675410a50bd5762c0",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1117,
+      "lineCount": 58
+    },
+    {
+      "source": "S1",
+      "start": "004B95E0",
+      "endExclusive": "004B9608",
+      "sha256": "3220d55d13a2aea4bf7892501f310534fd16efdecba80653b0ff0019a59fdee1",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1177,
+      "lineCount": 17
+    },
+    {
+      "source": "S1",
+      "start": "004BBA10",
+      "endExclusive": "004BBA9A",
+      "sha256": "ec96b3128ae82a1c1e442f2598aa4b46578246bc307b7d44b80f954cf88841de",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1196,
+      "lineCount": 56
+    },
+    {
+      "source": "S1",
+      "start": "004BBDB0",
+      "endExclusive": "004BBEE8",
+      "sha256": "a143f422b19613767c08a720da6b3e188836942604b0cb7df7beaa09023e7997",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1254,
+      "lineCount": 91
+    },
+    {
+      "source": "S1",
+      "start": "004BC870",
+      "endExclusive": "004BC90F",
+      "sha256": "50e443e66c0ac9141eea8b7b3565e2f049d8f246c1fa6113d683b8546f291769",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1347,
+      "lineCount": 44
+    },
+    {
+      "source": "S1",
+      "start": "004BCA30",
+      "endExclusive": "004BCCC2",
+      "sha256": "6f29ce5ca0a6b7f2b87a477d7e7592a828e13f286b84f5a157dd58c7641811e1",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1393,
+      "lineCount": 206
+    },
+    {
+      "source": "S1",
+      "start": "004BE2A0",
+      "endExclusive": "004BE78D",
+      "sha256": "7a74ca7c68a81ecbf873fd60c80eab5e472ca0fec18a59b7a4b1dbb4bb94b742",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1601,
+      "lineCount": 396
+    },
+    {
+      "source": "S1",
+      "start": "004CEF90",
+      "endExclusive": "004CF05E",
+      "sha256": "e8cff5bc1c613b2d59da1725c936341b2532828f31fc5d2e248680609b22ada7",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1999,
+      "lineCount": 90
+    },
+    {
+      "source": "S1",
+      "start": "004CF160",
+      "endExclusive": "004CF269",
+      "sha256": "f7c3aed2609019c3258ee7b3e48b00bcc78b1b8491412a0125f5e0a9097ba42b",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2091,
+      "lineCount": 102
+    },
+    {
+      "source": "S1",
+      "start": "004CF480",
+      "endExclusive": "004CF500",
+      "sha256": "b4f7917710a8b3fef1986908d98f2b59cde19142ce790e57bd55c10b6ef4e780",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2195,
+      "lineCount": 51
+    },
+    {
+      "source": "S1",
+      "start": "005B9D30",
+      "endExclusive": "005B9E07",
+      "sha256": "11bcbc67f1192735fa513daab3947e263c06a3f811c3fbffd74727f51e393084",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2248,
+      "lineCount": 83
+    },
+    {
+      "source": "S1",
+      "start": "0079BF60",
+      "endExclusive": "0079BF64",
+      "sha256": "051b5d97e8f5681f286c2830f976c7cc87d55c0689354779103178b92f2fb485",
+      "file": "S1-new.asm.txt",
+      "kind": "data",
+      "lineStart": 2333,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0079BFAC",
+      "endExclusive": "0079BFB0",
+      "sha256": "350050a99946814944c220129cf888118e4b06bfcbb25a5352aad1da6f2aeb08",
+      "file": "S1-new.asm.txt",
+      "kind": "data",
+      "lineStart": 2336,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0079C1C4",
+      "endExclusive": "0079C1C8",
+      "sha256": "0ea08f876123875ad6342fec81aaa2aff0ea93f5521ea2e077abca7c81f8bdb4",
+      "file": "S1-new.asm.txt",
+      "kind": "data",
+      "lineStart": 2339,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0079C824",
+      "endExclusive": "0079C828",
+      "sha256": "0ea08f876123875ad6342fec81aaa2aff0ea93f5521ea2e077abca7c81f8bdb4",
+      "file": "S1-new.asm.txt",
+      "kind": "data",
+      "lineStart": 2342,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0041C130",
+      "endExclusive": "0041C135",
+      "sha256": "81794790c0ad77391e995d91903df71d532fdf23777b0a32cef0c4606e844a6f",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "00436740",
+      "endExclusive": "00436744",
+      "sha256": "1a293db1c37aca6b2bac74db71ba984dcb4c91aae1d31deb62e41557b557ccc9",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 6,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "0047B150",
+      "endExclusive": "0047B15E",
+      "sha256": "52dc4158e437df16124a965fac71d33f46fcbe75856c9f9e760d32cb295fa52f",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 10,
+      "lineCount": 7
+    },
+    {
+      "source": "S2",
+      "start": "0047BE50",
+      "endExclusive": "0047BEC9",
+      "sha256": "fcd87db7ebedb700d9e0fafa68623d13680256111a0f4bed22ef6c09e7da2db9",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 19,
+      "lineCount": 42
+    },
+    {
+      "source": "S2",
+      "start": "0047C310",
+      "endExclusive": "0047C314",
+      "sha256": "3b2eded1bf6b0f7390191ad1371a956a736f9d18c2a7de0db7e90886555b69e1",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 63,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "004811E0",
+      "endExclusive": "0048120A",
+      "sha256": "a82ea32324ca4753eeacb16b5d6b2659901ef9ec9b32643aa03d06bd8401db62",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 67,
+      "lineCount": 16
+    },
+    {
+      "source": "S2",
+      "start": "00481350",
+      "endExclusive": "00481367",
+      "sha256": "b1c70ccdddbbb96a7b31f910ed1102d26ec11b3717e118b6346a6f854f1f56ec",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 85,
+      "lineCount": 10
+    },
+    {
+      "source": "S2",
+      "start": "00485160",
+      "endExclusive": "00485164",
+      "sha256": "6ffefd5a9a063cdcc897e922db1b401a2a6c8a8fd3c47617ed3ec2fe7dd373d8",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 97,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "004883F0",
+      "endExclusive": "00488422",
+      "sha256": "1a09de9f631ef197445be47b0d0886b4b49e942d128bd27ed615a38f5290a088",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 101,
+      "lineCount": 21
+    },
+    {
+      "source": "S2",
+      "start": "00488430",
+      "endExclusive": "00488461",
+      "sha256": "7491f2b7b02c21e417945fbd0ee295ad3c5d2c24a99a159e443f306d0acb7f1f",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 124,
+      "lineCount": 20
+    },
+    {
+      "source": "S2",
+      "start": "00488C10",
+      "endExclusive": "00488C1F",
+      "sha256": "7869dd29acea8a177b86bef5214a9fe4209c9d76fd0517a22c1d69dccd2efa09",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 146,
+      "lineCount": 5
+    },
+    {
+      "source": "S2",
+      "start": "00489070",
+      "endExclusive": "00489077",
+      "sha256": "bb20b834cb470d87ae48d0e8640098e31091697db80844e9365cafbb5ebdad82",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 153,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "004890F0",
+      "endExclusive": "00489100",
+      "sha256": "7ad1a032606d7d85f9a359c815b2016013690be2d88d34fa4a034521d2e38663",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 157,
+      "lineCount": 4
+    },
+    {
+      "source": "S2",
+      "start": "004896C0",
+      "endExclusive": "00489728",
+      "sha256": "c7af689d6a759f492564ab2679bd8ff54b221d2cced95a0d9ab66900449b9fa1",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 163,
+      "lineCount": 40
+    },
+    {
+      "source": "S2",
+      "start": "00489730",
+      "endExclusive": "0048977E",
+      "sha256": "a093feb7cf224a70a3f61e66a114ff7b2c58de67967582009a4752455a2f4710",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 205,
+      "lineCount": 35
+    },
+    {
+      "source": "S2",
+      "start": "0048A4F0",
+      "endExclusive": "0048A4FC",
+      "sha256": "d753e28f921d960fdffc402ff78166d98b440854f6ad7daf677f934de421dbd9",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 242,
+      "lineCount": 4
+    },
+    {
+      "source": "S2",
+      "start": "00490BF0",
+      "endExclusive": "00490C0F",
+      "sha256": "57173bdd9f28cd384cac028098370ff321b809672f7da8efc65a54b43b720a8e",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 248,
+      "lineCount": 10
+    },
+    {
+      "source": "S2",
+      "start": "00490C10",
+      "endExclusive": "00490C2F",
+      "sha256": "589e1546b543a8fc5a7945f88bf0aa9058092e3cf1a19547f98488b3e5c43c4c",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 260,
+      "lineCount": 10
+    },
+    {
+      "source": "S2",
+      "start": "00491270",
+      "endExclusive": "004912B8",
+      "sha256": "942fb0c5873734f314105ef4c735e504d1b4c0d529de369cebbb7308f2f5d438",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 272,
+      "lineCount": 29
+    },
+    {
+      "source": "S2",
+      "start": "004912C0",
+      "endExclusive": "00491308",
+      "sha256": "19360d0d0373c30434cb79322992b787627daf84282d61d0511499aab5ab73d8",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 303,
+      "lineCount": 29
+    },
+    {
+      "source": "S2",
+      "start": "0049D420",
+      "endExclusive": "0049D53B",
+      "sha256": "19e6023271fd2553b80ef29846419c7991ba4f2a247d8e80b7676bfc12c1eaaa",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 334,
+      "lineCount": 103
+    },
+    {
+      "source": "S2",
+      "start": "0049D540",
+      "endExclusive": "0049D59E",
+      "sha256": "30c5c201c4b25465a1dd1c7d6969511f2d5557f3e5bd6f0b52c5e1ba676de87c",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 439,
+      "lineCount": 35
+    },
+    {
+      "source": "S2",
+      "start": "004A69E0",
+      "endExclusive": "004A6B61",
+      "sha256": "77e6590a501c65d2fb985add5866223a79c8b16d239b41a6b9f2d627e7841ee7",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 476,
+      "lineCount": 148
+    },
+    {
+      "source": "S2",
+      "start": "004A6B70",
+      "endExclusive": "004A6CEB",
+      "sha256": "0b1ba85e0249e2498f02098cb2fd470b7daa512f6c5e2e0428c60e86de7c673a",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 626,
+      "lineCount": 147
+    },
+    {
+      "source": "S2",
+      "start": "004A8F40",
+      "endExclusive": "004A8FE6",
+      "sha256": "b311eee88c02e8e3ce39066e3b8ef1a6ddf354fc122687dd546400334027f532",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 775,
+      "lineCount": 67
+    },
+    {
+      "source": "S2",
+      "start": "004A8FF0",
+      "endExclusive": "004A90E9",
+      "sha256": "dbd8f8d851d8130fd042b836a3691fec7822ec13dbcc32c816632a582026c44e",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 844,
+      "lineCount": 93
+    },
+    {
+      "source": "S2",
+      "start": "004AA200",
+      "endExclusive": "004AA343",
+      "sha256": "9d9037e6a79f4468fa63803a4f66ec1f7c9a4e3f396c2f73b6831eedcf65f1d8",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 939,
+      "lineCount": 102
+    },
+    {
+      "source": "S2",
+      "start": "004B2090",
+      "endExclusive": "004B21A1",
+      "sha256": "ab6151e6841d0c12d82f879601c36da357de704b5e16042876215475745f2ed0",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1043,
+      "lineCount": 77
+    },
+    {
+      "source": "S2",
+      "start": "004B9550",
+      "endExclusive": "004B95D2",
+      "sha256": "ff783cee5c57edf1572bcf6c39e1d5cb150f7e89d80c787675410a50bd5762c0",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1122,
+      "lineCount": 58
+    },
+    {
+      "source": "S2",
+      "start": "004B95E0",
+      "endExclusive": "004B9608",
+      "sha256": "3220d55d13a2aea4bf7892501f310534fd16efdecba80653b0ff0019a59fdee1",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1182,
+      "lineCount": 17
+    },
+    {
+      "source": "S2",
+      "start": "004BBA10",
+      "endExclusive": "004BBA9A",
+      "sha256": "ec96b3128ae82a1c1e442f2598aa4b46578246bc307b7d44b80f954cf88841de",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1201,
+      "lineCount": 56
+    },
+    {
+      "source": "S2",
+      "start": "004BBDB0",
+      "endExclusive": "004BBEE8",
+      "sha256": "a143f422b19613767c08a720da6b3e188836942604b0cb7df7beaa09023e7997",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1259,
+      "lineCount": 91
+    },
+    {
+      "source": "S2",
+      "start": "004BC870",
+      "endExclusive": "004BC90F",
+      "sha256": "50e443e66c0ac9141eea8b7b3565e2f049d8f246c1fa6113d683b8546f291769",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1352,
+      "lineCount": 44
+    },
+    {
+      "source": "S2",
+      "start": "004BCA30",
+      "endExclusive": "004BCCC2",
+      "sha256": "6f29ce5ca0a6b7f2b87a477d7e7592a828e13f286b84f5a157dd58c7641811e1",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1398,
+      "lineCount": 206
+    },
+    {
+      "source": "S2",
+      "start": "004BE2A0",
+      "endExclusive": "004BE78D",
+      "sha256": "7a74ca7c68a81ecbf873fd60c80eab5e472ca0fec18a59b7a4b1dbb4bb94b742",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 1606,
+      "lineCount": 396
+    },
+    {
+      "source": "S2",
+      "start": "004CEF90",
+      "endExclusive": "004CF05E",
+      "sha256": "e8cff5bc1c613b2d59da1725c936341b2532828f31fc5d2e248680609b22ada7",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2004,
+      "lineCount": 90
+    },
+    {
+      "source": "S2",
+      "start": "004CF160",
+      "endExclusive": "004CF269",
+      "sha256": "f7c3aed2609019c3258ee7b3e48b00bcc78b1b8491412a0125f5e0a9097ba42b",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2096,
+      "lineCount": 102
+    },
+    {
+      "source": "S2",
+      "start": "004CF480",
+      "endExclusive": "004CF500",
+      "sha256": "b4f7917710a8b3fef1986908d98f2b59cde19142ce790e57bd55c10b6ef4e780",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2200,
+      "lineCount": 51
+    },
+    {
+      "source": "S2",
+      "start": "005B9D30",
+      "endExclusive": "005B9E07",
+      "sha256": "11bcbc67f1192735fa513daab3947e263c06a3f811c3fbffd74727f51e393084",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2253,
+      "lineCount": 83
+    },
+    {
+      "source": "S2",
+      "start": "0079BF60",
+      "endExclusive": "0079BF64",
+      "sha256": "051b5d97e8f5681f286c2830f976c7cc87d55c0689354779103178b92f2fb485",
+      "file": "S2-new.asm.txt",
+      "kind": "data",
+      "lineStart": 2338,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0079BFAC",
+      "endExclusive": "0079BFB0",
+      "sha256": "350050a99946814944c220129cf888118e4b06bfcbb25a5352aad1da6f2aeb08",
+      "file": "S2-new.asm.txt",
+      "kind": "data",
+      "lineStart": 2341,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0079C1C4",
+      "endExclusive": "0079C1C8",
+      "sha256": "0ea08f876123875ad6342fec81aaa2aff0ea93f5521ea2e077abca7c81f8bdb4",
+      "file": "S2-new.asm.txt",
+      "kind": "data",
+      "lineStart": 2344,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0079C824",
+      "endExclusive": "0079C828",
+      "sha256": "0ea08f876123875ad6342fec81aaa2aff0ea93f5521ea2e077abca7c81f8bdb4",
+      "file": "S2-new.asm.txt",
+      "kind": "data",
+      "lineStart": 2347,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0090D1A8",
+      "endExclusive": "0090D1C6",
+      "sha256": "1a6269896645b5582e27fc7fc54f4e79bb2a66dbfea508ecf070353875a85f3e",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2350,
+      "lineCount": 11
+    },
+    {
+      "source": "S2",
+      "start": "0090E8D8",
+      "endExclusive": "0090E905",
+      "sha256": "785add8b6c81a949248e4e1e1849ae89bacf17038e7c206acb830d1f9473e604",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2363,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "0090E908",
+      "endExclusive": "0090E910",
+      "sha256": "8a0806ee5ddf007c9109800e9838d0e20494cf27b96b444f3f7723364b0c92f3",
+      "file": "S2-new.asm.txt",
+      "kind": "data",
+      "lineStart": 2377,
+      "lineCount": 1
+    }
+  ],
+  "comparisons": [
+    {
+      "start": "0041C130",
+      "S1sha256": "81794790c0ad77391e995d91903df71d532fdf23777b0a32cef0c4606e844a6f",
+      "S2sha256": "81794790c0ad77391e995d91903df71d532fdf23777b0a32cef0c4606e844a6f",
+      "identical": true
+    },
+    {
+      "start": "00436740",
+      "S1sha256": "1a293db1c37aca6b2bac74db71ba984dcb4c91aae1d31deb62e41557b557ccc9",
+      "S2sha256": "1a293db1c37aca6b2bac74db71ba984dcb4c91aae1d31deb62e41557b557ccc9",
+      "identical": true
+    },
+    {
+      "start": "00472590",
+      "S1sha256": "528487c1dcf637a573414e3108a5bf6310f2596efa6013e88778438c34afb487",
+      "S2sha256": "528487c1dcf637a573414e3108a5bf6310f2596efa6013e88778438c34afb487",
+      "identical": true
+    },
+    {
+      "start": "0047A600",
+      "S1sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "S2sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "identical": true
+    },
+    {
+      "start": "0047A630",
+      "S1sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "S2sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "identical": true
+    },
+    {
+      "start": "0047B150",
+      "S1sha256": "52dc4158e437df16124a965fac71d33f46fcbe75856c9f9e760d32cb295fa52f",
+      "S2sha256": "52dc4158e437df16124a965fac71d33f46fcbe75856c9f9e760d32cb295fa52f",
+      "identical": true
+    },
+    {
+      "start": "0047B2B0",
+      "S1sha256": "2b871355a493a19960355b895dcbf725a6b3c931af48f71d233989991aac5017",
+      "S2sha256": "2b871355a493a19960355b895dcbf725a6b3c931af48f71d233989991aac5017",
+      "identical": true
+    },
+    {
+      "start": "0047B4B0",
+      "S1sha256": "2b29739356e22fbc66ae61b77059176dde78c24c1b9327232679a32a6bd362e5",
+      "S2sha256": "2b29739356e22fbc66ae61b77059176dde78c24c1b9327232679a32a6bd362e5",
+      "identical": true
+    },
+    {
+      "start": "0047BE50",
+      "S1sha256": "fcd87db7ebedb700d9e0fafa68623d13680256111a0f4bed22ef6c09e7da2db9",
+      "S2sha256": "fcd87db7ebedb700d9e0fafa68623d13680256111a0f4bed22ef6c09e7da2db9",
+      "identical": true
+    },
+    {
+      "start": "0047BED0",
+      "S1sha256": "8742a4036cae9f0b34f15e6e32d26dfbbdfba405e1f3f30d699ba01abaf8af10",
+      "S2sha256": "8742a4036cae9f0b34f15e6e32d26dfbbdfba405e1f3f30d699ba01abaf8af10",
+      "identical": true
+    },
+    {
+      "start": "0047C1B0",
+      "S1sha256": "29f27b91909d0e5b691616134e1e5736315e065b3b71f58c2737444e2a610d9c",
+      "S2sha256": "29f27b91909d0e5b691616134e1e5736315e065b3b71f58c2737444e2a610d9c",
+      "identical": true
+    },
+    {
+      "start": "0047C310",
+      "S1sha256": "3b2eded1bf6b0f7390191ad1371a956a736f9d18c2a7de0db7e90886555b69e1",
+      "S2sha256": "3b2eded1bf6b0f7390191ad1371a956a736f9d18c2a7de0db7e90886555b69e1",
+      "identical": true
+    },
+    {
+      "start": "0047C320",
+      "S1sha256": "7e6bda0a031f94dbe8477fe3ce3ba2b7e3d761a050d55625bc7d92212670e60c",
+      "S2sha256": "7e6bda0a031f94dbe8477fe3ce3ba2b7e3d761a050d55625bc7d92212670e60c",
+      "identical": true
+    },
+    {
+      "start": "0047E070",
+      "S1sha256": "4f60021d67009a52e6791f4ac1455a00eab1cd6f6b0ee56280c769fcf3ff0b05",
+      "S2sha256": "4f60021d67009a52e6791f4ac1455a00eab1cd6f6b0ee56280c769fcf3ff0b05",
+      "identical": true
+    },
+    {
+      "start": "0047E110",
+      "S1sha256": "d827f2dd333951c501854b45cdb2eb2cc9a064be0e6737ba1bb3da2eec9ef114",
+      "S2sha256": "d827f2dd333951c501854b45cdb2eb2cc9a064be0e6737ba1bb3da2eec9ef114",
+      "identical": true
+    },
+    {
+      "start": "004811E0",
+      "S1sha256": "c58d74c7230e473d11edefc36515bae8d1ccb67595250d1f4ee7fcec40718ae5",
+      "S2sha256": "a82ea32324ca4753eeacb16b5d6b2659901ef9ec9b32643aa03d06bd8401db62",
+      "identical": false
+    },
+    {
+      "start": "00481350",
+      "S1sha256": "b1c70ccdddbbb96a7b31f910ed1102d26ec11b3717e118b6346a6f854f1f56ec",
+      "S2sha256": "b1c70ccdddbbb96a7b31f910ed1102d26ec11b3717e118b6346a6f854f1f56ec",
+      "identical": true
+    },
+    {
+      "start": "00483810",
+      "S1sha256": "07ad3a50b1c271e07fb57fb47d2f0e77f3342d41bfa410990cb1320a45035fb2",
+      "S2sha256": "07ad3a50b1c271e07fb57fb47d2f0e77f3342d41bfa410990cb1320a45035fb2",
+      "identical": true
+    },
+    {
+      "start": "00485160",
+      "S1sha256": "6ffefd5a9a063cdcc897e922db1b401a2a6c8a8fd3c47617ed3ec2fe7dd373d8",
+      "S2sha256": "6ffefd5a9a063cdcc897e922db1b401a2a6c8a8fd3c47617ed3ec2fe7dd373d8",
+      "identical": true
+    },
+    {
+      "start": "00486400",
+      "S1sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7",
+      "S2sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7",
+      "identical": true
+    },
+    {
+      "start": "00486680",
+      "S1sha256": "f0851a8423bed9ca3264c913e1a445671645a48d91630362fb46f13b60c2b839",
+      "S2sha256": "f0851a8423bed9ca3264c913e1a445671645a48d91630362fb46f13b60c2b839",
+      "identical": true
+    },
+    {
+      "start": "004867D0",
+      "S1sha256": "8c7a53e95690c40aac1ca3fa7da7e324021182d1e3bca2917920f32c763f8897",
+      "S2sha256": "8c7a53e95690c40aac1ca3fa7da7e324021182d1e3bca2917920f32c763f8897",
+      "identical": true
+    },
+    {
+      "start": "00486890",
+      "S1sha256": "5d3f104b0151451cabba287017f110374072a1694662a0aec362e42c5ce7794a",
+      "S2sha256": "5d3f104b0151451cabba287017f110374072a1694662a0aec362e42c5ce7794a",
+      "identical": true
+    },
+    {
+      "start": "00487780",
+      "S1sha256": "303fdac792c9fd64c58a8d208d22f9a65f53d5fb62a46bfc3d061e00862a86b8",
+      "S2sha256": "303fdac792c9fd64c58a8d208d22f9a65f53d5fb62a46bfc3d061e00862a86b8",
+      "identical": true
+    },
+    {
+      "start": "00487BC0",
+      "S1sha256": "bf5cdf76ce6ab1b1523543e28561698827cf0a2f069b854da6ba1216549e7a8d",
+      "S2sha256": "bf5cdf76ce6ab1b1523543e28561698827cf0a2f069b854da6ba1216549e7a8d",
+      "identical": true
+    },
+    {
+      "start": "00487E10",
+      "S1sha256": "2167cf1594b2707b337ef3d41bcacd924c77d9741485928b9cdc1fa65969b87f",
+      "S2sha256": "2167cf1594b2707b337ef3d41bcacd924c77d9741485928b9cdc1fa65969b87f",
+      "identical": true
+    },
+    {
+      "start": "00487EB0",
+      "S1sha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c",
+      "S2sha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c",
+      "identical": true
+    },
+    {
+      "start": "004883B0",
+      "S1sha256": "b8daa47a1e2c23c0d84bc9ac1de08473d93f8b72166ba2ff5b06db32826f2236",
+      "S2sha256": "b8daa47a1e2c23c0d84bc9ac1de08473d93f8b72166ba2ff5b06db32826f2236",
+      "identical": true
+    },
+    {
+      "start": "004883C0",
+      "S1sha256": "8395557a66b0e00c0f94fdf47165c9ef850acc8786de5bdae7bf73783f6f7717",
+      "S2sha256": "8395557a66b0e00c0f94fdf47165c9ef850acc8786de5bdae7bf73783f6f7717",
+      "identical": true
+    },
+    {
+      "start": "004883F0",
+      "S1sha256": "1a09de9f631ef197445be47b0d0886b4b49e942d128bd27ed615a38f5290a088",
+      "S2sha256": "1a09de9f631ef197445be47b0d0886b4b49e942d128bd27ed615a38f5290a088",
+      "identical": true
+    },
+    {
+      "start": "00488430",
+      "S1sha256": "7491f2b7b02c21e417945fbd0ee295ad3c5d2c24a99a159e443f306d0acb7f1f",
+      "S2sha256": "7491f2b7b02c21e417945fbd0ee295ad3c5d2c24a99a159e443f306d0acb7f1f",
+      "identical": true
+    },
+    {
+      "start": "00488B30",
+      "S1sha256": "60086366232e8841ab7c36d92a8a15da00a8946fd60c8d1ac0d3a5936e80b78c",
+      "S2sha256": "60086366232e8841ab7c36d92a8a15da00a8946fd60c8d1ac0d3a5936e80b78c",
+      "identical": true
+    },
+    {
+      "start": "00488B9C",
+      "S1sha256": "6e2b728d38ae9928d92d80c5df4bfff7ec9a84a935c42b088b762fdacbb0a737",
+      "S2sha256": "6e2b728d38ae9928d92d80c5df4bfff7ec9a84a935c42b088b762fdacbb0a737",
+      "identical": true
+    },
+    {
+      "start": "00488C00",
+      "S1sha256": "76f9f18a1e8e40bc921e86166ace9acf8d9be7cc4afe36f6beee7aaa860074ec",
+      "S2sha256": "76f9f18a1e8e40bc921e86166ace9acf8d9be7cc4afe36f6beee7aaa860074ec",
+      "identical": true
+    },
+    {
+      "start": "00488C10",
+      "S1sha256": "7869dd29acea8a177b86bef5214a9fe4209c9d76fd0517a22c1d69dccd2efa09",
+      "S2sha256": "7869dd29acea8a177b86bef5214a9fe4209c9d76fd0517a22c1d69dccd2efa09",
+      "identical": true
+    },
+    {
+      "start": "00489070",
+      "S1sha256": "bb20b834cb470d87ae48d0e8640098e31091697db80844e9365cafbb5ebdad82",
+      "S2sha256": "bb20b834cb470d87ae48d0e8640098e31091697db80844e9365cafbb5ebdad82",
+      "identical": true
+    },
+    {
+      "start": "00489080",
+      "S1sha256": "28609dc1f574e61d9c6a371e89ddd235fb8328dcf4fa37b729c241791da3c747",
+      "S2sha256": "28609dc1f574e61d9c6a371e89ddd235fb8328dcf4fa37b729c241791da3c747",
+      "identical": true
+    },
+    {
+      "start": "004890F0",
+      "S1sha256": "28b915b82376fbebe6a95c983a5b1e9bb19d3fefb49a53a1a45312c4c0a5862f",
+      "S2sha256": "7ad1a032606d7d85f9a359c815b2016013690be2d88d34fa4a034521d2e38663",
+      "identical": false
+    },
+    {
+      "start": "004896C0",
+      "S1sha256": "c7af689d6a759f492564ab2679bd8ff54b221d2cced95a0d9ab66900449b9fa1",
+      "S2sha256": "c7af689d6a759f492564ab2679bd8ff54b221d2cced95a0d9ab66900449b9fa1",
+      "identical": true
+    },
+    {
+      "start": "00489730",
+      "S1sha256": "a093feb7cf224a70a3f61e66a114ff7b2c58de67967582009a4752455a2f4710",
+      "S2sha256": "a093feb7cf224a70a3f61e66a114ff7b2c58de67967582009a4752455a2f4710",
+      "identical": true
+    },
+    {
+      "start": "004897B0",
+      "S1sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b",
+      "S2sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b",
+      "identical": true
+    },
+    {
+      "start": "004898F0",
+      "S1sha256": "569e97f5df31300fac201418f260b40cfd71c99e2040eee64a33bcc679ea9a87",
+      "S2sha256": "569e97f5df31300fac201418f260b40cfd71c99e2040eee64a33bcc679ea9a87",
+      "identical": true
+    },
+    {
+      "start": "00489FE0",
+      "S1sha256": "483e8c16439460cbab48ff32e0edd027dcb886d18fc66523c0427edac69ee35e",
+      "S2sha256": "483e8c16439460cbab48ff32e0edd027dcb886d18fc66523c0427edac69ee35e",
+      "identical": true
+    },
+    {
+      "start": "0048A4F0",
+      "S1sha256": "d753e28f921d960fdffc402ff78166d98b440854f6ad7daf677f934de421dbd9",
+      "S2sha256": "d753e28f921d960fdffc402ff78166d98b440854f6ad7daf677f934de421dbd9",
+      "identical": true
+    },
+    {
+      "start": "0048D9A0",
+      "S1sha256": "68018d668708bef43c786e54fa2a3fa79698fed6fb27d9e157afeb495396ccc3",
+      "S2sha256": "68018d668708bef43c786e54fa2a3fa79698fed6fb27d9e157afeb495396ccc3",
+      "identical": true
+    },
+    {
+      "start": "00490A10",
+      "S1sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "S2sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "identical": true
+    },
+    {
+      "start": "00490A40",
+      "S1sha256": "8b122a1d07e6c7372d9e85d06a6fb3025f443cd8d359c150148707def85a97d6",
+      "S2sha256": "8b122a1d07e6c7372d9e85d06a6fb3025f443cd8d359c150148707def85a97d6",
+      "identical": true
+    },
+    {
+      "start": "00490A70",
+      "S1sha256": "a7f7198f20c14dd01bd48d9f7c3a356490fafad34d0e4d7d8e40c60d9635c822",
+      "S2sha256": "a7f7198f20c14dd01bd48d9f7c3a356490fafad34d0e4d7d8e40c60d9635c822",
+      "identical": true
+    },
+    {
+      "start": "00490AA0",
+      "S1sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "S2sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "identical": true
+    },
+    {
+      "start": "00490AD0",
+      "S1sha256": "d03849242416ef33815626c63a49db94f0d84740bbe3ae137b638ad756be3333",
+      "S2sha256": "d03849242416ef33815626c63a49db94f0d84740bbe3ae137b638ad756be3333",
+      "identical": true
+    },
+    {
+      "start": "00490B00",
+      "S1sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "S2sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "identical": true
+    },
+    {
+      "start": "00490BF0",
+      "S1sha256": "57173bdd9f28cd384cac028098370ff321b809672f7da8efc65a54b43b720a8e",
+      "S2sha256": "57173bdd9f28cd384cac028098370ff321b809672f7da8efc65a54b43b720a8e",
+      "identical": true
+    },
+    {
+      "start": "00490C10",
+      "S1sha256": "589e1546b543a8fc5a7945f88bf0aa9058092e3cf1a19547f98488b3e5c43c4c",
+      "S2sha256": "589e1546b543a8fc5a7945f88bf0aa9058092e3cf1a19547f98488b3e5c43c4c",
+      "identical": true
+    },
+    {
+      "start": "00490D00",
+      "S1sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "S2sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "identical": true
+    },
+    {
+      "start": "00491270",
+      "S1sha256": "942fb0c5873734f314105ef4c735e504d1b4c0d529de369cebbb7308f2f5d438",
+      "S2sha256": "942fb0c5873734f314105ef4c735e504d1b4c0d529de369cebbb7308f2f5d438",
+      "identical": true
+    },
+    {
+      "start": "004912C0",
+      "S1sha256": "19360d0d0373c30434cb79322992b787627daf84282d61d0511499aab5ab73d8",
+      "S2sha256": "19360d0d0373c30434cb79322992b787627daf84282d61d0511499aab5ab73d8",
+      "identical": true
+    },
+    {
+      "start": "00491310",
+      "S1sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "S2sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "identical": true
+    },
+    {
+      "start": "00491770",
+      "S1sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b",
+      "S2sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b",
+      "identical": true
+    },
+    {
+      "start": "0049D420",
+      "S1sha256": "f08529bac0b0770bd54a4723e4368ee088c9b74e1d98611323e8d01e13cb8481",
+      "S2sha256": "19e6023271fd2553b80ef29846419c7991ba4f2a247d8e80b7676bfc12c1eaaa",
+      "identical": false
+    },
+    {
+      "start": "0049D540",
+      "S1sha256": "42bb2dfe5953618454ecad71e6ea75d205d9b700f907eeb5d1ee06f79d377058",
+      "S2sha256": "30c5c201c4b25465a1dd1c7d6969511f2d5557f3e5bd6f0b52c5e1ba676de87c",
+      "identical": false
+    },
+    {
+      "start": "0049F820",
+      "S1sha256": "74a8edd3e3e4ce7073969193a1a3370fdeff55b74b14b7d6073ec396ee6babaf",
+      "S2sha256": "74a8edd3e3e4ce7073969193a1a3370fdeff55b74b14b7d6073ec396ee6babaf",
+      "identical": true
+    },
+    {
+      "start": "004A0940",
+      "S1sha256": "8ddf69330b7ff73adf4ece382771a83c83144d2f5e60ca350dc7725edc8518b0",
+      "S2sha256": "8ddf69330b7ff73adf4ece382771a83c83144d2f5e60ca350dc7725edc8518b0",
+      "identical": true
+    },
+    {
+      "start": "004A69E0",
+      "S1sha256": "77e6590a501c65d2fb985add5866223a79c8b16d239b41a6b9f2d627e7841ee7",
+      "S2sha256": "77e6590a501c65d2fb985add5866223a79c8b16d239b41a6b9f2d627e7841ee7",
+      "identical": true
+    },
+    {
+      "start": "004A6B70",
+      "S1sha256": "0b1ba85e0249e2498f02098cb2fd470b7daa512f6c5e2e0428c60e86de7c673a",
+      "S2sha256": "0b1ba85e0249e2498f02098cb2fd470b7daa512f6c5e2e0428c60e86de7c673a",
+      "identical": true
+    },
+    {
+      "start": "004A8110",
+      "S1sha256": "810beb7153f032a0d21b863fe3000007f7fd7c3ce076858d3bf63eed613a7623",
+      "S2sha256": "810beb7153f032a0d21b863fe3000007f7fd7c3ce076858d3bf63eed613a7623",
+      "identical": true
+    },
+    {
+      "start": "004A8F40",
+      "S1sha256": "b311eee88c02e8e3ce39066e3b8ef1a6ddf354fc122687dd546400334027f532",
+      "S2sha256": "b311eee88c02e8e3ce39066e3b8ef1a6ddf354fc122687dd546400334027f532",
+      "identical": true
+    },
+    {
+      "start": "004A8FF0",
+      "S1sha256": "dbd8f8d851d8130fd042b836a3691fec7822ec13dbcc32c816632a582026c44e",
+      "S2sha256": "dbd8f8d851d8130fd042b836a3691fec7822ec13dbcc32c816632a582026c44e",
+      "identical": true
+    },
+    {
+      "start": "004AA200",
+      "S1sha256": "9d9037e6a79f4468fa63803a4f66ec1f7c9a4e3f396c2f73b6831eedcf65f1d8",
+      "S2sha256": "9d9037e6a79f4468fa63803a4f66ec1f7c9a4e3f396c2f73b6831eedcf65f1d8",
+      "identical": true
+    },
+    {
+      "start": "004B2090",
+      "S1sha256": "ab6151e6841d0c12d82f879601c36da357de704b5e16042876215475745f2ed0",
+      "S2sha256": "ab6151e6841d0c12d82f879601c36da357de704b5e16042876215475745f2ed0",
+      "identical": true
+    },
+    {
+      "start": "004B3A20",
+      "S1sha256": "00a69c9c8094ff4765e8774dd9362b9bc72c7241f9ad4acb9c9cd3792c7aa426",
+      "S2sha256": "00a69c9c8094ff4765e8774dd9362b9bc72c7241f9ad4acb9c9cd3792c7aa426",
+      "identical": true
+    },
+    {
+      "start": "004B9550",
+      "S1sha256": "ff783cee5c57edf1572bcf6c39e1d5cb150f7e89d80c787675410a50bd5762c0",
+      "S2sha256": "ff783cee5c57edf1572bcf6c39e1d5cb150f7e89d80c787675410a50bd5762c0",
+      "identical": true
+    },
+    {
+      "start": "004B95E0",
+      "S1sha256": "3220d55d13a2aea4bf7892501f310534fd16efdecba80653b0ff0019a59fdee1",
+      "S2sha256": "3220d55d13a2aea4bf7892501f310534fd16efdecba80653b0ff0019a59fdee1",
+      "identical": true
+    },
+    {
+      "start": "004BA1D0",
+      "S1sha256": "70d2f33412b51e4e1337942addf82032c79021ea9c37cf562d95ad144daea67c",
+      "S2sha256": "70d2f33412b51e4e1337942addf82032c79021ea9c37cf562d95ad144daea67c",
+      "identical": true
+    },
+    {
+      "start": "004BBA10",
+      "S1sha256": "ec96b3128ae82a1c1e442f2598aa4b46578246bc307b7d44b80f954cf88841de",
+      "S2sha256": "ec96b3128ae82a1c1e442f2598aa4b46578246bc307b7d44b80f954cf88841de",
+      "identical": true
+    },
+    {
+      "start": "004BBAA0",
+      "S1sha256": "afa2361f9d954766bdb7e921b2afcc6d414ab7789ece1a4fbf188b20b8534a8a",
+      "S2sha256": "afa2361f9d954766bdb7e921b2afcc6d414ab7789ece1a4fbf188b20b8534a8a",
+      "identical": true
+    },
+    {
+      "start": "004BBDB0",
+      "S1sha256": "a143f422b19613767c08a720da6b3e188836942604b0cb7df7beaa09023e7997",
+      "S2sha256": "a143f422b19613767c08a720da6b3e188836942604b0cb7df7beaa09023e7997",
+      "identical": true
+    },
+    {
+      "start": "004BC870",
+      "S1sha256": "50e443e66c0ac9141eea8b7b3565e2f049d8f246c1fa6113d683b8546f291769",
+      "S2sha256": "50e443e66c0ac9141eea8b7b3565e2f049d8f246c1fa6113d683b8546f291769",
+      "identical": true
+    },
+    {
+      "start": "004BCA30",
+      "S1sha256": "6f29ce5ca0a6b7f2b87a477d7e7592a828e13f286b84f5a157dd58c7641811e1",
+      "S2sha256": "6f29ce5ca0a6b7f2b87a477d7e7592a828e13f286b84f5a157dd58c7641811e1",
+      "identical": true
+    },
+    {
+      "start": "004BE2A0",
+      "S1sha256": "7a74ca7c68a81ecbf873fd60c80eab5e472ca0fec18a59b7a4b1dbb4bb94b742",
+      "S2sha256": "7a74ca7c68a81ecbf873fd60c80eab5e472ca0fec18a59b7a4b1dbb4bb94b742",
+      "identical": true
+    },
+    {
+      "start": "004CEF90",
+      "S1sha256": "e8cff5bc1c613b2d59da1725c936341b2532828f31fc5d2e248680609b22ada7",
+      "S2sha256": "e8cff5bc1c613b2d59da1725c936341b2532828f31fc5d2e248680609b22ada7",
+      "identical": true
+    },
+    {
+      "start": "004CF160",
+      "S1sha256": "f7c3aed2609019c3258ee7b3e48b00bcc78b1b8491412a0125f5e0a9097ba42b",
+      "S2sha256": "f7c3aed2609019c3258ee7b3e48b00bcc78b1b8491412a0125f5e0a9097ba42b",
+      "identical": true
+    },
+    {
+      "start": "004CF360",
+      "S1sha256": "c9fbfcdc7fb4af190d97142f823e4249f6a7e6292b158086b92f20afcb1c13a5",
+      "S2sha256": "c9fbfcdc7fb4af190d97142f823e4249f6a7e6292b158086b92f20afcb1c13a5",
+      "identical": true
+    },
+    {
+      "start": "004CF480",
+      "S1sha256": "b4f7917710a8b3fef1986908d98f2b59cde19142ce790e57bd55c10b6ef4e780",
+      "S2sha256": "b4f7917710a8b3fef1986908d98f2b59cde19142ce790e57bd55c10b6ef4e780",
+      "identical": true
+    },
+    {
+      "start": "005B9D30",
+      "S1sha256": "11bcbc67f1192735fa513daab3947e263c06a3f811c3fbffd74727f51e393084",
+      "S2sha256": "11bcbc67f1192735fa513daab3947e263c06a3f811c3fbffd74727f51e393084",
+      "identical": true
+    },
+    {
+      "start": "005BA320",
+      "S1sha256": "15d6001729dbf43910e76f4781cdecf33eb98adb15aff70873f795bfd902911c",
+      "S2sha256": "15d6001729dbf43910e76f4781cdecf33eb98adb15aff70873f795bfd902911c",
+      "identical": true
+    },
+    {
+      "start": "005BA3DC",
+      "S1sha256": "3eb57addbcbd5bddb75357535de1ac8bb0757dac692ef6b10e38cc38df50d67c",
+      "S2sha256": "3eb57addbcbd5bddb75357535de1ac8bb0757dac692ef6b10e38cc38df50d67c",
+      "identical": true
+    },
+    {
+      "start": "005BA3F0",
+      "S1sha256": "fc0a159e0d4d2dcd909d1c04e67e929d646eac7d76d1d050f74e949467c3decc",
+      "S2sha256": "fc0a159e0d4d2dcd909d1c04e67e929d646eac7d76d1d050f74e949467c3decc",
+      "identical": true
+    },
+    {
+      "start": "0065D6C0",
+      "S1sha256": "f7e0208f5e988ae39c7a45dfddbd12921d02f9c3deb5695d4c534c8ab0ccdb0f",
+      "S2sha256": "f7e0208f5e988ae39c7a45dfddbd12921d02f9c3deb5695d4c534c8ab0ccdb0f",
+      "identical": true
+    },
+    {
+      "start": "0079BF60",
+      "S1sha256": "051b5d97e8f5681f286c2830f976c7cc87d55c0689354779103178b92f2fb485",
+      "S2sha256": "051b5d97e8f5681f286c2830f976c7cc87d55c0689354779103178b92f2fb485",
+      "identical": true
+    },
+    {
+      "start": "0079BF98",
+      "S1sha256": "6d34f0720c29e28d0a6b27f8a23f9d140316d5707d490881c6a7185111af4b39",
+      "S2sha256": "6d34f0720c29e28d0a6b27f8a23f9d140316d5707d490881c6a7185111af4b39",
+      "identical": true
+    },
+    {
+      "start": "0079BFAC",
+      "S1sha256": "350050a99946814944c220129cf888118e4b06bfcbb25a5352aad1da6f2aeb08",
+      "S2sha256": "350050a99946814944c220129cf888118e4b06bfcbb25a5352aad1da6f2aeb08",
+      "identical": true
+    },
+    {
+      "start": "0079BFB0",
+      "S1sha256": "05ef50c96a4085a936c0bde5ba9d590f81d5d6857ad1de49ce4acde274324d50",
+      "S2sha256": "05ef50c96a4085a936c0bde5ba9d590f81d5d6857ad1de49ce4acde274324d50",
+      "identical": true
+    },
+    {
+      "start": "0079C1B0",
+      "S1sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "S2sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "identical": true
+    },
+    {
+      "start": "0079C1C4",
+      "S1sha256": "0ea08f876123875ad6342fec81aaa2aff0ea93f5521ea2e077abca7c81f8bdb4",
+      "S2sha256": "0ea08f876123875ad6342fec81aaa2aff0ea93f5521ea2e077abca7c81f8bdb4",
+      "identical": true
+    },
+    {
+      "start": "0079C718",
+      "S1sha256": "aa61153907812b4d7b1804b81a0fe4cf7aff466aa3ea8d01ef3723306e4f186f",
+      "S2sha256": "aa61153907812b4d7b1804b81a0fe4cf7aff466aa3ea8d01ef3723306e4f186f",
+      "identical": true
+    },
+    {
+      "start": "0079C780",
+      "S1sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "S2sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "identical": true
+    },
+    {
+      "start": "0079C810",
+      "S1sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "S2sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "identical": true
+    },
+    {
+      "start": "0079C824",
+      "S1sha256": "0ea08f876123875ad6342fec81aaa2aff0ea93f5521ea2e077abca7c81f8bdb4",
+      "S2sha256": "0ea08f876123875ad6342fec81aaa2aff0ea93f5521ea2e077abca7c81f8bdb4",
+      "identical": true
+    }
+  ],
+  "sourceSpecificRanges": [
+    {
+      "source": "S2",
+      "start": "0090D1A8",
+      "endExclusive": "0090D1C6",
+      "sha256": "1a6269896645b5582e27fc7fc54f4e79bb2a66dbfea508ecf070353875a85f3e",
+      "reason": "S2-only reachable capacity wrapper hook. S1 has no matching address coverage; not a cross-source equivalence claim."
+    },
+    {
+      "source": "S2",
+      "start": "0090E8D8",
+      "endExclusive": "0090E905",
+      "sha256": "785add8b6c81a949248e4e1e1849ae89bacf17038e7c206acb830d1f9473e604",
+      "reason": "S2-only reachable capacity wrapper hook. S1 has no matching address coverage; not a cross-source equivalence claim."
+    },
+    {
+      "source": "S2",
+      "start": "0090E908",
+      "endExclusive": "0090E910",
+      "sha256": "8a0806ee5ddf007c9109800e9838d0e20494cf27b96b444f3f7723364b0c92f3",
+      "reason": "S2-only reachable capacity wrapper hook. S1 has no matching address coverage; not a cross-source equivalence claim."
+    }
+  ],
+  "containers": [
+    {
+      "file": "S1-new.asm.txt",
+      "sha256": "839d9e1366dd553ff745d7e08b29a854eed436bcee10f2a3bf861ace1cd0936a",
+      "lineCount": 2342
+    },
+    {
+      "file": "S2-new.asm.txt",
+      "sha256": "6364a9dd7abc4115eb5dc7bc4b25be65e9c3d18f69b3a0ef5a42dede1944c0a1",
+      "lineCount": 2377
+    }
+  ],
+  "rangeBudget": {
+    "functions": 85,
+    "dataRanges": 13,
+    "commonRangesPerSource": 98,
+    "sourceSpecificRanges": 3,
+    "newRanges": 88,
+    "referencedRanges": 111,
+    "totalSelectedBytesBothSources": 21881,
+    "newCorpusBytes": 12927
+  },
+  "contracts": {
+    "entry": "004BE2A0 stable nonempty corps; governor004BCA30 refreshFlag=0 only",
+    "domains": {
+      "persons": "fixed slots0..1099; allocated and valid are distinct",
+      "forces": "fixed slots0..46; stable entry force0..41 only",
+      "legions": "fixed slots0..46",
+      "buildings": "fixed slots0..16383; canonical city/gate/port0..86",
+      "cities": "separate valid city objects0..41, not building validity",
+      "sparseSnapshot": "complete source snapshot; absent slots explicitly unallocated/invalid",
+      "objectKindDomain": "canonical-backed arrays with matching kinds/IDs; malformed class/kind pairs excluded"
+    },
+    "orderedStableSteps": [
+      "valid legion",
+      "force ID0..41",
+      "004BBDB0 force presence",
+      "004B9550 corps presence",
+      "save old leader",
+      "collect valid same-legion IDs0..1099",
+      "sort004CEF90",
+      "reconcile old status1 leader",
+      "promote selected non-ruler and home governor",
+      "004A0940 leader write",
+      "ascending canonical base0..86 governor refresh0"
+    ],
+    "forcePresence": {
+      "collector": "004CF480 allocated persons, same derived force, statusmask15",
+      "cities": "at least one valid city object0..41 derived-force matching passed force ID",
+      "validForceRequired": true,
+      "statusMask15": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "corpsPresence": {
+      "cities": "at least one valid city object0..41 raw-legion match",
+      "persons": "at least one valid person0..1099 raw-legion match",
+      "statusMaskApplied": false
+    },
+    "leaderComparator": [
+      "ruler status0 first",
+      "capacity low16 descending",
+      "raw signed office+A4 ascending",
+      "derived unsigned leadership+170 descending",
+      "pointer ascending (canonical person ID ascending)"
+    ],
+    "governorComparator": [
+      "when either status<=1, differing statuses lower first",
+      "capacity unsigned low16 descending",
+      "derived unsigned leadership+170 descending",
+      "derived unsigned strength+171 descending",
+      "raw unsigned word+AE descending",
+      "signed virtual person ID ascending"
+    ],
+    "governorRefresh0": {
+      "collector": "existing subtype home-roster order; allocated status0..3",
+      "filter": "allocated recheck, rawlegion equals baselegion,00489730(person)",
+      "requiresCandidateHomeEqualsBase": false,
+      "requiresCandidateForceEqualsBase": false,
+      "leaderShortcut": "last surviving status<=1 candidate",
+      "sortFlag": 0,
+      "sameGovernorShortcut": false,
+      "empty": "clear governor through004B3A20 then event14(base,0)"
+    },
+    "leaderSetter": {
+      "entry": "004A0940",
+      "writer": "0047E110",
+      "idDomain": "-1 or0..1099",
+      "write": "legion+0C signed dword",
+      "advisorWrite": false
+    },
+    "governorSetter": {
+      "entry": "004B3A20",
+      "event8": "if old governor valid and differs, event8(oldperson,0) BEFORE governor field write",
+      "writer": "00487780 dispatch: city0047B4B0 +34, gate/port0048D9A0 +64",
+      "idDomain": "-1 or0..1099",
+      "advisorWrite": false
+    },
+    "eventDispatchOrder": [
+      "004A8110 mission listeners",
+      "004BA1D0 (event8/14 no-op)",
+      "004EC870 then optional UI virtual+1B4"
+    ],
+    "sortFlags": {
+      "1": "quicksort004A8F40/004A69E0",
+      "0": "mergesort004A8FF0/004A6B70",
+      "direction": "comparator(left,right)!=0 means left first for both"
+    },
+    "routeBoundary": {
+      "helper": "005BA320(person,null,null)",
+      "targetSources": {
+        "9/10/23/24": "arg0",
+        "12": "arg1",
+        "15..22": "force(arg0 numeric0..46).ruler valid then ruler.home; force validity not checked",
+        "37": "own home"
+      },
+      "targetRange": "0..16383 else false",
+      "observation": "source-bound routed-mission boolean, stable across role status writes only under callback noninterference"
+    },
+    "capacityBoundary": {
+      "helper": "0048A4F0/0049D540/0049D420",
+      "observations": "source+stage+person bound returned dword; low16 used, capacities may change between leader and each governor stage",
+      "S1": "base plus3000 if forcequery18",
+      "S2": "modified base (query377=>12000/15000; office0 fallback, no person403 name-match title shortcut) plus3000 forcequery3 plus2000 personquery278",
+      "queryHooksExecuted": false
+    },
+    "projectionPolicy": {
+      "unknownEffects": "ordered boundaries with snapshots; record-only requires explicit noninterference, reject preflights atomically",
+      "lists": "successful temporary allocation; preserve roster node order and duplicates; no native comparison invocation-count claim",
+      "fullNativeTransaction": false,
+      "noAdvisorReconciliationClaim": true,
+      "zeroLocalRngOnly": true
+    },
+    "deferred": {
+      "004B80A0": "force extinction",
+      "004BE348..004BE4D7": "empty-corps merge/redistribution",
+      "004BCA30 refreshFlag!=0": "fresh person scan and ability refresh",
+      "capacity": "complete native calculator/table/query-hook graph",
+      "events": "all mission listeners and UI execution",
+      "composition": "whole return/capture transaction, original EXE/save verification"
+    }
+  },
+  "callLedgers": {
+    "004BE2A0": [
+      {
+        "site": "004BE2C5",
+        "bytes": "e8 66 c3 fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BE2DA",
+        "bytes": "ff 50 40",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BE2F5",
+        "bytes": "ff 52 40",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BE2FE",
+        "bytes": "e8 9d 27 fd ff",
+        "kind": "direct",
+        "target": "00490AA0"
+      },
+      {
+        "site": "004BE30A",
+        "bytes": "e8 a1 da ff ff",
+        "kind": "direct",
+        "target": "004BBDB0"
+      },
+      {
+        "site": "004BE31F",
+        "bytes": "e8 7c 9d ff ff",
+        "kind": "direct",
+        "target": "004B80A0"
+      },
+      {
+        "site": "004BE33B",
+        "bytes": "e8 10 b2 ff ff",
+        "kind": "direct",
+        "target": "004B9550"
+      },
+      {
+        "site": "004BE358",
+        "bytes": "ff 52 40",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BE361",
+        "bytes": "e8 3a 27 fd ff",
+        "kind": "direct",
+        "target": "00490AA0"
+      },
+      {
+        "site": "004BE369",
+        "bytes": "e8 c2 c2 fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BE37B",
+        "bytes": "e8 90 2e fc ff",
+        "kind": "direct",
+        "target": "00481210"
+      },
+      {
+        "site": "004BE386",
+        "bytes": "e8 75 29 fd ff",
+        "kind": "direct",
+        "target": "00490D00"
+      },
+      {
+        "site": "004BE38E",
+        "bytes": "e8 9d c2 fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BE3A2",
+        "bytes": "e8 89 16 fe ff",
+        "kind": "direct",
+        "target": "0049FA30"
+      },
+      {
+        "site": "004BE3BA",
+        "bytes": "e8 31 ff 00 00",
+        "kind": "direct",
+        "target": "004CE2F0"
+      },
+      {
+        "site": "004BE3C7",
+        "bytes": "e8 f4 2e fd ff",
+        "kind": "direct",
+        "target": "004912C0"
+      },
+      {
+        "site": "004BE3D3",
+        "bytes": "e8 a8 e3 ff ff",
+        "kind": "direct",
+        "target": "004BC780"
+      },
+      {
+        "site": "004BE3EB",
+        "bytes": "e8 e0 0d fe ff",
+        "kind": "direct",
+        "target": "0049F1D0"
+      },
+      {
+        "site": "004BE3F4",
+        "bytes": "ff 52 44",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BE3FD",
+        "bytes": "e8 ce 26 fd ff",
+        "kind": "direct",
+        "target": "00490AD0"
+      },
+      {
+        "site": "004BE408",
+        "bytes": "e8 a3 ef ff ff",
+        "kind": "direct",
+        "target": "004BD3B0"
+      },
+      {
+        "site": "004BE40F",
+        "bytes": "e8 3c b1 ff ff",
+        "kind": "direct",
+        "target": "004B9550"
+      },
+      {
+        "site": "004BE420",
+        "bytes": "e8 9b 2e fd ff",
+        "kind": "direct",
+        "target": "004912C0"
+      },
+      {
+        "site": "004BE42C",
+        "bytes": "e8 4f e3 ff ff",
+        "kind": "direct",
+        "target": "004BC780"
+      },
+      {
+        "site": "004BE445",
+        "bytes": "e8 86 12 fe ff",
+        "kind": "direct",
+        "target": "0049F6D0"
+      },
+      {
+        "site": "004BE44C",
+        "bytes": "e8 ff b0 ff ff",
+        "kind": "direct",
+        "target": "004B9550"
+      },
+      {
+        "site": "004BE465",
+        "bytes": "e8 d6 2d fc ff",
+        "kind": "direct",
+        "target": "00481240"
+      },
+      {
+        "site": "004BE470",
+        "bytes": "e8 5b 26 fd ff",
+        "kind": "direct",
+        "target": "00490AD0"
+      },
+      {
+        "site": "004BE478",
+        "bytes": "e8 b3 c1 fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BE488",
+        "bytes": "e8 23 ef ff ff",
+        "kind": "direct",
+        "target": "004BD3B0"
+      },
+      {
+        "site": "004BE4AC",
+        "bytes": "e8 8f 2d fc ff",
+        "kind": "direct",
+        "target": "00481240"
+      },
+      {
+        "site": "004BE4B7",
+        "bytes": "e8 14 26 fd ff",
+        "kind": "direct",
+        "target": "00490AD0"
+      },
+      {
+        "site": "004BE4C0",
+        "bytes": "e8 eb ee ff ff",
+        "kind": "direct",
+        "target": "004BD3B0"
+      },
+      {
+        "site": "004BE4E3",
+        "bytes": "e8 18 26 fd ff",
+        "kind": "direct",
+        "target": "00490B00"
+      },
+      {
+        "site": "004BE526",
+        "bytes": "e8 d5 25 fd ff",
+        "kind": "direct",
+        "target": "00490B00"
+      },
+      {
+        "site": "004BE52E",
+        "bytes": "e8 fd c0 fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BE540",
+        "bytes": "e8 7b 2d fd ff",
+        "kind": "direct",
+        "target": "004912C0"
+      },
+      {
+        "site": "004BE54B",
+        "bytes": "ff 50 44",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BE557",
+        "bytes": "e8 54 dc fb ff",
+        "kind": "direct",
+        "target": "0047C1B0"
+      },
+      {
+        "site": "004BE57C",
+        "bytes": "e8 7f bc fe ff",
+        "kind": "direct",
+        "target": "004AA200"
+      },
+      {
+        "site": "004BE586",
+        "bytes": "ff 15 60 e3 74 00",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BE59C",
+        "bytes": "ff 15 5c e3 74 00",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BE5A6",
+        "bytes": "ff 15 5c e3 74 00",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BE5B3",
+        "bytes": "e8 78 c0 fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BE5C5",
+        "bytes": "e8 46 a6 fc ff",
+        "kind": "direct",
+        "target": "00488C10"
+      },
+      {
+        "site": "004BE5DE",
+        "bytes": "e8 1d 27 fd ff",
+        "kind": "direct",
+        "target": "00490D00"
+      },
+      {
+        "site": "004BE5F7",
+        "bytes": "e8 34 b1 fc ff",
+        "kind": "direct",
+        "target": "00489730"
+      },
+      {
+        "site": "004BE601",
+        "bytes": "e8 2a c0 fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BE613",
+        "bytes": "e8 f8 2c fd ff",
+        "kind": "direct",
+        "target": "00491310"
+      },
+      {
+        "site": "004BE61E",
+        "bytes": "e8 6d 82 fc ff",
+        "kind": "direct",
+        "target": "00486890"
+      },
+      {
+        "site": "004BE62E",
+        "bytes": "e8 fd bf fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BE640",
+        "bytes": "e8 cb 2c fd ff",
+        "kind": "direct",
+        "target": "00491310"
+      },
+      {
+        "site": "004BE64B",
+        "bytes": "e8 40 82 fc ff",
+        "kind": "direct",
+        "target": "00486890"
+      },
+      {
+        "site": "004BE65D",
+        "bytes": "e8 be 53 ff ff",
+        "kind": "direct",
+        "target": "004B3A20"
+      },
+      {
+        "site": "004BE666",
+        "bytes": "e8 85 b2 fc ff",
+        "kind": "direct",
+        "target": "004898F0"
+      },
+      {
+        "site": "004BE66D",
+        "bytes": "e8 8e a5 fc ff",
+        "kind": "direct",
+        "target": "00488C00"
+      },
+      {
+        "site": "004BE67A",
+        "bytes": "e8 71 b2 fc ff",
+        "kind": "direct",
+        "target": "004898F0"
+      },
+      {
+        "site": "004BE681",
+        "bytes": "e8 aa b0 fc ff",
+        "kind": "direct",
+        "target": "00489730"
+      },
+      {
+        "site": "004BE696",
+        "bytes": "e8 65 26 fd ff",
+        "kind": "direct",
+        "target": "00490D00"
+      },
+      {
+        "site": "004BE69E",
+        "bytes": "e8 8d bf fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BE6AC",
+        "bytes": "e8 df 81 fc ff",
+        "kind": "direct",
+        "target": "00486890"
+      },
+      {
+        "site": "004BE6B7",
+        "bytes": "e8 44 24 fd ff",
+        "kind": "direct",
+        "target": "00490B00"
+      },
+      {
+        "site": "004BE6BF",
+        "bytes": "e8 6c bf fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BE6DC",
+        "bytes": "e8 0f b2 fc ff",
+        "kind": "direct",
+        "target": "004898F0"
+      },
+      {
+        "site": "004BE6E7",
+        "bytes": "e8 34 53 ff ff",
+        "kind": "direct",
+        "target": "004B3A20"
+      },
+      {
+        "site": "004BE6F2",
+        "bytes": "e8 19 2c fd ff",
+        "kind": "direct",
+        "target": "00491310"
+      },
+      {
+        "site": "004BE6FD",
+        "bytes": "e8 3e 22 fe ff",
+        "kind": "direct",
+        "target": "004A0940"
+      },
+      {
+        "site": "004BE70A",
+        "bytes": "e8 f1 25 fd ff",
+        "kind": "direct",
+        "target": "00490D00"
+      },
+      {
+        "site": "004BE713",
+        "bytes": "e8 f8 96 fc ff",
+        "kind": "direct",
+        "target": "00487E10"
+      },
+      {
+        "site": "004BE722",
+        "bytes": "e8 99 2b fd ff",
+        "kind": "direct",
+        "target": "004912C0"
+      },
+      {
+        "site": "004BE72D",
+        "bytes": "ff 52 44",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BE73B",
+        "bytes": "e8 f0 e2 ff ff",
+        "kind": "direct",
+        "target": "004BCA30"
+      },
+      {
+        "site": "004BE75A",
+        "bytes": "e8 f1 d6 fb ff",
+        "kind": "direct",
+        "target": "0047BE50"
+      },
+      {
+        "site": "004BE773",
+        "bytes": "e8 d8 d6 fb ff",
+        "kind": "direct",
+        "target": "0047BE50"
+      }
+    ],
+    "004BCA30": [
+      {
+        "site": "004BCA52",
+        "bytes": "e8 d9 db fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BCAA5",
+        "bytes": "e8 a6 f3 fb ff",
+        "kind": "direct",
+        "target": "0047BE50"
+      },
+      {
+        "site": "004BCAB6",
+        "bytes": "e8 45 40 fd ff",
+        "kind": "direct",
+        "target": "00490B00"
+      },
+      {
+        "site": "004BCABE",
+        "bytes": "e8 6d db fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BCACE",
+        "bytes": "ff 50 40",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BCAE0",
+        "bytes": "ff 52 40",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BCAF1",
+        "bytes": "ff 50 28",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BCAFC",
+        "bytes": "e8 df d4 fc ff",
+        "kind": "direct",
+        "target": "00489FE0"
+      },
+      {
+        "site": "004BCB07",
+        "bytes": "e8 c4 d7 fc ff",
+        "kind": "direct",
+        "target": "0048A2D0"
+      },
+      {
+        "site": "004BCB11",
+        "bytes": "e8 9a f6 fb ff",
+        "kind": "direct",
+        "target": "0047C1B0"
+      },
+      {
+        "site": "004BCB30",
+        "bytes": "e8 2b 28 01 00",
+        "kind": "direct",
+        "target": "004CF360"
+      },
+      {
+        "site": "004BCB3A",
+        "bytes": "ff 52 44",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BCB47",
+        "bytes": "e8 24 fd ff ff",
+        "kind": "direct",
+        "target": "004BC870"
+      },
+      {
+        "site": "004BCB69",
+        "bytes": "e8 62 f3 fb ff",
+        "kind": "direct",
+        "target": "0047BED0"
+      },
+      {
+        "site": "004BCB92",
+        "bytes": "e8 f9 54 ff ff",
+        "kind": "direct",
+        "target": "004B2090"
+      },
+      {
+        "site": "004BCB9D",
+        "bytes": "e8 ee 9c fc ff",
+        "kind": "direct",
+        "target": "00486890"
+      },
+      {
+        "site": "004BCBA8",
+        "bytes": "e8 53 3f fd ff",
+        "kind": "direct",
+        "target": "00490B00"
+      },
+      {
+        "site": "004BCBB0",
+        "bytes": "e8 7b da fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BCBC8",
+        "bytes": "e8 a3 4b fd ff",
+        "kind": "direct",
+        "target": "00491770"
+      },
+      {
+        "site": "004BCBEF",
+        "bytes": "e8 0c 41 fd ff",
+        "kind": "direct",
+        "target": "00490D00"
+      },
+      {
+        "site": "004BCBF7",
+        "bytes": "e8 34 da fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BCC09",
+        "bytes": "e8 02 47 fd ff",
+        "kind": "direct",
+        "target": "00491310"
+      },
+      {
+        "site": "004BCC12",
+        "bytes": "e8 79 9c fc ff",
+        "kind": "direct",
+        "target": "00486890"
+      },
+      {
+        "site": "004BCC1F",
+        "bytes": "e8 cc cc fc ff",
+        "kind": "direct",
+        "target": "004898F0"
+      },
+      {
+        "site": "004BCC29",
+        "bytes": "e8 02 da fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BCC37",
+        "bytes": "e8 d4 bf fc ff",
+        "kind": "direct",
+        "target": "00488C10"
+      },
+      {
+        "site": "004BCC42",
+        "bytes": "e8 b9 bf fc ff",
+        "kind": "direct",
+        "target": "00488C00"
+      },
+      {
+        "site": "004BCC4F",
+        "bytes": "e8 9c cc fc ff",
+        "kind": "direct",
+        "target": "004898F0"
+      },
+      {
+        "site": "004BCC5A",
+        "bytes": "e8 c1 6d ff ff",
+        "kind": "direct",
+        "target": "004B3A20"
+      },
+      {
+        "site": "004BCC6A",
+        "bytes": "e8 b1 6d ff ff",
+        "kind": "direct",
+        "target": "004B3A20"
+      },
+      {
+        "site": "004BCC76",
+        "bytes": "e8 25 ee ff ff",
+        "kind": "direct",
+        "target": "004BBAA0"
+      },
+      {
+        "site": "004BCC8F",
+        "bytes": "e8 bc f1 fb ff",
+        "kind": "direct",
+        "target": "0047BE50"
+      },
+      {
+        "site": "004BCCA8",
+        "bytes": "e8 a3 f1 fb ff",
+        "kind": "direct",
+        "target": "0047BE50"
+      }
+    ],
+    "004B3A20": [
+      {
+        "site": "004B3A29",
+        "bytes": "e8 02 6c fc ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004B3A3B",
+        "bytes": "e8 f0 6b fc ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004B3A4E",
+        "bytes": "e8 3d 2e fd ff",
+        "kind": "direct",
+        "target": "00486890"
+      },
+      {
+        "site": "004B3A59",
+        "bytes": "e8 a2 d0 fd ff",
+        "kind": "direct",
+        "target": "00490B00"
+      },
+      {
+        "site": "004B3A61",
+        "bytes": "e8 ca 6b fc ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004B3A78",
+        "bytes": "e8 23 80 00 00",
+        "kind": "direct",
+        "target": "004BBAA0"
+      },
+      {
+        "site": "004B3A7F",
+        "bytes": "e8 0c 2e fd ff",
+        "kind": "direct",
+        "target": "00486890"
+      },
+      {
+        "site": "004B3A8A",
+        "bytes": "e8 81 d8 fd ff",
+        "kind": "direct",
+        "target": "00491310"
+      },
+      {
+        "site": "004B3A92",
+        "bytes": "e8 e9 3c fd ff",
+        "kind": "direct",
+        "target": "00487780"
+      }
+    ],
+    "004A0940": [
+      {
+        "site": "004A0946",
+        "bytes": "e8 e5 9c fd ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004A0969",
+        "bytes": "e8 a2 d7 fd ff",
+        "kind": "direct",
+        "target": "0047E110"
+      }
+    ],
+    "004BBAA0": [
+      {
+        "site": "004BBAC5",
+        "bytes": "e8 46 c6 fe ff",
+        "kind": "direct",
+        "target": "004A8110"
+      },
+      {
+        "site": "004BBAD1",
+        "bytes": "e8 fa e6 ff ff",
+        "kind": "direct",
+        "target": "004BA1D0"
+      },
+      {
+        "site": "004BBAD6",
+        "bytes": "e8 95 0d 03 00",
+        "kind": "direct",
+        "target": "004EC870"
+      },
+      {
+        "site": "004BBAEC",
+        "bytes": "ff 92 b4 01 00 00",
+        "kind": "indirect"
+      }
+    ],
+    "004B2090": [
+      {
+        "site": "004B20FD",
+        "bytes": "e8 1e d7 fe ff",
+        "kind": "direct",
+        "target": "0049F820"
+      },
+      {
+        "site": "004B210D",
+        "bytes": "ff 15 60 e3 74 00",
+        "kind": "indirect"
+      },
+      {
+        "site": "004B2122",
+        "bytes": "ff 15 5c e3 74 00",
+        "kind": "indirect"
+      },
+      {
+        "site": "004B212F",
+        "bytes": "ff 15 5c e3 74 00",
+        "kind": "indirect"
+      },
+      {
+        "site": "004B2145",
+        "bytes": "e8 b6 80 ff ff",
+        "kind": "direct",
+        "target": "004AA200"
+      },
+      {
+        "site": "004B214F",
+        "bytes": "ff 15 60 e3 74 00",
+        "kind": "indirect"
+      },
+      {
+        "site": "004B2165",
+        "bytes": "ff 15 5c e3 74 00",
+        "kind": "indirect"
+      },
+      {
+        "site": "004B216F",
+        "bytes": "ff 15 5c e3 74 00",
+        "kind": "indirect"
+      },
+      {
+        "site": "004B2187",
+        "bytes": "e8 74 9f fc ff",
+        "kind": "direct",
+        "target": "0047C100"
+      }
+    ],
+    "004B95E0": [
+      {
+        "site": "004B95E9",
+        "bytes": "ff 50 44",
+        "kind": "indirect"
+      },
+      {
+        "site": "004B95F4",
+        "bytes": "e8 37 01 fd ff",
+        "kind": "direct",
+        "target": "00489730"
+      }
+    ],
+    "004896C0": [
+      {
+        "site": "00489713",
+        "bytes": "e8 08 0c 13 00",
+        "kind": "direct",
+        "target": "005BA320"
+      }
+    ],
+    "00489730": [
+      {
+        "site": "00489734",
+        "bytes": "e8 87 ff ff ff",
+        "kind": "direct",
+        "target": "004896C0"
+      },
+      {
+        "site": "00489749",
+        "bytes": "e8 b2 75 00 00",
+        "kind": "direct",
+        "target": "00490D00"
+      },
+      {
+        "site": "00489751",
+        "bytes": "e8 da 0e ff ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "00489761",
+        "bytes": "ff 50 44",
+        "kind": "indirect"
+      },
+      {
+        "site": "0048976A",
+        "bytes": "ff 52 44",
+        "kind": "indirect"
+      }
+    ],
+    "004BBDB0": [
+      {
+        "site": "004BBE09",
+        "bytes": "e8 72 36 01 00",
+        "kind": "direct",
+        "target": "004CF480"
+      },
+      {
+        "site": "004BBE1E",
+        "bytes": "e8 dd 02 fc ff",
+        "kind": "direct",
+        "target": "0047C100"
+      },
+      {
+        "site": "004BBE46",
+        "bytes": "e8 c5 4b fd ff",
+        "kind": "direct",
+        "target": "00490A10"
+      },
+      {
+        "site": "004BBE4E",
+        "bytes": "e8 dd e7 fb ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004BBE60",
+        "bytes": "e8 0b 54 fd ff",
+        "kind": "direct",
+        "target": "00491270"
+      },
+      {
+        "site": "004BBE6B",
+        "bytes": "ff 52 40",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BBE8C",
+        "bytes": "e8 bf ff fb ff",
+        "kind": "direct",
+        "target": "0047BE50"
+      },
+      {
+        "site": "004BBEA5",
+        "bytes": "e8 a6 ff fb ff",
+        "kind": "direct",
+        "target": "0047BE50"
+      },
+      {
+        "site": "004BBECB",
+        "bytes": "e8 30 02 fc ff",
+        "kind": "direct",
+        "target": "0047C100"
+      }
+    ],
+    "004B9550": [
+      {
+        "site": "004B9559",
+        "bytes": "e8 62 7d fd ff",
+        "kind": "direct",
+        "target": "004912C0"
+      },
+      {
+        "site": "004B9568",
+        "bytes": "e8 a3 74 fd ff",
+        "kind": "direct",
+        "target": "00490A10"
+      },
+      {
+        "site": "004B9570",
+        "bytes": "e8 bb 10 fc ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004B9580",
+        "bytes": "ff 52 44",
+        "kind": "indirect"
+      },
+      {
+        "site": "004B959B",
+        "bytes": "e8 60 75 fd ff",
+        "kind": "direct",
+        "target": "00490B00"
+      },
+      {
+        "site": "004B95A3",
+        "bytes": "e8 88 10 fc ff",
+        "kind": "direct",
+        "target": "0047A630"
+      },
+      {
+        "site": "004B95B3",
+        "bytes": "ff 50 44",
+        "kind": "indirect"
+      }
+    ],
+    "004CF360": [
+      {
+        "site": "004CF368",
+        "bytes": "e8 e3 ca fa ff",
+        "kind": "direct",
+        "target": "0047BE50"
+      },
+      {
+        "site": "004CF373",
+        "bytes": "e8 98 8a fb ff",
+        "kind": "direct",
+        "target": "00487E10"
+      },
+      {
+        "site": "004CF37F",
+        "bytes": "e8 3c 88 fb ff",
+        "kind": "direct",
+        "target": "00487BC0"
+      },
+      {
+        "site": "004CF3A7",
+        "bytes": "e8 24 cb fa ff",
+        "kind": "direct",
+        "target": "0047BED0"
+      },
+      {
+        "site": "004CF3AF",
+        "bytes": "e8 4c b2 fa ff",
+        "kind": "direct",
+        "target": "0047A600"
+      },
+      {
+        "site": "004CF3BE",
+        "bytes": "e8 1d ac fb ff",
+        "kind": "direct",
+        "target": "00489FE0"
+      },
+      {
+        "site": "004CF3CA",
+        "bytes": "e8 e1 cd fa ff",
+        "kind": "direct",
+        "target": "0047C1B0"
+      }
+    ]
+  }
+}

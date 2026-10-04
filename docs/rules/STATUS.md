@@ -2,7 +2,15 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-57武将返回字段与列表/角色调用序
+## 最新完成：P0-58稳定非空军团与太守角色协调
+
+[正文](93-legion-role-reconciliation.md) · [结构化证据](../sources/legion-role-reconciliation.json)。基线main `6d62e86caddd50887b4d4792cb1918526e980722`（PR #15已合）。
+
+新增独立004BE2A0稳定分支及004BCA30(refresh=0)标量API：allocated与valid存在谓词分开，军团长与太守比较器不同，capacity低16位/office/derived bytes等输入可追溯；原home-roster次序、最后status<=1 shortcut、old==new暂态status/太守变化和0..86据点调用顺序保留。event8在太守字段写前、event14在清空后，完整阶段snapshot精确反映live mutation。capacity/mission getter与监听器均未执行，显式非干预record/reject；无虚构军师调整。
+
+灭亡/空军团/refresh!=0/非安全排序域整次defer，完整返回/capture未组合。stage-bound观察、完整稀疏canonical域、原子preflight、command防重与trace重放不改变所有旧API/trace。S1/S2容量计算及hook差异分别取证，clean stock/Vanilla/真实存档与全局RNG仍open。199范围/21881 raw bytes均直接双源取证并另用raw-ID1复核，98组共同范围94同4异，另含3个S2容量hook。17项source与47项模型测试（含512组独立全状态/事件快照oracle及JSON重放）通过。完整回归86条命令零失败：TypeScript、85 Node、83 Python checker、2 demos；模型测试最后新增4项后另行复跑47项全过。独立审阅通过：冻结14文件/index一致，另行直接raw-ID1核199范围/21881bytes与双IDB指纹，47模型/17source/512 oracle及完整86回归再次通过，无待修阻断；旧API/trace/训练代码未修改，staged/unstaged whitespace clean。合并后main仍须全测。
+
+## 历史完成：P0-57武将返回字段与列表/角色调用序
 
 [正文](92-officer-return-finalizer.md) · [结构化证据](../sources/officer-return-finalizer.json)。基线main `1ff61538c16a1e95dddc15cd228f63d7e15cd356`（PR #14已合）。
 

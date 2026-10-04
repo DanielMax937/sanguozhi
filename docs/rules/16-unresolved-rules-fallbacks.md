@@ -815,6 +815,12 @@ return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 `pointerDomain=array-slots-v1`、`callbackAssumption=noninterference-v1`和record-only/reject是显式可替换边界。ruler ownership分支原子defer，完整列表/角色/UI/事件不执行；role可能改status/force等，因此局部after不得冒充完整返回。必要观察先preflight、缺slot不猜invalid；全字段snapshot/command防重/trace重放保留旧API，零local RNG不覆盖省略的回调。下一bounded主题是004BE2A0稳定非空军团角色协调，force灭亡/空军团/完整governor/capture/stock/Vanilla仍open。
 
 
+### 4D.11 P0-58稳定军团与太守角色
+
+见[93-legion-role-reconciliation.md](93-legion-role-reconciliation.md)。独立API复现稳定非空004BE2A0及refresh=0太守的标量顺序，军团长capacity16/office/leadership/ID与太守capacity16/leadership/strength/rawWordAE/ID不可混用。existing roster最后status<=1 shortcut、同一leader暂态清除/重设、event8先于太守写、event14后于清空均保留。军师setter不是本入口的隐含步骤。
+
+完整稀疏canonical数组、successful temporary-list语义、stage-bound容量与mission-route观察是明确工程输入；capacity/事件/mission getter未执行，用非干预record/reject与完整阶段snapshot。force灭亡、空军团重分配、refresh!=0和mixed-validity多候选排序原子defer；完整return/capture、真实监听器、clean stock/Vanilla不因标量测试通过而关闭。
+
 ## 5. 火焰持续与“自然蔓延”
 
 > P0-4 专项证据矩阵与当前 exactness 状态见 [39-fire-lifetime-spread-exactness.md](39-fire-lifetime-spread-exactness.md)。本节保留工程 fallback；任何 70/30 权重都不得升级成原版常量。

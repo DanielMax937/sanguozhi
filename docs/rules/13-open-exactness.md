@@ -275,6 +275,8 @@ P0-56新增[mission37生命周期](91-return-mission-lifecycle.md)：completion�
 
 P0-57新增[武将返回字段与调用顺序](92-officer-return-finalizer.md)：004BF6F0的home→location→rawlegion→bit9、真实troop gate、numeric same-force、旧新roster阶段和role调用顺序现有独立有界投影。ruler ownership/capture明确整次defer，完整list/UI/角色仍record/reject且要求非干预，不等于004BF6F0完整执行。下一主题优先稳定非空004BE2A0角色协调；其余force灭亡/空军团合并/太守/事件/capture组合及clean stock/跨版本仍open。
 
+P0-58新增[稳定非空军团/太守协调](93-legion-role-reconciliation.md)：004BE2A0稳定分支与004BCA30(refresh=0)已有独立有界标量执行，完整域候选/不同排序/身份暂态/有序据点与event8/14字段边界已审计。原先“稳定非空角色尚未实现”收窄为完整事件/返回组合、军师监听、force灭亡/空军团、refresh!=0和不安全排序域；S1/S2容量观察按stage隔离，clean stock/Vanilla仍open。
+
 状态：
 
 ```text
