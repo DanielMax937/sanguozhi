@@ -2,6 +2,16 @@
 
 更新：2026-10-04 UTC。
 
+## 最新完成：P0-50旧俘虏释放、迁移与排序来源审计
+
+[正文](85-capture-relocation-source-profile.md) · [结构化证据](../sources/capture-relocation-source-profile.json)。本组基线main `e4dab4be5e86bd3d410048137a9c2a3847f2f494`（PR #7已合）。
+
+恢复原home链序的旧俘虏pass、己方归属shortcut、返回原势力首军团/君主home、event4后禁仕tail、004B0F50目的地优先链和territorial-city距离/同分随机。004A7990只准备任务期间并返回origin，base escape不写actual location；004B1950末城gate在selector之前。缺席home-roster与身份rank表降序稳定排序已恢复，不能混同资金不足forced-release comparator。
+
+独立有界Python人物投影，34项测试；126个文本范围、63组S1/S2对照（58同/5异），其中距离表1084/1764个byte不同。输入与RNG/事件时序有trace和重放，未执行任务取消资源、太守/军团/force/事件callback；004BBB00/004BA520在野路线用明确defer/reject，未拼成完整capture。两源均MOD相关；stock、真实存档/全局RNG和独立Vanilla等价仍open。
+
+全回归：TypeScript、85 Node、全部69 Python checker、两训练demo通过（最终main仍须合并后复核）。下一主题可继续004BBB00/004BA520及任务取消资源finalizer，或004B03D0 AI处分callee；不能因本组helper body恢复而清除完整游戏证据债。
+
 ## 最新完成：P0-49城兵容量与人员capture来源审计
 
 [正文](84-capture-personnel-source-profile.md) · [结构化证据](../sources/capture-personnel-source-profile.json)。本组基线main `feca7b37678bccff55d0e8e5732cea463c457708`。
@@ -10,7 +20,7 @@ S1城市特产查询及150000/100000兵cap、身份/地点/势力候选ID顺序�
 
 这是004B3180起点的独立部分投影：前置释放已作为输入阶段契约，后续位置/军团/任务/非hold处分及事件不伪造。P0-48未因此变成整场capture。PK reconstruction、Vanilla单独assumption；S1/S2均MOD相关。S2确有末城gate/skill/概率/RNG和容量改动。
 
-静态证据：142个文本范围、71组对照（61同/10异）。新30项测试含77,824组算术及trace/replay边界通过。全回归：TypeScript类型检查、85个Node测试、全部68个Python checker与两个训练demo通过。依赖沿用前组相同lockfile且已验证的registry包副本。下一可做项是前置俘虏释放、缺席home-roster及004B0F50/004A7990人员迁移，或004B03D0 AI处分callees；clean stock/全局RNG/真实存档债仍保留。
+静态证据：142个文本范围、71组对照（61同/10异）。新30项测试含77,824组算术及trace/replay边界通过。全回归：TypeScript类型检查、85个Node测试、全部68个Python checker与两个训练demo通过。依赖沿用前组相同lockfile且已验证的registry包副本。这些原下一项已由P0-50新增有界投影；当前剩余在野/资源/AI/callback范围见顶部P0-50。clean stock/全局RNG/真实存档债仍保留。
 
 ## 最新完成：P0-48 capture transaction来源审计与有界投影
 

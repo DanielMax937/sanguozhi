@@ -1,0 +1,79 @@
+004BA520  56                             push     esi
+004BA521  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+004BA525  56                             push     esi
+004BA526  e8 05 01 fc ff                 call     0x47a630
+004BA52B  83 c4 04                       add      esp, 4
+004BA52E  85 c0                          test     eax, eax
+004BA530  75 11                          jne      0x4ba543
+004BA532  6a 2a                          push     0x2a
+004BA534  e8 17 7c fb ff                 call     0x472150
+004BA539  83 c4 04                       add      esp, 4
+004BA53C  0f b7 c0                       movzx    eax, ax
+004BA53F  5e                             pop      esi
+004BA540  c2 04 00                       ret      4
+004BA543  57                             push     edi
+004BA544  e8 47 ff ff ff                 call     0x4ba490
+004BA549  8b f8                          mov      edi, eax
+004BA54B  85 ff                          test     edi, edi
+004BA54D  7c 05                          jl       0x4ba554
+004BA54F  83 ff 29                       cmp      edi, 0x29
+004BA552  7e 0d                          jle      0x4ba561
+004BA554  6a 2a                          push     0x2a
+004BA556  e8 f5 7b fb ff                 call     0x472150
+004BA55B  83 c4 04                       add      esp, 4
+004BA55E  0f b7 f8                       movzx    edi, ax
+004BA561  8b 06                          mov      eax, dword ptr [esi]
+004BA563  8b ce                          mov      ecx, esi
+004BA565  ff 50 40                       call     dword ptr [eax + 0x40]
+004BA568  85 c0                          test     eax, eax
+004BA56A  0f 8c 94 00 00 00              jl       0x4ba604
+004BA570  83 f8 2e                       cmp      eax, 0x2e
+004BA573  0f 8f 8b 00 00 00              jg       0x4ba604
+004BA579  8b 86 9c 00 00 00              mov      eax, dword ptr [esi + 0x9c]
+004BA57F  83 f8 57                       cmp      eax, 0x57
+004BA582  7c 60                          jl       0x4ba5e4
+004BA584  3d 3e 04 00 00                 cmp      eax, 0x43e
+004BA589  7f 59                          jg       0x4ba5e4
+004BA58B  8b ce                          mov      ecx, esi
+004BA58D  e8 8e ec fc ff                 call     0x489220
+004BA592  50                             push     eax
+004BA593  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BA598  e8 d3 68 fd ff                 call     0x490e70
+004BA59D  8b 10                          mov      edx, dword ptr [eax]
+004BA59F  8b c8                          mov      ecx, eax
+004BA5A1  ff 52 3c                       call     dword ptr [edx + 0x3c]
+004BA5A4  8b 30                          mov      esi, dword ptr [eax]
+004BA5A6  56                             push     esi
+004BA5A7  b9 68 0e fb 06                 mov      ecx, 0x6fb0e68
+004BA5AC  89 74 24 10                    mov      dword ptr [esp + 0x10], esi
+004BA5B0  e8 5b 54 f5 ff                 call     0x40fa10
+004BA5B5  85 c0                          test     eax, eax
+004BA5B7  74 2b                          je       0x4ba5e4
+004BA5B9  0f bf 4c 24 0e                 movsx    ecx, word ptr [esp + 0xe]
+004BA5BE  0f bf c6                       movsx    eax, si
+004BA5C1  69 c0 c8 00 00 00              imul     eax, eax, 0xc8
+004BA5C7  03 c1                          add      eax, ecx
+004BA5C9  8d 14 80                       lea      edx, [eax + eax*4]
+004BA5CC  8b 04 95 6c 0e fb 06           mov      eax, dword ptr [edx*4 + 0x6fb0e6c]
+004BA5D3  c1 e8 05                       shr      eax, 5
+004BA5D6  83 e0 7f                       and      eax, 0x7f
+004BA5D9  50                             push     eax
+004BA5DA  e8 11 94 fc ff                 call     0x4839f0
+004BA5DF  83 c4 04                       add      esp, 4
+004BA5E2  8b f8                          mov      edi, eax
+004BA5E4  e8 f7 ee ff ff                 call     0x4b94e0
+004BA5E9  85 c0                          test     eax, eax
+004BA5EB  7c 05                          jl       0x4ba5f2
+004BA5ED  83 f8 29                       cmp      eax, 0x29
+004BA5F0  7e 14                          jle      0x4ba606
+004BA5F2  6a 2a                          push     0x2a
+004BA5F4  e8 57 7b fb ff                 call     0x472150
+004BA5F9  83 c4 04                       add      esp, 4
+004BA5FC  5f                             pop      edi
+004BA5FD  0f b7 c0                       movzx    eax, ax
+004BA600  5e                             pop      esi
+004BA601  c2 04 00                       ret      4
+004BA604  8b c7                          mov      eax, edi
+004BA606  5f                             pop      edi
+004BA607  5e                             pop      esi
+004BA608  c2 04 00                       ret      4

@@ -1,0 +1,9 @@
+0047E030  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0047E034  85 c0                          test     eax, eax
+0047E036  7c 0d                          jl       0x47e045
+0047E038  3d ff 3f 00 00                 cmp      eax, 0x3fff
+0047E03D  7f 06                          jg       0x47e045
+0047E03F  b8 01 00 00 00                 mov      eax, 1
+0047E044  c3                             ret
+0047E045  33 c0                          xor      eax, eax
+0047E047  c3                             ret

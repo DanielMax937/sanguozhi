@@ -1,0 +1,6 @@
+00488700  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00488704  50                             push     eax
+00488705  51                             push     ecx
+00488706  e8 15 00 04 00                 call     0x4c8720
+0048870B  83 c4 08                       add      esp, 8
+0048870E  c2 04 00                       ret      4

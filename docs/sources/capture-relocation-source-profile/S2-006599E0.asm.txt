@@ -1,0 +1,54 @@
+006599E0  56                             push     esi
+006599E1  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+006599E5  85 f6                          test     esi, esi
+006599E7  57                             push     edi
+006599E8  8b 7c 24 10                    mov      edi, dword ptr [esp + 0x10]
+006599EC  74 4f                          je       0x659a3d
+006599EE  85 ff                          test     edi, edi
+006599F0  74 4b                          je       0x659a3d
+006599F2  53                             push     ebx
+006599F3  8b 1e                          mov      ebx, dword ptr [esi]
+006599F5  55                             push     ebp
+006599F6  8b 2f                          mov      ebp, dword ptr [edi]
+006599F8  53                             push     ebx
+006599F9  e8 02 0c e2 ff                 call     0x47a600
+006599FE  83 c4 04                       add      esp, 4
+00659A01  85 c0                          test     eax, eax
+00659A03  74 2d                          je       0x659a32
+00659A05  55                             push     ebp
+00659A06  e8 f5 0b e2 ff                 call     0x47a600
+00659A0B  83 c4 04                       add      esp, 4
+00659A0E  85 c0                          test     eax, eax
+00659A10  74 20                          je       0x659a32
+00659A12  8b 76 04                       mov      esi, dword ptr [esi + 4]
+00659A15  8b 7f 04                       mov      edi, dword ptr [edi + 4]
+00659A18  3b f7                          cmp      esi, edi
+00659A1A  75 0a                          jne      0x659a26
+00659A1C  5d                             pop      ebp
+00659A1D  5b                             pop      ebx
+00659A1E  5f                             pop      edi
+00659A1F  b8 01 00 00 00                 mov      eax, 1
+00659A24  5e                             pop      esi
+00659A25  c3                             ret
+00659A26  5d                             pop      ebp
+00659A27  33 c0                          xor      eax, eax
+00659A29  3b f7                          cmp      esi, edi
+00659A2B  5b                             pop      ebx
+00659A2C  5f                             pop      edi
+00659A2D  0f 9f c0                       setg     al
+00659A30  5e                             pop      esi
+00659A31  c3                             ret
+00659A32  3b dd                          cmp      ebx, ebp
+00659A34  5d                             pop      ebp
+00659A35  5b                             pop      ebx
+00659A36  1b c0                          sbb      eax, eax
+00659A38  5f                             pop      edi
+00659A39  f7 d8                          neg      eax
+00659A3B  5e                             pop      esi
+00659A3C  c3                             ret
+00659A3D  3b f7                          cmp      esi, edi
+00659A3F  1b c0                          sbb      eax, eax
+00659A41  5f                             pop      edi
+00659A42  f7 d8                          neg      eax
+00659A44  5e                             pop      esi
+00659A45  c3                             ret

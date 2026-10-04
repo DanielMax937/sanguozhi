@@ -1,0 +1,13 @@
+004A5720  56                             push     esi
+004A5721  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+004A5725  56                             push     esi
+004A5726  e8 05 4f fd ff                 call     0x47a630
+004A572B  83 c4 04                       add      esp, 4
+004A572E  85 c0                          test     eax, eax
+004A5730  74 0b                          je       0x4a573d
+004A5732  6a 00                          push     0
+004A5734  6a ff                          push     -1
+004A5736  8b ce                          mov      ecx, esi
+004A5738  e8 c3 51 fe ff                 call     0x48a900
+004A573D  5e                             pop      esi
+004A573E  c2 04 00                       ret      4

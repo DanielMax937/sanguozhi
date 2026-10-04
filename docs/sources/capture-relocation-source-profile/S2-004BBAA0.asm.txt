@@ -1,0 +1,30 @@
+004BBAA0  83 ec 0c                       sub      esp, 0xc
+004BBAA3  8b 44 24 10                    mov      eax, dword ptr [esp + 0x10]
+004BBAA7  8b 54 24 18                    mov      edx, dword ptr [esp + 0x18]
+004BBAAB  56                             push     esi
+004BBAAC  8b f1                          mov      esi, ecx
+004BBAAE  8b 4c 24 18                    mov      ecx, dword ptr [esp + 0x18]
+004BBAB2  89 44 24 04                    mov      dword ptr [esp + 4], eax
+004BBAB6  8d 44 24 04                    lea      eax, [esp + 4]
+004BBABA  89 4c 24 08                    mov      dword ptr [esp + 8], ecx
+004BBABE  50                             push     eax
+004BBABF  8b ce                          mov      ecx, esi
+004BBAC1  89 54 24 10                    mov      dword ptr [esp + 0x10], edx
+004BBAC5  e8 46 c6 fe ff                 call     0x4a8110
+004BBACA  8d 4c 24 04                    lea      ecx, [esp + 4]
+004BBACE  51                             push     ecx
+004BBACF  8b ce                          mov      ecx, esi
+004BBAD1  e8 fa e6 ff ff                 call     0x4ba1d0
+004BBAD6  e8 95 0d 03 00                 call     0x4ec870
+004BBADB  85 c0                          test     eax, eax
+004BBADD  5e                             pop      esi
+004BBADE  74 12                          je       0x4bbaf2
+004BBAE0  8b 10                          mov      edx, dword ptr [eax]
+004BBAE2  6a 00                          push     0
+004BBAE4  6a 00                          push     0
+004BBAE6  6a 00                          push     0
+004BBAE8  6a 00                          push     0
+004BBAEA  8b c8                          mov      ecx, eax
+004BBAEC  ff 92 b4 01 00 00              call     dword ptr [edx + 0x1b4]
+004BBAF2  83 c4 0c                       add      esp, 0xc
+004BBAF5  c2 0c 00                       ret      0xc

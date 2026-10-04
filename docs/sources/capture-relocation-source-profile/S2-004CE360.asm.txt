@@ -1,0 +1,45 @@
+004CE360  55                             push     ebp
+004CE361  8b 6c 24 08                    mov      ebp, dword ptr [esp + 8]
+004CE365  56                             push     esi
+004CE366  8b cd                          mov      ecx, ebp
+004CE368  e8 e3 0d fd ff                 call     0x49f150
+004CE36D  8b 74 24 10                    mov      esi, dword ptr [esp + 0x10]
+004CE371  56                             push     esi
+004CE372  e8 b9 c2 fa ff                 call     0x47a630
+004CE377  83 c4 04                       add      esp, 4
+004CE37A  85 c0                          test     eax, eax
+004CE37C  74 47                          je       0x4ce3c5
+004CE37E  53                             push     ebx
+004CE37F  57                             push     edi
+004CE380  56                             push     esi
+004CE381  b9 58 19 20 07                 mov      ecx, 0x7201958
+004CE386  e8 35 2f fc ff                 call     0x4912c0
+004CE38B  8b d8                          mov      ebx, eax
+004CE38D  33 ff                          xor      edi, edi
+004CE38F  90                             nop
+004CE390  57                             push     edi
+004CE391  b9 58 19 20 07                 mov      ecx, 0x7201958
+004CE396  e8 75 26 fc ff                 call     0x490a10
+004CE39B  8b f0                          mov      esi, eax
+004CE39D  56                             push     esi
+004CE39E  e8 8d c2 fa ff                 call     0x47a630
+004CE3A3  83 c4 04                       add      esp, 4
+004CE3A6  85 c0                          test     eax, eax
+004CE3A8  74 13                          je       0x4ce3bd
+004CE3AA  8b 06                          mov      eax, dword ptr [esi]
+004CE3AC  8b ce                          mov      ecx, esi
+004CE3AE  ff 50 44                       call     dword ptr [eax + 0x44]
+004CE3B1  3b d8                          cmp      ebx, eax
+004CE3B3  75 08                          jne      0x4ce3bd
+004CE3B5  56                             push     esi
+004CE3B6  8b cd                          mov      ecx, ebp
+004CE3B8  e8 73 bd fe ff                 call     0x4ba130
+004CE3BD  47                             inc      edi
+004CE3BE  83 ff 2a                       cmp      edi, 0x2a
+004CE3C1  7c cd                          jl       0x4ce390
+004CE3C3  5f                             pop      edi
+004CE3C4  5b                             pop      ebx
+004CE3C5  8b 45 0c                       mov      eax, dword ptr [ebp + 0xc]
+004CE3C8  5e                             pop      esi
+004CE3C9  5d                             pop      ebp
+004CE3CA  c2 08 00                       ret      8
