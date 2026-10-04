@@ -2,7 +2,15 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-55能力培养任务41..43取消
+## 最新完成：P0-56 mission37完成、一步推进与延迟退款
+
+[正文](91-return-mission-lifecycle.md) · [结构化证据](../sources/return-mission-lifecycle.json)。基线main `b488a9f6a38fbb45e6e6c2ac64cd68f6fa3f97ed`（PR #13已合）。
+
+独立complete/advance API补上mission37 positive refund→mission/five-args reset→duration0。单supplied active-list成员保留live valid/mission/acted gate、observed stop、源分离六邻城最小距离与首slot tie、到达真实building ID、handler1/dispatcher0、full-return边界后的direct acted0/duration0。no-next只清任务参数；canonical valid home/安全target地理/资源子对象限制明确是模型边界，完整callback与全链表/旬scheduler未执行。
+
+106范围直接重读并另用ID1 raw section复核，53组双源比较46同/7异；16项source测试、27项模型测试含256组fuzz通过。完整trace/RNG零local调用、全部观察preflight、原子拒绝和重复退款保护保持此前API/trace不变。全回归82条命令通过：TypeScript、85 Node、79 Python checker与两demo。独立审阅直接复核两份IDB全部106范围、两个1764格距离矩阵，重跑旧v1/v2/group/facility/special 15/15/20/24/21 tests；port/gate query ledger前移修复及新增阶段测试复审通过，无剩余阻断。合并后main须再全测。完整004BF6F0/角色reconcile、base销毁、事件/force/capture组合、clean stock/Vanilla/真实存档继续open。
+
+## 历史完成：P0-55能力培养任务41..43取消
 
 [正文](90-special-mission-cancellation.md) · [结构化证据](../sources/special-mission-cancellation.json)。基线main `8dd3a566b3d4627657ab2cbe9c50ccb3c9c84fdb`（PR #12已合）。
 

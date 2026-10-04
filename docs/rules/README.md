@@ -284,3 +284,5 @@ P0-53组任务取消以[88-group-mission-cancellation.md](88-group-mission-cance
 P0-54以[89-facility-mission-cancellation.md](89-facility-mission-cancellation.md)为准：0/38有独立有界投影；旧v1/v2/group语义不变，stock/Vanilla未验证。
 
 P0-55以[90-special-mission-cancellation.md](90-special-mission-cancellation.md)为准：41..43共享handler有独立有界投影，无actual-location valid gate；旧模块/trace不变，完整return与stock仍open。
+
+P0-56以[91-return-mission-lifecycle.md](91-return-mission-lifecycle.md)为准：mission37完成与单active-list成员的一步推进已有独立有界投影，退款先于reset、direct acted尾部、源分离距离/金cap、显式安全域与零local RNG重放；完整return/全链表与scheduler仍open。

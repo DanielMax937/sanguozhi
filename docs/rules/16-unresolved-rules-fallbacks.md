@@ -772,6 +772,12 @@ return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 
 `record-special-cancellation-v1`要求`callbackAssumption=noninterference-v1`，可选record-only/reject；未执行展示条件/文本/通知、cache/list和完整004BF6F0。实际分支需要的距离/query观察在任何标量writer前preflight；域内缺失slot报错，不猜invalid。旧v1/v2/group/facility及trace不改义，完整输入/时序快照/ledger/after可重放，不能把局部after当完整游戏或stock证明。
 
+### 4D.9 P0-56 mission37完成与单成员推进
+
+[91-return-mission-lifecycle.md](91-return-mission-lifecycle.md)新增独立`return_mission_lifecycle_profile.py`：complete只投影helper；advance只处理一个supplied node，执行live valid/mission/acted资格和observed global stop，按source六邻城表一步移动或完成延迟退款。完成refund先reset后；arrival的direct acted0不走S2 cancellation hook。invalid next只清mission/five args；不虚构duration递减或外部acted重置。
+
+`homeDomain=valid-canonical-only-v1`与`memberSelection=supplied-node-v1`是明确模型边界。generic/invalid home、invalid目标territory或positive refund的invalid资源对象整次拒绝；这不是新增source gate。实际branch依赖在任何writer前preflight，缺slot不猜invalid。`callbackAssumption=noninterference-v1`与record-only/reject暴露004BF6F0完整返回及UI/cache/virtual观察边界；全active-list/scheduler/force/event/capture仍open。rngState保持且零local call有trace，但不保证省略回调的RNG。完整输入、计划、字段阶段、ledger和after可重放，旧API/trace不改义。
+
 ### 4E. Golden tests
 
 日文 Wiki 的攻城表继续保留，但角色从“运行时规则”改为“回归测试”。

@@ -271,6 +271,8 @@ P0-54新增[设施任务取消](89-facility-mission-cancellation.md)：0/38 gate
 
 P0-55新增[能力培养任务取消](90-special-mission-cancellation.md)：41..43共享005D9C60按actor、args[1]建筑0..16383、args[0]培养记录0..97短路，独立投影不虚构actor实际所在地valid gate；troop/-1与home=-1相等路径已测试。六个S1/S2 +18 slot确认005DA320条件通知读home，展示/完整return仍显式record/reject。专用cancel家族已有分别的有界投影；base销毁、mission37完成、004BF6F0和事件/force/capture组合、clean stock/跨版本仍open。
 
+P0-56新增[mission37生命周期](91-return-mission-lifecycle.md)：completion与单active-list成员的一步推进有独立有界API。positive refund先于mission/args reset，handler1/dispatcher0，arrival直接acted0/duration0无S2 query267；六邻城首slot同分和S1/S2距离分别绑定。active live valid/mission/acted gate与stop观察已恢复；全链表、外部reset/全scheduler、generic/invalid-home不安全域、004BF6F0完整角色/force/事件与base销毁仍open，不能再笼统称mission37 helper/一步移动未实现。
+
 状态：
 
 ```text
