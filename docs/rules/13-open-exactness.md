@@ -263,11 +263,13 @@ P0-50新增[前置释放/迁移/排序审计](85-capture-relocation-source-profi
 
 P0-51新增[游离/任务取消审计](86-personnel-detachment-source-profile.md)：004BBB00/004BA520目的地、实际territorial-city、身份/军团/职务字段与事件顺序现有独立有界投影；004A57B0注册dispatch和15..21取消退款/返回路径已恢复，S2 cap/query/acted-hook差异隔离。其他专用取消handler、004BF6F0返回和004A8110监听器、完整force灭亡/君主继承/全capture组合仍open。不能再把已实现局部路线笼统称为缺body，也不能以此关闭完整事件。
 
-P0-52新增[六个零退款handler](87-mission-cancellation-zero-refund.md)：9/10/12/22/23/24的ordered gate、目标pointer域与无效性检查区别、零退款返回/reset现在有独立v2投影；v1仍保留历史语义。当前剩余专用取消为0/2/5/38和41..43，另mission37完成、004BF6F0及完整callback链继续open，不能再笼统称这六个handler未投影。
+P0-52新增[六个零退款handler](87-mission-cancellation-zero-refund.md)：9/10/12/22/23/24的ordered gate、目标pointer域与无效性检查区别、零退款返回/reset现在有独立v2投影；v1仍保留历史语义。该组当时剩余专用取消为0/2/5/38和41..43（后续有界进展见P0-53..55），另mission37完成、004BF6F0及完整callback链继续open，不能再笼统称这六个handler未投影。
 
-P0-53新增[组任务取消](88-group-mission-cancellation.md)：2/5的按ID前三人、城市signed byte恢复/actor-force研究字段先于逐人返回现有独立原子投影。S2研究getter扩展到63已追到独立hook。当前剩余专用cancel为0/38和41..43，以及mission37完成/004BF6F0/完整回调；v1/v2的历史trace保持不变。
+P0-53新增[组任务取消](88-group-mission-cancellation.md)：2/5的按ID前三人、城市signed byte恢复/actor-force研究字段先于逐人返回现有独立原子投影。S2研究getter扩展到63已追到独立hook。该组当时剩余专用cancel为0/38和41..43（后续有界进展见P0-54..55），以及mission37完成/004BF6F0/完整回调；v1/v2的历史trace保持不变。
 
-P0-54新增[设施任务取消](89-facility-mission-cancellation.md)：0/38 gate、mission0组收集先于target、无效target返回1但不reset、type30宝物42尾部、type3..63 raw写宽/城市byte/home引用现有独立投影。S2升级设施计数仍受+14 gate，与S1分别绑定；source-accepted base目标显式defer/reject。当前专用handler尚余41..43，另base销毁、mission37完成、004BF6F0与完整回调/force/capture仍open。
+P0-54新增[设施任务取消](89-facility-mission-cancellation.md)：0/38 gate、mission0组收集先于target、无效target返回1但不reset、type30宝物42尾部、type3..63 raw写宽/城市byte/home引用现有独立投影。S2升级设施计数仍受+14 gate，与S1分别绑定；source-accepted base目标显式defer/reject。P0-55另有41..43有界投影，另base销毁、mission37完成、004BF6F0与完整回调/force/capture仍open。
+
+P0-55新增[能力培养任务取消](90-special-mission-cancellation.md)：41..43共享005D9C60按actor、args[1]建筑0..16383、args[0]培养记录0..97短路，独立投影不虚构actor实际所在地valid gate；troop/-1与home=-1相等路径已测试。六个S1/S2 +18 slot确认005DA320条件通知读home，展示/完整return仍显式record/reject。专用cancel家族已有分别的有界投影；base销毁、mission37完成、004BF6F0和事件/force/capture组合、clean stock/跨版本仍open。
 
 状态：
 

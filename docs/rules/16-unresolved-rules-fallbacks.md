@@ -766,6 +766,12 @@ return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 
 `callbackAssumption=noninterference-v1`显式约束未执行的展示/return/force/list/attachment/空间AI回调。`unknownEffects=reject`原子拒绝；`baseTargets=defer|reject`专门处理源码接受而本投影不实现的type0..2完整销毁。defer时只保留前面的人员返回，不能说建筑已毁。所需观测在所有标量写入前按实际分支preflight，缺失不猜invalid；完整输入/阶段快照/ledger/after可重放。宝物42 owner数值范围gate不额外要求person有效。
 
+### 4D.8 P0-55能力培养取消的独立投影
+
+[90-special-mission-cancellation.md](90-special-mission-cancellation.md)新增`special_mission_cancellation_profile.py`。41..43按actor/args[1]建筑/args[0]培养记录有序gate；不强加此前handler的实际据点valid gate。培养记录0..97/stride0x6C不混同技术或人物域；条件通知取home。troop/-1且home=-1时同地reset，S2 query267仍独立观察。
+
+`record-special-cancellation-v1`要求`callbackAssumption=noninterference-v1`，可选record-only/reject；未执行展示条件/文本/通知、cache/list和完整004BF6F0。实际分支需要的距离/query观察在任何标量writer前preflight；域内缺失slot报错，不猜invalid。旧v1/v2/group/facility及trace不改义，完整输入/时序快照/ledger/after可重放，不能把局部after当完整游戏或stock证明。
+
 ### 4E. Golden tests
 
 日文 Wiki 的攻城表继续保留，但角色从“运行时规则”改为“回归测试”。

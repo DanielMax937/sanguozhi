@@ -1,5 +1,7 @@
 # P0-52 六个零退款任务取消 handler
 
+后续：P0-55在[独立能力培养取消模型](90-special-mission-cancellation.md)投影41..43；本页保留历史API与证据边界，完整return/回调仍open。
+
 后续：P0-54在[独立设施模型](89-facility-mission-cancellation.md)投影0/38及type3..63部分销毁；本页保留历史API与证据边界，完整base销毁/回调仍open。
 
 后续：P0-53在[独立组任务模型](88-group-mission-cancellation.md)恢复2/5；本页与v2保留既有范围，不代表2/5仍无实施。

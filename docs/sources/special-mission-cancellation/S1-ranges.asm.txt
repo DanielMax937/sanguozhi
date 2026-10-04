@@ -1,0 +1,81 @@
+; S1 00490F50..00490F6F code
+00490F50  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00490F54  85 c0                          test     eax, eax
+00490F56  7c 12                          jl       0x490f6a
+00490F58  83 f8 61                       cmp      eax, 0x61
+00490F5B  7f 0d                          jg       0x490f6a
+00490F5D  6b c0 6c                       imul     eax, eax, 0x6c
+00490F60  8d 84 08 d8 6d 08 00           lea      eax, [eax + ecx + 0x86dd8]
+00490F67  c2 04 00                       ret      4
+00490F6A  33 c0                          xor      eax, eax
+00490F6C  c2 04 00                       ret      4
+
+; S1 005DA320..005DA3F0 code
+005DA320  55                             push     ebp
+005DA321  8b ec                          mov      ebp, esp
+005DA323  83 e4 f8                       and      esp, 0xfffffff8
+005DA326  81 ec d4 07 00 00              sub      esp, 0x7d4
+005DA32C  a1 ac 0b 8e 00                 mov      eax, dword ptr [0x8e0bac]
+005DA331  53                             push     ebx
+005DA332  56                             push     esi
+005DA333  57                             push     edi
+005DA334  89 84 24 dc 07 00 00           mov      dword ptr [esp + 0x7dc], eax
+005DA33B  6a 1f                          push     0x1f
+005DA33D  8d 84 24 c0 07 00 00           lea      eax, [esp + 0x7c0]
+005DA344  50                             push     eax
+005DA345  8d 8c 24 b8 07 00 00           lea      ecx, [esp + 0x7b8]
+005DA34C  e8 5f 76 e9 ff                 call     0x4719b0
+005DA351  8b 4d 0c                       mov      ecx, dword ptr [ebp + 0xc]
+005DA354  51                             push     ecx
+005DA355  8d 94 24 b4 07 00 00           lea      edx, [esp + 0x7b4]
+005DA35C  52                             push     edx
+005DA35D  e8 4e 62 eb ff                 call     0x4905b0
+005DA362  83 c4 08                       add      esp, 8
+005DA365  68 b0 20 00 00                 push     0x20b0
+005DA36A  8d 4c 24 14                    lea      ecx, [esp + 0x14]
+005DA36E  e8 ed 27 ec ff                 call     0x49cb60
+005DA373  8b 5d 08                       mov      ebx, dword ptr [ebp + 8]
+005DA376  53                             push     ebx
+005DA377  6a 00                          push     0
+005DA379  8d 4c 24 18                    lea      ecx, [esp + 0x18]
+005DA37D  e8 fe 27 ec ff                 call     0x49cb80
+005DA382  8d 84 24 bc 07 00 00           lea      eax, [esp + 0x7bc]
+005DA389  50                             push     eax
+005DA38A  6a 00                          push     0
+005DA38C  8d 4c 24 18                    lea      ecx, [esp + 0x18]
+005DA390  e8 ab 25 ec ff                 call     0x49c940
+005DA395  b9 f4 00 00 00                 mov      ecx, 0xf4
+005DA39A  8d 74 24 10                    lea      esi, [esp + 0x10]
+005DA39E  8d bc 24 e0 03 00 00           lea      edi, [esp + 0x3e0]
+005DA3A5  f3 a5                          rep movsd dword ptr es:[edi], dword ptr [esi]
+005DA3A7  8d 8c 24 e0 03 00 00           lea      ecx, [esp + 0x3e0]
+005DA3AE  51                             push     ecx
+005DA3AF  e8 dc 0f ec ff                 call     0x49b390
+005DA3B4  8b 9b 98 00 00 00              mov      ebx, dword ptr [ebx + 0x98]
+005DA3BA  83 c4 04                       add      esp, 4
+005DA3BD  6a 00                          push     0
+005DA3BF  50                             push     eax
+005DA3C0  53                             push     ebx
+005DA3C1  b9 58 19 20 07                 mov      ecx, 0x7201958
+005DA3C6  e8 35 69 eb ff                 call     0x490d00
+005DA3CB  50                             push     eax
+005DA3CC  b9 00 4e c2 09                 mov      ecx, 0x9c24e00
+005DA3D1  e8 aa 0d 06 00                 call     0x63b180
+005DA3D6  8b 8c 24 dc 07 00 00           mov      ecx, dword ptr [esp + 0x7dc]
+005DA3DD  b8 01 00 00 00                 mov      eax, 1
+005DA3E2  e8 33 d7 12 00                 call     0x707b1a
+005DA3E7  5f                             pop      edi
+005DA3E8  5e                             pop      esi
+005DA3E9  5b                             pop      ebx
+005DA3EA  8b e5                          mov      esp, ebp
+005DA3EC  5d                             pop      ebp
+005DA3ED  c2 08 00                       ret      8
+
+; S1 0084CE00..0084CE04 data
+0084CE00  20 a3 5d 00                    DWORD    0x005DA320
+
+; S1 0084CE60..0084CE64 data
+0084CE60  20 a3 5d 00                    DWORD    0x005DA320
+
+; S1 0084CE7C..0084CE80 data
+0084CE7C  20 a3 5d 00                    DWORD    0x005DA320
