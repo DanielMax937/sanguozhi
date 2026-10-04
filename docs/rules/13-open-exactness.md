@@ -1288,3 +1288,8 @@ AI势力强度还存在君主ID硬编码 bonus，因此不能用一张现代通�
 ### P0-59 event8/14监听缺口收窄
 
 见[94-mission-event-listeners.md](94-mission-event-listeners.md)。004A8110/005B9D30的注册、copied-active顺序、live executing/mission、predicate与23/24 handler入口gate现已恢复并有独立有界模型。event8可取消mission23，event14可取消mission24；004BA1D0自身no-op不证明全事件无效果。成功tail采用source/stage/完整观察域before→after替换或原子reject，不要求callbacks非干预。原生完整presentation/return/递归事件、004EC870后置observer、新版本role/return组合和其他event ID仍open；clean stock/Vanilla/全局RNG/真实存档不因此关闭。
+
+
+### P0-60通知/active-list/acted尾缺口收窄
+
+见[95-mission-notification-tail.md](95-mission-notification-tail.md)。canonical005B81D0、两个handler入口/saved pointers及005B8400(actor,0)已知写序有独立模型；acted后manager dirty与可变observer先于live list append/duration，S2 query267仅wrapper路径。presentation、fullreturn、nonnull observer、patched query267保留精确stage可变观察或reject，不声称完整native闭包。下一步版本化return/role/event与004BBAA0后置observer组合；full force/empty legion/base destruction/stock/Vanilla仍open。

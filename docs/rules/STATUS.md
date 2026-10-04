@@ -2,7 +2,15 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-59 event8/14任务监听与显式可变tail观察
+## 最新完成：P0-60通知门与active-list/acted/零退款return尾
+
+[正文](95-mission-notification-tail.md) · [结构化证据](../sources/mission-notification-tail.json)。基线main `4140af9c71fba30c1a883dcf142ab494025f6472`（PR #17已合）。
+
+独立API闭合canonical005B81D0与handler23/24→005B8400(actor,0)已知写序：rawlegion派生force、player0..7、legion number1；saved current/target/raw force+44；mission/reset→actedbit→dirty→observer→live list-valid/尾追加→duration。重复列表不去重，同地reset不删active节点；callback可改变valid/status/home/list。S2 wrapper query267是result+全frame/RNG观察，异地直acted不走hook；presentation/nonnull observer/fullreturn均明确可变观察或整次reject。旧API/trace不动；版本化return/role/event与后置observer组合仍next。
+
+123范围/10,811 raw bytes，双IDB指纹与独立raw-ID1核对，61共同对比4差异及1个S2-only hook。33模型测试含512独立oracle/JSON replay通过。完整回归90条命令零失败：TypeScript、85 Node、87 Python checker与2 demos。独立审阅通过：14文件freeze/hash一致，双IDB完整指纹与123范围/10,811bytes另行stdlib mmap raw-ID1重核；33模型/18source及完整90回归独立重跑全过，额外32组query→observer→live status/saved-home链式反例与5组presentation错绑原子拒绝通过，无待修阻断。发布前仅补本结论；合并后main仍须全测。S1/S2均MOD关联；clean stock/Vanilla/force灭亡/空军团/真实存档/全局RNG仍open。
+
+## 历史完成：P0-59 event8/14任务监听与显式可变tail观察
 
 [正文](94-mission-event-listeners.md) · [结构化证据](../sources/mission-event-listeners.json)。基线main `de7f0218eefe528687b82c9659feeee1de77b8a3`（PR #16已合）。
 
