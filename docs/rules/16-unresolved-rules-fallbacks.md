@@ -754,6 +754,12 @@ return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 
 `record-zero-refund-cancellation-v2`通过`record-only|reject`保留条件展示、cache/list和004BF6F0回调边界，非干预是可替换假设。距离和S2 query267需要带来源观察；缺观察、矛盾slot、越界/重复ID均原子报错。PK重构与Vanilla假设仍独立；剩余专用handler和完整return/事件链未被假装执行。
 
+### 4D.6 P0-53组任务取消和字段顺序
+
+[88-group-mission-cancellation.md](88-group-mission-cancellation.md)新增`group_mission_cancellation_profile.py`。`personsComplete: true`是明确的完整稀疏输入契约：缺席person槽位无效；没有这个契约就拒绝，不把局部名单当全世界。005B8250按ID序取前三个valid/同mission/同group，不新增force、home、location或target过滤。任务2先恢复相应city signed byte，任务5先重置actor force研究字段，再逐人零退款返回。
+
+`record-group-cancellation-v1`仍提供record-only/reject，未执行展示、cache/list和004BF6F0；非干预假设可替换。逐人距离/S2 query267必须有观察，字段阶段快照和beforeStepIndex定位回调ledger；分组后先按实际分支preflight所需观察，任何字段写入前拒绝缺项；后续错误也不会把候选副本写入泄漏出去。S2研究36..63扩展有独立hook证据，不混为stock常数；旧v1/v2与完整force/event事务边界保留。
+
 ### 4E. Golden tests
 
 日文 Wiki 的攻城表继续保留，但角色从“运行时规则”改为“回归测试”。

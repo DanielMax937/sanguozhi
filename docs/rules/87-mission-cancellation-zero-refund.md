@@ -1,5 +1,7 @@
 # P0-52 六个零退款任务取消 handler
 
+后续：P0-53在[独立组任务模型](88-group-mission-cancellation.md)恢复2/5；本页与v2保留既有范围，不代表2/5仍无实施。
+
 更新：2026-10-04 UTC。基线main `324dd78b3c5a831cdf5d9406f63c492b7248bed4`（PR #9已合）。承接[P0-51](86-personnel-detachment-source-profile.md)。
 
 - [结构化证据](../sources/mission-cancellation-zero-refund.json)

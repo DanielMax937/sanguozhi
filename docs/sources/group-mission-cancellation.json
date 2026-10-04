@@ -1,0 +1,576 @@
+{
+  "schemaVersion": 1,
+  "profileId": "source-idb-S1-S2-group-mission-cancellation-v1",
+  "baselineCommit": "b95e33a7c1e23e7bc14a8ec23b90ff5030099c8e",
+  "sources": [
+    {
+      "source": "S1",
+      "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+      "recordedInputPath": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+      "recordedExeSha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip"
+    },
+    {
+      "source": "S2",
+      "idbSha256": "aa7f2c983b266633d6e23c494d4f8e1b03e5251632505cae103e176ae850dfd8",
+      "recordedInputPath": "C:\\Games\\san11\\血色衣冠6.0sp5(整合包240612)\\San11Pk\\san11pk_dump.exe",
+      "recordedExeSha256": "b1e9467e9612c23af83f6feda8414bc9ee99eb62c6862a84f7f4c5a8822b9da9",
+      "url": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/ida-db/san11pk_dump.exe.idb.7z"
+    }
+  ],
+  "stockOriginalVerified": false,
+  "originalExeExecuted": false,
+  "recordedExeHashesIndependentlyVerified": false,
+  "adoption": {
+    "PC-PK1.1": "compatibility-reconstruction",
+    "PC-Vanilla-assumed": "compatibility-assumption",
+    "PS2-Wii": "open"
+  },
+  "priorEvidence": [
+    {
+      "id": "P0-51",
+      "path": "docs/sources/personnel-detachment-source-profile.json",
+      "sha256": "d793bbd6d58f794e9a6c200d2dd29db346f7b3a6b8e165dd70d157ce68c9c28e"
+    },
+    {
+      "id": "P0-52",
+      "path": "docs/sources/mission-cancellation-zero-refund.json",
+      "sha256": "96141b4710c73a9e1aeec30968d9924c48708a8e841df1b010dd622f7685a9bf"
+    }
+  ],
+  "referencedRanges": [
+    {
+      "source": "S1",
+      "start": "004A5780",
+      "endExclusive": "004A57A9",
+      "sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S1",
+      "start": "004A5660",
+      "endExclusive": "004A5682",
+      "sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S1",
+      "start": "004A57B0",
+      "endExclusive": "004A57E0",
+      "sha256": "36b94ffaf3fa201a0331addb7a4771889e70a34e430da7f42846a8a3e9ac9299",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S2",
+      "start": "004A5780",
+      "endExclusive": "004A57A9",
+      "sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S2",
+      "start": "004A5660",
+      "endExclusive": "004A5682",
+      "sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S2",
+      "start": "004A57B0",
+      "endExclusive": "004A57E0",
+      "sha256": "36b94ffaf3fa201a0331addb7a4771889e70a34e430da7f42846a8a3e9ac9299",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S1",
+      "start": "00488C70",
+      "endExclusive": "00488C7F",
+      "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S1",
+      "start": "004A5600",
+      "endExclusive": "004A5622",
+      "sha256": "469e3a076f2dd39447ed00a439df84539740067d7eb95ae2fecce1b8e7850f81",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S1",
+      "start": "004A73A0",
+      "endExclusive": "004A740E",
+      "sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S1",
+      "start": "005B8400",
+      "endExclusive": "005B84E2",
+      "sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S1",
+      "start": "005B9B40",
+      "endExclusive": "005B9B8E",
+      "sha256": "f14b892a5be8603044ef0991aac7cb4d95cc577296683f06a28bf12b7f921e8b",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S1",
+      "start": "005C6AA0",
+      "endExclusive": "005C6C9A",
+      "sha256": "faabb270b4f7e59c38fb27d06f3630cb64c05344d88da9cc65d39973e690b722",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S1",
+      "start": "005D7FC0",
+      "endExclusive": "005D8212",
+      "sha256": "e67706b5f54400c1f49d8252e0c7edc509a1db9357886dd263478ee0fc808021",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S2",
+      "start": "00488C70",
+      "endExclusive": "00488C7F",
+      "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S2",
+      "start": "004A5600",
+      "endExclusive": "004A5622",
+      "sha256": "ba6c6d920a0fc1aca5619eb56c8b243f55fccd20c985dfb85184f883b0750a60",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S2",
+      "start": "004A73A0",
+      "endExclusive": "004A740E",
+      "sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S2",
+      "start": "005B8400",
+      "endExclusive": "005B84E2",
+      "sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S2",
+      "start": "005B9B40",
+      "endExclusive": "005B9B8E",
+      "sha256": "f14b892a5be8603044ef0991aac7cb4d95cc577296683f06a28bf12b7f921e8b",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S2",
+      "start": "005C6AA0",
+      "endExclusive": "005C6C9A",
+      "sha256": "faabb270b4f7e59c38fb27d06f3630cb64c05344d88da9cc65d39973e690b722",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S2",
+      "start": "005D7FC0",
+      "endExclusive": "005D8212",
+      "sha256": "e67706b5f54400c1f49d8252e0c7edc509a1db9357886dd263478ee0fc808021",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S2",
+      "start": "0090CBA0",
+      "endExclusive": "0090CBCB",
+      "sha256": "38cc86f580a7a31281c199e697a12c9b98a073973dbb5ab94258200cf238f21f",
+      "evidence": "P0-51"
+    },
+    {
+      "source": "S1",
+      "start": "00490A10",
+      "endExclusive": "00490A32",
+      "sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "file": "S1-00490A10.asm.txt",
+      "evidence": "P0-52"
+    },
+    {
+      "source": "S1",
+      "start": "005B81D0",
+      "endExclusive": "005B824A",
+      "sha256": "46e4e5388d0aa9babd6b1a2c71d1de33dd5b69aa5cddb87b3407e6a89b3817c5",
+      "file": "S1-005B81D0.asm.txt",
+      "evidence": "P0-52"
+    },
+    {
+      "source": "S2",
+      "start": "00490A10",
+      "endExclusive": "00490A32",
+      "sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "file": "S2-00490A10.asm.txt",
+      "evidence": "P0-52"
+    },
+    {
+      "source": "S2",
+      "start": "005B81D0",
+      "endExclusive": "005B824A",
+      "sha256": "46e4e5388d0aa9babd6b1a2c71d1de33dd5b69aa5cddb87b3407e6a89b3817c5",
+      "file": "S2-005B81D0.asm.txt",
+      "evidence": "P0-52"
+    }
+  ],
+  "newRanges": [
+    {
+      "source": "S1",
+      "start": "004815C0",
+      "endExclusive": "004815DB",
+      "sha256": "3b5cfb25b718c2ad98c5b66922958f15d932fed51a44cb1f027cd79c978cccea",
+      "file": "S1-ranges.asm.txt",
+      "lineStart": 11,
+      "lineCount": 9
+    },
+    {
+      "source": "S1",
+      "start": "004815E0",
+      "endExclusive": "004815ED",
+      "sha256": "be5901bc10772548c9b865125f6631ccc340d7fa70c5efd7e553044ce7bdf31e",
+      "file": "S1-ranges.asm.txt",
+      "lineStart": 22,
+      "lineCount": 3
+    },
+    {
+      "source": "S1",
+      "start": "00490BC0",
+      "endExclusive": "00490BE2",
+      "sha256": "48d7b2d026b4eada5c56ef6b0b72369c126bab74d7af45173a425c556f8a7bf9",
+      "file": "S1-ranges.asm.txt",
+      "lineStart": 27,
+      "lineCount": 11
+    },
+    {
+      "source": "S1",
+      "start": "00490C70",
+      "endExclusive": "00490C8F",
+      "sha256": "7a51d906653783390f513671dadb3b69e79eb5cbf1a23a5699a4eeafc135e94f",
+      "file": "S1-ranges.asm.txt",
+      "lineStart": 40,
+      "lineCount": 11
+    },
+    {
+      "source": "S1",
+      "start": "0047B080",
+      "endExclusive": "0047B091",
+      "sha256": "9ecced35fd9bdf89f3668ab9824e3befb5373abd33add88a6c8e013cacfa1351",
+      "file": "S1-ranges.asm.txt",
+      "lineStart": 2,
+      "lineCount": 7
+    },
+    {
+      "source": "S1",
+      "start": "005B8250",
+      "endExclusive": "005B82DD",
+      "sha256": "a18b708c369c27b99b1f9f4b2592f7620fc36d6ca9ede8e1ed5cc04710045eac",
+      "file": "S1-ranges.asm.txt",
+      "lineStart": 194,
+      "lineCount": 57
+    },
+    {
+      "source": "S1",
+      "start": "004B3EE0",
+      "endExclusive": "004B4018",
+      "sha256": "dfe153459c06adfe7392eeb392750c097ff3a4ae2f0ac08d6e09c0d5110e6776",
+      "file": "S1-ranges.asm.txt",
+      "lineStart": 53,
+      "lineCount": 109
+    },
+    {
+      "source": "S1",
+      "start": "004B53E0",
+      "endExclusive": "004B540E",
+      "sha256": "bfde54a538c9ce5c27ff3bac3586ef4a5421f8cc3f2e1ccdc40e64e88421ec19",
+      "file": "S1-ranges.asm.txt",
+      "lineStart": 175,
+      "lineCount": 17
+    },
+    {
+      "source": "S2",
+      "start": "004815C0",
+      "endExclusive": "004815DB",
+      "sha256": "d75a963116fba6a9b342e0590f610c769c52b6c0948f592ae0196c6c7315e848",
+      "file": "S2-ranges.asm.txt",
+      "lineStart": 11,
+      "lineCount": 9
+    },
+    {
+      "source": "S2",
+      "start": "004815E0",
+      "endExclusive": "004815ED",
+      "sha256": "be5901bc10772548c9b865125f6631ccc340d7fa70c5efd7e553044ce7bdf31e",
+      "file": "S2-ranges.asm.txt",
+      "lineStart": 22,
+      "lineCount": 3
+    },
+    {
+      "source": "S2",
+      "start": "00490BC0",
+      "endExclusive": "00490BE2",
+      "sha256": "48d7b2d026b4eada5c56ef6b0b72369c126bab74d7af45173a425c556f8a7bf9",
+      "file": "S2-ranges.asm.txt",
+      "lineStart": 27,
+      "lineCount": 11
+    },
+    {
+      "source": "S2",
+      "start": "00490C70",
+      "endExclusive": "00490C8F",
+      "sha256": "bda20810aa53555370284185fad98d19a400b04e78562e33a0b4c8b3775bb7cb",
+      "file": "S2-ranges.asm.txt",
+      "lineStart": 40,
+      "lineCount": 10
+    },
+    {
+      "source": "S2",
+      "start": "0047B080",
+      "endExclusive": "0047B091",
+      "sha256": "9ecced35fd9bdf89f3668ab9824e3befb5373abd33add88a6c8e013cacfa1351",
+      "file": "S2-ranges.asm.txt",
+      "lineStart": 2,
+      "lineCount": 7
+    },
+    {
+      "source": "S2",
+      "start": "005B8250",
+      "endExclusive": "005B82DD",
+      "sha256": "a18b708c369c27b99b1f9f4b2592f7620fc36d6ca9ede8e1ed5cc04710045eac",
+      "file": "S2-ranges.asm.txt",
+      "lineStart": 193,
+      "lineCount": 57
+    },
+    {
+      "source": "S2",
+      "start": "004B3EE0",
+      "endExclusive": "004B4018",
+      "sha256": "dfe153459c06adfe7392eeb392750c097ff3a4ae2f0ac08d6e09c0d5110e6776",
+      "file": "S2-ranges.asm.txt",
+      "lineStart": 52,
+      "lineCount": 109
+    },
+    {
+      "source": "S2",
+      "start": "004B53E0",
+      "endExclusive": "004B540E",
+      "sha256": "bfde54a538c9ce5c27ff3bac3586ef4a5421f8cc3f2e1ccdc40e64e88421ec19",
+      "file": "S2-ranges.asm.txt",
+      "lineStart": 174,
+      "lineCount": 17
+    },
+    {
+      "source": "S2",
+      "start": "00914000",
+      "endExclusive": "00914017",
+      "sha256": "9b9fa2095f7c99efb7a07737fccd123fa2e4f1f68f0599e644ff0af1286c2d05",
+      "file": "S2-ranges.asm.txt",
+      "lineStart": 252,
+      "lineCount": 8
+    },
+    {
+      "source": "S1",
+      "start": "004B4018",
+      "endExclusive": "004B4028",
+      "sha256": "9a8084765beedfa0bb23a7c92a787c7d966666aece2f9c9ca59563bfca6c24bf",
+      "file": "S1-ranges.asm.txt",
+      "lineStart": 164,
+      "lineCount": 4
+    },
+    {
+      "source": "S1",
+      "start": "004B4028",
+      "endExclusive": "004B4033",
+      "sha256": "086a769cc7a34b10a61b02e52ae8e0d5cbbcdb2d83abc1559667c635f40f5f4d",
+      "file": "S1-ranges.asm.txt",
+      "lineStart": 170,
+      "lineCount": 3
+    },
+    {
+      "source": "S2",
+      "start": "004B4018",
+      "endExclusive": "004B4028",
+      "sha256": "9a8084765beedfa0bb23a7c92a787c7d966666aece2f9c9ca59563bfca6c24bf",
+      "file": "S2-ranges.asm.txt",
+      "lineStart": 163,
+      "lineCount": 4
+    },
+    {
+      "source": "S2",
+      "start": "004B4028",
+      "endExclusive": "004B4033",
+      "sha256": "086a769cc7a34b10a61b02e52ae8e0d5cbbcdb2d83abc1559667c635f40f5f4d",
+      "file": "S2-ranges.asm.txt",
+      "lineStart": 169,
+      "lineCount": 3
+    }
+  ],
+  "containers": [
+    {
+      "file": "S1-ranges.asm.txt",
+      "lineCount": 250,
+      "sha256": "5436eb87bcfdb99e847aded8eb714ff742883c337a2c93ba80c5c56574db82e3"
+    },
+    {
+      "file": "S2-ranges.asm.txt",
+      "lineCount": 259,
+      "sha256": "aaaccce60abea7f569f16ec3e5e4bdc3c2900143dc3e0001cefa049e9a102d77"
+    }
+  ],
+  "comparisons": [
+    {
+      "start": "0047B080",
+      "S1sha256": "9ecced35fd9bdf89f3668ab9824e3befb5373abd33add88a6c8e013cacfa1351",
+      "S2sha256": "9ecced35fd9bdf89f3668ab9824e3befb5373abd33add88a6c8e013cacfa1351",
+      "identical": true
+    },
+    {
+      "start": "004815C0",
+      "S1sha256": "3b5cfb25b718c2ad98c5b66922958f15d932fed51a44cb1f027cd79c978cccea",
+      "S2sha256": "d75a963116fba6a9b342e0590f610c769c52b6c0948f592ae0196c6c7315e848",
+      "identical": false
+    },
+    {
+      "start": "004815E0",
+      "S1sha256": "be5901bc10772548c9b865125f6631ccc340d7fa70c5efd7e553044ce7bdf31e",
+      "S2sha256": "be5901bc10772548c9b865125f6631ccc340d7fa70c5efd7e553044ce7bdf31e",
+      "identical": true
+    },
+    {
+      "start": "00490BC0",
+      "S1sha256": "48d7b2d026b4eada5c56ef6b0b72369c126bab74d7af45173a425c556f8a7bf9",
+      "S2sha256": "48d7b2d026b4eada5c56ef6b0b72369c126bab74d7af45173a425c556f8a7bf9",
+      "identical": true
+    },
+    {
+      "start": "00490C70",
+      "S1sha256": "7a51d906653783390f513671dadb3b69e79eb5cbf1a23a5699a4eeafc135e94f",
+      "S2sha256": "bda20810aa53555370284185fad98d19a400b04e78562e33a0b4c8b3775bb7cb",
+      "identical": false
+    },
+    {
+      "start": "004B3EE0",
+      "S1sha256": "dfe153459c06adfe7392eeb392750c097ff3a4ae2f0ac08d6e09c0d5110e6776",
+      "S2sha256": "dfe153459c06adfe7392eeb392750c097ff3a4ae2f0ac08d6e09c0d5110e6776",
+      "identical": true
+    },
+    {
+      "start": "004B4018",
+      "S1sha256": "9a8084765beedfa0bb23a7c92a787c7d966666aece2f9c9ca59563bfca6c24bf",
+      "S2sha256": "9a8084765beedfa0bb23a7c92a787c7d966666aece2f9c9ca59563bfca6c24bf",
+      "identical": true
+    },
+    {
+      "start": "004B4028",
+      "S1sha256": "086a769cc7a34b10a61b02e52ae8e0d5cbbcdb2d83abc1559667c635f40f5f4d",
+      "S2sha256": "086a769cc7a34b10a61b02e52ae8e0d5cbbcdb2d83abc1559667c635f40f5f4d",
+      "identical": true
+    },
+    {
+      "start": "004B53E0",
+      "S1sha256": "bfde54a538c9ce5c27ff3bac3586ef4a5421f8cc3f2e1ccdc40e64e88421ec19",
+      "S2sha256": "bfde54a538c9ce5c27ff3bac3586ef4a5421f8cc3f2e1ccdc40e64e88421ec19",
+      "identical": true
+    },
+    {
+      "start": "005B8250",
+      "S1sha256": "a18b708c369c27b99b1f9f4b2592f7620fc36d6ca9ede8e1ed5cc04710045eac",
+      "S2sha256": "a18b708c369c27b99b1f9f4b2592f7620fc36d6ca9ede8e1ed5cc04710045eac",
+      "identical": true
+    }
+  ],
+  "contracts": {
+    "missions": [
+      2,
+      5
+    ],
+    "group": {
+      "helper": "005B8250",
+      "universe": "complete sparse person IDs0..1099; omitted slots are explicitly absent/invalid",
+      "ordering": "ascending person ID; stop after three matches",
+      "mission0ArgumentIndex": 1,
+      "mission2And5ArgumentIndex": 2,
+      "filters": [
+        "person valid",
+        "mission ID equal",
+        "signed group ID equal"
+      ],
+      "notFilters": [
+        "force",
+        "home",
+        "location",
+        "target",
+        "invoking actor"
+      ]
+    },
+    "mission2": {
+      "gate": [
+        "actor valid",
+        "actual location0..86 building valid",
+        "arg0 in0..41",
+        "arg1 valid weapon-type0..11"
+      ],
+      "sideEffects": [
+        "collect group before field update",
+        "city-subtype valid and weaponType1..11: signed byte +1 clamped[-1,30]",
+        "conditional presentation not executed",
+        "captured valid group members zero-refund return in ID order"
+      ],
+      "counterOffsets": {
+        "1..3": "0xA9",
+        "4": "0xAA",
+        "5..8": "0xAB",
+        "9..11": "0xAC"
+      },
+      "invalidCity": "no counter write, group still returns",
+      "weaponType0": "valid type may pass gate but helper performs no counter write"
+    },
+    "mission5": {
+      "gate": [
+        "actor valid",
+        "actual location0..86 building valid",
+        "arg0 in0..41",
+        "arg1 valid research-type within source getter domain"
+      ],
+      "S1ResearchTypeRange": [
+        0,
+        35
+      ],
+      "S2ResearchTypeRange": [
+        0,
+        63
+      ],
+      "S2ExtendedGetter": "00490C8A -> 00914000..00914017; unsigned bound rejects negatives",
+      "sideEffects": [
+        "collect group",
+        "if actor force valid: force+0x9C=-1 then byte+0xA0=0",
+        "conditional presentation not executed",
+        "captured valid group members zero-refund return in ID order"
+      ],
+      "invalidForce": "skip research reset; group still returns"
+    }
+  },
+  "fallback": {
+    "id": "record-group-cancellation-v1",
+    "unknownEffects": [
+      "record-only",
+      "reject"
+    ],
+    "noninterference": "presentation/cache/list/return callbacks not executed and assumed not to affect listed scalar projection",
+    "returnDistance": "required per-person source-helper observation when away; never guessed from geometry",
+    "S2Query267": "required per-person observation only for home branch",
+    "preflight": "after group selection, validate every selected member required return-branch observation before city, force or person writes; do not require unused observations"
+  },
+  "unresolved": [
+    "clean stock PK/Vanilla/console equivalence",
+    "mission0/38 destruction and treasure tail",
+    "mission41..43 target/presentation helpers",
+    "004BF6F0 complete return and mission37 completion",
+    "complete event listeners/AI/force extinction/capture transaction"
+  ]
+}
