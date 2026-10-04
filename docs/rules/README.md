@@ -5,6 +5,8 @@
 
 ## 最新审计入口
 
+新增[P0-48 capture transaction](83-capture-transaction-source-profile.md)：完整有序世界候选、三caller cause/mode、normal/neutral scalar finalizer、普通入城资源与耐久投影、显式fallback及重放。`python scripts/check_capture_transaction_profile.py`。61个来源范围、24组S1/S2对照；source字节不等于stock证明，完整人物/force/事件链仍open。独立参考模型，未接入训练沙盒战斗。
+
 新增运行入口：[PK训练生命周期v2](../engine/pk-training-lifecycle.md)。资格/行动重置/旬推进/累计WAR成长、显式迁移与十年重放；非完整游戏。`npm run check`、`npm run demo:lifecycle`。新增[P0-47 source审计](82-training-lifecycle-source-profile.md)与`../sources/training-lifecycle-source-profile.json`；两MOD关联样本明确分离，stock等价/完整scheduler和Vanilla仍open。
 
 [当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [P0-46据点陷落selector来源](81-capture-selector-source-profile.md) · [P0-2外交版本边界](37-diplomacy-version-boundaries.md)。

@@ -23,6 +23,7 @@ npm run play -- --growth-fixture
 
 - [训练切片入口](docs/engine/pk-training-slice.md)
 - [生命周期、配置、证据与迁移](docs/engine/pk-training-lifecycle.md)
+- [capture caller/完整候选/有界事务来源审计](docs/rules/83-capture-transaction-source-profile.md)：独立Python参考模型与重放，未接入沙盒战斗
 - [训练gate/reset/累计经验来源审计](docs/rules/82-training-lifecycle-source-profile.md)
 - [规则总索引](docs/rules/README.md) · [当前研究状态](docs/rules/STATUS.md) · [待办与证据债](TODO.md)
 

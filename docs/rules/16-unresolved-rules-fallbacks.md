@@ -686,7 +686,7 @@ specialBase =
 
 IDB输入路径含“血色5.0公测”；该标签只证明固定来源字节语义，`stockOriginalVerified=false`。stock PC-PK1.1复用为 `compatibility-reconstruction`；Vanilla独立 `compatibility-assumption`；PS2/Wii仍open。
 
-来源city-only分支按全局建筑链表序，取同城、已完成、非type30的内政候选，最多30个。内政分支没有owner gate；城市归属由坐标/地图地域映射。未完成另先销毁，完成铜雀台绕过且不占quota，不能把总残存数封为5。模型只消费已资格化有序候选，不负责这些世界筛选步骤。
+来源city-only分支按全局建筑链表序，取同城、已完成、非type30的内政候选，最多30个。内政分支没有owner gate；城市归属由坐标/地图地域映射。未完成另先销毁，完成铜雀台绕过且不占quota，不能把总残存数封为5。P0-46局部模型只消费预资格ID；P0-48新增完整world collector，不再将这些世界筛选步骤留给外部预资格名单。
 
 ```text
 effectiveCharm = validCommander ? max(20, charmByte) : 20
@@ -709,6 +709,19 @@ return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 旧 `seededSampleWithoutReplacement` 仅是历史 `provisional-engine-rule`，不再作为这个来源profile的实现。原始经验来源仍保留：[魅力分档](https://w.atwiki.jp/sangokushi11/pages/1598.html)、[2011讨论](https://w.atwiki.jp/sangokushi11/pages/2469.html)。
 
 ---
+
+### 4D.1 P0-48有界事务与明确fallback
+
+[83-capture-transaction-source-profile.md](83-capture-transaction-source-profile.md) / `scripts/capture_transaction_profile.py`新增完整有序世界资格、3 caller cause/mode、关系排除、资源→normal/neutral ownership→普通入城→耐久顺序及全输入重放。
+
+- neutral finalizer会再次清0中间保留资源；normal ownership改变max时先向下cap耐久，再最终半max floor
+- ordinary entry使用完整incoming兵数作气力权重，随后金粮兵和12 cargo slot分别cap；S1非负有界building merge用整数floor
+- `unknownEffects=record-only|reject`；entry可选source-scalar-projection/skip/reject，必须命名profile并保留provenance
+- record-only显式列出人物/俘虏、force调整/灭亡、销毁计数器/引用、太守排名、事件/AI/显示队列等尚未实现效果；原因是工程范围有界，不是断言原机无副作用
+- 原子copy-on-write、去重/revision、命令/世界顺序/policy/draw/结果全trace、JSON与零RNG replay可测；PK是reconstruction，Vanilla独立assumption
+- old/normal/neutral动态容量和入城range需显式输入来源，不拿S2 MOD常量冒充S1或stock
+
+这个fallback让独立事务投影可运行，不关闭clean stock、完整战斗/人物/事件或真实存档证据债。先前P0-36对舍入的unknown只继续约束stock和未审troop-to-troop路径，不能再说S1 `004B9840`完全没有body。
 
 ### 4E. Golden tests
 
@@ -734,9 +747,9 @@ return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 第4项仍需区分：
 
 1. `005ADE20` 等攻城耐久内部函数的完整闭式；
-2. P0-46来源selector与clean stock PC-PK1.1的等价性、完整capture caller/finalizer及全局RNG回放；
+2. P0-46/P0-48来源与clean stock PC-PK1.1的等价性、未覆盖人员/force/事件finalizer及全局RNG回放；
 3. Vanilla各补丁及PS2/Wii自身候选、selector、伤害/资源代码；
-4. 局部selector模型之外的候选资格化和事务集成验证。
+4. 完整游戏战斗/人物/事件系统集成与真实存档验证；P0-48已补有序world资格和有界事务。
 
 可以按显式版本/profile运行兼容重建，但测试通过不得升级原性等级。
 

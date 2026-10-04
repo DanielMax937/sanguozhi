@@ -1,0 +1,96 @@
+004AE0A0  53                             push     ebx
+004AE0A1  56                             push     esi
+004AE0A2  8b 74 24 0c                    mov      esi, dword ptr [esp + 0xc]
+004AE0A6  56                             push     esi
+004AE0A7  8b d9                          mov      ebx, ecx
+004AE0A9  e8 82 c5 fc ff                 call     0x47a630 ; IsLegalPtr
+004AE0AE  83 c4 04                       add      esp, 4
+004AE0B1  85 c0                          test     eax, eax
+004AE0B3  0f 84 df 00 00 00              je       0x4ae198
+004AE0B9  6a ff                          push     -1
+004AE0BB  56                             push     esi
+004AE0BC  8b cb                          mov      ecx, ebx
+004AE0BE  e8 8d f4 ff ff                 call     0x4ad550 ; sub_4ad550
+004AE0C3  56                             push     esi
+004AE0C4  e8 67 c5 fc ff                 call     0x47a630 ; IsLegalPtr
+004AE0C9  83 c4 04                       add      esp, 4
+004AE0CC  85 c0                          test     eax, eax
+004AE0CE  74 09                          je       0x4ae0d9
+004AE0D0  6a 00                          push     0
+004AE0D2  8b ce                          mov      ecx, esi
+004AE0D4  e8 37 92 fd ff                 call     0x487310 ; sub_487310
+004AE0D9  56                             push     esi
+004AE0DA  e8 51 c5 fc ff                 call     0x47a630 ; IsLegalPtr
+004AE0DF  83 c4 04                       add      esp, 4
+004AE0E2  85 c0                          test     eax, eax
+004AE0E4  74 09                          je       0x4ae0ef
+004AE0E6  6a 00                          push     0
+004AE0E8  8b ce                          mov      ecx, esi
+004AE0EA  e8 01 93 fd ff                 call     0x4873f0 ; sub_4873f0
+004AE0EF  56                             push     esi
+004AE0F0  e8 3b c5 fc ff                 call     0x47a630 ; IsLegalPtr
+004AE0F5  83 c4 04                       add      esp, 4
+004AE0F8  85 c0                          test     eax, eax
+004AE0FA  74 12                          je       0x4ae10e
+004AE0FC  6a 00                          push     0
+004AE0FE  8b ce                          mov      ecx, esi
+004AE100  e8 2b 91 fd ff                 call     0x487230 ; sub_487230
+004AE105  6a 00                          push     0
+004AE107  8b ce                          mov      ecx, esi
+004AE109  e8 b2 94 fd ff                 call     0x4875c0 ; sub_4875c0
+004AE10E  56                             push     esi
+004AE10F  e8 1c c5 fc ff                 call     0x47a630 ; IsLegalPtr
+004AE114  83 c4 04                       add      esp, 4
+004AE117  85 c0                          test     eax, eax
+004AE119  74 16                          je       0x4ae131
+004AE11B  57                             push     edi
+004AE11C  33 ff                          xor      edi, edi
+004AE11E  8b ff                          mov      edi, edi
+004AE120  6a 00                          push     0
+004AE122  57                             push     edi
+004AE123  8b ce                          mov      ecx, esi
+004AE125  e8 a6 93 fd ff                 call     0x4874d0 ; sub_4874d0
+004AE12A  47                             inc      edi
+004AE12B  83 ff 0c                       cmp      edi, 0xc
+004AE12E  7c f0                          jl       0x4ae120
+004AE130  5f                             pop      edi
+004AE131  6a 00                          push     0
+004AE133  8b ce                          mov      ecx, esi
+004AE135  e8 86 94 fd ff                 call     0x4875c0 ; sub_4875c0
+004AE13A  6a 00                          push     0
+004AE13C  8b ce                          mov      ecx, esi
+004AE13E  e8 0d 9d fd ff                 call     0x487e50 ; sub_487e50
+004AE143  8b ce                          mov      ecx, esi
+004AE145  e8 c6 9c fd ff                 call     0x487e10 ; sub_487e10
+004AE14A  85 c0                          test     eax, eax
+004AE14C  74 0a                          je       0x4ae158
+004AE14E  6a 00                          push     0
+004AE150  56                             push     esi
+004AE151  8b cb                          mov      ecx, ebx
+004AE153  e8 c8 58 00 00                 call     0x4b3a20 ; sub_4b3a20
+004AE158  8b ce                          mov      ecx, esi
+004AE15A  e8 91 85 fd ff                 call     0x4866f0 ; sub_4866f0
+004AE15F  8b f0                          mov      esi, eax
+004AE161  56                             push     esi
+004AE162  e8 c9 c4 fc ff                 call     0x47a630 ; IsLegalPtr
+004AE167  83 c4 04                       add      esp, 4
+004AE16A  85 c0                          test     eax, eax
+004AE16C  74 2a                          je       0x4ae198
+004AE16E  6a 00                          push     0
+004AE170  6a 04                          push     4
+004AE172  8b ce                          mov      ecx, esi
+004AE174  e8 67 d0 fc ff                 call     0x47b1e0 ; sub_47b1e0
+004AE179  6a 00                          push     0
+004AE17B  6a 00                          push     0
+004AE17D  8b ce                          mov      ecx, esi
+004AE17F  e8 5c d0 fc ff                 call     0x47b1e0 ; sub_47b1e0
+004AE184  6a 00                          push     0
+004AE186  6a 01                          push     1
+004AE188  8b ce                          mov      ecx, esi
+004AE18A  e8 51 d0 fc ff                 call     0x47b1e0 ; sub_47b1e0
+004AE18F  6a ff                          push     -1
+004AE191  8b ce                          mov      ecx, esi
+004AE193  e8 48 d3 fc ff                 call     0x47b4e0 ; sub_47b4e0
+004AE198  5e                             pop      esi
+004AE199  5b                             pop      ebx
+004AE19A  c2 04 00                       ret      4

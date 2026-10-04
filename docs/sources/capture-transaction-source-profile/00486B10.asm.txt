@@ -1,0 +1,65 @@
+00486B10  56                             push     esi
+00486B11  8b f1                          mov      esi, ecx
+00486B13  56                             push     esi
+00486B14  b9 58 19 20 07                 mov      ecx, 0x7201958
+00486B19  e8 52 ac 00 00                 call     0x491770 ; sub_491770
+00486B1E  8b 76 08                       mov      esi, dword ptr [esi + 8]
+00486B21  83 ee 00                       sub      esi, 0
+00486B24  74 65                          je       0x486b8b
+00486B26  4e                             dec      esi
+00486B27  74 38                          je       0x486b61
+00486B29  4e                             dec      esi
+00486B2A  0f 85 86 00 00 00              jne      0x486bb6
+00486B30  83 f8 34                       cmp      eax, 0x34
+00486B33  7c 0a                          jl       0x486b3f
+00486B35  83 f8 56                       cmp      eax, 0x56
+00486B38  7f 05                          jg       0x486b3f
+00486B3A  83 c0 cc                       add      eax, -0x34
+00486B3D  eb 03                          jmp      0x486b42
+00486B3F  83 c8 ff                       or       eax, 0xffffffff
+00486B42  50                             push     eax
+00486B43  b9 58 19 20 07                 mov      ecx, 0x7201958
+00486B48  e8 23 9f 00 00                 call     0x490a70 ; sub_490a70
+00486B4D  8b f0                          mov      esi, eax
+00486B4F  56                             push     esi
+00486B50  e8 db 3a ff ff                 call     0x47a630 ; IsLegalPtr
+00486B55  83 c4 04                       add      esp, 4
+00486B58  85 c0                          test     eax, eax
+00486B5A  74 5a                          je       0x486bb6
+00486B5C  8b 46 24                       mov      eax, dword ptr [esi + 0x24]
+00486B5F  5e                             pop      esi
+00486B60  c3                             ret
+00486B61  83 f8 2a                       cmp      eax, 0x2a
+00486B64  7c 15                          jl       0x486b7b
+00486B66  83 f8 33                       cmp      eax, 0x33
+00486B69  7f 10                          jg       0x486b7b
+00486B6B  83 c0 d6                       add      eax, -0x2a
+00486B6E  50                             push     eax
+00486B6F  b9 58 19 20 07                 mov      ecx, 0x7201958
+00486B74  e8 c7 9e 00 00                 call     0x490a40 ; sub_490a40
+00486B79  eb d2                          jmp      0x486b4d
+00486B7B  83 c8 ff                       or       eax, 0xffffffff
+00486B7E  50                             push     eax
+00486B7F  b9 58 19 20 07                 mov      ecx, 0x7201958
+00486B84  e8 b7 9e 00 00                 call     0x490a40 ; sub_490a40
+00486B89  eb c2                          jmp      0x486b4d
+00486B8B  85 c0                          test     eax, eax
+00486B8D  7c 05                          jl       0x486b94
+00486B8F  83 f8 29                       cmp      eax, 0x29
+00486B92  7e 03                          jle      0x486b97
+00486B94  83 c8 ff                       or       eax, 0xffffffff
+00486B97  50                             push     eax
+00486B98  b9 58 19 20 07                 mov      ecx, 0x7201958
+00486B9D  e8 6e 9e 00 00                 call     0x490a10 ; GetCityPtr
+00486BA2  8b f0                          mov      esi, eax
+00486BA4  56                             push     esi
+00486BA5  e8 86 3a ff ff                 call     0x47a630 ; IsLegalPtr
+00486BAA  83 c4 04                       add      esp, 4
+00486BAD  85 c0                          test     eax, eax
+00486BAF  74 05                          je       0x486bb6
+00486BB1  8b 46 40                       mov      eax, dword ptr [esi + 0x40]
+00486BB4  5e                             pop      esi
+00486BB5  c3                             ret
+00486BB6  33 c0                          xor      eax, eax
+00486BB8  5e                             pop      esi
+00486BB9  c3                             ret

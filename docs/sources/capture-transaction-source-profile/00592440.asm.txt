@@ -1,0 +1,261 @@
+00592440  6a ff                           push     -1
+00592442  68 bb 39 73 00                  push     0x7339bb
+00592447  64 a1 00 00 00 00               mov      eax, dword ptr fs:[0]
+0059244D  50                              push     eax
+0059244E  64 89 25 00 00 00 00            mov      dword ptr fs:[0], esp
+00592455  81 ec 8c 00 00 00               sub      esp, 0x8c
+0059245B  53                              push     ebx
+0059245C  8b 9c 24 a0 00 00 00            mov      ebx, dword ptr [esp + 0xa0]
+00592463  8b 03                           mov      eax, dword ptr [ebx]
+00592465  89 44 24 0c                     mov      dword ptr [esp + 0xc], eax
+00592469  0f bf c0                        movsx    eax, ax
+0059246C  69 c0 c8 00 00 00               imul     eax, eax, 0xc8
+00592472  89 4c 24 04                     mov      dword ptr [esp + 4], ecx
+00592476  8b 4c 24 0c                     mov      ecx, dword ptr [esp + 0xc]
+0059247A  c1 f9 10                        sar      ecx, 0x10
+0059247D  56                              push     esi
+0059247E  03 c1                           add      eax, ecx
+00592480  8d 34 80                        lea      esi, [eax + eax*4]
+00592483  8d 34 b5 68 0e fb 06            lea      esi, [esi*4 + 0x6fb0e68]
+0059248A  57                              push     edi
+0059248B  8b ce                           mov      ecx, esi
+0059248D  e8 ae 16 ef ff                  call     0x483b40 ; sub_483b40
+00592492  8b f8                           mov      edi, eax
+00592494  8b 46 04                        mov      eax, dword ptr [esi + 4]
+00592497  83 e0 1f                        and      eax, 0x1f
+0059249A  83 f8 07                        cmp      eax, 7
+0059249D  74 05                           je       0x5924a4
+0059249F  83 f8 08                        cmp      eax, 8
+005924A2  75 13                           jne      0x5924b7
+005924A4  8b 16                           mov      edx, dword ptr [esi]
+005924A6  80 e2 03                        and      dl, 3
+005924A9  80 fa 01                        cmp      dl, 1
+005924AC  75 25                           jne      0x5924d3
+005924AE  8b 43 08                        mov      eax, dword ptr [ebx + 8]
+005924B1  8b 0b                           mov      ecx, dword ptr [ebx]
+005924B3  50                              push     eax
+005924B4  51                              push     ecx
+005924B5  eb 14                           jmp      0x5924cb
+005924B7  57                              push     edi
+005924B8  e8 23 d7 01 00                  call     0x5afbe0 ; sub_5afbe0
+005924BD  83 c4 04                        add      esp, 4
+005924C0  85 c0                           test     eax, eax
+005924C2  75 0f                           jne      0x5924d3
+005924C4  8b 53 08                        mov      edx, dword ptr [ebx + 8]
+005924C7  8b 03                           mov      eax, dword ptr [ebx]
+005924C9  52                              push     edx
+005924CA  50                              push     eax
+005924CB  e8 a0 e2 00 00                  call     0x5a0770 ; sub_5a0770
+005924D0  83 c4 08                        add      esp, 8
+005924D3  57                              push     edi
+005924D4  e8 57 81 ee ff                  call     0x47a630 ; IsLegalPtr
+005924D9  83 c4 04                        add      esp, 4
+005924DC  85 c0                           test     eax, eax
+005924DE  0f 84 34 02 00 00               je       0x592718
+005924E4  8b 4b 0c                        mov      ecx, dword ptr [ebx + 0xc]
+005924E7  8b 53 04                        mov      edx, dword ptr [ebx + 4]
+005924EA  55                              push     ebp
+005924EB  51                              push     ecx
+005924EC  57                              push     edi
+005924ED  52                              push     edx
+005924EE  8d 44 24 28                     lea      eax, [esp + 0x28]
+005924F2  50                              push     eax
+005924F3  e8 98 ec 01 00                  call     0x5b1190 ; sub_5b1190
+005924F8  8b 0b                           mov      ecx, dword ptr [ebx]
+005924FA  51                              push     ecx
+005924FB  e8 c0 e1 00 00                  call     0x5a06c0 ; sub_5a06c0
+00592500  8b 17                           mov      edx, dword ptr [edi]
+00592502  83 c4 14                        add      esp, 0x14
+00592505  6a 0b                           push     0xb
+00592507  8b cf                           mov      ecx, edi
+00592509  8b e8                           mov      ebp, eax
+0059250B  ff 52 2c                        call     dword ptr [edx + 0x2c]
+0059250E  85 c0                           test     eax, eax
+00592510  8b 37                           mov      esi, dword ptr [edi]
+00592512  0f 84 a7 00 00 00               je       0x5925bf
+00592518  e8 43 69 ed ff                  call     0x468e60 ; sub_468e60
+0059251D  50                              push     eax
+0059251E  8b cf                           mov      ecx, edi
+00592520  ff 56 2c                        call     dword ptr [esi + 0x2c]
+00592523  8b f0                           mov      esi, eax
+00592525  8b 44 24 28                     mov      eax, dword ptr [esp + 0x28]
+00592529  f7 de                           neg      esi
+0059252B  1b f6                           sbb      esi, esi
+0059252D  f7 d8                           neg      eax
+0059252F  50                              push     eax
+00592530  23 f7                           and      esi, edi
+00592532  56                              push     esi
+00592533  b9 5c 89 99 07                  mov      ecx, 0x799895c
+00592538  e8 63 bf f1 ff                  call     0x4ae4a0 ; ArmyAddSoldier
+0059253D  8b ce                           mov      ecx, esi
+0059253F  8b f8                           mov      edi, eax
+00592541  e8 7a 2f f0 ff                  call     0x4954c0 ; sub_4954c0
+00592546  85 ed                           test     ebp, ebp
+00592548  75 3c                           jne      0x592586
+0059254A  83 bc 24 80 00 00 00 3e         cmp      dword ptr [esp + 0x80], 0x3e
+00592552  b9 d8 59 6a 09                  mov      ecx, 0x96a59d8
+00592557  75 24                           jne      0x59257d
+00592559  55                              push     ebp
+0059255A  56                              push     esi
+0059255B  6a 56                           push     0x56
+0059255D  e8 5e 74 ff ff                  call     0x5899c0 ; sub_5899c0
+00592562  56                              push     esi
+00592563  6a 61                           push     0x61
+00592565  b9 d8 59 6a 09                  mov      ecx, 0x96a59d8
+0059256A  e8 11 74 ff ff                  call     0x589980 ; sub_589980
+0059256F  8b 0b                           mov      ecx, dword ptr [ebx]
+00592571  55                              push     ebp
+00592572  51                              push     ecx
+00592573  e8 f8 e1 00 00                  call     0x5a0770 ; sub_5a0770
+00592578  83 c4 08                        add      esp, 8
+0059257B  eb 09                           jmp      0x592586
+0059257D  56                              push     esi
+0059257E  6a 01                           push     1
+00592580  57                              push     edi
+00592581  e8 2a 66 ff ff                  call     0x588bb0 ; sub_588bb0
+00592586  8b 16                           mov      edx, dword ptr [esi]
+00592588  8b ce                           mov      ecx, esi
+0059258A  ff 52 50                        call     dword ptr [edx + 0x50]
+0059258D  85 c0                           test     eax, eax
+0059258F  0f 85 82 01 00 00               jne      0x592717
+00592595  85 ed                           test     ebp, ebp
+00592597  75 0e                           jne      0x5925a7
+00592599  8b 43 04                        mov      eax, dword ptr [ebx + 4]
+0059259C  53                              push     ebx
+0059259D  50                              push     eax
+0059259E  56                              push     esi
+0059259F  e8 8c d5 01 00                  call     0x5afb30 ; sub_5afb30
+005925A4  83 c4 0c                        add      esp, 0xc
+005925A7  8b 4b 04                        mov      ecx, dword ptr [ebx + 4]
+005925AA  6a 00                           push     0
+005925AC  6a 00                           push     0
+005925AE  51                              push     ecx
+005925AF  56                              push     esi
+005925B0  b9 5c 89 99 07                  mov      ecx, 0x799895c
+005925B5  e8 76 d4 f2 ff                  call     0x4bfa30 ; AfterMiedui_Unk
+005925BA  e9 58 01 00 00                  jmp      0x592717
+005925BF  e8 ac 0e fe ff                  call     0x573470 ; __RTC_NumErrors_3
+005925C4  50                              push     eax
+005925C5  8b cf                           mov      ecx, edi
+005925C7  ff 56 2c                        call     dword ptr [esi + 0x2c]
+005925CA  8b f0                           mov      esi, eax
+005925CC  f7 de                           neg      esi
+005925CE  1b f6                           sbb      esi, esi
+005925D0  23 f7                           and      esi, edi
+005925D2  8b ce                           mov      ecx, esi
+005925D4  e8 57 54 ef ff                  call     0x487a30 ; sub_487a30
+005925D9  85 c0                           test     eax, eax
+005925DB  74 21                           je       0x5925fe
+005925DD  8b 46 14                        mov      eax, dword ptr [esi + 0x14]
+005925E0  85 c0                           test     eax, eax
+005925E2  75 1a                           jne      0x5925fe
+005925E4  8b 43 04                        mov      eax, dword ptr [ebx + 4]
+005925E7  33 d2                           xor      edx, edx
+005925E9  85 ed                           test     ebp, ebp
+005925EB  0f 94 c2                        sete     dl
+005925EE  52                              push     edx
+005925EF  50                              push     eax
+005925F0  56                              push     esi
+005925F1  e8 5a eb ff ff                  call     0x591150 ; sub_591150
+005925F6  83 c4 0c                        add      esp, 0xc
+005925F9  e9 19 01 00 00                  jmp      0x592717
+005925FE  8b ce                           mov      ecx, esi
+00592600  e8 ab 54 ef ff                  call     0x487ab0 ; sub_487ab0
+00592605  85 c0                           test     eax, eax
+00592607  74 20                           je       0x592629
+00592609  8b 46 14                        mov      eax, dword ptr [esi + 0x14]
+0059260C  85 c0                           test     eax, eax
+0059260E  74 19                           je       0x592629
+00592610  8b 4b 0c                        mov      ecx, dword ptr [ebx + 0xc]
+00592613  8b 53 04                        mov      edx, dword ptr [ebx + 4]
+00592616  6a 01                           push     1
+00592618  51                              push     ecx
+00592619  8b 4c 24 18                     mov      ecx, dword ptr [esp + 0x18]
+0059261D  52                              push     edx
+0059261E  56                              push     esi
+0059261F  e8 dc 5c 00 00                  call     0x598300 ; sub_598300
+00592624  e9 ee 00 00 00                  jmp      0x592717
+00592629  8b 44 24 2c                     mov      eax, dword ptr [esp + 0x2c]
+0059262D  f7 d8                           neg      eax
+0059262F  50                              push     eax
+00592630  56                              push     esi
+00592631  b9 5c 89 99 07                  mov      ecx, 0x799895c
+00592636  e8 25 bd f1 ff                  call     0x4ae360 ; sub_4ae360
+0059263B  85 ed                           test     ebp, ebp
+0059263D  75 0d                           jne      0x59264c
+0059263F  56                              push     esi
+00592640  55                              push     ebp
+00592641  50                              push     eax
+00592642  b9 d8 59 6a 09                  mov      ecx, 0x96a59d8
+00592647  e8 64 65 ff ff                  call     0x588bb0 ; sub_588bb0
+0059264C  66 83 7e 10 00                  cmp      word ptr [esi + 0x10], 0
+00592651  0f 85 b7 00 00 00               jne      0x59270e
+00592657  8b ce                           mov      ecx, esi
+00592659  e8 b2 57 ef ff                  call     0x487e10 ; sub_487e10
+0059265E  85 c0                           test     eax, eax
+00592660  0f 84 91 00 00 00               je       0x5926f7
+00592666  8b 4b 04                        mov      ecx, dword ptr [ebx + 4]
+00592669  51                              push     ecx
+0059266A  e8 c1 7f ee ff                  call     0x47a630 ; IsLegalPtr
+0059266F  83 c4 04                        add      esp, 4
+00592672  85 c0                           test     eax, eax
+00592674  0f 84 9d 00 00 00               je       0x592717
+0059267A  8b 16                           mov      edx, dword ptr [esi]
+0059267C  8b 7b 04                        mov      edi, dword ptr [ebx + 4]
+0059267F  8b ce                           mov      ecx, esi
+00592681  ff 52 40                        call     dword ptr [edx + 0x40]
+00592684  50                              push     eax
+00592685  8b 07                           mov      eax, dword ptr [edi]
+00592687  8b cf                           mov      ecx, edi
+00592689  ff 50 40                        call     dword ptr [eax + 0x40]
+0059268C  50                              push     eax
+0059268D  b9 5c 89 99 07                  mov      ecx, 0x799895c
+00592692  e8 c9 3b f2 ff                  call     0x4b6260 ; sub_4b6260
+00592697  85 c0                           test     eax, eax
+00592699  75 7c                           jne      0x592717
+0059269B  8d 4c 24 14                     lea      ecx, [esp + 0x14]
+0059269F  e8 ec e7 ff ff                  call     0x590e90 ; sub_590e90
+005926A4  85 ed                           test     ebp, ebp
+005926A6  c7 84 24 a4 00 00 00 00 00 00 00  mov      dword ptr [esp + 0xa4], 0
+005926B1  75 1d                           jne      0x5926d0
+005926B3  8b 4b 04                        mov      ecx, dword ptr [ebx + 4]
+005926B6  8b 11                           mov      edx, dword ptr [ecx]
+005926B8  ff 52 40                        call     dword ptr [edx + 0x40]
+005926BB  50                              push     eax
+005926BC  b9 58 19 20 07                  mov      ecx, 0x7201958
+005926C1  e8 da e3 ef ff                  call     0x490aa0 ; GetCountryPtr
+005926C6  56                              push     esi
+005926C7  50                              push     eax
+005926C8  e8 33 d4 00 00                  call     0x59fb00 ; sub_59fb00
+005926CD  83 c4 08                        add      esp, 8
+005926D0  8b 43 04                        mov      eax, dword ptr [ebx + 4]
+005926D3  6a 01                           push     1
+005926D5  50                              push     eax
+005926D6  56                              push     esi
+005926D7  b9 5c 89 99 07                  mov      ecx, 0x799895c
+005926DC  e8 bf 05 f2 ff                  call     0x4b2ca0 ; sub_4b2ca0
+005926E1  8d 4c 24 14                     lea      ecx, [esp + 0x14]
+005926E5  c7 84 24 a4 00 00 00 ff ff ff ff  mov      dword ptr [esp + 0xa4], 0xffffffff
+005926F0  e8 eb e7 ff ff                  call     0x590ee0 ; sub_590ee0
+005926F5  eb 20                           jmp      0x592717
+005926F7  8b 53 04                        mov      edx, dword ptr [ebx + 4]
+005926FA  33 c9                           xor      ecx, ecx
+005926FC  85 ed                           test     ebp, ebp
+005926FE  0f 94 c1                        sete     cl
+00592701  51                              push     ecx
+00592702  52                              push     edx
+00592703  56                              push     esi
+00592704  e8 47 ea ff ff                  call     0x591150 ; sub_591150
+00592709  83 c4 0c                        add      esp, 0xc
+0059270C  eb 09                           jmp      0x592717
+0059270E  56                              push     esi
+0059270F  e8 bc d6 00 00                  call     0x59fdd0 ; sub_59fdd0
+00592714  83 c4 04                        add      esp, 4
+00592717  5d                              pop      ebp
+00592718  8b 8c 24 98 00 00 00            mov      ecx, dword ptr [esp + 0x98]
+0059271F  5f                              pop      edi
+00592720  5e                              pop      esi
+00592721  5b                              pop      ebx
+00592722  64 89 0d 00 00 00 00            mov      dword ptr fs:[0], ecx
+00592729  81 c4 98 00 00 00               add      esp, 0x98
+0059272F  c2 04 00                        ret      4

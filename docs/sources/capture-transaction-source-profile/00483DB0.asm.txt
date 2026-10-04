@@ -1,0 +1,38 @@
+00483DB0  53                             push     ebx
+00483DB1  8b 5c 24 0c                    mov      ebx, dword ptr [esp + 0xc]
+00483DB5  55                             push     ebp
+00483DB6  56                             push     esi
+00483DB7  57                             push     edi
+00483DB8  0f bf 7c 24 14                 movsx    edi, word ptr [esp + 0x14]
+00483DBD  8b c7                          mov      eax, edi
+00483DBF  83 e0 01                       and      eax, 1
+00483DC2  8d 34 40                       lea      esi, [eax + eax*2]
+00483DC5  8b eb                          mov      ebp, ebx
+00483DC7  33 d2                          xor      edx, edx
+00483DC9  d1 e6                          shl      esi, 1
+00483DCB  c1 ed 10                       shr      ebp, 0x10
+00483DCE  8b ff                          mov      edi, edi
+00483DD0  8d 0c 16                       lea      ecx, [esi + edx]
+00483DD3  66 8b 04 8d 10 c3 79 00        mov      ax, word ptr [ecx*4 + 0x79c310]
+00483DDB  66 8b 0c 8d 12 c3 79 00        mov      cx, word ptr [ecx*4 + 0x79c312]
+00483DE3  66 03 4c 24 16                 add      cx, word ptr [esp + 0x16]
+00483DE8  66 03 c7                       add      ax, di
+00483DEB  66 3b d8                       cmp      bx, ax
+00483DEE  75 05                          jne      0x483df5
+00483DF0  66 3b e9                       cmp      bp, cx
+00483DF3  74 0f                          je       0x483e04
+00483DF5  42                             inc      edx
+00483DF6  83 fa 06                       cmp      edx, 6
+00483DF9  7c d5                          jl       0x483dd0
+00483DFB  5f                             pop      edi
+00483DFC  5e                             pop      esi
+00483DFD  5d                             pop      ebp
+00483DFE  33 c0                          xor      eax, eax
+00483E00  5b                             pop      ebx
+00483E01  c2 08 00                       ret      8
+00483E04  5f                             pop      edi
+00483E05  5e                             pop      esi
+00483E06  5d                             pop      ebp
+00483E07  b8 01 00 00 00                 mov      eax, 1
+00483E0C  5b                             pop      ebx
+00483E0D  c2 08 00                       ret      8

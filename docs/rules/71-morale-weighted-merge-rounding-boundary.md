@@ -2,6 +2,8 @@
 
 更新：2026-10-03。主目标版本：PC-PK1.1。
 
+> 2026-10-04增量说明：本页保留P0-36历史审计。当前[P0-48](83-capture-transaction-source-profile.md)已取得MOD关联S1的`004B9840`完整body并恢复有界非负building-entry整数floor；下文“没有body”仅描述本页当时资料范围。stock PC-PK1.1等价与troop-to-troop helper仍open，旧JSON未因此升级为stock已确认。
+
 ## 1. 本轮结论
 
 补兵后的气力按兵数加权平均这一核心语义继续成立；本轮把原程序中已知的 building merge helper 边界进一步锁定：

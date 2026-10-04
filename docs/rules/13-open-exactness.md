@@ -246,14 +246,16 @@ retained =
 - 小兵力/x87取整；
 - 小数量兵器/舰船整数边界；
 - 已恢复selector与clean stock PC-PK1.1的字节等价性；
-- 各capture caller的全部原因/参数与完整finalizer、副作用；
-- 据点接管耐久完整pre-to-post关系；
+- 已列3 direct caller之外的历史/脚本/劝降cause，人物/force/事件完整finalizer；
+- 有界ordinary/neutral scalar以外的二次ownership/外部callback耐久关系；
 - 全局RNG初始状态/消耗与存档回归；
 - Vanilla各补丁/PS2/Wii自身实现。
 
-P0-46新增已知范围：公开IDB的 `004B2CA0` body、三直接caller、city-only gate、候选链表序及30容量、完成/type30分支、`floor(max(20,charm)/20)` quota、n次全范围swap和销毁前缀均已恢复。`004B329B`只是资源局部段。新势力ID超0..41在shuffle后改为全毁；不能将其改名为“处断君主”规则。参考模型只处理已资格化有序候选。
+P0-46新增已知范围：公开IDB的 `004B2CA0` body、三直接caller、city-only gate、候选链表序及30容量、完成/type30分支、`floor(max(20,charm)/20)` quota、n次全范围swap和销毁前缀均已恢复。`004B329B`只是资源局部段。新势力ID超0..41在shuffle后改为全毁；不能将其改名为“处断君主”规则。P0-46参考模型只处理已资格化有序候选；[P0-48](83-capture-transaction-source-profile.md)已新增完整世界收集与有界事务。
 
 来源IDB的input path含“血色5.0公测”，因此 `opcode-exact` 仅限绑定hash的source profile，stock原性未核。PC-PK1.1采用为 `compatibility-reconstruction`，Vanilla单列 `compatibility-assumption`。晚期耐久 `currentAtTail < floor(maxAtTail/2)` 才写下限，不是完整capture reset公式。
+
+P0-48进一步恢复三caller mode/关系排除、normal/neutral finalizer、普通入城及存活domestic动态owner：neutral分支会清零中间保留资源；ownership先按newOwnerMax向下cap，尾部再半max floor。`004B9840`在S1有界非负building-entry域的非整除floor已恢复，stock和troop→troop仍未知。模型显式记录未覆盖人员/force/计数器/事件等fallback，不能称整场原游戏capture闭合。
 
 状态：
 
@@ -262,7 +264,8 @@ siege-call-chain-resolved
 capture-resource-formula-resolved
 capture-selector-source-profile-recovered
 stock-pc-pk11-equivalence-open
-capture-finalizer-and-global-rng-open
+capture-scalar-finalizer-source-profile-recovered
+capture-personnel-force-event-finalizers-and-global-rng-open
 durability-inner-functions-still-open
 ```
 
@@ -561,10 +564,10 @@ S1固定fingerprint已恢复：
 
 仍 open：
 
-- `sub_4BF1F0` 完整 body 和资源写入顺序；
+- `sub_4BF1F0` stock等价、复杂人员/二次ownership路径；S1完整body与普通入城scalar写入顺序已由P0-48恢复；
 - 手动/自动野外补给 finalizer及是否共享核心；
 - troop→troop morale merge helper；
-- 非整除气力平均 exact rounding；
+- stock/field troop-to-troop非整除气力rounding；S1 building-entry的`004B9840`已由P0-48恢复；
 - target=transport hard gate PC地址；
 - 野外补给+100功绩/+2统率经验PC地址；
 - 自动补给多资源优先级；

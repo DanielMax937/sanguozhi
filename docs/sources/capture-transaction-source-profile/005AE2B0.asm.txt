@@ -1,0 +1,19 @@
+005AE2B0  56                              push     esi
+005AE2B1  8b 74 24 08                     mov      esi, dword ptr [esp + 8]
+005AE2B5  66 83 7e 10 00                  cmp      word ptr [esi + 0x10], 0
+005AE2BA  74 16                           je       0x5ae2d2
+005AE2BC  8b ce                           mov      ecx, esi
+005AE2BE  e8 4d 9b ed ff                  call     0x487e10 ; sub_487e10
+005AE2C3  85 c0                           test     eax, eax
+005AE2C5  74 12                           je       0x5ae2d9
+005AE2C7  8b 06                           mov      eax, dword ptr [esi]
+005AE2C9  8b ce                           mov      ecx, esi
+005AE2CB  ff 50 50                        call     dword ptr [eax + 0x50]
+005AE2CE  85 c0                           test     eax, eax
+005AE2D0  75 07                           jne      0x5ae2d9
+005AE2D2  b8 01 00 00 00                  mov      eax, 1
+005AE2D7  5e                              pop      esi
+005AE2D8  c3                              ret
+005AE2D9  33 c0                           xor      eax, eax
+005AE2DB  5e                              pop      esi
+005AE2DC  c3                              ret

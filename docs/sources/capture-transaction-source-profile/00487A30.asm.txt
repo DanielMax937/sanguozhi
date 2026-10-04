@@ -1,0 +1,20 @@
+00487A30  8b 41 08                        mov      eax, dword ptr [ecx + 8]
+00487A33  85 c0                           test     eax, eax
+00487A35  7c 21                           jl       0x487a58
+00487A37  83 f8 3f                        cmp      eax, 0x3f
+00487A3A  7f 1c                           jg       0x487a58
+00487A3C  50                              push     eax
+00487A3D  b9 58 19 20 07                  mov      ecx, 0x7201958
+00487A42  e8 49 91 00 00                  call     0x490b90 ; sub_490b90
+00487A47  8b 80 b4 00 00 00               mov      eax, dword ptr [eax + 0xb4]
+00487A4D  33 c9                           xor      ecx, ecx
+00487A4F  83 f8 04                        cmp      eax, 4
+00487A52  0f 94 c1                        sete     cl
+00487A55  8b c1                           mov      eax, ecx
+00487A57  c3                              ret
+00487A58  83 c8 ff                        or       eax, 0xffffffff
+00487A5B  33 c9                           xor      ecx, ecx
+00487A5D  83 f8 04                        cmp      eax, 4
+00487A60  0f 94 c1                        sete     cl
+00487A63  8b c1                           mov      eax, ecx
+00487A65  c3                              ret

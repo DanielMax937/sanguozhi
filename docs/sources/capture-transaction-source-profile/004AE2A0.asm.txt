@@ -1,0 +1,41 @@
+004AE2A0  56                             push     esi
+004AE2A1  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+004AE2A5  56                             push     esi
+004AE2A6  e8 85 c3 fc ff                 call     0x47a630 ; IsLegalPtr
+004AE2AB  83 c4 04                       add      esp, 4
+004AE2AE  85 c0                          test     eax, eax
+004AE2B0  74 47                          je       0x4ae2f9
+004AE2B2  53                             push     ebx
+004AE2B3  57                             push     edi
+004AE2B4  8b ce                          mov      ecx, esi
+004AE2B6  e8 c5 89 fd ff                 call     0x486c80 ; sub_486c80
+004AE2BB  8b ce                          mov      ecx, esi
+004AE2BD  8b d8                          mov      ebx, eax
+004AE2BF  e8 6c 8a fd ff                 call     0x486d30 ; sub_486d30
+004AE2C4  8b 4c 24 14                    mov      ecx, dword ptr [esp + 0x14]
+004AE2C8  03 cb                          add      ecx, ebx
+004AE2CA  85 c9                          test     ecx, ecx
+004AE2CC  7f 04                          jg       0x4ae2d2
+004AE2CE  33 ff                          xor      edi, edi
+004AE2D0  eb 08                          jmp      0x4ae2da
+004AE2D2  3b c1                          cmp      eax, ecx
+004AE2D4  8b f8                          mov      edi, eax
+004AE2D6  7e 02                          jle      0x4ae2da
+004AE2D8  8b f9                          mov      edi, ecx
+004AE2DA  56                             push     esi
+004AE2DB  e8 50 c3 fc ff                 call     0x47a630 ; IsLegalPtr
+004AE2E0  83 c4 04                       add      esp, 4
+004AE2E3  85 c0                          test     eax, eax
+004AE2E5  74 08                          je       0x4ae2ef
+004AE2E7  57                             push     edi
+004AE2E8  8b ce                          mov      ecx, esi
+004AE2EA  e8 21 90 fd ff                 call     0x487310 ; sub_487310
+004AE2EF  8b c7                          mov      eax, edi
+004AE2F1  5f                             pop      edi
+004AE2F2  2b c3                          sub      eax, ebx
+004AE2F4  5b                             pop      ebx
+004AE2F5  5e                             pop      esi
+004AE2F6  c2 08 00                       ret      8
+004AE2F9  33 c0                          xor      eax, eax
+004AE2FB  5e                             pop      esi
+004AE2FC  c2 08 00                       ret      8

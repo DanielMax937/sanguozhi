@@ -1,0 +1,417 @@
+004BF1F0  6a ff                          push     -1
+004BF1F2  68 5b fd 72 00                 push     0x72fd5b
+004BF1F7  64 a1 00 00 00 00              mov      eax, dword ptr fs:[0]
+004BF1FD  50                             push     eax
+004BF1FE  64 89 25 00 00 00 00           mov      dword ptr fs:[0], esp
+004BF205  81 ec 00 0c 00 00              sub      esp, 0xc00
+004BF20B  a1 ac 0b 8e 00                 mov      eax, dword ptr [0x8e0bac]
+004BF210  53                             push     ebx
+004BF211  56                             push     esi
+004BF212  57                             push     edi
+004BF213  8b bc 24 1c 0c 00 00           mov      edi, dword ptr [esp + 0xc1c]
+004BF21A  57                             push     edi
+004BF21B  89 84 24 0c 0c 00 00           mov      dword ptr [esp + 0xc0c], eax
+004BF222  8b d9                          mov      ebx, ecx
+004BF224  e8 07 b4 fb ff                 call     0x47a630 ; IsLegalPtr
+004BF229  83 c4 04                       add      esp, 4
+004BF22C  85 c0                          test     eax, eax
+004BF22E  0f 84 8d 04 00 00              je       0x4bf6c1
+004BF234  8b b4 24 20 0c 00 00           mov      esi, dword ptr [esp + 0xc20]
+004BF23B  56                             push     esi
+004BF23C  e8 ef b3 fb ff                 call     0x47a630 ; IsLegalPtr
+004BF241  83 c4 04                       add      esp, 4
+004BF244  85 c0                          test     eax, eax
+004BF246  0f 84 75 04 00 00              je       0x4bf6c1
+004BF24C  8b ce                          mov      ecx, esi
+004BF24E  e8 bd 8b fc ff                 call     0x487e10 ; sub_487e10
+004BF253  85 c0                          test     eax, eax
+004BF255  0f 84 66 04 00 00              je       0x4bf6c1
+004BF25B  55                             push     ebp
+004BF25C  8b cf                          mov      ecx, edi
+004BF25E  e8 dd 67 fd ff                 call     0x495a40 ; sub_495a40
+004BF263  8b 17                          mov      edx, dword ptr [edi]
+004BF265  8b e8                          mov      ebp, eax
+004BF267  8b 85 98 00 00 00              mov      eax, dword ptr [ebp + 0x98]
+004BF26D  8b cf                          mov      ecx, edi
+004BF26F  89 6c 24 10                    mov      dword ptr [esp + 0x10], ebp
+004BF273  89 44 24 18                    mov      dword ptr [esp + 0x18], eax
+004BF277  ff 52 44                       call     dword ptr [edx + 0x44]
+004BF27A  50                             push     eax
+004BF27B  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BF280  e8 4b 18 fd ff                 call     0x490ad0 ; GetLegionPtr
+004BF285  89 44 24 20                    mov      dword ptr [esp + 0x20], eax
+004BF289  8b 06                          mov      eax, dword ptr [esi]
+004BF28B  8b ce                          mov      ecx, esi
+004BF28D  ff 50 44                       call     dword ptr [eax + 0x44]
+004BF290  50                             push     eax
+004BF291  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BF296  e8 35 18 fd ff                 call     0x490ad0 ; GetLegionPtr
+004BF29B  8b 16                          mov      edx, dword ptr [esi]
+004BF29D  8b ce                          mov      ecx, esi
+004BF29F  89 44 24 1c                    mov      dword ptr [esp + 0x1c], eax
+004BF2A3  ff 52 40                       call     dword ptr [edx + 0x40]
+004BF2A6  83 f8 ff                       cmp      eax, -1
+004BF2A9  75 1d                          jne      0x4bf2c8
+004BF2AB  8b 07                          mov      eax, dword ptr [edi]
+004BF2AD  8b cf                          mov      ecx, edi
+004BF2AF  ff 50 44                       call     dword ptr [eax + 0x44]
+004BF2B2  6a 00                          push     0
+004BF2B4  50                             push     eax
+004BF2B5  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BF2BA  e8 11 18 fd ff                 call     0x490ad0 ; GetLegionPtr
+004BF2BF  50                             push     eax
+004BF2C0  56                             push     esi
+004BF2C1  8b cb                          mov      ecx, ebx
+004BF2C3  e8 f8 4d ff ff                 call     0x4b40c0 ; sub_4b40c0
+004BF2C8  56                             push     esi
+004BF2C9  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BF2CE  e8 9d 24 fd ff                 call     0x491770 ; sub_491770
+004BF2D3  8b 57 08                       mov      edx, dword ptr [edi + 8]
+004BF2D6  b9 01 00 00 00                 mov      ecx, 1
+004BF2DB  3b d1                          cmp      edx, ecx
+004BF2DD  89 44 24 24                    mov      dword ptr [esp + 0x24], eax
+004BF2E1  89 4c 24 14                    mov      dword ptr [esp + 0x14], ecx
+004BF2E5  0f 85 df 00 00 00              jne      0x4bf3ca
+004BF2EB  3b 44 24 18                    cmp      eax, dword ptr [esp + 0x18]
+004BF2EF  0f 84 d5 00 00 00              je       0x4bf3ca
+004BF2F5  8b cf                          mov      ecx, edi
+004BF2F7  e8 d4 b3 fb ff                 call     0x47a6d0 ; sub_47a6d0
+004BF2FC  85 c0                          test     eax, eax
+004BF2FE  8b cf                          mov      ecx, edi
+004BF300  0f 84 b3 00 00 00              je       0x4bf3b9
+004BF306  e8 25 b4 fb ff                 call     0x47a730 ; sub_47a730
+004BF30B  50                             push     eax
+004BF30C  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BF311  e8 ea 17 fd ff                 call     0x490b00 ; GetPersonPtr
+004BF316  56                             push     esi
+004BF317  57                             push     edi
+004BF318  8b e8                          mov      ebp, eax
+004BF31A  55                             push     ebp
+004BF31B  68 bc 16 00 00                 push     0x16bc
+004BF320  8d 4c 24 64                    lea      ecx, [esp + 0x64]
+004BF324  e8 27 5a ff ff                 call     0x4b4d50 ; sub_4b4d50
+004BF329  50                             push     eax
+004BF32A  e8 61 c0 fd ff                 call     0x49b390 ; sub_49b390
+004BF32F  83 c4 04                       add      esp, 4
+004BF332  50                             push     eax
+004BF333  8d 8c 24 04 0a 00 00           lea      ecx, [esp + 0xa04]
+004BF33A  e8 c1 ad ff ff                 call     0x4ba100 ; sub_4ba100
+004BF33F  56                             push     esi
+004BF340  57                             push     edi
+004BF341  55                             push     ebp
+004BF342  68 bd 16 00 00                 push     0x16bd
+004BF347  8d 4c 24 64                    lea      ecx, [esp + 0x64]
+004BF34B  e8 00 5a ff ff                 call     0x4b4d50 ; sub_4b4d50
+004BF350  50                             push     eax
+004BF351  e8 3a c0 fd ff                 call     0x49b390 ; sub_49b390
+004BF356  83 c4 04                       add      esp, 4
+004BF359  50                             push     eax
+004BF35A  8d 8c 24 f8 07 00 00           lea      ecx, [esp + 0x7f8]
+004BF361  e8 9a ad ff ff                 call     0x4ba100 ; sub_4ba100
+004BF366  56                             push     esi
+004BF367  57                             push     edi
+004BF368  8d 8c 24 14 0a 00 00           lea      ecx, [esp + 0xa14]
+004BF36F  55                             push     ebp
+004BF370  89 4c 24 58                    mov      dword ptr [esp + 0x58], ecx
+004BF374  8d 94 24 0c 08 00 00           lea      edx, [esp + 0x80c]
+004BF37B  68 bb 16 00 00                 push     0x16bb
+004BF380  8d 8c 24 34 04 00 00           lea      ecx, [esp + 0x434]
+004BF387  89 54 24 60                    mov      dword ptr [esp + 0x60], edx
+004BF38B  e8 c0 59 ff ff                 call     0x4b4d50 ; sub_4b4d50
+004BF390  50                             push     eax
+004BF391  e8 fa bf fd ff                 call     0x49b390 ; sub_49b390
+004BF396  6a 00                          push     0
+004BF398  6a 00                          push     0
+004BF39A  50                             push     eax
+004BF39B  8d 44 24 5c                    lea      eax, [esp + 0x5c]
+004BF39F  6a 02                          push     2
+004BF3A1  50                             push     eax
+004BF3A2  e8 a9 59 1b 00                 call     0x674d50 ; sub_674d50
+004BF3A7  8b 6c 24 28                    mov      ebp, dword ptr [esp + 0x28]
+004BF3AB  83 c4 18                       add      esp, 0x18
+004BF3AE  f7 d8                          neg      eax
+004BF3B0  1b c0                          sbb      eax, eax
+004BF3B2  40                             inc      eax
+004BF3B3  89 44 24 14                    mov      dword ptr [esp + 0x14], eax
+004BF3B7  eb 09                          jmp      0x4bf3c2
+004BF3B9  e8 42 5f fd ff                 call     0x495300 ; sub_495300
+004BF3BE  89 44 24 14                    mov      dword ptr [esp + 0x14], eax
+004BF3C2  85 c0                          test     eax, eax
+004BF3C4  0f 84 bf 00 00 00              je       0x4bf489
+004BF3CA  8b cd                          mov      ecx, ebp
+004BF3CC  e8 2f 98 fc ff                 call     0x488c00 ; IsPersonKing
+004BF3D1  85 c0                          test     eax, eax
+004BF3D3  74 62                          je       0x4bf437
+004BF3D5  8b 4c 24 1c                    mov      ecx, dword ptr [esp + 0x1c]
+004BF3D9  51                             push     ecx
+004BF3DA  e8 51 b2 fb ff                 call     0x47a630 ; IsLegalPtr
+004BF3DF  83 c4 04                       add      esp, 4
+004BF3E2  85 c0                          test     eax, eax
+004BF3E4  74 31                          je       0x4bf417
+004BF3E6  8b ce                          mov      ecx, esi
+004BF3E8  e8 a3 74 fc ff                 call     0x486890 ; GetTaishouID
+004BF3ED  50                             push     eax
+004BF3EE  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BF3F3  e8 08 17 fd ff                 call     0x490b00 ; GetPersonPtr
+004BF3F8  50                             push     eax
+004BF3F9  89 44 24 14                    mov      dword ptr [esp + 0x14], eax
+004BF3FD  e8 2e b2 fb ff                 call     0x47a630 ; IsLegalPtr
+004BF402  83 c4 04                       add      esp, 4
+004BF405  85 c0                          test     eax, eax
+004BF407  74 0e                          je       0x4bf417
+004BF409  8b 54 24 10                    mov      edx, dword ptr [esp + 0x10]
+004BF40D  6a 03                          push     3
+004BF40F  52                             push     edx
+004BF410  8b cb                          mov      ecx, ebx
+004BF412  e8 d9 66 fe ff                 call     0x4a5af0 ; SetPersonStatus_WithCheck
+004BF417  8b 45 00                       mov      eax, dword ptr [ebp]
+004BF41A  8b cd                          mov      ecx, ebp
+004BF41C  ff 50 44                       call     dword ptr [eax + 0x44]
+004BF41F  6a 00                          push     0
+004BF421  50                             push     eax
+004BF422  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BF427  e8 a4 16 fd ff                 call     0x490ad0 ; GetLegionPtr
+004BF42C  50                             push     eax
+004BF42D  56                             push     esi
+004BF42E  8b cb                          mov      ecx, ebx
+004BF430  e8 8b 4c ff ff                 call     0x4b40c0 ; sub_4b40c0
+004BF435  eb 52                          jmp      0x4bf489
+004BF437  8b cd                          mov      ecx, ebp
+004BF439  e8 d2 97 fc ff                 call     0x488c10 ; IsPersonDudu
+004BF43E  85 c0                          test     eax, eax
+004BF440  74 47                          je       0x4bf489
+004BF442  8b 16                          mov      edx, dword ptr [esi]
+004BF444  8b ce                          mov      ecx, esi
+004BF446  ff 52 44                       call     dword ptr [edx + 0x44]
+004BF449  50                             push     eax
+004BF44A  e8 61 2f f5 ff                 call     0x4123b0 ; sub_4123b0
+004BF44F  83 c4 04                       add      esp, 4
+004BF452  85 c0                          test     eax, eax
+004BF454  74 33                          je       0x4bf489
+004BF456  8b 45 00                       mov      eax, dword ptr [ebp]
+004BF459  8b cd                          mov      ecx, ebp
+004BF45B  ff 50 44                       call     dword ptr [eax + 0x44]
+004BF45E  8b 16                          mov      edx, dword ptr [esi]
+004BF460  8b ce                          mov      ecx, esi
+004BF462  8b e8                          mov      ebp, eax
+004BF464  ff 52 44                       call     dword ptr [edx + 0x44]
+004BF467  3b e8                          cmp      ebp, eax
+004BF469  74 1e                          je       0x4bf489
+004BF46B  8b 6c 24 10                    mov      ebp, dword ptr [esp + 0x10]
+004BF46F  6a 03                          push     3
+004BF471  55                             push     ebp
+004BF472  8b cb                          mov      ecx, ebx
+004BF474  e8 77 66 fe ff                 call     0x4a5af0 ; SetPersonStatus_WithCheck
+004BF479  8b 06                          mov      eax, dword ptr [esi]
+004BF47B  8b ce                          mov      ecx, esi
+004BF47D  ff 50 44                       call     dword ptr [eax + 0x44]
+004BF480  50                             push     eax
+004BF481  55                             push     ebp
+004BF482  8b cb                          mov      ecx, ebx
+004BF484  e8 67 3e fe ff                 call     0x4a32f0 ; sub_4a32f0
+004BF489  8b 17                          mov      edx, dword ptr [edi]
+004BF48B  8b cf                          mov      ecx, edi
+004BF48D  ff 52 50                       call     dword ptr [edx + 0x50]
+004BF490  8b e8                          mov      ebp, eax
+004BF492  8b 06                          mov      eax, dword ptr [esi]
+004BF494  8b ce                          mov      ecx, esi
+004BF496  ff 50 50                       call     dword ptr [eax + 0x50]
+004BF499  8b 17                          mov      edx, dword ptr [edi]
+004BF49B  8b cf                          mov      ecx, edi
+004BF49D  89 44 24 10                    mov      dword ptr [esp + 0x10], eax
+004BF4A1  ff 52 54                       call     dword ptr [edx + 0x54]
+004BF4A4  50                             push     eax
+004BF4A5  8b 06                          mov      eax, dword ptr [esi]
+004BF4A7  55                             push     ebp
+004BF4A8  8b ce                          mov      ecx, esi
+004BF4AA  ff 50 54                       call     dword ptr [eax + 0x54]
+004BF4AD  8b 4c 24 18                    mov      ecx, dword ptr [esp + 0x18]
+004BF4B1  50                             push     eax
+004BF4B2  51                             push     ecx
+004BF4B3  56                             push     esi
+004BF4B4  8b cb                          mov      ecx, ebx
+004BF4B6  e8 85 a3 ff ff                 call     0x4b9840 ; sub_4b9840
+004BF4BB  50                             push     eax
+004BF4BC  8b ce                          mov      ecx, esi
+004BF4BE  e8 fd 80 fc ff                 call     0x4875c0 ; sub_4875c0
+004BF4C3  8b 47 1c                       mov      eax, dword ptr [edi + 0x1c]
+004BF4C6  50                             push     eax
+004BF4C7  56                             push     esi
+004BF4C8  8b cb                          mov      ecx, ebx
+004BF4CA  e8 d1 ed fe ff                 call     0x4ae2a0 ; AddCityMoney
+004BF4CF  8b 47 20                       mov      eax, dword ptr [edi + 0x20]
+004BF4D2  50                             push     eax
+004BF4D3  56                             push     esi
+004BF4D4  8b cb                          mov      ecx, ebx
+004BF4D6  e8 25 ee fe ff                 call     0x4ae300 ; sub_4ae300
+004BF4DB  8b 17                          mov      edx, dword ptr [edi]
+004BF4DD  8b cf                          mov      ecx, edi
+004BF4DF  ff 52 50                       call     dword ptr [edx + 0x50]
+004BF4E2  50                             push     eax
+004BF4E3  56                             push     esi
+004BF4E4  8b cb                          mov      ecx, ebx
+004BF4E6  e8 d5 ee fe ff                 call     0x4ae3c0 ; sub_4ae3c0
+004BF4EB  33 ed                          xor      ebp, ebp
+004BF4ED  8d 49 00                       lea      ecx, [ecx]
+004BF4F0  55                             push     ebp
+004BF4F1  8b cf                          mov      ecx, edi
+004BF4F3  e8 68 5f fd ff                 call     0x495460 ; sub_495460
+004BF4F8  8b 08                          mov      ecx, dword ptr [eax]
+004BF4FA  85 c9                          test     ecx, ecx
+004BF4FC  7c 12                          jl       0x4bf510
+004BF4FE  83 f9 0b                       cmp      ecx, 0xb
+004BF501  7f 0d                          jg       0x4bf510
+004BF503  8b 40 04                       mov      eax, dword ptr [eax + 4]
+004BF506  50                             push     eax
+004BF507  51                             push     ecx
+004BF508  56                             push     esi
+004BF509  8b cb                          mov      ecx, ebx
+004BF50B  e8 20 ef fe ff                 call     0x4ae430 ; sub_4ae430
+004BF510  45                             inc      ebp
+004BF511  83 fd 0c                       cmp      ebp, 0xc
+004BF514  7c da                          jl       0x4bf4f0
+004BF516  83 7f 08 01                    cmp      dword ptr [edi + 8], 1
+004BF51A  75 12                          jne      0x4bf52e
+004BF51C  68 c8 00 00 00                 push     0xc8
+004BF521  68 c8 00 00 00                 push     0xc8
+004BF526  57                             push     edi
+004BF527  8b cb                          mov      ecx, ebx
+004BF529  e8 a2 de fe ff                 call     0x4ad3d0 ; sub_4ad3d0
+004BF52E  8b ce                          mov      ecx, esi
+004BF530  e8 4b 71 fc ff                 call     0x486680 ; sub_486680
+004BF535  33 ed                          xor      ebp, ebp
+004BF537  89 44 24 28                    mov      dword ptr [esp + 0x28], eax
+004BF53B  89 6c 24 38                    mov      dword ptr [esp + 0x38], ebp
+004BF53F  89 6c 24 3c                    mov      dword ptr [esp + 0x3c], ebp
+004BF543  89 6c 24 34                    mov      dword ptr [esp + 0x34], ebp
+004BF547  89 6c 24 30                    mov      dword ptr [esp + 0x30], ebp
+004BF54B  89 6c 24 40                    mov      dword ptr [esp + 0x40], ebp
+004BF54F  c7 44 24 44 0a 00 00 00        mov      dword ptr [esp + 0x44], 0xa
+004BF557  89 6c 24 48                    mov      dword ptr [esp + 0x48], ebp
+004BF55B  c7 44 24 2c 44 bf 79 00        mov      dword ptr [esp + 0x2c], 0x79bf44
+004BF563  6a 2f                          push     0x2f
+004BF565  8b cf                          mov      ecx, edi
+004BF567  89 ac 24 1c 0c 00 00           mov      dword ptr [esp + 0xc1c], ebp
+004BF56E  e8 6d 60 fd ff                 call     0x4955e0 ; sub_4955e0
+004BF573  50                             push     eax
+004BF574  8d 4c 24 34                    lea      ecx, [esp + 0x34]
+004BF578  51                             push     ecx
+004BF579  b9 08 98 99 07                 mov      ecx, 0x7999808
+004BF57E  e8 6d fd 00 00                 call     0x4cf2f0 ; sub_4cf2f0
+004BF583  8b 44 24 30                    mov      eax, dword ptr [esp + 0x30]
+004BF587  3b c5                          cmp      eax, ebp
+004BF589  89 44 24 10                    mov      dword ptr [esp + 0x10], eax
+004BF58D  0f 84 a3 00 00 00              je       0x4bf636
+004BF593  8d 54 24 10                    lea      edx, [esp + 0x10]
+004BF597  52                             push     edx
+004BF598  8d 4c 24 30                    lea      ecx, [esp + 0x30]
+004BF59C  e8 2f c9 fb ff                 call     0x47bed0 ; NextPersonArray
+004BF5A1  8b 28                          mov      ebp, dword ptr [eax]
+004BF5A3  8b 44 24 28                    mov      eax, dword ptr [esp + 0x28]
+004BF5A7  50                             push     eax
+004BF5A8  55                             push     ebp
+004BF5A9  8b cb                          mov      ecx, ebx
+004BF5AB  e8 00 17 fe ff                 call     0x4a0cb0 ; SetSuozai
+004BF5B0  8b 44 24 14                    mov      eax, dword ptr [esp + 0x14]
+004BF5B4  85 c0                          test     eax, eax
+004BF5B6  75 3f                          jne      0x4bf5f7
+004BF5B8  8b cd                          mov      ecx, ebp
+004BF5BA  e8 b1 96 fc ff                 call     0x488c70 ; IsPersonFulu
+004BF5BF  85 c0                          test     eax, eax
+004BF5C1  75 34                          jne      0x4bf5f7
+004BF5C3  8b 4c 24 18                    mov      ecx, dword ptr [esp + 0x18]
+004BF5C7  50                             push     eax
+004BF5C8  6a ff                          push     -1
+004BF5CA  51                             push     ecx
+004BF5CB  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BF5D0  e8 2b 17 fd ff                 call     0x490d00 ; GetArchID
+004BF5D5  50                             push     eax
+004BF5D6  55                             push     ebp
+004BF5D7  8b cb                          mov      ecx, ebx
+004BF5D9  e8 b2 83 fe ff                 call     0x4a7990 ; sub_4a7990
+004BF5DE  6a 00                          push     0
+004BF5E0  6a 00                          push     0
+004BF5E2  6a 00                          push     0
+004BF5E4  6a 00                          push     0
+004BF5E6  6a 00                          push     0
+004BF5E8  6a 25                          push     0x25
+004BF5EA  55                             push     ebp
+004BF5EB  b9 5c 89 99 07                 mov      ecx, 0x799895c
+004BF5F0  e8 1b 7e fe ff                 call     0x4a7410 ; sub_4a7410
+004BF5F5  eb 31                          jmp      0x4bf628
+004BF5F7  8b cd                          mov      ecx, ebp
+004BF5F9  e8 72 96 fc ff                 call     0x488c70 ; IsPersonFulu
+004BF5FE  85 c0                          test     eax, eax
+004BF600  75 10                          jne      0x4bf612
+004BF602  8b 16                          mov      edx, dword ptr [esi]
+004BF604  8b ce                          mov      ecx, esi
+004BF606  ff 52 44                       call     dword ptr [edx + 0x44]
+004BF609  50                             push     eax
+004BF60A  55                             push     ebp
+004BF60B  8b cb                          mov      ecx, ebx
+004BF60D  e8 de 3c fe ff                 call     0x4a32f0 ; sub_4a32f0
+004BF612  8b 44 24 24                    mov      eax, dword ptr [esp + 0x24]
+004BF616  50                             push     eax
+004BF617  55                             push     ebp
+004BF618  8b cb                          mov      ecx, ebx
+004BF61A  e8 c1 3b fe ff                 call     0x4a31e0 ; sub_4a31e0
+004BF61F  6a 01                          push     1
+004BF621  8b cd                          mov      ecx, ebp
+004BF623  e8 18 a5 fc ff                 call     0x489b40 ; sub_489b40
+004BF628  8b 44 24 10                    mov      eax, dword ptr [esp + 0x10]
+004BF62C  85 c0                          test     eax, eax
+004BF62E  0f 85 5f ff ff ff              jne      0x4bf593
+004BF634  33 ed                          xor      ebp, ebp
+004BF636  57                             push     edi
+004BF637  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BF63C  e8 7f 21 fd ff                 call     0x4917c0 ; sub_4917c0
+004BF641  50                             push     eax
+004BF642  8b cb                          mov      ecx, ebx
+004BF644  e8 17 0f ff ff                 call     0x4b0560 ; sub_4b0560
+004BF649  57                             push     edi
+004BF64A  b9 d8 59 6a 09                 mov      ecx, 0x96a59d8
+004BF64F  e8 5c 96 0c 00                 call     0x588cb0 ; sub_588cb0
+004BF654  8b 4c 24 20                    mov      ecx, dword ptr [esp + 0x20]
+004BF658  55                             push     ebp
+004BF659  51                             push     ecx
+004BF65A  8b cb                          mov      ecx, ebx
+004BF65C  e8 3f ec ff ff                 call     0x4be2a0 ; sub_4be2a0
+004BF661  8b 6c 24 1c                    mov      ebp, dword ptr [esp + 0x1c]
+004BF665  55                             push     ebp
+004BF666  e8 c5 af fb ff                 call     0x47a630 ; IsLegalPtr
+004BF66B  83 c4 04                       add      esp, 4
+004BF66E  85 c0                          test     eax, eax
+004BF670  74 1b                          je       0x4bf68d
+004BF672  8b 17                          mov      edx, dword ptr [edi]
+004BF674  8b cf                          mov      ecx, edi
+004BF676  ff 52 40                       call     dword ptr [edx + 0x40]
+004BF679  50                             push     eax
+004BF67A  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BF67F  e8 1c 14 fd ff                 call     0x490aa0 ; GetCountryPtr
+004BF684  50                             push     eax
+004BF685  55                             push     ebp
+004BF686  8b cb                          mov      ecx, ebx
+004BF688  e8 13 ec ff ff                 call     0x4be2a0 ; sub_4be2a0
+004BF68D  8b cb                          mov      ecx, ebx
+004BF68F  e8 2c 18 fe ff                 call     0x4a0ec0 ; sub_4a0ec0
+004BF694  8b ce                          mov      ecx, esi
+004BF696  e8 f5 71 fc ff                 call     0x486890 ; GetTaishouID
+004BF69B  50                             push     eax
+004BF69C  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BF6A1  e8 5a 14 fd ff                 call     0x490b00 ; GetPersonPtr
+004BF6A6  8d 4c 24 2c                    lea      ecx, [esp + 0x2c]
+004BF6AA  c7 84 24 18 0c 00 00 ff ff ff ff mov      dword ptr [esp + 0xc18], 0xffffffff
+004BF6B5  e8 46 ca fb ff                 call     0x47c100 ; ClearPersonArray
+004BF6BA  8b 44 24 14                    mov      eax, dword ptr [esp + 0x14]
+004BF6BE  5d                             pop      ebp
+004BF6BF  eb 02                          jmp      0x4bf6c3
+004BF6C1  33 c0                          xor      eax, eax
+004BF6C3  8b 8c 24 0c 0c 00 00           mov      ecx, dword ptr [esp + 0xc0c]
+004BF6CA  5f                             pop      edi
+004BF6CB  5e                             pop      esi
+004BF6CC  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+004BF6D3  8b 8c 24 00 0c 00 00           mov      ecx, dword ptr [esp + 0xc00]
+004BF6DA  5b                             pop      ebx
+004BF6DB  e8 3a 84 24 00                 call     0x707b1a ; @__security_check_cookie@4
+004BF6E0  81 c4 0c 0c 00 00              add      esp, 0xc0c
+004BF6E6  c2 08 00                       ret      8

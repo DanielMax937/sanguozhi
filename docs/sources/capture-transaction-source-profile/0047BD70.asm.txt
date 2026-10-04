@@ -1,0 +1,11 @@
+0047BD70  8a 44 24 04                    mov      al, byte ptr [esp + 4]
+0047BD74  84 c0                          test     al, al
+0047BD76  77 0b                          ja       0x47bd83
+0047BD78  32 c0                          xor      al, al
+0047BD7A  88 81 85 00 00 00              mov      byte ptr [ecx + 0x85], al
+0047BD80  c2 04 00                       ret      4
+0047BD83  3c 64                          cmp      al, 0x64
+0047BD85  72 02                          jb       0x47bd89
+0047BD87  b0 64                          mov      al, 0x64
+0047BD89  88 81 85 00 00 00              mov      byte ptr [ecx + 0x85], al
+0047BD8F  c2 04 00                       ret      4

@@ -1,0 +1,15 @@
+0047B370  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0047B374  85 c0                          test     eax, eax
+0047B376  7c 1c                          jl       0x47b394
+0047B378  83 f8 0b                       cmp      eax, 0xb
+0047B37B  7f 17                          jg       0x47b394
+0047B37D  33 c9                          xor      ecx, ecx
+0047B37F  83 f8 04                       cmp      eax, 4
+0047B382  0f 9f c1                       setg     cl
+0047B385  49                             dec      ecx
+0047B386  81 e1 3c 86 01 00              and      ecx, 0x1863c
+0047B38C  83 c1 64                       add      ecx, 0x64
+0047B38F  8b c1                          mov      eax, ecx
+0047B391  c2 04 00                       ret      4
+0047B394  33 c0                          xor      eax, eax
+0047B396  c2 04 00                       ret      4

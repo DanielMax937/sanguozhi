@@ -1,0 +1,17 @@
+004812C0  56                             push     esi
+004812C1  8b f1                          mov      esi, ecx
+004812C3  8b 06                          mov      eax, dword ptr [esi]
+004812C5  ff 50 08                       call     dword ptr [eax + 8]
+004812C8  85 c0                          test     eax, eax
+004812CA  74 15                          je       0x4812e1
+004812CC  8b 44 24 08                    mov      eax, dword ptr [esp + 8]
+004812D0  85 c0                          test     eax, eax
+004812D2  7c 0d                          jl       0x4812e1
+004812D4  83 f8 2e                       cmp      eax, 0x2e
+004812D7  7f 08                          jg       0x4812e1
+004812D9  8a 44 30 64                    mov      al, byte ptr [eax + esi + 0x64]
+004812DD  5e                             pop      esi
+004812DE  c2 04 00                       ret      4
+004812E1  32 c0                          xor      al, al
+004812E3  5e                             pop      esi
+004812E4  c2 04 00                       ret      4

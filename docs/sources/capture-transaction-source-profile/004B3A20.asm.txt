@@ -1,0 +1,50 @@
+004B3A20  55                             push     ebp
+004B3A21  57                             push     edi
+004B3A22  8b 7c 24 0c                    mov      edi, dword ptr [esp + 0xc]
+004B3A26  57                             push     edi
+004B3A27  8b e9                          mov      ebp, ecx
+004B3A29  e8 02 6c fc ff                 call     0x47a630 ; IsLegalPtr
+004B3A2E  83 c4 04                       add      esp, 4
+004B3A31  85 c0                          test     eax, eax
+004B3A33  74 64                          je       0x4b3a99
+004B3A35  53                             push     ebx
+004B3A36  8b 5c 24 14                    mov      ebx, dword ptr [esp + 0x14]
+004B3A3A  53                             push     ebx
+004B3A3B  e8 f0 6b fc ff                 call     0x47a630 ; IsLegalPtr
+004B3A40  83 c4 04                       add      esp, 4
+004B3A43  85 c0                          test     eax, eax
+004B3A45  75 04                          jne      0x4b3a4b
+004B3A47  85 db                          test     ebx, ebx
+004B3A49  75 4d                          jne      0x4b3a98
+004B3A4B  56                             push     esi
+004B3A4C  8b cf                          mov      ecx, edi
+004B3A4E  e8 3d 2e fd ff                 call     0x486890 ; GetTaishouID
+004B3A53  50                             push     eax
+004B3A54  b9 58 19 20 07                 mov      ecx, 0x7201958
+004B3A59  e8 a2 d0 fd ff                 call     0x490b00 ; GetPersonPtr
+004B3A5E  8b f0                          mov      esi, eax
+004B3A60  56                             push     esi
+004B3A61  e8 ca 6b fc ff                 call     0x47a630 ; IsLegalPtr
+004B3A66  83 c4 04                       add      esp, 4
+004B3A69  85 c0                          test     eax, eax
+004B3A6B  74 10                          je       0x4b3a7d
+004B3A6D  3b f3                          cmp      esi, ebx
+004B3A6F  74 0c                          je       0x4b3a7d
+004B3A71  6a 00                          push     0
+004B3A73  56                             push     esi
+004B3A74  6a 08                          push     8
+004B3A76  8b cd                          mov      ecx, ebp
+004B3A78  e8 23 80 00 00                 call     0x4bbaa0 ; sub_4bbaa0
+004B3A7D  8b cf                          mov      ecx, edi
+004B3A7F  e8 0c 2e fd ff                 call     0x486890 ; GetTaishouID
+004B3A84  53                             push     ebx
+004B3A85  b9 58 19 20 07                 mov      ecx, 0x7201958
+004B3A8A  e8 81 d8 fd ff                 call     0x491310 ; GetPersonID
+004B3A8F  50                             push     eax
+004B3A90  8b cf                          mov      ecx, edi
+004B3A92  e8 e9 3c fd ff                 call     0x487780 ; sub_487780
+004B3A97  5e                             pop      esi
+004B3A98  5b                             pop      ebx
+004B3A99  5f                             pop      edi
+004B3A9A  5d                             pop      ebp
+004B3A9B  c2 08 00                       ret      8

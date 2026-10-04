@@ -1,0 +1,38 @@
+004B5D70  56                             push     esi
+004B5D71  57                             push     edi
+004B5D72  8b 7c 24 0c                    mov      edi, dword ptr [esp + 0xc]
+004B5D76  57                             push     edi
+004B5D77  e8 b4 48 fc ff                 call     0x47a630 ; IsLegalPtr
+004B5D7C  83 c4 04                       add      esp, 4
+004B5D7F  85 c0                          test     eax, eax
+004B5D81  74 44                          je       0x4b5dc7
+004B5D83  8b 74 24 10                    mov      esi, dword ptr [esp + 0x10]
+004B5D87  56                             push     esi
+004B5D88  e8 a3 48 fc ff                 call     0x47a630 ; IsLegalPtr
+004B5D8D  83 c4 04                       add      esp, 4
+004B5D90  85 c0                          test     eax, eax
+004B5D92  74 33                          je       0x4b5dc7
+004B5D94  3b fe                          cmp      edi, esi
+004B5D96  74 25                          je       0x4b5dbd
+004B5D98  56                             push     esi
+004B5D99  b9 58 19 20 07                 mov      ecx, 0x7201958
+004B5D9E  e8 cd b4 fd ff                 call     0x491270 ; sub_491270
+004B5DA3  8b f0                          mov      esi, eax
+004B5DA5  56                             push     esi
+004B5DA6  8b cf                          mov      ecx, edi
+004B5DA8  e8 03 b4 fc ff                 call     0x4811b0 ; sub_4811b0
+004B5DAD  85 c0                          test     eax, eax
+004B5DAF  75 0c                          jne      0x4b5dbd
+004B5DB1  56                             push     esi
+004B5DB2  8b cf                          mov      ecx, edi
+004B5DB4  e8 07 b5 fc ff                 call     0x4812c0 ; sub_4812c0
+004B5DB9  84 c0                          test     al, al
+004B5DBB  76 0a                          jbe      0x4b5dc7
+004B5DBD  5f                             pop      edi
+004B5DBE  b8 01 00 00 00                 mov      eax, 1
+004B5DC3  5e                             pop      esi
+004B5DC4  c2 08 00                       ret      8
+004B5DC7  5f                             pop      edi
+004B5DC8  33 c0                          xor      eax, eax
+004B5DCA  5e                             pop      esi
+004B5DCB  c2 08 00                       ret      8
