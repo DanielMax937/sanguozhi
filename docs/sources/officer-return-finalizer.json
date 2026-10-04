@@ -1,0 +1,2093 @@
+{
+  "schemaVersion": 1,
+  "profileId": "source-idb-S1-S2-officer-return-finalizer-v1",
+  "baselineCommit": "1ff61538c16a1e95dddc15cd228f63d7e15cd356",
+  "sources": [
+    {
+      "source": "S1",
+      "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+      "recordedInputPath": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+      "recordedExeSha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip"
+    },
+    {
+      "source": "S2",
+      "idbSha256": "aa7f2c983b266633d6e23c494d4f8e1b03e5251632505cae103e176ae850dfd8",
+      "recordedInputPath": "C:\\Games\\san11\\血色衣冠6.0sp5(整合包240612)\\San11Pk\\san11pk_dump.exe",
+      "recordedExeSha256": "b1e9467e9612c23af83f6feda8414bc9ee99eb62c6862a84f7f4c5a8822b9da9",
+      "url": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/ida-db/san11pk_dump.exe.idb.7z"
+    }
+  ],
+  "stockOriginalVerified": false,
+  "originalExeExecuted": false,
+  "recordedExeHashesIndependentlyVerified": false,
+  "adoption": {
+    "PC-PK1.1": "compatibility-reconstruction",
+    "PC-Vanilla-assumed": "compatibility-assumption",
+    "PS2-Wii": "open"
+  },
+  "provenance": {
+    "verificationDate": "2026-10-04",
+    "method": "Directly read both fingerprinted MOD-associated IDBs with the pre-existing trusted python-idb/lowmem_idb static parser; render contiguous code with Capstone, without EXE or machine-code execution. All reused corpus ranges also reread from both IDBs and matched by exact range hash.",
+    "independentReadback": "Every selected range matched a second direct ID1 low-byte-at-four-byte-stride read, independent of IDAPython.ida_bytes and Capstone.",
+    "sourceClassification": "Both input paths are MOD-associated. Recorded EXE hashes are IDB metadata, not independently hashed binaries. Equal selected bytes do not establish transitive effects, clean-stock equality, or original-save runtime behavior."
+  },
+  "priorEvidence": [
+    {
+      "id": "return-mission-lifecycle",
+      "path": "docs/sources/return-mission-lifecycle.json",
+      "sha256": "0f502f7d32a60b035afea99def41fd399eeb43ecc6a8ddf30add817b3372d130"
+    },
+    {
+      "id": "capture-relocation-source-profile",
+      "path": "docs/sources/capture-relocation-source-profile.json",
+      "sha256": "7b357eb4268490113a96aebdce152e0af1a889efb54ca77fbb5b4c9f9e6da8f5"
+    },
+    {
+      "id": "facility-mission-cancellation",
+      "path": "docs/sources/facility-mission-cancellation.json",
+      "sha256": "d00e7326ba4053781bdf608170027de4e7e83b0beab58539c31a318ac761a042"
+    }
+  ],
+  "referencedRanges": [
+    {
+      "source": "S1",
+      "start": "00472520",
+      "endExclusive": "00472585",
+      "sha256": "baaf172e81e3701f4aedfc6e4cffaf19daaed12e00c750844c976c0c7b7911a8",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "0047A600",
+      "endExclusive": "0047A626",
+      "sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "0047A630",
+      "endExclusive": "0047A656",
+      "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "0047B2B0",
+      "endExclusive": "0047B2DD",
+      "sha256": "2b871355a493a19960355b895dcbf725a6b3c931af48f71d233989991aac5017",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "0047CD50",
+      "endExclusive": "0047CF6F",
+      "sha256": "23a6d1e8698bdd6a6bdef30ed10ac881c2783dca456bc608ebb582325d38f2af",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004866F0",
+      "endExclusive": "00486713",
+      "sha256": "6cc7deef844219d8714d164ce1210ff4f1cd1a8f3a6862f0e97a2c1d1ac477da",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00487DB0",
+      "endExclusive": "00487DBB",
+      "sha256": "342ea19b25f2ec52aa11a84e358305e79dd51bb7e8a0077adeab58def8f9fb01",
+      "evidence": "facility-mission-cancellation"
+    },
+    {
+      "source": "S1",
+      "start": "00487EB0",
+      "endExclusive": "00488008",
+      "sha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c",
+      "evidence": "facility-mission-cancellation"
+    },
+    {
+      "source": "S1",
+      "start": "004883B0",
+      "endExclusive": "004883B7",
+      "sha256": "b8daa47a1e2c23c0d84bc9ac1de08473d93f8b72166ba2ff5b06db32826f2236",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00488C70",
+      "endExclusive": "00488C7F",
+      "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "004891C0",
+      "endExclusive": "0048921F",
+      "sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "00489E70",
+      "endExclusive": "00489E89",
+      "sha256": "9bb40c9c3154764854c745e5861ba6aee16fc6bc008482d52e73f01e23275ff5",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "00490A10",
+      "endExclusive": "00490A32",
+      "sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "00490A40",
+      "endExclusive": "00490A62",
+      "sha256": "8b122a1d07e6c7372d9e85d06a6fb3025f443cd8d359c150148707def85a97d6",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "00490A70",
+      "endExclusive": "00490A92",
+      "sha256": "a7f7198f20c14dd01bd48d9f7c3a356490fafad34d0e4d7d8e40c60d9635c822",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "00490AA0",
+      "endExclusive": "00490AC2",
+      "sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "00490D00",
+      "endExclusive": "00490D21",
+      "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "00490E70",
+      "endExclusive": "00490E94",
+      "sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "00491310",
+      "endExclusive": "0049135A",
+      "sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "00491770",
+      "endExclusive": "004917BC",
+      "sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "00495340",
+      "endExclusive": "00495382",
+      "sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "00495390",
+      "endExclusive": "004953C4",
+      "sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "004A0CB0",
+      "endExclusive": "004A0CEB",
+      "sha256": "e29a76b4ce5975fc358952d6cddb629a54d844856a1240018234db943095031f",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "004A31E0",
+      "endExclusive": "004A32E5",
+      "sha256": "fd7ef4e3bfd60d45a9b9a85e729f77cfc44f945fe5c245285802befdcfa29a58",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004A32F0",
+      "endExclusive": "004A33A4",
+      "sha256": "197e4fdf2a8c1f318a3f021ec29d96dbc4dabdba3e08aa3dea106ac574f063c4",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S1",
+      "start": "004BF6F0",
+      "endExclusive": "004BF91E",
+      "sha256": "a344fa6f6bbfb22fc2e8d57d875c04b2eaa0e6c8f755393bc9d26133949bfd7b",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S1",
+      "start": "0079C780",
+      "endExclusive": "0079C7D0",
+      "sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00472520",
+      "endExclusive": "00472585",
+      "sha256": "baaf172e81e3701f4aedfc6e4cffaf19daaed12e00c750844c976c0c7b7911a8",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "0047A600",
+      "endExclusive": "0047A626",
+      "sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "0047A630",
+      "endExclusive": "0047A656",
+      "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "0047B2B0",
+      "endExclusive": "0047B2DD",
+      "sha256": "2b871355a493a19960355b895dcbf725a6b3c931af48f71d233989991aac5017",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "0047CD50",
+      "endExclusive": "0047CF6F",
+      "sha256": "23a6d1e8698bdd6a6bdef30ed10ac881c2783dca456bc608ebb582325d38f2af",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "004866F0",
+      "endExclusive": "00486713",
+      "sha256": "6cc7deef844219d8714d164ce1210ff4f1cd1a8f3a6862f0e97a2c1d1ac477da",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00487DB0",
+      "endExclusive": "00487DBB",
+      "sha256": "342ea19b25f2ec52aa11a84e358305e79dd51bb7e8a0077adeab58def8f9fb01",
+      "evidence": "facility-mission-cancellation"
+    },
+    {
+      "source": "S2",
+      "start": "00487EB0",
+      "endExclusive": "00488008",
+      "sha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c",
+      "evidence": "facility-mission-cancellation"
+    },
+    {
+      "source": "S2",
+      "start": "004883B0",
+      "endExclusive": "004883B7",
+      "sha256": "b8daa47a1e2c23c0d84bc9ac1de08473d93f8b72166ba2ff5b06db32826f2236",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00488C70",
+      "endExclusive": "00488C7F",
+      "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "004891C0",
+      "endExclusive": "0048921F",
+      "sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "00489E70",
+      "endExclusive": "00489E89",
+      "sha256": "9bb40c9c3154764854c745e5861ba6aee16fc6bc008482d52e73f01e23275ff5",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "00490A10",
+      "endExclusive": "00490A32",
+      "sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "00490A40",
+      "endExclusive": "00490A62",
+      "sha256": "8b122a1d07e6c7372d9e85d06a6fb3025f443cd8d359c150148707def85a97d6",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "00490A70",
+      "endExclusive": "00490A92",
+      "sha256": "a7f7198f20c14dd01bd48d9f7c3a356490fafad34d0e4d7d8e40c60d9635c822",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "00490AA0",
+      "endExclusive": "00490AC2",
+      "sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "00490D00",
+      "endExclusive": "00490D21",
+      "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "00490E70",
+      "endExclusive": "00490E94",
+      "sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "00491310",
+      "endExclusive": "0049135A",
+      "sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "00491770",
+      "endExclusive": "004917BC",
+      "sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "00495340",
+      "endExclusive": "00495382",
+      "sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "00495390",
+      "endExclusive": "004953C4",
+      "sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "004A0CB0",
+      "endExclusive": "004A0CEB",
+      "sha256": "e29a76b4ce5975fc358952d6cddb629a54d844856a1240018234db943095031f",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "004A31E0",
+      "endExclusive": "004A32E5",
+      "sha256": "fd7ef4e3bfd60d45a9b9a85e729f77cfc44f945fe5c245285802befdcfa29a58",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "004A32F0",
+      "endExclusive": "004A33A4",
+      "sha256": "197e4fdf2a8c1f318a3f021ec29d96dbc4dabdba3e08aa3dea106ac574f063c4",
+      "evidence": "capture-relocation-source-profile"
+    },
+    {
+      "source": "S2",
+      "start": "004BF6F0",
+      "endExclusive": "004BF91E",
+      "sha256": "a344fa6f6bbfb22fc2e8d57d875c04b2eaa0e6c8f755393bc9d26133949bfd7b",
+      "evidence": "return-mission-lifecycle"
+    },
+    {
+      "source": "S2",
+      "start": "0079C780",
+      "endExclusive": "0079C7D0",
+      "sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "evidence": "capture-relocation-source-profile"
+    }
+  ],
+  "newRanges": [
+    {
+      "source": "S1",
+      "start": "0047A6D0",
+      "endExclusive": "0047A721",
+      "sha256": "0e654e75b52c3a8e80e3d2452676daec53cb21e28423d18c66001ba2214cf7d1",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 36
+    },
+    {
+      "source": "S1",
+      "start": "0047C1B0",
+      "endExclusive": "0047C247",
+      "sha256": "29f27b91909d0e5b691616134e1e5736315e065b3b71f58c2737444e2a610d9c",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 40,
+      "lineCount": 48
+    },
+    {
+      "source": "S1",
+      "start": "0047C320",
+      "endExclusive": "0047C324",
+      "sha256": "7e6bda0a031f94dbe8477fe3ce3ba2b7e3d761a050d55625bc7d92212670e60c",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 90,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "0047E070",
+      "endExclusive": "0047E099",
+      "sha256": "4f60021d67009a52e6791f4ac1455a00eab1cd6f6b0ee56280c769fcf3ff0b05",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 94,
+      "lineCount": 20
+    },
+    {
+      "source": "S1",
+      "start": "00482AF0",
+      "endExclusive": "00482BC1",
+      "sha256": "2a34f9b10691bcc34afa53519687d8c6376ce291eb850f4b0dbabf5e4f8e0a60",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 116,
+      "lineCount": 71
+    },
+    {
+      "source": "S1",
+      "start": "00482FC0",
+      "endExclusive": "00483077",
+      "sha256": "ee3340834189887d34b5180699bcef0a1c476d601d127827f30dbff7adcad8b8",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 189,
+      "lineCount": 63
+    },
+    {
+      "source": "S1",
+      "start": "00483810",
+      "endExclusive": "00483814",
+      "sha256": "07ad3a50b1c271e07fb57fb47d2f0e77f3342d41bfa410990cb1320a45035fb2",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 254,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "00486680",
+      "endExclusive": "004866EC",
+      "sha256": "f0851a8423bed9ca3264c913e1a445671645a48d91630362fb46f13b60c2b839",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 258,
+      "lineCount": 42
+    },
+    {
+      "source": "S1",
+      "start": "00486720",
+      "endExclusive": "00486753",
+      "sha256": "1612f2f5cf980f17443599cc361dde56e7f8bfd7b3a7dc8fbcb8461a50f0d947",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 302,
+      "lineCount": 17
+    },
+    {
+      "source": "S1",
+      "start": "00486760",
+      "endExclusive": "00486793",
+      "sha256": "5618d761e2845f056ae729ec7d2ff9ea36da8cc47ef2ec97c7f65764734fb801",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 321,
+      "lineCount": 17
+    },
+    {
+      "source": "S1",
+      "start": "004867D0",
+      "endExclusive": "0048688B",
+      "sha256": "8c7a53e95690c40aac1ca3fa7da7e324021182d1e3bca2917920f32c763f8897",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 340,
+      "lineCount": 73
+    },
+    {
+      "source": "S1",
+      "start": "00486890",
+      "endExclusive": "0048694B",
+      "sha256": "5d3f104b0151451cabba287017f110374072a1694662a0aec362e42c5ce7794a",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 415,
+      "lineCount": 73
+    },
+    {
+      "source": "S1",
+      "start": "00487B30",
+      "endExclusive": "00487BB3",
+      "sha256": "8620689504983fed521867667ddfdcb2f6477ecc3f0249ed7132c2d22596ca79",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 490,
+      "lineCount": 47
+    },
+    {
+      "source": "S1",
+      "start": "004883A0",
+      "endExclusive": "004883AB",
+      "sha256": "52682b94b8d4b2dc550e02fef8c58df4e7e77e231d8abba71cf23587382b5fef",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 539,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "00488C00",
+      "endExclusive": "00488C0E",
+      "sha256": "76f9f18a1e8e40bc921e86166ace9acf8d9be7cc4afe36f6beee7aaa860074ec",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 543,
+      "lineCount": 5
+    },
+    {
+      "source": "S1",
+      "start": "00490AD0",
+      "endExclusive": "00490AF2",
+      "sha256": "d03849242416ef33815626c63a49db94f0d84740bbe3ae137b638ad756be3333",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 550,
+      "lineCount": 11
+    },
+    {
+      "source": "S1",
+      "start": "00490B00",
+      "endExclusive": "00490B24",
+      "sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 563,
+      "lineCount": 10
+    },
+    {
+      "source": "S1",
+      "start": "004A2CB0",
+      "endExclusive": "004A2CD2",
+      "sha256": "6f5d95c197556c1adf9a88cb7f1aaed8e9ef3ec156ce7fa9f355d0a964b4327b",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 575,
+      "lineCount": 14
+    },
+    {
+      "source": "S1",
+      "start": "004B93D0",
+      "endExclusive": "004B940D",
+      "sha256": "aeb6582da3b8116a9e8c3f3a212470bb2d720e24940027265a3aae85da8cd133",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 591,
+      "lineCount": 23
+    },
+    {
+      "source": "S1",
+      "start": "004B9480",
+      "endExclusive": "004B949C",
+      "sha256": "35a0c7c9c9dbd6fa800d8bcd9019e2504d21279532929975f16d62f8e9acee53",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 616,
+      "lineCount": 11
+    },
+    {
+      "source": "S1",
+      "start": "004F55E0",
+      "endExclusive": "004F563A",
+      "sha256": "817b8d49e3257d94b7b6b4314bcfff188abc68e4274be212884f4985ab1fcd00",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 629,
+      "lineCount": 37
+    },
+    {
+      "source": "S1",
+      "start": "0065D6C0",
+      "endExclusive": "0065D6C4",
+      "sha256": "f7e0208f5e988ae39c7a45dfddbd12921d02f9c3deb5695d4c534c8ab0ccdb0f",
+      "file": "S1-new.asm.txt",
+      "kind": "code",
+      "lineStart": 668,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "0079BF98",
+      "endExclusive": "0079BFA0",
+      "sha256": "6d34f0720c29e28d0a6b27f8a23f9d140316d5707d490881c6a7185111af4b39",
+      "file": "S1-new.asm.txt",
+      "kind": "data",
+      "lineStart": 672,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0079BFB0",
+      "endExclusive": "0079BFFC",
+      "sha256": "05ef50c96a4085a936c0bde5ba9d590f81d5d6857ad1de49ce4acde274324d50",
+      "file": "S1-new.asm.txt",
+      "kind": "data",
+      "lineStart": 675,
+      "lineCount": 5
+    },
+    {
+      "source": "S1",
+      "start": "0079C1B0",
+      "endExclusive": "0079C1B8",
+      "sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "file": "S1-new.asm.txt",
+      "kind": "data",
+      "lineStart": 682,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0079C718",
+      "endExclusive": "0079C760",
+      "sha256": "aa61153907812b4d7b1804b81a0fe4cf7aff466aa3ea8d01ef3723306e4f186f",
+      "file": "S1-new.asm.txt",
+      "kind": "data",
+      "lineStart": 685,
+      "lineCount": 5
+    },
+    {
+      "source": "S1",
+      "start": "0079C810",
+      "endExclusive": "0079C818",
+      "sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "file": "S1-new.asm.txt",
+      "kind": "data",
+      "lineStart": 692,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0047A6D0",
+      "endExclusive": "0047A721",
+      "sha256": "0e654e75b52c3a8e80e3d2452676daec53cb21e28423d18c66001ba2214cf7d1",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 36
+    },
+    {
+      "source": "S2",
+      "start": "0047C1B0",
+      "endExclusive": "0047C247",
+      "sha256": "29f27b91909d0e5b691616134e1e5736315e065b3b71f58c2737444e2a610d9c",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 40,
+      "lineCount": 48
+    },
+    {
+      "source": "S2",
+      "start": "0047C320",
+      "endExclusive": "0047C324",
+      "sha256": "7e6bda0a031f94dbe8477fe3ce3ba2b7e3d761a050d55625bc7d92212670e60c",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 90,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "0047E070",
+      "endExclusive": "0047E099",
+      "sha256": "4f60021d67009a52e6791f4ac1455a00eab1cd6f6b0ee56280c769fcf3ff0b05",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 94,
+      "lineCount": 20
+    },
+    {
+      "source": "S2",
+      "start": "00482AF0",
+      "endExclusive": "00482BC1",
+      "sha256": "2a34f9b10691bcc34afa53519687d8c6376ce291eb850f4b0dbabf5e4f8e0a60",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 116,
+      "lineCount": 71
+    },
+    {
+      "source": "S2",
+      "start": "00482FC0",
+      "endExclusive": "00483077",
+      "sha256": "ee3340834189887d34b5180699bcef0a1c476d601d127827f30dbff7adcad8b8",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 189,
+      "lineCount": 63
+    },
+    {
+      "source": "S2",
+      "start": "00483810",
+      "endExclusive": "00483814",
+      "sha256": "07ad3a50b1c271e07fb57fb47d2f0e77f3342d41bfa410990cb1320a45035fb2",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 254,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "00486680",
+      "endExclusive": "004866EC",
+      "sha256": "f0851a8423bed9ca3264c913e1a445671645a48d91630362fb46f13b60c2b839",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 258,
+      "lineCount": 42
+    },
+    {
+      "source": "S2",
+      "start": "00486720",
+      "endExclusive": "00486753",
+      "sha256": "1612f2f5cf980f17443599cc361dde56e7f8bfd7b3a7dc8fbcb8461a50f0d947",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 302,
+      "lineCount": 17
+    },
+    {
+      "source": "S2",
+      "start": "00486760",
+      "endExclusive": "00486793",
+      "sha256": "5618d761e2845f056ae729ec7d2ff9ea36da8cc47ef2ec97c7f65764734fb801",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 321,
+      "lineCount": 17
+    },
+    {
+      "source": "S2",
+      "start": "004867D0",
+      "endExclusive": "0048688B",
+      "sha256": "8c7a53e95690c40aac1ca3fa7da7e324021182d1e3bca2917920f32c763f8897",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 340,
+      "lineCount": 73
+    },
+    {
+      "source": "S2",
+      "start": "00486890",
+      "endExclusive": "0048694B",
+      "sha256": "5d3f104b0151451cabba287017f110374072a1694662a0aec362e42c5ce7794a",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 415,
+      "lineCount": 73
+    },
+    {
+      "source": "S2",
+      "start": "00487B30",
+      "endExclusive": "00487BB3",
+      "sha256": "8620689504983fed521867667ddfdcb2f6477ecc3f0249ed7132c2d22596ca79",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 490,
+      "lineCount": 47
+    },
+    {
+      "source": "S2",
+      "start": "004883A0",
+      "endExclusive": "004883AB",
+      "sha256": "52682b94b8d4b2dc550e02fef8c58df4e7e77e231d8abba71cf23587382b5fef",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 539,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "00488C00",
+      "endExclusive": "00488C0E",
+      "sha256": "76f9f18a1e8e40bc921e86166ace9acf8d9be7cc4afe36f6beee7aaa860074ec",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 543,
+      "lineCount": 5
+    },
+    {
+      "source": "S2",
+      "start": "00490AD0",
+      "endExclusive": "00490AF2",
+      "sha256": "d03849242416ef33815626c63a49db94f0d84740bbe3ae137b638ad756be3333",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 550,
+      "lineCount": 11
+    },
+    {
+      "source": "S2",
+      "start": "00490B00",
+      "endExclusive": "00490B24",
+      "sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 563,
+      "lineCount": 10
+    },
+    {
+      "source": "S2",
+      "start": "004A2CB0",
+      "endExclusive": "004A2CD2",
+      "sha256": "6f5d95c197556c1adf9a88cb7f1aaed8e9ef3ec156ce7fa9f355d0a964b4327b",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 575,
+      "lineCount": 14
+    },
+    {
+      "source": "S2",
+      "start": "004B93D0",
+      "endExclusive": "004B940D",
+      "sha256": "aeb6582da3b8116a9e8c3f3a212470bb2d720e24940027265a3aae85da8cd133",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 591,
+      "lineCount": 23
+    },
+    {
+      "source": "S2",
+      "start": "004B9480",
+      "endExclusive": "004B949C",
+      "sha256": "35a0c7c9c9dbd6fa800d8bcd9019e2504d21279532929975f16d62f8e9acee53",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 616,
+      "lineCount": 11
+    },
+    {
+      "source": "S2",
+      "start": "004F55E0",
+      "endExclusive": "004F563A",
+      "sha256": "817b8d49e3257d94b7b6b4314bcfff188abc68e4274be212884f4985ab1fcd00",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 629,
+      "lineCount": 37
+    },
+    {
+      "source": "S2",
+      "start": "0065D6C0",
+      "endExclusive": "0065D6C4",
+      "sha256": "f7e0208f5e988ae39c7a45dfddbd12921d02f9c3deb5695d4c534c8ab0ccdb0f",
+      "file": "S2-new.asm.txt",
+      "kind": "code",
+      "lineStart": 668,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "0079BF98",
+      "endExclusive": "0079BFA0",
+      "sha256": "6d34f0720c29e28d0a6b27f8a23f9d140316d5707d490881c6a7185111af4b39",
+      "file": "S2-new.asm.txt",
+      "kind": "data",
+      "lineStart": 672,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0079BFB0",
+      "endExclusive": "0079BFFC",
+      "sha256": "05ef50c96a4085a936c0bde5ba9d590f81d5d6857ad1de49ce4acde274324d50",
+      "file": "S2-new.asm.txt",
+      "kind": "data",
+      "lineStart": 675,
+      "lineCount": 5
+    },
+    {
+      "source": "S2",
+      "start": "0079C1B0",
+      "endExclusive": "0079C1B8",
+      "sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "file": "S2-new.asm.txt",
+      "kind": "data",
+      "lineStart": 682,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0079C718",
+      "endExclusive": "0079C760",
+      "sha256": "aa61153907812b4d7b1804b81a0fe4cf7aff466aa3ea8d01ef3723306e4f186f",
+      "file": "S2-new.asm.txt",
+      "kind": "data",
+      "lineStart": 685,
+      "lineCount": 5
+    },
+    {
+      "source": "S2",
+      "start": "0079C810",
+      "endExclusive": "0079C818",
+      "sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "file": "S2-new.asm.txt",
+      "kind": "data",
+      "lineStart": 692,
+      "lineCount": 1
+    }
+  ],
+  "comparisons": [
+    {
+      "start": "00472520",
+      "S1sha256": "baaf172e81e3701f4aedfc6e4cffaf19daaed12e00c750844c976c0c7b7911a8",
+      "S2sha256": "baaf172e81e3701f4aedfc6e4cffaf19daaed12e00c750844c976c0c7b7911a8",
+      "identical": true
+    },
+    {
+      "start": "0047A600",
+      "S1sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "S2sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "identical": true
+    },
+    {
+      "start": "0047A630",
+      "S1sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "S2sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "identical": true
+    },
+    {
+      "start": "0047A6D0",
+      "S1sha256": "0e654e75b52c3a8e80e3d2452676daec53cb21e28423d18c66001ba2214cf7d1",
+      "S2sha256": "0e654e75b52c3a8e80e3d2452676daec53cb21e28423d18c66001ba2214cf7d1",
+      "identical": true
+    },
+    {
+      "start": "0047B2B0",
+      "S1sha256": "2b871355a493a19960355b895dcbf725a6b3c931af48f71d233989991aac5017",
+      "S2sha256": "2b871355a493a19960355b895dcbf725a6b3c931af48f71d233989991aac5017",
+      "identical": true
+    },
+    {
+      "start": "0047C1B0",
+      "S1sha256": "29f27b91909d0e5b691616134e1e5736315e065b3b71f58c2737444e2a610d9c",
+      "S2sha256": "29f27b91909d0e5b691616134e1e5736315e065b3b71f58c2737444e2a610d9c",
+      "identical": true
+    },
+    {
+      "start": "0047C320",
+      "S1sha256": "7e6bda0a031f94dbe8477fe3ce3ba2b7e3d761a050d55625bc7d92212670e60c",
+      "S2sha256": "7e6bda0a031f94dbe8477fe3ce3ba2b7e3d761a050d55625bc7d92212670e60c",
+      "identical": true
+    },
+    {
+      "start": "0047CD50",
+      "S1sha256": "23a6d1e8698bdd6a6bdef30ed10ac881c2783dca456bc608ebb582325d38f2af",
+      "S2sha256": "23a6d1e8698bdd6a6bdef30ed10ac881c2783dca456bc608ebb582325d38f2af",
+      "identical": true
+    },
+    {
+      "start": "0047E070",
+      "S1sha256": "4f60021d67009a52e6791f4ac1455a00eab1cd6f6b0ee56280c769fcf3ff0b05",
+      "S2sha256": "4f60021d67009a52e6791f4ac1455a00eab1cd6f6b0ee56280c769fcf3ff0b05",
+      "identical": true
+    },
+    {
+      "start": "00482AF0",
+      "S1sha256": "2a34f9b10691bcc34afa53519687d8c6376ce291eb850f4b0dbabf5e4f8e0a60",
+      "S2sha256": "2a34f9b10691bcc34afa53519687d8c6376ce291eb850f4b0dbabf5e4f8e0a60",
+      "identical": true
+    },
+    {
+      "start": "00482FC0",
+      "S1sha256": "ee3340834189887d34b5180699bcef0a1c476d601d127827f30dbff7adcad8b8",
+      "S2sha256": "ee3340834189887d34b5180699bcef0a1c476d601d127827f30dbff7adcad8b8",
+      "identical": true
+    },
+    {
+      "start": "00483810",
+      "S1sha256": "07ad3a50b1c271e07fb57fb47d2f0e77f3342d41bfa410990cb1320a45035fb2",
+      "S2sha256": "07ad3a50b1c271e07fb57fb47d2f0e77f3342d41bfa410990cb1320a45035fb2",
+      "identical": true
+    },
+    {
+      "start": "00486680",
+      "S1sha256": "f0851a8423bed9ca3264c913e1a445671645a48d91630362fb46f13b60c2b839",
+      "S2sha256": "f0851a8423bed9ca3264c913e1a445671645a48d91630362fb46f13b60c2b839",
+      "identical": true
+    },
+    {
+      "start": "004866F0",
+      "S1sha256": "6cc7deef844219d8714d164ce1210ff4f1cd1a8f3a6862f0e97a2c1d1ac477da",
+      "S2sha256": "6cc7deef844219d8714d164ce1210ff4f1cd1a8f3a6862f0e97a2c1d1ac477da",
+      "identical": true
+    },
+    {
+      "start": "00486720",
+      "S1sha256": "1612f2f5cf980f17443599cc361dde56e7f8bfd7b3a7dc8fbcb8461a50f0d947",
+      "S2sha256": "1612f2f5cf980f17443599cc361dde56e7f8bfd7b3a7dc8fbcb8461a50f0d947",
+      "identical": true
+    },
+    {
+      "start": "00486760",
+      "S1sha256": "5618d761e2845f056ae729ec7d2ff9ea36da8cc47ef2ec97c7f65764734fb801",
+      "S2sha256": "5618d761e2845f056ae729ec7d2ff9ea36da8cc47ef2ec97c7f65764734fb801",
+      "identical": true
+    },
+    {
+      "start": "004867D0",
+      "S1sha256": "8c7a53e95690c40aac1ca3fa7da7e324021182d1e3bca2917920f32c763f8897",
+      "S2sha256": "8c7a53e95690c40aac1ca3fa7da7e324021182d1e3bca2917920f32c763f8897",
+      "identical": true
+    },
+    {
+      "start": "00486890",
+      "S1sha256": "5d3f104b0151451cabba287017f110374072a1694662a0aec362e42c5ce7794a",
+      "S2sha256": "5d3f104b0151451cabba287017f110374072a1694662a0aec362e42c5ce7794a",
+      "identical": true
+    },
+    {
+      "start": "00487B30",
+      "S1sha256": "8620689504983fed521867667ddfdcb2f6477ecc3f0249ed7132c2d22596ca79",
+      "S2sha256": "8620689504983fed521867667ddfdcb2f6477ecc3f0249ed7132c2d22596ca79",
+      "identical": true
+    },
+    {
+      "start": "00487DB0",
+      "S1sha256": "342ea19b25f2ec52aa11a84e358305e79dd51bb7e8a0077adeab58def8f9fb01",
+      "S2sha256": "342ea19b25f2ec52aa11a84e358305e79dd51bb7e8a0077adeab58def8f9fb01",
+      "identical": true
+    },
+    {
+      "start": "00487EB0",
+      "S1sha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c",
+      "S2sha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c",
+      "identical": true
+    },
+    {
+      "start": "004883A0",
+      "S1sha256": "52682b94b8d4b2dc550e02fef8c58df4e7e77e231d8abba71cf23587382b5fef",
+      "S2sha256": "52682b94b8d4b2dc550e02fef8c58df4e7e77e231d8abba71cf23587382b5fef",
+      "identical": true
+    },
+    {
+      "start": "004883B0",
+      "S1sha256": "b8daa47a1e2c23c0d84bc9ac1de08473d93f8b72166ba2ff5b06db32826f2236",
+      "S2sha256": "b8daa47a1e2c23c0d84bc9ac1de08473d93f8b72166ba2ff5b06db32826f2236",
+      "identical": true
+    },
+    {
+      "start": "00488C00",
+      "S1sha256": "76f9f18a1e8e40bc921e86166ace9acf8d9be7cc4afe36f6beee7aaa860074ec",
+      "S2sha256": "76f9f18a1e8e40bc921e86166ace9acf8d9be7cc4afe36f6beee7aaa860074ec",
+      "identical": true
+    },
+    {
+      "start": "00488C70",
+      "S1sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "S2sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "identical": true
+    },
+    {
+      "start": "004891C0",
+      "S1sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "S2sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "identical": true
+    },
+    {
+      "start": "00489E70",
+      "S1sha256": "9bb40c9c3154764854c745e5861ba6aee16fc6bc008482d52e73f01e23275ff5",
+      "S2sha256": "9bb40c9c3154764854c745e5861ba6aee16fc6bc008482d52e73f01e23275ff5",
+      "identical": true
+    },
+    {
+      "start": "00490A10",
+      "S1sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "S2sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "identical": true
+    },
+    {
+      "start": "00490A40",
+      "S1sha256": "8b122a1d07e6c7372d9e85d06a6fb3025f443cd8d359c150148707def85a97d6",
+      "S2sha256": "8b122a1d07e6c7372d9e85d06a6fb3025f443cd8d359c150148707def85a97d6",
+      "identical": true
+    },
+    {
+      "start": "00490A70",
+      "S1sha256": "a7f7198f20c14dd01bd48d9f7c3a356490fafad34d0e4d7d8e40c60d9635c822",
+      "S2sha256": "a7f7198f20c14dd01bd48d9f7c3a356490fafad34d0e4d7d8e40c60d9635c822",
+      "identical": true
+    },
+    {
+      "start": "00490AA0",
+      "S1sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "S2sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "identical": true
+    },
+    {
+      "start": "00490AD0",
+      "S1sha256": "d03849242416ef33815626c63a49db94f0d84740bbe3ae137b638ad756be3333",
+      "S2sha256": "d03849242416ef33815626c63a49db94f0d84740bbe3ae137b638ad756be3333",
+      "identical": true
+    },
+    {
+      "start": "00490B00",
+      "S1sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "S2sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "identical": true
+    },
+    {
+      "start": "00490D00",
+      "S1sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "S2sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "identical": true
+    },
+    {
+      "start": "00490E70",
+      "S1sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "S2sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "identical": true
+    },
+    {
+      "start": "00491310",
+      "S1sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "S2sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "identical": true
+    },
+    {
+      "start": "00491770",
+      "S1sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b",
+      "S2sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b",
+      "identical": true
+    },
+    {
+      "start": "00495340",
+      "S1sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "S2sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "identical": true
+    },
+    {
+      "start": "00495390",
+      "S1sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "S2sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "identical": true
+    },
+    {
+      "start": "004A0CB0",
+      "S1sha256": "e29a76b4ce5975fc358952d6cddb629a54d844856a1240018234db943095031f",
+      "S2sha256": "e29a76b4ce5975fc358952d6cddb629a54d844856a1240018234db943095031f",
+      "identical": true
+    },
+    {
+      "start": "004A2CB0",
+      "S1sha256": "6f5d95c197556c1adf9a88cb7f1aaed8e9ef3ec156ce7fa9f355d0a964b4327b",
+      "S2sha256": "6f5d95c197556c1adf9a88cb7f1aaed8e9ef3ec156ce7fa9f355d0a964b4327b",
+      "identical": true
+    },
+    {
+      "start": "004A31E0",
+      "S1sha256": "fd7ef4e3bfd60d45a9b9a85e729f77cfc44f945fe5c245285802befdcfa29a58",
+      "S2sha256": "fd7ef4e3bfd60d45a9b9a85e729f77cfc44f945fe5c245285802befdcfa29a58",
+      "identical": true
+    },
+    {
+      "start": "004A32F0",
+      "S1sha256": "197e4fdf2a8c1f318a3f021ec29d96dbc4dabdba3e08aa3dea106ac574f063c4",
+      "S2sha256": "197e4fdf2a8c1f318a3f021ec29d96dbc4dabdba3e08aa3dea106ac574f063c4",
+      "identical": true
+    },
+    {
+      "start": "004B93D0",
+      "S1sha256": "aeb6582da3b8116a9e8c3f3a212470bb2d720e24940027265a3aae85da8cd133",
+      "S2sha256": "aeb6582da3b8116a9e8c3f3a212470bb2d720e24940027265a3aae85da8cd133",
+      "identical": true
+    },
+    {
+      "start": "004B9480",
+      "S1sha256": "35a0c7c9c9dbd6fa800d8bcd9019e2504d21279532929975f16d62f8e9acee53",
+      "S2sha256": "35a0c7c9c9dbd6fa800d8bcd9019e2504d21279532929975f16d62f8e9acee53",
+      "identical": true
+    },
+    {
+      "start": "004BF6F0",
+      "S1sha256": "a344fa6f6bbfb22fc2e8d57d875c04b2eaa0e6c8f755393bc9d26133949bfd7b",
+      "S2sha256": "a344fa6f6bbfb22fc2e8d57d875c04b2eaa0e6c8f755393bc9d26133949bfd7b",
+      "identical": true
+    },
+    {
+      "start": "004F55E0",
+      "S1sha256": "817b8d49e3257d94b7b6b4314bcfff188abc68e4274be212884f4985ab1fcd00",
+      "S2sha256": "817b8d49e3257d94b7b6b4314bcfff188abc68e4274be212884f4985ab1fcd00",
+      "identical": true
+    },
+    {
+      "start": "0065D6C0",
+      "S1sha256": "f7e0208f5e988ae39c7a45dfddbd12921d02f9c3deb5695d4c534c8ab0ccdb0f",
+      "S2sha256": "f7e0208f5e988ae39c7a45dfddbd12921d02f9c3deb5695d4c534c8ab0ccdb0f",
+      "identical": true
+    },
+    {
+      "start": "0079BF98",
+      "S1sha256": "6d34f0720c29e28d0a6b27f8a23f9d140316d5707d490881c6a7185111af4b39",
+      "S2sha256": "6d34f0720c29e28d0a6b27f8a23f9d140316d5707d490881c6a7185111af4b39",
+      "identical": true
+    },
+    {
+      "start": "0079BFB0",
+      "S1sha256": "05ef50c96a4085a936c0bde5ba9d590f81d5d6857ad1de49ce4acde274324d50",
+      "S2sha256": "05ef50c96a4085a936c0bde5ba9d590f81d5d6857ad1de49ce4acde274324d50",
+      "identical": true
+    },
+    {
+      "start": "0079C1B0",
+      "S1sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "S2sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "identical": true
+    },
+    {
+      "start": "0079C718",
+      "S1sha256": "aa61153907812b4d7b1804b81a0fe4cf7aff466aa3ea8d01ef3723306e4f186f",
+      "S2sha256": "aa61153907812b4d7b1804b81a0fe4cf7aff466aa3ea8d01ef3723306e4f186f",
+      "identical": true
+    },
+    {
+      "start": "0079C780",
+      "S1sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "S2sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "identical": true
+    },
+    {
+      "start": "0079C810",
+      "S1sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "S2sha256": "e259b3945587581e759c5b219917c9e78f31a7574d769b39864b63be5ce14d35",
+      "identical": true
+    }
+  ],
+  "containers": [
+    {
+      "file": "S1-new.asm.txt",
+      "sha256": "c5e533a593fdbd963c9f1e2c4c48f1a932b638c7e0009e1881cd10af128c98ea",
+      "lineCount": 692
+    },
+    {
+      "file": "S2-new.asm.txt",
+      "sha256": "aa5222180a21abffb6125b5e6b42c121dc4f94b723910bb777847246a098d0d1",
+      "lineCount": 692
+    }
+  ],
+  "rangeBudget": {
+    "functions": 48,
+    "dataRanges": 6,
+    "rangesPerSource": 54,
+    "newRanges": 54,
+    "referencedRanges": 54,
+    "totalSelectedBytesBothSources": 9560,
+    "newCorpusBytes": 3744
+  },
+  "callLedgers": {
+    "004BF6F0": [
+      {
+        "site": "004BF702",
+        "bytes": "e8 29 af fb ff",
+        "target": "0047A630",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF71B",
+        "bytes": "e8 10 af fb ff",
+        "target": "0047A630",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF731",
+        "bytes": "e8 3a 20 fd ff",
+        "target": "00491770",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF750",
+        "bytes": "e8 ab 15 fd ff",
+        "target": "00490D00",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF75D",
+        "bytes": "ff 52 44",
+        "target": "dword ptr [edx + 0x44]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BF766",
+        "bytes": "e8 65 13 fd ff",
+        "target": "00490AD0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF771",
+        "bytes": "e8 1a 71 fc ff",
+        "target": "00486890",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF77C",
+        "bytes": "e8 7f 13 fd ff",
+        "target": "00490B00",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF78E",
+        "bytes": "e8 3d af fb ff",
+        "target": "0047A6D0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF799",
+        "bytes": "e8 d2 94 fc ff",
+        "target": "00488C70",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF7BA",
+        "bytes": "e8 11 9c ff ff",
+        "target": "004B93D0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF7C0",
+        "bytes": "e8 1b 5e 03 00",
+        "target": "004F55E0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF7CD",
+        "bytes": "ff 52 40",
+        "target": "dword ptr [edx + 0x40]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BF7D6",
+        "bytes": "e8 c5 12 fd ff",
+        "target": "00490AA0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF7E1",
+        "bytes": "e8 1a 94 fc ff",
+        "target": "00488C00",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF7EE",
+        "bytes": "ff 50 40",
+        "target": "dword ptr [eax + 0x40]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BF7F7",
+        "bytes": "ff 52 40",
+        "target": "dword ptr [edx + 0x40]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BF803",
+        "bytes": "e8 28 ae fb ff",
+        "target": "0047A630",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF81D",
+        "bytes": "ff 50 44",
+        "target": "dword ptr [eax + 0x44]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BF828",
+        "bytes": "e8 a3 12 fd ff",
+        "target": "00490AD0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF831",
+        "bytes": "e8 8a 48 ff ff",
+        "target": "004B40C0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF83E",
+        "bytes": "e8 9d 39 fe ff",
+        "target": "004A31E0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF845",
+        "bytes": "e8 76 99 fc ff",
+        "target": "004891C0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF850",
+        "bytes": "e8 2b 6e fc ff",
+        "target": "00486680",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF859",
+        "bytes": "e8 52 14 fe ff",
+        "target": "004A0CB0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF862",
+        "bytes": "ff 52 40",
+        "target": "dword ptr [edx + 0x40]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BF87A",
+        "bytes": "ff 50 40",
+        "target": "dword ptr [eax + 0x40]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BF883",
+        "bytes": "ff 52 40",
+        "target": "dword ptr [edx + 0x40]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BF892",
+        "bytes": "ff 50 44",
+        "target": "dword ptr [eax + 0x44]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BF899",
+        "bytes": "e8 52 3a fe ff",
+        "target": "004A32F0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF8A2",
+        "bytes": "ff 52 44",
+        "target": "dword ptr [edx + 0x44]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BF8AB",
+        "bytes": "e8 20 12 fd ff",
+        "target": "00490AD0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF8BE",
+        "bytes": "e8 6d ad fb ff",
+        "target": "0047A630",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF8D3",
+        "bytes": "e8 c8 e9 ff ff",
+        "target": "004BE2A0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF8DD",
+        "bytes": "e8 be e9 ff ff",
+        "target": "004BE2A0",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF8E7",
+        "bytes": "e8 44 ad fb ff",
+        "target": "0047A630",
+        "kind": "direct"
+      },
+      {
+        "site": "004BF8F7",
+        "bytes": "ff 50 44",
+        "target": "dword ptr [eax + 0x44]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BF900",
+        "bytes": "ff 52 44",
+        "target": "dword ptr [edx + 0x44]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004BF90C",
+        "bytes": "e8 1f d1 ff ff",
+        "target": "004BCA30",
+        "kind": "direct"
+      }
+    ],
+    "004A31E0": [
+      {
+        "site": "004A31E6",
+        "bytes": "e8 15 74 fd ff",
+        "target": "0047A600",
+        "kind": "direct"
+      },
+      {
+        "site": "004A3202",
+        "bytes": "e8 f9 da fe ff",
+        "target": "00490D00",
+        "kind": "direct"
+      },
+      {
+        "site": "004A3215",
+        "bytes": "e8 e6 da fe ff",
+        "target": "00490D00",
+        "kind": "direct"
+      },
+      {
+        "site": "004A322F",
+        "bytes": "e8 2c 35 fe ff",
+        "target": "00486760",
+        "kind": "direct"
+      },
+      {
+        "site": "004A3236",
+        "bytes": "e8 e5 34 fe ff",
+        "target": "00486720",
+        "kind": "direct"
+      },
+      {
+        "site": "004A323E",
+        "bytes": "e8 ed 73 fd ff",
+        "target": "0047A630",
+        "kind": "direct"
+      },
+      {
+        "site": "004A324F",
+        "bytes": "e8 9c 34 fe ff",
+        "target": "004866F0",
+        "kind": "direct"
+      },
+      {
+        "site": "004A3257",
+        "bytes": "e8 d4 73 fd ff",
+        "target": "0047A630",
+        "kind": "direct"
+      },
+      {
+        "site": "004A326A",
+        "bytes": "e8 41 fa ff ff",
+        "target": "004A2CB0",
+        "kind": "direct"
+      },
+      {
+        "site": "004A328A",
+        "bytes": "e8 d1 34 fe ff",
+        "target": "00486760",
+        "kind": "direct"
+      },
+      {
+        "site": "004A3293",
+        "bytes": "e8 88 34 fe ff",
+        "target": "00486720",
+        "kind": "direct"
+      },
+      {
+        "site": "004A329B",
+        "bytes": "e8 90 73 fd ff",
+        "target": "0047A630",
+        "kind": "direct"
+      },
+      {
+        "site": "004A32AE",
+        "bytes": "e8 3d 34 fe ff",
+        "target": "004866F0",
+        "kind": "direct"
+      },
+      {
+        "site": "004A32B6",
+        "bytes": "e8 75 73 fd ff",
+        "target": "0047A630",
+        "kind": "direct"
+      },
+      {
+        "site": "004A32CB",
+        "bytes": "e8 e0 8e fd ff",
+        "target": "0047C1B0",
+        "kind": "direct"
+      },
+      {
+        "site": "004A32DA",
+        "bytes": "e8 71 9a fd ff",
+        "target": "0047CD50",
+        "kind": "direct"
+      }
+    ],
+    "004A32F0": [
+      {
+        "site": "004A32F6",
+        "bytes": "e8 05 73 fd ff",
+        "target": "0047A600",
+        "kind": "direct"
+      },
+      {
+        "site": "004A330B",
+        "bytes": "ff 50 44",
+        "target": "dword ptr [eax + 0x44]",
+        "kind": "indirect"
+      },
+      {
+        "site": "004A3314",
+        "bytes": "e8 b7 d7 fe ff",
+        "target": "00490AD0",
+        "kind": "direct"
+      },
+      {
+        "site": "004A331C",
+        "bytes": "e8 0f 73 fd ff",
+        "target": "0047A630",
+        "kind": "direct"
+      },
+      {
+        "site": "004A3330",
+        "bytes": "e8 bb f7 fd ff",
+        "target": "00482AF0",
+        "kind": "direct"
+      },
+      {
+        "site": "004A333C",
+        "bytes": "e8 7f fc fd ff",
+        "target": "00482FC0",
+        "kind": "direct"
+      },
+      {
+        "site": "004A3366",
+        "bytes": "e8 05 6b fe ff",
+        "target": "00489E70",
+        "kind": "direct"
+      },
+      {
+        "site": "004A3371",
+        "bytes": "e8 5a d7 fe ff",
+        "target": "00490AD0",
+        "kind": "direct"
+      },
+      {
+        "site": "004A3379",
+        "bytes": "e8 b2 72 fd ff",
+        "target": "0047A630",
+        "kind": "direct"
+      },
+      {
+        "site": "004A338B",
+        "bytes": "e8 20 8e fd ff",
+        "target": "0047C1B0",
+        "kind": "direct"
+      },
+      {
+        "site": "004A339A",
+        "bytes": "e8 b1 99 fd ff",
+        "target": "0047CD50",
+        "kind": "direct"
+      }
+    ],
+    "004A0CB0": [
+      {
+        "site": "004A0CB9",
+        "bytes": "e8 42 99 fd ff",
+        "target": "0047A600",
+        "kind": "direct"
+      },
+      {
+        "site": "004A0CE1",
+        "bytes": "e8 9a 87 01 00",
+        "target": "004B9480",
+        "kind": "direct"
+      }
+    ],
+    "00489E70": [
+      {
+        "site": "00489E7E",
+        "bytes": "e8 9d 86 fe ff",
+        "target": "00472520",
+        "kind": "direct"
+      }
+    ],
+    "004A2CB0": [
+      {
+        "site": "004A2CBA",
+        "bytes": "e8 31 fe fd ff",
+        "target": "00482AF0",
+        "kind": "direct"
+      },
+      {
+        "site": "004A2CC6",
+        "bytes": "e8 f5 02 fe ff",
+        "target": "00482FC0",
+        "kind": "direct"
+      }
+    ]
+  },
+  "callLedgerScope": "Every CALL instruction in004BF6F0 and the five listed scalar/removal helper bodies, in address order. Runtime order is the reached subsequence; explicit branch contracts below apply. Both sources share these exact bytes. Transitive list allocator/sort/UI/role internals remain deferred.",
+  "contracts": {
+    "scope": "Standalone bounded004BF6F0 scalar projection and ordered unresolved effect-call ledger. Not a full return transaction, roster mutation, role reconciliation, scheduler, capture composition, or original-save emulator.",
+    "entry": {
+      "helper": "004BF6F0",
+      "arguments": [
+        "person",
+        "targetBuilding",
+        "showNotice",
+        "noticeVariant"
+      ],
+      "gates": [
+        "0047A630(person) valid",
+        "0047A630(targetBuilding) valid"
+      ],
+      "savedBeforeNotice": [
+        "target ID from00491770",
+        "person status dword+0xa0",
+        "old home object from00490D00(person+0x98)",
+        "old legion object from00490AD0(person virtual+0x44)"
+      ],
+      "unusedRead": "00486890(target) governor ID then00490B00 person resolution occurs before notice; return value is unused, but the calls cannot be assumed absent.",
+      "stackMapAfterPushEbp": {
+        "+0x10": "saved old status",
+        "+0x14": "saved old legion pointer",
+        "+0x18": "saved target building ID",
+        "+0x1c": "saved old home pointer",
+        "+0x20": "force pointer saved after notice"
+      },
+      "doesNotWrite": [
+        "mission",
+        "mission arguments",
+        "duration",
+        "acted bit0",
+        "status",
+        "captive metadata",
+        "forbidden-service metadata"
+      ]
+    },
+    "orderedBoundaries": [
+      {
+        "stage": "notice",
+        "sites": [
+          "004BF7BA",
+          "004BF7C0"
+        ],
+        "calls": [
+          "004B93D0",
+          "004F55E0"
+        ],
+        "gate": "showNotice nonzero AND0047A6D0(person) nonzero AND status!=5",
+        "detail": "004B93D0(messageId0x175d,person,target,noticeVariant) RET0x10 consumes four stack args. Then004F55E0(formattedText,target,1,-1), followed by caller ADD ESP0x10. All presentation effects deferred"
+      },
+      {
+        "stage": "ownership",
+        "sites": [
+          "004BF831"
+        ],
+        "calls": [
+          "004B40C0"
+        ],
+        "gate": "live ruler status0 AND person force==target force AND saved force object valid AND force+0x128==0",
+        "detail": "Arguments target, current person legion object,0; occurs BEFORE home write; ownership/capture effects explicitly deferred"
+      },
+      {
+        "stage": "home",
+        "sites": [
+          "004BF83E"
+        ],
+        "calls": [
+          "004A31E0"
+        ],
+        "gate": "valid initial entry; helper rechecks allocated person",
+        "detail": "Old subtype roster removal boundary, dword home write, new subtype append, sort; no equality shortcut"
+      },
+      {
+        "stage": "actual-location",
+        "sites": [
+          "004BF845",
+          "004BF850",
+          "004BF859"
+        ],
+        "calls": [
+          "004891C0",
+          "00486680",
+          "004A0CB0"
+        ],
+        "gate": "only false actual troop membership reaches target-base getter and location writer",
+        "detail": "Canonical matching-kind base ID or-1; writer invokes004B9480 after dword location store"
+      },
+      {
+        "stage": "affiliation-gate",
+        "sites": [
+          "004BF862",
+          "004BF87A",
+          "004BF883"
+        ],
+        "calls": [
+          "person virtual+0x40",
+          "person virtual+0x40",
+          "target virtual+0x40"
+        ],
+        "gate": "first person force in signed0..46, then second person force equals target force",
+        "detail": "Live rereads after earlier effects; no target-force-object validity check in caller"
+      },
+      {
+        "stage": "legion",
+        "sites": [
+          "004BF892",
+          "004BF899"
+        ],
+        "calls": [
+          "target virtual+0x44",
+          "004A32F0"
+        ],
+        "gate": "affiliation gate passed",
+        "detail": "Old valid legion roster find/conditional erase precedes requested-ID validation; rawlegion/bit9 writes then new valid legion append/sort"
+      },
+      {
+        "stage": "resolve-new-legion",
+        "sites": [
+          "004BF8A2",
+          "004BF8AB"
+        ],
+        "calls": [
+          "target virtual+0x44",
+          "00490AD0"
+        ],
+        "gate": "affiliation gate passed",
+        "detail": "Target legion reread AFTER setter/list callbacks, rather than using scalar request cached earlier"
+      },
+      {
+        "stage": "old-legion-role",
+        "sites": [
+          "004BF8D3"
+        ],
+        "calls": [
+          "004BE2A0"
+        ],
+        "gate": "saved old status<=1 AND old legion currently valid AND old legion pointer!=resolved new legion pointer",
+        "detail": "Arguments old legion,0; signed status comparison; whole role function deferred"
+      },
+      {
+        "stage": "new-legion-role",
+        "sites": [
+          "004BF8DD"
+        ],
+        "calls": [
+          "004BE2A0"
+        ],
+        "gate": "affiliation gate passed",
+        "detail": "Arguments resolved new legion,0; caller invokes even if new pointer null/invalid; helper internal gates deferred"
+      },
+      {
+        "stage": "old-home-role",
+        "sites": [
+          "004BF8F7",
+          "004BF900",
+          "004BF90C"
+        ],
+        "calls": [
+          "target virtual+0x44",
+          "old-home virtual+0x44",
+          "004BCA30"
+        ],
+        "gate": "saved old home currently valid AND live old-home legion!=live target legion",
+        "detail": "Arguments saved old home,0; checked after both role calls; whole governor reconciliation deferred"
+      }
+    ],
+    "home": {
+      "helper": "004A31E0",
+      "allocatedGate": "0047A600(person)",
+      "oldHomePointer": "00490D00 yields fixed slot for ANY ID0..16383, independent of allocation/validity; null otherwise. Non-null pointer is dereferenced for kind without a building-valid test.",
+      "rosterMapping": [
+        {
+          "kind": 0,
+          "buildingIds": [
+            0,
+            41
+          ],
+          "getter": "004866F0",
+          "subtype": "city",
+          "rosterOffset": "0xb4"
+        },
+        {
+          "kind": 1,
+          "buildingIds": [
+            42,
+            51
+          ],
+          "getter": "00486720",
+          "subtype": "gate",
+          "rosterOffset": "0x70"
+        },
+        {
+          "kind": 2,
+          "buildingIds": [
+            52,
+            86
+          ],
+          "getter": "00486760",
+          "subtype": "port",
+          "rosterOffset": "0x70"
+        }
+      ],
+      "rosterGate": "kind0/1/2 plus mapped subtype passes0047A630; wrong kind/ID mapping resolves null. Other kinds skip roster calls. Building validity and subtype validity are distinct.",
+      "ordered": [
+        "004A2CB0(old roster,person) if mapped old subtype valid",
+        "write person+0x98 dword requested ID at004A3272, with no requested-ID validation",
+        "0047C1B0(new roster,person) if mapped new subtype valid",
+        "0047CD50(new roster,1,0,0,0) under same new-subtype gate"
+      ],
+      "removeHelper": "004A2CB0 calls00482AF0(person,0); calls00482FC0 only for nonzero found node. Missing-node removal is not an erase.",
+      "sameHomeShortcut": false
+    },
+    "location": {
+      "troopPredicate": "004891C0: location87..1086, corresponding troop via00490E70(location-87) valid, person ID via00491310 equals troop leader+0x0c OR appears in exactly two deputy slots+0x10/+0x14 via00495340. Otherwise false.",
+      "baseGetter": "00486680 examines target kind0/1/2 and matching canonical numeric base0..41/42..51/52..86. It returns original base ID, or-1; it does not consult subtype validity or territorial city.",
+      "writer": "004A0CB0 rechecks allocated person and accepts-1 or0..1086; writes dword person+0x9c at004A0CDB then invokes004B9480.",
+      "callback": "004B9480 calls004EC870 and, when nonnull, manager virtual+0x1b4(0,0,0,0). UI/cache effects not modeled.",
+      "preserveActualTroop": true
+    },
+    "legion": {
+      "helper": "004A32F0",
+      "allocatedGate": "0047A600(person)",
+      "oldRoster": "Resolve current person virtual+0x44 at004A330B; valid old legion then00482AF0(legion+0x30,person,0);00482FC0 only if a node was found.",
+      "acceptedRawIds": "-1 or signed0..46 only; out-of-domain requested ID skips rawlegion and bit9 writes but old roster removal has already been attempted.",
+      "rawWrite": "dword person+0x94 at004A3355",
+      "bit9": "For requested0..46, call00489E70(person,1)→00472520(person+0x124,9,1); OR only bit9 and preserve all others. Requested-1 does not clear bit9.",
+      "newRoster": "Resolve requested ID with00490AD0; if valid,0047C1B0(legion+0x30,person) then0047CD50(legion+0x30,1,0,0,0).",
+      "sameLegionShortcut": false
+    },
+    "getters": {
+      "personVtable": "0079C780; constructor004883A0 assigns this vtable;004883B0 is raw-legion getter",
+      "personLegion": {
+        "slot": "0x44",
+        "target": "004883B0",
+        "field": "person+0x94 raw signed dword",
+        "normalizes": false,
+        "usesStatusOrBit9": false
+      },
+      "personForce": {
+        "slot": "0x40",
+        "target": "0047B2B0",
+        "formula": "Read virtual+0x44;00490AD0 resolves0..46 slot; require0047A630(legion); tail-jump legion+0x40, otherwise-1."
+      },
+      "legionForce": {
+        "vtable": "0079BFB0",
+        "slot": "0x40",
+        "target": "0065D6C0",
+        "field": "legion+0x04 raw signed dword",
+        "validity": "0047E070 requires class predicate2 and numeric force0..46; no force-object validity check."
+      },
+      "buildingLegion": {
+        "vtable": "0079C718",
+        "slot": "0x44",
+        "target": "004867D0",
+        "formula": "Matching canonical kind/ID subtype and subtype valid→subtype virtual+0x44; else-1.",
+        "subtypeGetters": [
+          {
+            "vtableSlotAddress": "0079BF9C",
+            "target": "0047C320",
+            "field": "city+0x38"
+          },
+          {
+            "vtableSlotAddress": "0079C1B4",
+            "target": "00483810",
+            "field": "gate+0x20"
+          },
+          {
+            "vtableSlotAddress": "0079C814",
+            "target": "00483810",
+            "field": "port+0x20"
+          }
+        ],
+        "subtypeLegionIdNormalizes": false
+      },
+      "buildingForce": {
+        "vtable": "0079C718",
+        "slot": "0x40",
+        "target": "00487EB0",
+        "observationBoundary": true,
+        "reason": "00487B30 facility-category branch returns building+0x0c; category4 may use territorial city; fallback canonical subtype virtual+0x40. Runtime metadata/geography remain outside this scalar projection. Do not assume every building force equals its legion force."
+      }
+    },
+    "projectionPolicy": {
+      "omittedEffects": "Notice, ownership/capture, roster operations, sort comparators, UI callbacks, old/new legion role and old-home role are ordered unresolved boundaries, not successful game-side mutations.",
+      "continuation": "Continuing scalar writes beyond an omitted effect requires explicit recorded-boundary/noninterference policy. A strict reject mode must preflight dependencies and reject before committing scalar state. Runtime observations must be source-bound and stage-correct.",
+      "noEqualityClaim": "All selected local ranges match across S1/S2. Nothing establishes identical runtime input tables, callback behavior, transitive effects or stock binaries.",
+      "noRngClaim": "No direct RNG invocation in the bounded scalar bodies; no claim about deferred transitive functions or global RNG consumption."
+    },
+    "deferred": {
+      "004BE2A0": "Whole legion-role reconciliation, including force extinction, empty-legion merge/redistribution, status/leader and transitive governor reconciliation, remains unexecuted.",
+      "004BCA30": "Whole governor reconciliation, including collection, status changes, governor setter and events, remains unexecuted.",
+      "004B40C0": "Ownership/capture transaction and its transitive effects remain unexecuted.",
+      "rosters": "Actual runtime list memory, allocation, duplicate handling, missing-node erasure, sorting comparators and errors remain unexecuted."
+    }
+  },
+  "implementationBoundary": {
+    "scalarApi": "project_officer_return",
+    "module": "scripts/officer_return_finalizer_profile.py",
+    "policy": "Explicit noninterference-v1 and array-slots-v1; record-only or reject unknownEffects; ruler ownership always deferred.",
+    "observations": [
+      "source",
+      "provenance",
+      "noticeEligible",
+      "actualTroopMember",
+      "oldLegionRosterContains",
+      "targetForceId"
+    ],
+    "personScalarFields": [
+      "homeBaseId",
+      "locationId",
+      "rawLegionId",
+      "flags124 bit9"
+    ],
+    "unchangedBit": "acted agrees with flags124 bit0 and is preserved",
+    "evidenceFlags": {
+      "fullReturnExecuted": false,
+      "callbacksExecuted": false,
+      "rostersExecuted": false,
+      "roleReconciliationExecuted": false
+    }
+  },
+  "unresolved": [
+    "Complete004BE2A0 and004BCA30 role reconciliation",
+    "Ownership/capture004B40C0 and broader capture composition",
+    "Actual home/legion linked-list mutation and sorting",
+    "UI and notification callbacks and their possible interference",
+    "General building-force metadata and territorial-geography closure",
+    "Clean stock PC-PK1.1, independent Vanilla, consoles and original-save runtime equivalence"
+  ]
+}

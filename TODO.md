@@ -1,14 +1,24 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-56 mission37 completion, one-hop advance and delayed refund
-> Integration baseline: PR #13 merged; this theme starts at `b488a9f6a38fbb45e6e6c2ac64cd68f6fa3f97ed`
+> Current integration: P0-57 bounded officer return home/location/rawlegion/bit9
+> Integration baseline: PR #14 merged; this theme starts at `1ff61538c16a1e95dddc15cd228f63d7e15cd356`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: officer return scalar/call order
+
+- P0-57: separate004BF6F0 API preserves home→actual location→raw legion→bit9 and old/new roster call stages
+- Numeric same-force gate differs from force-object validity; real troop membership is a required observation, and generic targets map location to-1
+- Invalid requested legion still reaches old-roster removal; -1 preserves bit9, same-home/same-legion still call remove/add/sort
+- Ruler ownership/capture branch explicitly defers atomically; full old/new legion and old-home governor reconciliation remain record/reject boundaries
+- Source-bound getter/slot observations, full-field snapshots, preflight, command idempotency, local RNG and replay preserve all earlier APIs
+- Guide: `docs/rules/92-officer-return-finalizer.md`; run both officer return checkers
+- Next bounded theme: stable nonempty004BE2A0 role reconciliation; full callbacks/roles/force/capture, clean stock and Vanilla remain open
 
 ### Completed bounded implementation: mission37 lifecycle
 
@@ -120,6 +130,7 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-57 audit complete: officer-return scalar fields, exact roster/callback order, real troop and numeric affiliation gates, atomic ruler defer
 - P0-56 audit complete: mission37 completion, single active member advance, refund order, live eligibility and source-separated geometry
 
 - P0-55 audit complete: capability-training cancellation gates, 98-record getter, home notification and sentinel return boundary
@@ -175,7 +186,7 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop; continue base destruction, full `004BF6F0` return-home effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
+- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop and P0-57 separate return-home scalar/list-order projection; next implement stable nonempty `004BE2A0` role reconciliation, then continue base destruction, full `004BF6F0` return-home role/callback effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
 - Complete remaining base destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open

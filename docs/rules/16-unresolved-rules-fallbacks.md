@@ -808,6 +808,13 @@ return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 
 可以按显式版本/profile运行兼容重建，但测试通过不得升级原性等级。
 
+### 4D.10 P0-57 officer return标量及调用序
+
+见[92-officer-return-finalizer.md](92-officer-return-finalizer.md)。独立API保留home/location/rawlegion/bit9与列表/role caller原顺序；-1不清bit9，非法legion请求仍先删旧roster，same-home/same-legion不能省略调用。person force从valid raw legion推导；building force有特殊分支，使用source-bound targetForceId观察；troop-range位置另需actualTroopMember观察，不能把range当成员资格。
+
+`pointerDomain=array-slots-v1`、`callbackAssumption=noninterference-v1`和record-only/reject是显式可替换边界。ruler ownership分支原子defer，完整列表/角色/UI/事件不执行；role可能改status/force等，因此局部after不得冒充完整返回。必要观察先preflight、缺slot不猜invalid；全字段snapshot/command防重/trace重放保留旧API，零local RNG不覆盖省略的回调。下一bounded主题是004BE2A0稳定非空军团角色协调，force灭亡/空军团/完整governor/capture/stock/Vanilla仍open。
+
+
 ## 5. 火焰持续与“自然蔓延”
 
 > P0-4 专项证据矩阵与当前 exactness 状态见 [39-fire-lifetime-spread-exactness.md](39-fire-lifetime-spread-exactness.md)。本节保留工程 fallback；任何 70/30 权重都不得升级成原版常量。
