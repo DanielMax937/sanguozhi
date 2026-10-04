@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-51 wandering / last-city detachment / source-bound mission cancellation resources
-> Integration baseline: PR #8 merged; this theme starts at `453305b2dc64927a715fc58fceb0522557815f34`
+> Current integration: P0-52 dedicated zero-refund cancellation handlers
+> Integration baseline: PR #9 merged; this theme starts at `324dd78b3c5a831cdf5d9406f63c492b7248bed4`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: dedicated zero-refund cancellation
+
+- P0-52: missions9/10/12/22/23/24 now execute their source-local ordered gates and zero-refund return/reset projection
+- Target9/10/12 numeric-range gates do not invent target-validity requirements; mission24 permits buildings through16383, while mission23 checks a separate city-subtype object
+- Independent v2 preserves v1 traces, S1/S2 acted differences, explicit unknown-effect policies, atomic validation and full replay
+- Guide: `docs/rules/87-mission-cancellation-zero-refund.md`; run `check_mission_cancellation_v2_profile.py`
+- Group/facility/research handlers0/2/5/38, handlers41..43 and full return/callback effects remain open
 
 ### Completed bounded implementation: personnel detachment and cancellation
 
@@ -74,6 +82,7 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-52 audit complete: six dedicated zero-refund handler gates and bounded return/reset projection
 - P0-51 audit complete: source-bound wandering, detachment role/event order and bounded mission cancellation resources
 - P0-50 audit complete: source-bound release, destination/migration and stable ordering with tested partial projection
 - P0-49 audit complete: source-bound capacity, personnel partition and explicit partial projection
@@ -123,7 +132,7 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- P0-51 now recovers `004BBB00/004BA520` wandering and bounded role/event projection, plus cancellation registry and task15..21 refunds; continue the remaining dedicated cancellation handlers, `004BF6F0` return-home effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
+- P0-51/52 now recover wandering/role order, registry/task15..21 refunds and six zero-refund handlers9/10/12/22/23/24; continue group/facility/research handlers0/2/5/38, handlers41..43, mission37 completion, `004BF6F0` return-home effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
 - Complete destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open

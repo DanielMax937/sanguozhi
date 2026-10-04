@@ -263,6 +263,8 @@ P0-50新增[前置释放/迁移/排序审计](85-capture-relocation-source-profi
 
 P0-51新增[游离/任务取消审计](86-personnel-detachment-source-profile.md)：004BBB00/004BA520目的地、实际territorial-city、身份/军团/职务字段与事件顺序现有独立有界投影；004A57B0注册dispatch和15..21取消退款/返回路径已恢复，S2 cap/query/acted-hook差异隔离。其他专用取消handler、004BF6F0返回和004A8110监听器、完整force灭亡/君主继承/全capture组合仍open。不能再把已实现局部路线笼统称为缺body，也不能以此关闭完整事件。
 
+P0-52新增[六个零退款handler](87-mission-cancellation-zero-refund.md)：9/10/12/22/23/24的ordered gate、目标pointer域与无效性检查区别、零退款返回/reset现在有独立v2投影；v1仍保留历史语义。当前剩余专用取消为0/2/5/38和41..43，另mission37完成、004BF6F0及完整callback链继续open，不能再笼统称这六个handler未投影。
+
 状态：
 
 ```text
