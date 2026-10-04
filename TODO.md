@@ -1,24 +1,25 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-46 capture-source research and PK training slice
-> Integration baseline: PR #3 merged at `50dda2faaee55eef4c378ddb1dd4fcb0094e40b9`; PR #4 updated from that main
+> Current integration: P0-47 training lifecycle implementation and source audit
+> Integration baseline: PR #3/#4 merged; this theme starts at `56f1aa4ad9cf2bff5612b1777e16dc54be0cdefb`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
-> Publication: open a new draft PR for each theme; no automatic merge
+> Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
 
-### Bounded implementation: PK training kernel
+### Completed bounded implementation: PK training lifecycle v2
 
-- Added a `pk-training-slice-v1` TypeScript kernel and short synthetic text sandbox, initially derived independently from main after PR #2
-- Implemented Train, bounded EndTurn, preview/inspect, serializable state/evidence, save and deterministic replay
-- New normalized constants preserve fixed-main provenance; open gates, scheduler and omitted presentation RNG stay explicit
-- Vanilla is unsupported in this slice; XP-to-stat growth is rejected at the boundary
-- Guide: `docs/engine/pk-training-slice.md`; run `npm run check` and `npm run demo`
-- This is an implementation slice, not a complete game or a closure of P0-46
-- Follow-on prerequisites: recover/adapter-test gate bodies, full scheduler and XP growth before extending simulation length or commands
+- Train资格、行动/训练标记重置、可替换旬phase plan、累计WAR XP与派生能力成长已接入
+- `warXp`累计0..3000；每100提供+1而不扣经验；能力1..100，满能力仍可积累XP
+- 默认满气力拒绝；时间可持续推进，不凭空增加刷XP或气力衰减规则
+- 十年360旬测试与demo验证seed、全trace、save/load/replay；v1状态有显式迁移，旧trace不静默改写
+- Guide: `docs/engine/pk-training-lifecycle.md`; run `npm run check`, `npm run demo:lifecycle`
+- 训练gate、全局reset、野外气力tail-xref、累计XP/helper在固定S1 source恢复；第二MOD样本差异明确隔离
+- source字节exact只属于其fingerprint；stock PC-PK1.1等价、完整scheduler/AP时序、全局RNG及跨版本仍是证据债
+- Vanilla与完整游戏未实现；此实现不关闭P0-46 capture/stock/finalizer缺口
 
 Main audit is complete:
 
@@ -32,6 +33,7 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-47 audit complete: source-bound training lifecycle and tested compatibility implementation
 - P0-46 audit complete: source-bound capture caller/selector recovered
 - Stock PC-PK1.1 equivalence, full capture finalizer and cross-version validation remain open
 
@@ -70,13 +72,23 @@ Current record: `docs/rules/81-capture-selector-source-profile.md` and
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open
 
-### Independent baseline validation debt
+### P0-47 source-bound training lifecycle audit
 
-`python scripts/check_techniques.py` fails on current main at line 55 with a
-literal `\n` in source causing `SyntaxError`. Original PR #2 baseline: 62 of 63
-`check_*.py` scripts pass. After integrating P0-46 and the training slice,
-64 of 65 pass with the same failure. This pre-existing technique issue remains
-unfixed; track it separately rather than hiding it behind the new tests.
+See `docs/rules/82-training-lifecycle-source-profile.md` and
+`docs/sources/training-lifecycle-source-profile.json`.
+
+- Source gate/parameter/officer helpers recovered; full morale and zero troops reject
+- Raw cumulative experience cap3000, derived `floor(XP/100)`, cap1..100, shared research XP field
+- Actual reset uses global loops and noncontiguous direct-clear tails, not a guessed setter(0) caller
+- Both inspected IDBs are MOD-associated; S2 changes XP/stat caps and must not supply anonymous stock constants
+- Open: independent clean stock hash/bytes, complete mission predicates and attribute composition, AP/global scheduler placement and cross-version regression
+
+### Baseline validation repair
+
+The three literal `\n` separators in `scripts/check_techniques.py` were changed
+into actual newlines. All existing assertions remain, including the unresolved
+research-merit status. This syntax-only repair does not resolve rule uncertainty.
+The previous 64/65 result is historical; see current validation in STATUS.
 
 ### After P0-46
 
@@ -96,7 +108,7 @@ Likely remaining families include:
 - auto-office scheduler / remaining classifier and qualification bodies;
 - sortie / transport commit and return finalizers;
 - deputy blood/spouse/sworn remaining PC opcodes;
-- training reset caller / top scheduler;
+- training clean-stock reset equivalence / complete top scheduler and AP placement;
 - starvation field-troop handler and formula;
 - supply / transport finalizer and morale non-divisible rounding;
 - technique research full calculator / difficulty matrix;
@@ -370,7 +382,7 @@ Before editing, verify the latest GitHub `main` commit and create a fresh theme 
    - `docs/rules/README.md`
    - the new theme PR body, including test results, evidence boundaries and any parallel-PR index conflicts.
 9. Open a new draft PR for this theme. PR #2 is merged history, not the current work target.
-10. Do not merge or enable auto-merge on any PR without explicit user authorization.
+10. The user authorized self-merging subsequent project PRs on 2026-10-04; merge only after verification and independent review. Do not infer broader deployment authorization.
 
 ---
 

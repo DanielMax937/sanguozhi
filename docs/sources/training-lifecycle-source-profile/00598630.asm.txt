@@ -1,0 +1,40 @@
+00598630  56                             push     esi
+00598631  57                             push     edi
+00598632  33 f6                          xor      esi, esi
+00598634  56                             push     esi
+00598635  b9 58 19 20 07                 mov      ecx, 0x7201958
+0059863A  e8 c1 86 ef ff                 call     0x490d00 ; GetArchID
+0059863F  8b f8                          mov      edi, eax
+00598641  57                             push     edi
+00598642  e8 e9 1f ee ff                 call     0x47a630 ; IsLegalPtr
+00598647  83 c4 04                       add      esp, 4
+0059864A  85 c0                          test     eax, eax
+0059864C  74 07                          je       0x598655
+0059864E  8b cf                          mov      ecx, edi
+00598650  e8 0b f2 ee ff                 call     0x487860 ; sub_487860
+00598655  46                             inc      esi
+00598656  83 fe 57                       cmp      esi, 0x57
+00598659  7c d9                          jl       0x598634
+0059865B  33 ff                          xor      edi, edi
+0059865D  8d 49 00                       lea      ecx, [ecx]
+00598660  57                             push     edi
+00598661  b9 58 19 20 07                 mov      ecx, 0x7201958
+00598666  e8 95 84 ef ff                 call     0x490b00 ; GetPersonPtr
+0059866B  8b f0                          mov      esi, eax
+0059866D  56                             push     esi
+0059866E  e8 bd 1f ee ff                 call     0x47a630 ; IsLegalPtr
+00598673  83 c4 04                       add      esp, 4
+00598676  85 c0                          test     eax, eax
+00598678  74 12                          je       0x59868c
+0059867A  6a 00                          push     0
+0059867C  8b ce                          mov      ecx, esi
+0059867E  e8 bd 14 ef ff                 call     0x489b40 ; sub_489b40
+00598683  6a 00                          push     0
+00598685  8b ce                          mov      ecx, esi
+00598687  e8 e4 14 ef ff                 call     0x489b70 ; sub_489b70
+0059868C  47                             inc      edi
+0059868D  81 ff 4c 04 00 00              cmp      edi, 0x44c
+00598693  7c cb                          jl       0x598660
+00598695  5f                             pop      edi
+00598696  5e                             pop      esi
+00598697  c3                             ret      

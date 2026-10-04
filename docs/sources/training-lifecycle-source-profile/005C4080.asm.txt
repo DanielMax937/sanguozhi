@@ -1,0 +1,29 @@
+005C4080  56                             push     esi
+005C4081  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+005C4085  56                             push     esi
+005C4086  e8 a5 65 eb ff                 call     0x47a630 ; IsLegalPtr
+005C408B  83 c4 04                       add      esp, 4
+005C408E  85 c0                          test     eax, eax
+005C4090  75 07                          jne      0x5c4099
+005C4092  b8 14 00 00 00                 mov      eax, 0x14
+005C4097  5e                             pop      esi
+005C4098  c3                             ret      
+005C4099  8b ce                          mov      ecx, esi
+005C409B  e8 50 26 ec ff                 call     0x4866f0 ; sub_4866f0
+005C40A0  50                             push     eax
+005C40A1  e8 8a 65 eb ff                 call     0x47a630 ; IsLegalPtr
+005C40A6  83 c4 04                       add      esp, 4
+005C40A9  85 c0                          test     eax, eax
+005C40AB  74 e5                          je       0x5c4092
+005C40AD  6a 29                          push     0x29
+005C40AF  8b ce                          mov      ecx, esi
+005C40B1  e8 3a 26 ec ff                 call     0x4866f0 ; sub_4866f0
+005C40B6  50                             push     eax
+005C40B7  b9 cc b3 80 07                 mov      ecx, 0x780b3cc
+005C40BC  e8 ef 99 ed ff                 call     0x49dab0 ; sub_49dab0
+005C40C1  f7 d8                          neg      eax
+005C40C3  1b c0                          sbb      eax, eax
+005C40C5  83 e0 f6                       and      eax, 0xfffffff6
+005C40C8  83 c0 14                       add      eax, 0x14
+005C40CB  5e                             pop      esi
+005C40CC  c3                             ret      

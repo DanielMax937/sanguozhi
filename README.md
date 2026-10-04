@@ -1,25 +1,29 @@
 # 三国志11规则研究与训练内核
 
-主目标是逐步复现 PC-PK1.1，再单独恢复 Vanilla；已证实规则、实测规则、工程替代和未决边界必须可区分。
+主目标逐步复现PC-PK1.1，再单独恢复Vanilla；已证实规则、实测、工程替代和原作证据债分开记录。
 
-当前可运行的是**虚构的短训练沙盒**，不是完整游戏：一条玩法命令 `Train`，加有限 `EndTurn`、状态检查、JSON存档、确定性重放。没有AI、经济、战斗、历史剧本或能力成长转换。Vanilla在此切片中明确不支持。
+当前可运行的是**虚构训练沙盒**：Train、限定EndTurn、训练资格、累计武力经验成长、状态检查、JSON存档与确定性重放。能连续推进时间，但没有AI、经济、战争、历史剧本或完整调度系统。Vanilla明确不支持。
 
 ## 运行
 
-需要 Node.js 24.x 与 npm：
+需要Node.js24.x与npm：
 
 ```sh
 npm ci --ignore-scripts
 npm run check
 npm run demo
+npm run demo:lifecycle
 npm run play
+npm run play -- --growth-fixture
 ```
 
-`demo` 自动走完三次训练、两次旬切换并验证存档重放；`play` 提供交互式纯文本命令。存档默认使用 `training-save.json`，为避免误覆盖，文件已存在时保存会报错。
+`demo`完成气力40→100；`demo:lifecycle`从经验98推进十年（360旬）并验证完整存档重放；`--growth-fixture`在交互沙盒演示能力成长。满气力后训练仍拒绝，时间可以继续推进；没有额外添加刷经验规则。
 
-- [训练切片指南、证据边界与测试](docs/engine/pk-training-slice.md)
-- [规则总索引](docs/rules/README.md)
-- [当前研究状态](docs/rules/STATUS.md)
-- [后续任务](TODO.md)
+累计XP每100贡献+1，最多3000，普通武力封顶100。默认source-profile算术可替换且带证据，尚未认证clean stock PK等价。保存默认`training-save.json`，不覆盖同名文件；v1需显式状态快照迁移，不静默改写旧trace。
 
-已接受命令保存完整前后状态、计算中间量与来源证据。原训练命令的发言武将随机选择属于表现层，本内核明确省略；“核心零随机调用”不代表原游戏整条命令或全局随机流等价。
+- [训练切片入口](docs/engine/pk-training-slice.md)
+- [生命周期、配置、证据与迁移](docs/engine/pk-training-lifecycle.md)
+- [训练gate/reset/累计经验来源审计](docs/rules/82-training-lifecycle-source-profile.md)
+- [规则总索引](docs/rules/README.md) · [当前研究状态](docs/rules/STATUS.md) · [待办与证据债](TODO.md)
+
+每个接受命令保留完整前后状态、算术、实际奖励/裁剪和来源证据。原发言武将随机选择仍被省略，核心零随机调用不等于原游戏全局随机流一致。

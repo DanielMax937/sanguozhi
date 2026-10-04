@@ -2,11 +2,17 @@
 
 更新：2026-10-04 UTC。
 
-## 新增可运行切片：PK训练内核（不是完整游戏）
+## 最新完成：P0-47训练生命周期与source审计
 
-[切片指南](../engine/pk-training-slice.md) · [归一化运行规则](../sources/pk-training-runtime.json)。
+[实现指南](../engine/pk-training-lifecycle.md) · [来源审计](82-training-lifecycle-source-profile.md) · [结构化证据](../sources/training-lifecycle-source-profile.json)。本组从main `56f1aa4ad9cf2bff5612b1777e16dc54be0cdefb`的新分支开发。
 
-训练切片最初独立基于main `5c5611bb067c0dfe13cea1126ad69a12dade697c` 开发，现已同步PR #3合并后的main `50dda2faaee55eef4c378ddb1dd4fcb0094e40b9`，并保留P0-46研究与训练切片两个入口。新增Train、有限EndTurn、纯文本短目标、preview、存档/重放和逐命令证据。原资格gate/完整scheduler仍open；原训练表现层的发言武将RNG被明示省略，不声称整条原命令随机流一致。Vanilla不静默继承PK；XP达到100的未实现成长路径会原子拒绝。该训练实现不依赖P0-46的capture selector模型，不改变下列P0研究状态。
+训练资格与独立身份/位置/任务状态、行动重置、可替换旬phase plan、累计WAR经验成长、v2存档与显式v1状态迁移已完成。XP0..3000累计，不在每次+1时扣100；普通合成能力clamp1..100。默认满气力拒绝，但EndTurn可继续；十年360旬全trace/seed/save/replay回归通过。
+
+S1来源中`005C4100/005B8320/005B80F0`、XP writer/getter、研究共享XP、reset全局遍历及非连续tails、`0059C330→0059C2A0→0059A230`野外气力tail-xref现已恢复。S1/S2两个IDB均关联MOD，且S2的XP/能力cap确有不同；不能将source字节升级为stock PC-PK1.1。
+
+原作证据债继续保留：独立clean stock对照、完整scheduler/AP时序、任务与属性全链、全局RNG、Vanilla/PS2/Wii。此切片仍无AI/经济/战斗/派遣等完整游戏系统，也不关闭下面P0-46剩余capture缺口。
+
+验证：TypeScript检查与85个Node测试通过；全部66个`check_*.py`通过；两个demo及growth-fixture CLI通过；26个函数/尾块fingerprint、11个opcode断言、8组S1/S2对照、24,008条成长不变量通过。独立代码审阅无未修阻断。既有`check_techniques.py`只修3处字面\n语法错误，保留全部规则断言与merit unresolved标记。
 
 ## A1–E20 主审计已完成；正在清理 exactness gaps
 
@@ -32,4 +38,4 @@ A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完
 
 下一步：clean stock build 对照、剩余 caller/cause 与 finalizer、全局 RNG/存档验证；按可定位缺口推进，不预设固定 P0 终点。P0-44/45保留为历史证据，当前 selector 结论以P0-46的限定范围为准。
 
-独立基线缺陷：当前main的 `scripts/check_techniques.py:55` 因字面 `\n` 报 `SyntaxError`；PR #2原基线为63项校验中62项通过；本次组合后65项中64项通过，仍只有这一既有失败。本次整合不修改该技巧脚本。
+历史基线曾为65项中64项通过，唯一技巧脚本SyntaxError现已作语法修复；不代表技巧研究证据债关闭。

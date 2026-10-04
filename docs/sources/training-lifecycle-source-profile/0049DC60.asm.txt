@@ -1,0 +1,83 @@
+0049DC60  56                             push     esi
+0049DC61  8b 74 24 0c                    mov      esi, dword ptr [esp + 0xc]
+0049DC65  57                             push     edi
+0049DC66  56                             push     esi
+0049DC67  e8 c4 c9 fd ff                 call     0x47a630 ; IsLegalPtr
+0049DC6C  83 c4 04                       add      esp, 4
+0049DC6F  85 c0                          test     eax, eax
+0049DC71  0f 84 a9 00 00 00              je       0x49dd20
+0049DC77  8b 7c 24 0c                    mov      edi, dword ptr [esp + 0xc]
+0049DC7B  57                             push     edi
+0049DC7C  e8 af c9 fd ff                 call     0x47a630 ; IsLegalPtr
+0049DC81  83 c4 04                       add      esp, 4
+0049DC84  85 c0                          test     eax, eax
+0049DC86  0f 84 94 00 00 00              je       0x49dd20
+0049DC8C  8b 46 48                       mov      eax, dword ptr [esi + 0x48]
+0049DC8F  85 c0                          test     eax, eax
+0049DC91  53                             push     ebx
+0049DC92  75 42                          jne      0x49dcd6
+0049DC94  8b ce                          mov      ecx, esi
+0049DC96  e8 15 73 ff ff                 call     0x494fb0 ; sub_494fb0
+0049DC9B  8b ce                          mov      ecx, esi
+0049DC9D  8b d8                          mov      ebx, eax
+0049DC9F  e8 2c 73 ff ff                 call     0x494fd0 ; sub_494fd0
+0049DCA4  53                             push     ebx
+0049DCA5  8b cf                          mov      ecx, edi
+0049DCA7  8b f0                          mov      esi, eax
+0049DCA9  e8 d2 b4 fe ff                 call     0x489180 ; sub_489180
+0049DCAE  66 3d d0 07                    cmp      ax, 0x7d0
+0049DCB2  72 08                          jb       0x49dcbc
+0049DCB4  5b                             pop      ebx
+0049DCB5  5f                             pop      edi
+0049DCB6  33 c0                          xor      eax, eax
+0049DCB8  5e                             pop      esi
+0049DCB9  c2 08 00                       ret      8
+0049DCBC  53                             push     ebx
+0049DCBD  8b cf                          mov      ecx, edi
+0049DCBF  e8 cc c6 fe ff                 call     0x48a390 ; sub_48a390
+0049DCC4  0f b6 c0                       movzx    eax, al
+0049DCC7  33 c9                          xor      ecx, ecx
+0049DCC9  3b c6                          cmp      eax, esi
+0049DCCB  0f 9c c1                       setl     cl
+0049DCCE  5b                             pop      ebx
+0049DCCF  5f                             pop      edi
+0049DCD0  5e                             pop      esi
+0049DCD1  8b c1                          mov      eax, ecx
+0049DCD3  c2 08 00                       ret      8
+0049DCD6  83 f8 01                       cmp      eax, 1
+0049DCD9  75 2a                          jne      0x49dd05
+0049DCDB  8b ce                          mov      ecx, esi
+0049DCDD  e8 0e 73 ff ff                 call     0x494ff0 ; sub_494ff0
+0049DCE2  8b ce                          mov      ecx, esi
+0049DCE4  8b d8                          mov      ebx, eax
+0049DCE6  e8 25 73 ff ff                 call     0x495010 ; sub_495010
+0049DCEB  8b f0                          mov      esi, eax
+0049DCED  53                             push     ebx
+0049DCEE  8b cf                          mov      ecx, edi
+0049DCF0  4e                             dec      esi
+0049DCF1  e8 4a b0 fe ff                 call     0x488d40 ; sub_488d40
+0049DCF6  33 d2                          xor      edx, edx
+0049DCF8  3b f0                          cmp      esi, eax
+0049DCFA  0f 94 c2                       sete     dl
+0049DCFD  5b                             pop      ebx
+0049DCFE  5f                             pop      edi
+0049DCFF  5e                             pop      esi
+0049DD00  8b c2                          mov      eax, edx
+0049DD02  c2 08 00                       ret      8
+0049DD05  83 f8 02                       cmp      eax, 2
+0049DD08  75 aa                          jne      0x49dcb4
+0049DD0A  8b 76 58                       mov      esi, dword ptr [esi + 0x58]
+0049DD0D  56                             push     esi
+0049DD0E  8b cf                          mov      ecx, edi
+0049DD10  e8 db b3 fe ff                 call     0x4890f0 ; sub_4890f0
+0049DD15  f7 d8                          neg      eax
+0049DD17  5b                             pop      ebx
+0049DD18  1b c0                          sbb      eax, eax
+0049DD1A  5f                             pop      edi
+0049DD1B  40                             inc      eax
+0049DD1C  5e                             pop      esi
+0049DD1D  c2 08 00                       ret      8
+0049DD20  5f                             pop      edi
+0049DD21  33 c0                          xor      eax, eax
+0049DD23  5e                             pop      esi
+0049DD24  c2 08 00                       ret      8

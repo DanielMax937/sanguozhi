@@ -44,7 +44,7 @@ def main() -> None:
     assert apply_cap(110, 20, 120) == 120
 
     print("PASS: P0-11 training/morale boundaries")
-    print("Reset cadence/local recovery resolved; reset/top scheduler xrefs remain open.")
+    print("Historical P0-11 baseline preserved; P0-47 recovers S1 source gate/reset xrefs. Stock equivalence and complete scheduler remain open.")
 
 if __name__ == "__main__":
     main()

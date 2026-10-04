@@ -1,0 +1,31 @@
+0059C2A0  53                             push     ebx
+0059C2A1  56                             push     esi
+0059C2A2  57                             push     edi
+0059C2A3  8b d9                          mov      ebx, ecx
+0059C2A5  33 ff                          xor      edi, edi
+0059C2A7  eb 07                          jmp      0x59c2b0
+0059C2A9  8d a4 24 00 00 00 00           lea      esp, [esp]
+0059C2B0  57                             push     edi
+0059C2B1  b9 58 19 20 07                 mov      ecx, 0x7201958
+0059C2B6  e8 b5 4b ef ff                 call     0x490e70 ; GetArmyPtr
+0059C2BB  8b f0                          mov      esi, eax
+0059C2BD  56                             push     esi
+0059C2BE  e8 6d e3 ed ff                 call     0x47a630 ; IsLegalPtr
+0059C2C3  83 c4 04                       add      esp, 4
+0059C2C6  85 c0                          test     eax, eax
+0059C2C8  74 09                          je       0x59c2d3
+0059C2CA  6a 00                          push     0
+0059C2CC  8b ce                          mov      ecx, esi
+0059C2CE  e8 cd 96 ef ff                 call     0x4959a0 ; sub_4959a0
+0059C2D3  47                             inc      edi
+0059C2D4  81 ff e8 03 00 00              cmp      edi, 0x3e8
+0059C2DA  7c d4                          jl       0x59c2b0
+0059C2DC  8b cb                          mov      ecx, ebx
+0059C2DE  e8 5d fc ff ff                 call     0x59bf40 ; sub_59bf40
+0059C2E3  8b cb                          mov      ecx, ebx
+0059C2E5  e8 46 c6 ff ff                 call     0x598930 ; sub_598930
+0059C2EA  5f                             pop      edi
+0059C2EB  5e                             pop      esi
+0059C2EC  8b cb                          mov      ecx, ebx
+0059C2EE  5b                             pop      ebx
+0059C2EF  e9 3c df ff ff                 jmp      0x59a230

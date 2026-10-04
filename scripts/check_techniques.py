@@ -52,7 +52,10 @@ def main() -> None:
 
     assert data["techniquePointCap"] == 10000
     assert data["research"]["actionPoints"] == 50
-    assert data["research"]["abilityExperienceByLevel"] == [10, 20, 30, 50]\n    assert data["research"]["meritByLevel"] == [500, 1000, 2000, 3000]\n    assert data["research"]["meritEvidence"] == "documented-current-wiki-candidate"\n    assert data["research"]["meritExactness"] == "unresolved"
+    assert data["research"]["abilityExperienceByLevel"] == [10, 20, 30, 50]
+    assert data["research"]["meritByLevel"] == [500, 1000, 2000, 3000]
+    assert data["research"]["meritEvidence"] == "documented-current-wiki-candidate"
+    assert data["research"]["meritExactness"] == "unresolved"
 
     print("PASS: 36 techniques, IDs/branches/levels, costs and audited constants")
     print("Reference-data validation only; research-time, patch differences, and research-merit exactness remain open.")

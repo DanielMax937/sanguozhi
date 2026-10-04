@@ -1,0 +1,184 @@
+0059C330  81 ec e4 03 00 00              sub      esp, 0x3e4
+0059C336  53                             push     ebx
+0059C337  56                             push     esi
+0059C338  57                             push     edi
+0059C339  8b d9                          mov      ebx, ecx
+0059C33B  e8 40 c2 ff ff                 call     0x598580 ; sub_598580
+0059C340  85 c0                          test     eax, eax
+0059C342  0f 8c d9 00 00 00              jl       0x59c421
+0059C348  83 f8 2e                       cmp      eax, 0x2e
+0059C34B  0f 8f d0 00 00 00              jg       0x59c421
+0059C351  50                             push     eax
+0059C352  b9 58 19 20 07                 mov      ecx, 0x7201958
+0059C357  e8 44 47 ef ff                 call     0x490aa0 ; GetCountryPtr
+0059C35C  8b f0                          mov      esi, eax
+0059C35E  56                             push     esi
+0059C35F  e8 cc e2 ed ff                 call     0x47a630 ; IsLegalPtr
+0059C364  83 c4 04                       add      esp, 4
+0059C367  85 c0                          test     eax, eax
+0059C369  0f 84 9f 00 00 00              je       0x59c40e
+0059C36F  8b 06                          mov      eax, dword ptr [esi]
+0059C371  8b ce                          mov      ecx, esi
+0059C373  ff 50 48                       call     dword ptr [eax + 0x48]
+0059C376  85 c0                          test     eax, eax
+0059C378  74 4b                          je       0x59c3c5
+0059C37A  8b 76 04                       mov      esi, dword ptr [esi + 4]
+0059C37D  6a 00                          push     0
+0059C37F  56                             push     esi
+0059C380  6a 0a                          push     0xa
+0059C382  8d 4c 24 18                    lea      ecx, [esp + 0x18]
+0059C386  e8 05 2e ee ff                 call     0x47f190 ; sub_47f190
+0059C38B  50                             push     eax
+0059C38C  8b cb                          mov      ecx, ebx
+0059C38E  e8 8d 2c fe ff                 call     0x57f020 ; sub_57f020
+0059C393  33 c9                          xor      ecx, ecx
+0059C395  8a 0d 0c b5 3f 07              mov      cl, byte ptr [0x73fb50c]
+0059C39B  fe c1                          inc      cl
+0059C39D  51                             push     ecx
+0059C39E  b9 0c b5 3f 07                 mov      ecx, 0x73fb50c
+0059C3A3  e8 88 7a ef ff                 call     0x493e30 ; sub_493e30
+0059C3A8  b9 78 37 ed 06                 mov      ecx, 0x6ed3778
+0059C3AD  e8 0e f4 e9 ff                 call     0x43b7c0 ; sub_43b7c0
+0059C3B2  6a 1b                          push     0x1b
+0059C3B4  8b cb                          mov      ecx, ebx
+0059C3B6  e8 a5 21 fe ff                 call     0x57e560 ; sub_57e560
+0059C3BB  5f                             pop      edi
+0059C3BC  5e                             pop      esi
+0059C3BD  5b                             pop      ebx
+0059C3BE  81 c4 e4 03 00 00              add      esp, 0x3e4
+0059C3C4  c3                             ret      
+0059C3C5  8b 46 04                       mov      eax, dword ptr [esi + 4]
+0059C3C8  50                             push     eax
+0059C3C9  b9 58 19 20 07                 mov      ecx, 0x7201958
+0059C3CE  e8 2d 47 ef ff                 call     0x490b00 ; GetPersonPtr
+0059C3D3  68 a8 16 00 00                 push     0x16a8
+0059C3D8  8d 4c 24 24                    lea      ecx, [esp + 0x24]
+0059C3DC  8b f8                          mov      edi, eax
+0059C3DE  e8 7d 07 f0 ff                 call     0x49cb60 ; sub_49cb60
+0059C3E3  57                             push     edi
+0059C3E4  6a 00                          push     0
+0059C3E6  8d 4c 24 28                    lea      ecx, [esp + 0x28]
+0059C3EA  e8 91 07 f0 ff                 call     0x49cb80 ; sub_49cb80
+0059C3EF  56                             push     esi
+0059C3F0  6a 00                          push     0
+0059C3F2  8d 4c 24 28                    lea      ecx, [esp + 0x28]
+0059C3F6  e8 85 07 f0 ff                 call     0x49cb80 ; sub_49cb80
+0059C3FB  6a 01                          push     1
+0059C3FD  6a 00                          push     0
+0059C3FF  8d 54 24 28                    lea      edx, [esp + 0x28]
+0059C403  6a 00                          push     0
+0059C405  52                             push     edx
+0059C406  e8 65 90 f5 ff                 call     0x4f5470 ; sub_4f5470
+0059C40B  83 c4 10                       add      esp, 0x10
+0059C40E  6a 1b                          push     0x1b
+0059C410  8b cb                          mov      ecx, ebx
+0059C412  e8 49 21 fe ff                 call     0x57e560 ; sub_57e560
+0059C417  5f                             pop      edi
+0059C418  5e                             pop      esi
+0059C419  5b                             pop      ebx
+0059C41A  81 c4 e4 03 00 00              add      esp, 0x3e4
+0059C420  c3                             ret      
+0059C421  8b cb                          mov      ecx, ebx
+0059C423  e8 08 c2 ff ff                 call     0x598630 ; sub_598630
+0059C428  8b cb                          mov      ecx, ebx
+0059C42A  e8 d1 d1 ff ff                 call     0x599600 ; sub_599600
+0059C42F  8b cb                          mov      ecx, ebx
+0059C431  e8 ca bf ff ff                 call     0x598400 ; sub_598400
+0059C436  8b cb                          mov      ecx, ebx
+0059C438  e8 73 e0 ff ff                 call     0x59a4b0 ; sub_59a4b0
+0059C43D  8b cb                          mov      ecx, ebx
+0059C43F  e8 ac d8 ff ff                 call     0x599cf0 ; sub_599cf0
+0059C444  a1 f8 59 6a 09                 mov      eax, dword ptr [0x96a59f8]
+0059C449  85 c0                          test     eax, eax
+0059C44B  0f 85 13 01 00 00              jne      0x59c564
+0059C451  8b cb                          mov      ecx, ebx
+0059C453  e8 e8 e4 ff ff                 call     0x59a940 ; sub_59a940
+0059C458  a1 f8 59 6a 09                 mov      eax, dword ptr [0x96a59f8]
+0059C45D  85 c0                          test     eax, eax
+0059C45F  0f 85 ff 00 00 00              jne      0x59c564
+0059C465  8b cb                          mov      ecx, ebx
+0059C467  e8 74 e7 ff ff                 call     0x59abe0 ; sub_59abe0
+0059C46C  a1 f8 59 6a 09                 mov      eax, dword ptr [0x96a59f8]
+0059C471  85 c0                          test     eax, eax
+0059C473  0f 85 eb 00 00 00              jne      0x59c564
+0059C479  33 ff                          xor      edi, edi
+0059C47B  eb 03                          jmp      0x59c480
+0059C47D  8d 49 00                       lea      ecx, [ecx]
+0059C480  57                             push     edi
+0059C481  b9 58 19 20 07                 mov      ecx, 0x7201958
+0059C486  e8 75 46 ef ff                 call     0x490b00 ; GetPersonPtr
+0059C48B  8b f0                          mov      esi, eax
+0059C48D  56                             push     esi
+0059C48E  e8 9d e1 ed ff                 call     0x47a630 ; IsLegalPtr
+0059C493  83 c4 04                       add      esp, 4
+0059C496  85 c0                          test     eax, eax
+0059C498  74 55                          je       0x59c4ef
+0059C49A  8a 86 28 01 00 00              mov      al, byte ptr [esi + 0x128]
+0059C4A0  3c 64                          cmp      al, 0x64
+0059C4A2  73 4b                          jae      0x59c4ef
+0059C4A4  8b 8e 5c 01 00 00              mov      ecx, dword ptr [esi + 0x15c]
+0059C4AA  0f b6 c0                       movzx    eax, al
+0059C4AD  83 c0 1e                       add      eax, 0x1e
+0059C4B0  49                             dec      ecx
+0059C4B1  74 2a                          je       0x59c4dd
+0059C4B3  49                             dec      ecx
+0059C4B4  74 1b                          je       0x59c4d1
+0059C4B6  49                             dec      ecx
+0059C4B7  74 0c                          je       0x59c4c5
+0059C4B9  83 f8 64                       cmp      eax, 0x64
+0059C4BC  7c 29                          jl       0x59c4e7
+0059C4BE  b8 64 00 00 00                 mov      eax, 0x64
+0059C4C3  eb 22                          jmp      0x59c4e7
+0059C4C5  83 f8 1e                       cmp      eax, 0x1e
+0059C4C8  7c 1d                          jl       0x59c4e7
+0059C4CA  b8 1e 00 00 00                 mov      eax, 0x1e
+0059C4CF  eb 16                          jmp      0x59c4e7
+0059C4D1  83 f8 32                       cmp      eax, 0x32
+0059C4D4  7c 11                          jl       0x59c4e7
+0059C4D6  b8 32 00 00 00                 mov      eax, 0x32
+0059C4DB  eb 0a                          jmp      0x59c4e7
+0059C4DD  83 f8 50                       cmp      eax, 0x50
+0059C4E0  7c 05                          jl       0x59c4e7
+0059C4E2  b8 50 00 00 00                 mov      eax, 0x50
+0059C4E7  50                             push     eax
+0059C4E8  8b ce                          mov      ecx, esi
+0059C4EA  e8 91 e3 ee ff                 call     0x48a880 ; sub_48a880
+0059C4EF  47                             inc      edi
+0059C4F0  81 ff 4c 04 00 00              cmp      edi, 0x44c
+0059C4F6  7c 88                          jl       0x59c480
+0059C4F8  8b cb                          mov      ecx, ebx
+0059C4FA  e8 51 c6 ff ff                 call     0x598b50 ; sub_598b50
+0059C4FF  8b cb                          mov      ecx, ebx
+0059C501  e8 1a c7 ff ff                 call     0x598c20 ; sub_598c20
+0059C506  8b cb                          mov      ecx, ebx
+0059C508  e8 93 fd ff ff                 call     0x59c2a0 ; sub_59c2a0
+0059C50D  8b cb                          mov      ecx, ebx
+0059C50F  e8 8c d5 ff ff                 call     0x599aa0 ; sub_599aa0
+0059C514  8b cb                          mov      ecx, ebx
+0059C516  e8 f5 d1 ff ff                 call     0x599710 ; sub_599710
+0059C51B  b9 58 19 20 07                 mov      ecx, 0x7201958
+0059C520  e8 5b 60 ee ff                 call     0x482580 ; sub_482580
+0059C525  83 f8 0c                       cmp      eax, 0xc
+0059C528  72 33                          jb       0x59c55d
+0059C52A  b9 58 19 20 07                 mov      ecx, 0x7201958
+0059C52F  e8 9c 64 ee ff                 call     0x4829d0 ; sub_4829d0
+0059C534  85 c0                          test     eax, eax
+0059C536  74 25                          je       0x59c55d
+0059C538  b9 58 19 20 07                 mov      ecx, 0x7201958
+0059C53D  e8 3e 61 ee ff                 call     0x482680 ; sub_482680
+0059C542  85 c0                          test     eax, eax
+0059C544  74 17                          je       0x59c55d
+0059C546  6a 15                          push     0x15
+0059C548  b9 80 3e c4 09                 mov      ecx, 0x9c43e80
+0059C54D  e8 ce 09 f1 ff                 call     0x4acf20 ; sub_4acf20
+0059C552  85 c0                          test     eax, eax
+0059C554  75 07                          jne      0x59c55d
+0059C556  8b cb                          mov      ecx, ebx
+0059C558  e8 d3 e8 ff ff                 call     0x59ae30 ; sub_59ae30
+0059C55D  8b cb                          mov      ecx, ebx
+0059C55F  e8 9c fd ff ff                 call     0x59c300 ; sub_59c300
+0059C564  5f                             pop      edi
+0059C565  5e                             pop      esi
+0059C566  5b                             pop      ebx
+0059C567  81 c4 e4 03 00 00              add      esp, 0x3e4
+0059C56D  c3                             ret      

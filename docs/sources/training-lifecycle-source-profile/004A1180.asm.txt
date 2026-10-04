@@ -1,0 +1,16 @@
+004A1180  a1 b4 19 20 07                 mov      eax, dword ptr [0x72019b4]
+004A1185  40                             inc      eax
+004A1186  85 c0                          test     eax, eax
+004A1188  7f 0e                          jg       0x4a1198
+004A118A  33 c0                          xor      eax, eax
+004A118C  50                             push     eax
+004A118D  b9 58 19 20 07                 mov      ecx, 0x7201958
+004A1192  e8 49 17 fe ff                 call     0x4828e0 ; ?ResetVersion@COleControl@@QAEXK@Z
+004A1197  c3                             ret      
+004A1198  3d ff ff ff 7f                 cmp      eax, 0x7fffffff
+004A119D  7c 05                          jl       0x4a11a4
+004A119F  b8 ff ff ff 7f                 mov      eax, 0x7fffffff
+004A11A4  50                             push     eax
+004A11A5  b9 58 19 20 07                 mov      ecx, 0x7201958
+004A11AA  e8 31 17 fe ff                 call     0x4828e0 ; ?ResetVersion@COleControl@@QAEXK@Z
+004A11AF  c3                             ret      

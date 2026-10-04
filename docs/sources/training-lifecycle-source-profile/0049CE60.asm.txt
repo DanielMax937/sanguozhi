@@ -1,0 +1,82 @@
+0049CE60  56                             push     esi
+0049CE61  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+0049CE65  56                             push     esi
+0049CE66  e8 c5 d7 fd ff                 call     0x47a630 ; IsLegalPtr
+0049CE6B  83 c4 04                       add      esp, 4
+0049CE6E  85 c0                          test     eax, eax
+0049CE70  0f 84 d2 00 00 00              je       0x49cf48
+0049CE76  6a 00                          push     0
+0049CE78  8b ce                          mov      ecx, esi
+0049CE7A  e8 e1 97 fe ff                 call     0x486660 ; sub_486660
+0049CE7F  85 c0                          test     eax, eax
+0049CE81  74 2d                          je       0x49ceb0
+0049CE83  56                             push     esi
+0049CE84  b9 58 19 20 07                 mov      ecx, 0x7201958
+0049CE89  e8 e2 48 ff ff                 call     0x491770 ; sub_491770
+0049CE8E  85 c0                          test     eax, eax
+0049CE90  7c 05                          jl       0x49ce97
+0049CE92  83 f8 29                       cmp      eax, 0x29
+0049CE95  7e 03                          jle      0x49ce9a
+0049CE97  83 c8 ff                       or       eax, 0xffffffff
+0049CE9A  50                             push     eax
+0049CE9B  b9 58 19 20 07                 mov      ecx, 0x7201958
+0049CEA0  e8 6b 3b ff ff                 call     0x490a10 ; GetCityPtr
+0049CEA5  8b c8                          mov      ecx, eax
+0049CEA7  e8 94 e5 fd ff                 call     0x47b440 ; sub_47b440
+0049CEAC  5e                             pop      esi
+0049CEAD  c2 04 00                       ret      4
+0049CEB0  6a 01                          push     1
+0049CEB2  8b ce                          mov      ecx, esi
+0049CEB4  e8 a7 97 fe ff                 call     0x486660 ; sub_486660
+0049CEB9  85 c0                          test     eax, eax
+0049CEBB  74 3f                          je       0x49cefc
+0049CEBD  56                             push     esi
+0049CEBE  b9 58 19 20 07                 mov      ecx, 0x7201958
+0049CEC3  e8 a8 48 ff ff                 call     0x491770 ; sub_491770
+0049CEC8  83 f8 2a                       cmp      eax, 0x2a
+0049CECB  7c 1a                          jl       0x49cee7
+0049CECD  83 f8 33                       cmp      eax, 0x33
+0049CED0  7f 15                          jg       0x49cee7
+0049CED2  83 c0 d6                       add      eax, -0x2a
+0049CED5  50                             push     eax
+0049CED6  b9 58 19 20 07                 mov      ecx, 0x7201958
+0049CEDB  e8 60 3b ff ff                 call     0x490a40 ; sub_490a40
+0049CEE0  8b 40 68                       mov      eax, dword ptr [eax + 0x68]
+0049CEE3  5e                             pop      esi
+0049CEE4  c2 04 00                       ret      4
+0049CEE7  83 c8 ff                       or       eax, 0xffffffff
+0049CEEA  50                             push     eax
+0049CEEB  b9 58 19 20 07                 mov      ecx, 0x7201958
+0049CEF0  e8 4b 3b ff ff                 call     0x490a40 ; sub_490a40
+0049CEF5  8b 40 68                       mov      eax, dword ptr [eax + 0x68]
+0049CEF8  5e                             pop      esi
+0049CEF9  c2 04 00                       ret      4
+0049CEFC  6a 02                          push     2
+0049CEFE  8b ce                          mov      ecx, esi
+0049CF00  e8 5b 97 fe ff                 call     0x486660 ; sub_486660
+0049CF05  85 c0                          test     eax, eax
+0049CF07  74 3f                          je       0x49cf48
+0049CF09  56                             push     esi
+0049CF0A  b9 58 19 20 07                 mov      ecx, 0x7201958
+0049CF0F  e8 5c 48 ff ff                 call     0x491770 ; sub_491770
+0049CF14  83 f8 34                       cmp      eax, 0x34
+0049CF17  7c 1a                          jl       0x49cf33
+0049CF19  83 f8 56                       cmp      eax, 0x56
+0049CF1C  7f 15                          jg       0x49cf33
+0049CF1E  83 c0 cc                       add      eax, -0x34
+0049CF21  50                             push     eax
+0049CF22  b9 58 19 20 07                 mov      ecx, 0x7201958
+0049CF27  e8 44 3b ff ff                 call     0x490a70 ; sub_490a70
+0049CF2C  8b 40 68                       mov      eax, dword ptr [eax + 0x68]
+0049CF2F  5e                             pop      esi
+0049CF30  c2 04 00                       ret      4
+0049CF33  83 c8 ff                       or       eax, 0xffffffff
+0049CF36  50                             push     eax
+0049CF37  b9 58 19 20 07                 mov      ecx, 0x7201958
+0049CF3C  e8 2f 3b ff ff                 call     0x490a70 ; sub_490a70
+0049CF41  8b 40 68                       mov      eax, dword ptr [eax + 0x68]
+0049CF44  5e                             pop      esi
+0049CF45  c2 04 00                       ret      4
+0049CF48  33 c0                          xor      eax, eax
+0049CF4A  5e                             pop      esi
+0049CF4B  c2 04 00                       ret      4

@@ -1,11 +1,16 @@
 import { createInterface } from 'node:readline/promises';
 import { readFile, writeFile } from 'node:fs/promises';
 import { stdin, stdout } from 'node:process';
-import { createSession, dispatch, evidenceSummary, inspectState, loadGame, previewCommand, replaySession, saveGame, syntheticScenario } from '../../packages/engine/src/index.ts';
+import { createSession, derivedWar, dispatch, evidenceSummary, inspectState, loadGame, previewCommand, replaySession, saveGame, syntheticScenario } from '../../packages/engine/src/index.ts';
 
-let session = createSession(syntheticScenario());
-const help = `PK训练沙盒（虚构短场景，未实现完整游戏）
-目标：演练城气力40→100，通常需要3次训练；达到WAR XP100的操作会被拒绝
+const initial = syntheticScenario();
+if (process.argv.includes('--growth-fixture')) {
+  initial.officers.forEach(p => { p.warXp=98; p.war=derivedWar(p.warBase,p.warXp,initial.ruleset.progressionConfig); });
+}
+let session = createSession(initial);
+const help = `PK训练沙盒（虚构场景，未实现完整游戏）
+目标：演练城气力40→100；累计WAR XP每100提供+1，最多3000，能力封顶100
+使用 --growth-fixture 从XP98演示成长；满气力会拒绝训练但仍可推进旬
 train o1,o2,o3 [baseId]   执行训练（默认city1）
 preview o1,o2,o3 [baseId] 同路径预览（不消耗AP/随机）
 end                      下一旬：只恢复AP、重置行动/训练标记、推进日期

@@ -495,32 +495,26 @@ P0-6 专项见 [41-nonnatural-loyalty-exactness.md](41-nonnatural-loyalty-exactn
 - x87中间 extended precision / 原常量 bit pattern 极端边界；
 - Vanilla / PS2 / Wii等价性。
 
-### 6.6 训练 / 气力剩余边界（P0-11）
+### 6.6 训练生命周期剩余边界（P0-11 / P0-47）
 
-专项见 [46-training-morale-exactness.md](46-training-morale-exactness.md)。
+旧轮次见[46号](46-training-morale-exactness.md)与[69号](69-training-reset-scheduler-boundary.md)；当前source结果以[82号](82-training-lifecycle-source-profile.md)为准。
 
-已确认 / 收紧：
+S1固定fingerprint已恢复：
 
-- `005C4100` 是训练的**据点级 eligibility gate**，函数边界 `005C4100..005C421F`；
-- `005C4220` 执行训练先调用 `005C4100(SP)`，随后才由 `005B8320` 校验命令参数；
-- 官方手册明确训练“每回合只能执行一次”，20AP、最多3人；
-- 城市 `CityActions.bit4`、港关 `+0x68` 为已训练状态；
-- 执行时 `004AD080(SP,1)` 置位；
-- 下一回合恢复可训练的 reset cadence 已闭合，但置0的 exact caller 仍open；
-- `00599CF0` 的公开 body 可排除为该 reset caller；
-- 军乐台/奏乐/诗想的 local handler 已定位到 `0059A230`；
-- 军乐台+10、奏乐+5、诗想在军乐台额外+10；
-- 奏乐不与军乐台叠加，诗想+军乐台合计20；
-- 气力仍受100/120上限。
+- `005C4100`完整base gate、`005B8320`三槽参数helper、`005B80F0`身份/部队/acted/missionDuration过滤
+- 零兵力、已训练、满气力拒绝；AP/至少一位合格者的上层校验
+- `0059C423→00598630`全局reset，经`00487860`非连续tails清城市+A4、港关+68，再遍历1100人清acted/praised
+- `0059C330→0059C2A0`尾跳`0059A230`野外气力caller；后续任务处理可能重新置acted
+- 累计XP0..3000、floor(XP/100)派生能力、普通1..100cap，PK研究共享XP额度
+- 360天游戏年/30天月/每旬10天的整数日期getter
 
-仍 open：
+新字节只属于MOD关联S1来源；另一个S2 MOD样本确有不同XP/能力上限，所以不能直接写stock confirmed。带配置/测试/trace的训练生命周期兼容实现已接入，implementation gap与以下原作证据债分开：
 
-- `005C4100` 完整 body；
-- `005B8320` 训练参数验证细节；
-- training reset exact caller/xref；
-- `0059A230` 完整 body/签名；
-- `0059A230` top-level scheduler xref；
-- Vanilla/主机版差异。
+- clean stock PC-PK1.1独立hash与上述字节/完整调用链等价
+- 完整scheduler、AP恢复位置、经济/AI/事件/任务交错与全局RNG
+- 所有任务/位置predicate与完整人员属性修正、特殊人员ID语义
+- `0059A230`全body与多个军乐台selector全部细节
+- stock EXE/存档回归，Vanilla/PS2/Wii独立验证
 
 ### 6.7 阵系耗粮重叠 / 粮尽逃兵（P0-12）
 

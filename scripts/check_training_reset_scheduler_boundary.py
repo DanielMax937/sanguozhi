@@ -20,7 +20,7 @@ def main():
     assert x["addressAdjacencyIsNotXrefEvidence"] is True
     assert x["function00599CF0IsTrainingResetCaller"] is False
 
-    print("PASS: P0-34 preserves exact behavior while keeping reset/scheduler xrefs open.")
+    print("PASS: historical P0-34 boundary preserved; P0-47 separately recovers S1 reset/field-morale xrefs, stock/full scheduler still open.")
 
 if __name__ == "__main__":
     main()

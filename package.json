@@ -1,16 +1,23 @@
 {
   "name": "san11-training-sandbox",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "workspaces": ["packages/engine"],
-  "engines": { "node": ">=24.0.0 <25" },
+  "workspaces": [
+    "packages/engine"
+  ],
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "node --test packages/engine/test/*.test.mjs",
     "check": "npm run typecheck && npm test",
     "demo": "node apps/text/demo.mjs",
-    "play": "node apps/text/play.mjs"
+    "play": "node apps/text/play.mjs",
+    "demo:lifecycle": "node apps/text/lifecycle-demo.mjs"
   },
-  "devDependencies": { "typescript": "7.0.2" }
+  "devDependencies": {
+    "typescript": "7.0.2"
+  }
 }
