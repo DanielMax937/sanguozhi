@@ -1283,3 +1283,8 @@ AI势力强度还存在君主ID硬编码 bonus，因此不能用一张现代通�
 - 单挑方针/必杀核心数值
 - 舌战手牌与再考
 - PK人才府技巧研究固定-20日
+
+
+### P0-59 event8/14监听缺口收窄
+
+见[94-mission-event-listeners.md](94-mission-event-listeners.md)。004A8110/005B9D30的注册、copied-active顺序、live executing/mission、predicate与23/24 handler入口gate现已恢复并有独立有界模型。event8可取消mission23，event14可取消mission24；004BA1D0自身no-op不证明全事件无效果。成功tail采用source/stage/完整观察域before→after替换或原子reject，不要求callbacks非干预。原生完整presentation/return/递归事件、004EC870后置observer、新版本role/return组合和其他event ID仍open；clean stock/Vanilla/全局RNG/真实存档不因此关闭。

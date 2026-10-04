@@ -1,14 +1,24 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-58 stable nonempty legion and refresh=0 governor role reconciliation
-> Integration baseline: PR #15 merged; this theme starts at `6d62e86caddd50887b4d4792cb1918526e980722`
+> Current integration: P0-59 bounded event8/14 mission listeners and explicit mutable-tail observations
+> Integration baseline: PR #16 merged; this theme starts at `de7f0218eefe528687b82c9659feeee1de77b8a3`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: event8/14 mission listeners
+
+- P0-59: separate004A8110→005B9D30 API; copied active-node order/duplicates and live executing/mission reads
+- All44 registry slots and predicate/handler pairs recovered; onlymission23/event8 andmission24/event14 may invoke handlers
+- Exact subject type/validity/ID/rawkind and independently rechecked actor/current-building/target-CITY-or-building gates
+- Handler return0 still dispatcher1; successful tails require source/event/stage/saved-pointer/full-frame observations or atomic rejection, never implicit noninterference
+- Observed tails may mutate mission/active list/executing/data/RNG; old APIs and trace contracts remain intact
+- Guide: `docs/rules/94-mission-event-listeners.md`; run both mission-event-listener checkers
+- Next: close presentation/active-list/acted/return tails and post-event observer, then versioned return/role/event composition; stock/Vanilla/force/empty-corps remain open
 
 ### Completed bounded implementation: stable legion/governor roles
 
@@ -18,7 +28,7 @@
 - Capacity/mission observations and listeners have stage snapshots and explicit noninterference/record/reject; no advisor mutation is invented
 - Extinction, empty-corps redistribution, refresh!=0 and unsafe mixed-validity sort domains defer atomically; old APIs/traces remain intact
 - Guide: `docs/rules/93-legion-role-reconciliation.md`; run both legion-role checkers
-- Next: recover004A8110→005B9D30 event8/14 listener effects before composing full return roles; force/empty corps, clean stock and Vanilla remain open
+- P0-59 separately recovers event8/14 dispatch/predicates/handler gates; successful tails remain explicit mutable observations or rejection, and full return/force/empty corps/stock remain open
 
 ### Completed bounded implementation: officer return scalar/call order
 
@@ -140,6 +150,8 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-59 audit complete: event8/14 registration, live dispatch, native predicate/gate semantics and explicit stage-bound mutable-tail observation contract
+
 - P0-58 audit complete: stable nonempty legion and governor scalar roles, distinct rankings, exact transient/status/event ordering and explicit unsafe-path deferral
 - P0-57 audit complete: officer-return scalar fields, exact roster/callback order, real troop and numeric affiliation gates, atomic ruler defer
 - P0-56 audit complete: mission37 completion, single active member advance, refund order, live eligibility and source-separated geometry
@@ -197,7 +209,7 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop and P0-57 separate return-home scalar/list-order projection; P0-58 adds separate stable nonempty `004BE2A0` and refresh=0 governor scalar coordination; next recover event8/14 mission-listener effects and continue base destruction, full `004BF6F0` return-home role/callback effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
+- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop and P0-57 separate return-home scalar/list-order projection; P0-58 adds separate stable nonempty `004BE2A0` and refresh=0 governor scalar coordination; P0-59 adds event8/14 registration/dispatch/predicates/handler gates; next close their successful presentation/return tails and post-event observer before versioned composition, then continue base destruction, full `004BF6F0` return-home role/callback effects, other `004A8110→005B9D30` event IDs, full force extinction and `004B03D0` AI disposition callees
 - Complete remaining base destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open
