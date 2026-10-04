@@ -360,41 +360,13 @@ for (const equipment of all12EquipmentSlots) {
 - https://www.gamersky.com/handbook/200703/57518.shtml
 - https://3g.ali213.net/gl/html/6354.html
 
-### 7.4 内政设施保留数
+### 7.4 内政设施保留：来源算法与版本边界
 
-`[COMMON][empirical-high]`
+当前规则见 [P0-46 capture selector来源审计](81-capture-selector-source-profile.md)。公开IDB的 `004B2CA0` 内已恢复city-only候选/selector，但输入路径含“血色5.0公测”；`opcode-exact`仅限定source profile，stock PC-PK1.1复用为 `compatibility-reconstruction`，Vanilla另为 `compatibility-assumption`，主机版独立open。
 
-攻陷部队主将魅力决定陷落后最多保留的内政设施数量：
+来源普通候选是同城市、已完成、非type30内政设施，按全局链表序取前30个；未完成另先销毁，完成铜雀台绕过quota。`keep=min(n,floor(max(20,charmByte)/20))`，无硬性5上限；全范围交换n次后销毁前缀、保留后缀，n>1即使全保留也消费n次RNG。新势力ID超0..41在shuffle后改全毁，不能直接解释为处断君主条件。
 
-- 魅力 ≥100：5
-- 80–99：4
-- 60–79：3
-- 40–59：2
-- ≤39：1
-
-日文 Wiki 明确给出这五档；旧 2ch 讨论也确认魅力100时上限为5，而且玩家不能选择具体保留哪座。
-
-当前**尚未找到“从现有设施集合中具体抽哪几座”的原版 RNG/排序函数**。
-
-引擎 fallback：
-
-```ts
-keepCount = min(existingFacilities.length,
-  charisma >= 100 ? 5 :
-  charisma >= 80  ? 4 :
-  charisma >= 60  ? 3 :
-  charisma >= 40  ? 2 : 1
-)
-
-retainedFacilities =
-  seededSampleWithoutReplacement(existingFacilities, keepCount)
-```
-
-这里必须用可回放 seed；以后若逆出原作选择算法，只替换 `seededSampleWithoutReplacement()`。
-
-来源：
-- https://w.atwiki.jp/sangokushi11/pages/1598.html
-- https://w.atwiki.jp/sangokushi11/pages/2469.html
+[Wiki魅力分档](https://w.atwiki.jp/sangokushi11/pages/1598.html) 保留为未标build的城市攻略观察；[旧讨论](https://w.atwiki.jp/sangokushi11/pages/2469.html) 不足证明均匀分布。旧均匀seeded sample仅是历史工程fallback，不是新source算法。完整候选/事务引擎、stock字节与Vanilla/PS2/Wii等价性仍需验证。
 
 ### 7.5 攻城 golden tests
 
