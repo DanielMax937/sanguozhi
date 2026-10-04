@@ -1,12 +1,24 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
-> Branch: `rules-audit-capture-selector-p0-46`
-> PR: new follow-up PR from current main; #2 is merged history
-> Base main: `5c5611bb067c0dfe13cea1126ad69a12dade697c`
+> Working policy: one fresh theme branch from the latest GitHub `main`
+> Current integration: P0-46 capture-source research and PK training slice
+> Integration baseline: PR #3 merged at `50dda2faaee55eef4c378ddb1dd4fcb0094e40b9`; PR #4 updated from that main
+> History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
+> Publication: open a new draft PR for each theme; no automatic merge
 > Primary target: PC-PK1.1
-> Updated: 2026-10-03 UTC
+> Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Bounded implementation: PK training kernel
+
+- Added a `pk-training-slice-v1` TypeScript kernel and short synthetic text sandbox, initially derived independently from main after PR #2
+- Implemented Train, bounded EndTurn, preview/inspect, serializable state/evidence, save and deterministic replay
+- New normalized constants preserve fixed-main provenance; open gates, scheduler and omitted presentation RNG stay explicit
+- Vanilla is unsupported in this slice; XP-to-stat growth is rejected at the boundary
+- Guide: `docs/engine/pk-training-slice.md`; run `npm run check` and `npm run demo`
+- This is an implementation slice, not a complete game or a closure of P0-46
+- Follow-on prerequisites: recover/adapter-test gate bodies, full scheduler and XP growth before extending simulation length or commands
 
 Main audit is complete:
 
@@ -61,9 +73,10 @@ Current record: `docs/rules/81-capture-selector-source-profile.md` and
 ### Independent baseline validation debt
 
 `python scripts/check_techniques.py` fails on current main at line 55 with a
-literal `\n` in source causing `SyntaxError`. Baseline: 62 of 63 `check_*.py`
-scripts pass. This pre-existing technique issue is outside P0-46 and remains
-unfixed; track it separately rather than hiding it behind the new selector test.
+literal `\n` in source causing `SyntaxError`. Original PR #2 baseline: 62 of 63
+`check_*.py` scripts pass. After integrating P0-46 and the training slice,
+64 of 65 pass with the same failure. This pre-existing technique issue remains
+unfixed; track it separately rather than hiding it behind the new tests.
 
 ### After P0-46
 
@@ -329,7 +342,9 @@ Do not merge platform/version behavior without evidence.
 
 ---
 
-## 7. Working procedure for each new P0 item
+## 7. Working procedure for each new theme / P0 item
+
+Before editing, verify the latest GitHub `main` commit and create a fresh theme branch from it. Read `TODO.md`, `STATUS.md`, the rule index, `13-open-exactness.md` and `16-unresolved-rules-fallbacks.md`. Do not use another unmerged PR as the baseline. Keep implementation slices separate from unresolved research closure.
 
 1. Read live `docs/rules/STATUS.md`.
 2. Read the existing related rule/evidence files.
@@ -353,10 +368,9 @@ Do not merge platform/version behavior without evidence.
 8. Update:
    - `docs/rules/STATUS.md`
    - `docs/rules/README.md`
-   - the new follow-up PR body.
-9. Start new work from current main in a new branch. PR #2 and its old branch
-   are historical; do not resume or push to them.
-10. Do not merge the new PR unless explicitly requested.
+   - the new theme PR body, including test results, evidence boundaries and any parallel-PR index conflicts.
+9. Open a new draft PR for this theme. PR #2 is merged history, not the current work target.
+10. Do not merge or enable auto-merge on any PR without explicit user authorization.
 
 ---
 

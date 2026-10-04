@@ -1,6 +1,12 @@
 # 规则审计当前状态
 
-更新：2026-10-03 UTC。
+更新：2026-10-04 UTC。
+
+## 新增可运行切片：PK训练内核（不是完整游戏）
+
+[切片指南](../engine/pk-training-slice.md) · [归一化运行规则](../sources/pk-training-runtime.json)。
+
+训练切片最初独立基于main `5c5611bb067c0dfe13cea1126ad69a12dade697c` 开发，现已同步PR #3合并后的main `50dda2faaee55eef4c378ddb1dd4fcb0094e40b9`，并保留P0-46研究与训练切片两个入口。新增Train、有限EndTurn、纯文本短目标、preview、存档/重放和逐命令证据。原资格gate/完整scheduler仍open；原训练表现层的发言武将RNG被明示省略，不声称整条原命令随机流一致。Vanilla不静默继承PK；XP达到100的未实现成长路径会原子拒绝。该训练实现不依赖P0-46的capture selector模型，不改变下列P0研究状态。
 
 ## A1–E20 主审计已完成；正在清理 exactness gaps
 
@@ -26,4 +32,4 @@ A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完
 
 下一步：clean stock build 对照、剩余 caller/cause 与 finalizer、全局 RNG/存档验证；按可定位缺口推进，不预设固定 P0 终点。P0-44/45保留为历史证据，当前 selector 结论以P0-46的限定范围为准。
 
-独立基线缺陷：当前main的 `scripts/check_techniques.py:55` 因字面 `\n` 报 `SyntaxError`；既有63项校验中62项通过。本主题不修改该技巧脚本。
+独立基线缺陷：当前main的 `scripts/check_techniques.py:55` 因字面 `\n` 报 `SyntaxError`；PR #2原基线为63项校验中62项通过；本次组合后65项中64项通过，仍只有这一既有失败。本次整合不修改该技巧脚本。
