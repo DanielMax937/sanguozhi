@@ -1,14 +1,23 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-60 notification gates, active-list/acted ordering and bounded zero-refund return tails
-> Integration baseline: PR #17 merged; this theme starts at `4140af9c71fba30c1a883dcf142ab494025f6472`
+> Current integration: P0-61 atomic event8/14 dispatcher, shared handler/tail frame and post-event observer
+> Integration baseline: PR #18 merged; this theme starts at `1e5862e045c9aec3db14540c2bd8decc565a321b`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: atomic event8/14 and handler/tail composition
+
+- P0-61: one shared canonical live frame and one atomic commit across004BBAA0→004A8110→dispatcher→real handler/tail primitives→004BA1D0→fresh post-event observer
+- Preserves copied node order/duplicates, live executing/mission/subject reads and captured dispatcher mission; no old project/trace concatenation
+- Versioned adapters share live reads; source/stage/callStack binds native saved event/current/target/raw44/home/distance independently of callback mutations
+- Presentation, S2 effect-query, nonnull observers and full004BF6F0 require mutable observations or atomic reject; no implicit noninterference
+- Guide: `docs/rules/96-mission-event-composition.md`; run both mission-event-composition checkers
+- Next: integrate full return/list/roles with native event recursion in a new version; force/empty-corps/stock/Vanilla remain open
 
 ### Completed bounded implementation: notification and zero-refund return tails
 
@@ -221,7 +230,7 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop and P0-57 separate return-home scalar/list-order projection; P0-58 adds separate stable nonempty `004BE2A0` and refresh=0 governor scalar coordination; P0-59 adds event8/14 registration/dispatch/predicates/handler gates; P0-60 closes canonical notification and active-list/acted/return-tail writes with mutable presentation/observer/full-return boundaries; next compose versioned return/role/event APIs and the post-event observer, then continue base destruction, full `004BF6F0` return-home role/callback effects, other `004A8110→005B9D30` event IDs, full force extinction and `004B03D0` AI disposition callees
+- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop and P0-57 separate return-home scalar/list-order projection; P0-58 adds separate stable nonempty `004BE2A0` and refresh=0 governor scalar coordination; P0-59 adds event8/14 registration/dispatch/predicates/handler gates; P0-60 closes canonical notification and active-list/acted/return-tail writes with mutable presentation/observer/full-return boundaries; P0-61 now composes the event8/14 wrapper/dispatcher/known tail/post-event observer in one live-frame transaction; next compose full return/list/role native stages and recursive events, then continue base destruction, full `004BF6F0` return-home role/callback effects, other `004A8110→005B9D30` event IDs, full force extinction and `004B03D0` AI disposition callees
 - Complete remaining base destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open

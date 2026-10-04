@@ -1293,3 +1293,8 @@ AI势力强度还存在君主ID硬编码 bonus，因此不能用一张现代通�
 ### P0-60通知/active-list/acted尾缺口收窄
 
 见[95-mission-notification-tail.md](95-mission-notification-tail.md)。canonical005B81D0、两个handler入口/saved pointers及005B8400(actor,0)已知写序有独立模型；acted后manager dirty与可变observer先于live list append/duration，S2 query267仅wrapper路径。presentation、fullreturn、nonnull observer、patched query267保留精确stage可变观察或reject，不声称完整native闭包。下一步版本化return/role/event与004BBAA0后置observer组合；full force/empty legion/base destruction/stock/Vanilla仍open。
+
+
+### P0-61单事务event8/14与已知handler/tail组合
+
+[96-mission-event-composition.md](96-mission-event-composition.md)使用严格共享canonical frame、直接primitive adapters与单次原子提交，顺序执行004BBAA0→004A8110/predicate/handler/notification/return-tail→004BA1D0(8/14无操作)→fresh004EC870/非空observer。callStack绑定source/event/复制列表/visit/captured mission及saved current/target/raw44/home/distance；所有未知效果仍明确可变观察或整次reject，不默认非干预。旧API/trace不变；完整004BF6F0/list/role递归、empty-corps/force灭亡、base销毁、其他event IDs、stock/Vanilla与全局RNG继续open。

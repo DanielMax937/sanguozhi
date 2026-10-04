@@ -7,6 +7,8 @@
 
 ## 最新审计入口
 
+新增[P0-61共享frame单事务event8/14组合](96-mission-event-composition.md)：dispatcher直接调用已知handler/notification/return-tail primitives，保留copied/live/native saved locals，再执行004BA1D0空分支与fresh post-event observer。全部unknown边界可变观察或原子拒绝，旧API不变；完整return/list/role仍next。`python scripts/check_mission_event_composition_source.py`、`python scripts/check_mission_event_composition_profile.py`。
+
 新增[P0-60通知门与零退款return尾](95-mission-notification-tail.md)：canonical通知资格、saved-pointer presentation、acted/dirty/可变observer/active尾追加/期间写序及S2 mutable query267。旧API不变，完整return/role/event待新版本组合。`python scripts/check_mission_notification_tail_source.py`、`python scripts/check_mission_notification_tail_profile.py`。
 
 新增[P0-59 event8/14任务监听](94-mission-event-listeners.md)：44slot注册、live列表/任务分派、23/8与24/14 predicate及handler gate；成功tail用完整阶段观察或原子拒绝，绝不默认非干预。完整return/角色/后置observer仍open。`python scripts/check_mission_event_listener_source.py`与`python scripts/check_mission_event_listener_profile.py`。

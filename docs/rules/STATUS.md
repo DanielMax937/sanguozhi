@@ -2,7 +2,15 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-60通知门与active-list/acted/零退款return尾
+## 最新完成：P0-61共享live frame的event8/14单事务组合
+
+[正文](96-mission-event-composition.md) · [结构化证据](../sources/mission-event-composition.json)。基线main `1e5862e045c9aec3db14540c2bd8decc565a321b`（PR #18已合）。
+
+一个共享canonical frame、一个boundary流与一次revision提交执行004BBAA0→004A8110→真实predicate/handler/notification/return-tail primitive→004BA1D0(8/14空分支)→fresh004EC870/nonnull observer。保留复制节点/重复、live mission/executing/subject和native saved current/target/raw44/home/distance；不拼旧project/非干预trace。所有unknown effect仍以source/精确callStack/full before→after/RNG观察或原子reject处理，完整return/list/roles待后续版本。
+
+13项source检查通过；完整S1/S2 IDB指纹与独立stdlib raw-ID1读取425范围、29,809 selected range bytes已复核（S1 212/S2 213；208共同相同、4不同、1 S2专有）。38项模型测试通过，含768组独立evolving-frame/callStack/visit oracle与JSON重放。完整92命令回归零失败：TypeScript、85 Node、89 Python checker与2 demos。最终38项模型测试另行复跑通过；独立审阅通过：冻结13文件/index无漂移，13 source与完整双IDB 425范围/29,809bytes另行raw-ID1重核，关键wrapper/listener/return-zero/away setter/S2 hook再由raw/objdump核序；38 model/768 oracle与完整92命令独立重跑全过，额外42条分支/观察篡改测试通过，无待修阻断。发布前仅补本结论，合并后main仍须全测。S1/S2来源独立、均MOD关联；clean stock/Vanilla/force灭亡/空军团/完整递归return与角色/真实存档/全局RNG继续open。
+
+## 历史完成：P0-60通知门与active-list/acted/零退款return尾
 
 [正文](95-mission-notification-tail.md) · [结构化证据](../sources/mission-notification-tail.json)。基线main `4140af9c71fba30c1a883dcf142ab494025f6472`（PR #17已合）。
 
