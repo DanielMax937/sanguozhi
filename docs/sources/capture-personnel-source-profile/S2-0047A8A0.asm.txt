@@ -1,0 +1,12 @@
+0047A8A0  8b 54 24 04                    mov      edx, dword ptr [esp + 4]
+0047A8A4  8b 01                          mov      eax, dword ptr [ecx]
+0047A8A6  52                             push     edx
+0047A8A7  ff 50 5c                       call     dword ptr [eax + 0x5c]
+0047A8AA  85 c0                          test     eax, eax
+0047A8AC  7c 0f                          jl       0x47a8bd
+0047A8AE  3d 4b 04 00 00                 cmp      eax, 0x44b
+0047A8B3  7f 08                          jg       0x47a8bd
+0047A8B5  b8 01 00 00 00                 mov      eax, 1
+0047A8BA  c2 04 00                       ret      4
+0047A8BD  33 c0                          xor      eax, eax
+0047A8BF  c2 04 00                       ret      4

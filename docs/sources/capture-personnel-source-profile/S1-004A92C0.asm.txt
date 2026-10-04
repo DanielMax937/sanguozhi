@@ -1,0 +1,71 @@
+004A92C0  6a ff                          push     -1
+004A92C2  68 58 f5 72 00                 push     0x72f558
+004A92C7  64 a1 00 00 00 00              mov      eax, dword ptr fs:[0]
+004A92CD  50                             push     eax
+004A92CE  64 89 25 00 00 00 00           mov      dword ptr fs:[0], esp
+004A92D5  83 ec 20                       sub      esp, 0x20
+004A92D8  8b 44 24 34                    mov      eax, dword ptr [esp + 0x34]
+004A92DC  53                             push     ebx
+004A92DD  56                             push     esi
+004A92DE  57                             push     edi
+004A92DF  50                             push     eax
+004A92E0  b9 58 19 20 07                 mov      ecx, 0x7201958
+004A92E5  33 ff                          xor      edi, edi
+004A92E7  33 db                          xor      ebx, ebx
+004A92E9  e8 22 80 fe ff                 call     0x491310
+004A92EE  8b f0                          mov      esi, eax
+004A92F0  89 7c 24 18                    mov      dword ptr [esp + 0x18], edi
+004A92F4  89 7c 24 1c                    mov      dword ptr [esp + 0x1c], edi
+004A92F8  89 7c 24 14                    mov      dword ptr [esp + 0x14], edi
+004A92FC  89 7c 24 10                    mov      dword ptr [esp + 0x10], edi
+004A9300  89 7c 24 20                    mov      dword ptr [esp + 0x20], edi
+004A9304  c7 44 24 24 0a 00 00 00        mov      dword ptr [esp + 0x24], 0xa
+004A930C  89 7c 24 28                    mov      dword ptr [esp + 0x28], edi
+004A9310  c7 44 24 0c f4 aa 75 00        mov      dword ptr [esp + 0xc], 0x75aaf4
+004A9318  8b 4c 24 3c                    mov      ecx, dword ptr [esp + 0x3c]
+004A931C  51                             push     ecx
+004A931D  8d 54 24 10                    lea      edx, [esp + 0x10]
+004A9321  52                             push     edx
+004A9322  b9 08 98 99 07                 mov      ecx, 0x7999808
+004A9327  89 7c 24 3c                    mov      dword ptr [esp + 0x3c], edi
+004A932B  e8 10 4c 02 00                 call     0x4cdf40
+004A9330  8b 44 24 10                    mov      eax, dword ptr [esp + 0x10]
+004A9334  3b c7                          cmp      eax, edi
+004A9336  89 44 24 40                    mov      dword ptr [esp + 0x40], eax
+004A933A  74 49                          je       0x4a9385
+004A933C  8d 64 24 00                    lea      esp, [esp]
+004A9340  8d 44 24 40                    lea      eax, [esp + 0x40]
+004A9344  50                             push     eax
+004A9345  8d 4c 24 10                    lea      ecx, [esp + 0x10]
+004A9349  e8 f2 20 f6 ff                 call     0x40b440
+004A934E  8b 08                          mov      ecx, dword ptr [eax]
+004A9350  8b 41 38                       mov      eax, dword ptr [ecx + 0x38]
+004A9353  83 f8 07                       cmp      eax, 7
+004A9356  74 05                          je       0x4a935d
+004A9358  83 f8 06                       cmp      eax, 6
+004A935B  75 22                          jne      0x4a937f
+004A935D  3b f7                          cmp      esi, edi
+004A935F  7c 12                          jl       0x4a9373
+004A9361  81 fe 4b 04 00 00              cmp      esi, 0x44b
+004A9367  7f 0a                          jg       0x4a9373
+004A9369  6a ff                          push     -1
+004A936B  56                             push     esi
+004A936C  e8 6f ba fd ff                 call     0x484de0
+004A9371  eb 0b                          jmp      0x4a937e
+004A9373  51                             push     ecx
+004A9374  b9 5c 89 99 07                 mov      ecx, 0x799895c
+004A9379  e8 82 7b ff ff                 call     0x4a0f00
+004A937E  43                             inc      ebx
+004A937F  39 7c 24 40                    cmp      dword ptr [esp + 0x40], edi
+004A9383  75 bb                          jne      0x4a9340
+004A9385  8d 4c 24 0c                    lea      ecx, [esp + 0xc]
+004A9389  c7 44 24 34 ff ff ff ff        mov      dword ptr [esp + 0x34], 0xffffffff
+004A9391  e8 fa 3b f6 ff                 call     0x40cf90
+004A9396  8b 4c 24 2c                    mov      ecx, dword ptr [esp + 0x2c]
+004A939A  5f                             pop      edi
+004A939B  5e                             pop      esi
+004A939C  8b c3                          mov      eax, ebx
+004A939E  5b                             pop      ebx
+004A939F  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+004A93A6  83 c4 2c                       add      esp, 0x2c
+004A93A9  c2 08 00                       ret      8

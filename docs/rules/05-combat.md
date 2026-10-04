@@ -540,6 +540,8 @@ initialCount = base + (critical ? 1 : 0)
 
 ## 10. 击破后的武将：俘虏率
 
+> 2026-10-04来源校正：下列是历史社区简化式，不能作为S1/stock精确runtime公式。当前[P0-49](84-capture-personnel-source-profile.md)恢复了binary32(0.01)、先整数除3、nearby=0特殊缩放、超级仅玩家攻击AI方向、末城优先于免疫以及source-bound随机消费；据点与野战caller继续分开。下面70%样例属于历史实测/简化口径，不能覆盖新source模型的离散取整。
+
 `[PC-PK中心][empirical-high]`
 
 在先处理血路、强运、名马等“不能被俘/可脱出”条件后，普通野战击破的捕获率可按逆向公式：

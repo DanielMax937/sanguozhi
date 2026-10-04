@@ -1,0 +1,71 @@
+004AF670  6a ff                          push     -1
+004AF672  68 18 f7 72 00                 push     0x72f718
+004AF677  64 a1 00 00 00 00              mov      eax, dword ptr fs:[0]
+004AF67D  50                             push     eax
+004AF67E  64 89 25 00 00 00 00           mov      dword ptr fs:[0], esp
+004AF685  51                             push     ecx
+004AF686  56                             push     esi
+004AF687  57                             push     edi
+004AF688  68 68 78 ee 06                 push     0x6ee7868
+004AF68D  8b f9                          mov      edi, ecx
+004AF68F  ff 15 60 e3 74 00              call     dword ptr [0x74e360]
+004AF695  8b 74 24 20                    mov      esi, dword ptr [esp + 0x20]
+004AF699  85 f6                          test     esi, esi
+004AF69B  c7 44 24 14 00 00 00 00        mov      dword ptr [esp + 0x14], 0
+004AF6A3  75 05                          jne      0x4af6aa
+004AF6A5  8b 77 04                       mov      esi, dword ptr [edi + 4]
+004AF6A8  eb 13                          jmp      0x4af6bd
+004AF6AA  6a 01                          push     1
+004AF6AC  6a 0c                          push     0xc
+004AF6AE  56                             push     esi
+004AF6AF  e8 bc 29 fc ff                 call     0x472070
+004AF6B4  83 c4 0c                       add      esp, 0xc
+004AF6B7  85 c0                          test     eax, eax
+004AF6B9  74 46                          je       0x4af701
+004AF6BB  8b 36                          mov      esi, dword ptr [esi]
+004AF6BD  85 f6                          test     esi, esi
+004AF6BF  74 40                          je       0x4af701
+004AF6C1  6a 00                          push     0
+004AF6C3  8d 7e 08                       lea      edi, [esi + 8]
+004AF6C6  6a 04                          push     4
+004AF6C8  57                             push     edi
+004AF6C9  e8 a2 29 fc ff                 call     0x472070
+004AF6CE  83 c4 0c                       add      esp, 0xc
+004AF6D1  85 c0                          test     eax, eax
+004AF6D3  74 26                          je       0x4af6fb
+004AF6D5  6a 00                          push     0
+004AF6D7  8d 44 24 20                    lea      eax, [esp + 0x20]
+004AF6DB  6a 04                          push     4
+004AF6DD  50                             push     eax
+004AF6DE  e8 8d 29 fc ff                 call     0x472070
+004AF6E3  83 c4 0c                       add      esp, 0xc
+004AF6E6  85 c0                          test     eax, eax
+004AF6E8  74 11                          je       0x4af6fb
+004AF6EA  8b 0f                          mov      ecx, dword ptr [edi]
+004AF6EC  8b 54 24 1c                    mov      edx, dword ptr [esp + 0x1c]
+004AF6F0  33 c0                          xor      eax, eax
+004AF6F2  3b ca                          cmp      ecx, edx
+004AF6F4  0f 94 c0                       sete     al
+004AF6F7  85 c0                          test     eax, eax
+004AF6F9  75 26                          jne      0x4af721
+004AF6FB  8b 36                          mov      esi, dword ptr [esi]
+004AF6FD  85 f6                          test     esi, esi
+004AF6FF  75 c0                          jne      0x4af6c1
+004AF701  68 68 78 ee 06                 push     0x6ee7868
+004AF706  ff 15 5c e3 74 00              call     dword ptr [0x74e35c]
+004AF70C  5f                             pop      edi
+004AF70D  33 c0                          xor      eax, eax
+004AF70F  5e                             pop      esi
+004AF710  8b 4c 24 04                    mov      ecx, dword ptr [esp + 4]
+004AF714  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+004AF71B  83 c4 10                       add      esp, 0x10
+004AF71E  c2 08 00                       ret      8
+004AF721  68 68 78 ee 06                 push     0x6ee7868
+004AF726  ff 15 5c e3 74 00              call     dword ptr [0x74e35c]
+004AF72C  8b 4c 24 0c                    mov      ecx, dword ptr [esp + 0xc]
+004AF730  5f                             pop      edi
+004AF731  8b c6                          mov      eax, esi
+004AF733  5e                             pop      esi
+004AF734  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+004AF73B  83 c4 10                       add      esp, 0x10
+004AF73E  c2 08 00                       ret      8

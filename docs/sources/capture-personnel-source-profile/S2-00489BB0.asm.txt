@@ -1,0 +1,9 @@
+00489BB0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00489BB4  83 f8 ff                       cmp      eax, -1
+00489BB7  74 09                          je       0x489bc2
+00489BB9  85 c0                          test     eax, eax
+00489BBB  7c 0b                          jl       0x489bc8
+00489BBD  83 f8 2e                       cmp      eax, 0x2e
+00489BC0  7f 06                          jg       0x489bc8
+00489BC2  89 81 60 01 00 00              mov      dword ptr [ecx + 0x160], eax
+00489BC8  c2 04 00                       ret      4

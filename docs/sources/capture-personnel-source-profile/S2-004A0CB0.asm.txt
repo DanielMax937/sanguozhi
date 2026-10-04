@@ -1,0 +1,22 @@
+004A0CB0  56                             push     esi
+004A0CB1  57                             push     edi
+004A0CB2  8b 7c 24 0c                    mov      edi, dword ptr [esp + 0xc]
+004A0CB6  57                             push     edi
+004A0CB7  8b f1                          mov      esi, ecx
+004A0CB9  e8 42 99 fd ff                 call     0x47a600
+004A0CBE  83 c4 04                       add      esp, 4
+004A0CC1  85 c0                          test     eax, eax
+004A0CC3  74 21                          je       0x4a0ce6
+004A0CC5  8b 44 24 10                    mov      eax, dword ptr [esp + 0x10]
+004A0CC9  83 f8 ff                       cmp      eax, -1
+004A0CCC  74 0b                          je       0x4a0cd9
+004A0CCE  85 c0                          test     eax, eax
+004A0CD0  7c 14                          jl       0x4a0ce6
+004A0CD2  3d 3e 04 00 00                 cmp      eax, 0x43e
+004A0CD7  7f 0d                          jg       0x4a0ce6
+004A0CD9  8b ce                          mov      ecx, esi
+004A0CDB  89 87 9c 00 00 00              mov      dword ptr [edi + 0x9c], eax
+004A0CE1  e8 9a 87 01 00                 call     0x4b9480
+004A0CE6  5f                             pop      edi
+004A0CE7  5e                             pop      esi
+004A0CE8  c2 08 00                       ret      8

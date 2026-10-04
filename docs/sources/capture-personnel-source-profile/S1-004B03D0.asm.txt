@@ -1,0 +1,76 @@
+004B03D0  51                             push     ecx
+004B03D1  57                             push     edi
+004B03D2  8b f9                          mov      edi, ecx
+004B03D4  8b 07                          mov      eax, dword ptr [edi]
+004B03D6  8b 40 04                       mov      eax, dword ptr [eax + 4]
+004B03D9  85 c0                          test     eax, eax
+004B03DB  89 44 24 04                    mov      dword ptr [esp + 4], eax
+004B03DF  0f 84 ae 00 00 00              je       0x4b0493
+004B03E5  53                             push     ebx
+004B03E6  56                             push     esi
+004B03E7  8d 4c 24 0c                    lea      ecx, [esp + 0xc]
+004B03EB  51                             push     ecx
+004B03EC  8b 0f                          mov      ecx, dword ptr [edi]
+004B03EE  e8 dd ba fc ff                 call     0x47bed0
+004B03F3  8b 18                          mov      ebx, dword ptr [eax]
+004B03F5  8b 47 04                       mov      eax, dword ptr [edi + 4]
+004B03F8  8b cb                          mov      ecx, ebx
+004B03FA  e8 31 d7 ff ff                 call     0x4adb30
+004B03FF  85 c0                          test     eax, eax
+004B0401  74 07                          je       0x4b040a
+004B0403  be 03 00 00 00                 mov      esi, 3
+004B0408  eb 63                          jmp      0x4b046d
+004B040A  8b 57 0c                       mov      edx, dword ptr [edi + 0xc]
+004B040D  8b 42 08                       mov      eax, dword ptr [edx + 8]
+004B0410  8b 77 04                       mov      esi, dword ptr [edi + 4]
+004B0413  33 c9                          xor      ecx, ecx
+004B0415  85 c0                          test     eax, eax
+004B0417  0f 94 c1                       sete     cl
+004B041A  6a 00                          push     0
+004B041C  41                             inc      ecx
+004B041D  51                             push     ecx
+004B041E  56                             push     esi
+004B041F  53                             push     ebx
+004B0420  b9 5c 89 99 07                 mov      ecx, 0x799895c
+004B0425  e8 36 f9 ff ff                 call     0x4afd60
+004B042A  85 c0                          test     eax, eax
+004B042C  74 04                          je       0x4b0432
+004B042E  33 f6                          xor      esi, esi
+004B0430  eb 3b                          jmp      0x4b046d
+004B0432  8b 57 04                       mov      edx, dword ptr [edi + 4]
+004B0435  52                             push     edx
+004B0436  53                             push     ebx
+004B0437  e8 04 e9 ff ff                 call     0x4aed40
+004B043C  83 c4 08                       add      esp, 8
+004B043F  85 c0                          test     eax, eax
+004B0441  74 07                          je       0x4b044a
+004B0443  be 03 00 00 00                 mov      esi, 3
+004B0448  eb 23                          jmp      0x4b046d
+004B044A  8b cb                          mov      ecx, ebx
+004B044C  e8 af 87 fd ff                 call     0x488c00
+004B0451  85 c0                          test     eax, eax
+004B0453  74 07                          je       0x4b045c
+004B0455  be 02 00 00 00                 mov      esi, 2
+004B045A  eb 11                          jmp      0x4b046d
+004B045C  8b 4f 0c                       mov      ecx, dword ptr [edi + 0xc]
+004B045F  e8 6c fa ff ff                 call     0x4afed0
+004B0464  8b f0                          mov      esi, eax
+004B0466  f7 de                          neg      esi
+004B0468  1b f6                          sbb      esi, esi
+004B046A  83 c6 02                       add      esi, 2
+004B046D  56                             push     esi
+004B046E  53                             push     ebx
+004B046F  8b cf                          mov      ecx, edi
+004B0471  e8 da d8 ff ff                 call     0x4add50
+004B0476  53                             push     ebx
+004B0477  b9 58 19 20 07                 mov      ecx, 0x7201958
+004B047C  e8 8f 0e fe ff                 call     0x491310
+004B0481  89 74 87 10                    mov      dword ptr [edi + eax*4 + 0x10], esi
+004B0485  8b 44 24 0c                    mov      eax, dword ptr [esp + 0xc]
+004B0489  85 c0                          test     eax, eax
+004B048B  0f 85 56 ff ff ff              jne      0x4b03e7
+004B0491  5e                             pop      esi
+004B0492  5b                             pop      ebx
+004B0493  5f                             pop      edi
+004B0494  59                             pop      ecx
+004B0495  c3                             ret

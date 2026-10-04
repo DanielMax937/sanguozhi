@@ -1,0 +1,42 @@
+004CF2F0  53                             push     ebx
+004CF2F1  8b 5c 24 08                    mov      ebx, dword ptr [esp + 8]
+004CF2F5  55                             push     ebp
+004CF2F6  8b cb                          mov      ecx, ebx
+004CF2F8  e8 53 cb fa ff                 call     0x47be50
+004CF2FD  8b 6c 24 10                    mov      ebp, dword ptr [esp + 0x10]
+004CF301  85 ed                          test     ebp, ebp
+004CF303  7c 51                          jl       0x4cf356
+004CF305  81 fd 3e 04 00 00              cmp      ebp, 0x43e
+004CF30B  7f 49                          jg       0x4cf356
+004CF30D  56                             push     esi
+004CF30E  57                             push     edi
+004CF30F  33 ff                          xor      edi, edi
+004CF311  57                             push     edi
+004CF312  b9 58 19 20 07                 mov      ecx, 0x7201958
+004CF317  e8 e4 17 fc ff                 call     0x490b00
+004CF31C  8b f0                          mov      esi, eax
+004CF31E  56                             push     esi
+004CF31F  e8 dc b2 fa ff                 call     0x47a600
+004CF324  83 c4 04                       add      esp, 4
+004CF327  85 c0                          test     eax, eax
+004CF329  74 20                          je       0x4cf34b
+004CF32B  3b ae 9c 00 00 00              cmp      ebp, dword ptr [esi + 0x9c]
+004CF331  75 18                          jne      0x4cf34b
+004CF333  8b 44 24 1c                    mov      eax, dword ptr [esp + 0x1c]
+004CF337  50                             push     eax
+004CF338  8b ce                          mov      ecx, esi
+004CF33A  e8 a1 ac fb ff                 call     0x489fe0
+004CF33F  85 c0                          test     eax, eax
+004CF341  74 08                          je       0x4cf34b
+004CF343  56                             push     esi
+004CF344  8b cb                          mov      ecx, ebx
+004CF346  e8 65 ce fa ff                 call     0x47c1b0
+004CF34B  47                             inc      edi
+004CF34C  81 ff 4c 04 00 00              cmp      edi, 0x44c
+004CF352  7c bd                          jl       0x4cf311
+004CF354  5f                             pop      edi
+004CF355  5e                             pop      esi
+004CF356  8b 43 0c                       mov      eax, dword ptr [ebx + 0xc]
+004CF359  5d                             pop      ebp
+004CF35A  5b                             pop      ebx
+004CF35B  c2 0c 00                       ret      0xc

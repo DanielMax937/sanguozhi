@@ -172,3 +172,6 @@ PK采用为`compatibility-reconstruction`；Vanilla需显式`PC-Vanilla-assumpti
 参考校验包含静态范围哈希/连续字节、call目标、关键opcode、6邻格表、24个跨来源对照；世界资格顺序/容量/特例、三cause、关系gate、两ownership分支、max变化、气力取整/overflow/重复cargo、原子性、拒绝与零RNG、JSON与零RNG重放及输入/结果篡改检测。
 
 仍开放：clean stock对照；人员/俘虏结果、force灭亡/量值变化、销毁设施各计数器与人员引用；太守选择tie-break；完整入城身份/运输/事件链；更广caller/scheduler、历史脚本/劝降；全球随机消费/真实存档回归；Vanilla各补丁与主机版。下一个可直接从现有S1静态资料推进的是`004B1280/004B2820`俘虏/人员分配，或`004C0C30(city,0x26)`城兵cap qualifier。缺clean EXE不阻止这些独立工作。
+
+
+2026-10-04后续：上述下一步的人员分组/处分body及城兵容量已由[P0-49](84-capture-personnel-source-profile.md)取得，新增独立部分人员投影；旧P0-48模型接口不变，完整人员迁移/force/事件仍未集成。

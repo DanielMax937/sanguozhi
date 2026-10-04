@@ -1,0 +1,19 @@
+004B27F0  56                             push     esi
+004B27F1  8b f1                          mov      esi, ecx
+004B27F3  8b 46 04                       mov      eax, dword ptr [esi + 4]
+004B27F6  50                             push     eax
+004B27F7  e8 34 7e fc ff                 call     0x47a630
+004B27FC  83 c4 04                       add      esp, 4
+004B27FF  85 c0                          test     eax, eax
+004B2801  74 19                          je       0x4b281c
+004B2803  8b 4e 04                       mov      ecx, dword ptr [esi + 4]
+004B2806  8b 11                          mov      edx, dword ptr [ecx]
+004B2808  ff 52 48                       call     dword ptr [edx + 0x48]
+004B280B  85 c0                          test     eax, eax
+004B280D  8b ce                          mov      ecx, esi
+004B280F  5e                             pop      esi
+004B2810  74 05                          je       0x4b2817
+004B2812  e9 69 fb ff ff                 jmp      0x4b2380
+004B2817  e9 b4 db ff ff                 jmp      0x4b03d0
+004B281C  5e                             pop      esi
+004B281D  c3                             ret

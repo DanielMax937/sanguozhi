@@ -257,6 +257,8 @@ P0-46新增已知范围：公开IDB的 `004B2CA0` body、三直接caller、city-
 
 P0-48进一步恢复三caller mode/关系排除、normal/neutral finalizer、普通入城及存活domestic动态owner：neutral分支会清零中间保留资源；ownership先按newOwnerMax向下cap，尾部再半max floor。`004B9840`在S1有界非负building-entry域的非整除floor已恢复，stock和troop→troop仍未知。模型显式记录未覆盖人员/force/计数器/事件等fallback，不能称整场原游戏capture闭合。
 
+P0-49新增[人员/容量审计](84-capture-personnel-source-profile.md)：S1特产容量查询、004B1280分组与binary32小值边界、004B2820处分路由已恢复；当前模型只写三个已知俘虏字段，完整位置/军团/任务/非hold处分和事件仍open。
+
 状态：
 
 ```text
@@ -345,7 +347,7 @@ P0-5 专项见 [40-debut-death-exactness.md](40-debut-death-exactness.md)。
 
 已确认：
 
-- `004B1280` 捕获主公式、强运硬免疫、`00582BE0` 据点自然逃亡、`0058E510` 俘虏月度掉忠均沿用 D9 已恢复结论；
+- `004B1280`当前以P0-49 source-bound审计为准：末城gate在强运/宝物之前，binary32舍入与nearby=0不可省略；`00582BE0`自然逃亡、`0058E510`月度掉忠保留原有独立证据边界；
 - 据点俘虏维护费50金/人；
 - 可支付人数 = `min(count, floor(gold/50))`；
 - **资金不足必须释放人数** = `max(0, count-floor(gold/50))`，这一项已 exact；
@@ -358,10 +360,10 @@ P0-5 专项见 [40-debut-death-exactness.md](40-debut-death-exactness.md)。
 
 仍未知：
 
-- 捕获前置 `004A0590` 精确语义；
-- context id 3/4 的业务含义；
+- S1 `004A0590` 已由P0-49恢复为持有指定type宝物检查；clean stock等价继续open；
+- S1参数7的3/4已定位为目标cell低5bit地形值，具体地形命名/跨版本等价另核；
 - 血路的路径/版本边界；
-- `004721D0` 对 p>100 的语义；
+- S1 `004721D0` 的p>100必成功且消费一次已恢复；stock/S2随机等价仍open；
 - `0058C320` comparator 字段与方向；
 - `004A8E10` 裁剪方向；
 - `0058D1D0 / 0058D430` 完整函数体；

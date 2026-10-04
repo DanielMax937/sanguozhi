@@ -1,0 +1,19 @@
+004ADA60  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+004ADA64  56                             push     esi
+004ADA65  50                             push     eax
+004ADA66  e8 35 ff ff ff                 call     0x4ad9a0
+004ADA6B  8b f0                          mov      esi, eax
+004ADA6D  56                             push     esi
+004ADA6E  e8 bd cb fc ff                 call     0x47a630
+004ADA73  83 c4 04                       add      esp, 4
+004ADA76  85 c0                          test     eax, eax
+004ADA78  74 15                          je       0x4ada8f
+004ADA7A  8b b6 98 00 00 00              mov      esi, dword ptr [esi + 0x98]
+004ADA80  56                             push     esi
+004ADA81  b9 58 19 20 07                 mov      ecx, 0x7201958
+004ADA86  e8 75 32 fe ff                 call     0x490d00
+004ADA8B  5e                             pop      esi
+004ADA8C  c2 04 00                       ret      4
+004ADA8F  33 c0                          xor      eax, eax
+004ADA91  5e                             pop      esi
+004ADA92  c2 04 00                       ret      4

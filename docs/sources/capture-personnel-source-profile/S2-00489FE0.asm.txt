@@ -1,0 +1,7 @@
+00489FE0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00489FE4  8b 89 a0 00 00 00              mov      ecx, dword ptr [ecx + 0xa0]
+00489FEA  50                             push     eax
+00489FEB  51                             push     ecx
+00489FEC  e8 3f eb ff ff                 call     0x488b30
+00489FF1  83 c4 08                       add      esp, 8
+00489FF4  c2 04 00                       ret      4
