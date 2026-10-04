@@ -265,6 +265,8 @@ P0-51新增[游离/任务取消审计](86-personnel-detachment-source-profile.md
 
 P0-52新增[六个零退款handler](87-mission-cancellation-zero-refund.md)：9/10/12/22/23/24的ordered gate、目标pointer域与无效性检查区别、零退款返回/reset现在有独立v2投影；v1仍保留历史语义。当前剩余专用取消为0/2/5/38和41..43，另mission37完成、004BF6F0及完整callback链继续open，不能再笼统称这六个handler未投影。
 
+P0-53新增[组任务取消](88-group-mission-cancellation.md)：2/5的按ID前三人、城市signed byte恢复/actor-force研究字段先于逐人返回现有独立原子投影。S2研究getter扩展到63已追到独立hook。当前剩余专用cancel为0/38和41..43，以及mission37完成/004BF6F0/完整回调；v1/v2的历史trace保持不变。
+
 状态：
 
 ```text

@@ -1,14 +1,23 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-52 dedicated zero-refund cancellation handlers
-> Integration baseline: PR #9 merged; this theme starts at `324dd78b3c5a831cdf5d9406f63c492b7248bed4`
+> Current integration: P0-53 grouped cancellation / city counters / force research reset
+> Integration baseline: PR #10 merged; this theme starts at `b95e33a7c1e23e7bc14a8ec23b90ff5030099c8e`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: grouped mission cancellation
+
+- P0-53: missions2/5 now execute source-local gates, complete sparse ID-ordered first-three group collection and ordered per-person zero-refund return/reset
+- Mission2 restores the selected signed city byte with clamp[-1,30]; invalid city skips only that write
+- Mission5 resets actor-force research ID then duration byte before returning group members; S1 research0..35 and S2 extended0..63 getter/hook are separate
+- Independent API preserves v1/v2 traces; explicit callback noninterference/record/reject policy, field-stage snapshots, atomic errors and full replay
+- Guide: `docs/rules/88-group-mission-cancellation.md`; run `check_group_mission_cancellation_profile.py`
+- Facility/treasure handlers0/38, handlers41..43, mission37 completion and full return/event/force composition remain open
 
 ### Completed bounded implementation: dedicated zero-refund cancellation
 
@@ -82,6 +91,7 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-53 audit complete: grouped cancellation, signed city-counter mapping and source-separated force research reset
 - P0-52 audit complete: six dedicated zero-refund handler gates and bounded return/reset projection
 - P0-51 audit complete: source-bound wandering, detachment role/event order and bounded mission cancellation resources
 - P0-50 audit complete: source-bound release, destination/migration and stable ordering with tested partial projection
@@ -132,7 +142,7 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- P0-51/52 now recover wandering/role order, registry/task15..21 refunds and six zero-refund handlers9/10/12/22/23/24; continue group/facility/research handlers0/2/5/38, handlers41..43, mission37 completion, `004BF6F0` return-home effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
+- P0-51/52/53 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24 and group/city/research handlers2/5; continue facility/treasure handlers0/38, handlers41..43, mission37 completion, `004BF6F0` return-home effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
 - Complete destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open

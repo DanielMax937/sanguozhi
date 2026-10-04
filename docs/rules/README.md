@@ -274,3 +274,5 @@ P0-46当前capture selector以 `81-capture-selector-source-profile.md` 为专项
 P0-47训练生命周期审计以`82-training-lifecycle-source-profile.md`为准：source gate/parameter/officer helpers、累计XP3000、普通growth1..100、PK研究共享XP、reset全局loop/noncontiguous tails和野外气力tail-xref已恢复；stock等价/完整AP与scheduler顺序仍未证实。实现是带配置/证据/重放的限定兼容模型。
 
 P0-52专用零退款取消以[87-mission-cancellation-zero-refund.md](87-mission-cancellation-zero-refund.md)为准：9/10/12/22/23/24的ordered gate与零退款返回/reset有界投影，独立v2保留v1重放语义；组任务/设施/研究与完整return/callback仍open。
+
+P0-53组任务取消以[88-group-mission-cancellation.md](88-group-mission-cancellation.md)为准：2/5按ID序前三人、signed city计数/force研究字段先于逐人返回，S2研究扩展单独绑定；独立新API保留v1/v2历史trace。
