@@ -760,6 +760,12 @@ return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 
 `record-group-cancellation-v1`仍提供record-only/reject，未执行展示、cache/list和004BF6F0；非干预假设可替换。逐人距离/S2 query267必须有观察，字段阶段快照和beforeStepIndex定位回调ledger；分组后先按实际分支preflight所需观察，任何字段写入前拒绝缺项；后续错误也不会把候选副本写入泄漏出去。S2研究36..63扩展有独立hook证据，不混为stock常数；旧v1/v2与完整force/event事务边界保留。
 
+### 4D.7 P0-54设施取消的raw有界投影
+
+[89-facility-mission-cancellation.md](89-facility-mission-cancellation.md)新增独立`facility_mission_cancellation_profile.py`。旧v1/v2/group和trace保持原义。raw0x38具体building vtable域中，type3..63按来源写宽reset、城市byte模256减法与allocated-person home引用可投影；S2 types54..59构造字段gate与S1分离。
+
+`callbackAssumption=noninterference-v1`显式约束未执行的展示/return/force/list/attachment/空间AI回调。`unknownEffects=reject`原子拒绝；`baseTargets=defer|reject`专门处理源码接受而本投影不实现的type0..2完整销毁。defer时只保留前面的人员返回，不能说建筑已毁。所需观测在所有标量写入前按实际分支preflight，缺失不猜invalid；完整输入/阶段快照/ledger/after可重放。宝物42 owner数值范围gate不额外要求person有效。
+
 ### 4E. Golden tests
 
 日文 Wiki 的攻城表继续保留，但角色从“运行时规则”改为“回归测试”。

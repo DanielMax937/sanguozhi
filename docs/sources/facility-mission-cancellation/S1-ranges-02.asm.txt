@@ -1,0 +1,392 @@
+; S1 004A1E40..004A1F11 (code; end exclusive)
+004A1E40  6a ff                          push     -1
+004A1E42  68 98 f3 72 00                 push     0x72f398
+004A1E47  64 a1 00 00 00 00              mov      eax, dword ptr fs:[0]
+004A1E4D  50                             push     eax
+004A1E4E  64 89 25 00 00 00 00           mov      dword ptr fs:[0], esp
+004A1E55  51                             push     ecx
+004A1E56  56                             push     esi
+004A1E57  57                             push     edi
+004A1E58  68 68 78 ee 06                 push     0x6ee7868
+004A1E5D  8b f9                          mov      edi, ecx
+004A1E5F  ff 15 60 e3 74 00              call     dword ptr [0x74e360]
+004A1E65  8b 74 24 20                    mov      esi, dword ptr [esp + 0x20]
+004A1E69  85 f6                          test     esi, esi
+004A1E6B  c7 44 24 14 00 00 00 00        mov      dword ptr [esp + 0x14], 0
+004A1E73  75 05                          jne      0x4a1e7a
+004A1E75  8b 77 04                       mov      esi, dword ptr [edi + 4]
+004A1E78  eb 13                          jmp      0x4a1e8d
+004A1E7A  6a 01                          push     1
+004A1E7C  6a 0c                          push     0xc
+004A1E7E  56                             push     esi
+004A1E7F  e8 ec 01 fd ff                 call     0x472070
+004A1E84  83 c4 0c                       add      esp, 0xc
+004A1E87  85 c0                          test     eax, eax
+004A1E89  74 46                          je       0x4a1ed1
+004A1E8B  8b 36                          mov      esi, dword ptr [esi]
+004A1E8D  85 f6                          test     esi, esi
+004A1E8F  74 40                          je       0x4a1ed1
+004A1E91  6a 00                          push     0
+004A1E93  8d 7e 08                       lea      edi, [esi + 8]
+004A1E96  6a 04                          push     4
+004A1E98  57                             push     edi
+004A1E99  e8 d2 01 fd ff                 call     0x472070
+004A1E9E  83 c4 0c                       add      esp, 0xc
+004A1EA1  85 c0                          test     eax, eax
+004A1EA3  74 26                          je       0x4a1ecb
+004A1EA5  6a 00                          push     0
+004A1EA7  8d 44 24 20                    lea      eax, [esp + 0x20]
+004A1EAB  6a 04                          push     4
+004A1EAD  50                             push     eax
+004A1EAE  e8 bd 01 fd ff                 call     0x472070
+004A1EB3  83 c4 0c                       add      esp, 0xc
+004A1EB6  85 c0                          test     eax, eax
+004A1EB8  74 11                          je       0x4a1ecb
+004A1EBA  8b 0f                          mov      ecx, dword ptr [edi]
+004A1EBC  8b 54 24 1c                    mov      edx, dword ptr [esp + 0x1c]
+004A1EC0  33 c0                          xor      eax, eax
+004A1EC2  3b ca                          cmp      ecx, edx
+004A1EC4  0f 94 c0                       sete     al
+004A1EC7  85 c0                          test     eax, eax
+004A1EC9  75 26                          jne      0x4a1ef1
+004A1ECB  8b 36                          mov      esi, dword ptr [esi]
+004A1ECD  85 f6                          test     esi, esi
+004A1ECF  75 c0                          jne      0x4a1e91
+004A1ED1  68 68 78 ee 06                 push     0x6ee7868
+004A1ED6  ff 15 5c e3 74 00              call     dword ptr [0x74e35c]
+004A1EDC  5f                             pop      edi
+004A1EDD  33 c0                          xor      eax, eax
+004A1EDF  5e                             pop      esi
+004A1EE0  8b 4c 24 04                    mov      ecx, dword ptr [esp + 4]
+004A1EE4  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+004A1EEB  83 c4 10                       add      esp, 0x10
+004A1EEE  c2 08 00                       ret      8
+004A1EF1  68 68 78 ee 06                 push     0x6ee7868
+004A1EF6  ff 15 5c e3 74 00              call     dword ptr [0x74e35c]
+004A1EFC  8b 4c 24 0c                    mov      ecx, dword ptr [esp + 0xc]
+004A1F00  5f                             pop      edi
+004A1F01  8b c6                          mov      eax, esi
+004A1F03  5e                             pop      esi
+004A1F04  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+004A1F0B  83 c4 10                       add      esp, 0x10
+004A1F0E  c2 08 00                       ret      8
+
+; S1 004A2370..004A2427 (code; end exclusive)
+004A2370  6a ff                          push     -1
+004A2372  68 98 f3 72 00                 push     0x72f398
+004A2377  64 a1 00 00 00 00              mov      eax, dword ptr fs:[0]
+004A237D  50                             push     eax
+004A237E  64 89 25 00 00 00 00           mov      dword ptr fs:[0], esp
+004A2385  51                             push     ecx
+004A2386  56                             push     esi
+004A2387  57                             push     edi
+004A2388  68 68 78 ee 06                 push     0x6ee7868
+004A238D  8b f9                          mov      edi, ecx
+004A238F  ff 15 60 e3 74 00              call     dword ptr [0x74e360]
+004A2395  8b 74 24 1c                    mov      esi, dword ptr [esp + 0x1c]
+004A2399  6a 01                          push     1
+004A239B  6a 0c                          push     0xc
+004A239D  56                             push     esi
+004A239E  c7 44 24 20 00 00 00 00        mov      dword ptr [esp + 0x20], 0
+004A23A6  e8 c5 fc fc ff                 call     0x472070
+004A23AB  83 c4 0c                       add      esp, 0xc
+004A23AE  85 c0                          test     eax, eax
+004A23B0  74 57                          je       0x4a2409
+004A23B2  3b 77 04                       cmp      esi, dword ptr [edi + 4]
+004A23B5  75 07                          jne      0x4a23be
+004A23B7  8b 06                          mov      eax, dword ptr [esi]
+004A23B9  89 47 04                       mov      dword ptr [edi + 4], eax
+004A23BC  eb 1b                          jmp      0x4a23d9
+004A23BE  8b 4e 04                       mov      ecx, dword ptr [esi + 4]
+004A23C1  6a 01                          push     1
+004A23C3  6a 0c                          push     0xc
+004A23C5  51                             push     ecx
+004A23C6  e8 a5 fc fc ff                 call     0x472070
+004A23CB  83 c4 0c                       add      esp, 0xc
+004A23CE  85 c0                          test     eax, eax
+004A23D0  74 37                          je       0x4a2409
+004A23D2  8b 56 04                       mov      edx, dword ptr [esi + 4]
+004A23D5  8b 06                          mov      eax, dword ptr [esi]
+004A23D7  89 02                          mov      dword ptr [edx], eax
+004A23D9  3b 77 08                       cmp      esi, dword ptr [edi + 8]
+004A23DC  75 08                          jne      0x4a23e6
+004A23DE  8b 4e 04                       mov      ecx, dword ptr [esi + 4]
+004A23E1  89 4f 08                       mov      dword ptr [edi + 8], ecx
+004A23E4  eb 1b                          jmp      0x4a2401
+004A23E6  8b 16                          mov      edx, dword ptr [esi]
+004A23E8  6a 01                          push     1
+004A23EA  6a 0c                          push     0xc
+004A23EC  52                             push     edx
+004A23ED  e8 7e fc fc ff                 call     0x472070
+004A23F2  83 c4 0c                       add      esp, 0xc
+004A23F5  85 c0                          test     eax, eax
+004A23F7  74 10                          je       0x4a2409
+004A23F9  8b 06                          mov      eax, dword ptr [esi]
+004A23FB  8b 4e 04                       mov      ecx, dword ptr [esi + 4]
+004A23FE  89 48 04                       mov      dword ptr [eax + 4], ecx
+004A2401  56                             push     esi
+004A2402  8b cf                          mov      ecx, edi
+004A2404  e8 a7 fc ff ff                 call     0x4a20b0
+004A2409  68 68 78 ee 06                 push     0x6ee7868
+004A240E  ff 15 5c e3 74 00              call     dword ptr [0x74e35c]
+004A2414  8b 4c 24 0c                    mov      ecx, dword ptr [esp + 0xc]
+004A2418  5f                             pop      edi
+004A2419  5e                             pop      esi
+004A241A  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+004A2421  83 c4 10                       add      esp, 0x10
+004A2424  c2 04 00                       ret      4
+
+; S1 004A3180..004A31DA (code; end exclusive)
+004A3180  53                             push     ebx
+004A3181  56                             push     esi
+004A3182  8b 74 24 0c                    mov      esi, dword ptr [esp + 0xc]
+004A3186  6a 05                          push     5
+004A3188  56                             push     esi
+004A3189  8b d9                          mov      ebx, ecx
+004A318B  e8 d0 74 fd ff                 call     0x47a660
+004A3190  83 c4 08                       add      esp, 8
+004A3193  85 c0                          test     eax, eax
+004A3195  74 3e                          je       0x4a31d5
+004A3197  57                             push     edi
+004A3198  56                             push     esi
+004A3199  b9 58 19 20 07                 mov      ecx, 0x7201958
+004A319E  e8 cd e5 fe ff                 call     0x491770
+004A31A3  6a 00                          push     0
+004A31A5  56                             push     esi
+004A31A6  b9 ec b4 3f 07                 mov      ecx, 0x73fb4ec
+004A31AB  8b f8                          mov      edi, eax
+004A31AD  e8 8e ec ff ff                 call     0x4a1e40
+004A31B2  85 c0                          test     eax, eax
+004A31B4  74 0b                          je       0x4a31c1
+004A31B6  50                             push     eax
+004A31B7  b9 ec b4 3f 07                 mov      ecx, 0x73fb4ec
+004A31BC  e8 af f1 ff ff                 call     0x4a2370
+004A31C1  8b 06                          mov      eax, dword ptr [esi]
+004A31C3  6a 00                          push     0
+004A31C5  8b ce                          mov      ecx, esi
+004A31C7  ff 50 20                       call     dword ptr [eax + 0x20]
+004A31CA  6a 01                          push     1
+004A31CC  57                             push     edi
+004A31CD  8b cb                          mov      ecx, ebx
+004A31CF  e8 0c d5 00 00                 call     0x4b06e0
+004A31D4  5f                             pop      edi
+004A31D5  5e                             pop      esi
+004A31D6  5b                             pop      ebx
+004A31D7  c2 04 00                       ret      4
+
+; S1 004B06E0..004B09AB (code; end exclusive)
+004B06E0  6a ff                          push     -1
+004B06E2  68 b8 f7 72 00                 push     0x72f7b8
+004B06E7  64 a1 00 00 00 00              mov      eax, dword ptr fs:[0]
+004B06ED  50                             push     eax
+004B06EE  64 89 25 00 00 00 00           mov      dword ptr fs:[0], esp
+004B06F5  83 ec 30                       sub      esp, 0x30
+004B06F8  53                             push     ebx
+004B06F9  55                             push     ebp
+004B06FA  56                             push     esi
+004B06FB  57                             push     edi
+004B06FC  8b d9                          mov      ebx, ecx
+004B06FE  8d 44 24 1c                    lea      eax, [esp + 0x1c]
+004B0702  50                             push     eax
+004B0703  b9 d8 59 6a 09                 mov      ecx, 0x96a59d8
+004B0708  89 5c 24 18                    mov      dword ptr [esp + 0x18], ebx
+004B070C  e8 9f 80 0d 00                 call     0x5887b0
+004B0711  8b 7c 24 50                    mov      edi, dword ptr [esp + 0x50]
+004B0715  33 ed                          xor      ebp, ebp
+004B0717  57                             push     edi
+004B0718  b9 58 19 20 07                 mov      ecx, 0x7201958
+004B071D  89 6c 24 14                    mov      dword ptr [esp + 0x14], ebp
+004B0721  e8 da 05 fe ff                 call     0x490d00
+004B0726  8b f0                          mov      esi, eax
+004B0728  56                             push     esi
+004B0729  e8 02 9f fc ff                 call     0x47a630
+004B072E  83 c4 04                       add      esp, 4
+004B0731  85 c0                          test     eax, eax
+004B0733  0f 84 5d 02 00 00              je       0x4b0996
+004B0739  89 6c 24 2c                    mov      dword ptr [esp + 0x2c], ebp
+004B073D  89 6c 24 30                    mov      dword ptr [esp + 0x30], ebp
+004B0741  89 6c 24 28                    mov      dword ptr [esp + 0x28], ebp
+004B0745  89 6c 24 24                    mov      dword ptr [esp + 0x24], ebp
+004B0749  89 6c 24 34                    mov      dword ptr [esp + 0x34], ebp
+004B074D  c7 44 24 38 0a 00 00 00        mov      dword ptr [esp + 0x38], 0xa
+004B0755  89 6c 24 3c                    mov      dword ptr [esp + 0x3c], ebp
+004B0759  c7 44 24 20 ec c8 79 00        mov      dword ptr [esp + 0x20], 0x79c8ec
+004B0761  57                             push     edi
+004B0762  55                             push     ebp
+004B0763  8d 4c 24 28                    lea      ecx, [esp + 0x28]
+004B0767  51                             push     ecx
+004B0768  b9 08 98 99 07                 mov      ecx, 0x7999808
+004B076D  89 6c 24 54                    mov      dword ptr [esp + 0x54], ebp
+004B0771  e8 6a df 01 00                 call     0x4ce6e0
+004B0776  8b ce                          mov      ecx, esi
+004B0778  e8 93 76 fd ff                 call     0x487e10
+004B077D  85 c0                          test     eax, eax
+004B077F  8b 44 24 24                    mov      eax, dword ptr [esp + 0x24]
+004B0783  89 44 24 50                    mov      dword ptr [esp + 0x50], eax
+004B0787  0f 84 a9 00 00 00              je       0x4b0836
+004B078D  3b c5                          cmp      eax, ebp
+004B078F  0f 84 f0 01 00 00              je       0x4b0985
+004B0795  8d 54 24 50                    lea      edx, [esp + 0x50]
+004B0799  52                             push     edx
+004B079A  8d 4c 24 24                    lea      ecx, [esp + 0x24]
+004B079E  e8 1d 1b fe ff                 call     0x4922c0
+004B07A3  8b 38                          mov      edi, dword ptr [eax]
+004B07A5  57                             push     edi
+004B07A6  e8 85 9e fc ff                 call     0x47a630
+004B07AB  83 c4 04                       add      esp, 4
+004B07AE  85 c0                          test     eax, eax
+004B07B0  74 73                          je       0x4b0825
+004B07B2  8b cf                          mov      ecx, edi
+004B07B4  e8 17 9f fc ff                 call     0x47a6d0
+004B07B9  85 c0                          test     eax, eax
+004B07BB  74 4c                          je       0x4b0809
+004B07BD  8b 07                          mov      eax, dword ptr [edi]
+004B07BF  8b cf                          mov      ecx, edi
+004B07C1  ff 50 3c                       call     dword ptr [eax + 0x3c]
+004B07C4  8b 00                          mov      eax, dword ptr [eax]
+004B07C6  89 44 24 14                    mov      dword ptr [esp + 0x14], eax
+004B07CA  8b 4c 24 14                    mov      ecx, dword ptr [esp + 0x14]
+004B07CE  0f bf c0                       movsx    eax, ax
+004B07D1  69 c0 c8 00 00 00              imul     eax, eax, 0xc8
+004B07D7  c1 f9 10                       sar      ecx, 0x10
+004B07DA  03 c1                          add      eax, ecx
+004B07DC  8d 2c 80                       lea      ebp, [eax + eax*4]
+004B07DF  56                             push     esi
+004B07E0  b9 58 19 20 07                 mov      ecx, 0x7201958
+004B07E5  8d 2c ad 68 0e fb 06           lea      ebp, [ebp*4 + 0x6fb0e68]
+004B07EC  e8 7f 0f fe ff                 call     0x491770
+004B07F1  8b 55 04                       mov      edx, dword ptr [ebp + 4]
+004B07F4  c1 ea 05                       shr      edx, 5
+004B07F7  83 e2 7f                       and      edx, 0x7f
+004B07FA  3b c2                          cmp      eax, edx
+004B07FC  74 27                          je       0x4b0825
+004B07FE  ff 44 24 10                    inc      dword ptr [esp + 0x10]
+004B0802  e8 d9 cf ff ff                 call     0x4ad7e0
+004B0807  eb 14                          jmp      0x4b081d
+004B0809  8b 06                          mov      eax, dword ptr [esi]
+004B080B  8b ce                          mov      ecx, esi
+004B080D  ff 50 40                       call     dword ptr [eax + 0x40]
+004B0810  8b 17                          mov      edx, dword ptr [edi]
+004B0812  8b cf                          mov      ecx, edi
+004B0814  8b e8                          mov      ebp, eax
+004B0816  ff 52 40                       call     dword ptr [edx + 0x40]
+004B0819  3b e8                          cmp      ebp, eax
+004B081B  74 08                          je       0x4b0825
+004B081D  8b cb                          mov      ecx, ebx
+004B081F  57                             push     edi
+004B0820  e8 6b cf ff ff                 call     0x4ad790
+004B0825  8b 44 24 50                    mov      eax, dword ptr [esp + 0x50]
+004B0829  85 c0                          test     eax, eax
+004B082B  0f 85 64 ff ff ff              jne      0x4b0795
+004B0831  e9 38 01 00 00                 jmp      0x4b096e
+004B0836  3b c5                          cmp      eax, ebp
+004B0838  0f 84 47 01 00 00              je       0x4b0985
+004B083E  8b ff                          mov      edi, edi
+004B0840  8d 44 24 50                    lea      eax, [esp + 0x50]
+004B0844  50                             push     eax
+004B0845  8d 4c 24 24                    lea      ecx, [esp + 0x24]
+004B0849  e8 72 1a fe ff                 call     0x4922c0
+004B084E  8b 28                          mov      ebp, dword ptr [eax]
+004B0850  55                             push     ebp
+004B0851  e8 da 9d fc ff                 call     0x47a630
+004B0856  83 c4 04                       add      esp, 4
+004B0859  85 c0                          test     eax, eax
+004B085B  0f 84 f5 00 00 00              je       0x4b0956
+004B0861  8b cd                          mov      ecx, ebp
+004B0863  e8 68 9e fc ff                 call     0x47a6d0
+004B0868  85 c0                          test     eax, eax
+004B086A  0f 84 e6 00 00 00              je       0x4b0956
+004B0870  8b 45 2c                       mov      eax, dword ptr [ebp + 0x2c]
+004B0873  83 f8 03                       cmp      eax, 3
+004B0876  74 09                          je       0x4b0881
+004B0878  83 f8 01                       cmp      eax, 1
+004B087B  0f 85 d5 00 00 00              jne      0x4b0956
+004B0881  8b 46 08                       mov      eax, dword ptr [esi + 8]
+004B0884  83 f8 0f                       cmp      eax, 0xf
+004B0887  0f 85 91 00 00 00              jne      0x4b091e
+004B088D  8b cd                          mov      ecx, ebp
+004B088F  e8 8c 4c fe ff                 call     0x495520
+004B0894  50                             push     eax
+004B0895  b9 58 19 20 07                 mov      ecx, 0x7201958
+004B089A  e8 61 04 fe ff                 call     0x490d00
+004B089F  8b d8                          mov      ebx, eax
+004B08A1  53                             push     ebx
+004B08A2  e8 89 9d fc ff                 call     0x47a630
+004B08A7  83 c4 04                       add      esp, 4
+004B08AA  85 c0                          test     eax, eax
+004B08AC  0f 84 88 00 00 00              je       0x4b093a
+004B08B2  8b 16                          mov      edx, dword ptr [esi]
+004B08B4  8b ce                          mov      ecx, esi
+004B08B6  ff 52 3c                       call     dword ptr [edx + 0x3c]
+004B08B9  8b 00                          mov      eax, dword ptr [eax]
+004B08BB  8b 13                          mov      edx, dword ptr [ebx]
+004B08BD  89 44 24 18                    mov      dword ptr [esp + 0x18], eax
+004B08C1  8b 4c 24 18                    mov      ecx, dword ptr [esp + 0x18]
+004B08C5  0f bf c0                       movsx    eax, ax
+004B08C8  69 c0 c8 00 00 00              imul     eax, eax, 0xc8
+004B08CE  c1 f9 10                       sar      ecx, 0x10
+004B08D1  03 c1                          add      eax, ecx
+004B08D3  8d 3c 80                       lea      edi, [eax + eax*4]
+004B08D6  8b cb                          mov      ecx, ebx
+004B08D8  8d 3c bd 68 0e fb 06           lea      edi, [edi*4 + 0x6fb0e68]
+004B08DF  ff 52 3c                       call     dword ptr [edx + 0x3c]
+004B08E2  8b 00                          mov      eax, dword ptr [eax]
+004B08E4  89 44 24 18                    mov      dword ptr [esp + 0x18], eax
+004B08E8  8b 4c 24 18                    mov      ecx, dword ptr [esp + 0x18]
+004B08EC  0f bf c0                       movsx    eax, ax
+004B08EF  69 c0 c8 00 00 00              imul     eax, eax, 0xc8
+004B08F5  c1 f9 10                       sar      ecx, 0x10
+004B08F8  03 c1                          add      eax, ecx
+004B08FA  8b 4f 04                       mov      ecx, dword ptr [edi + 4]
+004B08FD  8d 04 80                       lea      eax, [eax + eax*4]
+004B0900  8b 14 85 6c 0e fb 06           mov      edx, dword ptr [eax*4 + 0x6fb0e6c]
+004B0907  8d 04 85 68 0e fb 06           lea      eax, [eax*4 + 0x6fb0e68]
+004B090E  33 d1                          xor      edx, ecx
+004B0910  f7 c2 e0 0f 00 00              test     edx, 0xfe0
+004B0916  75 22                          jne      0x4b093a
+004B0918  8b 5c 24 14                    mov      ebx, dword ptr [esp + 0x14]
+004B091C  eb 05                          jmp      0x4b0923
+004B091E  83 f8 0e                       cmp      eax, 0xe
+004B0921  75 1b                          jne      0x4b093e
+004B0923  a1 d0 c1 79 00                 mov      eax, dword ptr [0x79c1d0]
+004B0928  6a 00                          push     0
+004B092A  50                             push     eax
+004B092B  6a 04                          push     4
+004B092D  55                             push     ebp
+004B092E  b9 50 93 6a 09                 mov      ecx, 0x96a9350
+004B0933  e8 e8 83 0f 00                 call     0x5a8d20
+004B0938  eb 1c                          jmp      0x4b0956
+004B093A  8b 5c 24 14                    mov      ebx, dword ptr [esp + 0x14]
+004B093E  8b 4c 24 10                    mov      ecx, dword ptr [esp + 0x10]
+004B0942  41                             inc      ecx
+004B0943  8b fd                          mov      edi, ebp
+004B0945  89 4c 24 10                    mov      dword ptr [esp + 0x10], ecx
+004B0949  e8 92 ce ff ff                 call     0x4ad7e0
+004B094E  55                             push     ebp
+004B094F  8b cb                          mov      ecx, ebx
+004B0951  e8 3a ce ff ff                 call     0x4ad790
+004B0956  56                             push     esi
+004B0957  55                             push     ebp
+004B0958  b9 50 93 6a 09                 mov      ecx, 0x96a9350
+004B095D  e8 ee 53 0f 00                 call     0x5a5d50
+004B0962  8b 44 24 50                    mov      eax, dword ptr [esp + 0x50]
+004B0966  85 c0                          test     eax, eax
+004B0968  0f 85 d2 fe ff ff              jne      0x4b0840
+004B096E  8b 44 24 10                    mov      eax, dword ptr [esp + 0x10]
+004B0972  85 c0                          test     eax, eax
+004B0974  7e 0f                          jle      0x4b0985
+004B0976  8d 4c 24 1c                    lea      ecx, [esp + 0x1c]
+004B097A  51                             push     ecx
+004B097B  b9 d8 59 6a 09                 mov      ecx, 0x96a59d8
+004B0980  e8 4b 8d 0d 00                 call     0x5896d0
+004B0985  8d 4c 24 20                    lea      ecx, [esp + 0x20]
+004B0989  c7 44 24 48 ff ff ff ff        mov      dword ptr [esp + 0x48], 0xffffffff
+004B0991  e8 5a 15 fe ff                 call     0x491ef0
+004B0996  8b 4c 24 40                    mov      ecx, dword ptr [esp + 0x40]
+004B099A  5f                             pop      edi
+004B099B  5e                             pop      esi
+004B099C  5d                             pop      ebp
+004B099D  5b                             pop      ebx
+004B099E  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+004B09A5  83 c4 3c                       add      esp, 0x3c
+004B09A8  c2 08 00                       ret      8

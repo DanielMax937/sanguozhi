@@ -267,6 +267,8 @@ P0-52新增[六个零退款handler](87-mission-cancellation-zero-refund.md)：9/
 
 P0-53新增[组任务取消](88-group-mission-cancellation.md)：2/5的按ID前三人、城市signed byte恢复/actor-force研究字段先于逐人返回现有独立原子投影。S2研究getter扩展到63已追到独立hook。当前剩余专用cancel为0/38和41..43，以及mission37完成/004BF6F0/完整回调；v1/v2的历史trace保持不变。
 
+P0-54新增[设施任务取消](89-facility-mission-cancellation.md)：0/38 gate、mission0组收集先于target、无效target返回1但不reset、type30宝物42尾部、type3..63 raw写宽/城市byte/home引用现有独立投影。S2升级设施计数仍受+14 gate，与S1分别绑定；source-accepted base目标显式defer/reject。当前专用handler尚余41..43，另base销毁、mission37完成、004BF6F0与完整回调/force/capture仍open。
+
 状态：
 
 ```text
