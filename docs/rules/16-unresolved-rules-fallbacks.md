@@ -4803,3 +4803,8 @@ type RuleEvidence = {
 ### P0-59 event8/14任务监听的可变tail观察
 
 [94-mission-event-listeners.md](94-mission-event-listeners.md)提供独立新API。已知注册/列表遍历/predicate/handler入口gate直接投影；tail005B6D87或005CFBEB只允许明确whole-frame观察或整次reject。frame绑定source/event/visit/person/captured mission/saved current与target/精确before，允许修改任务、列表、执行人、所有已提供data和RNG状态；无默认identity transition。missing/unused/stale frame报错且无半提交。opaque data是声明观察域，不冒充完整内存；观察真实性/可达性不由hash证明。未知随机计数为null，不因首末state相同而记零。旧trace不变，完整return/role/event与后置observer仍待新版本组合。
+
+
+### P0-60 notification/return尾的可变边界
+
+[95-mission-notification-tail.md](95-mission-notification-tail.md)直接执行已知通知gate、mission/reset、acted-bit、dirty、active-list尾追加与duration写入。presentation/nonnull observer/完整004BF6F0用完整阶段before→after或原子reject；S2 query267 additionally绑定返回布尔值和可变frame/RNG，不猜纯查询。距离为source/stage/getter-pointer绑定的-1..255结果观察。固定slot/命名data域、全before、顺序index、实参、missing/unused检查防止误用旧观察；RNG未知为null，同状态不等于零消费。无implicit identity transition，旧API和trace不变；组合需新版本。

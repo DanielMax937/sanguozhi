@@ -7,6 +7,8 @@
 
 ## 最新审计入口
 
+新增[P0-60通知门与零退款return尾](95-mission-notification-tail.md)：canonical通知资格、saved-pointer presentation、acted/dirty/可变observer/active尾追加/期间写序及S2 mutable query267。旧API不变，完整return/role/event待新版本组合。`python scripts/check_mission_notification_tail_source.py`、`python scripts/check_mission_notification_tail_profile.py`。
+
 新增[P0-59 event8/14任务监听](94-mission-event-listeners.md)：44slot注册、live列表/任务分派、23/8与24/14 predicate及handler gate；成功tail用完整阶段观察或原子拒绝，绝不默认非干预。完整return/角色/后置observer仍open。`python scripts/check_mission_event_listener_source.py`与`python scripts/check_mission_event_listener_profile.py`。
 
 新增[P0-58稳定非空军团/太守角色协调](93-legion-role-reconciliation.md)：独立004BE2A0稳定分支与004BCA30(refresh=0)，不同比较器、原roster顺序、live身份变化与event8/14阶段账本；完整监听/force/返回组合仍open。`python scripts/check_legion_role_source.py`与`python scripts/check_legion_role_reconciliation_profile.py`。
