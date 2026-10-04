@@ -1,14 +1,24 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-61 atomic event8/14 dispatcher, shared handler/tail frame and post-event observer
-> Integration baseline: PR #18 merged; this theme starts at `1e5862e045c9aec3db14540c2bd8decc565a321b`
+> Current integration: P0-62 recursive native return/list/role/event composition with explicit mutable sort boundaries
+> Integration baseline: PR #19 merged; this theme starts at `a3c94e9d045688fe93c3c9b9172db30d5a89333a`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: recursive return/list/role/event composition
+
+- P0-62: expanded canonical frame, direct native return/home+legion roster/normal nonempty role stages and recursive event8/14, one revision commit
+- Person allocation/validity is derived from explicit raw17C/status; native promotions refresh both before snapshots and later event gates
+- Every event owns copied nodes/visits and saved actor/event context; native saved IDs survive callbacks while later reads use the current frame
+- Remove-first/append and count<2 sort execute; nontrivial native sorts, transitive route/target-force and external callbacks require exact stage-bound mutable observations
+- Empty force/corps, ruler ownership and engine recursion/resource guards defer atomically; guards are engineering limits, not original termination rules
+- Guide: `docs/rules/97-recursive-officer-return.md`; run both recursive-officer-return checkers
+- Next: full multi-node sort/capacity/route internals, empty-corps/force extinction, ruler/base/capture integration and other event IDs; stock/Vanilla/global RNG remain open
 
 ### Completed bounded implementation: atomic event8/14 and handler/tail composition
 
@@ -169,6 +179,9 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-62 audit complete: live return/list/stable-role/event recursion, independently scoped native locals, explicit mutable whole-sort boundaries and atomic engine guards
+- P0-61 audit complete: atomic event8/14 wrapper/handler/tail composition on a single mutable frame
+
 - P0-60 audit complete: canonical notification gates, saved-pointer presentation boundaries, active-list/acted/cache/observer order and source-specific zero-refund tails
 
 - P0-59 audit complete: event8/14 registration, live dispatch, native predicate/gate semantics and explicit stage-bound mutable-tail observation contract
@@ -230,7 +243,7 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop and P0-57 separate return-home scalar/list-order projection; P0-58 adds separate stable nonempty `004BE2A0` and refresh=0 governor scalar coordination; P0-59 adds event8/14 registration/dispatch/predicates/handler gates; P0-60 closes canonical notification and active-list/acted/return-tail writes with mutable presentation/observer/full-return boundaries; P0-61 now composes the event8/14 wrapper/dispatcher/known tail/post-event observer in one live-frame transaction; next compose full return/list/role native stages and recursive events, then continue base destruction, full `004BF6F0` return-home role/callback effects, other `004A8110→005B9D30` event IDs, full force extinction and `004B03D0` AI disposition callees
+- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop and P0-57 separate return-home scalar/list-order projection; P0-58 adds separate stable nonempty `004BE2A0` and refresh=0 governor scalar coordination; P0-59 adds event8/14 registration/dispatch/predicates/handler gates; P0-60 closes canonical notification and active-list/acted/return-tail writes with mutable presentation/observer/full-return boundaries; P0-61 now composes the event8/14 wrapper/dispatcher/known tail/post-event observer in one live-frame transaction; P0-62 now executes versioned return/list/stable-role/native recursive events with explicit mutable sort/route boundaries; next recover full multi-node sort/capacity/route internals and continue base destruction, full `004BF6F0` return-home role/callback effects, other `004A8110→005B9D30` event IDs, full force extinction and `004B03D0` AI disposition callees
 - Complete remaining base destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open
