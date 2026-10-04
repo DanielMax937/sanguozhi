@@ -1303,3 +1303,8 @@ AI势力强度还存在君主ID硬编码 bonus，因此不能用一张现代通�
 ### P0-62原生return/list/role/event递归组合
 
 [97-recursive-officer-return.md](97-recursive-officer-return.md)以扩展canonical frame执行return/list/stable-role及递归event8/14，只有一次revision提交。每层自己的event/actor/copied nodes/visits和native saved IDs保留，回调后按源重新读取live字段。移首节点/追加和count<2 sort闭合；非平凡sort、route、target-force及外部observer仍为精确stage-bound可变观察，不默认不干预。empty-force/corps和ruler ownership明确defer，递归/调用预算只是工程guard，不证明原作终止。完整sort内部、force/base/capture、其他event IDs、stock/Vanilla/全局RNG继续open。
+
+
+### P0-63原生roster/role排序与source-separated capacity
+
+[98-native-roster-sort.md](98-native-roster-sort.md)新增独立版本：固定roster参数(1,0,0,0)的virtual field0实际返回canonical person ID；按不同entry/pointer pivot身份执行两种quicksort及governor merge，保留比较调用序、相等项非稳定行为、两轮allocated过滤与clear/reappend。capacity的title/office/technique分支分别按S1/S2执行，query377/278为精确callStack/full-frame/RNG可变观察；saved left低16位、saved force pointer与后续live读取不混淆。canonical title/office的type15/16 validity固定true，person raw/status派生规则不变。旧API/trace不变；一般sort flags/vtable/分配失败、route/target-force、empty-corps/force灭亡、其他event/base/capture、stock/Vanilla与全局RNG继续open。
