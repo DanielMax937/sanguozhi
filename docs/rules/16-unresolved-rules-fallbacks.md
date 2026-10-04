@@ -4808,3 +4808,8 @@ type RuleEvidence = {
 ### P0-60 notification/return尾的可变边界
 
 [95-mission-notification-tail.md](95-mission-notification-tail.md)直接执行已知通知gate、mission/reset、acted-bit、dirty、active-list尾追加与duration写入。presentation/nonnull observer/完整004BF6F0用完整阶段before→after或原子reject；S2 query267 additionally绑定返回布尔值和可变frame/RNG，不猜纯查询。距离为source/stage/getter-pointer绑定的-1..255结果观察。固定slot/命名data域、全before、顺序index、实参、missing/unused检查防止误用旧观察；RNG未知为null，同状态不等于零消费。无implicit identity transition，旧API和trace不变；组合需新版本。
+
+
+### P0-61单事务event8/14与已知handler/tail组合
+
+[96-mission-event-composition.md](96-mission-event-composition.md)使用严格共享canonical frame、直接primitive adapters与单次原子提交，顺序执行004BBAA0→004A8110/predicate/handler/notification/return-tail→004BA1D0(8/14无操作)→fresh004EC870/非空observer。callStack绑定source/event/复制列表/visit/captured mission及saved current/target/raw44/home/distance；所有未知效果仍明确可变观察或整次reject，不默认非干预。旧API/trace不变；完整004BF6F0/list/role递归、empty-corps/force灭亡、base销毁、其他event IDs、stock/Vanilla与全局RNG继续open。
