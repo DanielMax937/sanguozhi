@@ -4798,3 +4798,8 @@ type RuleEvidence = {
 ```
 
 并且 simulation report 应输出本局实际触发过多少次 `provisional-engine-rule`。这样 Agent 对局可以运行，但研究者能明确知道哪些结果依赖我们的工程假设。
+
+
+### P0-59 event8/14任务监听的可变tail观察
+
+[94-mission-event-listeners.md](94-mission-event-listeners.md)提供独立新API。已知注册/列表遍历/predicate/handler入口gate直接投影；tail005B6D87或005CFBEB只允许明确whole-frame观察或整次reject。frame绑定source/event/visit/person/captured mission/saved current与target/精确before，允许修改任务、列表、执行人、所有已提供data和RNG状态；无默认identity transition。missing/unused/stale frame报错且无半提交。opaque data是声明观察域，不冒充完整内存；观察真实性/可达性不由hash证明。未知随机计数为null，不因首末state相同而记零。旧trace不变，完整return/role/event与后置observer仍待新版本组合。

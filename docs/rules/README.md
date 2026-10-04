@@ -7,6 +7,8 @@
 
 ## 最新审计入口
 
+新增[P0-59 event8/14任务监听](94-mission-event-listeners.md)：44slot注册、live列表/任务分派、23/8与24/14 predicate及handler gate；成功tail用完整阶段观察或原子拒绝，绝不默认非干预。完整return/角色/后置observer仍open。`python scripts/check_mission_event_listener_source.py`与`python scripts/check_mission_event_listener_profile.py`。
+
 新增[P0-58稳定非空军团/太守角色协调](93-legion-role-reconciliation.md)：独立004BE2A0稳定分支与004BCA30(refresh=0)，不同比较器、原roster顺序、live身份变化与event8/14阶段账本；完整监听/force/返回组合仍open。`python scripts/check_legion_role_source.py`与`python scripts/check_legion_role_reconciliation_profile.py`。
 
 新增[P0-55能力培养任务取消](90-special-mission-cancellation.md)：41..43有序actor/建筑/98培养记录gate，无actual-location valid gate；home通知与troop/home=-1边界、独立原子API及重放。完整return/callback和stock仍open。`python scripts/check_special_mission_cancellation_profile.py`与`python scripts/check_special_mission_cancellation_evidence.py`。

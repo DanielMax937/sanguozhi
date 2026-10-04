@@ -2,7 +2,15 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-58稳定非空军团与太守角色协调
+## 最新完成：P0-59 event8/14任务监听与显式可变tail观察
+
+[正文](94-mission-event-listeners.md) · [结构化证据](../sources/mission-event-listeners.json)。基线main `de7f0218eefe528687b82c9659feeee1de77b8a3`（PR #16已合）。
+
+新独立API恢复004A8110→005B9D30：44slot注册、copied-active节点序/重复、live executing/mission、仅mission23/event8与mission24/event14 predicate、类型/valid/ID/rawkind门及独立handler入口gate。CITY与building对象分开，handler0仍dispatcher1；成功tail以source/event/stage/saved-pointer/full-frame before→after替换或整次reject，允许任务/active/executing/data/RNG变化，不默认callback非干预。旧API/trace不动；完整004BBAA0后置observer与return/role组合仍open。
+
+两源各169范围/105code/64data，合计22,202 raw bytes；完整IDB指纹、独立raw-ID1与text byte hash全过，169对选段全同。14source与34model测试含768独立oracle/JSON重放通过。完整回归88条命令零失败：TypeScript、85 Node、85 Python checker与2 demos；独立审阅通过：14文件/index一致，338范围/22,202bytes另行stdlib raw-ID1核对；全部回归重跑及512 evolving-frame/1,241可变tail、512 JSON replay、1,536证据/RNG重签篡改拒绝与10边界preflight测试通过，无待修阻断。发布前仅补充本审阅结论；合并后main仍须全测。S1/S2均MOD关联，recorded EXE hash非binary认证；clean stock/Vanilla/force灭亡/空军团/真实存档与全局RNG仍open。
+
+## 历史完成：P0-58稳定非空军团与太守角色协调
 
 [正文](93-legion-role-reconciliation.md) · [结构化证据](../sources/legion-role-reconciliation.json)。基线main `6d62e86caddd50887b4d4792cb1918526e980722`（PR #15已合）。
 
