@@ -1,0 +1,36 @@
+00588CB0  56                             push     esi
+00588CB1  8b f1                          mov      esi, ecx
+00588CB3  e8 c8 50 ff ff                 call     0x57dd80 ; sub_57dd80
+00588CB8  85 c0                          test     eax, eax
+00588CBA  74 27                          je       0x588ce3
+00588CBC  8b ce                          mov      ecx, esi
+00588CBE  e8 fd 4e ff ff                 call     0x57dbc0 ; sub_57dbc0
+00588CC3  8b 44 24 08                    mov      eax, dword ptr [esp + 8]
+00588CC7  8b ce                          mov      ecx, esi
+00588CC9  c7 46 4c 03 00 00 00           mov      dword ptr [esi + 0x4c], 3
+00588CD0  89 46 48                       mov      dword ptr [esi + 0x48], eax
+00588CD3  e8 f8 4e ff ff                 call     0x57dbd0 ; sub_57dbd0
+00588CD8  8b 16                          mov      edx, dword ptr [esi]
+00588CDA  8b ce                          mov      ecx, esi
+00588CDC  ff 52 10                       call     dword ptr [edx + 0x10]
+00588CDF  5e                             pop      esi
+00588CE0  c2 04 00                       ret      4
+00588CE3  57                             push     edi
+00588CE4  8b 7c 24 0c                    mov      edi, dword ptr [esp + 0xc]
+00588CE8  57                             push     edi
+00588CE9  b9 50 93 6a 09                 mov      ecx, 0x96a9350
+00588CEE  e8 3d 2b 02 00                 call     0x5ab830 ; sub_5ab830
+00588CF3  57                             push     edi
+00588CF4  b9 58 19 20 07                 mov      ecx, 0x7201958
+00588CF9  e8 c2 8a f0 ff                 call     0x4917c0 ; sub_4917c0
+00588CFE  50                             push     eax
+00588CFF  e8 9c 73 01 00                 call     0x5a00a0 ; sub_5a00a0
+00588D04  83 c4 04                       add      esp, 4
+00588D07  57                             push     edi
+00588D08  b9 5c 89 99 07                 mov      ecx, 0x799895c
+00588D0D  e8 be a3 f1 ff                 call     0x4a30d0 ; sub_4a30d0
+00588D12  8b ce                          mov      ecx, esi
+00588D14  e8 b7 58 ff ff                 call     0x57e5d0 ; sub_57e5d0
+00588D19  5f                             pop      edi
+00588D1A  5e                             pop      esi
+00588D1B  c2 04 00                       ret      4

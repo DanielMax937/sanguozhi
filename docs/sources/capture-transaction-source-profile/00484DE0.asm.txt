@@ -1,0 +1,17 @@
+00484DE0  83 c8 ff                       or       eax, 0xffffffff
+00484DE3  89 41 40                       mov      dword ptr [ecx + 0x40], eax
+00484DE6  89 41 44                       mov      dword ptr [ecx + 0x44], eax
+00484DE9  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00484DED  85 c0                          test     eax, eax
+00484DEF  7c 0d                          jl       0x484dfe
+00484DF1  3d 4b 04 00 00                 cmp      eax, 0x44b
+00484DF6  7f 06                          jg       0x484dfe
+00484DF8  89 41 40                       mov      dword ptr [ecx + 0x40], eax
+00484DFB  c2 08 00                       ret      8
+00484DFE  8b 44 24 08                    mov      eax, dword ptr [esp + 8]
+00484E02  85 c0                          test     eax, eax
+00484E04  7c 08                          jl       0x484e0e
+00484E06  83 f8 29                       cmp      eax, 0x29
+00484E09  7f 03                          jg       0x484e0e
+00484E0B  89 41 44                       mov      dword ptr [ecx + 0x44], eax
+00484E0E  c2 08 00                       ret      8

@@ -1,0 +1,47 @@
+00487B30  56                              push     esi
+00487B31  8b f1                           mov      esi, ecx
+00487B33  8b 46 08                        mov      eax, dword ptr [esi + 8]
+00487B36  85 c0                           test     eax, eax
+00487B38  7c 19                           jl       0x487b53
+00487B3A  83 f8 3f                        cmp      eax, 0x3f
+00487B3D  7f 14                           jg       0x487b53
+00487B3F  50                              push     eax
+00487B40  b9 58 19 20 07                  mov      ecx, 0x7201958
+00487B45  e8 46 90 00 00                  call     0x490b90 ; sub_490b90
+00487B4A  83 b8 b4 00 00 00 01            cmp      dword ptr [eax + 0xb4], 1
+00487B51  74 59                           je       0x487bac
+00487B53  8b 46 08                        mov      eax, dword ptr [esi + 8]
+00487B56  83 f8 18                        cmp      eax, 0x18
+00487B59  74 2d                           je       0x487b88
+00487B5B  85 c0                           test     eax, eax
+00487B5D  7c 18                           jl       0x487b77
+00487B5F  83 f8 3f                        cmp      eax, 0x3f
+00487B62  7f 13                           jg       0x487b77
+00487B64  50                              push     eax
+00487B65  b9 58 19 20 07                  mov      ecx, 0x7201958
+00487B6A  e8 21 90 00 00                  call     0x490b90 ; sub_490b90
+00487B6F  8b 80 b4 00 00 00               mov      eax, dword ptr [eax + 0xb4]
+00487B75  eb 03                           jmp      0x487b7a
+00487B77  83 c8 ff                        or       eax, 0xffffffff
+00487B7A  33 c9                           xor      ecx, ecx
+00487B7C  83 f8 03                        cmp      eax, 3
+00487B7F  0f 94 c1                        sete     cl
+00487B82  8b c1                           mov      eax, ecx
+00487B84  85 c0                           test     eax, eax
+00487B86  75 24                           jne      0x487bac
+00487B88  8b 46 08                        mov      eax, dword ptr [esi + 8]
+00487B8B  85 c0                           test     eax, eax
+00487B8D  7c 19                           jl       0x487ba8
+00487B8F  83 f8 3f                        cmp      eax, 0x3f
+00487B92  7f 14                           jg       0x487ba8
+00487B94  50                              push     eax
+00487B95  b9 58 19 20 07                  mov      ecx, 0x7201958
+00487B9A  e8 f1 8f 00 00                  call     0x490b90 ; sub_490b90
+00487B9F  83 b8 b4 00 00 00 02            cmp      dword ptr [eax + 0xb4], 2
+00487BA6  74 04                           je       0x487bac
+00487BA8  33 c0                           xor      eax, eax
+00487BAA  5e                              pop      esi
+00487BAB  c3                              ret
+00487BAC  b8 01 00 00 00                  mov      eax, 1
+00487BB1  5e                              pop      esi
+00487BB2  c3                              ret

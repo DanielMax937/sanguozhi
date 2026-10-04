@@ -1,0 +1,76 @@
+004876A0  56                             push     esi
+004876A1  8b f1                          mov      esi, ecx
+004876A3  56                             push     esi
+004876A4  b9 58 19 20 07                 mov      ecx, 0x7201958
+004876A9  e8 c2 a0 00 00                 call     0x491770 ; sub_491770
+004876AE  8b 76 08                       mov      esi, dword ptr [esi + 8]
+004876B1  83 ee 00                       sub      esi, 0
+004876B4  0f 84 82 00 00 00              je       0x48773c
+004876BA  4e                             dec      esi
+004876BB  74 43                          je       0x487700
+004876BD  4e                             dec      esi
+004876BE  0f 85 aa 00 00 00              jne      0x48776e
+004876C4  83 f8 34                       cmp      eax, 0x34
+004876C7  7c 0a                          jl       0x4876d3
+004876C9  83 f8 56                       cmp      eax, 0x56
+004876CC  7f 05                          jg       0x4876d3
+004876CE  83 c0 cc                       add      eax, -0x34
+004876D1  eb 03                          jmp      0x4876d6
+004876D3  83 c8 ff                       or       eax, 0xffffffff
+004876D6  50                             push     eax
+004876D7  b9 58 19 20 07                 mov      ecx, 0x7201958
+004876DC  e8 8f 93 00 00                 call     0x490a70 ; sub_490a70
+004876E1  8b f0                          mov      esi, eax
+004876E3  56                             push     esi
+004876E4  e8 47 2f ff ff                 call     0x47a630 ; IsLegalPtr
+004876E9  83 c4 04                       add      esp, 4
+004876EC  85 c0                          test     eax, eax
+004876EE  74 7e                          je       0x48776e
+004876F0  8b 44 24 08                    mov      eax, dword ptr [esp + 8]
+004876F4  50                             push     eax
+004876F5  8b ce                          mov      ecx, esi
+004876F7  e8 34 64 00 00                 call     0x48db30 ; sub_48db30
+004876FC  5e                             pop      esi
+004876FD  c2 04 00                       ret      4
+00487700  83 f8 2a                       cmp      eax, 0x2a
+00487703  7c 0a                          jl       0x48770f
+00487705  83 f8 33                       cmp      eax, 0x33
+00487708  7f 05                          jg       0x48770f
+0048770A  83 c0 d6                       add      eax, -0x2a
+0048770D  eb 03                          jmp      0x487712
+0048770F  83 c8 ff                       or       eax, 0xffffffff
+00487712  50                             push     eax
+00487713  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487718  e8 23 93 00 00                 call     0x490a40 ; sub_490a40
+0048771D  8b f0                          mov      esi, eax
+0048771F  56                             push     esi
+00487720  e8 0b 2f ff ff                 call     0x47a630 ; IsLegalPtr
+00487725  83 c4 04                       add      esp, 4
+00487728  85 c0                          test     eax, eax
+0048772A  74 42                          je       0x48776e
+0048772C  8b 4c 24 08                    mov      ecx, dword ptr [esp + 8]
+00487730  51                             push     ecx
+00487731  8b ce                          mov      ecx, esi
+00487733  e8 f8 bf ff ff                 call     0x483730 ; sub_483730
+00487738  5e                             pop      esi
+00487739  c2 04 00                       ret      4
+0048773C  85 c0                          test     eax, eax
+0048773E  7c 05                          jl       0x487745
+00487740  83 f8 29                       cmp      eax, 0x29
+00487743  7e 03                          jle      0x487748
+00487745  83 c8 ff                       or       eax, 0xffffffff
+00487748  50                             push     eax
+00487749  b9 58 19 20 07                 mov      ecx, 0x7201958
+0048774E  e8 bd 92 00 00                 call     0x490a10 ; GetCityPtr
+00487753  8b f0                          mov      esi, eax
+00487755  56                             push     esi
+00487756  e8 d5 2e ff ff                 call     0x47a630 ; IsLegalPtr
+0048775B  83 c4 04                       add      esp, 4
+0048775E  85 c0                          test     eax, eax
+00487760  74 0c                          je       0x48776e
+00487762  8b 54 24 08                    mov      edx, dword ptr [esp + 8]
+00487766  52                             push     edx
+00487767  8b ce                          mov      ecx, esi
+00487769  e8 62 54 ff ff                 call     0x47cbd0 ; sub_47cbd0
+0048776E  5e                             pop      esi
+0048776F  c2 04 00                       ret      4

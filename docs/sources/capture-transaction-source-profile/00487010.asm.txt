@@ -1,0 +1,30 @@
+00487010  8b 41 08                       mov      eax, dword ptr [ecx + 8]
+00487013  85 c0                          test     eax, eax
+00487015  7c 40                          jl       0x487057
+00487017  83 f8 02                       cmp      eax, 2
+0048701A  7f 3b                          jg       0x487057
+0048701C  8b 01                          mov      eax, dword ptr [ecx]
+0048701E  56                             push     esi
+0048701F  ff 50 40                       call     dword ptr [eax + 0x40]
+00487022  50                             push     eax
+00487023  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487028  e8 73 9a 00 00                 call     0x490aa0 ; GetCountryPtr
+0048702D  8b f0                          mov      esi, eax
+0048702F  56                             push     esi
+00487030  e8 fb 35 ff ff                 call     0x47a630 ; IsLegalPtr
+00487035  83 c4 04                       add      esp, 4
+00487038  85 c0                          test     eax, eax
+0048703A  74 14                          je       0x487050
+0048703C  6a 10                          push     0x10
+0048703E  8b ce                          mov      ecx, esi
+00487040  e8 9b a1 ff ff                 call     0x4811e0 ; sub_4811e0
+00487045  85 c0                          test     eax, eax
+00487047  74 07                          je       0x487050
+00487049  b8 78 00 00 00                 mov      eax, 0x78
+0048704E  5e                             pop      esi
+0048704F  c3                             ret
+00487050  b8 64 00 00 00                 mov      eax, 0x64
+00487055  5e                             pop      esi
+00487056  c3                             ret
+00487057  33 c0                          xor      eax, eax
+00487059  c3                             ret

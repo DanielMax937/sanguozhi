@@ -1,14 +1,25 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-47 training lifecycle implementation and source audit
-> Integration baseline: PR #3/#4 merged; this theme starts at `56f1aa4ad9cf2bff5612b1777e16dc54be0cdefb`
+> Current integration: P0-48 capture caller/collection/finalizer source audit and bounded transaction projection
+> Integration baseline: PR #5 merged; this theme starts at `9462f8cf1e9e24147757f0032aec1f11df579033`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: capture transaction projection
+
+- P0-48: three direct caller cause/mode and directed relationship gate; full ordered world-facility qualification instead of prequalified IDs
+- Neutral finalizer wipes retained resources; ordinary ownership clamps against new-owner durability max before the late half-max floor
+- Ordinary entry weighted morale uses full incoming troops before caps; ordered duplicate cargo slots and overflow are traced
+- All surviving domestic owners refresh from territorial city; completed type30 and candidate overflow remain outside quota
+- Explicit PK reconstruction / separate Vanilla assumption, named replaceable fallback policies, atomic projected state, replay and invalid-input tests
+- Source corpus has 61 byte-verified ranges and 24 S1/S2 comparisons (17 identical / 7 different); both sources are MOD-associated
+- Guide: `docs/rules/83-capture-transaction-source-profile.md`; `python scripts/check_capture_transaction_profile.py`
+- This is a standalone reference transaction, not a battle command integrated into the training sandbox; stock evidence and unmodelled domain effects remain open
 
 ### Completed bounded implementation: PK training lifecycle v2
 
@@ -33,9 +44,10 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-48 audit complete: capture caller/collector/scalar finalizer and tested transaction projection
 - P0-47 audit complete: source-bound training lifecycle and tested compatibility implementation
 - P0-46 audit complete: source-bound capture caller/selector recovered
-- Stock PC-PK1.1 equivalence, full capture finalizer and cross-version validation remain open
+- Stock PC-PK1.1 equivalence, full personnel/force/callback finalizers and cross-version validation remain open
 
 Current source of truth:
 
@@ -63,12 +75,24 @@ Current record: `docs/rules/81-capture-selector-source-profile.md` and
 - PK reuse is `compatibility-reconstruction`; Vanilla reuse is a separate
   `compatibility-assumption`. PS2/Wii are separate open targets
 
+### P0-48 current capture transaction result
+
+Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
+`docs/sources/capture-transaction-source-profile.json`.
+
+- `scripts/capture_transaction_profile.py` now collects world candidates and applies a bounded scalar transaction; the P0-46 selector remains a reused subroutine
+- `004B40C0/004B49B0`, ownership setters, neutral reset, ordinary `004BF1F0` resource projection and `004BCA30` role are recovered within S1
+- Cause mode is not a durability/troops enum; trap relationship arg4 and capture source arg3 remain distinct
+- Source-local normal/neutral durability and ordinary entry integer rounding no longer lack helper bodies
+- Full destruction counters/references, personnel/captive outcomes, force adjustments/extinction, governor ranking and event/AI callbacks still require implementation/evidence
+
 ### Immediate next research
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- Finish caller argument/cause coverage and capture finalizer side effects;
-  the newly found late durability floor is not a full pre-to-post capture formula
+- Continue `004B1280/004B2820` captive/personnel outcomes and full destruction/callback side effects;
+  ordinary scalar finalizers are now recovered, not the whole game transaction
+- Resolve `004C0C30(city,0x26)` city troop-cap predicate and broader ruler/corps/transport entry paths
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open
 
@@ -97,7 +121,7 @@ Do not invent a fixed P0 endpoint.
 
 Likely remaining families include:
 
-- clean-build capture equivalence, complete takeover reset/finalizer, and versioned domestic-facility selection;
+- clean-build capture equivalence, personnel/force/event finalizer effects, and cross-version domestic-facility selection;
 - hiring inner probability body;
 - diplomacy per-build constants;
 - siege durability inner helper bodies;
@@ -110,7 +134,7 @@ Likely remaining families include:
 - deputy blood/spouse/sworn remaining PC opcodes;
 - training clean-stock reset equivalence / complete top scheduler and AP placement;
 - starvation field-troop handler and formula;
-- supply / transport finalizer and morale non-divisible rounding;
+- full supply / transport finalizer; S1 ordinary building-entry rounding now recovered, stock and troop-to-troop rounding remain open;
 - technique research full calculator / difficulty matrix;
 - technique-research completion merit writer / participant distribution;
 - food-raid helper body / RNG / clamps;

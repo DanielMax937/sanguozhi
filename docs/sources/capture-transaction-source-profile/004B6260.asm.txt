@@ -1,0 +1,19 @@
+004B6260  8b 44 24 04                     mov      eax, dword ptr [esp + 4]
+004B6264  56                              push     esi
+004B6265  57                              push     edi
+004B6266  8b f1                           mov      esi, ecx
+004B6268  50                              push     eax
+004B6269  b9 58 19 20 07                  mov      ecx, 0x7201958
+004B626E  e8 2d a8 fd ff                  call     0x490aa0 ; GetCountryPtr
+004B6273  8b 4c 24 10                     mov      ecx, dword ptr [esp + 0x10]
+004B6277  51                              push     ecx
+004B6278  b9 58 19 20 07                  mov      ecx, 0x7201958
+004B627D  8b f8                           mov      edi, eax
+004B627F  e8 1c a8 fd ff                  call     0x490aa0 ; GetCountryPtr
+004B6284  50                              push     eax
+004B6285  57                              push     edi
+004B6286  8b ce                           mov      ecx, esi
+004B6288  e8 e3 fa ff ff                  call     0x4b5d70 ; sub_4b5d70
+004B628D  5f                              pop      edi
+004B628E  5e                              pop      esi
+004B628F  c2 08 00                        ret      8

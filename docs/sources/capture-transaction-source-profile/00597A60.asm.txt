@@ -1,0 +1,372 @@
+00597A60  6a ff                           push     -1
+00597A62  68 5b 3a 73 00                  push     0x733a5b
+00597A67  64 a1 00 00 00 00               mov      eax, dword ptr fs:[0]
+00597A6D  50                              push     eax
+00597A6E  64 89 25 00 00 00 00            mov      dword ptr fs:[0], esp
+00597A75  81 ec 40 01 00 00               sub      esp, 0x140
+00597A7B  8b 84 24 50 01 00 00            mov      eax, dword ptr [esp + 0x150]
+00597A82  53                              push     ebx
+00597A83  8b 18                           mov      ebx, dword ptr [eax]
+00597A85  0f bf c3                        movsx    eax, bx
+00597A88  69 c0 c8 00 00 00               imul     eax, eax, 0xc8
+00597A8E  55                              push     ebp
+00597A8F  8b e9                           mov      ebp, ecx
+00597A91  8b cb                           mov      ecx, ebx
+00597A93  c1 f9 10                        sar      ecx, 0x10
+00597A96  56                              push     esi
+00597A97  03 c1                           add      eax, ecx
+00597A99  8d 34 80                        lea      esi, [eax + eax*4]
+00597A9C  8d 34 b5 68 0e fb 06            lea      esi, [esi*4 + 0x6fb0e68]
+00597AA3  57                              push     edi
+00597AA4  8b ce                           mov      ecx, esi
+00597AA6  89 5c 24 14                     mov      dword ptr [esp + 0x14], ebx
+00597AAA  e8 91 c0 ee ff                  call     0x483b40 ; sub_483b40
+00597AAF  8b f8                           mov      edi, eax
+00597AB1  8b 46 04                        mov      eax, dword ptr [esi + 4]
+00597AB4  83 e0 1f                        and      eax, 0x1f
+00597AB7  83 f8 07                        cmp      eax, 7
+00597ABA  74 05                           je       0x597ac1
+00597ABC  83 f8 08                        cmp      eax, 8
+00597ABF  75 0a                           jne      0x597acb
+00597AC1  8b 16                           mov      edx, dword ptr [esi]
+00597AC3  80 e2 03                        and      dl, 3
+00597AC6  80 fa 01                        cmp      dl, 1
+00597AC9  75 15                           jne      0x597ae0
+00597ACB  6a 03                           push     3
+00597ACD  e8 7e a6 ed ff                  call     0x472150 ; Random_Smallerthan
+00597AD2  0f b7 c0                        movzx    eax, ax
+00597AD5  40                              inc      eax
+00597AD6  50                              push     eax
+00597AD7  53                              push     ebx
+00597AD8  e8 93 8c 00 00                  call     0x5a0770 ; sub_5a0770
+00597ADD  83 c4 0c                        add      esp, 0xc
+00597AE0  57                              push     edi
+00597AE1  e8 4a 2b ee ff                  call     0x47a630 ; IsLegalPtr
+00597AE6  83 c4 04                        add      esp, 4
+00597AE9  85 c0                           test     eax, eax
+00597AEB  0f 84 f1 03 00 00               je       0x597ee2
+00597AF1  8b 8c 24 70 01 00 00            mov      ecx, dword ptr [esp + 0x170]
+00597AF8  8b 94 24 60 01 00 00            mov      edx, dword ptr [esp + 0x160]
+00597AFF  8b b4 24 68 01 00 00            mov      esi, dword ptr [esp + 0x168]
+00597B06  8b 42 08                        mov      eax, dword ptr [edx + 8]
+00597B09  51                              push     ecx
+00597B0A  57                              push     edi
+00597B0B  56                              push     esi
+00597B0C  50                              push     eax
+00597B0D  8d 4c 24 60                     lea      ecx, [esp + 0x60]
+00597B11  51                              push     ecx
+00597B12  e8 89 9a 01 00                  call     0x5b15a0 ; sub_5b15a0
+00597B17  8b 94 24 84 01 00 00            mov      edx, dword ptr [esp + 0x184]
+00597B1E  52                              push     edx
+00597B1F  57                              push     edi
+00597B20  8d 84 24 ec 00 00 00            lea      eax, [esp + 0xec]
+00597B27  56                              push     esi
+00597B28  50                              push     eax
+00597B29  e8 62 96 01 00                  call     0x5b1190 ; sub_5b1190
+00597B2E  8b 17                           mov      edx, dword ptr [edi]
+00597B30  83 c4 24                        add      esp, 0x24
+00597B33  6a 0b                           push     0xb
+00597B35  8b cf                           mov      ecx, edi
+00597B37  ff 52 2c                        call     dword ptr [edx + 0x2c]
+00597B3A  85 c0                           test     eax, eax
+00597B3C  74 3e                           je       0x597b7c
+00597B3E  8b 1f                           mov      ebx, dword ptr [edi]
+00597B40  e8 1b 13 ed ff                  call     0x468e60 ; sub_468e60
+00597B45  50                              push     eax
+00597B46  8b cf                           mov      ecx, edi
+00597B48  ff 53 2c                        call     dword ptr [ebx + 0x2c]
+00597B4B  f7 d8                           neg      eax
+00597B4D  8d 8c 24 d0 00 00 00            lea      ecx, [esp + 0xd0]
+00597B54  51                              push     ecx
+00597B55  8b 8c 24 64 01 00 00            mov      ecx, dword ptr [esp + 0x164]
+00597B5C  1b c0                           sbb      eax, eax
+00597B5E  8d 54 24 54                     lea      edx, [esp + 0x54]
+00597B62  52                              push     edx
+00597B63  23 c7                           and      eax, edi
+00597B65  50                              push     eax
+00597B66  8b 84 24 78 01 00 00            mov      eax, dword ptr [esp + 0x178]
+00597B6D  50                              push     eax
+00597B6E  56                              push     esi
+00597B6F  51                              push     ecx
+00597B70  8b cd                           mov      ecx, ebp
+00597B72  e8 d9 fc ff ff                  call     0x597850 ; sub_597850
+00597B77  e9 66 03 00 00                  jmp      0x597ee2
+00597B7C  8b 37                           mov      esi, dword ptr [edi]
+00597B7E  e8 ed b8 fd ff                  call     0x573470 ; __RTC_NumErrors_3
+00597B83  50                              push     eax
+00597B84  8b cf                           mov      ecx, edi
+00597B86  ff 56 2c                        call     dword ptr [esi + 0x2c]
+00597B89  8b f0                           mov      esi, eax
+00597B8B  f7 de                           neg      esi
+00597B8D  1b f6                           sbb      esi, esi
+00597B8F  23 f7                           and      esi, edi
+00597B91  8b bc 24 6c 01 00 00            mov      edi, dword ptr [esp + 0x16c]
+00597B98  57                              push     edi
+00597B99  e8 92 2a ee ff                  call     0x47a630 ; IsLegalPtr
+00597B9E  83 c4 04                        add      esp, 4
+00597BA1  85 c0                           test     eax, eax
+00597BA3  74 21                           je       0x597bc6
+00597BA5  8b 16                           mov      edx, dword ptr [esi]
+00597BA7  8b ce                           mov      ecx, esi
+00597BA9  ff 52 40                        call     dword ptr [edx + 0x40]
+00597BAC  50                              push     eax
+00597BAD  8b cf                           mov      ecx, edi
+00597BAF  e8 4c 99 ee ff                  call     0x481500 ; sub_481500
+00597BB4  85 c0                           test     eax, eax
+00597BB6  74 0e                           je       0x597bc6
+00597BB8  8b 84 24 60 01 00 00            mov      eax, dword ptr [esp + 0x160]
+00597BBF  c7 40 0c 01 00 00 00            mov      dword ptr [eax + 0xc], 1
+00597BC6  53                              push     ebx
+00597BC7  e8 f4 8a 00 00                  call     0x5a06c0 ; sub_5a06c0
+00597BCC  83 c4 04                        add      esp, 4
+00597BCF  8b ce                           mov      ecx, esi
+00597BD1  89 44 24 10                     mov      dword ptr [esp + 0x10], eax
+00597BD5  e8 56 fe ee ff                  call     0x487a30 ; sub_487a30
+00597BDA  85 c0                           test     eax, eax
+00597BDC  74 19                           je       0x597bf7
+00597BDE  8b 46 14                        mov      eax, dword ptr [esi + 0x14]
+00597BE1  85 c0                           test     eax, eax
+00597BE3  75 12                           jne      0x597bf7
+00597BE5  6a 00                           push     0
+00597BE7  56                              push     esi
+00597BE8  b9 5c 89 99 07                  mov      ecx, 0x799895c
+00597BED  e8 be 8d f1 ff                  call     0x4b09b0 ; sub_4b09b0
+00597BF2  e9 eb 02 00 00                  jmp      0x597ee2
+00597BF7  8b ce                           mov      ecx, esi
+00597BF9  e8 b2 fe ee ff                  call     0x487ab0 ; sub_487ab0
+00597BFE  85 c0                           test     eax, eax
+00597C00  0f 84 c9 01 00 00               je       0x597dcf
+00597C06  8b 46 14                        mov      eax, dword ptr [esi + 0x14]
+00597C09  85 c0                           test     eax, eax
+00597C0B  0f 84 be 01 00 00               je       0x597dcf
+00597C11  8b 7e 08                        mov      edi, dword ptr [esi + 8]
+00597C14  6a 00                           push     0
+00597C16  56                              push     esi
+00597C17  b9 5c 89 99 07                  mov      ecx, 0x799895c
+00597C1C  89 7c 24 24                     mov      dword ptr [esp + 0x24], edi
+00597C20  e8 8b 8d f1 ff                  call     0x4b09b0 ; sub_4b09b0
+00597C25  8d 47 f0                        lea      eax, [edi - 0x10]
+00597C28  83 f8 06                        cmp      eax, 6
+00597C2B  0f 87 b1 02 00 00               ja       0x597ee2
+00597C31  ff 24 85 00 7f 59 00            jmp      dword ptr [eax*4 + 0x597f00]
+00597C38  8b 44 24 10                     mov      eax, dword ptr [esp + 0x10]
+00597C3C  85 c0                           test     eax, eax
+00597C3E  75 2c                           jne      0x597c6c
+00597C40  6a 00                           push     0
+00597C42  53                              push     ebx
+00597C43  6a 0f                           push     0xf
+00597C45  8b cd                           mov      ecx, ebp
+00597C47  e8 74 1c ff ff                  call     0x5898c0 ; sub_5898c0
+00597C4C  53                              push     ebx
+00597C4D  6a 3d                           push     0x3d
+00597C4F  8b cd                           mov      ecx, ebp
+00597C51  e8 ba 1b ff ff                  call     0x589810 ; sub_589810
+00597C56  6a 64                           push     0x64
+00597C58  e8 f3 a4 ed ff                  call     0x472150 ; Random_Smallerthan
+00597C5D  0f b7 c8                        movzx    ecx, ax
+00597C60  83 c1 64                        add      ecx, 0x64
+00597C63  51                              push     ecx
+00597C64  e8 b7 e3 ff ff                  call     0x596020 ; sub_596020
+00597C69  83 c4 08                        add      esp, 8
+00597C6C  53                              push     ebx
+00597C6D  6a 01                           push     1
+00597C6F  8d 54 24 28                     lea      edx, [esp + 0x28]
+00597C73  52                              push     edx
+00597C74  b9 68 0e fb 06                  mov      ecx, 0x6fb0e68
+00597C79  c7 44 24 1c 00 00 00 00         mov      dword ptr [esp + 0x1c], 0
+00597C81  e8 fa bf ee ff                  call     0x483c80 ; sub_483c80
+00597C86  85 c0                           test     eax, eax
+00597C88  7e 3d                           jle      0x597cc7
+00597C8A  8b b4 24 64 01 00 00            mov      esi, dword ptr [esp + 0x164]
+00597C91  8d 6c 24 20                     lea      ebp, [esp + 0x20]
+00597C95  89 44 24 14                     mov      dword ptr [esp + 0x14], eax
+00597C99  8d a4 24 00 00 00 00            lea      esp, [esp]
+00597CA0  8b 45 00                        mov      eax, dword ptr [ebp]
+00597CA3  57                              push     edi
+00597CA4  53                              push     ebx
+00597CA5  50                              push     eax
+00597CA6  e8 65 e6 ff ff                  call     0x596310 ; sub_596310
+00597CAB  83 c4 0c                        add      esp, 0xc
+00597CAE  85 c0                           test     eax, eax
+00597CB0  74 07                           je       0x597cb9
+00597CB2  ff 44 24 10                     inc      dword ptr [esp + 0x10]
+00597CB6  83 c6 10                        add      esi, 0x10
+00597CB9  8b 44 24 14                     mov      eax, dword ptr [esp + 0x14]
+00597CBD  83 c5 04                        add      ebp, 4
+00597CC0  48                              dec      eax
+00597CC1  89 44 24 14                     mov      dword ptr [esp + 0x14], eax
+00597CC5  75 d9                           jne      0x597ca0
+00597CC7  8b 44 24 10                     mov      eax, dword ptr [esp + 0x10]
+00597CCB  e9 14 02 00 00                  jmp      0x597ee4
+00597CD0  8b 44 24 10                     mov      eax, dword ptr [esp + 0x10]
+00597CD4  85 c0                           test     eax, eax
+00597CD6  75 2c                           jne      0x597d04
+00597CD8  6a 00                           push     0
+00597CDA  53                              push     ebx
+00597CDB  6a 0f                           push     0xf
+00597CDD  8b cd                           mov      ecx, ebp
+00597CDF  e8 dc 1b ff ff                  call     0x5898c0 ; sub_5898c0
+00597CE4  53                              push     ebx
+00597CE5  6a 3e                           push     0x3e
+00597CE7  8b cd                           mov      ecx, ebp
+00597CE9  e8 22 1b ff ff                  call     0x589810 ; sub_589810
+00597CEE  6a 64                           push     0x64
+00597CF0  e8 5b a4 ed ff                  call     0x472150 ; Random_Smallerthan
+00597CF5  0f b7 c8                        movzx    ecx, ax
+00597CF8  83 c1 64                        add      ecx, 0x64
+00597CFB  51                              push     ecx
+00597CFC  e8 1f e3 ff ff                  call     0x596020 ; sub_596020
+00597D01  83 c4 08                        add      esp, 8
+00597D04  8b b4 24 64 01 00 00            mov      esi, dword ptr [esp + 0x164]
+00597D0B  c7 44 24 10 00 00 00 00         mov      dword ptr [esp + 0x10], 0
+00597D13  33 c0                           xor      eax, eax
+00597D15  53                              push     ebx
+00597D16  8d 68 01                        lea      ebp, [eax + 1]
+00597D19  55                              push     ebp
+00597D1A  8d 54 24 28                     lea      edx, [esp + 0x28]
+00597D1E  52                              push     edx
+00597D1F  b9 68 0e fb 06                  mov      ecx, 0x6fb0e68
+00597D24  e8 57 bf ee ff                  call     0x483c80 ; sub_483c80
+00597D29  85 c0                           test     eax, eax
+00597D2B  7e 32                           jle      0x597d5f
+00597D2D  8d 7c 24 20                     lea      edi, [esp + 0x20]
+00597D31  89 44 24 14                     mov      dword ptr [esp + 0x14], eax
+00597D35  8b 44 24 1c                     mov      eax, dword ptr [esp + 0x1c]
+00597D39  8b 0f                           mov      ecx, dword ptr [edi]
+00597D3B  50                              push     eax
+00597D3C  53                              push     ebx
+00597D3D  51                              push     ecx
+00597D3E  e8 cd e5 ff ff                  call     0x596310 ; sub_596310
+00597D43  83 c4 0c                        add      esp, 0xc
+00597D46  85 c0                           test     eax, eax
+00597D48  74 07                           je       0x597d51
+00597D4A  ff 44 24 10                     inc      dword ptr [esp + 0x10]
+00597D4E  83 c6 10                        add      esi, 0x10
+00597D51  8b 44 24 14                     mov      eax, dword ptr [esp + 0x14]
+00597D55  83 c7 04                        add      edi, 4
+00597D58  48                              dec      eax
+00597D59  89 44 24 14                     mov      dword ptr [esp + 0x14], eax
+00597D5D  75 d6                           jne      0x597d35
+00597D5F  8b c5                           mov      eax, ebp
+00597D61  83 f8 02                        cmp      eax, 2
+00597D64  7c af                           jl       0x597d15
+00597D66  8b 44 24 10                     mov      eax, dword ptr [esp + 0x10]
+00597D6A  e9 75 01 00 00                  jmp      0x597ee4
+00597D6F  8b 84 24 60 01 00 00            mov      eax, dword ptr [esp + 0x160]
+00597D76  8b 8c 24 64 01 00 00            mov      ecx, dword ptr [esp + 0x164]
+00597D7D  6a 09                           push     9
+00597D7F  57                              push     edi
+00597D80  6a 03                           push     3
+00597D82  e8 99 e8 ff ff                  call     0x596620 ; sub_596620
+00597D87  83 c4 0c                        add      esp, 0xc
+00597D8A  e9 55 01 00 00                  jmp      0x597ee4
+00597D8F  8b 84 24 60 01 00 00            mov      eax, dword ptr [esp + 0x160]
+00597D96  8b 8c 24 64 01 00 00            mov      ecx, dword ptr [esp + 0x164]
+00597D9D  6a 0a                           push     0xa
+00597D9F  57                              push     edi
+00597DA0  6a 05                           push     5
+00597DA2  e8 79 e8 ff ff                  call     0x596620 ; sub_596620
+00597DA7  83 c4 0c                        add      esp, 0xc
+00597DAA  e9 35 01 00 00                  jmp      0x597ee4
+00597DAF  8b 84 24 60 01 00 00            mov      eax, dword ptr [esp + 0x160]
+00597DB6  8b 8c 24 64 01 00 00            mov      ecx, dword ptr [esp + 0x164]
+00597DBD  6a 0b                           push     0xb
+00597DBF  57                              push     edi
+00597DC0  6a 04                           push     4
+00597DC2  e8 59 e8 ff ff                  call     0x596620 ; sub_596620
+00597DC7  83 c4 0c                        add      esp, 0xc
+00597DCA  e9 15 01 00 00                  jmp      0x597ee4
+00597DCF  8b 54 24 60                     mov      edx, dword ptr [esp + 0x60]
+00597DD3  8b 84 24 e0 00 00 00            mov      eax, dword ptr [esp + 0xe0]
+00597DDA  03 c2                           add      eax, edx
+00597DDC  f7 d8                           neg      eax
+00597DDE  50                              push     eax
+00597DDF  56                              push     esi
+00597DE0  b9 5c 89 99 07                  mov      ecx, 0x799895c
+00597DE5  e8 76 65 f1 ff                  call     0x4ae360 ; sub_4ae360
+00597DEA  8b 4c 24 5c                     mov      ecx, dword ptr [esp + 0x5c]
+00597DEE  8b 94 24 dc 00 00 00            mov      edx, dword ptr [esp + 0xdc]
+00597DF5  03 d1                           add      edx, ecx
+00597DF7  f7 da                           neg      edx
+00597DF9  52                              push     edx
+00597DFA  56                              push     esi
+00597DFB  b9 5c 89 99 07                  mov      ecx, 0x799895c
+00597E00  8b f8                           mov      edi, eax
+00597E02  e8 b9 65 f1 ff                  call     0x4ae3c0 ; sub_4ae3c0
+00597E07  8b 4c 24 10                     mov      ecx, dword ptr [esp + 0x10]
+00597E0B  85 c9                           test     ecx, ecx
+00597E0D  75 16                           jne      0x597e25
+00597E0F  53                              push     ebx
+00597E10  6a 01                           push     1
+00597E12  50                              push     eax
+00597E13  8b cd                           mov      ecx, ebp
+00597E15  e8 76 0d ff ff                  call     0x588b90 ; sub_588b90
+00597E1A  53                              push     ebx
+00597E1B  6a 00                           push     0
+00597E1D  57                              push     edi
+00597E1E  8b cd                           mov      ecx, ebp
+00597E20  e8 6b 0d ff ff                  call     0x588b90 ; sub_588b90
+00597E25  66 83 7e 10 00                  cmp      word ptr [esi + 0x10], 0
+00597E2A  0f 85 b2 00 00 00               jne      0x597ee2
+00597E30  8b ce                           mov      ecx, esi
+00597E32  e8 d9 ff ee ff                  call     0x487e10 ; sub_487e10
+00597E37  85 c0                           test     eax, eax
+00597E39  74 74                           je       0x597eaf
+00597E3B  8b 9c 24 6c 01 00 00            mov      ebx, dword ptr [esp + 0x16c]
+00597E42  53                              push     ebx
+00597E43  b9 58 19 20 07                  mov      ecx, 0x7201958
+00597E48  e8 23 94 ef ff                  call     0x491270 ; sub_491270
+00597E4D  8b f8                           mov      edi, eax
+00597E4F  8b 06                           mov      eax, dword ptr [esi]
+00597E51  8b ce                           mov      ecx, esi
+00597E53  ff 50 40                        call     dword ptr [eax + 0x40]
+00597E56  50                              push     eax
+00597E57  57                              push     edi
+00597E58  b9 5c 89 99 07                  mov      ecx, 0x799895c
+00597E5D  e8 fe e3 f1 ff                  call     0x4b6260 ; sub_4b6260
+00597E62  85 c0                           test     eax, eax
+00597E64  75 7c                           jne      0x597ee2
+00597E66  8d 4c 24 18                     lea      ecx, [esp + 0x18]
+00597E6A  e8 21 90 ff ff                  call     0x590e90 ; sub_590e90
+00597E6F  56                              push     esi
+00597E70  53                              push     ebx
+00597E71  c7 84 24 60 01 00 00 00 00 00 00  mov      dword ptr [esp + 0x160], 0
+00597E7C  e8 7f 7c 00 00                  call     0x59fb00 ; sub_59fb00
+00597E81  8b 8c 24 70 01 00 00            mov      ecx, dword ptr [esp + 0x170]
+00597E88  83 c4 08                        add      esp, 8
+00597E8B  6a 01                           push     1
+00597E8D  51                              push     ecx
+00597E8E  56                              push     esi
+00597E8F  b9 5c 89 99 07                  mov      ecx, 0x799895c
+00597E94  e8 07 ae f1 ff                  call     0x4b2ca0 ; sub_4b2ca0
+00597E99  8d 4c 24 18                     lea      ecx, [esp + 0x18]
+00597E9D  c7 84 24 58 01 00 00 ff ff ff ff  mov      dword ptr [esp + 0x158], 0xffffffff
+00597EA8  e8 33 90 ff ff                  call     0x590ee0 ; sub_590ee0
+00597EAD  eb 33                           jmp      0x597ee2
+00597EAF  8b 44 24 10                     mov      eax, dword ptr [esp + 0x10]
+00597EB3  85 c0                           test     eax, eax
+00597EB5  75 16                           jne      0x597ecd
+00597EB7  6a 00                           push     0
+00597EB9  56                              push     esi
+00597EBA  6a 5c                           push     0x5c
+00597EBC  8b cd                           mov      ecx, ebp
+00597EBE  e8 fd 1a ff ff                  call     0x5899c0 ; sub_5899c0
+00597EC3  56                              push     esi
+00597EC4  6a 3b                           push     0x3b
+00597EC6  8b cd                           mov      ecx, ebp
+00597EC8  e8 b3 1a ff ff                  call     0x589980 ; sub_589980
+00597ECD  8b 94 24 68 01 00 00            mov      edx, dword ptr [esp + 0x168]
+00597ED4  6a 00                           push     0
+00597ED6  52                              push     edx
+00597ED7  56                              push     esi
+00597ED8  b9 5c 89 99 07                  mov      ecx, 0x799895c
+00597EDD  e8 1e 58 f2 ff                  call     0x4bd700 ; sub_4bd700
+00597EE2  33 c0                           xor      eax, eax
+00597EE4  8b 8c 24 50 01 00 00            mov      ecx, dword ptr [esp + 0x150]
+00597EEB  5f                              pop      edi
+00597EEC  5e                              pop      esi
+00597EED  5d                              pop      ebp
+00597EEE  5b                              pop      ebx
+00597EEF  64 89 0d 00 00 00 00            mov      dword ptr fs:[0], ecx
+00597EF6  81 c4 4c 01 00 00               add      esp, 0x14c
+00597EFC  c2 14 00                        ret      0x14

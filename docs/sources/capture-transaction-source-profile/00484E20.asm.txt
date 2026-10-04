@@ -1,0 +1,9 @@
+00484E20  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00484E24  83 f8 ff                       cmp      eax, -1
+00484E27  74 09                          je       0x484e32
+00484E29  85 c0                          test     eax, eax
+00484E2B  7c 08                          jl       0x484e35
+00484E2D  83 f8 02                       cmp      eax, 2
+00484E30  7f 03                          jg       0x484e35
+00484E32  89 41 48                       mov      dword ptr [ecx + 0x48], eax
+00484E35  c2 04 00                       ret      4

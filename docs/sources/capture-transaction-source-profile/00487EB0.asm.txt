@@ -1,0 +1,132 @@
+00487EB0  51                             push     ecx
+00487EB1  56                             push     esi
+00487EB2  8b f1                          mov      esi, ecx
+00487EB4  e8 77 fc ff ff                 call     0x487b30 ; sub_487b30
+00487EB9  85 c0                          test     eax, eax
+00487EBB  74 06                          je       0x487ec3
+00487EBD  8b 46 0c                       mov      eax, dword ptr [esi + 0xc]
+00487EC0  5e                             pop      esi
+00487EC1  59                             pop      ecx
+00487EC2  c3                             ret
+00487EC3  8b 46 08                       mov      eax, dword ptr [esi + 8]
+00487EC6  85 c0                          test     eax, eax
+00487EC8  57                             push     edi
+00487EC9  7c 77                          jl       0x487f42
+00487ECB  83 f8 3f                       cmp      eax, 0x3f
+00487ECE  7f 72                          jg       0x487f42
+00487ED0  50                             push     eax
+00487ED1  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487ED6  e8 b5 8c 00 00                 call     0x490b90 ; sub_490b90
+00487EDB  83 b8 b4 00 00 00 04           cmp      dword ptr [eax + 0xb4], 4
+00487EE2  75 5e                          jne      0x487f42
+00487EE4  8b 06                          mov      eax, dword ptr [esi]
+00487EE6  8b ce                          mov      ecx, esi
+00487EE8  ff 50 3c                       call     dword ptr [eax + 0x3c]
+00487EEB  8b 00                          mov      eax, dword ptr [eax]
+00487EED  89 44 24 08                    mov      dword ptr [esp + 8], eax
+00487EF1  8b 4c 24 08                    mov      ecx, dword ptr [esp + 8]
+00487EF5  0f bf c0                       movsx    eax, ax
+00487EF8  69 c0 c8 00 00 00              imul     eax, eax, 0xc8
+00487EFE  c1 f9 10                       sar      ecx, 0x10
+00487F01  03 c1                          add      eax, ecx
+00487F03  8d 14 80                       lea      edx, [eax + eax*4]
+00487F06  8b 04 95 6c 0e fb 06           mov      eax, dword ptr [edx*4 + 0x6fb0e6c]
+00487F0D  c1 e8 05                       shr      eax, 5
+00487F10  83 e0 7f                       and      eax, 0x7f
+00487F13  50                             push     eax
+00487F14  e8 d7 ba ff ff                 call     0x4839f0 ; GetCityID
+00487F19  83 c4 04                       add      esp, 4
+00487F1C  50                             push     eax
+00487F1D  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487F22  e8 e9 8a 00 00                 call     0x490a10 ; GetCityPtr
+00487F27  8b f8                          mov      edi, eax
+00487F29  57                             push     edi
+00487F2A  e8 01 27 ff ff                 call     0x47a630 ; IsLegalPtr
+00487F2F  83 c4 04                       add      esp, 4
+00487F32  85 c0                          test     eax, eax
+00487F34  74 0c                          je       0x487f42
+00487F36  8b 17                          mov      edx, dword ptr [edi]
+00487F38  8b cf                          mov      ecx, edi
+00487F3A  5f                             pop      edi
+00487F3B  5e                             pop      esi
+00487F3C  83 c4 04                       add      esp, 4
+00487F3F  ff 62 40                       jmp      dword ptr [edx + 0x40]
+00487F42  56                             push     esi
+00487F43  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487F48  e8 23 98 00 00                 call     0x491770 ; sub_491770
+00487F4D  8b 76 08                       mov      esi, dword ptr [esi + 8]
+00487F50  83 ee 00                       sub      esi, 0
+00487F53  74 7a                          je       0x487fcf
+00487F55  4e                             dec      esi
+00487F56  74 3f                          je       0x487f97
+00487F58  4e                             dec      esi
+00487F59  0f 85 a2 00 00 00              jne      0x488001
+00487F5F  83 f8 34                       cmp      eax, 0x34
+00487F62  7c 0a                          jl       0x487f6e
+00487F64  83 f8 56                       cmp      eax, 0x56
+00487F67  7f 05                          jg       0x487f6e
+00487F69  83 c0 cc                       add      eax, -0x34
+00487F6C  eb 03                          jmp      0x487f71
+00487F6E  83 c8 ff                       or       eax, 0xffffffff
+00487F71  50                             push     eax
+00487F72  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487F77  e8 f4 8a 00 00                 call     0x490a70 ; sub_490a70
+00487F7C  8b f0                          mov      esi, eax
+00487F7E  56                             push     esi
+00487F7F  e8 ac 26 ff ff                 call     0x47a630 ; IsLegalPtr
+00487F84  83 c4 04                       add      esp, 4
+00487F87  85 c0                          test     eax, eax
+00487F89  74 76                          je       0x488001
+00487F8B  8b 06                          mov      eax, dword ptr [esi]
+00487F8D  5f                             pop      edi
+00487F8E  8b ce                          mov      ecx, esi
+00487F90  5e                             pop      esi
+00487F91  83 c4 04                       add      esp, 4
+00487F94  ff 60 40                       jmp      dword ptr [eax + 0x40]
+00487F97  83 f8 2a                       cmp      eax, 0x2a
+00487F9A  7c 0a                          jl       0x487fa6
+00487F9C  83 f8 33                       cmp      eax, 0x33
+00487F9F  7f 05                          jg       0x487fa6
+00487FA1  83 c0 d6                       add      eax, -0x2a
+00487FA4  eb 03                          jmp      0x487fa9
+00487FA6  83 c8 ff                       or       eax, 0xffffffff
+00487FA9  50                             push     eax
+00487FAA  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487FAF  e8 8c 8a 00 00                 call     0x490a40 ; sub_490a40
+00487FB4  8b f0                          mov      esi, eax
+00487FB6  56                             push     esi
+00487FB7  e8 74 26 ff ff                 call     0x47a630 ; IsLegalPtr
+00487FBC  83 c4 04                       add      esp, 4
+00487FBF  85 c0                          test     eax, eax
+00487FC1  74 3e                          je       0x488001
+00487FC3  8b 16                          mov      edx, dword ptr [esi]
+00487FC5  5f                             pop      edi
+00487FC6  8b ce                          mov      ecx, esi
+00487FC8  5e                             pop      esi
+00487FC9  83 c4 04                       add      esp, 4
+00487FCC  ff 62 40                       jmp      dword ptr [edx + 0x40]
+00487FCF  85 c0                          test     eax, eax
+00487FD1  7c 05                          jl       0x487fd8
+00487FD3  83 f8 29                       cmp      eax, 0x29
+00487FD6  7e 03                          jle      0x487fdb
+00487FD8  83 c8 ff                       or       eax, 0xffffffff
+00487FDB  50                             push     eax
+00487FDC  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487FE1  e8 2a 8a 00 00                 call     0x490a10 ; GetCityPtr
+00487FE6  8b f0                          mov      esi, eax
+00487FE8  56                             push     esi
+00487FE9  e8 42 26 ff ff                 call     0x47a630 ; IsLegalPtr
+00487FEE  83 c4 04                       add      esp, 4
+00487FF1  85 c0                          test     eax, eax
+00487FF3  74 0c                          je       0x488001
+00487FF5  8b 06                          mov      eax, dword ptr [esi]
+00487FF7  5f                             pop      edi
+00487FF8  8b ce                          mov      ecx, esi
+00487FFA  5e                             pop      esi
+00487FFB  83 c4 04                       add      esp, 4
+00487FFE  ff 60 40                       jmp      dword ptr [eax + 0x40]
+00488001  5f                             pop      edi
+00488002  83 c8 ff                       or       eax, 0xffffffff
+00488005  5e                             pop      esi
+00488006  59                             pop      ecx
+00488007  c3                             ret

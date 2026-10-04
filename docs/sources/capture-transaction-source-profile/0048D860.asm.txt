@@ -1,0 +1,21 @@
+0048D860  8b 01                          mov      eax, dword ptr [ecx]
+0048D862  56                             push     esi
+0048D863  ff 50 40                       call     dword ptr [eax + 0x40]
+0048D866  50                             push     eax
+0048D867  b9 58 19 20 07                 mov      ecx, 0x7201958
+0048D86C  e8 2f 32 00 00                 call     0x490aa0 ; GetCountryPtr
+0048D871  8b f0                          mov      esi, eax
+0048D873  56                             push     esi
+0048D874  e8 b7 cd fe ff                 call     0x47a630 ; IsLegalPtr
+0048D879  83 c4 04                       add      esp, 4
+0048D87C  85 c0                          test     eax, eax
+0048D87E  74 12                          je       0x48d892
+0048D880  6a 21                          push     0x21
+0048D882  8b ce                          mov      ecx, esi
+0048D884  e8 57 39 ff ff                 call     0x4811e0 ; sub_4811e0
+0048D889  85 c0                          test     eax, eax
+0048D88B  b8 80 1a 06 00                 mov      eax, 0x61a80
+0048D890  75 05                          jne      0x48d897
+0048D892  b8 a0 86 01 00                 mov      eax, 0x186a0
+0048D897  5e                             pop      esi
+0048D898  c3                             ret

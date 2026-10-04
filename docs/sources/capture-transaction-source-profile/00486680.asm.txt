@@ -1,0 +1,42 @@
+00486680  8b 41 08                       mov      eax, dword ptr [ecx + 8]
+00486683  83 e8 00                       sub      eax, 0
+00486686  74 4c                          je       0x4866d4
+00486688  48                             dec      eax
+00486689  74 26                          je       0x4866b1
+0048668B  48                             dec      eax
+0048668C  75 5a                          jne      0x4866e8
+0048668E  51                             push     ecx
+0048668F  b9 58 19 20 07                 mov      ecx, 0x7201958
+00486694  e8 d7 b0 00 00                 call     0x491770 ; sub_491770
+00486699  83 f8 34                       cmp      eax, 0x34
+0048669C  7c 4a                          jl       0x4866e8
+0048669E  83 f8 56                       cmp      eax, 0x56
+004866A1  7f 45                          jg       0x4866e8
+004866A3  83 c0 cc                       add      eax, -0x34
+004866A6  78 40                          js       0x4866e8
+004866A8  83 f8 22                       cmp      eax, 0x22
+004866AB  7f 3b                          jg       0x4866e8
+004866AD  83 c0 34                       add      eax, 0x34
+004866B0  c3                             ret
+004866B1  51                             push     ecx
+004866B2  b9 58 19 20 07                 mov      ecx, 0x7201958
+004866B7  e8 b4 b0 00 00                 call     0x491770 ; sub_491770
+004866BC  83 f8 2a                       cmp      eax, 0x2a
+004866BF  7c 27                          jl       0x4866e8
+004866C1  83 f8 33                       cmp      eax, 0x33
+004866C4  7f 22                          jg       0x4866e8
+004866C6  83 c0 d6                       add      eax, -0x2a
+004866C9  78 1d                          js       0x4866e8
+004866CB  83 f8 09                       cmp      eax, 9
+004866CE  7f 18                          jg       0x4866e8
+004866D0  83 c0 2a                       add      eax, 0x2a
+004866D3  c3                             ret
+004866D4  51                             push     ecx
+004866D5  b9 58 19 20 07                 mov      ecx, 0x7201958
+004866DA  e8 91 b0 00 00                 call     0x491770 ; sub_491770
+004866DF  85 c0                          test     eax, eax
+004866E1  7c 05                          jl       0x4866e8
+004866E3  83 f8 29                       cmp      eax, 0x29
+004866E6  7e 03                          jle      0x4866eb
+004866E8  83 c8 ff                       or       eax, 0xffffffff
+004866EB  c3                             ret

@@ -1,0 +1,918 @@
+{
+  "schemaVersion": 1,
+  "theme": "P0-48",
+  "updated": "2026-10-04",
+  "baselineMain": "9462f8cf1e9e24147757f0032aec1f11df579033",
+  "profileId": "source-idb-30d33b44-capture-transaction-v1",
+  "stockOriginalVerified": false,
+  "originalExecutableExecuted": false,
+  "defaultRuntimeEvidence": "compatibility-reconstruction",
+  "vanilla": "separate compatibility-assumption; not certified",
+  "sourceProfiles": [
+    {
+      "id": "S1",
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "archivePath": "IDA Related/san11pk.zip",
+      "archiveSha256": "47beee4ac990869694a5e6f7577947cd6b34a41aefe60bace3af3350c682ce5a",
+      "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+      "inputPath": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+      "recordedInputSha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+      "grade": "idb-stored-byte-exact / mod-associated-stock-unverified"
+    },
+    {
+      "id": "S2",
+      "repository": "sean2077/311SireCustomizedPackageDev",
+      "commit": "43afe4efe273cf3b6ab7833b9b6f5822bd331fd4",
+      "archivePath": "ida-db/san11pk_dump.exe.idb.7z",
+      "archiveSha256": "fcf31f2b0aa34bb623e0cb8c91bf5f67154b742b9bc004a415228b0ad7483e4c",
+      "idbSha256": "aa7f2c983b266633d6e23c494d4f8e1b03e5251632505cae103e176ae850dfd8",
+      "inputPath": "C:\\Games\\san11\\血色衣冠6.0sp5(整合包240612)\\San11Pk\\san11pk_dump.exe",
+      "recordedInputSha256": "b1e9467e9612c23af83f6feda8414bc9ee99eb62c6862a84f7f4c5a8822b9da9",
+      "grade": "independent-mod-associated-negative-control; do-not-mix-constants"
+    }
+  ],
+  "functions": [
+    {
+      "start": "0047A7D0",
+      "endExclusive": "0047A828",
+      "byteCount": 88,
+      "rawSha256": "d35f4c40baadb037b9caf3a82c1859468ea9947e58b2c1db4ad300160ef17847",
+      "disassembly": "0047A7D0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "0047B1E0",
+      "endExclusive": "0047B1FC",
+      "byteCount": 28,
+      "rawSha256": "a3b7bd57c5a54d6990edbed58e24fe0346216d4b1b934657a2a49f72a2404e2c",
+      "disassembly": "0047B1E0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "0047B330",
+      "endExclusive": "0047B34B",
+      "byteCount": 27,
+      "rawSha256": "e4748f240922b568f70ac3dbf19ca9cd307fe46abb1531c406d7e15bb28afcec",
+      "disassembly": "0047B330.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "0047B370",
+      "endExclusive": "0047B399",
+      "byteCount": 41,
+      "rawSha256": "4e76675819286ba6558edf79c1e7a21381978b4b45000447d2e3b0a420c3938c",
+      "disassembly": "0047B370.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "0047B6F0",
+      "endExclusive": "0047B709",
+      "byteCount": 25,
+      "rawSha256": "4dd6d234b0365af575d9dfcf834585edfb3be7ea12747c3376d89a78e9f2c147",
+      "disassembly": "0047B6F0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "0047B710",
+      "endExclusive": "0047B729",
+      "byteCount": 25,
+      "rawSha256": "66edf8df5646d79e5baf91e4633454513b29b37955c753f467873d52d1eedee0",
+      "disassembly": "0047B710.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "0047BD70",
+      "endExclusive": "0047BD92",
+      "byteCount": 34,
+      "rawSha256": "fd53cc59ef6cbbe00fef49bd64f2469e322c55df38f28ef24748dcdd4b525b0f",
+      "disassembly": "0047BD70.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "0047CBD0",
+      "endExclusive": "0047CC42",
+      "byteCount": 114,
+      "rawSha256": "88c9fd83e9b63ef3bb9fdff78bbc372ef5b907450af6e264547f29ea0ea823e6",
+      "disassembly": "0047CBD0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004811B0",
+      "endExclusive": "004811D2",
+      "byteCount": 34,
+      "rawSha256": "7eb0464e58dc58192808c6724238d85c67b5f2bf580bb3bb3535c78b87510bb1",
+      "disassembly": "004811B0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004812C0",
+      "endExclusive": "004812E7",
+      "byteCount": 39,
+      "rawSha256": "7dc84b8db502947902b0fa029db42ebbf29a646309bca602fad4e41762e13912",
+      "disassembly": "004812C0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004815F0",
+      "endExclusive": "00481609",
+      "byteCount": 25,
+      "rawSha256": "d751503844dc14a8b126ec92b201ae1f32500ded8dec585a5e03ea97341d857d",
+      "disassembly": "004815F0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00483730",
+      "endExclusive": "004837A7",
+      "byteCount": 119,
+      "rawSha256": "7073437dcbe567e2005d129e7dd7a52c7e3820c292c9e2314f306c98377ff0e4",
+      "disassembly": "00483730.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004839F0",
+      "endExclusive": "004839FC",
+      "byteCount": 12,
+      "rawSha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+      "disassembly": "004839F0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00483DB0",
+      "endExclusive": "00483E10",
+      "byteCount": 96,
+      "rawSha256": "185ba3b194e36a71df050fb729a4b18494d05c5a5dad8a145d5c2f2610e20c33",
+      "disassembly": "00483DB0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00484DE0",
+      "endExclusive": "00484E11",
+      "byteCount": 49,
+      "rawSha256": "1d141ccfab4aa22e67ac31e301405c8cb191a3e39011d9fc8025d8590377a74e",
+      "disassembly": "00484DE0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00484E20",
+      "endExclusive": "00484E38",
+      "byteCount": 24,
+      "rawSha256": "6a59fd6a7616acd270dfbb3d655b24bafc07cf376ce7ee42d4445e49e418f729",
+      "disassembly": "00484E20.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00486680",
+      "endExclusive": "004866EC",
+      "byteCount": 108,
+      "rawSha256": "f0851a8423bed9ca3264c913e1a445671645a48d91630362fb46f13b60c2b839",
+      "disassembly": "00486680.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004866F0",
+      "endExclusive": "00486713",
+      "byteCount": 35,
+      "rawSha256": "6cc7deef844219d8714d164ce1210ff4f1cd1a8f3a6862f0e97a2c1d1ac477da",
+      "disassembly": "004866F0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004867D0",
+      "endExclusive": "0048688B",
+      "byteCount": 187,
+      "rawSha256": "8c7a53e95690c40aac1ca3fa7da7e324021182d1e3bca2917920f32c763f8897",
+      "disassembly": "004867D0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00486B10",
+      "endExclusive": "00486BBA",
+      "byteCount": 170,
+      "rawSha256": "7cf2cae4aee20ed04b7cc4b32a4483fccd00d05adc1134b7267a8080a0b11fb2",
+      "disassembly": "00486B10.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00487010",
+      "endExclusive": "0048705A",
+      "byteCount": 74,
+      "rawSha256": "dec11bda9c7262e2e4c30e6945e72b79fac4753dec583333e8c5ffd000c0f23a",
+      "disassembly": "00487010.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004876A0",
+      "endExclusive": "00487772",
+      "byteCount": 210,
+      "rawSha256": "f4ef962665d376af548eb6b46e7c124af6b4b5df75efb4f7e05f1a61c6a4642b",
+      "disassembly": "004876A0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00487920",
+      "endExclusive": "00487956",
+      "byteCount": 54,
+      "rawSha256": "49888397ffecbc8962df0818e282940cf2caf2f5e079f3a11cc0bafc89164fdc",
+      "disassembly": "00487920.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004879F0",
+      "endExclusive": "00487A24",
+      "byteCount": 52,
+      "rawSha256": "24f606d6a1ff3be27699d45edac99a9500f2e2859e176b256f2b12828f1d1b91",
+      "disassembly": "004879F0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00487A30",
+      "endExclusive": "00487A66",
+      "byteCount": 54,
+      "rawSha256": "26f152437f0ba659c1e9a0afa5c2e59f69c08e5cb8f4dda095a549fe19ad517c",
+      "disassembly": "00487A30.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00487B30",
+      "endExclusive": "00487BB3",
+      "byteCount": 131,
+      "rawSha256": "8620689504983fed521867667ddfdcb2f6477ecc3f0249ed7132c2d22596ca79",
+      "disassembly": "00487B30.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00487E10",
+      "endExclusive": "00487E20",
+      "byteCount": 16,
+      "rawSha256": "2167cf1594b2707b337ef3d41bcacd924c77d9741485928b9cdc1fa65969b87f",
+      "disassembly": "00487E10.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00487E50",
+      "endExclusive": "00487E6C",
+      "byteCount": 28,
+      "rawSha256": "61ddbb4f82c650f5da301991542f68ae1ca832d361875d3355a5764e0c128ef5",
+      "disassembly": "00487E50.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00487EB0",
+      "endExclusive": "00488008",
+      "byteCount": 344,
+      "rawSha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c",
+      "disassembly": "00487EB0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "0048D7E0",
+      "endExclusive": "0048D819",
+      "byteCount": 57,
+      "rawSha256": "1029eff66c263f1cd8db6c03b69f7c1b82c314cc8fb64ce0aefcc8e42e39d038",
+      "disassembly": "0048D7E0.asm.txt",
+      "source": "S1",
+      "kind": "shared-function-tail"
+    },
+    {
+      "start": "0048D820",
+      "endExclusive": "0048D859",
+      "byteCount": 57,
+      "rawSha256": "6e95be1f5c7fe636035430215b9c9e1f015ba40714ad9595fc7a4f95e5ef5eb2",
+      "disassembly": "0048D820.asm.txt",
+      "source": "S1",
+      "kind": "shared-function-tail"
+    },
+    {
+      "start": "0048D860",
+      "endExclusive": "0048D899",
+      "byteCount": 57,
+      "rawSha256": "ac8aa4155d6dc10b95af39a17de04d3659ceb6ff2b1f1a95b17751f0fbbff4e4",
+      "disassembly": "0048D860.asm.txt",
+      "source": "S1",
+      "kind": "shared-function-tail"
+    },
+    {
+      "start": "0048D8A0",
+      "endExclusive": "0048D90F",
+      "byteCount": 111,
+      "rawSha256": "5d2b942022f6d5af22625ee2532f794dc008d487b189bdff1a6760e706d381a9",
+      "disassembly": "0048D8A0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "0048DB30",
+      "endExclusive": "0048DBA7",
+      "byteCount": 119,
+      "rawSha256": "2c5ec5e9659bbfd3b4e2a580e6c6358999fa10a1e3cee275e025753849dbceb0",
+      "disassembly": "0048DB30.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004922C0",
+      "endExclusive": "00492348",
+      "byteCount": 136,
+      "rawSha256": "1238ab9a49364c9f3bc0f5b9b162146f4d9af4314acb01a405586d824ab34e88",
+      "disassembly": "004922C0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00495460",
+      "endExclusive": "00495473",
+      "byteCount": 19,
+      "rawSha256": "0ba6ab1aac04b18a31d42931fc5bc3856e128a1287101294ee2d5359b8f68ef0",
+      "disassembly": "00495460.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004A0F00",
+      "endExclusive": "004A0F2A",
+      "byteCount": 42,
+      "rawSha256": "7e465c152a89c44e91b276af72e386d86e12b4a9e65ce1edb4b942edf11bf551",
+      "disassembly": "004A0F00.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004A30D0",
+      "endExclusive": "004A3119",
+      "byteCount": 73,
+      "rawSha256": "a5135f7fdb849fd26f014cd733d7cef6fe8c0ac61c6bf5b0d0f0472ed4517099",
+      "disassembly": "004A30D0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004AD550",
+      "endExclusive": "004AD665",
+      "byteCount": 277,
+      "rawSha256": "8e8978b13d407231a923db828a355b8ff08d1893e99dd1c3d9995e74022fc12c",
+      "disassembly": "004AD550.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004AE0A0",
+      "endExclusive": "004AE19D",
+      "byteCount": 253,
+      "rawSha256": "88ac3d27890bee4820fd72b135fed3fadc5a36221e54cc71badc5ca40e48998f",
+      "disassembly": "004AE0A0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004AE2A0",
+      "endExclusive": "004AE2FF",
+      "byteCount": 95,
+      "rawSha256": "4c496db9d8a880bd4378fce6e8ad7a0dfbdbe101e8e59ec4ee86d6d7764c4244",
+      "disassembly": "004AE2A0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004AE300",
+      "endExclusive": "004AE35F",
+      "byteCount": 95,
+      "rawSha256": "20123ba0e01b9b9221bcac8b84563312a5996905583daa9849584b6032f26bcc",
+      "disassembly": "004AE300.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004AE3C0",
+      "endExclusive": "004AE42B",
+      "byteCount": 107,
+      "rawSha256": "76de2e7a26ecb945598d5480a8687d5f7e0e6613d1bd055e7ab72b75449be567",
+      "disassembly": "004AE3C0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004AE430",
+      "endExclusive": "004AE498",
+      "byteCount": 104,
+      "rawSha256": "de8d8a6820cf6309564042f4353ae04b633c79d48ca8ecff47c15d1cd4808532",
+      "disassembly": "004AE430.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004B06E0",
+      "endExclusive": "004B09AB",
+      "byteCount": 715,
+      "rawSha256": "8214537228f900a84c8ebc28e8b8c69914d75717794833f38a8230d8401a6ff7",
+      "disassembly": "004B06E0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004B09B0",
+      "endExclusive": "004B0C5B",
+      "byteCount": 683,
+      "rawSha256": "6ac319378dca0bb85788ddc56f41544d8547e228e890eb36dc8e02c0e1208905",
+      "disassembly": "004B09B0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004B1280",
+      "endExclusive": "004B194B",
+      "byteCount": 1739,
+      "rawSha256": "5726408358cf372bff1cf8d9f2a1bc240e4469e94d7ebc2acd6588b5a7040bd7",
+      "disassembly": "004B1280.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004B2CA0",
+      "endExclusive": "004B36FF",
+      "byteCount": 2655,
+      "rawSha256": "88ad5211c4484037aad336c7cd3ef0dbd1fc0c1091a00627d67986c222caa5af",
+      "disassembly": "004B2CA0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004B3A20",
+      "endExclusive": "004B3A9E",
+      "byteCount": 126,
+      "rawSha256": "00a69c9c8094ff4765e8774dd9362b9bc72c7241f9ad4acb9c9cd3792c7aa426",
+      "disassembly": "004B3A20.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004B40C0",
+      "endExclusive": "004B49AD",
+      "byteCount": 2285,
+      "rawSha256": "722fe6179b4d9396d1c8047e2dfafea57b11d7d035398638313ee0808e96e151",
+      "disassembly": "004B40C0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004B49B0",
+      "endExclusive": "004B4D50",
+      "byteCount": 928,
+      "rawSha256": "8e4b05b586b8133c726a460a2fd5ebceb6b63526d5e77dfb7691d6d32129736e",
+      "disassembly": "004B49B0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004B5D70",
+      "endExclusive": "004B5DCE",
+      "byteCount": 94,
+      "rawSha256": "036918050c080f9f7a20ba4c30a6f1087f80a738bf0d002561b67fe72807c211",
+      "disassembly": "004B5D70.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004B6260",
+      "endExclusive": "004B6292",
+      "byteCount": 50,
+      "rawSha256": "ee1f3f3bb96e50b7b52d2998dae325803e9ac5533edf4c39bf9f121e5270ef1c",
+      "disassembly": "004B6260.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004B9840",
+      "endExclusive": "004B989C",
+      "byteCount": 92,
+      "rawSha256": "0cdac291fd9dc607a56a819eb51b119bd491751cf43459821bc9b2d1631bb01e",
+      "disassembly": "004B9840.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004BCA30",
+      "endExclusive": "004BCCC2",
+      "byteCount": 658,
+      "rawSha256": "6f29ce5ca0a6b7f2b87a477d7e7592a828e13f286b84f5a157dd58c7641811e1",
+      "disassembly": "004BCA30.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "004BF1F0",
+      "endExclusive": "004BF6E9",
+      "byteCount": 1273,
+      "rawSha256": "8460174a48528ecca47939d96a99b94fb94bd2961e2c5dd47e13e7743e69a216",
+      "disassembly": "004BF1F0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00588CB0",
+      "endExclusive": "00588D1E",
+      "byteCount": 110,
+      "rawSha256": "766e7254158e726e87dbce95aad0f4f2544d41bcc760c8739c3b4e079e9190ba",
+      "disassembly": "00588CB0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00592440",
+      "endExclusive": "00592732",
+      "byteCount": 754,
+      "rawSha256": "001f2a5ed49a04004e9920c57d4779be63acda57ce35e0ad431836d375f185f5",
+      "disassembly": "00592440.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "00597A60",
+      "endExclusive": "00597EFF",
+      "byteCount": 1183,
+      "rawSha256": "72c695d9cca16bcfafc499c4d443cfa57ed1a5da19aaefd36517123e35c63218",
+      "disassembly": "00597A60.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "005AE2B0",
+      "endExclusive": "005AE2DD",
+      "byteCount": 45,
+      "rawSha256": "c5729adf6bdccebb237e5cc03ab75b0f71a3874bfdb98d46f6894e490f13fff5",
+      "disassembly": "005AE2B0.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    },
+    {
+      "start": "005B1870",
+      "endExclusive": "005B1D92",
+      "byteCount": 1314,
+      "rawSha256": "2555461a0cbd38facd3de9bd46ce9ddea65a81570fc602541c04afae6e3df762",
+      "disassembly": "005B1870.asm.txt",
+      "source": "S1",
+      "kind": "IDA-recorded-range"
+    }
+  ],
+  "dataWindows": [
+    {
+      "address": "0079C2B0",
+      "byteCount": 128,
+      "bytesHex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20212223242526272829050f111111242525272700040506070708080a0b0c0f0f11111216161718191a1a1a1a1b1c1d1e1e1e1f202023010815182729000000ffffffff0000ffff0100ffffffff00000000010001000000ffff00000000ffff",
+      "sha256": "d692c5d627bf8182061c550e469f9e0b13e17d483aadbec413ec11491d3f0272",
+      "source": "S1"
+    },
+    {
+      "address": "0079C310",
+      "byteCount": 48,
+      "bytesHex": "ffffffff0000ffff0100ffffffff00000000010001000000ffff00000000ffff01000000ffff01000000010001000100",
+      "sha256": "79967c43e263c7cc2ce4f59d5ca1d954038efa91fcf6a79003a71a8759277d4f",
+      "source": "S1"
+    }
+  ],
+  "sourceComparisons": [
+    {
+      "address": "004B2CA0",
+      "s1Length": 2655,
+      "s2Length": 2655,
+      "s1Sha256": "88ad5211c4484037aad336c7cd3ef0dbd1fc0c1091a00627d67986c222caa5af",
+      "s2Sha256": "0adf9142b90c2c64846b9fc9f15fbaeff928a52b6ad7ce06d9f0a33d3a3f37d2",
+      "identical": false,
+      "s2BytesHex": "6aff6817f9720064a100000000506489250000000081ec04010000578bbc241801000057894c240ce86379fcff83c40485c00f840f0a0000568bb4242001000056e84a79fcff83c40485c00f84f50900005333db3bf35574158b2ee86061fbff508bceff552c85c0897424187504895c24183bf3740d8b2ee853070c00508bceff552c8d44245850b9d8596a09e87e5a0d008b168bceff524050b95819200789442428e858ddfdff8be88b068bce896c244cff504450b958192007e870ddfdff8b4c24185189442454e8c278fcff83c40485c0740b8b4c2418e8c22cfeffeb0233c05089442424e8a478fcff83c40485c0751b55e89778fcff83c40485c0740e8b6d0455b958192007e852ddfdff8b178bcfff524050b95819200789442420e8dcdcfdff8bcf89442410e82139fdff8be88b44241050896c244ce85178fcff83c40485c00f8481000000895c2434895c2438895c2430895c242c895c243cc74424400a000000895c2444c74424288c7b7e008b4c2410518d54242c52b908989907899c2424010000e8c3b4010053558d4c2430e838c8ffff3bc3740a508d4c242ce85ad6ffff395c2434750b8b4c24106a01e839e8fcff8d4c2428c784241c010000ffffffffe865c8feffe800b0ffff57b9d8596a09e895610d008b47083bc38bcf7533e86738fdff8bf08b44242050b958192007e876e4fdff5356b9581920078be8e8d8e2fdff50556a078d4c2438e82bc3fcffeb33e8544ffdff85c074358b4c242051b958192007e841e4fdff5357b9581920078bf0e893e8fdff50566a0f8d4c2438e8a6c3fcffb9d8596a0950e82bc10c008b47083bc37507bed0070000eb138bf04ef7de1bf681e60cfeffff81c6e803000033d23bc38b4424180f94c2508d5412038beae80377fcff83c40485c074358b4c241051e8f276fcff83c40485c074248b542418558b6c24186aff53528bcde817a7ffff8b4424185656508bcde869a4ffffeb048b6c24148b74244c56e8b976fcff83c40485c074458b4c241051e8a876fcff83c40485c074348b7424248b4c241056e843e5fcff3c0f8bcd760f8b54241c6a0f5652e8a0200000eb0d8b44241c6aff5650e8d12f00008b74244c56e86776fcff83c40485c074228b168bceff524885c074178a86990000003c09730d6a0956b95c899907e83e230000895c2434895c2438895c2430895c242c895c243cc74424400a000000895c2444c744242844bf79006a20578d44243050b908989907c784242801000001000000e829c301006a018bcfe84036fdff506a048d4c2434e8a4c4ffff8b44242c3bc389442410747b8b7424148d6424008d4c2410518d4c242ce8628efcff8b288b55008bcdff52403b4424248bce75476a0355e8682affff6aff8bcde81f6bfdff538bcde8a778fdff6a018bcde89e6afdff8b44245050b958192007e80fe2fdff50558bcee83602ffff53556a048bcee8db890000eb0655e8a358ffff395c2410758d8d4c2428c784241c010000ffffffffe81990fcffbe0a000000bd44bf7900899c2488000000899c248c000000899c2484000000899c2480000000899c249000000089b42494000000899c2498000000896c247cc784241c01000002000000895c2468895c246c895c2464895c2460895c247089742474895c2478896c245c8b8c242c0100008b942428010000536aff6aff5152578d442474508d8c2498000000518b4c2434c684243c01000003e8fbe0ffff8d54247c528d4c2460e88dc6feff895c2434895c2438895c2430895c242c895c243c89742440895c2444896c24286a0f578d44243050b908989907c684242801000004e893c101008b4c241c6a01516a4b8d4c2434e811c3ffff5357b958192007e885e5fdff50e85f51fdff83c404506a048d4c2434e8f0c2ffff8b44242c3bc389442410743a8d6424008d542410528d4c242ce8b28cfcff8b308bcee8495afdff85c075158bcee88e5ffdff85c0750a568d4c2460e8708ffcff395c241075ca8d4c2428c684241c01000003e8a98efcff8b84242801000050578d8c2484000000518b4c24208d54246852e8aaf5ffff8d4c245cc684241c01000002e8798efcff8d4c247cc784241c010000ffffffffe8658efcff8b74242056bd02000000e88673fcff83c40485c074268bcee8f85dfdff0fb6c06a0ae866554300e8e19945003bc58be87f05bd02000000e8091846008bcfe8a239fdff8bc80fafcdb81f85eb51f7e9c1fa058bf2c1ee1f5703f2e83673fcff83c40485c07408568bcfe80740fdff8bcfe8e03afdff8bc80fafcdb81f85eb51f7e9c1fa058bf2c1ee1f5703f2e80473fcff83c40485c07408568bcfe8b540fdff8b078bcfff50508bc80fafcdb81f85eb51f7e9c1fa058bf2c1ee1f5703f2e8d272fcff83c40485c07414568bcfe8c33efdff3bf37508538bcfe84742fdff895c24108d49008b4c2410518bcfe8c435fdff8bd00fafd5b81f85eb51f7e28bf257c1ee05e88d72fcff83c40485c0740d8b44241056508bcfe81941fdff8b4424104083f80c894424107cbb8b74244856e86172fcff83c40485c00f84ad01000056b958192007e89bddfdff89442454e9badc45003bc3895c2410894424480f84fb0000008b6c241c8d4c244851b9ecb43f07e8afeefdff8b3056e81772fcff83c40485c0744d8bcee80946fdff85c075428bcee8be45fdff85c075378bcee8f346fdff85c0742c3beb7c2883fd2e7f238b168bceff52403bc575188bcee8c444fdff3b442454750b8b4c24145356e843d5ffff56e8bd71fcff83c40485c074758bcee8af45fdff85c0746a8bcee89444fdff3b442454755d395e148b4608753b83f81e75296a2ab958192007e885d6fdff8be855e87d71fcff83c40485c0740a8b4c241455e83cdafeff8b6c241c8b4c24145356e8ddd4ffffeb1a83f81e74158b44241083f81e7d0c89b4849c0000004089442410395c24480f8509ffffff8b6c242055be14000000e82871fcff83c40485c074148bcde9ca9745000fb6f083fe147f05be140000008b6c24106a018d8424a00000005550e8b9661d00b867666666f7eec1fa038bc2c1e81f03c283c40c3be87d028bc58b4c24108be92be88b4424243bc37c0583f8297e028be933f63beb7e198bff8b8cb49c00000053518b4c241ce82ed4ffff463bf57ce98b54244c52e89f70fcff8b6c242883c40485c074283beb7c2483fd297f1f8b74245056e88170fcff83c40485c0740e8b4c2414535657e8fe0a0000eb0a8b4c241457e8e21300008b74241856e85870fcff83c40485c074573beb7c4883fd297f438b068b6f088bceff503c8b178bcf89442450ff523c8b4c24508b1133c93beb0f94c1528b10415152b9ccb38007e826a0feff85c074188b4c24145756e8c7bb0000eb0b578bc6e88de4ffff83c4048b6c241453578bcde8ed9300008bcfe8063bfdff0fb7f00fbf4710d1ee3bc67d1557e8d36ffcff83c40485c07408568bcfe8b447fdff6a0157b958192007e8f7e0fdff508bcde85fd0ffff33ed55b958192007e8e2d7fdff8bf056e89a6ffcff83c40485c0742f8b462c83f805740583f80b75228bc68bcfe83da9ffff85c074158b0dd0c1790053516a0456b950936a09e854560f004581fde80300007cae8d54245852b9d8596a09e8ec5f0d005d5b5e8b8c24080100005f64890d0000000081c410010000c20c00"
+    },
+    {
+      "address": "00592440",
+      "s1Length": 754,
+      "s2Length": 754,
+      "s1Sha256": "001f2a5ed49a04004e9920c57d4779be63acda57ce35e0ad431836d375f185f5",
+      "s2Sha256": "08bb4edfe32ceac834ff0e24c33969f1e92df89e480bb1f29fccb2f0c20e6111",
+      "identical": false,
+      "s2BytesHex": "6aff68bb39730064a100000000506489250000000081ec8c000000538b9c24a00000008b038944240c0fbfc069c0c8000000894c24048b4c240cc1f9105603c18d34808d34b5680efb06578bcee8ae16efff8bf88b460483e01f83f8067c1883f8087f138b1680e20380fa0175258b43088b0b5051eb1457e823d7010083c40485c0750f8b53088b035250e8a0e2000083c40857e85781eeff83c40485c00f84340200008b4b0c8b5304555157528d44242850e898ec01008b0b51e8c0e100008b1783c4146a0b8bcf8be8ff522c85c08b370f84a7000000e84369edff508bcfff562c8bf08b442428f7de1bf6f7d85023f756b95c899907e863bff1ff8bce8bf8e87a2ff0ff85ed753c83bc24800000003eb9d8596a09752455566a56e85e74ffff566a61b9d8596a09e81174ffff8b0b5551e8f8e1000083c408eb09566a0157e82a66ffff8b168bceff525085c00f858201000085ed750e8b4304535056e88cd5010083c40c8b4b046a006a005156b95c899907e876d4f2ffe958010000e8ac0efeff508bcfff562c8bf0f7de1bf623f78bcee85754efff85c0eb218b461485c0751a8b430433d285ed0f94c2525056e85aebffff83c40ce9190100008bcee8ab54efff85c074208b461485c074198b4b0c8b53046a01518b4c24185256e8dc5c0000e9ee0000008b44242cf7d85056b95c899907e825bdf1ff85ed750d565550b9d8596a09e86465ffff66837e10000f85b70000008bcee8b257efff85c00f84910000008b4b0451e8c17feeff83c40485c00f849d0000008b168b7b048bceff5240508b078bcfff504050b95c899907e8c93bf2ff85c0757c8d4c2414e8ece7ffff85edc78424a400000000000000751d8b4b048b11ff524050b958192007e8dae3efff5650e833d4000083c4088b43046a015056b95c899907e8bf05f2ff8d4c2414c78424a4000000ffffffffe8ebe7ffffeb208b530433c985ed0f94c1515256e847eaffff83c40ceb0956e8bcd6000083c4045d8b8c24980000005f5e5b64890d0000000081c498000000c20400"
+    },
+    {
+      "address": "00597A60",
+      "s1Length": 1183,
+      "s2Length": 1183,
+      "s1Sha256": "72c695d9cca16bcfafc499c4d443cfa57ed1a5da19aaefd36517123e35c63218",
+      "s2Sha256": "7cc787c3586c9bdc4eeec2fa17e666b51f9dc186222046179b0789cd5236f7bb",
+      "identical": false,
+      "s2BytesHex": "6aff685b3a730064a100000000506489250000000081ec400100008b842450010000538b180fbfc369c0c8000000558be98bcbc1f9105603c18d34808d34b5680efb06578bce895c2414e891c0eeff8bf88b460483e01f83f8067c0f83f8087f0a8b1680e20380fa0175156a03e87ea6edff0fb7c0405053e8938c000083c40c57e84a2beeff83c40485c00f84f10300008b8c24700100008b9424600100008bb424680100008b4208515756508d4c246051e8899a01008b94248401000052578d8424ec0000005650e8629601008b1783c4246a0b8bcfff522c85c0743e8b1fe81b13edff508bcfff532cf7d88d8c24d0000000518b8c24640100001bc08d5424545223c7508b8424780100005056518bcde8d9fcffffe9660300008b37e8edb8fdff508bcfff562c8bf0f7de1bf623f78bbc246c01000057e8922aeeff83c40485c074218b168bceff5240508bcfe84c99eeff85c0740e8b842460010000c7400c0100000053e8f48a000083c4048bce89442410e856feeeff85c0eb198b461485c075126a0056b95c899907e8be8df1ffe9eb0200008bcee8b2feeeff85c00f84c90100008b461485c00f84be0100008b7e086a0056b95c899907897c2424e88b8df1ff8d47f083f8060f87b1020000ff2485007f59008b44241085c0752c6a00536a0f8bcde8741cffff536a3d8bcde8ba1bffff6a64e8f3a4edff0fb7c883c16451e8b7e3ffff83c408536a018d54242852b9680efb06c744241c00000000e8d20d350085c07e3d8bb424640100008d6c2420894424148da424000000008b4500575350e865e6ffff83c40c85c07407ff44241083c6108b44241483c504488944241475d98b442410e9140200008b44241085c0752c6a00536a0f8bcde8dc1bffff536a3e8bcde8221bffff6a64e85ba4edff0fb7c883c16451e81fe3ffff83c4088bb42464010000c74424100000000033c0538d6801558d54242852b9680efb06e857bfeeff85c07e328d7c2420894424148b44241c8b0f505351e8cde5ffff83c40c85c07407ff44241083c6108b44241483c704488944241475d68bc583f8027caf8b442410e9750100008b8424600100008b8c24640100006a09576a03e899e8ffff83c40ce9550100008b8424600100008b8c24640100006a0a576a05e879e8ffff83c40ce9350100008b8424600100008b8c24640100006a0b576a04e859e8ffff83c40ce9150100008b5424608b8424e000000003c2f7d85056b95c899907e87665f1ff8b4c245c8b9424dc00000003d1f7da5256b95c8999078bf8e8b965f1ff8b4c241085c97516536a01508bcde8760dffff536a00578bcde86b0dffff66837e10000f85b20000008bcee8d9ffeeff85c074748b9c246c01000053b958192007e82394efff8bf88b068bceff50405057b95c899907e8fee3f1ff85c0757c8d4c2418e82190ffff5653c784246001000000000000e87f7c00008b8c247001000083c4086a015156b95c899907e807aef1ff8d4c2418c7842458010000ffffffffe83390ffffeb338b44241085c075166a00566a5c8bcde8fd1affff566a3b8bcde8b31affff8b9424680100006a005256b95c899907e81e58f2ff33c08b8c24500100005f5e5d5b64890d0000000081c44c010000c21400"
+    },
+    {
+      "address": "005B1870",
+      "s1Length": 1314,
+      "s2Length": 1314,
+      "s1Sha256": "2555461a0cbd38facd3de9bd46ce9ddea65a81570fc602541c04afae6e3df762",
+      "s2Sha256": "6494a550f645201879e12b90380b7b5cfc352b3d0ce2009a615921196dfeaae6",
+      "identical": false,
+      "s2BytesHex": "6aff68583d730064a100000000506489250000000083ec185355578b7c24348b4758894424348b4c24340fbfc069c0c8000000c1f91003c18d04808b1485680efb068d0485680efb0680e20380fa01740433edeb110fb7400850b958192007e89cf5edff8be88b475c894424348b4c24340fbfc069c0c8000000c1f91003c18d0c808d0c8d680efb06e84222edff8bd88b475c894424348b5424340fbfc069c0c8000000c1fa1003c28d04808b0c85680efb068d0485680efb0680e10380f901740ac744241400000000eb130fb7400850b958192007e825f5edff8944241455e8db8cecff83c40485c0740d53e8ce8cecff83c40485c075145f5d33c05b8b4c241864890d0000000083c424c38b575c8b47585250b9680efb06c744241400000000e81924edff85c07408c744240c010000008b13568bcbff523c8bf08b45008bcdff503c8b0e8b105152e810edfeff894424408b472883c40885c0743e508bcde89a0136008bf08b44243885c0752c8bcfe819cfffff6a00506a51b9d8596a09e8ca7efdff8bcfe803cfffff50556a0756b9d8596a09e80478fdff8b472c85c0742c5055b95c899907e851cbefff8bf08b44243885c075168bcfe8d0ceffff50556a0456b9d8596a09e8d177fdff8b74241885f6c7442414000000000f850d0200008b33e8161afcff508bcbff562c8bf08b470cf7de1bf6f7d85023f356b95c899907e847c9efff8b4f18f7d95156b95c89990789442424e872c8efff8b5714f7da528bce89442428e87165edff894424208b4710f7d85056b95c899907e8acc8efff568944241ce812e3feff8b7c243c83c40485ff75428b44241c85c0740e566a0150b9d8596a09e8d170fdff8b44242085c0740e566a0250b9d8596a09e8bb70fdff8b44242485c0740e566a0450b9d8596a09e8a570fdff8b168bceff525085c07508508bcee8a25aedff8bcee80b5fedff85c0eb2b8b461485c075248b44241033c985ff0f94c150515556e81cc7ffff83c410c744241401000000e91d02000056e856c7ffff83c40485c00f84d400000085ffc74424140100000075118b542418535752b9d8596a09e82e70fdff8bcee88762edff85c00f848c0000008b068bceff50408b5500508bcdff524050b95c899907e8b446f0ff85c075608d4c2438e8d7f2fdff85ffc744243000000000751d8b45008bcdff504050b958192007e8c8eeedff5650e821dffeff83c4088b7c241033c985ff0f94c1515556b95c899907e8a610f0ff8d4c2438c7442430ffffffffe8d5f2fdffe961010000c744241400000000e9540100008b54241033c085ff0f94c052505556e82fc6ffff83c410e93801000085ff0f85300100008b168bceff523c8b008b4c2418505751b9d8596a09e8356ffdffe911010000e9fb1936005256b95c899907e82fc8efff894424188b4718f7d85056b95c899907e8eac8efff8b4f14f7d9518bce89442420e8d9fe35008bce89442414e98e0136008b44243885c075668b44241885c0741a8bcfe887ccffff8b54241850536a0152b9d8596a09e84475fdff8b44241485c0741a8bcfe865ccffff508b442418536a0750b9d8596a09e82275fdff8b44241c85c0741a8bcfe843ccffff8b4c241c50536a0451b9d8596a09e80075fdff8b168bceff5250f7d81bc04089442414744f8b44243885c0751a8bcfe80fccffff894424388d442438505556e8efddffff83c40c8b7f5083ff03740e83ff04740983ff05740433c0eb05b8010000008b4c241050515556b95c899907e8bfdcf0ffb9d8596a09e855c8fcff8b4c24288b4424145e5f5d5b64890d0000000083c424c3"
+    },
+    {
+      "address": "005AE2B0",
+      "s1Length": 45,
+      "s2Length": 45,
+      "s1Sha256": "c5729adf6bdccebb237e5cc03ab75b0f71a3874bfdb98d46f6894e490f13fff5",
+      "s2Sha256": "c5729adf6bdccebb237e5cc03ab75b0f71a3874bfdb98d46f6894e490f13fff5",
+      "identical": true,
+      "s2BytesHex": "568b74240866837e100074168bcee84d9bedff85c074128b068bceff505085c07507b8010000005ec333c05ec3"
+    },
+    {
+      "address": "00483DB0",
+      "s1Length": 96,
+      "s2Length": 96,
+      "s1Sha256": "185ba3b194e36a71df050fb729a4b18494d05c5a5dad8a145d5c2f2610e20c33",
+      "s2Sha256": "185ba3b194e36a71df050fb729a4b18494d05c5a5dad8a145d5c2f2610e20c33",
+      "identical": true,
+      "s2BytesHex": "538b5c240c5556570fbf7c24148bc783e0018d34408beb33d2d1e6c1ed108bff8d0c16668b048d10c37900668b0c8d12c3790066034c24166603c7663bd87505663be9740f4283fa067cd55f5e5d33c05bc208005f5e5db8010000005bc20800"
+    },
+    {
+      "address": "00486680",
+      "s1Length": 108,
+      "s2Length": 108,
+      "s1Sha256": "f0851a8423bed9ca3264c913e1a445671645a48d91630362fb46f13b60c2b839",
+      "s2Sha256": "f0851a8423bed9ca3264c913e1a445671645a48d91630362fb46f13b60c2b839",
+      "identical": true,
+      "s2BytesHex": "8b410883e800744c48742648755a51b958192007e8d7b0000083f8347c4a83f8567f4583c0cc784083f8227f3b83c034c351b958192007e8b4b0000083f82a7c2783f8337f2283c0d6781d83f8097f1883c02ac351b958192007e891b0000085c07c0583f8297e0383c8ffc3"
+    },
+    {
+      "address": "00487E10",
+      "s1Length": 16,
+      "s2Length": 16,
+      "s1Sha256": "2167cf1594b2707b337ef3d41bcacd924c77d9741485928b9cdc1fa65969b87f",
+      "s2Sha256": "2167cf1594b2707b337ef3d41bcacd924c77d9741485928b9cdc1fa65969b87f",
+      "identical": true,
+      "s2BytesHex": "e86be8ffff33c983f8ff0f95c18bc1c3"
+    },
+    {
+      "address": "004866F0",
+      "s1Length": 35,
+      "s2Length": 35,
+      "s1Sha256": "6cc7deef844219d8714d164ce1210ff4f1cd1a8f3a6862f0e97a2c1d1ac477da",
+      "s2Sha256": "6cc7deef844219d8714d164ce1210ff4f1cd1a8f3a6862f0e97a2c1d1ac477da",
+      "identical": true,
+      "s2BytesHex": "51b958192007e875b0000085c07c0583f8297e0383c8ff50b958192007e8fea20000c3"
+    },
+    {
+      "address": "00487A30",
+      "s1Length": 54,
+      "s2Length": 54,
+      "s1Sha256": "26f152437f0ba659c1e9a0afa5c2e59f69c08e5cb8f4dda095a549fe19ad517c",
+      "s2Sha256": "26f152437f0ba659c1e9a0afa5c2e59f69c08e5cb8f4dda095a549fe19ad517c",
+      "identical": true,
+      "s2BytesHex": "8b410885c07c2183f83f7f1c50b958192007e8499100008b80b400000033c983f8040f94c18bc1c383c8ff33c983f8040f94c18bc1c3"
+    },
+    {
+      "address": "004879F0",
+      "s1Length": 52,
+      "s2Length": 52,
+      "s1Sha256": "24f606d6a1ff3be27699d45edac99a9500f2e2859e176b256f2b12828f1d1b91",
+      "s2Sha256": "24f606d6a1ff3be27699d45edac99a9500f2e2859e176b256f2b12828f1d1b91",
+      "identical": true,
+      "s2BytesHex": "8b410885c07c2083f83f7f1b50b958192007e8899100008b80b400000033c985c00f94c18bc1c383c8ff33c985c00f94c18bc1c3"
+    },
+    {
+      "address": "00487B30",
+      "s1Length": 131,
+      "s2Length": 131,
+      "s1Sha256": "8620689504983fed521867667ddfdcb2f6477ecc3f0249ed7132c2d22596ca79",
+      "s2Sha256": "8620689504983fed521867667ddfdcb2f6477ecc3f0249ed7132c2d22596ca79",
+      "identical": true,
+      "s2BytesHex": "568bf18b460885c07c1983f83f7f1450b958192007e84690000083b8b40000000174598b460883f818742d85c07c1883f83f7f1350b958192007e8219000008b80b4000000eb0383c8ff33c983f8030f94c18bc185c075248b460885c07c1983f83f7f1450b958192007e8f18f000083b8b400000002740433c05ec3b8010000005ec3"
+    },
+    {
+      "address": "00487920",
+      "s1Length": 54,
+      "s2Length": 54,
+      "s1Sha256": "49888397ffecbc8962df0818e282940cf2caf2f5e079f3a11cc0bafc89164fdc",
+      "s2Sha256": "49888397ffecbc8962df0818e282940cf2caf2f5e079f3a11cc0bafc89164fdc",
+      "identical": true,
+      "s2BytesHex": "518b01ff503c8b008904248b0c240fbfc069c0c8000000c1f91003c18d14808b04956c0efb06c1e80583e07f50e89ec0ffff83c408c3"
+    },
+    {
+      "address": "004839F0",
+      "s1Length": 12,
+      "s2Length": 12,
+      "s1Sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+      "s2Sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+      "identical": true,
+      "s2BytesHex": "8b4424040fb680b0c27900c3"
+    },
+    {
+      "address": "004922C0",
+      "s1Length": 136,
+      "s2Length": 136,
+      "s1Sha256": "1238ab9a49364c9f3bc0f5b9b162146f4d9af4314acb01a405586d824ab34e88",
+      "s2Sha256": "1238ab9a49364c9f3bc0f5b9b162146f4d9af4314acb01a405586d824ab34e88",
+      "identical": true,
+      "s2BytesHex": "6aff6818ee720064a100000000506489250000000051535657686878ee068bd9ff1560e374008b7c24208b376a016a0c56c744242400000000e872fdfdff83c40c85c0686878ee0674218b068907ff155ce374005f8d46085e5b8b4c240464890d0000000083c410c20400ff155ce374008b4c24105f5e8d431c5b64890d0000000083c410c20400"
+    },
+    {
+      "address": "004B1280",
+      "s1Length": 1739,
+      "s2Length": 1739,
+      "s1Sha256": "5726408358cf372bff1cf8d9f2a1bc240e4469e94d7ebc2acd6588b5a7040bd7",
+      "s2Sha256": "5ee957931a3d6e23f0fda1232c6977589a5d6745898b7040e0c75e7d03759216",
+      "identical": false,
+      "s2BytesHex": "64a1000000008b4c24046aff6848f87200506489250000000083ec705657e8adabfcff8b8c248c000000e8a1abfcff8b8424940000008b8c24900000006a0050518d4c2434e856fbffff8b74242856e85c93fcff83c40485c074118b7c242c57e84b93fcff83c40485c075155f33c05e8b4c247064890d0000000083c47cc220008b1753558bcfff524050b958192007e88bf7fdff50b958192007e850fffdff894424188b068bceff504050b958192007e86af7fdff50b958192007e82ffffdff8b178bcf89442428c744242000000000ff52248bd88b0783eb05f7db1bdbf7d38bcf23dfff50248b168be883ed0bf7dd1bedf7d58bce23efff52248bf88b0683ef05f7df1bfff7d78bce23feff502483e80bf7d81bc0f7d023c65789442430e88b92fcff83c40485c0740f8b470885c0c744241c020000007408c744241c010000008b8c249c0000008b11ff523c8b8c24980000008bf08b01ff503c8b0e8b54241c8b00515250b9ccb38007e84ec2feff8b15781920078bb4249c00000033c983fa020f94c15689442428c744241400000000894c2418e81392fcff83c40485c074128b168bceff524885c07407b801000000eb0233c08b54241423d08b8424980000005089542418e8e191fcff83c40485c074178b8c24980000008b11ff524885c07507b801000000eb0233c08b54241423d08b44241885c0895424147c1283f8297f0d8b44242885c07c0583f8297e08c744241001000000b9803ec409e8abe21c0085c0741ba1803ec4096a18b9803ec409ff500485c07408c74424100100000053e86691fcff83c40485c00f84cc00000033f68974246c89742470897424688974246489742474c74424780a0000008974247cc744246044bf790053b95819200789b4248c000000e85f02feff50e8396efdff83c4046a0f508d4c246851b908989907e8c4dd01008b54241856526a4b8d4c246ce8c3deffff3974246c7f08c74424100100000039742424743a8b4424643bc689442424742e8d49008d442424508d4c2464e862a9fcff8b086a13e8797bfdff85c075083974242475dfeb08c7442420010000008d4c2460c7842488000000ffffffffe861abfcffeb2455e88990fcff83c40485c074158b44242485c0740d8b166a138bceff52588944242033f68974244c89742450897424488974244489742454c74424580a0000008974245cc744244044bf79008b6c242c55c784248c00000001000000e82e90fcff83c40485c0743b33dbeb038d4900538bcde8783cfeff50b958192007e8ddf4fdff8bf857e80590fcff83c40485c0740a578d4c2444e874abfcff4383fb037cceeb4457e8e68ffcff83c40485c0743757b958192007e81401feff50e8ee6cfdff83c4046a0f508d44244850b908989907e879dc01008b4c242856516a4b8d4c244ce878ddffff39b424a40000008bbc24980000007d588b178bcf89b424a4000000ff523c8b088bd1894c242c0fbfc9c1fa103bce7c3881f9c80000007d303bd67c2c81fac80000007d248b4c24188b54241c8b00565168f0da4a005250b9680efb06e8272efdff898424a40000008b8424a80000003bc67c0583f81f7e5a8b178bcfff523c8b000fbfc88bd0c1fa103bce8944242c7c4181f9c80000007d393bd67c3581fac80000007d2d8944242c8b4c242c0fbfc069c0c8000000c1f91003c18d04808d0485680efb068b400483e01f898424a80000008b4424443bc6894424280f84780100008d9b000000008d542428528d4c2444e852a7fcff8b28397424100f854101000039742438eb0c8b8c2490000000e9360100005655b9ccb38007e8e8edfeff85c00f851b0100006a188bcde83779fdff85c00f850a0100008bcde8c878fdff8bcd8ad8e8af78fdff3ac377028ac38b9c24a40000003bde0fb6f8c744241c010000007e286a7d8bcde8fa78fdff85c0b80100000075028bc36bc06483f8018944241c7d08c744241c010000008b8424a800000083f803740d83f8047408d90518e77400eb06d90534b377008b4424208b5c2414f7d81bc083e01e33c93bde0f95c189442418b85655555541894c2424b9780000002bcff7e98bc2c1e81f03c28944242cdb44242cda4c241cd8c9d80d88aa7700da742424da442418e8eb612500ddd883c000eb05b86400000039b424ac000000740383c01483f8647c05b86400000050e81f09fcff83c40485c05574098b8c2494000000eb118b8c2498000000eb088b8c249400000055e8d8a8fcff397424280f858efeffff8b8c24900000008b410c8b9424940000008b4a0c8d3c01c744244034bf79008d4c2440c784248800000002000000e83ba5fcff8d4c2440c7842488000000ffffffffc744244014bf7900e81fa5fcff8b8c24800000005d5b8bc75f5e64890d0000000083c47cc22000"
+    },
+    {
+      "address": "004B6260",
+      "s1Length": 50,
+      "s2Length": 50,
+      "s1Sha256": "ee1f3f3bb96e50b7b52d2998dae325803e9ac5533edf4c39bf9f121e5270ef1c",
+      "s2Sha256": "ee1f3f3bb96e50b7b52d2998dae325803e9ac5533edf4c39bf9f121e5270ef1c",
+      "identical": true,
+      "s2BytesHex": "8b44240456578bf150b958192007e82da8fdff8b4c241051b9581920078bf8e81ca8fdff50578bcee8e3faffff5f5ec20800"
+    },
+    {
+      "address": "004B5D70",
+      "s1Length": 94,
+      "s2Length": 94,
+      "s1Sha256": "036918050c080f9f7a20ba4c30a6f1087f80a738bf0d002561b67fe72807c211",
+      "s2Sha256": "036918050c080f9f7a20ba4c30a6f1087f80a738bf0d002561b67fe72807c211",
+      "identical": true,
+      "s2BytesHex": "56578b7c240c57e8b448fcff83c40485c074448b74241056e8a348fcff83c40485c074333bfe742556b958192007e8cdb4fdff8bf0568bcfe803b4fcff85c0750c568bcfe807b5fcff84c0760a5fb8010000005ec208005f33c05ec20800"
+    },
+    {
+      "address": "004A0F00",
+      "s1Length": 42,
+      "s2Length": 42,
+      "s1Sha256": "7e465c152a89c44e91b276af72e386d86e12b4a9e65ce1edb4b942edf11bf551",
+      "s2Sha256": "7e465c152a89c44e91b276af72e386d86e12b4a9e65ce1edb4b942edf11bf551",
+      "identical": true,
+      "s2BytesHex": "568b74240856e82597fdff83c40485c074146aff6aff8bcee8c33efeff6a008bcee8fa3efeff5ec20400"
+    },
+    {
+      "address": "00484DE0",
+      "s1Length": 49,
+      "s2Length": 62,
+      "s1Sha256": "1d141ccfab4aa22e67ac31e301405c8cb191a3e39011d9fc8025d8590377a74e",
+      "s2Sha256": "265bc5ef90942b44ad1fe7fba914c972b40eea371ce727e7f796c8206d79700d",
+      "identical": false,
+      "s2BytesHex": "8b414083caff895140895144e83f5446008b44240485c07c123d4b0400007f0b894140e828544600c208008b44240885c07c0883f8297f03894144c20800"
+    },
+    {
+      "address": "00484E20",
+      "s1Length": 24,
+      "s2Length": 24,
+      "s1Sha256": "6a59fd6a7616acd270dfbb3d655b24bafc07cf376ce7ee42d4445e49e418f729",
+      "s2Sha256": "6a59fd6a7616acd270dfbb3d655b24bafc07cf376ce7ee42d4445e49e418f729",
+      "identical": true,
+      "s2BytesHex": "8b44240483f8ff740985c07c0883f8027f03894148c20400"
+    },
+    {
+      "address": "00486B10",
+      "s1Length": 170,
+      "s2Length": 170,
+      "s1Sha256": "7cf2cae4aee20ed04b7cc4b32a4483fccd00d05adc1134b7267a8080a0b11fb2",
+      "s2Sha256": "7cf2cae4aee20ed04b7cc4b32a4483fccd00d05adc1134b7267a8080a0b11fb2",
+      "identical": true,
+      "s2BytesHex": "568bf156b958192007e852ac00008b760883ee0074654e74384e0f858600000083f8347c0a83f8567f0583c0cceb0383c8ff50b958192007e8239f00008bf056e8db3affff83c40485c0745a8b46245ec383f82a7c1583f8337f1083c0d650b958192007e8c79e0000ebd283c8ff50b958192007e8b79e0000ebc285c07c0583f8297e0383c8ff50b958192007e86e9e00008bf056e8863affff83c40485c074058b46405ec333c05ec3"
+    },
+    {
+      "address": "0079C310",
+      "s1Length": 48,
+      "s2Length": 48,
+      "s1Sha256": "79967c43e263c7cc2ce4f59d5ca1d954038efa91fcf6a79003a71a8759277d4f",
+      "s2Sha256": "79967c43e263c7cc2ce4f59d5ca1d954038efa91fcf6a79003a71a8759277d4f",
+      "identical": true,
+      "s2BytesHex": "ffffffff0000ffff0100ffffffff00000000010001000000ffff00000000ffff01000000ffff01000000010001000100"
+    },
+    {
+      "address": "0079C2B0",
+      "s1Length": 128,
+      "s2Length": 128,
+      "s1Sha256": "d692c5d627bf8182061c550e469f9e0b13e17d483aadbec413ec11491d3f0272",
+      "s2Sha256": "c43c9e7e16ef2efa065e931224a872a8d97c6463bca829b7aaeb6212c2992d0d",
+      "identical": false,
+      "s2BytesHex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728291305110c1124250202210f031f151a07071d1c0b211228111f25161f170f07201d00271b2704050d1e1f070a23010815182729000000ffffffff0000ffff0100ffffffff00000000010001000000ffff00000000ffff"
+    }
+  ],
+  "provenance": {
+    "extraction": "python-idb 0.8.0; Capstone 5.0.9; x86-32; stored bytes only; no EXE execution",
+    "sjnUrl": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip",
+    "seanUrl": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/ida-db/san11pk_dump.exe.idb.7z",
+    "boundariesUrl": "https://github.com/fudanglp/311resource/blob/16efa1241dc8637dd33446abb4a9732a37f0a2b9/extractor/ida/data/python_idb/san11pk_dump.exe_functions.csv",
+    "boundaryOnlyDoesNotProveSemantics": true
+  },
+  "callerContracts": [
+    {
+      "caller": "fire",
+      "entry": "00592440",
+      "callsite": "005926DC",
+      "source": "record+4",
+      "mode": "1",
+      "terminal": "durability == 0",
+      "relationSource": "record+4 object owner"
+    },
+    {
+      "caller": "trap",
+      "entry": "00597A60",
+      "callsite": "00597E94",
+      "source": "original arg3",
+      "mode": "1",
+      "terminal": "durability == 0",
+      "relationSource": "original arg4 country pointer; must not conflate with arg3 owner"
+    },
+    {
+      "caller": "attack",
+      "entry": "005B1870",
+      "callsite": "005B1BF5",
+      "source": "attacker troop",
+      "mode": "!six-neighbor adjacency of record positions",
+      "terminal": "durability == 0 OR qualifying base troops == 0",
+      "relationSource": "attacker owner"
+    }
+  ],
+  "orderedStages": [
+    "personnel/captive preprocessing (outside projection)",
+    "resource retention",
+    "per-node military/incomplete domestic destruction and candidate construction",
+    "source selector RNG and selected prefix destruction",
+    "normal ownership change or neutralization",
+    "conditional source-troop entry or special-force cleanup",
+    "governor reconciliation",
+    "half of current max durability floor",
+    "troop-order callbacks and presentation restore"
+  ],
+  "scalarRules": {
+    "retentionPercent": "max(5,floor(commanderCharmByte/10)); missing troop commander ->5",
+    "ownershipMax": "intrinsic base max + 3000 if current legal/alive force has tech26; ownership setter caps old durability to new max",
+    "lateDurability": "max(currentAtTail,floor(maxAtTail/2)); not max(preCapture,oldMax/2)",
+    "neutral": "force/corps=-1, resources/morale/fire=0, governor=-1, city flags&~0x13 and opaque city+0x8C=-1; no direct publicOrder zero",
+    "normal": "different force: flags&~0x13, morale cap, city publicOrder=min(100,max(old,70+floor(newLegionLeaderCharm/5))), troop/gold/food/weapon caps; same-force short path skips latter caps/publicOrder",
+    "entry": "weighted morale on full pre-add troops, then gold/food/troops and12 ordered cargo slots with per-slot caps; duplicate weapon IDs supported; total troop0 =>morale0",
+    "domesticOwner": "00487EB0 derives surviving domestic force from territory city, including special and overflow facilities; nonbase corps getter is -1"
+  },
+  "referenceModel": {
+    "path": "scripts/capture_transaction_profile.py",
+    "validator": "scripts/check_capture_transaction_profile.py",
+    "completeGameTransaction": false,
+    "worldQualification": "full ordered list with type class table, map-cell word and region-byte mapping",
+    "capacityInputs": "explicit observed old/normal/neutral dynamic capacities with provenance; no anonymous stock constants",
+    "unknownPolicy": [
+      "record-only",
+      "reject"
+    ],
+    "entryPolicy": [
+      "source-scalar-projection",
+      "skip",
+      "reject"
+    ],
+    "entryRestriction": "valid commander; coherent normal force/legion; ordinary entry with no secondary ruler/corps ownership change",
+    "replay": "full before/after/command/policy/source profile, recorded selector draws; no RNG during replay",
+    "sourceRngState": "at selector entry, not necessarily at capture entry",
+    "rng": "reuse P0-46 selector; zero selector calls for gate/harbor"
+  },
+  "remainingOpen": [
+    "independently verified clean stock PK build and full byte comparison",
+    "pre-resource captive/personnel outcome and force extinction/merit/currency side effects",
+    "full destruction city counters/personnel target clearing/force adjustments and event callbacks",
+    "governor rank/tie-break and full officer reconciliation",
+    "ruler/corps-changing/transport entry and display-queue timing",
+    "full upstream damage/strategy paths, historical/scripted/surrender takeovers",
+    "complete global RNG initialization/consumption and real savegame regression",
+    "Vanilla patch-specific, PS2 and Wii validation"
+  ],
+  "validation": {
+    "scope": "static source fingerprints, source comparisons, Python reference model and full prior suite; no original executable or savegame run",
+    "comparisonCount": 24,
+    "identicalComparisonCount": 17,
+    "sourceRangeCount": 61,
+    "referenceTestCount": 35,
+    "stateMatrixCount": 150,
+    "nodeTests": 85,
+    "pythonCheckScripts": 67,
+    "trainingDemo": "passed",
+    "trainingLifecycleDemo": "passed (360 turns / 364 accepted trace records)"
+  }
+}

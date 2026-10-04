@@ -1,0 +1,38 @@
+004B9840  57                             push     edi
+004B9841  8b 7c 24 08                    mov      edi, dword ptr [esp + 8]
+004B9845  57                             push     edi
+004B9846  e8 e5 0d fc ff                 call     0x47a630 ; IsLegalPtr
+004B984B  83 c4 04                       add      esp, 4
+004B984E  85 c0                          test     eax, eax
+004B9850  75 04                          jne      0x4b9856
+004B9852  5f                             pop      edi
+004B9853  c2 14 00                       ret      0x14
+004B9856  8b 44 24 0c                    mov      eax, dword ptr [esp + 0xc]
+004B985A  8b 4c 24 14                    mov      ecx, dword ptr [esp + 0x14]
+004B985E  56                             push     esi
+004B985F  8d 34 08                       lea      esi, [eax + ecx]
+004B9862  85 f6                          test     esi, esi
+004B9864  75 07                          jne      0x4b986d
+004B9866  5e                             pop      esi
+004B9867  33 c0                          xor      eax, eax
+004B9869  5f                             pop      edi
+004B986A  c2 14 00                       ret      0x14
+004B986D  0f af 44 24 14                 imul     eax, dword ptr [esp + 0x14]
+004B9872  0f af 4c 24 1c                 imul     ecx, dword ptr [esp + 0x1c]
+004B9877  03 c1                          add      eax, ecx
+004B9879  99                             cdq
+004B987A  f7 fe                          idiv     esi
+004B987C  8b cf                          mov      ecx, edi
+004B987E  8b f0                          mov      esi, eax
+004B9880  e8 8b d7 fc ff                 call     0x487010 ; sub_487010
+004B9885  3b c6                          cmp      eax, esi
+004B9887  7d 0c                          jge      0x4b9895
+004B9889  8b cf                          mov      ecx, edi
+004B988B  e8 80 d7 fc ff                 call     0x487010 ; sub_487010
+004B9890  5e                             pop      esi
+004B9891  5f                             pop      edi
+004B9892  c2 14 00                       ret      0x14
+004B9895  8b c6                          mov      eax, esi
+004B9897  5e                             pop      esi
+004B9898  5f                             pop      edi
+004B9899  c2 14 00                       ret      0x14

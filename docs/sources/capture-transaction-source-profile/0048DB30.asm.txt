@@ -1,0 +1,45 @@
+0048DB30  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0048DB34  83 f8 ff                       cmp      eax, -1
+0048DB37  56                             push     esi
+0048DB38  8b f1                          mov      esi, ecx
+0048DB3A  74 09                          je       0x48db45
+0048DB3C  85 c0                          test     eax, eax
+0048DB3E  7c 63                          jl       0x48dba3
+0048DB40  83 f8 2e                       cmp      eax, 0x2e
+0048DB43  7f 5e                          jg       0x48dba3
+0048DB45  56                             push     esi
+0048DB46  b9 58 19 20 07                 mov      ecx, 0x7201958
+0048DB4B  89 46 20                       mov      dword ptr [esi + 0x20], eax
+0048DB4E  e8 cd 36 00 00                 call     0x491220 ; sub_491220
+0048DB53  85 c0                          test     eax, eax
+0048DB55  7c 0a                          jl       0x48db61
+0048DB57  83 f8 22                       cmp      eax, 0x22
+0048DB5A  7f 05                          jg       0x48db61
+0048DB5C  83 c0 34                       add      eax, 0x34
+0048DB5F  eb 03                          jmp      0x48db64
+0048DB61  83 c8 ff                       or       eax, 0xffffffff
+0048DB64  57                             push     edi
+0048DB65  50                             push     eax
+0048DB66  b9 58 19 20 07                 mov      ecx, 0x7201958
+0048DB6B  e8 90 31 00 00                 call     0x490d00 ; GetArchID
+0048DB70  8b f8                          mov      edi, eax
+0048DB72  57                             push     edi
+0048DB73  e8 b8 ca fe ff                 call     0x47a630 ; IsLegalPtr
+0048DB78  83 c4 04                       add      esp, 4
+0048DB7B  85 c0                          test     eax, eax
+0048DB7D  74 06                          je       0x48db85
+0048DB7F  66 8b 7f 10                    mov      di, word ptr [edi + 0x10]
+0048DB83  eb 02                          jmp      0x48db87
+0048DB85  33 ff                          xor      edi, edi
+0048DB87  8b ce                          mov      ecx, esi
+0048DB89  e8 42 cc fe ff                 call     0x47a7d0 ; sub_47a7d0
+0048DB8E  66 3b f8                       cmp      di, ax
+0048DB91  5f                             pop      edi
+0048DB92  76 0f                          jbe      0x48dba3
+0048DB94  8b ce                          mov      ecx, esi
+0048DB96  e8 35 cc fe ff                 call     0x47a7d0 ; sub_47a7d0
+0048DB9B  8b ce                          mov      ecx, esi
+0048DB9D  50                             push     eax
+0048DB9E  e8 1d fe ff ff                 call     0x48d9c0 ; sub_48d9c0
+0048DBA3  5e                             pop      esi
+0048DBA4  c2 04 00                       ret      4

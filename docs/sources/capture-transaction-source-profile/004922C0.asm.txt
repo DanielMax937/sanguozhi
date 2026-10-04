@@ -1,0 +1,43 @@
+004922C0  6a ff                           push     -1
+004922C2  68 18 ee 72 00                  push     0x72ee18
+004922C7  64 a1 00 00 00 00               mov      eax, dword ptr fs:[0]
+004922CD  50                              push     eax
+004922CE  64 89 25 00 00 00 00            mov      dword ptr fs:[0], esp
+004922D5  51                              push     ecx
+004922D6  53                              push     ebx
+004922D7  56                              push     esi
+004922D8  57                              push     edi
+004922D9  68 68 78 ee 06                  push     0x6ee7868
+004922DE  8b d9                           mov      ebx, ecx
+004922E0  ff 15 60 e3 74 00               call     dword ptr [0x74e360]
+004922E6  8b 7c 24 20                     mov      edi, dword ptr [esp + 0x20]
+004922EA  8b 37                           mov      esi, dword ptr [edi]
+004922EC  6a 01                           push     1
+004922EE  6a 0c                           push     0xc
+004922F0  56                              push     esi
+004922F1  c7 44 24 24 00 00 00 00         mov      dword ptr [esp + 0x24], 0
+004922F9  e8 72 fd fd ff                  call     0x472070 ; IsValidPtr
+004922FE  83 c4 0c                        add      esp, 0xc
+00492301  85 c0                           test     eax, eax
+00492303  68 68 78 ee 06                  push     0x6ee7868
+00492308  74 21                           je       0x49232b
+0049230A  8b 06                           mov      eax, dword ptr [esi]
+0049230C  89 07                           mov      dword ptr [edi], eax
+0049230E  ff 15 5c e3 74 00               call     dword ptr [0x74e35c]
+00492314  5f                              pop      edi
+00492315  8d 46 08                        lea      eax, [esi + 8]
+00492318  5e                              pop      esi
+00492319  5b                              pop      ebx
+0049231A  8b 4c 24 04                     mov      ecx, dword ptr [esp + 4]
+0049231E  64 89 0d 00 00 00 00            mov      dword ptr fs:[0], ecx
+00492325  83 c4 10                        add      esp, 0x10
+00492328  c2 04 00                        ret      4
+0049232B  ff 15 5c e3 74 00               call     dword ptr [0x74e35c]
+00492331  8b 4c 24 10                     mov      ecx, dword ptr [esp + 0x10]
+00492335  5f                              pop      edi
+00492336  5e                              pop      esi
+00492337  8d 43 1c                        lea      eax, [ebx + 0x1c]
+0049233A  5b                              pop      ebx
+0049233B  64 89 0d 00 00 00 00            mov      dword ptr fs:[0], ecx
+00492342  83 c4 10                        add      esp, 0x10
+00492345  c2 04 00                        ret      4

@@ -1,0 +1,8 @@
+0047B6F0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0047B6F4  50                             push     eax
+0047B6F5  81 c1 a4 00 00 00              add      ecx, 0xa4
+0047B6FB  6a 01                          push     1
+0047B6FD  51                             push     ecx
+0047B6FE  e8 1d 6e ff ff                 call     0x472520 ; SetPtrXFlag
+0047B703  83 c4 0c                       add      esp, 0xc
+0047B706  c2 04 00                       ret      4

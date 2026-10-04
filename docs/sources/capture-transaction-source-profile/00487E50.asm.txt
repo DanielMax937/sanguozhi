@@ -1,0 +1,11 @@
+00487E50  8a 44 24 04                    mov      al, byte ptr [esp + 4]
+00487E54  84 c0                          test     al, al
+00487E56  77 08                          ja       0x487e60
+00487E58  32 c0                          xor      al, al
+00487E5A  88 41 1c                       mov      byte ptr [ecx + 0x1c], al
+00487E5D  c2 04 00                       ret      4
+00487E60  3c 0a                          cmp      al, 0xa
+00487E62  72 02                          jb       0x487e66
+00487E64  b0 0a                          mov      al, 0xa
+00487E66  88 41 1c                       mov      byte ptr [ecx + 0x1c], al
+00487E69  c2 04 00                       ret      4
