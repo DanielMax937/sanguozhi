@@ -1510,47 +1510,24 @@ turns = max(1, turns)
 
 ---
 
-## 7.0 训练资格 / 已训练重置 / 野外气力恢复（P0-11）
+## 7.0 训练生命周期（P0-11 / P0-47）
 
-> 专项： [46-training-morale-exactness.md](46-training-morale-exactness.md)。
+当前来源：[82号审计](82-training-lifecycle-source-profile.md)；运行实现：[v2指南](../engine/pk-training-lifecycle.md)。
 
-训练状态：
+S1来源gate已确认拒绝零兵力、已训练和满气力；执行者helper过滤identity0..3、非部队、未行动、missionDuration0。S1仍为MOD关联profile，stock等价未核；same-force/same-base/去重复是明示引擎安全约束，不能反说这些全在`005B8320`本体。
 
-```ts
-if (sp.trainingCompleted)
-  rejectTraining()
-
-// 成功执行后
-sp.trainingCompleted = true
-
-// 下一回合/旬可操作前
-sp.trainingCompleted = false
-```
-
-“每回合一次”是 official-confirmed；但 reset 的原 caller 仍open。
-
-据点 gate 必须 profile 化：
+本项目默认compatibility-reconstruction采用：
 
 ```ts
-canTrainAtSP = fidelity005C4100Profile
+warXp = min(3000, warXp + 2) // 累计，不扣100
+war = max(1,min(100,warBase+floor(warXp/100)))
 ```
 
-不要自行把“满气力/零兵力”等条件标成原函数 exact，直到 `005C4100` body 恢复。
+配置和profile写入存档并接受重放；覆盖100/3000与能力cap边界。默认保守gate不允许满气力刷经验，EndTurn可连续运行。旧XP到100拒绝的临时限制已移除。
 
-野外恢复：
+S1 reset的真实全局loop及field-morale tail-xref已恢复；单势力训练内核只按显式phase plan推进日历、回AP、重置所表示的据点/武将flags。任务/位置不改变，月季边界不执行未实现系统。该scope和APheadcount过滤是provisional-engine-rule，不是完整原scheduler。
 
-```ts
-if (inMusicPlatformRange)
-  gain = hasPoetry ? 20 : 10
-else if (hasMusic)
-  gain = 5
-else
-  gain = 0
-```
-
-最后按100/120气力上限裁剪。
-
----
+既有野外恢复行为仍可复用（平台10/诗想20，无平台奏乐5，气力100/120cap），但本切片没有野外部队。完整原scheduler/AP时序/任务与属性合成、clean stock、全局RNG和跨版本继续open；不会因fallback可运行便清除证据债。
 
 ## 7.0.1 阵系耗粮重叠 / 粮尽逃兵（P0-12）
 

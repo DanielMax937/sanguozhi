@@ -827,23 +827,18 @@ SIRE 数据表给出精确编号：
 004A70D0 IncreasePersonAttrExperience
 ```
 
-长期实测精确确认：
+长期实测支持每100经验提供1点成长；**raw字段是累计经验，不是每次成长就扣100的余数**。P0-47在绑定fingerprint的S1来源恢复writer/getter：
 
 ```ts
-exp += gained
-
-while (exp >= 100 && trainingCapNotReached) {
-  exp -= 100
-  trainedStat += 1
-}
+// 普通人员、关闭年龄/装备等修正的限定兼容profile
+cumulativeExp = min(3000, cumulativeExp + gained)
+growthStat = max(1, min(100, talent + floor(cumulativeExp / 100)))
+uiProgress = cumulativeExp >= 3000 ? 100 : cumulativeExp % 100
 ```
 
-超过100的部分会保留。例如智力经验99，再获得3点：
+例如累计99再得3，存储为102，经验贡献+1，UI余数2；不会把存储减回2。能力100不阻止继续攒经验，累计3000才截断；此时算术余数0而情报UI显示满100。旧“while exp>=100就exp-=100”只能描述余数概念，不能作为原字段写回模型，现已撤回。
 
-```text
-能力 +1
-剩余经验 = 2
-```
+**证据边界：** S1 IDB关联血色5.0路径，S2另一个MOD样本把cap改成0/120；因此新逐字结论只限S1来源，clean stock PK等价仍open。PK研究在S1也把实际提升×100写入同一XP字段，不能另算一份+30预算。详见[来源审计](82-training-lifecycle-source-profile.md)。
 
 ### 3.6 旧规则“只要没到100就能一直练”错误：培养总增量约 +30
 
@@ -1018,7 +1013,7 @@ function getActualAttr(person, attr, health): number
 
 仍 open：
 
-- `0048A030 GetPersonAttrChangeCoef` 与 `0048A390 GetPersonGrowthAttr` 完整函数体；
+- `0048A030 GetPersonAttrChangeCoef` 的完整年龄语义及与已恢复S1 `0048A390` getter的clean-stock等价性；
 - 年龄百分比应用到低素质时的精确整数取整；
 - 年龄盛衰、培养增量、官职/宝物、伤病的最终逐指令合成顺序；
 - 自然适性升档时超出阈值的余数处理；

@@ -1,0 +1,20 @@
+004824B0  8b 41 08                       mov      eax, dword ptr [ecx + 8]
+004824B3  8b 51 0c                       mov      edx, dword ptr [ecx + 0xc]
+004824B6  48                             dec      eax
+004824B7  8d 04 40                       lea      eax, [eax + eax*2]
+004824BA  8d 44 82 ff                    lea      eax, [edx + eax*4 - 1]
+004824BE  8b 51 5c                       mov      edx, dword ptr [ecx + 0x5c]
+004824C1  8b 49 10                       mov      ecx, dword ptr [ecx + 0x10]
+004824C4  8d 04 40                       lea      eax, [eax + eax*2]
+004824C7  03 c2                          add      eax, edx
+004824C9  8d 04 80                       lea      eax, [eax + eax*4]
+004824CC  8d 4c 41 ff                    lea      ecx, [ecx + eax*2 - 1]
+004824D0  b8 6d c1 16 6c                 mov      eax, 0x6c16c16d
+004824D5  f7 e1                          mul      ecx
+004824D7  8b c1                          mov      eax, ecx
+004824D9  2b c2                          sub      eax, edx
+004824DB  d1 e8                          shr      eax, 1
+004824DD  03 c2                          add      eax, edx
+004824DF  c1 e8 08                       shr      eax, 8
+004824E2  40                             inc      eax
+004824E3  c3                             ret      

@@ -1,0 +1,21 @@
+00482530  8b 41 08                       mov      eax, dword ptr [ecx + 8]
+00482533  8b 51 0c                       mov      edx, dword ptr [ecx + 0xc]
+00482536  48                             dec      eax
+00482537  8d 04 40                       lea      eax, [eax + eax*2]
+0048253A  8d 44 82 ff                    lea      eax, [edx + eax*4 - 1]
+0048253E  8b 51 5c                       mov      edx, dword ptr [ecx + 0x5c]
+00482541  8b 49 10                       mov      ecx, dword ptr [ecx + 0x10]
+00482544  8d 04 40                       lea      eax, [eax + eax*2]
+00482547  03 c2                          add      eax, edx
+00482549  8d 04 80                       lea      eax, [eax + eax*4]
+0048254C  8d 44 41 ff                    lea      eax, [ecx + eax*2 - 1]
+00482550  33 d2                          xor      edx, edx
+00482552  b9 68 01 00 00                 mov      ecx, 0x168
+00482557  f7 f1                          div      ecx
+00482559  b9 1e 00 00 00                 mov      ecx, 0x1e
+0048255E  8b c2                          mov      eax, edx
+00482560  33 d2                          xor      edx, edx
+00482562  f7 f1                          div      ecx
+00482564  8b c2                          mov      eax, edx
+00482566  40                             inc      eax
+00482567  c3                             ret      

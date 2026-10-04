@@ -1,0 +1,130 @@
+004A70D0  81 ec 68 04 00 00              sub      esp, 0x468
+004A70D6  a1 ac 0b 8e 00                 mov      eax, dword ptr [0x8e0bac]
+004A70DB  56                             push     esi
+004A70DC  8b b4 24 70 04 00 00           mov      esi, dword ptr [esp + 0x470]
+004A70E3  57                             push     edi
+004A70E4  56                             push     esi
+004A70E5  89 84 24 70 04 00 00           mov      dword ptr [esp + 0x470], eax
+004A70EC  e8 3f 35 fd ff                 call     0x47a630 ; IsLegalPtr
+004A70F1  83 c4 04                       add      esp, 4
+004A70F4  85 c0                          test     eax, eax
+004A70F6  0f 84 62 01 00 00              je       0x4a725e
+004A70FC  8b bc 24 78 04 00 00           mov      edi, dword ptr [esp + 0x478]
+004A7103  85 ff                          test     edi, edi
+004A7105  0f 8c 53 01 00 00              jl       0x4a725e
+004A710B  83 ff 04                       cmp      edi, 4
+004A710E  0f 8f 4a 01 00 00              jg       0x4a725e
+004A7114  53                             push     ebx
+004A7115  55                             push     ebp
+004A7116  8b ce                          mov      ecx, esi
+004A7118  e8 b3 31 fe ff                 call     0x48a2d0 ; sub_48a2d0
+004A711D  57                             push     edi
+004A711E  8b ce                          mov      ecx, esi
+004A7120  e8 5b 20 fe ff                 call     0x489180 ; sub_489180
+004A7125  0f b7 d8                       movzx    ebx, ax
+004A7128  57                             push     edi
+004A7129  8b ce                          mov      ecx, esi
+004A712B  89 5c 24 18                    mov      dword ptr [esp + 0x18], ebx
+004A712F  e8 fc 1e fe ff                 call     0x489030 ; GetAbility_WithInjure
+004A7134  8b ac 24 84 04 00 00           mov      ebp, dword ptr [esp + 0x484]
+004A713B  0f b6 c0                       movzx    eax, al
+004A713E  56                             push     esi
+004A713F  89 44 24 14                    mov      dword ptr [esp + 0x14], eax
+004A7143  03 dd                          add      ebx, ebp
+004A7145  e8 56 e3 ff ff                 call     0x4a54a0 ; sub_4a54a0
+004A714A  83 c4 04                       add      esp, 4
+004A714D  85 c0                          test     eax, eax
+004A714F  74 02                          je       0x4a7153
+004A7151  03 dd                          add      ebx, ebp
+004A7153  81 fb b8 0b 00 00              cmp      ebx, 0xbb8
+004A7159  7e 05                          jle      0x4a7160
+004A715B  bb b8 0b 00 00                 mov      ebx, 0xbb8
+004A7160  53                             push     ebx
+004A7161  57                             push     edi
+004A7162  8b ce                          mov      ecx, esi
+004A7164  e8 a7 36 fe ff                 call     0x48a810 ; sub_48a810
+004A7169  8b 84 24 88 04 00 00           mov      eax, dword ptr [esp + 0x488]
+004A7170  85 c0                          test     eax, eax
+004A7172  74 07                          je       0x4a717b
+004A7174  8b ce                          mov      ecx, esi
+004A7176  e8 55 31 fe ff                 call     0x48a2d0 ; sub_48a2d0
+004A717B  57                             push     edi
+004A717C  8b ce                          mov      ecx, esi
+004A717E  e8 ad 1e fe ff                 call     0x489030 ; GetAbility_WithInjure
+004A7183  0f b6 d8                       movzx    ebx, al
+004A7186  39 5c 24 10                    cmp      dword ptr [esp + 0x10], ebx
+004A718A  0f 8d a4 00 00 00              jge      0x4a7234
+004A7190  8b 16                          mov      edx, dword ptr [esi]
+004A7192  8b ce                          mov      ecx, esi
+004A7194  ff 52 48                       call     dword ptr [edx + 0x48]
+004A7197  85 c0                          test     eax, eax
+004A7199  0f 84 95 00 00 00              je       0x4a7234
+004A719F  6a 7f                          push     0x7f
+004A71A1  8d 84 24 f8 03 00 00           lea      eax, [esp + 0x3f8]
+004A71A8  50                             push     eax
+004A71A9  8d 8c 24 f0 03 00 00           lea      ecx, [esp + 0x3f0]
+004A71B0  e8 fb a7 fc ff                 call     0x4719b0 ; sub_4719b0
+004A71B5  8d 8c 24 e8 03 00 00           lea      ecx, [esp + 0x3e8]
+004A71BC  57                             push     edi
+004A71BD  51                             push     ecx
+004A71BE  e8 ad 78 fe ff                 call     0x48ea70 ; sub_48ea70
+004A71C3  83 c4 08                       add      esp, 8
+004A71C6  6a 00                          push     0
+004A71C8  6a 00                          push     0
+004A71CA  68 00 00 80 bf                 push     0xbf800000
+004A71CF  6a 00                          push     0
+004A71D1  6a 0a                          push     0xa
+004A71D3  b9 10 98 11 09                 mov      ecx, 0x9119810
+004A71D8  e8 93 93 02 00                 call     0x4d0570 ; sub_4d0570
+004A71DD  8b 4c 24 10                    mov      ecx, dword ptr [esp + 0x10]
+004A71E1  6a 01                          push     1
+004A71E3  6a 00                          push     0
+004A71E5  6a 00                          push     0
+004A71E7  8d 94 24 00 04 00 00           lea      edx, [esp + 0x400]
+004A71EE  52                             push     edx
+004A71EF  8b eb                          mov      ebp, ebx
+004A71F1  2b e9                          sub      ebp, ecx
+004A71F3  55                             push     ebp
+004A71F4  53                             push     ebx
+004A71F5  56                             push     esi
+004A71F6  68 5e 17 00 00                 push     0x175e
+004A71FB  8d 4c 24 38                    lea      ecx, [esp + 0x38]
+004A71FF  e8 bc e0 ff ff                 call     0x4a52c0 ; sub_4a52c0
+004A7204  50                             push     eax
+004A7205  e8 66 e2 04 00                 call     0x4f5470 ; sub_4f5470
+004A720A  83 c4 10                       add      esp, 0x10
+004A720D  6a ff                          push     -1
+004A720F  6a 01                          push     1
+004A7211  56                             push     esi
+004A7212  8d 84 24 00 04 00 00           lea      eax, [esp + 0x400]
+004A7219  50                             push     eax
+004A721A  55                             push     ebp
+004A721B  53                             push     ebx
+004A721C  56                             push     esi
+004A721D  68 5f 17 00 00                 push     0x175f
+004A7222  8d 4c 24 38                    lea      ecx, [esp + 0x38]
+004A7226  e8 95 e0 ff ff                 call     0x4a52c0 ; sub_4a52c0
+004A722B  50                             push     eax
+004A722C  e8 af e3 04 00                 call     0x4f55e0 ; sub_4f55e0
+004A7231  83 c4 10                       add      esp, 0x10
+004A7234  57                             push     edi
+004A7235  8b ce                          mov      ecx, esi
+004A7237  e8 44 1f fe ff                 call     0x489180 ; sub_489180
+004A723C  8b 4c 24 14                    mov      ecx, dword ptr [esp + 0x14]
+004A7240  5d                             pop      ebp
+004A7241  5b                             pop      ebx
+004A7242  0f b7 c0                       movzx    eax, ax
+004A7245  5f                             pop      edi
+004A7246  2b c1                          sub      eax, ecx
+004A7248  5e                             pop      esi
+004A7249  8b 8c 24 64 04 00 00           mov      ecx, dword ptr [esp + 0x464]
+004A7250  e8 c5 08 26 00                 call     0x707b1a ; @__security_check_cookie@4
+004A7255  81 c4 68 04 00 00              add      esp, 0x468
+004A725B  c2 10 00                       ret      0x10
+004A725E  8b 8c 24 6c 04 00 00           mov      ecx, dword ptr [esp + 0x46c]
+004A7265  5f                             pop      edi
+004A7266  33 c0                          xor      eax, eax
+004A7268  5e                             pop      esi
+004A7269  e8 ac 08 26 00                 call     0x707b1a ; @__security_check_cookie@4
+004A726E  81 c4 68 04 00 00              add      esp, 0x468
+004A7274  c2 10 00                       ret      0x10

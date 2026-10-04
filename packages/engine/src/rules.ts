@@ -1,5 +1,5 @@
 import data from '../../../docs/sources/pk-training-runtime.json' with { type: 'json' };
-import type { RuleEvidence, RuleUse, Ruleset } from './types.ts';
+import type { EngineAdapters, RuleEvidence, RuleUse, Ruleset } from './types.ts';
 
 function freeze<T>(value: T): T {
   if (value !== null && typeof value === 'object') {
@@ -11,12 +11,20 @@ function freeze<T>(value: T): T {
 export const RULES = freeze(data.rules);
 export type RuleId = keyof typeof RULES;
 export const RULESET: Ruleset = freeze({
-  id: 'pk-training-slice-v1', rulesetVersion: 'pk', patchVersion: '1.1', fixProfile: 'original',
+  id: 'pk-training-lifecycle-v2', rulesetVersion: 'pk', patchVersion: '1.1', fixProfile: 'original',
   gateProfile: 'conservative-training-v1', apProfile: 'single-first-corps-c9-v1',
-  turnProfile: 'training-only-turn-v1', progressionProfile: 'reject-stat-growth-v1',
+  turnProfile: 'training-only-turn-v2',
+  turnPhases: ['advance-date','recover-ap','reset-base-training','reset-officer-actions'],
+  progressionProfile: 'cumulative-war-growth-v2',
+  progressionConfig: { experiencePerPoint:RULES['engine.progression'].value.conversionThreshold, experienceCap:RULES['engine.progression'].value.experienceCap, statMin:RULES['engine.progression'].value.statMin, statMax:RULES['engine.progression'].value.statMax },
   presentationProfile: 'omit-training-presentation-v1',
 });
 export const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
+/** Save both adapter identity and effective configuration; a reused ID cannot hide a config change. */
+export function rulesetForAdapters(adapters: EngineAdapters): Ruleset {
+  return clone({...RULESET, gateProfile:adapters.gate.id, turnProfile:adapters.turn.id,
+    turnPhases:adapters.turn.phases, progressionProfile:adapters.growth.id, progressionConfig:adapters.growth.config});
+}
 export function evidence(id: RuleId, detail: string): RuleUse {
   return { evidence: clone(RULES[id]) as RuleEvidence, detail };
 }

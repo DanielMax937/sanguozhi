@@ -14,7 +14,7 @@ export function replayCommands(initial: GameState, commands: readonly Command[],
 }
 /** Verifies every state snapshot, formula output and evidence record by deterministic replay. Not a cryptographic signature. */
 export function verifySession(value: unknown, adapters: EngineAdapters = DEFAULT_ADAPTERS): Session {
-  if (!isRecord(value) || value.saveVersion !== 1 || value.engineVersion !== 'training-kernel-v1' || !Array.isArray(value.trace) || !isRecord(value.initialState) || !isRecord(value.state)) throw new Error('Invalid save envelope');
+  if (!isRecord(value) || value.saveVersion !== 2 || value.engineVersion !== 'training-kernel-v2' || !Array.isArray(value.trace) || !isRecord(value.initialState) || !isRecord(value.state)) throw new Error('Invalid save envelope (v1 requires explicit state migration; old traces are not silently rewritten)');
   if (canonical(Object.keys(value).sort()) !== canonical(['engineVersion','initialState','saveVersion','state','trace'])) throw new Error('Unexpected save fields');
   const commands: Command[] = [];
   for (const entry of value.trace) {

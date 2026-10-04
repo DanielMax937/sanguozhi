@@ -1,0 +1,36 @@
+004A55A0  56                             push     esi
+004A55A1  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+004A55A5  57                             push     edi
+004A55A6  56                             push     esi
+004A55A7  e8 54 50 fd ff                 call     0x47a600 ; IsPtrValid_UnknownType
+004A55AC  83 c4 04                       add      esp, 4
+004A55AF  85 c0                          test     eax, eax
+004A55B1  74 40                          je       0x4a55f3
+004A55B3  8b 7c 24 10                    mov      edi, dword ptr [esp + 0x10]
+004A55B7  85 ff                          test     edi, edi
+004A55B9  7c 38                          jl       0x4a55f3
+004A55BB  83 ff 04                       cmp      edi, 4
+004A55BE  7f 33                          jg       0x4a55f3
+004A55C0  8b ce                          mov      ecx, esi
+004A55C2  e8 09 4d fe ff                 call     0x48a2d0 ; sub_48a2d0
+004A55C7  8b 44 24 14                    mov      eax, dword ptr [esp + 0x14]
+004A55CB  50                             push     eax
+004A55CC  57                             push     edi
+004A55CD  8b ce                          mov      ecx, esi
+004A55CF  e8 3c 52 fe ff                 call     0x48a810 ; sub_48a810
+004A55D4  8b 44 24 18                    mov      eax, dword ptr [esp + 0x18]
+004A55D8  85 c0                          test     eax, eax
+004A55DA  74 07                          je       0x4a55e3
+004A55DC  8b ce                          mov      ecx, esi
+004A55DE  e8 ed 4c fe ff                 call     0x48a2d0 ; sub_48a2d0
+004A55E3  57                             push     edi
+004A55E4  8b ce                          mov      ecx, esi
+004A55E6  e8 95 3b fe ff                 call     0x489180 ; sub_489180
+004A55EB  5f                             pop      edi
+004A55EC  0f b7 c0                       movzx    eax, ax
+004A55EF  5e                             pop      esi
+004A55F0  c2 10 00                       ret      0x10
+004A55F3  5f                             pop      edi
+004A55F4  33 c0                          xor      eax, eax
+004A55F6  5e                             pop      esi
+004A55F7  c2 10 00                       ret      0x10

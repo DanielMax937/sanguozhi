@@ -25,14 +25,14 @@ const vectors = [
 ];
 for (const [wars,troops,drill,expected] of vectors) test(`main reference vector WAR${wars}/troops${troops}/drill${drill}`,() => {
  const state=unboosted(); state.bases[0].troops=troops; state.bases[0].morale=0; state.bases[0].facilities.drillGround=drill?'complete':'none';
- wars.forEach((war,i) => {state.officers[i].war=war;});
+ wars.forEach((war,i) => {state.officers[i].war=war;state.officers[i].warBase=war;});
  const preview=previewCommand(state,{...train,officerIds:wars.map((_,i)=>`o${i+1}`)});
  assert.equal(preview.calculation.training.gainBeforeCap,expected);
  assert.equal(preview.ok,troops>0); // zero troops is a documented conservative gate, not formula behavior
 });
 
 test('integer denominator 1999/2000 boundary and odd boosted gain',() => {
- const state=unboosted(); state.bases[0].morale=0; state.officers.forEach(p=>p.war=100);
+ const state=unboosted(); state.bases[0].morale=0; state.officers.forEach(p=>{p.war=100;p.warBase=100});
  state.bases[0].troops=1999; assert.equal(previewCommand(state,train).calculation.training.denominator,20);
  state.bases[0].troops=2000; assert.equal(previewCommand(state,train).calculation.training.denominator,21);
  state.bases[0].troops=10000; state.bases[0].facilities.drillGround='complete';
@@ -49,7 +49,7 @@ test('preview and execution share arithmetic; input frozen; zero core RNG draws'
  assert.ok(result.evidence.some(x=>x.evidence.id==='engine.presentationOmitted'));
 });
 test('actual capped gain drives TP; gold unchanged; all rewards and flags',() => {
- const state=unboosted(); state.bases[0].morale=95; state.officers.forEach(p=>p.war=100);
+ const state=unboosted(); state.bases[0].morale=95; state.officers.forEach(p=>{p.war=100;p.warBase=100});
  const out=executeCommand(state,train); assert.equal(out.ok,true);
  assert.equal(out.state.bases[0].morale,100); assert.equal(out.calculation.training.actualGain,5);
  assert.equal(out.state.force.techniquePoints,7); assert.equal(out.state.corps.actionPoints,20);
@@ -87,8 +87,7 @@ for (const [name, mutate, command, pattern] of [
  ['too many officers',()=>{},{...train,officerIds:['o1','o2','o3','o4']},/1\.\.3/],
  ['unknown officer',()=>{},{...train,officerIds:['missing']},/Unknown/],
  ['unknown base',()=>{},{...train,baseId:'missing'},/Unknown/],
- ['XP growth threshold',s=>{s.officers[0].warXp=98},train,/Unsupported progression/],
- ['XP past threshold state',s=>{s.officers[0].warXp=100},train,/XP/],
+ ['XP past storage cap',s=>{s.officers[0].warXp=3001},train,/XP/],
  ['overcap morale',s=>{s.bases[0].morale=101},train,/resources/],
  ['negative resource',s=>{s.bases[0].troops=-1},train,/resources/],
  ['fractional stat',s=>{s.officers[0].war=1.5},train,/outside/],
@@ -102,10 +101,10 @@ test('failed dispatch leaves accepted command log and session byte-identical',()
  const session=createSession(syntheticScenario());const before=canonical(session);
  const out=dispatch(session,{...train,officerIds:['o1','o1']});assert.strictEqual(out.session,session);assert.equal(canonical(session),before);assert.equal(session.trace.length,0);
 });
-test('XP97 is allowed once; XP99 cannot silently accumulate',() => {
+test('XP97 to99 to101 remains cumulative; stat100 can still accumulate XP',() => {
  const state=syntheticScenario();state.officers[0].warXp=97;
  const one=executeCommand(state,train);assert.equal(one.ok,true);assert.equal(one.state.officers[0].warXp,99);
- const next=executeCommand(one.state,{type:'EndTurn'});rejectAtomic(next.state,train,/Unsupported progression/);
+ const next=executeCommand(one.state,{type:'EndTurn'});const two=executeCommand(next.state,train);assert.equal(two.ok,true);assert.equal(two.state.officers[0].warXp,101);assert.equal(two.state.officers[0].war,100);
 });
 test('EndTurn resets modeled flags, restores per-corps AP, preserves morale/gold/XP/RNG',() => {
  const trained=executeCommand(syntheticScenario(),train).state;const before=copy(trained);

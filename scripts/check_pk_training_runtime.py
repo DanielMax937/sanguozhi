@@ -28,7 +28,7 @@ def main() -> None:
             assert source['commit'] == BASELINE
             assert BASELINE in source['url']
         else:
-            assert source['introducedWith'] == 'pk-training-slice-v1'
+            assert source['introducedWith'] in {'pk-training-slice-v1', 'pk-training-lifecycle-v2'}
             assert source['url'] is None  # do not invent a main URL for this new guide
     f = rules['train.formula']['value']
     drill = rules['train.drill']['value']
@@ -62,8 +62,12 @@ def main() -> None:
     assert rules['train.gateOpen']['level'] == 'open'
     assert rules['engine.version']['value']['supported'] == 'pk'
     assert rules['engine.progression']['value']['conversionThreshold'] == 100
+    assert rules['engine.progression']['value']['experienceCap'] == 3000
+    assert rules['engine.progression']['level'] == 'compatibility-reconstruction'
+    assert data['profileId'] == 'pk-training-lifecycle-v2'
+    assert data['lifecycleBaseline']['commit'] == '56f1aa4ad9cf2bff5612b1777e16dc54be0cdefb'
     print(f'PASS: {len(rules)} provenance/evidence records, {count} formula vectors and existing technique data')
-    print('New runtime normalization, not original executable certification; gate, scheduler and Vanilla stay open.')
+    print('New runtime normalization, not original executable certification; source gate/reset recovered separately; stock equivalence, full scheduler and Vanilla stay open.')
 
 
 if __name__ == '__main__':

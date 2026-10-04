@@ -1,0 +1,47 @@
+005B8320  56                             push     esi
+005B8321  8b f1                          mov      esi, ecx
+005B8323  8b 06                          mov      eax, dword ptr [esi]
+005B8325  50                             push     eax
+005B8326  e8 05 23 ec ff                 call     0x47a630 ; IsLegalPtr
+005B832B  83 c4 04                       add      esp, 4
+005B832E  85 c0                          test     eax, eax
+005B8330  74 0c                          je       0x5b833e
+005B8332  8b 0e                          mov      ecx, dword ptr [esi]
+005B8334  e8 47 e3 ec ff                 call     0x486680 ; sub_486680
+005B8339  83 f8 ff                       cmp      eax, -1
+005B833C  75 04                          jne      0x5b8342
+005B833E  33 c0                          xor      eax, eax
+005B8340  5e                             pop      esi
+005B8341  c3                             ret      
+005B8342  53                             push     ebx
+005B8343  57                             push     edi
+005B8344  33 db                          xor      ebx, ebx
+005B8346  33 ff                          xor      edi, edi
+005B8348  83 c6 04                       add      esi, 4
+005B834B  eb 03                          jmp      0x5b8350
+005B834D  8d 49 00                       lea      ecx, [ecx]
+005B8350  8b 06                          mov      eax, dword ptr [esi]
+005B8352  85 c0                          test     eax, eax
+005B8354  74 0e                          je       0x5b8364
+005B8356  50                             push     eax
+005B8357  43                             inc      ebx
+005B8358  e8 93 fd ff ff                 call     0x5b80f0 ; sub_5b80f0
+005B835D  83 c4 04                       add      esp, 4
+005B8360  85 c0                          test     eax, eax
+005B8362  74 14                          je       0x5b8378
+005B8364  47                             inc      edi
+005B8365  83 c6 04                       add      esi, 4
+005B8368  83 ff 03                       cmp      edi, 3
+005B836B  7c e3                          jl       0x5b8350
+005B836D  33 c0                          xor      eax, eax
+005B836F  5f                             pop      edi
+005B8370  85 db                          test     ebx, ebx
+005B8372  5b                             pop      ebx
+005B8373  0f 9f c0                       setg     al
+005B8376  5e                             pop      esi
+005B8377  c3                             ret      
+005B8378  5f                             pop      edi
+005B8379  5b                             pop      ebx
+005B837A  33 c0                          xor      eax, eax
+005B837C  5e                             pop      esi
+005B837D  c3                             ret      

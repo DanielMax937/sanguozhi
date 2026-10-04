@@ -1,5 +1,8 @@
 # P0-11 训练资格 / 已训练重置 / 野外气力恢复 exactness
 
+> 2026-10-04来源更新：本页保留旧轮次边界记录。S1 source gate、真实全局reset及野外气力tail-xref已由[82号审计](82-training-lifecycle-source-profile.md)恢复；以下旧“caller/body open”不能再解读为该S1来源仍未恢复。S1/S2均关联MOD，clean stock等价及完整scheduler仍open。
+
+
 更新：2026-10-03。
 
 ## 1. 本轮结论

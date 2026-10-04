@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "profileId": "pk-training-slice-v1",
+  "profileId": "pk-training-lifecycle-v2",
   "baseline": {
     "repository": "DanielMax937/sanguozhi",
     "branch": "main",
@@ -22,8 +22,8 @@
     "train.formula": {
       "id": "train.formula",
       "level": "opcode-exact",
-      "target": "PC-PK1.1",
-      "originalEvidence": "PC-PK1.1 reverse-engineered original formula",
+      "target": "published PK-oriented source corpus; clean-stock PC-PK1.1 unverified",
+      "originalEvidence": "source-corpus instruction-exact (inherited v1 grade); not clean-stock executable certification",
       "source": {
         "repository": "DanielMax937/sanguozhi",
         "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
@@ -34,7 +34,7 @@
           "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政03-计算训练效果.txt"
         ]
       },
-      "note": "Effective/current WAR, highest WAR counted twice; integer operations, no core RNG.",
+      "note": "Effective/current WAR, highest WAR counted twice; integer operations, no core RNG. Opcode-exact describes the pinned published instruction evidence only; S1 IDB corroboration is MOD-associated and does not certify stock PK. See82-training-lifecycle-source-profile.md.",
       "value": {
         "troopsDivisor": 2000,
         "denominatorBase": 20,
@@ -47,8 +47,8 @@
     "train.drill": {
       "id": "train.drill",
       "level": "opcode-exact",
-      "target": "PC-PK1.1",
-      "originalEvidence": "PC-PK1.1 reverse-engineered",
+      "target": "published PK-oriented source corpus; clean-stock PC-PK1.1 unverified",
+      "originalEvidence": "source-corpus instruction-exact (inherited v1 grade); not clean-stock executable certification",
       "source": {
         "repository": "DanielMax937/sanguozhi",
         "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
@@ -59,7 +59,7 @@
           "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政03-计算训练效果.txt"
         ]
       },
-      "note": "City drill ground only; completed facility required by bounded model.",
+      "note": "City drill ground only; completed facility required by bounded model. Opcode-exact describes the pinned published instruction evidence only; S1 IDB corroboration is MOD-associated and does not certify stock PK. See82-training-lifecycle-source-profile.md.",
       "value": {
         "numerator": 3,
         "denominator": 2
@@ -68,8 +68,8 @@
     "train.ap": {
       "id": "train.ap",
       "level": "opcode-exact",
-      "target": "PC-PK1.1",
-      "originalEvidence": "PC-PK1.1 reverse-engineered",
+      "target": "published PK-oriented source corpus; clean-stock PC-PK1.1 unverified",
+      "originalEvidence": "source-corpus instruction-exact (inherited v1 grade); not clean-stock executable certification",
       "source": {
         "repository": "DanielMax937/sanguozhi",
         "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
@@ -80,7 +80,7 @@
           "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政04-执行训练.txt"
         ]
       },
-      "note": "Complete city military office reduces AP cost; gold cost is zero.",
+      "note": "Complete city military office reduces AP cost; gold cost is zero. Opcode-exact describes the pinned published instruction evidence only; S1 IDB corroboration is MOD-associated and does not certify stock PK. See82-training-lifecycle-source-profile.md.",
       "value": {
         "ordinary": 20,
         "militaryOffice": 10,
@@ -90,8 +90,8 @@
     "train.rewards": {
       "id": "train.rewards",
       "level": "opcode-exact",
-      "target": "PC-PK1.1",
-      "originalEvidence": "PC-PK1.1 reverse-engineered",
+      "target": "published PK-oriented source corpus; clean-stock PC-PK1.1 unverified",
+      "originalEvidence": "source-corpus instruction-exact (inherited v1 grade); not clean-stock executable certification",
       "source": {
         "repository": "DanielMax937/sanguozhi",
         "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
@@ -102,7 +102,7 @@
           "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政04-执行训练.txt"
         ]
       },
-      "note": "Each selected officer receives WAR XP and merit and is marked acted; base marked trained.",
+      "note": "Each selected officer receives WAR XP and merit and is marked acted; base marked trained. Opcode-exact describes the pinned published instruction evidence only; S1 IDB corroboration is MOD-associated and does not certify stock PK. See82-training-lifecycle-source-profile.md.",
       "value": {
         "warXp": 2,
         "merit": 50
@@ -111,8 +111,8 @@
     "train.tp": {
       "id": "train.tp",
       "level": "opcode-exact",
-      "target": "PC-PK1.1",
-      "originalEvidence": "PC-PK1.1 reverse-engineered",
+      "target": "published PK-oriented source corpus; clean-stock PC-PK1.1 unverified",
+      "originalEvidence": "source-corpus instruction-exact (inherited v1 grade); not clean-stock executable certification",
       "source": {
         "repository": "DanielMax937/sanguozhi",
         "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
@@ -123,7 +123,7 @@
           "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政04-执行训练.txt"
         ]
       },
-      "note": "TP computed from actual morale gain after clipping.",
+      "note": "TP computed from actual morale gain after clipping. Opcode-exact describes the pinned published instruction evidence only; S1 IDB corroboration is MOD-associated and does not certify stock PK. See82-training-lifecycle-source-profile.md.",
       "value": {
         "divisor": 2,
         "flat": 5
@@ -132,8 +132,8 @@
     "train.moraleCap": {
       "id": "train.moraleCap",
       "level": "opcode-exact",
-      "target": "PC-PK1.1",
-      "originalEvidence": "PC-PK1.1 reverse-engineered",
+      "target": "published PK-oriented source corpus; clean-stock PC-PK1.1 unverified",
+      "originalEvidence": "source-corpus instruction-exact (inherited v1 grade); not clean-stock executable certification",
       "source": {
         "repository": "DanielMax937/sanguozhi",
         "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
@@ -145,7 +145,7 @@
           "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/sources/techniques.json"
         ]
       },
-      "note": "Existing techniques.json identifies trained-soldiers as technique ID16; no automatic morale increase.",
+      "note": "Existing techniques.json identifies trained-soldiers as technique ID16; no automatic morale increase. Opcode-exact describes the pinned published instruction evidence only; S1 IDB corroboration is MOD-associated and does not certify stock PK. See82-training-lifecycle-source-profile.md.",
       "value": {
         "ordinary": 100,
         "trainedSoldiers": 120,
@@ -206,16 +206,20 @@
       "id": "train.gateOpen",
       "level": "open",
       "target": "PC-PK1.1",
-      "originalEvidence": "trainingGateInnerConditions partial; completeBody open",
+      "originalEvidence": "source gate/parameter bodies recovered; clean stock equivalence and full mission predicates open",
       "source": {
         "repository": "DanielMax937/sanguozhi",
-        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
-        "path": "docs/rules/46-training-morale-exactness.md",
-        "section": "§2/§10; 005C4100/005B8320",
-        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/46-training-morale-exactness.md",
-        "originalUrls": []
+        "commit": null,
+        "path": "docs/rules/82-training-lifecycle-source-profile.md",
+        "section": "Source-bound qualification, reset and growth",
+        "url": null,
+        "originalUrls": [
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip",
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/地址资料.txt"
+        ],
+        "introducedWith": "pk-training-lifecycle-v2"
       },
-      "note": "Base eligibility and full parameter-validator bodies remain open; no invented full original gate.",
+      "note": "005C4100/005B8320/005B80F0 bodies recovered in S1 IDB c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab; not certified stock. Same-force/same-base/duplicate safety is an engine contract.",
       "value": {
         "baseGate": "005C4100",
         "parameterGate": "005B8320"
@@ -234,7 +238,7 @@
         "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/16-unresolved-rules-fallbacks.md",
         "originalUrls": []
       },
-      "note": "Conservative replaceable gate: owned active-corps base, positive troops, below morale cap, untrained; 1–3 distinct present own officers, unacted, sufficient AP. These extra gates are not original opcode claims.",
+      "note": "Conservative additional/domain checks plus source-supported positive troops and below-cap rules. Distinct own same-base idle active officers, AP and once-per-turn are enforced; no full clean-stock validator equivalence claimed.",
       "value": {
         "profile": "conservative-training-v1"
       }
@@ -243,7 +247,7 @@
       "id": "turn.reset",
       "level": "documented-guide",
       "target": "PC-PK1.1",
-      "originalEvidence": "exact behavior; reset xref open",
+      "originalEvidence": "documented reset cadence; legacy xref gap superseded source-bound in82; stock equivalence open",
       "source": {
         "repository": "DanielMax937/sanguozhi",
         "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
@@ -254,23 +258,27 @@
           "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf"
         ]
       },
-      "note": "Training flag cleared before next usable turn; exact global order/scope not recovered.",
+      "note": "Training flags clear before next usable turn. S1 global source reset chain now separately recovered in82; this runtime projects it onto its bounded state domain rather than claiming original global scope.",
       "value": true
     },
     "turn.schedulerOpen": {
       "id": "turn.schedulerOpen",
       "level": "open",
       "target": "PC-PK1.1",
-      "originalEvidence": "training-reset-xref-open",
+      "originalEvidence": "source reset and field-morale xrefs recovered; complete stock scheduler/AP placement open",
       "source": {
         "repository": "DanielMax937/sanguozhi",
-        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
-        "path": "docs/rules/69-training-reset-scheduler-boundary.md",
-        "section": "§8",
-        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/69-training-reset-scheduler-boundary.md",
-        "originalUrls": []
+        "commit": null,
+        "path": "docs/rules/82-training-lifecycle-source-profile.md",
+        "section": "Source-bound qualification, reset and growth",
+        "url": null,
+        "originalUrls": [
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip",
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/地址资料.txt"
+        ],
+        "introducedWith": "pk-training-lifecycle-v2"
       },
-      "note": "No original global scheduler/caller or field-morale-recovery xref claimed.",
+      "note": "S1 reset0059C423->00598630 and field-morale0059C330->0059C2A0 tail-jump0059A230 recovered. Stock equivalence, full scheduler/AP placement/global RNG and all mission interactions remain open.",
       "value": true
     },
     "ap.recovery": {
@@ -319,7 +327,7 @@
         "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/02-economy.md",
         "originalUrls": []
       },
-      "note": "Only one first corps of one force, present synthetic officers and unmodified 0..100 abilities. At least one controlled city. Port/gate headcount requires controlled parent city. Unsupported split corps/state is rejected.",
+      "note": "One first corps of one force; unmodified synthetic abilities; at least one owned city. Active physically-at-base officer headcount is an explicit bounded adapter; mission-in-base counts, absent/unit/prisoner does not. Role parameters are independent of location. Split corps and complete source selector remain unsupported.",
       "value": {
         "profile": "single-first-corps-c9-v1"
       }
@@ -351,39 +359,53 @@
     },
     "engine.progression": {
       "id": "engine.progression",
-      "level": "provisional-engine-rule",
-      "target": "training-sandbox-v1",
-      "originalEvidence": "five-stat experience >=100 converts to growth; +30 combined cultivation bound",
+      "level": "compatibility-reconstruction",
+      "target": "PC-PK1.1 compatibility / synthetic lifecycle v2",
+      "originalEvidence": "source-profile recovered; stock equivalence open",
       "source": {
         "repository": "DanielMax937/sanguozhi",
-        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
-        "path": "docs/rules/03-personnel.md",
-        "section": "§3.5–3.6",
-        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/03-personnel.md",
-        "originalUrls": []
+        "commit": null,
+        "path": "docs/rules/82-training-lifecycle-source-profile.md",
+        "section": "Source-bound qualification, reset and growth",
+        "url": null,
+        "originalUrls": [
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip",
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/地址资料.txt"
+        ],
+        "introducedWith": "pk-training-lifecycle-v2"
       },
-      "note": "This short synthetic slice refuses any Train reaching XP100, preventing silent accumulation or unimplemented stat growth.",
+      "note": "Cumulative XP clamps at 3000; every 100 contributes one growth point; unmodified synthetic talent plus floor(XP/100) clamps to 1..100. Source-profile bytes do not certify stock PK equivalence. No age, research command, injury, equipment or special roster ID700..799 path.",
       "value": {
         "conversionThreshold": 100,
-        "profile": "reject-stat-growth-v1"
+        "experienceCap": 3000,
+        "statMin": 1,
+        "statMax": 100,
+        "profile": "cumulative-war-growth-v2"
       }
     },
     "engine.scheduler": {
       "id": "engine.scheduler",
       "level": "provisional-engine-rule",
-      "target": "training-sandbox-v1",
-      "originalEvidence": "new bounded engine adapter, not recovered top scheduler",
+      "target": "PC-PK1.1 compatibility / synthetic lifecycle v2",
+      "originalEvidence": "provisional-engine-rule",
       "source": {
         "repository": "DanielMax937/sanguozhi",
-        "commit": "5c5611bb067c0dfe13cea1126ad69a12dade697c",
-        "path": "docs/rules/69-training-reset-scheduler-boundary.md",
-        "section": "§6–§8",
-        "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/69-training-reset-scheduler-boundary.md",
-        "originalUrls": []
+        "commit": null,
+        "path": "docs/engine/pk-training-lifecycle.md",
+        "section": "Turn phase plan",
+        "url": null,
+        "originalUrls": [],
+        "introducedWith": "pk-training-lifecycle-v2"
       },
-      "note": "EndTurn advances calendar, resets owned-base training and synthetic officer acted flags, and restores this corps AP only. No economy, AI, field units, aging, events or historical scenario.",
+      "note": "Explicit replaceable phase order; only calendar, current first-corps AP, controlled-base training flags and represented officer action flags. No inferred original global scheduler, missions, AI or economy.",
       "value": {
-        "profile": "training-only-turn-v1"
+        "profile": "training-only-turn-v2",
+        "phases": [
+          "advance-date",
+          "recover-ap",
+          "reset-base-training",
+          "reset-officer-actions"
+        ]
       }
     },
     "engine.rng": {
@@ -441,9 +463,9 @@
         "originalUrls": [],
         "introducedWith": "pk-training-slice-v1"
       },
-      "note": "Validated serializable synthetic state, atomic commands, replay trace, and save format are engineering mechanisms. Unsupported systems are not approximated.",
+      "note": "Validated lifecycle-v2 serializable synthetic state, atomic commands, cumulative WAR experience, trace and save format. Unsupported lifecycle transitions are not simulated.",
       "value": {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "maxTroops": 150000,
         "maxStat": 100,
         "maxYear": 9998
@@ -462,12 +484,66 @@
         "url": "https://github.com/DanielMax937/sanguozhi/blob/5c5611bb067c0dfe13cea1126ad69a12dade697c/docs/rules/46-training-morale-exactness.md",
         "originalUrls": []
       },
-      "note": "Only PC-PK1.1 original fix profile is enabled. Vanilla is explicitly unsupported in this slice; never inherits PK effects.",
+      "note": "The engine targets PC-PK1.1/original fix profile but source-profile lifecycle reconstruction is not clean-stock certification. Vanilla/PS2/Wii remain separately unsupported.",
       "value": {
         "supported": "pk",
         "patchVersion": "1.1",
         "fixProfile": "original"
       }
+    },
+    "engine.eligibility": {
+      "id": "engine.eligibility",
+      "level": "provisional-engine-rule",
+      "target": "PC-PK1.1 compatibility / synthetic lifecycle v2",
+      "originalEvidence": "provisional-engine-rule",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": null,
+        "path": "docs/engine/pk-training-lifecycle.md",
+        "section": "Eligibility and action reset",
+        "url": null,
+        "originalUrls": [],
+        "introducedWith": "pk-training-lifecycle-v2"
+      },
+      "note": "Independent identity/location/mission dimensions. Training requires active identity0..3, at the selected base, no mission and not acted. AP headcounts include active officers physically at a base; mission-in-base remains counted. These bounded status mappings are not complete original validator semantics.",
+      "value": {
+        "activeIdentities": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "prisonerIdentity": 5
+      }
+    },
+    "train.sourceGate": {
+      "id": "train.sourceGate",
+      "level": "compatibility-reconstruction",
+      "target": "PC-PK1.1 target / source S1 only",
+      "originalEvidence": "IDB-stored bytes exact; MOD-associated input; stock equivalence open",
+      "source": {
+        "repository": "DanielMax937/sanguozhi",
+        "commit": null,
+        "path": "docs/rules/82-training-lifecycle-source-profile.md",
+        "section": "Source-bound qualification, reset and growth",
+        "url": null,
+        "originalUrls": [
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip",
+          "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/地址资料.txt"
+        ],
+        "introducedWith": "pk-training-lifecycle-v2"
+      },
+      "note": "S1 base gate requires positive troops and current morale below limit; officer helper requires identities0..3, not in troop, not acted, mission duration0. Boolean mission/location in this synthetic engine is a bounded projection.",
+      "value": {
+        "source": "S1",
+        "fullMorale": "reject",
+        "zeroTroops": "reject",
+        "stockOriginalVerified": false
+      }
     }
+  },
+  "lifecycleBaseline": {
+    "repository": "DanielMax937/sanguozhi",
+    "commit": "56f1aa4ad9cf2bff5612b1777e16dc54be0cdefb"
   }
 }

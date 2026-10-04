@@ -1,0 +1,97 @@
+005C4100  81 ec d0 03 00 00              sub      esp, 0x3d0
+005C4106  56                             push     esi
+005C4107  8b b4 24 d8 03 00 00           mov      esi, dword ptr [esp + 0x3d8]
+005C410E  8b 06                          mov      eax, dword ptr [esi]
+005C4110  8b ce                          mov      ecx, esi
+005C4112  ff 50 40                       call     dword ptr [eax + 0x40]
+005C4115  50                             push     eax
+005C4116  b9 58 19 20 07                 mov      ecx, 0x7201958
+005C411B  e8 80 c9 ec ff                 call     0x490aa0 ; GetCountryPtr
+005C4120  50                             push     eax
+005C4121  e8 0a 65 eb ff                 call     0x47a630 ; IsLegalPtr
+005C4126  83 c4 04                       add      esp, 4
+005C4129  85 c0                          test     eax, eax
+005C412B  0f 84 a6 00 00 00              je       0x5c41d7
+005C4131  6a 01                          push     1
+005C4133  6a 00                          push     0
+005C4135  56                             push     esi
+005C4136  e8 45 ff ff ff                 call     0x5c4080 ; sub_5c4080
+005C413B  83 c4 04                       add      esp, 4
+005C413E  50                             push     eax
+005C413F  56                             push     esi
+005C4140  6a 06                          push     6
+005C4142  e8 a9 44 ff ff                 call     0x5b85f0 ; sub_5b85f0
+005C4147  83 c4 14                       add      esp, 0x14
+005C414A  85 c0                          test     eax, eax
+005C414C  0f 85 85 00 00 00              jne      0x5c41d7
+005C4152  56                             push     esi
+005C4153  b9 cc b3 80 07                 mov      ecx, 0x780b3cc
+005C4158  e8 03 8d ed ff                 call     0x49ce60 ; sub_49ce60
+005C415D  85 c0                          test     eax, eax
+005C415F  74 14                          je       0x5c4175
+005C4161  56                             push     esi
+005C4162  e8 19 40 ff ff                 call     0x5b8180 ; sub_5b8180
+005C4167  83 c4 04                       add      esp, 4
+005C416A  85 c0                          test     eax, eax
+005C416C  74 69                          je       0x5c41d7
+005C416E  68 c8 15 00 00                 push     0x15c8
+005C4173  eb 47                          jmp      0x5c41bc
+005C4175  8b 16                          mov      edx, dword ptr [esi]
+005C4177  8b ce                          mov      ecx, esi
+005C4179  ff 52 50                       call     dword ptr [edx + 0x50]
+005C417C  85 c0                          test     eax, eax
+005C417E  75 14                          jne      0x5c4194
+005C4180  56                             push     esi
+005C4181  e8 fa 3f ff ff                 call     0x5b8180 ; sub_5b8180
+005C4186  83 c4 04                       add      esp, 4
+005C4189  85 c0                          test     eax, eax
+005C418B  74 4a                          je       0x5c41d7
+005C418D  68 c6 15 00 00                 push     0x15c6
+005C4192  eb 28                          jmp      0x5c41bc
+005C4194  57                             push     edi
+005C4195  8b ce                          mov      ecx, esi
+005C4197  e8 74 2e ec ff                 call     0x487010 ; sub_487010
+005C419C  8b f8                          mov      edi, eax
+005C419E  8b 06                          mov      eax, dword ptr [esi]
+005C41A0  8b ce                          mov      ecx, esi
+005C41A2  ff 50 54                       call     dword ptr [eax + 0x54]
+005C41A5  3b c7                          cmp      eax, edi
+005C41A7  5f                             pop      edi
+005C41A8  56                             push     esi
+005C41A9  7c 36                          jl       0x5c41e1
+005C41AB  e8 d0 3f ff ff                 call     0x5b8180 ; sub_5b8180
+005C41B0  83 c4 04                       add      esp, 4
+005C41B3  85 c0                          test     eax, eax
+005C41B5  74 20                          je       0x5c41d7
+005C41B7  68 c7 15 00 00                 push     0x15c7
+005C41BC  8d 4c 24 08                    lea      ecx, [esp + 8]
+005C41C0  e8 9b 89 ed ff                 call     0x49cb60 ; sub_49cb60
+005C41C5  50                             push     eax
+005C41C6  e8 c5 71 ed ff                 call     0x49b390 ; sub_49b390
+005C41CB  56                             push     esi
+005C41CC  50                             push     eax
+005C41CD  6a 06                          push     6
+005C41CF  e8 fc 3e ff ff                 call     0x5b80d0 ; sub_5b80d0
+005C41D4  83 c4 10                       add      esp, 0x10
+005C41D7  33 c0                          xor      eax, eax
+005C41D9  5e                             pop      esi
+005C41DA  81 c4 d0 03 00 00              add      esp, 0x3d0
+005C41E0  c3                             ret      
+005C41E1  e8 9a 3f ff ff                 call     0x5b8180 ; sub_5b8180
+005C41E6  83 c4 04                       add      esp, 4
+005C41E9  85 c0                          test     eax, eax
+005C41EB  74 20                          je       0x5c420d
+005C41ED  68 c5 15 00 00                 push     0x15c5
+005C41F2  8d 4c 24 08                    lea      ecx, [esp + 8]
+005C41F6  e8 65 89 ed ff                 call     0x49cb60 ; sub_49cb60
+005C41FB  50                             push     eax
+005C41FC  e8 8f 71 ed ff                 call     0x49b390 ; sub_49b390
+005C4201  56                             push     esi
+005C4202  50                             push     eax
+005C4203  6a 06                          push     6
+005C4205  e8 c6 3e ff ff                 call     0x5b80d0 ; sub_5b80d0
+005C420A  83 c4 10                       add      esp, 0x10
+005C420D  b8 01 00 00 00                 mov      eax, 1
+005C4212  5e                             pop      esi
+005C4213  81 c4 d0 03 00 00              add      esp, 0x3d0
+005C4219  c3                             ret      

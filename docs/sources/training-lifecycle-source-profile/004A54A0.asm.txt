@@ -1,0 +1,64 @@
+004A54A0  53                             push     ebx
+004A54A1  55                             push     ebp
+004A54A2  8b 6c 24 0c                    mov      ebp, dword ptr [esp + 0xc]
+004A54A6  56                             push     esi
+004A54A7  57                             push     edi
+004A54A8  55                             push     ebp
+004A54A9  e8 82 51 fd ff                 call     0x47a630 ; IsLegalPtr
+004A54AE  83 c4 04                       add      esp, 4
+004A54B1  85 c0                          test     eax, eax
+004A54B3  74 74                          je       0x4a5529
+004A54B5  8b 85 9c 00 00 00              mov      eax, dword ptr [ebp + 0x9c]
+004A54BB  83 f8 57                       cmp      eax, 0x57
+004A54BE  7c 0c                          jl       0x4a54cc
+004A54C0  3d 3e 04 00 00                 cmp      eax, 0x43e
+004A54C5  7f 05                          jg       0x4a54cc
+004A54C7  83 c0 a9                       add      eax, -0x57
+004A54CA  eb 03                          jmp      0x4a54cf
+004A54CC  83 c8 ff                       or       eax, 0xffffffff
+004A54CF  50                             push     eax
+004A54D0  b9 58 19 20 07                 mov      ecx, 0x7201958
+004A54D5  e8 96 b9 fe ff                 call     0x490e70 ; GetArmyPtr
+004A54DA  8b d8                          mov      ebx, eax
+004A54DC  53                             push     ebx
+004A54DD  e8 4e 51 fd ff                 call     0x47a630 ; IsLegalPtr
+004A54E2  83 c4 04                       add      esp, 4
+004A54E5  85 c0                          test     eax, eax
+004A54E7  74 40                          je       0x4a5529
+004A54E9  33 ff                          xor      edi, edi
+004A54EB  eb 03                          jmp      0x4a54f0
+004A54ED  8d 49 00                       lea      ecx, [ecx]
+004A54F0  57                             push     edi
+004A54F1  8b cb                          mov      ecx, ebx
+004A54F3  e8 98 fd fe ff                 call     0x495290 ; sub_495290
+004A54F8  50                             push     eax
+004A54F9  b9 58 19 20 07                 mov      ecx, 0x7201958
+004A54FE  e8 fd b5 fe ff                 call     0x490b00 ; GetPersonPtr
+004A5503  8b f0                          mov      esi, eax
+004A5505  56                             push     esi
+004A5506  e8 25 51 fd ff                 call     0x47a630 ; IsLegalPtr
+004A550B  83 c4 04                       add      esp, 4
+004A550E  85 c0                          test     eax, eax
+004A5510  74 11                          je       0x4a5523
+004A5512  3b f5                          cmp      esi, ebp
+004A5514  74 0d                          je       0x4a5523
+004A5516  6a 54                          push     0x54
+004A5518  8b ce                          mov      ecx, esi
+004A551A  e8 d1 3b fe ff                 call     0x4890f0 ; sub_4890f0
+004A551F  85 c0                          test     eax, eax
+004A5521  75 0d                          jne      0x4a5530
+004A5523  47                             inc      edi
+004A5524  83 ff 03                       cmp      edi, 3
+004A5527  7c c7                          jl       0x4a54f0
+004A5529  5f                             pop      edi
+004A552A  5e                             pop      esi
+004A552B  5d                             pop      ebp
+004A552C  33 c0                          xor      eax, eax
+004A552E  5b                             pop      ebx
+004A552F  c3                             ret      
+004A5530  5f                             pop      edi
+004A5531  5e                             pop      esi
+004A5532  5d                             pop      ebp
+004A5533  b8 01 00 00 00                 mov      eax, 1
+004A5538  5b                             pop      ebx
+004A5539  c3                             ret      

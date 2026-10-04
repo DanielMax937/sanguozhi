@@ -19,7 +19,7 @@ console.log('\n' + inspectState(session.state));
 const save = saveGame(session);
 const replayed = loadGame(save);
 if (canonical(replayed) !== canonical(session)) throw new Error('Replay divergence');
-console.log(`\n目标完成：气力 ${session.state.bases[0].morale}/100；WAR XP每人${session.state.officers[0].warXp}/100（尚未到成长阈值）`);
+console.log(`\n目标完成：气力 ${session.state.bases[0].morale}/100；WAR XP每人${session.state.officers[0].warXp}/100（本短目标未跨成长阈值）`);
 console.log(`Save/load/replay verified: ${session.trace.length} accepted commands, ${save.length} characters`);
 console.log(`Evidence use counts (includes explicit fallback and open boundaries): ${JSON.stringify(evidenceSummary(session))}`);
 console.log('原命令的发言武将随机选择被省略；此处0 core draws不等于原游戏命令0随机或全局随机流一致。');

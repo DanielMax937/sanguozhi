@@ -71,7 +71,7 @@ def main() -> None:
         "PASS: div2000 equivalence for 0..150000, "
         f"{len(vectors)} training vectors, cap and technique-point checks"
     )
-    print("Reference arithmetic only; unrecovered command gates are not tested.")
+    print("Reference arithmetic only; source gate reconstruction is checked separately by P0-47; stock equivalence is not tested.")
 
 
 if __name__ == "__main__":

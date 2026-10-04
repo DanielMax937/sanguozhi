@@ -1,5 +1,21 @@
 import { RULES } from './rules.ts';
-import type { ApCalculation, Base, GameDate, GameState, Officer, TrainingCalculation } from './types.ts';
+import type { ApCalculation, Base, GameDate, GameState, GrowthCalculation, GrowthConfig, Officer, TrainingCalculation } from './types.ts';
+
+export const isActiveOfficer = (person: Readonly<Officer>): boolean => RULES['engine.eligibility'].value.activeIdentities.includes(person.identity);
+export function derivedWar(talent: number, xp: number, config: GrowthConfig): number {
+  return Math.max(config.statMin,Math.min(config.statMax,talent + Math.floor(xp / config.experiencePerPoint)));
+}
+/** XP is cumulative storage; progress is only its display remainder. */
+export function calculateWarGrowth(person: Readonly<Officer>, gainedXp: number, config: GrowthConfig): GrowthCalculation {
+  const xpAfter = Math.min(config.experienceCap,person.warXp + gainedXp);
+  const warAfter = derivedWar(person.warBase,xpAfter,config);
+  return {officerId:person.id,xpBefore:person.warXp,requestedXp:gainedXp,creditedXp:xpAfter-person.warXp,xpAfter,
+    remainderBefore:person.warXp % config.experiencePerPoint,remainderAfter:xpAfter % config.experiencePerPoint,
+    displayProgressBefore:person.warXp === config.experienceCap ? config.experiencePerPoint : person.warXp % config.experiencePerPoint,
+    displayProgressAfter:xpAfter === config.experienceCap ? config.experiencePerPoint : xpAfter % config.experiencePerPoint,
+    earnedPointsBefore:Math.floor(person.warXp / config.experiencePerPoint),earnedPointsAfter:Math.floor(xpAfter / config.experiencePerPoint),
+    warBefore:person.war,warAfter,actualStatGain:warAfter-person.war,xpAtCap:xpAfter===config.experienceCap,statAtCap:warAfter===config.statMax};
+}
 
 export function moraleCap(state: GameState): number {
   const caps = RULES['train.moraleCap'].value;
@@ -29,7 +45,7 @@ export function calculateApRecovery(state: GameState): ApCalculation {
   const owned = state.bases.filter(b => b.ownerForceId === state.force.id && b.corpsId === state.corps.id);
   const cities = owned.filter(b => b.kind === 'city');
   const eligible = owned.filter(b => b.kind === 'city' || cities.some(c => c.id === b.parentCityId));
-  const counts = eligible.map(b => ({baseId:b.id,count:Math.min(r.officersPerBase,state.officers.filter(p => p.baseId === b.id && p.forceId === state.force.id).length)}));
+  const counts = eligible.map(b => ({baseId:b.id,count:Math.min(r.officersPerBase,state.officers.filter(p => p.baseId === b.id && p.forceId === state.force.id && p.location === 'base' && isActiveOfficer(p)).length)}));
   // Ties affect only reported order, not the sum. IDs make serialization stable.
   counts.sort((a,b) => b.count - a.count || (a.baseId < b.baseId ? -1 : a.baseId > b.baseId ? 1 : 0));
   const countedBases = counts.slice(0,r.baseCount);

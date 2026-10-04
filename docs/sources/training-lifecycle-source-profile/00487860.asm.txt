@@ -1,0 +1,69 @@
+00487860  56                             push     esi
+00487861  8b f1                          mov      esi, ecx
+00487863  56                             push     esi
+00487864  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487869  e8 02 9f 00 00                 call     0x491770 ; sub_491770
+0048786E  8b 76 08                       mov      esi, dword ptr [esi + 8]
+00487871  83 ee 00                       sub      esi, 0
+00487874  74 72                          je       0x4878e8
+00487876  4e                             dec      esi
+00487877  74 3b                          je       0x4878b4
+00487879  4e                             dec      esi
+0048787A  0f 85 96 00 00 00              jne      0x487916
+00487880  83 f8 34                       cmp      eax, 0x34
+00487883  7c 0a                          jl       0x48788f
+00487885  83 f8 56                       cmp      eax, 0x56
+00487888  7f 05                          jg       0x48788f
+0048788A  83 c0 cc                       add      eax, -0x34
+0048788D  eb 03                          jmp      0x487892
+0048788F  83 c8 ff                       or       eax, 0xffffffff
+00487892  50                             push     eax
+00487893  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487898  e8 d3 91 00 00                 call     0x490a70 ; sub_490a70
+0048789D  8b f0                          mov      esi, eax
+0048789F  56                             push     esi
+004878A0  e8 8b 2d ff ff                 call     0x47a630 ; IsLegalPtr
+004878A5  83 c4 04                       add      esp, 4
+004878A8  85 c0                          test     eax, eax
+004878AA  74 6a                          je       0x487916
+004878AC  8b ce                          mov      ecx, esi
+004878AE  5e                             pop      esi
+004878AF  e9 5c 61 00 00                 jmp      0x48da10
+004878B4  83 f8 2a                       cmp      eax, 0x2a
+004878B7  7c 0a                          jl       0x4878c3
+004878B9  83 f8 33                       cmp      eax, 0x33
+004878BC  7f 05                          jg       0x4878c3
+004878BE  83 c0 d6                       add      eax, -0x2a
+004878C1  eb 03                          jmp      0x4878c6
+004878C3  83 c8 ff                       or       eax, 0xffffffff
+004878C6  50                             push     eax
+004878C7  b9 58 19 20 07                 mov      ecx, 0x7201958
+004878CC  e8 6f 91 00 00                 call     0x490a40 ; sub_490a40
+004878D1  8b f0                          mov      esi, eax
+004878D3  56                             push     esi
+004878D4  e8 57 2d ff ff                 call     0x47a630 ; IsLegalPtr
+004878D9  83 c4 04                       add      esp, 4
+004878DC  85 c0                          test     eax, eax
+004878DE  74 36                          je       0x487916
+004878E0  8b ce                          mov      ecx, esi
+004878E2  5e                             pop      esi
+004878E3  e9 28 61 00 00                 jmp      0x48da10
+004878E8  85 c0                          test     eax, eax
+004878EA  7c 05                          jl       0x4878f1
+004878EC  83 f8 29                       cmp      eax, 0x29
+004878EF  7e 03                          jle      0x4878f4
+004878F1  83 c8 ff                       or       eax, 0xffffffff
+004878F4  50                             push     eax
+004878F5  b9 58 19 20 07                 mov      ecx, 0x7201958
+004878FA  e8 11 91 00 00                 call     0x490a10 ; GetCityPtr
+004878FF  8b f0                          mov      esi, eax
+00487901  56                             push     esi
+00487902  e8 29 2d ff ff                 call     0x47a630 ; IsLegalPtr
+00487907  83 c4 04                       add      esp, 4
+0048790A  85 c0                          test     eax, eax
+0048790C  74 08                          je       0x487916
+0048790E  8b ce                          mov      ecx, esi
+00487910  5e                             pop      esi
+00487911  e9 1a 3e ff ff                 jmp      0x47b730
+00487916  5e                             pop      esi
+00487917  c3                             ret      

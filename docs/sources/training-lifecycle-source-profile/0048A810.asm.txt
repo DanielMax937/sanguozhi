@@ -1,0 +1,18 @@
+0048A810  8b 54 24 04                    mov      edx, dword ptr [esp + 4]
+0048A814  85 d2                          test     edx, edx
+0048A816  7c 38                          jl       0x48a850
+0048A818  83 fa 04                       cmp      edx, 4
+0048A81B  7f 33                          jg       0x48a850
+0048A81D  8b 44 24 08                    mov      eax, dword ptr [esp + 8]
+0048A821  66 85 c0                       test     ax, ax
+0048A824  77 12                          ja       0x48a838
+0048A826  33 c0                          xor      eax, eax
+0048A828  66 89 84 51 2a 01 00 00        mov      word ptr [ecx + edx*2 + 0x12a], ax
+0048A830  e8 9b fa ff ff                 call     0x48a2d0 ; sub_48a2d0
+0048A835  c2 08 00                       ret      8
+0048A838  66 3d b8 0b                    cmp      ax, 0xbb8
+0048A83C  72 05                          jb       0x48a843
+0048A83E  b8 b8 0b 00 00                 mov      eax, 0xbb8
+0048A843  66 89 84 51 2a 01 00 00        mov      word ptr [ecx + edx*2 + 0x12a], ax
+0048A84B  e8 80 fa ff ff                 call     0x48a2d0 ; sub_48a2d0
+0048A850  c2 08 00                       ret      8
