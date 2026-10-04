@@ -2,6 +2,16 @@
 
 更新：2026-10-04 UTC。
 
+## 最新完成：P0-49城兵容量与人员capture来源审计
+
+[正文](84-capture-personnel-source-profile.md) · [结构化证据](../sources/capture-personnel-source-profile.json)。本组基线main `feca7b37678bccff55d0e8e5732cea463c457708`。
+
+S1城市特产查询及150000/100000兵cap、身份/地点/势力候选ID顺序、末城硬gate、type0宝物与skill32优先级、binary32(0.01)取整、p<=0零随机/p100仍消费随机已恢复。004B2820六路处分表及玩家/AI非连续tails已取证；可运行模型提供显式hold/observed/reject配置和三个已知俘虏字段写回。
+
+这是004B3180起点的独立部分投影：前置释放已作为输入阶段契约，后续位置/军团/任务/非hold处分及事件不伪造。P0-48未因此变成整场capture。PK reconstruction、Vanilla单独assumption；S1/S2均MOD相关。S2确有末城gate/skill/概率/RNG和容量改动。
+
+静态证据：142个文本范围、71组对照（61同/10异）。新30项测试含77,824组算术及trace/replay边界通过。全回归：TypeScript类型检查、85个Node测试、全部68个Python checker与两个训练demo通过。依赖沿用前组相同lockfile且已验证的registry包副本。下一可做项是前置俘虏释放、缺席home-roster及004B0F50/004A7990人员迁移，或004B03D0 AI处分callees；clean stock/全局RNG/真实存档债仍保留。
+
 ## 最新完成：P0-48 capture transaction来源审计与有界投影
 
 [正文](83-capture-transaction-source-profile.md) · [结构化证据](../sources/capture-transaction-source-profile.json)。本组基线main `9462f8cf1e9e24147757f0032aec1f11df579033`。
@@ -12,7 +22,7 @@
 
 静态证据：61个来源范围、24组S1/S2比较（17同/7异）；S2对caller/资源/候选/宝物/地域表有修改，绝不混入S1。全部来源仍MOD关联，clean stock、全局RNG/真实存档以及跨平台证据债保留。
 
-验证：新参考校验35个test（含150状态组合）通过；TypeScript检查、85个Node测试、全部67个Python check脚本、训练demo和十年360旬生命周期demo均通过。下一可做项：`004B1280/004B2820`人员/俘虏分配，或`004C0C30(city,0x26)`城兵容量predicate；缺clean stock不阻止这些静态链继续。
+验证：新参考校验35个test（含150状态组合）通过；TypeScript检查、85个Node测试、全部67个Python check脚本、训练demo和十年360旬生命周期demo均通过。该组后续人员/容量研究现见P0-49；完整人员迁移及事件链仍可从已有静态资料推进。
 
 ### 既有P0-36更新范围
 

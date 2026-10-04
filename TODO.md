@@ -1,14 +1,24 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-48 capture caller/collection/finalizer source audit and bounded transaction projection
-> Integration baseline: PR #5 merged; this theme starts at `9462f8cf1e9e24147757f0032aec1f11df579033`
+> Current integration: P0-49 city troop capacity / captive partition / disposition source audit and partial personnel projection
+> Integration baseline: PR #6 merged; this theme starts at `feca7b37678bccff55d0e8e5732cea463c457708`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: capture personnel projection
+
+- P0-49: S1 city specialty query and 150000/100000 troop-cap adapter; S2 separately reads its city+0x3C field
+- Full sparse base-person collection in person-ID order, other-city gate, treasure-type0/skill32 precedence and binary32 probability arithmetic
+- Positive-p RNG consumption (including p=100), no RNG for nonpositive p, exact input-state LCG and replay
+- Six disposition routes mapped; explicitly configurable hold/observed-code/reject policy and three known held-captive field writes
+- 142 text byte ranges, 71 S1/S2 comparisons (61 identical / 10 different); 30 tests and 77,824 arithmetic cases
+- Guide: `docs/rules/84-capture-personnel-source-profile.md`; `python scripts/check_capture_personnel_profile.py`
+- Starts after prior prisoners' release; location/legion/tasks/AI choices and callbacks remain partial, not a complete game capture
 
 ### Completed bounded implementation: capture transaction projection
 
@@ -44,6 +54,7 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-49 audit complete: source-bound capacity, personnel partition and explicit partial projection
 - P0-48 audit complete: capture caller/collector/scalar finalizer and tested transaction projection
 - P0-47 audit complete: source-bound training lifecycle and tested compatibility implementation
 - P0-46 audit complete: source-bound capture caller/selector recovered
@@ -84,15 +95,14 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 - `004B40C0/004B49B0`, ownership setters, neutral reset, ordinary `004BF1F0` resource projection and `004BCA30` role are recovered within S1
 - Cause mode is not a durability/troops enum; trap relationship arg4 and capture source arg3 remain distinct
 - Source-local normal/neutral durability and ordinary entry integer rounding no longer lack helper bodies
-- Full destruction counters/references, personnel/captive outcomes, force adjustments/extinction, governor ranking and event/AI callbacks still require implementation/evidence
+- P0-49 now recovers ordinary personnel partition and disposition routing; full destruction counters/references, person relocation/tasks, force adjustments/extinction, governor ranking and event/AI callbacks still require implementation/evidence
 
 ### Immediate next research
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- Continue `004B1280/004B2820` captive/personnel outcomes and full destruction/callback side effects;
-  ordinary scalar finalizers are now recovered, not the whole game transaction
-- Resolve `004C0C30(city,0x26)` city troop-cap predicate and broader ruler/corps/transport entry paths
+- Continue prior-prisoner release, absent home-roster persons and `004B0F50/004A7990` relocation / `004B03D0` AI disposition callees; P0-49 ordinary partition and dispatcher are recovered
+- Complete destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open
 

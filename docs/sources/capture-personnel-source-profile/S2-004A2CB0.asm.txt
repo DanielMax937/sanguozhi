@@ -1,0 +1,14 @@
+004A2CB0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+004A2CB4  56                             push     esi
+004A2CB5  6a 00                          push     0
+004A2CB7  50                             push     eax
+004A2CB8  8b f1                          mov      esi, ecx
+004A2CBA  e8 31 fe fd ff                 call     0x482af0
+004A2CBF  85 c0                          test     eax, eax
+004A2CC1  74 08                          je       0x4a2ccb
+004A2CC3  50                             push     eax
+004A2CC4  8b ce                          mov      ecx, esi
+004A2CC6  e8 f5 02 fe ff                 call     0x482fc0
+004A2CCB  8b 46 0c                       mov      eax, dword ptr [esi + 0xc]
+004A2CCE  5e                             pop      esi
+004A2CCF  c2 04 00                       ret      4

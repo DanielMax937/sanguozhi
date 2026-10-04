@@ -1,0 +1,20 @@
+004721D0  8b 4c 24 04                    mov      ecx, dword ptr [esp + 4]
+004721D4  85 c9                          test     ecx, ecx
+004721D6  7f 03                          jg       0x4721db
+004721D8  33 c0                          xor      eax, eax
+004721DA  c3                             ret
+004721DB  e8 30 8e 47 00                 call     0x8eb010
+004721E0  69 c0 65 89 07 6c              imul     eax, eax, 0x6c078965
+004721E6  05 39 30 00 00                 add      eax, 0x3039
+004721EB  a3 44 5d 8a 00                 mov      dword ptr [0x8a5d44], eax
+004721F0  c1 e8 10                       shr      eax, 0x10
+004721F3  99                             cdq
+004721F4  56                             push     esi
+004721F5  be 64 00 00 00                 mov      esi, 0x64
+004721FA  f7 fe                          idiv     esi
+004721FC  33 c0                          xor      eax, eax
+004721FE  5e                             pop      esi
+004721FF  0f b7 d2                       movzx    edx, dx
+00472202  3b d1                          cmp      edx, ecx
+00472204  0f 9c c0                       setl     al
+00472207  c3                             ret

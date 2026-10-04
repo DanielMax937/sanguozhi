@@ -1,0 +1,15 @@
+004890F0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+004890F4  85 c0                          test     eax, eax
+004890F6  7c 19                          jl       0x489111
+004890F8  83 f8 63                       cmp      eax, 0x63
+004890FB  7f 14                          jg       0x489111
+004890FD  56                             push     esi
+004890FE  8b b1 e8 00 00 00              mov      esi, dword ptr [ecx + 0xe8]
+00489104  33 d2                          xor      edx, edx
+00489106  3b f0                          cmp      esi, eax
+00489108  0f 94 c2                       sete     dl
+0048910B  5e                             pop      esi
+0048910C  8b c2                          mov      eax, edx
+0048910E  c2 04 00                       ret      4
+00489111  33 c0                          xor      eax, eax
+00489113  c2 04 00                       ret      4

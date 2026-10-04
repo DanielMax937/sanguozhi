@@ -723,6 +723,12 @@ return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 
 这个fallback让独立事务投影可运行，不关闭clean stock、完整战斗/人物/事件或真实存档证据债。先前P0-36对舍入的unknown只继续约束stock和未审troop-to-troop路径，不能再说S1 `004B9840`完全没有body。
 
+### 4D.2 P0-49人员分组与可替换处分
+
+[84-capture-personnel-source-profile.md](84-capture-personnel-source-profile.md)新增S1特产城兵容量适配、post-release人物表资格/顺序、末城/宝物/skill分支、binary32概率和完整随机消费trace。S2有实际hook与常量差异，不能复用来认证S1/stock。
+
+独立模型`capture_personnel_profile.py`采用`hold-captive-v1|observed-codes|reject`；hold只写status5、formerForceId、office80。`partial-person-fields-v1`显式记录旧俘虏前置释放、缺席roster、位置/军团/任务、排序/非hold处分、force/事件未投影。保留输入字段不是推断这些字段在原机不变。没有接入P0-48或训练战斗引擎，stock/完整游戏债不关闭。
+
 ### 4E. Golden tests
 
 日文 Wiki 的攻城表继续保留，但角色从“运行时规则”改为“回归测试”。

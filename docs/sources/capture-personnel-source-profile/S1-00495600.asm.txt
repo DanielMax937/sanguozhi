@@ -1,0 +1,55 @@
+00495600  53                             push     ebx
+00495601  55                             push     ebp
+00495602  8b 6c 24 0c                    mov      ebp, dword ptr [esp + 0xc]
+00495606  56                             push     esi
+00495607  57                             push     edi
+00495608  8b d9                          mov      ebx, ecx
+0049560A  33 ff                          xor      edi, edi
+0049560C  8d 64 24 00                    lea      esp, [esp]
+00495610  85 ff                          test     edi, edi
+00495612  7c 20                          jl       0x495634
+00495614  83 ff 03                       cmp      edi, 3
+00495617  7d 1b                          jge      0x495634
+00495619  85 ff                          test     edi, edi
+0049561B  75 05                          jne      0x495622
+0049561D  8b 43 0c                       mov      eax, dword ptr [ebx + 0xc]
+00495620  eb 15                          jmp      0x495637
+00495622  8d 47 ff                       lea      eax, [edi - 1]
+00495625  85 c0                          test     eax, eax
+00495627  7c 0b                          jl       0x495634
+00495629  83 f8 02                       cmp      eax, 2
+0049562C  7d 06                          jge      0x495634
+0049562E  8b 44 83 10                    mov      eax, dword ptr [ebx + eax*4 + 0x10]
+00495632  eb 03                          jmp      0x495637
+00495634  83 c8 ff                       or       eax, 0xffffffff
+00495637  50                             push     eax
+00495638  b9 58 19 20 07                 mov      ecx, 0x7201958
+0049563D  e8 be b4 ff ff                 call     0x490b00
+00495642  8b f0                          mov      esi, eax
+00495644  56                             push     esi
+00495645  e8 e6 4f fe ff                 call     0x47a630
+0049564A  83 c4 04                       add      esp, 4
+0049564D  85 c0                          test     eax, eax
+0049564F  74 0c                          je       0x49565d
+00495651  55                             push     ebp
+00495652  8b ce                          mov      ecx, esi
+00495654  e8 97 3a ff ff                 call     0x4890f0
+00495659  85 c0                          test     eax, eax
+0049565B  75 10                          jne      0x49566d
+0049565D  47                             inc      edi
+0049565E  83 ff 03                       cmp      edi, 3
+00495661  7c ad                          jl       0x495610
+00495663  5f                             pop      edi
+00495664  5e                             pop      esi
+00495665  5d                             pop      ebp
+00495666  83 c8 ff                       or       eax, 0xffffffff
+00495669  5b                             pop      ebx
+0049566A  c2 04 00                       ret      4
+0049566D  56                             push     esi
+0049566E  b9 58 19 20 07                 mov      ecx, 0x7201958
+00495673  e8 98 bc ff ff                 call     0x491310
+00495678  5f                             pop      edi
+00495679  5e                             pop      esi
+0049567A  5d                             pop      ebp
+0049567B  5b                             pop      ebx
+0049567C  c2 04 00                       ret      4

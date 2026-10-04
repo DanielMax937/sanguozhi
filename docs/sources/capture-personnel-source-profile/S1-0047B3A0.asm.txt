@@ -1,0 +1,9 @@
+0047B3A0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0047B3A4  85 c0                          test     eax, eax
+0047B3A6  7c 0f                          jl       0x47b3b7
+0047B3A8  83 f8 05                       cmp      eax, 5
+0047B3AB  7f 0a                          jg       0x47b3b7
+0047B3AD  8a 84 08 86 00 00 00           mov      al, byte ptr [eax + ecx + 0x86]
+0047B3B4  c2 04 00                       ret      4
+0047B3B7  32 c0                          xor      al, al
+0047B3B9  c2 04 00                       ret      4

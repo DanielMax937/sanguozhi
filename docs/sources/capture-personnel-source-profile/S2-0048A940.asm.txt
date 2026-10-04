@@ -1,0 +1,11 @@
+0048A940  8a 44 24 04                    mov      al, byte ptr [esp + 4]
+0048A944  84 c0                          test     al, al
+0048A946  77 0b                          ja       0x48a953
+0048A948  32 c0                          xor      al, al
+0048A94A  88 81 69 01 00 00              mov      byte ptr [ecx + 0x169], al
+0048A950  c2 04 00                       ret      4
+0048A953  3c 64                          cmp      al, 0x64
+0048A955  72 02                          jb       0x48a959
+0048A957  b0 64                          mov      al, 0x64
+0048A959  88 81 69 01 00 00              mov      byte ptr [ecx + 0x169], al
+0048A95F  c2 04 00                       ret      4

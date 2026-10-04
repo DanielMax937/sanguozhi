@@ -1,0 +1,38 @@
+0049F820  6a ff                          push     -1
+0049F822  68 88 f2 72 00                 push     0x72f288
+0049F827  64 a1 00 00 00 00              mov      eax, dword ptr fs:[0]
+0049F82D  50                             push     eax
+0049F82E  64 89 25 00 00 00 00           mov      dword ptr fs:[0], esp
+0049F835  51                             push     ecx
+0049F836  56                             push     esi
+0049F837  57                             push     edi
+0049F838  68 68 78 ee 06                 push     0x6ee7868
+0049F83D  8b f9                          mov      edi, ecx
+0049F83F  ff 15 60 e3 74 00              call     dword ptr [0x74e360]
+0049F845  8b 74 24 1c                    mov      esi, dword ptr [esp + 0x1c]
+0049F849  85 f6                          test     esi, esi
+0049F84B  c7 44 24 14 00 00 00 00        mov      dword ptr [esp + 0x14], 0
+0049F853  74 29                          je       0x49f87e
+0049F855  8b 46 04                       mov      eax, dword ptr [esi + 4]
+0049F858  85 c0                          test     eax, eax
+0049F85A  89 44 24 1c                    mov      dword ptr [esp + 0x1c], eax
+0049F85E  74 1e                          je       0x49f87e
+0049F860  8d 44 24 1c                    lea      eax, [esp + 0x1c]
+0049F864  50                             push     eax
+0049F865  8b ce                          mov      ecx, esi
+0049F867  e8 64 c6 fd ff                 call     0x47bed0
+0049F86C  8b 08                          mov      ecx, dword ptr [eax]
+0049F86E  51                             push     ecx
+0049F86F  8b cf                          mov      ecx, edi
+0049F871  e8 3a c9 fd ff                 call     0x47c1b0
+0049F876  8b 44 24 1c                    mov      eax, dword ptr [esp + 0x1c]
+0049F87A  85 c0                          test     eax, eax
+0049F87C  75 e2                          jne      0x49f860
+0049F87E  68 68 78 ee 06                 push     0x6ee7868
+0049F883  ff 15 5c e3 74 00              call     dword ptr [0x74e35c]
+0049F889  8b 4c 24 0c                    mov      ecx, dword ptr [esp + 0xc]
+0049F88D  5f                             pop      edi
+0049F88E  5e                             pop      esi
+0049F88F  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+0049F896  83 c4 10                       add      esp, 0x10
+0049F899  c2 04 00                       ret      4

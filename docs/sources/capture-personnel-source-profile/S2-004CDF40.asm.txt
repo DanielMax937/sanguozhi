@@ -1,0 +1,42 @@
+004CDF40  55                             push     ebp
+004CDF41  8b 6c 24 08                    mov      ebp, dword ptr [esp + 8]
+004CDF45  56                             push     esi
+004CDF46  8b cd                          mov      ecx, ebp
+004CDF48  e8 73 d6 f3 ff                 call     0x40b5c0
+004CDF4D  8b 74 24 10                    mov      esi, dword ptr [esp + 0x10]
+004CDF51  56                             push     esi
+004CDF52  e8 a9 c6 fa ff                 call     0x47a600
+004CDF57  83 c4 04                       add      esp, 4
+004CDF5A  85 c0                          test     eax, eax
+004CDF5C  74 41                          je       0x4cdf9f
+004CDF5E  53                             push     ebx
+004CDF5F  57                             push     edi
+004CDF60  56                             push     esi
+004CDF61  b9 58 19 20 07                 mov      ecx, 0x7201958
+004CDF66  e8 a5 33 fc ff                 call     0x491310
+004CDF6B  8b d8                          mov      ebx, eax
+004CDF6D  33 ff                          xor      edi, edi
+004CDF6F  90                             nop
+004CDF70  57                             push     edi
+004CDF71  b9 58 19 20 07                 mov      ecx, 0x7201958
+004CDF76  e8 b5 2b fc ff                 call     0x490b30
+004CDF7B  8b f0                          mov      esi, eax
+004CDF7D  56                             push     esi
+004CDF7E  e8 ad c6 fa ff                 call     0x47a630
+004CDF83  83 c4 04                       add      esp, 4
+004CDF86  85 c0                          test     eax, eax
+004CDF88  74 0d                          je       0x4cdf97
+004CDF8A  3b 5e 40                       cmp      ebx, dword ptr [esi + 0x40]
+004CDF8D  75 08                          jne      0x4cdf97
+004CDF8F  56                             push     esi
+004CDF90  8b cd                          mov      ecx, ebp
+004CDF92  e8 19 88 fd ff                 call     0x4a67b0
+004CDF97  47                             inc      edi
+004CDF98  83 ff 64                       cmp      edi, 0x64
+004CDF9B  7c d3                          jl       0x4cdf70
+004CDF9D  5f                             pop      edi
+004CDF9E  5b                             pop      ebx
+004CDF9F  8b 45 0c                       mov      eax, dword ptr [ebp + 0xc]
+004CDFA2  5e                             pop      esi
+004CDFA3  5d                             pop      ebp
+004CDFA4  c2 08 00                       ret      8

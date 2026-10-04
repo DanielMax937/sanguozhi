@@ -1,0 +1,30 @@
+00495BD0  55                             push     ebp
+00495BD1  8b 6c 24 08                    mov      ebp, dword ptr [esp + 8]
+00495BD5  56                             push     esi
+00495BD6  57                             push     edi
+00495BD7  33 ff                          xor      edi, edi
+00495BD9  8d a4 24 00 00 00 00           lea      esp, [esp]
+00495BE0  8b 34 bb                       mov      esi, dword ptr [ebx + edi*4]
+00495BE3  56                             push     esi
+00495BE4  e8 47 4a fe ff                 call     0x47a630
+00495BE9  83 c4 04                       add      esp, 4
+00495BEC  85 c0                          test     eax, eax
+00495BEE  74 0c                          je       0x495bfc
+00495BF0  55                             push     ebp
+00495BF1  8b ce                          mov      ecx, esi
+00495BF3  e8 f8 34 ff ff                 call     0x4890f0
+00495BF8  85 c0                          test     eax, eax
+00495BFA  75 0c                          jne      0x495c08
+00495BFC  47                             inc      edi
+00495BFD  83 ff 03                       cmp      edi, 3
+00495C00  7c de                          jl       0x495be0
+00495C02  5f                             pop      edi
+00495C03  5e                             pop      esi
+00495C04  33 c0                          xor      eax, eax
+00495C06  5d                             pop      ebp
+00495C07  c3                             ret
+00495C08  5f                             pop      edi
+00495C09  5e                             pop      esi
+00495C0A  b8 01 00 00 00                 mov      eax, 1
+00495C0F  5d                             pop      ebp
+00495C10  c3                             ret

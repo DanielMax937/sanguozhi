@@ -1,0 +1,25 @@
+0047BDA0  56                             push     esi
+0047BDA1  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+0047BDA5  85 f6                          test     esi, esi
+0047BDA7  7c 32                          jl       0x47bddb
+0047BDA9  83 fe 0b                       cmp      esi, 0xb
+0047BDAC  7f 2d                          jg       0x47bddb
+0047BDAE  8b 54 24 0c                    mov      edx, dword ptr [esp + 0xc]
+0047BDB2  33 c0                          xor      eax, eax
+0047BDB4  83 fe 04                       cmp      esi, 4
+0047BDB7  0f 9f c0                       setg     al
+0047BDBA  48                             dec      eax
+0047BDBB  25 3c 86 01 00                 and      eax, 0x1863c
+0047BDC0  83 c0 64                       add      eax, 0x64
+0047BDC3  85 d2                          test     edx, edx
+0047BDC5  77 0a                          ja       0x47bdd1
+0047BDC7  33 c0                          xor      eax, eax
+0047BDC9  89 44 b1 4c                    mov      dword ptr [ecx + esi*4 + 0x4c], eax
+0047BDCD  5e                             pop      esi
+0047BDCE  c2 08 00                       ret      8
+0047BDD1  3b c2                          cmp      eax, edx
+0047BDD3  76 02                          jbe      0x47bdd7
+0047BDD5  8b c2                          mov      eax, edx
+0047BDD7  89 44 b1 4c                    mov      dword ptr [ecx + esi*4 + 0x4c], eax
+0047BDDB  5e                             pop      esi
+0047BDDC  c2 08 00                       ret      8

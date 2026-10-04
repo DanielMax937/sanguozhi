@@ -1,0 +1,13 @@
+004890F0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+004890F4  e9 ff b1 48 00                 jmp      0x9142f8
+004890F9  73 1b                          jae      0x489116
+004890FB  e9 58 11 46 00                 jmp      0x8ea258
+00489100  56                             push     esi
+00489101  8b b1 e8 00 00 00              mov      esi, dword ptr [ecx + 0xe8]
+00489107  57                             push     edi
+00489108  31 ff                          xor      edi, edi
+0048910A  e8 51 0f 48 00                 call     0x90a060
+0048910F  8b c7                          mov      eax, edi
+00489111  5f                             pop      edi
+00489112  5e                             pop      esi
+00489113  c2 04 00                       ret      4

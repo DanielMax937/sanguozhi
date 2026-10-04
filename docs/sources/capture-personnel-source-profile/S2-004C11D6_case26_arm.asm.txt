@@ -1,0 +1,27 @@
+004C11D6  83 cf ff                       or       edi, 0xffffffff
+004C11D9  33 db                          xor      ebx, ebx
+004C11DB  eb 03                          jmp      0x4c11e0
+004C11DD  8d 49 00                       lea      ecx, [ecx]
+004C11E0  53                             push     ebx
+004C11E1  8b ce                          mov      ecx, esi
+004C11E3  e8 b8 a1 fb ff                 call     0x47b3a0
+004C11E8  84 c0                          test     al, al
+004C11EA  77 13                          ja       0x4c11ff
+004C11EC  43                             inc      ebx
+004C11ED  83 fb 06                       cmp      ebx, 6
+004C11F0  7c ee                          jl       0x4c11e0
+004C11F2  5d                             pop      ebp
+004C11F3  5b                             pop      ebx
+004C11F4  8b c7                          mov      eax, edi
+004C11F6  5f                             pop      edi
+004C11F7  5e                             pop      esi
+004C11F8  81 c4 ac 00 00 00              add      esp, 0xac
+004C11FE  c3                             ret
+004C11FF  5d                             pop      ebp
+004C1200  8b fb                          mov      edi, ebx
+004C1202  5b                             pop      ebx
+004C1203  8b c7                          mov      eax, edi
+004C1205  5f                             pop      edi
+004C1206  5e                             pop      esi
+004C1207  81 c4 ac 00 00 00              add      esp, 0xac
+004C120D  c3                             ret

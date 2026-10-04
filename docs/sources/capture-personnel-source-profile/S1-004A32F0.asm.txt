@@ -1,0 +1,67 @@
+004A32F0  56                             push     esi
+004A32F1  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+004A32F5  56                             push     esi
+004A32F6  e8 05 73 fd ff                 call     0x47a600
+004A32FB  83 c4 04                       add      esp, 4
+004A32FE  85 c0                          test     eax, eax
+004A3300  0f 84 9a 00 00 00              je       0x4a33a0
+004A3306  8b 06                          mov      eax, dword ptr [esi]
+004A3308  57                             push     edi
+004A3309  8b ce                          mov      ecx, esi
+004A330B  ff 50 44                       call     dword ptr [eax + 0x44]
+004A330E  50                             push     eax
+004A330F  b9 58 19 20 07                 mov      ecx, 0x7201958
+004A3314  e8 b7 d7 fe ff                 call     0x490ad0
+004A3319  8b f8                          mov      edi, eax
+004A331B  57                             push     edi
+004A331C  e8 0f 73 fd ff                 call     0x47a630
+004A3321  83 c4 04                       add      esp, 4
+004A3324  85 c0                          test     eax, eax
+004A3326  74 19                          je       0x4a3341
+004A3328  6a 00                          push     0
+004A332A  83 c7 30                       add      edi, 0x30
+004A332D  56                             push     esi
+004A332E  8b cf                          mov      ecx, edi
+004A3330  e8 bb f7 fd ff                 call     0x482af0
+004A3335  85 c0                          test     eax, eax
+004A3337  74 08                          je       0x4a3341
+004A3339  50                             push     eax
+004A333A  8b cf                          mov      ecx, edi
+004A333C  e8 7f fc fd ff                 call     0x482fc0
+004A3341  8b 7c 24 10                    mov      edi, dword ptr [esp + 0x10]
+004A3345  83 ff ff                       cmp      edi, -1
+004A3348  74 09                          je       0x4a3353
+004A334A  85 ff                          test     edi, edi
+004A334C  7c 1d                          jl       0x4a336b
+004A334E  83 ff 2e                       cmp      edi, 0x2e
+004A3351  7f 18                          jg       0x4a336b
+004A3353  85 ff                          test     edi, edi
+004A3355  89 be 94 00 00 00              mov      dword ptr [esi + 0x94], edi
+004A335B  7c 0e                          jl       0x4a336b
+004A335D  83 ff 2e                       cmp      edi, 0x2e
+004A3360  7f 09                          jg       0x4a336b
+004A3362  6a 01                          push     1
+004A3364  8b ce                          mov      ecx, esi
+004A3366  e8 05 6b fe ff                 call     0x489e70
+004A336B  57                             push     edi
+004A336C  b9 58 19 20 07                 mov      ecx, 0x7201958
+004A3371  e8 5a d7 fe ff                 call     0x490ad0
+004A3376  8b f8                          mov      edi, eax
+004A3378  57                             push     edi
+004A3379  e8 b2 72 fd ff                 call     0x47a630
+004A337E  83 c4 04                       add      esp, 4
+004A3381  85 c0                          test     eax, eax
+004A3383  74 1a                          je       0x4a339f
+004A3385  83 c7 30                       add      edi, 0x30
+004A3388  56                             push     esi
+004A3389  8b cf                          mov      ecx, edi
+004A338B  e8 20 8e fd ff                 call     0x47c1b0
+004A3390  6a 00                          push     0
+004A3392  6a 00                          push     0
+004A3394  6a 00                          push     0
+004A3396  6a 01                          push     1
+004A3398  8b cf                          mov      ecx, edi
+004A339A  e8 b1 99 fd ff                 call     0x47cd50
+004A339F  5f                             pop      edi
+004A33A0  5e                             pop      esi
+004A33A1  c2 08 00                       ret      8

@@ -1,0 +1,10 @@
+0047B330  6a 26                          push     0x26
+0047B332  51                             push     ecx
+0047B333  e8 f8 58 04 00                 call     0x4c0c30 ; sub_4c0c30
+0047B338  83 c4 08                       add      esp, 8
+0047B33B  40                             inc      eax
+0047B33C  f7 d8                          neg      eax
+0047B33E  1b c0                          sbb      eax, eax
+0047B340  25 b0 3c ff ff                 and      eax, 0xffff3cb0
+0047B345  05 f0 49 02 00                 add      eax, 0x249f0
+0047B34A  c3                             ret

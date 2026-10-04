@@ -3031,79 +3031,42 @@ Location
 
 ### 9.1 野战 / 据点击破捕获：主概率函数已恢复
 
-PC-PK1.1 的主函数位于 `004B1280`。它同时处理部队被击破与据点陷落后的武将捕获。
+当前可逐字节绑定的是MOD相关S1的`004B1280`，stock PC-PK1.1等价未验证。[P0-49](84-capture-personnel-source-profile.md)已取得完整body、callee和数据常量，以下替代D9早期省略细节的简化式。
 
-普通概率路径的已确认核心：
+在通过硬gate后，来源算术为：
 
-```ts
-stat = max(target.war, target.intelligence)
-
-surround = 1
-if (surroundingFriendlyUnits > 0 && !target.hasSkill("铁壁")) {
-  surround = surroundingFriendlyUnits
-}
-
-contextMultiplier = (unknownContextId === 3 || unknownContextId === 4)
-  ? 1.5
-  : 1.0
-
-difficultyDivisor =
-  (difficulty === "超级" &&
-   attackerIsPlayer &&
-   defenderIsAI)
-  ? 2
-  : 1
-
-p = toInt(
-  floor((120 - stat) / 3)
-  * surround
-  * contextMultiplier
-  / difficultyDivisor
-)
-
-if (attackingUnit.hasSkill("捕缚")) {
-  p += 100
-}
-p = min(p, 100)
-
-if (isHalberdTactic) {
-  p += 30
-}
-p = min(p, 100)
-
+```text
+q = truncTowardZero((120 - max(byte171, byte172))/3)
+mult = nearbyCount <= 0 ? 1 : 100 * (skillId==0x1D ? 1 : nearbyCount)
+terrainFactor = terrainId in {3,4} ? 1.5 : 1.0
+divisor = (difficulty==2 && sourcePlayer && !targetPlayer) ? 2 : 1
+arrestBonus = sourceHasSkill19 && inRange ? 100 : 0
+p = truncTowardZero(q * mult * terrainFactor * binary32(0.01) / divisor + arrestBonus)
+p = min(p,100)
+if arg8 != 0: p = min(p+30,100)
 capture = ProbabilityRoll(p)
 ```
 
-说明：
+- `binary32(0.01)`为存储的`0x3C23D70A`，不能约去mult里的100：能力100、邻兵1、普通地形时实际p为5，而数学百分数简化会得6
+- nearbyCount=0的mult为1而非100，普通低值往往p=0
+- 参数7已确定读取目标地图cell低5bit地形；3/4数值作用为×1.5，具体命名与stock跨源等价另核
+- 参数8在据点capture caller为0；其余caller与戟兵战法映射不能只凭该函数命名
+- S1 `004721D0` p<=0不消费随机；p>0消费一次，比较0..99与p；p=100以及p>100仍消费一次
+- S1末城强制捕获在宝物和skill32免疫之前，须按路径看优先级
+- `_ftol2`向零截断已有取证；原运行时FPU环境与stock等价仍是独立边界。参考模型在明确有界/精度前提下验证77,824组算术
 
-- 目标武将取**武力、智力较高者**；能力越高，普通被俘率越低。
-- 合围会按周围己方部队数线性放大；目标有`铁壁`时，合围倍率被压回1，但铁壁不是绝对免疫。
-- 超级难度中仅“玩家击破AI”这一方向再除以2。
-- `捕缚`在普通概率路径直接加100，因此在没有更前面的逃脱/免疫硬分支时等价于必捕。
-- 戟兵战法在最终概率上再`+30`，然后再次封顶100。
-- `unknownContextId==3/4 -> ×1.5` 已由反汇编确认，但该 context 的业务语义还没有可靠命名，暂不猜成某个战法/地形。
-- 浮点转整数 helper `00707A74` 的边界舍入语义仍沿用全项目统一 open，不在这里自造 round/floor 差异。
-
-旧总规则里的：
-
-```text
-近战约30%
-位移战法约40%
-包围约70%
-```
-
-只能视为旧经验样本，**不能继续作为 PC-PK1.1 的主公式**。
+旧“近战30%/位移40%/包围70%”经验值及D9简化式只作历史对照，不作为此source profile运行公式。完整资格、处分与fallback见P0-49；模型并不等于完整原游戏人员系统。
 
 ### 9.2 强运 / 名马 / 血路不能混成一个百分比修正
 
-`强运`是源码级硬边界：
+在S1普通概率路径中，`强运`数值ID0x20会直接退出；但它位于末城强制capture之后，不能跨路径称绝对免疫：
 
 ```text
 004B17B1 skill 32 强运
 -> 部队击破捕获流程中直接走不可捕获分支
 ```
 
-`捕缚`的日文特技说明长期一致表述为“对没有强运、没有名马的武将必定捕获”，因此**名马是高置信反捕获条件**；但主捕获函数中位于强运之前的 `004A0590` 保护检查尚未完成语义映射，当前不把它擅自命名成“名马检查”。
+`004A0590(person,0)`现由P0-49恢复为持有type0宝物检查：遍历合法宝物0..99、holderPersonId匹配，再读type。社区type0标作名马。其escape分支位于skill32之前、末城强制捕获之后；S2的末城gate已修改，不能混用。
 
 `血路`另有独立函数/特技入口，社区资料也明确存在“部队壊滅时有效、城陷落时边界不同”的版本/场景争议。因此：
 
@@ -3151,7 +3114,7 @@ escape = ProbabilityRoll(p)
 - 被俘月数不足2：不会走自然逃亡 roll；
 - 武力/智力取较高值，低于30按30；
 - 随被俘时间**平方增长**，随武/智最大值线性增长；
-- 本函数只设最小概率1，没有本地 `min(100)`；当算式超过100时，最终行为取决于共用概率 helper `004721D0` 对超范围参数的处理，这一极端边界仍 open。
+- 该自然逃亡函数只设最小概率1、没有本地 `min(100)`。P0-49已取得S1共用`004721D0`：p>100必成功且消费一次随机；这只闭合S1 helper语义，尚未认证stock等价或此自然逃亡caller的完整运行样本。
 
 ### 9.4 俘虏月度掉忠：不再 open
 
