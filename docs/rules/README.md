@@ -7,6 +7,8 @@
 
 ## 最新审计入口
 
+新增[P0-63原生roster/role排序与capacity](98-native-roster-sort.md)：固定field0 key链、两种quicksort/一种merge、按实际比较序live读与两轮allocated筛选；capacity分别执行S1/S2标量路径，query377/278保留全frame/RNG可变观察。`python scripts/check_native_roster_sort_source.py`、`python scripts/check_native_roster_sort_profile.py`；旧API不变，一般flags/vtable、route/force/capture/stock继续open。
+
 新增[P0-62原生return/list/role递归组合](97-recursive-officer-return.md)：每调用context stack保存native locals，正常非空角色event直接回到dispatcher/handler/return；count<2 sort闭合，多节点sort/route/target-force明确可变观察；灭亡/空军团/ruler路径原子defer。`python scripts/check_recursive_officer_return_source.py`、`python scripts/check_recursive_officer_return_profile.py`。
 
 新增[P0-61共享frame单事务event8/14组合](96-mission-event-composition.md)：dispatcher直接调用已知handler/notification/return-tail primitives，保留copied/live/native saved locals，再执行004BA1D0空分支与fresh post-event observer。全部unknown边界可变观察或原子拒绝，旧API不变；完整return/list/role仍next。`python scripts/check_mission_event_composition_source.py`、`python scripts/check_mission_event_composition_profile.py`。

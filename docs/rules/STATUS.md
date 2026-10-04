@@ -2,7 +2,15 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-62原生return/list/role与event8/14递归组合
+## 最新完成：P0-63原生roster/role排序、capacity与S2可变查询
+
+[正文](98-native-roster-sort.md) · [结构化证据](../sources/native-roster-sort.json)。基线main `fd1323511ae7f2d1a1f171e787bca2300444cc4b`（PR #20已合）。
+
+新版本在共享recursive frame中展开固定field0 roster key链、entry/pointer分别保留身份的两种quicksort和governor merge；逐次comparator/live capacity替代whole-sort观察，保留重复节点、两轮allocated过滤与clear/reappend，不宣称排序稳定。S1/S2 title/office/technique分别原生投影；query377/278逐调用绑定saved locals、full before/after和RNG。canonical title/office type-valid约束、raw17C/status派生、递归上下文和一次原子提交保持严格；旧API不变。
+
+20项source-only检查通过；完整双IDB指纹及独立raw-ID1重读667范围/65,134 selected range bytes通过（S1 331/S2 336；330同形对321同/9异，另7未配对宽度；含56个新增范围，重叠选段长度不去重）。28项模型测试通过，含100静态与128可变独立oracle、逐step/frame/scope/golden比较及hook序、status6/8 promotion、24-hook真实数组越界域反例、原子/幂等与完整JSON重放。完整96条命令回归零失败：TypeScript、85 Node tests、93 Python checkers与2 demos。16文件冻结在全测前后无漂移；asm文本尾空白规范化后的全部范围已再用raw-ID1复核。独立审阅通过：双IDB/raw667范围、20source/27model另行重跑，追加576个signed-status/raw17C comparator与576个S1 capacity边界case通过；收紧direct building receiver域后，test28/20source及6个canonical端点正例差异复审通过，未误加一般building.valid gate。最终96命令重新全过（28model），16文件冻结无漂移；完整回归结果日志经独审核对，无剩余阻断。发布前仅补本结论；合并后main仍须全测。route/target-force、一般sort flags/vtable/allocator失败、empty-corps/force灭亡、ruler/base/capture、其他event、clean stock/Vanilla/真实存档与全局RNG继续open。
+
+## 历史完成：P0-62原生return/list/role与event8/14递归组合
 
 [正文](97-recursive-officer-return.md) · [结构化证据](../sources/recursive-officer-return.json)。基线main `a3c94e9d045688fe93c3c9b9172db30d5a89333a`（PR #19已合）。
 
