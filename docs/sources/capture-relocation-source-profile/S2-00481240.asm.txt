@@ -1,0 +1,50 @@
+00481240  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00481244  83 f8 01                       cmp      eax, 1
+00481247  53                             push     ebx
+00481248  55                             push     ebp
+00481249  56                             push     esi
+0048124A  57                             push     edi
+0048124B  8b e9                          mov      ebp, ecx
+0048124D  7c 52                          jl       0x4812a1
+0048124F  83 f8 08                       cmp      eax, 8
+00481252  7f 4d                          jg       0x4812a1
+00481254  33 db                          xor      ebx, ebx
+00481256  eb 08                          jmp      0x481260
+00481258  8d a4 24 00 00 00 00           lea      esp, [esp]
+0048125F  90                             nop
+00481260  53                             push     ebx
+00481261  b9 58 19 20 07                 mov      ecx, 0x7201958
+00481266  e8 65 f8 00 00                 call     0x490ad0
+0048126B  8b f0                          mov      esi, eax
+0048126D  56                             push     esi
+0048126E  e8 bd 93 ff ff                 call     0x47a630
+00481273  83 c4 04                       add      esp, 4
+00481276  85 c0                          test     eax, eax
+00481278  74 21                          je       0x48129b
+0048127A  55                             push     ebp
+0048127B  b9 58 19 20 07                 mov      ecx, 0x7201958
+00481280  e8 eb ff 00 00                 call     0x491270
+00481285  8b f8                          mov      edi, eax
+00481287  8b 06                          mov      eax, dword ptr [esi]
+00481289  8b ce                          mov      ecx, esi
+0048128B  ff 50 40                       call     dword ptr [eax + 0x40]
+0048128E  3b c7                          cmp      eax, edi
+00481290  75 09                          jne      0x48129b
+00481292  8b 4c 24 14                    mov      ecx, dword ptr [esp + 0x14]
+00481296  39 4e 08                       cmp      dword ptr [esi + 8], ecx
+00481299  74 10                          je       0x4812ab
+0048129B  43                             inc      ebx
+0048129C  83 fb 2f                       cmp      ebx, 0x2f
+0048129F  7c bf                          jl       0x481260
+004812A1  5f                             pop      edi
+004812A2  5e                             pop      esi
+004812A3  5d                             pop      ebp
+004812A4  83 c8 ff                       or       eax, 0xffffffff
+004812A7  5b                             pop      ebx
+004812A8  c2 04 00                       ret      4
+004812AB  5f                             pop      edi
+004812AC  5e                             pop      esi
+004812AD  5d                             pop      ebp
+004812AE  8b c3                          mov      eax, ebx
+004812B0  5b                             pop      ebx
+004812B1  c2 04 00                       ret      4

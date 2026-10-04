@@ -1,0 +1,147 @@
+0047BAA0  51                             push     ecx
+0047BAA1  55                             push     ebp
+0047BAA2  8b 6c 24 14                    mov      ebp, dword ptr [esp + 0x14]
+0047BAA6  56                             push     esi
+0047BAA7  8b 74 24 1c                    mov      esi, dword ptr [esp + 0x1c]
+0047BAAB  3b ee                          cmp      ebp, esi
+0047BAAD  0f 8d 64 01 00 00              jge      0x47bc17
+0047BAB3  8b 44 24 20                    mov      eax, dword ptr [esp + 0x20]
+0047BAB7  85 c0                          test     eax, eax
+0047BAB9  0f 84 58 01 00 00              je       0x47bc17
+0047BABF  53                             push     ebx
+0047BAC0  8b 5c 24 14                    mov      ebx, dword ptr [esp + 0x14]
+0047BAC4  85 db                          test     ebx, ebx
+0047BAC6  0f 84 4a 01 00 00              je       0x47bc16
+0047BACC  6a 01                          push     1
+0047BACE  8d 04 ab                       lea      eax, [ebx + ebp*4]
+0047BAD1  6a 04                          push     4
+0047BAD3  50                             push     eax
+0047BAD4  e8 97 65 ff ff                 call     0x472070
+0047BAD9  83 c4 0c                       add      esp, 0xc
+0047BADC  85 c0                          test     eax, eax
+0047BADE  0f 84 32 01 00 00              je       0x47bc16
+0047BAE4  6a 01                          push     1
+0047BAE6  8d 0c b3                       lea      ecx, [ebx + esi*4]
+0047BAE9  6a 04                          push     4
+0047BAEB  51                             push     ecx
+0047BAEC  e8 7f 65 ff ff                 call     0x472070
+0047BAF1  83 c4 0c                       add      esp, 0xc
+0047BAF4  85 c0                          test     eax, eax
+0047BAF6  0f 84 1a 01 00 00              je       0x47bc16
+0047BAFC  8d 04 2e                       lea      eax, [esi + ebp]
+0047BAFF  99                             cdq
+0047BB00  2b c2                          sub      eax, edx
+0047BB02  57                             push     edi
+0047BB03  8b 7c 24 1c                    mov      edi, dword ptr [esp + 0x1c]
+0047BB07  8b f0                          mov      esi, eax
+0047BB09  d1 fe                          sar      esi, 1
+0047BB0B  85 ff                          test     edi, edi
+0047BB0D  0f 84 02 01 00 00              je       0x47bc15
+0047BB13  6a 01                          push     1
+0047BB15  6a 04                          push     4
+0047BB17  57                             push     edi
+0047BB18  e8 53 65 ff ff                 call     0x472070
+0047BB1D  83 c4 0c                       add      esp, 0xc
+0047BB20  85 c0                          test     eax, eax
+0047BB22  0f 84 ed 00 00 00              je       0x47bc15
+0047BB28  8b d6                          mov      edx, esi
+0047BB2A  6a 01                          push     1
+0047BB2C  2b d5                          sub      edx, ebp
+0047BB2E  8d 04 97                       lea      eax, [edi + edx*4]
+0047BB31  6a 04                          push     4
+0047BB33  50                             push     eax
+0047BB34  e8 37 65 ff ff                 call     0x472070
+0047BB39  83 c4 0c                       add      esp, 0xc
+0047BB3C  85 c0                          test     eax, eax
+0047BB3E  0f 84 d1 00 00 00              je       0x47bc15
+0047BB44  8b 4c 24 30                    mov      ecx, dword ptr [esp + 0x30]
+0047BB48  8b 54 24 2c                    mov      edx, dword ptr [esp + 0x2c]
+0047BB4C  8b 44 24 28                    mov      eax, dword ptr [esp + 0x28]
+0047BB50  51                             push     ecx
+0047BB51  52                             push     edx
+0047BB52  50                             push     eax
+0047BB53  56                             push     esi
+0047BB54  55                             push     ebp
+0047BB55  57                             push     edi
+0047BB56  53                             push     ebx
+0047BB57  e8 44 ff ff ff                 call     0x47baa0
+0047BB5C  8b 4c 24 4c                    mov      ecx, dword ptr [esp + 0x4c]
+0047BB60  8b 54 24 48                    mov      edx, dword ptr [esp + 0x48]
+0047BB64  51                             push     ecx
+0047BB65  8b 4c 24 48                    mov      ecx, dword ptr [esp + 0x48]
+0047BB69  52                             push     edx
+0047BB6A  8b 54 24 48                    mov      edx, dword ptr [esp + 0x48]
+0047BB6E  51                             push     ecx
+0047BB6F  52                             push     edx
+0047BB70  8d 46 01                       lea      eax, [esi + 1]
+0047BB73  50                             push     eax
+0047BB74  57                             push     edi
+0047BB75  53                             push     ebx
+0047BB76  89 44 24 58                    mov      dword ptr [esp + 0x58], eax
+0047BB7A  e8 21 ff ff ff                 call     0x47baa0
+0047BB7F  33 c9                          xor      ecx, ecx
+0047BB81  83 c4 38                       add      esp, 0x38
+0047BB84  3b ee                          cmp      ebp, esi
+0047BB86  89 4c 24 10                    mov      dword ptr [esp + 0x10], ecx
+0047BB8A  8b c5                          mov      eax, ebp
+0047BB8C  7f 12                          jg       0x47bba0
+0047BB8E  8b ff                          mov      edi, edi
+0047BB90  8b 14 83                       mov      edx, dword ptr [ebx + eax*4]
+0047BB93  40                             inc      eax
+0047BB94  89 14 8f                       mov      dword ptr [edi + ecx*4], edx
+0047BB97  41                             inc      ecx
+0047BB98  3b c6                          cmp      eax, esi
+0047BB9A  7e f4                          jle      0x47bb90
+0047BB9C  89 4c 24 10                    mov      dword ptr [esp + 0x10], ecx
+0047BBA0  8b 44 24 20                    mov      eax, dword ptr [esp + 0x20]
+0047BBA4  8b 54 24 24                    mov      edx, dword ptr [esp + 0x24]
+0047BBA8  33 f6                          xor      esi, esi
+0047BBAA  3b c2                          cmp      eax, edx
+0047BBAC  89 44 24 20                    mov      dword ptr [esp + 0x20], eax
+0047BBB0  7f 4f                          jg       0x47bc01
+0047BBB2  eb 04                          jmp      0x47bbb8
+0047BBB4  8b 44 24 20                    mov      eax, dword ptr [esp + 0x20]
+0047BBB8  3b f1                          cmp      esi, ecx
+0047BBBA  7d 59                          jge      0x47bc15
+0047BBBC  8b 4c 24 30                    mov      ecx, dword ptr [esp + 0x30]
+0047BBC0  8b 54 24 2c                    mov      edx, dword ptr [esp + 0x2c]
+0047BBC4  8b 04 83                       mov      eax, dword ptr [ebx + eax*4]
+0047BBC7  51                             push     ecx
+0047BBC8  8b 0c b7                       mov      ecx, dword ptr [edi + esi*4]
+0047BBCB  52                             push     edx
+0047BBCC  50                             push     eax
+0047BBCD  51                             push     ecx
+0047BBCE  ff 54 24 38                    call     dword ptr [esp + 0x38]
+0047BBD2  83 c4 10                       add      esp, 0x10
+0047BBD5  85 c0                          test     eax, eax
+0047BBD7  74 0a                          je       0x47bbe3
+0047BBD9  8b 14 b7                       mov      edx, dword ptr [edi + esi*4]
+0047BBDC  89 14 ab                       mov      dword ptr [ebx + ebp*4], edx
+0047BBDF  45                             inc      ebp
+0047BBE0  46                             inc      esi
+0047BBE1  eb 10                          jmp      0x47bbf3
+0047BBE3  8b 44 24 20                    mov      eax, dword ptr [esp + 0x20]
+0047BBE7  8b 0c 83                       mov      ecx, dword ptr [ebx + eax*4]
+0047BBEA  89 0c ab                       mov      dword ptr [ebx + ebp*4], ecx
+0047BBED  45                             inc      ebp
+0047BBEE  40                             inc      eax
+0047BBEF  89 44 24 20                    mov      dword ptr [esp + 0x20], eax
+0047BBF3  8b 54 24 20                    mov      edx, dword ptr [esp + 0x20]
+0047BBF7  3b 54 24 24                    cmp      edx, dword ptr [esp + 0x24]
+0047BBFB  8b 4c 24 10                    mov      ecx, dword ptr [esp + 0x10]
+0047BBFF  7e b3                          jle      0x47bbb4
+0047BC01  3b f1                          cmp      esi, ecx
+0047BC03  7d 10                          jge      0x47bc15
+0047BC05  8d 1c ab                       lea      ebx, [ebx + ebp*4]
+0047BC08  8b 04 b7                       mov      eax, dword ptr [edi + esi*4]
+0047BC0B  89 03                          mov      dword ptr [ebx], eax
+0047BC0D  83 c3 04                       add      ebx, 4
+0047BC10  46                             inc      esi
+0047BC11  3b f1                          cmp      esi, ecx
+0047BC13  7c f3                          jl       0x47bc08
+0047BC15  5f                             pop      edi
+0047BC16  5b                             pop      ebx
+0047BC17  5e                             pop      esi
+0047BC18  5d                             pop      ebp
+0047BC19  59                             pop      ecx
+0047BC1A  c3                             ret

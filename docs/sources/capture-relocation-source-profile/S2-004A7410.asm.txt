@@ -1,0 +1,41 @@
+004A7410  53                             push     ebx
+004A7411  56                             push     esi
+004A7412  8b 74 24 0c                    mov      esi, dword ptr [esp + 0xc]
+004A7416  56                             push     esi
+004A7417  8b d9                          mov      ebx, ecx
+004A7419  e8 12 32 fd ff                 call     0x47a630
+004A741E  83 c4 04                       add      esp, 4
+004A7421  85 c0                          test     eax, eax
+004A7423  74 4c                          je       0x4a7471
+004A7425  57                             push     edi
+004A7426  8b 7c 24 14                    mov      edi, dword ptr [esp + 0x14]
+004A742A  85 ff                          test     edi, edi
+004A742C  7c 42                          jl       0x4a7470
+004A742E  83 ff 2b                       cmp      edi, 0x2b
+004A7431  7f 3d                          jg       0x4a7470
+004A7433  56                             push     esi
+004A7434  8b cb                          mov      ecx, ebx
+004A7436  e8 75 e3 ff ff                 call     0x4a57b0
+004A743B  8b 44 24 28                    mov      eax, dword ptr [esp + 0x28]
+004A743F  8b 4c 24 24                    mov      ecx, dword ptr [esp + 0x24]
+004A7443  8b 54 24 20                    mov      edx, dword ptr [esp + 0x20]
+004A7447  50                             push     eax
+004A7448  8b 44 24 20                    mov      eax, dword ptr [esp + 0x20]
+004A744C  51                             push     ecx
+004A744D  8b 4c 24 20                    mov      ecx, dword ptr [esp + 0x20]
+004A7451  52                             push     edx
+004A7452  50                             push     eax
+004A7453  51                             push     ecx
+004A7454  57                             push     edi
+004A7455  8b ce                          mov      ecx, esi
+004A7457  e8 74 27 fe ff                 call     0x489bd0
+004A745C  6a 01                          push     1
+004A745E  8b ce                          mov      ecx, esi
+004A7460  e8 db 26 fe ff                 call     0x489b40
+004A7465  56                             push     esi
+004A7466  b9 58 19 20 07                 mov      ecx, 0x7201958
+004A746B  e8 10 bb fd ff                 call     0x482f80
+004A7470  5f                             pop      edi
+004A7471  5e                             pop      esi
+004A7472  5b                             pop      ebx
+004A7473  c2 1c 00                       ret      0x1c

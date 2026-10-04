@@ -1,0 +1,19 @@
+0048A900  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0048A904  83 f8 ff                       cmp      eax, -1
+0048A907  74 0b                          je       0x48a914
+0048A909  85 c0                          test     eax, eax
+0048A90B  7c 0d                          jl       0x48a91a
+0048A90D  3d 4b 04 00 00                 cmp      eax, 0x44b
+0048A912  7f 06                          jg       0x48a91a
+0048A914  89 81 64 01 00 00              mov      dword ptr [ecx + 0x164], eax
+0048A91A  8a 44 24 08                    mov      al, byte ptr [esp + 8]
+0048A91E  84 c0                          test     al, al
+0048A920  77 0b                          ja       0x48a92d
+0048A922  32 c0                          xor      al, al
+0048A924  88 81 68 01 00 00              mov      byte ptr [ecx + 0x168], al
+0048A92A  c2 08 00                       ret      8
+0048A92D  3c ff                          cmp      al, 0xff
+0048A92F  72 02                          jb       0x48a933
+0048A931  0c ff                          or       al, 0xff
+0048A933  88 81 68 01 00 00              mov      byte ptr [ecx + 0x168], al
+0048A939  c2 08 00                       ret      8

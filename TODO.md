@@ -1,14 +1,24 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-49 city troop capacity / captive partition / disposition source audit and partial personnel projection
-> Integration baseline: PR #6 merged; this theme starts at `feca7b37678bccff55d0e8e5732cea463c457708`
+> Current integration: P0-50 prior-captive release / migration destination / source-bound ordering projection
+> Integration baseline: PR #7 merged; this theme starts at `e4dab4be5e86bd3d410048137a9c2a3847f2f494`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: captive release and relocation
+
+- P0-50: pre-capture old-prisoner roster pass, own-affiliation shortcut and bounded return-former-force writes
+- Source 004B0F50 destination priority, nearest territorial-city table/ties, singleton-zero-RNG, and 004B1950 last-city gate
+- 004A7990 prepares mission duration and returns origin; base escape does not teleport actual location
+- Absent home-roster collector and stable transformed-identity dispatcher ordering; event4 snapshot before forbidden tail
+- 126 text byte ranges, 63 S1/S2 comparisons (58 identical / 5 different); 34 regression tests
+- Guide: `docs/rules/85-capture-relocation-source-profile.md`; `python scripts/check_capture_relocation_profile.py`
+- Explicit defer/reject for unsupported wandering/force-extinction routes, callback/resource effects record-only; independent partial model, no stock or complete-capture claim
 
 ### Completed bounded implementation: capture personnel projection
 
@@ -18,7 +28,7 @@
 - Six disposition routes mapped; explicitly configurable hold/observed-code/reject policy and three known held-captive field writes
 - 142 text byte ranges, 71 S1/S2 comparisons (61 identical / 10 different); 30 tests and 77,824 arithmetic cases
 - Guide: `docs/rules/84-capture-personnel-source-profile.md`; `python scripts/check_capture_personnel_profile.py`
-- Starts after prior prisoners' release; location/legion/tasks/AI choices and callbacks remain partial, not a complete game capture
+- P0-49 starts after prior prisoners' release; P0-50 adds a separate bounded prelude/migration model, while AI choices/callbacks and full composition remain open
 
 ### Completed bounded implementation: capture transaction projection
 
@@ -54,6 +64,7 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-50 audit complete: source-bound release, destination/migration and stable ordering with tested partial projection
 - P0-49 audit complete: source-bound capacity, personnel partition and explicit partial projection
 - P0-48 audit complete: capture caller/collector/scalar finalizer and tested transaction projection
 - P0-47 audit complete: source-bound training lifecycle and tested compatibility implementation
@@ -101,7 +112,7 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- Continue prior-prisoner release, absent home-roster persons and `004B0F50/004A7990` relocation / `004B03D0` AI disposition callees; P0-49 ordinary partition and dispatcher are recovered
+- P0-50 recovers prior-prisoner release, absent home-roster, `004B0F50/004A7990` relocation and stable identity-rank ordering; continue `004BBB00/004BA520` wandering/force-extinction, mission cancellation resource callbacks and `004B03D0` AI disposition callees
 - Complete destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open

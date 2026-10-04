@@ -729,6 +729,15 @@ return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 
 独立模型`capture_personnel_profile.py`采用`hold-captive-v1|observed-codes|reject`；hold只写status5、formerForceId、office80。`partial-person-fields-v1`显式记录旧俘虏前置释放、缺席roster、位置/军团/任务、排序/非hold处分、force/事件未投影。保留输入字段不是推断这些字段在原机不变。没有接入P0-48或训练战斗引擎，stock/完整游戏债不关闭。
 
+
+### 4D.3 P0-50前置释放与人员迁移
+
+[85-capture-relocation-source-profile.md](85-capture-relocation-source-profile.md) / `capture_relocation_profile.py`实现独立旧俘虏pass和escape有界人物投影。目的地优先链、最近territorial-city表、同分RNG、任务期间低byte、base escape保留实际位置及稳定身份rank排序均绑定S1。PC-PK1.1 reconstruction；Vanilla另assumption。S2距离表1084格不同，不能混用。
+
+`record-person-callbacks-v1`只投影已声明标量，保留人员/军团列表、任务取消资源、太守/force/事件副作用ledger。`defer-unresolved-person-v1`整人跳过004BBB00/004BA520或无效返回上下文；`unresolvedPerson=reject`在任何投影/draw前拒绝整批，`unknownEffects=reject`拒绝所有部分模型。保留字段不等于原作不变；新任务参数只覆盖+140..+150五个dword，不称整个任务状态清空。三个capture参考模块尚未组成完整战斗事务。
+
+源码随机模式是已给定入口seed的纯本地LCG；replay可重算以核验记录，不使用外部随机服务、不推进共享RNG。全局RNG/真实存档与stock对应继续open。维护费俘虏forced-release排序不属于本组建筑处分排序。
+
 ### 4E. Golden tests
 
 日文 Wiki 的攻城表继续保留，但角色从“运行时规则”改为“回归测试”。

@@ -1,0 +1,6 @@
+00487E10  e8 6b e8 ff ff                 call     0x486680
+00487E15  33 c9                          xor      ecx, ecx
+00487E17  83 f8 ff                       cmp      eax, -1
+00487E1A  0f 95 c1                       setne    cl
+00487E1D  8b c1                          mov      eax, ecx
+00487E1F  c3                             ret

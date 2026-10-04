@@ -1,0 +1,70 @@
+00487BC0  8b 41 08                       mov      eax, dword ptr [ecx + 8]
+00487BC3  83 e8 00                       sub      eax, 0
+00487BC6  56                             push     esi
+00487BC7  74 7b                          je       0x487c44
+00487BC9  48                             dec      eax
+00487BCA  74 43                          je       0x487c0f
+00487BCC  48                             dec      eax
+00487BCD  0f 85 aa 00 00 00              jne      0x487c7d
+00487BD3  51                             push     ecx
+00487BD4  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487BD9  e8 92 9b 00 00                 call     0x491770
+00487BDE  83 f8 34                       cmp      eax, 0x34
+00487BE1  7c 0a                          jl       0x487bed
+00487BE3  83 f8 56                       cmp      eax, 0x56
+00487BE6  7f 05                          jg       0x487bed
+00487BE8  83 c0 cc                       add      eax, -0x34
+00487BEB  eb 03                          jmp      0x487bf0
+00487BED  83 c8 ff                       or       eax, 0xffffffff
+00487BF0  50                             push     eax
+00487BF1  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487BF6  e8 75 8e 00 00                 call     0x490a70
+00487BFB  8b f0                          mov      esi, eax
+00487BFD  56                             push     esi
+00487BFE  e8 2d 2a ff ff                 call     0x47a630
+00487C03  83 c4 04                       add      esp, 4
+00487C06  85 c0                          test     eax, eax
+00487C08  74 73                          je       0x487c7d
+00487C0A  8d 46 70                       lea      eax, [esi + 0x70]
+00487C0D  5e                             pop      esi
+00487C0E  c3                             ret
+00487C0F  51                             push     ecx
+00487C10  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487C15  e8 56 9b 00 00                 call     0x491770
+00487C1A  83 f8 2a                       cmp      eax, 0x2a
+00487C1D  7c 15                          jl       0x487c34
+00487C1F  83 f8 33                       cmp      eax, 0x33
+00487C22  7f 10                          jg       0x487c34
+00487C24  83 c0 d6                       add      eax, -0x2a
+00487C27  50                             push     eax
+00487C28  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487C2D  e8 0e 8e 00 00                 call     0x490a40
+00487C32  eb c7                          jmp      0x487bfb
+00487C34  83 c8 ff                       or       eax, 0xffffffff
+00487C37  50                             push     eax
+00487C38  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487C3D  e8 fe 8d 00 00                 call     0x490a40
+00487C42  eb b7                          jmp      0x487bfb
+00487C44  51                             push     ecx
+00487C45  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487C4A  e8 21 9b 00 00                 call     0x491770
+00487C4F  85 c0                          test     eax, eax
+00487C51  7c 05                          jl       0x487c58
+00487C53  83 f8 29                       cmp      eax, 0x29
+00487C56  7e 03                          jle      0x487c5b
+00487C58  83 c8 ff                       or       eax, 0xffffffff
+00487C5B  50                             push     eax
+00487C5C  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487C61  e8 aa 8d 00 00                 call     0x490a10
+00487C66  8b f0                          mov      esi, eax
+00487C68  56                             push     esi
+00487C69  e8 c2 29 ff ff                 call     0x47a630
+00487C6E  83 c4 04                       add      esp, 4
+00487C71  85 c0                          test     eax, eax
+00487C73  74 08                          je       0x487c7d
+00487C75  8d 86 b4 00 00 00              lea      eax, [esi + 0xb4]
+00487C7B  5e                             pop      esi
+00487C7C  c3                             ret
+00487C7D  33 c0                          xor      eax, eax
+00487C7F  5e                             pop      esi
+00487C80  c3                             ret
