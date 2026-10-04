@@ -1,10 +1,10 @@
 # PC-PK1.1 训练切片：确定性内核与纯文本沙盒
 
-更新：2026-10-03。运行 profile：`pk-training-slice-v1`。
+更新：2026-10-04。运行 profile：`pk-training-slice-v1`。
 
 ## 1. 基线与目标
 
-本实现从 GitHub `main` 的 `5c5611bb067c0dfe13cea1126ad69a12dade697c` 单独建立，未纳入未合并的 PR3 capture-profile 草稿。它不会把 P0-46 标记为关闭，也不声称完整《三国志11》已可游玩。
+本实现最初从 GitHub `main` 的 `5c5611bb067c0dfe13cea1126ad69a12dade697c` 独立建立。PR #3 的 capture-profile 研究现已合入main（`50dda2faaee55eef4c378ddb1dd4fcb0094e40b9`），本分支已同步该main并合并进度索引；训练常量仍保留原固定main的来源，不改写其证据基线。训练内核不依赖capture selector模型，不关闭P0-46剩余的stock版本等价、finalizer及全局RNG缺口，也不声称完整《三国志11》已可游玩。
 
 长线方向：先 PC-PK1.1，再独立恢复 Vanilla；缺失规则用可替换、带来源和证据等级的工程适配器，不能把猜测伪装为原版。此切片只实现：
 
@@ -160,4 +160,4 @@ newCorpsAP = min(255, remainingAP + recovery)
 - `python scripts/check_training_morale.py`：主分支训练参考检查通过
 - `python scripts/check_pk_training_runtime.py`：归一化规则/来源与参考向量检查
 
-仓库已有 `scripts/check_techniques.py:55` 把字面量 `\n` 写在同一Python代码行中，造成SyntaxError。该文件保持主分支原样，未把其既有问题混入本主题；所以不能声称整个仓库原有Python检查全绿。本次运行全部64个 `scripts/check_*.py`：63通过、1个上述既有SyntaxError失败。所有数值检查都是参考规则/内核测试，不是执行原版EXE回归。
+仓库已有 `scripts/check_techniques.py:55` 把字面量 `\n` 写在同一Python代码行中，造成SyntaxError。该文件保持主分支原样，未把其既有问题混入本主题；所以不能声称整个仓库原有Python检查全绿。PR #4原独立切片运行全部64个 `scripts/check_*.py`：63通过；同步已合并的PR #3后重新运行全部65个检查：64通过、1个上述既有SyntaxError失败。所有数值检查都是参考规则/内核测试，不是执行原版EXE回归。

@@ -1,17 +1,18 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current theme branch: `rules-engine-pk-training`
+> Current integration: P0-46 capture-source research and PK training slice
+> Integration baseline: PR #3 merged at `50dda2faaee55eef4c378ddb1dd4fcb0094e40b9`; PR #4 updated from that main
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: open a new draft PR for each theme; no automatic merge
 > Primary target: PC-PK1.1
-> Updated: 2026-10-03 (UTC)
+> Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
 
 ### Bounded implementation: PK training kernel
 
-- Added a main-only `pk-training-slice-v1` TypeScript kernel and short synthetic text sandbox
+- Added a `pk-training-slice-v1` TypeScript kernel and short synthetic text sandbox, initially derived independently from main after PR #2
 - Implemented Train, bounded EndTurn, preview/inspect, serializable state/evidence, save and deterministic replay
 - New normalized constants preserve fixed-main provenance; open gates, scheduler and omitted presentation RNG stay explicit
 - Vanilla is unsupported in this slice; XP-to-stat growth is rejected at the boundary
@@ -31,8 +32,8 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
-- P0-45 complete
-- Next: P0-46
+- P0-46 audit complete: source-bound capture caller/selector recovered
+- Stock PC-PK1.1 equivalence, full capture finalizer and cross-version validation remain open
 
 Current source of truth:
 
@@ -44,18 +45,38 @@ Current source of truth:
 
 ## 2. Immediate next items
 
-### P0-46
-City / harbor / gate capture:
-domestic-facility destruction caller / selector xref boundary.
+### P0-46 completed audit: source-bound capture selector
 
-Targets:
+Current record: `docs/rules/81-capture-selector-source-profile.md` and
+`docs/sources/capture-selector-source-profile.json`.
 
-- identify capture-time destruction caller;
-- separate city capture from ordinary single-facility destruction;
-- locate retained/destroyed facility candidate list;
-- locate selector / RNG / ordering xref if public;
-- determine whether city / harbor / gate share one path;
-- preserve exact open state when body/xref is unavailable.
+- Recovered `004B2CA0` containing body, three direct callers, city-only
+  domestic branch, ordered candidate construction, count, RNG and destruction
+- `004B329B` is an interior resource block, not an independent selector
+- Source IDB records an input under `血色5.0公测`; opcode-exact claims are
+  restricted to its fingerprint. Stock PC-PK1.1 remains unverified
+- Reference planner and replay checks exist in `scripts/capture_selector_profile.py`
+  and `scripts/check_capture_selector_profile.py`; they accept prequalified
+  ordered candidates and do not implement the full capture transaction
+- PK reuse is `compatibility-reconstruction`; Vanilla reuse is a separate
+  `compatibility-assumption`. PS2/Wii are separate open targets
+
+### Immediate next research
+
+- Obtain an independently verified clean PC-PK1.1 build/hash and compare the
+  recovered bytes, without treating a MOD-associated input path as stock proof
+- Finish caller argument/cause coverage and capture finalizer side effects;
+  the newly found late durability floor is not a full pre-to-post capture formula
+- Validate source RNG initialization/global consumption and capture savegame cases
+- Keep Vanilla patch-specific candidate/selector behavior separately open
+
+### Independent baseline validation debt
+
+`python scripts/check_techniques.py` fails on current main at line 55 with a
+literal `\n` in source causing `SyntaxError`. Original PR #2 baseline: 62 of 63
+`check_*.py` scripts pass. After integrating P0-46 and the training slice,
+64 of 65 pass with the same failure. This pre-existing technique issue remains
+unfixed; track it separately rather than hiding it behind the new tests.
 
 ### After P0-46
 
@@ -64,7 +85,7 @@ Do not invent a fixed P0 endpoint.
 
 Likely remaining families include:
 
-- capture / takeover reset and domestic-facility selection;
+- clean-build capture equivalence, complete takeover reset/finalizer, and versioned domestic-facility selection;
 - hiring inner probability body;
 - diplomacy per-build constants;
 - siege durability inner helper bodies;
@@ -96,7 +117,10 @@ Repository:
 
 Role:
 
-Primary public PC-PK1.1 reverse-engineering corpus used throughout this project.
+Primary public PK-oriented reverse-engineering corpus used throughout this project.
+Each executable/IDB artifact still needs its own provenance check; P0-46 found
+a MOD-directory input path in the archived IDB, so its new byte claims are
+source-profile exact, not verified stock PC-PK1.1.
 
 High-value material includes:
 

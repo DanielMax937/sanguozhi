@@ -175,7 +175,7 @@ constants-still-open
 
 ### 3. 攻城统一公式与据点接管资源（P0-3 主链已收窄）
 
-P0-3 专项见 `38-siege-capture-exactness.md`。
+P0-3 专项见 `38-siege-capture-exactness.md`；P0-46当前capture来源边界见 [81-capture-selector-source-profile.md](81-capture-selector-source-profile.md)。
 
 当前 PC-PK1.1 已确认：
 
@@ -245,15 +245,24 @@ retained =
 - `005ADE20` 函数体；
 - 小兵力/x87取整；
 - 小数量兵器/舰船整数边界；
-- 内政设施具体保留哪几座的 selector；
-- 据点耐久接管时的所有重置路径；
-- Vanilla/主机版差异。
+- 已恢复selector与clean stock PC-PK1.1的字节等价性；
+- 各capture caller的全部原因/参数与完整finalizer、副作用；
+- 据点接管耐久完整pre-to-post关系；
+- 全局RNG初始状态/消耗与存档回归；
+- Vanilla各补丁/PS2/Wii自身实现。
+
+P0-46新增已知范围：公开IDB的 `004B2CA0` body、三直接caller、city-only gate、候选链表序及30容量、完成/type30分支、`floor(max(20,charm)/20)` quota、n次全范围swap和销毁前缀均已恢复。`004B329B`只是资源局部段。新势力ID超0..41在shuffle后改为全毁；不能将其改名为“处断君主”规则。参考模型只处理已资格化有序候选。
+
+来源IDB的input path含“血色5.0公测”，因此 `opcode-exact` 仅限绑定hash的source profile，stock原性未核。PC-PK1.1采用为 `compatibility-reconstruction`，Vanilla单列 `compatibility-assumption`。晚期耐久 `currentAtTail < floor(maxAtTail/2)` 才写下限，不是完整capture reset公式。
 
 状态：
 
 ```text
 siege-call-chain-resolved
 capture-resource-formula-resolved
+capture-selector-source-profile-recovered
+stock-pc-pk11-equivalence-open
+capture-finalizer-and-global-rng-open
 durability-inner-functions-still-open
 ```
 

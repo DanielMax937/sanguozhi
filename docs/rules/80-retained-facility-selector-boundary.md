@@ -1,5 +1,7 @@
 # P0-45 内政设施保留 selector / retained-facility RNG 边界
 
+> 历史审计记录：当前结论以 [P0-46来源限定审计](81-capture-selector-source-profile.md) 为准。公开IDB已恢复 containing body、city-only selector/RNG与晚期耐久下限，但输入路径含MOD目录，stock PC-PK1.1等价性仍open。以下保留当轮证据状态，不作为当前“body尚未找到”的进度指针。
+
 更新：2026-10-04。主目标版本：PC-PK1.1。
 
 ## 1. 本轮结论

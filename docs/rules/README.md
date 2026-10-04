@@ -1,14 +1,15 @@
 # 三国志11规则总索引
 
 > 目标：建立可直接驱动规则引擎的《三国志11》规则规范，并严格区分无印（Vanilla）与威力加强版（PK）。
-> 更新日期：2026-10-01。
+> 更新日期：2026-10-04 UTC。
 
 ## 最新审计入口
 
 新增运行入口：[PK训练切片与纯文本沙盒](../engine/pk-training-slice.md)。仅Train与有限EndTurn，非完整游戏；`npm run check`、`npm run demo`、`npm run play`。新常量表为 `../sources/pk-training-runtime.json`，参考校验 `python scripts/check_pk_training_runtime.py`；保持原gate、全局scheduler、Vanilla与表现层RNG边界透明。
 
+[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [P0-46据点陷落selector来源](81-capture-selector-source-profile.md) · [P0-2外交版本边界](37-diplomacy-version-boundaries.md)。
 
-[当前审计总表](17-post-15-source-audit.md) · [状态](STATUS.md) · [P0-2外交版本边界](37-diplomacy-version-boundaries.md)。
+P0-46已恢复公开IDB的capture caller/候选/selector字节，但其输入路径含“血色5.0公测”。`opcode-exact`限定source profile/hash，stock PC-PK1.1仍open；PK采用为`compatibility-reconstruction`，Vanilla另为`compatibility-assumption`，主机版独立open。
 
 A1–E2原审计全文和旧STATUS分别完整保存在 `audit-history/`，原blob复用，无历史段落丢失。历史快照不是当前进度指针。
 
@@ -255,7 +256,9 @@ P0-42攻城耐久 `005ADDC0 / 005ADE20` inner helper 以 `77-siege-durability-in
 P0-43兵临城下出城 / AI 3格与1.2倍规则以 `78-ai-defense-sortie-boundary.md` 为专项记录，结构化证据为 `../sources/ai-defense-sortie-boundary.json`；旧“3格+1.2倍兵力比”已撤回为不受支持的 legacy fallback，AI 出兵必须走已逆出的多阶段 procedural pipeline；固定3格守城trigger仍open。
 
 
-P0-44据点陷落 takeover reset 以 `79-facility-takeover-reset-boundary.md` 为专项记录，结构化证据为 `../sources/facility-takeover-reset-boundary.json`；`00487E20` 耐久 setter 与 `004B329B` 资源保留路径已分层，资源保留 exact，但两种陷落入口的 reset writer、10%耐久重置与守兵归零保留耐久都继续 open。
+P0-44历史据点陷落 takeover reset 审计以 `79-facility-takeover-reset-boundary.md` 为专项记录，结构化证据为 `../sources/facility-takeover-reset-boundary.json`；`00487E20` 耐久 setter 与 `004B329B` 资源保留路径已分层，资源保留 exact，但两种陷落入口的 reset writer、10%耐久重置与守兵归零保留耐久都继续 open。
 
 
-P0-45内政设施保留 selector 以 `80-retained-facility-selector-boundary.md` 为专项记录，结构化证据为 `../sources/retained-facility-selector-boundary.json`；魅力决定保留1–5座的档位继续 empirical-high，但具体 selector/RNG 仍 open，`004BA610` 与 `004B329B` 均已排除为该 selector。
+P0-45历史内政设施保留 selector 审计以 `80-retained-facility-selector-boundary.md` 为专项记录，结构化证据为 `../sources/retained-facility-selector-boundary.json`；魅力决定保留1–5座的档位继续 empirical-high，但具体 selector/RNG 仍 open，`004BA610` 与 `004B329B` 均已排除为该 selector。
+
+P0-46当前capture selector以 `81-capture-selector-source-profile.md` 为专项记录，结构化证据为 `../sources/capture-selector-source-profile.json`。`004B2CA0` containing body及三caller、city-only gate、全局链表前30完成普通内政候选、魅力byte除20、全范围n次交换/RNG与销毁前缀已在固定source profile恢复；完成铜雀台另行跳过，新势力ID超0..41在shuffle后全毁。旧“100+固定5”和均匀sample不代表该source算法；stock等价、完整finalizer与跨版本仍open。局部模型/trace/replay校验：`python scripts/check_capture_selector_profile.py`；不代表原EXE或整引擎回归。

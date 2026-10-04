@@ -1,0 +1,598 @@
+{
+  "schemaVersion": 1,
+  "audit": "P0-46",
+  "updatedDateUtc": "2026-10-03",
+  "status": "audit-complete-source-profile-recovered-stock-equivalence-open",
+  "target": "PC-PK1.1 first; source-bound reconstruction only until stock executable equivalence is verified",
+  "profile": {
+    "id": "source-idb-30d33b44-capture-selector-v1",
+    "evidence": "opcode-exact",
+    "stockPcPk11Equivalence": "open",
+    "pkRuntimeReuse": "compatibility-reconstruction",
+    "vanillaRuntimeReuse": "compatibility-assumption",
+    "ps2RuntimeReuse": "open",
+    "wiiRuntimeReuse": "open",
+    "declaredSourceLineage": "PK-named IDB with mod-directory input path; exact stock build unknown",
+    "scope": "identified-idb-source-profile",
+    "sourceProfile": "source-idb-30d33b44-capture-selector-v1",
+    "stockOriginalVerified": false,
+    "targetProfileEvidence": {
+      "PC-PK1.1": "compatibility-reconstruction",
+      "PC-Vanilla": "compatibility-assumption",
+      "PS2": "open",
+      "Wii": "open"
+    }
+  },
+  "provenance": {
+    "repository": "https://github.com/sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "archivePath": "IDA Related/san11pk.zip",
+    "archiveUrl": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip",
+    "archiveSha256": "47beee4ac990869694a5e6f7577947cd6b34a41aefe60bace3af3350c682ce5a",
+    "member": "san11pk.idb",
+    "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+    "idbInputMetadata": {
+      "input_file_path": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+      "md5": "5183312eb33a7556fb5d8de8ca2fae91",
+      "sha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+      "version": 700,
+      "version_string": "7.00",
+      "open_count": 16
+    },
+    "metadataCaveats": [
+      "input file hash/path are recorded by IDB; this audit did not hash an independently acquired original executable",
+      "IDB version 7.00 describes the database format, not SAN11 patch version",
+      "mod-directory path is a stock-equivalence warning, not proof that every extracted byte is modified"
+    ],
+    "extraction": {
+      "method": "read IDB stored bytes with python-idb; disassemble x86-32 with Capstone; retain opcode bytes and function boundaries",
+      "executedGame": false,
+      "executedSourceRepositoryCode": false,
+      "fullFunctionDecode": true,
+      "versions": {
+        "python-idb": "0.8.0",
+        "capstone": "5.0.9"
+      }
+    }
+  },
+  "functions": [
+    {
+      "start": "004B2CA0",
+      "endExclusive": "004B36FF",
+      "rawSha256": "88ad5211c4484037aad336c7cd3ef0dbd1fc0c1091a00627d67986c222caa5af",
+      "byteCount": 2655,
+      "decodedByteCount": 2655,
+      "idbName": "sub_4b2ca0"
+    },
+    {
+      "start": "00689BF0",
+      "endExclusive": "00689C3B",
+      "rawSha256": "d310580f70eee5d7ee2e63fcd165fad3f62cb7b383f3940c53dacce6ed20a79e",
+      "byteCount": 75,
+      "decodedByteCount": 75,
+      "idbName": "sub_689bf0"
+    },
+    {
+      "start": "00472150",
+      "endExclusive": "00472184",
+      "rawSha256": "82bef9b78dc532adc5b0405a42da040048639dfee9ff2be22ed8d043c21140d0",
+      "byteCount": 52,
+      "decodedByteCount": 52,
+      "idbName": "Random_Smallerthan"
+    },
+    {
+      "start": "004890B0",
+      "endExclusive": "004890B7",
+      "rawSha256": "6b8b6c236a26022af24186e5f6009efa93bee6162b3c7a609d90be1e6bccf3b9",
+      "byteCount": 7,
+      "decodedByteCount": 7,
+      "idbName": "GetAttraction"
+    },
+    {
+      "start": "004866F0",
+      "endExclusive": "00486713",
+      "rawSha256": "6cc7deef844219d8714d164ce1210ff4f1cd1a8f3a6862f0e97a2c1d1ac477da",
+      "byteCount": 35,
+      "decodedByteCount": 35,
+      "idbName": "sub_4866f0"
+    },
+    {
+      "start": "00491180",
+      "endExclusive": "004911CA",
+      "rawSha256": "1e0f65a9b50e32866330593a5670938d4b13209d304ea365cd6dacb100a7cb6a",
+      "byteCount": 74,
+      "decodedByteCount": 74,
+      "idbName": "sub_491180"
+    },
+    {
+      "start": "004922C0",
+      "endExclusive": "00492348",
+      "rawSha256": "1238ab9a49364c9f3bc0f5b9b162146f4d9af4314acb01a405586d824ab34e88",
+      "byteCount": 136,
+      "decodedByteCount": 136,
+      "idbName": "sub_4922c0"
+    },
+    {
+      "start": "00487920",
+      "endExclusive": "00487956",
+      "rawSha256": "49888397ffecbc8962df0818e282940cf2caf2f5e079f3a11cc0bafc89164fdc",
+      "byteCount": 54,
+      "decodedByteCount": 54,
+      "idbName": "sub_487920"
+    },
+    {
+      "start": "00487A30",
+      "endExclusive": "00487A66",
+      "rawSha256": "26f152437f0ba659c1e9a0afa5c2e59f69c08e5cb8f4dda095a549fe19ad517c",
+      "byteCount": 54,
+      "decodedByteCount": 54,
+      "idbName": "sub_487a30"
+    },
+    {
+      "start": "004879F0",
+      "endExclusive": "00487A24",
+      "rawSha256": "24f606d6a1ff3be27699d45edac99a9500f2e2859e176b256f2b12828f1d1b91",
+      "byteCount": 52,
+      "decodedByteCount": 52,
+      "idbName": "sub_4879f0"
+    },
+    {
+      "start": "00487B30",
+      "endExclusive": "00487BB3",
+      "rawSha256": "8620689504983fed521867667ddfdcb2f6477ecc3f0249ed7132c2d22596ca79",
+      "byteCount": 131,
+      "decodedByteCount": 131,
+      "idbName": "sub_487b30"
+    },
+    {
+      "start": "00495A40",
+      "endExclusive": "00495A4F",
+      "rawSha256": "b736869852441e3c43d8443109e39ea8f5305c891370aca631306a53061ff893",
+      "byteCount": 15,
+      "decodedByteCount": 15,
+      "idbName": "sub_495a40"
+    },
+    {
+      "start": "00487150",
+      "endExclusive": "0048722A",
+      "rawSha256": "64edf410232f9c3a14da85cdc7e3e2c4dfd6c8c995f8051b19b01d7166b78ebe",
+      "byteCount": 218,
+      "decodedByteCount": 218,
+      "idbName": "sub_487150"
+    },
+    {
+      "start": "00487E20",
+      "endExclusive": "00487E48",
+      "rawSha256": "85464d117db8f211c57b23543d9d0aefbbe274c1ce000479d6a97b747c486c43",
+      "byteCount": 40,
+      "decodedByteCount": 40,
+      "idbName": "sub_487e20"
+    },
+    {
+      "start": "005AE2B0",
+      "endExclusive": "005AE2DD",
+      "rawSha256": "c5729adf6bdccebb237e5cc03ab75b0f71a3874bfdb98d46f6894e490f13fff5",
+      "byteCount": 45,
+      "decodedByteCount": 45,
+      "idbName": "sub_5ae2b0"
+    }
+  ],
+  "checkedInExcerpt": {
+    "path": "capture-selector-source-profile/capture-selector.asm.txt",
+    "sha256": "2b192efd3629fecf1f3ff634d9c54d9cfb1da71e74c0ed8cb2942fe22ab18078",
+    "fullFunctionStarts": [
+      "004B2CA0",
+      "00689BF0",
+      "00472150",
+      "004890B0",
+      "004866F0",
+      "00491180",
+      "004922C0",
+      "00487920",
+      "00487A30",
+      "004879F0",
+      "00487B30",
+      "00495A40",
+      "00487150",
+      "00487E20",
+      "005AE2B0"
+    ],
+    "callsiteWindows": [
+      {
+        "containingFunction": "00592440",
+        "windowStart": "0059264C",
+        "windowEndExclusive": "005926E1",
+        "fullFunctionRawSha256": "001f2a5ed49a04004e9920c57d4779be63acda57ce35e0ad431836d375f185f5"
+      },
+      {
+        "containingFunction": "00597A60",
+        "windowStart": "00597E25",
+        "windowEndExclusive": "00597EFF",
+        "fullFunctionRawSha256": "72c695d9cca16bcfafc499c4d443cfa57ed1a5da19aaefd36517123e35c63218"
+      },
+      {
+        "containingFunction": "005B1870",
+        "windowStart": "005B1B48",
+        "windowEndExclusive": "005B1C39",
+        "fullFunctionRawSha256": "2555461a0cbd38facd3de9bd46ce9ddea65a81570fc602541c04afae6e3df762"
+      }
+    ]
+  },
+  "boundaries": {
+    "containingFunction": {
+      "start": "004B2CA0",
+      "endExclusive": "004B36FF"
+    },
+    "directCallsites": [
+      {
+        "from": "005926DC",
+        "to": "004B2CA0",
+        "kind": "direct-call",
+        "evidence": "opcode-exact",
+        "sourceType": "idb-code-xref",
+        "scope": "identified-idb-source-profile",
+        "stockOriginalVerified": false
+      },
+      {
+        "from": "00597E94",
+        "to": "004B2CA0",
+        "kind": "direct-call",
+        "evidence": "opcode-exact",
+        "sourceType": "idb-code-xref",
+        "scope": "identified-idb-source-profile",
+        "stockOriginalVerified": false
+      },
+      {
+        "from": "005B1BF5",
+        "to": "004B2CA0",
+        "kind": "direct-call",
+        "evidence": "opcode-exact",
+        "sourceType": "idb-code-xref",
+        "scope": "identified-idb-source-profile",
+        "stockOriginalVerified": false
+      }
+    ],
+    "resourceRetentionInterior": "004B329B",
+    "candidateAndSelectorRegion": {
+      "start": "004B33C5",
+      "endExclusive": "004B3587"
+    },
+    "singleFacilityLootExcluded": "004BA610",
+    "destructionHelper": "004B09B0",
+    "destructionCallsite": "004B357D",
+    "notes": [
+      "004B329B is an interior resource-retention block, not a standalone function and not the selector",
+      "direct callers are recovered; mapping every gameplay trigger to these callers remains open"
+    ],
+    "callerSemantics": [
+      {
+        "callsite": "005926DC",
+        "containingFunction": "00592440",
+        "context": "fire tactic; zero durability/base/relation gates"
+      },
+      {
+        "callsite": "00597E94",
+        "containingFunction": "00597A60",
+        "context": "fire trap; zero durability/base/relation gates"
+      },
+      {
+        "callsite": "005B1BF5",
+        "containingFunction": "005B1870",
+        "context": "attack result application; 005AE2B0 merges zero durability and base zero troop gates"
+      }
+    ],
+    "opaqueThirdArgument": "do not equate with durability-zero versus troops-zero reason"
+  },
+  "candidates": {
+    "evidence": "opcode-exact",
+    "cityGate": "target building ID 0..41 through 004866F0; 004B33C5 legal-city-pointer gate; 00491180 city-index conversion; harbor/gate target IDs skip selector",
+    "orderedContainer": {
+      "headAddress": "073FB4F0",
+      "containerAddress": "073FB4EC",
+      "iterator": "004922C0"
+    },
+    "order": "global building-list traversal order; do not canonical-sort IDs",
+    "typeClassifier": {
+      "helper": "00487A30",
+      "test": "facility type table +0xB4 == 4"
+    },
+    "cityMembership": {
+      "helper": "00487920",
+      "source": "building coordinates -> map region -> GetCityID; not a presumed building.city field"
+    },
+    "domesticOwnerFilter": false,
+    "constructionStatus": {
+      "offset": "0x14",
+      "zero": "immediate destruction through 004B09B0 before retained-candidate shuffle",
+      "nonzero": "eligible if type != 30 and fewer than 30 candidates"
+    },
+    "specialType30": {
+      "name": "铜雀台 / Bronze Sparrow Terrace",
+      "zeroStatus": "separate treasure-42 path, then immediate destruction",
+      "nonzeroStatus": "excluded from sampled candidates and not destroyed by this domestic selector"
+    },
+    "maxCandidateCount": 30,
+    "excessPolicy": "not appended after first 30; this audit does not extend the source loop or invent overflow destruction",
+    "separatePrecedingBranch": "non-domestic military/other facility checks have a prior-owner condition; do not import that condition into the domestic branch",
+    "fullCandidateEngineImplemented": false,
+    "scope": "identified-idb-source-profile",
+    "sourceProfile": "source-idb-30d33b44-capture-selector-v1",
+    "stockOriginalVerified": false
+  },
+  "count": {
+    "charmGetter": "004890B0",
+    "charmGetterCallsite": "004B3511",
+    "getterField": "uint8 person+0x174",
+    "charmDomain": [
+      0,
+      255
+    ],
+    "formula": "min(n, floor(max(20, charm) / 20))",
+    "minimumEffectiveCharm": 20,
+    "invalidCommanderSourceDefault": 20,
+    "invalidCommanderReferencePolicy": "reject unless caller explicitly chooses source-default-20",
+    "hardMaximumFive": false,
+    "wikiBinsScope": "documented city-capture observations; >=100 -> 5 is not a safe unlimited-charm cap for this source",
+    "forceOverride": {
+      "readAt": "004B3559",
+      "slot": "ESP+0x24 at selector normal stack depth",
+      "semantic": "capturing/new force ID, derived at 004B2D36/004B2D3F",
+      "validRangeInclusive": [
+        0,
+        41
+      ],
+      "outsideRange": "destroyCount=n after shuffle",
+      "notProven": "ruler execution or force elimination automatically implies this force-ID condition"
+    },
+    "totalSurvivorCaveat": "completed type30 and unappended overflow are outside sampled quota; total city survivors are not simply keepCount"
+  },
+  "algorithm": {
+    "id": "full-range-swap-destroy-prefix-v1",
+    "shuffleHelper": "00689BF0",
+    "callsite": "004B3532",
+    "passes": 1,
+    "steps": [
+      "if n > 1, for i=0..n-1: j=randBelow(n); swap(candidate[i],candidate[j])",
+      "keepCount=min(n,floor(max(20,charm)/20))",
+      "destroyCount=n-keepCount; if capturingForceId outside 0..41 then destroyCount=n",
+      "destroy candidate[0:destroyCount] in resulting order; retain candidate[destroyCount:n]"
+    ],
+    "drawCount": "n if n>1 else 0",
+    "bound": "n on every draw",
+    "allRetainedStillDraws": true,
+    "forceOverrideStillDraws": true,
+    "fisherYates": false,
+    "uniformPermutationProven": false,
+    "normalizationSort": false
+  },
+  "sourceRng": {
+    "helper": "00472150",
+    "stateAddress": "008A5D44",
+    "adapterId": "source-idb-lcg32-high16-mod-v1",
+    "step": "state = (state * 0x6C078965 + 0x3039) mod 2^32",
+    "output": "(state >> 16) % n for this selector domain n=2..30",
+    "smallBound": "bound < 2 returns 0 without advancing state",
+    "genericHelperCaveat": "generic helper checks low16(bound) and divides by low16(bound); selector n<=30 avoids that separate large-bound issue",
+    "initialState": "open",
+    "globalRngCallOrder": "open",
+    "stockRngEquivalence": "open"
+  },
+  "durabilityAdjacentFinding": {
+    "callsiteStart": "004B3645",
+    "setterCallsite": "004B3667",
+    "getter": "00487150",
+    "setter": "00487E20",
+    "operation": "if currentDurabilityAtTail < floor(maxDurabilityAtTail/2): setDurability(floor(maxDurabilityAtTail/2))",
+    "evidence": "opcode-exact",
+    "unconditionalReset": false,
+    "tenPercentRuleProven": false,
+    "allCaptureModesProven": false,
+    "preCaptureToPostCaptureFormulaProven": false,
+    "previousSideEffectsOpen": [
+      "004B40C0",
+      "004B49B0",
+      "troop entry helpers",
+      "004BCA30"
+    ],
+    "scope": "identified-idb-source-profile",
+    "sourceProfile": "source-idb-30d33b44-capture-selector-v1",
+    "stockOriginalVerified": false
+  },
+  "resourceTextCrosscheck": {
+    "scope": "105 unindented original-instruction records in the pinned resource-retention TXT; indented patch alternatives excluded",
+    "matched": 105,
+    "mismatched": 0,
+    "proves": "local byte agreement between text and IDB for the resource block",
+    "doesNotProve": [
+      "selector bytes in stock PC-PK1.1",
+      "entire IDB matches stock executable",
+      "all versions share behavior"
+    ]
+  },
+  "referenceModel": {
+    "module": "scripts/capture_selector_profile.py",
+    "check": "scripts/check_capture_selector_profile.py",
+    "purePlanner": true,
+    "input": "prequalified ordered candidate IDs plus explicit candidate qualification/order/source provenance",
+    "implements": [
+      "source selector/count/force-ID override",
+      "raw draw replay",
+      "engineering seed adapter",
+      "source-IDB RNG adapter from supplied state"
+    ],
+    "doesNotImplement": [
+      "world candidate collection",
+      "city/harbor/gate dispatch",
+      "immediate incomplete-building destruction",
+      "ownership/resource/personnel/durability transaction",
+      "game RNG initial/global state discovery",
+      "full game integration"
+    ],
+    "rngAdapter": "sha256-counter-rejection-v1",
+    "rngAdapterEvidence": "provisional-engine-rule",
+    "sourceRngAdapter": "source-idb-lcg32-high16-mod-v1",
+    "traceSchemaVersion": 1,
+    "traceRequirements": [
+      "source fingerprint",
+      "profile/algorithm/adapter IDs",
+      "ordered input and input hash",
+      "candidate provenance",
+      "charm input and missing-charm policy",
+      "capturing force ID",
+      "all bounds and draws",
+      "RNG state before/after where applicable",
+      "shuffled order",
+      "retained/destroyed ordered IDs",
+      "target ruleset evidence labels"
+    ],
+    "replay": "reject input/profile/fingerprint/adapter/draw/result mismatches; reconstruct without consuming fresh RNG",
+    "validationMeaning": "reference-model and local evidence regression, not stock executable or savegame regression",
+    "rngAdapterScope": "engineering determinism only; not original game RNG"
+  },
+  "supersedes": {
+    "currentSelectorClaims": [
+      "80-retained-facility-selector-boundary.md selector-address/RNG unknown, within this source scope",
+      "16-unresolved-rules-fallbacks.md section 4D universal seeded sample default",
+      "05-combat.md section 7.4 universal seeded sample default"
+    ],
+    "preservedHistoricalEvidence": [
+      "facility-takeover-reset-boundary.json",
+      "retained-facility-selector-boundary.json"
+    ],
+    "notSuperseded": "stock PK1.1 and cross-version provenance gaps remain open"
+  },
+  "open": [
+    "stock executable/build identity and byte equivalence",
+    "complete direct-caller gameplay semantics and durability-zero versus troops-zero trigger coverage",
+    "full ownership/personnel/resource/destruction finalizer side effects and transaction order",
+    "initial/global RNG state and complete surrounding RNG consumption",
+    "all city/harbor/gate capture modes and special neutral/force-elimination/ruler-execution cases",
+    "Vanilla exact candidate set/order/count/selector/RNG",
+    "PS2/Wii per-version behavior",
+    "savegame/executable regression and model integration"
+  ],
+  "sources": [
+    {
+      "id": "IDB",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip",
+      "evidence": "opcode-exact",
+      "scope": "identified IDB; stock PC-PK1.1 equivalence open",
+      "sourceType": "source-bound-static-byte-analysis",
+      "stockOriginalVerified": false,
+      "sourceProfile": "source-idb-30d33b44-capture-selector-v1"
+    },
+    {
+      "id": "S1",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/1598.html",
+      "date": "2024-04-25 00:38 page update",
+      "locator": "Charisma section; city capture count bins",
+      "version": "unspecified mixed-platform wiki",
+      "evidence": "documented-guide",
+      "delta": "existing source; city-only wording and commander input rechecked",
+      "sourceType": "documented-community / existing empirical-high",
+      "limitations": "build and platform unspecified; count table is documented, not opcode evidence"
+    },
+    {
+      "id": "S2",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/2469.html",
+      "date": "2011-08-15 original posts 507-511; mirror updated 2011-09-04",
+      "version": "unspecified; PK-era discussion is not exact build attribution",
+      "evidence": "documented-guide",
+      "delta": "existing source newly exposes count disagreement and execution-of-eliminated-ruler exception claim",
+      "unprovenClaims": [
+        "uniform selection",
+        "ruler execution always destroys all domestic facilities"
+      ],
+      "sourceType": "empirical-anecdotal",
+      "limitations": "unverified player claims; no controlled build/inputs/trace, not empirical-high or opcode proof"
+    },
+    {
+      "id": "S3",
+      "url": "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf",
+      "date": "2017-12-14T06:35:02Z PDF modification metadata",
+      "sha256": "36035142af058e29c0e26f4888bbc7069062e936e4520d0034472c98cba2f917",
+      "version": "2017 reissue combined base and PK manuals; no exact executable build",
+      "locators": [
+        "PDF11/35 printed14-15 city development",
+        "PDF25/35 city and port/gate information",
+        "PDF29/35 fish market requirement"
+      ],
+      "evidence": "documented-guide",
+      "delta": "city development slots and port ownership distinction; fish market allowed even if associated harbor enemy-owned",
+      "doesNotProve": [
+        "capture caller",
+        "candidate loop",
+        "under-construction eligibility",
+        "cross-build binary equivalence"
+      ],
+      "sourceType": "official-manual",
+      "limitations": "supports only the stated source scope; not executable selector equivalence"
+    },
+    {
+      "id": "S4",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/1818.html",
+      "date": "2006-03-17 posts78,81; mirror updated2011-07-03",
+      "version": "PC Vanilla launch-era inferred from contemporary context, exact patch not identified",
+      "evidence": "documented-guide",
+      "delta": "new early Vanilla example: Beiping capture leaves market, farm and barracks; no charisma supplied",
+      "sourceType": "empirical-anecdotal",
+      "limitations": "unverified player claims; no controlled build/inputs/trace, not empirical-high or opcode proof"
+    },
+    {
+      "id": "S5",
+      "url": "https://www.gamecity.ne.jp/sangokushi/11ps2/system/affairs.htm",
+      "date": "copyright2006; no revision date",
+      "version": "PS2 base game",
+      "evidence": "documented-guide",
+      "delta": "city development feature, not retention algorithm",
+      "sourceType": "official-feature-scope",
+      "limitations": "supports only the stated source scope; not executable selector equivalence"
+    },
+    {
+      "id": "S6",
+      "url": "https://www.gamecity.ne.jp/sangokushi/11wpk/pwp/01.htm",
+      "date": "copyright2006-2007; no revision date",
+      "version": "with-PK product site with console/Wii menu; not PC-PK1.1 opcode evidence",
+      "evidence": "documented-guide",
+      "delta": "absorption levels and additional facilities require versioned candidate types",
+      "sourceType": "official-feature-delta",
+      "limitations": "supports only the stated source scope; not executable selector equivalence"
+    },
+    {
+      "id": "S7",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/2065.html",
+      "date": "2011-02-09 posts784,795,798-801",
+      "version": "mixed/unspecified, PS2 expressly mentioned by one respondent",
+      "evidence": "documented-guide",
+      "delta": "placement territory and city-associated development are distinct concerns; no capture proof",
+      "sourceType": "empirical-anecdotal",
+      "limitations": "unverified player claims; no controlled build/inputs/trace, not empirical-high or opcode proof"
+    },
+    {
+      "id": "S8",
+      "url": "https://www.gamecity.ne.jp/regist_c/user/san11/san11_update02_history.htm",
+      "date": "entries2006-05-01 through2006-10-18",
+      "version": "PC Vanilla1.2,1.3,1.3.1,1.3.2",
+      "evidence": "documented-guide",
+      "delta": "no specific domestic capture selector entry observed; broad adjustments prevent identity inference",
+      "sourceType": "official-changelog-negative-search",
+      "limitations": "supports only the stated source scope; not executable selector equivalence"
+    }
+  ],
+  "sourceIdentity": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "archivePath": "IDA Related/san11pk.zip",
+    "archiveSha256": "47beee4ac990869694a5e6f7577947cd6b34a41aefe60bace3af3350c682ce5a",
+    "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+    "idbRecordedInputPath": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+    "idbRecordedInputSha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+    "functionRawSha256": {
+      "004B2CA0": "88ad5211c4484037aad336c7cd3ef0dbd1fc0c1091a00627d67986c222caa5af",
+      "00689BF0": "d310580f70eee5d7ee2e63fcd165fad3f62cb7b383f3940c53dacce6ed20a79e",
+      "00472150": "82bef9b78dc532adc5b0405a42da040048639dfee9ff2be22ed8d043c21140d0"
+    }
+  },
+  "sourceFingerprint": "c6dc72a39ec2a0c09844ce81f6984701bc6490e6676a9311234d4a3c2e9c00a4",
+  "sourceFingerprintEncoding": "SHA-256 of sourceIdentity encoded as UTF-8 JSON, sorted keys, compact separators, ensure_ascii=false, allow_nan=false"
+}
