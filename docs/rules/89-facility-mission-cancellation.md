@@ -1,5 +1,7 @@
 # P0-54 设施任务取消、销毁字段与宝物42
 
+后续：P0-55在[独立能力培养取消模型](90-special-mission-cancellation.md)投影41..43；本页保留历史API与证据边界，完整return/回调仍open。
+
 更新：2026-10-04 UTC。基线main `3a93431f3ef8a4e15e920ebb9475939a6aab1e21`（PR #11已合）。承接[P0-53](88-group-mission-cancellation.md)。
 
 - [结构化证据](../sources/facility-mission-cancellation.json)

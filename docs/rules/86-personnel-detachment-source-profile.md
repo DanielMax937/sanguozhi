@@ -1,5 +1,7 @@
 # P0-51 人员游离、末城逃逸与任务取消资源
 
+后续：P0-55在[独立能力培养取消模型](90-special-mission-cancellation.md)投影41..43；本页保留历史API与证据边界，完整return/回调仍open。
+
 后续：P0-54在[独立设施模型](89-facility-mission-cancellation.md)投影0/38及type3..63部分销毁；本页保留历史API与证据边界，完整base销毁/回调仍open。
 
 后续：P0-52已在[独立v2](87-mission-cancellation-zero-refund.md)新增9/10/12/22/23/24零退款handler。本页与v1保留当时的范围和trace，不代表这六者仍无实现。

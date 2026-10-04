@@ -1,14 +1,23 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-54 facility mission cancellation / raw destruction / treasure42
-> Integration baseline: PR #11 merged; this theme starts at `3a93431f3ef8a4e15e920ebb9475939a6aab1e21`
+> Current integration: P0-55 capability-training mission41..43 cancellation
+> Integration baseline: PR #12 merged; this theme starts at `8dd3a566b3d4627657ab2cbe9c50ccb3c9c84fdb`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: capability-training cancellation
+
+- P0-55: missions41/42/43 share actor → args[1] building0..16383 → args[0] capability-training0..97 ordered validity gates
+- No actual-location validity gate: troop location and home=-1 correctly take the normalized same-home branch
+- Six new S1/S2 vtable+0x18 slots identify conditional005DA320 notification at actor.home, explicitly left unexecuted
+- Independent API/trace, required-observation preflight, ordered zero-refund scalar writes, callback noninterference/record/reject and full replay preserve all earlier APIs
+- Guide: `docs/rules/90-special-mission-cancellation.md`; run both special mission cancellation checkers
+- All dedicated cancel families now have separate bounded projections; base destruction, mission37 completion and full return/event/force/capture composition remain open
 
 ### Completed bounded implementation: facility mission cancellation
 
@@ -18,7 +27,7 @@
 - Complete allocated-person home-reference selection includes source-specific excluded ID ranges; force/list/attachment/spatial/AI callbacks remain explicit record/reject
 - Independent API/trace, observation preflight, base-target defer/reject, replay and boundary/fuzz tests preserve prior modules
 - Guide: `docs/rules/89-facility-mission-cancellation.md`; run both facility mission cancellation checkers
-- Base destruction, handlers41..43, mission37 completion and full return/event/force/capture composition remain open
+- P0-55 separately projects handlers41..43; base destruction, mission37 completion and full return/event/force/capture composition remain open
 
 ### Completed bounded implementation: grouped mission cancellation
 
@@ -27,7 +36,7 @@
 - Mission5 resets actor-force research ID then duration byte before returning group members; S1 research0..35 and S2 extended0..63 getter/hook are separate
 - Independent API preserves v1/v2 traces; explicit callback noninterference/record/reject policy, field-stage snapshots, atomic errors and full replay
 - Guide: `docs/rules/88-group-mission-cancellation.md`; run `check_group_mission_cancellation_profile.py`
-- P0-54 separately projects facility/treasure handlers0/38; base destruction, handlers41..43, mission37 completion and full return/event/force composition remain open
+- P0-54 separately projects facility/treasure handlers0/38; base destruction, mission37 completion and full return/event/force composition remain open
 
 ### Completed bounded implementation: dedicated zero-refund cancellation
 
@@ -35,7 +44,7 @@
 - Target9/10/12 numeric-range gates do not invent target-validity requirements; mission24 permits buildings through16383, while mission23 checks a separate city-subtype object
 - Independent v2 preserves v1 traces, S1/S2 acted differences, explicit unknown-effect policies, atomic validation and full replay
 - Guide: `docs/rules/87-mission-cancellation-zero-refund.md`; run `check_mission_cancellation_v2_profile.py`
-- P0-53/54 separately project group/facility/research handlers0/2/5/38; handlers41..43 and full return/callback effects remain open
+- P0-53/54 separately project group/facility/research handlers0/2/5/38; P0-55 separately projects handlers41..43; full return/callback effects remain open
 
 ### Completed bounded implementation: personnel detachment and cancellation
 
@@ -101,6 +110,7 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-55 audit complete: capability-training cancellation gates, 98-record getter, home notification and sentinel return boundary
 - P0-54 audit complete: facility cancellation, exact raw reset, source-separated city counter table and treasure42 tail
 - P0-53 audit complete: grouped cancellation, signed city-counter mapping and source-separated force research reset
 - P0-52 audit complete: six dedicated zero-refund handler gates and bounded return/reset projection
@@ -153,7 +163,7 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- P0-51/52/53/54 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5 and bounded facility/treasure handlers0/38; continue base destruction, handlers41..43, mission37 completion, `004BF6F0` return-home effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
+- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; continue base destruction, mission37 completion, `004BF6F0` return-home effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
 - Complete remaining base destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open

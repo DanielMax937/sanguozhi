@@ -2,7 +2,15 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-54设施任务取消、销毁字段与宝物42
+## 最新完成：P0-55能力培养任务41..43取消
+
+[正文](90-special-mission-cancellation.md) · [结构化证据](../sources/special-mission-cancellation.json)。基线main `8dd3a566b3d4627657ab2cbe9c50ccb3c9c84fdb`（PR #12已合）。
+
+41..43共享005D9C60已有独立有界API：actor→args[1]建筑0..16383→args[0]培养记录0..97按序短路，不虚构实际所在地valid gate。troop/-1与home=-1相等时正确reset；六个双源vtable+18新slot确认005DA320条件通知取actor.home。零退款、S2同地acted差异、字段阶段快照、观察preflight和显式callback非干预/record/reject保持此前API/trace不变。
+
+新增10范围、引用47范围均直接重读IDB并核哈希；28组双源比较27同/1异。8项字节checker和21项模型测试含360组fuzz通过。全回归80条命令通过（TypeScript、85 Node、77 Python checker与2 demos）；独立审阅无阻断：独立stdlib mmap/ID1直接重读两份IDB，全部57范围与源哈希及六slot吻合；新增8+21和旧v1/v2/group/facility的15+15+20+24 tests重跑通过。合并后main仍须再全测。专用cancel家族现均有分开的有界投影；base销毁、mission37完成、004BF6F0全返回/事件/force/capture组合以及clean stock/Vanilla仍open。
+
+## 历史完成：P0-54设施任务取消、销毁字段与宝物42
 
 [正文](89-facility-mission-cancellation.md) · [结构化证据](../sources/facility-mission-cancellation.json)。基线main `3a93431f3ef8a4e15e920ebb9475939a6aab1e21`（PR #11已合）。
 
