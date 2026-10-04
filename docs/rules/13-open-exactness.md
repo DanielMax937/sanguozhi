@@ -273,6 +273,8 @@ P0-55新增[能力培养任务取消](90-special-mission-cancellation.md)：41..
 
 P0-56新增[mission37生命周期](91-return-mission-lifecycle.md)：completion与单active-list成员的一步推进有独立有界API。positive refund先于mission/args reset，handler1/dispatcher0，arrival直接acted0/duration0无S2 query267；六邻城首slot同分和S1/S2距离分别绑定。active live valid/mission/acted gate与stop观察已恢复；全链表、外部reset/全scheduler、generic/invalid-home不安全域、004BF6F0完整角色/force/事件与base销毁仍open，不能再笼统称mission37 helper/一步移动未实现。
 
+P0-57新增[武将返回字段与调用顺序](92-officer-return-finalizer.md)：004BF6F0的home→location→rawlegion→bit9、真实troop gate、numeric same-force、旧新roster阶段和role调用顺序现有独立有界投影。ruler ownership/capture明确整次defer，完整list/UI/角色仍record/reject且要求非干预，不等于004BF6F0完整执行。下一主题优先稳定非空004BE2A0角色协调；其余force灭亡/空军团合并/太守/事件/capture组合及clean stock/跨版本仍open。
+
 状态：
 
 ```text

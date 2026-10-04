@@ -286,3 +286,5 @@ P0-54以[89-facility-mission-cancellation.md](89-facility-mission-cancellation.m
 P0-55以[90-special-mission-cancellation.md](90-special-mission-cancellation.md)为准：41..43共享handler有独立有界投影，无actual-location valid gate；旧模块/trace不变，完整return与stock仍open。
 
 P0-56以[91-return-mission-lifecycle.md](91-return-mission-lifecycle.md)为准：mission37完成与单active-list成员的一步推进已有独立有界投影，退款先于reset、direct acted尾部、源分离距离/金cap、显式安全域与零local RNG重放；完整return/全链表与scheduler仍open。
+
+P0-57以[92-officer-return-finalizer.md](92-officer-return-finalizer.md)为准：004BF6F0四字段及完整列表/role调用顺序已有独立有界投影，ruler ownership原子defer；004BE2A0稳定非空军团角色协调为下一主题，完整callback/force/stock/Vanilla仍open。

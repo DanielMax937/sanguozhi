@@ -2,7 +2,15 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-56 mission37完成、一步推进与延迟退款
+## 最新完成：P0-57武将返回字段与列表/角色调用序
+
+[正文](92-officer-return-finalizer.md) · [结构化证据](../sources/officer-return-finalizer.json)。基线main `1ff61538c16a1e95dddc15cd228f63d7e15cd356`（PR #14已合）。
+
+独立004BF6F0投影补home→actual location→rawlegion→bit9及旧新home/legion roster调用阶段。保留numeric same-force、实际troop观察、kind/ID/subtype区别、-1不清bit9、非法legion请求仍先移旧roster和saved status控制role顺序。ruler ownership/capture整次defer；旧新军团/旧home完整角色与list/UI/notice继续显式非干预record/reject，不把局部after当全返回。所有旧API/trace不变。
+
+108个范围直接重读两份IDB并另用raw-ID1复核；54组双源比较全同，3744新增raw bytes/9560选定bytes，既有54范围固定hash复用。18项来源测试与27项模型测试（含384组固定seed oracle/replay）通过。全回归84条命令零失败：TypeScript、85 Node、81 Python checker与2 demos。notice formatter/display参数栈拆分已由callee ret0x10确认并修正。独立审阅无剩余阻断：冻结14文件及index逐字节一致、108范围/9560 bytes再次raw-ID1复核、27模型/18source及全部回归和另11边界case通过，旧API/trace/训练代码均未修改；staged/unstaged whitespace检查clean。合并后main须再全测。下一主题是稳定非空004BE2A0角色协调；完整角色/force/事件/capture、base销毁、clean stock/Vanilla/真实存档继续open。
+
+## 历史完成：P0-56 mission37完成、一步推进与延迟退款
 
 [正文](91-return-mission-lifecycle.md) · [结构化证据](../sources/return-mission-lifecycle.json)。基线main `b488a9f6a38fbb45e6e6c2ac64cd68f6fa3f97ed`（PR #13已合）。
 
