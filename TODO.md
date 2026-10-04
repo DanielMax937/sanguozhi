@@ -1,8 +1,8 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-64 native mission route and target-force composition
-> Integration baseline: PR #21 merged; this theme starts at `28d0b0b8aa6e2c781b791886093b806e6e3d1ad3`
+> Current integration: P0-65 empty-legion dispatch, merge and raw reset
+> Integration baseline: PR #22 merged; this theme starts at `116c6dd44d7fc1d102b3dab6f9716a8dde3a4abe`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
@@ -10,13 +10,22 @@
 
 ## 1. Current progress
 
+### Completed bounded implementation: empty-legion dispatch and merge
+
+- P0-65: native primary/nonprimary dispatch, both merge directions, copied roster loops, live base/relocation calls and exact raw scalar reset in one recursive frame
+- Preserves the primary fallback's discarded lookup/global-ID2..8 behavior; no invented same-force/same-pointer/valid-destination gate
+- Nearest city uses source-separated geometry and RNG; S2 clock-shared-page reads are required per-call observations, singleton consumes no RNG state
+- Full base transfer004AD550 and relocation004A8270 remain mutable observations; force extinction remains atomic defer; previous APIs/traces unchanged
+- Guide: `docs/rules/100-empty-legion-redistribution.md`; run both empty-legion checkers
+- Final 100-command regression and independent review pass; canonical42-city/87-base validity aliases are strict in this version; next force extinction, full base/relocation and ruler/capture, other events, general sort flags/vtables, stock and global RNG
+
 ### Completed bounded implementation: native route and target-force
 
 - P0-64: executes mission route dispatch/arg0/arg1/dynamic target-ruler home and optional territory outputs in the existing recursive live frame
 - Target force executes raw facility ownership, territorial city and canonical subtype/legion paths; S1/S2 geography bytes remain separate
 - Force ruler and legion force validity aliases are strict; real external hooks retain full mutable observations/RNG, and all older APIs/traces stay unchanged
 - Guide: `docs/rules/99-return-route-target-force.md`; run both return-route-target-force checkers
-- Final 98-command regression and independent review pass; next: empty-corps/force extinction, ruler/base/capture, other events and general sort flags/vtables, with stock/global RNG still open
+- Final 98-command regression and independent review pass; P0-65 separately adds empty-corps dispatch/merge/reset; force extinction, full base/relocation, ruler/capture, other events, general sort flags/vtables and stock/global RNG stay open
 
 ### Completed bounded implementation: native roster/role sort and capacity
 
@@ -195,6 +204,9 @@ Main audit is complete:
 Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
+
+- P0-65 audit complete: native empty-legion dispatch/merge/reset, stricter source-derived canonical validity and S2 shared-page entropy; deep base/relocation effects remain bound observations
+- P0-64 audit complete: native route/target-force on its original versioned frame; P0-65 adds stricter canonical validity, without retroactively certifying older inconsistent validity-cache inputs
 
 - P0-63 audit complete: native roster/role algorithms and source-separated capacity with explicit mutable S2 hooks; complete native comparator schedule and post-sort allocation filtering
 

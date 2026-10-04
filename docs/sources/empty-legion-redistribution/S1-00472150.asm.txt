@@ -1,0 +1,17 @@
+00472150  8b 4c 24 04                    mov      ecx, dword ptr [esp + 4]
+00472154  83 f9 02                       cmp      ecx, 2
+00472157  7c 27                          jl       0x472180
+00472159  66 85 c9                       test     cx, cx
+0047215C  74 22                          je       0x472180
+0047215E  a1 44 5d 8a 00                 mov      eax, dword ptr [0x8a5d44]
+00472163  69 c0 65 89 07 6c              imul     eax, eax, 0x6c078965
+00472169  05 39 30 00 00                 add      eax, 0x3039
+0047216E  a3 44 5d 8a 00                 mov      dword ptr [0x8a5d44], eax
+00472173  c1 e8 10                       shr      eax, 0x10
+00472176  0f b7 c9                       movzx    ecx, cx
+00472179  99                             cdq
+0047217A  f7 f9                          idiv     ecx
+0047217C  66 8b c2                       mov      ax, dx
+0047217F  c3                             ret
+00472180  66 33 c0                       xor      ax, ax
+00472183  c3                             ret

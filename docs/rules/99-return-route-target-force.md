@@ -6,6 +6,10 @@
 - [事务API](../../scripts/return_route_target_force_profile.py) · [原生helper](../../scripts/return_route_primitives.py) · [扩展frame](../../scripts/return_route_frame.py)
 - [来源检查](../../scripts/check_return_route_target_force_source.py) · [模型检查](../../scripts/check_return_route_target_force_profile.py)
 
+## 后续证据更正（P0-65）
+
+[P0-65](100-empty-legion-redistribution.md)补齐固定vtable的type getter：canonical city/gate/port subtype valid/allocated均恒true；generic building.valid精确派生自raw kind0..63。P0-64 frame曾允许这些valid缓存独立变化，其接受的矛盾缓存输入不能作为固定vtable原生精确路径。P0-65另设严格frame，完整列出42 city/87 base并校验所有观察before/after；P0-64 API与历史trace为兼容保留，不自动迁移，也不以测试通过重新认证旧假设。
+
 ## 1. 这次闭合什么
 
 `project_return_route_target_force(state,command,observations,policy)`在原有共享recursive frame、native sort/capacity与一次revision提交内，直接执行`005BA320`、`00487EB0`及本域触达的canonical getter。正常非空role/return/event8/14继续在一个live frame内递归；不调用旧project，不拼接旧trace。

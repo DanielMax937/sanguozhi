@@ -1,0 +1,43 @@
+0047BED0  6a ff                          push     -1
+0047BED2  68 38 eb 72 00                 push     0x72eb38
+0047BED7  64 a1 00 00 00 00              mov      eax, dword ptr fs:[0]
+0047BEDD  50                             push     eax
+0047BEDE  64 89 25 00 00 00 00           mov      dword ptr fs:[0], esp
+0047BEE5  51                             push     ecx
+0047BEE6  53                             push     ebx
+0047BEE7  56                             push     esi
+0047BEE8  57                             push     edi
+0047BEE9  68 68 78 ee 06                 push     0x6ee7868
+0047BEEE  8b d9                          mov      ebx, ecx
+0047BEF0  ff 15 60 e3 74 00              call     dword ptr [0x74e360]
+0047BEF6  8b 7c 24 20                    mov      edi, dword ptr [esp + 0x20]
+0047BEFA  8b 37                          mov      esi, dword ptr [edi]
+0047BEFC  6a 01                          push     1
+0047BEFE  6a 0c                          push     0xc
+0047BF00  56                             push     esi
+0047BF01  c7 44 24 24 00 00 00 00        mov      dword ptr [esp + 0x24], 0
+0047BF09  e8 62 61 ff ff                 call     0x472070
+0047BF0E  83 c4 0c                       add      esp, 0xc
+0047BF11  85 c0                          test     eax, eax
+0047BF13  68 68 78 ee 06                 push     0x6ee7868
+0047BF18  74 21                          je       0x47bf3b
+0047BF1A  8b 06                          mov      eax, dword ptr [esi]
+0047BF1C  89 07                          mov      dword ptr [edi], eax
+0047BF1E  ff 15 5c e3 74 00              call     dword ptr [0x74e35c]
+0047BF24  5f                             pop      edi
+0047BF25  8d 46 08                       lea      eax, [esi + 8]
+0047BF28  5e                             pop      esi
+0047BF29  5b                             pop      ebx
+0047BF2A  8b 4c 24 04                    mov      ecx, dword ptr [esp + 4]
+0047BF2E  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+0047BF35  83 c4 10                       add      esp, 0x10
+0047BF38  c2 04 00                       ret      4
+0047BF3B  ff 15 5c e3 74 00              call     dword ptr [0x74e35c]
+0047BF41  8b 4c 24 10                    mov      ecx, dword ptr [esp + 0x10]
+0047BF45  5f                             pop      edi
+0047BF46  5e                             pop      esi
+0047BF47  8d 43 1c                       lea      eax, [ebx + 0x1c]
+0047BF4A  5b                             pop      ebx
+0047BF4B  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+0047BF52  83 c4 10                       add      esp, 0x10
+0047BF55  c2 04 00                       ret      4

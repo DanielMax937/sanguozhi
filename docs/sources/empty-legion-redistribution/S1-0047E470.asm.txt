@@ -1,0 +1,24 @@
+0047E470  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0047E474  56                             push     esi
+0047E475  50                             push     eax
+0047E476  8b f1                          mov      esi, ecx
+0047E478  e8 b3 4d fa ff                 call     0x423230
+0047E47D  83 c8 ff                       or       eax, 0xffffffff
+0047E480  33 c9                          xor      ecx, ecx
+0047E482  89 4e 08                       mov      dword ptr [esi + 8], ecx
+0047E485  89 4e 24                       mov      dword ptr [esi + 0x24], ecx
+0047E488  89 4e 28                       mov      dword ptr [esi + 0x28], ecx
+0047E48B  88 4e 2c                       mov      byte ptr [esi + 0x2c], cl
+0047E48E  8b ce                          mov      ecx, esi
+0047E490  89 46 04                       mov      dword ptr [esi + 4], eax
+0047E493  89 46 0c                       mov      dword ptr [esi + 0xc], eax
+0047E496  89 46 10                       mov      dword ptr [esi + 0x10], eax
+0047E499  89 46 14                       mov      dword ptr [esi + 0x14], eax
+0047E49C  89 46 18                       mov      dword ptr [esi + 0x18], eax
+0047E49F  89 46 1c                       mov      dword ptr [esi + 0x1c], eax
+0047E4A2  89 46 20                       mov      dword ptr [esi + 0x20], eax
+0047E4A5  e8 d6 fd ff ff                 call     0x47e280
+0047E4AA  8d 4e 30                       lea      ecx, [esi + 0x30]
+0047E4AD  e8 9e d9 ff ff                 call     0x47be50
+0047E4B2  5e                             pop      esi
+0047E4B3  c2 04 00                       ret      4

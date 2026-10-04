@@ -1,0 +1,42 @@
+00658FB0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00658FB4  83 f8 05                       cmp      eax, 5
+00658FB7  77 73                          ja       0x65902c
+00658FB9  ff 24 85 34 90 65 00           jmp      dword ptr [eax*4 + 0x659034]
+00658FC0  8b 4c 24 08                    mov      ecx, dword ptr [esp + 8]
+00658FC4  8b 54 24 0c                    mov      edx, dword ptr [esp + 0xc]
+00658FC8  33 c0                          xor      eax, eax
+00658FCA  3b ca                          cmp      ecx, edx
+00658FCC  0f 94 c0                       sete     al
+00658FCF  c2 0c 00                       ret      0xc
+00658FD2  8b 54 24 08                    mov      edx, dword ptr [esp + 8]
+00658FD6  8b 4c 24 0c                    mov      ecx, dword ptr [esp + 0xc]
+00658FDA  33 c0                          xor      eax, eax
+00658FDC  3b d1                          cmp      edx, ecx
+00658FDE  0f 95 c0                       setne    al
+00658FE1  c2 0c 00                       ret      0xc
+00658FE4  8b 4c 24 08                    mov      ecx, dword ptr [esp + 8]
+00658FE8  8b 54 24 0c                    mov      edx, dword ptr [esp + 0xc]
+00658FEC  33 c0                          xor      eax, eax
+00658FEE  3b ca                          cmp      ecx, edx
+00658FF0  0f 9c c0                       setl     al
+00658FF3  c2 0c 00                       ret      0xc
+00658FF6  8b 54 24 08                    mov      edx, dword ptr [esp + 8]
+00658FFA  8b 4c 24 0c                    mov      ecx, dword ptr [esp + 0xc]
+00658FFE  33 c0                          xor      eax, eax
+00659000  3b d1                          cmp      edx, ecx
+00659002  0f 9e c0                       setle    al
+00659005  c2 0c 00                       ret      0xc
+00659008  8b 4c 24 08                    mov      ecx, dword ptr [esp + 8]
+0065900C  8b 54 24 0c                    mov      edx, dword ptr [esp + 0xc]
+00659010  33 c0                          xor      eax, eax
+00659012  3b ca                          cmp      ecx, edx
+00659014  0f 9f c0                       setg     al
+00659017  c2 0c 00                       ret      0xc
+0065901A  8b 54 24 08                    mov      edx, dword ptr [esp + 8]
+0065901E  8b 4c 24 0c                    mov      ecx, dword ptr [esp + 0xc]
+00659022  33 c0                          xor      eax, eax
+00659024  3b d1                          cmp      edx, ecx
+00659026  0f 9d c0                       setge    al
+00659029  c2 0c 00                       ret      0xc
+0065902C  33 c0                          xor      eax, eax
+0065902E  c2 0c 00                       ret      0xc

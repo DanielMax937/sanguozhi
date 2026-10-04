@@ -1,0 +1,65 @@
+0049F1D0  81 ec b4 00 00 00              sub      esp, 0xb4
+0049F1D6  8b 84 24 bc 00 00 00           mov      eax, dword ptr [esp + 0xbc]
+0049F1DD  8b 40 04                       mov      eax, dword ptr [eax + 4]
+0049F1E0  85 c0                          test     eax, eax
+0049F1E2  55                             push     ebp
+0049F1E3  89 4c 24 08                    mov      dword ptr [esp + 8], ecx
+0049F1E7  c7 44 24 04 00 00 00 00        mov      dword ptr [esp + 4], 0
+0049F1EF  bd ff ff ff 7f                 mov      ebp, 0x7fffffff
+0049F1F4  89 44 24 0c                    mov      dword ptr [esp + 0xc], eax
+0049F1F8  0f 84 96 00 00 00              je       0x49f294
+0049F1FE  53                             push     ebx
+0049F1FF  56                             push     esi
+0049F200  57                             push     edi
+0049F201  8d 4c 24 18                    lea      ecx, [esp + 0x18]
+0049F205  51                             push     ecx
+0049F206  8b 8c 24 d0 00 00 00           mov      ecx, dword ptr [esp + 0xd0]
+0049F20D  e8 3e fd ff ff                 call     0x49ef50
+0049F212  8b 30                          mov      esi, dword ptr [eax]
+0049F214  8b ce                          mov      ecx, esi
+0049F216  e8 a5 d2 fd ff                 call     0x47c4c0
+0049F21B  8b 94 24 c8 00 00 00           mov      edx, dword ptr [esp + 0xc8]
+0049F222  8b 4c 24 14                    mov      ecx, dword ptr [esp + 0x14]
+0049F226  52                             push     edx
+0049F227  8b f8                          mov      edi, eax
+0049F229  e8 22 f2 ff ff                 call     0x49e450
+0049F22E  8b 4c 24 14                    mov      ecx, dword ptr [esp + 0x14]
+0049F232  57                             push     edi
+0049F233  8b d8                          mov      ebx, eax
+0049F235  e8 16 f2 ff ff                 call     0x49e450
+0049F23A  50                             push     eax
+0049F23B  53                             push     ebx
+0049F23C  e8 3f c2 fd ff                 call     0x47b480
+0049F241  83 c4 08                       add      esp, 8
+0049F244  3b c5                          cmp      eax, ebp
+0049F246  7d 10                          jge      0x49f258
+0049F248  8b e8                          mov      ebp, eax
+0049F24A  89 74 24 1c                    mov      dword ptr [esp + 0x1c], esi
+0049F24E  c7 44 24 10 01 00 00 00        mov      dword ptr [esp + 0x10], 1
+0049F256  eb 0f                          jmp      0x49f267
+0049F258  75 0d                          jne      0x49f267
+0049F25A  8b 44 24 10                    mov      eax, dword ptr [esp + 0x10]
+0049F25E  89 74 84 1c                    mov      dword ptr [esp + eax*4 + 0x1c], esi
+0049F262  40                             inc      eax
+0049F263  89 44 24 10                    mov      dword ptr [esp + 0x10], eax
+0049F267  8b 44 24 18                    mov      eax, dword ptr [esp + 0x18]
+0049F26B  85 c0                          test     eax, eax
+0049F26D  75 92                          jne      0x49f201
+0049F26F  8b 44 24 10                    mov      eax, dword ptr [esp + 0x10]
+0049F273  85 c0                          test     eax, eax
+0049F275  5f                             pop      edi
+0049F276  5e                             pop      esi
+0049F277  5b                             pop      ebx
+0049F278  7e 1a                          jle      0x49f294
+0049F27A  50                             push     eax
+0049F27B  e8 d0 2e fd ff                 call     0x472150
+0049F280  0f b7 c0                       movzx    eax, ax
+0049F283  8b 44 84 14                    mov      eax, dword ptr [esp + eax*4 + 0x14]
+0049F287  83 c4 04                       add      esp, 4
+0049F28A  5d                             pop      ebp
+0049F28B  81 c4 b4 00 00 00              add      esp, 0xb4
+0049F291  c2 08 00                       ret      8
+0049F294  33 c0                          xor      eax, eax
+0049F296  5d                             pop      ebp
+0049F297  81 c4 b4 00 00 00              add      esp, 0xb4
+0049F29D  c2 08 00                       ret      8

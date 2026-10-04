@@ -1,0 +1,17 @@
+00481210  8b 49 04                       mov      ecx, dword ptr [ecx + 4]
+00481213  56                             push     esi
+00481214  51                             push     ecx
+00481215  b9 58 19 20 07                 mov      ecx, 0x7201958
+0048121A  e8 e1 f8 00 00                 call     0x490b00
+0048121F  8b f0                          mov      esi, eax
+00481221  56                             push     esi
+00481222  e8 09 94 ff ff                 call     0x47a630
+00481227  83 c4 04                       add      esp, 4
+0048122A  85 c0                          test     eax, eax
+0048122C  74 08                          je       0x481236
+0048122E  8b 86 98 00 00 00              mov      eax, dword ptr [esi + 0x98]
+00481234  5e                             pop      esi
+00481235  c3                             ret
+00481236  83 c8 ff                       or       eax, 0xffffffff
+00481239  5e                             pop      esi
+0048123A  c3                             ret

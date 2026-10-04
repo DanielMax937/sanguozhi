@@ -1,0 +1,30 @@
+00491180  56                             push     esi
+00491181  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+00491185  85 f6                          test     esi, esi
+00491187  57                             push     edi
+00491188  74 38                          je       0x4911c2
+0049118A  8d b9 d8 01 00 00              lea      edi, [ecx + 0x1d8]
+00491190  85 ff                          test     edi, edi
+00491192  74 2e                          je       0x4911c2
+00491194  53                             push     ebx
+00491195  e8 36 84 f8 ff                 call     0x4195d0
+0049119A  8b d8                          mov      ebx, eax
+0049119C  e8 2f 84 f8 ff                 call     0x4195d0
+004911A1  3b d8                          cmp      ebx, eax
+004911A3  5b                             pop      ebx
+004911A4  75 1c                          jne      0x4911c2
+004911A6  2b f7                          sub      esi, edi
+004911A8  b8 1d 38 70 e0                 mov      eax, 0xe070381d
+004911AD  f7 ee                          imul     esi
+004911AF  03 d6                          add      edx, esi
+004911B1  c1 fa 09                       sar      edx, 9
+004911B4  8b c2                          mov      eax, edx
+004911B6  c1 e8 1f                       shr      eax, 0x1f
+004911B9  03 c2                          add      eax, edx
+004911BB  78 05                          js       0x4911c2
+004911BD  83 f8 29                       cmp      eax, 0x29
+004911C0  7e 03                          jle      0x4911c5
+004911C2  83 c8 ff                       or       eax, 0xffffffff
+004911C5  5f                             pop      edi
+004911C6  5e                             pop      esi
+004911C7  c2 04 00                       ret      4

@@ -1,0 +1,87 @@
+0047E280  53                             push     ebx
+0047E281  56                             push     esi
+0047E282  57                             push     edi
+0047E283  33 d2                          xor      edx, edx
+0047E285  8b c1                          mov      eax, ecx
+0047E287  bf ff f7 ff ff                 mov      edi, 0xfffff7ff
+0047E28C  83 ce ff                       or       esi, 0xffffffff
+0047E28F  90                             nop
+0047E290  83 fa 0b                       cmp      edx, 0xb
+0047E293  75 0a                          jne      0x47e29f
+0047E295  8b 48 28                       mov      ecx, dword ptr [eax + 0x28]
+0047E298  23 cf                          and      ecx, edi
+0047E29A  89 70 20                       mov      dword ptr [eax + 0x20], esi
+0047E29D  eb 0e                          jmp      0x47e2ad
+0047E29F  8b ca                          mov      ecx, edx
+0047E2A1  bb 01 00 00 00                 mov      ebx, 1
+0047E2A6  d3 e3                          shl      ebx, cl
+0047E2A8  8b 48 28                       mov      ecx, dword ptr [eax + 0x28]
+0047E2AB  0b cb                          or       ecx, ebx
+0047E2AD  89 48 28                       mov      dword ptr [eax + 0x28], ecx
+0047E2B0  8d 4a 01                       lea      ecx, [edx + 1]
+0047E2B3  83 f9 0b                       cmp      ecx, 0xb
+0047E2B6  75 0a                          jne      0x47e2c2
+0047E2B8  8b 48 28                       mov      ecx, dword ptr [eax + 0x28]
+0047E2BB  23 cf                          and      ecx, edi
+0047E2BD  89 70 20                       mov      dword ptr [eax + 0x20], esi
+0047E2C0  eb 0c                          jmp      0x47e2ce
+0047E2C2  bb 01 00 00 00                 mov      ebx, 1
+0047E2C7  d3 e3                          shl      ebx, cl
+0047E2C9  8b 48 28                       mov      ecx, dword ptr [eax + 0x28]
+0047E2CC  0b cb                          or       ecx, ebx
+0047E2CE  89 48 28                       mov      dword ptr [eax + 0x28], ecx
+0047E2D1  8d 4a 02                       lea      ecx, [edx + 2]
+0047E2D4  83 f9 0b                       cmp      ecx, 0xb
+0047E2D7  75 0a                          jne      0x47e2e3
+0047E2D9  8b 48 28                       mov      ecx, dword ptr [eax + 0x28]
+0047E2DC  23 cf                          and      ecx, edi
+0047E2DE  89 70 20                       mov      dword ptr [eax + 0x20], esi
+0047E2E1  eb 0c                          jmp      0x47e2ef
+0047E2E3  bb 01 00 00 00                 mov      ebx, 1
+0047E2E8  d3 e3                          shl      ebx, cl
+0047E2EA  8b 48 28                       mov      ecx, dword ptr [eax + 0x28]
+0047E2ED  0b cb                          or       ecx, ebx
+0047E2EF  89 48 28                       mov      dword ptr [eax + 0x28], ecx
+0047E2F2  8d 4a 03                       lea      ecx, [edx + 3]
+0047E2F5  83 f9 0b                       cmp      ecx, 0xb
+0047E2F8  75 0a                          jne      0x47e304
+0047E2FA  8b 48 28                       mov      ecx, dword ptr [eax + 0x28]
+0047E2FD  23 cf                          and      ecx, edi
+0047E2FF  89 70 20                       mov      dword ptr [eax + 0x20], esi
+0047E302  eb 0c                          jmp      0x47e310
+0047E304  bb 01 00 00 00                 mov      ebx, 1
+0047E309  d3 e3                          shl      ebx, cl
+0047E30B  8b 48 28                       mov      ecx, dword ptr [eax + 0x28]
+0047E30E  0b cb                          or       ecx, ebx
+0047E310  89 48 28                       mov      dword ptr [eax + 0x28], ecx
+0047E313  8d 4a 04                       lea      ecx, [edx + 4]
+0047E316  83 f9 0b                       cmp      ecx, 0xb
+0047E319  75 0a                          jne      0x47e325
+0047E31B  8b 48 28                       mov      ecx, dword ptr [eax + 0x28]
+0047E31E  23 cf                          and      ecx, edi
+0047E320  89 70 20                       mov      dword ptr [eax + 0x20], esi
+0047E323  eb 0c                          jmp      0x47e331
+0047E325  bb 01 00 00 00                 mov      ebx, 1
+0047E32A  d3 e3                          shl      ebx, cl
+0047E32C  8b 48 28                       mov      ecx, dword ptr [eax + 0x28]
+0047E32F  0b cb                          or       ecx, ebx
+0047E331  89 48 28                       mov      dword ptr [eax + 0x28], ecx
+0047E334  8d 4a 05                       lea      ecx, [edx + 5]
+0047E337  83 f9 0b                       cmp      ecx, 0xb
+0047E33A  75 0a                          jne      0x47e346
+0047E33C  8b 48 28                       mov      ecx, dword ptr [eax + 0x28]
+0047E33F  23 cf                          and      ecx, edi
+0047E341  89 70 20                       mov      dword ptr [eax + 0x20], esi
+0047E344  eb 0c                          jmp      0x47e352
+0047E346  bb 01 00 00 00                 mov      ebx, 1
+0047E34B  d3 e3                          shl      ebx, cl
+0047E34D  8b 48 28                       mov      ecx, dword ptr [eax + 0x28]
+0047E350  0b cb                          or       ecx, ebx
+0047E352  83 c2 06                       add      edx, 6
+0047E355  83 fa 0c                       cmp      edx, 0xc
+0047E358  89 48 28                       mov      dword ptr [eax + 0x28], ecx
+0047E35B  0f 8c 2f ff ff ff              jl       0x47e290
+0047E361  5f                             pop      edi
+0047E362  5e                             pop      esi
+0047E363  5b                             pop      ebx
+0047E364  c3                             ret

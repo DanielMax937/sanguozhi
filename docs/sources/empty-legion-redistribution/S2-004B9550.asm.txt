@@ -1,0 +1,58 @@
+004B9550  53                             push     ebx
+004B9551  56                             push     esi
+004B9552  57                             push     edi
+004B9553  50                             push     eax
+004B9554  b9 58 19 20 07                 mov      ecx, 0x7201958
+004B9559  e8 62 7d fd ff                 call     0x4912c0
+004B955E  8b d8                          mov      ebx, eax
+004B9560  33 ff                          xor      edi, edi
+004B9562  57                             push     edi
+004B9563  b9 58 19 20 07                 mov      ecx, 0x7201958
+004B9568  e8 a3 74 fd ff                 call     0x490a10
+004B956D  8b f0                          mov      esi, eax
+004B956F  56                             push     esi
+004B9570  e8 bb 10 fc ff                 call     0x47a630
+004B9575  83 c4 04                       add      esp, 4
+004B9578  85 c0                          test     eax, eax
+004B957A  74 0b                          je       0x4b9587
+004B957C  8b 16                          mov      edx, dword ptr [esi]
+004B957E  8b ce                          mov      ecx, esi
+004B9580  ff 52 44                       call     dword ptr [edx + 0x44]
+004B9583  3b c3                          cmp      eax, ebx
+004B9585  74 0c                          je       0x4b9593
+004B9587  47                             inc      edi
+004B9588  83 ff 2a                       cmp      edi, 0x2a
+004B958B  7c d5                          jl       0x4b9562
+004B958D  5f                             pop      edi
+004B958E  5e                             pop      esi
+004B958F  33 c0                          xor      eax, eax
+004B9591  5b                             pop      ebx
+004B9592  c3                             ret
+004B9593  33 ff                          xor      edi, edi
+004B9595  57                             push     edi
+004B9596  b9 58 19 20 07                 mov      ecx, 0x7201958
+004B959B  e8 60 75 fd ff                 call     0x490b00
+004B95A0  8b f0                          mov      esi, eax
+004B95A2  56                             push     esi
+004B95A3  e8 88 10 fc ff                 call     0x47a630
+004B95A8  83 c4 04                       add      esp, 4
+004B95AB  85 c0                          test     eax, eax
+004B95AD  74 0b                          je       0x4b95ba
+004B95AF  8b 06                          mov      eax, dword ptr [esi]
+004B95B1  8b ce                          mov      ecx, esi
+004B95B3  ff 50 44                       call     dword ptr [eax + 0x44]
+004B95B6  3b c3                          cmp      eax, ebx
+004B95B8  74 0f                          je       0x4b95c9
+004B95BA  47                             inc      edi
+004B95BB  81 ff 4c 04 00 00              cmp      edi, 0x44c
+004B95C1  7c d2                          jl       0x4b9595
+004B95C3  5f                             pop      edi
+004B95C4  5e                             pop      esi
+004B95C5  33 c0                          xor      eax, eax
+004B95C7  5b                             pop      ebx
+004B95C8  c3                             ret
+004B95C9  5f                             pop      edi
+004B95CA  5e                             pop      esi
+004B95CB  b8 01 00 00 00                 mov      eax, 1
+004B95D0  5b                             pop      ebx
+004B95D1  c3                             ret

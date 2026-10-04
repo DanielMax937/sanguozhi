@@ -1,0 +1,18 @@
+0047A600  56                             push     esi
+0047A601  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+0047A605  85 f6                          test     esi, esi
+0047A607  74 11                          je       0x47a61a
+0047A609  6a 01                          push     1
+0047A60B  6a 04                          push     4
+0047A60D  56                             push     esi
+0047A60E  e8 5d 7a ff ff                 call     0x472070
+0047A613  83 c4 0c                       add      esp, 0xc
+0047A616  85 c0                          test     eax, eax
+0047A618  75 04                          jne      0x47a61e
+0047A61A  33 c0                          xor      eax, eax
+0047A61C  5e                             pop      esi
+0047A61D  c3                             ret
+0047A61E  8b 06                          mov      eax, dword ptr [esi]
+0047A620  8b ce                          mov      ecx, esi
+0047A622  5e                             pop      esi
+0047A623  ff 60 04                       jmp      dword ptr [eax + 4]

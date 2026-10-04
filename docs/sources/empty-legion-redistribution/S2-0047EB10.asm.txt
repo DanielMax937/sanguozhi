@@ -1,0 +1,16 @@
+0047EB10  56                             push     esi
+0047EB11  8b f1                          mov      esi, ecx
+0047EB13  e8 b8 ba ff ff                 call     0x47a5d0
+0047EB18  c7 06 b0 bf 79 00              mov      dword ptr [esi], 0x79bfb0
+0047EB1E  33 c0                          xor      eax, eax
+0047EB20  89 46 3c                       mov      dword ptr [esi + 0x3c], eax
+0047EB23  89 46 40                       mov      dword ptr [esi + 0x40], eax
+0047EB26  89 46 38                       mov      dword ptr [esi + 0x38], eax
+0047EB29  89 46 34                       mov      dword ptr [esi + 0x34], eax
+0047EB2C  89 46 44                       mov      dword ptr [esi + 0x44], eax
+0047EB2F  c7 46 48 0a 00 00 00           mov      dword ptr [esi + 0x48], 0xa
+0047EB36  89 46 4c                       mov      dword ptr [esi + 0x4c], eax
+0047EB39  c7 46 30 44 bf 79 00           mov      dword ptr [esi + 0x30], 0x79bf44
+0047EB40  8b c6                          mov      eax, esi
+0047EB42  5e                             pop      esi
+0047EB43  c3                             ret
