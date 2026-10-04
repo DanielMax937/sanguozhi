@@ -1,0 +1,6030 @@
+{
+  "schemaVersion": 1,
+  "profileId": "source-idb-30d33b44-personnel-detachment-v1",
+  "baselineCommit": "453305b2dc64927a715fc58fceb0522557815f34",
+  "stockOriginalVerified": false,
+  "originalExeExecuted": false,
+  "recordedExeHashesIndependentlyVerified": false,
+  "adoption": {
+    "PC-PK1.1": "compatibility-reconstruction",
+    "PC-Vanilla-assumed": "compatibility-assumption",
+    "PS2-Wii": "open"
+  },
+  "sources": [
+    {
+      "source": "S1",
+      "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+      "recordedInputPath": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+      "recordedExeSha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip"
+    },
+    {
+      "source": "S2",
+      "idbSha256": "aa7f2c983b266633d6e23c494d4f8e1b03e5251632505cae103e176ae850dfd8",
+      "recordedInputPath": "C:\\Games\\san11\\血色衣冠6.0sp5(整合包240612)\\San11Pk\\san11pk_dump.exe",
+      "recordedExeSha256": "b1e9467e9612c23af83f6feda8414bc9ee99eb62c6862a84f7f4c5a8822b9da9",
+      "url": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/ida-db/san11pk_dump.exe.idb.7z"
+    }
+  ],
+  "ranges": [
+    {
+      "source": "S1",
+      "start": "004BBB00",
+      "endExclusive": "004BBDA3",
+      "sha256": "7b06f0ac821eee5d56e36506934069146cebaa7de0e0b0143a4502b23e1d4301",
+      "file": "../capture-personnel-source-profile/S1-004BBB00.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004BA520",
+      "endExclusive": "004BA60B",
+      "sha256": "5292bfeaa1b6b0206ac30fdfeeb0a41b4d4bfef884ccb062c7b5e8cb6910f0ea",
+      "file": "../capture-relocation-source-profile/S1-004BA520.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004BA490",
+      "endExclusive": "004BA520",
+      "sha256": "0d1694397a9d81896b435f09a3c3edef4605d6836398d419d5f6eec4db7c0cf2",
+      "file": "S1-004BA490.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004B94E0",
+      "endExclusive": "004B954C",
+      "sha256": "72a2cbc723b8f5c5c639d48eb9b0c2d411f6e688f55de56b0944e35f456882ab",
+      "file": "S1-004B94E0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0047BC70",
+      "endExclusive": "0047BCA5",
+      "sha256": "e5f58f83c2730a6924795e64feb00b4d69b0b5b18fb509afbe677cb0d4a56135",
+      "file": "S1-0047BC70.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "00487920",
+      "endExclusive": "00487956",
+      "sha256": "49888397ffecbc8962df0818e282940cf2caf2f5e079f3a11cc0bafc89164fdc",
+      "file": "S1-00487920.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004839F0",
+      "endExclusive": "004839FC",
+      "sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+      "file": "S1-004839F0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "00489610",
+      "endExclusive": "0048968A",
+      "sha256": "d2213aa3397f098ba26d3af5566126c69e3aadbe58de881e90fdd08ea289a497",
+      "file": "S1-00489610.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "00495A50",
+      "endExclusive": "00495AA4",
+      "sha256": "3556d4b9ae9b24a94354024203c0de470b3515f422bcfe038f78b1f242073fe3",
+      "file": "S1-00495A50.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0047B460",
+      "endExclusive": "0047B478",
+      "sha256": "d5dcfdb6e7dac8a293f4e48216394fafd4d99021f19755cefb076f01a5f84682",
+      "file": "S1-0047B460.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0047A9B0",
+      "endExclusive": "0047AA02",
+      "sha256": "8d8dd48a66d63426bccb9df90444792aa0d5ee7ccd09066576d49cf228d9f4af",
+      "file": "S1-0047A9B0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0047C4C0",
+      "endExclusive": "0047C4E3",
+      "sha256": "afeebeb78dcb836ff32ae586dbc1ac30c76d8b39bdd512cf74d3721f9034ce81",
+      "file": "S1-0047C4C0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004A5780",
+      "endExclusive": "004A57A9",
+      "sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+      "file": "S1-004A5780.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004A5660",
+      "endExclusive": "004A5682",
+      "sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+      "file": "S1-004A5660.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004A57B0",
+      "endExclusive": "004A57E0",
+      "sha256": "36b94ffaf3fa201a0331addb7a4771889e70a34e430da7f42846a8a3e9ac9299",
+      "file": "../capture-relocation-source-profile/S1-004A57B0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004A7410",
+      "endExclusive": "004A7476",
+      "sha256": "ad2c9c681375ec170d940f57f3b451b57311772cf6de6834bb0aa054f400caa8",
+      "file": "../capture-relocation-source-profile/S1-004A7410.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004813E0",
+      "endExclusive": "004813FE",
+      "sha256": "e1c9636856a24593092bba179559fece4eeca3b875ae07256c63807416a22c8b",
+      "file": "S1-004813E0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004A0940",
+      "endExclusive": "004A0972",
+      "sha256": "8ddf69330b7ff73adf4ece382771a83c83144d2f5e60ca350dc7725edc8518b0",
+      "file": "S1-004A0940.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0047E110",
+      "endExclusive": "0047E12A",
+      "sha256": "d827f2dd333951c501854b45cdb2eb2cc9a064be0e6737ba1bb3da2eec9ef114",
+      "file": "S1-0047E110.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004B3A20",
+      "endExclusive": "004B3A9E",
+      "sha256": "00a69c9c8094ff4765e8774dd9362b9bc72c7241f9ad4acb9c9cd3792c7aa426",
+      "file": "S1-004B3A20.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "00487780",
+      "endExclusive": "00487852",
+      "sha256": "303fdac792c9fd64c58a8d208d22f9a65f53d5fb62a46bfc3d061e00862a86b8",
+      "file": "S1-00487780.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0047B4B0",
+      "endExclusive": "0047B4CA",
+      "sha256": "2b29739356e22fbc66ae61b77059176dde78c24c1b9327232679a32a6bd362e5",
+      "file": "S1-0047B4B0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0048D9A0",
+      "endExclusive": "0048D9BA",
+      "sha256": "68018d668708bef43c786e54fa2a3fa79698fed6fb27d9e157afeb495396ccc3",
+      "file": "S1-0048D9A0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "00491310",
+      "endExclusive": "0049135A",
+      "sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "file": "S1-00491310.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "00491180",
+      "endExclusive": "004911CA",
+      "sha256": "1e0f65a9b50e32866330593a5670938d4b13209d304ea365cd6dacb100a7cb6a",
+      "file": "S1-00491180.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004A8970",
+      "endExclusive": "004A8B2A",
+      "sha256": "b7ecba0638a8de555c213b3c99fb2581a01c70e19c3acb3722d2038f03c7a3a5",
+      "file": "../capture-personnel-source-profile/S1-004A8970.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004B1950",
+      "endExclusive": "004B1ABD",
+      "sha256": "14e9c535b802259b4a9449f398b68c4a06fd0bd7add20b8118e1fa6fb62dc95d",
+      "file": "../capture-personnel-source-profile/S1-004B1950.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004BBAA0",
+      "endExclusive": "004BBAF8",
+      "sha256": "afa2361f9d954766bdb7e921b2afcc6d414ab7789ece1a4fbf188b20b8534a8a",
+      "file": "../capture-relocation-source-profile/S1-004BBAA0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004A8110",
+      "endExclusive": "004A81D3",
+      "sha256": "810beb7153f032a0d21b863fe3000007f7fd7c3ce076858d3bf63eed613a7623",
+      "file": "S1-004A8110.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004BA1D0",
+      "endExclusive": "004BA485",
+      "sha256": "70d2f33412b51e4e1337942addf82032c79021ea9c37cf562d95ad144daea67c",
+      "file": "S1-004BA1D0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004A31E0",
+      "endExclusive": "004A32E5",
+      "sha256": "fd7ef4e3bfd60d45a9b9a85e729f77cfc44f945fe5c245285802befdcfa29a58",
+      "file": "../capture-personnel-source-profile/S1-004A31E0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004A32F0",
+      "endExclusive": "004A33A4",
+      "sha256": "197e4fdf2a8c1f318a3f021ec29d96dbc4dabdba3e08aa3dea106ac574f063c4",
+      "file": "../capture-personnel-source-profile/S1-004A32F0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004A0CB0",
+      "endExclusive": "004A0CEB",
+      "sha256": "e29a76b4ce5975fc358952d6cddb629a54d844856a1240018234db943095031f",
+      "file": "../capture-personnel-source-profile/S1-004A0CB0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "00489BD0",
+      "endExclusive": "00489C0F",
+      "sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+      "file": "../capture-personnel-source-profile/S1-00489BD0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004898F0",
+      "endExclusive": "0048990B",
+      "sha256": "569e97f5df31300fac201418f260b40cfd71c99e2040eee64a33bcc679ea9a87",
+      "file": "../capture-personnel-source-profile/S1-004898F0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0048A770",
+      "endExclusive": "0048A792",
+      "sha256": "fd5501b841804607b81ea5e108d971988e5f4192019d62592f0b776428acc462",
+      "file": "S1-0048A770.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "00489B40",
+      "endExclusive": "00489B6D",
+      "sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+      "file": "../capture-personnel-source-profile/S1-00489B40.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0048A750",
+      "endExclusive": "0048A770",
+      "sha256": "0b320ba6c150abaa26c0eec4d57812fddddd3f1dfdb0d03cd93e8fc96568ea26",
+      "file": "S1-0048A750.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0048A8B0",
+      "endExclusive": "0048A8D2",
+      "sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+      "file": "../capture-personnel-source-profile/S1-0048A8B0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0049E4D0",
+      "endExclusive": "0049E4FB",
+      "sha256": "ceefad36fa02092bcedd902908fbb6309c9bea3d4d16898cb72edda05d683ac1",
+      "file": "../capture-relocation-source-profile/S1-0049E4D0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0049E450",
+      "endExclusive": "0049E4C4",
+      "sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+      "file": "../capture-relocation-source-profile/S1-0049E450.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0047B480",
+      "endExclusive": "0047B4AA",
+      "sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+      "file": "../capture-relocation-source-profile/S1-0047B480.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "00472150",
+      "endExclusive": "00472184",
+      "sha256": "82bef9b78dc532adc5b0405a42da040048639dfee9ff2be22ed8d043c21140d0",
+      "file": "../capture-relocation-source-profile/S1-00472150.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0047B2B0",
+      "endExclusive": "0047B2DD",
+      "sha256": "2b871355a493a19960355b895dcbf725a6b3c931af48f71d233989991aac5017",
+      "file": "../capture-relocation-source-profile/S1-0047B2B0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "004883B0",
+      "endExclusive": "004883B7",
+      "sha256": "b8daa47a1e2c23c0d84bc9ac1de08473d93f8b72166ba2ff5b06db32826f2236",
+      "file": "../capture-relocation-source-profile/S1-004883B0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "00489E70",
+      "endExclusive": "00489E89",
+      "sha256": "9bb40c9c3154764854c745e5861ba6aee16fc6bc008482d52e73f01e23275ff5",
+      "file": "../capture-relocation-source-profile/S1-00489E70.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S1",
+      "start": "0079B830",
+      "endExclusive": "0079BF14",
+      "sha256": "deda8ff7828a2c42df89457adcec1b36df55f7ff78337be347e94698dc6b3e8f",
+      "file": "../capture-relocation-source-profile/S1-0079B830.data.txt",
+      "kind": "data",
+      "label": "territorial-city-distance"
+    },
+    {
+      "source": "S1",
+      "start": "0079C780",
+      "endExclusive": "0079C7D0",
+      "sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "file": "../capture-relocation-source-profile/S1-0079C780.data.txt",
+      "kind": "data",
+      "label": "person-vtable"
+    },
+    {
+      "source": "S2",
+      "start": "004BBB00",
+      "endExclusive": "004BBDA3",
+      "sha256": "7b06f0ac821eee5d56e36506934069146cebaa7de0e0b0143a4502b23e1d4301",
+      "file": "../capture-personnel-source-profile/S2-004BBB00.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004BA520",
+      "endExclusive": "004BA60B",
+      "sha256": "5292bfeaa1b6b0206ac30fdfeeb0a41b4d4bfef884ccb062c7b5e8cb6910f0ea",
+      "file": "../capture-relocation-source-profile/S2-004BA520.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004BA490",
+      "endExclusive": "004BA520",
+      "sha256": "0d1694397a9d81896b435f09a3c3edef4605d6836398d419d5f6eec4db7c0cf2",
+      "file": "S2-004BA490.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004B94E0",
+      "endExclusive": "004B954C",
+      "sha256": "72a2cbc723b8f5c5c639d48eb9b0c2d411f6e688f55de56b0944e35f456882ab",
+      "file": "S2-004B94E0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0047BC70",
+      "endExclusive": "0047BCA5",
+      "sha256": "e5f58f83c2730a6924795e64feb00b4d69b0b5b18fb509afbe677cb0d4a56135",
+      "file": "S2-0047BC70.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "00487920",
+      "endExclusive": "00487956",
+      "sha256": "49888397ffecbc8962df0818e282940cf2caf2f5e079f3a11cc0bafc89164fdc",
+      "file": "S2-00487920.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004839F0",
+      "endExclusive": "004839FC",
+      "sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+      "file": "S2-004839F0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "00489610",
+      "endExclusive": "0048968A",
+      "sha256": "d2213aa3397f098ba26d3af5566126c69e3aadbe58de881e90fdd08ea289a497",
+      "file": "S2-00489610.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "00495A50",
+      "endExclusive": "00495AA4",
+      "sha256": "3556d4b9ae9b24a94354024203c0de470b3515f422bcfe038f78b1f242073fe3",
+      "file": "S2-00495A50.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0047B460",
+      "endExclusive": "0047B478",
+      "sha256": "d5dcfdb6e7dac8a293f4e48216394fafd4d99021f19755cefb076f01a5f84682",
+      "file": "S2-0047B460.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0047A9B0",
+      "endExclusive": "0047AA02",
+      "sha256": "8d8dd48a66d63426bccb9df90444792aa0d5ee7ccd09066576d49cf228d9f4af",
+      "file": "S2-0047A9B0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0047C4C0",
+      "endExclusive": "0047C4E3",
+      "sha256": "afeebeb78dcb836ff32ae586dbc1ac30c76d8b39bdd512cf74d3721f9034ce81",
+      "file": "S2-0047C4C0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004A5780",
+      "endExclusive": "004A57A9",
+      "sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+      "file": "S2-004A5780.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004A5660",
+      "endExclusive": "004A5682",
+      "sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+      "file": "S2-004A5660.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004A57B0",
+      "endExclusive": "004A57E0",
+      "sha256": "36b94ffaf3fa201a0331addb7a4771889e70a34e430da7f42846a8a3e9ac9299",
+      "file": "../capture-relocation-source-profile/S2-004A57B0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004A7410",
+      "endExclusive": "004A7476",
+      "sha256": "ad2c9c681375ec170d940f57f3b451b57311772cf6de6834bb0aa054f400caa8",
+      "file": "../capture-relocation-source-profile/S2-004A7410.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004813E0",
+      "endExclusive": "004813FE",
+      "sha256": "e1c9636856a24593092bba179559fece4eeca3b875ae07256c63807416a22c8b",
+      "file": "S2-004813E0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004A0940",
+      "endExclusive": "004A0972",
+      "sha256": "8ddf69330b7ff73adf4ece382771a83c83144d2f5e60ca350dc7725edc8518b0",
+      "file": "S2-004A0940.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0047E110",
+      "endExclusive": "0047E12A",
+      "sha256": "d827f2dd333951c501854b45cdb2eb2cc9a064be0e6737ba1bb3da2eec9ef114",
+      "file": "S2-0047E110.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004B3A20",
+      "endExclusive": "004B3A9E",
+      "sha256": "00a69c9c8094ff4765e8774dd9362b9bc72c7241f9ad4acb9c9cd3792c7aa426",
+      "file": "S2-004B3A20.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "00487780",
+      "endExclusive": "00487852",
+      "sha256": "303fdac792c9fd64c58a8d208d22f9a65f53d5fb62a46bfc3d061e00862a86b8",
+      "file": "S2-00487780.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0047B4B0",
+      "endExclusive": "0047B4CA",
+      "sha256": "2b29739356e22fbc66ae61b77059176dde78c24c1b9327232679a32a6bd362e5",
+      "file": "S2-0047B4B0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0048D9A0",
+      "endExclusive": "0048D9BA",
+      "sha256": "68018d668708bef43c786e54fa2a3fa79698fed6fb27d9e157afeb495396ccc3",
+      "file": "S2-0048D9A0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "00491310",
+      "endExclusive": "0049135A",
+      "sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "file": "S2-00491310.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "00491180",
+      "endExclusive": "004911CA",
+      "sha256": "1e0f65a9b50e32866330593a5670938d4b13209d304ea365cd6dacb100a7cb6a",
+      "file": "S2-00491180.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004A8970",
+      "endExclusive": "004A8B2A",
+      "sha256": "b7ecba0638a8de555c213b3c99fb2581a01c70e19c3acb3722d2038f03c7a3a5",
+      "file": "../capture-personnel-source-profile/S2-004A8970.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004B1950",
+      "endExclusive": "004B1ABD",
+      "sha256": "14e9c535b802259b4a9449f398b68c4a06fd0bd7add20b8118e1fa6fb62dc95d",
+      "file": "../capture-personnel-source-profile/S2-004B1950.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004BBAA0",
+      "endExclusive": "004BBAF8",
+      "sha256": "afa2361f9d954766bdb7e921b2afcc6d414ab7789ece1a4fbf188b20b8534a8a",
+      "file": "../capture-relocation-source-profile/S2-004BBAA0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004A8110",
+      "endExclusive": "004A81D3",
+      "sha256": "810beb7153f032a0d21b863fe3000007f7fd7c3ce076858d3bf63eed613a7623",
+      "file": "S2-004A8110.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004BA1D0",
+      "endExclusive": "004BA485",
+      "sha256": "70d2f33412b51e4e1337942addf82032c79021ea9c37cf562d95ad144daea67c",
+      "file": "S2-004BA1D0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004A31E0",
+      "endExclusive": "004A32E5",
+      "sha256": "fd7ef4e3bfd60d45a9b9a85e729f77cfc44f945fe5c245285802befdcfa29a58",
+      "file": "../capture-personnel-source-profile/S2-004A31E0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004A32F0",
+      "endExclusive": "004A33A4",
+      "sha256": "197e4fdf2a8c1f318a3f021ec29d96dbc4dabdba3e08aa3dea106ac574f063c4",
+      "file": "../capture-personnel-source-profile/S2-004A32F0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004A0CB0",
+      "endExclusive": "004A0CEB",
+      "sha256": "e29a76b4ce5975fc358952d6cddb629a54d844856a1240018234db943095031f",
+      "file": "../capture-personnel-source-profile/S2-004A0CB0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "00489BD0",
+      "endExclusive": "00489C0F",
+      "sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+      "file": "../capture-personnel-source-profile/S2-00489BD0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004898F0",
+      "endExclusive": "0048990B",
+      "sha256": "569e97f5df31300fac201418f260b40cfd71c99e2040eee64a33bcc679ea9a87",
+      "file": "../capture-personnel-source-profile/S2-004898F0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0048A770",
+      "endExclusive": "0048A792",
+      "sha256": "fd5501b841804607b81ea5e108d971988e5f4192019d62592f0b776428acc462",
+      "file": "S2-0048A770.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "00489B40",
+      "endExclusive": "00489B6D",
+      "sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+      "file": "../capture-personnel-source-profile/S2-00489B40.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0048A750",
+      "endExclusive": "0048A770",
+      "sha256": "0b320ba6c150abaa26c0eec4d57812fddddd3f1dfdb0d03cd93e8fc96568ea26",
+      "file": "S2-0048A750.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0048A8B0",
+      "endExclusive": "0048A8D2",
+      "sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+      "file": "../capture-personnel-source-profile/S2-0048A8B0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0049E4D0",
+      "endExclusive": "0049E4FB",
+      "sha256": "ceefad36fa02092bcedd902908fbb6309c9bea3d4d16898cb72edda05d683ac1",
+      "file": "../capture-relocation-source-profile/S2-0049E4D0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0049E450",
+      "endExclusive": "0049E4C4",
+      "sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+      "file": "../capture-relocation-source-profile/S2-0049E450.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0047B480",
+      "endExclusive": "0047B4AA",
+      "sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+      "file": "../capture-relocation-source-profile/S2-0047B480.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "00472150",
+      "endExclusive": "00472184",
+      "sha256": "287de88f866471b9deb9ab890751a90ac33310b913e27962a364750fa40e0430",
+      "file": "../capture-relocation-source-profile/S2-00472150.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0047B2B0",
+      "endExclusive": "0047B2DD",
+      "sha256": "2b871355a493a19960355b895dcbf725a6b3c931af48f71d233989991aac5017",
+      "file": "../capture-relocation-source-profile/S2-0047B2B0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "004883B0",
+      "endExclusive": "004883B7",
+      "sha256": "b8daa47a1e2c23c0d84bc9ac1de08473d93f8b72166ba2ff5b06db32826f2236",
+      "file": "../capture-relocation-source-profile/S2-004883B0.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "00489E70",
+      "endExclusive": "00489E89",
+      "sha256": "9bb40c9c3154764854c745e5861ba6aee16fc6bc008482d52e73f01e23275ff5",
+      "file": "../capture-relocation-source-profile/S2-00489E70.asm.txt",
+      "kind": "code"
+    },
+    {
+      "source": "S2",
+      "start": "0079B830",
+      "endExclusive": "0079BF14",
+      "sha256": "edd622ed95be439d7a5eee27fc429937e5224a1dd0fa296859e95863eee667ff",
+      "file": "../capture-relocation-source-profile/S2-0079B830.data.txt",
+      "kind": "data",
+      "label": "territorial-city-distance"
+    },
+    {
+      "source": "S2",
+      "start": "0079C780",
+      "endExclusive": "0079C7D0",
+      "sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "file": "../capture-relocation-source-profile/S2-0079C780.data.txt",
+      "kind": "data",
+      "label": "person-vtable"
+    },
+    {
+      "source": "S1",
+      "start": "00441880",
+      "endExclusive": "00441885",
+      "sha256": "3df6af1ec778d46a61b8d7160523ba89fe1af814222acb1175be5a7b1748e06b",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "0047A600",
+      "endExclusive": "0047A626",
+      "sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 6,
+      "lineCount": 18
+    },
+    {
+      "source": "S1",
+      "start": "0047A630",
+      "endExclusive": "0047A656",
+      "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 26,
+      "lineCount": 18
+    },
+    {
+      "source": "S1",
+      "start": "0047BCF0",
+      "endExclusive": "0047BD12",
+      "sha256": "c6b45b33ebc8daf8604e6cc833453ab19a80f2fc6d9ad83124c9e88f91142ee8",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 46,
+      "lineCount": 11
+    },
+    {
+      "source": "S1",
+      "start": "00482F80",
+      "endExclusive": "00482FC0",
+      "sha256": "a3294bd1f816574db08694971a10cf95a2b40d8877cdda4bf13b622f498aff4c",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 59,
+      "lineCount": 26
+    },
+    {
+      "source": "S1",
+      "start": "00483660",
+      "endExclusive": "004836B8",
+      "sha256": "4a500a842e6a1f5bbbf226b0c3d378b3cc7a51d42d461a42ea166968ea27a508",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 87,
+      "lineCount": 35
+    },
+    {
+      "source": "S1",
+      "start": "00486C80",
+      "endExclusive": "00486D2A",
+      "sha256": "102594bd6629352165ba7c5645a8009a9cbbfbca658d3312b3538f6c5ff5bffe",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 124,
+      "lineCount": 65
+    },
+    {
+      "source": "S1",
+      "start": "00486D30",
+      "endExclusive": "00486DE7",
+      "sha256": "a2f0adc4a6092112feb4e9f3924896835389baf936aa02a614903ec0b6a9acd2",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 191,
+      "lineCount": 69
+    },
+    {
+      "source": "S1",
+      "start": "00487310",
+      "endExclusive": "004873E2",
+      "sha256": "93a38fc6e422c6344db8c85b8f839d0a19a602d11b9766ef9dc7706cc9fb4bfb",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 262,
+      "lineCount": 76
+    },
+    {
+      "source": "S1",
+      "start": "00488C70",
+      "endExclusive": "00488C7F",
+      "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 340,
+      "lineCount": 5
+    },
+    {
+      "source": "S1",
+      "start": "004897B0",
+      "endExclusive": "004897CD",
+      "sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 347,
+      "lineCount": 9
+    },
+    {
+      "source": "S1",
+      "start": "0048D820",
+      "endExclusive": "0048D859",
+      "sha256": "6e95be1f5c7fe636035430215b9c9e1f015ba40714ad9595fc7a4f95e5ef5eb2",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 358,
+      "lineCount": 21
+    },
+    {
+      "source": "S1",
+      "start": "00490AA0",
+      "endExclusive": "00490AC2",
+      "sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 381,
+      "lineCount": 10
+    },
+    {
+      "source": "S1",
+      "start": "00490B00",
+      "endExclusive": "00490B24",
+      "sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 393,
+      "lineCount": 10
+    },
+    {
+      "source": "S1",
+      "start": "00490D00",
+      "endExclusive": "00490D21",
+      "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 405,
+      "lineCount": 10
+    },
+    {
+      "source": "S1",
+      "start": "004A06A0",
+      "endExclusive": "004A06AD",
+      "sha256": "5d440998401108a871a7787b8f210906e453bc44afe1b15f0fac976f238bce6f",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 417,
+      "lineCount": 4
+    },
+    {
+      "source": "S1",
+      "start": "004A5600",
+      "endExclusive": "004A5622",
+      "sha256": "469e3a076f2dd39447ed00a439df84539740067d7eb95ae2fecce1b8e7850f81",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 423,
+      "lineCount": 13
+    },
+    {
+      "source": "S1",
+      "start": "004A73A0",
+      "endExclusive": "004A740E",
+      "sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 438,
+      "lineCount": 44
+    },
+    {
+      "source": "S1",
+      "start": "004AE2A0",
+      "endExclusive": "004AE2FF",
+      "sha256": "4c496db9d8a880bd4378fce6e8ad7a0dfbdbe101e8e59ec4ee86d6d7764c4244",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 484,
+      "lineCount": 41
+    },
+    {
+      "source": "S1",
+      "start": "004B9480",
+      "endExclusive": "004B949C",
+      "sha256": "35a0c7c9c9dbd6fa800d8bcd9019e2504d21279532929975f16d62f8e9acee53",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 527,
+      "lineCount": 11
+    },
+    {
+      "source": "S1",
+      "start": "005725A0",
+      "endExclusive": "005725CE",
+      "sha256": "54166980e15e096a83a7ef288e106a48e3d70d224838e2477c53e48863e16b08",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 540,
+      "lineCount": 20
+    },
+    {
+      "source": "S1",
+      "start": "00572680",
+      "endExclusive": "005726C7",
+      "sha256": "68f1e594b13b0edc48dcb144b078b782e23de0f0ba8aecfa859f473ecffa10f4",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 562,
+      "lineCount": 28
+    },
+    {
+      "source": "S1",
+      "start": "00572760",
+      "endExclusive": "005727AE",
+      "sha256": "6e0be7902a2b869d1617464cb2c4795dacb75fc4ab402b7f928e3a85b86e7208",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 592,
+      "lineCount": 32
+    },
+    {
+      "source": "S1",
+      "start": "005B1E60",
+      "endExclusive": "005B1EEA",
+      "sha256": "083938341640eca4c1399f7b12bbf683f51471f2be1134a5a6ca5e9c8912d686",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 626,
+      "lineCount": 48
+    },
+    {
+      "source": "S1",
+      "start": "005B2C70",
+      "endExclusive": "005B2CF8",
+      "sha256": "ba889c145aafb87af258f12a946864e06fae004bab900e1bfc98f9ad621b5902",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 676,
+      "lineCount": 47
+    },
+    {
+      "source": "S1",
+      "start": "005B3F70",
+      "endExclusive": "005B3F94",
+      "sha256": "0720679446a87d6ee2b909b0ced81eff835baaa18a9c605af8e0adf3943303e2",
+      "file": "S1-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 725,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005B4B60",
+      "endExclusive": "005B4B84",
+      "sha256": "57dd8937a1ff4c1fd7be89b4b0a29575b6df55e4c03d7cacd6d06e38c556d706",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005B4F40",
+      "endExclusive": "005B4F64",
+      "sha256": "0850c8192dd992c118acca0014667077d92a6075209619f600603884a630628a",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 16,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005B5B30",
+      "endExclusive": "005B5B54",
+      "sha256": "e61e34ab5659b84f9be85649848bee5830aff787eb3a9869e4236f7c7bd8c485",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 30,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005B6060",
+      "endExclusive": "005B60EA",
+      "sha256": "874a7694245c5cad7b6d324c1af3cc1a715cdce897e8fb668b027a7719789ce9",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 44,
+      "lineCount": 48
+    },
+    {
+      "source": "S1",
+      "start": "005B6D00",
+      "endExclusive": "005B6E4E",
+      "sha256": "a7ffa1b73bf30ed87dd93dfdd75e1686be5f0daf4f7415d57805383e156d40da",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 94,
+      "lineCount": 121
+    },
+    {
+      "source": "S1",
+      "start": "005B7BE0",
+      "endExclusive": "005B7C04",
+      "sha256": "54b2499811a41621d6281a6dfd4675eab1ba825543ce3ee9eab11c8777d379ae",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 217,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005B8400",
+      "endExclusive": "005B84E2",
+      "sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 231,
+      "lineCount": 81
+    },
+    {
+      "source": "S1",
+      "start": "005B8F90",
+      "endExclusive": "005B9000",
+      "sha256": "d7d7aab23746ae14a8094f1ef6990b1a729d56893799794a37855c821bd9e272",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 314,
+      "lineCount": 37
+    },
+    {
+      "source": "S1",
+      "start": "005B9000",
+      "endExclusive": "005B905D",
+      "sha256": "c9c66203bbbc14e3399094f0938b398ec171983c2aaacd1f5456fe6c3f3717fa",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 353,
+      "lineCount": 32
+    },
+    {
+      "source": "S1",
+      "start": "005B9060",
+      "endExclusive": "005B90E3",
+      "sha256": "b01e11ac0ea15a3b281d4cb2b929bd80306959371a5a871709717386e8d605af",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 387,
+      "lineCount": 42
+    },
+    {
+      "source": "S1",
+      "start": "005B90F0",
+      "endExclusive": "005B9160",
+      "sha256": "3069266a875e2c6d0d2cacf45002f47ffa65556e906f2653b4c28c95a77f34f5",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 431,
+      "lineCount": 37
+    },
+    {
+      "source": "S1",
+      "start": "005B9160",
+      "endExclusive": "005B91FF",
+      "sha256": "5feffed8482dbb3e38b35ba314abde068c945d9c96fc2ab9f0c41507b1d1136e",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 470,
+      "lineCount": 56
+    },
+    {
+      "source": "S1",
+      "start": "005B9200",
+      "endExclusive": "005B92AA",
+      "sha256": "328827395bb7a78e2856546abc390a1d1833079f8553103aa08cf142cb23c3b7",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 528,
+      "lineCount": 61
+    },
+    {
+      "source": "S1",
+      "start": "005B9B40",
+      "endExclusive": "005B9B8E",
+      "sha256": "f14b892a5be8603044ef0991aac7cb4d95cc577296683f06a28bf12b7f921e8b",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 591,
+      "lineCount": 28
+    },
+    {
+      "source": "S1",
+      "start": "005B9C40",
+      "endExclusive": "005B9CB0",
+      "sha256": "84979387bdaecc087bb0ce71694a1c4ed66ae802cf7fb3a785246307eff16aeb",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 621,
+      "lineCount": 37
+    },
+    {
+      "source": "S1",
+      "start": "005BA520",
+      "endExclusive": "005BA526",
+      "sha256": "3ad3b8de377ca39afd03c964973bac1c1cc34b6b19c61339fa64498eda6bffac",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 660,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "005BA560",
+      "endExclusive": "005BA57D",
+      "sha256": "cf78bb5ff8a5c864eff586fcb3c0ba3cd736f100a7916058f21a3671f850ec2f",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 664,
+      "lineCount": 9
+    },
+    {
+      "source": "S1",
+      "start": "005BA5B0",
+      "endExclusive": "005BA5B6",
+      "sha256": "75f533bd3e59de2588c8f1901e45a3eea6688bc16b7ecaf3dcaf4d49cf4f3d49",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 675,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "005BA5F0",
+      "endExclusive": "005BA60D",
+      "sha256": "28a4aa4a45423dc962f457a1fac7f0a7ba608d1628dd7054eefc2165af2edb7d",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 679,
+      "lineCount": 9
+    },
+    {
+      "source": "S1",
+      "start": "005BA640",
+      "endExclusive": "005BA646",
+      "sha256": "22954e48ba4d89914bc8c4663a473a80db700de51e9090145042da6fcbabdf10",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 690,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "005BA680",
+      "endExclusive": "005BA69D",
+      "sha256": "e83aad3ed66bbd857ac9c11f6e978be9e44500f6ca69379c6605575c410e39e1",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 694,
+      "lineCount": 9
+    },
+    {
+      "source": "S1",
+      "start": "005BA6D0",
+      "endExclusive": "005BA6D6",
+      "sha256": "8e3e785d41dddc521601c78e6b419295110be69e63907076843ba16e092e98c9",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 705,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "005BA710",
+      "endExclusive": "005BA72D",
+      "sha256": "98267aa32f6e8100674095081f48c8fe4f69516fb2d98a2ec286d2764aa4d7fa",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 709,
+      "lineCount": 9
+    },
+    {
+      "source": "S1",
+      "start": "005BA760",
+      "endExclusive": "005BA766",
+      "sha256": "4becd086c8729211c845a4bf1497d75a688c76b952462edfe7f7b5a56f63b399",
+      "file": "S1-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 720,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "005BA7A0",
+      "endExclusive": "005BA7BD",
+      "sha256": "dde4a491baf3635349c09451b24ea0d18c24e90bc86523f56cdd84006d325d48",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 9
+    },
+    {
+      "source": "S1",
+      "start": "005BA7F0",
+      "endExclusive": "005BA7F6",
+      "sha256": "b5e246fbf558c442548ccb78aa6a03d48027a6f91f15c02d7dc661bd43aaaab1",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 13,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "005BA830",
+      "endExclusive": "005BA84D",
+      "sha256": "07f9ec1284fc51216859e4bddcdce7f1a014c3b0029bfe4ea937633f20593242",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 17,
+      "lineCount": 9
+    },
+    {
+      "source": "S1",
+      "start": "005BA880",
+      "endExclusive": "005BA886",
+      "sha256": "e4f9f7041b372cb8bd7dda73eb33390a3fb3a11ea2164b2b6a465b11b2ea2188",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 28,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "005BA8C0",
+      "endExclusive": "005BA8DD",
+      "sha256": "9ad2607beaec4a7b07ea6e4a0c7474824c59deaf28a486613b8700992909f28d",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 32,
+      "lineCount": 9
+    },
+    {
+      "source": "S1",
+      "start": "005BA8E0",
+      "endExclusive": "005BAD5E",
+      "sha256": "c65844314fa4fab9870bd91b1c3fced56559a3d9d78c397ee88d25c1b79a811d",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 43,
+      "lineCount": 230
+    },
+    {
+      "source": "S1",
+      "start": "005BAF10",
+      "endExclusive": "005BAF34",
+      "sha256": "8586c82f9855ef9113c9d2d31a091cc1a395e64e7bc0c9e56e77269a4234cce6",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 275,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005BBE30",
+      "endExclusive": "005BBFFD",
+      "sha256": "18d5f2efbf490e24aec97395cfe476ef32f16ebe67d7cc0b5fb3e6e155b76662",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 289,
+      "lineCount": 155
+    },
+    {
+      "source": "S1",
+      "start": "005BC070",
+      "endExclusive": "005BC094",
+      "sha256": "0e84d2b02355fc354b5f115c2fd7084f009898bd092ae42ca47dcb01f0dc77b6",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 446,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005BC560",
+      "endExclusive": "005BC58A",
+      "sha256": "0983fa2ee6cc6cab83861844b04c0ff028dd314057aebd37396c81aab8217e0a",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 460,
+      "lineCount": 17
+    },
+    {
+      "source": "S1",
+      "start": "005BC590",
+      "endExclusive": "005BC5D1",
+      "sha256": "6dff7486e2ebb2298cb42e655fa85ee91bb8dcac36fc76fe1e15e184fadbf610",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 479,
+      "lineCount": 27
+    },
+    {
+      "source": "S1",
+      "start": "005BC9F0",
+      "endExclusive": "005BCA19",
+      "sha256": "f72ca39df2c8134c4b0717f441fb8623ad1df2f3cd7c74d9791d4a45d2190f65",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 508,
+      "lineCount": 18
+    },
+    {
+      "source": "S1",
+      "start": "005BE040",
+      "endExclusive": "005BE0C3",
+      "sha256": "d2af3caf82d96d83615dd57e0dfd8643cdc28fefa3f9d7efc96faefa2a785769",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 528,
+      "lineCount": 46
+    },
+    {
+      "source": "S1",
+      "start": "005BEBD0",
+      "endExclusive": "005BEBF4",
+      "sha256": "8e212febd1d67184fc39cdf133797bdb0b9104c967fb6dc5d31c6d6c69712e3b",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 576,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005BEDA0",
+      "endExclusive": "005BEEE2",
+      "sha256": "b5f6702bc864e81bd071cf85e70e5782b29f7b0716acb96b9c13e055091c601e",
+      "file": "S1-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 590,
+      "lineCount": 116
+    },
+    {
+      "source": "S1",
+      "start": "005C0030",
+      "endExclusive": "005C0054",
+      "sha256": "4b0e2c1149ae2ee2420c781e2ec72bf52d106c2db2a9cc2413e822b24f76a16e",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005C04F0",
+      "endExclusive": "005C0514",
+      "sha256": "4f573b80a1d82316dec40bba54c00b308cbfe7d15f927739a0072f8aa914ca05",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 16,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005C0F00",
+      "endExclusive": "005C0F24",
+      "sha256": "e94c964e8dfa3698417e852516149b48406c12f1ad4c3988c9f3f14ddf911457",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 30,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005C1CD0",
+      "endExclusive": "005C1CF4",
+      "sha256": "ef2d637c40754de4bcec0420abe9e7f4d2f406fdacf634bb88b3fc7d8baf7a07",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 44,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005C2650",
+      "endExclusive": "005C2674",
+      "sha256": "6785cd2d98f6c4b92884f2bd86e89eaaea008b11fddd4afc3f5aacf052eff6d8",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 58,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005C2B60",
+      "endExclusive": "005C2BEA",
+      "sha256": "c7c7a8dd2677174964502639463d9921448b153f8471ca6bb61f73288fd4eebe",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 72,
+      "lineCount": 48
+    },
+    {
+      "source": "S1",
+      "start": "005C3790",
+      "endExclusive": "005C37B4",
+      "sha256": "dd8bedb5827508831a38a023df4ce1c1ecb06c1ed557f71c000b902eefc2a8e4",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 122,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005C40D0",
+      "endExclusive": "005C40F4",
+      "sha256": "ad08b975882df95cca54eeef47e0b3624d5dbef0e96ba1711e6a34e84540c16b",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 136,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005C4E70",
+      "endExclusive": "005C4F7E",
+      "sha256": "70416a83c176fe2d8535e3f834fd5ceebdcce0c290ac808741beb5d3ba742261",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 150,
+      "lineCount": 100
+    },
+    {
+      "source": "S1",
+      "start": "005C5670",
+      "endExclusive": "005C5694",
+      "sha256": "accc04dc6298ea99e05132b95c0e6a958693df1997a18ea60fe18ffd269f1a72",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 252,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005C6AA0",
+      "endExclusive": "005C6C9A",
+      "sha256": "faabb270b4f7e59c38fb27d06f3630cb64c05344d88da9cc65d39973e690b722",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 266,
+      "lineCount": 171
+    },
+    {
+      "source": "S1",
+      "start": "005C6E80",
+      "endExclusive": "005C6EA4",
+      "sha256": "8c1769728052080413932702b954f40c7faa72235a32102a8653203c60ec5476",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 439,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005C7550",
+      "endExclusive": "005C7574",
+      "sha256": "628da1fc160dae564aa03cf499193a56d7269827dcca7e3f663ea4341594fe50",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 453,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005C7D90",
+      "endExclusive": "005C7DB4",
+      "sha256": "26144dc961bfb360db497bc029b4cc6d097ad0e1d2f6543feb6f5729e266cd37",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 467,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005C8B80",
+      "endExclusive": "005C8BA4",
+      "sha256": "a45a99353c0af82128a1ceceea5422826a8bdc3c01173063522d1b45be640183",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 481,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005CA920",
+      "endExclusive": "005CA944",
+      "sha256": "7489c0007182c93f5565b792bda197e43cdb477983da9632f50108c637628cee",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 495,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005CB050",
+      "endExclusive": "005CB177",
+      "sha256": "63ef89f2b55faae9aea25c885ae229a65ed24487bca73410bbf9b3d37bbae6c9",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 509,
+      "lineCount": 108
+    },
+    {
+      "source": "S1",
+      "start": "005CB2B0",
+      "endExclusive": "005CB2D4",
+      "sha256": "fb8ce895cab93ea82d384bb2007353d95b676db083b3d0905161920effe70d0b",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 619,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005CBAE0",
+      "endExclusive": "005CBB04",
+      "sha256": "f1b20cd61f970a94783b8ac808881eae3a590a8bb13717996002bea41ad73879",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 633,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005CC1C0",
+      "endExclusive": "005CC24A",
+      "sha256": "d32b343696149d47ba8307e65594c65b0cfa8eac948662bdab33a21709cac048",
+      "file": "S1-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 647,
+      "lineCount": 48
+    },
+    {
+      "source": "S1",
+      "start": "005CD1A0",
+      "endExclusive": "005CD22A",
+      "sha256": "95af7b067d0bc37f2a8ab9b3bfe9fbd991eddddf7ebedf653c14d1a00a81b958",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 48
+    },
+    {
+      "source": "S1",
+      "start": "005CE930",
+      "endExclusive": "005CE954",
+      "sha256": "d1cbd83769bc48dd0b78a6cf3f354f235972dddcdcb69768c86247864947aebf",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 52,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005CF300",
+      "endExclusive": "005CF324",
+      "sha256": "e9c2d11e8700a1c80efae75c1333698311eac0db9a2bf464d084059572834bfe",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 66,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005CFB70",
+      "endExclusive": "005CFCB2",
+      "sha256": "1321f69bbd6dfd7b78792e8b61f2c8c80e1b3de3bd695f792dfb01f95dd953e2",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 80,
+      "lineCount": 116
+    },
+    {
+      "source": "S1",
+      "start": "005D0270",
+      "endExclusive": "005D0294",
+      "sha256": "7602ede13483ef5dc58f61e66d9272f25762639af8553a7a7e552fc6d4801b0a",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 198,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005D3A90",
+      "endExclusive": "005D3AB4",
+      "sha256": "8d17611afeda3e01f2e81866a11abbd40264000792563ee2a1bbdb83c319d277",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 212,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005D5DD0",
+      "endExclusive": "005D5EF7",
+      "sha256": "918f1b3d84c37b10c36ebdd81f78499ee9158c3bbb535831b3b52a6805daf6f4",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 226,
+      "lineCount": 108
+    },
+    {
+      "source": "S1",
+      "start": "005D5F60",
+      "endExclusive": "005D5F84",
+      "sha256": "f44b05c8c730e597042dd91a8e1230a4ac9440cb201b9dd85f697c6d299dd2ef",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 336,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005D69D0",
+      "endExclusive": "005D6B2A",
+      "sha256": "a9554f02ca0d7e0b401dd6e303ba1e3665562da1c2c48d1f3d5aec4af6b0e29c",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 350,
+      "lineCount": 116
+    },
+    {
+      "source": "S1",
+      "start": "005D6E70",
+      "endExclusive": "005D6E94",
+      "sha256": "8fae4139b6ec7f0f83027d3d885cdb59e84f5442b8b5829c602d91ed35f0afaf",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 468,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005D7FC0",
+      "endExclusive": "005D8212",
+      "sha256": "e67706b5f54400c1f49d8252e0c7edc509a1db9357886dd263478ee0fc808021",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 482,
+      "lineCount": 190
+    },
+    {
+      "source": "S1",
+      "start": "005D8580",
+      "endExclusive": "005D85A4",
+      "sha256": "cc44ee988ffdd1ec125f777c1ab95be6183c9ad1a8cf1088848ca7656c0668ce",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 674,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005D9070",
+      "endExclusive": "005D9082",
+      "sha256": "6467aec22e94b6e621e950494494a426554633765a2a8931db66ebf6ba197e2b",
+      "file": "S1-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 688,
+      "lineCount": 7
+    },
+    {
+      "source": "S1",
+      "start": "005D9C60",
+      "endExclusive": "005D9CF3",
+      "sha256": "3fcfc05229383189a155f0c7789b441bd871768acdfe395046b509121a103cce",
+      "file": "S1-mission-code-06.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 60
+    },
+    {
+      "source": "S1",
+      "start": "005D9EA0",
+      "endExclusive": "005D9EC4",
+      "sha256": "a1ec32a9a0cacb395becf5f8bde814844e904977bce0eb6ab866a8fdd18a650b",
+      "file": "S1-mission-code-06.asm.txt",
+      "kind": "code",
+      "lineStart": 64,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "005D9F90",
+      "endExclusive": "005D9FA2",
+      "sha256": "24b7be358313432ef047915bd529c0f817a72281a734558e9d7765d9d41193f0",
+      "file": "S1-mission-code-06.asm.txt",
+      "kind": "code",
+      "lineStart": 78,
+      "lineCount": 7
+    },
+    {
+      "source": "S1",
+      "start": "005DA8B0",
+      "endExclusive": "005DA8C2",
+      "sha256": "fce252bbf0f68612b0ab6eeb6735d451ccb0ff901ed12f095e73bceec7d9315f",
+      "file": "S1-mission-code-06.asm.txt",
+      "kind": "code",
+      "lineStart": 87,
+      "lineCount": 7
+    },
+    {
+      "source": "S1",
+      "start": "005DB140",
+      "endExclusive": "005DB164",
+      "sha256": "4a226f11745db0fb150d6afd6118ebf27fd5b329c8739c676706e4bf646f1995",
+      "file": "S1-mission-code-06.asm.txt",
+      "kind": "code",
+      "lineStart": 96,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "008492F8",
+      "endExclusive": "00849304",
+      "sha256": "b3a4771b5ddd1ea7fcffd976bf77755cb4eb00163655e58fcacff03d498a94d0",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 2,
+      "lineCount": 3
+    },
+    {
+      "source": "S1",
+      "start": "0084930C",
+      "endExclusive": "00849318",
+      "sha256": "f30ac0b8876a2f1050f5252fb82e57da87f419e90e9bdce197c721676fd55c8c",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 7,
+      "lineCount": 3
+    },
+    {
+      "source": "S1",
+      "start": "00849320",
+      "endExclusive": "0084932C",
+      "sha256": "232eff10c0080f636a2abf5e8beacccc970b5d375c5d3560f352027577ded5e1",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 12,
+      "lineCount": 3
+    },
+    {
+      "source": "S1",
+      "start": "00849338",
+      "endExclusive": "00849344",
+      "sha256": "01acae0cc8149d68ad13de21508629597b936ee2a7dea3165dc038967e86cec1",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 17,
+      "lineCount": 3
+    },
+    {
+      "source": "S1",
+      "start": "00849350",
+      "endExclusive": "0084935C",
+      "sha256": "be44f56808069bb52ff65c998ee7760417f02a648e48e8d7d59218dd40db1b3d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 22,
+      "lineCount": 3
+    },
+    {
+      "source": "S1",
+      "start": "00849368",
+      "endExclusive": "00849374",
+      "sha256": "884656f6ce35c75ba548e7509af22487d734e99991bee3c11a77b0c166d15d86",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 27,
+      "lineCount": 3
+    },
+    {
+      "source": "S1",
+      "start": "0084991C",
+      "endExclusive": "00849928",
+      "sha256": "ac4ded41bb2f7e3cf853f8193385bdaa91309636b38390a88ebd94ec3896fa6f",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 32,
+      "lineCount": 3
+    },
+    {
+      "source": "S1",
+      "start": "0084BCF8",
+      "endExclusive": "0084BCFC",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 37,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084BD38",
+      "endExclusive": "0084BD3C",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 40,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084BD58",
+      "endExclusive": "0084BD5C",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 43,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084BD78",
+      "endExclusive": "0084BD7C",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 46,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084BF80",
+      "endExclusive": "0084BF84",
+      "sha256": "e019fc33b246fda97bd41859aeec266da9acaee934c47200194e040d61428be1",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 49,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084BF98",
+      "endExclusive": "0084BF9C",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 52,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084BFB0",
+      "endExclusive": "0084BFB4",
+      "sha256": "301a35607e9524d2aea9a9547025e9b385bfab751a067d6b1ea15613ce9cb112",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 55,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084BFCC",
+      "endExclusive": "0084BFD0",
+      "sha256": "da9512eea8565792bb3ebc46d29806509f5338a41375fa67a19b03b4d8b7fb46",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 58,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084BFE8",
+      "endExclusive": "0084BFEC",
+      "sha256": "13744d9f0ee1fb3a6b6be0d0310d03e2276fb16dae328a3be9680106df47f72c",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 61,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C004",
+      "endExclusive": "0084C008",
+      "sha256": "eb63c51fc42b482442e6c2f902af7ca78adf5756edd2e23051ca2372995fbdf6",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 64,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C020",
+      "endExclusive": "0084C024",
+      "sha256": "8e28a1c9b263ca595990e26c5f5387ee99ac13b1288ad5368d0549710c81deda",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 67,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C03C",
+      "endExclusive": "0084C040",
+      "sha256": "c8a3fb0b09ac7f3acb32a31463f564d23f8a1692f6cfc5271299f6ffb045d6c5",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 70,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C058",
+      "endExclusive": "0084C05C",
+      "sha256": "dd27b93d099a44eef2c04c6531d84db0c9e1f484c465868085c31969f1902f8c",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 73,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C118",
+      "endExclusive": "0084C11C",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 76,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C138",
+      "endExclusive": "0084C13C",
+      "sha256": "c2404fb98e59f50c429ae450e17d6c7454b55f168e8841cc89d1732d313e943c",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 79,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C340",
+      "endExclusive": "0084C344",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 82,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C360",
+      "endExclusive": "0084C364",
+      "sha256": "104385fc9c89e0b98ad0233ef64ef287bf3856dd173468b4b410cc2e8bdfc2ab",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 85,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C380",
+      "endExclusive": "0084C384",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 88,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C3A0",
+      "endExclusive": "0084C3A4",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 91,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C3C0",
+      "endExclusive": "0084C3C4",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 94,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C3E0",
+      "endExclusive": "0084C3E4",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 97,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C5E8",
+      "endExclusive": "0084C5EC",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 100,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C608",
+      "endExclusive": "0084C60C",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 103,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C628",
+      "endExclusive": "0084C62C",
+      "sha256": "a50630ca005193f16a0c6c351bd16c1f9cdc195b9bc3b147a33548d42ca77c1d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 106,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C648",
+      "endExclusive": "0084C64C",
+      "sha256": "e44327d1ca6ffb7556597d75036dda3d2847c6bc136c8963254d417b8387a8b6",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 109,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C66C",
+      "endExclusive": "0084C670",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 112,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C68C",
+      "endExclusive": "0084C690",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 115,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C894",
+      "endExclusive": "0084C898",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 118,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C8B4",
+      "endExclusive": "0084C8B8",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 121,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C8D4",
+      "endExclusive": "0084C8D8",
+      "sha256": "224dc611659fffa1c1f39d7365d68c2359182bef5690bbf7d1336f4e783ed283",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 124,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084C8F4",
+      "endExclusive": "0084C8F8",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 127,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084CCE0",
+      "endExclusive": "0084CCE4",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 130,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084CD00",
+      "endExclusive": "0084CD04",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 133,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084CD20",
+      "endExclusive": "0084CD24",
+      "sha256": "b6002b448f58f2e3a59f15e78c50dbfcad9a890e3a4fffcd303c926f9fc28cdb",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 136,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084CD44",
+      "endExclusive": "0084CD48",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 139,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084CD64",
+      "endExclusive": "0084CD68",
+      "sha256": "725668676662dedba4d5db4a229742fc76659c85bb5e29fe3419b0b3bc128dfa",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 142,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084CD8C",
+      "endExclusive": "0084CD90",
+      "sha256": "3d6904e93f2e2dc6a82cb66ec735ea2a9290940e5a0743b27d22f903338fddea",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 145,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084CDBC",
+      "endExclusive": "0084CDC0",
+      "sha256": "5505db0cbe64bea5e42b58985e95cc53043317bc856a7c2dc93a926060242612",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 148,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084CDF4",
+      "endExclusive": "0084CDF8",
+      "sha256": "a343d9cf60451ea2e1e10dc69e2678fa16dd49b0a14b8e3e366a56a0ed1d3c20",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 151,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084CE3C",
+      "endExclusive": "0084CE40",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 154,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084CE54",
+      "endExclusive": "0084CE58",
+      "sha256": "a343d9cf60451ea2e1e10dc69e2678fa16dd49b0a14b8e3e366a56a0ed1d3c20",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 157,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084CE70",
+      "endExclusive": "0084CE74",
+      "sha256": "a343d9cf60451ea2e1e10dc69e2678fa16dd49b0a14b8e3e366a56a0ed1d3c20",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 160,
+      "lineCount": 1
+    },
+    {
+      "source": "S1",
+      "start": "0084CE90",
+      "endExclusive": "0084CE94",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S1-mission-data.txt",
+      "kind": "data",
+      "lineStart": 163,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "00441880",
+      "endExclusive": "00441885",
+      "sha256": "3df6af1ec778d46a61b8d7160523ba89fe1af814222acb1175be5a7b1748e06b",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "0047A600",
+      "endExclusive": "0047A626",
+      "sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 6,
+      "lineCount": 18
+    },
+    {
+      "source": "S2",
+      "start": "0047A630",
+      "endExclusive": "0047A656",
+      "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 26,
+      "lineCount": 18
+    },
+    {
+      "source": "S2",
+      "start": "0047BCF0",
+      "endExclusive": "0047BD12",
+      "sha256": "49822991f42cb6880d21df749d436bb07ffc0f793010c380a0e0b2fb9950db97",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 46,
+      "lineCount": 11
+    },
+    {
+      "source": "S2",
+      "start": "00482F80",
+      "endExclusive": "00482FC0",
+      "sha256": "a3294bd1f816574db08694971a10cf95a2b40d8877cdda4bf13b622f498aff4c",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 59,
+      "lineCount": 26
+    },
+    {
+      "source": "S2",
+      "start": "00483660",
+      "endExclusive": "004836B8",
+      "sha256": "9d8ee806575a3bbcc2aaddf9002b308e75c81f22c38fcf5c5fe2172b6180fbfb",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 87,
+      "lineCount": 35
+    },
+    {
+      "source": "S2",
+      "start": "00486C80",
+      "endExclusive": "00486D2A",
+      "sha256": "102594bd6629352165ba7c5645a8009a9cbbfbca658d3312b3538f6c5ff5bffe",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 124,
+      "lineCount": 65
+    },
+    {
+      "source": "S2",
+      "start": "00486D30",
+      "endExclusive": "00486DE7",
+      "sha256": "c3313d2c1972326ba37741ba77446d550862b6d3edeb124b6656bf3536cd95f3",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 191,
+      "lineCount": 69
+    },
+    {
+      "source": "S2",
+      "start": "00487310",
+      "endExclusive": "004873E2",
+      "sha256": "93a38fc6e422c6344db8c85b8f839d0a19a602d11b9766ef9dc7706cc9fb4bfb",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 262,
+      "lineCount": 76
+    },
+    {
+      "source": "S2",
+      "start": "00488C70",
+      "endExclusive": "00488C7F",
+      "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 340,
+      "lineCount": 5
+    },
+    {
+      "source": "S2",
+      "start": "004897B0",
+      "endExclusive": "004897CD",
+      "sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 347,
+      "lineCount": 9
+    },
+    {
+      "source": "S2",
+      "start": "0048D820",
+      "endExclusive": "0048D859",
+      "sha256": "2e0e4be9421aa1f2cc32d1f0a58d828f3c16c06c2cf22600ac4b413b655d367b",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 358,
+      "lineCount": 21
+    },
+    {
+      "source": "S2",
+      "start": "00490AA0",
+      "endExclusive": "00490AC2",
+      "sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 381,
+      "lineCount": 10
+    },
+    {
+      "source": "S2",
+      "start": "00490B00",
+      "endExclusive": "00490B24",
+      "sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 393,
+      "lineCount": 10
+    },
+    {
+      "source": "S2",
+      "start": "00490D00",
+      "endExclusive": "00490D21",
+      "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 405,
+      "lineCount": 10
+    },
+    {
+      "source": "S2",
+      "start": "004A06A0",
+      "endExclusive": "004A06AD",
+      "sha256": "5d440998401108a871a7787b8f210906e453bc44afe1b15f0fac976f238bce6f",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 417,
+      "lineCount": 4
+    },
+    {
+      "source": "S2",
+      "start": "004A5600",
+      "endExclusive": "004A5622",
+      "sha256": "ba6c6d920a0fc1aca5619eb56c8b243f55fccd20c985dfb85184f883b0750a60",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 423,
+      "lineCount": 13
+    },
+    {
+      "source": "S2",
+      "start": "004A73A0",
+      "endExclusive": "004A740E",
+      "sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 438,
+      "lineCount": 44
+    },
+    {
+      "source": "S2",
+      "start": "004AE2A0",
+      "endExclusive": "004AE2FF",
+      "sha256": "4c496db9d8a880bd4378fce6e8ad7a0dfbdbe101e8e59ec4ee86d6d7764c4244",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 484,
+      "lineCount": 41
+    },
+    {
+      "source": "S2",
+      "start": "004B9480",
+      "endExclusive": "004B949C",
+      "sha256": "35a0c7c9c9dbd6fa800d8bcd9019e2504d21279532929975f16d62f8e9acee53",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 527,
+      "lineCount": 11
+    },
+    {
+      "source": "S2",
+      "start": "005725A0",
+      "endExclusive": "005725CE",
+      "sha256": "54166980e15e096a83a7ef288e106a48e3d70d224838e2477c53e48863e16b08",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 540,
+      "lineCount": 20
+    },
+    {
+      "source": "S2",
+      "start": "00572680",
+      "endExclusive": "005726C7",
+      "sha256": "68f1e594b13b0edc48dcb144b078b782e23de0f0ba8aecfa859f473ecffa10f4",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 562,
+      "lineCount": 28
+    },
+    {
+      "source": "S2",
+      "start": "00572760",
+      "endExclusive": "005727AE",
+      "sha256": "6e0be7902a2b869d1617464cb2c4795dacb75fc4ab402b7f928e3a85b86e7208",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 592,
+      "lineCount": 32
+    },
+    {
+      "source": "S2",
+      "start": "005B1E60",
+      "endExclusive": "005B1EEA",
+      "sha256": "083938341640eca4c1399f7b12bbf683f51471f2be1134a5a6ca5e9c8912d686",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 626,
+      "lineCount": 48
+    },
+    {
+      "source": "S2",
+      "start": "005B2C70",
+      "endExclusive": "005B2CF8",
+      "sha256": "ba889c145aafb87af258f12a946864e06fae004bab900e1bfc98f9ad621b5902",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 676,
+      "lineCount": 47
+    },
+    {
+      "source": "S2",
+      "start": "005B3F70",
+      "endExclusive": "005B3F94",
+      "sha256": "0720679446a87d6ee2b909b0ced81eff835baaa18a9c605af8e0adf3943303e2",
+      "file": "S2-mission-code-01.asm.txt",
+      "kind": "code",
+      "lineStart": 725,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005B4B60",
+      "endExclusive": "005B4B84",
+      "sha256": "57dd8937a1ff4c1fd7be89b4b0a29575b6df55e4c03d7cacd6d06e38c556d706",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005B4F40",
+      "endExclusive": "005B4F64",
+      "sha256": "0850c8192dd992c118acca0014667077d92a6075209619f600603884a630628a",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 16,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005B5B30",
+      "endExclusive": "005B5B54",
+      "sha256": "e61e34ab5659b84f9be85649848bee5830aff787eb3a9869e4236f7c7bd8c485",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 30,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005B6060",
+      "endExclusive": "005B60EA",
+      "sha256": "874a7694245c5cad7b6d324c1af3cc1a715cdce897e8fb668b027a7719789ce9",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 44,
+      "lineCount": 48
+    },
+    {
+      "source": "S2",
+      "start": "005B6D00",
+      "endExclusive": "005B6E4E",
+      "sha256": "a7ffa1b73bf30ed87dd93dfdd75e1686be5f0daf4f7415d57805383e156d40da",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 94,
+      "lineCount": 121
+    },
+    {
+      "source": "S2",
+      "start": "005B7BE0",
+      "endExclusive": "005B7C04",
+      "sha256": "54b2499811a41621d6281a6dfd4675eab1ba825543ce3ee9eab11c8777d379ae",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 217,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005B8400",
+      "endExclusive": "005B84E2",
+      "sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 231,
+      "lineCount": 81
+    },
+    {
+      "source": "S2",
+      "start": "005B8F90",
+      "endExclusive": "005B9000",
+      "sha256": "d7d7aab23746ae14a8094f1ef6990b1a729d56893799794a37855c821bd9e272",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 314,
+      "lineCount": 37
+    },
+    {
+      "source": "S2",
+      "start": "005B9000",
+      "endExclusive": "005B905D",
+      "sha256": "c9c66203bbbc14e3399094f0938b398ec171983c2aaacd1f5456fe6c3f3717fa",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 353,
+      "lineCount": 32
+    },
+    {
+      "source": "S2",
+      "start": "005B9060",
+      "endExclusive": "005B90E3",
+      "sha256": "b01e11ac0ea15a3b281d4cb2b929bd80306959371a5a871709717386e8d605af",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 387,
+      "lineCount": 42
+    },
+    {
+      "source": "S2",
+      "start": "005B90F0",
+      "endExclusive": "005B9160",
+      "sha256": "3069266a875e2c6d0d2cacf45002f47ffa65556e906f2653b4c28c95a77f34f5",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 431,
+      "lineCount": 37
+    },
+    {
+      "source": "S2",
+      "start": "005B9160",
+      "endExclusive": "005B91FF",
+      "sha256": "5feffed8482dbb3e38b35ba314abde068c945d9c96fc2ab9f0c41507b1d1136e",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 470,
+      "lineCount": 56
+    },
+    {
+      "source": "S2",
+      "start": "005B9200",
+      "endExclusive": "005B92AA",
+      "sha256": "328827395bb7a78e2856546abc390a1d1833079f8553103aa08cf142cb23c3b7",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 528,
+      "lineCount": 61
+    },
+    {
+      "source": "S2",
+      "start": "005B9B40",
+      "endExclusive": "005B9B8E",
+      "sha256": "f14b892a5be8603044ef0991aac7cb4d95cc577296683f06a28bf12b7f921e8b",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 591,
+      "lineCount": 28
+    },
+    {
+      "source": "S2",
+      "start": "005B9C40",
+      "endExclusive": "005B9CB0",
+      "sha256": "84979387bdaecc087bb0ce71694a1c4ed66ae802cf7fb3a785246307eff16aeb",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 621,
+      "lineCount": 37
+    },
+    {
+      "source": "S2",
+      "start": "005BA520",
+      "endExclusive": "005BA526",
+      "sha256": "3ad3b8de377ca39afd03c964973bac1c1cc34b6b19c61339fa64498eda6bffac",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 660,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "005BA560",
+      "endExclusive": "005BA57D",
+      "sha256": "cf78bb5ff8a5c864eff586fcb3c0ba3cd736f100a7916058f21a3671f850ec2f",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 664,
+      "lineCount": 9
+    },
+    {
+      "source": "S2",
+      "start": "005BA5B0",
+      "endExclusive": "005BA5B6",
+      "sha256": "75f533bd3e59de2588c8f1901e45a3eea6688bc16b7ecaf3dcaf4d49cf4f3d49",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 675,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "005BA5F0",
+      "endExclusive": "005BA60D",
+      "sha256": "28a4aa4a45423dc962f457a1fac7f0a7ba608d1628dd7054eefc2165af2edb7d",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 679,
+      "lineCount": 9
+    },
+    {
+      "source": "S2",
+      "start": "005BA640",
+      "endExclusive": "005BA646",
+      "sha256": "22954e48ba4d89914bc8c4663a473a80db700de51e9090145042da6fcbabdf10",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 690,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "005BA680",
+      "endExclusive": "005BA69D",
+      "sha256": "e83aad3ed66bbd857ac9c11f6e978be9e44500f6ca69379c6605575c410e39e1",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 694,
+      "lineCount": 9
+    },
+    {
+      "source": "S2",
+      "start": "005BA6D0",
+      "endExclusive": "005BA6D6",
+      "sha256": "8e3e785d41dddc521601c78e6b419295110be69e63907076843ba16e092e98c9",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 705,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "005BA710",
+      "endExclusive": "005BA72D",
+      "sha256": "98267aa32f6e8100674095081f48c8fe4f69516fb2d98a2ec286d2764aa4d7fa",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 709,
+      "lineCount": 9
+    },
+    {
+      "source": "S2",
+      "start": "005BA760",
+      "endExclusive": "005BA766",
+      "sha256": "4becd086c8729211c845a4bf1497d75a688c76b952462edfe7f7b5a56f63b399",
+      "file": "S2-mission-code-02.asm.txt",
+      "kind": "code",
+      "lineStart": 720,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "005BA7A0",
+      "endExclusive": "005BA7BD",
+      "sha256": "dde4a491baf3635349c09451b24ea0d18c24e90bc86523f56cdd84006d325d48",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 9
+    },
+    {
+      "source": "S2",
+      "start": "005BA7F0",
+      "endExclusive": "005BA7F6",
+      "sha256": "b5e246fbf558c442548ccb78aa6a03d48027a6f91f15c02d7dc661bd43aaaab1",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 13,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "005BA830",
+      "endExclusive": "005BA84D",
+      "sha256": "07f9ec1284fc51216859e4bddcdce7f1a014c3b0029bfe4ea937633f20593242",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 17,
+      "lineCount": 9
+    },
+    {
+      "source": "S2",
+      "start": "005BA880",
+      "endExclusive": "005BA886",
+      "sha256": "e4f9f7041b372cb8bd7dda73eb33390a3fb3a11ea2164b2b6a465b11b2ea2188",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 28,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "005BA8C0",
+      "endExclusive": "005BA8DD",
+      "sha256": "9ad2607beaec4a7b07ea6e4a0c7474824c59deaf28a486613b8700992909f28d",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 32,
+      "lineCount": 9
+    },
+    {
+      "source": "S2",
+      "start": "005BA8E0",
+      "endExclusive": "005BAD5E",
+      "sha256": "c65844314fa4fab9870bd91b1c3fced56559a3d9d78c397ee88d25c1b79a811d",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 43,
+      "lineCount": 230
+    },
+    {
+      "source": "S2",
+      "start": "005BAF10",
+      "endExclusive": "005BAF34",
+      "sha256": "8586c82f9855ef9113c9d2d31a091cc1a395e64e7bc0c9e56e77269a4234cce6",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 275,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005BBE30",
+      "endExclusive": "005BBFFD",
+      "sha256": "18d5f2efbf490e24aec97395cfe476ef32f16ebe67d7cc0b5fb3e6e155b76662",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 289,
+      "lineCount": 155
+    },
+    {
+      "source": "S2",
+      "start": "005BC070",
+      "endExclusive": "005BC094",
+      "sha256": "0e84d2b02355fc354b5f115c2fd7084f009898bd092ae42ca47dcb01f0dc77b6",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 446,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005BC560",
+      "endExclusive": "005BC58A",
+      "sha256": "0983fa2ee6cc6cab83861844b04c0ff028dd314057aebd37396c81aab8217e0a",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 460,
+      "lineCount": 17
+    },
+    {
+      "source": "S2",
+      "start": "005BC590",
+      "endExclusive": "005BC5D1",
+      "sha256": "6dff7486e2ebb2298cb42e655fa85ee91bb8dcac36fc76fe1e15e184fadbf610",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 479,
+      "lineCount": 27
+    },
+    {
+      "source": "S2",
+      "start": "005BC9F0",
+      "endExclusive": "005BCA19",
+      "sha256": "f72ca39df2c8134c4b0717f441fb8623ad1df2f3cd7c74d9791d4a45d2190f65",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 508,
+      "lineCount": 18
+    },
+    {
+      "source": "S2",
+      "start": "005BE040",
+      "endExclusive": "005BE0C3",
+      "sha256": "d2af3caf82d96d83615dd57e0dfd8643cdc28fefa3f9d7efc96faefa2a785769",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 528,
+      "lineCount": 46
+    },
+    {
+      "source": "S2",
+      "start": "005BEBD0",
+      "endExclusive": "005BEBF4",
+      "sha256": "8e212febd1d67184fc39cdf133797bdb0b9104c967fb6dc5d31c6d6c69712e3b",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 576,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005BEDA0",
+      "endExclusive": "005BEEE2",
+      "sha256": "b5f6702bc864e81bd071cf85e70e5782b29f7b0716acb96b9c13e055091c601e",
+      "file": "S2-mission-code-03.asm.txt",
+      "kind": "code",
+      "lineStart": 590,
+      "lineCount": 116
+    },
+    {
+      "source": "S2",
+      "start": "005C0030",
+      "endExclusive": "005C0054",
+      "sha256": "4b0e2c1149ae2ee2420c781e2ec72bf52d106c2db2a9cc2413e822b24f76a16e",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005C04F0",
+      "endExclusive": "005C0514",
+      "sha256": "4f573b80a1d82316dec40bba54c00b308cbfe7d15f927739a0072f8aa914ca05",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 16,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005C0F00",
+      "endExclusive": "005C0F24",
+      "sha256": "e94c964e8dfa3698417e852516149b48406c12f1ad4c3988c9f3f14ddf911457",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 30,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005C1CD0",
+      "endExclusive": "005C1CF4",
+      "sha256": "ef2d637c40754de4bcec0420abe9e7f4d2f406fdacf634bb88b3fc7d8baf7a07",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 44,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005C2650",
+      "endExclusive": "005C2674",
+      "sha256": "6785cd2d98f6c4b92884f2bd86e89eaaea008b11fddd4afc3f5aacf052eff6d8",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 58,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005C2B60",
+      "endExclusive": "005C2BEA",
+      "sha256": "c7c7a8dd2677174964502639463d9921448b153f8471ca6bb61f73288fd4eebe",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 72,
+      "lineCount": 48
+    },
+    {
+      "source": "S2",
+      "start": "005C3790",
+      "endExclusive": "005C37B4",
+      "sha256": "dd8bedb5827508831a38a023df4ce1c1ecb06c1ed557f71c000b902eefc2a8e4",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 122,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005C40D0",
+      "endExclusive": "005C40F4",
+      "sha256": "ad08b975882df95cca54eeef47e0b3624d5dbef0e96ba1711e6a34e84540c16b",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 136,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005C4E70",
+      "endExclusive": "005C4F7E",
+      "sha256": "70416a83c176fe2d8535e3f834fd5ceebdcce0c290ac808741beb5d3ba742261",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 150,
+      "lineCount": 100
+    },
+    {
+      "source": "S2",
+      "start": "005C5670",
+      "endExclusive": "005C5694",
+      "sha256": "accc04dc6298ea99e05132b95c0e6a958693df1997a18ea60fe18ffd269f1a72",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 252,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005C6AA0",
+      "endExclusive": "005C6C9A",
+      "sha256": "faabb270b4f7e59c38fb27d06f3630cb64c05344d88da9cc65d39973e690b722",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 266,
+      "lineCount": 171
+    },
+    {
+      "source": "S2",
+      "start": "005C6E80",
+      "endExclusive": "005C6EA4",
+      "sha256": "8c1769728052080413932702b954f40c7faa72235a32102a8653203c60ec5476",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 439,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005C7550",
+      "endExclusive": "005C7574",
+      "sha256": "628da1fc160dae564aa03cf499193a56d7269827dcca7e3f663ea4341594fe50",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 453,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005C7D90",
+      "endExclusive": "005C7DB4",
+      "sha256": "26144dc961bfb360db497bc029b4cc6d097ad0e1d2f6543feb6f5729e266cd37",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 467,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005C8B80",
+      "endExclusive": "005C8BA4",
+      "sha256": "a45a99353c0af82128a1ceceea5422826a8bdc3c01173063522d1b45be640183",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 481,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005CA920",
+      "endExclusive": "005CA944",
+      "sha256": "7489c0007182c93f5565b792bda197e43cdb477983da9632f50108c637628cee",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 495,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005CB050",
+      "endExclusive": "005CB177",
+      "sha256": "63ef89f2b55faae9aea25c885ae229a65ed24487bca73410bbf9b3d37bbae6c9",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 509,
+      "lineCount": 108
+    },
+    {
+      "source": "S2",
+      "start": "005CB2B0",
+      "endExclusive": "005CB2D4",
+      "sha256": "fb8ce895cab93ea82d384bb2007353d95b676db083b3d0905161920effe70d0b",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 619,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005CBAE0",
+      "endExclusive": "005CBB04",
+      "sha256": "f1b20cd61f970a94783b8ac808881eae3a590a8bb13717996002bea41ad73879",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 633,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005CC1C0",
+      "endExclusive": "005CC24A",
+      "sha256": "d32b343696149d47ba8307e65594c65b0cfa8eac948662bdab33a21709cac048",
+      "file": "S2-mission-code-04.asm.txt",
+      "kind": "code",
+      "lineStart": 647,
+      "lineCount": 48
+    },
+    {
+      "source": "S2",
+      "start": "005CD1A0",
+      "endExclusive": "005CD22A",
+      "sha256": "95af7b067d0bc37f2a8ab9b3bfe9fbd991eddddf7ebedf653c14d1a00a81b958",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 48
+    },
+    {
+      "source": "S2",
+      "start": "005CE930",
+      "endExclusive": "005CE954",
+      "sha256": "d1cbd83769bc48dd0b78a6cf3f354f235972dddcdcb69768c86247864947aebf",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 52,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005CF300",
+      "endExclusive": "005CF324",
+      "sha256": "e9c2d11e8700a1c80efae75c1333698311eac0db9a2bf464d084059572834bfe",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 66,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005CFB70",
+      "endExclusive": "005CFCB2",
+      "sha256": "1321f69bbd6dfd7b78792e8b61f2c8c80e1b3de3bd695f792dfb01f95dd953e2",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 80,
+      "lineCount": 116
+    },
+    {
+      "source": "S2",
+      "start": "005D0270",
+      "endExclusive": "005D0294",
+      "sha256": "7602ede13483ef5dc58f61e66d9272f25762639af8553a7a7e552fc6d4801b0a",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 198,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005D3A90",
+      "endExclusive": "005D3AB4",
+      "sha256": "8d17611afeda3e01f2e81866a11abbd40264000792563ee2a1bbdb83c319d277",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 212,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005D5DD0",
+      "endExclusive": "005D5EF7",
+      "sha256": "918f1b3d84c37b10c36ebdd81f78499ee9158c3bbb535831b3b52a6805daf6f4",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 226,
+      "lineCount": 108
+    },
+    {
+      "source": "S2",
+      "start": "005D5F60",
+      "endExclusive": "005D5F84",
+      "sha256": "f44b05c8c730e597042dd91a8e1230a4ac9440cb201b9dd85f697c6d299dd2ef",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 336,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005D69D0",
+      "endExclusive": "005D6B2A",
+      "sha256": "a9554f02ca0d7e0b401dd6e303ba1e3665562da1c2c48d1f3d5aec4af6b0e29c",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 350,
+      "lineCount": 116
+    },
+    {
+      "source": "S2",
+      "start": "005D6E70",
+      "endExclusive": "005D6E94",
+      "sha256": "8fae4139b6ec7f0f83027d3d885cdb59e84f5442b8b5829c602d91ed35f0afaf",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 468,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005D7FC0",
+      "endExclusive": "005D8212",
+      "sha256": "e67706b5f54400c1f49d8252e0c7edc509a1db9357886dd263478ee0fc808021",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 482,
+      "lineCount": 190
+    },
+    {
+      "source": "S2",
+      "start": "005D8580",
+      "endExclusive": "005D85A4",
+      "sha256": "cc44ee988ffdd1ec125f777c1ab95be6183c9ad1a8cf1088848ca7656c0668ce",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 674,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005D9070",
+      "endExclusive": "005D9082",
+      "sha256": "6467aec22e94b6e621e950494494a426554633765a2a8931db66ebf6ba197e2b",
+      "file": "S2-mission-code-05.asm.txt",
+      "kind": "code",
+      "lineStart": 688,
+      "lineCount": 7
+    },
+    {
+      "source": "S2",
+      "start": "005D9C60",
+      "endExclusive": "005D9CF3",
+      "sha256": "3fcfc05229383189a155f0c7789b441bd871768acdfe395046b509121a103cce",
+      "file": "S2-mission-code-06.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 60
+    },
+    {
+      "source": "S2",
+      "start": "005D9EA0",
+      "endExclusive": "005D9EC4",
+      "sha256": "a1ec32a9a0cacb395becf5f8bde814844e904977bce0eb6ab866a8fdd18a650b",
+      "file": "S2-mission-code-06.asm.txt",
+      "kind": "code",
+      "lineStart": 64,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "005D9F90",
+      "endExclusive": "005D9FA2",
+      "sha256": "24b7be358313432ef047915bd529c0f817a72281a734558e9d7765d9d41193f0",
+      "file": "S2-mission-code-06.asm.txt",
+      "kind": "code",
+      "lineStart": 78,
+      "lineCount": 7
+    },
+    {
+      "source": "S2",
+      "start": "005DA8B0",
+      "endExclusive": "005DA8C2",
+      "sha256": "fce252bbf0f68612b0ab6eeb6735d451ccb0ff901ed12f095e73bceec7d9315f",
+      "file": "S2-mission-code-06.asm.txt",
+      "kind": "code",
+      "lineStart": 87,
+      "lineCount": 7
+    },
+    {
+      "source": "S2",
+      "start": "005DB140",
+      "endExclusive": "005DB164",
+      "sha256": "4a226f11745db0fb150d6afd6118ebf27fd5b329c8739c676706e4bf646f1995",
+      "file": "S2-mission-code-06.asm.txt",
+      "kind": "code",
+      "lineStart": 96,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "008492F8",
+      "endExclusive": "00849304",
+      "sha256": "b3a4771b5ddd1ea7fcffd976bf77755cb4eb00163655e58fcacff03d498a94d0",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 2,
+      "lineCount": 3
+    },
+    {
+      "source": "S2",
+      "start": "0084930C",
+      "endExclusive": "00849318",
+      "sha256": "f30ac0b8876a2f1050f5252fb82e57da87f419e90e9bdce197c721676fd55c8c",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 7,
+      "lineCount": 3
+    },
+    {
+      "source": "S2",
+      "start": "00849320",
+      "endExclusive": "0084932C",
+      "sha256": "232eff10c0080f636a2abf5e8beacccc970b5d375c5d3560f352027577ded5e1",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 12,
+      "lineCount": 3
+    },
+    {
+      "source": "S2",
+      "start": "00849338",
+      "endExclusive": "00849344",
+      "sha256": "01acae0cc8149d68ad13de21508629597b936ee2a7dea3165dc038967e86cec1",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 17,
+      "lineCount": 3
+    },
+    {
+      "source": "S2",
+      "start": "00849350",
+      "endExclusive": "0084935C",
+      "sha256": "be44f56808069bb52ff65c998ee7760417f02a648e48e8d7d59218dd40db1b3d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 22,
+      "lineCount": 3
+    },
+    {
+      "source": "S2",
+      "start": "00849368",
+      "endExclusive": "00849374",
+      "sha256": "884656f6ce35c75ba548e7509af22487d734e99991bee3c11a77b0c166d15d86",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 27,
+      "lineCount": 3
+    },
+    {
+      "source": "S2",
+      "start": "0084991C",
+      "endExclusive": "00849928",
+      "sha256": "ac4ded41bb2f7e3cf853f8193385bdaa91309636b38390a88ebd94ec3896fa6f",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 32,
+      "lineCount": 3
+    },
+    {
+      "source": "S2",
+      "start": "0084BCF8",
+      "endExclusive": "0084BCFC",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 37,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084BD38",
+      "endExclusive": "0084BD3C",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 40,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084BD58",
+      "endExclusive": "0084BD5C",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 43,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084BD78",
+      "endExclusive": "0084BD7C",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 46,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084BF80",
+      "endExclusive": "0084BF84",
+      "sha256": "e019fc33b246fda97bd41859aeec266da9acaee934c47200194e040d61428be1",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 49,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084BF98",
+      "endExclusive": "0084BF9C",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 52,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084BFB0",
+      "endExclusive": "0084BFB4",
+      "sha256": "301a35607e9524d2aea9a9547025e9b385bfab751a067d6b1ea15613ce9cb112",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 55,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084BFCC",
+      "endExclusive": "0084BFD0",
+      "sha256": "da9512eea8565792bb3ebc46d29806509f5338a41375fa67a19b03b4d8b7fb46",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 58,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084BFE8",
+      "endExclusive": "0084BFEC",
+      "sha256": "13744d9f0ee1fb3a6b6be0d0310d03e2276fb16dae328a3be9680106df47f72c",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 61,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C004",
+      "endExclusive": "0084C008",
+      "sha256": "eb63c51fc42b482442e6c2f902af7ca78adf5756edd2e23051ca2372995fbdf6",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 64,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C020",
+      "endExclusive": "0084C024",
+      "sha256": "8e28a1c9b263ca595990e26c5f5387ee99ac13b1288ad5368d0549710c81deda",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 67,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C03C",
+      "endExclusive": "0084C040",
+      "sha256": "c8a3fb0b09ac7f3acb32a31463f564d23f8a1692f6cfc5271299f6ffb045d6c5",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 70,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C058",
+      "endExclusive": "0084C05C",
+      "sha256": "dd27b93d099a44eef2c04c6531d84db0c9e1f484c465868085c31969f1902f8c",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 73,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C118",
+      "endExclusive": "0084C11C",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 76,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C138",
+      "endExclusive": "0084C13C",
+      "sha256": "c2404fb98e59f50c429ae450e17d6c7454b55f168e8841cc89d1732d313e943c",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 79,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C340",
+      "endExclusive": "0084C344",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 82,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C360",
+      "endExclusive": "0084C364",
+      "sha256": "104385fc9c89e0b98ad0233ef64ef287bf3856dd173468b4b410cc2e8bdfc2ab",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 85,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C380",
+      "endExclusive": "0084C384",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 88,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C3A0",
+      "endExclusive": "0084C3A4",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 91,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C3C0",
+      "endExclusive": "0084C3C4",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 94,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C3E0",
+      "endExclusive": "0084C3E4",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 97,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C5E8",
+      "endExclusive": "0084C5EC",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 100,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C608",
+      "endExclusive": "0084C60C",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 103,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C628",
+      "endExclusive": "0084C62C",
+      "sha256": "a50630ca005193f16a0c6c351bd16c1f9cdc195b9bc3b147a33548d42ca77c1d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 106,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C648",
+      "endExclusive": "0084C64C",
+      "sha256": "e44327d1ca6ffb7556597d75036dda3d2847c6bc136c8963254d417b8387a8b6",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 109,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C66C",
+      "endExclusive": "0084C670",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 112,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C68C",
+      "endExclusive": "0084C690",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 115,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C894",
+      "endExclusive": "0084C898",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 118,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C8B4",
+      "endExclusive": "0084C8B8",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 121,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C8D4",
+      "endExclusive": "0084C8D8",
+      "sha256": "224dc611659fffa1c1f39d7365d68c2359182bef5690bbf7d1336f4e783ed283",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 124,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084C8F4",
+      "endExclusive": "0084C8F8",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 127,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084CCE0",
+      "endExclusive": "0084CCE4",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 130,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084CD00",
+      "endExclusive": "0084CD04",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 133,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084CD20",
+      "endExclusive": "0084CD24",
+      "sha256": "b6002b448f58f2e3a59f15e78c50dbfcad9a890e3a4fffcd303c926f9fc28cdb",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 136,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084CD44",
+      "endExclusive": "0084CD48",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 139,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084CD64",
+      "endExclusive": "0084CD68",
+      "sha256": "725668676662dedba4d5db4a229742fc76659c85bb5e29fe3419b0b3bc128dfa",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 142,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084CD8C",
+      "endExclusive": "0084CD90",
+      "sha256": "3d6904e93f2e2dc6a82cb66ec735ea2a9290940e5a0743b27d22f903338fddea",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 145,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084CDBC",
+      "endExclusive": "0084CDC0",
+      "sha256": "5505db0cbe64bea5e42b58985e95cc53043317bc856a7c2dc93a926060242612",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 148,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084CDF4",
+      "endExclusive": "0084CDF8",
+      "sha256": "a343d9cf60451ea2e1e10dc69e2678fa16dd49b0a14b8e3e366a56a0ed1d3c20",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 151,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084CE3C",
+      "endExclusive": "0084CE40",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 154,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084CE54",
+      "endExclusive": "0084CE58",
+      "sha256": "a343d9cf60451ea2e1e10dc69e2678fa16dd49b0a14b8e3e366a56a0ed1d3c20",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 157,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084CE70",
+      "endExclusive": "0084CE74",
+      "sha256": "a343d9cf60451ea2e1e10dc69e2678fa16dd49b0a14b8e3e366a56a0ed1d3c20",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 160,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0084CE90",
+      "endExclusive": "0084CE94",
+      "sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "file": "S2-mission-data.txt",
+      "kind": "data",
+      "lineStart": 163,
+      "lineCount": 1
+    },
+    {
+      "source": "S2",
+      "start": "0090CBA0",
+      "endExclusive": "0090CBCB",
+      "sha256": "38cc86f580a7a31281c199e697a12c9b98a073973dbb5ab94258200cf238f21f",
+      "file": "S2-mission-code-06.asm.txt",
+      "kind": "code",
+      "lineStart": 110,
+      "lineCount": 15
+    }
+  ],
+  "comparisons": [
+    {
+      "start": "004BBB00",
+      "identical": true,
+      "S1sha256": "7b06f0ac821eee5d56e36506934069146cebaa7de0e0b0143a4502b23e1d4301",
+      "S2sha256": "7b06f0ac821eee5d56e36506934069146cebaa7de0e0b0143a4502b23e1d4301",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004BA520",
+      "identical": true,
+      "S1sha256": "5292bfeaa1b6b0206ac30fdfeeb0a41b4d4bfef884ccb062c7b5e8cb6910f0ea",
+      "S2sha256": "5292bfeaa1b6b0206ac30fdfeeb0a41b4d4bfef884ccb062c7b5e8cb6910f0ea",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004BA490",
+      "identical": true,
+      "S1sha256": "0d1694397a9d81896b435f09a3c3edef4605d6836398d419d5f6eec4db7c0cf2",
+      "S2sha256": "0d1694397a9d81896b435f09a3c3edef4605d6836398d419d5f6eec4db7c0cf2",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004B94E0",
+      "identical": true,
+      "S1sha256": "72a2cbc723b8f5c5c639d48eb9b0c2d411f6e688f55de56b0944e35f456882ab",
+      "S2sha256": "72a2cbc723b8f5c5c639d48eb9b0c2d411f6e688f55de56b0944e35f456882ab",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0047BC70",
+      "identical": true,
+      "S1sha256": "e5f58f83c2730a6924795e64feb00b4d69b0b5b18fb509afbe677cb0d4a56135",
+      "S2sha256": "e5f58f83c2730a6924795e64feb00b4d69b0b5b18fb509afbe677cb0d4a56135",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00487920",
+      "identical": true,
+      "S1sha256": "49888397ffecbc8962df0818e282940cf2caf2f5e079f3a11cc0bafc89164fdc",
+      "S2sha256": "49888397ffecbc8962df0818e282940cf2caf2f5e079f3a11cc0bafc89164fdc",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004839F0",
+      "identical": true,
+      "S1sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+      "S2sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00489610",
+      "identical": true,
+      "S1sha256": "d2213aa3397f098ba26d3af5566126c69e3aadbe58de881e90fdd08ea289a497",
+      "S2sha256": "d2213aa3397f098ba26d3af5566126c69e3aadbe58de881e90fdd08ea289a497",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00495A50",
+      "identical": true,
+      "S1sha256": "3556d4b9ae9b24a94354024203c0de470b3515f422bcfe038f78b1f242073fe3",
+      "S2sha256": "3556d4b9ae9b24a94354024203c0de470b3515f422bcfe038f78b1f242073fe3",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0047B460",
+      "identical": true,
+      "S1sha256": "d5dcfdb6e7dac8a293f4e48216394fafd4d99021f19755cefb076f01a5f84682",
+      "S2sha256": "d5dcfdb6e7dac8a293f4e48216394fafd4d99021f19755cefb076f01a5f84682",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0047A9B0",
+      "identical": true,
+      "S1sha256": "8d8dd48a66d63426bccb9df90444792aa0d5ee7ccd09066576d49cf228d9f4af",
+      "S2sha256": "8d8dd48a66d63426bccb9df90444792aa0d5ee7ccd09066576d49cf228d9f4af",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0047C4C0",
+      "identical": true,
+      "S1sha256": "afeebeb78dcb836ff32ae586dbc1ac30c76d8b39bdd512cf74d3721f9034ce81",
+      "S2sha256": "afeebeb78dcb836ff32ae586dbc1ac30c76d8b39bdd512cf74d3721f9034ce81",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A5780",
+      "identical": true,
+      "S1sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+      "S2sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A5660",
+      "identical": true,
+      "S1sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+      "S2sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A57B0",
+      "identical": true,
+      "S1sha256": "36b94ffaf3fa201a0331addb7a4771889e70a34e430da7f42846a8a3e9ac9299",
+      "S2sha256": "36b94ffaf3fa201a0331addb7a4771889e70a34e430da7f42846a8a3e9ac9299",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A7410",
+      "identical": true,
+      "S1sha256": "ad2c9c681375ec170d940f57f3b451b57311772cf6de6834bb0aa054f400caa8",
+      "S2sha256": "ad2c9c681375ec170d940f57f3b451b57311772cf6de6834bb0aa054f400caa8",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004813E0",
+      "identical": true,
+      "S1sha256": "e1c9636856a24593092bba179559fece4eeca3b875ae07256c63807416a22c8b",
+      "S2sha256": "e1c9636856a24593092bba179559fece4eeca3b875ae07256c63807416a22c8b",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A0940",
+      "identical": true,
+      "S1sha256": "8ddf69330b7ff73adf4ece382771a83c83144d2f5e60ca350dc7725edc8518b0",
+      "S2sha256": "8ddf69330b7ff73adf4ece382771a83c83144d2f5e60ca350dc7725edc8518b0",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0047E110",
+      "identical": true,
+      "S1sha256": "d827f2dd333951c501854b45cdb2eb2cc9a064be0e6737ba1bb3da2eec9ef114",
+      "S2sha256": "d827f2dd333951c501854b45cdb2eb2cc9a064be0e6737ba1bb3da2eec9ef114",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004B3A20",
+      "identical": true,
+      "S1sha256": "00a69c9c8094ff4765e8774dd9362b9bc72c7241f9ad4acb9c9cd3792c7aa426",
+      "S2sha256": "00a69c9c8094ff4765e8774dd9362b9bc72c7241f9ad4acb9c9cd3792c7aa426",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00487780",
+      "identical": true,
+      "S1sha256": "303fdac792c9fd64c58a8d208d22f9a65f53d5fb62a46bfc3d061e00862a86b8",
+      "S2sha256": "303fdac792c9fd64c58a8d208d22f9a65f53d5fb62a46bfc3d061e00862a86b8",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0047B4B0",
+      "identical": true,
+      "S1sha256": "2b29739356e22fbc66ae61b77059176dde78c24c1b9327232679a32a6bd362e5",
+      "S2sha256": "2b29739356e22fbc66ae61b77059176dde78c24c1b9327232679a32a6bd362e5",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0048D9A0",
+      "identical": true,
+      "S1sha256": "68018d668708bef43c786e54fa2a3fa79698fed6fb27d9e157afeb495396ccc3",
+      "S2sha256": "68018d668708bef43c786e54fa2a3fa79698fed6fb27d9e157afeb495396ccc3",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00491310",
+      "identical": true,
+      "S1sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "S2sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00491180",
+      "identical": true,
+      "S1sha256": "1e0f65a9b50e32866330593a5670938d4b13209d304ea365cd6dacb100a7cb6a",
+      "S2sha256": "1e0f65a9b50e32866330593a5670938d4b13209d304ea365cd6dacb100a7cb6a",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A8970",
+      "identical": true,
+      "S1sha256": "b7ecba0638a8de555c213b3c99fb2581a01c70e19c3acb3722d2038f03c7a3a5",
+      "S2sha256": "b7ecba0638a8de555c213b3c99fb2581a01c70e19c3acb3722d2038f03c7a3a5",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004B1950",
+      "identical": true,
+      "S1sha256": "14e9c535b802259b4a9449f398b68c4a06fd0bd7add20b8118e1fa6fb62dc95d",
+      "S2sha256": "14e9c535b802259b4a9449f398b68c4a06fd0bd7add20b8118e1fa6fb62dc95d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004BBAA0",
+      "identical": true,
+      "S1sha256": "afa2361f9d954766bdb7e921b2afcc6d414ab7789ece1a4fbf188b20b8534a8a",
+      "S2sha256": "afa2361f9d954766bdb7e921b2afcc6d414ab7789ece1a4fbf188b20b8534a8a",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A8110",
+      "identical": true,
+      "S1sha256": "810beb7153f032a0d21b863fe3000007f7fd7c3ce076858d3bf63eed613a7623",
+      "S2sha256": "810beb7153f032a0d21b863fe3000007f7fd7c3ce076858d3bf63eed613a7623",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004BA1D0",
+      "identical": true,
+      "S1sha256": "70d2f33412b51e4e1337942addf82032c79021ea9c37cf562d95ad144daea67c",
+      "S2sha256": "70d2f33412b51e4e1337942addf82032c79021ea9c37cf562d95ad144daea67c",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A31E0",
+      "identical": true,
+      "S1sha256": "fd7ef4e3bfd60d45a9b9a85e729f77cfc44f945fe5c245285802befdcfa29a58",
+      "S2sha256": "fd7ef4e3bfd60d45a9b9a85e729f77cfc44f945fe5c245285802befdcfa29a58",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A32F0",
+      "identical": true,
+      "S1sha256": "197e4fdf2a8c1f318a3f021ec29d96dbc4dabdba3e08aa3dea106ac574f063c4",
+      "S2sha256": "197e4fdf2a8c1f318a3f021ec29d96dbc4dabdba3e08aa3dea106ac574f063c4",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A0CB0",
+      "identical": true,
+      "S1sha256": "e29a76b4ce5975fc358952d6cddb629a54d844856a1240018234db943095031f",
+      "S2sha256": "e29a76b4ce5975fc358952d6cddb629a54d844856a1240018234db943095031f",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00489BD0",
+      "identical": true,
+      "S1sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+      "S2sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004898F0",
+      "identical": true,
+      "S1sha256": "569e97f5df31300fac201418f260b40cfd71c99e2040eee64a33bcc679ea9a87",
+      "S2sha256": "569e97f5df31300fac201418f260b40cfd71c99e2040eee64a33bcc679ea9a87",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0048A770",
+      "identical": true,
+      "S1sha256": "fd5501b841804607b81ea5e108d971988e5f4192019d62592f0b776428acc462",
+      "S2sha256": "fd5501b841804607b81ea5e108d971988e5f4192019d62592f0b776428acc462",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00489B40",
+      "identical": true,
+      "S1sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+      "S2sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0048A750",
+      "identical": true,
+      "S1sha256": "0b320ba6c150abaa26c0eec4d57812fddddd3f1dfdb0d03cd93e8fc96568ea26",
+      "S2sha256": "0b320ba6c150abaa26c0eec4d57812fddddd3f1dfdb0d03cd93e8fc96568ea26",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0048A8B0",
+      "identical": true,
+      "S1sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+      "S2sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0049E4D0",
+      "identical": true,
+      "S1sha256": "ceefad36fa02092bcedd902908fbb6309c9bea3d4d16898cb72edda05d683ac1",
+      "S2sha256": "ceefad36fa02092bcedd902908fbb6309c9bea3d4d16898cb72edda05d683ac1",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0049E450",
+      "identical": true,
+      "S1sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+      "S2sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0047B480",
+      "identical": true,
+      "S1sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+      "S2sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00472150",
+      "identical": false,
+      "S1sha256": "82bef9b78dc532adc5b0405a42da040048639dfee9ff2be22ed8d043c21140d0",
+      "S2sha256": "287de88f866471b9deb9ab890751a90ac33310b913e27962a364750fa40e0430",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0047B2B0",
+      "identical": true,
+      "S1sha256": "2b871355a493a19960355b895dcbf725a6b3c931af48f71d233989991aac5017",
+      "S2sha256": "2b871355a493a19960355b895dcbf725a6b3c931af48f71d233989991aac5017",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004883B0",
+      "identical": true,
+      "S1sha256": "b8daa47a1e2c23c0d84bc9ac1de08473d93f8b72166ba2ff5b06db32826f2236",
+      "S2sha256": "b8daa47a1e2c23c0d84bc9ac1de08473d93f8b72166ba2ff5b06db32826f2236",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00489E70",
+      "identical": true,
+      "S1sha256": "9bb40c9c3154764854c745e5861ba6aee16fc6bc008482d52e73f01e23275ff5",
+      "S2sha256": "9bb40c9c3154764854c745e5861ba6aee16fc6bc008482d52e73f01e23275ff5",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0079B830",
+      "identical": false,
+      "S1sha256": "deda8ff7828a2c42df89457adcec1b36df55f7ff78337be347e94698dc6b3e8f",
+      "S2sha256": "edd622ed95be439d7a5eee27fc429937e5224a1dd0fa296859e95863eee667ff",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0079C780",
+      "identical": true,
+      "S1sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "S2sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00441880",
+      "identical": true,
+      "S1sha256": "3df6af1ec778d46a61b8d7160523ba89fe1af814222acb1175be5a7b1748e06b",
+      "S2sha256": "3df6af1ec778d46a61b8d7160523ba89fe1af814222acb1175be5a7b1748e06b",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0047A600",
+      "identical": true,
+      "S1sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "S2sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0047A630",
+      "identical": true,
+      "S1sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "S2sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0047BCF0",
+      "identical": false,
+      "S1sha256": "c6b45b33ebc8daf8604e6cc833453ab19a80f2fc6d9ad83124c9e88f91142ee8",
+      "S2sha256": "49822991f42cb6880d21df749d436bb07ffc0f793010c380a0e0b2fb9950db97",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00482F80",
+      "identical": true,
+      "S1sha256": "a3294bd1f816574db08694971a10cf95a2b40d8877cdda4bf13b622f498aff4c",
+      "S2sha256": "a3294bd1f816574db08694971a10cf95a2b40d8877cdda4bf13b622f498aff4c",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00483660",
+      "identical": false,
+      "S1sha256": "4a500a842e6a1f5bbbf226b0c3d378b3cc7a51d42d461a42ea166968ea27a508",
+      "S2sha256": "9d8ee806575a3bbcc2aaddf9002b308e75c81f22c38fcf5c5fe2172b6180fbfb",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00486C80",
+      "identical": true,
+      "S1sha256": "102594bd6629352165ba7c5645a8009a9cbbfbca658d3312b3538f6c5ff5bffe",
+      "S2sha256": "102594bd6629352165ba7c5645a8009a9cbbfbca658d3312b3538f6c5ff5bffe",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00486D30",
+      "identical": false,
+      "S1sha256": "a2f0adc4a6092112feb4e9f3924896835389baf936aa02a614903ec0b6a9acd2",
+      "S2sha256": "c3313d2c1972326ba37741ba77446d550862b6d3edeb124b6656bf3536cd95f3",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00487310",
+      "identical": true,
+      "S1sha256": "93a38fc6e422c6344db8c85b8f839d0a19a602d11b9766ef9dc7706cc9fb4bfb",
+      "S2sha256": "93a38fc6e422c6344db8c85b8f839d0a19a602d11b9766ef9dc7706cc9fb4bfb",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00488C70",
+      "identical": true,
+      "S1sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "S2sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004897B0",
+      "identical": true,
+      "S1sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b",
+      "S2sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0048D820",
+      "identical": false,
+      "S1sha256": "6e95be1f5c7fe636035430215b9c9e1f015ba40714ad9595fc7a4f95e5ef5eb2",
+      "S2sha256": "2e0e4be9421aa1f2cc32d1f0a58d828f3c16c06c2cf22600ac4b413b655d367b",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00490AA0",
+      "identical": true,
+      "S1sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "S2sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00490B00",
+      "identical": true,
+      "S1sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "S2sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00490D00",
+      "identical": true,
+      "S1sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "S2sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A06A0",
+      "identical": true,
+      "S1sha256": "5d440998401108a871a7787b8f210906e453bc44afe1b15f0fac976f238bce6f",
+      "S2sha256": "5d440998401108a871a7787b8f210906e453bc44afe1b15f0fac976f238bce6f",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A5600",
+      "identical": false,
+      "S1sha256": "469e3a076f2dd39447ed00a439df84539740067d7eb95ae2fecce1b8e7850f81",
+      "S2sha256": "ba6c6d920a0fc1aca5619eb56c8b243f55fccd20c985dfb85184f883b0750a60",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004A73A0",
+      "identical": true,
+      "S1sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56",
+      "S2sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004AE2A0",
+      "identical": true,
+      "S1sha256": "4c496db9d8a880bd4378fce6e8ad7a0dfbdbe101e8e59ec4ee86d6d7764c4244",
+      "S2sha256": "4c496db9d8a880bd4378fce6e8ad7a0dfbdbe101e8e59ec4ee86d6d7764c4244",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "004B9480",
+      "identical": true,
+      "S1sha256": "35a0c7c9c9dbd6fa800d8bcd9019e2504d21279532929975f16d62f8e9acee53",
+      "S2sha256": "35a0c7c9c9dbd6fa800d8bcd9019e2504d21279532929975f16d62f8e9acee53",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005725A0",
+      "identical": true,
+      "S1sha256": "54166980e15e096a83a7ef288e106a48e3d70d224838e2477c53e48863e16b08",
+      "S2sha256": "54166980e15e096a83a7ef288e106a48e3d70d224838e2477c53e48863e16b08",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00572680",
+      "identical": true,
+      "S1sha256": "68f1e594b13b0edc48dcb144b078b782e23de0f0ba8aecfa859f473ecffa10f4",
+      "S2sha256": "68f1e594b13b0edc48dcb144b078b782e23de0f0ba8aecfa859f473ecffa10f4",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00572760",
+      "identical": true,
+      "S1sha256": "6e0be7902a2b869d1617464cb2c4795dacb75fc4ab402b7f928e3a85b86e7208",
+      "S2sha256": "6e0be7902a2b869d1617464cb2c4795dacb75fc4ab402b7f928e3a85b86e7208",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B1E60",
+      "identical": true,
+      "S1sha256": "083938341640eca4c1399f7b12bbf683f51471f2be1134a5a6ca5e9c8912d686",
+      "S2sha256": "083938341640eca4c1399f7b12bbf683f51471f2be1134a5a6ca5e9c8912d686",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B2C70",
+      "identical": true,
+      "S1sha256": "ba889c145aafb87af258f12a946864e06fae004bab900e1bfc98f9ad621b5902",
+      "S2sha256": "ba889c145aafb87af258f12a946864e06fae004bab900e1bfc98f9ad621b5902",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B3F70",
+      "identical": true,
+      "S1sha256": "0720679446a87d6ee2b909b0ced81eff835baaa18a9c605af8e0adf3943303e2",
+      "S2sha256": "0720679446a87d6ee2b909b0ced81eff835baaa18a9c605af8e0adf3943303e2",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B4B60",
+      "identical": true,
+      "S1sha256": "57dd8937a1ff4c1fd7be89b4b0a29575b6df55e4c03d7cacd6d06e38c556d706",
+      "S2sha256": "57dd8937a1ff4c1fd7be89b4b0a29575b6df55e4c03d7cacd6d06e38c556d706",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B4F40",
+      "identical": true,
+      "S1sha256": "0850c8192dd992c118acca0014667077d92a6075209619f600603884a630628a",
+      "S2sha256": "0850c8192dd992c118acca0014667077d92a6075209619f600603884a630628a",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B5B30",
+      "identical": true,
+      "S1sha256": "e61e34ab5659b84f9be85649848bee5830aff787eb3a9869e4236f7c7bd8c485",
+      "S2sha256": "e61e34ab5659b84f9be85649848bee5830aff787eb3a9869e4236f7c7bd8c485",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B6060",
+      "identical": true,
+      "S1sha256": "874a7694245c5cad7b6d324c1af3cc1a715cdce897e8fb668b027a7719789ce9",
+      "S2sha256": "874a7694245c5cad7b6d324c1af3cc1a715cdce897e8fb668b027a7719789ce9",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B6D00",
+      "identical": true,
+      "S1sha256": "a7ffa1b73bf30ed87dd93dfdd75e1686be5f0daf4f7415d57805383e156d40da",
+      "S2sha256": "a7ffa1b73bf30ed87dd93dfdd75e1686be5f0daf4f7415d57805383e156d40da",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B7BE0",
+      "identical": true,
+      "S1sha256": "54b2499811a41621d6281a6dfd4675eab1ba825543ce3ee9eab11c8777d379ae",
+      "S2sha256": "54b2499811a41621d6281a6dfd4675eab1ba825543ce3ee9eab11c8777d379ae",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B8400",
+      "identical": true,
+      "S1sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0",
+      "S2sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B8F90",
+      "identical": true,
+      "S1sha256": "d7d7aab23746ae14a8094f1ef6990b1a729d56893799794a37855c821bd9e272",
+      "S2sha256": "d7d7aab23746ae14a8094f1ef6990b1a729d56893799794a37855c821bd9e272",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B9000",
+      "identical": true,
+      "S1sha256": "c9c66203bbbc14e3399094f0938b398ec171983c2aaacd1f5456fe6c3f3717fa",
+      "S2sha256": "c9c66203bbbc14e3399094f0938b398ec171983c2aaacd1f5456fe6c3f3717fa",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B9060",
+      "identical": true,
+      "S1sha256": "b01e11ac0ea15a3b281d4cb2b929bd80306959371a5a871709717386e8d605af",
+      "S2sha256": "b01e11ac0ea15a3b281d4cb2b929bd80306959371a5a871709717386e8d605af",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B90F0",
+      "identical": true,
+      "S1sha256": "3069266a875e2c6d0d2cacf45002f47ffa65556e906f2653b4c28c95a77f34f5",
+      "S2sha256": "3069266a875e2c6d0d2cacf45002f47ffa65556e906f2653b4c28c95a77f34f5",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B9160",
+      "identical": true,
+      "S1sha256": "5feffed8482dbb3e38b35ba314abde068c945d9c96fc2ab9f0c41507b1d1136e",
+      "S2sha256": "5feffed8482dbb3e38b35ba314abde068c945d9c96fc2ab9f0c41507b1d1136e",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B9200",
+      "identical": true,
+      "S1sha256": "328827395bb7a78e2856546abc390a1d1833079f8553103aa08cf142cb23c3b7",
+      "S2sha256": "328827395bb7a78e2856546abc390a1d1833079f8553103aa08cf142cb23c3b7",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B9B40",
+      "identical": true,
+      "S1sha256": "f14b892a5be8603044ef0991aac7cb4d95cc577296683f06a28bf12b7f921e8b",
+      "S2sha256": "f14b892a5be8603044ef0991aac7cb4d95cc577296683f06a28bf12b7f921e8b",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005B9C40",
+      "identical": true,
+      "S1sha256": "84979387bdaecc087bb0ce71694a1c4ed66ae802cf7fb3a785246307eff16aeb",
+      "S2sha256": "84979387bdaecc087bb0ce71694a1c4ed66ae802cf7fb3a785246307eff16aeb",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA520",
+      "identical": true,
+      "S1sha256": "3ad3b8de377ca39afd03c964973bac1c1cc34b6b19c61339fa64498eda6bffac",
+      "S2sha256": "3ad3b8de377ca39afd03c964973bac1c1cc34b6b19c61339fa64498eda6bffac",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA560",
+      "identical": true,
+      "S1sha256": "cf78bb5ff8a5c864eff586fcb3c0ba3cd736f100a7916058f21a3671f850ec2f",
+      "S2sha256": "cf78bb5ff8a5c864eff586fcb3c0ba3cd736f100a7916058f21a3671f850ec2f",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA5B0",
+      "identical": true,
+      "S1sha256": "75f533bd3e59de2588c8f1901e45a3eea6688bc16b7ecaf3dcaf4d49cf4f3d49",
+      "S2sha256": "75f533bd3e59de2588c8f1901e45a3eea6688bc16b7ecaf3dcaf4d49cf4f3d49",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA5F0",
+      "identical": true,
+      "S1sha256": "28a4aa4a45423dc962f457a1fac7f0a7ba608d1628dd7054eefc2165af2edb7d",
+      "S2sha256": "28a4aa4a45423dc962f457a1fac7f0a7ba608d1628dd7054eefc2165af2edb7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA640",
+      "identical": true,
+      "S1sha256": "22954e48ba4d89914bc8c4663a473a80db700de51e9090145042da6fcbabdf10",
+      "S2sha256": "22954e48ba4d89914bc8c4663a473a80db700de51e9090145042da6fcbabdf10",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA680",
+      "identical": true,
+      "S1sha256": "e83aad3ed66bbd857ac9c11f6e978be9e44500f6ca69379c6605575c410e39e1",
+      "S2sha256": "e83aad3ed66bbd857ac9c11f6e978be9e44500f6ca69379c6605575c410e39e1",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA6D0",
+      "identical": true,
+      "S1sha256": "8e3e785d41dddc521601c78e6b419295110be69e63907076843ba16e092e98c9",
+      "S2sha256": "8e3e785d41dddc521601c78e6b419295110be69e63907076843ba16e092e98c9",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA710",
+      "identical": true,
+      "S1sha256": "98267aa32f6e8100674095081f48c8fe4f69516fb2d98a2ec286d2764aa4d7fa",
+      "S2sha256": "98267aa32f6e8100674095081f48c8fe4f69516fb2d98a2ec286d2764aa4d7fa",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA760",
+      "identical": true,
+      "S1sha256": "4becd086c8729211c845a4bf1497d75a688c76b952462edfe7f7b5a56f63b399",
+      "S2sha256": "4becd086c8729211c845a4bf1497d75a688c76b952462edfe7f7b5a56f63b399",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA7A0",
+      "identical": true,
+      "S1sha256": "dde4a491baf3635349c09451b24ea0d18c24e90bc86523f56cdd84006d325d48",
+      "S2sha256": "dde4a491baf3635349c09451b24ea0d18c24e90bc86523f56cdd84006d325d48",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA7F0",
+      "identical": true,
+      "S1sha256": "b5e246fbf558c442548ccb78aa6a03d48027a6f91f15c02d7dc661bd43aaaab1",
+      "S2sha256": "b5e246fbf558c442548ccb78aa6a03d48027a6f91f15c02d7dc661bd43aaaab1",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA830",
+      "identical": true,
+      "S1sha256": "07f9ec1284fc51216859e4bddcdce7f1a014c3b0029bfe4ea937633f20593242",
+      "S2sha256": "07f9ec1284fc51216859e4bddcdce7f1a014c3b0029bfe4ea937633f20593242",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA880",
+      "identical": true,
+      "S1sha256": "e4f9f7041b372cb8bd7dda73eb33390a3fb3a11ea2164b2b6a465b11b2ea2188",
+      "S2sha256": "e4f9f7041b372cb8bd7dda73eb33390a3fb3a11ea2164b2b6a465b11b2ea2188",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA8C0",
+      "identical": true,
+      "S1sha256": "9ad2607beaec4a7b07ea6e4a0c7474824c59deaf28a486613b8700992909f28d",
+      "S2sha256": "9ad2607beaec4a7b07ea6e4a0c7474824c59deaf28a486613b8700992909f28d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BA8E0",
+      "identical": true,
+      "S1sha256": "c65844314fa4fab9870bd91b1c3fced56559a3d9d78c397ee88d25c1b79a811d",
+      "S2sha256": "c65844314fa4fab9870bd91b1c3fced56559a3d9d78c397ee88d25c1b79a811d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BAF10",
+      "identical": true,
+      "S1sha256": "8586c82f9855ef9113c9d2d31a091cc1a395e64e7bc0c9e56e77269a4234cce6",
+      "S2sha256": "8586c82f9855ef9113c9d2d31a091cc1a395e64e7bc0c9e56e77269a4234cce6",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BBE30",
+      "identical": true,
+      "S1sha256": "18d5f2efbf490e24aec97395cfe476ef32f16ebe67d7cc0b5fb3e6e155b76662",
+      "S2sha256": "18d5f2efbf490e24aec97395cfe476ef32f16ebe67d7cc0b5fb3e6e155b76662",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BC070",
+      "identical": true,
+      "S1sha256": "0e84d2b02355fc354b5f115c2fd7084f009898bd092ae42ca47dcb01f0dc77b6",
+      "S2sha256": "0e84d2b02355fc354b5f115c2fd7084f009898bd092ae42ca47dcb01f0dc77b6",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BC560",
+      "identical": true,
+      "S1sha256": "0983fa2ee6cc6cab83861844b04c0ff028dd314057aebd37396c81aab8217e0a",
+      "S2sha256": "0983fa2ee6cc6cab83861844b04c0ff028dd314057aebd37396c81aab8217e0a",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BC590",
+      "identical": true,
+      "S1sha256": "6dff7486e2ebb2298cb42e655fa85ee91bb8dcac36fc76fe1e15e184fadbf610",
+      "S2sha256": "6dff7486e2ebb2298cb42e655fa85ee91bb8dcac36fc76fe1e15e184fadbf610",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BC9F0",
+      "identical": true,
+      "S1sha256": "f72ca39df2c8134c4b0717f441fb8623ad1df2f3cd7c74d9791d4a45d2190f65",
+      "S2sha256": "f72ca39df2c8134c4b0717f441fb8623ad1df2f3cd7c74d9791d4a45d2190f65",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BE040",
+      "identical": true,
+      "S1sha256": "d2af3caf82d96d83615dd57e0dfd8643cdc28fefa3f9d7efc96faefa2a785769",
+      "S2sha256": "d2af3caf82d96d83615dd57e0dfd8643cdc28fefa3f9d7efc96faefa2a785769",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BEBD0",
+      "identical": true,
+      "S1sha256": "8e212febd1d67184fc39cdf133797bdb0b9104c967fb6dc5d31c6d6c69712e3b",
+      "S2sha256": "8e212febd1d67184fc39cdf133797bdb0b9104c967fb6dc5d31c6d6c69712e3b",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005BEDA0",
+      "identical": true,
+      "S1sha256": "b5f6702bc864e81bd071cf85e70e5782b29f7b0716acb96b9c13e055091c601e",
+      "S2sha256": "b5f6702bc864e81bd071cf85e70e5782b29f7b0716acb96b9c13e055091c601e",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C0030",
+      "identical": true,
+      "S1sha256": "4b0e2c1149ae2ee2420c781e2ec72bf52d106c2db2a9cc2413e822b24f76a16e",
+      "S2sha256": "4b0e2c1149ae2ee2420c781e2ec72bf52d106c2db2a9cc2413e822b24f76a16e",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C04F0",
+      "identical": true,
+      "S1sha256": "4f573b80a1d82316dec40bba54c00b308cbfe7d15f927739a0072f8aa914ca05",
+      "S2sha256": "4f573b80a1d82316dec40bba54c00b308cbfe7d15f927739a0072f8aa914ca05",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C0F00",
+      "identical": true,
+      "S1sha256": "e94c964e8dfa3698417e852516149b48406c12f1ad4c3988c9f3f14ddf911457",
+      "S2sha256": "e94c964e8dfa3698417e852516149b48406c12f1ad4c3988c9f3f14ddf911457",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C1CD0",
+      "identical": true,
+      "S1sha256": "ef2d637c40754de4bcec0420abe9e7f4d2f406fdacf634bb88b3fc7d8baf7a07",
+      "S2sha256": "ef2d637c40754de4bcec0420abe9e7f4d2f406fdacf634bb88b3fc7d8baf7a07",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C2650",
+      "identical": true,
+      "S1sha256": "6785cd2d98f6c4b92884f2bd86e89eaaea008b11fddd4afc3f5aacf052eff6d8",
+      "S2sha256": "6785cd2d98f6c4b92884f2bd86e89eaaea008b11fddd4afc3f5aacf052eff6d8",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C2B60",
+      "identical": true,
+      "S1sha256": "c7c7a8dd2677174964502639463d9921448b153f8471ca6bb61f73288fd4eebe",
+      "S2sha256": "c7c7a8dd2677174964502639463d9921448b153f8471ca6bb61f73288fd4eebe",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C3790",
+      "identical": true,
+      "S1sha256": "dd8bedb5827508831a38a023df4ce1c1ecb06c1ed557f71c000b902eefc2a8e4",
+      "S2sha256": "dd8bedb5827508831a38a023df4ce1c1ecb06c1ed557f71c000b902eefc2a8e4",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C40D0",
+      "identical": true,
+      "S1sha256": "ad08b975882df95cca54eeef47e0b3624d5dbef0e96ba1711e6a34e84540c16b",
+      "S2sha256": "ad08b975882df95cca54eeef47e0b3624d5dbef0e96ba1711e6a34e84540c16b",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C4E70",
+      "identical": true,
+      "S1sha256": "70416a83c176fe2d8535e3f834fd5ceebdcce0c290ac808741beb5d3ba742261",
+      "S2sha256": "70416a83c176fe2d8535e3f834fd5ceebdcce0c290ac808741beb5d3ba742261",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C5670",
+      "identical": true,
+      "S1sha256": "accc04dc6298ea99e05132b95c0e6a958693df1997a18ea60fe18ffd269f1a72",
+      "S2sha256": "accc04dc6298ea99e05132b95c0e6a958693df1997a18ea60fe18ffd269f1a72",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C6AA0",
+      "identical": true,
+      "S1sha256": "faabb270b4f7e59c38fb27d06f3630cb64c05344d88da9cc65d39973e690b722",
+      "S2sha256": "faabb270b4f7e59c38fb27d06f3630cb64c05344d88da9cc65d39973e690b722",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C6E80",
+      "identical": true,
+      "S1sha256": "8c1769728052080413932702b954f40c7faa72235a32102a8653203c60ec5476",
+      "S2sha256": "8c1769728052080413932702b954f40c7faa72235a32102a8653203c60ec5476",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C7550",
+      "identical": true,
+      "S1sha256": "628da1fc160dae564aa03cf499193a56d7269827dcca7e3f663ea4341594fe50",
+      "S2sha256": "628da1fc160dae564aa03cf499193a56d7269827dcca7e3f663ea4341594fe50",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C7D90",
+      "identical": true,
+      "S1sha256": "26144dc961bfb360db497bc029b4cc6d097ad0e1d2f6543feb6f5729e266cd37",
+      "S2sha256": "26144dc961bfb360db497bc029b4cc6d097ad0e1d2f6543feb6f5729e266cd37",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005C8B80",
+      "identical": true,
+      "S1sha256": "a45a99353c0af82128a1ceceea5422826a8bdc3c01173063522d1b45be640183",
+      "S2sha256": "a45a99353c0af82128a1ceceea5422826a8bdc3c01173063522d1b45be640183",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005CA920",
+      "identical": true,
+      "S1sha256": "7489c0007182c93f5565b792bda197e43cdb477983da9632f50108c637628cee",
+      "S2sha256": "7489c0007182c93f5565b792bda197e43cdb477983da9632f50108c637628cee",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005CB050",
+      "identical": true,
+      "S1sha256": "63ef89f2b55faae9aea25c885ae229a65ed24487bca73410bbf9b3d37bbae6c9",
+      "S2sha256": "63ef89f2b55faae9aea25c885ae229a65ed24487bca73410bbf9b3d37bbae6c9",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005CB2B0",
+      "identical": true,
+      "S1sha256": "fb8ce895cab93ea82d384bb2007353d95b676db083b3d0905161920effe70d0b",
+      "S2sha256": "fb8ce895cab93ea82d384bb2007353d95b676db083b3d0905161920effe70d0b",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005CBAE0",
+      "identical": true,
+      "S1sha256": "f1b20cd61f970a94783b8ac808881eae3a590a8bb13717996002bea41ad73879",
+      "S2sha256": "f1b20cd61f970a94783b8ac808881eae3a590a8bb13717996002bea41ad73879",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005CC1C0",
+      "identical": true,
+      "S1sha256": "d32b343696149d47ba8307e65594c65b0cfa8eac948662bdab33a21709cac048",
+      "S2sha256": "d32b343696149d47ba8307e65594c65b0cfa8eac948662bdab33a21709cac048",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005CD1A0",
+      "identical": true,
+      "S1sha256": "95af7b067d0bc37f2a8ab9b3bfe9fbd991eddddf7ebedf653c14d1a00a81b958",
+      "S2sha256": "95af7b067d0bc37f2a8ab9b3bfe9fbd991eddddf7ebedf653c14d1a00a81b958",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005CE930",
+      "identical": true,
+      "S1sha256": "d1cbd83769bc48dd0b78a6cf3f354f235972dddcdcb69768c86247864947aebf",
+      "S2sha256": "d1cbd83769bc48dd0b78a6cf3f354f235972dddcdcb69768c86247864947aebf",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005CF300",
+      "identical": true,
+      "S1sha256": "e9c2d11e8700a1c80efae75c1333698311eac0db9a2bf464d084059572834bfe",
+      "S2sha256": "e9c2d11e8700a1c80efae75c1333698311eac0db9a2bf464d084059572834bfe",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005CFB70",
+      "identical": true,
+      "S1sha256": "1321f69bbd6dfd7b78792e8b61f2c8c80e1b3de3bd695f792dfb01f95dd953e2",
+      "S2sha256": "1321f69bbd6dfd7b78792e8b61f2c8c80e1b3de3bd695f792dfb01f95dd953e2",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005D0270",
+      "identical": true,
+      "S1sha256": "7602ede13483ef5dc58f61e66d9272f25762639af8553a7a7e552fc6d4801b0a",
+      "S2sha256": "7602ede13483ef5dc58f61e66d9272f25762639af8553a7a7e552fc6d4801b0a",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005D3A90",
+      "identical": true,
+      "S1sha256": "8d17611afeda3e01f2e81866a11abbd40264000792563ee2a1bbdb83c319d277",
+      "S2sha256": "8d17611afeda3e01f2e81866a11abbd40264000792563ee2a1bbdb83c319d277",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005D5DD0",
+      "identical": true,
+      "S1sha256": "918f1b3d84c37b10c36ebdd81f78499ee9158c3bbb535831b3b52a6805daf6f4",
+      "S2sha256": "918f1b3d84c37b10c36ebdd81f78499ee9158c3bbb535831b3b52a6805daf6f4",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005D5F60",
+      "identical": true,
+      "S1sha256": "f44b05c8c730e597042dd91a8e1230a4ac9440cb201b9dd85f697c6d299dd2ef",
+      "S2sha256": "f44b05c8c730e597042dd91a8e1230a4ac9440cb201b9dd85f697c6d299dd2ef",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005D69D0",
+      "identical": true,
+      "S1sha256": "a9554f02ca0d7e0b401dd6e303ba1e3665562da1c2c48d1f3d5aec4af6b0e29c",
+      "S2sha256": "a9554f02ca0d7e0b401dd6e303ba1e3665562da1c2c48d1f3d5aec4af6b0e29c",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005D6E70",
+      "identical": true,
+      "S1sha256": "8fae4139b6ec7f0f83027d3d885cdb59e84f5442b8b5829c602d91ed35f0afaf",
+      "S2sha256": "8fae4139b6ec7f0f83027d3d885cdb59e84f5442b8b5829c602d91ed35f0afaf",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005D7FC0",
+      "identical": true,
+      "S1sha256": "e67706b5f54400c1f49d8252e0c7edc509a1db9357886dd263478ee0fc808021",
+      "S2sha256": "e67706b5f54400c1f49d8252e0c7edc509a1db9357886dd263478ee0fc808021",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005D8580",
+      "identical": true,
+      "S1sha256": "cc44ee988ffdd1ec125f777c1ab95be6183c9ad1a8cf1088848ca7656c0668ce",
+      "S2sha256": "cc44ee988ffdd1ec125f777c1ab95be6183c9ad1a8cf1088848ca7656c0668ce",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005D9070",
+      "identical": true,
+      "S1sha256": "6467aec22e94b6e621e950494494a426554633765a2a8931db66ebf6ba197e2b",
+      "S2sha256": "6467aec22e94b6e621e950494494a426554633765a2a8931db66ebf6ba197e2b",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005D9C60",
+      "identical": true,
+      "S1sha256": "3fcfc05229383189a155f0c7789b441bd871768acdfe395046b509121a103cce",
+      "S2sha256": "3fcfc05229383189a155f0c7789b441bd871768acdfe395046b509121a103cce",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005D9EA0",
+      "identical": true,
+      "S1sha256": "a1ec32a9a0cacb395becf5f8bde814844e904977bce0eb6ab866a8fdd18a650b",
+      "S2sha256": "a1ec32a9a0cacb395becf5f8bde814844e904977bce0eb6ab866a8fdd18a650b",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005D9F90",
+      "identical": true,
+      "S1sha256": "24b7be358313432ef047915bd529c0f817a72281a734558e9d7765d9d41193f0",
+      "S2sha256": "24b7be358313432ef047915bd529c0f817a72281a734558e9d7765d9d41193f0",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005DA8B0",
+      "identical": true,
+      "S1sha256": "fce252bbf0f68612b0ab6eeb6735d451ccb0ff901ed12f095e73bceec7d9315f",
+      "S2sha256": "fce252bbf0f68612b0ab6eeb6735d451ccb0ff901ed12f095e73bceec7d9315f",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "005DB140",
+      "identical": true,
+      "S1sha256": "4a226f11745db0fb150d6afd6118ebf27fd5b329c8739c676706e4bf646f1995",
+      "S2sha256": "4a226f11745db0fb150d6afd6118ebf27fd5b329c8739c676706e4bf646f1995",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "008492F8",
+      "identical": true,
+      "S1sha256": "b3a4771b5ddd1ea7fcffd976bf77755cb4eb00163655e58fcacff03d498a94d0",
+      "S2sha256": "b3a4771b5ddd1ea7fcffd976bf77755cb4eb00163655e58fcacff03d498a94d0",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084930C",
+      "identical": true,
+      "S1sha256": "f30ac0b8876a2f1050f5252fb82e57da87f419e90e9bdce197c721676fd55c8c",
+      "S2sha256": "f30ac0b8876a2f1050f5252fb82e57da87f419e90e9bdce197c721676fd55c8c",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00849320",
+      "identical": true,
+      "S1sha256": "232eff10c0080f636a2abf5e8beacccc970b5d375c5d3560f352027577ded5e1",
+      "S2sha256": "232eff10c0080f636a2abf5e8beacccc970b5d375c5d3560f352027577ded5e1",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00849338",
+      "identical": true,
+      "S1sha256": "01acae0cc8149d68ad13de21508629597b936ee2a7dea3165dc038967e86cec1",
+      "S2sha256": "01acae0cc8149d68ad13de21508629597b936ee2a7dea3165dc038967e86cec1",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00849350",
+      "identical": true,
+      "S1sha256": "be44f56808069bb52ff65c998ee7760417f02a648e48e8d7d59218dd40db1b3d",
+      "S2sha256": "be44f56808069bb52ff65c998ee7760417f02a648e48e8d7d59218dd40db1b3d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "00849368",
+      "identical": true,
+      "S1sha256": "884656f6ce35c75ba548e7509af22487d734e99991bee3c11a77b0c166d15d86",
+      "S2sha256": "884656f6ce35c75ba548e7509af22487d734e99991bee3c11a77b0c166d15d86",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084991C",
+      "identical": true,
+      "S1sha256": "ac4ded41bb2f7e3cf853f8193385bdaa91309636b38390a88ebd94ec3896fa6f",
+      "S2sha256": "ac4ded41bb2f7e3cf853f8193385bdaa91309636b38390a88ebd94ec3896fa6f",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084BCF8",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084BD38",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084BD58",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084BD78",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084BF80",
+      "identical": true,
+      "S1sha256": "e019fc33b246fda97bd41859aeec266da9acaee934c47200194e040d61428be1",
+      "S2sha256": "e019fc33b246fda97bd41859aeec266da9acaee934c47200194e040d61428be1",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084BF98",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084BFB0",
+      "identical": true,
+      "S1sha256": "301a35607e9524d2aea9a9547025e9b385bfab751a067d6b1ea15613ce9cb112",
+      "S2sha256": "301a35607e9524d2aea9a9547025e9b385bfab751a067d6b1ea15613ce9cb112",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084BFCC",
+      "identical": true,
+      "S1sha256": "da9512eea8565792bb3ebc46d29806509f5338a41375fa67a19b03b4d8b7fb46",
+      "S2sha256": "da9512eea8565792bb3ebc46d29806509f5338a41375fa67a19b03b4d8b7fb46",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084BFE8",
+      "identical": true,
+      "S1sha256": "13744d9f0ee1fb3a6b6be0d0310d03e2276fb16dae328a3be9680106df47f72c",
+      "S2sha256": "13744d9f0ee1fb3a6b6be0d0310d03e2276fb16dae328a3be9680106df47f72c",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C004",
+      "identical": true,
+      "S1sha256": "eb63c51fc42b482442e6c2f902af7ca78adf5756edd2e23051ca2372995fbdf6",
+      "S2sha256": "eb63c51fc42b482442e6c2f902af7ca78adf5756edd2e23051ca2372995fbdf6",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C020",
+      "identical": true,
+      "S1sha256": "8e28a1c9b263ca595990e26c5f5387ee99ac13b1288ad5368d0549710c81deda",
+      "S2sha256": "8e28a1c9b263ca595990e26c5f5387ee99ac13b1288ad5368d0549710c81deda",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C03C",
+      "identical": true,
+      "S1sha256": "c8a3fb0b09ac7f3acb32a31463f564d23f8a1692f6cfc5271299f6ffb045d6c5",
+      "S2sha256": "c8a3fb0b09ac7f3acb32a31463f564d23f8a1692f6cfc5271299f6ffb045d6c5",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C058",
+      "identical": true,
+      "S1sha256": "dd27b93d099a44eef2c04c6531d84db0c9e1f484c465868085c31969f1902f8c",
+      "S2sha256": "dd27b93d099a44eef2c04c6531d84db0c9e1f484c465868085c31969f1902f8c",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C118",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C138",
+      "identical": true,
+      "S1sha256": "c2404fb98e59f50c429ae450e17d6c7454b55f168e8841cc89d1732d313e943c",
+      "S2sha256": "c2404fb98e59f50c429ae450e17d6c7454b55f168e8841cc89d1732d313e943c",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C340",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C360",
+      "identical": true,
+      "S1sha256": "104385fc9c89e0b98ad0233ef64ef287bf3856dd173468b4b410cc2e8bdfc2ab",
+      "S2sha256": "104385fc9c89e0b98ad0233ef64ef287bf3856dd173468b4b410cc2e8bdfc2ab",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C380",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C3A0",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C3C0",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C3E0",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C5E8",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C608",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C628",
+      "identical": true,
+      "S1sha256": "a50630ca005193f16a0c6c351bd16c1f9cdc195b9bc3b147a33548d42ca77c1d",
+      "S2sha256": "a50630ca005193f16a0c6c351bd16c1f9cdc195b9bc3b147a33548d42ca77c1d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C648",
+      "identical": true,
+      "S1sha256": "e44327d1ca6ffb7556597d75036dda3d2847c6bc136c8963254d417b8387a8b6",
+      "S2sha256": "e44327d1ca6ffb7556597d75036dda3d2847c6bc136c8963254d417b8387a8b6",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C66C",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C68C",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C894",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C8B4",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C8D4",
+      "identical": true,
+      "S1sha256": "224dc611659fffa1c1f39d7365d68c2359182bef5690bbf7d1336f4e783ed283",
+      "S2sha256": "224dc611659fffa1c1f39d7365d68c2359182bef5690bbf7d1336f4e783ed283",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084C8F4",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084CCE0",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084CD00",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084CD20",
+      "identical": true,
+      "S1sha256": "b6002b448f58f2e3a59f15e78c50dbfcad9a890e3a4fffcd303c926f9fc28cdb",
+      "S2sha256": "b6002b448f58f2e3a59f15e78c50dbfcad9a890e3a4fffcd303c926f9fc28cdb",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084CD44",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084CD64",
+      "identical": true,
+      "S1sha256": "725668676662dedba4d5db4a229742fc76659c85bb5e29fe3419b0b3bc128dfa",
+      "S2sha256": "725668676662dedba4d5db4a229742fc76659c85bb5e29fe3419b0b3bc128dfa",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084CD8C",
+      "identical": true,
+      "S1sha256": "3d6904e93f2e2dc6a82cb66ec735ea2a9290940e5a0743b27d22f903338fddea",
+      "S2sha256": "3d6904e93f2e2dc6a82cb66ec735ea2a9290940e5a0743b27d22f903338fddea",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084CDBC",
+      "identical": true,
+      "S1sha256": "5505db0cbe64bea5e42b58985e95cc53043317bc856a7c2dc93a926060242612",
+      "S2sha256": "5505db0cbe64bea5e42b58985e95cc53043317bc856a7c2dc93a926060242612",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084CDF4",
+      "identical": true,
+      "S1sha256": "a343d9cf60451ea2e1e10dc69e2678fa16dd49b0a14b8e3e366a56a0ed1d3c20",
+      "S2sha256": "a343d9cf60451ea2e1e10dc69e2678fa16dd49b0a14b8e3e366a56a0ed1d3c20",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084CE3C",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084CE54",
+      "identical": true,
+      "S1sha256": "a343d9cf60451ea2e1e10dc69e2678fa16dd49b0a14b8e3e366a56a0ed1d3c20",
+      "S2sha256": "a343d9cf60451ea2e1e10dc69e2678fa16dd49b0a14b8e3e366a56a0ed1d3c20",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084CE70",
+      "identical": true,
+      "S1sha256": "a343d9cf60451ea2e1e10dc69e2678fa16dd49b0a14b8e3e366a56a0ed1d3c20",
+      "S2sha256": "a343d9cf60451ea2e1e10dc69e2678fa16dd49b0a14b8e3e366a56a0ed1d3c20",
+      "sameAddressWindow": true
+    },
+    {
+      "start": "0084CE90",
+      "identical": true,
+      "S1sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "S2sha256": "8877b4f6e39a6c962671dfaa7b90236ad8180f22b08b1a00622ac4abfd77ae7d",
+      "sameAddressWindow": true
+    }
+  ],
+  "containers": [
+    {
+      "file": "S1-mission-data.txt",
+      "sha256": "be439d27163fcc59bf88db472ca041a5b5256c446de2c3b9dfd6c2ebc9c9a009",
+      "lineCount": 163
+    },
+    {
+      "file": "S2-mission-data.txt",
+      "sha256": "cdcdd2de2f47fe76700a25c91d78dd01dee4fb01d496822c1294a23a6be76742",
+      "lineCount": 163
+    },
+    {
+      "file": "S1-mission-code-01.asm.txt",
+      "sha256": "92bc99c8b35d7e4c685ffc62108cedd5cbc4a0a1a2b6b2f6cce3ec9913f97c2a",
+      "lineCount": 736
+    },
+    {
+      "file": "S1-mission-code-02.asm.txt",
+      "sha256": "af20e61a8336c4d33ab4a36562215930c0a67fa0582f670da288daf65e850c20",
+      "lineCount": 721
+    },
+    {
+      "file": "S1-mission-code-03.asm.txt",
+      "sha256": "74f7caacf6b4ca63f4c4c1a3900fbe3abf9ba1f9c0b8fcde543df1a2b9a052d7",
+      "lineCount": 705
+    },
+    {
+      "file": "S1-mission-code-04.asm.txt",
+      "sha256": "0fa964d8749701c6aa2953cc44475d1772cfe24790caad96cff99f0d7951c856",
+      "lineCount": 694
+    },
+    {
+      "file": "S1-mission-code-05.asm.txt",
+      "sha256": "5293944d34b74d622c83ecdf835297cccc68819ff25e4e4f1a682c7a6961bcf5",
+      "lineCount": 694
+    },
+    {
+      "file": "S1-mission-code-06.asm.txt",
+      "sha256": "36a061cefa58a7ea786a3ee3fa39d6f2bc3606870f50661c5d38c0380814b197",
+      "lineCount": 107
+    },
+    {
+      "file": "S2-mission-code-01.asm.txt",
+      "sha256": "de7a30554e9de91addd652cce92c4a1c1f53d099ae2f633d5b5767d005f31b7e",
+      "lineCount": 736
+    },
+    {
+      "file": "S2-mission-code-02.asm.txt",
+      "sha256": "83d85d34be6c9fc458ac384697e8401af276549cfafd51eae8e8a492f093a866",
+      "lineCount": 721
+    },
+    {
+      "file": "S2-mission-code-03.asm.txt",
+      "sha256": "cc35662b33d6f2a7f8cf1e2753228df271152c72a917894ca6051296b27e2caf",
+      "lineCount": 705
+    },
+    {
+      "file": "S2-mission-code-04.asm.txt",
+      "sha256": "f2e9e3b9c081812fba50ef5afedbbdb30839ab6b2a4e5a09b0447b0f1045ea8b",
+      "lineCount": 694
+    },
+    {
+      "file": "S2-mission-code-05.asm.txt",
+      "sha256": "63a6d2f46039cc6569c184fc64eb9de4ad4a98b476b1ddb6efa9b0898a93b196",
+      "lineCount": 694
+    },
+    {
+      "file": "S2-mission-code-06.asm.txt",
+      "sha256": "a16d6de9c3a3175ce4089bcfea6414a50e0ce90cdb6de5e4e35ccbd8446987cc",
+      "lineCount": 124
+    }
+  ],
+  "missionCancellationDispatch": [
+    {
+      "mission": 0,
+      "objectOffset": "00B8",
+      "constructor": "005BC070",
+      "vtable": "0084C12C",
+      "methods": [
+        "005B8090",
+        "005BC520",
+        "005BBCB0",
+        "005BBE30",
+        "005BA7F0",
+        "005B80A0"
+      ],
+      "cancel": "005BBE30"
+    },
+    {
+      "mission": 1,
+      "objectOffset": "01E8",
+      "constructor": "005C3790",
+      "vtable": "0084C5DC",
+      "methods": [
+        "005B8090",
+        "005C3E10",
+        "00441880",
+        "00441880",
+        "005BA7F0",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 2,
+      "objectOffset": "0280",
+      "constructor": "005C6E80",
+      "vtable": "0084C63C",
+      "methods": [
+        "005B8090",
+        "005C7520",
+        "005C6930",
+        "005C6AA0",
+        "005BA7F0",
+        "005B80A0"
+      ],
+      "cancel": "005C6AA0"
+    },
+    {
+      "mission": 3,
+      "objectOffset": "0318",
+      "constructor": "005CBAE0",
+      "vtable": "0084C8E8",
+      "methods": [
+        "005B8090",
+        "005CC100",
+        "00441880",
+        "00441880",
+        "005BA7F0",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 4,
+      "objectOffset": "03B0",
+      "constructor": "005CA920",
+      "vtable": "0084C8A8",
+      "methods": [
+        "005B8090",
+        "005CADF0",
+        "00441880",
+        "00441880",
+        "005BA7F0",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 5,
+      "objectOffset": "0448",
+      "constructor": "005D8580",
+      "vtable": "0084CDB0",
+      "methods": [
+        "005B8090",
+        "005D8FA0",
+        "005D7F00",
+        "005D7FC0",
+        "005D7890",
+        "005B80A0"
+      ],
+      "cancel": "005D7FC0"
+    },
+    {
+      "mission": 6,
+      "objectOffset": "04E0",
+      "constructor": "005C40D0",
+      "vtable": "0084C5FC",
+      "methods": [
+        "005B8090",
+        "005C45B0",
+        "00441880",
+        "00441880",
+        "005BA7F0",
+        "005C4580"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 7,
+      "objectOffset": "0578",
+      "constructor": "inline",
+      "vtable": "0084BF8C",
+      "methods": [
+        "005B8090",
+        "005DBDB0",
+        "00441880",
+        "00441880",
+        "0067F810",
+        "005DBC70"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 8,
+      "objectOffset": "0610",
+      "constructor": "005DB140",
+      "vtable": "0084CE84",
+      "methods": [
+        "005B8090",
+        "005DB3B0",
+        "00441880",
+        "00441880",
+        "005DB0D0",
+        "005DB170"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 9,
+      "objectOffset": "06A8",
+      "constructor": "005CB2B0",
+      "vtable": "0084C8C8",
+      "methods": [
+        "005B8090",
+        "005CB890",
+        "005CB180",
+        "005CB050",
+        "005BA7F0",
+        "005B80A0"
+      ],
+      "cancel": "005CB050"
+    },
+    {
+      "mission": 10,
+      "objectOffset": "0740",
+      "constructor": "005D5F60",
+      "vtable": "0084CD58",
+      "methods": [
+        "005B8090",
+        "005D67C0",
+        "005CB180",
+        "005D5DD0",
+        "005BA7F0",
+        "005B80A0"
+      ],
+      "cancel": "005D5DD0"
+    },
+    {
+      "mission": 11,
+      "objectOffset": "07D8",
+      "constructor": "005D3A90",
+      "vtable": "0084CD38",
+      "methods": [
+        "005B8090",
+        "005D51F0",
+        "00441880",
+        "00441880",
+        "005BA7F0",
+        "005C56A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 12,
+      "objectOffset": "0870",
+      "constructor": "005C5670",
+      "vtable": "0084C61C",
+      "methods": [
+        "005B8090",
+        "005C5B50",
+        "005C5420",
+        "005C4E70",
+        "005BA7F0",
+        "005C56A0"
+      ],
+      "cancel": "005C4E70"
+    },
+    {
+      "mission": 13,
+      "objectOffset": "0908",
+      "constructor": "005B5B30",
+      "vtable": "0084BD6C",
+      "methods": [
+        "005B8090",
+        "005B5FA0",
+        "00441880",
+        "00441880",
+        "00573470",
+        "005B59E0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 14,
+      "objectOffset": "09A0",
+      "constructor": "005CF300",
+      "vtable": "0084CCF4",
+      "methods": [
+        "005B8090",
+        "005CF9C0",
+        "00441880",
+        "00441880",
+        "0067F810",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 15,
+      "objectOffset": "0A38",
+      "constructor": "inline",
+      "vtable": "0084BFA4",
+      "methods": [
+        "005B8090",
+        "005C3030",
+        "005BA530",
+        "005BA560",
+        "005B9CB0",
+        "005BD7F0"
+      ],
+      "cancel": "005BA560"
+    },
+    {
+      "mission": 16,
+      "objectOffset": "0AD0",
+      "constructor": "inline",
+      "vtable": "0084BFC0",
+      "methods": [
+        "005B8090",
+        "005B2800",
+        "005BA5C0",
+        "005BA5F0",
+        "005B9CB0",
+        "005BD7F0"
+      ],
+      "cancel": "005BA5F0"
+    },
+    {
+      "mission": 17,
+      "objectOffset": "0B68",
+      "constructor": "inline",
+      "vtable": "0084BFDC",
+      "methods": [
+        "005B8090",
+        "005BE5A0",
+        "005BA650",
+        "005BA680",
+        "005B9CB0",
+        "005BD7F0"
+      ],
+      "cancel": "005BA680"
+    },
+    {
+      "mission": 18,
+      "objectOffset": "0C00",
+      "constructor": "inline",
+      "vtable": "0084BFF8",
+      "methods": [
+        "005B8090",
+        "005B67D0",
+        "005BA6E0",
+        "005BA710",
+        "005B9CB0",
+        "005BD7F0"
+      ],
+      "cancel": "005BA710"
+    },
+    {
+      "mission": 19,
+      "objectOffset": "0C98",
+      "constructor": "inline",
+      "vtable": "0084C014",
+      "methods": [
+        "005B8090",
+        "005B34C0",
+        "005BA770",
+        "005BA7A0",
+        "005B9CB0",
+        "005BD7F0"
+      ],
+      "cancel": "005BA7A0"
+    },
+    {
+      "mission": 20,
+      "objectOffset": "0D30",
+      "constructor": "inline",
+      "vtable": "0084C030",
+      "methods": [
+        "005B8090",
+        "005CCB90",
+        "005BA800",
+        "005BA830",
+        "005B9CB0",
+        "005BD7F0"
+      ],
+      "cancel": "005BA830"
+    },
+    {
+      "mission": 21,
+      "objectOffset": "0DC8",
+      "constructor": "inline",
+      "vtable": "0084C04C",
+      "methods": [
+        "005B8090",
+        "005CDFE0",
+        "005BA890",
+        "005BA8C0",
+        "005B9CB0",
+        "005BD7F0"
+      ],
+      "cancel": "005BA8C0"
+    },
+    {
+      "mission": 22,
+      "objectOffset": "0E60",
+      "constructor": "005C0030",
+      "vtable": "0084C354",
+      "methods": [
+        "005B8090",
+        "005C04C0",
+        "005BF300",
+        "005BEDA0",
+        "005B7550",
+        "005D0240"
+      ],
+      "cancel": "005BEDA0"
+    },
+    {
+      "mission": 23,
+      "objectOffset": "0EF8",
+      "constructor": "005B7BE0",
+      "vtable": "0084BF74",
+      "methods": [
+        "005B8090",
+        "005B8060",
+        "005B7560",
+        "005B6D00",
+        "005B7550",
+        "005D0240"
+      ],
+      "cancel": "005B6D00"
+    },
+    {
+      "mission": 24,
+      "objectOffset": "0F90",
+      "constructor": "005D0270",
+      "vtable": "0084CD14",
+      "methods": [
+        "005B8090",
+        "005D14F0",
+        "005D00A0",
+        "005CFB70",
+        "005B7550",
+        "005D0240"
+      ],
+      "cancel": "005CFB70"
+    },
+    {
+      "mission": 25,
+      "objectOffset": "1028",
+      "constructor": "005BAF10",
+      "vtable": "0084C10C",
+      "methods": [
+        "005B8090",
+        "005BAD60",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 26,
+      "objectOffset": "10C0",
+      "constructor": "005C04F0",
+      "vtable": "0084C374",
+      "methods": [
+        "005B8090",
+        "005C0AE0",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 27,
+      "objectOffset": "1158",
+      "constructor": "005C1CD0",
+      "vtable": "0084C3B4",
+      "methods": [
+        "005B8090",
+        "005C1F50",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 28,
+      "objectOffset": "11F0",
+      "constructor": "005C0F00",
+      "vtable": "0084C394",
+      "methods": [
+        "005B8090",
+        "005C1550",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 29,
+      "objectOffset": "1288",
+      "constructor": "005C2650",
+      "vtable": "0084C3D4",
+      "methods": [
+        "005B8090",
+        "005C2AE0",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 30,
+      "objectOffset": "1320",
+      "constructor": "005B4B60",
+      "vtable": "0084BD2C",
+      "methods": [
+        "005B8090",
+        "005B4D10",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 31,
+      "objectOffset": "13B8",
+      "constructor": "005B3F70",
+      "vtable": "0084BCEC",
+      "methods": [
+        "005B8090",
+        "005B4760",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 32,
+      "objectOffset": "1450",
+      "constructor": "005C7550",
+      "vtable": "0084C660",
+      "methods": [
+        "005B8090",
+        "005C77B0",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 33,
+      "objectOffset": "14E8",
+      "constructor": "005C8B80",
+      "vtable": "0084C888",
+      "methods": [
+        "005B8090",
+        "005C9270",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 34,
+      "objectOffset": "1580",
+      "constructor": "005C7D90",
+      "vtable": "0084C680",
+      "methods": [
+        "005B8090",
+        "005C84B0",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 35,
+      "objectOffset": "1618",
+      "constructor": "005B4F40",
+      "vtable": "0084BD4C",
+      "methods": [
+        "005B8090",
+        "005B5450",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 36,
+      "objectOffset": "19A8",
+      "constructor": "005BEBD0",
+      "vtable": "0084C334",
+      "methods": [
+        "005B8090",
+        "005BEBB0",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 37,
+      "objectOffset": null,
+      "cancel": null
+    },
+    {
+      "mission": 38,
+      "objectOffset": "0150",
+      "constructor": "005D6E70",
+      "vtable": "0084CD80",
+      "methods": [
+        "005B8090",
+        "005D75E0",
+        "005BBCB0",
+        "005D69D0",
+        "0067F810",
+        "005B80A0"
+      ],
+      "cancel": "005D69D0"
+    },
+    {
+      "mission": 39,
+      "objectOffset": "16B0",
+      "constructor": "005CE930",
+      "vtable": "0084CCD4",
+      "methods": [
+        "005B8090",
+        "005CED10",
+        "00441880",
+        "00441880",
+        "005BA7F0",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 40,
+      "objectOffset": "1748",
+      "constructor": "005D9EA0",
+      "vtable": "0084CE30",
+      "methods": [
+        "005B8090",
+        "005D9D00",
+        "00441880",
+        "00441880",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "00441880"
+    },
+    {
+      "mission": 41,
+      "objectOffset": "17E0",
+      "constructor": "005D9070",
+      "vtable": "0084CDE8",
+      "methods": [
+        "005B8090",
+        "005D98A0",
+        "005D9D60",
+        "005D9C60",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "005D9C60"
+    },
+    {
+      "mission": 42,
+      "objectOffset": "1878",
+      "constructor": "005D9F90",
+      "vtable": "0084CE48",
+      "methods": [
+        "005B8090",
+        "005DA6B0",
+        "005D9D60",
+        "005D9C60",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "005D9C60"
+    },
+    {
+      "mission": 43,
+      "objectOffset": "1910",
+      "constructor": "005DA8B0",
+      "vtable": "0084CE64",
+      "methods": [
+        "005B8090",
+        "005DAEE0",
+        "005D9D60",
+        "005D9C60",
+        "0044FC50",
+        "005B80A0"
+      ],
+      "cancel": "005D9C60"
+    }
+  ],
+  "missionCancellationScope": "all cancellation dispatch slots and bodies; constructors and implemented 15..21 refund chain; omitted callback bodies not claimed executed",
+  "detachmentContracts": {
+    "source": "S1",
+    "selector": "numeric force gate; distance[candidate,anchor]==1 in city ID order; early random consumed before troop override",
+    "supportedCommands": [
+      "detach",
+      "release-invalid-former-force",
+      "last-city-escape"
+    ],
+    "callbacks": "record-only or reject, no complete force extinction",
+    "taskOrder": "004A5780 resets to -1 before 004A7410, so old-mission cancellation is not dispatched",
+    "safeDomain": "87 base observations with 42 valid city slots; valid actual base or explicitly observed valid-coordinate troop",
+    "rng": "injected or pure source LCG with given entry state; global seed and consumption unknown"
+  },
+  "unresolved": [
+    "clean stock PC-PK1.1 equivalence",
+    "Vanilla/PS2/Wii/patch equivalence",
+    "global RNG and real savegame tests",
+    "dedicated cancellation handlers outside tasks15..21",
+    "004BF6F0 full return-home effects",
+    "004A8110->005B9D30 task event listeners",
+    "complete capture/personnel lists/force extinction/ruler succession",
+    "004B03D0 AI disposition callbacks"
+  ]
+}

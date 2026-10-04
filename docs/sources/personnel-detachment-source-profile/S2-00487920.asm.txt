@@ -1,0 +1,18 @@
+00487920  51                             push     ecx
+00487921  8b 01                          mov      eax, dword ptr [ecx]
+00487923  ff 50 3c                       call     dword ptr [eax + 0x3c]
+00487926  8b 00                          mov      eax, dword ptr [eax]
+00487928  89 04 24                       mov      dword ptr [esp], eax
+0048792B  8b 0c 24                       mov      ecx, dword ptr [esp]
+0048792E  0f bf c0                       movsx    eax, ax
+00487931  69 c0 c8 00 00 00              imul     eax, eax, 0xc8
+00487937  c1 f9 10                       sar      ecx, 0x10
+0048793A  03 c1                          add      eax, ecx
+0048793C  8d 14 80                       lea      edx, [eax + eax*4]
+0048793F  8b 04 95 6c 0e fb 06           mov      eax, dword ptr [edx*4 + 0x6fb0e6c]
+00487946  c1 e8 05                       shr      eax, 5
+00487949  83 e0 7f                       and      eax, 0x7f
+0048794C  50                             push     eax
+0048794D  e8 9e c0 ff ff                 call     0x4839f0
+00487952  83 c4 08                       add      esp, 8
+00487955  c3                             ret

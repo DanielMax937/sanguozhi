@@ -124,3 +124,5 @@ LCG是已给定入口状态的`state*0x6C078965+0x3039 mod 2^32`，取高16位mo
 34项测试涵盖126范围字节/hash、63对照、1764距离格、120种身份排序排列、2560种禁仕局部组合、前置链序与筛选、shortcut与返回原势力、完整目的地优先链、singleton/tie/random、last-city caller gate、港关母城、无效origin、任务期间byte写回、事件快照时序、君主/都督/太守边界、显式defer/reject、PK/Vanilla分离、原子性与重放，以及先迁移军团长会改变后续人的目的地与RNG消费。
 
 下一步：继续`004BBB00→004BA520`游离/势力灭亡与任务取消resource callee、`004B03D0`AI处分完整callees、完整人物/军团/太守/force回调和P0-48/49/50组合。独立clean stock、RNG全局序列、真实存档、Vanilla/PS2/Wii仍是证据债。维护费forced-release的`0058C320/004A8E10`排序/裁剪不是本组建筑处分排序，仍open。
+
+后续进展：[P0-51](86-personnel-detachment-source-profile.md)新增004BBB00/004BA520游离、invalid-former/last-city caller与部分任务取消资源的独立投影。本篇v1接口及defer trace保持兼容；完整监听器/force消亡/其他任务handler与stock仍open。

@@ -1,0 +1,9 @@
+0047B460  51                             push     ecx
+0047B461  b9 58 19 20 07                 mov      ecx, 0x7201958
+0047B466  e8 15 5d 01 00                 call     0x491180
+0047B46B  85 c0                          test     eax, eax
+0047B46D  7c 05                          jl       0x47b474
+0047B46F  83 f8 29                       cmp      eax, 0x29
+0047B472  7e 03                          jle      0x47b477
+0047B474  83 c8 ff                       or       eax, 0xffffffff
+0047B477  c3                             ret

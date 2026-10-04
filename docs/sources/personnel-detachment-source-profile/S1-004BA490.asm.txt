@@ -1,0 +1,53 @@
+004BA490  51                             push     ecx
+004BA491  57                             push     edi
+004BA492  56                             push     esi
+004BA493  e8 98 01 fc ff                 call     0x47a630
+004BA498  83 c4 04                       add      esp, 4
+004BA49B  85 c0                          test     eax, eax
+004BA49D  74 7b                          je       0x4ba51a
+004BA49F  8b 86 98 00 00 00              mov      eax, dword ptr [esi + 0x98]
+004BA4A5  50                             push     eax
+004BA4A6  b9 58 19 20 07                 mov      ecx, 0x7201958
+004BA4AB  e8 50 68 fd ff                 call     0x490d00
+004BA4B0  8b f8                          mov      edi, eax
+004BA4B2  57                             push     edi
+004BA4B3  e8 78 01 fc ff                 call     0x47a630
+004BA4B8  83 c4 04                       add      esp, 4
+004BA4BB  85 c0                          test     eax, eax
+004BA4BD  74 0b                          je       0x4ba4ca
+004BA4BF  8b cf                          mov      ecx, edi
+004BA4C1  5f                             pop      edi
+004BA4C2  83 c4 04                       add      esp, 4
+004BA4C5  e9 56 d4 fc ff                 jmp      0x487920
+004BA4CA  8b 06                          mov      eax, dword ptr [esi]
+004BA4CC  8b ce                          mov      ecx, esi
+004BA4CE  ff 50 3c                       call     dword ptr [eax + 0x3c]
+004BA4D1  8b 00                          mov      eax, dword ptr [eax]
+004BA4D3  8b c8                          mov      ecx, eax
+004BA4D5  89 44 24 04                    mov      dword ptr [esp + 4], eax
+004BA4D9  0f bf c0                       movsx    eax, ax
+004BA4DC  c1 f9 10                       sar      ecx, 0x10
+004BA4DF  85 c0                          test     eax, eax
+004BA4E1  7c 37                          jl       0x4ba51a
+004BA4E3  3d c8 00 00 00                 cmp      eax, 0xc8
+004BA4E8  7d 30                          jge      0x4ba51a
+004BA4EA  85 c9                          test     ecx, ecx
+004BA4EC  7c 2c                          jl       0x4ba51a
+004BA4EE  81 f9 c8 00 00 00              cmp      ecx, 0xc8
+004BA4F4  7d 24                          jge      0x4ba51a
+004BA4F6  69 c0 c8 00 00 00              imul     eax, eax, 0xc8
+004BA4FC  03 c1                          add      eax, ecx
+004BA4FE  8d 0c 80                       lea      ecx, [eax + eax*4]
+004BA501  8b 14 8d 6c 0e fb 06           mov      edx, dword ptr [ecx*4 + 0x6fb0e6c]
+004BA508  c1 ea 05                       shr      edx, 5
+004BA50B  83 e2 7f                       and      edx, 0x7f
+004BA50E  52                             push     edx
+004BA50F  e8 dc 94 fc ff                 call     0x4839f0
+004BA514  83 c4 04                       add      esp, 4
+004BA517  5f                             pop      edi
+004BA518  59                             pop      ecx
+004BA519  c3                             ret
+004BA51A  83 c8 ff                       or       eax, 0xffffffff
+004BA51D  5f                             pop      edi
+004BA51E  59                             pop      ecx
+004BA51F  c3                             ret

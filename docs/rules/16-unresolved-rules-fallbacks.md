@@ -738,6 +738,16 @@ return destroyedPrefix(destroy), retainedSuffix(keep unless overridden)
 
 源码随机模式是已给定入口seed的纯本地LCG；replay可重算以核验记录，不使用外部随机服务、不推进共享RNG。全局RNG/真实存档与stock对应继续open。维护费俘虏forced-release排序不属于本组建筑处分排序。
 
+### 4D.4 P0-51游离与取消资源的独立有界投影
+
+[86-personnel-detachment-source-profile.md](86-personnel-detachment-source-profile.md)新增`personnel_detachment_profile.py`和`mission_cancellation_profile.py`。前者替代“只能整人defer”的实施空白，后者把注册no-op、已恢复退款/返回和未投影专用handler分开。旧P0-50 v1接口与trace保持原边界，不将新增资源状态悄悄写入旧trace。
+
+`record-detachment-callbacks-v1`保留home/legion/location列表、mission监听器和force灭亡/君主继承ledger；局部after以callback不干预为显式工程前提。`unknownEffects=reject`拒绝局部模型；`unsupportedPerson=defer-person|reject`对欠缺安全所在地观察整人延迟/整批拒绝，禁止虚构坐标或随机目的地填洞。对于source选择器真实可达的Random42则精确保留，不把工程defer与原机随机混同。
+
+取消模块用registry handler与gate分流，未知任务仅record/reject，既不承诺退款也不默认取消成功。在野004BBB00先raw reset成mission=-1后再set37，实际不进入旧任务取消；不能把取消投影套在这条路径前。异地退款写入mission37参数，不立即加金。S1/S2 cap、query33/query38和S2 query267 acted-hook分别绑定source与显式观察provenance。
+
+两个新模型都有输入校验、原子写回、幂等/冲突和全trace重放；通过不代表stock或原存档验证，Vanilla仍单独assumption。完整capture/force事务仍待组合，不能仅清空证据债来制造完成。
+
 ### 4E. Golden tests
 
 日文 Wiki 的攻城表继续保留，但角色从“运行时规则”改为“回归测试”。

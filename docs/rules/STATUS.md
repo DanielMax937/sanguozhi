@@ -2,6 +2,16 @@
 
 更新：2026-10-04 UTC。
 
+## 最新完成：P0-51人员游离、末城逃逸与任务取消资源
+
+[正文](86-personnel-detachment-source-profile.md) · [结构化证据](../sources/personnel-detachment-source-profile.json)。本组基线main `453305b2dc64927a715fc58fceb0522557815f34`（PR #8已合）。
+
+004BA520按candidate→anchor距离1收集42城ID序候选，不过滤势力；无效anchor的早期Random42在troop覆盖后仍保留消费。004BBB00的home/territorial-city实际位置、军团/身份/忠诚/官职/期间与旧军师/太守/军团长字段现有有界投影；events2/8/5/21及invalid-former release的event4/tail顺序有快照与重放。旧任务直接reset后才set37，因此此在野路线不触发取消退款。
+
+44任务cancel注册表和vtable+0xC已恢复，明确区分无操作、15..21已投影退款/异地返回以及其余专用handler。S1/S2金cap、query33/38和S2 acted-hook分别绑定来源。旧P0-50 v1不静默改trace；两个新独立模块均显式record/reject，尚未组成完整capture或force灭亡，未接入训练战斗。
+
+验证：TypeScript、85 Node、全部71 Python checker与两个训练demo通过；detachment 28项测试覆盖146个邻城选项，cancel 15项专用测试含source分支和完整输入重放。403个文本字节范围、201组S1/S2对照（194同/7异），另S2 hook单独取证。独立审阅无待修阻断，另704组source/mission/location/policy扩测通过；最终main合并后另行复核，不能将无远端CI配置误称CI通过。clean stock、真实存档/全局RNG、监听器/其余cancel/完整返回与force、Vanilla/主机版仍open。下一主题可优先进入其余专用cancel handler、004BF6F0返回、004A8110→005B9D30事件任务链或004B03D0 AI处分。
+
 ## 最新完成：P0-50旧俘虏释放、迁移与排序来源审计
 
 [正文](85-capture-relocation-source-profile.md) · [结构化证据](../sources/capture-relocation-source-profile.json)。本组基线main `e4dab4be5e86bd3d410048137a9c2a3847f2f494`（PR #7已合）。

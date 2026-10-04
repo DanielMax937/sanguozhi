@@ -1,0 +1,31 @@
+00495A50  51                             push     ecx
+00495A51  56                             push     esi
+00495A52  8b f1                          mov      esi, ecx
+00495A54  56                             push     esi
+00495A55  e8 d6 4b fe ff                 call     0x47a630
+00495A5A  83 c4 04                       add      esp, 4
+00495A5D  85 c0                          test     eax, eax
+00495A5F  75 03                          jne      0x495a64
+00495A61  5e                             pop      esi
+00495A62  59                             pop      ecx
+00495A63  c3                             ret
+00495A64  8b 46 3c                       mov      eax, dword ptr [esi + 0x3c]
+00495A67  89 44 24 04                    mov      dword ptr [esp + 4], eax
+00495A6B  8b 4c 24 04                    mov      ecx, dword ptr [esp + 4]
+00495A6F  0f bf c0                       movsx    eax, ax
+00495A72  69 c0 c8 00 00 00              imul     eax, eax, 0xc8
+00495A78  c1 f9 10                       sar      ecx, 0x10
+00495A7B  03 c1                          add      eax, ecx
+00495A7D  8d 14 80                       lea      edx, [eax + eax*4]
+00495A80  8b 04 95 6c 0e fb 06           mov      eax, dword ptr [edx*4 + 0x6fb0e6c]
+00495A87  c1 e8 05                       shr      eax, 5
+00495A8A  83 e0 7f                       and      eax, 0x7f
+00495A8D  50                             push     eax
+00495A8E  e8 5d df fe ff                 call     0x4839f0
+00495A93  83 c4 04                       add      esp, 4
+00495A96  50                             push     eax
+00495A97  b9 58 19 20 07                 mov      ecx, 0x7201958
+00495A9C  e8 6f af ff ff                 call     0x490a10
+00495AA1  5e                             pop      esi
+00495AA2  59                             pop      ecx
+00495AA3  c3                             ret

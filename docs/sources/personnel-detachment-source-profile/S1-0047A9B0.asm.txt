@@ -1,0 +1,30 @@
+0047A9B0  51                             push     ecx
+0047A9B1  8b 01                          mov      eax, dword ptr [ecx]
+0047A9B3  ff 50 3c                       call     dword ptr [eax + 0x3c]
+0047A9B6  8b 00                          mov      eax, dword ptr [eax]
+0047A9B8  8b c8                          mov      ecx, eax
+0047A9BA  89 04 24                       mov      dword ptr [esp], eax
+0047A9BD  0f bf c0                       movsx    eax, ax
+0047A9C0  c1 f9 10                       sar      ecx, 0x10
+0047A9C3  85 c0                          test     eax, eax
+0047A9C5  7c 36                          jl       0x47a9fd
+0047A9C7  3d c8 00 00 00                 cmp      eax, 0xc8
+0047A9CC  7d 2f                          jge      0x47a9fd
+0047A9CE  85 c9                          test     ecx, ecx
+0047A9D0  7c 2b                          jl       0x47a9fd
+0047A9D2  81 f9 c8 00 00 00              cmp      ecx, 0xc8
+0047A9D8  7d 23                          jge      0x47a9fd
+0047A9DA  69 c0 c8 00 00 00              imul     eax, eax, 0xc8
+0047A9E0  03 c1                          add      eax, ecx
+0047A9E2  8d 0c 80                       lea      ecx, [eax + eax*4]
+0047A9E5  8b 14 8d 6c 0e fb 06           mov      edx, dword ptr [ecx*4 + 0x6fb0e6c]
+0047A9EC  c1 ea 05                       shr      edx, 5
+0047A9EF  83 e2 7f                       and      edx, 0x7f
+0047A9F2  52                             push     edx
+0047A9F3  e8 f8 8f 00 00                 call     0x4839f0
+0047A9F8  83 c4 04                       add      esp, 4
+0047A9FB  59                             pop      ecx
+0047A9FC  c3                             ret
+0047A9FD  83 c8 ff                       or       eax, 0xffffffff
+0047AA00  59                             pop      ecx
+0047AA01  c3                             ret

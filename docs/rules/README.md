@@ -7,7 +7,9 @@
 
 ## 最新审计入口
 
-新增[P0-50旧俘虏释放/迁移/稳定排序](85-capture-relocation-source-profile.md)：前置链序、返回原势力、目的地分层/距离同分RNG、非瞬移actual-location语义、缺席home-roster与身份rank排序。有界独立投影、defer/reject与事件时序，`python scripts/check_capture_relocation_profile.py`。126范围/63对照；004BBB00/资源/AI/force回调和clean stock仍open。
+新增[P0-51人员游离/末城逃逸/任务取消](86-personnel-detachment-source-profile.md)：004BA520有向distance1候选与RNG阶段、004BBB00局部role写回及event时序、invalid-former/last-city入口、44项cancel注册分流及有界退款。S1/S2金cap和acted hook明确分离。`python scripts/check_personnel_detachment_profile.py`、`python scripts/check_mission_cancellation_profile.py`。完整force消亡/监听回调/其他专用取消仍open。
+
+新增[P0-50旧俘虏释放/迁移/稳定排序](85-capture-relocation-source-profile.md)：前置链序、返回原势力、目的地分层/距离同分RNG、非瞬移actual-location语义、缺席home-roster与身份rank排序。有界独立投影、defer/reject与事件时序，`python scripts/check_capture_relocation_profile.py`。126范围/63对照；P0-50 v1未投影004BBB00/资源，后续P0-51另模块恢复部分范围；完整AI/force回调和clean stock仍open。
 
 新增[P0-48 capture transaction](83-capture-transaction-source-profile.md)：完整有序世界候选、三caller cause/mode、normal/neutral scalar finalizer、普通入城资源与耐久投影、显式fallback及重放。`python scripts/check_capture_transaction_profile.py`。61个来源范围、24组S1/S2对照；source字节不等于stock证明，完整人物/force/事件链仍open。独立参考模型，未接入训练沙盒战斗。
 

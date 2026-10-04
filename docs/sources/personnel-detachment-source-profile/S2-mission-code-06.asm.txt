@@ -1,0 +1,124 @@
+# S2 005D9C60..005D9CF3 code source range
+005D9C60  53                             push     ebx
+005D9C61  56                             push     esi
+005D9C62  8b 74 24 0c                    mov      esi, dword ptr [esp + 0xc]
+005D9C66  56                             push     esi
+005D9C67  8b d9                          mov      ebx, ecx
+005D9C69  e8 c2 09 ea ff                 call     0x47a630
+005D9C6E  83 c4 04                       add      esp, 4
+005D9C71  85 c0                          test     eax, eax
+005D9C73  74 21                          je       0x5d9c96
+005D9C75  6a 01                          push     1
+005D9C77  8b ce                          mov      ecx, esi
+005D9C79  e8 32 fb ea ff                 call     0x4897b0
+005D9C7E  50                             push     eax
+005D9C7F  b9 58 19 20 07                 mov      ecx, 0x7201958
+005D9C84  e8 77 70 eb ff                 call     0x490d00
+005D9C89  50                             push     eax
+005D9C8A  e8 a1 09 ea ff                 call     0x47a630
+005D9C8F  83 c4 04                       add      esp, 4
+005D9C92  85 c0                          test     eax, eax
+005D9C94  75 07                          jne      0x5d9c9d
+005D9C96  5e                             pop      esi
+005D9C97  33 c0                          xor      eax, eax
+005D9C99  5b                             pop      ebx
+005D9C9A  c2 08 00                       ret      8
+005D9C9D  57                             push     edi
+005D9C9E  6a 00                          push     0
+005D9CA0  8b ce                          mov      ecx, esi
+005D9CA2  e8 09 fb ea ff                 call     0x4897b0
+005D9CA7  50                             push     eax
+005D9CA8  b9 58 19 20 07                 mov      ecx, 0x7201958
+005D9CAD  e8 9e 72 eb ff                 call     0x490f50
+005D9CB2  8b f8                          mov      edi, eax
+005D9CB4  57                             push     edi
+005D9CB5  e8 76 09 ea ff                 call     0x47a630
+005D9CBA  83 c4 04                       add      esp, 4
+005D9CBD  85 c0                          test     eax, eax
+005D9CBF  75 06                          jne      0x5d9cc7
+005D9CC1  5f                             pop      edi
+005D9CC2  5e                             pop      esi
+005D9CC3  5b                             pop      ebx
+005D9CC4  c2 08 00                       ret      8
+005D9CC7  56                             push     esi
+005D9CC8  e8 03 e5 fd ff                 call     0x5b81d0
+005D9CCD  83 c4 04                       add      esp, 4
+005D9CD0  85 c0                          test     eax, eax
+005D9CD2  74 09                          je       0x5d9cdd
+005D9CD4  8b 03                          mov      eax, dword ptr [ebx]
+005D9CD6  57                             push     edi
+005D9CD7  56                             push     esi
+005D9CD8  8b cb                          mov      ecx, ebx
+005D9CDA  ff 50 18                       call     dword ptr [eax + 0x18]
+005D9CDD  6a 00                          push     0
+005D9CDF  56                             push     esi
+005D9CE0  e8 1b e7 fd ff                 call     0x5b8400
+005D9CE5  83 c4 08                       add      esp, 8
+005D9CE8  5f                             pop      edi
+005D9CE9  5e                             pop      esi
+005D9CEA  b8 01 00 00 00                 mov      eax, 1
+005D9CEF  5b                             pop      ebx
+005D9CF0  c2 08 00                       ret      8
+
+# S2 005D9EA0..005D9EC4 code source range
+005D9EA0  56                             push     esi
+005D9EA1  8b f1                          mov      esi, ecx
+005D9EA3  8d 4e 08                       lea      ecx, [esi + 8]
+005D9EA6  68 80 00 00 00                 push     0x80
+005D9EAB  8d 41 0c                       lea      eax, [ecx + 0xc]
+005D9EAE  50                             push     eax
+005D9EAF  c7 06 d4 bc 84 00              mov      dword ptr [esi], 0x84bcd4
+005D9EB5  e8 f6 7a e9 ff                 call     0x4719b0
+005D9EBA  c7 06 30 ce 84 00              mov      dword ptr [esi], 0x84ce30
+005D9EC0  8b c6                          mov      eax, esi
+005D9EC2  5e                             pop      esi
+005D9EC3  c3                             ret
+
+# S2 005D9F90..005D9FA2 code source range
+005D9F90  56                             push     esi
+005D9F91  8b f1                          mov      esi, ecx
+005D9F93  e8 98 fd ff ff                 call     0x5d9d30
+005D9F98  c7 06 48 ce 84 00              mov      dword ptr [esi], 0x84ce48
+005D9F9E  8b c6                          mov      eax, esi
+005D9FA0  5e                             pop      esi
+005D9FA1  c3                             ret
+
+# S2 005DA8B0..005DA8C2 code source range
+005DA8B0  56                             push     esi
+005DA8B1  8b f1                          mov      esi, ecx
+005DA8B3  e8 78 f4 ff ff                 call     0x5d9d30
+005DA8B8  c7 06 64 ce 84 00              mov      dword ptr [esi], 0x84ce64
+005DA8BE  8b c6                          mov      eax, esi
+005DA8C0  5e                             pop      esi
+005DA8C1  c3                             ret
+
+# S2 005DB140..005DB164 code source range
+005DB140  56                             push     esi
+005DB141  8b f1                          mov      esi, ecx
+005DB143  8d 4e 08                       lea      ecx, [esi + 8]
+005DB146  68 80 00 00 00                 push     0x80
+005DB14B  8d 41 0c                       lea      eax, [ecx + 0xc]
+005DB14E  50                             push     eax
+005DB14F  c7 06 d4 bc 84 00              mov      dword ptr [esi], 0x84bcd4
+005DB155  e8 56 68 e9 ff                 call     0x4719b0
+005DB15A  c7 06 84 ce 84 00              mov      dword ptr [esi], 0x84ce84
+005DB160  8b c6                          mov      eax, esi
+005DB162  5e                             pop      esi
+005DB163  c3                             ret
+
+# S2 0090CBA0..0090CBCB code source range
+0090CBA0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0090CBA4  85 c0                          test     eax, eax
+0090CBA6  75 09                          jne      0x90cbb1
+0090CBA8  50                             push     eax
+0090CBA9  e8 92 cf b7 ff                 call     0x489b40
+0090CBAE  c2 04 00                       ret      4
+0090CBB1  51                             push     ecx
+0090CBB2  68 0b 01 00 00                 push     0x10b
+0090CBB7  e8 34 c5 b7 ff                 call     0x4890f0
+0090CBBC  85 c0                          test     eax, eax
+0090CBBE  59                             pop      ecx
+0090CBBF  75 07                          jne      0x90cbc8
+0090CBC1  6a 01                          push     1
+0090CBC3  e8 78 cf b7 ff                 call     0x489b40
+0090CBC8  c2 04 00                       ret      4

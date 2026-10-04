@@ -1,0 +1,9 @@
+004813E0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+004813E4  85 c0                          test     eax, eax
+004813E6  7c 13                          jl       0x4813fb
+004813E8  3d 4b 04 00 00                 cmp      eax, 0x44b
+004813ED  7f 0c                          jg       0x4813fb
+004813EF  39 41 08                       cmp      dword ptr [ecx + 8], eax
+004813F2  75 07                          jne      0x4813fb
+004813F4  c7 41 08 ff ff ff ff           mov      dword ptr [ecx + 8], 0xffffffff
+004813FB  c2 04 00                       ret      4

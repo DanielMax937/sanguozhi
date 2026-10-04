@@ -1,0 +1,17 @@
+0047BC70  51                             push     ecx
+0047BC71  b9 58 19 20 07                 mov      ecx, 0x7201958
+0047BC76  e8 05 55 01 00                 call     0x491180
+0047BC7B  85 c0                          test     eax, eax
+0047BC7D  7c 20                          jl       0x47bc9f
+0047BC7F  83 f8 29                       cmp      eax, 0x29
+0047BC82  7f 1b                          jg       0x47bc9f
+0047BC84  8b 4c 24 04                    mov      ecx, dword ptr [esp + 4]
+0047BC88  85 c9                          test     ecx, ecx
+0047BC8A  7c 13                          jl       0x47bc9f
+0047BC8C  83 f9 29                       cmp      ecx, 0x29
+0047BC8F  7f 0e                          jg       0x47bc9f
+0047BC91  6b c0 2a                       imul     eax, eax, 0x2a
+0047BC94  0f b6 84 08 30 b8 79 00        movzx    eax, byte ptr [eax + ecx + 0x79b830]
+0047BC9C  c2 04 00                       ret      4
+0047BC9F  83 c8 ff                       or       eax, 0xffffffff
+0047BCA2  c2 04 00                       ret      4

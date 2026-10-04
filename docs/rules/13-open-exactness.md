@@ -259,7 +259,9 @@ P0-48进一步恢复三caller mode/关系排除、normal/neutral finalizer、普
 
 P0-49新增[人员/容量审计](84-capture-personnel-source-profile.md)：S1特产容量查询、004B1280分组与binary32小值边界、004B2820处分路由已恢复；当前模型只写三个已知俘虏字段，完整位置/军团/任务/非hold处分和事件仍open。
 
-P0-50新增[前置释放/迁移/排序审计](85-capture-relocation-source-profile.md)：旧俘虏pass、004B0F50目的地、004A7990任务期间/返回origin、base escape不写实际位置、缺席home-roster和稳定身份rank排序已source-bound恢复并有界投影。004BBB00/004BA520在野/势力灭亡、任务取消resource/事件及完整force callbacks仍open；这不解决0058C320维护费forced-release comparator，也不证明stock等价。
+P0-50新增[前置释放/迁移/排序审计](85-capture-relocation-source-profile.md)：旧俘虏pass、004B0F50目的地、004A7990任务期间/返回origin、base escape不写实际位置、缺席home-roster和稳定身份rank排序已source-bound恢复并有界投影。P0-50 v1原有未投影范围的后续进展见P0-51；这仍不解决0058C320维护费forced-release comparator，也不证明stock等价。
+
+P0-51新增[游离/任务取消审计](86-personnel-detachment-source-profile.md)：004BBB00/004BA520目的地、实际territorial-city、身份/军团/职务字段与事件顺序现有独立有界投影；004A57B0注册dispatch和15..21取消退款/返回路径已恢复，S2 cap/query/acted-hook差异隔离。其他专用取消handler、004BF6F0返回和004A8110监听器、完整force灭亡/君主继承/全capture组合仍open。不能再把已实现局部路线笼统称为缺body，也不能以此关闭完整事件。
 
 状态：
 

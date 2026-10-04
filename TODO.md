@@ -1,14 +1,24 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-50 prior-captive release / migration destination / source-bound ordering projection
-> Integration baseline: PR #7 merged; this theme starts at `e4dab4be5e86bd3d410048137a9c2a3847f2f494`
+> Current integration: P0-51 wandering / last-city detachment / source-bound mission cancellation resources
+> Integration baseline: PR #8 merged; this theme starts at `453305b2dc64927a715fc58fceb0522557815f34`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: personnel detachment and cancellation
+
+- P0-51: source-bound wandering selector, numeric-affiliation gate, ordered distance-one city pool and preserved early RNG consumption
+- Previously deferred invalid-former-force captive release and last-city escape now have a separate bounded projection
+- Actual location normalizes to territorial city; former advisor/governor/legion leader scalar clearing and event2/8/5/21/4 order
+- Direct mission reset occurs before set37, so detachment does not dispatch old-mission refunds
+- Mission-cancel registry recovered for 44 slots; explicit no-op and task15..21 refund/return projection with separate S1/S2 caps and S2 acted hook
+- Guide: `docs/rules/86-personnel-detachment-source-profile.md`; run both `check_personnel_detachment_profile.py` and `check_mission_cancellation_profile.py`
+- Callbacks/other task handlers/full force extinction and composition remain explicit record/reject boundaries; stock and Vanilla are not proven
 
 ### Completed bounded implementation: captive release and relocation
 
@@ -18,7 +28,7 @@
 - Absent home-roster collector and stable transformed-identity dispatcher ordering; event4 snapshot before forbidden tail
 - 126 text byte ranges, 63 S1/S2 comparisons (58 identical / 5 different); 34 regression tests
 - Guide: `docs/rules/85-capture-relocation-source-profile.md`; `python scripts/check_capture_relocation_profile.py`
-- Explicit defer/reject for unsupported wandering/force-extinction routes, callback/resource effects record-only; independent partial model, no stock or complete-capture claim
+- P0-50 v1 keeps its original defer/reject trace contract; P0-51 separately adds bounded wandering/cancel projections. Full callbacks/force extinction/composition remain open
 
 ### Completed bounded implementation: capture personnel projection
 
@@ -64,6 +74,7 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-51 audit complete: source-bound wandering, detachment role/event order and bounded mission cancellation resources
 - P0-50 audit complete: source-bound release, destination/migration and stable ordering with tested partial projection
 - P0-49 audit complete: source-bound capacity, personnel partition and explicit partial projection
 - P0-48 audit complete: capture caller/collector/scalar finalizer and tested transaction projection
@@ -112,7 +123,7 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- P0-50 recovers prior-prisoner release, absent home-roster, `004B0F50/004A7990` relocation and stable identity-rank ordering; continue `004BBB00/004BA520` wandering/force-extinction, mission cancellation resource callbacks and `004B03D0` AI disposition callees
+- P0-51 now recovers `004BBB00/004BA520` wandering and bounded role/event projection, plus cancellation registry and task15..21 refunds; continue the remaining dedicated cancellation handlers, `004BF6F0` return-home effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
 - Complete destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open
