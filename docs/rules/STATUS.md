@@ -2,7 +2,15 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-64原生任务route、目标势力与递归组合
+## 最新完成：P0-65空军团分派、合并与raw reset
+
+[正文](100-empty-legion-redistribution.md) · [结构化证据](../sources/empty-legion-redistribution.json)。基线main `116c6dd44d7fc1d102b3dab6f9716a8dde3a4abe`（PR #22已合）。
+
+[100-empty-legion-redistribution.md](100-empty-legion-redistribution.md)新增独立版本，展开空军团primary/nonprimary分派、source/destination合并方向、完整两次roster复制、live据点扫描与人员迁移调用、raw44-byte reset。primary fallback丢弃ordinal查找值而直接使用global ID2..8的原生控制流保留；nearest距离与S1/S2 RNG分开，S2三次共享页读要求逐调用观察。004AD550/004A8270仍是明确可变深层边界，force灭亡仍atomic defer；旧API、stock/Vanilla/全局RNG边界不变。
+
+22项source-only检查及双IDB完整指纹/独立raw-ID1的155区间、26,651 selected bytes复核通过（77双源对73同/4异，另1个S2 RNG hook）。21项模型测试通过，含64组独立seeded merge oracle、完整JSON重放与raw逐store golden核对。独审发现并已收紧canonical city/gate/port恒type-valid和generic building kind派生valid；新frame显式42 city/87 base存储全列，旧API不变。最终100命令全回归零失败：TypeScript、85 Node tests、97 Python checkers、2 demos。169文件工作树/暂存区冻结在全回归及独审前后无漂移；独立复审重跑22source/21model、单独raw-ID1验证155区间及追加128随机reset/112 tie-RNG cases全过，staged/unstaged whitespace干净，无剩余阻断。源asm尾空白已规范化后重新双IDB核验；没有执行EXE或声称不存在的远端CI通过。发布前仅补验证结论及P0-64历史域更正，合并后main仍须全测。
+
+## 历史完成：P0-64原生任务route、目标势力与递归组合
 
 [正文](99-return-route-target-force.md) · [结构化证据](../sources/return-route-target-force.json)。基线main `28d0b0b8aa6e2c781b791886093b806e6e3d1ad3`（PR #21已合）。
 

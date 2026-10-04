@@ -1,0 +1,21 @@
+0047C2B0  6a ff                          push     -1
+0047C2B2  68 78 eb 72 00                 push     0x72eb78
+0047C2B7  64 a1 00 00 00 00              mov      eax, dword ptr fs:[0]
+0047C2BD  50                             push     eax
+0047C2BE  64 89 25 00 00 00 00           mov      dword ptr fs:[0], esp
+0047C2C5  51                             push     ecx
+0047C2C6  56                             push     esi
+0047C2C7  8b f1                          mov      esi, ecx
+0047C2C9  89 74 24 04                    mov      dword ptr [esp + 4], esi
+0047C2CD  c7 06 58 bf 79 00              mov      dword ptr [esi], 0x79bf58
+0047C2D3  8d 8e b4 00 00 00              lea      ecx, [esi + 0xb4]
+0047C2D9  c7 44 24 10 00 00 00 00        mov      dword ptr [esp + 0x10], 0
+0047C2E1  e8 1a fe ff ff                 call     0x47c100
+0047C2E6  8b ce                          mov      ecx, esi
+0047C2E8  c7 44 24 10 ff ff ff ff        mov      dword ptr [esp + 0x10], 0xffffffff
+0047C2F0  e8 eb e2 ff ff                 call     0x47a5e0
+0047C2F5  8b 4c 24 08                    mov      ecx, dword ptr [esp + 8]
+0047C2F9  5e                             pop      esi
+0047C2FA  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+0047C301  83 c4 10                       add      esp, 0x10
+0047C304  c3                             ret

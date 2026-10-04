@@ -1,0 +1,21 @@
+0049F6D0  6a ff                          push     -1
+0049F6D2  68 a8 f2 72 00                 push     0x72f2a8
+0049F6D7  64 a1 00 00 00 00              mov      eax, dword ptr fs:[0]
+0049F6DD  50                             push     eax
+0049F6DE  64 89 25 00 00 00 00           mov      dword ptr fs:[0], esp
+0049F6E5  51                             push     ecx
+0049F6E6  56                             push     esi
+0049F6E7  8b f1                          mov      esi, ecx
+0049F6E9  89 74 24 04                    mov      dword ptr [esp + 4], esi
+0049F6ED  c7 06 6c 7b 7e 00              mov      dword ptr [esi], 0x7e7b6c
+0049F6F3  c7 44 24 10 00 00 00 00        mov      dword ptr [esp + 0x10], 0
+0049F6FB  e8 50 fa ff ff                 call     0x49f150
+0049F700  8b ce                          mov      ecx, esi
+0049F702  c7 44 24 10 ff ff ff ff        mov      dword ptr [esp + 0x10], 0xffffffff
+0049F70A  c7 06 48 7b 7e 00              mov      dword ptr [esi], 0x7e7b48
+0049F710  e8 3b fa ff ff                 call     0x49f150
+0049F715  8b 4c 24 08                    mov      ecx, dword ptr [esp + 8]
+0049F719  5e                             pop      esi
+0049F71A  64 89 0d 00 00 00 00           mov      dword ptr fs:[0], ecx
+0049F721  83 c4 10                       add      esp, 0x10
+0049F724  c3                             ret

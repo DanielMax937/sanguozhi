@@ -1,0 +1,5 @@
+00488C00  8b 91 a0 00 00 00              mov      edx, dword ptr [ecx + 0xa0]
+00488C06  33 c0                          xor      eax, eax
+00488C08  85 d2                          test     edx, edx
+00488C0A  0f 94 c0                       sete     al
+00488C0D  c3                             ret

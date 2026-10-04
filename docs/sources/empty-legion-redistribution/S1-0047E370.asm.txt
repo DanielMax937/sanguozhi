@@ -1,0 +1,17 @@
+0047E370  8b 49 0c                       mov      ecx, dword ptr [ecx + 0xc]
+0047E373  56                             push     esi
+0047E374  51                             push     ecx
+0047E375  b9 58 19 20 07                 mov      ecx, 0x7201958
+0047E37A  e8 81 27 01 00                 call     0x490b00
+0047E37F  8b f0                          mov      esi, eax
+0047E381  56                             push     esi
+0047E382  e8 a9 c2 ff ff                 call     0x47a630
+0047E387  83 c4 04                       add      esp, 4
+0047E38A  85 c0                          test     eax, eax
+0047E38C  74 08                          je       0x47e396
+0047E38E  8b ce                          mov      ecx, esi
+0047E390  5e                             pop      esi
+0047E391  e9 fa b2 00 00                 jmp      0x489690
+0047E396  b8 4c 79 ee 06                 mov      eax, 0x6ee794c
+0047E39B  5e                             pop      esi
+0047E39C  c3                             ret

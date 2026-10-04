@@ -1,0 +1,17 @@
+0047E3B0  8b 49 0c                       mov      ecx, dword ptr [ecx + 0xc]
+0047E3B3  56                             push     esi
+0047E3B4  51                             push     ecx
+0047E3B5  b9 58 19 20 07                 mov      ecx, 0x7201958
+0047E3BA  e8 41 27 01 00                 call     0x490b00
+0047E3BF  8b f0                          mov      esi, eax
+0047E3C1  56                             push     esi
+0047E3C2  e8 69 c2 ff ff                 call     0x47a630
+0047E3C7  83 c4 04                       add      esp, 4
+0047E3CA  85 c0                          test     eax, eax
+0047E3CC  74 08                          je       0x47e3d6
+0047E3CE  8b 86 98 00 00 00              mov      eax, dword ptr [esi + 0x98]
+0047E3D4  5e                             pop      esi
+0047E3D5  c3                             ret
+0047E3D6  83 c8 ff                       or       eax, 0xffffffff
+0047E3D9  5e                             pop      esi
+0047E3DA  c3                             ret

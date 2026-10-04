@@ -1,0 +1,6 @@
+0047B180  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0047B184  50                             push     eax
+0047B185  51                             push     ecx
+0047B186  e8 a5 5a 04 00                 call     0x4c0c30
+0047B18B  83 c4 08                       add      esp, 8
+0047B18E  c2 04 00                       ret      4

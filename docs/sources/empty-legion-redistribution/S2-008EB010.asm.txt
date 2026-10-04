@@ -1,0 +1,6 @@
+008EB010  a1 20 03 fe 7f                 mov      eax, dword ptr [0x7ffe0320]
+008EB015  03 05 08 00 fe 7f              add      eax, dword ptr [0x7ffe0008]
+008EB01B  03 05 14 00 fe 7f              add      eax, dword ptr [0x7ffe0014]
+008EB021  25 ff ff 00 00                 and      eax, 0xffff
+008EB026  03 05 44 5d 8a 00              add      eax, dword ptr [0x8a5d44]
+008EB02C  c3                             ret
