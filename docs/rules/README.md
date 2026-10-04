@@ -7,6 +7,8 @@
 
 ## 最新审计入口
 
+新增[P0-58稳定非空军团/太守角色协调](93-legion-role-reconciliation.md)：独立004BE2A0稳定分支与004BCA30(refresh=0)，不同比较器、原roster顺序、live身份变化与event8/14阶段账本；完整监听/force/返回组合仍open。`python scripts/check_legion_role_source.py`与`python scripts/check_legion_role_reconciliation_profile.py`。
+
 新增[P0-55能力培养任务取消](90-special-mission-cancellation.md)：41..43有序actor/建筑/98培养记录gate，无actual-location valid gate；home通知与troop/home=-1边界、独立原子API及重放。完整return/callback和stock仍open。`python scripts/check_special_mission_cancellation_profile.py`与`python scripts/check_special_mission_cancellation_evidence.py`。
 
 新增[P0-54设施任务取消/销毁字段/宝物42](89-facility-mission-cancellation.md)：0/38 gate与返回、raw0x38精确写宽、S1/S2城市byte表差异、allocated-person home引用；base销毁及完整回调仍open。`python scripts/check_facility_mission_cancellation_profile.py`与`python scripts/check_facility_mission_cancellation_evidence.py`。
@@ -288,3 +290,5 @@ P0-55以[90-special-mission-cancellation.md](90-special-mission-cancellation.md)
 P0-56以[91-return-mission-lifecycle.md](91-return-mission-lifecycle.md)为准：mission37完成与单active-list成员的一步推进已有独立有界投影，退款先于reset、direct acted尾部、源分离距离/金cap、显式安全域与零local RNG重放；完整return/全链表与scheduler仍open。
 
 P0-57以[92-officer-return-finalizer.md](92-officer-return-finalizer.md)为准：004BF6F0四字段及完整列表/role调用顺序已有独立有界投影，ruler ownership原子defer；004BE2A0稳定非空军团角色协调为下一主题，完整callback/force/stock/Vanilla仍open。
+
+P0-58以[93-legion-role-reconciliation.md](93-legion-role-reconciliation.md)为准：原下一主题稳定军团与refresh=0太守标量协调已有独立有界API；事件监听、force灭亡/空军团及完整返回/capture仍open。

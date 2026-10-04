@@ -1,14 +1,24 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-57 bounded officer return home/location/rawlegion/bit9
-> Integration baseline: PR #14 merged; this theme starts at `1ff61538c16a1e95dddc15cd228f63d7e15cd356`
+> Current integration: P0-58 stable nonempty legion and refresh=0 governor role reconciliation
+> Integration baseline: PR #15 merged; this theme starts at `6d62e86caddd50887b4d4792cb1918526e980722`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: stable legion/governor roles
+
+- P0-58: separate004BE2A0 stable nonempty branch and004BCA30 refresh=0 scalar APIs
+- Force allocated/status-mask predicates remain distinct from valid corps/person candidates; leader and governor ranking are different, with explicit uint16 capacity inputs
+- Existing home-roster order, last status<=1 shortcut, transient same-leader changes, all canonical-base passes and event8-before-write/event14-after-clear are preserved
+- Capacity/mission observations and listeners have stage snapshots and explicit noninterference/record/reject; no advisor mutation is invented
+- Extinction, empty-corps redistribution, refresh!=0 and unsafe mixed-validity sort domains defer atomically; old APIs/traces remain intact
+- Guide: `docs/rules/93-legion-role-reconciliation.md`; run both legion-role checkers
+- Next: recover004A8110→005B9D30 event8/14 listener effects before composing full return roles; force/empty corps, clean stock and Vanilla remain open
 
 ### Completed bounded implementation: officer return scalar/call order
 
@@ -18,7 +28,7 @@
 - Ruler ownership/capture branch explicitly defers atomically; full old/new legion and old-home governor reconciliation remain record/reject boundaries
 - Source-bound getter/slot observations, full-field snapshots, preflight, command idempotency, local RNG and replay preserve all earlier APIs
 - Guide: `docs/rules/92-officer-return-finalizer.md`; run both officer return checkers
-- Next bounded theme: stable nonempty004BE2A0 role reconciliation; full callbacks/roles/force/capture, clean stock and Vanilla remain open
+- Stable nonempty004BE2A0 and refresh=0 governor scalar coordination now have a separate P0-58 API; complete callback/force/capture composition, clean stock and Vanilla remain open
 
 ### Completed bounded implementation: mission37 lifecycle
 
@@ -130,6 +140,7 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-58 audit complete: stable nonempty legion and governor scalar roles, distinct rankings, exact transient/status/event ordering and explicit unsafe-path deferral
 - P0-57 audit complete: officer-return scalar fields, exact roster/callback order, real troop and numeric affiliation gates, atomic ruler defer
 - P0-56 audit complete: mission37 completion, single active member advance, refund order, live eligibility and source-separated geometry
 
@@ -186,7 +197,7 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop and P0-57 separate return-home scalar/list-order projection; next implement stable nonempty `004BE2A0` role reconciliation, then continue base destruction, full `004BF6F0` return-home role/callback effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
+- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop and P0-57 separate return-home scalar/list-order projection; P0-58 adds separate stable nonempty `004BE2A0` and refresh=0 governor scalar coordination; next recover event8/14 mission-listener effects and continue base destruction, full `004BF6F0` return-home role/callback effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
 - Complete remaining base destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open
