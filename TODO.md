@@ -1,14 +1,24 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-55 capability-training mission41..43 cancellation
-> Integration baseline: PR #12 merged; this theme starts at `8dd3a566b3d4627657ab2cbe9c50ccb3c9c84fdb`
+> Current integration: P0-56 mission37 completion, one-hop advance and delayed refund
+> Integration baseline: PR #13 merged; this theme starts at `b488a9f6a38fbb45e6e6c2ac64cd68f6fa3f97ed`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-04 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: mission37 lifecycle
+
+- P0-56: separate complete/advance API closes positive delayed refund → mission/five-args reset → duration0
+- One supplied active-list member applies live valid/mission/acted and stop gates, source-specific six-neighbor distance ordering, one-hop or exact-base arrival
+- Arrival has handler1/dispatcher0, optional full-return boundary, then direct acted0 and duration0; no S2 cancellation query267 hook
+- Invalid next city only clears mission/args; safe canonical-home/geography/resource restrictions are explicit model limits, not source gates
+- Source-local RNG zero-call trace, atomic observation preflight, stage snapshots, record/reject and full replay preserve earlier APIs
+- Guide: `docs/rules/91-return-mission-lifecycle.md`; run both return mission checkers
+- Full `004BF6F0`, whole linked-list/scheduler, base destruction, event/force/capture composition and clean stock/Vanilla remain open
 
 ### Completed bounded implementation: capability-training cancellation
 
@@ -17,7 +27,7 @@
 - Six new S1/S2 vtable+0x18 slots identify conditional005DA320 notification at actor.home, explicitly left unexecuted
 - Independent API/trace, required-observation preflight, ordered zero-refund scalar writes, callback noninterference/record/reject and full replay preserve all earlier APIs
 - Guide: `docs/rules/90-special-mission-cancellation.md`; run both special mission cancellation checkers
-- All dedicated cancel families now have separate bounded projections; base destruction, mission37 completion and full return/event/force/capture composition remain open
+- All dedicated cancel families now have separate bounded projections; P0-56 adds mission37 completion/one-hop within its explicit domain, while base destruction and full return/event/force/capture composition remain open
 
 ### Completed bounded implementation: facility mission cancellation
 
@@ -27,7 +37,7 @@
 - Complete allocated-person home-reference selection includes source-specific excluded ID ranges; force/list/attachment/spatial/AI callbacks remain explicit record/reject
 - Independent API/trace, observation preflight, base-target defer/reject, replay and boundary/fuzz tests preserve prior modules
 - Guide: `docs/rules/89-facility-mission-cancellation.md`; run both facility mission cancellation checkers
-- P0-55 separately projects handlers41..43; base destruction, mission37 completion and full return/event/force/capture composition remain open
+- P0-55/56 separately project handlers41..43 and bounded mission37 completion; base destruction and full return/event/force/capture composition remain open
 
 ### Completed bounded implementation: grouped mission cancellation
 
@@ -36,7 +46,7 @@
 - Mission5 resets actor-force research ID then duration byte before returning group members; S1 research0..35 and S2 extended0..63 getter/hook are separate
 - Independent API preserves v1/v2 traces; explicit callback noninterference/record/reject policy, field-stage snapshots, atomic errors and full replay
 - Guide: `docs/rules/88-group-mission-cancellation.md`; run `check_group_mission_cancellation_profile.py`
-- P0-54 separately projects facility/treasure handlers0/38; base destruction, mission37 completion and full return/event/force composition remain open
+- P0-54/56 separately project facility handlers0/38 and bounded mission37 completion; base destruction and full return/event/force composition remain open
 
 ### Completed bounded implementation: dedicated zero-refund cancellation
 
@@ -110,6 +120,8 @@ Total: 55 main audit points.
 
 P0 exactness cleanup has currently reached:
 
+- P0-56 audit complete: mission37 completion, single active member advance, refund order, live eligibility and source-separated geometry
+
 - P0-55 audit complete: capability-training cancellation gates, 98-record getter, home notification and sentinel return boundary
 - P0-54 audit complete: facility cancellation, exact raw reset, source-separated city counter table and treasure42 tail
 - P0-53 audit complete: grouped cancellation, signed city-counter mapping and source-separated force research reset
@@ -163,7 +175,7 @@ Current source audit: `docs/rules/83-capture-transaction-source-profile.md` and
 
 - Obtain an independently verified clean PC-PK1.1 build/hash and compare the
   recovered bytes, without treating a MOD-associated input path as stock proof
-- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; continue base destruction, mission37 completion, `004BF6F0` return-home effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
+- P0-51/52/53/54/55 now recover wandering/role order, registry/task15..21 refunds, six zero-refund handlers9/10/12/22/23/24, group/city/research handlers2/5, bounded facility/treasure handlers0/38 and capability-training handlers41..43; P0-56 adds bounded mission37 completion/one-hop; continue base destruction, full `004BF6F0` return-home effects, `004A8110→005B9D30` mission-event listeners, full force extinction and `004B03D0` AI disposition callees
 - Complete remaining base destruction/callback effects and broader ruler/corps/transport entry paths; S1 city troop-cap query is now resolved and S2 remains separate
 - Validate source RNG initialization/global consumption and capture savegame cases
 - Keep Vanilla patch-specific candidate/selector behavior separately open

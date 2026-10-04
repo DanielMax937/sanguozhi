@@ -1,0 +1,1622 @@
+{
+  "schemaVersion": 1,
+  "profileId": "source-idb-S1-S2-return-mission-lifecycle-v1",
+  "baselineCommit": "b488a9f6a38fbb45e6e6c2ac64cd68f6fa3f97ed",
+  "sources": [
+    {
+      "source": "S1",
+      "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+      "recordedInputPath": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+      "recordedExeSha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip"
+    },
+    {
+      "source": "S2",
+      "idbSha256": "aa7f2c983b266633d6e23c494d4f8e1b03e5251632505cae103e176ae850dfd8",
+      "recordedInputPath": "C:\\Games\\san11\\血色衣冠6.0sp5(整合包240612)\\San11Pk\\san11pk_dump.exe",
+      "recordedExeSha256": "b1e9467e9612c23af83f6feda8414bc9ee99eb62c6862a84f7f4c5a8822b9da9",
+      "url": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/ida-db/san11pk_dump.exe.idb.7z"
+    }
+  ],
+  "stockOriginalVerified": false,
+  "originalExeExecuted": false,
+  "recordedExeHashesIndependentlyVerified": false,
+  "adoption": {
+    "PC-PK1.1": "compatibility-reconstruction",
+    "PC-Vanilla-assumed": "compatibility-assumption",
+    "PS2-Wii": "open"
+  },
+  "provenance": {
+    "method": "Directly reread both fingerprinted IDB files using python-idb/lowmem_idb and disassemble contiguous code ranges with Capstone; no EXE execution. Rehashed full source IDBs and cross-checked matching earlier corpus ranges. The 0048D820 tail chunk is explicitly bounded at0048D859, not the parent function end returned by IDA.",
+    "sourceClassification": "Both source IDBs are MOD-associated. Recorded EXE hashes are IDB metadata, not independently hashed binary files. Equal local bytes do not establish transitive effects or clean stock equivalence.",
+    "verificationDate": "2026-10-04",
+    "independentReadback": "All106 committed ranges rechecked from ID1 raw section bytes at four-byte stride, independently of IDAPython.ida_bytes and the Capstone renderer; exact match."
+  },
+  "ranges": [
+    {
+      "source": "S1",
+      "start": "00472520",
+      "endExclusive": "00472585",
+      "sha256": "baaf172e81e3701f4aedfc6e4cffaf19daaed12e00c750844c976c0c7b7911a8",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 44
+    },
+    {
+      "source": "S1",
+      "start": "00472590",
+      "endExclusive": "004725DC",
+      "sha256": "528487c1dcf637a573414e3108a5bf6310f2596efa6013e88778438c34afb487",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 48,
+      "lineCount": 36
+    },
+    {
+      "source": "S1",
+      "start": "0047A600",
+      "endExclusive": "0047A626",
+      "sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 86,
+      "lineCount": 18
+    },
+    {
+      "source": "S1",
+      "start": "0047A630",
+      "endExclusive": "0047A656",
+      "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 106,
+      "lineCount": 18
+    },
+    {
+      "source": "S1",
+      "start": "0047B480",
+      "endExclusive": "0047B4AA",
+      "sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 126,
+      "lineCount": 15
+    },
+    {
+      "source": "S1",
+      "start": "0047BC30",
+      "endExclusive": "0047BC4A",
+      "sha256": "68bdcb5fb07565a63d6965c15cd9f7728c4516826d5608330cad02bcabf0fa88",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 143,
+      "lineCount": 9
+    },
+    {
+      "source": "S1",
+      "start": "0047BCF0",
+      "endExclusive": "0047BD12",
+      "sha256": "c6b45b33ebc8daf8604e6cc833453ab19a80f2fc6d9ad83124c9e88f91142ee8",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 154,
+      "lineCount": 11
+    },
+    {
+      "source": "S1",
+      "start": "0047BED0",
+      "endExclusive": "0047BF58",
+      "sha256": "8742a4036cae9f0b34f15e6e32d26dfbbdfba405e1f3f30d699ba01abaf8af10",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 167,
+      "lineCount": 43
+    },
+    {
+      "source": "S1",
+      "start": "00482AE0",
+      "endExclusive": "00482AE7",
+      "sha256": "b679e47759c8f774f8f994e01d6997a3e6a9b94d3a2d95948f0fc1e8801ead7a",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 212,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "00482F20",
+      "endExclusive": "00482F7A",
+      "sha256": "47ed42db65a252424f5fd644eb334ca1fbed6942cb7f5f1f70097ab4230b8330",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 216,
+      "lineCount": 36
+    },
+    {
+      "source": "S1",
+      "start": "00483660",
+      "endExclusive": "004836B8",
+      "sha256": "4a500a842e6a1f5bbbf226b0c3d378b3cc7a51d42d461a42ea166968ea27a508",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 254,
+      "lineCount": 35
+    },
+    {
+      "source": "S1",
+      "start": "004839F0",
+      "endExclusive": "004839FC",
+      "sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 291,
+      "lineCount": 3
+    },
+    {
+      "source": "S1",
+      "start": "00486C80",
+      "endExclusive": "00486D2A",
+      "sha256": "102594bd6629352165ba7c5645a8009a9cbbfbca658d3312b3538f6c5ff5bffe",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 296,
+      "lineCount": 65
+    },
+    {
+      "source": "S1",
+      "start": "00486D30",
+      "endExclusive": "00486DE7",
+      "sha256": "a2f0adc4a6092112feb4e9f3924896835389baf936aa02a614903ec0b6a9acd2",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 363,
+      "lineCount": 69
+    },
+    {
+      "source": "S1",
+      "start": "00487310",
+      "endExclusive": "004873E2",
+      "sha256": "93a38fc6e422c6344db8c85b8f839d0a19a602d11b9766ef9dc7706cc9fb4bfb",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 434,
+      "lineCount": 76
+    },
+    {
+      "source": "S1",
+      "start": "00488350",
+      "endExclusive": "00488391",
+      "sha256": "af5b03b67366083fc8251d6e1ce86e835c501dfbb88371ed247994ed61565e0f",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 512,
+      "lineCount": 27
+    },
+    {
+      "source": "S1",
+      "start": "00488C70",
+      "endExclusive": "00488C7F",
+      "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 541,
+      "lineCount": 5
+    },
+    {
+      "source": "S1",
+      "start": "00489120",
+      "endExclusive": "00489132",
+      "sha256": "4423ac37cf042d351469108085c720121f9ac17d0956e7a9c10ac65a42d3a332",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 548,
+      "lineCount": 6
+    },
+    {
+      "source": "S1",
+      "start": "004891C0",
+      "endExclusive": "0048921F",
+      "sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 556,
+      "lineCount": 37
+    },
+    {
+      "source": "S1",
+      "start": "004897B0",
+      "endExclusive": "004897CD",
+      "sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 595,
+      "lineCount": 9
+    },
+    {
+      "source": "S1",
+      "start": "00489B40",
+      "endExclusive": "00489B6D",
+      "sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 606,
+      "lineCount": 12
+    },
+    {
+      "source": "S1",
+      "start": "00489BD0",
+      "endExclusive": "00489C0F",
+      "sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 620,
+      "lineCount": 13
+    },
+    {
+      "source": "S1",
+      "start": "0048A8B0",
+      "endExclusive": "0048A8D2",
+      "sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 635,
+      "lineCount": 11
+    },
+    {
+      "source": "S1",
+      "start": "0048D820",
+      "endExclusive": "0048D859",
+      "sha256": "6e95be1f5c7fe636035430215b9c9e1f015ba40714ad9595fc7a4f95e5ef5eb2",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 648,
+      "lineCount": 21
+    },
+    {
+      "source": "S1",
+      "start": "00490A10",
+      "endExclusive": "00490A32",
+      "sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 671,
+      "lineCount": 10
+    },
+    {
+      "source": "S1",
+      "start": "00490A40",
+      "endExclusive": "00490A62",
+      "sha256": "8b122a1d07e6c7372d9e85d06a6fb3025f443cd8d359c150148707def85a97d6",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 683,
+      "lineCount": 11
+    },
+    {
+      "source": "S1",
+      "start": "00490A70",
+      "endExclusive": "00490A92",
+      "sha256": "a7f7198f20c14dd01bd48d9f7c3a356490fafad34d0e4d7d8e40c60d9635c822",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 696,
+      "lineCount": 11
+    },
+    {
+      "source": "S1",
+      "start": "00490AA0",
+      "endExclusive": "00490AC2",
+      "sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 709,
+      "lineCount": 10
+    },
+    {
+      "source": "S1",
+      "start": "00490D00",
+      "endExclusive": "00490D21",
+      "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 721,
+      "lineCount": 10
+    },
+    {
+      "source": "S1",
+      "start": "00490E70",
+      "endExclusive": "00490E94",
+      "sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 733,
+      "lineCount": 10
+    },
+    {
+      "source": "S1",
+      "start": "00491310",
+      "endExclusive": "0049135A",
+      "sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 745,
+      "lineCount": 29
+    },
+    {
+      "source": "S1",
+      "start": "00491770",
+      "endExclusive": "004917BC",
+      "sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 776,
+      "lineCount": 30
+    },
+    {
+      "source": "S1",
+      "start": "00495340",
+      "endExclusive": "00495382",
+      "sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 808,
+      "lineCount": 27
+    },
+    {
+      "source": "S1",
+      "start": "00495390",
+      "endExclusive": "004953C4",
+      "sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 837,
+      "lineCount": 20
+    },
+    {
+      "source": "S1",
+      "start": "0049E450",
+      "endExclusive": "0049E4C4",
+      "sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 859,
+      "lineCount": 43
+    },
+    {
+      "source": "S1",
+      "start": "004A0CB0",
+      "endExclusive": "004A0CEB",
+      "sha256": "e29a76b4ce5975fc358952d6cddb629a54d844856a1240018234db943095031f",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 904,
+      "lineCount": 22
+    },
+    {
+      "source": "S1",
+      "start": "004A0CF0",
+      "endExclusive": "004A0D36",
+      "sha256": "69351e0978d4e2c9aa71f82e79c73b4a2e7f0164bc3f2f95c067d8bfb82e5d0b",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 928,
+      "lineCount": 28
+    },
+    {
+      "source": "S1",
+      "start": "004A5600",
+      "endExclusive": "004A5622",
+      "sha256": "469e3a076f2dd39447ed00a439df84539740067d7eb95ae2fecce1b8e7850f81",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 958,
+      "lineCount": 13
+    },
+    {
+      "source": "S1",
+      "start": "004A5660",
+      "endExclusive": "004A5682",
+      "sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 973,
+      "lineCount": 13
+    },
+    {
+      "source": "S1",
+      "start": "004A5780",
+      "endExclusive": "004A57A9",
+      "sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 988,
+      "lineCount": 17
+    },
+    {
+      "source": "S1",
+      "start": "004AE2A0",
+      "endExclusive": "004AE2FF",
+      "sha256": "4c496db9d8a880bd4378fce6e8ad7a0dfbdbe101e8e59ec4ee86d6d7764c4244",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1007,
+      "lineCount": 41
+    },
+    {
+      "source": "S1",
+      "start": "004BF6F0",
+      "endExclusive": "004BF91E",
+      "sha256": "a344fa6f6bbfb22fc2e8d57d875c04b2eaa0e6c8f755393bc9d26133949bfd7b",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1050,
+      "lineCount": 193
+    },
+    {
+      "source": "S1",
+      "start": "00598D60",
+      "endExclusive": "00598DDA",
+      "sha256": "124a9360843741a28e450d4a497b63071bef08d3e3e5432966ccd06dfc2760d2",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1245,
+      "lineCount": 49
+    },
+    {
+      "source": "S1",
+      "start": "00599CF0",
+      "endExclusive": "0059A08C",
+      "sha256": "fc0918fb5a9dc3753aeee7c27084404916ea3065772d285db393b766029d0a4a",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1296,
+      "lineCount": 306
+    },
+    {
+      "source": "S1",
+      "start": "005B9B40",
+      "endExclusive": "005B9B8E",
+      "sha256": "f14b892a5be8603044ef0991aac7cb4d95cc577296683f06a28bf12b7f921e8b",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1604,
+      "lineCount": 28
+    },
+    {
+      "source": "S1",
+      "start": "005B9B90",
+      "endExclusive": "005B9BFF",
+      "sha256": "3943862747581301116b9c8aa364b3d36883be7e8d4509c3d899ed3f9de5071e",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1634,
+      "lineCount": 39
+    },
+    {
+      "source": "S1",
+      "start": "005B9E10",
+      "endExclusive": "005BA298",
+      "sha256": "d74d2e696b1cb3e579294d758284f5b111796a2949056e026c735aa337324951",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1675,
+      "lineCount": 369
+    },
+    {
+      "source": "S1",
+      "start": "005BA320",
+      "endExclusive": "005BA3D9",
+      "sha256": "15d6001729dbf43910e76f4781cdecf33eb98adb15aff70873f795bfd902911c",
+      "file": "S1-code.asm.txt",
+      "kind": "code",
+      "lineStart": 2046,
+      "lineCount": 60
+    },
+    {
+      "source": "S1",
+      "start": "005BA298",
+      "endExclusive": "005BA2E8",
+      "sha256": "e899cab8060b8c45a70f7c252bb6161b16a2e3da54a85b5594e2171056ecd809",
+      "file": "S1-data.hex.txt",
+      "kind": "data",
+      "lineStart": 2,
+      "lineCount": 5
+    },
+    {
+      "source": "S1",
+      "start": "005BA2E8",
+      "endExclusive": "005BA312",
+      "sha256": "a0877c70517d0dfc8eefb9e1e66bd315f0d86a1c3f5b57312d2a33fb1994762f",
+      "file": "S1-data.hex.txt",
+      "kind": "data",
+      "lineStart": 9,
+      "lineCount": 3
+    },
+    {
+      "source": "S1",
+      "start": "005BA3DC",
+      "endExclusive": "005BA3F0",
+      "sha256": "3eb57addbcbd5bddb75357535de1ac8bb0757dac692ef6b10e38cc38df50d67c",
+      "file": "S1-data.hex.txt",
+      "kind": "data",
+      "lineStart": 14,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "005BA3F0",
+      "endExclusive": "005BA40D",
+      "sha256": "fc0a159e0d4d2dcd909d1c04e67e929d646eac7d76d1d050f74e949467c3decc",
+      "file": "S1-data.hex.txt",
+      "kind": "data",
+      "lineStart": 18,
+      "lineCount": 2
+    },
+    {
+      "source": "S1",
+      "start": "0079B830",
+      "endExclusive": "0079BF14",
+      "sha256": "deda8ff7828a2c42df89457adcec1b36df55f7ff78337be347e94698dc6b3e8f",
+      "file": "S1-data.hex.txt",
+      "kind": "data",
+      "lineStart": 22,
+      "lineCount": 111
+    },
+    {
+      "source": "S2",
+      "start": "00472520",
+      "endExclusive": "00472585",
+      "sha256": "baaf172e81e3701f4aedfc6e4cffaf19daaed12e00c750844c976c0c7b7911a8",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 2,
+      "lineCount": 44
+    },
+    {
+      "source": "S2",
+      "start": "00472590",
+      "endExclusive": "004725DC",
+      "sha256": "528487c1dcf637a573414e3108a5bf6310f2596efa6013e88778438c34afb487",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 48,
+      "lineCount": 36
+    },
+    {
+      "source": "S2",
+      "start": "0047A600",
+      "endExclusive": "0047A626",
+      "sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 86,
+      "lineCount": 18
+    },
+    {
+      "source": "S2",
+      "start": "0047A630",
+      "endExclusive": "0047A656",
+      "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 106,
+      "lineCount": 18
+    },
+    {
+      "source": "S2",
+      "start": "0047B480",
+      "endExclusive": "0047B4AA",
+      "sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 126,
+      "lineCount": 15
+    },
+    {
+      "source": "S2",
+      "start": "0047BC30",
+      "endExclusive": "0047BC4A",
+      "sha256": "68bdcb5fb07565a63d6965c15cd9f7728c4516826d5608330cad02bcabf0fa88",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 143,
+      "lineCount": 9
+    },
+    {
+      "source": "S2",
+      "start": "0047BCF0",
+      "endExclusive": "0047BD12",
+      "sha256": "49822991f42cb6880d21df749d436bb07ffc0f793010c380a0e0b2fb9950db97",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 154,
+      "lineCount": 11
+    },
+    {
+      "source": "S2",
+      "start": "0047BED0",
+      "endExclusive": "0047BF58",
+      "sha256": "8742a4036cae9f0b34f15e6e32d26dfbbdfba405e1f3f30d699ba01abaf8af10",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 167,
+      "lineCount": 43
+    },
+    {
+      "source": "S2",
+      "start": "00482AE0",
+      "endExclusive": "00482AE7",
+      "sha256": "b679e47759c8f774f8f994e01d6997a3e6a9b94d3a2d95948f0fc1e8801ead7a",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 212,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "00482F20",
+      "endExclusive": "00482F7A",
+      "sha256": "47ed42db65a252424f5fd644eb334ca1fbed6942cb7f5f1f70097ab4230b8330",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 216,
+      "lineCount": 36
+    },
+    {
+      "source": "S2",
+      "start": "00483660",
+      "endExclusive": "004836B8",
+      "sha256": "9d8ee806575a3bbcc2aaddf9002b308e75c81f22c38fcf5c5fe2172b6180fbfb",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 254,
+      "lineCount": 35
+    },
+    {
+      "source": "S2",
+      "start": "004839F0",
+      "endExclusive": "004839FC",
+      "sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 291,
+      "lineCount": 3
+    },
+    {
+      "source": "S2",
+      "start": "00486C80",
+      "endExclusive": "00486D2A",
+      "sha256": "102594bd6629352165ba7c5645a8009a9cbbfbca658d3312b3538f6c5ff5bffe",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 296,
+      "lineCount": 65
+    },
+    {
+      "source": "S2",
+      "start": "00486D30",
+      "endExclusive": "00486DE7",
+      "sha256": "c3313d2c1972326ba37741ba77446d550862b6d3edeb124b6656bf3536cd95f3",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 363,
+      "lineCount": 69
+    },
+    {
+      "source": "S2",
+      "start": "00487310",
+      "endExclusive": "004873E2",
+      "sha256": "93a38fc6e422c6344db8c85b8f839d0a19a602d11b9766ef9dc7706cc9fb4bfb",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 434,
+      "lineCount": 76
+    },
+    {
+      "source": "S2",
+      "start": "00488350",
+      "endExclusive": "00488391",
+      "sha256": "af5b03b67366083fc8251d6e1ce86e835c501dfbb88371ed247994ed61565e0f",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 512,
+      "lineCount": 27
+    },
+    {
+      "source": "S2",
+      "start": "00488C70",
+      "endExclusive": "00488C7F",
+      "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 541,
+      "lineCount": 5
+    },
+    {
+      "source": "S2",
+      "start": "00489120",
+      "endExclusive": "00489132",
+      "sha256": "4423ac37cf042d351469108085c720121f9ac17d0956e7a9c10ac65a42d3a332",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 548,
+      "lineCount": 6
+    },
+    {
+      "source": "S2",
+      "start": "004891C0",
+      "endExclusive": "0048921F",
+      "sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 556,
+      "lineCount": 37
+    },
+    {
+      "source": "S2",
+      "start": "004897B0",
+      "endExclusive": "004897CD",
+      "sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 595,
+      "lineCount": 9
+    },
+    {
+      "source": "S2",
+      "start": "00489B40",
+      "endExclusive": "00489B6D",
+      "sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 606,
+      "lineCount": 12
+    },
+    {
+      "source": "S2",
+      "start": "00489BD0",
+      "endExclusive": "00489C0F",
+      "sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 620,
+      "lineCount": 13
+    },
+    {
+      "source": "S2",
+      "start": "0048A8B0",
+      "endExclusive": "0048A8D2",
+      "sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 635,
+      "lineCount": 11
+    },
+    {
+      "source": "S2",
+      "start": "0048D820",
+      "endExclusive": "0048D859",
+      "sha256": "2e0e4be9421aa1f2cc32d1f0a58d828f3c16c06c2cf22600ac4b413b655d367b",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 648,
+      "lineCount": 21
+    },
+    {
+      "source": "S2",
+      "start": "00490A10",
+      "endExclusive": "00490A32",
+      "sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 671,
+      "lineCount": 10
+    },
+    {
+      "source": "S2",
+      "start": "00490A40",
+      "endExclusive": "00490A62",
+      "sha256": "8b122a1d07e6c7372d9e85d06a6fb3025f443cd8d359c150148707def85a97d6",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 683,
+      "lineCount": 11
+    },
+    {
+      "source": "S2",
+      "start": "00490A70",
+      "endExclusive": "00490A92",
+      "sha256": "a7f7198f20c14dd01bd48d9f7c3a356490fafad34d0e4d7d8e40c60d9635c822",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 696,
+      "lineCount": 11
+    },
+    {
+      "source": "S2",
+      "start": "00490AA0",
+      "endExclusive": "00490AC2",
+      "sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 709,
+      "lineCount": 10
+    },
+    {
+      "source": "S2",
+      "start": "00490D00",
+      "endExclusive": "00490D21",
+      "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 721,
+      "lineCount": 10
+    },
+    {
+      "source": "S2",
+      "start": "00490E70",
+      "endExclusive": "00490E94",
+      "sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 733,
+      "lineCount": 10
+    },
+    {
+      "source": "S2",
+      "start": "00491310",
+      "endExclusive": "0049135A",
+      "sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 745,
+      "lineCount": 29
+    },
+    {
+      "source": "S2",
+      "start": "00491770",
+      "endExclusive": "004917BC",
+      "sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 776,
+      "lineCount": 30
+    },
+    {
+      "source": "S2",
+      "start": "00495340",
+      "endExclusive": "00495382",
+      "sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 808,
+      "lineCount": 27
+    },
+    {
+      "source": "S2",
+      "start": "00495390",
+      "endExclusive": "004953C4",
+      "sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 837,
+      "lineCount": 20
+    },
+    {
+      "source": "S2",
+      "start": "0049E450",
+      "endExclusive": "0049E4C4",
+      "sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 859,
+      "lineCount": 43
+    },
+    {
+      "source": "S2",
+      "start": "004A0CB0",
+      "endExclusive": "004A0CEB",
+      "sha256": "e29a76b4ce5975fc358952d6cddb629a54d844856a1240018234db943095031f",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 904,
+      "lineCount": 22
+    },
+    {
+      "source": "S2",
+      "start": "004A0CF0",
+      "endExclusive": "004A0D36",
+      "sha256": "69351e0978d4e2c9aa71f82e79c73b4a2e7f0164bc3f2f95c067d8bfb82e5d0b",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 928,
+      "lineCount": 28
+    },
+    {
+      "source": "S2",
+      "start": "004A5600",
+      "endExclusive": "004A5622",
+      "sha256": "ba6c6d920a0fc1aca5619eb56c8b243f55fccd20c985dfb85184f883b0750a60",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 958,
+      "lineCount": 13
+    },
+    {
+      "source": "S2",
+      "start": "004A5660",
+      "endExclusive": "004A5682",
+      "sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 973,
+      "lineCount": 13
+    },
+    {
+      "source": "S2",
+      "start": "004A5780",
+      "endExclusive": "004A57A9",
+      "sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 988,
+      "lineCount": 17
+    },
+    {
+      "source": "S2",
+      "start": "004AE2A0",
+      "endExclusive": "004AE2FF",
+      "sha256": "4c496db9d8a880bd4378fce6e8ad7a0dfbdbe101e8e59ec4ee86d6d7764c4244",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1007,
+      "lineCount": 41
+    },
+    {
+      "source": "S2",
+      "start": "004BF6F0",
+      "endExclusive": "004BF91E",
+      "sha256": "a344fa6f6bbfb22fc2e8d57d875c04b2eaa0e6c8f755393bc9d26133949bfd7b",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1050,
+      "lineCount": 193
+    },
+    {
+      "source": "S2",
+      "start": "00598D60",
+      "endExclusive": "00598DDA",
+      "sha256": "124a9360843741a28e450d4a497b63071bef08d3e3e5432966ccd06dfc2760d2",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1245,
+      "lineCount": 49
+    },
+    {
+      "source": "S2",
+      "start": "00599CF0",
+      "endExclusive": "0059A08C",
+      "sha256": "0ea05d3282769841b835560d5577832cb110b2e9135e0033ae323350b1c7c866",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1296,
+      "lineCount": 306
+    },
+    {
+      "source": "S2",
+      "start": "005B9B40",
+      "endExclusive": "005B9B8E",
+      "sha256": "f14b892a5be8603044ef0991aac7cb4d95cc577296683f06a28bf12b7f921e8b",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1604,
+      "lineCount": 28
+    },
+    {
+      "source": "S2",
+      "start": "005B9B90",
+      "endExclusive": "005B9BFF",
+      "sha256": "3943862747581301116b9c8aa364b3d36883be7e8d4509c3d899ed3f9de5071e",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1634,
+      "lineCount": 39
+    },
+    {
+      "source": "S2",
+      "start": "005B9E10",
+      "endExclusive": "005BA298",
+      "sha256": "d74d2e696b1cb3e579294d758284f5b111796a2949056e026c735aa337324951",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 1675,
+      "lineCount": 369
+    },
+    {
+      "source": "S2",
+      "start": "005BA320",
+      "endExclusive": "005BA3D9",
+      "sha256": "15d6001729dbf43910e76f4781cdecf33eb98adb15aff70873f795bfd902911c",
+      "file": "S2-code.asm.txt",
+      "kind": "code",
+      "lineStart": 2046,
+      "lineCount": 60
+    },
+    {
+      "source": "S2",
+      "start": "005BA298",
+      "endExclusive": "005BA2E8",
+      "sha256": "e899cab8060b8c45a70f7c252bb6161b16a2e3da54a85b5594e2171056ecd809",
+      "file": "S2-data.hex.txt",
+      "kind": "data",
+      "lineStart": 2,
+      "lineCount": 5
+    },
+    {
+      "source": "S2",
+      "start": "005BA2E8",
+      "endExclusive": "005BA312",
+      "sha256": "a0877c70517d0dfc8eefb9e1e66bd315f0d86a1c3f5b57312d2a33fb1994762f",
+      "file": "S2-data.hex.txt",
+      "kind": "data",
+      "lineStart": 9,
+      "lineCount": 3
+    },
+    {
+      "source": "S2",
+      "start": "005BA3DC",
+      "endExclusive": "005BA3F0",
+      "sha256": "3eb57addbcbd5bddb75357535de1ac8bb0757dac692ef6b10e38cc38df50d67c",
+      "file": "S2-data.hex.txt",
+      "kind": "data",
+      "lineStart": 14,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "005BA3F0",
+      "endExclusive": "005BA40D",
+      "sha256": "fc0a159e0d4d2dcd909d1c04e67e929d646eac7d76d1d050f74e949467c3decc",
+      "file": "S2-data.hex.txt",
+      "kind": "data",
+      "lineStart": 18,
+      "lineCount": 2
+    },
+    {
+      "source": "S2",
+      "start": "0079B830",
+      "endExclusive": "0079BF14",
+      "sha256": "edd622ed95be439d7a5eee27fc429937e5224a1dd0fa296859e95863eee667ff",
+      "file": "S2-data.hex.txt",
+      "kind": "data",
+      "lineStart": 22,
+      "lineCount": 111
+    }
+  ],
+  "comparisons": [
+    {
+      "start": "00472520",
+      "identical": true,
+      "S1sha256": "baaf172e81e3701f4aedfc6e4cffaf19daaed12e00c750844c976c0c7b7911a8",
+      "S2sha256": "baaf172e81e3701f4aedfc6e4cffaf19daaed12e00c750844c976c0c7b7911a8"
+    },
+    {
+      "start": "00472590",
+      "identical": true,
+      "S1sha256": "528487c1dcf637a573414e3108a5bf6310f2596efa6013e88778438c34afb487",
+      "S2sha256": "528487c1dcf637a573414e3108a5bf6310f2596efa6013e88778438c34afb487"
+    },
+    {
+      "start": "0047A600",
+      "identical": true,
+      "S1sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5",
+      "S2sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5"
+    },
+    {
+      "start": "0047A630",
+      "identical": true,
+      "S1sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "S2sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d"
+    },
+    {
+      "start": "0047B480",
+      "identical": true,
+      "S1sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+      "S2sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7"
+    },
+    {
+      "start": "0047BC30",
+      "identical": true,
+      "S1sha256": "68bdcb5fb07565a63d6965c15cd9f7728c4516826d5608330cad02bcabf0fa88",
+      "S2sha256": "68bdcb5fb07565a63d6965c15cd9f7728c4516826d5608330cad02bcabf0fa88"
+    },
+    {
+      "start": "0047BCF0",
+      "identical": false,
+      "S1sha256": "c6b45b33ebc8daf8604e6cc833453ab19a80f2fc6d9ad83124c9e88f91142ee8",
+      "S2sha256": "49822991f42cb6880d21df749d436bb07ffc0f793010c380a0e0b2fb9950db97"
+    },
+    {
+      "start": "0047BED0",
+      "identical": true,
+      "S1sha256": "8742a4036cae9f0b34f15e6e32d26dfbbdfba405e1f3f30d699ba01abaf8af10",
+      "S2sha256": "8742a4036cae9f0b34f15e6e32d26dfbbdfba405e1f3f30d699ba01abaf8af10"
+    },
+    {
+      "start": "00482AE0",
+      "identical": true,
+      "S1sha256": "b679e47759c8f774f8f994e01d6997a3e6a9b94d3a2d95948f0fc1e8801ead7a",
+      "S2sha256": "b679e47759c8f774f8f994e01d6997a3e6a9b94d3a2d95948f0fc1e8801ead7a"
+    },
+    {
+      "start": "00482F20",
+      "identical": true,
+      "S1sha256": "47ed42db65a252424f5fd644eb334ca1fbed6942cb7f5f1f70097ab4230b8330",
+      "S2sha256": "47ed42db65a252424f5fd644eb334ca1fbed6942cb7f5f1f70097ab4230b8330"
+    },
+    {
+      "start": "00483660",
+      "identical": false,
+      "S1sha256": "4a500a842e6a1f5bbbf226b0c3d378b3cc7a51d42d461a42ea166968ea27a508",
+      "S2sha256": "9d8ee806575a3bbcc2aaddf9002b308e75c81f22c38fcf5c5fe2172b6180fbfb"
+    },
+    {
+      "start": "004839F0",
+      "identical": true,
+      "S1sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+      "S2sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e"
+    },
+    {
+      "start": "00486C80",
+      "identical": true,
+      "S1sha256": "102594bd6629352165ba7c5645a8009a9cbbfbca658d3312b3538f6c5ff5bffe",
+      "S2sha256": "102594bd6629352165ba7c5645a8009a9cbbfbca658d3312b3538f6c5ff5bffe"
+    },
+    {
+      "start": "00486D30",
+      "identical": false,
+      "S1sha256": "a2f0adc4a6092112feb4e9f3924896835389baf936aa02a614903ec0b6a9acd2",
+      "S2sha256": "c3313d2c1972326ba37741ba77446d550862b6d3edeb124b6656bf3536cd95f3"
+    },
+    {
+      "start": "00487310",
+      "identical": true,
+      "S1sha256": "93a38fc6e422c6344db8c85b8f839d0a19a602d11b9766ef9dc7706cc9fb4bfb",
+      "S2sha256": "93a38fc6e422c6344db8c85b8f839d0a19a602d11b9766ef9dc7706cc9fb4bfb"
+    },
+    {
+      "start": "00488350",
+      "identical": true,
+      "S1sha256": "af5b03b67366083fc8251d6e1ce86e835c501dfbb88371ed247994ed61565e0f",
+      "S2sha256": "af5b03b67366083fc8251d6e1ce86e835c501dfbb88371ed247994ed61565e0f"
+    },
+    {
+      "start": "00488C70",
+      "identical": true,
+      "S1sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "S2sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a"
+    },
+    {
+      "start": "00489120",
+      "identical": true,
+      "S1sha256": "4423ac37cf042d351469108085c720121f9ac17d0956e7a9c10ac65a42d3a332",
+      "S2sha256": "4423ac37cf042d351469108085c720121f9ac17d0956e7a9c10ac65a42d3a332"
+    },
+    {
+      "start": "004891C0",
+      "identical": true,
+      "S1sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "S2sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37"
+    },
+    {
+      "start": "004897B0",
+      "identical": true,
+      "S1sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b",
+      "S2sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b"
+    },
+    {
+      "start": "00489B40",
+      "identical": true,
+      "S1sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+      "S2sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5"
+    },
+    {
+      "start": "00489BD0",
+      "identical": true,
+      "S1sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+      "S2sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620"
+    },
+    {
+      "start": "0048A8B0",
+      "identical": true,
+      "S1sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+      "S2sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8"
+    },
+    {
+      "start": "0048D820",
+      "identical": false,
+      "S1sha256": "6e95be1f5c7fe636035430215b9c9e1f015ba40714ad9595fc7a4f95e5ef5eb2",
+      "S2sha256": "2e0e4be9421aa1f2cc32d1f0a58d828f3c16c06c2cf22600ac4b413b655d367b"
+    },
+    {
+      "start": "00490A10",
+      "identical": true,
+      "S1sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4",
+      "S2sha256": "5fdb5f2212b319522010293ef4ce36bb915efdc6a44b48882a9faecbff95c4f4"
+    },
+    {
+      "start": "00490A40",
+      "identical": true,
+      "S1sha256": "8b122a1d07e6c7372d9e85d06a6fb3025f443cd8d359c150148707def85a97d6",
+      "S2sha256": "8b122a1d07e6c7372d9e85d06a6fb3025f443cd8d359c150148707def85a97d6"
+    },
+    {
+      "start": "00490A70",
+      "identical": true,
+      "S1sha256": "a7f7198f20c14dd01bd48d9f7c3a356490fafad34d0e4d7d8e40c60d9635c822",
+      "S2sha256": "a7f7198f20c14dd01bd48d9f7c3a356490fafad34d0e4d7d8e40c60d9635c822"
+    },
+    {
+      "start": "00490AA0",
+      "identical": true,
+      "S1sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db",
+      "S2sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db"
+    },
+    {
+      "start": "00490D00",
+      "identical": true,
+      "S1sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "S2sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a"
+    },
+    {
+      "start": "00490E70",
+      "identical": true,
+      "S1sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "S2sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be"
+    },
+    {
+      "start": "00491310",
+      "identical": true,
+      "S1sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "S2sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1"
+    },
+    {
+      "start": "00491770",
+      "identical": true,
+      "S1sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b",
+      "S2sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b"
+    },
+    {
+      "start": "00495340",
+      "identical": true,
+      "S1sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "S2sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17"
+    },
+    {
+      "start": "00495390",
+      "identical": true,
+      "S1sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "S2sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0"
+    },
+    {
+      "start": "0049E450",
+      "identical": true,
+      "S1sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+      "S2sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d"
+    },
+    {
+      "start": "004A0CB0",
+      "identical": true,
+      "S1sha256": "e29a76b4ce5975fc358952d6cddb629a54d844856a1240018234db943095031f",
+      "S2sha256": "e29a76b4ce5975fc358952d6cddb629a54d844856a1240018234db943095031f"
+    },
+    {
+      "start": "004A0CF0",
+      "identical": true,
+      "S1sha256": "69351e0978d4e2c9aa71f82e79c73b4a2e7f0164bc3f2f95c067d8bfb82e5d0b",
+      "S2sha256": "69351e0978d4e2c9aa71f82e79c73b4a2e7f0164bc3f2f95c067d8bfb82e5d0b"
+    },
+    {
+      "start": "004A5600",
+      "identical": false,
+      "S1sha256": "469e3a076f2dd39447ed00a439df84539740067d7eb95ae2fecce1b8e7850f81",
+      "S2sha256": "ba6c6d920a0fc1aca5619eb56c8b243f55fccd20c985dfb85184f883b0750a60"
+    },
+    {
+      "start": "004A5660",
+      "identical": true,
+      "S1sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+      "S2sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72"
+    },
+    {
+      "start": "004A5780",
+      "identical": true,
+      "S1sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+      "S2sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55"
+    },
+    {
+      "start": "004AE2A0",
+      "identical": true,
+      "S1sha256": "4c496db9d8a880bd4378fce6e8ad7a0dfbdbe101e8e59ec4ee86d6d7764c4244",
+      "S2sha256": "4c496db9d8a880bd4378fce6e8ad7a0dfbdbe101e8e59ec4ee86d6d7764c4244"
+    },
+    {
+      "start": "004BF6F0",
+      "identical": true,
+      "S1sha256": "a344fa6f6bbfb22fc2e8d57d875c04b2eaa0e6c8f755393bc9d26133949bfd7b",
+      "S2sha256": "a344fa6f6bbfb22fc2e8d57d875c04b2eaa0e6c8f755393bc9d26133949bfd7b"
+    },
+    {
+      "start": "00598D60",
+      "identical": true,
+      "S1sha256": "124a9360843741a28e450d4a497b63071bef08d3e3e5432966ccd06dfc2760d2",
+      "S2sha256": "124a9360843741a28e450d4a497b63071bef08d3e3e5432966ccd06dfc2760d2"
+    },
+    {
+      "start": "00599CF0",
+      "identical": false,
+      "S1sha256": "fc0918fb5a9dc3753aeee7c27084404916ea3065772d285db393b766029d0a4a",
+      "S2sha256": "0ea05d3282769841b835560d5577832cb110b2e9135e0033ae323350b1c7c866"
+    },
+    {
+      "start": "005B9B40",
+      "identical": true,
+      "S1sha256": "f14b892a5be8603044ef0991aac7cb4d95cc577296683f06a28bf12b7f921e8b",
+      "S2sha256": "f14b892a5be8603044ef0991aac7cb4d95cc577296683f06a28bf12b7f921e8b"
+    },
+    {
+      "start": "005B9B90",
+      "identical": true,
+      "S1sha256": "3943862747581301116b9c8aa364b3d36883be7e8d4509c3d899ed3f9de5071e",
+      "S2sha256": "3943862747581301116b9c8aa364b3d36883be7e8d4509c3d899ed3f9de5071e"
+    },
+    {
+      "start": "005B9E10",
+      "identical": true,
+      "S1sha256": "d74d2e696b1cb3e579294d758284f5b111796a2949056e026c735aa337324951",
+      "S2sha256": "d74d2e696b1cb3e579294d758284f5b111796a2949056e026c735aa337324951"
+    },
+    {
+      "start": "005BA298",
+      "identical": true,
+      "S1sha256": "e899cab8060b8c45a70f7c252bb6161b16a2e3da54a85b5594e2171056ecd809",
+      "S2sha256": "e899cab8060b8c45a70f7c252bb6161b16a2e3da54a85b5594e2171056ecd809"
+    },
+    {
+      "start": "005BA2E8",
+      "identical": true,
+      "S1sha256": "a0877c70517d0dfc8eefb9e1e66bd315f0d86a1c3f5b57312d2a33fb1994762f",
+      "S2sha256": "a0877c70517d0dfc8eefb9e1e66bd315f0d86a1c3f5b57312d2a33fb1994762f"
+    },
+    {
+      "start": "005BA320",
+      "identical": true,
+      "S1sha256": "15d6001729dbf43910e76f4781cdecf33eb98adb15aff70873f795bfd902911c",
+      "S2sha256": "15d6001729dbf43910e76f4781cdecf33eb98adb15aff70873f795bfd902911c"
+    },
+    {
+      "start": "005BA3DC",
+      "identical": true,
+      "S1sha256": "3eb57addbcbd5bddb75357535de1ac8bb0757dac692ef6b10e38cc38df50d67c",
+      "S2sha256": "3eb57addbcbd5bddb75357535de1ac8bb0757dac692ef6b10e38cc38df50d67c"
+    },
+    {
+      "start": "005BA3F0",
+      "identical": true,
+      "S1sha256": "fc0a159e0d4d2dcd909d1c04e67e929d646eac7d76d1d050f74e949467c3decc",
+      "S2sha256": "fc0a159e0d4d2dcd909d1c04e67e929d646eac7d76d1d050f74e949467c3decc"
+    },
+    {
+      "start": "0079B830",
+      "identical": false,
+      "S1sha256": "deda8ff7828a2c42df89457adcec1b36df55f7ff78337be347e94698dc6b3e8f",
+      "S2sha256": "edd622ed95be439d7a5eee27fc429937e5224a1dd0fa296859e95863eee667ff"
+    }
+  ],
+  "containers": [
+    {
+      "file": "S1-code.asm.txt",
+      "sha256": "c977778f416569f2659568b84abb3ad0114c9f1ea1a33caaaa859f3309d015fb",
+      "lineCount": 2106
+    },
+    {
+      "file": "S1-data.hex.txt",
+      "sha256": "211647a30eca56ab2dc1d6a153d54026285fae8a747d29c274d2599052ac3874",
+      "lineCount": 133
+    },
+    {
+      "file": "S2-code.asm.txt",
+      "sha256": "52a78c50a94341fca0708b8f10478d0fbd4b1369b9f56a8d97571ef81686c1c5",
+      "lineCount": 2106
+    },
+    {
+      "file": "S2-data.hex.txt",
+      "sha256": "53c089da346f56ffc7bfa87bcab979b0b965398ceaad01269c848b42d70e3d1a",
+      "lineCount": 133
+    }
+  ],
+  "personPassRanges": [
+    {
+      "source": "S1",
+      "start": "00599DF8",
+      "endExclusive": "0059A019",
+      "sha256": "61d9087886fe5cba950cbbd7cd985b96ba0b4f660753f83289b05f80f2ec2933",
+      "parentRange": "00599CF0"
+    },
+    {
+      "source": "S2",
+      "start": "00599DF8",
+      "endExclusive": "0059A019",
+      "sha256": "61d9087886fe5cba950cbbd7cd985b96ba0b4f660753f83289b05f80f2ec2933",
+      "parentRange": "00599CF0"
+    }
+  ],
+  "contracts": {
+    "scope": "Source-local mission37 completion and one routed active-person member advance. Full active-list execution, outer scheduler, return-home and role reconciliation are not projected.",
+    "missionId": 37,
+    "completion": {
+      "dispatcher": "005B9E10",
+      "missionBias": 2,
+      "byteTable": "005BA2E8",
+      "mission37Selector": 15,
+      "pointerTable": "005BA298",
+      "branch": "005BA1E6",
+      "handler": "005B9B90",
+      "dispatchScratch": "Store actor at dispatcher+4 on entry and clear it at exit; this is transient dispatcher state, not a person field.",
+      "handlerReturn": 1,
+      "dispatcherReturn": 0,
+      "dispatcherReturnExplanation": "Mission37 branch jumps directly to005BA27E; EDI remains initialized zero rather than copying handler EAX.",
+      "orderedEffects": [
+        "0047A630(actor) gate",
+        "00490D00(actor.home)",
+        "actor virtual+0x44",
+        "home virtual+0x44",
+        "004897B0(actor,0)",
+        "if signed args[0]>0:004AE2A0(home,args[0])",
+        "004A5780(actor): mission=-1 then five args=0",
+        "004A5660(actor,0): duration=0"
+      ],
+      "noSameLegionGate": true,
+      "homeValidityGateBeforeDereference": false,
+      "sameHomeRequirement": false,
+      "changesActed": false,
+      "movesLocation": false,
+      "callsReturnHome": false,
+      "boundedDomain": "Projection requires a canonical0..86 valid home. The source does not add that validity gate before its home virtual dereference; invalid/generic homes are an explicit model restriction, not a source no-op."
+    },
+    "activeList": {
+      "headGetter": "00482AE0",
+      "headOffset": "0x188",
+      "listObjectOffset": "0x184",
+      "memberGetter": "00482F20",
+      "nodeStepper": "0047BED0",
+      "nodeNextOffset": "0x0",
+      "nodePayloadOffset": "0x8",
+      "order": "Linked-node order supplied by runtime list, not person-ID order. No ID sorting or pre-collected mission37 snapshot exists in this pass.",
+      "readTiming": "0047BED0 advances caller cursor to node.next before returning the current payload address. 00482F20 then rereads person valid, mission and acted at visit time; later people can therefore depend on preceding effects unless a noninterference assumption is imposed.",
+      "memberGates": [
+        "0047A630(person) valid",
+        "signed missionId0..43",
+        "00489120(person)==0 (person+0x124 bit0 clear)"
+      ],
+      "callerRechecksValid": true,
+      "globalStopAddress": "096A59F8",
+      "globalStopRead": "Caller reads before each00482F20 invocation; not before every node skipped inside00482F20.",
+      "safeObservationBoundary": "Node memory readability, finite acyclic links and callback noninterference are outside the single-member projection; the linked stepper has a readability-failure fallback and does not establish a safe whole-list snapshot."
+    },
+    "route": {
+      "resolver": "005BA320",
+      "missionBias": 9,
+      "byteTable": "005BA3F0",
+      "mission37Selector": 3,
+      "pointerTable": "005BA3DC",
+      "branch": "005BA393",
+      "target": "person+0x98 home",
+      "targetIdRange": [
+        0,
+        16383
+      ],
+      "outputs": [
+        "optional target building ID",
+        "optional0049E450(target building) territorial city"
+      ],
+      "currentLocation": "Read person+0x9c and normalize to0..86 else-1;00490D00 then0049E450.",
+      "durationGate": false,
+      "neighborSelector": "00598D60",
+      "equalCityShortcut": "If currentCity==targetCity return targetCity before current-city validity check.",
+      "neighborGate": "Otherwise require current-city object valid; scan exactly six runtime neighbor slots at city+0x1c+4*i via0047BC30; accept numeric neighbor0..41 without neighbor-object validity check.",
+      "score": "0047B480(candidate,target), unsigned byte at0079B830[candidate*42+target]; out-of-range argument returns-1.",
+      "selection": "Strictly smaller score wins; signed minimum initializedINT32_MAX; ties keep the first slot. No ownership, RNG, direction reversal, sort by ID, or requirement to improve on current distance.",
+      "noNeighborResult": -1,
+      "distanceTable": "0079B830..0079BF14; source-specific42x42 byte matrix",
+      "geographyBoundary": "Territorial results and six current neighbor slots are runtime observations. Restricting target city to0..41 is a safe model domain, not an extra source branch."
+    },
+    "advance": {
+      "caller": "00599CF0",
+      "personPass": [
+        "00599DF8",
+        "0059A019"
+      ],
+      "enRoute": [
+        "004A0CF0(actor,nextCity)",
+        "00489B40(actor,1) direct bit0 acted write",
+        "0047B480(nextCity,targetCity)",
+        "004A5660(actor,low8(distance))"
+      ],
+      "arrival": [
+        "004A0CF0(actor,targetBuildingId)",
+        "004A5660(actor,0)",
+        "save old mission",
+        "005B9E10(actor)",
+        "reread mission; if0..43 stop tail",
+        "resolve normalized actual-location building; if invalid stop tail",
+        "if status!=5 call004BF6F0(actor,actualBase,oldMission not9/10,1)",
+        "00489B40(actor,0)",
+        "0048A8B0(actor,0)"
+      ],
+      "invalidNextCity": [
+        "004A5780(actor) only; no refund, duration or acted reset"
+      ],
+      "failedRouteResolver": "The full caller has separate nonroute mission branches and duration-zero completion. That path is outside this routed-single-member model.",
+      "arrivalSecondWriter": "0048A8B0 writes person+0x158 duration byte, not a second action flag. It is the same setter invoked by004A5660. The final tail repeats duration0 after the return boundary.",
+      "actedWriter": "00489B40 writes bit0 of person+0x124 then calls004A06A0 and004B9480; surrounding flag bits are preserved. Arrival directly calls it without the S2-specific004A5600 query267 wrapper.",
+      "globalSchedulerBoundary": "City/building resets and force loops precede this pass; later city/building updates follow. S1 CALL005CAFD0 vs S2 JMP008EAA30 at0059A06B is outside equal person-pass bytes."
+    },
+    "movement": {
+      "helper": "004A0CF0",
+      "orderedGates": [
+        "0047A600(person) allocated",
+        "004891C0(person)==false actual troop membership",
+        "target ID0..16383"
+      ],
+      "troopPredicate": "004891C0 requires actual location87..1086, corresponding troop object valid, and person ID present as troop leader/deputy; merely having a troop-range location does not prove membership.",
+      "normalizer": "00488350 preserves canonical base0..86, otherwise returns-1 (does not map generic building to its territorial city).",
+      "writer": "004A0CB0 rechecks allocated person, accepts-1 or0..1086, writes dword person+0x9c then004B9480 callback."
+    },
+    "refund": {
+      "helper": "004AE2A0",
+      "arithmetic": "signed32 old+positiveAmount with x86 wrap;<=0 clamps0, else min(total,capacity). Return is new-old with32-bit arithmetic.",
+      "orderedCalls": [
+        "0047A630(building)",
+        "00486C80 money getter",
+        "00486D30 cap getter",
+        "0047A630(building) again",
+        "if valid00487310 money setter"
+      ],
+      "subtypeValidity": "City/gate/port resource objects have separate validity checks inside getter, capacity and setter. Source invalid-subtype paths are not assumed to be normal valid money writes.",
+      "caps": {
+        "S1": {
+          "city": 100000,
+          "portGateDefault": 10000,
+          "portGateWithValidForceQuery33": 40000
+        },
+        "S2": {
+          "city": 200000,
+          "portGateDefault": 50000,
+          "portGateWithValidForceQuery38": 100000
+        }
+      },
+      "queryBoundary": "Force-query results are source-bound observations; full technology/skill query implementation is not projected.",
+      "sourceSeparatelyPreservedHelpers": [
+        "0047BCF0",
+        "00483660",
+        "00486D30",
+        "0048D820"
+      ]
+    },
+    "deferred": {
+      "004BF6F0": "Full return-home, home roster, actual location, legion roster/flags, notification, ownership/capture, force extinction and role-reconciliation callbacks remain unexecuted. Corpus includes body only to identify boundary and call order.",
+      "callbackPolicy": "Any continuation beyond omitted calls is explicitly a scalar projection under observed/specified noninterference, not game-equivalent execution.",
+      "rng": "No direct RNG call in mission37 completion, route resolver, minimum-distance neighbor selector or projected caller arms; does not claim all transitively omitted callbacks or the whole scheduler use zero RNG."
+    }
+  },
+  "unresolved": [
+    "Full active linked-list mutation and callback composition",
+    "00599CF0 global invocation cadence, preceding/following phases and outer scheduler",
+    "004BF6F0 return-home lists/roles/ownership/force extinction",
+    "005B9E10 other mission handlers and nonroute caller paths",
+    "Presentation/cache/UI callbacks and runtime geography capture",
+    "Clean stock PC-PK1.1, independently read original EXE, Vanilla, PS2/Wii equivalence"
+  ]
+}
