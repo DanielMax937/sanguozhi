@@ -1,0 +1,445 @@
+{
+ "schemaVersion": 1,
+ "profileId": "source-idb-S1-S2-facility-mission-cancellation-v1",
+ "baselineCommit": "3a93431f3ef8a4e15e920ebb9475939a6aab1e21",
+ "sources": [
+  {
+   "source": "S1",
+   "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+   "recordedInputPath": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+   "recordedExeSha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+   "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip"
+  },
+  {
+   "source": "S2",
+   "idbSha256": "aa7f2c983b266633d6e23c494d4f8e1b03e5251632505cae103e176ae850dfd8",
+   "recordedInputPath": "C:\\Games\\san11\\血色衣冠6.0sp5(整合包240612)\\San11Pk\\san11pk_dump.exe",
+   "recordedExeSha256": "b1e9467e9612c23af83f6feda8414bc9ee99eb62c6862a84f7f4c5a8822b9da9",
+   "url": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/ida-db/san11pk_dump.exe.idb.7z"
+  }
+ ],
+ "stockOriginalVerified": false,
+ "originalExeExecuted": false,
+ "recordedExeHashesIndependentlyVerified": false,
+ "adoption": {
+  "PC-PK1.1": "compatibility-reconstruction",
+  "PC-Vanilla-assumed": "compatibility-assumption",
+  "PS2-Wii": "open"
+ },
+ "provenance": {
+  "method": "Independently read bounded virtual-address byte ranges from both fingerprinted IDB files using python-idb/lowmem_idb. Code rendered with Capstone x86-32; data rendered without execution. Prior manifest byte hashes rechecked against each IDB.",
+  "sourceClassification": "Both database recorded input paths identify MOD-associated installations; source agreement is not proof of clean stock PK or Vanilla equivalence.",
+  "hookBoundary": "S2 008EA230 ends at 008EA256 exclusive, immediately after RET at 008EA255; later alignment and unrelated hook code excluded."
+ },
+ "priorEvidence": [
+  {
+   "id": "P0-51",
+   "path": "docs/sources/personnel-detachment-source-profile.json",
+   "sha256": "d793bbd6d58f794e9a6c200d2dd29db346f7b3a6b8e165dd70d157ce68c9c28e"
+  },
+  {
+   "id": "P0-52",
+   "path": "docs/sources/mission-cancellation-zero-refund.json",
+   "sha256": "96141b4710c73a9e1aeec30968d9924c48708a8e841df1b010dd622f7685a9bf"
+  },
+  {
+   "id": "P0-53",
+   "path": "docs/sources/group-mission-cancellation.json",
+   "sha256": "d3e789bf1784a9fcc0ce1dcb177857e1cca3753beaa3d0f6f3fc0d22774922fa"
+  }
+ ],
+ "referencedRanges": [
+  {"source": "S1","start": "005BBE30","endExclusive": "005BBFFD","sha256": "18d5f2efbf490e24aec97395cfe476ef32f16ebe67d7cc0b5fb3e6e155b76662","evidence": "P0-51"},
+  {"source": "S1","start": "005D69D0","endExclusive": "005D6B2A","sha256": "a9554f02ca0d7e0b401dd6e303ba1e3665562da1c2c48d1f3d5aec4af6b0e29c","evidence": "P0-51"},
+  {"source": "S1","start": "0047A600","endExclusive": "0047A626","sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5","evidence": "P0-51"},
+  {"source": "S1","start": "0047A630","endExclusive": "0047A656","sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d","evidence": "P0-51"},
+  {"source": "S1","start": "00487920","endExclusive": "00487956","sha256": "49888397ffecbc8962df0818e282940cf2caf2f5e079f3a11cc0bafc89164fdc","evidence": "P0-51"},
+  {"source": "S1","start": "004897B0","endExclusive": "004897CD","sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b","evidence": "P0-51"},
+  {"source": "S1","start": "00491310","endExclusive": "0049135A","sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1","evidence": "P0-51"},
+  {"source": "S1","start": "00490D00","endExclusive": "00490D21","sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a","evidence": "P0-51"},
+  {"source": "S1","start": "00490B00","endExclusive": "00490B24","sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c","evidence": "P0-51"},
+  {"source": "S1","start": "00490AA0","endExclusive": "00490AC2","sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db","evidence": "P0-51"},
+  {"source": "S1","start": "005B8400","endExclusive": "005B84E2","sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0","evidence": "P0-51"},
+  {"source": "S1","start": "005B8250","endExclusive": "005B82DD","sha256": "a18b708c369c27b99b1f9f4b2592f7620fc36d6ca9ede8e1ed5cc04710045eac","evidence": "P0-53"},
+  {"source": "S2","start": "005BBE30","endExclusive": "005BBFFD","sha256": "18d5f2efbf490e24aec97395cfe476ef32f16ebe67d7cc0b5fb3e6e155b76662","evidence": "P0-51"},
+  {"source": "S2","start": "005D69D0","endExclusive": "005D6B2A","sha256": "a9554f02ca0d7e0b401dd6e303ba1e3665562da1c2c48d1f3d5aec4af6b0e29c","evidence": "P0-51"},
+  {"source": "S2","start": "0047A600","endExclusive": "0047A626","sha256": "d2c5dd74ec4be8db14108f583a87a713ae6501ed3c5592eb44de9e624c1aa4e5","evidence": "P0-51"},
+  {"source": "S2","start": "0047A630","endExclusive": "0047A656","sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d","evidence": "P0-51"},
+  {"source": "S2","start": "00487920","endExclusive": "00487956","sha256": "49888397ffecbc8962df0818e282940cf2caf2f5e079f3a11cc0bafc89164fdc","evidence": "P0-51"},
+  {"source": "S2","start": "004897B0","endExclusive": "004897CD","sha256": "6b399b2cd04d2e17bba80fdab7aee8968b0f6c2e76d0a30f1fa30070b157df1b","evidence": "P0-51"},
+  {"source": "S2","start": "00491310","endExclusive": "0049135A","sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1","evidence": "P0-51"},
+  {"source": "S2","start": "00490D00","endExclusive": "00490D21","sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a","evidence": "P0-51"},
+  {"source": "S2","start": "00490B00","endExclusive": "00490B24","sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c","evidence": "P0-51"},
+  {"source": "S2","start": "00490AA0","endExclusive": "00490AC2","sha256": "e9c9bd6a1d8baa85ea48e7f40425871ad9469d7a5a9896f24d16ca03242866db","evidence": "P0-51"},
+  {"source": "S2","start": "005B8400","endExclusive": "005B84E2","sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0","evidence": "P0-51"},
+  {"source": "S2","start": "005B8250","endExclusive": "005B82DD","sha256": "a18b708c369c27b99b1f9f4b2592f7620fc36d6ca9ede8e1ed5cc04710045eac","evidence": "P0-53"}
+ ],
+ "newRanges": [
+  {"source": "S1","start": "00423230","endExclusive": "00423233","sha256": "e598d0c3ba86d917b177d7adde0556aa99bc355543c57aee0a3e50b684dd7e99","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 2,"lineCount": 1},
+  {"source": "S1","start": "0047A660","endExclusive": "0047A68C","sha256": "e8cafac4ce880e2f03324914c28cd1aa84c3ac7897764461e9176f233bcd0147","kind": "code","file": "S1-ranges-01.asm.txt","lineStart": 5,"lineCount": 21},
+  {"source": "S1","start": "0047B820","endExclusive": "0047B835","sha256": "697e39e6c60bb946fb8cdc20ca2aebde9c3cafeea49dcf1f75905f3711ff2c82","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 28,"lineCount": 5},
+  {"source": "S1","start": "0047B840","endExclusive": "0047B855","sha256": "280e4c53e67d97f4b49605d0c4a135504b056043d6b819938b62513d432a3d99","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 35,"lineCount": 5},
+  {"source": "S1","start": "0047B860","endExclusive": "0047B875","sha256": "26fc8ea1c3c1f091492bef461cb94178b4ed6d7e481735c0d80c93202038f187","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 42,"lineCount": 5},
+  {"source": "S1","start": "0047B880","endExclusive": "0047B895","sha256": "c5d9f7cb8c6b8c11b0c881adb3f34f07ae9de77e29c419933f5e20baa825c1c6","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 49,"lineCount": 5},
+  {"source": "S1","start": "0047B8A0","endExclusive": "0047B8B5","sha256": "a6fd82740fbd80cdf263d0967e00de048f5530a0eb47a03014bd1358b8a0a619","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 56,"lineCount": 5},
+  {"source": "S1","start": "00484DE0","endExclusive": "00484E11","sha256": "1d141ccfab4aa22e67ac31e301405c8cb191a3e39011d9fc8025d8590377a74e","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 63,"lineCount": 17},
+  {"source": "S1","start": "00484E20","endExclusive": "00484E38","sha256": "6a59fd6a7616acd270dfbb3d655b24bafc07cf376ce7ee42d4445e49e418f729","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 82,"lineCount": 9},
+  {"source": "S1","start": "004863D0","endExclusive": "004863F1","kind": "code","sha256": "5500e4a2326ca7c9ec310cf20083e9050f61f039bd6199011501d274f2e8c5ba","file": "S1-ranges-01.asm.txt","lineStart": 93,"lineCount": 13},
+  {"source": "S1","start": "00486400","endExclusive": "00486424","sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 108,"lineCount": 17},
+  {"source": "S1","start": "00486430","endExclusive": "00486467","sha256": "b13ee24e66622a3aa926ede6784b077ab208bab426888b322b453d5165949e4c","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 127,"lineCount": 19},
+  {"source": "S1","start": "004866F0","endExclusive": "00486713","sha256": "6cc7deef844219d8714d164ce1210ff4f1cd1a8f3a6862f0e97a2c1d1ac477da","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 148,"lineCount": 12},
+  {"source": "S1","start": "00487A30","endExclusive": "00487A66","sha256": "26f152437f0ba659c1e9a0afa5c2e59f69c08e5cb8f4dda095a549fe19ad517c","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 162,"lineCount": 20},
+  {"source": "S1","start": "00487DB0","endExclusive": "00487DBB","sha256": "342ea19b25f2ec52aa11a84e358305e79dd51bb7e8a0077adeab58def8f9fb01","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 184,"lineCount": 2},
+  {"source": "S1","start": "00487EB0","endExclusive": "00488008","sha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 188,"lineCount": 132},
+  {"source": "S1","start": "004880A0","endExclusive": "004880B8","sha256": "672200b358bfbf28d0eca996b11adc2250ddb5de243887c13c6b8242c07ae09d","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 322,"lineCount": 8},
+  {"source": "S1","start": "00488B30","endExclusive": "00488B9A","sha256": "60086366232e8841ab7c36d92a8a15da00a8946fd60c8d1ac0d3a5936e80b78c","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 332,"lineCount": 37},
+  {"source": "S1","start": "00488B9C","endExclusive": "00488BC4","sha256": "6e2b728d38ae9928d92d80c5df4bfff7ec9a84a935c42b088b762fdacbb0a737","file": "S1-ranges-01.asm.txt","kind": "data","lineStart": 371,"lineCount": 10},
+  {"source": "S1","start": "00489C30","endExclusive": "00489C48","sha256": "bf59ce1f0accbce236a237c37a32044a601733507e34d6e213ddcb2eeb080ee7","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 383,"lineCount": 10},
+  {"source": "S1","start": "00489C50","endExclusive": "00489C5E","sha256": "e2e355732833127cd02b2457c928519b8114cfe664f49ac8a736dae2313b708e","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 395,"lineCount": 7},
+  {"source": "S1","start": "00489CE0","endExclusive": "00489D02","sha256": "9bd8d066727eb6e7846dda07de53de9dc674e592880e6b4b89644e26f4110842","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 404,"lineCount": 11},
+  {"source": "S1","start": "00489FE0","endExclusive": "00489FF7","sha256": "483e8c16439460cbab48ff32e0edd027dcb886d18fc66523c0427edac69ee35e","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 417,"lineCount": 7},
+  {"source": "S1","start": "00490B30","endExclusive": "00490B4F","sha256": "9f6f2e81025998477d1d0289c0dc212aa0a6562f36ac1df0abf92dc5f27da59c","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 426,"lineCount": 10},
+  {"source": "S1","start": "00490B90","endExclusive": "00490BB2","sha256": "f15b07997daf87667fe34f62f99504c1f6f4efe454dd45036219e4aba32945b6","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 438,"lineCount": 10},
+  {"source": "S1","start": "00491770","endExclusive": "004917BC","sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 450,"lineCount": 30},
+  {"source": "S1","start": "004A0F00","endExclusive": "004A0F2A","sha256": "7e465c152a89c44e91b276af72e386d86e12b4a9e65ce1edb4b942edf11bf551","file": "S1-ranges-01.asm.txt","kind": "code","lineStart": 482,"lineCount": 16},
+  {"source": "S1","start": "004A1E40","endExclusive": "004A1F11","sha256": "a3e5ccec5d7c8a495e3e1b1bffaf953a9813521f12bafd9fac6aae1ae1eadd63","file": "S1-ranges-02.asm.txt","kind": "code","lineStart": 2,"lineCount": 71},
+  {"source": "S1","start": "004A2370","endExclusive": "004A2427","sha256": "c5b62bd1b799e92d06a8d9c68e596f123c32615db61f273501564ab7a3746897","file": "S1-ranges-02.asm.txt","kind": "code","lineStart": 75,"lineCount": 63},
+  {"source": "S1","start": "004A3180","endExclusive": "004A31DA","sha256": "4b51fa042217e3f156d7c1cc0dcf2ff3be9693826e81e2a941898284763eae59","file": "S1-ranges-02.asm.txt","kind": "code","lineStart": 140,"lineCount": 36},
+  {"source": "S1","start": "004B06E0","endExclusive": "004B09AB","sha256": "8214537228f900a84c8ebc28e8b8c69914d75717794833f38a8230d8401a6ff7","file": "S1-ranges-02.asm.txt","kind": "code","lineStart": 178,"lineCount": 215},
+  {"source": "S1","start": "004B09B0","endExclusive": "004B0C5B","sha256": "6ac319378dca0bb85788ddc56f41544d8547e228e890eb36dc8e02c0e1208905","file": "S1-ranges-03.asm.txt","kind": "code","lineStart": 2,"lineCount": 218},
+  {"source": "S1","start": "004B0C5C","endExclusive": "004B0C80","sha256": "f2d688d727406d3ae3b9b10d3baf0ca3181a0b48dc065846ebd917f614e94761","file": "S1-ranges-03.asm.txt","kind": "data","lineStart": 222,"lineCount": 9},
+  {"source": "S1","start": "004B0C80","endExclusive": "004B0C9B","sha256": "16fdb013863b05b1d64aa385f8f51d5c90dd191fa8ba7db3660c17f3a060d9cb","file": "S1-ranges-03.asm.txt","kind": "data","lineStart": 233,"lineCount": 7},
+  {"source": "S1","start": "004B6580","endExclusive": "004B65D3","sha256": "b1d63e509bb4da155f92bf3450403c44ff2ddef5b263bf0adc8e718117f1d187","file": "S1-ranges-03.asm.txt","kind": "code","lineStart": 242,"lineCount": 37},
+  {"source": "S1","start": "004CF270","endExclusive": "004CF2E7","sha256": "20b01d8c161d0187f341013e2325d812013ec9353544f920efc8e1b083b5f426","file": "S1-ranges-03.asm.txt","kind": "code","lineStart": 281,"lineCount": 47},
+  {"source": "S1","start": "00573470","endExclusive": "00573476","sha256": "21faa16607cb70438711aab3fa582829af50aa15d5946524996fc7aa8a8e4e6d","kind": "code","file": "S1-ranges-03.asm.txt","lineStart": 330,"lineCount": 2},
+  {"source": "S1","start": "0079C718","endExclusive": "0079C748","file": "S1-ranges-03.asm.txt","kind": "data","lineStart": 334,"lineCount": 12,"sha256": "dd268a9ad9dac77ed31361662bd2fad3fb4d8edb1eeff8bb8b9c5e50762a3da4"},
+  {"source": "S2","start": "00423230","endExclusive": "00423233","sha256": "e598d0c3ba86d917b177d7adde0556aa99bc355543c57aee0a3e50b684dd7e99","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 2,"lineCount": 1},
+  {"source": "S2","start": "0047A660","endExclusive": "0047A68C","sha256": "e8cafac4ce880e2f03324914c28cd1aa84c3ac7897764461e9176f233bcd0147","kind": "code","file": "S2-ranges-01.asm.txt","lineStart": 5,"lineCount": 21},
+  {"source": "S2","start": "0047B820","endExclusive": "0047B835","sha256": "697e39e6c60bb946fb8cdc20ca2aebde9c3cafeea49dcf1f75905f3711ff2c82","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 28,"lineCount": 5},
+  {"source": "S2","start": "0047B840","endExclusive": "0047B855","sha256": "280e4c53e67d97f4b49605d0c4a135504b056043d6b819938b62513d432a3d99","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 35,"lineCount": 5},
+  {"source": "S2","start": "0047B860","endExclusive": "0047B875","sha256": "26fc8ea1c3c1f091492bef461cb94178b4ed6d7e481735c0d80c93202038f187","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 42,"lineCount": 5},
+  {"source": "S2","start": "0047B880","endExclusive": "0047B895","sha256": "c5d9f7cb8c6b8c11b0c881adb3f34f07ae9de77e29c419933f5e20baa825c1c6","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 49,"lineCount": 5},
+  {"source": "S2","start": "0047B8A0","endExclusive": "0047B8B5","sha256": "a6fd82740fbd80cdf263d0967e00de048f5530a0eb47a03014bd1358b8a0a619","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 56,"lineCount": 5},
+  {"source": "S2","start": "00484DE0","endExclusive": "00484E1E","sha256": "265bc5ef90942b44ad1fe7fba914c972b40eea371ce727e7f796c8206d79700d","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 63,"lineCount": 20},
+  {"source": "S2","start": "00484E20","endExclusive": "00484E38","sha256": "6a59fd6a7616acd270dfbb3d655b24bafc07cf376ce7ee42d4445e49e418f729","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 85,"lineCount": 9},
+  {"source": "S2","start": "004863D0","endExclusive": "004863F1","kind": "code","sha256": "5500e4a2326ca7c9ec310cf20083e9050f61f039bd6199011501d274f2e8c5ba","file": "S2-ranges-01.asm.txt","lineStart": 96,"lineCount": 13},
+  {"source": "S2","start": "00486400","endExclusive": "00486424","sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 111,"lineCount": 17},
+  {"source": "S2","start": "00486430","endExclusive": "00486467","sha256": "b13ee24e66622a3aa926ede6784b077ab208bab426888b322b453d5165949e4c","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 130,"lineCount": 19},
+  {"source": "S2","start": "004866F0","endExclusive": "00486713","sha256": "6cc7deef844219d8714d164ce1210ff4f1cd1a8f3a6862f0e97a2c1d1ac477da","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 151,"lineCount": 12},
+  {"source": "S2","start": "00487A30","endExclusive": "00487A66","sha256": "26f152437f0ba659c1e9a0afa5c2e59f69c08e5cb8f4dda095a549fe19ad517c","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 165,"lineCount": 20},
+  {"source": "S2","start": "00487DB0","endExclusive": "00487DBB","sha256": "342ea19b25f2ec52aa11a84e358305e79dd51bb7e8a0077adeab58def8f9fb01","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 187,"lineCount": 2},
+  {"source": "S2","start": "00487EB0","endExclusive": "00488008","sha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 191,"lineCount": 132},
+  {"source": "S2","start": "004880A0","endExclusive": "004880B8","sha256": "672200b358bfbf28d0eca996b11adc2250ddb5de243887c13c6b8242c07ae09d","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 325,"lineCount": 8},
+  {"source": "S2","start": "00488B30","endExclusive": "00488B9A","sha256": "60086366232e8841ab7c36d92a8a15da00a8946fd60c8d1ac0d3a5936e80b78c","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 335,"lineCount": 37},
+  {"source": "S2","start": "00488B9C","endExclusive": "00488BC4","sha256": "6e2b728d38ae9928d92d80c5df4bfff7ec9a84a935c42b088b762fdacbb0a737","file": "S2-ranges-01.asm.txt","kind": "data","lineStart": 374,"lineCount": 10},
+  {"source": "S2","start": "00489C30","endExclusive": "00489C48","sha256": "bf59ce1f0accbce236a237c37a32044a601733507e34d6e213ddcb2eeb080ee7","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 386,"lineCount": 10},
+  {"source": "S2","start": "00489C50","endExclusive": "00489C5E","sha256": "e2e355732833127cd02b2457c928519b8114cfe664f49ac8a736dae2313b708e","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 398,"lineCount": 7},
+  {"source": "S2","start": "00489CE0","endExclusive": "00489D02","sha256": "6e615661a80b7fd2ffe20c15a557020303424ac7b4bdc2abc8b03577adf9c36f","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 407,"lineCount": 11},
+  {"source": "S2","start": "00489FE0","endExclusive": "00489FF7","sha256": "483e8c16439460cbab48ff32e0edd027dcb886d18fc66523c0427edac69ee35e","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 420,"lineCount": 7},
+  {"source": "S2","start": "00490B30","endExclusive": "00490B4F","sha256": "9f6f2e81025998477d1d0289c0dc212aa0a6562f36ac1df0abf92dc5f27da59c","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 429,"lineCount": 10},
+  {"source": "S2","start": "00490B90","endExclusive": "00490BB2","sha256": "f15b07997daf87667fe34f62f99504c1f6f4efe454dd45036219e4aba32945b6","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 441,"lineCount": 10},
+  {"source": "S2","start": "00491770","endExclusive": "004917BC","sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 453,"lineCount": 30},
+  {"source": "S2","start": "004A0F00","endExclusive": "004A0F2A","sha256": "7e465c152a89c44e91b276af72e386d86e12b4a9e65ce1edb4b942edf11bf551","file": "S2-ranges-01.asm.txt","kind": "code","lineStart": 485,"lineCount": 16},
+  {"source": "S2","start": "004A1E40","endExclusive": "004A1F11","sha256": "a3e5ccec5d7c8a495e3e1b1bffaf953a9813521f12bafd9fac6aae1ae1eadd63","file": "S2-ranges-02.asm.txt","kind": "code","lineStart": 2,"lineCount": 71},
+  {"source": "S2","start": "004A2370","endExclusive": "004A2427","sha256": "c5b62bd1b799e92d06a8d9c68e596f123c32615db61f273501564ab7a3746897","file": "S2-ranges-02.asm.txt","kind": "code","lineStart": 75,"lineCount": 63},
+  {"source": "S2","start": "004A3180","endExclusive": "004A31DA","sha256": "4b51fa042217e3f156d7c1cc0dcf2ff3be9693826e81e2a941898284763eae59","file": "S2-ranges-02.asm.txt","kind": "code","lineStart": 140,"lineCount": 36},
+  {"source": "S2","start": "004B06E0","endExclusive": "004B09AB","sha256": "8214537228f900a84c8ebc28e8b8c69914d75717794833f38a8230d8401a6ff7","file": "S2-ranges-02.asm.txt","kind": "code","lineStart": 178,"lineCount": 215},
+  {"source": "S2","start": "004B09B0","endExclusive": "004B0C5B","sha256": "6ac319378dca0bb85788ddc56f41544d8547e228e890eb36dc8e02c0e1208905","file": "S2-ranges-03.asm.txt","kind": "code","lineStart": 2,"lineCount": 218},
+  {"source": "S2","start": "004B0C5C","endExclusive": "004B0C80","sha256": "f2d688d727406d3ae3b9b10d3baf0ca3181a0b48dc065846ebd917f614e94761","file": "S2-ranges-03.asm.txt","kind": "data","lineStart": 222,"lineCount": 9},
+  {"source": "S2","start": "004B0C80","endExclusive": "004B0C9B","sha256": "3d6425a5af35087b76320161fd63895ebcd7d109f0fb620523cf99a536388255","file": "S2-ranges-03.asm.txt","kind": "data","lineStart": 233,"lineCount": 7},
+  {"source": "S2","start": "004B6580","endExclusive": "004B65D3","sha256": "b1d63e509bb4da155f92bf3450403c44ff2ddef5b263bf0adc8e718117f1d187","file": "S2-ranges-03.asm.txt","kind": "code","lineStart": 242,"lineCount": 37},
+  {"source": "S2","start": "004CF270","endExclusive": "004CF2E7","sha256": "20b01d8c161d0187f341013e2325d812013ec9353544f920efc8e1b083b5f426","file": "S2-ranges-03.asm.txt","kind": "code","lineStart": 281,"lineCount": 47},
+  {"source": "S2","start": "00573470","endExclusive": "00573476","sha256": "21faa16607cb70438711aab3fa582829af50aa15d5946524996fc7aa8a8e4e6d","kind": "code","file": "S2-ranges-03.asm.txt","lineStart": 330,"lineCount": 2},
+  {"source": "S2","start": "0079C718","endExclusive": "0079C748","file": "S2-ranges-03.asm.txt","kind": "data","lineStart": 334,"lineCount": 12,"sha256": "dd268a9ad9dac77ed31361662bd2fad3fb4d8edb1eeff8bb8b9c5e50762a3da4"},
+  {"source": "S2","start": "008EA230","endExclusive": "008EA256","sha256": "bd32ff82396b8a0b1f2b1a74ad754b9eb70c1a711708f650540ce6809c2a103a","file": "S2-ranges-03.asm.txt","kind": "code","lineStart": 348,"lineCount": 16}
+ ],
+ "containers": [
+  {"file": "S1-ranges-01.asm.txt","lineCount": 497,"sha256": "db3125ba14ca8c2e5f34d53a5da7663d9b5ac3fe4d01607ee2b03a2d24e2a1fc"},
+  {"file": "S1-ranges-02.asm.txt","lineCount": 392,"sha256": "2afa132f8b7fdcffe3d023102970a5d993bbcda26e58a8e1039811002191e137"},
+  {"file": "S1-ranges-03.asm.txt","lineCount": 345,"sha256": "b8e775d988031455ad3fcd472263b85acdbf1a65cc4b63d149b00a4bccea51e7"},
+  {"file": "S2-ranges-01.asm.txt","lineCount": 500,"sha256": "7672d395e0c5fec47c43a9d1a8cd9cbd0863aeda23abe75720b72eb893640210"},
+  {"file": "S2-ranges-02.asm.txt","lineCount": 392,"sha256": "38906877bff7932e2bae1765d6da9be5c272ef45d10638295d9106c21b7c7b77"},
+  {"file": "S2-ranges-03.asm.txt","lineCount": 363,"sha256": "c9c88093a3276436f9ce3e07d6d8e72749e9ed62cede47d3421eb6384115d625"}
+ ],
+ "comparisons": [
+  {"start": "00423230","S1sha256": "e598d0c3ba86d917b177d7adde0556aa99bc355543c57aee0a3e50b684dd7e99","S2sha256": "e598d0c3ba86d917b177d7adde0556aa99bc355543c57aee0a3e50b684dd7e99","identical": true},
+  {"start": "0047A660","S1sha256": "e8cafac4ce880e2f03324914c28cd1aa84c3ac7897764461e9176f233bcd0147","S2sha256": "e8cafac4ce880e2f03324914c28cd1aa84c3ac7897764461e9176f233bcd0147","identical": true},
+  {"start": "0047B820","S1sha256": "697e39e6c60bb946fb8cdc20ca2aebde9c3cafeea49dcf1f75905f3711ff2c82","S2sha256": "697e39e6c60bb946fb8cdc20ca2aebde9c3cafeea49dcf1f75905f3711ff2c82","identical": true},
+  {"start": "0047B840","S1sha256": "280e4c53e67d97f4b49605d0c4a135504b056043d6b819938b62513d432a3d99","S2sha256": "280e4c53e67d97f4b49605d0c4a135504b056043d6b819938b62513d432a3d99","identical": true},
+  {"start": "0047B860","S1sha256": "26fc8ea1c3c1f091492bef461cb94178b4ed6d7e481735c0d80c93202038f187","S2sha256": "26fc8ea1c3c1f091492bef461cb94178b4ed6d7e481735c0d80c93202038f187","identical": true},
+  {"start": "0047B880","S1sha256": "c5d9f7cb8c6b8c11b0c881adb3f34f07ae9de77e29c419933f5e20baa825c1c6","S2sha256": "c5d9f7cb8c6b8c11b0c881adb3f34f07ae9de77e29c419933f5e20baa825c1c6","identical": true},
+  {"start": "0047B8A0","S1sha256": "a6fd82740fbd80cdf263d0967e00de048f5530a0eb47a03014bd1358b8a0a619","S2sha256": "a6fd82740fbd80cdf263d0967e00de048f5530a0eb47a03014bd1358b8a0a619","identical": true},
+  {"start": "00484DE0","S1sha256": "1d141ccfab4aa22e67ac31e301405c8cb191a3e39011d9fc8025d8590377a74e","S2sha256": "265bc5ef90942b44ad1fe7fba914c972b40eea371ce727e7f796c8206d79700d","identical": false},
+  {"start": "00484E20","S1sha256": "6a59fd6a7616acd270dfbb3d655b24bafc07cf376ce7ee42d4445e49e418f729","S2sha256": "6a59fd6a7616acd270dfbb3d655b24bafc07cf376ce7ee42d4445e49e418f729","identical": true},
+  {"start": "004863D0","S1sha256": "5500e4a2326ca7c9ec310cf20083e9050f61f039bd6199011501d274f2e8c5ba","S2sha256": "5500e4a2326ca7c9ec310cf20083e9050f61f039bd6199011501d274f2e8c5ba","identical": true},
+  {"start": "00486400","S1sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7","S2sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7","identical": true},
+  {"start": "00486430","S1sha256": "b13ee24e66622a3aa926ede6784b077ab208bab426888b322b453d5165949e4c","S2sha256": "b13ee24e66622a3aa926ede6784b077ab208bab426888b322b453d5165949e4c","identical": true},
+  {"start": "004866F0","S1sha256": "6cc7deef844219d8714d164ce1210ff4f1cd1a8f3a6862f0e97a2c1d1ac477da","S2sha256": "6cc7deef844219d8714d164ce1210ff4f1cd1a8f3a6862f0e97a2c1d1ac477da","identical": true},
+  {"start": "00487A30","S1sha256": "26f152437f0ba659c1e9a0afa5c2e59f69c08e5cb8f4dda095a549fe19ad517c","S2sha256": "26f152437f0ba659c1e9a0afa5c2e59f69c08e5cb8f4dda095a549fe19ad517c","identical": true},
+  {"start": "00487DB0","S1sha256": "342ea19b25f2ec52aa11a84e358305e79dd51bb7e8a0077adeab58def8f9fb01","S2sha256": "342ea19b25f2ec52aa11a84e358305e79dd51bb7e8a0077adeab58def8f9fb01","identical": true},
+  {"start": "00487EB0","S1sha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c","S2sha256": "2e8ba025d2f1180608985a96a793de0b18f35b225bf22d16c40b9e524f24730c","identical": true},
+  {"start": "004880A0","S1sha256": "672200b358bfbf28d0eca996b11adc2250ddb5de243887c13c6b8242c07ae09d","S2sha256": "672200b358bfbf28d0eca996b11adc2250ddb5de243887c13c6b8242c07ae09d","identical": true},
+  {"start": "00488B30","S1sha256": "60086366232e8841ab7c36d92a8a15da00a8946fd60c8d1ac0d3a5936e80b78c","S2sha256": "60086366232e8841ab7c36d92a8a15da00a8946fd60c8d1ac0d3a5936e80b78c","identical": true},
+  {"start": "00488B9C","S1sha256": "6e2b728d38ae9928d92d80c5df4bfff7ec9a84a935c42b088b762fdacbb0a737","S2sha256": "6e2b728d38ae9928d92d80c5df4bfff7ec9a84a935c42b088b762fdacbb0a737","identical": true},
+  {"start": "00489C30","S1sha256": "bf59ce1f0accbce236a237c37a32044a601733507e34d6e213ddcb2eeb080ee7","S2sha256": "bf59ce1f0accbce236a237c37a32044a601733507e34d6e213ddcb2eeb080ee7","identical": true},
+  {"start": "00489C50","S1sha256": "e2e355732833127cd02b2457c928519b8114cfe664f49ac8a736dae2313b708e","S2sha256": "e2e355732833127cd02b2457c928519b8114cfe664f49ac8a736dae2313b708e","identical": true},
+  {"start": "00489CE0","S1sha256": "9bd8d066727eb6e7846dda07de53de9dc674e592880e6b4b89644e26f4110842","S2sha256": "6e615661a80b7fd2ffe20c15a557020303424ac7b4bdc2abc8b03577adf9c36f","identical": false},
+  {"start": "00489FE0","S1sha256": "483e8c16439460cbab48ff32e0edd027dcb886d18fc66523c0427edac69ee35e","S2sha256": "483e8c16439460cbab48ff32e0edd027dcb886d18fc66523c0427edac69ee35e","identical": true},
+  {"start": "00490B30","S1sha256": "9f6f2e81025998477d1d0289c0dc212aa0a6562f36ac1df0abf92dc5f27da59c","S2sha256": "9f6f2e81025998477d1d0289c0dc212aa0a6562f36ac1df0abf92dc5f27da59c","identical": true},
+  {"start": "00490B90","S1sha256": "f15b07997daf87667fe34f62f99504c1f6f4efe454dd45036219e4aba32945b6","S2sha256": "f15b07997daf87667fe34f62f99504c1f6f4efe454dd45036219e4aba32945b6","identical": true},
+  {"start": "00491770","S1sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b","S2sha256": "57db6d0a75e755ba06d4cf80f7dd9e634d89cf02e272c4c7ad3ae053e213f41b","identical": true},
+  {"start": "004A0F00","S1sha256": "7e465c152a89c44e91b276af72e386d86e12b4a9e65ce1edb4b942edf11bf551","S2sha256": "7e465c152a89c44e91b276af72e386d86e12b4a9e65ce1edb4b942edf11bf551","identical": true},
+  {"start": "004A1E40","S1sha256": "a3e5ccec5d7c8a495e3e1b1bffaf953a9813521f12bafd9fac6aae1ae1eadd63","S2sha256": "a3e5ccec5d7c8a495e3e1b1bffaf953a9813521f12bafd9fac6aae1ae1eadd63","identical": true},
+  {"start": "004A2370","S1sha256": "c5b62bd1b799e92d06a8d9c68e596f123c32615db61f273501564ab7a3746897","S2sha256": "c5b62bd1b799e92d06a8d9c68e596f123c32615db61f273501564ab7a3746897","identical": true},
+  {"start": "004A3180","S1sha256": "4b51fa042217e3f156d7c1cc0dcf2ff3be9693826e81e2a941898284763eae59","S2sha256": "4b51fa042217e3f156d7c1cc0dcf2ff3be9693826e81e2a941898284763eae59","identical": true},
+  {"start": "004B06E0","S1sha256": "8214537228f900a84c8ebc28e8b8c69914d75717794833f38a8230d8401a6ff7","S2sha256": "8214537228f900a84c8ebc28e8b8c69914d75717794833f38a8230d8401a6ff7","identical": true},
+  {"start": "004B09B0","S1sha256": "6ac319378dca0bb85788ddc56f41544d8547e228e890eb36dc8e02c0e1208905","S2sha256": "6ac319378dca0bb85788ddc56f41544d8547e228e890eb36dc8e02c0e1208905","identical": true},
+  {"start": "004B0C5C","S1sha256": "f2d688d727406d3ae3b9b10d3baf0ca3181a0b48dc065846ebd917f614e94761","S2sha256": "f2d688d727406d3ae3b9b10d3baf0ca3181a0b48dc065846ebd917f614e94761","identical": true},
+  {"start": "004B0C80","S1sha256": "16fdb013863b05b1d64aa385f8f51d5c90dd191fa8ba7db3660c17f3a060d9cb","S2sha256": "3d6425a5af35087b76320161fd63895ebcd7d109f0fb620523cf99a536388255","identical": false},
+  {"start": "004B6580","S1sha256": "b1d63e509bb4da155f92bf3450403c44ff2ddef5b263bf0adc8e718117f1d187","S2sha256": "b1d63e509bb4da155f92bf3450403c44ff2ddef5b263bf0adc8e718117f1d187","identical": true},
+  {"start": "004CF270","S1sha256": "20b01d8c161d0187f341013e2325d812013ec9353544f920efc8e1b083b5f426","S2sha256": "20b01d8c161d0187f341013e2325d812013ec9353544f920efc8e1b083b5f426","identical": true},
+  {"start": "00573470","S1sha256": "21faa16607cb70438711aab3fa582829af50aa15d5946524996fc7aa8a8e4e6d","S2sha256": "21faa16607cb70438711aab3fa582829af50aa15d5946524996fc7aa8a8e4e6d","identical": true},
+  {"start": "0079C718","S1sha256": "dd268a9ad9dac77ed31361662bd2fad3fb4d8edb1eeff8bb8b9c5e50762a3da4","S2sha256": "dd268a9ad9dac77ed31361662bd2fad3fb4d8edb1eeff8bb8b9c5e50762a3da4","identical": true}
+ ],
+ "contracts": {
+  "missions": [
+   0,
+   38
+  ],
+  "handlerGates": {
+   "shared": [
+    "actor valid",
+    "actual location 0..86 resolves to a valid building",
+    "actual building raw facility type +08 equals 0"
+   ],
+   "notGates": [
+    "home base equals actual location",
+    "target facility type equals 0"
+   ],
+   "target": "arg0 getter resolves a valid building; if invalid after shared gates, handler returns 1 without group/actor return, treasure reset, or destruction",
+   "event12": "context first dword equal 12 suppresses destruction only, after zero-refund returns and (mission0) treasure handling"
+  },
+  "mission0": {
+   "handler": "005BBE30",
+   "groupHelper": "005B8250",
+   "groupArgumentIndex": 1,
+   "groupSnapshot": "first three valid mission0 persons matching signed arg1, ascending IDs0..1099; collected before resolving target arg0",
+   "order": [
+    "group snapshot",
+    "target validity",
+    "conditional presentation (opaque)",
+    "zero-refund return for each captured valid group member",
+    "if target raw facility type30: treasure42 owner-range test and guarded reset",
+    "unless event12, destroy target with reason1"
+   ]
+  },
+  "mission38": {
+   "handler": "005D69D0",
+   "order": [
+    "target validity",
+    "conditional presentation (opaque)",
+    "actor zero-refund return",
+    "unless event12, destroy target with reason1"
+   ],
+   "notEffects": [
+    "no group collection",
+    "no treasure42 tail"
+   ]
+  },
+  "treasure": {
+   "getter": "00490B30",
+   "resetHelper": "004A0F00",
+   "setter": "00484DE0",
+   "statusSetter": "00484E20",
+   "id": 42,
+   "trigger": "mission0 target raw facility type30 and treasure owner+40 outside signed range0..1099; helper additionally requires treasure valid",
+   "writes": [
+    {
+     "offset": "0x40",
+     "width": 4,
+     "value": -1
+    },
+    {
+     "offset": "0x44",
+     "width": 4,
+     "value": -1
+    },
+    {
+     "offset": "0x48",
+     "width": 4,
+     "value": 0
+    }
+   ],
+   "S2Hook": "00484DEC calls008EA230 using previous owner. This cancellation caller reaches reset only for old owner outside0..1099, so00490B00 deterministically returns null and0048A2D0 is not called. Both setter arguments are -1, so the second setter hook at00484E03 is also not reached. The general setter may refresh a valid old/new owner through0048A2D0; those non-cancellation effects remain unimplemented."
+  },
+  "destruction": {
+   "helper": "004B09B0",
+   "scope": "bounded scalar projection, not a complete destruction transaction",
+   "typeClassification": "00487A30 checks facility-definition +B4==4, separately from raw facility type +08",
+   "counterJumpTable": {
+    "pointerRange": [
+     "004B0C5C",
+     "004B0C80"
+    ],
+    "pointerCount": 9,
+    "mappingRange": [
+     "004B0C80",
+     "004B0C9B"
+    ],
+    "mappingTypeFirst": 33,
+    "mappingTypeLast": 59,
+    "requires": [
+     "facility-definition +B4==4",
+     "associated city valid"
+    ],
+    "rawType33To37": "counter A8..AC respectively, gated on nonzero facility +14 in both sources",
+    "rawType38To53": "no city counter decrement",
+    "rawType54To59": "A8 for54/55, A9 for56/57, AA for58/59; S1 unconditional within table gates, S2 additionally requires nonzero facility +14",
+    "arithmetic": "byte add -1, modulo256; no signed saturation/clamp"
+   },
+   "homeReferenceSelection": {
+    "helper": "004CF270",
+    "universe": "ascending person IDs0..1099",
+    "allocationHelper": "0047A600 (virtual slot+04), not validity0047A630 (virtual slot+08)",
+    "mask": 63,
+    "statusHelper": "00488B30",
+    "statusJumpTable": [
+     "00488B9C",
+     "00488BC4"
+    ],
+    "statuses": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "excludedPersonIds": {
+     "S1": [
+      700,
+      799
+     ],
+     "S2": [
+      704,
+      753
+     ]
+    },
+    "excludedEffectiveForces": [
+     42,
+     43,
+     44,
+     45,
+     46
+    ],
+    "write": "selected person home+98 equals destroyed building ID => dword -1; do not require person valid"
+   },
+   "order": [
+    "guard building valid",
+    "presentation and force/counter handling (some opaque)",
+    "enumerate home references with mask63, clear matching +98",
+    "004B06E0 reaction call before reset",
+    "004A3180 remove-list wrapper",
+    "virtual+20 reset00486430",
+    "004B06E0 reaction call after reset inside wrapper"
+   ]
+  },
+  "facilityReset": {
+   "helper": "00486430",
+   "vtable": "0079C718",
+   "slot": "0x20",
+   "constructor": "004880A0",
+   "baseReset": "00423230 is RET4 only",
+   "writes": [
+    {
+     "offset": "0x08",
+     "width": 4,
+     "value": -1
+    },
+    {
+     "offset": "0x0C",
+     "width": 4,
+     "value": -1
+    },
+    {
+     "offset": "0x10",
+     "width": 2,
+     "value": 0
+    },
+    {
+     "offset": "0x14",
+     "width": 4,
+     "value": 0
+    },
+    {
+     "offset": "0x18",
+     "width": 4,
+     "value": 0
+    },
+    {
+     "offset": "0x1C",
+     "width": 1,
+     "value": 0
+    },
+    {
+     "offset": "0x1E",
+     "width": 2,
+     "value": -1
+    },
+    {
+     "offset": "0x20",
+     "width": 2,
+     "value": -1
+    },
+    {
+     "offset": "0x28",
+     "width": 4,
+     "value": 0
+    },
+    {
+     "offset": "0x2C",
+     "width": 4,
+     "value": 0
+    }
+   ],
+   "preserved": "unlisted bytes, including +22 (constructor initializes word+22 toFFFF; reset does not write it)",
+   "validity": "00486400 checks virtual type==5 and signed facility type+08 in0..63; reset +08=-1 makes that validity check fail",
+   "classGetter": "00573470 at virtual+24 returns immediate5; fixed vtable validity uses00486400 at virtual+08",
+   "classGate": "004A3180 pushes5 to0047A660, which checks readable pointer and dispatches virtual+2C. Concrete vtable+2C points to004863D0, whose explicit arg==5 branch returns1 regardless of base-class result."
+  },
+  "implementationScope": {
+   "supportedRawFacilityTypes": [
+    3,
+    63
+   ],
+   "rawTypes0To2": "baseTargets defer or reject policy; no base destruction result is claimed",
+   "callbackAssumption": "noninterference-v1",
+   "engineCallbacksExecuted": false
+  }
+ },
+ "fallback": {
+  "id": "record-facility-cancellation-v1",
+  "unknownEffects": [
+   "record-only",
+   "reject"
+  ],
+  "noninterference": "Conditional presentation, force-cost handling, list management, map/cache/AI/event callbacks and S2 derived-skill refresh are not executed. Explicit bounded projections must not claim complete engine equivalence.",
+  "returnDistance": "required per selected returning person when away; source helper observation, never inferred from geometry",
+  "S2Query267": "required only when selected person takes source S2 home-return branch",
+  "preflight": "validate all branch-required return/helper observations and supported scalar targets before any scalar write; unused branches require no observations",
+  "callbackAssumption": "noninterference-v1",
+  "baseTargets": [
+   "defer",
+   "reject"
+  ]
+ },
+ "unresolved": [
+  "clean stock PK/Vanilla/console equivalence",
+  "force-cost updates and associated helper004B6460",
+  "complete presentation, event/list/map/cache/AI reactions004B06E0 and004BBAA0",
+  "S2 general treasure-owner derived-skill refresh0048A2D0 (not reached by the witnessed out-of-range-owner cancellation reset)",
+  "mission41..43 target/presentation helpers",
+  "004BF6F0 complete return and mission37 completion",
+  "complete capture/force-extinction transaction"
+ ]
+}

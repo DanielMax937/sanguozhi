@@ -2,13 +2,21 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-53组任务取消、城市计数与研究字段
+## 最新完成：P0-54设施任务取消、销毁字段与宝物42
+
+[正文](89-facility-mission-cancellation.md) · [结构化证据](../sources/facility-mission-cancellation.json)。基线main `3a93431f3ef8a4e15e920ebb9475939a6aab1e21`（PR #11已合）。
+
+0/38已有独立有界投影：当前建筑必须type0；mission0按ID前三组收集先于target；目标无效返回1且不reset。零退款返回之后才是type30 treasure42 owner/city/state与设施销毁。raw0x38只写精确offset/width，未知byte保留；城市计数模256，S2升级type54..59仍有construction gate而S1无此gate；home扫描使用allocated与来源各自ID排除。
+
+新增24项模型测试通过，覆盖两源完整设施type/construction矩阵、全部byte回绕、treasure边界、invalid-but-allocated home、精确写宽、所有必要观测preflight、原子拒绝、时序快照、重放与fuzz。source-accepted type0..2销毁为显式defer/reject；完整列表/attachment/force/空间AI/return回调未执行，非干预是可替换工程前提。77个新字节范围、24个既有引用，38组双源比较35同/3异，10项字节checker通过。TypeScript、85 Node、全部75个Python checker与两demo共78条命令全过。独立审阅无阻断：重跑新增10+24及旧group20/v2 15/v1 15测试，另366组直接source-bytes计数oracle和20项invalid-type/reorder回归通过；具体class5 gate证据缺口已补齐并复核。合并后main须再全测；不以局部after冒充整场capture或stock/Vanilla证明。
+
+## 历史完成：P0-53组任务取消、城市计数与研究字段
 
 [正文](88-group-mission-cancellation.md) · [结构化证据](../sources/group-mission-cancellation.json)。基线main `b95e33a7c1e23e7bc14a8ec23b90ff5030099c8e`（PR #10已合）。
 
 2/5现有独立组事务投影：完整稀疏person宇宙，ID序前三个同任务/组键匹配者，不按势力/位置/target过滤且不保证actor入组。2先恢复四路signed city计数clamp[-1,30]；5先清actor force研究ID/byte，然后才按组序零退款返回。无效city/force只跳过相应字段，不阻止组取消。S2研究getter扩至63的00914000 hook与S1分离。
 
-新增20项测试通过；21新增byte范围（10双源比较8同/2异及1S2 hook）、25既有引用范围和容器/manifest哈希锁定。TypeScript、85 Node、73 Python checker与两demo共76条命令全过。独立审阅无阻断：新增20、旧v1/v2各15及detachment28测试通过，另1024组独立oracle/重放和16组mutation/domain验证通过，46范围均从两份IDB重读匹配；preflight修复已复核。合并后main仍须复测。旧v1/v2未改义；完整return/list/event/force回调、设施0/38、41..43与stock/Vanilla仍open。
+新增20项测试通过；21新增byte范围（10双源比较8同/2异及1S2 hook）、25既有引用范围和容器/manifest哈希锁定。TypeScript、85 Node、73 Python checker与两demo共76条命令全过。独立审阅无阻断：新增20、旧v1/v2各15及detachment28测试通过，另1024组独立oracle/重放和16组mutation/domain验证通过，46范围均从两份IDB重读匹配；preflight修复已复核。PR #11合并后main 3a93431f已复测76条命令全过。旧v1/v2未改义；完整return/list/event/force回调、41..43与stock/Vanilla仍open；0/38新增有界范围见P0-54。
 
 ## 历史完成：P0-52六个零退款任务取消handler
 

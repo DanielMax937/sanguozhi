@@ -7,6 +7,8 @@
 
 ## 最新审计入口
 
+新增[P0-54设施任务取消/销毁字段/宝物42](89-facility-mission-cancellation.md)：0/38 gate与返回、raw0x38精确写宽、S1/S2城市byte表差异、allocated-person home引用；base销毁及完整回调仍open。`python scripts/check_facility_mission_cancellation_profile.py`与`python scripts/check_facility_mission_cancellation_evidence.py`。
+
 新增[P0-51人员游离/末城逃逸/任务取消](86-personnel-detachment-source-profile.md)：004BA520有向distance1候选与RNG阶段、004BBB00局部role写回及event时序、invalid-former/last-city入口、44项cancel注册分流及有界退款。S1/S2金cap和acted hook明确分离。`python scripts/check_personnel_detachment_profile.py`、`python scripts/check_mission_cancellation_profile.py`。完整force消亡/监听回调/其他专用取消仍open。
 
 新增[P0-50旧俘虏释放/迁移/稳定排序](85-capture-relocation-source-profile.md)：前置链序、返回原势力、目的地分层/距离同分RNG、非瞬移actual-location语义、缺席home-roster与身份rank排序。有界独立投影、defer/reject与事件时序，`python scripts/check_capture_relocation_profile.py`。126范围/63对照；P0-50 v1未投影004BBB00/资源，后续P0-51另模块恢复部分范围；完整AI/force回调和clean stock仍open。
@@ -276,3 +278,5 @@ P0-47训练生命周期审计以`82-training-lifecycle-source-profile.md`为准�
 P0-52专用零退款取消以[87-mission-cancellation-zero-refund.md](87-mission-cancellation-zero-refund.md)为准：9/10/12/22/23/24的ordered gate与零退款返回/reset有界投影，独立v2保留v1重放语义；组任务/设施/研究与完整return/callback仍open。
 
 P0-53组任务取消以[88-group-mission-cancellation.md](88-group-mission-cancellation.md)为准：2/5按ID序前三人、signed city计数/force研究字段先于逐人返回，S2研究扩展单独绑定；独立新API保留v1/v2历史trace。
+
+P0-54以[89-facility-mission-cancellation.md](89-facility-mission-cancellation.md)为准：0/38有独立有界投影；旧v1/v2/group语义不变，stock/Vanilla未验证。
