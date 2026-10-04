@@ -2,7 +2,15 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-61共享live frame的event8/14单事务组合
+## 最新完成：P0-62原生return/list/role与event8/14递归组合
+
+[正文](97-recursive-officer-return.md) · [结构化证据](../sources/recursive-officer-return.json)。基线main `a3c94e9d045688fe93c3c9b9172db30d5a89333a`（PR #19已合）。
+
+扩展单一live frame，已知return/list/正常非空role直接调用递归event/dispatcher/handler/return。每调用event/actor/copied/visits及native saved locals独立push/pop，回调后按源重读live字段。移首/append和count<2 sort直接执行，多节点sort/route/target-force与外部callback明确可变观察；force灭亡/空军团/ruler capture原子defer。引擎递归/调用guard不冒充原作终止规则；旧API和trace不变。
+
+17项source-only检查通过；完整双IDB指纹及独立raw-ID1重读611范围/53,266 selected range bytes通过（S1 303/S2 308；302同形对296同/6异，另7未配对宽度；重叠选段长度不去重）。37项模型测试通过，含256组独立evolving-frame递归oracle、184组listener/event/source变体、130组独立raw/status truth-table、24组promotion→event14回归、32层真实递归guard、原子拒绝和完整JSON重放。完整94条命令回归零失败：TypeScript、85 Node tests、91 Python checkers与2 demos。独立审阅发现native status写后的derived validity依赖，已补rawDword17C、严格派生缓存及逐写刷新；修复后完整94命令和最终37模型测试重新全过，独立复审通过：新schema的14文件/index在验证前后无漂移，17source/37model与完整94命令重跑零失败；两份完整IDB哈希和611范围/53,266bytes另用独立raw-ID1读取复核，追加36组promotion逐step派生predicate及mixed event14→8/outer-event篡改检查全过，无剩余阻断。发布前仅补本审阅结论，合并后main仍须全测。clean stock、Vanilla、多节点sort内部、其他event、base/capture、全局RNG与真实存档继续open。
+
+## 历史完成：P0-61共享live frame的event8/14单事务组合
 
 [正文](96-mission-event-composition.md) · [结构化证据](../sources/mission-event-composition.json)。基线main `1e5862e045c9aec3db14540c2bd8decc565a321b`（PR #18已合）。
 

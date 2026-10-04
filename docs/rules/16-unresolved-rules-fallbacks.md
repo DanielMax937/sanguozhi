@@ -4813,3 +4813,8 @@ type RuleEvidence = {
 ### P0-61单事务event8/14与已知handler/tail组合
 
 [96-mission-event-composition.md](96-mission-event-composition.md)使用严格共享canonical frame、直接primitive adapters与单次原子提交，顺序执行004BBAA0→004A8110/predicate/handler/notification/return-tail→004BA1D0(8/14无操作)→fresh004EC870/非空observer。callStack绑定source/event/复制列表/visit/captured mission及saved current/target/raw44/home/distance；所有未知效果仍明确可变观察或整次reject，不默认非干预。旧API/trace不变；完整004BF6F0/list/role递归、empty-corps/force灭亡、base销毁、其他event IDs、stock/Vanilla与全局RNG继续open。
+
+
+### P0-62原生return/list/role/event递归组合
+
+[97-recursive-officer-return.md](97-recursive-officer-return.md)以扩展canonical frame执行return/list/stable-role及递归event8/14，只有一次revision提交。每层自己的event/actor/copied nodes/visits和native saved IDs保留，回调后按源重新读取live字段。移首节点/追加和count<2 sort闭合；非平凡sort、route、target-force及外部observer仍为精确stage-bound可变观察，不默认不干预。empty-force/corps和ruler ownership明确defer，递归/调用预算只是工程guard，不证明原作终止。完整sort内部、force/base/capture、其他event IDs、stock/Vanilla/全局RNG继续open。
