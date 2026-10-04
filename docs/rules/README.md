@@ -7,6 +7,8 @@
 
 ## 最新审计入口
 
+新增[99-return-route-target-force.md](99-return-route-target-force.md)新增独立版本，直接执行005BA320任务分派/arg0与arg1/目标force君主live home/可选territory输出，以及00487EB0设施raw owner、领土city和canonical subtype势力链。两源地图byte分别固定，完整原生getter不再用whole-route/target-force观察；真实外部作用仍绑定full frame/callStack/RNG。新force rulerId和legion forceId与valid严格派生，旧API/trace不变。source未改表/固定vtable/不别名输出与可读map域明确；force灭亡/空军团/ruler/base/capture、其他event、stock/Vanilla/全局RNG仍open。`python scripts/check_return_route_target_force_source.py`、`python scripts/check_return_route_target_force_profile.py`。
+
 新增[P0-63原生roster/role排序与capacity](98-native-roster-sort.md)：固定field0 key链、两种quicksort/一种merge、按实际比较序live读与两轮allocated筛选；capacity分别执行S1/S2标量路径，query377/278保留全frame/RNG可变观察。`python scripts/check_native_roster_sort_source.py`、`python scripts/check_native_roster_sort_profile.py`；旧API不变，一般flags/vtable、route/force/capture/stock继续open。
 
 新增[P0-62原生return/list/role递归组合](97-recursive-officer-return.md)：每调用context stack保存native locals，正常非空角色event直接回到dispatcher/handler/return；count<2 sort闭合，多节点sort/route/target-force明确可变观察；灭亡/空军团/ruler路径原子defer。`python scripts/check_recursive_officer_return_source.py`、`python scripts/check_recursive_officer_return_profile.py`。

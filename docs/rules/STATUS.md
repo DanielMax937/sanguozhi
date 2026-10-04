@@ -2,7 +2,15 @@
 
 更新：2026-10-04 UTC。
 
-## 最新完成：P0-63原生roster/role排序、capacity与S2可变查询
+## 最新完成：P0-64原生任务route、目标势力与递归组合
+
+[正文](99-return-route-target-force.md) · [结构化证据](../sources/return-route-target-force.json)。基线main `28d0b0b8aa6e2c781b791886093b806e6e3d1ad3`（PR #21已合）。
+
+[99-return-route-target-force.md](99-return-route-target-force.md)新增独立版本，直接执行005BA320任务分派/arg0与arg1/目标force君主live home/可选territory输出，以及00487EB0设施raw owner、领土city和canonical subtype势力链。两源地图byte分别固定，完整原生getter不再用whole-route/target-force观察；真实外部作用仍绑定full frame/callStack/RNG。新force rulerId和legion forceId与valid严格派生，旧API/trace不变。source未改表/固定vtable/不别名输出与可读map域明确；force灭亡/空军团/ruler/base/capture、其他event、stock/Vanilla/全局RNG仍open。
+
+18项source-only检查通过；完整双IDB指纹及独立raw-ID1重读681范围/65,834 selected range bytes通过（S1 338/S2 343；337同形对328同/9异，另7未配对宽度；新增14范围，重叠选段长度不去重）。30项模型测试通过：2,231个独立oracle接受场景（含96组evolving-frame）、53个原子输入错误场景与25个原子defer/conflict场景；覆盖完整mission/output分派、两源128地图byte、类别/validity边界、真实observer/S2 hook后的live读取、递归event8/14、精确read/store golden顺序、幂等与JSON重放。完整98命令回归零失败：TypeScript、85 Node tests、95 Python checkers与2 demos。自审补充early-route与out-of-range facility两类跳过读取的trace-only精度修正，随后最终98命令重新全过。17文件在冻结全测前后无漂移；独立审阅再次重跑18 source/30 model和S1/S2 observer改map后的fresh target-force例，核对冻结哈希、原始字节、golden序及git diff --check，无剩余阻断。发布前补本结论，并规范化两份新增asm的EOF空行及container hash/linecount，重新通过source与staged whitespace检查；原始机器字节、范围、模型代码及测试不变。合并后main仍须全测。
+
+## 历史完成：P0-63原生roster/role排序、capacity与S2可变查询
 
 [正文](98-native-roster-sort.md) · [结构化证据](../sources/native-roster-sort.json)。基线main `fd1323511ae7f2d1a1f171e787bca2300444cc4b`（PR #20已合）。
 
