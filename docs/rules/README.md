@@ -1,5 +1,7 @@
 > 最新capture人员/城市容量来源与有界模型：[P0-49](84-capture-personnel-source-profile.md)；完整人员迁移、AI处分和stock等价仍开放。
 
+新增[P0-69 generic设施入口与早返](104-generic-facility.md)：004B40C0入口、generic87..16383共享frame归属与明确0/1结果；canonical完整观察及其余证据债保留；13+13组source、28组model、双IDB、9组既有独审probe通过；108命令集合经重试全过（首轮107/108，lifecycle以512MiB old-space上限重试成功，137原因未确认），集成delta独审无阻断。
+
 新增[P0-68 live零退款取消9/10/12/22](103-live-zero-refund.md)：同frame gate/control与live return，精确presentation观察及其余证据债保留；13组source、28组model、双IDB和最新main106命令复验及集成delta独审通过。
 
 新增[P0-67武将迁移与固定参数移动准备](102-officer-relocation.md)：004A8270、取消分派和004A7990原生组合，旧API不变；两个officer-relocation检查覆盖来源/模型，最新main104命令复验及集成独审通过。

@@ -2,7 +2,13 @@
 
 更新：2026-10-05 UTC。
 
-## 最新完成：P0-68 live零退款取消9/10/12/22
+## 最新完成：P0-69 generic设施入口与早返
+
+[104-generic-facility.md](104-generic-facility.md)在共享frame中展开004B40C0入口validity、old-legion pointer保存、generic建筑ID87..16383分类、requested pointer转换与live004AD550。invalid entry返回0，generic完成固定返回1，包含ownership早退或callback使目标失效后。指针构造/转换不虚构target row/validity门；仅新版本relocation移除过严requested-row预读，实际字段读取仍要求可读row，旧API冻结。canonical004B415D..004B4988仍为完整frame/RNG effect-query或原子reject，绑定原始实参、saved old pointer与symbolic entry manager，normal EAX仅integer0/1。
+
+基线为PR #26已合并main `094f94b41795169df73fe708f9bbd29083949ea1`。最新main的108命令集合经重试全部通过：首轮TypeScript、85 Node tests、105 Python checker命令及短demo均过（107/108），末条npm run demo:lifecycle以137/Killed失败；原日志保留，同一文件/index冻结与共用Node锁下，仅该命令设置NODE_OPTIONS=--max-old-space-size=512重试通过。137原因未确认，这不是全新单轮108全绿。13组新source及13组继承source、28组独立model通过；两份whole-IDB指纹与raw-ID1闭包重新核验通过（S1 612区间/73,783 interval bytes，S2 624/74,140，含重叠区间），既有9组手工独审probe在正式树重跑通过。独立集成delta审阅无阻断；27项生产/模型/raw/report文件逐字节继承已审版本，新manifest/checker的真实baseline与两项pin已递归证明只涉及P0-68/P0-67元数据。继承Capstone5.0.7/2,222指令报告核hash，本次未重新解码。1,230 tracked文件和index在原轮及重试前后一致，108原日志加1重试日志hash逐项核验；之后仅补充5份文档结果文字。未执行游戏EXE、未声称远端CI或stock等价。full canonical ruler/capture、surrender/captive、force灭亡、recursive-return ruler ownership、其余cancel/positive refund、presentation/tail距离、troop/位置、event9部队反应、S2 effects/observer、未建模memory/platform、stock/Vanilla及全局RNG仍open。
+
+## 历史完成：P0-68 live零退款取消9/10/12/22
 
 [103-live-zero-refund.md](103-live-zero-refund.md)在P0-67共享frame中直接执行mission9/10/12/22的gate与control，复用notification、零退款return、relocation和真实event分派；23/24维持既有原生实现。9/10仅target数值范围门并保留丢弃的force validity读取，12只构造target person pointer，22验证target force并保存actor color。四段presentation仍需完整before→after/RNG观察或原子reject；tail fresh读取actor，成功body固定return1。旧API、模型测试和raw来源字节不变。
 
