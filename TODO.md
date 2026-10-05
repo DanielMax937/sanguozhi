@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-75 native event9 saved-force reset
-> Integration baseline: PR #32 merged; this theme starts at `bbaaf647b62fa0814c8333eb1a1dc07f407649d7`
+> Current integration: P0-76 native event9 saved-troop raw44 reset
+> Integration baseline: PR #33 merged; this theme starts at `9a487b75b4ebd3dab0326ed0ffc81a7a3b2e5e06`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-05 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: event9 saved-troop raw44 reset
+
+- P0-76 expands only 004BA442..004BA44C in a new explicit frame/version, retaining all 24 inherited entries and adding event9-troop-reset. Existing troop raw44 accepts every signed32 bit pattern; its DWORD all-ones store is represented as -1, separately from unsigned force rawDword94. No defaults, coercion or gameplay meaning are inferred
+- 004AD2B0 validates the saved ESI troop exactly once through 0047A630: canonical live leader/person/deputy validity, or an exact unknown08 full-frame/RNG effect-query. False preserves callback changes but skips the direct store; true writes raw44=-1 on current storage of that same saved identity through 00495A20/00495A32, even after callback changes leader/vtable/frame/ownership. No second validity, owner reread or virtual setter dispatch is invented; missing reached storage is an explicit gap. No generalized setter API is exposed
+- The earlier EBX force remains the identity captured from pre-presentation raw44, never recomputed from current ownership or the reset field. Its raw94/raw98 writes precede troop raw44 in the same atomic command. 445 copies original saved manager EDI into ECX, but the helper ignores incoming ECX; setter RET4/helper RET8 balance the 44C continuation, retaining original manager, saved force/troop/subject/target, event domain, captured raw44, old/new scalars and next-node cursor. Presentation411..432 stays combined; home/reaction44C..46C remains one full-frame/RNG observation. Stack cleanup does not prove temporary destruction or absence of aliasing/asynchronous retention
+- Guide: `docs/rules/111-native-event9-troop-reset.md`; the complete latest-main 122/122 command run passed on one frozen tree: TypeScript,85 Node tests,119 Python checker commands and2 demos. Its unchanged34-group independent model ran once in the full set (374 accepted cases,889 atomic rejections,38 killed mutations). The20 source groups plus inherited17/nested26/21/21/17/12/13, both complete IDB fingerprints/all1327 raw intervals (S1 657/S2 670), and6 historical independent probes (38 accepted/32 rejected) passed. All124 full/supplemental raw command logs and fixed-inode lock records were hash-verified. Every command used heap512/TAP/semi16, a dedicated repository-external npm cache and no Python bytecode writes; original product argv stayed unchanged. Formal TAP_DISABLE_COVERAGE/TAP_RCFILE were unset, whereas the historical isolated run added both, so identical environments are not claimed. All2146 tracked files and the real index remained identical through full/supplemental checks; only5 result documents were then updated for separate review. Independent delta review confirmed189/192 unchanged new production/model/raw/report files, formal baseline/two P0-75 metadata pins and the separate strict historical extraction baseline for the unchanged raw report; proof recurses to P0-67. P0-72's approved strict test32 pin remains with no new model exception. Historical Capstone5.0.7 reports were hash-checked only; no recovered machine code was executed and no hosted CI/stock/runtime proof is claimed. The192 additions include guide111 and retain formal guide107; previous failure history and open evidence debt remain
+- Still open: actual presentation and home/reaction44C..46C, mutable event arguments and event16/18, canonical capture/surrender/captive policy, force extinction, recursive ruler ownership, positive refunds/resources and other cancellation, S2 effects/full vtable tail, fallback reset scheduling, unrepresented temporary/formatter/external/platform/concurrent state, global RNG, clean-stock/Vanilla/console/original-save/runtime certification
 
 ### Completed bounded implementation: event9 saved-force reset
 

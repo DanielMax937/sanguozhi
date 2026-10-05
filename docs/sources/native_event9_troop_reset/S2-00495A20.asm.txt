@@ -1,0 +1,9 @@
+00495A20  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00495A24  83 f8 ff                       cmp      eax, -1
+00495A27  74 09                          je       0x495a32
+00495A29  85 c0                          test     eax, eax
+00495A2B  7c 08                          jl       0x495a35
+00495A2D  83 f8 2e                       cmp      eax, 0x2e
+00495A30  7f 03                          jg       0x495a35
+00495A32  89 41 44                       mov      dword ptr [ecx + 0x44], eax
+00495A35  c2 04 00                       ret      4
