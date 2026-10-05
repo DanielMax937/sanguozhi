@@ -1,0 +1,13 @@
+004834B0  56                             push     esi
+004834B1  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+004834B5  56                             push     esi
+004834B6  e8 f5 72 ff ff                 call     0x47a7b0
+004834BB  85 c0                          test     eax, eax
+004834BD  75 09                          jne      0x4834c8
+004834BF  83 fe 07                       cmp      esi, 7
+004834C2  74 04                          je       0x4834c8
+004834C4  5e                             pop      esi
+004834C5  c2 04 00                       ret      4
+004834C8  b8 01 00 00 00                 mov      eax, 1
+004834CD  5e                             pop      esi
+004834CE  c2 04 00                       ret      4

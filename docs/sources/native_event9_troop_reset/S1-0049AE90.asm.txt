@@ -1,0 +1,35 @@
+0049AE90  56                             push     esi
+0049AE91  8b f1                          mov      esi, ecx
+0049AE93  8b 46 04                       mov      eax, dword ptr [esi + 4]
+0049AE96  85 c0                          test     eax, eax
+0049AE98  75 09                          jne      0x49aea3
+0049AE9A  a1 d0 e2 8a 00                 mov      eax, dword ptr [0x8ae2d0]
+0049AE9F  5e                             pop      esi
+0049AEA0  c2 04 00                       ret      4
+0049AEA3  53                             push     ebx
+0049AEA4  8b 5c 24 0c                    mov      ebx, dword ptr [esp + 0xc]
+0049AEA8  83 3b ff                       cmp      dword ptr [ebx], -1
+0049AEAB  75 0a                          jne      0x49aeb7
+0049AEAD  a1 d0 e2 8a 00                 mov      eax, dword ptr [0x8ae2d0]
+0049AEB2  5b                             pop      ebx
+0049AEB3  5e                             pop      esi
+0049AEB4  c2 04 00                       ret      4
+0049AEB7  57                             push     edi
+0049AEB8  8d be 6c 12 00 00              lea      edi, [esi + 0x126c]
+0049AEBE  57                             push     edi
+0049AEBF  ff 15 60 e3 74 00              call     dword ptr [0x74e360]
+0049AEC5  53                             push     ebx
+0049AEC6  8d 8e 9c 0e 00 00              lea      ecx, [esi + 0xe9c]
+0049AECC  e8 cf 16 00 00                 call     0x49c5a0
+0049AED1  8b 1b                          mov      ebx, dword ptr [ebx]
+0049AED3  53                             push     ebx
+0049AED4  8b ce                          mov      ecx, esi
+0049AED6  e8 b5 db ff ff                 call     0x498a90
+0049AEDB  57                             push     edi
+0049AEDC  8b f0                          mov      esi, eax
+0049AEDE  ff 15 5c e3 74 00              call     dword ptr [0x74e35c]
+0049AEE4  5f                             pop      edi
+0049AEE5  5b                             pop      ebx
+0049AEE6  8b c6                          mov      eax, esi
+0049AEE8  5e                             pop      esi
+0049AEE9  c2 04 00                       ret      4

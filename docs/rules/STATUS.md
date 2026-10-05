@@ -2,7 +2,15 @@
 
 更新：2026-10-05 UTC。
 
-## 最新完成：P0-75 event9 saved-force原生reset
+## 最新完成：P0-76 event9 saved-troop原生raw44 reset
+
+[111-native-event9-troop-reset.md](111-native-event9-troop-reset.md)在新显式frame/version中仅展开004BA442..44C：004AD2B0经0047A630单次验证saved ESI troop的live leader/person/deputy链，unknown08仍为精确完整frame/RNG effect-query；false保留callback变化并跳过写入，true经00495A20/00495A32在同一saved pointer当前storage直接写raw44=-1。callback改leader/vtable/frame/ownership后不二次validity、不重读owner、不虚构virtual setter；missing reached storage明确gap。raw44保留所有signed32位模式，无默认、coercion或业务含义，不暴露通用setter。24继承入口加event9-troop-reset共25入口，新34组model原字节不变。
+
+早期EBX force仍来自pre-presentation保存的raw44，不能从current ownership或reset后的raw44重算；先前force raw94/raw98 stores与troop raw44 store处于同一atomic command。445复制原saved manager EDI到ECX，helper不读incoming ECX；setter RET4/helper RET8证明44C续接参数栈平衡，原manager及saved force/troop/subject/target、event domain、captured raw44、old/new scalars和next cursor保持。presentation411..432整体观察不变；参数cleanup不证明temporary析构、无别名或异步不保留。44C..46C home/reaction仍整体frame/RNG可变观察，live home lookup/building lookup/004AD220未展开；immutable-event只是支持域。
+
+基线为PR #33已合并main `9a487b75b4ebd3dab0326ed0ffc81a7a3b2e5e06`。最新main全新单轮122/122命令通过：TypeScript、85 Node tests、119 Python checker与2 demos。34组model在完整集合执行一次，374 accepted/889 atomic rejection/38 killed mutants；20 source加继承17/nested26/21/21/17/12/13通过。双IDB全指纹和1327 raw-ID1区间重新验证（S1 657、S2 670），6组历史独立作者probe通过38 accepted/32 rejected；仅迁移ROOT/STAGE路径，无失效production禁用selector。124份完整/专项原始字节日志逐条核hash及固定inode wait/start/exit/released；每条命令heap512/TAP/semi16、原argv、专用repo外npm cache、禁Python bytecode，正式TAP_DISABLE_COVERAGE/TAP_RCFILE均unset。2146 tracked文件及真实index在全测/专项前后完全一致；之后仅5结果文档单独复审，生产/model/raw/report/sourcechecker不变。clean-baseline patch恢复全部hash一致；集成delta独审通过。P0-74历史SIGKILL与恢复记录保留，本条新122结果仅属于P0-76冻树及其明确环境，不代表远端CI/stock/runtime认证。192已审新增含guide111，保留正式guide107，共2146 tracked文件；189新增生产/model/raw/report与最终隔离版逐字节一致。新manifest/source checker仅formal baseline、两项P0-75 metadata pin及独立的严格历史提取baseline协调，raw report原字节保持；递归证明至P0-67，继承P0-72已审单strict model pin correction，无新增model例外。Capstone5.0.7历史报告只核hash，不重新解码；IAT source-specific双view仍未认证。正式环境单独记录，不称与隔离run额外TAP_DISABLE_COVERAGE及external TAP_RCFILE配置完全相同，也不默默关闭产品coverage。实际presentation/home/reaction44C..46C、mutable event与16/18、capture/surrender/captive、force灭亡、recursive ruler ownership、positive refund/resources、其余cancel、S2 effects/full vtable tail、fallback reset scheduling、未建模temporary/formatter/external/platform/concurrent memory、全局RNG及clean-stock/Vanilla/console/original-save/runtime认证仍open。
+
+## 历史完成：P0-75 event9 saved-force原生reset
 
 [110-native-event9-force-reset.md](110-native-event9-force-reset.md)在新显式frame/version中仅展开004BA432..442：保存先前troop raw44所得EBX force身份，004B5020单次检查current force validity，canonical ruler0..1099或unknown08完整frame/RNG effect-query；false保留callback变化且跳过两写，true依次在同一saved pointer的当前storage写raw94=0xffffffff、raw98=0。不重读troop ownership，不二次validity，不按新vtable虚构virtual setter，missing reached storage明确gap。rawDword94/rawByte98显式无默认，允许所有既有位模式，不猜业务含义。23继承入口加event9-force-reset共24入口，新34组model原字节不变。
 

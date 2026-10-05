@@ -1,0 +1,124 @@
+0049CB80  56                             push     esi
+0049CB81  8b 74 24 0c                    mov      esi, dword ptr [esp + 0xc]
+0049CB85  85 f6                          test     esi, esi
+0049CB87  57                             push     edi
+0049CB88  8b f9                          mov      edi, ecx
+0049CB8A  0f 84 28 01 00 00              je       0x49ccb8
+0049CB90  8b 06                          mov      eax, dword ptr [esi]
+0049CB92  8b ce                          mov      ecx, esi
+0049CB94  ff 50 24                       call     dword ptr [eax + 0x24]
+0049CB97  48                             dec      eax
+0049CB98  83 f8 1a                       cmp      eax, 0x1a
+0049CB9B  0f 87 17 01 00 00              ja       0x49ccb8
+0049CBA1  0f b6 88 ec cc 49 00           movzx    ecx, byte ptr [eax + 0x49ccec]
+0049CBA8  ff 24 8d c0 cc 49 00           jmp      dword ptr [ecx*4 + 0x49ccc0]
+0049CBAF  56                             push     esi
+0049CBB0  e8 eb fd ff ff                 call     0x49c9a0
+0049CBB5  8b 54 24 10                    mov      edx, dword ptr [esp + 0x10]
+0049CBB9  83 c4 04                       add      esp, 4
+0049CBBC  50                             push     eax
+0049CBBD  52                             push     edx
+0049CBBE  8b cf                          mov      ecx, edi
+0049CBC0  e8 3b fc ff ff                 call     0x49c800
+0049CBC5  5f                             pop      edi
+0049CBC6  5e                             pop      esi
+0049CBC7  c2 08 00                       ret      8
+0049CBCA  56                             push     esi
+0049CBCB  e8 00 fe ff ff                 call     0x49c9d0
+0049CBD0  83 c4 04                       add      esp, 4
+0049CBD3  50                             push     eax
+0049CBD4  8b 44 24 10                    mov      eax, dword ptr [esp + 0x10]
+0049CBD8  50                             push     eax
+0049CBD9  8b cf                          mov      ecx, edi
+0049CBDB  e8 40 fc ff ff                 call     0x49c820
+0049CBE0  5f                             pop      edi
+0049CBE1  5e                             pop      esi
+0049CBE2  c2 08 00                       ret      8
+0049CBE5  56                             push     esi
+0049CBE6  e8 15 fe ff ff                 call     0x49ca00
+0049CBEB  8b 4c 24 10                    mov      ecx, dword ptr [esp + 0x10]
+0049CBEF  83 c4 04                       add      esp, 4
+0049CBF2  50                             push     eax
+0049CBF3  51                             push     ecx
+0049CBF4  8b cf                          mov      ecx, edi
+0049CBF6  e8 45 fc ff ff                 call     0x49c840
+0049CBFB  5f                             pop      edi
+0049CBFC  5e                             pop      esi
+0049CBFD  c2 08 00                       ret      8
+0049CC00  56                             push     esi
+0049CC01  e8 2a 43 18 00                 call     0x620f30
+0049CC06  8b 54 24 10                    mov      edx, dword ptr [esp + 0x10]
+0049CC0A  83 c4 04                       add      esp, 4
+0049CC0D  50                             push     eax
+0049CC0E  52                             push     edx
+0049CC0F  8b cf                          mov      ecx, edi
+0049CC11  e8 4a fc ff ff                 call     0x49c860
+0049CC16  5f                             pop      edi
+0049CC17  5e                             pop      esi
+0049CC18  c2 08 00                       ret      8
+0049CC1B  56                             push     esi
+0049CC1C  e8 0f fe ff ff                 call     0x49ca30
+0049CC21  83 c4 04                       add      esp, 4
+0049CC24  50                             push     eax
+0049CC25  8b 44 24 10                    mov      eax, dword ptr [esp + 0x10]
+0049CC29  50                             push     eax
+0049CC2A  8b cf                          mov      ecx, edi
+0049CC2C  e8 4f fc ff ff                 call     0x49c880
+0049CC31  5f                             pop      edi
+0049CC32  5e                             pop      esi
+0049CC33  c2 08 00                       ret      8
+0049CC36  56                             push     esi
+0049CC37  e8 24 fe ff ff                 call     0x49ca60
+0049CC3C  8b 4c 24 10                    mov      ecx, dword ptr [esp + 0x10]
+0049CC40  83 c4 04                       add      esp, 4
+0049CC43  50                             push     eax
+0049CC44  51                             push     ecx
+0049CC45  8b cf                          mov      ecx, edi
+0049CC47  e8 54 fc ff ff                 call     0x49c8a0
+0049CC4C  5f                             pop      edi
+0049CC4D  5e                             pop      esi
+0049CC4E  c2 08 00                       ret      8
+0049CC51  56                             push     esi
+0049CC52  e8 39 fe ff ff                 call     0x49ca90
+0049CC57  8b 54 24 10                    mov      edx, dword ptr [esp + 0x10]
+0049CC5B  83 c4 04                       add      esp, 4
+0049CC5E  50                             push     eax
+0049CC5F  52                             push     edx
+0049CC60  8b cf                          mov      ecx, edi
+0049CC62  e8 59 fc ff ff                 call     0x49c8c0
+0049CC67  5f                             pop      edi
+0049CC68  5e                             pop      esi
+0049CC69  c2 08 00                       ret      8
+0049CC6C  56                             push     esi
+0049CC6D  e8 4e fe ff ff                 call     0x49cac0
+0049CC72  83 c4 04                       add      esp, 4
+0049CC75  50                             push     eax
+0049CC76  8b 44 24 10                    mov      eax, dword ptr [esp + 0x10]
+0049CC7A  50                             push     eax
+0049CC7B  8b cf                          mov      ecx, edi
+0049CC7D  e8 5e fc ff ff                 call     0x49c8e0
+0049CC82  5f                             pop      edi
+0049CC83  5e                             pop      esi
+0049CC84  c2 08 00                       ret      8
+0049CC87  56                             push     esi
+0049CC88  e8 63 fe ff ff                 call     0x49caf0
+0049CC8D  8b 4c 24 10                    mov      ecx, dword ptr [esp + 0x10]
+0049CC91  83 c4 04                       add      esp, 4
+0049CC94  50                             push     eax
+0049CC95  51                             push     ecx
+0049CC96  8b cf                          mov      ecx, edi
+0049CC98  e8 63 fc ff ff                 call     0x49c900
+0049CC9D  5f                             pop      edi
+0049CC9E  5e                             pop      esi
+0049CC9F  c2 08 00                       ret      8
+0049CCA2  56                             push     esi
+0049CCA3  e8 78 fe ff ff                 call     0x49cb20
+0049CCA8  8b 54 24 10                    mov      edx, dword ptr [esp + 0x10]
+0049CCAC  83 c4 04                       add      esp, 4
+0049CCAF  50                             push     eax
+0049CCB0  52                             push     edx
+0049CCB1  8b cf                          mov      ecx, edi
+0049CCB3  e8 68 fc ff ff                 call     0x49c920
+0049CCB8  5f                             pop      edi
+0049CCB9  5e                             pop      esi
+0049CCBA  c2 08 00                       ret      8

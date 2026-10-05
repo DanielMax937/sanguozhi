@@ -1,0 +1,17 @@
+004B5020  56                             push     esi
+004B5021  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+004B5025  56                             push     esi
+004B5026  e8 05 56 fc ff                 call     0x47a630
+004B502B  83 c4 04                       add      esp, 4
+004B502E  85 c0                          test     eax, eax
+004B5030  74 18                          je       0x4b504a
+004B5032  8b 44 24 0c                    mov      eax, dword ptr [esp + 0xc]
+004B5036  50                             push     eax
+004B5037  8b ce                          mov      ecx, esi
+004B5039  e8 52 c5 fc ff                 call     0x481590
+004B503E  8b 4c 24 10                    mov      ecx, dword ptr [esp + 0x10]
+004B5042  51                             push     ecx
+004B5043  8b ce                          mov      ecx, esi
+004B5045  e8 66 c5 fc ff                 call     0x4815b0
+004B504A  5e                             pop      esi
+004B504B  c2 0c 00                       ret      0xc

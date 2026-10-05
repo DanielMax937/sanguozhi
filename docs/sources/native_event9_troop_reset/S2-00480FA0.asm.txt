@@ -1,0 +1,9 @@
+00480FA0  8b 41 60                       mov      eax, dword ptr [ecx + 0x60]
+00480FA3  85 c0                          test     eax, eax
+00480FA5  7c 0b                          jl       0x480fb2
+00480FA7  83 f8 07                       cmp      eax, 7
+00480FAA  7f 06                          jg       0x480fb2
+00480FAC  b8 01 00 00 00                 mov      eax, 1
+00480FB1  c3                             ret
+00480FB2  33 c0                          xor      eax, eax
+00480FB4  c3                             ret
