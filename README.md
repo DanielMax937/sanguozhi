@@ -23,6 +23,7 @@ npm run play -- --growth-fixture
 
 - [训练切片入口](docs/engine/pk-training-slice.md)
 - [生命周期、配置、证据与迁移](docs/engine/pk-training-lifecycle.md)
+- [live零退款取消9/10/12/22](docs/rules/103-live-zero-refund.md)：同frame原生gate/control与live return；presentation和其余缺口保留；最新main106命令复验及集成delta独审通过
 - [武将迁移与固定移动准备](docs/rules/102-officer-relocation.md)：同一frame内的迁移/cancel分派/保存值与live回读；ruler与troop/位置等边界明确；104命令复验及集成独审通过
 - [据点归属、耐久与event9/10](docs/rules/101-base-ownership-events.md)：原生归属/耐久/flags与复制列表事件predicate；深层取消/部队反应显式观察；专项、102命令回归与独审通过
 - [空军团分派、合并与raw reset](docs/rules/100-empty-legion-redistribution.md)：两方向merge、copied/live状态、精确写宽及S2额外熵；深层base/迁移保持显式边界

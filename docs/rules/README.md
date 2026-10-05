@@ -1,5 +1,7 @@
 > 最新capture人员/城市容量来源与有界模型：[P0-49](84-capture-personnel-source-profile.md)；完整人员迁移、AI处分和stock等价仍开放。
 
+新增[P0-68 live零退款取消9/10/12/22](103-live-zero-refund.md)：同frame gate/control与live return，精确presentation观察及其余证据债保留；13组source、28组model、双IDB和最新main106命令复验及集成delta独审通过。
+
 新增[P0-67武将迁移与固定参数移动准备](102-officer-relocation.md)：004A8270、取消分派和004A7990原生组合，旧API不变；两个officer-relocation检查覆盖来源/模型，最新main104命令复验及集成独审通过。
 
 新增[P0-66据点归属、耐久与event9/10](101-base-ownership-events.md)：归属/耐久/flags与源分离事件predicate，深层handler及部队反应保持明确可变边界。20项source、23项model与102命令全回归及独审通过；运行两项base-ownership检查。
@@ -7,7 +9,7 @@
 # 三国志11规则总索引
 
 > 目标：建立可直接驱动规则引擎的《三国志11》规则规范，并严格区分无印（Vanilla）与威力加强版（PK）。
-> 更新日期：2026-10-04 UTC。
+> 更新日期：2026-10-05 UTC。
 
 ## 最新审计入口
 

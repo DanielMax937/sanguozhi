@@ -2,7 +2,13 @@
 
 更新：2026-10-05 UTC。
 
-## 最新完成：P0-67武将迁移与固定参数移动准备
+## 最新完成：P0-68 live零退款取消9/10/12/22
+
+[103-live-zero-refund.md](103-live-zero-refund.md)在P0-67共享frame中直接执行mission9/10/12/22的gate与control，复用notification、零退款return、relocation和真实event分派；23/24维持既有原生实现。9/10仅target数值范围门并保留丢弃的force validity读取，12只构造target person pointer，22验证target force并保存actor color。四段presentation仍需完整before→after/RNG观察或原子reject；tail fresh读取actor，成功body固定return1。旧API、模型测试和raw来源字节不变。
+
+基线为PR #25已合并main `e8bae319e5d1b08057fd091a90d305d58c9d7669`。最新main全新完整106命令确认回归通过：TypeScript、85 Node tests、103 Python checker命令、2 demos；13组source与28组独立model检查通过。两份whole-IDB指纹与raw-ID1闭包复核通过（S1 610区间/73,708 interval bytes，S2 622/74,065，含重叠区间）。122项既有手工独审probe在集成树重跑通过；集成delta独审无阻断，生产/模型测试/raw证据逐字节继承已审版本。1,199文件与Git index在回归前后冻结一致，106日志hash核验。首轮npm的lifecycle子进程曾异常失败，原日志保留、原因未确认；同一代码的独立27项lifecycle和全新整套106随后通过，未把失败抹去。本段结果文字在全测后写入，程序、测试与来源字节不再改变。未执行游戏EXE，未将本地验证称为远端CI或stock认证。其余handler/positive refund、presentation、tail距离、S2 effects/observer、ruler/capture、troop/位置、event9部队反应、force灭亡、stock/Vanilla和全局RNG仍open。
+
+## 历史完成：P0-67武将迁移与固定参数移动准备
 
 [102-officer-relocation.md](102-officer-relocation.md)新增独立版本，在P0-66共享frame中展开004A8270、allocated取消注册分派及固定参数004A7990。保留status2内嵌旧太守清理、ruler live判断、same-home不取消、away两处direct acted、保存distance低byte不复验写回与live governor刷新。004B40C0、其余cancel handler、真实troop成员/非base位置、event9部队反应、force灭亡和stock/Vanilla/全局RNG仍为明确观察或open。
 
