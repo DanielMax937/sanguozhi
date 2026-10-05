@@ -1,0 +1,5 @@
+00488C70  8b 91 a0 00 00 00              mov      edx, dword ptr [ecx + 0xa0]
+00488C76  33 c0                          xor      eax, eax
+00488C78  83 fa 05                       cmp      edx, 5
+00488C7B  0f 94 c0                       sete     al
+00488C7E  c3                             ret

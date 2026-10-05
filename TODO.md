@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-69 generic-facility entry and early return
-> Integration baseline: PR #26 merged; this theme starts at `094f94b41795169df73fe708f9bbd29083949ea1`
+> Current integration: P0-70 native zero-refund tail distance
+> Integration baseline: PR #27 merged; this theme starts at `8b21e340d577810ca664e829d1d9cb35b1046fc4`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-05 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: native zero-refund tail distance
+
+- P0-70 replaces only the reached005B8400→0049E4D0 distance observation with native source-local territory and current-to-home byte-table evaluation in the same live frame; all17 entries remain available under the new version and old APIs/traces are frozen
+- Normalized live current and raw home compare before getter normalization. Current territory is saved before home territory; home is evaluated even if current failed. The helper scope closes before savedDistance is kept in the parent tail, surviving later callbacks; the duration wrapper rechecks live validity and stores the saved low byte, including-1→255
+- Source territory/distance tables stay distinct; both real matrices are symmetric. The asymmetric probe is explicitly synthetic. Missing reached slot/map data rejects; eager represented getter slots remain a conservative model-domain restriction
+- Guide: `docs/rules/105-native-tail-distance.md`; fresh latest-main110/110 commands passed: TypeScript,85 Node tests,107 Python checker commands and2 demos, with the shared Node lock and NODE_OPTIONS=--max-old-space-size=512. The12 new plus13 inherited source groups,29 model groups,both whole-IDB/raw checks and8 historical reviewer probe groups passed. Independent integration-delta review found no blocker; all1285 files/index stayed unchanged across validation and all110 log hashes were checked. Only5 result documents were updated afterward for separate review. Zero new unique raw intervals or newly recovered machine-code bytes; inherited Capstone5.0.7 reports were hash-checked, not re-decoded
+- Still open: canonical ruler/capture, surrender/captive policy, force extinction, recursive-return ruler ownership, positive refunds/resources, other cancellation bodies, presentation internals, troop membership/non-base positions, event9 troop reaction, S2 effects/observers, unrepresented memory/platform paths, global RNG and runtime/stock/Vanilla certification
 
 ### Completed bounded implementation: generic-facility entry and early return
 

@@ -1,0 +1,2077 @@
+{
+  "profileId": "source-idb-S1-S2-native-tail-distance-v1",
+  "baselineCommit": "8b21e340d577810ca664e829d1d9cb35b1046fc4",
+  "integrationStatus": "versioned-theme-on-merged-main",
+  "sources": [
+    {
+      "source": "S1",
+      "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+      "recordedInputPath": "D:\\Games\\\u4e09\u56fd\u5fd711\\\u8840\u82725.0\u516c\u6d4b\\san11pk.exe",
+      "recordedExeSha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip"
+    },
+    {
+      "source": "S2",
+      "idbSha256": "aa7f2c983b266633d6e23c494d4f8e1b03e5251632505cae103e176ae850dfd8",
+      "recordedInputPath": "C:\\Games\\san11\\\u8840\u8272\u8863\u51a06.0sp5(\u6574\u5408\u5305240612)\\San11Pk\\san11pk_dump.exe",
+      "recordedExeSha256": "b1e9467e9612c23af83f6feda8414bc9ee99eb62c6862a84f7f4c5a8822b9da9",
+      "url": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/ida-db/san11pk_dump.exe.idb.7z"
+    }
+  ],
+  "stockOriginalVerified": false,
+  "originalExeExecuted": false,
+  "recordedExeHashesIndependentlyVerified": false,
+  "adoption": {
+    "PC-PK1.1": "compatibility-reconstruction",
+    "PC-Vanilla-assumed": "compatibility-assumption",
+    "PS2-Wii": "open"
+  },
+  "priorEvidence": {
+    "path": "docs/sources/generic-facility.json",
+    "sha256": "b1244b414dc712ecb71a9d7b56e240bb61eba02fbe038281b995c788dec05df9"
+  },
+  "retainedFiles": [
+    {
+      "path": "scripts/check_generic_facility_source.py",
+      "sha256": "2bee13a5305c54b63a7d02268b5d3798691f4ba81977e72e4cf2e4b4860d10ba"
+    },
+    {
+      "path": "scripts/generic_facility_profile.py",
+      "sha256": "0a91f92d8dd1a23e6bd48a2f395239711d9a6dd83dbd27dd9dbf6b239c917b0d"
+    },
+    {
+      "path": "scripts/generic_facility_primitives.py",
+      "sha256": "7d06405e7c9cc795c8ec09a31799ca0fe051b0e2809e0687a134fca58c77f461"
+    },
+    {
+      "path": "scripts/check_generic_facility_profile.py",
+      "sha256": "ee764ffcbf5922e70403677510931aaa5bb49ee03a23240875d53c4ba2a851ad"
+    },
+    {
+      "path": "scripts/officer_relocation_primitives.py",
+      "sha256": "f0787cd4f58a47ed83806d851ab8c52fce08817354cee9255c9ad124cd47cc51"
+    },
+    {
+      "path": "scripts/return_route_primitives.py",
+      "sha256": "d7a98e0209698c35c6ab6fc69d1ca961bab00965d3ef542f0240b73660a6ecc2"
+    },
+    {
+      "path": "scripts/return_route_tables.py",
+      "sha256": "7569dfb995eaf38c26cbdd69d444c82d3225964a7b2d73e8c69108376cf18352"
+    },
+    {
+      "path": "scripts/return_mission_lifecycle_profile.py",
+      "sha256": "2b2dc7cc74018200a0b02effcf7a748295439f9c3599a566c39290a8b8cb98c6"
+    }
+  ],
+  "ranges": [
+    {
+      "source": "S1",
+      "start": "005B8400",
+      "endExclusive": "005B84E2",
+      "kind": "code",
+      "sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0",
+      "artifactSha256": "1f51740fb93fb9c1f040464ea7085678a01e9caca1f5bd0ce6214428e55504bc",
+      "file": "S1-005B8400.asm.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S1",
+        "start": "005B8400",
+        "endExclusive": "005B84E2",
+        "sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0",
+        "independentId1Sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0",
+        "kind": "code",
+        "role": "function",
+        "file": "S1-selected.asm.txt",
+        "lineStart": 1084,
+        "lineCount": 81
+      }
+    },
+    {
+      "source": "S1",
+      "start": "00490D00",
+      "endExclusive": "00490D21",
+      "kind": "code",
+      "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "artifactSha256": "a82117690681914a52efc3d60a1cd9f4503ecb5f3185a1483caad5b2d0dc93da",
+      "file": "S1-00490D00.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "00490D00",
+        "endExclusive": "00490D21",
+        "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+        "rawId1Sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+        "file": "S1-00490D00.asm.txt",
+        "ownerFunction": "00490D00",
+        "artifactSha256": "a82117690681914a52efc3d60a1cd9f4503ecb5f3185a1483caad5b2d0dc93da",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "0049E4D0",
+      "endExclusive": "0049E4FB",
+      "kind": "code",
+      "sha256": "ceefad36fa02092bcedd902908fbb6309c9bea3d4d16898cb72edda05d683ac1",
+      "artifactSha256": "5592bbc46db00d63dcd3b709d825efc3c7dca10a4af43c382268a975e1e12250",
+      "file": "S1-0049E4D0.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "0049E4D0",
+        "endExclusive": "0049E4FB",
+        "sha256": "ceefad36fa02092bcedd902908fbb6309c9bea3d4d16898cb72edda05d683ac1",
+        "rawId1Sha256": "ceefad36fa02092bcedd902908fbb6309c9bea3d4d16898cb72edda05d683ac1",
+        "file": "S1-0049E4D0.asm.txt",
+        "ownerFunction": "0049E4D0",
+        "artifactSha256": "5592bbc46db00d63dcd3b709d825efc3c7dca10a4af43c382268a975e1e12250",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "0049E450",
+      "endExclusive": "0049E4C4",
+      "kind": "code",
+      "sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+      "artifactSha256": "fd716f0ac688e3263f90de888c21e1c3abe38a538345e08635f7133db5469ece",
+      "file": "S1-0049E450.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "0049E450",
+        "endExclusive": "0049E4C4",
+        "sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+        "rawId1Sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+        "file": "S1-0049E450.asm.txt",
+        "ownerFunction": "0049E450",
+        "artifactSha256": "fd716f0ac688e3263f90de888c21e1c3abe38a538345e08635f7133db5469ece",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "0047B480",
+      "endExclusive": "0047B4AA",
+      "kind": "code",
+      "sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+      "artifactSha256": "12db48459ff7fc35d9510cb1af01c0b67e1a2e6359ac8516fe5669c908fde179",
+      "file": "S1-0047B480.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "0047B480",
+        "endExclusive": "0047B4AA",
+        "sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+        "rawId1Sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+        "file": "S1-0047B480.asm.txt",
+        "ownerFunction": "0047B480",
+        "artifactSha256": "12db48459ff7fc35d9510cb1af01c0b67e1a2e6359ac8516fe5669c908fde179",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "004839F0",
+      "endExclusive": "004839FC",
+      "kind": "code",
+      "sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+      "artifactSha256": "a927e4ba1a0095cd6d72e1648d509bbab06cfd853d964c821bb2afaf8b333ccb",
+      "file": "S1-004839F0.asm.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S1",
+        "start": "004839F0",
+        "endExclusive": "004839FC",
+        "sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+        "independentId1Sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+        "kind": "code",
+        "role": "function",
+        "file": "S1-selected.asm.txt",
+        "lineStart": 462,
+        "lineCount": 3
+      }
+    },
+    {
+      "source": "S1",
+      "start": "00487DC0",
+      "endExclusive": "00487DC4",
+      "kind": "code",
+      "sha256": "a97a61afc73231cb78bb2c78600f652c4d2d996c15d963c8764c5c055bf114d1",
+      "artifactSha256": "083e68c69be8d4798b4ba453b86692ca8b180544be9c5903c950aca83327b6d4",
+      "file": "S1-00487DC0.asm.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S1",
+        "start": "00487DC0",
+        "endExclusive": "00487DC4",
+        "sha256": "a97a61afc73231cb78bb2c78600f652c4d2d996c15d963c8764c5c055bf114d1",
+        "independentId1Sha256": "a97a61afc73231cb78bb2c78600f652c4d2d996c15d963c8764c5c055bf114d1",
+        "kind": "code",
+        "role": "function",
+        "file": "S1-selected.asm.txt",
+        "lineStart": 486,
+        "lineCount": 2
+      }
+    },
+    {
+      "source": "S1",
+      "start": "0047A630",
+      "endExclusive": "0047A656",
+      "kind": "code",
+      "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "artifactSha256": "92bc77145c9d5bc7ad3471f46ae6941efa917f6e5878ca0f2c79079b62eda4b0",
+      "file": "S1-0047A630.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "0047A630",
+        "endExclusive": "0047A656",
+        "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+        "rawId1Sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+        "file": "S1-0047A630.asm.txt",
+        "ownerFunction": "0047A630",
+        "artifactSha256": "92bc77145c9d5bc7ad3471f46ae6941efa917f6e5878ca0f2c79079b62eda4b0",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "00472070",
+      "endExclusive": "004720AB",
+      "kind": "code",
+      "sha256": "ba76fa401ab64a66e9ee58fd742a90a8aed891eb0815679089dcb0521e09c536",
+      "artifactSha256": "3e87abf1713b66bf4bede685b735327a5843c53d57ff8cf8ea7b527f6558b859",
+      "file": "S1-00472070.asm.txt",
+      "inheritedManifest": "docs/sources/generic-facility.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "00472070",
+        "endExclusive": "004720AB",
+        "sha256": "ba76fa401ab64a66e9ee58fd742a90a8aed891eb0815679089dcb0521e09c536",
+        "rawId1Sha256": "ba76fa401ab64a66e9ee58fd742a90a8aed891eb0815679089dcb0521e09c536",
+        "file": "S1-00472070.asm.txt",
+        "artifactSha256": "3e87abf1713b66bf4bede685b735327a5843c53d57ff8cf8ea7b527f6558b859",
+        "boundaryKind": "inherited-continuous-function-region",
+        "inheritedBytes": true
+      }
+    },
+    {
+      "source": "S1",
+      "start": "00486400",
+      "endExclusive": "00486424",
+      "kind": "code",
+      "sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7",
+      "artifactSha256": "671f490f4c4d4c8d2a6f67825cfc0df2da38d390e701f5291c5aeccaca09c304",
+      "file": "S1-00486400.asm.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S1",
+        "start": "00486400",
+        "endExclusive": "00486424",
+        "sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7",
+        "independentId1Sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7",
+        "kind": "code",
+        "role": "function",
+        "file": "S1-selected.asm.txt",
+        "lineStart": 467,
+        "lineCount": 17
+      }
+    },
+    {
+      "source": "S1",
+      "start": "00573470",
+      "endExclusive": "00573476",
+      "kind": "code",
+      "sha256": "21faa16607cb70438711aab3fa582829af50aa15d5946524996fc7aa8a8e4e6d",
+      "artifactSha256": "7c5ca7ea62bb11c48ac1f8f163778096ffedf8e767eb88eb2480ac9e4b3ac920",
+      "file": "S1-00573470.asm.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S1",
+        "start": "00573470",
+        "endExclusive": "00573476",
+        "sha256": "21faa16607cb70438711aab3fa582829af50aa15d5946524996fc7aa8a8e4e6d",
+        "independentId1Sha256": "21faa16607cb70438711aab3fa582829af50aa15d5946524996fc7aa8a8e4e6d",
+        "kind": "code",
+        "role": "function",
+        "file": "S1-selected.asm.txt",
+        "lineStart": 904,
+        "lineCount": 2
+      }
+    },
+    {
+      "source": "S1",
+      "start": "004A73A0",
+      "endExclusive": "004A740E",
+      "kind": "code",
+      "sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56",
+      "artifactSha256": "522dfc1e67b2ab4c0ab9179ca38fd5496e6e6452c8218225934b77171f32767f",
+      "file": "S1-004A73A0.asm.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S1",
+        "start": "004A73A0",
+        "endExclusive": "004A740E",
+        "sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56",
+        "independentId1Sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56",
+        "kind": "code",
+        "role": "function",
+        "file": "S1-selected.asm.txt",
+        "lineStart": 841,
+        "lineCount": 44
+      }
+    },
+    {
+      "source": "S1",
+      "start": "004A5660",
+      "endExclusive": "004A5682",
+      "kind": "code",
+      "sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+      "artifactSha256": "1f28759edaa2c7bad52800247ce0b0129afac9dc5787d7de44a36e1db3fde01b",
+      "file": "S1-004A5660.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "004A5660",
+        "endExclusive": "004A5682",
+        "sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+        "rawId1Sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+        "file": "S1-004A5660.asm.txt",
+        "ownerFunction": "004A5660",
+        "artifactSha256": "1f28759edaa2c7bad52800247ce0b0129afac9dc5787d7de44a36e1db3fde01b",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "0048A8B0",
+      "endExclusive": "0048A8D2",
+      "kind": "code",
+      "sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+      "artifactSha256": "2950d55fe0cd9e867f7e1543b4e50531e742e00c61737a445f5440335e47d66e",
+      "file": "S1-0048A8B0.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "0048A8B0",
+        "endExclusive": "0048A8D2",
+        "sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+        "rawId1Sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+        "file": "S1-0048A8B0.asm.txt",
+        "ownerFunction": "0048A8B0",
+        "artifactSha256": "2950d55fe0cd9e867f7e1543b4e50531e742e00c61737a445f5440335e47d66e",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "00489BD0",
+      "endExclusive": "00489C0F",
+      "kind": "code",
+      "sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+      "artifactSha256": "b549a51e7ab5b392f5ba689de79d03d0987c0949812f688564c257d68f6dc3b0",
+      "file": "S1-00489BD0.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "00489BD0",
+        "endExclusive": "00489C0F",
+        "sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+        "rawId1Sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+        "file": "S1-00489BD0.asm.txt",
+        "ownerFunction": "00489BD0",
+        "artifactSha256": "b549a51e7ab5b392f5ba689de79d03d0987c0949812f688564c257d68f6dc3b0",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "004A5600",
+      "endExclusive": "004A5622",
+      "kind": "code",
+      "sha256": "469e3a076f2dd39447ed00a439df84539740067d7eb95ae2fecce1b8e7850f81",
+      "artifactSha256": "c5634edc9e224302276408d864dcf791f0a9e1e9b667d8eba901e80c50541c84",
+      "file": "S1-004A5600.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "004A5600",
+        "endExclusive": "004A5622",
+        "sha256": "469e3a076f2dd39447ed00a439df84539740067d7eb95ae2fecce1b8e7850f81",
+        "rawId1Sha256": "469e3a076f2dd39447ed00a439df84539740067d7eb95ae2fecce1b8e7850f81",
+        "file": "S1-004A5600.asm.txt",
+        "ownerFunction": "004A5600",
+        "artifactSha256": "c5634edc9e224302276408d864dcf791f0a9e1e9b667d8eba901e80c50541c84",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "00489B40",
+      "endExclusive": "00489B6D",
+      "kind": "code",
+      "sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+      "artifactSha256": "8bdf3c5e515001727f8e87d6db85e79c2b4e310b6453431d0d2765d793ade839",
+      "file": "S1-00489B40.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "00489B40",
+        "endExclusive": "00489B6D",
+        "sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+        "rawId1Sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+        "file": "S1-00489B40.asm.txt",
+        "ownerFunction": "00489B40",
+        "artifactSha256": "8bdf3c5e515001727f8e87d6db85e79c2b4e310b6453431d0d2765d793ade839",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "00482F80",
+      "endExclusive": "00482FC0",
+      "kind": "code",
+      "sha256": "a3294bd1f816574db08694971a10cf95a2b40d8877cdda4bf13b622f498aff4c",
+      "artifactSha256": "00b9b0ccfe219ebc7abb7f241b5ed865d9864ffb17bd79d921fa281134f5130b",
+      "file": "S1-00482F80.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "00482F80",
+        "endExclusive": "00482FC0",
+        "sha256": "a3294bd1f816574db08694971a10cf95a2b40d8877cdda4bf13b622f498aff4c",
+        "rawId1Sha256": "a3294bd1f816574db08694971a10cf95a2b40d8877cdda4bf13b622f498aff4c",
+        "file": "S1-00482F80.asm.txt",
+        "ownerFunction": "00482F80",
+        "artifactSha256": "00b9b0ccfe219ebc7abb7f241b5ed865d9864ffb17bd79d921fa281134f5130b",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "004A5780",
+      "endExclusive": "004A57A9",
+      "kind": "code",
+      "sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+      "artifactSha256": "0460f4577b0222d370e3594ffa95410939d442b1fac7449e32450fa12e9bb5a6",
+      "file": "S1-004A5780.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "004A5780",
+        "endExclusive": "004A57A9",
+        "sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+        "rawId1Sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+        "file": "S1-004A5780.asm.txt",
+        "ownerFunction": "004A5780",
+        "artifactSha256": "0460f4577b0222d370e3594ffa95410939d442b1fac7449e32450fa12e9bb5a6",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "00488C70",
+      "endExclusive": "00488C7F",
+      "kind": "code",
+      "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "artifactSha256": "f54d958d8d5ca96acacbada0acc66cb91925553f69e5a175e528280abc202038",
+      "file": "S1-00488C70.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S1",
+        "start": "00488C70",
+        "endExclusive": "00488C7F",
+        "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+        "rawId1Sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+        "file": "S1-00488C70.asm.txt",
+        "ownerFunction": "00488C70",
+        "artifactSha256": "f54d958d8d5ca96acacbada0acc66cb91925553f69e5a175e528280abc202038",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "0079C718",
+      "endExclusive": "0079C774",
+      "kind": "data",
+      "sha256": "93644003052b306a2543d1e4cd26359f5e743ec4450b0b0d59742f7f4ecaffec",
+      "artifactSha256": "ecd641642bfc2869e5db8390241189bc234789450d31ad57f62a1a2a32032b15",
+      "file": "S1-0079C718.data.txt",
+      "inheritedManifest": "docs/sources/base-ownership-events.json",
+      "inheritedRange": {
+        "source": "S1",
+        "kind": "data",
+        "start": "0079C718",
+        "endExclusive": "0079C774",
+        "sha256": "93644003052b306a2543d1e4cd26359f5e743ec4450b0b0d59742f7f4ecaffec",
+        "independentId1Sha256": "93644003052b306a2543d1e4cd26359f5e743ec4450b0b0d59742f7f4ecaffec",
+        "file": "S1-0079C718.asm.txt",
+        "boundaryKind": "bounded-data"
+      }
+    },
+    {
+      "source": "S1",
+      "start": "0079C2B0",
+      "endExclusive": "0079C330",
+      "kind": "data",
+      "sha256": "d692c5d627bf8182061c550e469f9e0b13e17d483aadbec413ec11491d3f0272",
+      "artifactSha256": "625955a23224c5cc406c7e79c290043f874d3532c8157461e0930e311dcea010",
+      "file": "S1-0079C2B0.data.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S1",
+        "start": "0079C2B0",
+        "endExclusive": "0079C330",
+        "sha256": "d692c5d627bf8182061c550e469f9e0b13e17d483aadbec413ec11491d3f0272",
+        "independentId1Sha256": "d692c5d627bf8182061c550e469f9e0b13e17d483aadbec413ec11491d3f0272",
+        "kind": "data",
+        "role": "territorial-zone-byte-table-all-masked-indices",
+        "file": "S1-selected.asm.txt",
+        "lineStart": 1416,
+        "lineCount": 8
+      }
+    },
+    {
+      "source": "S1",
+      "start": "0079B830",
+      "endExclusive": "0079BF14",
+      "kind": "data",
+      "sha256": "deda8ff7828a2c42df89457adcec1b36df55f7ff78337be347e94698dc6b3e8f",
+      "artifactSha256": "4d46937b0c4b881c4d1c105f33f5930cebc2ff088bdcccc397ff531a23410bfc",
+      "file": "S1-0079B830.data.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S1",
+        "start": "0079B830",
+        "endExclusive": "0079BF14",
+        "sha256": "deda8ff7828a2c42df89457adcec1b36df55f7ff78337be347e94698dc6b3e8f",
+        "independentId1Sha256": "deda8ff7828a2c42df89457adcec1b36df55f7ff78337be347e94698dc6b3e8f",
+        "kind": "data",
+        "role": "source-local-directed-city-distance-table",
+        "file": "S1-selected.asm.txt",
+        "lineStart": 1289,
+        "lineCount": 111
+      }
+    },
+    {
+      "source": "S2",
+      "start": "005B8400",
+      "endExclusive": "005B84E2",
+      "kind": "code",
+      "sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0",
+      "artifactSha256": "1f51740fb93fb9c1f040464ea7085678a01e9caca1f5bd0ce6214428e55504bc",
+      "file": "S2-005B8400.asm.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S2",
+        "start": "005B8400",
+        "endExclusive": "005B84E2",
+        "sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0",
+        "independentId1Sha256": "72e5086aa0b0a1dd846a1c805df826fd010ca8199f5880d1491e62e74369d6b0",
+        "kind": "code",
+        "role": "function",
+        "file": "S2-selected.asm.txt",
+        "lineStart": 1082,
+        "lineCount": 81
+      }
+    },
+    {
+      "source": "S2",
+      "start": "00490D00",
+      "endExclusive": "00490D21",
+      "kind": "code",
+      "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+      "artifactSha256": "a82117690681914a52efc3d60a1cd9f4503ecb5f3185a1483caad5b2d0dc93da",
+      "file": "S2-00490D00.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "00490D00",
+        "endExclusive": "00490D21",
+        "sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+        "rawId1Sha256": "534216ae648797120a1ced66decc784947f7a05b4b23b844d303c16ea5c6091a",
+        "file": "S2-00490D00.asm.txt",
+        "ownerFunction": "00490D00",
+        "artifactSha256": "a82117690681914a52efc3d60a1cd9f4503ecb5f3185a1483caad5b2d0dc93da",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "0049E4D0",
+      "endExclusive": "0049E4FB",
+      "kind": "code",
+      "sha256": "ceefad36fa02092bcedd902908fbb6309c9bea3d4d16898cb72edda05d683ac1",
+      "artifactSha256": "5592bbc46db00d63dcd3b709d825efc3c7dca10a4af43c382268a975e1e12250",
+      "file": "S2-0049E4D0.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "0049E4D0",
+        "endExclusive": "0049E4FB",
+        "sha256": "ceefad36fa02092bcedd902908fbb6309c9bea3d4d16898cb72edda05d683ac1",
+        "rawId1Sha256": "ceefad36fa02092bcedd902908fbb6309c9bea3d4d16898cb72edda05d683ac1",
+        "file": "S2-0049E4D0.asm.txt",
+        "ownerFunction": "0049E4D0",
+        "artifactSha256": "5592bbc46db00d63dcd3b709d825efc3c7dca10a4af43c382268a975e1e12250",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "0049E450",
+      "endExclusive": "0049E4C4",
+      "kind": "code",
+      "sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+      "artifactSha256": "fd716f0ac688e3263f90de888c21e1c3abe38a538345e08635f7133db5469ece",
+      "file": "S2-0049E450.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "0049E450",
+        "endExclusive": "0049E4C4",
+        "sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+        "rawId1Sha256": "13b358fb26d20b04b393bc594a40c2b4d4487ed96c26fd6059a9d9659a26d67d",
+        "file": "S2-0049E450.asm.txt",
+        "ownerFunction": "0049E450",
+        "artifactSha256": "fd716f0ac688e3263f90de888c21e1c3abe38a538345e08635f7133db5469ece",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "0047B480",
+      "endExclusive": "0047B4AA",
+      "kind": "code",
+      "sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+      "artifactSha256": "12db48459ff7fc35d9510cb1af01c0b67e1a2e6359ac8516fe5669c908fde179",
+      "file": "S2-0047B480.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "0047B480",
+        "endExclusive": "0047B4AA",
+        "sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+        "rawId1Sha256": "cc2baaaec3925264a81eefcf859bdf803023623ad5fbf37e4c9a94920a9c89d7",
+        "file": "S2-0047B480.asm.txt",
+        "ownerFunction": "0047B480",
+        "artifactSha256": "12db48459ff7fc35d9510cb1af01c0b67e1a2e6359ac8516fe5669c908fde179",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "004839F0",
+      "endExclusive": "004839FC",
+      "kind": "code",
+      "sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+      "artifactSha256": "a927e4ba1a0095cd6d72e1648d509bbab06cfd853d964c821bb2afaf8b333ccb",
+      "file": "S2-004839F0.asm.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S2",
+        "start": "004839F0",
+        "endExclusive": "004839FC",
+        "sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+        "independentId1Sha256": "56b58ce4a05e2ecdfa055b04e499f6a144840249d8e11b28065dfce3bcfee08e",
+        "kind": "code",
+        "role": "function",
+        "file": "S2-selected.asm.txt",
+        "lineStart": 462,
+        "lineCount": 3
+      }
+    },
+    {
+      "source": "S2",
+      "start": "00487DC0",
+      "endExclusive": "00487DC4",
+      "kind": "code",
+      "sha256": "a97a61afc73231cb78bb2c78600f652c4d2d996c15d963c8764c5c055bf114d1",
+      "artifactSha256": "083e68c69be8d4798b4ba453b86692ca8b180544be9c5903c950aca83327b6d4",
+      "file": "S2-00487DC0.asm.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S2",
+        "start": "00487DC0",
+        "endExclusive": "00487DC4",
+        "sha256": "a97a61afc73231cb78bb2c78600f652c4d2d996c15d963c8764c5c055bf114d1",
+        "independentId1Sha256": "a97a61afc73231cb78bb2c78600f652c4d2d996c15d963c8764c5c055bf114d1",
+        "kind": "code",
+        "role": "function",
+        "file": "S2-selected.asm.txt",
+        "lineStart": 486,
+        "lineCount": 2
+      }
+    },
+    {
+      "source": "S2",
+      "start": "0047A630",
+      "endExclusive": "0047A656",
+      "kind": "code",
+      "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "artifactSha256": "92bc77145c9d5bc7ad3471f46ae6941efa917f6e5878ca0f2c79079b62eda4b0",
+      "file": "S2-0047A630.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "0047A630",
+        "endExclusive": "0047A656",
+        "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+        "rawId1Sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+        "file": "S2-0047A630.asm.txt",
+        "ownerFunction": "0047A630",
+        "artifactSha256": "92bc77145c9d5bc7ad3471f46ae6941efa917f6e5878ca0f2c79079b62eda4b0",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "00472070",
+      "endExclusive": "004720AB",
+      "kind": "code",
+      "sha256": "ba76fa401ab64a66e9ee58fd742a90a8aed891eb0815679089dcb0521e09c536",
+      "artifactSha256": "3e87abf1713b66bf4bede685b735327a5843c53d57ff8cf8ea7b527f6558b859",
+      "file": "S2-00472070.asm.txt",
+      "inheritedManifest": "docs/sources/generic-facility.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "00472070",
+        "endExclusive": "004720AB",
+        "sha256": "ba76fa401ab64a66e9ee58fd742a90a8aed891eb0815679089dcb0521e09c536",
+        "rawId1Sha256": "ba76fa401ab64a66e9ee58fd742a90a8aed891eb0815679089dcb0521e09c536",
+        "file": "S2-00472070.asm.txt",
+        "artifactSha256": "3e87abf1713b66bf4bede685b735327a5843c53d57ff8cf8ea7b527f6558b859",
+        "boundaryKind": "inherited-continuous-function-region",
+        "inheritedBytes": true
+      }
+    },
+    {
+      "source": "S2",
+      "start": "00486400",
+      "endExclusive": "00486424",
+      "kind": "code",
+      "sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7",
+      "artifactSha256": "671f490f4c4d4c8d2a6f67825cfc0df2da38d390e701f5291c5aeccaca09c304",
+      "file": "S2-00486400.asm.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S2",
+        "start": "00486400",
+        "endExclusive": "00486424",
+        "sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7",
+        "independentId1Sha256": "c5f03d3151997a9c57011d7fec3a0e7a61a5f1989a4d5eba46a468965527e2d7",
+        "kind": "code",
+        "role": "function",
+        "file": "S2-selected.asm.txt",
+        "lineStart": 467,
+        "lineCount": 17
+      }
+    },
+    {
+      "source": "S2",
+      "start": "00573470",
+      "endExclusive": "00573476",
+      "kind": "code",
+      "sha256": "21faa16607cb70438711aab3fa582829af50aa15d5946524996fc7aa8a8e4e6d",
+      "artifactSha256": "7c5ca7ea62bb11c48ac1f8f163778096ffedf8e767eb88eb2480ac9e4b3ac920",
+      "file": "S2-00573470.asm.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S2",
+        "start": "00573470",
+        "endExclusive": "00573476",
+        "sha256": "21faa16607cb70438711aab3fa582829af50aa15d5946524996fc7aa8a8e4e6d",
+        "independentId1Sha256": "21faa16607cb70438711aab3fa582829af50aa15d5946524996fc7aa8a8e4e6d",
+        "kind": "code",
+        "role": "function",
+        "file": "S2-selected.asm.txt",
+        "lineStart": 902,
+        "lineCount": 2
+      }
+    },
+    {
+      "source": "S2",
+      "start": "004A73A0",
+      "endExclusive": "004A740E",
+      "kind": "code",
+      "sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56",
+      "artifactSha256": "522dfc1e67b2ab4c0ab9179ca38fd5496e6e6452c8218225934b77171f32767f",
+      "file": "S2-004A73A0.asm.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S2",
+        "start": "004A73A0",
+        "endExclusive": "004A740E",
+        "sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56",
+        "independentId1Sha256": "6dbbc7827f8a64f9c4f8e90e9ea3691260d5e8d4ca187eb6970e9de2cc26ea56",
+        "kind": "code",
+        "role": "function",
+        "file": "S2-selected.asm.txt",
+        "lineStart": 839,
+        "lineCount": 44
+      }
+    },
+    {
+      "source": "S2",
+      "start": "004A5660",
+      "endExclusive": "004A5682",
+      "kind": "code",
+      "sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+      "artifactSha256": "1f28759edaa2c7bad52800247ce0b0129afac9dc5787d7de44a36e1db3fde01b",
+      "file": "S2-004A5660.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "004A5660",
+        "endExclusive": "004A5682",
+        "sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+        "rawId1Sha256": "ab24ca4352b8935daa2ce25929eab3b68318dc802fcd64dcd954195e7f370e72",
+        "file": "S2-004A5660.asm.txt",
+        "ownerFunction": "004A5660",
+        "artifactSha256": "1f28759edaa2c7bad52800247ce0b0129afac9dc5787d7de44a36e1db3fde01b",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "0048A8B0",
+      "endExclusive": "0048A8D2",
+      "kind": "code",
+      "sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+      "artifactSha256": "2950d55fe0cd9e867f7e1543b4e50531e742e00c61737a445f5440335e47d66e",
+      "file": "S2-0048A8B0.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "0048A8B0",
+        "endExclusive": "0048A8D2",
+        "sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+        "rawId1Sha256": "322cb17b9afd835f01b92079ad112eec2a85e9f2786b903433b8ae0b69983cf8",
+        "file": "S2-0048A8B0.asm.txt",
+        "ownerFunction": "0048A8B0",
+        "artifactSha256": "2950d55fe0cd9e867f7e1543b4e50531e742e00c61737a445f5440335e47d66e",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "00489BD0",
+      "endExclusive": "00489C0F",
+      "kind": "code",
+      "sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+      "artifactSha256": "b549a51e7ab5b392f5ba689de79d03d0987c0949812f688564c257d68f6dc3b0",
+      "file": "S2-00489BD0.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "00489BD0",
+        "endExclusive": "00489C0F",
+        "sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+        "rawId1Sha256": "d54e29a33757c8e2870d8b595d3cd1175032b260050a12ada902053cc527c620",
+        "file": "S2-00489BD0.asm.txt",
+        "ownerFunction": "00489BD0",
+        "artifactSha256": "b549a51e7ab5b392f5ba689de79d03d0987c0949812f688564c257d68f6dc3b0",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "004A5600",
+      "endExclusive": "004A5622",
+      "kind": "code",
+      "sha256": "ba6c6d920a0fc1aca5619eb56c8b243f55fccd20c985dfb85184f883b0750a60",
+      "artifactSha256": "1b836994066c66c6a8a22121b59da477e61de12735c724924a26f3812d1bb3bd",
+      "file": "S2-004A5600.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "004A5600",
+        "endExclusive": "004A5622",
+        "sha256": "ba6c6d920a0fc1aca5619eb56c8b243f55fccd20c985dfb85184f883b0750a60",
+        "rawId1Sha256": "ba6c6d920a0fc1aca5619eb56c8b243f55fccd20c985dfb85184f883b0750a60",
+        "file": "S2-004A5600.asm.txt",
+        "ownerFunction": "004A5600",
+        "artifactSha256": "1b836994066c66c6a8a22121b59da477e61de12735c724924a26f3812d1bb3bd",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "00489B40",
+      "endExclusive": "00489B6D",
+      "kind": "code",
+      "sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+      "artifactSha256": "8bdf3c5e515001727f8e87d6db85e79c2b4e310b6453431d0d2765d793ade839",
+      "file": "S2-00489B40.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "00489B40",
+        "endExclusive": "00489B6D",
+        "sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+        "rawId1Sha256": "65a6bf561c8f4504f006ce811a02a4ddabe23f1cd7959fa72ce8a8f7a4d4ecb5",
+        "file": "S2-00489B40.asm.txt",
+        "ownerFunction": "00489B40",
+        "artifactSha256": "8bdf3c5e515001727f8e87d6db85e79c2b4e310b6453431d0d2765d793ade839",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "00482F80",
+      "endExclusive": "00482FC0",
+      "kind": "code",
+      "sha256": "a3294bd1f816574db08694971a10cf95a2b40d8877cdda4bf13b622f498aff4c",
+      "artifactSha256": "00b9b0ccfe219ebc7abb7f241b5ed865d9864ffb17bd79d921fa281134f5130b",
+      "file": "S2-00482F80.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "00482F80",
+        "endExclusive": "00482FC0",
+        "sha256": "a3294bd1f816574db08694971a10cf95a2b40d8877cdda4bf13b622f498aff4c",
+        "rawId1Sha256": "a3294bd1f816574db08694971a10cf95a2b40d8877cdda4bf13b622f498aff4c",
+        "file": "S2-00482F80.asm.txt",
+        "ownerFunction": "00482F80",
+        "artifactSha256": "00b9b0ccfe219ebc7abb7f241b5ed865d9864ffb17bd79d921fa281134f5130b",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "004A5780",
+      "endExclusive": "004A57A9",
+      "kind": "code",
+      "sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+      "artifactSha256": "0460f4577b0222d370e3594ffa95410939d442b1fac7449e32450fa12e9bb5a6",
+      "file": "S2-004A5780.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "004A5780",
+        "endExclusive": "004A57A9",
+        "sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+        "rawId1Sha256": "bea4fd2a008efef375f126734b2b798b2f82aaac8a00ccd5dd93034d28f1af55",
+        "file": "S2-004A5780.asm.txt",
+        "ownerFunction": "004A5780",
+        "artifactSha256": "0460f4577b0222d370e3594ffa95410939d442b1fac7449e32450fa12e9bb5a6",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "00488C70",
+      "endExclusive": "00488C7F",
+      "kind": "code",
+      "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+      "artifactSha256": "f54d958d8d5ca96acacbada0acc66cb91925553f69e5a175e528280abc202038",
+      "file": "S2-00488C70.asm.txt",
+      "inheritedManifest": "docs/sources/officer-relocation.json",
+      "inheritedRange": {
+        "kind": "code",
+        "source": "S2",
+        "start": "00488C70",
+        "endExclusive": "00488C7F",
+        "sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+        "rawId1Sha256": "a297e2bb914b85540fcb3b06aecdea40aa041a2d6cd13cef5fd2654648f9bd6a",
+        "file": "S2-00488C70.asm.txt",
+        "ownerFunction": "00488C70",
+        "artifactSha256": "f54d958d8d5ca96acacbada0acc66cb91925553f69e5a175e528280abc202038",
+        "boundaryKind": "complete-IDB-function"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "0079C718",
+      "endExclusive": "0079C774",
+      "kind": "data",
+      "sha256": "93644003052b306a2543d1e4cd26359f5e743ec4450b0b0d59742f7f4ecaffec",
+      "artifactSha256": "ecd641642bfc2869e5db8390241189bc234789450d31ad57f62a1a2a32032b15",
+      "file": "S2-0079C718.data.txt",
+      "inheritedManifest": "docs/sources/base-ownership-events.json",
+      "inheritedRange": {
+        "source": "S2",
+        "kind": "data",
+        "start": "0079C718",
+        "endExclusive": "0079C774",
+        "sha256": "93644003052b306a2543d1e4cd26359f5e743ec4450b0b0d59742f7f4ecaffec",
+        "independentId1Sha256": "93644003052b306a2543d1e4cd26359f5e743ec4450b0b0d59742f7f4ecaffec",
+        "file": "S2-0079C718.asm.txt",
+        "boundaryKind": "bounded-data"
+      }
+    },
+    {
+      "source": "S2",
+      "start": "0079C2B0",
+      "endExclusive": "0079C330",
+      "kind": "data",
+      "sha256": "c43c9e7e16ef2efa065e931224a872a8d97c6463bca829b7aaeb6212c2992d0d",
+      "artifactSha256": "e22f48f0d7ce5a4fe7d556fd779578ac52a745215b693e2a15ee5c4c3c53fb05",
+      "file": "S2-0079C2B0.data.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S2",
+        "start": "0079C2B0",
+        "endExclusive": "0079C330",
+        "sha256": "c43c9e7e16ef2efa065e931224a872a8d97c6463bca829b7aaeb6212c2992d0d",
+        "independentId1Sha256": "c43c9e7e16ef2efa065e931224a872a8d97c6463bca829b7aaeb6212c2992d0d",
+        "kind": "data",
+        "role": "territorial-zone-byte-table-all-masked-indices",
+        "file": "S2-selected.asm.txt",
+        "lineStart": 1414,
+        "lineCount": 8
+      }
+    },
+    {
+      "source": "S2",
+      "start": "0079B830",
+      "endExclusive": "0079BF14",
+      "kind": "data",
+      "sha256": "edd622ed95be439d7a5eee27fc429937e5224a1dd0fa296859e95863eee667ff",
+      "artifactSha256": "9ae82cb132e2e0f92eb7a1bc6b394e30871cd0f7508149e3ab05ae3fa5d8cc77",
+      "file": "S2-0079B830.data.txt",
+      "inheritedManifest": "docs/sources/mission-notification-tail.json",
+      "inheritedRange": {
+        "source": "S2",
+        "start": "0079B830",
+        "endExclusive": "0079BF14",
+        "sha256": "edd622ed95be439d7a5eee27fc429937e5224a1dd0fa296859e95863eee667ff",
+        "independentId1Sha256": "edd622ed95be439d7a5eee27fc429937e5224a1dd0fa296859e95863eee667ff",
+        "kind": "data",
+        "role": "source-local-directed-city-distance-table",
+        "file": "S2-selected.asm.txt",
+        "lineStart": 1287,
+        "lineCount": 111
+      }
+    }
+  ],
+  "callLedgers": {
+    "S1": {
+      "005B8400": [
+        {
+          "site": "005B8429",
+          "bytes": "e8 d2 88 ed ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005B8436",
+          "bytes": "e8 c5 88 ed ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005B8442",
+          "bytes": "e8 89 60 ee ff",
+          "kind": "direct",
+          "target": "0049E4D0"
+        },
+        {
+          "site": "005B8460",
+          "bytes": "e8 3b ef ee ff",
+          "kind": "direct",
+          "target": "004A73A0"
+        },
+        {
+          "site": "005B846C",
+          "bytes": "e8 ef d1 ee ff",
+          "kind": "direct",
+          "target": "004A5660"
+        },
+        {
+          "site": "005B847B",
+          "bytes": "e8 00 d3 ee ff",
+          "kind": "direct",
+          "target": "004A5780"
+        },
+        {
+          "site": "005B8488",
+          "bytes": "e8 d3 d1 ee ff",
+          "kind": "direct",
+          "target": "004A5660"
+        },
+        {
+          "site": "005B8495",
+          "bytes": "e8 66 d1 ee ff",
+          "kind": "direct",
+          "target": "004A5600"
+        },
+        {
+          "site": "005B84A9",
+          "bytes": "e8 52 88 ed ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005B84B4",
+          "bytes": "e8 e7 5d ef ff",
+          "kind": "direct",
+          "target": "004AE2A0"
+        },
+        {
+          "site": "005B84BB",
+          "bytes": "e8 b0 07 ed ff",
+          "kind": "direct",
+          "target": "00488C70"
+        },
+        {
+          "site": "005B84CA",
+          "bytes": "e8 31 88 ed ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005B84DA",
+          "bytes": "e8 11 72 f0 ff",
+          "kind": "direct",
+          "target": "004BF6F0"
+        }
+      ],
+      "00490D00": [],
+      "0049E4D0": [
+        {
+          "site": "0049E4D9",
+          "bytes": "e8 72 ff ff ff",
+          "kind": "direct",
+          "target": "0049E450"
+        },
+        {
+          "site": "0049E4E7",
+          "bytes": "e8 64 ff ff ff",
+          "kind": "direct",
+          "target": "0049E450"
+        },
+        {
+          "site": "0049E4EE",
+          "bytes": "e8 8d cf fd ff",
+          "kind": "direct",
+          "target": "0047B480"
+        }
+      ],
+      "0049E450": [
+        {
+          "site": "0049E45A",
+          "bytes": "e8 d1 c1 fd ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "0049E46A",
+          "bytes": "ff 50 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "0049E4B3",
+          "bytes": "e8 38 55 fe ff",
+          "kind": "direct",
+          "target": "004839F0"
+        }
+      ],
+      "0047B480": [],
+      "004839F0": [],
+      "00487DC0": [],
+      "0047A630": [
+        {
+          "site": "0047A63E",
+          "bytes": "e8 2d 7a ff ff",
+          "kind": "direct",
+          "target": "00472070"
+        }
+      ],
+      "00472070": [
+        {
+          "site": "00472080",
+          "bytes": "ff 15 68 e2 74 00",
+          "kind": "indirect"
+        },
+        {
+          "site": "00472094",
+          "bytes": "ff 15 6c e2 74 00",
+          "kind": "indirect"
+        }
+      ],
+      "00486400": [
+        {
+          "site": "00486405",
+          "bytes": "ff 50 24",
+          "kind": "indirect"
+        }
+      ],
+      "00573470": [],
+      "004A73A0": [
+        {
+          "site": "004A73A9",
+          "bytes": "e8 82 32 fd ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "004A73CE",
+          "bytes": "e8 dd e3 ff ff",
+          "kind": "direct",
+          "target": "004A57B0"
+        },
+        {
+          "site": "004A73EF",
+          "bytes": "e8 dc 27 fe ff",
+          "kind": "direct",
+          "target": "00489BD0"
+        },
+        {
+          "site": "004A73F8",
+          "bytes": "e8 43 27 fe ff",
+          "kind": "direct",
+          "target": "00489B40"
+        },
+        {
+          "site": "004A7403",
+          "bytes": "e8 78 bb fd ff",
+          "kind": "direct",
+          "target": "00482F80"
+        }
+      ],
+      "004A5660": [
+        {
+          "site": "004A5666",
+          "bytes": "e8 c5 4f fd ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "004A5679",
+          "bytes": "e8 32 52 fe ff",
+          "kind": "direct",
+          "target": "0048A8B0"
+        }
+      ],
+      "0048A8B0": [],
+      "00489BD0": [],
+      "004A5600": [
+        {
+          "site": "004A5606",
+          "bytes": "e8 25 50 fd ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "004A5619",
+          "bytes": "e8 22 45 fe ff",
+          "kind": "direct",
+          "target": "00489B40"
+        }
+      ],
+      "00489B40": [
+        {
+          "site": "00489B4E",
+          "bytes": "e8 cd 89 fe ff",
+          "kind": "direct",
+          "target": "00472520"
+        },
+        {
+          "site": "00489B5B",
+          "bytes": "e8 40 6b 01 00",
+          "kind": "direct",
+          "target": "004A06A0"
+        },
+        {
+          "site": "00489B65",
+          "bytes": "e8 16 f9 02 00",
+          "kind": "direct",
+          "target": "004B9480"
+        }
+      ],
+      "00482F80": [
+        {
+          "site": "00482F89",
+          "bytes": "e8 a2 76 ff ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "00482FA5",
+          "bytes": "e8 46 fb ff ff",
+          "kind": "direct",
+          "target": "00482AF0"
+        },
+        {
+          "site": "00482FB1",
+          "bytes": "e8 fa 91 ff ff",
+          "kind": "direct",
+          "target": "0047C1B0"
+        }
+      ],
+      "004A5780": [
+        {
+          "site": "004A5786",
+          "bytes": "e8 75 4e fd ff",
+          "kind": "direct",
+          "target": "0047A600"
+        },
+        {
+          "site": "004A57A0",
+          "bytes": "e8 2b 44 fe ff",
+          "kind": "direct",
+          "target": "00489BD0"
+        }
+      ],
+      "00488C70": []
+    },
+    "S2": {
+      "005B8400": [
+        {
+          "site": "005B8429",
+          "bytes": "e8 d2 88 ed ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005B8436",
+          "bytes": "e8 c5 88 ed ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005B8442",
+          "bytes": "e8 89 60 ee ff",
+          "kind": "direct",
+          "target": "0049E4D0"
+        },
+        {
+          "site": "005B8460",
+          "bytes": "e8 3b ef ee ff",
+          "kind": "direct",
+          "target": "004A73A0"
+        },
+        {
+          "site": "005B846C",
+          "bytes": "e8 ef d1 ee ff",
+          "kind": "direct",
+          "target": "004A5660"
+        },
+        {
+          "site": "005B847B",
+          "bytes": "e8 00 d3 ee ff",
+          "kind": "direct",
+          "target": "004A5780"
+        },
+        {
+          "site": "005B8488",
+          "bytes": "e8 d3 d1 ee ff",
+          "kind": "direct",
+          "target": "004A5660"
+        },
+        {
+          "site": "005B8495",
+          "bytes": "e8 66 d1 ee ff",
+          "kind": "direct",
+          "target": "004A5600"
+        },
+        {
+          "site": "005B84A9",
+          "bytes": "e8 52 88 ed ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005B84B4",
+          "bytes": "e8 e7 5d ef ff",
+          "kind": "direct",
+          "target": "004AE2A0"
+        },
+        {
+          "site": "005B84BB",
+          "bytes": "e8 b0 07 ed ff",
+          "kind": "direct",
+          "target": "00488C70"
+        },
+        {
+          "site": "005B84CA",
+          "bytes": "e8 31 88 ed ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005B84DA",
+          "bytes": "e8 11 72 f0 ff",
+          "kind": "direct",
+          "target": "004BF6F0"
+        }
+      ],
+      "00490D00": [],
+      "0049E4D0": [
+        {
+          "site": "0049E4D9",
+          "bytes": "e8 72 ff ff ff",
+          "kind": "direct",
+          "target": "0049E450"
+        },
+        {
+          "site": "0049E4E7",
+          "bytes": "e8 64 ff ff ff",
+          "kind": "direct",
+          "target": "0049E450"
+        },
+        {
+          "site": "0049E4EE",
+          "bytes": "e8 8d cf fd ff",
+          "kind": "direct",
+          "target": "0047B480"
+        }
+      ],
+      "0049E450": [
+        {
+          "site": "0049E45A",
+          "bytes": "e8 d1 c1 fd ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "0049E46A",
+          "bytes": "ff 50 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "0049E4B3",
+          "bytes": "e8 38 55 fe ff",
+          "kind": "direct",
+          "target": "004839F0"
+        }
+      ],
+      "0047B480": [],
+      "004839F0": [],
+      "00487DC0": [],
+      "0047A630": [
+        {
+          "site": "0047A63E",
+          "bytes": "e8 2d 7a ff ff",
+          "kind": "direct",
+          "target": "00472070"
+        }
+      ],
+      "00472070": [
+        {
+          "site": "00472080",
+          "bytes": "ff 15 68 e2 74 00",
+          "kind": "indirect"
+        },
+        {
+          "site": "00472094",
+          "bytes": "ff 15 6c e2 74 00",
+          "kind": "indirect"
+        }
+      ],
+      "00486400": [
+        {
+          "site": "00486405",
+          "bytes": "ff 50 24",
+          "kind": "indirect"
+        }
+      ],
+      "00573470": [],
+      "004A73A0": [
+        {
+          "site": "004A73A9",
+          "bytes": "e8 82 32 fd ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "004A73CE",
+          "bytes": "e8 dd e3 ff ff",
+          "kind": "direct",
+          "target": "004A57B0"
+        },
+        {
+          "site": "004A73EF",
+          "bytes": "e8 dc 27 fe ff",
+          "kind": "direct",
+          "target": "00489BD0"
+        },
+        {
+          "site": "004A73F8",
+          "bytes": "e8 43 27 fe ff",
+          "kind": "direct",
+          "target": "00489B40"
+        },
+        {
+          "site": "004A7403",
+          "bytes": "e8 78 bb fd ff",
+          "kind": "direct",
+          "target": "00482F80"
+        }
+      ],
+      "004A5660": [
+        {
+          "site": "004A5666",
+          "bytes": "e8 c5 4f fd ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "004A5679",
+          "bytes": "e8 32 52 fe ff",
+          "kind": "direct",
+          "target": "0048A8B0"
+        }
+      ],
+      "0048A8B0": [],
+      "00489BD0": [],
+      "004A5600": [
+        {
+          "site": "004A5606",
+          "bytes": "e8 25 50 fd ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "004A5619",
+          "bytes": "e8 82 75 46 00",
+          "kind": "direct",
+          "target": "0090CBA0"
+        }
+      ],
+      "00489B40": [
+        {
+          "site": "00489B4E",
+          "bytes": "e8 cd 89 fe ff",
+          "kind": "direct",
+          "target": "00472520"
+        },
+        {
+          "site": "00489B5B",
+          "bytes": "e8 40 6b 01 00",
+          "kind": "direct",
+          "target": "004A06A0"
+        },
+        {
+          "site": "00489B65",
+          "bytes": "e8 16 f9 02 00",
+          "kind": "direct",
+          "target": "004B9480"
+        }
+      ],
+      "00482F80": [
+        {
+          "site": "00482F89",
+          "bytes": "e8 a2 76 ff ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "00482FA5",
+          "bytes": "e8 46 fb ff ff",
+          "kind": "direct",
+          "target": "00482AF0"
+        },
+        {
+          "site": "00482FB1",
+          "bytes": "e8 fa 91 ff ff",
+          "kind": "direct",
+          "target": "0047C1B0"
+        }
+      ],
+      "004A5780": [
+        {
+          "site": "004A5786",
+          "bytes": "e8 75 4e fd ff",
+          "kind": "direct",
+          "target": "0047A600"
+        },
+        {
+          "site": "004A57A0",
+          "bytes": "e8 2b 44 fe ff",
+          "kind": "direct",
+          "target": "00489BD0"
+        }
+      ],
+      "00488C70": []
+    }
+  },
+  "branchLedgers": {
+    "S1": {
+      "005B8400": [
+        {
+          "site": "005B840E",
+          "bytes": "7c 05",
+          "target": "005B8415"
+        },
+        {
+          "site": "005B8413",
+          "bytes": "7e 03",
+          "target": "005B8418"
+        },
+        {
+          "site": "005B8420",
+          "bytes": "74 53",
+          "target": "005B8475"
+        },
+        {
+          "site": "005B84A0",
+          "bytes": "7e 17",
+          "target": "005B84B9"
+        },
+        {
+          "site": "005B84C2",
+          "bytes": "75 1b",
+          "target": "005B84DF"
+        }
+      ],
+      "00490D00": [
+        {
+          "site": "00490D06",
+          "bytes": "7c 14",
+          "target": "00490D1C"
+        },
+        {
+          "site": "00490D0D",
+          "bytes": "7f 0d",
+          "target": "00490D1C"
+        }
+      ],
+      "0049E4D0": [],
+      "0049E450": [
+        {
+          "site": "0049E464",
+          "bytes": "74 57",
+          "target": "0049E4BD"
+        },
+        {
+          "site": "0049E47D",
+          "bytes": "7c 13",
+          "target": "0049E492"
+        },
+        {
+          "site": "0049E484",
+          "bytes": "7d 0c",
+          "target": "0049E492"
+        },
+        {
+          "site": "0049E488",
+          "bytes": "7c 08",
+          "target": "0049E492"
+        },
+        {
+          "site": "0049E490",
+          "bytes": "7c 08",
+          "target": "0049E49A"
+        }
+      ],
+      "0047B480": [
+        {
+          "site": "0047B486",
+          "bytes": "7c 1e",
+          "target": "0047B4A6"
+        },
+        {
+          "site": "0047B48B",
+          "bytes": "7f 19",
+          "target": "0047B4A6"
+        },
+        {
+          "site": "0047B493",
+          "bytes": "7c 11",
+          "target": "0047B4A6"
+        },
+        {
+          "site": "0047B498",
+          "bytes": "7f 0c",
+          "target": "0047B4A6"
+        }
+      ],
+      "004839F0": [],
+      "00487DC0": [],
+      "0047A630": [
+        {
+          "site": "0047A637",
+          "bytes": "74 11",
+          "target": "0047A64A"
+        },
+        {
+          "site": "0047A648",
+          "bytes": "75 04",
+          "target": "0047A64E"
+        }
+      ],
+      "00472070": [
+        {
+          "site": "00472078",
+          "bytes": "74 2c",
+          "target": "004720A6"
+        },
+        {
+          "site": "00472088",
+          "bytes": "75 1c",
+          "target": "004720A6"
+        },
+        {
+          "site": "00472090",
+          "bytes": "74 0c",
+          "target": "0047209E"
+        },
+        {
+          "site": "0047209C",
+          "bytes": "75 08",
+          "target": "004720A6"
+        }
+      ],
+      "00486400": [
+        {
+          "site": "0048640B",
+          "bytes": "75 13",
+          "target": "00486420"
+        },
+        {
+          "site": "00486412",
+          "bytes": "7c 0c",
+          "target": "00486420"
+        },
+        {
+          "site": "00486417",
+          "bytes": "7f 07",
+          "target": "00486420"
+        }
+      ],
+      "00573470": [],
+      "004A73A0": [
+        {
+          "site": "004A73B3",
+          "bytes": "74 54",
+          "target": "004A7409"
+        },
+        {
+          "site": "004A73BC",
+          "bytes": "7c 4a",
+          "target": "004A7408"
+        },
+        {
+          "site": "004A73C1",
+          "bytes": "7f 45",
+          "target": "004A7408"
+        },
+        {
+          "site": "004A73C9",
+          "bytes": "74 08",
+          "target": "004A73D3"
+        }
+      ],
+      "004A5660": [
+        {
+          "site": "004A5670",
+          "bytes": "74 0c",
+          "target": "004A567E"
+        }
+      ],
+      "0048A8B0": [
+        {
+          "site": "0048A8B6",
+          "bytes": "77 0b",
+          "target": "0048A8C3"
+        },
+        {
+          "site": "0048A8C5",
+          "bytes": "72 02",
+          "target": "0048A8C9"
+        }
+      ],
+      "00489BD0": [],
+      "004A5600": [
+        {
+          "site": "004A5610",
+          "bytes": "74 0c",
+          "target": "004A561E"
+        }
+      ],
+      "00489B40": [],
+      "00482F80": [
+        {
+          "site": "00482F93",
+          "bytes": "75 05",
+          "target": "00482F9A"
+        },
+        {
+          "site": "00482FAC",
+          "bytes": "75 08",
+          "target": "00482FB6"
+        }
+      ],
+      "004A5780": [
+        {
+          "site": "004A5790",
+          "bytes": "74 13",
+          "target": "004A57A5"
+        }
+      ],
+      "00488C70": []
+    },
+    "S2": {
+      "005B8400": [
+        {
+          "site": "005B840E",
+          "bytes": "7c 05",
+          "target": "005B8415"
+        },
+        {
+          "site": "005B8413",
+          "bytes": "7e 03",
+          "target": "005B8418"
+        },
+        {
+          "site": "005B8420",
+          "bytes": "74 53",
+          "target": "005B8475"
+        },
+        {
+          "site": "005B84A0",
+          "bytes": "7e 17",
+          "target": "005B84B9"
+        },
+        {
+          "site": "005B84C2",
+          "bytes": "75 1b",
+          "target": "005B84DF"
+        }
+      ],
+      "00490D00": [
+        {
+          "site": "00490D06",
+          "bytes": "7c 14",
+          "target": "00490D1C"
+        },
+        {
+          "site": "00490D0D",
+          "bytes": "7f 0d",
+          "target": "00490D1C"
+        }
+      ],
+      "0049E4D0": [],
+      "0049E450": [
+        {
+          "site": "0049E464",
+          "bytes": "74 57",
+          "target": "0049E4BD"
+        },
+        {
+          "site": "0049E47D",
+          "bytes": "7c 13",
+          "target": "0049E492"
+        },
+        {
+          "site": "0049E484",
+          "bytes": "7d 0c",
+          "target": "0049E492"
+        },
+        {
+          "site": "0049E488",
+          "bytes": "7c 08",
+          "target": "0049E492"
+        },
+        {
+          "site": "0049E490",
+          "bytes": "7c 08",
+          "target": "0049E49A"
+        }
+      ],
+      "0047B480": [
+        {
+          "site": "0047B486",
+          "bytes": "7c 1e",
+          "target": "0047B4A6"
+        },
+        {
+          "site": "0047B48B",
+          "bytes": "7f 19",
+          "target": "0047B4A6"
+        },
+        {
+          "site": "0047B493",
+          "bytes": "7c 11",
+          "target": "0047B4A6"
+        },
+        {
+          "site": "0047B498",
+          "bytes": "7f 0c",
+          "target": "0047B4A6"
+        }
+      ],
+      "004839F0": [],
+      "00487DC0": [],
+      "0047A630": [
+        {
+          "site": "0047A637",
+          "bytes": "74 11",
+          "target": "0047A64A"
+        },
+        {
+          "site": "0047A648",
+          "bytes": "75 04",
+          "target": "0047A64E"
+        }
+      ],
+      "00472070": [
+        {
+          "site": "00472078",
+          "bytes": "74 2c",
+          "target": "004720A6"
+        },
+        {
+          "site": "00472088",
+          "bytes": "75 1c",
+          "target": "004720A6"
+        },
+        {
+          "site": "00472090",
+          "bytes": "74 0c",
+          "target": "0047209E"
+        },
+        {
+          "site": "0047209C",
+          "bytes": "75 08",
+          "target": "004720A6"
+        }
+      ],
+      "00486400": [
+        {
+          "site": "0048640B",
+          "bytes": "75 13",
+          "target": "00486420"
+        },
+        {
+          "site": "00486412",
+          "bytes": "7c 0c",
+          "target": "00486420"
+        },
+        {
+          "site": "00486417",
+          "bytes": "7f 07",
+          "target": "00486420"
+        }
+      ],
+      "00573470": [],
+      "004A73A0": [
+        {
+          "site": "004A73B3",
+          "bytes": "74 54",
+          "target": "004A7409"
+        },
+        {
+          "site": "004A73BC",
+          "bytes": "7c 4a",
+          "target": "004A7408"
+        },
+        {
+          "site": "004A73C1",
+          "bytes": "7f 45",
+          "target": "004A7408"
+        },
+        {
+          "site": "004A73C9",
+          "bytes": "74 08",
+          "target": "004A73D3"
+        }
+      ],
+      "004A5660": [
+        {
+          "site": "004A5670",
+          "bytes": "74 0c",
+          "target": "004A567E"
+        }
+      ],
+      "0048A8B0": [
+        {
+          "site": "0048A8B6",
+          "bytes": "77 0b",
+          "target": "0048A8C3"
+        },
+        {
+          "site": "0048A8C5",
+          "bytes": "72 02",
+          "target": "0048A8C9"
+        }
+      ],
+      "00489BD0": [],
+      "004A5600": [
+        {
+          "site": "004A5610",
+          "bytes": "74 0c",
+          "target": "004A561E"
+        }
+      ],
+      "00489B40": [],
+      "00482F80": [
+        {
+          "site": "00482F93",
+          "bytes": "75 05",
+          "target": "00482F9A"
+        },
+        {
+          "site": "00482FAC",
+          "bytes": "75 08",
+          "target": "00482FB6"
+        }
+      ],
+      "004A5780": [
+        {
+          "site": "004A5790",
+          "bytes": "74 13",
+          "target": "004A57A5"
+        }
+      ],
+      "00488C70": []
+    }
+  },
+  "rangeBudget": {
+    "intervals": 46,
+    "codeIntervals": 40,
+    "dataIntervals": 6,
+    "selectedBytesBothSources": 6078,
+    "instructions": 780,
+    "callSites": 80,
+    "branchSites": 72
+  },
+  "provenance": {
+    "newMachineCodeBytesRecovered": 0,
+    "rawRuntimeMapCaptured": false,
+    "verificationArtifacts": [
+      {
+        "file": "raw-verification.json",
+        "sha256": "46662aed24bf1c45b688217e768f3d9ecd5628ad5b57dacbe703b4c66bf9be6a"
+      },
+      {
+        "file": "disassembly-verification.json",
+        "sha256": "f96b756bbbc534162185dbc58294ca033f8ada28ccb3566da064c901822b3fe8"
+      }
+    ],
+    "newUniqueIntervals": 0,
+    "focusedInheritedReusedIntervals": 46,
+    "focusedInheritedBytesFreshlyVerified": true
+  }
+}
