@@ -2,7 +2,13 @@
 
 更新：2026-10-05 UTC。
 
-## 最新完成：P0-66据点归属、耐久与event9/10
+## 最新完成：P0-67武将迁移与固定参数移动准备
+
+[102-officer-relocation.md](102-officer-relocation.md)新增独立版本，在P0-66共享frame中展开004A8270、allocated取消注册分派及固定参数004A7990。保留status2内嵌旧太守清理、ruler live判断、same-home不取消、away两处direct acted、保存distance低byte不复验写回与live governor刷新。004B40C0、其余cancel handler、真实troop成员/非base位置、event9部队反应、force灭亡和stock/Vanilla/全局RNG仍为明确观察或open。
+
+最新main `5215348ebd12cd4bc7b221008775052411fb92bb` 上的完整104命令回归已通过：TypeScript、85 Node tests、101 Python checker命令、2 demos。32组独立oracle模型（含120 seeded场景）与19组来源检查通过；两份完整IDB指纹及new/inherited raw-ID1复核通过。三生产模块及模型测试与已独审隔离版本逐字节一致；集成仅调整真实基线、3项manifest metadata和索引，独立集成delta审阅无阻断。1182文件在全测前后冻结无漂移，104日志hash逐一核对。验证结果文字另行复核；未执行游戏EXE、未认证stock/Vanilla/全局RNG，也未将本地检查称为远端CI。
+
+## 历史完成：P0-66据点归属、耐久与event9/10
 
 [101-base-ownership-events.md](101-base-ownership-events.md)新增独立版本：在空军团merge中直接展开004AD550归属写、source分离耐久上限与有符号word裁剪、城市A4的bit0/1/4 dword重置，以及event9/10复制列表/predicate；保留saved locals与callback后的live读取。新触发的其余cancel handler、event9部队反应尾仍需精确可变观察或原子reject。旧API不变，004A8270/force/ruler/capture、其他event、stock/Vanilla和全局RNG继续open。
 

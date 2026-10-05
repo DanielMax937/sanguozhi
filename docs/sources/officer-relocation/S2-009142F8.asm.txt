@@ -1,0 +1,10 @@
+009142F8  50                             push     eax
+009142F9  50                             push     eax
+009142FA  e8 a1 ff ff ff                 call     0x9142a0
+009142FF  85 c0                          test     eax, eax
+00914301  74 06                          je       0x914309
+00914303  83 c4 04                       add      esp, 4
+00914306  c2 04 00                       ret      4
+00914309  58                             pop      eax
+0091430A  3d e8 fd 00 00                 cmp      eax, 0xfde8
+0091430F  e9 e5 4d b7 ff                 jmp      0x4890f9

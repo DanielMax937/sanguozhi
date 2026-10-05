@@ -1,0 +1,18 @@
+0049E4D0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0049E4D4  56                             push     esi
+0049E4D5  57                             push     edi
+0049E4D6  50                             push     eax
+0049E4D7  8b f1                          mov      esi, ecx
+0049E4D9  e8 72 ff ff ff                 call     0x49e450
+0049E4DE  8b 4c 24 10                    mov      ecx, dword ptr [esp + 0x10]
+0049E4E2  51                             push     ecx
+0049E4E3  8b ce                          mov      ecx, esi
+0049E4E5  8b f8                          mov      edi, eax
+0049E4E7  e8 64 ff ff ff                 call     0x49e450
+0049E4EC  50                             push     eax
+0049E4ED  57                             push     edi
+0049E4EE  e8 8d cf fd ff                 call     0x47b480
+0049E4F3  83 c4 08                       add      esp, 8
+0049E4F6  5f                             pop      edi
+0049E4F7  5e                             pop      esi
+0049E4F8  c2 08 00                       ret      8

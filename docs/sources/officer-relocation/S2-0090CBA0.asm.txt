@@ -1,0 +1,15 @@
+0090CBA0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0090CBA4  85 c0                          test     eax, eax
+0090CBA6  75 09                          jne      0x90cbb1
+0090CBA8  50                             push     eax
+0090CBA9  e8 92 cf b7 ff                 call     0x489b40
+0090CBAE  c2 04 00                       ret      4
+0090CBB1  51                             push     ecx
+0090CBB2  68 0b 01 00 00                 push     0x10b
+0090CBB7  e8 34 c5 b7 ff                 call     0x4890f0
+0090CBBC  85 c0                          test     eax, eax
+0090CBBE  59                             pop      ecx
+0090CBBF  75 07                          jne      0x90cbc8
+0090CBC1  6a 01                          push     1
+0090CBC3  e8 78 cf b7 ff                 call     0x489b40
+0090CBC8  c2 04 00                       ret      4
