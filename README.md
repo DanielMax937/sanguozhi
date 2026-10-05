@@ -23,6 +23,7 @@ npm run play -- --growth-fixture
 
 - [训练切片入口](docs/engine/pk-training-slice.md)
 - [生命周期、配置、证据与迁移](docs/engine/pk-training-lifecycle.md)
+- [原生live位置与可变fallback](docs/rules/107-native-live-position.md)：base/troop/fallback pointer身份、后置DWORD读取及signed16坐标；新version/frame且无fallback默认值，旧API及其余缺口保留；114命令集合经定点恢复通过（首轮112/114），集成delta独审通过
 - [原生部队成员判断](docs/rules/106-native-troop-membership.md)：live location、raw leader validity与两deputy成员；18入口、新troop frame、旧API及其余缺口保留；最新main112命令复验及集成delta独审通过
 - [原生零退款tail距离](docs/rules/105-native-tail-distance.md)：同frame领土/源分离距离表、parent saved distance与live低byte写回；旧API及其余缺口保留；最新main110命令复验及集成delta独审通过
 - [generic设施入口与早返](docs/rules/104-generic-facility.md)：004B40C0入口、87..16383原生共享frame归属与0/1返回；canonical续段及其余缺口保留；最新main108命令集合重试后通过（首轮107/108），集成delta独审通过
