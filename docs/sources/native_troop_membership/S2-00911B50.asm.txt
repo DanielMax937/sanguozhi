@@ -1,0 +1,8 @@
+00911B50  31 c0                          xor      eax, eax
+00911B52  83 79 08 01                    cmp      dword ptr [ecx + 8], 1
+00911B56  74 10                          je       0x911b68
+00911B58  0f b6 81 a6 00 00 00           movzx    eax, byte ptr [ecx + 0xa6]
+00911B5F  6a 00                          push     0
+00911B61  6a 78                          push     0x78
+00911B63  e8 c8 6d fd ff                 call     0x8e8930
+00911B68  c3                             ret

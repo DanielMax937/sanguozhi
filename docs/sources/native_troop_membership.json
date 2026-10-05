@@ -1,0 +1,2268 @@
+{
+  "profileId": "source-idb-S1-S2-native-troop-membership-v1",
+  "frameProfileId": "source-idb-S1-S2-native-troop-membership-frame-v1",
+  "baselineCommit": "c190abfd43985251eee4936fdccb5d3910d4fed7",
+  "integrationStatus": "versioned-theme-on-merged-main",
+  "sources": [
+    {
+      "source": "S1",
+      "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+      "recordedInputPath": "D:\\Games\\\u4e09\u56fd\u5fd711\\\u8840\u82725.0\u516c\u6d4b\\san11pk.exe",
+      "recordedExeSha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip"
+    },
+    {
+      "source": "S2",
+      "idbSha256": "aa7f2c983b266633d6e23c494d4f8e1b03e5251632505cae103e176ae850dfd8",
+      "recordedInputPath": "C:\\Games\\san11\\\u8840\u8272\u8863\u51a06.0sp5(\u6574\u5408\u5305240612)\\San11Pk\\san11pk_dump.exe",
+      "recordedExeSha256": "b1e9467e9612c23af83f6feda8414bc9ee99eb62c6862a84f7f4c5a8822b9da9",
+      "url": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/ida-db/san11pk_dump.exe.idb.7z"
+    }
+  ],
+  "stockOriginalVerified": false,
+  "originalExeExecuted": false,
+  "recordedExeHashesIndependentlyVerified": false,
+  "rawRuntimeMapCaptured": false,
+  "adoption": {
+    "PC-PK1.1": "compatibility-reconstruction",
+    "PC-Vanilla-assumed": "compatibility-assumption",
+    "PS2-Wii": "open"
+  },
+  "priorEvidence": {
+    "path": "docs/sources/native_tail_distance.json",
+    "sha256": "d36a616d9ee3c8172e23477e4824e1bcd94f2ec4eb6405c7a640e5c4feb989c9"
+  },
+  "retainedFiles": [
+    {
+      "path": "scripts/check_native_tail_distance_source.py",
+      "sha256": "8152ff8d0b368c4ad852d15b5c738337719b4b43a6f14c346f94e1b4b42dfad2"
+    },
+    {
+      "path": "scripts/native_tail_distance_profile.py",
+      "sha256": "7ef9ed70f29534b774ab35d299992b6396b01e44692acce6c2223a3ebe5f38f7"
+    },
+    {
+      "path": "scripts/native_tail_distance_primitives.py",
+      "sha256": "97d5f57057cade421ac1b83361914e6f7c44c4b3a25dfb5f1f33831821f285a0"
+    },
+    {
+      "path": "scripts/check_native_tail_distance_profile.py",
+      "sha256": "4c7ea04e7d0b46cf32ed7f23ed5af371fbda3bdb89be780f8adaacc3cfa8dfa2"
+    },
+    {
+      "path": "scripts/officer_relocation_primitives.py",
+      "sha256": "f0787cd4f58a47ed83806d851ab8c52fce08817354cee9255c9ad124cd47cc51"
+    },
+    {
+      "path": "scripts/recursive_return_frame.py",
+      "sha256": "cd1f7cd1fbe3940987426c3f704bb56e6232ebd1d0c1e91d62ee9a70a5142810"
+    },
+    {
+      "path": "scripts/recursive_role_primitives.py",
+      "sha256": "ad28535effcc10a4a096dccf67e1293ae552b94e0c9795e0ad14fd0ee19cf14e"
+    }
+  ],
+  "ranges": [
+    {
+      "source": "S1",
+      "start": "004195D0",
+      "endExclusive": "004195D4",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "004195D0",
+      "sha256": "031a1d90a8a2c46993613c8b2828efd0c52f20f2852d5f2ff930bc6acc0090c8",
+      "rawId1Sha256": "031a1d90a8a2c46993613c8b2828efd0c52f20f2852d5f2ff930bc6acc0090c8",
+      "artifactSha256": "aca9b772f4f6194a5826c46c3bea541ab63e276d6b5709bff4db0ca1bd8cb7d4",
+      "file": "S1-004195D0.asm.txt",
+      "instructionCount": 2,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "0041C130",
+      "endExclusive": "0041C135",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "0041C130",
+      "sha256": "81794790c0ad77391e995d91903df71d532fdf23777b0a32cef0c4606e844a6f",
+      "rawId1Sha256": "81794790c0ad77391e995d91903df71d532fdf23777b0a32cef0c4606e844a6f",
+      "artifactSha256": "1c74593d756286731fe0192ead61141729e06b10f3d5cc1941bd60d01bc930ee",
+      "file": "S1-0041C130.asm.txt",
+      "instructionCount": 2,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "00468E60",
+      "endExclusive": "00468E66",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00468E60",
+      "sha256": "5df10ed21e27c6f4dcad30a3050f43ccebae8ffa69612802165a96b9efeefddb",
+      "rawId1Sha256": "5df10ed21e27c6f4dcad30a3050f43ccebae8ffa69612802165a96b9efeefddb",
+      "artifactSha256": "e1e3c773b29f2e4dc6a77641a875b3c67b5e94c4a28c89b7763a5cd87beb15a3",
+      "file": "S1-00468E60.asm.txt",
+      "instructionCount": 2,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S1",
+      "start": "00472070",
+      "endExclusive": "004720AB",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00472070",
+      "sha256": "ba76fa401ab64a66e9ee58fd742a90a8aed891eb0815679089dcb0521e09c536",
+      "rawId1Sha256": "ba76fa401ab64a66e9ee58fd742a90a8aed891eb0815679089dcb0521e09c536",
+      "artifactSha256": "13c6734ce69bec80407e2095880eeabfd4302a1119fc9617b1d6328ff9189ac4",
+      "file": "S1-00472070.asm.txt",
+      "instructionCount": 27,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "0047A5D0",
+      "endExclusive": "0047A5D9",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "0047A5D0",
+      "sha256": "336e6d1ac6f11f67df7db7d5f89a438c5a41aa1673b4e071afda2050a291f656",
+      "rawId1Sha256": "336e6d1ac6f11f67df7db7d5f89a438c5a41aa1673b4e071afda2050a291f656",
+      "artifactSha256": "f37f7aeba3b951f85c4c673a04923943940dc79ad077db78f37a3ad4ddc0545f",
+      "file": "S1-0047A5D0.asm.txt",
+      "instructionCount": 3,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S1",
+      "start": "0047A5E0",
+      "endExclusive": "0047A5E7",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "0047A5E0",
+      "sha256": "96b136d90c06f657a1f15ed871a1d1a08aa9415104b91c66c2f3337a15ba454f",
+      "rawId1Sha256": "96b136d90c06f657a1f15ed871a1d1a08aa9415104b91c66c2f3337a15ba454f",
+      "artifactSha256": "ce4691076512be6d1f705d0d1a75177f5433ce9cefd6d5f0320b53e0ed82ddcb",
+      "file": "S1-0047A5E0.asm.txt",
+      "instructionCount": 2,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S1",
+      "start": "0047A630",
+      "endExclusive": "0047A656",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "0047A630",
+      "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "rawId1Sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "artifactSha256": "92bc77145c9d5bc7ad3471f46ae6941efa917f6e5878ca0f2c79079b62eda4b0",
+      "file": "S1-0047A630.asm.txt",
+      "instructionCount": 18,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "0047AA80",
+      "endExclusive": "0047AA90",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "0047AA80",
+      "sha256": "9a2bb180f23db262c8ced963c3328bd2d09e74d4690e53d97b55b240a525dcf3",
+      "rawId1Sha256": "9a2bb180f23db262c8ced963c3328bd2d09e74d4690e53d97b55b240a525dcf3",
+      "artifactSha256": "a89b8974d0655bdcc89b37fec65d314f68967cabffe519a025505176d092277e",
+      "file": "S1-0047AA80.asm.txt",
+      "instructionCount": 4,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S1",
+      "start": "004883D0",
+      "endExclusive": "004883EB",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "004883D0",
+      "sha256": "c7dd95b24263a58b616df7adf489d1f07f502af3168d73d09da287ca65ca10c3",
+      "rawId1Sha256": "c7dd95b24263a58b616df7adf489d1f07f502af3168d73d09da287ca65ca10c3",
+      "artifactSha256": "5b078aa445374e46ec420e6ce11317c4693513b242eacd09cb5f204806d0bf6d",
+      "file": "S1-004883D0.asm.txt",
+      "instructionCount": 9,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "004883F0",
+      "endExclusive": "00488422",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "004883F0",
+      "sha256": "1a09de9f631ef197445be47b0d0886b4b49e942d128bd27ed615a38f5290a088",
+      "rawId1Sha256": "1a09de9f631ef197445be47b0d0886b4b49e942d128bd27ed615a38f5290a088",
+      "artifactSha256": "fe0ecfa27c0fbf2d045cf70d27ae0ebf307f3b097d4d737a57bf307ef1222ec9",
+      "file": "S1-004883F0.asm.txt",
+      "instructionCount": 21,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "00488430",
+      "endExclusive": "00488461",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00488430",
+      "sha256": "7491f2b7b02c21e417945fbd0ee295ad3c5d2c24a99a159e443f306d0acb7f1f",
+      "rawId1Sha256": "7491f2b7b02c21e417945fbd0ee295ad3c5d2c24a99a159e443f306d0acb7f1f",
+      "artifactSha256": "075a238a260621208616cf48e109c6ee28c9dc1385e15502c4a7a57d301f209b",
+      "file": "S1-00488430.asm.txt",
+      "instructionCount": 20,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "004891C0",
+      "endExclusive": "0048921F",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "004891C0",
+      "sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "rawId1Sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "artifactSha256": "2bac28b86f07fbd8db1fb7ed42ff1ba02d70d979687da37b2fa40047846b62a0",
+      "file": "S1-004891C0.asm.txt",
+      "instructionCount": 37,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "00489F10",
+      "endExclusive": "00489F22",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00489F10",
+      "sha256": "c9dfadf9bea7a72ed7f905c625e17ccb73ae47616ed799e24fccf78dc8697164",
+      "rawId1Sha256": "c9dfadf9bea7a72ed7f905c625e17ccb73ae47616ed799e24fccf78dc8697164",
+      "artifactSha256": "a35d82ac0e0b7f6a8b1f4f2446469d121629715c476eaedb3a5e21f44e09efd0",
+      "file": "S1-00489F10.asm.txt",
+      "instructionCount": 7,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S1",
+      "start": "00490B00",
+      "endExclusive": "00490B24",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00490B00",
+      "sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "rawId1Sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "artifactSha256": "d22eb058df38253ea680e66ba13459c3732d8abf1799a5a138a803a4b9162f71",
+      "file": "S1-00490B00.asm.txt",
+      "instructionCount": 10,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "00490E70",
+      "endExclusive": "00490E94",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00490E70",
+      "sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "rawId1Sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "artifactSha256": "118231ad1caa9cffc745504ab1dac002cde592ffbf8bf06c78442d19d6c081d5",
+      "file": "S1-00490E70.asm.txt",
+      "instructionCount": 10,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "00491310",
+      "endExclusive": "0049135A",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00491310",
+      "sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "rawId1Sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "artifactSha256": "8dbfb0abf80a486b2c66e04df7d7af3522fc69f01233ffcdc6e5fe8783ac3051",
+      "file": "S1-00491310.asm.txt",
+      "instructionCount": 29,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "00495340",
+      "endExclusive": "00495382",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00495340",
+      "sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "rawId1Sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "artifactSha256": "813b8320227e2d7d914b9923a82f9fda575522c392f359f8dd38536def4e44b5",
+      "file": "S1-00495340.asm.txt",
+      "instructionCount": 27,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "00495390",
+      "endExclusive": "004953C4",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00495390",
+      "sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "rawId1Sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "artifactSha256": "b98f3f29c7a2664f0a44a2ab5b2f9fb99a8a969f15345aa8938055ab19a2e23c",
+      "file": "S1-00495390.asm.txt",
+      "instructionCount": 20,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "00496000",
+      "endExclusive": "0049600B",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00496000",
+      "sha256": "a7d8de85f3a382332a20ec851c7eb3c1230565729a5a4cb30eff4c1a33e39c6a",
+      "rawId1Sha256": "a7d8de85f3a382332a20ec851c7eb3c1230565729a5a4cb30eff4c1a33e39c6a",
+      "artifactSha256": "d7e02fea927f3d812d0b1248e5ec3c3a91f7f40cf6a9bedc7fefb8e596b42ee1",
+      "file": "S1-00496000.asm.txt",
+      "instructionCount": 2,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S1",
+      "start": "00496040",
+      "endExclusive": "00496095",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00496040",
+      "sha256": "53b3259ab3c5ad65284858ebbb9f4964efe9f9326b7086ffcc88bac821e9ab55",
+      "rawId1Sha256": "53b3259ab3c5ad65284858ebbb9f4964efe9f9326b7086ffcc88bac821e9ab55",
+      "artifactSha256": "ccf32cf0ec4aabacdb604e34f674a8585f2c1ecd7190772d2aad227e8c79c3b7",
+      "file": "S1-00496040.asm.txt",
+      "instructionCount": 34,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S1",
+      "start": "00496D90",
+      "endExclusive": "00496DA2",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00496D90",
+      "sha256": "04fc43ea99ccb0bfbb25c4dfc4b2843bc5d1464f9b50d2c2fae1b5dd3a327b7a",
+      "rawId1Sha256": "04fc43ea99ccb0bfbb25c4dfc4b2843bc5d1464f9b50d2c2fae1b5dd3a327b7a",
+      "artifactSha256": "f6c68e4438504d0c715dfedcf8004608fcfc2dbf9f2ee8117274acca44dfb781",
+      "file": "S1-00496D90.asm.txt",
+      "instructionCount": 7,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S1",
+      "start": "0067F810",
+      "endExclusive": "0067F816",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "0067F810",
+      "sha256": "07297dca94be1b975a5dc696b5976f205b84057995fa3d3fbb157101b1ae8098",
+      "rawId1Sha256": "07297dca94be1b975a5dc696b5976f205b84057995fa3d3fbb157101b1ae8098",
+      "artifactSha256": "7521fec00cbf1386145c4372099be99ecc2045072a934e22dc6762fb67a1b91b",
+      "file": "S1-0067F810.asm.txt",
+      "instructionCount": 2,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "0079C780",
+      "endExclusive": "0079C7D0",
+      "kind": "data",
+      "boundaryKind": "canonical-person-vtable-dispatch-prefix",
+      "ownerFunction": null,
+      "sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "rawId1Sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "artifactSha256": "df7cb315fe2000845d12542e3092ad09a70cc37a3248020a858bbdb6d3f27f5f",
+      "file": "S1-0079C780.data.txt",
+      "instructionCount": 0,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S1",
+      "start": "0079CC18",
+      "endExclusive": "0079CC80",
+      "kind": "data",
+      "boundaryKind": "complete-common-troop-vtable-dispatch-block",
+      "ownerFunction": null,
+      "sha256": "efa4fcf33c37aa292173d640d6f873f32332c2ca46406423eb39de04ed3c75ff",
+      "rawId1Sha256": "efa4fcf33c37aa292173d640d6f873f32332c2ca46406423eb39de04ed3c75ff",
+      "artifactSha256": "1e6f0026973996f3d716a1454deaeca399ca9f6105deb9982216c8b7a6a3f9ae",
+      "file": "S1-0079CC18.data.txt",
+      "instructionCount": 0,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S1",
+      "start": "0079CC80",
+      "endExclusive": "0079CC8C",
+      "kind": "data",
+      "boundaryKind": "source-specific-post-common-block-data",
+      "ownerFunction": null,
+      "sha256": "c91f9bac358b29d91d06111e118d050dea803503c960c40ca8d2c625f7dcdfc5",
+      "rawId1Sha256": "c91f9bac358b29d91d06111e118d050dea803503c960c40ca8d2c625f7dcdfc5",
+      "artifactSha256": "3a92830f92d324fbf1f26d2d274b04e743951f52a4a7c60887647bfbc7e10369",
+      "file": "S1-0079CC80.data.txt",
+      "instructionCount": 0,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S2",
+      "start": "004195D0",
+      "endExclusive": "004195D4",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "004195D0",
+      "sha256": "031a1d90a8a2c46993613c8b2828efd0c52f20f2852d5f2ff930bc6acc0090c8",
+      "rawId1Sha256": "031a1d90a8a2c46993613c8b2828efd0c52f20f2852d5f2ff930bc6acc0090c8",
+      "artifactSha256": "aca9b772f4f6194a5826c46c3bea541ab63e276d6b5709bff4db0ca1bd8cb7d4",
+      "file": "S2-004195D0.asm.txt",
+      "instructionCount": 2,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "0041C130",
+      "endExclusive": "0041C135",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "0041C130",
+      "sha256": "81794790c0ad77391e995d91903df71d532fdf23777b0a32cef0c4606e844a6f",
+      "rawId1Sha256": "81794790c0ad77391e995d91903df71d532fdf23777b0a32cef0c4606e844a6f",
+      "artifactSha256": "1c74593d756286731fe0192ead61141729e06b10f3d5cc1941bd60d01bc930ee",
+      "file": "S2-0041C130.asm.txt",
+      "instructionCount": 2,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00468E60",
+      "endExclusive": "00468E66",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00468E60",
+      "sha256": "5df10ed21e27c6f4dcad30a3050f43ccebae8ffa69612802165a96b9efeefddb",
+      "rawId1Sha256": "5df10ed21e27c6f4dcad30a3050f43ccebae8ffa69612802165a96b9efeefddb",
+      "artifactSha256": "e1e3c773b29f2e4dc6a77641a875b3c67b5e94c4a28c89b7763a5cd87beb15a3",
+      "file": "S2-00468E60.asm.txt",
+      "instructionCount": 2,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00472070",
+      "endExclusive": "004720AB",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00472070",
+      "sha256": "ba76fa401ab64a66e9ee58fd742a90a8aed891eb0815679089dcb0521e09c536",
+      "rawId1Sha256": "ba76fa401ab64a66e9ee58fd742a90a8aed891eb0815679089dcb0521e09c536",
+      "artifactSha256": "13c6734ce69bec80407e2095880eeabfd4302a1119fc9617b1d6328ff9189ac4",
+      "file": "S2-00472070.asm.txt",
+      "instructionCount": 27,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "0047A5D0",
+      "endExclusive": "0047A5D9",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "0047A5D0",
+      "sha256": "336e6d1ac6f11f67df7db7d5f89a438c5a41aa1673b4e071afda2050a291f656",
+      "rawId1Sha256": "336e6d1ac6f11f67df7db7d5f89a438c5a41aa1673b4e071afda2050a291f656",
+      "artifactSha256": "f37f7aeba3b951f85c4c673a04923943940dc79ad077db78f37a3ad4ddc0545f",
+      "file": "S2-0047A5D0.asm.txt",
+      "instructionCount": 3,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S2",
+      "start": "0047A5E0",
+      "endExclusive": "0047A5E7",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "0047A5E0",
+      "sha256": "96b136d90c06f657a1f15ed871a1d1a08aa9415104b91c66c2f3337a15ba454f",
+      "rawId1Sha256": "96b136d90c06f657a1f15ed871a1d1a08aa9415104b91c66c2f3337a15ba454f",
+      "artifactSha256": "ce4691076512be6d1f705d0d1a75177f5433ce9cefd6d5f0320b53e0ed82ddcb",
+      "file": "S2-0047A5E0.asm.txt",
+      "instructionCount": 2,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S2",
+      "start": "0047A630",
+      "endExclusive": "0047A656",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "0047A630",
+      "sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "rawId1Sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "artifactSha256": "92bc77145c9d5bc7ad3471f46ae6941efa917f6e5878ca0f2c79079b62eda4b0",
+      "file": "S2-0047A630.asm.txt",
+      "instructionCount": 18,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "0047AA80",
+      "endExclusive": "0047AA90",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "0047AA80",
+      "sha256": "9a2bb180f23db262c8ced963c3328bd2d09e74d4690e53d97b55b240a525dcf3",
+      "rawId1Sha256": "9a2bb180f23db262c8ced963c3328bd2d09e74d4690e53d97b55b240a525dcf3",
+      "artifactSha256": "a89b8974d0655bdcc89b37fec65d314f68967cabffe519a025505176d092277e",
+      "file": "S2-0047AA80.asm.txt",
+      "instructionCount": 4,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S2",
+      "start": "004883D0",
+      "endExclusive": "004883EB",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "004883D0",
+      "sha256": "c7dd95b24263a58b616df7adf489d1f07f502af3168d73d09da287ca65ca10c3",
+      "rawId1Sha256": "c7dd95b24263a58b616df7adf489d1f07f502af3168d73d09da287ca65ca10c3",
+      "artifactSha256": "5b078aa445374e46ec420e6ce11317c4693513b242eacd09cb5f204806d0bf6d",
+      "file": "S2-004883D0.asm.txt",
+      "instructionCount": 9,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "004883F0",
+      "endExclusive": "00488422",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "004883F0",
+      "sha256": "1a09de9f631ef197445be47b0d0886b4b49e942d128bd27ed615a38f5290a088",
+      "rawId1Sha256": "1a09de9f631ef197445be47b0d0886b4b49e942d128bd27ed615a38f5290a088",
+      "artifactSha256": "fe0ecfa27c0fbf2d045cf70d27ae0ebf307f3b097d4d737a57bf307ef1222ec9",
+      "file": "S2-004883F0.asm.txt",
+      "instructionCount": 21,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00488430",
+      "endExclusive": "00488461",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00488430",
+      "sha256": "7491f2b7b02c21e417945fbd0ee295ad3c5d2c24a99a159e443f306d0acb7f1f",
+      "rawId1Sha256": "7491f2b7b02c21e417945fbd0ee295ad3c5d2c24a99a159e443f306d0acb7f1f",
+      "artifactSha256": "075a238a260621208616cf48e109c6ee28c9dc1385e15502c4a7a57d301f209b",
+      "file": "S2-00488430.asm.txt",
+      "instructionCount": 20,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "004891C0",
+      "endExclusive": "0048921F",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "004891C0",
+      "sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "rawId1Sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "artifactSha256": "2bac28b86f07fbd8db1fb7ed42ff1ba02d70d979687da37b2fa40047846b62a0",
+      "file": "S2-004891C0.asm.txt",
+      "instructionCount": 37,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00489F10",
+      "endExclusive": "00489F22",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00489F10",
+      "sha256": "c9dfadf9bea7a72ed7f905c625e17ccb73ae47616ed799e24fccf78dc8697164",
+      "rawId1Sha256": "c9dfadf9bea7a72ed7f905c625e17ccb73ae47616ed799e24fccf78dc8697164",
+      "artifactSha256": "a35d82ac0e0b7f6a8b1f4f2446469d121629715c476eaedb3a5e21f44e09efd0",
+      "file": "S2-00489F10.asm.txt",
+      "instructionCount": 7,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00490B00",
+      "endExclusive": "00490B24",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00490B00",
+      "sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "rawId1Sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "artifactSha256": "d22eb058df38253ea680e66ba13459c3732d8abf1799a5a138a803a4b9162f71",
+      "file": "S2-00490B00.asm.txt",
+      "instructionCount": 10,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00490E70",
+      "endExclusive": "00490E94",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00490E70",
+      "sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "rawId1Sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "artifactSha256": "118231ad1caa9cffc745504ab1dac002cde592ffbf8bf06c78442d19d6c081d5",
+      "file": "S2-00490E70.asm.txt",
+      "instructionCount": 10,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00491310",
+      "endExclusive": "0049135A",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00491310",
+      "sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "rawId1Sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "artifactSha256": "8dbfb0abf80a486b2c66e04df7d7af3522fc69f01233ffcdc6e5fe8783ac3051",
+      "file": "S2-00491310.asm.txt",
+      "instructionCount": 29,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00495340",
+      "endExclusive": "00495382",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00495340",
+      "sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "rawId1Sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "artifactSha256": "813b8320227e2d7d914b9923a82f9fda575522c392f359f8dd38536def4e44b5",
+      "file": "S2-00495340.asm.txt",
+      "instructionCount": 27,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00495390",
+      "endExclusive": "004953C4",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00495390",
+      "sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "rawId1Sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "artifactSha256": "b98f3f29c7a2664f0a44a2ab5b2f9fb99a8a969f15345aa8938055ab19a2e23c",
+      "file": "S2-00495390.asm.txt",
+      "instructionCount": 20,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00496000",
+      "endExclusive": "0049600B",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00496000",
+      "sha256": "a7d8de85f3a382332a20ec851c7eb3c1230565729a5a4cb30eff4c1a33e39c6a",
+      "rawId1Sha256": "a7d8de85f3a382332a20ec851c7eb3c1230565729a5a4cb30eff4c1a33e39c6a",
+      "artifactSha256": "d7e02fea927f3d812d0b1248e5ec3c3a91f7f40cf6a9bedc7fefb8e596b42ee1",
+      "file": "S2-00496000.asm.txt",
+      "instructionCount": 2,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00496040",
+      "endExclusive": "00496095",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00496040",
+      "sha256": "53b3259ab3c5ad65284858ebbb9f4964efe9f9326b7086ffcc88bac821e9ab55",
+      "rawId1Sha256": "53b3259ab3c5ad65284858ebbb9f4964efe9f9326b7086ffcc88bac821e9ab55",
+      "artifactSha256": "ccf32cf0ec4aabacdb604e34f674a8585f2c1ecd7190772d2aad227e8c79c3b7",
+      "file": "S2-00496040.asm.txt",
+      "instructionCount": 34,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00496D90",
+      "endExclusive": "00496DA2",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00496D90",
+      "sha256": "04fc43ea99ccb0bfbb25c4dfc4b2843bc5d1464f9b50d2c2fae1b5dd3a327b7a",
+      "rawId1Sha256": "04fc43ea99ccb0bfbb25c4dfc4b2843bc5d1464f9b50d2c2fae1b5dd3a327b7a",
+      "artifactSha256": "f6c68e4438504d0c715dfedcf8004608fcfc2dbf9f2ee8117274acca44dfb781",
+      "file": "S2-00496D90.asm.txt",
+      "instructionCount": 7,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S2",
+      "start": "0067F810",
+      "endExclusive": "0067F816",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "0067F810",
+      "sha256": "07297dca94be1b975a5dc696b5976f205b84057995fa3d3fbb157101b1ae8098",
+      "rawId1Sha256": "07297dca94be1b975a5dc696b5976f205b84057995fa3d3fbb157101b1ae8098",
+      "artifactSha256": "7521fec00cbf1386145c4372099be99ecc2045072a934e22dc6762fb67a1b91b",
+      "file": "S2-0067F810.asm.txt",
+      "instructionCount": 2,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "0079C780",
+      "endExclusive": "0079C7D0",
+      "kind": "data",
+      "boundaryKind": "canonical-person-vtable-dispatch-prefix",
+      "ownerFunction": null,
+      "sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "rawId1Sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "artifactSha256": "df7cb315fe2000845d12542e3092ad09a70cc37a3248020a858bbdb6d3f27f5f",
+      "file": "S2-0079C780.data.txt",
+      "instructionCount": 0,
+      "evidenceUse": "reused-exact-inherited-interval"
+    },
+    {
+      "source": "S2",
+      "start": "0079CC18",
+      "endExclusive": "0079CC80",
+      "kind": "data",
+      "boundaryKind": "complete-common-troop-vtable-dispatch-block",
+      "ownerFunction": null,
+      "sha256": "efa4fcf33c37aa292173d640d6f873f32332c2ca46406423eb39de04ed3c75ff",
+      "rawId1Sha256": "efa4fcf33c37aa292173d640d6f873f32332c2ca46406423eb39de04ed3c75ff",
+      "artifactSha256": "1e6f0026973996f3d716a1454deaeca399ca9f6105deb9982216c8b7a6a3f9ae",
+      "file": "S2-0079CC18.data.txt",
+      "instructionCount": 0,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S2",
+      "start": "0079CC80",
+      "endExclusive": "0079CC8C",
+      "kind": "data",
+      "boundaryKind": "source-specific-post-common-block-data",
+      "ownerFunction": null,
+      "sha256": "ac94994b7d6f10ce5b1666bf88192dd47dce742a74b215d1f780973250fa998c",
+      "rawId1Sha256": "ac94994b7d6f10ce5b1666bf88192dd47dce742a74b215d1f780973250fa998c",
+      "artifactSha256": "6dcbd72467d634a7041aeb787c98de4cf0bb9f008b874f4e8ac917156e85a34e",
+      "file": "S2-0079CC80.data.txt",
+      "instructionCount": 0,
+      "evidenceUse": "new-unique-interval"
+    },
+    {
+      "source": "S2",
+      "start": "00911B50",
+      "endExclusive": "00911B69",
+      "kind": "code",
+      "boundaryKind": "complete-IDB-function",
+      "ownerFunction": "00911B50",
+      "sha256": "ae04e98e8c54c9c6775eaa1d9f449364554fc0685ca1676d4b67f5f5d637f924",
+      "rawId1Sha256": "ae04e98e8c54c9c6775eaa1d9f449364554fc0685ca1676d4b67f5f5d637f924",
+      "artifactSha256": "2fdd0819c2e98692c205bf4b12c0f7aa4eb21ccf21d5106c038b5f37f5e5ccc3",
+      "file": "S2-00911B50.asm.txt",
+      "instructionCount": 8,
+      "evidenceUse": "new-unique-interval"
+    }
+  ],
+  "functionRegions": {
+    "S1:0041C130": [
+      {
+        "start": "0041C130",
+        "endExclusive": "0041C135"
+      }
+    ],
+    "S1:004891C0": [
+      {
+        "start": "004891C0",
+        "endExclusive": "0048921F"
+      }
+    ],
+    "S1:00490E70": [
+      {
+        "start": "00490E70",
+        "endExclusive": "00490E94"
+      }
+    ],
+    "S1:0047A630": [
+      {
+        "start": "0047A630",
+        "endExclusive": "0047A656"
+      }
+    ],
+    "S1:00472070": [
+      {
+        "start": "00472070",
+        "endExclusive": "004720AB"
+      }
+    ],
+    "S1:00496040": [
+      {
+        "start": "00496040",
+        "endExclusive": "00496095"
+      }
+    ],
+    "S1:00468E60": [
+      {
+        "start": "00468E60",
+        "endExclusive": "00468E66"
+      }
+    ],
+    "S1:00490B00": [
+      {
+        "start": "00490B00",
+        "endExclusive": "00490B24"
+      }
+    ],
+    "S1:00488430": [
+      {
+        "start": "00488430",
+        "endExclusive": "00488461"
+      }
+    ],
+    "S1:004883F0": [
+      {
+        "start": "004883F0",
+        "endExclusive": "00488422"
+      }
+    ],
+    "S1:004883D0": [
+      {
+        "start": "004883D0",
+        "endExclusive": "004883EB"
+      }
+    ],
+    "S1:00491310": [
+      {
+        "start": "00491310",
+        "endExclusive": "0049135A"
+      }
+    ],
+    "S1:004195D0": [
+      {
+        "start": "004195D0",
+        "endExclusive": "004195D4"
+      }
+    ],
+    "S1:00495390": [
+      {
+        "start": "00495390",
+        "endExclusive": "004953C4"
+      }
+    ],
+    "S1:00495340": [
+      {
+        "start": "00495340",
+        "endExclusive": "00495382"
+      }
+    ],
+    "S1:00496D90": [
+      {
+        "start": "00496D90",
+        "endExclusive": "00496DA2"
+      }
+    ],
+    "S1:0047AA80": [
+      {
+        "start": "0047AA80",
+        "endExclusive": "0047AA90"
+      }
+    ],
+    "S1:00496000": [
+      {
+        "start": "00496000",
+        "endExclusive": "0049600B"
+      }
+    ],
+    "S1:0047A5E0": [
+      {
+        "start": "0047A5E0",
+        "endExclusive": "0047A5E7"
+      }
+    ],
+    "S1:00489F10": [
+      {
+        "start": "00489F10",
+        "endExclusive": "00489F22"
+      }
+    ],
+    "S1:0047A5D0": [
+      {
+        "start": "0047A5D0",
+        "endExclusive": "0047A5D9"
+      }
+    ],
+    "S1:0067F810": [
+      {
+        "start": "0067F810",
+        "endExclusive": "0067F816"
+      }
+    ],
+    "S2:0041C130": [
+      {
+        "start": "0041C130",
+        "endExclusive": "0041C135"
+      }
+    ],
+    "S2:004891C0": [
+      {
+        "start": "004891C0",
+        "endExclusive": "0048921F"
+      }
+    ],
+    "S2:00490E70": [
+      {
+        "start": "00490E70",
+        "endExclusive": "00490E94"
+      }
+    ],
+    "S2:0047A630": [
+      {
+        "start": "0047A630",
+        "endExclusive": "0047A656"
+      }
+    ],
+    "S2:00472070": [
+      {
+        "start": "00472070",
+        "endExclusive": "004720AB"
+      }
+    ],
+    "S2:00496040": [
+      {
+        "start": "00496040",
+        "endExclusive": "00496095"
+      }
+    ],
+    "S2:00468E60": [
+      {
+        "start": "00468E60",
+        "endExclusive": "00468E66"
+      }
+    ],
+    "S2:00490B00": [
+      {
+        "start": "00490B00",
+        "endExclusive": "00490B24"
+      }
+    ],
+    "S2:00488430": [
+      {
+        "start": "00488430",
+        "endExclusive": "00488461"
+      }
+    ],
+    "S2:004883F0": [
+      {
+        "start": "004883F0",
+        "endExclusive": "00488422"
+      }
+    ],
+    "S2:004883D0": [
+      {
+        "start": "004883D0",
+        "endExclusive": "004883EB"
+      }
+    ],
+    "S2:00491310": [
+      {
+        "start": "00491310",
+        "endExclusive": "0049135A"
+      }
+    ],
+    "S2:004195D0": [
+      {
+        "start": "004195D0",
+        "endExclusive": "004195D4"
+      }
+    ],
+    "S2:00495390": [
+      {
+        "start": "00495390",
+        "endExclusive": "004953C4"
+      }
+    ],
+    "S2:00495340": [
+      {
+        "start": "00495340",
+        "endExclusive": "00495382"
+      }
+    ],
+    "S2:00496D90": [
+      {
+        "start": "00496D90",
+        "endExclusive": "00496DA2"
+      }
+    ],
+    "S2:0047AA80": [
+      {
+        "start": "0047AA80",
+        "endExclusive": "0047AA90"
+      }
+    ],
+    "S2:00496000": [
+      {
+        "start": "00496000",
+        "endExclusive": "0049600B"
+      }
+    ],
+    "S2:0047A5E0": [
+      {
+        "start": "0047A5E0",
+        "endExclusive": "0047A5E7"
+      }
+    ],
+    "S2:00489F10": [
+      {
+        "start": "00489F10",
+        "endExclusive": "00489F22"
+      }
+    ],
+    "S2:0047A5D0": [
+      {
+        "start": "0047A5D0",
+        "endExclusive": "0047A5D9"
+      }
+    ],
+    "S2:0067F810": [
+      {
+        "start": "0067F810",
+        "endExclusive": "0067F816"
+      }
+    ],
+    "S2:00911B50": [
+      {
+        "start": "00911B50",
+        "endExclusive": "00911B69"
+      }
+    ]
+  },
+  "callLedgers": {
+    "S1": {
+      "004195D0": [],
+      "0041C130": [],
+      "00468E60": [],
+      "00472070": [
+        {
+          "site": "00472080",
+          "bytes": "ff 15 68 e2 74 00",
+          "kind": "indirect",
+          "operand": "dword ptr [0x74e268]"
+        },
+        {
+          "site": "00472094",
+          "bytes": "ff 15 6c e2 74 00",
+          "kind": "indirect",
+          "operand": "dword ptr [0x74e26c]"
+        }
+      ],
+      "0047A5D0": [],
+      "0047A5E0": [],
+      "0047A630": [
+        {
+          "site": "0047A63E",
+          "bytes": "e8 2d 7a ff ff",
+          "kind": "direct",
+          "target": "00472070"
+        }
+      ],
+      "0047AA80": [],
+      "004883D0": [],
+      "004883F0": [
+        {
+          "site": "004883F7",
+          "bytes": "ff 50 2c",
+          "kind": "indirect",
+          "operand": "dword ptr [eax + 0x2c]"
+        }
+      ],
+      "00488430": [
+        {
+          "site": "00488435",
+          "bytes": "ff 50 04",
+          "kind": "indirect",
+          "operand": "dword ptr [eax + 4]"
+        }
+      ],
+      "004891C0": [
+        {
+          "site": "004891F0",
+          "bytes": "e8 7b 7c 00 00",
+          "kind": "direct",
+          "target": "00490E70"
+        },
+        {
+          "site": "004891F8",
+          "bytes": "e8 33 14 ff ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "0048920A",
+          "bytes": "e8 01 81 00 00",
+          "kind": "direct",
+          "target": "00491310"
+        },
+        {
+          "site": "00489212",
+          "bytes": "e8 79 c1 00 00",
+          "kind": "direct",
+          "target": "00495390"
+        }
+      ],
+      "00489F10": [
+        {
+          "site": "00489F13",
+          "bytes": "e8 b8 06 ff ff",
+          "kind": "direct",
+          "target": "0047A5D0"
+        }
+      ],
+      "00490B00": [],
+      "00490E70": [],
+      "00491310": [
+        {
+          "site": "00491325",
+          "bytes": "e8 a6 82 f8 ff",
+          "kind": "direct",
+          "target": "004195D0"
+        },
+        {
+          "site": "0049132C",
+          "bytes": "e8 9f 82 f8 ff",
+          "kind": "direct",
+          "target": "004195D0"
+        }
+      ],
+      "00495340": [],
+      "00495390": [
+        {
+          "site": "004953B0",
+          "bytes": "e8 8b ff ff ff",
+          "kind": "direct",
+          "target": "00495340"
+        }
+      ],
+      "00496000": [],
+      "00496040": [
+        {
+          "site": "00496045",
+          "bytes": "ff 50 24",
+          "kind": "indirect",
+          "operand": "dword ptr [eax + 0x24]"
+        },
+        {
+          "site": "00496056",
+          "bytes": "e8 a5 aa ff ff",
+          "kind": "direct",
+          "target": "00490B00"
+        },
+        {
+          "site": "0049605C",
+          "bytes": "e8 cf 45 fe ff",
+          "kind": "direct",
+          "target": "0047A630"
+        }
+      ],
+      "00496D90": [
+        {
+          "site": "00496D93",
+          "bytes": "e8 e8 3c fe ff",
+          "kind": "direct",
+          "target": "0047AA80"
+        }
+      ],
+      "0067F810": [],
+      "0079C780": [],
+      "0079CC18": [],
+      "0079CC80": []
+    },
+    "S2": {
+      "004195D0": [],
+      "0041C130": [],
+      "00468E60": [],
+      "00472070": [
+        {
+          "site": "00472080",
+          "bytes": "ff 15 68 e2 74 00",
+          "kind": "indirect",
+          "operand": "dword ptr [0x74e268]"
+        },
+        {
+          "site": "00472094",
+          "bytes": "ff 15 6c e2 74 00",
+          "kind": "indirect",
+          "operand": "dword ptr [0x74e26c]"
+        }
+      ],
+      "0047A5D0": [],
+      "0047A5E0": [],
+      "0047A630": [
+        {
+          "site": "0047A63E",
+          "bytes": "e8 2d 7a ff ff",
+          "kind": "direct",
+          "target": "00472070"
+        }
+      ],
+      "0047AA80": [],
+      "004883D0": [],
+      "004883F0": [
+        {
+          "site": "004883F7",
+          "bytes": "ff 50 2c",
+          "kind": "indirect",
+          "operand": "dword ptr [eax + 0x2c]"
+        }
+      ],
+      "00488430": [
+        {
+          "site": "00488435",
+          "bytes": "ff 50 04",
+          "kind": "indirect",
+          "operand": "dword ptr [eax + 4]"
+        }
+      ],
+      "004891C0": [
+        {
+          "site": "004891F0",
+          "bytes": "e8 7b 7c 00 00",
+          "kind": "direct",
+          "target": "00490E70"
+        },
+        {
+          "site": "004891F8",
+          "bytes": "e8 33 14 ff ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "0048920A",
+          "bytes": "e8 01 81 00 00",
+          "kind": "direct",
+          "target": "00491310"
+        },
+        {
+          "site": "00489212",
+          "bytes": "e8 79 c1 00 00",
+          "kind": "direct",
+          "target": "00495390"
+        }
+      ],
+      "00489F10": [
+        {
+          "site": "00489F13",
+          "bytes": "e8 b8 06 ff ff",
+          "kind": "direct",
+          "target": "0047A5D0"
+        }
+      ],
+      "00490B00": [],
+      "00490E70": [],
+      "00491310": [
+        {
+          "site": "00491325",
+          "bytes": "e8 a6 82 f8 ff",
+          "kind": "direct",
+          "target": "004195D0"
+        },
+        {
+          "site": "0049132C",
+          "bytes": "e8 9f 82 f8 ff",
+          "kind": "direct",
+          "target": "004195D0"
+        }
+      ],
+      "00495340": [],
+      "00495390": [
+        {
+          "site": "004953B0",
+          "bytes": "e8 8b ff ff ff",
+          "kind": "direct",
+          "target": "00495340"
+        }
+      ],
+      "00496000": [],
+      "00496040": [
+        {
+          "site": "00496045",
+          "bytes": "ff 50 24",
+          "kind": "indirect",
+          "operand": "dword ptr [eax + 0x24]"
+        },
+        {
+          "site": "00496056",
+          "bytes": "e8 a5 aa ff ff",
+          "kind": "direct",
+          "target": "00490B00"
+        },
+        {
+          "site": "0049605C",
+          "bytes": "e8 cf 45 fe ff",
+          "kind": "direct",
+          "target": "0047A630"
+        }
+      ],
+      "00496D90": [
+        {
+          "site": "00496D93",
+          "bytes": "e8 e8 3c fe ff",
+          "kind": "direct",
+          "target": "0047AA80"
+        }
+      ],
+      "0067F810": [],
+      "0079C780": [],
+      "0079CC18": [],
+      "0079CC80": [],
+      "00911B50": [
+        {
+          "site": "00911B63",
+          "bytes": "e8 c8 6d fd ff",
+          "kind": "direct",
+          "target": "008E8930"
+        }
+      ]
+    }
+  },
+  "branchLedgers": {
+    "S1": {
+      "004195D0": [],
+      "0041C130": [],
+      "00468E60": [],
+      "00472070": [
+        {
+          "site": "00472078",
+          "bytes": "74 2c",
+          "target": "004720A6"
+        },
+        {
+          "site": "00472088",
+          "bytes": "75 1c",
+          "target": "004720A6"
+        },
+        {
+          "site": "00472090",
+          "bytes": "74 0c",
+          "target": "0047209E"
+        },
+        {
+          "site": "0047209C",
+          "bytes": "75 08",
+          "target": "004720A6"
+        }
+      ],
+      "0047A5D0": [],
+      "0047A5E0": [],
+      "0047A630": [
+        {
+          "site": "0047A637",
+          "bytes": "74 11",
+          "target": "0047A64A"
+        },
+        {
+          "site": "0047A648",
+          "bytes": "75 04",
+          "target": "0047A64E"
+        }
+      ],
+      "0047AA80": [],
+      "004883D0": [
+        {
+          "site": "004883D7",
+          "bytes": "74 0a",
+          "target": "004883E3"
+        },
+        {
+          "site": "004883DC",
+          "bytes": "74 05",
+          "target": "004883E3"
+        }
+      ],
+      "004883F0": [
+        {
+          "site": "004883FC",
+          "bytes": "74 19",
+          "target": "00488417"
+        },
+        {
+          "site": "00488406",
+          "bytes": "75 13",
+          "target": "0048841B"
+        },
+        {
+          "site": "00488410",
+          "bytes": "7c 05",
+          "target": "00488417"
+        },
+        {
+          "site": "00488415",
+          "bytes": "7e 04",
+          "target": "0048841B"
+        }
+      ],
+      "00488430": [
+        {
+          "site": "0048843A",
+          "bytes": "74 21",
+          "target": "0048845D"
+        },
+        {
+          "site": "00488444",
+          "bytes": "75 10",
+          "target": "00488456"
+        },
+        {
+          "site": "0048844F",
+          "bytes": "74 0c",
+          "target": "0048845D"
+        },
+        {
+          "site": "00488454",
+          "bytes": "74 07",
+          "target": "0048845D"
+        }
+      ],
+      "004891C0": [
+        {
+          "site": "004891CD",
+          "bytes": "7c 4b",
+          "target": "0048921A"
+        },
+        {
+          "site": "004891D4",
+          "bytes": "7f 44",
+          "target": "0048921A"
+        },
+        {
+          "site": "004891D9",
+          "bytes": "7c 0c",
+          "target": "004891E7"
+        },
+        {
+          "site": "004891E0",
+          "bytes": "7f 05",
+          "target": "004891E7"
+        },
+        {
+          "site": "004891E5",
+          "bytes": "eb 03",
+          "target": "004891EA"
+        },
+        {
+          "site": "00489202",
+          "bytes": "74 16",
+          "target": "0048921A"
+        }
+      ],
+      "00489F10": [],
+      "00490B00": [
+        {
+          "site": "00490B06",
+          "bytes": "7c 17",
+          "target": "00490B1F"
+        },
+        {
+          "site": "00490B0D",
+          "bytes": "7f 10",
+          "target": "00490B1F"
+        }
+      ],
+      "00490E70": [
+        {
+          "site": "00490E76",
+          "bytes": "7c 17",
+          "target": "00490E8F"
+        },
+        {
+          "site": "00490E7D",
+          "bytes": "7f 10",
+          "target": "00490E8F"
+        }
+      ],
+      "00491310": [
+        {
+          "site": "00491318",
+          "bytes": "74 38",
+          "target": "00491352"
+        },
+        {
+          "site": "00491322",
+          "bytes": "74 2e",
+          "target": "00491352"
+        },
+        {
+          "site": "00491334",
+          "bytes": "75 1c",
+          "target": "00491352"
+        },
+        {
+          "site": "00491349",
+          "bytes": "78 07",
+          "target": "00491352"
+        },
+        {
+          "site": "00491350",
+          "bytes": "7e 03",
+          "target": "00491355"
+        }
+      ],
+      "00495340": [
+        {
+          "site": "00495347",
+          "bytes": "7c 2a",
+          "target": "00495373"
+        },
+        {
+          "site": "0049534F",
+          "bytes": "7f 22",
+          "target": "00495373"
+        },
+        {
+          "site": "00495358",
+          "bytes": "7c 09",
+          "target": "00495363"
+        },
+        {
+          "site": "0049535D",
+          "bytes": "7d 04",
+          "target": "00495363"
+        },
+        {
+          "site": "00495361",
+          "bytes": "eb 03",
+          "target": "00495366"
+        },
+        {
+          "site": "00495368",
+          "bytes": "74 0f",
+          "target": "00495379"
+        },
+        {
+          "site": "00495371",
+          "bytes": "7c e3",
+          "target": "00495356"
+        }
+      ],
+      "00495390": [
+        {
+          "site": "00495396",
+          "bytes": "7c 17",
+          "target": "004953AF"
+        },
+        {
+          "site": "0049539D",
+          "bytes": "7f 10",
+          "target": "004953AF"
+        },
+        {
+          "site": "004953AD",
+          "bytes": "75 0d",
+          "target": "004953BC"
+        },
+        {
+          "site": "004953B7",
+          "bytes": "75 03",
+          "target": "004953BC"
+        }
+      ],
+      "00496000": [
+        {
+          "site": "00496006",
+          "bytes": "e9 d5 45 fe ff",
+          "target": "0047A5E0"
+        }
+      ],
+      "00496040": [
+        {
+          "site": "0049604B",
+          "bytes": "75 44",
+          "target": "00496091"
+        },
+        {
+          "site": "00496066",
+          "bytes": "74 29",
+          "target": "00496091"
+        },
+        {
+          "site": "00496072",
+          "bytes": "7c 0d",
+          "target": "00496081"
+        },
+        {
+          "site": "00496077",
+          "bytes": "7d 08",
+          "target": "00496081"
+        },
+        {
+          "site": "0049607F",
+          "bytes": "7d 10",
+          "target": "00496091"
+        },
+        {
+          "site": "00496088",
+          "bytes": "7c e6",
+          "target": "00496070"
+        }
+      ],
+      "00496D90": [],
+      "0067F810": []
+    },
+    "S2": {
+      "004195D0": [],
+      "0041C130": [],
+      "00468E60": [],
+      "00472070": [
+        {
+          "site": "00472078",
+          "bytes": "74 2c",
+          "target": "004720A6"
+        },
+        {
+          "site": "00472088",
+          "bytes": "75 1c",
+          "target": "004720A6"
+        },
+        {
+          "site": "00472090",
+          "bytes": "74 0c",
+          "target": "0047209E"
+        },
+        {
+          "site": "0047209C",
+          "bytes": "75 08",
+          "target": "004720A6"
+        }
+      ],
+      "0047A5D0": [],
+      "0047A5E0": [],
+      "0047A630": [
+        {
+          "site": "0047A637",
+          "bytes": "74 11",
+          "target": "0047A64A"
+        },
+        {
+          "site": "0047A648",
+          "bytes": "75 04",
+          "target": "0047A64E"
+        }
+      ],
+      "0047AA80": [],
+      "004883D0": [
+        {
+          "site": "004883D7",
+          "bytes": "74 0a",
+          "target": "004883E3"
+        },
+        {
+          "site": "004883DC",
+          "bytes": "74 05",
+          "target": "004883E3"
+        }
+      ],
+      "004883F0": [
+        {
+          "site": "004883FC",
+          "bytes": "74 19",
+          "target": "00488417"
+        },
+        {
+          "site": "00488406",
+          "bytes": "75 13",
+          "target": "0048841B"
+        },
+        {
+          "site": "00488410",
+          "bytes": "7c 05",
+          "target": "00488417"
+        },
+        {
+          "site": "00488415",
+          "bytes": "7e 04",
+          "target": "0048841B"
+        }
+      ],
+      "00488430": [
+        {
+          "site": "0048843A",
+          "bytes": "74 21",
+          "target": "0048845D"
+        },
+        {
+          "site": "00488444",
+          "bytes": "75 10",
+          "target": "00488456"
+        },
+        {
+          "site": "0048844F",
+          "bytes": "74 0c",
+          "target": "0048845D"
+        },
+        {
+          "site": "00488454",
+          "bytes": "74 07",
+          "target": "0048845D"
+        }
+      ],
+      "004891C0": [
+        {
+          "site": "004891CD",
+          "bytes": "7c 4b",
+          "target": "0048921A"
+        },
+        {
+          "site": "004891D4",
+          "bytes": "7f 44",
+          "target": "0048921A"
+        },
+        {
+          "site": "004891D9",
+          "bytes": "7c 0c",
+          "target": "004891E7"
+        },
+        {
+          "site": "004891E0",
+          "bytes": "7f 05",
+          "target": "004891E7"
+        },
+        {
+          "site": "004891E5",
+          "bytes": "eb 03",
+          "target": "004891EA"
+        },
+        {
+          "site": "00489202",
+          "bytes": "74 16",
+          "target": "0048921A"
+        }
+      ],
+      "00489F10": [],
+      "00490B00": [
+        {
+          "site": "00490B06",
+          "bytes": "7c 17",
+          "target": "00490B1F"
+        },
+        {
+          "site": "00490B0D",
+          "bytes": "7f 10",
+          "target": "00490B1F"
+        }
+      ],
+      "00490E70": [
+        {
+          "site": "00490E76",
+          "bytes": "7c 17",
+          "target": "00490E8F"
+        },
+        {
+          "site": "00490E7D",
+          "bytes": "7f 10",
+          "target": "00490E8F"
+        }
+      ],
+      "00491310": [
+        {
+          "site": "00491318",
+          "bytes": "74 38",
+          "target": "00491352"
+        },
+        {
+          "site": "00491322",
+          "bytes": "74 2e",
+          "target": "00491352"
+        },
+        {
+          "site": "00491334",
+          "bytes": "75 1c",
+          "target": "00491352"
+        },
+        {
+          "site": "00491349",
+          "bytes": "78 07",
+          "target": "00491352"
+        },
+        {
+          "site": "00491350",
+          "bytes": "7e 03",
+          "target": "00491355"
+        }
+      ],
+      "00495340": [
+        {
+          "site": "00495347",
+          "bytes": "7c 2a",
+          "target": "00495373"
+        },
+        {
+          "site": "0049534F",
+          "bytes": "7f 22",
+          "target": "00495373"
+        },
+        {
+          "site": "00495358",
+          "bytes": "7c 09",
+          "target": "00495363"
+        },
+        {
+          "site": "0049535D",
+          "bytes": "7d 04",
+          "target": "00495363"
+        },
+        {
+          "site": "00495361",
+          "bytes": "eb 03",
+          "target": "00495366"
+        },
+        {
+          "site": "00495368",
+          "bytes": "74 0f",
+          "target": "00495379"
+        },
+        {
+          "site": "00495371",
+          "bytes": "7c e3",
+          "target": "00495356"
+        }
+      ],
+      "00495390": [
+        {
+          "site": "00495396",
+          "bytes": "7c 17",
+          "target": "004953AF"
+        },
+        {
+          "site": "0049539D",
+          "bytes": "7f 10",
+          "target": "004953AF"
+        },
+        {
+          "site": "004953AD",
+          "bytes": "75 0d",
+          "target": "004953BC"
+        },
+        {
+          "site": "004953B7",
+          "bytes": "75 03",
+          "target": "004953BC"
+        }
+      ],
+      "00496000": [
+        {
+          "site": "00496006",
+          "bytes": "e9 d5 45 fe ff",
+          "target": "0047A5E0"
+        }
+      ],
+      "00496040": [
+        {
+          "site": "0049604B",
+          "bytes": "75 44",
+          "target": "00496091"
+        },
+        {
+          "site": "00496066",
+          "bytes": "74 29",
+          "target": "00496091"
+        },
+        {
+          "site": "00496072",
+          "bytes": "7c 0d",
+          "target": "00496081"
+        },
+        {
+          "site": "00496077",
+          "bytes": "7d 08",
+          "target": "00496081"
+        },
+        {
+          "site": "0049607F",
+          "bytes": "7d 10",
+          "target": "00496091"
+        },
+        {
+          "site": "00496088",
+          "bytes": "7c e6",
+          "target": "00496070"
+        }
+      ],
+      "00496D90": [],
+      "0067F810": [],
+      "00911B50": [
+        {
+          "site": "00911B56",
+          "bytes": "74 10",
+          "target": "00911B68"
+        }
+      ]
+    }
+  },
+  "boundaryMetadata": {
+    "S1:0079CC14": {
+      "itemEnd": "0079CC18",
+      "name": ""
+    },
+    "S1:0079CC18": {
+      "itemEnd": "0079CC1C",
+      "name": ""
+    },
+    "S1:0079CC7C": {
+      "itemEnd": "0079CC80",
+      "name": ""
+    },
+    "S1:0079CC80": {
+      "itemEnd": "0079CC84",
+      "name": ""
+    },
+    "S1:0079CC84": {
+      "itemEnd": "0079CC88",
+      "name": ""
+    },
+    "S1:0079CC88": {
+      "itemEnd": "0079CC8C",
+      "name": ""
+    },
+    "S1:0079CC8C": {
+      "itemEnd": "0079CC90",
+      "name": ""
+    },
+    "S2:0079CC14": {
+      "itemEnd": "0079CC18",
+      "name": ""
+    },
+    "S2:0079CC18": {
+      "itemEnd": "0079CC1C",
+      "name": ""
+    },
+    "S2:0079CC7C": {
+      "itemEnd": "0079CC80",
+      "name": ""
+    },
+    "S2:0079CC80": {
+      "itemEnd": "0079CC84",
+      "name": ""
+    },
+    "S2:0079CC84": {
+      "itemEnd": "0079CC88",
+      "name": ""
+    },
+    "S2:0079CC88": {
+      "itemEnd": "0079CC8C",
+      "name": ""
+    },
+    "S2:0079CC8C": {
+      "itemEnd": "0079CC90",
+      "name": ""
+    }
+  },
+  "comparisons": [
+    {
+      "start": "004195D0",
+      "identical": true,
+      "S1length": 4,
+      "S2length": 4,
+      "S1sha256": "031a1d90a8a2c46993613c8b2828efd0c52f20f2852d5f2ff930bc6acc0090c8",
+      "S2sha256": "031a1d90a8a2c46993613c8b2828efd0c52f20f2852d5f2ff930bc6acc0090c8",
+      "differingByteCount": 0
+    },
+    {
+      "start": "0041C130",
+      "identical": true,
+      "S1length": 5,
+      "S2length": 5,
+      "S1sha256": "81794790c0ad77391e995d91903df71d532fdf23777b0a32cef0c4606e844a6f",
+      "S2sha256": "81794790c0ad77391e995d91903df71d532fdf23777b0a32cef0c4606e844a6f",
+      "differingByteCount": 0
+    },
+    {
+      "start": "00468E60",
+      "identical": true,
+      "S1length": 6,
+      "S2length": 6,
+      "S1sha256": "5df10ed21e27c6f4dcad30a3050f43ccebae8ffa69612802165a96b9efeefddb",
+      "S2sha256": "5df10ed21e27c6f4dcad30a3050f43ccebae8ffa69612802165a96b9efeefddb",
+      "differingByteCount": 0
+    },
+    {
+      "start": "00472070",
+      "identical": true,
+      "S1length": 59,
+      "S2length": 59,
+      "S1sha256": "ba76fa401ab64a66e9ee58fd742a90a8aed891eb0815679089dcb0521e09c536",
+      "S2sha256": "ba76fa401ab64a66e9ee58fd742a90a8aed891eb0815679089dcb0521e09c536",
+      "differingByteCount": 0
+    },
+    {
+      "start": "0047A5D0",
+      "identical": true,
+      "S1length": 9,
+      "S2length": 9,
+      "S1sha256": "336e6d1ac6f11f67df7db7d5f89a438c5a41aa1673b4e071afda2050a291f656",
+      "S2sha256": "336e6d1ac6f11f67df7db7d5f89a438c5a41aa1673b4e071afda2050a291f656",
+      "differingByteCount": 0
+    },
+    {
+      "start": "0047A5E0",
+      "identical": true,
+      "S1length": 7,
+      "S2length": 7,
+      "S1sha256": "96b136d90c06f657a1f15ed871a1d1a08aa9415104b91c66c2f3337a15ba454f",
+      "S2sha256": "96b136d90c06f657a1f15ed871a1d1a08aa9415104b91c66c2f3337a15ba454f",
+      "differingByteCount": 0
+    },
+    {
+      "start": "0047A630",
+      "identical": true,
+      "S1length": 38,
+      "S2length": 38,
+      "S1sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "S2sha256": "39414d5052e472ece3b8b80f46b47178be3331aed847fafc4ebd4028aedebe1d",
+      "differingByteCount": 0
+    },
+    {
+      "start": "0047AA80",
+      "identical": true,
+      "S1length": 16,
+      "S2length": 16,
+      "S1sha256": "9a2bb180f23db262c8ced963c3328bd2d09e74d4690e53d97b55b240a525dcf3",
+      "S2sha256": "9a2bb180f23db262c8ced963c3328bd2d09e74d4690e53d97b55b240a525dcf3",
+      "differingByteCount": 0
+    },
+    {
+      "start": "004883D0",
+      "identical": true,
+      "S1length": 27,
+      "S2length": 27,
+      "S1sha256": "c7dd95b24263a58b616df7adf489d1f07f502af3168d73d09da287ca65ca10c3",
+      "S2sha256": "c7dd95b24263a58b616df7adf489d1f07f502af3168d73d09da287ca65ca10c3",
+      "differingByteCount": 0
+    },
+    {
+      "start": "004883F0",
+      "identical": true,
+      "S1length": 50,
+      "S2length": 50,
+      "S1sha256": "1a09de9f631ef197445be47b0d0886b4b49e942d128bd27ed615a38f5290a088",
+      "S2sha256": "1a09de9f631ef197445be47b0d0886b4b49e942d128bd27ed615a38f5290a088",
+      "differingByteCount": 0
+    },
+    {
+      "start": "00488430",
+      "identical": true,
+      "S1length": 49,
+      "S2length": 49,
+      "S1sha256": "7491f2b7b02c21e417945fbd0ee295ad3c5d2c24a99a159e443f306d0acb7f1f",
+      "S2sha256": "7491f2b7b02c21e417945fbd0ee295ad3c5d2c24a99a159e443f306d0acb7f1f",
+      "differingByteCount": 0
+    },
+    {
+      "start": "004891C0",
+      "identical": true,
+      "S1length": 95,
+      "S2length": 95,
+      "S1sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "S2sha256": "1d57cbaee05e849f951219305481215bd4daebe7c840f3ffb0e99730099c5f37",
+      "differingByteCount": 0
+    },
+    {
+      "start": "00489F10",
+      "identical": true,
+      "S1length": 18,
+      "S2length": 18,
+      "S1sha256": "c9dfadf9bea7a72ed7f905c625e17ccb73ae47616ed799e24fccf78dc8697164",
+      "S2sha256": "c9dfadf9bea7a72ed7f905c625e17ccb73ae47616ed799e24fccf78dc8697164",
+      "differingByteCount": 0
+    },
+    {
+      "start": "00490B00",
+      "identical": true,
+      "S1length": 36,
+      "S2length": 36,
+      "S1sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "S2sha256": "2cb3b51ef504a63e94a8fde3c94d5f9f80fb72d88b0df61f41d2608da575736c",
+      "differingByteCount": 0
+    },
+    {
+      "start": "00490E70",
+      "identical": true,
+      "S1length": 36,
+      "S2length": 36,
+      "S1sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "S2sha256": "69dce2910ef46501efb42c693e70432a5d30e9156664c3ae48fb55303d72a1be",
+      "differingByteCount": 0
+    },
+    {
+      "start": "00491310",
+      "identical": true,
+      "S1length": 74,
+      "S2length": 74,
+      "S1sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "S2sha256": "ff8455e17139f3794426e7601a069acbed1e81a61f2398b911e75cd0402849f1",
+      "differingByteCount": 0
+    },
+    {
+      "start": "00495340",
+      "identical": true,
+      "S1length": 66,
+      "S2length": 66,
+      "S1sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "S2sha256": "a49821777993b52dbcdcc0ae4e7e60da729e39e5843a9a8847d67219080dbb17",
+      "differingByteCount": 0
+    },
+    {
+      "start": "00495390",
+      "identical": true,
+      "S1length": 52,
+      "S2length": 52,
+      "S1sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "S2sha256": "d53b87f5995ef377db0aba6be78ef06be98475c7ca91218ef46db4c7012ca0f0",
+      "differingByteCount": 0
+    },
+    {
+      "start": "00496000",
+      "identical": true,
+      "S1length": 11,
+      "S2length": 11,
+      "S1sha256": "a7d8de85f3a382332a20ec851c7eb3c1230565729a5a4cb30eff4c1a33e39c6a",
+      "S2sha256": "a7d8de85f3a382332a20ec851c7eb3c1230565729a5a4cb30eff4c1a33e39c6a",
+      "differingByteCount": 0
+    },
+    {
+      "start": "00496040",
+      "identical": true,
+      "S1length": 85,
+      "S2length": 85,
+      "S1sha256": "53b3259ab3c5ad65284858ebbb9f4964efe9f9326b7086ffcc88bac821e9ab55",
+      "S2sha256": "53b3259ab3c5ad65284858ebbb9f4964efe9f9326b7086ffcc88bac821e9ab55",
+      "differingByteCount": 0
+    },
+    {
+      "start": "00496D90",
+      "identical": true,
+      "S1length": 18,
+      "S2length": 18,
+      "S1sha256": "04fc43ea99ccb0bfbb25c4dfc4b2843bc5d1464f9b50d2c2fae1b5dd3a327b7a",
+      "S2sha256": "04fc43ea99ccb0bfbb25c4dfc4b2843bc5d1464f9b50d2c2fae1b5dd3a327b7a",
+      "differingByteCount": 0
+    },
+    {
+      "start": "0067F810",
+      "identical": true,
+      "S1length": 6,
+      "S2length": 6,
+      "S1sha256": "07297dca94be1b975a5dc696b5976f205b84057995fa3d3fbb157101b1ae8098",
+      "S2sha256": "07297dca94be1b975a5dc696b5976f205b84057995fa3d3fbb157101b1ae8098",
+      "differingByteCount": 0
+    },
+    {
+      "start": "0079C780",
+      "identical": true,
+      "S1length": 80,
+      "S2length": 80,
+      "S1sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "S2sha256": "31b9e76589f399ca3b91451fd4948da9672865716e98c45b3780817468b3021c",
+      "differingByteCount": 0
+    },
+    {
+      "start": "0079CC18",
+      "identical": true,
+      "S1length": 104,
+      "S2length": 104,
+      "S1sha256": "efa4fcf33c37aa292173d640d6f873f32332c2ca46406423eb39de04ed3c75ff",
+      "S2sha256": "efa4fcf33c37aa292173d640d6f873f32332c2ca46406423eb39de04ed3c75ff",
+      "differingByteCount": 0
+    },
+    {
+      "start": "0079CC80",
+      "identical": false,
+      "S1length": 12,
+      "S2length": 12,
+      "S1sha256": "c91f9bac358b29d91d06111e118d050dea803503c960c40ca8d2c625f7dcdfc5",
+      "S2sha256": "ac94994b7d6f10ce5b1666bf88192dd47dce742a74b215d1f780973250fa998c",
+      "differingByteCount": 4
+    }
+  ],
+  "rangeBudget": {
+    "focusedIntervals": 51,
+    "reusedExactInheritedIntervals": 30,
+    "newUniqueIntervals": 21,
+    "codeIntervals": 45,
+    "dataIntervals": 6,
+    "selectedBytesBothSources": 1951,
+    "instructions": 598,
+    "callSites": 35,
+    "branchSites": 99,
+    "inheritedSelectedIntervals": 1236,
+    "allSelectedIntervals": 1257,
+    "newMachineCodeBytesRecovered": 365
+  },
+  "provenance": {
+    "method": "Independent full-file identity, ID0 function regions, IDAPython bytes, raw ID1 low-byte map, Capstone x86-32 complete linear decode; no machine-code execution.",
+    "verificationArtifacts": [
+      {
+        "file": "raw-verification.json",
+        "sha256": "8f65a4038d3e1c0857032fcfbe4b273bc31437697d054e54d84ffd53cc757d3e"
+      },
+      {
+        "file": "recovery-evidence-S1.json",
+        "sha256": "0eeffdca4077cb6c0d730410b3c50425e50ce5381582037ef7794d29bb0d82a7"
+      },
+      {
+        "file": "recovery-evidence-S2.json",
+        "sha256": "3789a472c2b1d92f5ee564cc3b7d3290f842d1b2b53cfa2dd467d0b52dd2a4ab"
+      }
+    ]
+  },
+  "semantics": {
+    "troopVtable": {
+      "start": "0079CC18",
+      "endExclusive": "0079CC80",
+      "commonSlots": 26,
+      "sourceSpecificTail": "S1 +68 is float50; S2 +68 is00911B50 pointer followed by float constants. Possible patched S2 extension is preserved but not used/certified by membership closure.",
+      "constructor": "00496D90",
+      "baseConstructor": "0047AA80",
+      "allocationSlot04": "0041C130",
+      "validitySlot08": "00496040",
+      "typeSlot24": "00468E60",
+      "nativeType": 11
+    },
+    "personVtable": {
+      "start": "0079C780",
+      "prefixEndExclusive": "0079C7D0",
+      "constructor": "00489F10",
+      "allocationSlot04": "004883F0",
+      "validitySlot08": "00488430",
+      "isTypeSlot2C": "004883D0",
+      "nativeType": 10
+    },
+    "pointerDomain": "Fixed canonical readable slots and original vtable/IAT dispatch. Getter pointer construction precedes validity/field reads. Missing reached in-range slots are missing model data, not native null/invalid.",
+    "membership": "Live officer location+9C signed87..1086 -> troop slot(location-87); native validity; canonical actor pointer-to-ID; leader+0C or exactly deputies+10/+14 match.",
+    "troopValidity": "virtual+24==11; native-valid leader from signed person getter0..1099; exactly two deputies each signed<1100. Negative deputy values are allowed and deputy person rows are never validated.",
+    "personValidity": "Canonical virtual+04 checks is-type10 then raw+17C!=0 or signed status0..8. virtual+08 first allocation, then raw+17C!=0 or status not6/8. Fields are read live.",
+    "platformBoundary": "0047A630 calls00472070 pointer probes via IAT and tail-dispatches virtual+08. Canonical readable pointer success is an explicit supported-domain assumption, not process memory verification.",
+    "excluded": [
+      "troop position virtual+3C",
+      "mutable fallback06EE794C",
+      "noncanonical vtable effects",
+      "S2 patched tail00911B50 business and unproven vtable tail extent",
+      "arbitrary/misaligned pointers",
+      "platform probe failures",
+      "stock certification",
+      "original executable execution"
+    ]
+  }
+}

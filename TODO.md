@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-70 native zero-refund tail distance
-> Integration baseline: PR #27 merged; this theme starts at `8b21e340d577810ca664e829d1d9cb35b1046fc4`
+> Current integration: P0-71 native troop membership
+> Integration baseline: PR #28 merged; this theme starts at `c190abfd43985251eee4936fdccb5d3910d4fed7`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-05 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: native troop membership
+
+- P0-71 replaces the reached004891C0 membership observation with native live-location lookup, canonical troop validity and leader/two-deputy membership in a new explicit troop-slot frame; all17 inherited entries remain and the new troop-member entry makes18. Old APIs/frames/traces are frozen
+- Native troop validity derives the leader predicate from live raw person17C/status, then checks each signed deputy<1100. All negative deputy sentinels pass; deputy person rows are not read. A matching leader cannot bypass an invalid deputy, and this helper adds no actor-validity gate
+- Unknown troop vtables retain exact read-only queries bound to full live frame/source/stack; missing reached troop or leader rows reject atomically. No location-only shortcut, guessed member list or implicit callback identity is introduced
+- Guide: `docs/rules/106-native-troop-membership.md`; fresh latest-main112/112 commands passed: TypeScript,85 Node tests,109 Python checker commands and2 demos. Every command used the shared fcntl lock; npm/node inherited NODE_OPTIONS=--max-old-space-size=512 --test-reporter=tap, with product argv unchanged. The17 new plus12/13 inherited source groups,31 model groups,both whole-IDB/all1257 selected raw intervals and8 historical reviewer probe groups passed. Independent integration-delta review found no blocker; all1347 files/index stayed unchanged across validation and all112 log hashes were checked. Only5 result documents were updated afterward for separate review. Historical extraction has51 focused intervals/1951 selected bytes,21 new unique boundaries/365 newly recovered machine-code bytes and598 instructions; Capstone5.0.7 reports were hash-checked, not re-decoded
+- Still open: non-base position/fallback06EE794C, custom vtables and S2 vtable-tail extent/virtual+68 caller/business, canonical ruler/capture, surrender/captive policy, force extinction, recursive-return ruler ownership, positive refunds/resources, other cancellation bodies, presentation internals, event9 troop reaction, S2 effects/observers, unrepresented memory/platform, global RNG and runtime/clean-stock/Vanilla certification
 
 ### Completed bounded implementation: native zero-refund tail distance
 

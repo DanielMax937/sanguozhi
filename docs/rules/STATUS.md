@@ -2,7 +2,13 @@
 
 更新：2026-10-05 UTC。
 
-## 最新完成：P0-70原生零退款tail距离
+## 最新完成：P0-71原生部队成员判断
+
+[106-native-troop-membership.md](106-native-troop-membership.md)在新显式troop-slot frame内直接执行004891C0：live location87..1086转换slot，canonical troop validity从leader raw17C/status派生，再依次检查两deputy signed<1100，最后匹配leader/两deputy。负deputy哨兵全允许且不读取deputy person；匹配leader不能绕过无效deputy，helper不添加actor-validity门。未知vtable仍精确full-frame/source/stack只读观察，缺少reached slot原子reject。17继承入口加新troop-member共18入口，旧API/frame/trace冻结。
+
+基线为PR #28已合并main `c190abfd43985251eee4936fdccb5d3910d4fed7`。最新main全新完整112/112命令回归通过：TypeScript、85 Node tests、109 Python checker命令与2 demos；所有命令逐条使用同一fcntl锁，npm/node继承NODE_OPTIONS=--max-old-space-size=512 --test-reporter=tap，保留waiting/start/exit/release及同inode记录，产品argv未改。17组新source及12/13组继承source、31组独立model通过；两份whole-IDB与1257个raw-ID1选定区间重新核验通过（S1 622/74,069 interval bytes，S2 635/74,451，含重叠区间）；既有8组独审probe在正式candidate重跑通过。独立集成delta审阅无阻断：58项生产/model/raw/report逐字节继承已审版本，P0-70→P0-69→P0-68→P0-67递归证明只变metadata/基线断言，含P070/P071独立固定历史提取baseline而不改raw报告。1347 tracked文件/index在全测前后一致，112条日志hash逐一核验；之后仅补5份文档结果文字并另行复核。历史提取51 focused区间/1951 selected bytes，21新unique边界/365新机器码字节，45 code区间/598指令；Capstone5.0.7历史报告只核hash，本次未重新解码。未执行游戏EXE，未声称远端CI或stock认证。非base位置与fallback06EE794C、S2尾extent/virtual+68 caller/business、canonical ruler/capture、surrender/captive、force灭亡、recursive-return ruler ownership、其余handler/positive refund、presentation内部、event9部队反应、S2 effects/observer、未建模memory/platform、clean-stock/Vanilla及全局RNG仍open。
+
+## 历史完成：P0-70原生零退款tail距离
 
 [105-native-tail-distance.md](105-native-tail-distance.md)在同一live frame中将005B8400尾部0049E4D0距离观察替换为原生领土和source-local距离表求值。先比较normalized current与raw home，再转换getter；current领土保存后仍读取home，子scope退出后将distance保存到parent tail，后续callback不重算。duration wrapper fresh复验actor validity并写保存值低byte，-1→255。两源领土/距离表保持分离；真实矩阵均对称，非对称probe仅为synthetic索引测试。旧API/frame/trace冻结，17入口均保留。
 

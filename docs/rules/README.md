@@ -1,5 +1,7 @@
 > 最新capture人员/城市容量来源与有界模型：[P0-49](84-capture-personnel-source-profile.md)；完整人员迁移、AI处分和stock等价仍开放。
 
+新增[P0-71原生部队成员判断](106-native-troop-membership.md)：live location、leader raw validity、signed deputy<1100与原生成员匹配；18入口/新troop frame，旧API和unknown边界保留；17+12/13组source、31组model、双IDB及8组既有独审probe通过；最新main全新112/112命令通过，文件/index冻结一致，集成delta独审无阻断。
+
 新增[P0-70原生零退款tail距离](105-native-tail-distance.md)：同frame领土/源分离距离表、parent saved distance与live validity低byte写回；零新增原始机器码字节，旧API及其余证据债保留；12+13组source、29组model、双IDB及8组既有独审probe通过；最新main全新110/110命令通过，文件/index冻结一致，集成delta独审无阻断。
 
 新增[P0-69 generic设施入口与早返](104-generic-facility.md)：004B40C0入口、generic87..16383共享frame归属与明确0/1结果；canonical完整观察及其余证据债保留；13+13组source、28组model、双IDB、9组既有独审probe通过；108命令集合经重试全过（首轮107/108，lifecycle以512MiB old-space上限重试成功，137原因未确认），集成delta独审无阻断。

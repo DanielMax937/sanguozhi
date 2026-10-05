@@ -1,0 +1,7 @@
+00489F10  56                             push     esi
+00489F11  8b f1                          mov      esi, ecx
+00489F13  e8 b8 06 ff ff                 call     0x47a5d0
+00489F18  c7 06 80 c7 79 00              mov      dword ptr [esi], 0x79c780
+00489F1E  8b c6                          mov      eax, esi
+00489F20  5e                             pop      esi
+00489F21  c3                             ret

@@ -1,0 +1,20 @@
+00495390  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00495394  85 c0                          test     eax, eax
+00495396  7c 17                          jl       0x4953af
+00495398  3d 4b 04 00 00                 cmp      eax, 0x44b
+0049539D  7f 10                          jg       0x4953af
+0049539F  56                             push     esi
+004953A0  8b 71 0c                       mov      esi, dword ptr [ecx + 0xc]
+004953A3  33 d2                          xor      edx, edx
+004953A5  3b f0                          cmp      esi, eax
+004953A7  0f 94 c2                       sete     dl
+004953AA  5e                             pop      esi
+004953AB  85 d2                          test     edx, edx
+004953AD  75 0d                          jne      0x4953bc
+004953AF  50                             push     eax
+004953B0  e8 8b ff ff ff                 call     0x495340
+004953B5  85 c0                          test     eax, eax
+004953B7  75 03                          jne      0x4953bc
+004953B9  c2 04 00                       ret      4
+004953BC  b8 01 00 00 00                 mov      eax, 1
+004953C1  c2 04 00                       ret      4
