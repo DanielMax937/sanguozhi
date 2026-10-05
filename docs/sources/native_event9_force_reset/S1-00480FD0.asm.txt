@@ -1,0 +1,9 @@
+00480FD0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00480FD4  83 f8 1a                       cmp      eax, 0x1a
+00480FD7  74 0a                          je       0x480fe3
+00480FD9  83 f8 01                       cmp      eax, 1
+00480FDC  74 05                          je       0x480fe3
+00480FDE  33 c0                          xor      eax, eax
+00480FE0  c2 04 00                       ret      4
+00480FE3  b8 01 00 00 00                 mov      eax, 1
+00480FE8  c2 04 00                       ret      4
