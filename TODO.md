@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-67 officer relocation and fixed movement preparation
-> Integration baseline: PR #24 merged; this theme starts at `5215348ebd12cd4bc7b221008775052411fb92bb`
+> Current integration: P0-68 live zero-refund cancellation handlers 9/10/12/22
+> Integration baseline: PR #25 merged; this theme starts at `e8bae319e5d1b08057fd091a90d305d58c9d7669`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-05 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: live zero-refund cancellation handlers 9/10/12/22
+
+- P0-68 executes four source-local handler gates/control in the shared relocation/cancellation/event frame; existing23/24 remain native, with one observation order and one revision
+- 9/10 only gate signed arg0 range0..16383 and preserve the discarded actor-force validity read; 12 gates0..1099 and constructs its fixed-array target pointer without requiring a target row; 22 requires a valid target force and saves actor force/color before notification
+- The four presentation segments remain exact full-frame/RNG observations or atomic rejection; 9/10/12 late color reads stay inside them. The zero-refund tail reads the live actor after presentation and successful handlers return1 even if callbacks invalidate it
+- Guide: `docs/rules/103-live-zero-refund.md`; 13 source groups, 28 independent-model groups and both whole-IDB/raw-ID1 checks passed. Fresh latest-main106-command regression and independent integration-delta review passed; the first lifecycle subprocess failure is retained in the validation record, with its cause unconfirmed
+- Still open: other cancellation handlers, positive refunds/resources, presentation internals, tail-distance observations, S2 effects/observers, ruler/capture, troop membership/non-base positions, event9 troop reaction, force extinction, stock/Vanilla and global RNG
 
 ### Completed bounded implementation: officer relocation and fixed movement
 

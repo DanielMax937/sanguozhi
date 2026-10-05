@@ -4843,3 +4843,8 @@ type RuleEvidence = {
 ### P0-67武将迁移与固定参数移动准备
 
 [102-officer-relocation.md](102-officer-relocation.md)新增独立版本，在P0-66共享frame中展开004A8270、allocated取消注册分派及固定参数004A7990。保留status2内嵌旧太守清理、ruler live判断、same-home不取消、away两处direct acted、保存distance低byte不复验写回与live governor刷新。004B40C0、其余cancel handler、真实troop成员/非base位置、event9部队反应、force灭亡和stock/Vanilla/全局RNG仍为明确观察或open。 坐标read-only query绑定source/person/live location/全before/stack；mutable fallback坐标06EE794C不能从IDB快照默认。所有未知可变作用仍需完整before→after/RNG或原子reject；工程预算不认证原作终止。
+
+
+### P0-68 live零退款取消9/10/12/22
+
+[103-live-zero-refund.md](103-live-zero-refund.md)在P0-67共享frame中直接执行mission9/10/12/22的gate与control，复用notification、零退款return、relocation和真实event分派；23/24维持既有原生实现。9/10仅target数值范围门并保留丢弃的force validity读取，12只构造target person pointer，22验证target force并保存actor color。四段presentation仍需完整before→after/RNG观察或原子reject；tail fresh读取actor，成功body固定return1。旧API、模型测试和raw来源字节不变。 仅这四个whole-handler观察被收窄；其他handler、非零退款/资源、presentation内部、tail距离观察、S2 effects/observer、完整004B40C0 ruler/capture、真实troop成员/非base位置、event9部队反应、force灭亡、未建模memory/platform域及全局RNG继续open。S1/S2仍为MOD-associated；相同selected bytes不认证clean-stock PK、Vanilla或console。上文旧版本说明保持其历史边界。

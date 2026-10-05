@@ -1,0 +1,1478 @@
+{
+  "schemaVersion": 1,
+  "profileId": "source-idb-S1-S2-live-zero-refund-v1",
+  "baselineCommit": "e8bae319e5d1b08057fd091a90d305d58c9d7669",
+  "integrationStatus": "versioned-theme-on-merged-main",
+  "sources": [
+    {
+      "source": "S1",
+      "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+      "recordedInputPath": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+      "recordedExeSha256": "30d33b44876b84a8e87570873a86de88c65d2491c7e1cdeeb5883dc4b12feefb",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip"
+    },
+    {
+      "source": "S2",
+      "idbSha256": "aa7f2c983b266633d6e23c494d4f8e1b03e5251632505cae103e176ae850dfd8",
+      "recordedInputPath": "C:\\Games\\san11\\血色衣冠6.0sp5(整合包240612)\\San11Pk\\san11pk_dump.exe",
+      "recordedExeSha256": "b1e9467e9612c23af83f6feda8414bc9ee99eb62c6862a84f7f4c5a8822b9da9",
+      "url": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/ida-db/san11pk_dump.exe.idb.7z"
+    }
+  ],
+  "stockOriginalVerified": false,
+  "originalExeExecuted": false,
+  "recordedExeHashesIndependentlyVerified": false,
+  "adoption": {
+    "PC-PK1.1": "compatibility-reconstruction",
+    "PC-Vanilla-assumed": "compatibility-assumption",
+    "PS2-Wii": "open"
+  },
+  "provenance": {
+    "verificationDate": "2026-10-05",
+    "sourceClassification": "Both S1 and S2 are MOD-associated IDBs. Recorded executable hashes are metadata, not independently verified executable files.",
+    "method": "Inherited emitted-byte rows, an independent stdlib byte/relative-call parser, and optional whole-IDB/raw-ID1 verification. No target executable or machine code execution.",
+    "sourceEvidence": "Selected source-local static bytes; canonical fixed vtables, readable complete required slots and inherited frame assumptions remain explicit.",
+    "stockEvidence": "No clean-stock executable was supplied or independently verified. Selected S1/S2 equality is not original PK, Vanilla, console or whole-game equivalence.",
+    "verificationArtifacts": [
+      {
+        "file": "raw-verification.json",
+        "sha256": "4893af46424bacb28dcb150dfbe3433e74380bccf2993bfbdfcd9cb2c6e47bbc"
+      },
+      {
+        "file": "disassembly-verification.json",
+        "sha256": "058d92ca4c7aae832f8b5e6cd648c4013dad987950a18ce91c250e8521f3614b"
+      }
+    ]
+  },
+  "priorEvidence": {
+    "path": "docs/sources/officer-relocation.json",
+    "sha256": "198d78ac9ab81bb8d05c3dffb9b382421a3a672a26a11058b1acdad34c70f3a9"
+  },
+  "inheritedChecker": {
+    "path": "scripts/check_officer_relocation_source.py",
+    "sha256": "94217a6ad86377bd8af579dd166d45168012adac4a996310dabe5305b09f5a71"
+  },
+  "retainedApiFiles": [
+    {
+      "path": "scripts/officer_relocation_profile.py",
+      "sha256": "7a538a9cc7662c3bf0e8e62c9bf9a9007e0fae2a0fcfa14b65a84e06363fb538"
+    },
+    {
+      "path": "scripts/officer_relocation_primitives.py",
+      "sha256": "f0787cd4f58a47ed83806d851ab8c52fce08817354cee9255c9ad124cd47cc51"
+    },
+    {
+      "path": "scripts/officer_relocation_tables.py",
+      "sha256": "be00dd195a64d5782e25fb17d89cb1784ed8f97b9c7245c80ce85fe49fc0872f"
+    },
+    {
+      "path": "scripts/check_officer_relocation_profile.py",
+      "sha256": "4e461c5b60cab60fea26f87fec3a158129c6757defd871b1fa935f6821abca53"
+    }
+  ],
+  "ranges": [
+    {
+      "kind": "code",
+      "source": "S1",
+      "start": "005CB050",
+      "endExclusive": "005CB177",
+      "sha256": "63ef89f2b55faae9aea25c885ae229a65ed24487bca73410bbf9b3d37bbae6c9",
+      "file": "S1-005CB050.asm.txt",
+      "artifactSha256": "26298ce47a3b99f69ac23c1a23dc9c77afebcdc9bc156632a17239d2a677ee83",
+      "inheritedManifest": "docs/sources/personnel-detachment-source-profile.json",
+      "inheritedRange": {
+        "source": "S1",
+        "start": "005CB050",
+        "endExclusive": "005CB177",
+        "sha256": "63ef89f2b55faae9aea25c885ae229a65ed24487bca73410bbf9b3d37bbae6c9",
+        "file": "S1-mission-code-04.asm.txt",
+        "kind": "code",
+        "lineStart": 509,
+        "lineCount": 108
+      },
+      "boundaryKind": "complete-recovered-handler-interval"
+    },
+    {
+      "kind": "code",
+      "source": "S1",
+      "start": "005D5DD0",
+      "endExclusive": "005D5EF7",
+      "sha256": "918f1b3d84c37b10c36ebdd81f78499ee9158c3bbb535831b3b52a6805daf6f4",
+      "file": "S1-005D5DD0.asm.txt",
+      "artifactSha256": "685c739a721440f19d019431e5f71ebd32b988d6db6109b8a40061fed13ba1f1",
+      "inheritedManifest": "docs/sources/personnel-detachment-source-profile.json",
+      "inheritedRange": {
+        "source": "S1",
+        "start": "005D5DD0",
+        "endExclusive": "005D5EF7",
+        "sha256": "918f1b3d84c37b10c36ebdd81f78499ee9158c3bbb535831b3b52a6805daf6f4",
+        "file": "S1-mission-code-05.asm.txt",
+        "kind": "code",
+        "lineStart": 226,
+        "lineCount": 108
+      },
+      "boundaryKind": "complete-recovered-handler-interval"
+    },
+    {
+      "kind": "code",
+      "source": "S1",
+      "start": "005C4E70",
+      "endExclusive": "005C4F7E",
+      "sha256": "70416a83c176fe2d8535e3f834fd5ceebdcce0c290ac808741beb5d3ba742261",
+      "file": "S1-005C4E70.asm.txt",
+      "artifactSha256": "79de2f6819f379470a9abacb11436f451198304c5931b239e9eac0854ef79782",
+      "inheritedManifest": "docs/sources/personnel-detachment-source-profile.json",
+      "inheritedRange": {
+        "source": "S1",
+        "start": "005C4E70",
+        "endExclusive": "005C4F7E",
+        "sha256": "70416a83c176fe2d8535e3f834fd5ceebdcce0c290ac808741beb5d3ba742261",
+        "file": "S1-mission-code-04.asm.txt",
+        "kind": "code",
+        "lineStart": 150,
+        "lineCount": 100
+      },
+      "boundaryKind": "complete-recovered-handler-interval"
+    },
+    {
+      "kind": "code",
+      "source": "S1",
+      "start": "005BEDA0",
+      "endExclusive": "005BEEE2",
+      "sha256": "b5f6702bc864e81bd071cf85e70e5782b29f7b0716acb96b9c13e055091c601e",
+      "file": "S1-005BEDA0.asm.txt",
+      "artifactSha256": "95897f894273b4e54618aafead0e60349973bb3d123a1d88a8f623b114f4acd5",
+      "inheritedManifest": "docs/sources/personnel-detachment-source-profile.json",
+      "inheritedRange": {
+        "source": "S1",
+        "start": "005BEDA0",
+        "endExclusive": "005BEEE2",
+        "sha256": "b5f6702bc864e81bd071cf85e70e5782b29f7b0716acb96b9c13e055091c601e",
+        "file": "S1-mission-code-03.asm.txt",
+        "kind": "code",
+        "lineStart": 590,
+        "lineCount": 116
+      },
+      "boundaryKind": "complete-recovered-handler-interval"
+    },
+    {
+      "kind": "code",
+      "source": "S2",
+      "start": "005CB050",
+      "endExclusive": "005CB177",
+      "sha256": "63ef89f2b55faae9aea25c885ae229a65ed24487bca73410bbf9b3d37bbae6c9",
+      "file": "S2-005CB050.asm.txt",
+      "artifactSha256": "26298ce47a3b99f69ac23c1a23dc9c77afebcdc9bc156632a17239d2a677ee83",
+      "inheritedManifest": "docs/sources/personnel-detachment-source-profile.json",
+      "inheritedRange": {
+        "source": "S2",
+        "start": "005CB050",
+        "endExclusive": "005CB177",
+        "sha256": "63ef89f2b55faae9aea25c885ae229a65ed24487bca73410bbf9b3d37bbae6c9",
+        "file": "S2-mission-code-04.asm.txt",
+        "kind": "code",
+        "lineStart": 509,
+        "lineCount": 108
+      },
+      "boundaryKind": "complete-recovered-handler-interval"
+    },
+    {
+      "kind": "code",
+      "source": "S2",
+      "start": "005D5DD0",
+      "endExclusive": "005D5EF7",
+      "sha256": "918f1b3d84c37b10c36ebdd81f78499ee9158c3bbb535831b3b52a6805daf6f4",
+      "file": "S2-005D5DD0.asm.txt",
+      "artifactSha256": "685c739a721440f19d019431e5f71ebd32b988d6db6109b8a40061fed13ba1f1",
+      "inheritedManifest": "docs/sources/personnel-detachment-source-profile.json",
+      "inheritedRange": {
+        "source": "S2",
+        "start": "005D5DD0",
+        "endExclusive": "005D5EF7",
+        "sha256": "918f1b3d84c37b10c36ebdd81f78499ee9158c3bbb535831b3b52a6805daf6f4",
+        "file": "S2-mission-code-05.asm.txt",
+        "kind": "code",
+        "lineStart": 226,
+        "lineCount": 108
+      },
+      "boundaryKind": "complete-recovered-handler-interval"
+    },
+    {
+      "kind": "code",
+      "source": "S2",
+      "start": "005C4E70",
+      "endExclusive": "005C4F7E",
+      "sha256": "70416a83c176fe2d8535e3f834fd5ceebdcce0c290ac808741beb5d3ba742261",
+      "file": "S2-005C4E70.asm.txt",
+      "artifactSha256": "79de2f6819f379470a9abacb11436f451198304c5931b239e9eac0854ef79782",
+      "inheritedManifest": "docs/sources/personnel-detachment-source-profile.json",
+      "inheritedRange": {
+        "source": "S2",
+        "start": "005C4E70",
+        "endExclusive": "005C4F7E",
+        "sha256": "70416a83c176fe2d8535e3f834fd5ceebdcce0c290ac808741beb5d3ba742261",
+        "file": "S2-mission-code-04.asm.txt",
+        "kind": "code",
+        "lineStart": 150,
+        "lineCount": 100
+      },
+      "boundaryKind": "complete-recovered-handler-interval"
+    },
+    {
+      "kind": "code",
+      "source": "S2",
+      "start": "005BEDA0",
+      "endExclusive": "005BEEE2",
+      "sha256": "b5f6702bc864e81bd071cf85e70e5782b29f7b0716acb96b9c13e055091c601e",
+      "file": "S2-005BEDA0.asm.txt",
+      "artifactSha256": "95897f894273b4e54618aafead0e60349973bb3d123a1d88a8f623b114f4acd5",
+      "inheritedManifest": "docs/sources/personnel-detachment-source-profile.json",
+      "inheritedRange": {
+        "source": "S2",
+        "start": "005BEDA0",
+        "endExclusive": "005BEEE2",
+        "sha256": "b5f6702bc864e81bd071cf85e70e5782b29f7b0716acb96b9c13e055091c601e",
+        "file": "S2-mission-code-03.asm.txt",
+        "kind": "code",
+        "lineStart": 590,
+        "lineCount": 116
+      },
+      "boundaryKind": "complete-recovered-handler-interval"
+    }
+  ],
+  "callLedgers": {
+    "S1": {
+      "005CB050": [
+        {
+          "site": "005CB063",
+          "bytes": "e8 c8 f5 ea ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005CB087",
+          "bytes": "e8 74 5c ec ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005CB08F",
+          "bytes": "e8 9c f5 ea ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005CB09F",
+          "bytes": "e8 0c e7 eb ff",
+          "kind": "direct",
+          "target": "004897B0"
+        },
+        {
+          "site": "005CB0C1",
+          "bytes": "ff 50 40",
+          "kind": "indirect"
+        },
+        {
+          "site": "005CB0CA",
+          "bytes": "e8 d1 59 ec ff",
+          "kind": "direct",
+          "target": "00490AA0"
+        },
+        {
+          "site": "005CB0D0",
+          "bytes": "e8 5b f5 ea ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005CB0D6",
+          "bytes": "e8 f5 d0 fe ff",
+          "kind": "direct",
+          "target": "005B81D0"
+        },
+        {
+          "site": "005CB0E8",
+          "bytes": "e8 13 5c ec ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005CB0FB",
+          "bytes": "e8 40 69 ff ff",
+          "kind": "direct",
+          "target": "005C1A40"
+        },
+        {
+          "site": "005CB112",
+          "bytes": "e8 79 02 ed ff",
+          "kind": "direct",
+          "target": "0049B390"
+        },
+        {
+          "site": "005CB120",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005CB138",
+          "bytes": "e8 63 55 f0 ff",
+          "kind": "direct",
+          "target": "004D06A0"
+        },
+        {
+          "site": "005CB143",
+          "bytes": "e8 28 f6 ea ff",
+          "kind": "direct",
+          "target": "0047A770"
+        },
+        {
+          "site": "005CB14D",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005CB156",
+          "bytes": "e8 75 fc 06 00",
+          "kind": "direct",
+          "target": "0063ADD0"
+        },
+        {
+          "site": "005CB161",
+          "bytes": "e8 9a d2 fe ff",
+          "kind": "direct",
+          "target": "005B8400"
+        }
+      ],
+      "005D5DD0": [
+        {
+          "site": "005D5DE3",
+          "bytes": "e8 48 48 ea ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005D5E07",
+          "bytes": "e8 f4 ae eb ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005D5E0F",
+          "bytes": "e8 1c 48 ea ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005D5E1F",
+          "bytes": "e8 8c 39 eb ff",
+          "kind": "direct",
+          "target": "004897B0"
+        },
+        {
+          "site": "005D5E41",
+          "bytes": "ff 50 40",
+          "kind": "indirect"
+        },
+        {
+          "site": "005D5E4A",
+          "bytes": "e8 51 ac eb ff",
+          "kind": "direct",
+          "target": "00490AA0"
+        },
+        {
+          "site": "005D5E50",
+          "bytes": "e8 db 47 ea ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005D5E56",
+          "bytes": "e8 75 23 fe ff",
+          "kind": "direct",
+          "target": "005B81D0"
+        },
+        {
+          "site": "005D5E68",
+          "bytes": "e8 93 ae eb ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005D5E7B",
+          "bytes": "e8 c0 bb fe ff",
+          "kind": "direct",
+          "target": "005C1A40"
+        },
+        {
+          "site": "005D5E92",
+          "bytes": "e8 f9 54 ec ff",
+          "kind": "direct",
+          "target": "0049B390"
+        },
+        {
+          "site": "005D5EA0",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005D5EB8",
+          "bytes": "e8 e3 a7 ef ff",
+          "kind": "direct",
+          "target": "004D06A0"
+        },
+        {
+          "site": "005D5EC3",
+          "bytes": "e8 a8 48 ea ff",
+          "kind": "direct",
+          "target": "0047A770"
+        },
+        {
+          "site": "005D5ECD",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005D5ED6",
+          "bytes": "e8 f5 4e 06 00",
+          "kind": "direct",
+          "target": "0063ADD0"
+        },
+        {
+          "site": "005D5EE1",
+          "bytes": "e8 1a 25 fe ff",
+          "kind": "direct",
+          "target": "005B8400"
+        }
+      ],
+      "005C4E70": [
+        {
+          "site": "005C4E83",
+          "bytes": "e8 a8 57 eb ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005C4EA7",
+          "bytes": "e8 54 be ec ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005C4EAF",
+          "bytes": "e8 7c 57 eb ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005C4EBF",
+          "bytes": "e8 ec 48 ec ff",
+          "kind": "direct",
+          "target": "004897B0"
+        },
+        {
+          "site": "005C4EE0",
+          "bytes": "e8 1b bc ec ff",
+          "kind": "direct",
+          "target": "00490B00"
+        },
+        {
+          "site": "005C4EE8",
+          "bytes": "e8 e3 32 ff ff",
+          "kind": "direct",
+          "target": "005B81D0"
+        },
+        {
+          "site": "005C4F02",
+          "bytes": "e8 d9 f6 ff ff",
+          "kind": "direct",
+          "target": "005C45E0"
+        },
+        {
+          "site": "005C4F19",
+          "bytes": "e8 72 64 ed ff",
+          "kind": "direct",
+          "target": "0049B390"
+        },
+        {
+          "site": "005C4F27",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005C4F3F",
+          "bytes": "e8 5c b7 f0 ff",
+          "kind": "direct",
+          "target": "004D06A0"
+        },
+        {
+          "site": "005C4F4A",
+          "bytes": "e8 21 58 eb ff",
+          "kind": "direct",
+          "target": "0047A770"
+        },
+        {
+          "site": "005C4F54",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005C4F5D",
+          "bytes": "e8 6e 5e 07 00",
+          "kind": "direct",
+          "target": "0063ADD0"
+        },
+        {
+          "site": "005C4F68",
+          "bytes": "e8 93 34 ff ff",
+          "kind": "direct",
+          "target": "005B8400"
+        }
+      ],
+      "005BEDA0": [
+        {
+          "site": "005BEDB3",
+          "bytes": "e8 78 b8 eb ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005BEDD7",
+          "bytes": "e8 24 1f ed ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005BEDDF",
+          "bytes": "e8 4c b8 eb ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005BEDEF",
+          "bytes": "e8 bc a9 ec ff",
+          "kind": "direct",
+          "target": "004897B0"
+        },
+        {
+          "site": "005BEDFA",
+          "bytes": "e8 a1 1c ed ff",
+          "kind": "direct",
+          "target": "00490AA0"
+        },
+        {
+          "site": "005BEE04",
+          "bytes": "e8 27 b8 eb ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005BEE27",
+          "bytes": "ff 50 40",
+          "kind": "indirect"
+        },
+        {
+          "site": "005BEE30",
+          "bytes": "e8 6b 1c ed ff",
+          "kind": "direct",
+          "target": "00490AA0"
+        },
+        {
+          "site": "005BEE38",
+          "bytes": "e8 f3 b7 eb ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005BEE4C",
+          "bytes": "e8 7f 93 ff ff",
+          "kind": "direct",
+          "target": "005B81D0"
+        },
+        {
+          "site": "005BEE6A",
+          "bytes": "e8 81 0b 01 00",
+          "kind": "direct",
+          "target": "005CF9F0"
+        },
+        {
+          "site": "005BEE81",
+          "bytes": "e8 0a c5 ed ff",
+          "kind": "direct",
+          "target": "0049B390"
+        },
+        {
+          "site": "005BEE8F",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005BEEA7",
+          "bytes": "e8 f4 17 f1 ff",
+          "kind": "direct",
+          "target": "004D06A0"
+        },
+        {
+          "site": "005BEEB8",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005BEEC1",
+          "bytes": "e8 0a bf 07 00",
+          "kind": "direct",
+          "target": "0063ADD0"
+        },
+        {
+          "site": "005BEECC",
+          "bytes": "e8 2f 95 ff ff",
+          "kind": "direct",
+          "target": "005B8400"
+        }
+      ]
+    },
+    "S2": {
+      "005CB050": [
+        {
+          "site": "005CB063",
+          "bytes": "e8 c8 f5 ea ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005CB087",
+          "bytes": "e8 74 5c ec ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005CB08F",
+          "bytes": "e8 9c f5 ea ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005CB09F",
+          "bytes": "e8 0c e7 eb ff",
+          "kind": "direct",
+          "target": "004897B0"
+        },
+        {
+          "site": "005CB0C1",
+          "bytes": "ff 50 40",
+          "kind": "indirect"
+        },
+        {
+          "site": "005CB0CA",
+          "bytes": "e8 d1 59 ec ff",
+          "kind": "direct",
+          "target": "00490AA0"
+        },
+        {
+          "site": "005CB0D0",
+          "bytes": "e8 5b f5 ea ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005CB0D6",
+          "bytes": "e8 f5 d0 fe ff",
+          "kind": "direct",
+          "target": "005B81D0"
+        },
+        {
+          "site": "005CB0E8",
+          "bytes": "e8 13 5c ec ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005CB0FB",
+          "bytes": "e8 40 69 ff ff",
+          "kind": "direct",
+          "target": "005C1A40"
+        },
+        {
+          "site": "005CB112",
+          "bytes": "e8 79 02 ed ff",
+          "kind": "direct",
+          "target": "0049B390"
+        },
+        {
+          "site": "005CB120",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005CB138",
+          "bytes": "e8 63 55 f0 ff",
+          "kind": "direct",
+          "target": "004D06A0"
+        },
+        {
+          "site": "005CB143",
+          "bytes": "e8 28 f6 ea ff",
+          "kind": "direct",
+          "target": "0047A770"
+        },
+        {
+          "site": "005CB14D",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005CB156",
+          "bytes": "e8 75 fc 06 00",
+          "kind": "direct",
+          "target": "0063ADD0"
+        },
+        {
+          "site": "005CB161",
+          "bytes": "e8 9a d2 fe ff",
+          "kind": "direct",
+          "target": "005B8400"
+        }
+      ],
+      "005D5DD0": [
+        {
+          "site": "005D5DE3",
+          "bytes": "e8 48 48 ea ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005D5E07",
+          "bytes": "e8 f4 ae eb ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005D5E0F",
+          "bytes": "e8 1c 48 ea ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005D5E1F",
+          "bytes": "e8 8c 39 eb ff",
+          "kind": "direct",
+          "target": "004897B0"
+        },
+        {
+          "site": "005D5E41",
+          "bytes": "ff 50 40",
+          "kind": "indirect"
+        },
+        {
+          "site": "005D5E4A",
+          "bytes": "e8 51 ac eb ff",
+          "kind": "direct",
+          "target": "00490AA0"
+        },
+        {
+          "site": "005D5E50",
+          "bytes": "e8 db 47 ea ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005D5E56",
+          "bytes": "e8 75 23 fe ff",
+          "kind": "direct",
+          "target": "005B81D0"
+        },
+        {
+          "site": "005D5E68",
+          "bytes": "e8 93 ae eb ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005D5E7B",
+          "bytes": "e8 c0 bb fe ff",
+          "kind": "direct",
+          "target": "005C1A40"
+        },
+        {
+          "site": "005D5E92",
+          "bytes": "e8 f9 54 ec ff",
+          "kind": "direct",
+          "target": "0049B390"
+        },
+        {
+          "site": "005D5EA0",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005D5EB8",
+          "bytes": "e8 e3 a7 ef ff",
+          "kind": "direct",
+          "target": "004D06A0"
+        },
+        {
+          "site": "005D5EC3",
+          "bytes": "e8 a8 48 ea ff",
+          "kind": "direct",
+          "target": "0047A770"
+        },
+        {
+          "site": "005D5ECD",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005D5ED6",
+          "bytes": "e8 f5 4e 06 00",
+          "kind": "direct",
+          "target": "0063ADD0"
+        },
+        {
+          "site": "005D5EE1",
+          "bytes": "e8 1a 25 fe ff",
+          "kind": "direct",
+          "target": "005B8400"
+        }
+      ],
+      "005C4E70": [
+        {
+          "site": "005C4E83",
+          "bytes": "e8 a8 57 eb ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005C4EA7",
+          "bytes": "e8 54 be ec ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005C4EAF",
+          "bytes": "e8 7c 57 eb ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005C4EBF",
+          "bytes": "e8 ec 48 ec ff",
+          "kind": "direct",
+          "target": "004897B0"
+        },
+        {
+          "site": "005C4EE0",
+          "bytes": "e8 1b bc ec ff",
+          "kind": "direct",
+          "target": "00490B00"
+        },
+        {
+          "site": "005C4EE8",
+          "bytes": "e8 e3 32 ff ff",
+          "kind": "direct",
+          "target": "005B81D0"
+        },
+        {
+          "site": "005C4F02",
+          "bytes": "e8 d9 f6 ff ff",
+          "kind": "direct",
+          "target": "005C45E0"
+        },
+        {
+          "site": "005C4F19",
+          "bytes": "e8 72 64 ed ff",
+          "kind": "direct",
+          "target": "0049B390"
+        },
+        {
+          "site": "005C4F27",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005C4F3F",
+          "bytes": "e8 5c b7 f0 ff",
+          "kind": "direct",
+          "target": "004D06A0"
+        },
+        {
+          "site": "005C4F4A",
+          "bytes": "e8 21 58 eb ff",
+          "kind": "direct",
+          "target": "0047A770"
+        },
+        {
+          "site": "005C4F54",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005C4F5D",
+          "bytes": "e8 6e 5e 07 00",
+          "kind": "direct",
+          "target": "0063ADD0"
+        },
+        {
+          "site": "005C4F68",
+          "bytes": "e8 93 34 ff ff",
+          "kind": "direct",
+          "target": "005B8400"
+        }
+      ],
+      "005BEDA0": [
+        {
+          "site": "005BEDB3",
+          "bytes": "e8 78 b8 eb ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005BEDD7",
+          "bytes": "e8 24 1f ed ff",
+          "kind": "direct",
+          "target": "00490D00"
+        },
+        {
+          "site": "005BEDDF",
+          "bytes": "e8 4c b8 eb ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005BEDEF",
+          "bytes": "e8 bc a9 ec ff",
+          "kind": "direct",
+          "target": "004897B0"
+        },
+        {
+          "site": "005BEDFA",
+          "bytes": "e8 a1 1c ed ff",
+          "kind": "direct",
+          "target": "00490AA0"
+        },
+        {
+          "site": "005BEE04",
+          "bytes": "e8 27 b8 eb ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005BEE27",
+          "bytes": "ff 50 40",
+          "kind": "indirect"
+        },
+        {
+          "site": "005BEE30",
+          "bytes": "e8 6b 1c ed ff",
+          "kind": "direct",
+          "target": "00490AA0"
+        },
+        {
+          "site": "005BEE38",
+          "bytes": "e8 f3 b7 eb ff",
+          "kind": "direct",
+          "target": "0047A630"
+        },
+        {
+          "site": "005BEE4C",
+          "bytes": "e8 7f 93 ff ff",
+          "kind": "direct",
+          "target": "005B81D0"
+        },
+        {
+          "site": "005BEE6A",
+          "bytes": "e8 81 0b 01 00",
+          "kind": "direct",
+          "target": "005CF9F0"
+        },
+        {
+          "site": "005BEE81",
+          "bytes": "e8 0a c5 ed ff",
+          "kind": "direct",
+          "target": "0049B390"
+        },
+        {
+          "site": "005BEE8F",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005BEEA7",
+          "bytes": "e8 f4 17 f1 ff",
+          "kind": "direct",
+          "target": "004D06A0"
+        },
+        {
+          "site": "005BEEB8",
+          "bytes": "ff 52 3c",
+          "kind": "indirect"
+        },
+        {
+          "site": "005BEEC1",
+          "bytes": "e8 0a bf 07 00",
+          "kind": "direct",
+          "target": "0063ADD0"
+        },
+        {
+          "site": "005BEECC",
+          "bytes": "e8 2f 95 ff ff",
+          "kind": "direct",
+          "target": "005B8400"
+        }
+      ]
+    }
+  },
+  "branchLedgers": {
+    "S1": {
+      "005CB050": [
+        {
+          "site": "005CB06D",
+          "bytes": "74 43",
+          "target": "005CB0B2"
+        },
+        {
+          "site": "005CB077",
+          "bytes": "7c 05",
+          "target": "005CB07E"
+        },
+        {
+          "site": "005CB07C",
+          "bytes": "7e 03",
+          "target": "005CB081"
+        },
+        {
+          "site": "005CB099",
+          "bytes": "74 17",
+          "target": "005CB0B2"
+        },
+        {
+          "site": "005CB0A8",
+          "bytes": "7c 08",
+          "target": "005CB0B2"
+        },
+        {
+          "site": "005CB0B0",
+          "bytes": "7e 0b",
+          "target": "005CB0BD"
+        },
+        {
+          "site": "005CB0E0",
+          "bytes": "74 7c",
+          "target": "005CB15E"
+        }
+      ],
+      "005D5DD0": [
+        {
+          "site": "005D5DED",
+          "bytes": "74 43",
+          "target": "005D5E32"
+        },
+        {
+          "site": "005D5DF7",
+          "bytes": "7c 05",
+          "target": "005D5DFE"
+        },
+        {
+          "site": "005D5DFC",
+          "bytes": "7e 03",
+          "target": "005D5E01"
+        },
+        {
+          "site": "005D5E19",
+          "bytes": "74 17",
+          "target": "005D5E32"
+        },
+        {
+          "site": "005D5E28",
+          "bytes": "7c 08",
+          "target": "005D5E32"
+        },
+        {
+          "site": "005D5E30",
+          "bytes": "7e 0b",
+          "target": "005D5E3D"
+        },
+        {
+          "site": "005D5E60",
+          "bytes": "74 7c",
+          "target": "005D5EDE"
+        }
+      ],
+      "005C4E70": [
+        {
+          "site": "005C4E8D",
+          "bytes": "74 40",
+          "target": "005C4ECF"
+        },
+        {
+          "site": "005C4E97",
+          "bytes": "7c 05",
+          "target": "005C4E9E"
+        },
+        {
+          "site": "005C4E9C",
+          "bytes": "7e 03",
+          "target": "005C4EA1"
+        },
+        {
+          "site": "005C4EB9",
+          "bytes": "74 14",
+          "target": "005C4ECF"
+        },
+        {
+          "site": "005C4EC6",
+          "bytes": "7c 07",
+          "target": "005C4ECF"
+        },
+        {
+          "site": "005C4ECD",
+          "bytes": "7e 0b",
+          "target": "005C4EDA"
+        },
+        {
+          "site": "005C4EF2",
+          "bytes": "74 71",
+          "target": "005C4F65"
+        }
+      ],
+      "005BEDA0": [
+        {
+          "site": "005BEDBD",
+          "bytes": "74 51",
+          "target": "005BEE10"
+        },
+        {
+          "site": "005BEDC7",
+          "bytes": "7c 05",
+          "target": "005BEDCE"
+        },
+        {
+          "site": "005BEDCC",
+          "bytes": "7e 03",
+          "target": "005BEDD1"
+        },
+        {
+          "site": "005BEDE9",
+          "bytes": "74 25",
+          "target": "005BEE10"
+        },
+        {
+          "site": "005BEE0E",
+          "bytes": "75 0b",
+          "target": "005BEE1B"
+        },
+        {
+          "site": "005BEE42",
+          "bytes": "74 07",
+          "target": "005BEE4B"
+        },
+        {
+          "site": "005BEE56",
+          "bytes": "74 71",
+          "target": "005BEEC9"
+        }
+      ]
+    },
+    "S2": {
+      "005CB050": [
+        {
+          "site": "005CB06D",
+          "bytes": "74 43",
+          "target": "005CB0B2"
+        },
+        {
+          "site": "005CB077",
+          "bytes": "7c 05",
+          "target": "005CB07E"
+        },
+        {
+          "site": "005CB07C",
+          "bytes": "7e 03",
+          "target": "005CB081"
+        },
+        {
+          "site": "005CB099",
+          "bytes": "74 17",
+          "target": "005CB0B2"
+        },
+        {
+          "site": "005CB0A8",
+          "bytes": "7c 08",
+          "target": "005CB0B2"
+        },
+        {
+          "site": "005CB0B0",
+          "bytes": "7e 0b",
+          "target": "005CB0BD"
+        },
+        {
+          "site": "005CB0E0",
+          "bytes": "74 7c",
+          "target": "005CB15E"
+        }
+      ],
+      "005D5DD0": [
+        {
+          "site": "005D5DED",
+          "bytes": "74 43",
+          "target": "005D5E32"
+        },
+        {
+          "site": "005D5DF7",
+          "bytes": "7c 05",
+          "target": "005D5DFE"
+        },
+        {
+          "site": "005D5DFC",
+          "bytes": "7e 03",
+          "target": "005D5E01"
+        },
+        {
+          "site": "005D5E19",
+          "bytes": "74 17",
+          "target": "005D5E32"
+        },
+        {
+          "site": "005D5E28",
+          "bytes": "7c 08",
+          "target": "005D5E32"
+        },
+        {
+          "site": "005D5E30",
+          "bytes": "7e 0b",
+          "target": "005D5E3D"
+        },
+        {
+          "site": "005D5E60",
+          "bytes": "74 7c",
+          "target": "005D5EDE"
+        }
+      ],
+      "005C4E70": [
+        {
+          "site": "005C4E8D",
+          "bytes": "74 40",
+          "target": "005C4ECF"
+        },
+        {
+          "site": "005C4E97",
+          "bytes": "7c 05",
+          "target": "005C4E9E"
+        },
+        {
+          "site": "005C4E9C",
+          "bytes": "7e 03",
+          "target": "005C4EA1"
+        },
+        {
+          "site": "005C4EB9",
+          "bytes": "74 14",
+          "target": "005C4ECF"
+        },
+        {
+          "site": "005C4EC6",
+          "bytes": "7c 07",
+          "target": "005C4ECF"
+        },
+        {
+          "site": "005C4ECD",
+          "bytes": "7e 0b",
+          "target": "005C4EDA"
+        },
+        {
+          "site": "005C4EF2",
+          "bytes": "74 71",
+          "target": "005C4F65"
+        }
+      ],
+      "005BEDA0": [
+        {
+          "site": "005BEDBD",
+          "bytes": "74 51",
+          "target": "005BEE10"
+        },
+        {
+          "site": "005BEDC7",
+          "bytes": "7c 05",
+          "target": "005BEDCE"
+        },
+        {
+          "site": "005BEDCC",
+          "bytes": "7e 03",
+          "target": "005BEDD1"
+        },
+        {
+          "site": "005BEDE9",
+          "bytes": "74 25",
+          "target": "005BEE10"
+        },
+        {
+          "site": "005BEE0E",
+          "bytes": "75 0b",
+          "target": "005BEE1B"
+        },
+        {
+          "site": "005BEE42",
+          "bytes": "74 07",
+          "target": "005BEE4B"
+        },
+        {
+          "site": "005BEE56",
+          "bytes": "74 71",
+          "target": "005BEEC9"
+        }
+      ]
+    }
+  },
+  "handlers": [
+    {
+      "missionId": 9,
+      "entry": "005CB050",
+      "endExclusive": "005CB177",
+      "gateFailureResult": 0,
+      "successResult": 1,
+      "eventArgumentRead": false,
+      "actorGate": "0047A630 valid",
+      "currentGate": "fresh signed location0..86 else-1;00490D00 pointer saved in EBX;0047A630 valid",
+      "targetGate": "signed arg0 range0..16383 only",
+      "targetSaved": "numeric arg0 EDI before notification; building getter only inside presentation",
+      "actorForceBeforeNotification": "virtual+40,00490AA0,0047A630; validity result discarded",
+      "notification": "005B81D0 fresh actor/force/player/legion/direct-control reads",
+      "presentation": {
+        "start": "005CB0E2",
+        "endExclusive": "005CB15E",
+        "messageId": 5029,
+        "kind": "full-frame-RNG-effect-or-atomic-reject",
+        "savedArguments": [
+          "actor identity",
+          "current building pointer",
+          "numeric target ID"
+        ],
+        "color": "0047A770 on original actor after004D06A0; contained in opaque presentation region"
+      },
+      "tail": {
+        "helper": "005B8400",
+        "refund": 0,
+        "reads": "fresh location and home after presentation; does not reuse handler current/target pointers",
+        "validityRecheckAtTailEntry": false
+      }
+    },
+    {
+      "missionId": 10,
+      "entry": "005D5DD0",
+      "endExclusive": "005D5EF7",
+      "gateFailureResult": 0,
+      "successResult": 1,
+      "eventArgumentRead": false,
+      "actorGate": "0047A630 valid",
+      "currentGate": "fresh signed location0..86 else-1;00490D00 pointer saved in EBX;0047A630 valid",
+      "targetGate": "signed arg0 range0..16383 only",
+      "targetSaved": "numeric arg0 EDI before notification; building getter only inside presentation",
+      "actorForceBeforeNotification": "virtual+40,00490AA0,0047A630; validity result discarded",
+      "notification": "005B81D0 fresh actor/force/player/legion/direct-control reads",
+      "presentation": {
+        "start": "005D5E62",
+        "endExclusive": "005D5EDE",
+        "messageId": 8318,
+        "kind": "full-frame-RNG-effect-or-atomic-reject",
+        "savedArguments": [
+          "actor identity",
+          "current building pointer",
+          "numeric target ID"
+        ],
+        "color": "0047A770 on original actor after004D06A0; contained in opaque presentation region"
+      },
+      "tail": {
+        "helper": "005B8400",
+        "refund": 0,
+        "reads": "fresh location and home after presentation; does not reuse handler current/target pointers",
+        "validityRecheckAtTailEntry": false
+      }
+    },
+    {
+      "missionId": 12,
+      "entry": "005C4E70",
+      "endExclusive": "005C4F7E",
+      "gateFailureResult": 0,
+      "successResult": 1,
+      "eventArgumentRead": false,
+      "actorGate": "0047A630 valid",
+      "currentGate": "fresh signed location0..86 else-1;00490D00 pointer saved in EBX;0047A630 valid",
+      "targetGate": "signed arg0 range0..1099 only",
+      "targetSaved": "person pointer EDI before notification; no target validity test",
+      "actorForceBeforeNotification": "none",
+      "notification": "005B81D0 fresh actor/force/player/legion/direct-control reads",
+      "presentation": {
+        "start": "005C4EF4",
+        "endExclusive": "005C4F65",
+        "messageId": 5097,
+        "kind": "full-frame-RNG-effect-or-atomic-reject",
+        "savedArguments": [
+          "actor identity",
+          "current building pointer",
+          "target person pointer"
+        ],
+        "color": "0047A770 on original actor after004D06A0; contained in opaque presentation region"
+      },
+      "tail": {
+        "helper": "005B8400",
+        "refund": 0,
+        "reads": "fresh location and home after presentation; does not reuse handler current/target pointers",
+        "validityRecheckAtTailEntry": false
+      }
+    },
+    {
+      "missionId": 22,
+      "entry": "005BEDA0",
+      "endExclusive": "005BEEE2",
+      "gateFailureResult": 0,
+      "successResult": 1,
+      "eventArgumentRead": false,
+      "actorGate": "0047A630 valid",
+      "currentGate": "fresh signed location0..86 else-1;00490D00 pointer saved in EBX;0047A630 valid",
+      "targetGate": "00490AA0 force getter then0047A630 valid",
+      "targetSaved": "force pointer stack local before actor-force lookup and notification",
+      "actorForceBeforeNotification": "virtual+40,00490AA0,0047A630; saved force+44 if valid else-1",
+      "notification": "005B81D0 fresh actor/force/player/legion/direct-control reads",
+      "presentation": {
+        "start": "005BEE58",
+        "endExclusive": "005BEEC9",
+        "messageId": 5525,
+        "kind": "full-frame-RNG-effect-or-atomic-reject",
+        "savedArguments": [
+          "actor identity",
+          "current building pointer",
+          "target force pointer",
+          "saved force+44 or-1"
+        ],
+        "color": "saved pre-notification actor-force+44 or-1; no0047A770"
+      },
+      "tail": {
+        "helper": "005B8400",
+        "refund": 0,
+        "reads": "fresh location and home after presentation; does not reuse handler current/target pointers",
+        "validityRecheckAtTailEntry": false
+      }
+    }
+  ],
+  "contracts": {
+    "composition": "New versioned same-live-frame primitive; one revision; no old project transaction concatenation.",
+    "legacy": "Existing API/frame/replay/trace contracts and pinned files are unchanged.",
+    "presentation": "Opaque full-frame/RNG effect binds source, actor, exact region, saved native arguments, full caller stack and immediate before-frame; absent/stale/unused observations are rejected, not no-ops.",
+    "tail": "Reuse live zero-refund return/route/role/event primitives, including S2 query267 and mutable callbacks.",
+    "dispatch": "Cancellation wrapper captured mission and {-1,0,0} event words do not invoke event predicate. Event dispatch retains its own existing predicate gates.",
+    "noninterferenceAssumption": false,
+    "stockCertification": false
+  },
+  "boundaries": [
+    "Full presentation regions remain observed/rejected; no renderer or global RNG claim",
+    "Nonzero refunds and handlers other than9/10/12/22 are outside this addition; inherited23/24 remain supported",
+    "Inherited ruler capture, troop membership, positions, observer, S2 queries, force extinction and event tails remain bounded",
+    "No clean stock, Vanilla, console, real savefile, scheduler or runtime vtable certification"
+  ],
+  "rangeBudget": {
+    "intervals": 8,
+    "selectedBytesBothSources": 2364,
+    "identicalSourcePairs": 4,
+    "callSites": 130,
+    "branchSites": 56
+  }
+}
