@@ -1,0 +1,8 @@
+0047B710  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0047B714  50                             push     eax
+0047B715  81 c1 a4 00 00 00              add      ecx, 0xa4
+0047B71B  6a 04                          push     4
+0047B71D  51                             push     ecx
+0047B71E  e8 fd 6d ff ff                 call     0x472520
+0047B723  83 c4 0c                       add      esp, 0xc
+0047B726  c2 04 00                       ret      4

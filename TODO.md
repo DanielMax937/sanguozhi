@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-65 empty-legion dispatch, merge and raw reset
-> Integration baseline: PR #22 merged; this theme starts at `116c6dd44d7fc1d102b3dab6f9716a8dde3a4abe`
+> Current integration: P0-66 base ownership, durability and event9/10
+> Integration baseline: PR #23 merged; this theme starts at `874f6126bd82d4bfc2ff6daf778ec60a5120bc35`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
-> Updated: 2026-10-04 (UTC)
+> Updated: 2026-10-05 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: base ownership and event9/10
+
+- P0-66 expands004AD550 in the shared empty-legion merge frame: native ownership, S1/S2 durability maximum and signed16 clamp, city A4 bit0/1/4 dword resets, exact event selection
+- Executes event9/10 copied-list dispatch and source predicates, including mission0/38 home comparison and mission21 typed-context pointer matching; old APIs/traces unchanged
+- Newly reached non23/24 cancellation handlers and event9 troop-reaction004BA1D0 remain exact mutable full-frame/RNG observations or atomic rejection; no implicit identity callback
+- Guide: `docs/rules/101-base-ownership-events.md`; 20 source tests, 23 model tests, full102-command regression and independent review passed
+- Still open: those handler/troop-reaction internals, full004A8270 relocation, force extinction, ruler/capture, other events, stock/Vanilla and global RNG
 
 ### Completed bounded implementation: empty-legion dispatch and merge
 

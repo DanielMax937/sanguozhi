@@ -1,0 +1,16 @@
+0048DD70  56                             push     esi
+0048DD71  8b f1                          mov      esi, ecx
+0048DD73  e8 58 c8 fe ff                 call     0x47a5d0
+0048DD78  c7 06 d0 c7 79 00              mov      dword ptr [esi], 0x79c7d0
+0048DD7E  33 c0                          xor      eax, eax
+0048DD80  89 46 7c                       mov      dword ptr [esi + 0x7c], eax
+0048DD83  89 86 80 00 00 00              mov      dword ptr [esi + 0x80], eax
+0048DD89  89 46 78                       mov      dword ptr [esi + 0x78], eax
+0048DD8C  89 46 74                       mov      dword ptr [esi + 0x74], eax
+0048DD8F  89 86 84 00 00 00              mov      dword ptr [esi + 0x84], eax
+0048DD95  c7 86 88 00 00 00 0a 00 00 00  mov      dword ptr [esi + 0x88], 0xa
+0048DD9F  89 86 8c 00 00 00              mov      dword ptr [esi + 0x8c], eax
+0048DDA5  c7 46 70 44 bf 79 00           mov      dword ptr [esi + 0x70], 0x79bf44
+0048DDAC  8b c6                          mov      eax, esi
+0048DDAE  5e                             pop      esi
+0048DDAF  c3                             ret

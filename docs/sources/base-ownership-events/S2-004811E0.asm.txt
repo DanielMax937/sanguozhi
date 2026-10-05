@@ -1,0 +1,16 @@
+004811E0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+004811E4  85 c0                          test     eax, eax
+004811E6  7c 15                          jl       0x4811fd
+004811E8  83 f8 3f                       cmp      eax, 0x3f
+004811EB  7f 10                          jg       0x4811fd
+004811ED  50                             push     eax
+004811EE  83 c1 58                       add      ecx, 0x58
+004811F1  51                             push     ecx
+004811F2  e8 99 13 ff ff                 call     0x472590
+004811F7  83 c4 08                       add      esp, 8
+004811FA  c2 04 00                       ret      4
+004811FD  33 c0                          xor      eax, eax
+004811FF  83 7c 24 04 40                 cmp      dword ptr [esp + 4], 0x40
+00481204  75 01                          jne      0x481207
+00481206  40                             inc      eax
+00481207  c2 04 00                       ret      4

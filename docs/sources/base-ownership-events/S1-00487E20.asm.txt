@@ -1,0 +1,15 @@
+00487E20  56                             push     esi
+00487E21  8b f1                          mov      esi, ecx
+00487E23  e8 28 f3 ff ff                 call     0x487150
+00487E28  8b 4c 24 08                    mov      ecx, dword ptr [esp + 8]
+00487E2C  66 85 c9                       test     cx, cx
+00487E2F  7f 0a                          jg       0x487e3b
+00487E31  33 c0                          xor      eax, eax
+00487E33  66 89 46 10                    mov      word ptr [esi + 0x10], ax
+00487E37  5e                             pop      esi
+00487E38  c2 04 00                       ret      4
+00487E3B  66 3b c1                       cmp      ax, cx
+00487E3E  7e f3                          jle      0x487e33
+00487E40  66 89 4e 10                    mov      word ptr [esi + 0x10], cx
+00487E44  5e                             pop      esi
+00487E45  c2 04 00                       ret      4

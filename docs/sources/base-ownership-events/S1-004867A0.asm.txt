@@ -1,0 +1,9 @@
+004867A0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+004867A4  83 f8 ff                       cmp      eax, -1
+004867A7  74 09                          je       0x4867b2
+004867A9  85 c0                          test     eax, eax
+004867AB  7c 08                          jl       0x4867b5
+004867AD  83 f8 2e                       cmp      eax, 0x2e
+004867B0  7f 03                          jg       0x4867b5
+004867B2  89 41 0c                       mov      dword ptr [ecx + 0xc], eax
+004867B5  c2 04 00                       ret      4

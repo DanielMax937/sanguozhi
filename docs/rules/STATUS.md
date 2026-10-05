@@ -1,8 +1,14 @@
 # 规则审计当前状态
 
-更新：2026-10-04 UTC。
+更新：2026-10-05 UTC。
 
-## 最新完成：P0-65空军团分派、合并与raw reset
+## 最新完成：P0-66据点归属、耐久与event9/10
+
+[101-base-ownership-events.md](101-base-ownership-events.md)新增独立版本：在空军团merge中直接展开004AD550归属写、source分离耐久上限与有符号word裁剪、城市A4的bit0/1/4 dword重置，以及event9/10复制列表/predicate；保留saved locals与callback后的live读取。新触发的其余cancel handler、event9部队反应尾仍需精确可变观察或原子reject。旧API不变，004A8270/force/ruler/capture、其他event、stock/Vanilla和全局RNG继续open。
+
+20项source检查、23项独立oracle模型测试及完整102命令回归通过：TypeScript、85 Node tests、99 Python checkers、2 demos。双IDB完整fingerprint与483次raw-ID1区间检查通过（32,843 summed selected bytes，含重叠范围，不声称唯一字节覆盖）。独审另核366个predicate与1,262个ownership-prefix边界案例，发现并修复新事件context读取arg2..4被旧getter拒绝的问题，仅新增版本override，旧API未改。最终1,080 tracked文件冻结在全测前后无漂移，staged whitespace通过，无剩余独审阻断。验证结果文字在全测后单独复核；源、模型与测试字节不再改变。未执行EXE，未把本地回归称作远端CI；合并后的main另行验证。
+
+## 历史完成：P0-65空军团分派、合并与raw reset
 
 [正文](100-empty-legion-redistribution.md) · [结构化证据](../sources/empty-legion-redistribution.json)。基线main `116c6dd44d7fc1d102b3dab6f9716a8dde3a4abe`（PR #22已合）。
 

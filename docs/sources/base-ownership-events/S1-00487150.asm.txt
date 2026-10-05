@@ -1,0 +1,81 @@
+00487150  56                             push     esi
+00487151  57                             push     edi
+00487152  8b f9                          mov      edi, ecx
+00487154  57                             push     edi
+00487155  b9 58 19 20 07                 mov      ecx, 0x7201958
+0048715A  e8 11 a6 00 00                 call     0x491770
+0048715F  8b 4f 08                       mov      ecx, dword ptr [edi + 8]
+00487162  83 e9 00                       sub      ecx, 0
+00487165  74 5e                          je       0x4871c5
+00487167  49                             dec      ecx
+00487168  74 31                          je       0x48719b
+0048716A  49                             dec      ecx
+0048716B  0f 85 83 00 00 00              jne      0x4871f4
+00487171  83 f8 34                       cmp      eax, 0x34
+00487174  7c 15                          jl       0x48718b
+00487176  83 f8 56                       cmp      eax, 0x56
+00487179  7f 10                          jg       0x48718b
+0048717B  83 c0 cc                       add      eax, -0x34
+0048717E  50                             push     eax
+0048717F  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487184  e8 e7 98 00 00                 call     0x490a70
+00487189  eb 51                          jmp      0x4871dc
+0048718B  83 c8 ff                       or       eax, 0xffffffff
+0048718E  50                             push     eax
+0048718F  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487194  e8 d7 98 00 00                 call     0x490a70
+00487199  eb 41                          jmp      0x4871dc
+0048719B  83 f8 2a                       cmp      eax, 0x2a
+0048719E  7c 15                          jl       0x4871b5
+004871A0  83 f8 33                       cmp      eax, 0x33
+004871A3  7f 10                          jg       0x4871b5
+004871A5  83 c0 d6                       add      eax, -0x2a
+004871A8  50                             push     eax
+004871A9  b9 58 19 20 07                 mov      ecx, 0x7201958
+004871AE  e8 8d 98 00 00                 call     0x490a40
+004871B3  eb 27                          jmp      0x4871dc
+004871B5  83 c8 ff                       or       eax, 0xffffffff
+004871B8  50                             push     eax
+004871B9  b9 58 19 20 07                 mov      ecx, 0x7201958
+004871BE  e8 7d 98 00 00                 call     0x490a40
+004871C3  eb 17                          jmp      0x4871dc
+004871C5  85 c0                          test     eax, eax
+004871C7  7c 05                          jl       0x4871ce
+004871C9  83 f8 29                       cmp      eax, 0x29
+004871CC  7e 03                          jle      0x4871d1
+004871CE  83 c8 ff                       or       eax, 0xffffffff
+004871D1  50                             push     eax
+004871D2  b9 58 19 20 07                 mov      ecx, 0x7201958
+004871D7  e8 34 98 00 00                 call     0x490a10
+004871DC  8b f0                          mov      esi, eax
+004871DE  56                             push     esi
+004871DF  e8 4c 34 ff ff                 call     0x47a630
+004871E4  83 c4 04                       add      esp, 4
+004871E7  85 c0                          test     eax, eax
+004871E9  74 09                          je       0x4871f4
+004871EB  5f                             pop      edi
+004871EC  8b ce                          mov      ecx, esi
+004871EE  5e                             pop      esi
+004871EF  e9 dc 35 ff ff                 jmp      0x47a7d0
+004871F4  8b 47 08                       mov      eax, dword ptr [edi + 8]
+004871F7  85 c0                          test     eax, eax
+004871F9  7c 29                          jl       0x487224
+004871FB  83 f8 3f                       cmp      eax, 0x3f
+004871FE  7f 24                          jg       0x487224
+00487200  50                             push     eax
+00487201  b9 58 19 20 07                 mov      ecx, 0x7201958
+00487206  e8 85 99 00 00                 call     0x490b90
+0048720B  8b f0                          mov      esi, eax
+0048720D  56                             push     esi
+0048720E  e8 1d 34 ff ff                 call     0x47a630
+00487213  83 c4 04                       add      esp, 4
+00487216  85 c0                          test     eax, eax
+00487218  74 0a                          je       0x487224
+0048721A  66 8b 86 c2 00 00 00           mov      ax, word ptr [esi + 0xc2]
+00487221  5f                             pop      edi
+00487222  5e                             pop      esi
+00487223  c3                             ret
+00487224  5f                             pop      edi
+00487225  66 33 c0                       xor      ax, ax
+00487228  5e                             pop      esi
+00487229  c3                             ret

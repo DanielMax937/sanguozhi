@@ -1,0 +1,26 @@
+0048D9C0  51                             push     ecx
+0048D9C1  b9 58 19 20 07                 mov      ecx, 0x7201958
+0048D9C6  e8 55 38 00 00                 call     0x491220
+0048D9CB  85 c0                          test     eax, eax
+0048D9CD  7c 0a                          jl       0x48d9d9
+0048D9CF  83 f8 22                       cmp      eax, 0x22
+0048D9D2  7f 05                          jg       0x48d9d9
+0048D9D4  83 c0 34                       add      eax, 0x34
+0048D9D7  eb 03                          jmp      0x48d9dc
+0048D9D9  83 c8 ff                       or       eax, 0xffffffff
+0048D9DC  56                             push     esi
+0048D9DD  50                             push     eax
+0048D9DE  b9 58 19 20 07                 mov      ecx, 0x7201958
+0048D9E3  e8 18 33 00 00                 call     0x490d00
+0048D9E8  8b f0                          mov      esi, eax
+0048D9EA  56                             push     esi
+0048D9EB  e8 40 cc fe ff                 call     0x47a630
+0048D9F0  83 c4 04                       add      esp, 4
+0048D9F3  85 c0                          test     eax, eax
+0048D9F5  74 0c                          je       0x48da03
+0048D9F7  8b 44 24 08                    mov      eax, dword ptr [esp + 8]
+0048D9FB  50                             push     eax
+0048D9FC  8b ce                          mov      ecx, esi
+0048D9FE  e8 1d a4 ff ff                 call     0x487e20
+0048DA03  5e                             pop      esi
+0048DA04  c2 04 00                       ret      4

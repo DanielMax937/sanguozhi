@@ -1,0 +1,16 @@
+004838E0  56                             push     esi
+004838E1  8b f1                          mov      esi, ecx
+004838E3  e8 e8 6c ff ff                 call     0x47a5d0
+004838E8  c7 06 70 c1 79 00              mov      dword ptr [esi], 0x79c170
+004838EE  33 c0                          xor      eax, eax
+004838F0  89 46 7c                       mov      dword ptr [esi + 0x7c], eax
+004838F3  89 86 80 00 00 00              mov      dword ptr [esi + 0x80], eax
+004838F9  89 46 78                       mov      dword ptr [esi + 0x78], eax
+004838FC  89 46 74                       mov      dword ptr [esi + 0x74], eax
+004838FF  89 86 84 00 00 00              mov      dword ptr [esi + 0x84], eax
+00483905  c7 86 88 00 00 00 0a 00 00 00  mov      dword ptr [esi + 0x88], 0xa
+0048390F  89 86 8c 00 00 00              mov      dword ptr [esi + 0x8c], eax
+00483915  c7 46 70 44 bf 79 00           mov      dword ptr [esi + 0x70], 0x79bf44
+0048391C  8b c6                          mov      eax, esi
+0048391E  5e                             pop      esi
+0048391F  c3                             ret

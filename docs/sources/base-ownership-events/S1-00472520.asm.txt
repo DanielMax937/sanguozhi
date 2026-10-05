@@ -1,0 +1,44 @@
+00472520  8b 54 24 04                    mov      edx, dword ptr [esp + 4]
+00472524  85 d2                          test     edx, edx
+00472526  74 5c                          je       0x472584
+00472528  8b 44 24 08                    mov      eax, dword ptr [esp + 8]
+0047252C  8b c8                          mov      ecx, eax
+0047252E  c1 e9 05                       shr      ecx, 5
+00472531  56                             push     esi
+00472532  83 e0 1f                       and      eax, 0x1f
+00472535  8d 34 8a                       lea      esi, [edx + ecx*4]
+00472538  85 f6                          test     esi, esi
+0047253A  57                             push     edi
+0047253B  8b f8                          mov      edi, eax
+0047253D  74 43                          je       0x472582
+0047253F  6a 04                          push     4
+00472541  56                             push     esi
+00472542  ff 15 68 e2 74 00              call     dword ptr [0x74e268]
+00472548  85 c0                          test     eax, eax
+0047254A  75 36                          jne      0x472582
+0047254C  6a 04                          push     4
+0047254E  56                             push     esi
+0047254F  ff 15 6c e2 74 00              call     dword ptr [0x74e26c]
+00472555  85 c0                          test     eax, eax
+00472557  75 29                          jne      0x472582
+00472559  8b 44 24 14                    mov      eax, dword ptr [esp + 0x14]
+0047255D  85 c0                          test     eax, eax
+0047255F  8b cf                          mov      ecx, edi
+00472561  74 10                          je       0x472573
+00472563  b8 01 00 00 00                 mov      eax, 1
+00472568  d3 e0                          shl      eax, cl
+0047256A  8b 0e                          mov      ecx, dword ptr [esi]
+0047256C  5f                             pop      edi
+0047256D  0b c8                          or       ecx, eax
+0047256F  89 0e                          mov      dword ptr [esi], ecx
+00472571  5e                             pop      esi
+00472572  c3                             ret
+00472573  8b 06                          mov      eax, dword ptr [esi]
+00472575  ba 01 00 00 00                 mov      edx, 1
+0047257A  d3 e2                          shl      edx, cl
+0047257C  f7 d2                          not      edx
+0047257E  23 c2                          and      eax, edx
+00472580  89 06                          mov      dword ptr [esi], eax
+00472582  5f                             pop      edi
+00472583  5e                             pop      esi
+00472584  c3                             ret

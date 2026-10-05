@@ -1,0 +1,36 @@
+00472590  8b 54 24 04                    mov      edx, dword ptr [esp + 4]
+00472594  85 d2                          test     edx, edx
+00472596  75 03                          jne      0x47259b
+00472598  33 c0                          xor      eax, eax
+0047259A  c3                             ret
+0047259B  8b 44 24 08                    mov      eax, dword ptr [esp + 8]
+0047259F  8b c8                          mov      ecx, eax
+004725A1  c1 e9 05                       shr      ecx, 5
+004725A4  56                             push     esi
+004725A5  83 e0 1f                       and      eax, 0x1f
+004725A8  8d 34 8a                       lea      esi, [edx + ecx*4]
+004725AB  85 f6                          test     esi, esi
+004725AD  57                             push     edi
+004725AE  8b f8                          mov      edi, eax
+004725B0  74 0d                          je       0x4725bf
+004725B2  6a 04                          push     4
+004725B4  56                             push     esi
+004725B5  ff 15 68 e2 74 00              call     dword ptr [0x74e268]
+004725BB  85 c0                          test     eax, eax
+004725BD  74 05                          je       0x4725c4
+004725BF  5f                             pop      edi
+004725C0  33 c0                          xor      eax, eax
+004725C2  5e                             pop      esi
+004725C3  c3                             ret
+004725C4  8b cf                          mov      ecx, edi
+004725C6  8b 3e                          mov      edi, dword ptr [esi]
+004725C8  b8 01 00 00 00                 mov      eax, 1
+004725CD  d3 e0                          shl      eax, cl
+004725CF  33 c9                          xor      ecx, ecx
+004725D1  23 c7                          and      eax, edi
+004725D3  3b c8                          cmp      ecx, eax
+004725D5  1b c0                          sbb      eax, eax
+004725D7  5f                             pop      edi
+004725D8  f7 d8                          neg      eax
+004725DA  5e                             pop      esi
+004725DB  c3                             ret

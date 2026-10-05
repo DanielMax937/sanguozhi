@@ -1,0 +1,12 @@
+004866F0  51                             push     ecx
+004866F1  b9 58 19 20 07                 mov      ecx, 0x7201958
+004866F6  e8 75 b0 00 00                 call     0x491770
+004866FB  85 c0                          test     eax, eax
+004866FD  7c 05                          jl       0x486704
+004866FF  83 f8 29                       cmp      eax, 0x29
+00486702  7e 03                          jle      0x486707
+00486704  83 c8 ff                       or       eax, 0xffffffff
+00486707  50                             push     eax
+00486708  b9 58 19 20 07                 mov      ecx, 0x7201958
+0048670D  e8 fe a2 00 00                 call     0x490a10
+00486712  c3                             ret
