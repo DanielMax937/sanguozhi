@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-76 native event9 saved-troop raw44 reset
-> Integration baseline: PR #33 merged; this theme starts at `9a487b75b4ebd3dab0326ed0ffc81a7a3b2e5e06`
+> Current integration: P0-77 native event9 live home getter
+> Integration baseline: PR #34 merged; this theme starts at `d811288e5e9110036678719af23b597a2450650c`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-05 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: event9 live home getter
+
+- P0-77 expands only 004BA44C..004BA45E in a new explicit frame/version, retaining all 25 inherited entries and adding event9-home-getter. The saved troop calls its current virtual08 directly at00495525, with no invented0047A630 wrapper or raw44 gate; prior raw44=-1 does not suppress this getter. Unknown troop08 remains an exact ordered whole-frame/RNG effect-query. False preserves callback changes and returns-1; true reads the live leader from current storage of that same saved troop, saves its canonical person pointer, validates once and reads signed homeBaseId from that saved person
+- Complete004A31E0 proves the already represented person.homeBaseId is DWORD+98. Every signed32 bit pattern remains accepted, separately from force byte+98; no duplicate field or arbitrary person08 callback domain is added. 00490D00 accepts signed0..16383 and constructs numeric building pointer identity under fixed manager07201958 without reading building storage or validity. A missing/invalid in-range building can still yield a pointer; storage is required only at a later genuine read. Missing reached troop/person storage is an explicit gap
+- Getter RET and numeric resolver RET4 balance the45E continuation. Original manager, saved force/troop/subject/target, captured raw44, old/new scalars and cursor remain bound, together with the returned home scalar and building pointer. The opaque suffix binds004AD220/site004BA467, incoming ECX0799895C, arguments[saved troop,4,building] and reverse PUSH order, without claiming the helper uses incoming ECX. Presentation411..432 and reaction45E..46C remain whole-frame/RNG observations or atomic rejection. Old APIs/frames/traces remain intact
+- Guide: `docs/rules/112-native-event9-home-getter.md`; the complete latest-main 124/124 command run passed on one frozen tree: TypeScript,85 Node tests,121 Python checker commands and2 demos. Its unchanged28-group independent model ran once in the full set (474 accepted cases,1003 atomic rejections,84 killed source-specific mutations, each with an unchanged control). The25 source groups plus inherited20/nested17/26/21/21/17/12/13 and34 clean-controlled source mutations, both complete IDB fingerprints/all1329 raw intervals (S1 658/S2 671), and8 historical independent probes (60 accepted/42 rejected) passed. All126 full/supplemental raw command logs and504 fixed-inode lock events were hash-verified. Every command used heap512/TAP/semi16, a dedicated repository-external npm cache and no Python bytecode writes; original product argv stayed unchanged. Formal TAP_DISABLE_COVERAGE/TAP_RCFILE were unset, whereas the historical isolated run added both, so identical environments are not claimed. All2184 tracked files, the real index and dependencies remained identical through full/supplemental checks; only5 result documents were then updated for separate review. Independent delta and terminal review passed, including35/38 unchanged new production/model/raw/report files, formal baseline/two P0-76 metadata pins and the separate strict historical extraction baseline for the unchanged raw report; Gitblob proof recurses to P0-67. P0-72's approved strict test32 pin remains with no new model exception. Historical Capstone5.0.7 reports were hash-checked only; no recovered machine code was executed and no hosted CI/stock/runtime proof is claimed. The38 additions include guide112 and retain formal guide107; previous failure history and open evidence debt remain
+- Still open: actual presentation and reaction45E..46C, mutable event arguments and event16/18, canonical capture/surrender/captive policy, force extinction, recursive ruler ownership, positive refunds/resources and other cancellation, S2 effects/full vtable tail, fallback reset scheduling, unrepresented temporary/formatter/external/platform/concurrent state, global RNG, clean-stock/Vanilla/console/original-save/runtime certification. PKPC1.1 stays primary and Vanilla remains isolated; MOD-associated selected bytes do not prove clean-stock behavior
 
 ### Completed bounded implementation: event9 saved-troop raw44 reset
 

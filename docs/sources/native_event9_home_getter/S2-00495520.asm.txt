@@ -1,0 +1,22 @@
+00495520  56                             push     esi
+00495521  8b f1                          mov      esi, ecx
+00495523  8b 06                          mov      eax, dword ptr [esi]
+00495525  ff 50 08                       call     dword ptr [eax + 8]
+00495528  85 c0                          test     eax, eax
+0049552A  74 25                          je       0x495551
+0049552C  8b 46 0c                       mov      eax, dword ptr [esi + 0xc]
+0049552F  50                             push     eax
+00495530  b9 58 19 20 07                 mov      ecx, 0x7201958
+00495535  e8 c6 b5 ff ff                 call     0x490b00
+0049553A  8b f0                          mov      esi, eax
+0049553C  56                             push     esi
+0049553D  e8 ee 50 fe ff                 call     0x47a630
+00495542  83 c4 04                       add      esp, 4
+00495545  85 c0                          test     eax, eax
+00495547  74 08                          je       0x495551
+00495549  8b 86 98 00 00 00              mov      eax, dword ptr [esi + 0x98]
+0049554F  5e                             pop      esi
+00495550  c3                             ret
+00495551  83 c8 ff                       or       eax, 0xffffffff
+00495554  5e                             pop      esi
+00495555  c3                             ret
