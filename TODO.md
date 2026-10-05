@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-72 native live position
-> Integration baseline: PR #29 merged; this theme starts at `8a47624d5923b447597c9fab18dc1e84fa1eade4`
+> Current integration: P0-73 native event9 live troop selection
+> Integration baseline: PR #30 merged; this theme starts at `82432a2c5b85ba8b9e443217b8da1b925441b10c`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-05 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: event9 live troop selection
+
+- P0-73 expands004BA1D0 eligibility through004BA345 in the same frame.004922C0 saves next node before payload/virtual/suffix callbacks; it later follows that saved identity and reads the reached node live. Duplicate payloads, node removal/reuse and terminating cycles are represented; failed probes and missing reached storage remain explicit gaps
+- New explicit frame adds troop raw44/order/target fields and mutable heap-node identities. Complete00495CE0 target dispatch and canonical troop+40 use live reads; saved raw44, subject/target/troop pointers, manager ECX and next cursor survive full-frame/RNG replacement. All21 inherited entries remain plus event9-selection. Old APIs/frames/traces and39 behavioral model groups are unchanged
+- Unknown virtual validity/type/force calls are exact mutable effect-queries, never implicit pure/false answers. Ordinary event9 composes in one frame/revision.004BA345..004BA46C still observes presentation and mutating reaction, including virtual+48; node/call/depth budgets are engine safeguards, not native game rules
+- Guide: `docs/rules/108-native-event9-selection.md`; fresh latest-main116/116 commands passed in one frozen run: TypeScript,85 Node tests,113 Python checker commands and2 demos. The39 model groups,21 new plus21 inherited and nested17/12/13 source groups,both whole-IDB/all1297 raw intervals and18 historical independently authored probes passed on this candidate. All119 command logs were hash-checked; all commands used the fixed-inode per-command fcntl lock with NODE_OPTIONS=--max-old-space-size=512 --test-reporter=tap and unchanged product argv. Independent integration-delta review passed;157 audited new files are byte-identical, including production,39-group model,raw data and historical reports. Only three proved P0-72 metadata pins and the formal baseline change in the new manifest/source checker; P0-72 throughP0-67 are recursively proved, including the already approved inherited P0-72 single strict model pin correction. No new model exception. All1583 files/index remained unchanged across full and supplemental validation; afterward only5 result documents were changed for separate review. Capstone5.0.7 historical reports were hash-checked, not re-decoded. The161 audited additions include guide108; existing formal guide107 is preserved
+- Still open: event9 presentation/reaction, event16/18, canonical capture/surrender/captive policy, force extinction, recursive ruler ownership, positive refunds/resources, other cancellation, S2 effects/full vtable tail, fallback reset scheduling, unrepresented memory/platform/concurrency, global RNG and clean-stock/Vanilla/console/runtime certification
 
 ### Completed bounded implementation: native live position
 

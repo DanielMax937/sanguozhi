@@ -2,7 +2,13 @@
 
 更新：2026-10-05 UTC。
 
-## 最新完成：P0-72原生live位置与可变fallback
+## 最新完成：P0-73 event9原生live部队选择
+
+[108-native-event9-selection.md](108-native-event9-selection.md)在新显式frame/version中展开event9选择前缀：004922C0先保存node.next再读取payload，callback后沿saved-next身份继续、到达时live读取节点；允许重复payload、节点删除/重用与可终止cycle。完整00495CE0读取raw order/target并保留真实分派顺序；raw44、subject/target/troop pointer、manager ECX和saved cursor跨完整frame/RNG替换保持。21继承入口加event9-selection共22入口，普通event9同frame一次revision，旧API/frame/trace及39行为测试不改。
+
+基线为PR #30已合并main `82432a2c5b85ba8b9e443217b8da1b925441b10c`。最新main全新单轮116/116命令通过：TypeScript、85 Node tests、113 Python checker命令与2 demos。39组model、21新source加21继承及nested17/12/13组通过；双IDB全指纹与1297 raw-ID1区间重新核验通过（S1 642/75192 interval bytes，S2 655/75584，含重叠），18组历史独立作者probe在正式candidate重跑通过。所有119日志hash核验，命令逐条使用同一固定inode的fcntl锁，npm/node继承NODE_OPTIONS=--max-old-space-size=512 --test-reporter=tap，产品argv未改。1583 tracked文件及真实Git index在全测和专项前后完全一致；其后仅5结果文档更新另行复审。集成delta独审通过：157项新增生产/model/raw/report与已审隔离版逐字节一致，新增manifest/sourcechecker仅改formal baseline和3项P0-72已证metadata pin，未改行为assert/oracle。未执行游戏EXE，也未声称远端CI或stock认证。161已审新增含guide108，保留正式107 guide，共1583 tracked文件。P0-72 manifest/source及已批准test32 model metadata pin变化递归证明到P0-67；无新增model例外。Capstone5.0.7历史报告只核hash，不重新解码。004BA345..004BA46C的presentation与mutating reaction仍观察，virtual+48仅影响presentation路线；engine node/call/depth预算不是原作规则。event16/18、capture/surrender/captive、force灭亡、recursive ruler ownership、positive refund/resources、其余cancel、S2 effects/full vtable尾、fallback reset scheduling、未建模memory/platform/concurrency、全局RNG及clean-stock/Vanilla/console/runtime认证仍open。
+
+## 历史完成：P0-72原生live位置与可变fallback
 
 [107-native-live-position.md](107-native-live-position.md)在新显式frame/version中展开00489610：location只读一次，按base再troop原生validity解析base+1E、troop+3C或fallback06EE794C的storage identity；position不要求本人troop membership。0047A950随后单次DWORD读取并解释signed16 X/Y，先bounds再live map/source-local base table。004A6340的valid actor/base-location fast path继续跳过base validity、position与map读取。18继承入口和3新direct入口可用；旧API/frame/trace冻结。
 

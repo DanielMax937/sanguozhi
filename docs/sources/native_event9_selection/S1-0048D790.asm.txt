@@ -1,0 +1,13 @@
+0048D790  56                             push     esi
+0048D791  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+0048D795  56                             push     esi
+0048D796  e8 15 d0 fe ff                 call     0x47a7b0
+0048D79B  85 c0                          test     eax, eax
+0048D79D  75 09                          jne      0x48d7a8
+0048D79F  83 fe 08                       cmp      esi, 8
+0048D7A2  74 04                          je       0x48d7a8
+0048D7A4  5e                             pop      esi
+0048D7A5  c2 04 00                       ret      4
+0048D7A8  b8 01 00 00 00                 mov      eax, 1
+0048D7AD  5e                             pop      esi
+0048D7AE  c2 04 00                       ret      4

@@ -1,0 +1,10 @@
+00490D00  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00490D04  85 c0                          test     eax, eax
+00490D06  7c 14                          jl       0x490d1c
+00490D08  3d ff 3f 00 00                 cmp      eax, 0x3fff
+00490D0D  7f 0d                          jg       0x490d1c
+00490D0F  6b c0 38                       imul     eax, eax, 0x38
+00490D12  8d 84 08 30 97 08 00           lea      eax, [eax + ecx + 0x89730]
+00490D19  c2 04 00                       ret      4
+00490D1C  33 c0                          xor      eax, eax
+00490D1E  c2 04 00                       ret      4
