@@ -1,0 +1,15 @@
+0047B480  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0047B484  85 c0                          test     eax, eax
+0047B486  7c 1e                          jl       0x47b4a6
+0047B488  83 f8 29                       cmp      eax, 0x29
+0047B48B  7f 19                          jg       0x47b4a6
+0047B48D  8b 4c 24 08                    mov      ecx, dword ptr [esp + 8]
+0047B491  85 c9                          test     ecx, ecx
+0047B493  7c 11                          jl       0x47b4a6
+0047B495  83 f9 29                       cmp      ecx, 0x29
+0047B498  7f 0c                          jg       0x47b4a6
+0047B49A  6b c0 2a                       imul     eax, eax, 0x2a
+0047B49D  0f b6 84 08 30 b8 79 00        movzx    eax, byte ptr [eax + ecx + 0x79b830]
+0047B4A5  c3                             ret
+0047B4A6  83 c8 ff                       or       eax, 0xffffffff
+0047B4A9  c3                             ret

@@ -1338,3 +1338,8 @@ AI势力强度还存在君主ID硬编码 bonus，因此不能用一张现代通�
 ### P0-69 generic设施入口与早返
 
 [104-generic-facility.md](104-generic-facility.md)在共享frame中展开004B40C0入口validity、old-legion pointer保存、generic建筑ID87..16383分类、requested pointer转换与live004AD550。invalid entry返回0，generic完成固定返回1，包含ownership早退或callback使目标失效后。指针构造/转换不虚构target row/validity门；仅新版本relocation移除过严requested-row预读，实际字段读取仍要求可读row，旧API冻结。canonical004B415D..004B4988仍为完整frame/RNG effect-query或原子reject，绑定原始实参、saved old pointer与symbolic entry manager，normal EAX仅integer0/1。 仅有界入口与generic早返闭合；完整canonical ruler transfer/capture、surrender/captive、force灭亡、recursive-return ruler ownership、其余handler/positive refund、presentation内部、tail距离、真实troop成员/非base位置、event9部队反应、S2 effects/observer、未建模memory/platform与全局RNG继续open。任意/非对齐pointer、真实memory probe、stack fault/cookie failure/SEH不属于该normal域。S1/S2仍为MOD-associated；selected bytes相同不认证clean-stock PK、Vanilla或console。上文旧版本保留历史边界。
+
+
+### P0-70原生零退款tail距离
+
+[105-native-tail-distance.md](105-native-tail-distance.md)在同一live frame中将005B8400尾部0049E4D0距离观察替换为原生领土和source-local距离表求值。先比较normalized current与raw home，再转换getter；current领土保存后仍读取home，子scope退出后将distance保存到parent tail，后续callback不重算。duration wrapper fresh复验actor validity并写保存值低byte，-1→255。两源领土/距离表保持分离；真实矩阵均对称，非对称probe仅为synthetic索引测试。旧API/frame/trace冻结，17入口均保留。 仅新版本取消这一个distance观察；仍要求显式mapCells与可读slot，eager双getter slot要求是保守模型域，不是原生pointer构造读。其余opaque effect继续ordered full-frame/stack/RNG观察或原子reject。canonical ruler/capture、surrender/captive、force灭亡、recursive-return ruler ownership、positive refund/资源、其余handler、presentation内部、真实troop成员/非base位置、event9部队反应、S2 effects/observer、未建模memory/platform、全局RNG与runtime/stock/Vanilla认证继续open。46 focused区间均继承复用，零新增unique原始区间与机器码字节；MOD-associated S1/S2不能代表clean-stock PK、Vanilla或console。旧版本仍保留历史distance观察契约。

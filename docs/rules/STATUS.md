@@ -2,7 +2,13 @@
 
 更新：2026-10-05 UTC。
 
-## 最新完成：P0-69 generic设施入口与早返
+## 最新完成：P0-70原生零退款tail距离
+
+[105-native-tail-distance.md](105-native-tail-distance.md)在同一live frame中将005B8400尾部0049E4D0距离观察替换为原生领土和source-local距离表求值。先比较normalized current与raw home，再转换getter；current领土保存后仍读取home，子scope退出后将distance保存到parent tail，后续callback不重算。duration wrapper fresh复验actor validity并写保存值低byte，-1→255。两源领土/距离表保持分离；真实矩阵均对称，非对称probe仅为synthetic索引测试。旧API/frame/trace冻结，17入口均保留。
+
+基线为PR #27已合并main `8b21e340d577810ca664e829d1d9cb35b1046fc4`。最新main全新完整110/110命令回归通过：TypeScript、85 Node tests、107 Python checker命令与2 demos；每个npm/node使用同一fcntl锁并继承NODE_OPTIONS=--max-old-space-size=512，保留waiting/start/exit/release记录，产品argv未改。12组新source及13组继承source、29组独立model通过；两份whole-IDB与1236个raw-ID1选定区间重新核验通过（S1 612/73,783 interval bytes，S2 624/74,140，含重叠区间）；既有8组独审probe在正式candidate重跑通过。独立集成delta审阅无阻断：51项生产/model/raw/report逐字节继承已审版本，P0-69→P0-68→P0-67递归证明只变metadata/基线断言，新checker独立固定历史提取baseline而不改raw报告。1285 tracked文件/index在全测前后一致，110条日志hash逐一核验；之后仅补5份文档结果文字并另行复核。零新增unique原始区间/机器码字节；Capstone5.0.7的780指令历史报告只核hash，本次未重新解码。未执行游戏EXE，未声称远端CI或stock认证。canonical ruler/capture、surrender/captive、force灭亡、recursive-return ruler ownership、其余handler/positive refund、presentation内部、troop/位置、event9部队反应、S2 effects/observer、未建模memory/platform、stock/Vanilla及全局RNG仍open。
+
+## 历史完成：P0-69 generic设施入口与早返
 
 [104-generic-facility.md](104-generic-facility.md)在共享frame中展开004B40C0入口validity、old-legion pointer保存、generic建筑ID87..16383分类、requested pointer转换与live004AD550。invalid entry返回0，generic完成固定返回1，包含ownership早退或callback使目标失效后。指针构造/转换不虚构target row/validity门；仅新版本relocation移除过严requested-row预读，实际字段读取仍要求可读row，旧API冻结。canonical004B415D..004B4988仍为完整frame/RNG effect-query或原子reject，绑定原始实参、saved old pointer与symbolic entry manager，normal EAX仅integer0/1。
 
