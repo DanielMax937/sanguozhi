@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-71 native troop membership
-> Integration baseline: PR #28 merged; this theme starts at `c190abfd43985251eee4936fdccb5d3910d4fed7`
+> Current integration: P0-72 native live position
+> Integration baseline: PR #29 merged; this theme starts at `8a47624d5923b447597c9fab18dc1e84fa1eade4`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-05 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: native live position
+
+- P0-72 expands00489610 into saved-location base/troop/fallback storage resolution, then0047A950's separate packed DWORD read, signed16 coordinates, bounds and source-local live map/base-table lookup; all18 inherited entries remain, with new position-pointer/position/movement-origin direct entries. Old APIs/frames/traces are frozen
+- Troop position uses leader/deputy validity rather than officer membership. Base+1E and troop+3C pointer identity stays separate from coordinates; missing reached rows reject.004A6340's valid-actor/base-location fast path still skips base validity, position and map reads
+- New frame explicitly requires troop X/Y and mutable fallbackPosition06EE794C. No default or implicit migration exists. Unknown virtual chains require mutable full-frame/RNG observations; opaque pointer reads need separate observations. S1 bounded0073BE10 store/RET evidence and S2 complete ID0 function do not prove initializer scheduling
+- Guide: `docs/rules/107-native-live-position.md`; latest-main114-command set passed after targeted recovery: the first frozen run passed112/114. npm check first failed because the local dependency copy dereferenced its tsc symlink; restoring both original symlinks passed TypeScript/85 Node tests. Model test32 first rejected its historical predecessor-source-checker SHA; an authorized single strict metadata-pin correction was independently reviewed, with all31 behavioral groups byte-identical. The corrected32 model groups,21+17/12/13 source groups,both whole-IDB/all1263 raw intervals and17 historical reviewer probes passed. Unaffected command evidence is reused only with an explicit dependency proof. Initial and corrected1422-file/index freezes were verified separately; this is not one unchanged tree or a fresh single all-green run. Every command used the same per-command fcntl lock and npm/node inherited NODE_OPTIONS=--max-old-space-size=512 --test-reporter=tap, with argv unchanged. All121 command logs, including the three retained failed attempts, were hash-checked. Capstone5.0.7 historical reports were hash-checked, not re-decoded. The74 audited additions plus1 formal guide give1422 files; only5 result documents were updated afterward for separate review
+- Still open: fallback reset scheduling, custom vtables/full S2 tail/virtual+68 caller/business, canonical ruler/capture, surrender/captive policy, force extinction, recursive-return ruler ownership, positive refunds/resources, other cancellation bodies, presentation internals, event9 troop reaction, S2 effects/observers, unrepresented memory/platform/concurrency, global RNG and runtime/clean-stock/Vanilla certification
 
 ### Completed bounded implementation: native troop membership
 

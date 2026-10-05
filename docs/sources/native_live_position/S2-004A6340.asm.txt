@@ -1,0 +1,25 @@
+004A6340  56                             push     esi
+004A6341  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+004A6345  57                             push     edi
+004A6346  56                             push     esi
+004A6347  83 cf ff                       or       edi, 0xffffffff
+004A634A  e8 e1 42 fd ff                 call     0x47a630
+004A634F  83 c4 04                       add      esp, 4
+004A6352  85 c0                          test     eax, eax
+004A6354  74 22                          je       0x4a6378
+004A6356  8b 86 9c 00 00 00              mov      eax, dword ptr [esi + 0x9c]
+004A635C  85 c0                          test     eax, eax
+004A635E  7c 0c                          jl       0x4a636c
+004A6360  83 f8 56                       cmp      eax, 0x56
+004A6363  7f 07                          jg       0x4a636c
+004A6365  3d ff 3f 00 00                 cmp      eax, 0x3fff
+004A636A  7e 0e                          jle      0x4a637a
+004A636C  8b ce                          mov      ecx, esi
+004A636E  e8 dd 45 fd ff                 call     0x47a950
+004A6373  5f                             pop      edi
+004A6374  5e                             pop      esi
+004A6375  c2 04 00                       ret      4
+004A6378  8b c7                          mov      eax, edi
+004A637A  5f                             pop      edi
+004A637B  5e                             pop      esi
+004A637C  c2 04 00                       ret      4

@@ -2,7 +2,13 @@
 
 更新：2026-10-05 UTC。
 
-## 最新完成：P0-71原生部队成员判断
+## 最新完成：P0-72原生live位置与可变fallback
+
+[107-native-live-position.md](107-native-live-position.md)在新显式frame/version中展开00489610：location只读一次，按base再troop原生validity解析base+1E、troop+3C或fallback06EE794C的storage identity；position不要求本人troop membership。0047A950随后单次DWORD读取并解释signed16 X/Y，先bounds再live map/source-local base table。004A6340的valid actor/base-location fast path继续跳过base validity、position与map读取。18继承入口和3新direct入口可用；旧API/frame/trace冻结。
+
+基线为PR #29已合并main `8a47624d5923b447597c9fab18dc1e84fa1eade4`。最新main114命令集合经定点恢复通过，首轮冻结运行112/114通过。npm check首次因本地依赖复制解引用tsc链接而ERR_MODULE_NOT_FOUND，恢复两条原symlink后TypeScript及85 Node tests通过；此错误与历史lifecycle异常不同，不声称后者原因已解。新model test32首次因旧前代source-checker SHA断言失败，经授权只更新该metadata pin并独审，31行为组原字节不变，严格hash断言保留。修正冻树下32组model、21+17/12/13组source、两份whole-IDB及1263 raw-ID1区间（S1 625/74088 interval bytes，S2 638/74470；含重叠）和17历史独审probe通过。其余113条命令只在明确dependency证明下复用成功证据；111 Python checker命令、TypeScript/85 Node tests及2 demos均有成功终态。初始与修正两个1422文件/index冻结分别吻合，不能称全程一棵不变树或全新单轮全绿。所有命令逐条同一fcntl锁，npm/node继承NODE_OPTIONS=--max-old-space-size=512 --test-reporter=tap，原argv不改；121条日志及含inode的wait/start/exit/release逐一核验，三份首次/重复失败日志保留。集成delta和单pin例外独审无阻断；74审定新增中70文件逐字节相同，model checker仅单pin差异并非整文件未改，另增1正式guide，共1422 tracked文件。之后仅补5份结果文档并单独复核。Capstone5.0.7历史报告只核hash，本次未重新解码；未执行原EXE或已恢复的机器码，未声称远端CI/stock认证。fallback明确可变且无默认值；S1 bounded0073BE10 store/RET与S2 complete ID0 function都不能证明init调度。fallback reset、custom vtable/full S2 extent/virtual+68 caller/business、canonical ruler/capture、surrender/captive、force灭亡、recursive ruler ownership、positive refund/资源、其余cancel与presentation、event9部队反应、S2 effects/observer、未建模memory/platform/concurrency、stock/Vanilla/runtime及全局RNG继续open。
+
+## 历史完成：P0-71原生部队成员判断
 
 [106-native-troop-membership.md](106-native-troop-membership.md)在新显式troop-slot frame内直接执行004891C0：live location87..1086转换slot，canonical troop validity从leader raw17C/status派生，再依次检查两deputy signed<1100，最后匹配leader/两deputy。负deputy哨兵全允许且不读取deputy person；匹配leader不能绕过无效deputy，helper不添加actor-validity门。未知vtable仍精确full-frame/source/stack只读观察，缺少reached slot原子reject。17继承入口加新troop-member共18入口，旧API/frame/trace冻结。
 
