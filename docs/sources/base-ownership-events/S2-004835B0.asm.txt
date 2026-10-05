@@ -1,0 +1,26 @@
+004835B0  51                             push     ecx
+004835B1  b9 58 19 20 07                 mov      ecx, 0x7201958
+004835B6  e8 15 dc 00 00                 call     0x4911d0
+004835BB  85 c0                          test     eax, eax
+004835BD  7c 0a                          jl       0x4835c9
+004835BF  83 f8 09                       cmp      eax, 9
+004835C2  7f 05                          jg       0x4835c9
+004835C4  83 c0 2a                       add      eax, 0x2a
+004835C7  eb 03                          jmp      0x4835cc
+004835C9  83 c8 ff                       or       eax, 0xffffffff
+004835CC  56                             push     esi
+004835CD  50                             push     eax
+004835CE  b9 58 19 20 07                 mov      ecx, 0x7201958
+004835D3  e8 28 d7 00 00                 call     0x490d00
+004835D8  8b f0                          mov      esi, eax
+004835DA  56                             push     esi
+004835DB  e8 50 70 ff ff                 call     0x47a630
+004835E0  83 c4 04                       add      esp, 4
+004835E3  85 c0                          test     eax, eax
+004835E5  74 0c                          je       0x4835f3
+004835E7  8b 44 24 08                    mov      eax, dword ptr [esp + 8]
+004835EB  50                             push     eax
+004835EC  8b ce                          mov      ecx, esi
+004835EE  e8 2d 48 00 00                 call     0x487e20
+004835F3  5e                             pop      esi
+004835F4  c2 04 00                       ret      4

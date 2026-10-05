@@ -1,0 +1,24 @@
+0047C4F0  51                             push     ecx
+0047C4F1  b9 58 19 20 07                 mov      ecx, 0x7201958
+0047C4F6  e8 85 4c 01 00                 call     0x491180
+0047C4FB  85 c0                          test     eax, eax
+0047C4FD  7c 05                          jl       0x47c504
+0047C4FF  83 f8 29                       cmp      eax, 0x29
+0047C502  7e 03                          jle      0x47c507
+0047C504  83 c8 ff                       or       eax, 0xffffffff
+0047C507  56                             push     esi
+0047C508  50                             push     eax
+0047C509  b9 58 19 20 07                 mov      ecx, 0x7201958
+0047C50E  e8 ed 47 01 00                 call     0x490d00
+0047C513  8b f0                          mov      esi, eax
+0047C515  56                             push     esi
+0047C516  e8 15 e1 ff ff                 call     0x47a630
+0047C51B  83 c4 04                       add      esp, 4
+0047C51E  85 c0                          test     eax, eax
+0047C520  74 0c                          je       0x47c52e
+0047C522  8b 44 24 08                    mov      eax, dword ptr [esp + 8]
+0047C526  50                             push     eax
+0047C527  8b ce                          mov      ecx, esi
+0047C529  e8 f2 b8 00 00                 call     0x487e20
+0047C52E  5e                             pop      esi
+0047C52F  c2 04 00                       ret      4

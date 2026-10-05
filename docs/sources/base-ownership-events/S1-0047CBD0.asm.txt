@@ -1,0 +1,43 @@
+0047CBD0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0047CBD4  83 f8 ff                       cmp      eax, -1
+0047CBD7  56                             push     esi
+0047CBD8  8b f1                          mov      esi, ecx
+0047CBDA  74 09                          je       0x47cbe5
+0047CBDC  85 c0                          test     eax, eax
+0047CBDE  7c 5e                          jl       0x47cc3e
+0047CBE0  83 f8 2e                       cmp      eax, 0x2e
+0047CBE3  7f 59                          jg       0x47cc3e
+0047CBE5  56                             push     esi
+0047CBE6  b9 58 19 20 07                 mov      ecx, 0x7201958
+0047CBEB  89 46 38                       mov      dword ptr [esi + 0x38], eax
+0047CBEE  e8 8d 45 01 00                 call     0x491180
+0047CBF3  85 c0                          test     eax, eax
+0047CBF5  7c 05                          jl       0x47cbfc
+0047CBF7  83 f8 29                       cmp      eax, 0x29
+0047CBFA  7e 03                          jle      0x47cbff
+0047CBFC  83 c8 ff                       or       eax, 0xffffffff
+0047CBFF  57                             push     edi
+0047CC00  50                             push     eax
+0047CC01  b9 58 19 20 07                 mov      ecx, 0x7201958
+0047CC06  e8 f5 40 01 00                 call     0x490d00
+0047CC0B  8b f8                          mov      edi, eax
+0047CC0D  57                             push     edi
+0047CC0E  e8 1d da ff ff                 call     0x47a630
+0047CC13  83 c4 04                       add      esp, 4
+0047CC16  85 c0                          test     eax, eax
+0047CC18  74 06                          je       0x47cc20
+0047CC1A  66 8b 7f 10                    mov      di, word ptr [edi + 0x10]
+0047CC1E  eb 02                          jmp      0x47cc22
+0047CC20  33 ff                          xor      edi, edi
+0047CC22  8b ce                          mov      ecx, esi
+0047CC24  e8 a7 db ff ff                 call     0x47a7d0
+0047CC29  66 3b f8                       cmp      di, ax
+0047CC2C  5f                             pop      edi
+0047CC2D  76 0f                          jbe      0x47cc3e
+0047CC2F  8b ce                          mov      ecx, esi
+0047CC31  e8 9a db ff ff                 call     0x47a7d0
+0047CC36  8b ce                          mov      ecx, esi
+0047CC38  50                             push     eax
+0047CC39  e8 b2 f8 ff ff                 call     0x47c4f0
+0047CC3E  5e                             pop      esi
+0047CC3F  c2 04 00                       ret      4

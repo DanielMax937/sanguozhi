@@ -1,0 +1,6 @@
+008EA050  66 3d c0 5d                    cmp      ax, 0x5dc0
+008EA054  76 04                          jbe      0x8ea05a
+008EA056  66 b8 c0 5d                    mov      ax, 0x5dc0
+008EA05A  5f                             pop      edi
+008EA05B  5e                             pop      esi
+008EA05C  c3                             ret

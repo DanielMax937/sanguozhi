@@ -1,0 +1,13 @@
+0047B120  56                             push     esi
+0047B121  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+0047B125  56                             push     esi
+0047B126  e8 85 f6 ff ff                 call     0x47a7b0
+0047B12B  85 c0                          test     eax, eax
+0047B12D  75 09                          jne      0x47b138
+0047B12F  83 fe 06                       cmp      esi, 6
+0047B132  74 04                          je       0x47b138
+0047B134  5e                             pop      esi
+0047B135  c2 04 00                       ret      4
+0047B138  b8 01 00 00 00                 mov      eax, 1
+0047B13D  5e                             pop      esi
+0047B13E  c2 04 00                       ret      4
