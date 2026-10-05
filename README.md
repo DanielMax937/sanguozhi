@@ -23,6 +23,7 @@ npm run play -- --growth-fixture
 
 - [训练切片入口](docs/engine/pk-training-slice.md)
 - [生命周期、配置、证据与迁移](docs/engine/pk-training-lifecycle.md)
+- [event9 live home getter与numeric building pointer](docs/rules/112-native-event9-home-getter.md)：004BA44C..45E direct live troop08、saved person signed homeBaseId与纯numeric building resolver；raw44=-1不是gate，不读building row/validity，25继承入口加1新direct；45E..46C reaction仍观察；最新main全新124/124命令通过；双IDB/1329 raw、8 probes及集成delta与终态独审通过
 - [event9 saved-troop原生raw44 reset](docs/rules/111-native-event9-troop-reset.md)：004BA442..44C单次live troop validity及raw44=-1 direct store；早期saved EBX force身份不重算，24继承入口加1新direct，后续home/reaction44C..46C仍完整观察；最新main全新122/122命令通过；双IDB/1327 raw、6 probes及集成delta独审通过
 - [event9 saved-force原生reset](docs/rules/110-native-event9-force-reset.md)：004BA432..442固定saved force身份、单次live validity及有序raw94/raw98写入；23继承入口加1新direct，442..46C reaction仍完整观察；最新main全新120/120命令通过；双IDB/1323 raw、10 probes及集成delta独审通过
 - [event9原生展示决策](docs/rules/109-native-event9-presentation.md)：saved-force身份与live troop/force virtual48决策，22继承入口加1新direct；immutable-event支持域明确，展示与reaction仍分别观察；最新main 118命令集合经环境定点恢复通过（首轮117/118，原npm同配置重试仍SIGKILL，追加semi16后85/85）；双IDB/1317 raw区间、17 probes及集成独审通过
