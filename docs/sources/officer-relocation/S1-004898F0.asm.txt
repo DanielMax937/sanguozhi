@@ -1,0 +1,9 @@
+004898F0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+004898F4  83 f8 ff                       cmp      eax, -1
+004898F7  74 09                          je       0x489902
+004898F9  85 c0                          test     eax, eax
+004898FB  7c 0b                          jl       0x489908
+004898FD  83 f8 08                       cmp      eax, 8
+00489900  7f 06                          jg       0x489908
+00489902  89 81 a0 00 00 00              mov      dword ptr [ecx + 0xa0], eax
+00489908  c2 04 00                       ret      4

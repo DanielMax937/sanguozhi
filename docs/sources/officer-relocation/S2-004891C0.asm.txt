@@ -1,0 +1,37 @@
+004891C0  56                             push     esi
+004891C1  57                             push     edi
+004891C2  8b f9                          mov      edi, ecx
+004891C4  8b 87 9c 00 00 00              mov      eax, dword ptr [edi + 0x9c]
+004891CA  83 f8 57                       cmp      eax, 0x57
+004891CD  7c 4b                          jl       0x48921a
+004891CF  3d 3e 04 00 00                 cmp      eax, 0x43e
+004891D4  7f 44                          jg       0x48921a
+004891D6  83 f8 57                       cmp      eax, 0x57
+004891D9  7c 0c                          jl       0x4891e7
+004891DB  3d 3e 04 00 00                 cmp      eax, 0x43e
+004891E0  7f 05                          jg       0x4891e7
+004891E2  83 c0 a9                       add      eax, -0x57
+004891E5  eb 03                          jmp      0x4891ea
+004891E7  83 c8 ff                       or       eax, 0xffffffff
+004891EA  50                             push     eax
+004891EB  b9 58 19 20 07                 mov      ecx, 0x7201958
+004891F0  e8 7b 7c 00 00                 call     0x490e70
+004891F5  8b f0                          mov      esi, eax
+004891F7  56                             push     esi
+004891F8  e8 33 14 ff ff                 call     0x47a630
+004891FD  83 c4 04                       add      esp, 4
+00489200  85 c0                          test     eax, eax
+00489202  74 16                          je       0x48921a
+00489204  57                             push     edi
+00489205  b9 58 19 20 07                 mov      ecx, 0x7201958
+0048920A  e8 01 81 00 00                 call     0x491310
+0048920F  50                             push     eax
+00489210  8b ce                          mov      ecx, esi
+00489212  e8 79 c1 00 00                 call     0x495390
+00489217  5f                             pop      edi
+00489218  5e                             pop      esi
+00489219  c3                             ret
+0048921A  5f                             pop      edi
+0048921B  33 c0                          xor      eax, eax
+0048921D  5e                             pop      esi
+0048921E  c3                             ret

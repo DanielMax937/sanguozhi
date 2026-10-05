@@ -1,0 +1,11 @@
+0048A8B0  8a 44 24 04                    mov      al, byte ptr [esp + 4]
+0048A8B4  84 c0                          test     al, al
+0048A8B6  77 0b                          ja       0x48a8c3
+0048A8B8  32 c0                          xor      al, al
+0048A8BA  88 81 58 01 00 00              mov      byte ptr [ecx + 0x158], al
+0048A8C0  c2 04 00                       ret      4
+0048A8C3  3c ff                          cmp      al, 0xff
+0048A8C5  72 02                          jb       0x48a8c9
+0048A8C7  0c ff                          or       al, 0xff
+0048A8C9  88 81 58 01 00 00              mov      byte ptr [ecx + 0x158], al
+0048A8CF  c2 04 00                       ret      4

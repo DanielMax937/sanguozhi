@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-66 base ownership, durability and event9/10
-> Integration baseline: PR #23 merged; this theme starts at `874f6126bd82d4bfc2ff6daf778ec60a5120bc35`
+> Current integration: P0-67 officer relocation and fixed movement preparation
+> Integration baseline: PR #24 merged; this theme starts at `5215348ebd12cd4bc7b221008775052411fb92bb`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-05 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: officer relocation and fixed movement
+
+- P0-67 expands004A8270 coordinator, allocated004A57B0/captured005B9B40 cancellation and fixed004A7990(-1,0) in the shared P0-66 live frame; old APIs/traces unchanged
+- Exact status2-only demotion/governor nesting, saved destination/old home, live ruler/legion/home reads, same-home no-cancel reset, away mission37 overwrite and two direct acted callbacks
+- Movement preserves origin/distance across callbacks, writes duration low byte without an extra validity gate, and refreshes current/home governors in native order
+- Guide: `docs/rules/102-officer-relocation.md`; 19 source groups, 32 model groups, latest-main104-command regression and independent integration review passed
+- Still open: whole004B40C0 ruler capture/transfer, wider cancellation bodies, real troop membership, non-base position query, event9 troop reaction, force extinction, other events, stock/Vanilla and global RNG
 
 ### Completed bounded implementation: base ownership and event9/10
 
