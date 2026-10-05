@@ -2,7 +2,15 @@
 
 更新：2026-10-05 UTC。
 
-## 最新完成：P0-74 event9原生展示决策
+## 最新完成：P0-75 event9 saved-force原生reset
+
+[110-native-event9-force-reset.md](110-native-event9-force-reset.md)在新显式frame/version中仅展开004BA432..442：保存先前troop raw44所得EBX force身份，004B5020单次检查current force validity，canonical ruler0..1099或unknown08完整frame/RNG effect-query；false保留callback变化且跳过两写，true依次在同一saved pointer的当前storage写raw94=0xffffffff、raw98=0。不重读troop ownership，不二次validity，不按新vtable虚构virtual setter，missing reached storage明确gap。rawDword94/rawByte98显式无默认，允许所有既有位模式，不猜业务含义。23继承入口加event9-force-reset共24入口，新34组model原字节不变。
+
+432将saved manager加载到EDI，43B复制到ECX，helper不读取incoming manager ECX；完整setter RET4/helper RET12证明442续接参数栈平衡。原始manager与saved force/troop/target/subject、captured raw44、old/new scalar和next cursor保留。presentation411..432整体观察保持；参数cleanup不证明temporary析构、无别名或不保留。442..46C reaction remainder仍完整frame/RNG可变观察，live troop reset/home lookup/004AD220未展开；immutable-event仅支持域，不是原生内存恒定证明。
+
+基线为PR #32已合并main `bbaaf647b62fa0814c8333eb1a1dc07f407649d7`。最新main全新单轮120/120命令通过：TypeScript、85 Node tests、117 Python checker与2 demos。34组model在完整集合执行一次，312 accepted/905 atomic rejection/32 killed mutants；17 source加继承26/nested21/21/17/12/13通过。双IDB全指纹和1323 raw-ID1区间重新验证（S1 655、S2 668），10组历史独立作者probe通过18 accepted/40 rejected；仅迁移ROOT/STAGE路径，无失效production禁用selector。122份完整/专项日志逐条核hash及固定inode wait/start/exit/released；每条命令heap512/TAP/semi16、原argv、固定npm cache、禁Python bytecode。1954 tracked文件及真实index在全测/专项前后完全一致；之后仅5结果文档单独复审，生产/model/raw/report/sourcechecker不变。clean-baseline patch恢复全部hash一致；集成delta独审通过。P0-74历史SIGKILL与恢复记录保留，本条新120结果仅属于P0-75冻树及其明确环境，不代表远端CI/stock/runtime认证。188已审新增含guide110，保留正式guide107，共1954 tracked文件；185新增生产/model/raw/report与最终隔离版逐字节一致。新manifest/source checker仅formal baseline和两项P0-74 metadata pin变化，递归证明至P0-67，继承P0-72已审单strict model pin correction，无新增model例外。Capstone5.0.7历史报告只核hash，不重新解码；IAT source-specific双view仍未认证。实际presentation/reaction442..46C、mutable event与16/18、capture/surrender/captive、force灭亡、recursive ruler ownership、positive refund/resources、其余cancel、S2 effects/full vtable tail、fallback reset scheduling、未建模temporary/formatter/external/platform/concurrent memory、全局RNG及clean-stock/Vanilla/console/original-save/runtime认证仍open。
+
+## 历史完成：P0-74 event9原生展示决策
 
 [109-native-event9-presentation.md](109-native-event9-presentation.md)在新显式frame/version中展开004BA345后的展示决策：saved raw44转换为saved force身份，与troop当前owner分开；troop48、当前force08/48和fallback saved-force08/48按原序live读取，未知virtual仍是完整frame/RNG可变effect-query。22继承入口加event9-presentation共23入口，旧API/frame/trace及42组模型checker逐字节不变。
 

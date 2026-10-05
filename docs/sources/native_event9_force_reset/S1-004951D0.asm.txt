@@ -1,0 +1,13 @@
+004951D0  56                             push     esi
+004951D1  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+004951D5  56                             push     esi
+004951D6  e8 55 56 fe ff                 call     0x47a830
+004951DB  85 c0                          test     eax, eax
+004951DD  75 09                          jne      0x4951e8
+004951DF  83 fe 0b                       cmp      esi, 0xb
+004951E2  74 04                          je       0x4951e8
+004951E4  5e                             pop      esi
+004951E5  c2 04 00                       ret      4
+004951E8  b8 01 00 00 00                 mov      eax, 1
+004951ED  5e                             pop      esi
+004951EE  c2 04 00                       ret      4

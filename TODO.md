@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-74 native event9 presentation decision
-> Integration baseline: PR #31 merged; this theme starts at `f9c55c48c95fa84c1594bd9fb5ddcaf5849dcbe1`
+> Current integration: P0-75 native event9 saved-force reset
+> Integration baseline: PR #32 merged; this theme starts at `bbaaf647b62fa0814c8333eb1a1dc07f407649d7`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-05 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: event9 saved-force reset
+
+- P0-75 expands only 004BA432..004BA442 in a new explicit frame/version, retaining all 23 inherited entries and adding event9-force-reset. Force rows require unsigned32 rawDword94 and unsigned8 rawByte98; existing bit patterns stay unrestricted and no game meaning is inferred
+- EBX retains the force identity derived from the earlier saved troop raw44. 004B5020 checks that force's current validity once: canonical ruler0..1099, or exact unknown08 full-frame/RNG effect-query. False preserves callback changes but skips both stores; true writes raw94=0xffffffff then raw98=0 on current storage of the same saved identity, even after callback replaces ruler/vtable/frame. No reread of troop ownership, second validity gate or virtual setter is invented; missing reached storage is a gap
+- 432 reloads the manager to EDI and 43B copies it to ECX, but the helper ignores incoming manager ECX. Setter RET4 and helper RET12 balance the 442 continuation; saved manager/force/troop/subject/target, raw44, old/new scalars and next-node cursor remain bound through the whole 442..46C reaction remainder. Presentation411..432 stays combined; parameter cleanup does not prove presentation-object destruction or absence of retention
+- Guide: `docs/rules/110-native-event9-force-reset.md`; the complete latest-main 120/120 command run passed on one frozen tree: TypeScript, 85 Node tests, 117 Python checker commands and 2 demos. Its unchanged 34-group independent model ran once in the full set (312 accepted cases, 905 atomic rejections, 32 killed mutations). The 17 source groups plus inherited26/nested21/21/17/12/13, both complete IDB fingerprints/all1323 raw intervals (S1 655/S2 668), and10 historical independent probes (18 accepted/40 rejected) passed. All122 full/supplemental command logs and fixed-inode lock records were hash-verified. Every command used heap512/TAP/semi16, a dedicated repository-external npm cache and no Python bytecode writes; original product argv stayed unchanged. All1954 tracked files and the real index remained identical through full/supplemental checks; only5 result documents were then updated for separate review. Independent delta review confirmed185/188 unchanged new production/model/raw/report files and formal-baseline/two P0-74 metadata-pin changes, recursively proved to P0-67. P0-72's approved strict test32 metadata pin remains with no new model exception. Historical Capstone5.0.7 reports were hash-checked only; no recovered machine code was executed and no hosted CI/stock/runtime proof is claimed. The188 additions include guide110 and retain formal guide107
+- Still open: actual presentation and reaction442..46C, mutable event arguments and event16/18, canonical capture/surrender/captive policy, force extinction, recursive ruler ownership, positive refunds/resources and other cancellation, S2 effects/full vtable tail, fallback reset scheduling, unrepresented temporary/formatter/external/platform/concurrent memory, global RNG, clean-stock/Vanilla/console/original-save/runtime certification
 
 ### Completed bounded implementation: event9 presentation decision
 

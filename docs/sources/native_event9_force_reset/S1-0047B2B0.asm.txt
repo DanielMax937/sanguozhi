@@ -1,0 +1,19 @@
+0047B2B0  8b 01                          mov      eax, dword ptr [ecx]
+0047B2B2  56                             push     esi
+0047B2B3  ff 50 44                       call     dword ptr [eax + 0x44]
+0047B2B6  50                             push     eax
+0047B2B7  b9 58 19 20 07                 mov      ecx, 0x7201958
+0047B2BC  e8 0f 58 01 00                 call     0x490ad0
+0047B2C1  8b f0                          mov      esi, eax
+0047B2C3  56                             push     esi
+0047B2C4  e8 67 f3 ff ff                 call     0x47a630
+0047B2C9  83 c4 04                       add      esp, 4
+0047B2CC  85 c0                          test     eax, eax
+0047B2CE  74 08                          je       0x47b2d8
+0047B2D0  8b 16                          mov      edx, dword ptr [esi]
+0047B2D2  8b ce                          mov      ecx, esi
+0047B2D4  5e                             pop      esi
+0047B2D5  ff 62 40                       jmp      dword ptr [edx + 0x40]
+0047B2D8  83 c8 ff                       or       eax, 0xffffffff
+0047B2DB  5e                             pop      esi
+0047B2DC  c3                             ret

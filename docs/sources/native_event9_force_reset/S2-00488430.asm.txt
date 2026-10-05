@@ -1,0 +1,20 @@
+00488430  56                             push     esi
+00488431  8b f1                          mov      esi, ecx
+00488433  8b 06                          mov      eax, dword ptr [esi]
+00488435  ff 50 04                       call     dword ptr [eax + 4]
+00488438  85 c0                          test     eax, eax
+0048843A  74 21                          je       0x48845d
+0048843C  8b 86 7c 01 00 00              mov      eax, dword ptr [esi + 0x17c]
+00488442  85 c0                          test     eax, eax
+00488444  75 10                          jne      0x488456
+00488446  8b b6 a0 00 00 00              mov      esi, dword ptr [esi + 0xa0]
+0048844C  83 fe 06                       cmp      esi, 6
+0048844F  74 0c                          je       0x48845d
+00488451  83 fe 08                       cmp      esi, 8
+00488454  74 07                          je       0x48845d
+00488456  b8 01 00 00 00                 mov      eax, 1
+0048845B  5e                             pop      esi
+0048845C  c3                             ret
+0048845D  33 c0                          xor      eax, eax
+0048845F  5e                             pop      esi
+00488460  c3                             ret

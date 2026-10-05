@@ -1,0 +1,17 @@
+0063ADD0  8b 44 24 10                    mov      eax, dword ptr [esp + 0x10]
+0063ADD4  8b 54 24 08                    mov      edx, dword ptr [esp + 8]
+0063ADD8  56                             push     esi
+0063ADD9  8b f1                          mov      esi, ecx
+0063ADDB  8b 4c 24 10                    mov      ecx, dword ptr [esp + 0x10]
+0063ADDF  50                             push     eax
+0063ADE0  51                             push     ecx
+0063ADE1  52                             push     edx
+0063ADE2  b9 58 19 20 07                 mov      ecx, 0x7201958
+0063ADE7  e8 34 20 2b 00                 call     0x8ece20
+0063ADEC  50                             push     eax
+0063ADED  8b 44 24 18                    mov      eax, dword ptr [esp + 0x18]
+0063ADF1  50                             push     eax
+0063ADF2  8b ce                          mov      ecx, esi
+0063ADF4  e8 97 f1 ff ff                 call     0x639f90
+0063ADF9  5e                             pop      esi
+0063ADFA  c2 10 00                       ret      0x10

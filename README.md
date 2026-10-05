@@ -23,6 +23,7 @@ npm run play -- --growth-fixture
 
 - [训练切片入口](docs/engine/pk-training-slice.md)
 - [生命周期、配置、证据与迁移](docs/engine/pk-training-lifecycle.md)
+- [event9 saved-force原生reset](docs/rules/110-native-event9-force-reset.md)：004BA432..442固定saved force身份、单次live validity及有序raw94/raw98写入；23继承入口加1新direct，442..46C reaction仍完整观察；最新main全新120/120命令通过；双IDB/1323 raw、10 probes及集成delta独审通过
 - [event9原生展示决策](docs/rules/109-native-event9-presentation.md)：saved-force身份与live troop/force virtual48决策，22继承入口加1新direct；immutable-event支持域明确，展示与reaction仍分别观察；最新main 118命令集合经环境定点恢复通过（首轮117/118，原npm同配置重试仍SIGKILL，追加semi16后85/85）；双IDB/1317 raw区间、17 probes及集成独审通过
 - [event9原生live部队选择](docs/rules/108-native-event9-selection.md)：saved-next heap-node遍历、live raw44/order/target与精确可变virtual查询；21继承入口加1新direct，presentation/reaction仍显式边界；最新main全新116/116命令、双IDB/1297 raw区间、18独审probe及集成delta独审通过
 - [原生live位置与可变fallback](docs/rules/107-native-live-position.md)：base/troop/fallback pointer身份、后置DWORD读取及signed16坐标；新version/frame且无fallback默认值，旧API及其余缺口保留；114命令集合经定点恢复通过（首轮112/114），集成delta独审通过
