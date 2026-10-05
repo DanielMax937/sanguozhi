@@ -1,0 +1,13 @@
+004863D0  56                             push     esi
+004863D1  8b 74 24 08                    mov      esi, dword ptr [esp + 8]
+004863D5  56                             push     esi
+004863D6  e8 55 44 ff ff                 call     0x47a830
+004863DB  85 c0                          test     eax, eax
+004863DD  75 09                          jne      0x4863e8
+004863DF  83 fe 05                       cmp      esi, 5
+004863E2  74 04                          je       0x4863e8
+004863E4  5e                             pop      esi
+004863E5  c2 04 00                       ret      4
+004863E8  b8 01 00 00 00                 mov      eax, 1
+004863ED  5e                             pop      esi
+004863EE  c2 04 00                       ret      4

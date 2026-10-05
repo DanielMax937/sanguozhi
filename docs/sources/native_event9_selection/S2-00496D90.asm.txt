@@ -1,0 +1,7 @@
+00496D90  56                             push     esi
+00496D91  8b f1                          mov      esi, ecx
+00496D93  e8 e8 3c fe ff                 call     0x47aa80
+00496D98  c7 06 18 cc 79 00              mov      dword ptr [esi], 0x79cc18
+00496D9E  8b c6                          mov      eax, esi
+00496DA0  5e                             pop      esi
+00496DA1  c3                             ret

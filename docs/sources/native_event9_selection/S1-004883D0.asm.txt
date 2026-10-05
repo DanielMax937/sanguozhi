@@ -1,0 +1,9 @@
+004883D0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+004883D4  83 f8 1a                       cmp      eax, 0x1a
+004883D7  74 0a                          je       0x4883e3
+004883D9  83 f8 0a                       cmp      eax, 0xa
+004883DC  74 05                          je       0x4883e3
+004883DE  33 c0                          xor      eax, eax
+004883E0  c2 04 00                       ret      4
+004883E3  b8 01 00 00 00                 mov      eax, 1
+004883E8  c2 04 00                       ret      4

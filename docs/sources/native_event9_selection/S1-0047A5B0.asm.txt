@@ -1,0 +1,9 @@
+0047A5B0  8b 49 04                       mov      ecx, dword ptr [ecx + 4]
+0047A5B3  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0047A5B7  c1 e9 05                       shr      ecx, 5
+0047A5BA  50                             push     eax
+0047A5BB  83 e1 7f                       and      ecx, 0x7f
+0047A5BE  51                             push     ecx
+0047A5BF  e8 3c 95 00 00                 call     0x483b00
+0047A5C4  83 c4 08                       add      esp, 8
+0047A5C7  c2 04 00                       ret      4

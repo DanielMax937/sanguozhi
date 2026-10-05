@@ -1,0 +1,34 @@
+00496040  56                             push     esi
+00496041  8b f1                          mov      esi, ecx
+00496043  8b 06                          mov      eax, dword ptr [esi]
+00496045  ff 50 24                       call     dword ptr [eax + 0x24]
+00496048  83 f8 0b                       cmp      eax, 0xb
+0049604B  75 44                          jne      0x496091
+0049604D  8b 46 0c                       mov      eax, dword ptr [esi + 0xc]
+00496050  50                             push     eax
+00496051  b9 58 19 20 07                 mov      ecx, 0x7201958
+00496056  e8 a5 aa ff ff                 call     0x490b00
+0049605B  50                             push     eax
+0049605C  e8 cf 45 fe ff                 call     0x47a630
+00496061  83 c4 04                       add      esp, 4
+00496064  85 c0                          test     eax, eax
+00496066  74 29                          je       0x496091
+00496068  33 c0                          xor      eax, eax
+0049606A  8d 4e 10                       lea      ecx, [esi + 0x10]
+0049606D  8d 49 00                       lea      ecx, [ecx]
+00496070  85 c0                          test     eax, eax
+00496072  7c 0d                          jl       0x496081
+00496074  83 f8 02                       cmp      eax, 2
+00496077  7d 08                          jge      0x496081
+00496079  81 39 4c 04 00 00              cmp      dword ptr [ecx], 0x44c
+0049607F  7d 10                          jge      0x496091
+00496081  40                             inc      eax
+00496082  83 c1 04                       add      ecx, 4
+00496085  83 f8 02                       cmp      eax, 2
+00496088  7c e6                          jl       0x496070
+0049608A  b8 01 00 00 00                 mov      eax, 1
+0049608F  5e                             pop      esi
+00496090  c3                             ret
+00496091  33 c0                          xor      eax, eax
+00496093  5e                             pop      esi
+00496094  c3                             ret
