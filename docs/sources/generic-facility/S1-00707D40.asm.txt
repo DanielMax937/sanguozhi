@@ -1,0 +1,25 @@
+00707D40  3d 00 10 00 00                 cmp      eax, 0x1000
+00707D45  73 0e                          jae      0x707d55
+00707D47  f7 d8                          neg      eax
+00707D49  03 c4                          add      eax, esp
+00707D4B  83 c0 04                       add      eax, 4
+00707D4E  85 00                          test     dword ptr [eax], eax
+00707D50  94                             xchg     esp, eax
+00707D51  8b 00                          mov      eax, dword ptr [eax]
+00707D53  50                             push     eax
+00707D54  c3                             ret      
+00707D55  51                             push     ecx
+00707D56  8d 4c 24 08                    lea      ecx, [esp + 8]
+00707D5A  81 e9 00 10 00 00              sub      ecx, 0x1000
+00707D60  2d 00 10 00 00                 sub      eax, 0x1000
+00707D65  85 01                          test     dword ptr [ecx], eax
+00707D67  3d 00 10 00 00                 cmp      eax, 0x1000
+00707D6C  73 ec                          jae      0x707d5a
+00707D6E  2b c8                          sub      ecx, eax
+00707D70  8b c4                          mov      eax, esp
+00707D72  85 01                          test     dword ptr [ecx], eax
+00707D74  8b e1                          mov      esp, ecx
+00707D76  8b 08                          mov      ecx, dword ptr [eax]
+00707D78  8b 40 04                       mov      eax, dword ptr [eax + 4]
+00707D7B  50                             push     eax
+00707D7C  c3                             ret      

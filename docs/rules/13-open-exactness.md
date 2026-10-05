@@ -1333,3 +1333,8 @@ AI势力强度还存在君主ID硬编码 bonus，因此不能用一张现代通�
 ### P0-68 live零退款取消9/10/12/22
 
 [103-live-zero-refund.md](103-live-zero-refund.md)在P0-67共享frame中直接执行mission9/10/12/22的gate与control，复用notification、零退款return、relocation和真实event分派；23/24维持既有原生实现。9/10仅target数值范围门并保留丢弃的force validity读取，12只构造target person pointer，22验证target force并保存actor color。四段presentation仍需完整before→after/RNG观察或原子reject；tail fresh读取actor，成功body固定return1。旧API、模型测试和raw来源字节不变。 仅这四个whole-handler观察被收窄；其他handler、非零退款/资源、presentation内部、tail距离观察、S2 effects/observer、完整004B40C0 ruler/capture、真实troop成员/非base位置、event9部队反应、force灭亡、未建模memory/platform域及全局RNG继续open。S1/S2仍为MOD-associated；相同selected bytes不认证clean-stock PK、Vanilla或console。上文旧版本说明保持其历史边界。
+
+
+### P0-69 generic设施入口与早返
+
+[104-generic-facility.md](104-generic-facility.md)在共享frame中展开004B40C0入口validity、old-legion pointer保存、generic建筑ID87..16383分类、requested pointer转换与live004AD550。invalid entry返回0，generic完成固定返回1，包含ownership早退或callback使目标失效后。指针构造/转换不虚构target row/validity门；仅新版本relocation移除过严requested-row预读，实际字段读取仍要求可读row，旧API冻结。canonical004B415D..004B4988仍为完整frame/RNG effect-query或原子reject，绑定原始实参、saved old pointer与symbolic entry manager，normal EAX仅integer0/1。 仅有界入口与generic早返闭合；完整canonical ruler transfer/capture、surrender/captive、force灭亡、recursive-return ruler ownership、其余handler/positive refund、presentation内部、tail距离、真实troop成员/非base位置、event9部队反应、S2 effects/observer、未建模memory/platform与全局RNG继续open。任意/非对齐pointer、真实memory probe、stack fault/cookie failure/SEH不属于该normal域。S1/S2仍为MOD-associated；selected bytes相同不认证clean-stock PK、Vanilla或console。上文旧版本保留历史边界。

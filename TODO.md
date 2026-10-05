@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-68 live zero-refund cancellation handlers 9/10/12/22
-> Integration baseline: PR #25 merged; this theme starts at `e8bae319e5d1b08057fd091a90d305d58c9d7669`
+> Current integration: P0-69 generic-facility entry and early return
+> Integration baseline: PR #26 merged; this theme starts at `094f94b41795169df73fe708f9bbd29083949ea1`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-05 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: generic-facility entry and early return
+
+- P0-69 expands004B40C0 entry validity, old-legion pointer save, generic building IDs87..16383, canonical requested-pointer conversion and same-frame004AD550; normal invalid entry returns0 and generic completion returns1 even after ownership early exits or callback invalidation
+- Pointer construction/conversion adds no target-row or validity gate. Only the new relocation version removes its former conservative requested-row pre-read; earlier APIs remain frozen and actual field reads still require readable rows
+- Canonical004B415D..004B4988 remains an exact full-frame/RNG effect-query or atomic rejection, preserving original arguments, saved old pointer and symbolic entry manager; normal observed EAX is integer0 or1
+- Guide: `docs/rules/104-generic-facility.md`; 13 new plus13 inherited source groups,28 independent-model groups,both whole-IDB/raw-ID1 checks and9 historical reviewer probe groups passed. The latest-main108-command set passed after retry: the original run passed107/108; only npm run demo:lifecycle exited137, then passed under the same shared Node lock with NODE_OPTIONS=--max-old-space-size=512. The cause remains unconfirmed. This is not a fresh single all-green run; all1230 files/index stayed unchanged across attempts and independent integration-delta review passed
+- Still open: full canonical ruler/capture, surrender/captive policy, force extinction, recursive-return ruler ownership, remaining cancellation/positive refunds, presentation/tail-distance observations, troop membership/non-base positions, event9 troop reaction, S2 effects/observers, unrepresented memory/platform paths, stock/Vanilla and global RNG
 
 ### Completed bounded implementation: live zero-refund cancellation handlers 9/10/12/22
 
