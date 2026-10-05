@@ -1,0 +1,17 @@
+00486400  56                             push     esi
+00486401  8b f1                          mov      esi, ecx
+00486403  8b 06                          mov      eax, dword ptr [esi]
+00486405  ff 50 24                       call     dword ptr [eax + 0x24]
+00486408  83 f8 05                       cmp      eax, 5
+0048640B  75 13                          jne      0x486420
+0048640D  8b 46 08                       mov      eax, dword ptr [esi + 8]
+00486410  85 c0                          test     eax, eax
+00486412  7c 0c                          jl       0x486420
+00486414  83 f8 3f                       cmp      eax, 0x3f
+00486417  7f 07                          jg       0x486420
+00486419  b8 01 00 00 00                 mov      eax, 1
+0048641E  5e                             pop      esi
+0048641F  c3                             ret
+00486420  33 c0                          xor      eax, eax
+00486422  5e                             pop      esi
+00486423  c3                             ret

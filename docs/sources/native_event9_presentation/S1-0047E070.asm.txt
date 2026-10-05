@@ -1,0 +1,20 @@
+0047E070  56                             push     esi
+0047E071  8b f1                          mov      esi, ecx
+0047E073  8b 06                          mov      eax, dword ptr [esi]
+0047E075  6a 02                          push     2
+0047E077  ff 50 2c                       call     dword ptr [eax + 0x2c]
+0047E07A  85 c0                          test     eax, eax
+0047E07C  74 17                          je       0x47e095
+0047E07E  8b 16                          mov      edx, dword ptr [esi]
+0047E080  8b ce                          mov      ecx, esi
+0047E082  ff 52 40                       call     dword ptr [edx + 0x40]
+0047E085  85 c0                          test     eax, eax
+0047E087  7c 0c                          jl       0x47e095
+0047E089  83 f8 2e                       cmp      eax, 0x2e
+0047E08C  7f 07                          jg       0x47e095
+0047E08E  b8 01 00 00 00                 mov      eax, 1
+0047E093  5e                             pop      esi
+0047E094  c3                             ret
+0047E095  33 c0                          xor      eax, eax
+0047E097  5e                             pop      esi
+0047E098  c3                             ret

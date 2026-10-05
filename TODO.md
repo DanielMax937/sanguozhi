@@ -1,14 +1,22 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-73 native event9 live troop selection
-> Integration baseline: PR #30 merged; this theme starts at `82432a2c5b85ba8b9e443217b8da1b925441b10c`
+> Current integration: P0-74 native event9 presentation decision
+> Integration baseline: PR #31 merged; this theme starts at `f9c55c48c95fa84c1594bd9fb5ddcaf5849dcbe1`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
 > Updated: 2026-10-05 (UTC)
 
 ## 1. Current progress
+
+### Completed bounded implementation: event9 presentation decision
+
+- P0-74 expands the post-selection decision from 004BA345: saved troop raw44 becomes a saved force pointer, distinct from the troop's live owner. Canonical troop48/current-force validity/player predicates preserve virtual-call order and live rereads after mutable callbacks; unknown 08/40/48 calls remain exact full-frame/RNG effect-queries
+- All 22 inherited entries plus event9-presentation use a new explicit frame/version. Force vtableAddress is required; old APIs/frames/traces and the full 42-group model checker are unchanged. Saved force/troop/target/subject pointers, entry manager, scalar locals and next-node cursor survive observation replacements
+- Native event-word reread is preserved within the explicit immutable-command-event-v1 domain; mutable event memory and event16/18 remain open. Known caller-stack temporary writes remain inside the 004BA411..004BA432 whole presentation observation. Cleanup does not prove destruction, retention, aliasing or asynchronous lifetime. 004BA432..004BA46C remains a separate mutating reaction observation; S1/S2 0063ADE7 subcalls remain source-specific
+- Guide: `docs/rules/109-native-event9-presentation.md`; all 118 required command types have successful evidence on one frozen product tree: TypeScript, 85 Node tests, 115 Python checkers and 2 demos. The initial run passed 117/118; npm check and its unchanged-environment retry each ended with lifecycle child SIGKILL (58/59). A direct Node 85/85 run was diagnostic only. The original npm run check argv subsequently passed with the sole supported environment addition --max-semi-space-size=16 to heap512/TAP. The cause of the earlier signals remains unproved; this is not a single-green-run claim. The 42 model groups, 26 source plus inherited21/nested21/17/12/13, both whole-IDBs/all1317 raw intervals and17 historical independent probes passed. All122 command-attempt logs, including both failures, were hash-checked. All1766 files and the real index stayed unchanged throughout; only5 result documents were later updated for separate review. Independent delta review confirmed179 unchanged audited new production/model/raw/report files, recursively proved baseline and2 new metadata pins, and retained the approved P0-72 strict test32 pin correction with no new model exception. The relocated test16 module selector was independently shown nonempty (47 modules/367 production patches), with a rejecting production-contamination control. Historical Capstone5.0.7 reports were hash-checked only; no game code was executed or hosted CI/stock proof claimed. The183 additions include guide109; formalguide107 is preserved
+- Still open: actual presentation/reaction, mutable event arguments and event16/18, canonical capture/surrender/captive policy, force extinction, recursive ruler ownership, positive refunds/resources and other cancellation, S2 effects/full vtable tail, fallback reset scheduling, unrepresented memory/platform/concurrency, global RNG, clean-stock/Vanilla/console/original-save/runtime certification
 
 ### Completed bounded implementation: event9 live troop selection
 

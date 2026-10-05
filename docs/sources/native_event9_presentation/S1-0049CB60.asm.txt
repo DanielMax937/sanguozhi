@@ -1,0 +1,8 @@
+0049CB60  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0049CB64  56                             push     esi
+0049CB65  8b f1                          mov      esi, ecx
+0049CB67  89 06                          mov      dword ptr [esi], eax
+0049CB69  e8 c2 f8 ff ff                 call     0x49c430
+0049CB6E  8b c6                          mov      eax, esi
+0049CB70  5e                             pop      esi
+0049CB71  c2 04 00                       ret      4
