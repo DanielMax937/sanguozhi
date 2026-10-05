@@ -1,0 +1,9 @@
+0047A830  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+0047A834  83 f8 1a                       cmp      eax, 0x1a
+0047A837  74 0a                          je       0x47a843
+0047A839  83 f8 1b                       cmp      eax, 0x1b
+0047A83C  74 05                          je       0x47a843
+0047A83E  33 c0                          xor      eax, eax
+0047A840  c2 04 00                       ret      4
+0047A843  b8 01 00 00 00                 mov      eax, 1
+0047A848  c2 04 00                       ret      4

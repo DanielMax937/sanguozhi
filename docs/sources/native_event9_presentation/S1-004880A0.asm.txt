@@ -1,0 +1,8 @@
+004880A0  56                             push     esi
+004880A1  8b f1                          mov      esi, ecx
+004880A3  e8 d8 29 ff ff                 call     0x47aa80
+004880A8  c7 06 18 c7 79 00              mov      dword ptr [esi], 0x79c718
+004880AE  66 c7 46 22 ff ff              mov      word ptr [esi + 0x22], 0xffff
+004880B4  8b c6                          mov      eax, esi
+004880B6  5e                             pop      esi
+004880B7  c3                             ret

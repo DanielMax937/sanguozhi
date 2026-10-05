@@ -1,5 +1,7 @@
 > 最新capture人员/城市容量来源与有界模型：[P0-49](84-capture-personnel-source-profile.md)；完整人员迁移、AI处分和stock等价仍开放。
 
+新增[P0-74 event9原生展示决策](109-native-event9-presentation.md)：saved force与live owner分离、原序可变virtual48/08决策；23入口和明确immutable-event域，presentation/reaction仍两段观察，temporary lifetime未闭合；最新main 118命令集合定点恢复后通过（首轮117/118，两次npm SIGKILL保留，semi16新配置通过）；42 model、26 source及继承链、双IDB/1317 raw和17 probes、集成delta独审通过，1766文件/index全程一致。
+
 新增[P0-73 event9原生live部队选择](108-native-event9-selection.md)：saved-next heap-node遍历与live raw44/order/target，完整可变virtual effect-query；21继承加1新direct，presentation/reaction仍边界，engine预算非原作规则；最新main全新116/116命令、21+21+17/12/13 source、39 model、双IDB/1297 raw区间及18既有独审probe通过；1583文件/index冻结一致，集成delta独审通过。
 
 新增[P0-72原生live位置与可变fallback](107-native-live-position.md)：base/troop/fallback pointer身份与后置DWORD读取、signed16坐标及fast path；显式新frame无fallback默认值，旧API及unknown债保留；21+17/12/13组source、32组model、双IDB及17组既有独审probe通过；114命令集合经定点恢复通过（首轮112/114），两次文件/index冻结分别核验，集成delta及单metadata pin例外独审通过；不是单轮全绿。

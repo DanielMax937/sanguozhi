@@ -1,0 +1,18 @@
+00480FF0  56                             push     esi
+00480FF1  8b f1                          mov      esi, ecx
+00480FF3  8b 06                          mov      eax, dword ptr [esi]
+00480FF5  6a 01                          push     1
+00480FF7  ff 50 2c                       call     dword ptr [eax + 0x2c]
+00480FFA  85 c0                          test     eax, eax
+00480FFC  74 16                          je       0x481014
+00480FFE  8b 76 04                       mov      esi, dword ptr [esi + 4]
+00481001  85 f6                          test     esi, esi
+00481003  7c 0f                          jl       0x481014
+00481005  81 fe 4b 04 00 00              cmp      esi, 0x44b
+0048100B  7f 07                          jg       0x481014
+0048100D  b8 01 00 00 00                 mov      eax, 1
+00481012  5e                             pop      esi
+00481013  c3                             ret
+00481014  33 c0                          xor      eax, eax
+00481016  5e                             pop      esi
+00481017  c3                             ret

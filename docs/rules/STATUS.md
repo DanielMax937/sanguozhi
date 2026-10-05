@@ -2,7 +2,15 @@
 
 更新：2026-10-05 UTC。
 
-## 最新完成：P0-73 event9原生live部队选择
+## 最新完成：P0-74 event9原生展示决策
+
+[109-native-event9-presentation.md](109-native-event9-presentation.md)在新显式frame/version中展开004BA345后的展示决策：saved raw44转换为saved force身份，与troop当前owner分开；troop48、当前force08/48和fallback saved-force08/48按原序live读取，未知virtual仍是完整frame/RNG可变effect-query。22继承入口加event9-presentation共23入口，旧API/frame/trace及42组模型checker逐字节不变。
+
+原生event word确有重读；immutable-command-event-v1仅声明当前支持域，不能声称原生event memory不变。该域排除callback破坏event/control/saved control-flow locals，但保留411..432内已知caller-stack temporary写入。presentation 004BA411..004BA432整体观察构造、格式化、virtual、consumer及cleanup，不发明稳定temporary地址或析构/不保留/异步别名证明；reaction 004BA432..004BA46C仍独立观察。S1在0063ADE7调用00482480，S2调用008ECE20，保持source绑定。saved force/troop/target/subject、manager、locals和next cursor跨替换保持。
+
+基线为PR #31已合并main `f9c55c48c95fa84c1594bd9fb5ddcaf5849dcbe1`。最新main 118命令集合在同一产品冻树取得通过证据：TypeScript、85 Node、115 Python checker和2 demos。首轮117/118通过；npm check及同配置重试都因lifecycle子进程SIGKILL结束（58/59），原始失败保留。direct Node的85/85仅诊断；原npm run check argv随后在heap512/TAP基础上仅追加受支持的--max-semi-space-size=16后通过，未改产品或测试。原因未确证，不能称OOM或首轮全绿。42组model、26 source及继承21/nested21/17/12/13、双IDB全指纹/1317 raw和17历史独审probes通过，122条命令尝试日志含2条失败逐条核hash；全部命令同一固定inode flock。独审额外证实test16迁移后selector命中47模块/367个production patch，干净oracle无生产调用且负控制能拒绝污染。1766文件及真实index在全测/恢复/专项期间完全一致，其后仅5结果文档修改另审；集成delta独审通过。183已审新增含guide109，保留正式guide107，共1766 tracked文件；179新增生产/model/raw/report与最终隔离版逐字节一致。新manifest/sourcechecker仅formal baseline和2项P0-73 metadata pin变化，递归证明至P0-67，继承P0-72已审单strict model pin correction，无新增model例外。Capstone 5.0.7历史报告只核hash，不重新解码。实际presentation/reaction、mutable event与16/18、capture/surrender/captive、force灭亡、recursive ruler ownership、positive refund/resources、其余cancel、S2 effects/full vtable tail、fallback reset scheduling、未建模memory/platform/concurrency、全局RNG及clean-stock/Vanilla/console/original-save/runtime认证仍open。
+
+## 历史完成：P0-73 event9原生live部队选择
 
 [108-native-event9-selection.md](108-native-event9-selection.md)在新显式frame/version中展开event9选择前缀：004922C0先保存node.next再读取payload，callback后沿saved-next身份继续、到达时live读取节点；允许重复payload、节点删除/重用与可终止cycle。完整00495CE0读取raw order/target并保留真实分派顺序；raw44、subject/target/troop pointer、manager ECX和saved cursor跨完整frame/RNG替换保持。21继承入口加event9-selection共22入口，普通event9同frame一次revision，旧API/frame/trace及39行为测试不改。
 

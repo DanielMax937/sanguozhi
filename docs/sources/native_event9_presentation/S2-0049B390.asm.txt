@@ -1,0 +1,10 @@
+0049B390  33 c0                          xor      eax, eax
+0049B392  3d b8 ca 67 07                 cmp      eax, 0x767cab8
+0049B397  75 06                          jne      0x49b39f
+0049B399  a1 d0 e2 8a 00                 mov      eax, dword ptr [0x8ae2d0]
+0049B39E  c3                             ret
+0049B39F  8b 4c 24 04                    mov      ecx, dword ptr [esp + 4]
+0049B3A3  51                             push     ecx
+0049B3A4  b9 b8 ca 67 07                 mov      ecx, 0x767cab8
+0049B3A9  e8 e2 fa ff ff                 call     0x49ae90
+0049B3AE  c3                             ret

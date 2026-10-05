@@ -1,0 +1,28 @@
+0047A690  8b 01                          mov      eax, dword ptr [ecx]
+0047A692  56                             push     esi
+0047A693  ff 50 40                       call     dword ptr [eax + 0x40]
+0047A696  50                             push     eax
+0047A697  b9 58 19 20 07                 mov      ecx, 0x7201958
+0047A69C  e8 ff 63 01 00                 call     0x490aa0
+0047A6A1  8b f0                          mov      esi, eax
+0047A6A3  85 f6                          test     esi, esi
+0047A6A5  74 1c                          je       0x47a6c3
+0047A6A7  6a 01                          push     1
+0047A6A9  6a 04                          push     4
+0047A6AB  56                             push     esi
+0047A6AC  e8 bf 79 ff ff                 call     0x472070
+0047A6B1  83 c4 0c                       add      esp, 0xc
+0047A6B4  85 c0                          test     eax, eax
+0047A6B6  74 0b                          je       0x47a6c3
+0047A6B8  8b 16                          mov      edx, dword ptr [esi]
+0047A6BA  8b ce                          mov      ecx, esi
+0047A6BC  ff 52 08                       call     dword ptr [edx + 8]
+0047A6BF  85 c0                          test     eax, eax
+0047A6C1  75 04                          jne      0x47a6c7
+0047A6C3  33 c0                          xor      eax, eax
+0047A6C5  5e                             pop      esi
+0047A6C6  c3                             ret
+0047A6C7  8b 06                          mov      eax, dword ptr [esi]
+0047A6C9  8b ce                          mov      ecx, esi
+0047A6CB  5e                             pop      esi
+0047A6CC  ff 60 48                       jmp      dword ptr [eax + 0x48]

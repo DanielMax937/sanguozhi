@@ -1,0 +1,11 @@
+00483B00  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+00483B04  8b 04 85 58 c3 79 00           mov      eax, dword ptr [eax*4 + 0x79c358]
+00483B0B  85 c0                          test     eax, eax
+00483B0D  7d 0e                          jge      0x483b1d
+00483B0F  8b 4c 24 08                    mov      ecx, dword ptr [esp + 8]
+00483B13  85 c9                          test     ecx, ecx
+00483B15  74 03                          je       0x483b1a
+00483B17  f7 d8                          neg      eax
+00483B19  c3                             ret
+00483B1A  83 c8 ff                       or       eax, 0xffffffff
+00483B1D  c3                             ret

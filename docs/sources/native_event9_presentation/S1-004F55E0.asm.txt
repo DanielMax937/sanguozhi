@@ -1,0 +1,37 @@
+004F55E0  8b 44 24 04                    mov      eax, dword ptr [esp + 4]
+004F55E4  53                             push     ebx
+004F55E5  56                             push     esi
+004F55E6  57                             push     edi
+004F55E7  50                             push     eax
+004F55E8  e8 a3 5d fa ff                 call     0x49b390
+004F55ED  8b 74 24 18                    mov      esi, dword ptr [esp + 0x18]
+004F55F1  8b 7c 24 20                    mov      edi, dword ptr [esp + 0x20]
+004F55F5  83 c4 04                       add      esp, 4
+004F55F8  85 f6                          test     esi, esi
+004F55FA  8b d8                          mov      ebx, eax
+004F55FC  74 38                          je       0x4f5636
+004F55FE  83 ff ff                       cmp      edi, -1
+004F5601  75 09                          jne      0x4f560c
+004F5603  8b ce                          mov      ecx, esi
+004F5605  e8 66 51 f8 ff                 call     0x47a770
+004F560A  8b f8                          mov      edi, eax
+004F560C  8b 16                          mov      edx, dword ptr [esi]
+004F560E  8b ce                          mov      ecx, esi
+004F5610  ff 52 3c                       call     dword ptr [edx + 0x3c]
+004F5613  8b 00                          mov      eax, dword ptr [eax]
+004F5615  33 c9                          xor      ecx, ecx
+004F5617  89 44 24 1c                    mov      dword ptr [esp + 0x1c], eax
+004F561B  8b 44 24 18                    mov      eax, dword ptr [esp + 0x18]
+004F561F  85 c0                          test     eax, eax
+004F5621  0f 95 c1                       setne    cl
+004F5624  8d 54 24 1c                    lea      edx, [esp + 0x1c]
+004F5628  51                             push     ecx
+004F5629  53                             push     ebx
+004F562A  57                             push     edi
+004F562B  52                             push     edx
+004F562C  b9 00 4e c2 09                 mov      ecx, 0x9c24e00
+004F5631  e8 9a 57 14 00                 call     0x63add0
+004F5636  5f                             pop      edi
+004F5637  5e                             pop      esi
+004F5638  5b                             pop      ebx
+004F5639  c3                             ret
