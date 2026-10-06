@@ -1,0 +1,597 @@
+{
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "const": "./schema.json"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "const": "pk-ability-research-guide-v1"
+    },
+    "version": {
+      "const": "pk"
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "const": "documented-guide"
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retrievedOn": {
+          "type": "string",
+          "minLength": 1
+        },
+        "baselineCommit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nativeIds": {
+          "const": false
+        },
+        "image": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "minLength": 1
+            },
+            "width": {
+              "const": 1020
+            },
+            "height": {
+              "const": 586
+            }
+          },
+          "required": [
+            "url",
+            "sha256",
+            "width",
+            "height"
+          ],
+          "additionalProperties": false
+        },
+        "hiddenEditorImage": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "minLength": 1
+            },
+            "width": {
+              "const": 913
+            },
+            "height": {
+              "const": 736
+            }
+          },
+          "required": [
+            "url",
+            "sha256",
+            "width",
+            "height"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "level",
+        "target",
+        "retrievedOn",
+        "baselineCommit",
+        "nativeIds",
+        "image",
+        "hiddenEditorImage"
+      ],
+      "additionalProperties": false
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1
+          },
+          "section": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "section",
+          "scope"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 9,
+      "maxItems": 9
+    },
+    "semantics": {
+      "type": "object",
+      "properties": {
+        "basePrerequisites": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hiddenAlternatives": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hiddenSelection": {
+          "type": "object",
+          "properties": {
+            "documentedSlotsSelected": {
+              "const": 5
+            },
+            "candidateSlots": {
+              "const": 10
+            },
+            "algorithm": {
+              "const": "open"
+            },
+            "rng": {
+              "const": "open"
+            }
+          },
+          "required": [
+            "documentedSlotsSelected",
+            "candidateSlots",
+            "algorithm",
+            "rng"
+          ],
+          "additionalProperties": false
+        },
+        "fieldResolution": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "basePrerequisites",
+        "hiddenAlternatives",
+        "hiddenSelection",
+        "fieldResolution"
+      ],
+      "additionalProperties": false
+    },
+    "baseNodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/baseNode"
+      },
+      "minItems": 48,
+      "maxItems": 48
+    },
+    "hiddenSlots": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/hiddenSlot"
+      },
+      "minItems": 10,
+      "maxItems": 10
+    },
+    "imageCoverage": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "object",
+          "properties": {
+            "sourceLabel": {
+              "const": "研究開始"
+            },
+            "imageCenter": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "required": [
+            "sourceLabel",
+            "imageCenter"
+          ],
+          "additionalProperties": false
+        },
+        "startTargets": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "baseNodeCount": {
+          "const": 48
+        },
+        "hiddenSlotCount": {
+          "const": 10
+        },
+        "baseArrowCount": {
+          "const": 52
+        },
+        "startArrowCount": {
+          "const": 4
+        },
+        "hiddenArrowCount": {
+          "const": 29
+        }
+      },
+      "required": [
+        "start",
+        "startTargets",
+        "baseNodeCount",
+        "hiddenSlotCount",
+        "baseArrowCount",
+        "startArrowCount",
+        "hiddenArrowCount"
+      ],
+      "additionalProperties": false
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "field": {
+            "type": "string",
+            "minLength": 1
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "integer"
+                  ]
+                }
+              },
+              "required": [
+                "source",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 2
+          },
+          "resolution": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "field",
+          "values",
+          "resolution"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "openBoundaries": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 5,
+      "maxItems": 5
+    }
+  },
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "id",
+    "version",
+    "provenance",
+    "sources",
+    "semantics",
+    "baseNodes",
+    "hiddenSlots",
+    "imageCoverage",
+    "conflicts",
+    "openBoundaries"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:pk-ability-research:guide:v1",
+  "title": "Source-bounded PK ability research guide catalog",
+  "$defs": {
+    "prerequisites": {
+      "type": "object",
+      "properties": {
+        "allOf": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "allOf"
+      ],
+      "additionalProperties": false
+    },
+    "baseNode": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "const": "pk"
+        },
+        "months": {
+          "enum": [
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "costGold": {
+          "const": 300
+        },
+        "costAP": {
+          "const": 20
+        },
+        "trainingCategory": {
+          "enum": [
+            "stat",
+            "aptitude",
+            "skill"
+          ]
+        },
+        "useLimit": {
+          "enum": [
+            1,
+            3,
+            5
+          ]
+        },
+        "prerequisites": {
+          "$ref": "#/$defs/prerequisites"
+        },
+        "imageCenter": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "sourceLabel",
+        "version",
+        "months",
+        "costGold",
+        "costAP",
+        "trainingCategory",
+        "useLimit",
+        "prerequisites",
+        "imageCenter",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "hiddenAlternative": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "const": "pk"
+        },
+        "months": {
+          "enum": [
+            3,
+            6
+          ]
+        },
+        "costGold": {
+          "const": 300
+        },
+        "costAP": {
+          "const": 20
+        },
+        "trainingCategory": {
+          "const": "skill"
+        },
+        "useLimit": {
+          "enum": [
+            3,
+            5
+          ]
+        },
+        "prerequisites": {
+          "$ref": "#/$defs/prerequisites"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "tableColumn": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "skillKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "sourceLabel",
+        "version",
+        "months",
+        "costGold",
+        "costAP",
+        "trainingCategory",
+        "useLimit",
+        "prerequisites",
+        "evidence",
+        "tableColumn",
+        "skillKey"
+      ],
+      "additionalProperties": false
+    },
+    "hiddenSlot": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tableRow": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rule15Position": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "zolTablePosition": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "imageMonths": {
+          "enum": [
+            3,
+            6
+          ]
+        },
+        "imageCenter": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "imageIncoming": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/hiddenAlternative"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        }
+      },
+      "required": [
+        "id",
+        "sourceLabel",
+        "tableRow",
+        "rule15Position",
+        "zolTablePosition",
+        "imageMonths",
+        "imageCenter",
+        "imageIncoming",
+        "alternatives"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

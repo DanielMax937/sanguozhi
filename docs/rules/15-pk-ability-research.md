@@ -84,7 +84,7 @@
 - 6个月：捕缚、连战、辅佐、霸王、深谋、明镜、名声、能吏、繁殖等
 - 强力特技的可培育次数更少（如霸王/捕缚/深谋为1）
 
-完整基础树的节点/箭头可由官方游戏树图直接转为数据；参考图：
+基础树的节点/箭头已按攻略 Wiki 的参考图逐项转录（社区整理图，不宣称官方原始资源）；参考图：
 https://img.atwiki.jp/sangokushi11/attach/46/257/%E4%B8%89%E5%9B%BD%E5%BF%9711%E8%83%BD%E5%8A%9B%E7%A0%94%E7%A9%B605.png
 
 来源：
@@ -158,22 +158,29 @@ https://img.atwiki.jp/sangokushi11/attach/46/257/%E4%B8%89%E5%9B%BD%E5%BF%9711%E
 
 `skill.learnableByAbilityResearch`
 
-## 8. 实现建议
+## 8. 已完成的静态树数据
 
-能力研究树应保存为数据：
+- 数据：[catalog.json](../sources/pk-ability-research/catalog.json)
+- 闭合结构：[schema.json](../sources/pk-ability-research/schema.json)（JSON Schema 2020-12）
+- 独立逐图核对：[image-transcription-audit.json](../sources/pk-ability-research/image-transcription-audit.json)
+- 隐藏项编辑器截图独立核对：[hidden-editor-transcription-audit.json](../sources/pk-ability-research/hidden-editor-transcription-audit.json)
+- 只读导出：`PK_ABILITY_RESEARCH`，见 `packages/engine/src/ability-research.ts`
 
-```ts
-type AbilityResearchNode = {
-  id: string
-  version: "pk"
-  months: number
-  costGold: 300
-  costAP: 20
-  prerequisites: string[]
-  trainingCategory: "stat" | "aptitude" | "skill"
-  useLimit: number
-  hiddenSlot?: 1|2|3|4|5|6|7|8|9|10
-}
-```
+直接查看 1020×586 的 image05 后转录，并由另一位审阅者独立枚举核对：48 个基础节点（15 五维、12 适性、21 特技）、52 条基础节点间黑箭头、4 条研究开始箭头、10 个隐藏位置和29条橙箭头。基础节点均含稳定语义 ID、PK 版本、月数、类别、使用次数、300金/20AP、直接前置项及原图位置/日文标签。ID 是应用自定义键，不是原生 scenario 序号，也不映射原生98记录。
 
-主树规则已经有可靠资料；剩余工作主要是把参考图中的基础节点箭头完整转录为 JSON，而不是继续“猜规则”。
+`prerequisites.allOf` 表示所有直接前置项均必须完成；空数组仅表示4个起点。八个双前置基础节点保留 AND，不把多条箭头转成 OR。图中全部节点/黑箭头/橙箭头都与独立转录逐项比较，另核对引用完整性和无环性。
+
+隐藏表的10行×5列保留为50个有独立 ID 的候选，包含44种不同特技和16个双前置组合。一个槽位的候选是开局选项之间的替代关系；选定候选内部仍是 AND，不允许把其他候选前置项拿来代替。Wiki链接的[编辑器截图](https://w.atwiki.jp/sangokushi11/pages/1139.html)中48..97行的全部隐藏记录也逐项核对；行号只作证据定位，不作为应用ID。米道、征收、屯田、仁政的同名不同前置候选不可合并。`rule15Position` 保持本页旧编号，另存不同的 ZOL 表编号；不改旧命令、save、trace 或 ruleset。
+
+## 9. 来源冲突与未实现边界
+
+以下差异保留在数据 `conflicts`，没有通过猜测消除：
+
+1. 原图知ロ缺少魅+5低箭头，但 Wiki 表与 ZOL 路径都要求看破/连环为魅+5低 AND 待伏。语义候选采用表格，原图箭头清单保留实际29条。
+2. 心攻的 ZOL 明列6个月，原图武ロ槽位写3个月，图并未逐候选列时长。Wiki链接的编辑器截图第48行直接显示3个月，故攻略数据取3并保留ZOL的6；不是从槽位默认猜值。
+3. 祈愿（Wiki祈願；ZOL祈祷）使用次数 Wiki为5、ZOL为3，Wiki链接的编辑器截图第62行也显示5，故攻略数据取5并保留ZOL差异。
+4. ZOL开头写最多6个隐藏项、后文写5个；Wiki及游民星空支持5。保留攻略默认5，但没有实现抽取或随机流。
+5. 戟兵B原图由武+5低指入；游民星空旧文说统+5低。本次基础树忠实记录原图的武+5低，并保留旧文差异，不能据此声称clean-stock原生前置已认证。
+6. Wiki政治ロ第三列明确有“仅发明→征收”候选，ZOL路径摘要未列这一项。数据保留Wiki全表，不把摘要当作穷举。
+
+证据等级仅 `documented-guide`，PK资料不继承到Vanilla或主机，不声明精确补丁或原始可执行文件等价。基础图转录缺口已经闭合；完整能力研究/培育命令、资格与效果、scheduler、native cancellation/completion、隐藏开局选项算法/权重/全局RNG，以及所选攻略值与原生数据是否一致仍然 open。本次只添加独立静态数据和只读导出，不把这些边界混入训练沙盒运行时。

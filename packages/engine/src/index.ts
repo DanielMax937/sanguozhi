@@ -5,3 +5,5 @@ export { advanceDate, calculateWarGrowth, derivedWar } from './calculations.ts';
 export { conservativeTrainingGate, DEFAULT_ADAPTERS, previewCommand, executeCommand, createSession, dispatch, inspectState } from './engine.ts';
 export { replayCommands, replaySession, saveGame, loadGame, evidenceSummary } from './replay.ts';
 export { migrateLegacyState } from './migration.ts';
+export { PK_ABILITY_RESEARCH } from './ability-research.ts';
+export type { AbilityResearchCatalog, AbilityResearchBaseNode, AbilityResearchHiddenAlternative, AbilityResearchHiddenSlot, AbilityResearchCategory, AbilityResearchPrerequisites } from './ability-research.ts';

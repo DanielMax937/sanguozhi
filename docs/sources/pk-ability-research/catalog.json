@@ -1,0 +1,2840 @@
+{
+  "$schema": "./schema.json",
+  "schemaVersion": 1,
+  "id": "pk-ability-research-guide-v1",
+  "version": "pk",
+  "provenance": {
+    "level": "documented-guide",
+    "target": "PK guide data; exact patch/platform equivalence unverified",
+    "retrievedOn": "2026-10-06",
+    "baselineCommit": "f2b0bc29044ad0bcff97080c6b5082b9b0aabdd9",
+    "nativeIds": false,
+    "image": {
+      "url": "https://img.atwiki.jp/sangokushi11/attach/46/257/%E4%B8%89%E5%9B%BD%E5%BF%9711%E8%83%BD%E5%8A%9B%E7%A0%94%E7%A9%B605.png",
+      "sha256": "19570558e5b1b5bcce68f8b3e78622bc4e606260f36a0cf2345988b8a05c804f",
+      "width": 1020,
+      "height": 586
+    },
+    "hiddenEditorImage": {
+      "url": "https://img.atwiki.jp/sangokushi11/attach/1139/801/San11Editor01.PNG",
+      "sha256": "840be6803fb9b5ae1256f475892d5084825f650cb0b6bcec1db8d89c48f7a0c4",
+      "width": 913,
+      "height": 736
+    }
+  },
+  "sources": [
+    {
+      "id": "atwiki-tree-05",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/46.html",
+      "section": "能力研究ツリー / 三國志11能力研究05.png",
+      "scope": "all base labels, months, black arrows, and hidden-slot image geometry; image directly viewed"
+    },
+    {
+      "id": "atwiki-uses",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/46.html",
+      "section": "養成回数",
+      "scope": "base use limits"
+    },
+    {
+      "id": "atwiki-hidden",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/46.html",
+      "section": "隠し特技一覧",
+      "scope": "10 rows x 5 exact alternatives, prerequisites and use limits"
+    },
+    {
+      "id": "zol-base",
+      "url": "https://game.zol.com.cn/228/2285144.html",
+      "section": "一般能力研究 / 基本能力研究",
+      "scope": "independent complete base months and use-limit cross-check"
+    },
+    {
+      "id": "zol-hidden",
+      "url": "https://game.zol.com.cn/228/2285144.html",
+      "section": "额外能力研究 / 研究路径整理",
+      "scope": "hidden months and prerequisites; conflicting fields retained separately"
+    },
+    {
+      "id": "gamersky-tree",
+      "url": "https://www.gamersky.com/handbook/200707/69811.shtml",
+      "section": "能力研究的注意事项 / 修改研究的路径",
+      "scope": "300 gold / 20 AP, AND meaning of incoming arrows, fame and war-medium prerequisite cross-check"
+    },
+    {
+      "id": "gamersky-hidden",
+      "url": "https://www.gamersky.com/handbook/200707/69578.shtml",
+      "section": "hidden-position description",
+      "scope": "five selected positions from ten; numbering mapped through rule15Position"
+    },
+    {
+      "id": "gamersky-timing",
+      "url": "https://www.gamersky.com/handbook/200704/59216.shtml",
+      "section": "research difficulty discussion",
+      "scope": "qualitative path cross-check only; star ratings are not research months"
+    },
+    {
+      "id": "atwiki-editor-hidden",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/1139.html",
+      "section": "San11Editor01.PNG, visible rows48..97",
+      "scope": "Directly viewed editor screenshot: all50 hidden prerequisite/month/use records, including heart-attack3 months and prayer5 uses. Screenshot provenance is not executable authentication."
+    }
+  ],
+  "semantics": {
+    "basePrerequisites": "allOf: every listed direct predecessor must be completed; empty means research-start root",
+    "hiddenAlternatives": "Exactly one alternative at an active slot is fixed at game start. Alternatives are possibilities, not simultaneous unlockable nodes; never OR their prerequisites to bypass a selected alternative.",
+    "hiddenSelection": {
+      "documentedSlotsSelected": 5,
+      "candidateSlots": 10,
+      "algorithm": "open",
+      "rng": "open"
+    },
+    "fieldResolution": "All fields are explicit source-backed guide values. Historical contradictions remain in conflicts; the linked editor screenshot corroborates heart-attack3 months and prayer5 uses without certifying native stock data."
+  },
+  "baseNodes": [
+    {
+      "id": "aptitude.spear.a",
+      "name": "枪兵A",
+      "sourceLabel": "槍兵A",
+      "version": "pk",
+      "months": 5,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "aptitude",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "aptitude.crossbow.a"
+        ]
+      },
+      "imageCenter": [
+        114,
+        43
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "aptitude.crossbow.a",
+      "name": "弩兵A",
+      "sourceLabel": "弩兵A",
+      "version": "pk",
+      "months": 5,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "aptitude",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "stat.war.medium"
+        ]
+      },
+      "imageCenter": [
+        227,
+        43
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.war.medium",
+      "name": "武+5中",
+      "sourceLabel": "武+5中",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "aptitude.spear.b",
+          "aptitude.navy.b"
+        ]
+      },
+      "imageCenter": [
+        341,
+        43
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "aptitude.halberd.a",
+      "name": "戟兵A",
+      "sourceLabel": "戟兵A",
+      "version": "pk",
+      "months": 5,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "aptitude",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "aptitude.navy.b"
+        ]
+      },
+      "imageCenter": [
+        454,
+        43
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "aptitude.navy.a",
+      "name": "水军A",
+      "sourceLabel": "水軍A",
+      "version": "pk",
+      "months": 5,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "aptitude",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "aptitude.halberd.a"
+        ]
+      },
+      "imageCenter": [
+        568,
+        43
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.support",
+      "name": "辅佐",
+      "sourceLabel": "補佐",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "aptitude.navy.a"
+        ]
+      },
+      "imageCenter": [
+        681,
+        43
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.overlord",
+      "name": "霸王",
+      "sourceLabel": "覇王",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 1,
+      "prerequisites": {
+        "allOf": [
+          "skill.support",
+          "stat.leadership.medium"
+        ]
+      },
+      "imageCenter": [
+        794,
+        43
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.chain-attack",
+      "name": "连战",
+      "sourceLabel": "連戦",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "aptitude.spear.a"
+        ]
+      },
+      "imageCenter": [
+        171,
+        128
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "aptitude.spear.b",
+      "name": "枪兵B",
+      "sourceLabel": "槍兵B",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "aptitude",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "aptitude.crossbow.b"
+        ]
+      },
+      "imageCenter": [
+        284,
+        128
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "aptitude.navy.b",
+      "name": "水军B",
+      "sourceLabel": "水軍B",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "aptitude",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "aptitude.halberd.b"
+        ]
+      },
+      "imageCenter": [
+        397,
+        128
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "aptitude.halberd.b",
+      "name": "戟兵B",
+      "sourceLabel": "戟兵B",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "aptitude",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "stat.war.low"
+        ]
+      },
+      "imageCenter": [
+        511,
+        128
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.diamond",
+      "name": "金刚",
+      "sourceLabel": "金剛",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "skill.indomitable"
+        ]
+      },
+      "imageCenter": [
+        737,
+        128
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.leadership.medium",
+      "name": "统+5中",
+      "sourceLabel": "統+5中",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "skill.diamond"
+        ]
+      },
+      "imageCenter": [
+        851,
+        128
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.leadership.high",
+      "name": "统+5高",
+      "sourceLabel": "統+5高",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "stat.leadership.medium"
+        ]
+      },
+      "imageCenter": [
+        965,
+        128
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.war.high",
+      "name": "武+5高",
+      "sourceLabel": "武+5高",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "skill.chain-attack",
+          "aptitude.cavalry.a"
+        ]
+      },
+      "imageCenter": [
+        114,
+        213
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "aptitude.crossbow.b",
+      "name": "弩兵B",
+      "sourceLabel": "弩兵B",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "aptitude",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "stat.war.low"
+        ]
+      },
+      "imageCenter": [
+        341,
+        213
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.war.low",
+      "name": "武+5低",
+      "sourceLabel": "武+5低",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": []
+      },
+      "imageCenter": [
+        454,
+        213
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.leadership.low",
+      "name": "统+5低",
+      "sourceLabel": "統+5低",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": []
+      },
+      "imageCenter": [
+        568,
+        213
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.indomitable",
+      "name": "不屈",
+      "sourceLabel": "不屈",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "stat.leadership.low"
+        ]
+      },
+      "imageCenter": [
+        681,
+        213
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.fame",
+      "name": "名声",
+      "sourceLabel": "名声",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "stat.leadership.medium",
+          "skill.efficient-official"
+        ]
+      },
+      "imageCenter": [
+        794,
+        213
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.capture",
+      "name": "捕缚",
+      "sourceLabel": "捕縛",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 1,
+      "prerequisites": {
+        "allOf": [
+          "skill.fame"
+        ]
+      },
+      "imageCenter": [
+        909,
+        213
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "aptitude.cavalry.a",
+      "name": "骑兵A",
+      "sourceLabel": "騎兵A",
+      "version": "pk",
+      "months": 5,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "aptitude",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "aptitude.siege.a"
+        ]
+      },
+      "imageCenter": [
+        57,
+        298
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.range",
+      "name": "射程",
+      "sourceLabel": "射程",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "aptitude.cavalry.b"
+        ]
+      },
+      "imageCenter": [
+        171,
+        298
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "aptitude.cavalry.b",
+      "name": "骑兵B",
+      "sourceLabel": "騎兵B",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "aptitude",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "aptitude.siege.b"
+        ]
+      },
+      "imageCenter": [
+        284,
+        298
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "aptitude.siege.b",
+      "name": "兵器B",
+      "sourceLabel": "兵器B",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "aptitude",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "stat.war.low"
+        ]
+      },
+      "imageCenter": [
+        397,
+        298
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.iron-wall",
+      "name": "铁壁",
+      "sourceLabel": "鉄壁",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "stat.leadership.low",
+          "skill.fortification"
+        ]
+      },
+      "imageCenter": [
+        624,
+        298
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.efficient-official",
+      "name": "能吏",
+      "sourceLabel": "能吏",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "skill.breeding"
+        ]
+      },
+      "imageCenter": [
+        851,
+        298
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.debater",
+      "name": "论客",
+      "sourceLabel": "論客",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 1,
+      "prerequisites": {
+        "allOf": [
+          "skill.capture",
+          "skill.efficient-official"
+        ]
+      },
+      "imageCenter": [
+        965,
+        298
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "aptitude.siege.a",
+      "name": "兵器A",
+      "sourceLabel": "兵器A",
+      "version": "pk",
+      "months": 5,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "aptitude",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "skill.range"
+        ]
+      },
+      "imageCenter": [
+        114,
+        383
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.sweep",
+      "name": "扫讨",
+      "sourceLabel": "掃討",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "skill.ambush"
+        ]
+      },
+      "imageCenter": [
+        227,
+        383
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.ambush",
+      "name": "待伏",
+      "sourceLabel": "待伏",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "stat.intelligence.low"
+        ]
+      },
+      "imageCenter": [
+        341,
+        383
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.intelligence.low",
+      "name": "知+5低",
+      "sourceLabel": "知+5低",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": []
+      },
+      "imageCenter": [
+        454,
+        383
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.politics.low",
+      "name": "政+5低",
+      "sourceLabel": "政+5低",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": []
+      },
+      "imageCenter": [
+        568,
+        383
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.fortification",
+      "name": "筑城",
+      "sourceLabel": "築城",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "stat.politics.low"
+        ]
+      },
+      "imageCenter": [
+        681,
+        383
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.breeding",
+      "name": "繁殖",
+      "sourceLabel": "繁殖",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "stat.politics.high"
+        ]
+      },
+      "imageCenter": [
+        794,
+        383
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.politics.high",
+      "name": "政+5高",
+      "sourceLabel": "政+5高",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "skill.invention"
+        ]
+      },
+      "imageCenter": [
+        909,
+        383
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.intelligence.high",
+      "name": "知+5高",
+      "sourceLabel": "知+5高",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "skill.deep-plan"
+        ]
+      },
+      "imageCenter": [
+        171,
+        468
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.intelligence.medium",
+      "name": "知+5中",
+      "sourceLabel": "知+5中",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "skill.sweep"
+        ]
+      },
+      "imageCenter": [
+        284,
+        468
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.charisma.low",
+      "name": "魅+5低",
+      "sourceLabel": "魅+5低",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "stat.intelligence.low",
+          "stat.politics.low"
+        ]
+      },
+      "imageCenter": [
+        511,
+        468
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.charisma.high",
+      "name": "魅+5高",
+      "sourceLabel": "魅+5高",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "stat.charisma.medium"
+        ]
+      },
+      "imageCenter": [
+        624,
+        468
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.transport",
+      "name": "运搬",
+      "sourceLabel": "運搬",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "skill.fortification"
+        ]
+      },
+      "imageCenter": [
+        737,
+        468
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.invention",
+      "name": "发明",
+      "sourceLabel": "発明",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "skill.shipbuilding"
+        ]
+      },
+      "imageCenter": [
+        851,
+        468
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.deep-plan",
+      "name": "深谋",
+      "sourceLabel": "深謀",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 1,
+      "prerequisites": {
+        "allOf": [
+          "skill.clear-mirror"
+        ]
+      },
+      "imageCenter": [
+        227,
+        553
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.clear-mirror",
+      "name": "明镜",
+      "sourceLabel": "明鏡",
+      "version": "pk",
+      "months": 6,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "stat.intelligence.medium",
+          "skill.intimidation"
+        ]
+      },
+      "imageCenter": [
+        341,
+        553
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.intimidation",
+      "name": "威压",
+      "sourceLabel": "威圧",
+      "version": "pk",
+      "months": 3,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "stat.charisma.low"
+        ]
+      },
+      "imageCenter": [
+        454,
+        553
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.charisma.medium",
+      "name": "魅+5中",
+      "sourceLabel": "魅+5中",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "skill.intimidation"
+        ]
+      },
+      "imageCenter": [
+        568,
+        553
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "stat.politics.medium",
+      "name": "政+5中",
+      "sourceLabel": "政+5中",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "stat",
+      "useLimit": 5,
+      "prerequisites": {
+        "allOf": [
+          "skill.transport"
+        ]
+      },
+      "imageCenter": [
+        681,
+        553
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    },
+    {
+      "id": "skill.shipbuilding",
+      "name": "造船",
+      "sourceLabel": "造船",
+      "version": "pk",
+      "months": 4,
+      "costGold": 300,
+      "costAP": 20,
+      "trainingCategory": "skill",
+      "useLimit": 3,
+      "prerequisites": {
+        "allOf": [
+          "stat.politics.medium"
+        ]
+      },
+      "imageCenter": [
+        794,
+        553
+      ],
+      "evidence": [
+        "atwiki-tree-05",
+        "atwiki-uses",
+        "zol-base",
+        "gamersky-tree"
+      ]
+    }
+  ],
+  "hiddenSlots": [
+    {
+      "id": "hidden.war-i",
+      "sourceLabel": "武イ",
+      "tableRow": "武力イ",
+      "rule15Position": 5,
+      "zolTablePosition": 1,
+      "imageMonths": 6,
+      "imageCenter": [
+        57,
+        128
+      ],
+      "imageIncoming": [
+        "aptitude.spear.a",
+        "skill.chain-attack",
+        "stat.war.high"
+      ],
+      "alternatives": [
+        {
+          "id": "hidden.war-i.option-1",
+          "tableColumn": 1,
+          "skillKey": "chaotic-combat",
+          "name": "乱战",
+          "sourceLabel": "乱戦",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "aptitude.spear.a"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.war-i.option-2",
+          "tableColumn": 2,
+          "skillKey": "pincer",
+          "name": "掎角",
+          "sourceLabel": "掎角",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.chain-attack"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.war-i.option-3",
+          "tableColumn": 3,
+          "skillKey": "brave-general",
+          "name": "勇将",
+          "sourceLabel": "勇将",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "aptitude.spear.a"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.war-i.option-4",
+          "tableColumn": 4,
+          "skillKey": "war-god",
+          "name": "斗神",
+          "sourceLabel": "闘神",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.chain-attack"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.war-i.option-5",
+          "tableColumn": 5,
+          "skillKey": "gallop",
+          "name": "疾走",
+          "sourceLabel": "疾走",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "stat.war.high"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hidden.war-ro",
+      "sourceLabel": "武ロ",
+      "tableRow": "武力ロ",
+      "rule15Position": 1,
+      "zolTablePosition": 2,
+      "imageMonths": 3,
+      "imageCenter": [
+        227,
+        213
+      ],
+      "imageIncoming": [
+        "skill.chain-attack",
+        "aptitude.spear.b",
+        "aptitude.crossbow.b",
+        "aptitude.cavalry.b"
+      ],
+      "alternatives": [
+        {
+          "id": "hidden.war-ro.option-1",
+          "tableColumn": 1,
+          "skillKey": "heart-attack",
+          "name": "心攻",
+          "sourceLabel": "心攻",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "aptitude.cavalry.b"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ],
+          "conflicts": [
+            "heart-attack-months"
+          ]
+        },
+        {
+          "id": "hidden.war-ro.option-2",
+          "tableColumn": 2,
+          "skillKey": "spear-god",
+          "name": "枪神",
+          "sourceLabel": "槍神",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "aptitude.spear.b",
+              "skill.chain-attack"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.war-ro.option-3",
+          "tableColumn": 3,
+          "skillKey": "halberd-god",
+          "name": "戟神",
+          "sourceLabel": "戟神",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "aptitude.crossbow.b",
+              "skill.chain-attack"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.war-ro.option-4",
+          "tableColumn": 4,
+          "skillKey": "bow-god",
+          "name": "弓神",
+          "sourceLabel": "弓神",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "aptitude.crossbow.b",
+              "skill.chain-attack"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.war-ro.option-5",
+          "tableColumn": 5,
+          "skillKey": "water-god",
+          "name": "水神",
+          "sourceLabel": "水神",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "aptitude.crossbow.b",
+              "skill.chain-attack"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hidden.war-ha",
+      "sourceLabel": "武ハ",
+      "tableRow": "武力ハ",
+      "rule15Position": 6,
+      "zolTablePosition": 3,
+      "imageMonths": 6,
+      "imageCenter": [
+        57,
+        468
+      ],
+      "imageIncoming": [
+        "stat.intelligence.high",
+        "aptitude.siege.a"
+      ],
+      "alternatives": [
+        {
+          "id": "hidden.war-ha.option-1",
+          "tableColumn": 1,
+          "skillKey": "siege",
+          "name": "攻城",
+          "sourceLabel": "攻城",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "stat.intelligence.high",
+              "aptitude.siege.a"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.war-ha.option-2",
+          "tableColumn": 2,
+          "skillKey": "divine-general",
+          "name": "神将",
+          "sourceLabel": "神将",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "stat.intelligence.high",
+              "aptitude.siege.a"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.war-ha.option-3",
+          "tableColumn": 3,
+          "skillKey": "cavalry-god",
+          "name": "骑神",
+          "sourceLabel": "騎神",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "aptitude.siege.a"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.war-ha.option-4",
+          "tableColumn": 4,
+          "skillKey": "engineering-god",
+          "name": "工神",
+          "sourceLabel": "工神",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "aptitude.siege.a"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.war-ha.option-5",
+          "tableColumn": 5,
+          "skillKey": "fierce",
+          "name": "猛者",
+          "sourceLabel": "猛者",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "aptitude.siege.a"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hidden.leadership-i",
+      "sourceLabel": "統イ",
+      "tableRow": "統率イ",
+      "rule15Position": 2,
+      "zolTablePosition": 6,
+      "imageMonths": 3,
+      "imageCenter": [
+        624,
+        128
+      ],
+      "imageIncoming": [
+        "skill.support",
+        "skill.diamond",
+        "stat.leadership.low",
+        "skill.indomitable"
+      ],
+      "alternatives": [
+        {
+          "id": "hidden.leadership-i.option-1",
+          "tableColumn": 1,
+          "skillKey": "long-drive",
+          "name": "长驱",
+          "sourceLabel": "長駆",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.diamond"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.leadership-i.option-2",
+          "tableColumn": 2,
+          "skillKey": "traverse",
+          "name": "踏破",
+          "sourceLabel": "踏破",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.diamond"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.leadership-i.option-3",
+          "tableColumn": 3,
+          "skillKey": "blood-road",
+          "name": "血路",
+          "sourceLabel": "血路",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "stat.leadership.low"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.leadership-i.option-4",
+          "tableColumn": 4,
+          "skillKey": "bodyguard",
+          "name": "护卫",
+          "sourceLabel": "護衛",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.indomitable"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.leadership-i.option-5",
+          "tableColumn": 5,
+          "skillKey": "music",
+          "name": "奏乐",
+          "sourceLabel": "楽奏",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "skill.support",
+              "skill.indomitable"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hidden.leadership-ro",
+      "sourceLabel": "統ロ",
+      "tableRow": "統率ロ",
+      "rule15Position": 7,
+      "zolTablePosition": 7,
+      "imageMonths": 6,
+      "imageCenter": [
+        909,
+        43
+      ],
+      "imageIncoming": [
+        "skill.overlord",
+        "stat.leadership.medium",
+        "stat.leadership.high"
+      ],
+      "alternatives": [
+        {
+          "id": "hidden.leadership-ro.option-1",
+          "tableColumn": 1,
+          "skillKey": "flying-general",
+          "name": "飞将",
+          "sourceLabel": "飛将",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.leadership.high",
+              "skill.overlord"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.leadership-ro.option-2",
+          "tableColumn": 2,
+          "skillKey": "escape",
+          "name": "遁走",
+          "sourceLabel": "遁走",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.leadership.medium"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.leadership-ro.option-3",
+          "tableColumn": 3,
+          "skillKey": "forced-march",
+          "name": "强行",
+          "sourceLabel": "強行",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.leadership.high"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.leadership-ro.option-4",
+          "tableColumn": 4,
+          "skillKey": "rattan-armor",
+          "name": "藤甲",
+          "sourceLabel": "藤甲",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.leadership.high"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.leadership-ro.option-5",
+          "tableColumn": 5,
+          "skillKey": "fortune",
+          "name": "强运",
+          "sourceLabel": "強運",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "stat.leadership.medium"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hidden.intelligence-i",
+      "sourceLabel": "知イ",
+      "tableRow": "知力イ",
+      "rule15Position": 10,
+      "zolTablePosition": 4,
+      "imageMonths": 6,
+      "imageCenter": [
+        114,
+        553
+      ],
+      "imageIncoming": [
+        "stat.intelligence.high",
+        "skill.deep-plan"
+      ],
+      "alternatives": [
+        {
+          "id": "hidden.intelligence-i.option-1",
+          "tableColumn": 1,
+          "skillKey": "feint",
+          "name": "虚实",
+          "sourceLabel": "虚実",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.intelligence.high"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.intelligence-i.option-2",
+          "tableColumn": 2,
+          "skillKey": "insight",
+          "name": "洞察",
+          "sourceLabel": "洞察",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.intelligence.high"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.intelligence-i.option-3",
+          "tableColumn": 3,
+          "skillKey": "divine-calculation",
+          "name": "神算",
+          "sourceLabel": "神算",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "skill.deep-plan"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.intelligence-i.option-4",
+          "tableColumn": 4,
+          "skillKey": "hundred-plans",
+          "name": "百出",
+          "sourceLabel": "百出",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.intelligence.high"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.intelligence-i.option-5",
+          "tableColumn": 5,
+          "skillKey": "demon-gate",
+          "name": "鬼门",
+          "sourceLabel": "鬼門",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.intelligence.high"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hidden.intelligence-ro",
+      "sourceLabel": "知ロ",
+      "tableRow": "知力ロ",
+      "rule15Position": 4,
+      "zolTablePosition": 5,
+      "imageMonths": 3,
+      "imageCenter": [
+        397,
+        468
+      ],
+      "imageIncoming": [
+        "skill.ambush",
+        "stat.intelligence.low",
+        "stat.intelligence.medium",
+        "skill.clear-mirror"
+      ],
+      "alternatives": [
+        {
+          "id": "hidden.intelligence-ro.option-1",
+          "tableColumn": 1,
+          "skillKey": "perception",
+          "name": "看破",
+          "sourceLabel": "看破",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.charisma.low",
+              "skill.ambush"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.intelligence-ro.option-2",
+          "tableColumn": 2,
+          "skillKey": "fire-god",
+          "name": "火神",
+          "sourceLabel": "火神",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.intelligence.medium"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.intelligence-ro.option-3",
+          "tableColumn": 3,
+          "skillKey": "demonic-plan",
+          "name": "鬼谋",
+          "sourceLabel": "鬼謀",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.intelligence.low",
+              "skill.clear-mirror"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.intelligence-ro.option-4",
+          "tableColumn": 4,
+          "skillKey": "chain-plan",
+          "name": "连环",
+          "sourceLabel": "連環",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.charisma.low",
+              "skill.ambush"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.intelligence-ro.option-5",
+          "tableColumn": 5,
+          "skillKey": "counter-plan",
+          "name": "反计",
+          "sourceLabel": "反計",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "stat.intelligence.low",
+              "skill.ambush"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hidden.politics-i",
+      "sourceLabel": "政イ",
+      "tableRow": "政治イ",
+      "rule15Position": 3,
+      "zolTablePosition": 8,
+      "imageMonths": 3,
+      "imageCenter": [
+        737,
+        298
+      ],
+      "imageIncoming": [
+        "skill.indomitable",
+        "skill.fortification",
+        "skill.breeding"
+      ],
+      "alternatives": [
+        {
+          "id": "hidden.politics-i.option-1",
+          "tableColumn": 1,
+          "skillKey": "guidance",
+          "name": "指导",
+          "sourceLabel": "指導",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.indomitable",
+              "skill.fortification"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.politics-i.option-2",
+          "tableColumn": 2,
+          "skillKey": "discernment",
+          "name": "眼力",
+          "sourceLabel": "眼力",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.indomitable",
+              "skill.fortification"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.politics-i.option-3",
+          "tableColumn": 3,
+          "skillKey": "taxation",
+          "name": "征税",
+          "sourceLabel": "徴税",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 3,
+          "prerequisites": {
+            "allOf": [
+              "skill.breeding"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.politics-i.option-4",
+          "tableColumn": 4,
+          "skillKey": "feng-shui",
+          "name": "风水",
+          "sourceLabel": "風水",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.fortification"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.politics-i.option-5",
+          "tableColumn": 5,
+          "skillKey": "prayer",
+          "name": "祈愿",
+          "sourceLabel": "祈願",
+          "version": "pk",
+          "months": 3,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.fortification"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ],
+          "conflicts": [
+            "prayer-use-limit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hidden.politics-ro",
+      "sourceLabel": "政ロ",
+      "tableRow": "政治ロ",
+      "rule15Position": 8,
+      "zolTablePosition": 9,
+      "imageMonths": 6,
+      "imageCenter": [
+        965,
+        468
+      ],
+      "imageIncoming": [
+        "stat.politics.high",
+        "skill.invention"
+      ],
+      "alternatives": [
+        {
+          "id": "hidden.politics-ro.option-1",
+          "tableColumn": 1,
+          "skillKey": "rice",
+          "name": "米道",
+          "sourceLabel": "米道",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.invention"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.politics-ro.option-2",
+          "tableColumn": 2,
+          "skillKey": "rice",
+          "name": "米道",
+          "sourceLabel": "米道",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "stat.politics.high"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.politics-ro.option-3",
+          "tableColumn": 3,
+          "skillKey": "collection",
+          "name": "征收",
+          "sourceLabel": "徴収",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.invention"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.politics-ro.option-4",
+          "tableColumn": 4,
+          "skillKey": "collection",
+          "name": "征收",
+          "sourceLabel": "徴収",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "stat.politics.high"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.politics-ro.option-5",
+          "tableColumn": 5,
+          "skillKey": "collection",
+          "name": "征收",
+          "sourceLabel": "徴収",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "stat.politics.high",
+              "skill.invention"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hidden.politics-ha",
+      "sourceLabel": "政ハ",
+      "tableRow": "政治ハ",
+      "rule15Position": 9,
+      "zolTablePosition": 10,
+      "imageMonths": 6,
+      "imageCenter": [
+        909,
+        553
+      ],
+      "imageIncoming": [
+        "skill.invention",
+        "skill.shipbuilding"
+      ],
+      "alternatives": [
+        {
+          "id": "hidden.politics-ha.option-1",
+          "tableColumn": 1,
+          "skillKey": "farming",
+          "name": "屯田",
+          "sourceLabel": "屯田",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.shipbuilding",
+              "skill.invention"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.politics-ha.option-2",
+          "tableColumn": 2,
+          "skillKey": "farming",
+          "name": "屯田",
+          "sourceLabel": "屯田",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.shipbuilding"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.politics-ha.option-3",
+          "tableColumn": 3,
+          "skillKey": "farming",
+          "name": "屯田",
+          "sourceLabel": "屯田",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.invention"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.politics-ha.option-4",
+          "tableColumn": 4,
+          "skillKey": "benevolence",
+          "name": "仁政",
+          "sourceLabel": "仁政",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.shipbuilding"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        },
+        {
+          "id": "hidden.politics-ha.option-5",
+          "tableColumn": 5,
+          "skillKey": "benevolence",
+          "name": "仁政",
+          "sourceLabel": "仁政",
+          "version": "pk",
+          "months": 6,
+          "costGold": 300,
+          "costAP": 20,
+          "trainingCategory": "skill",
+          "useLimit": 5,
+          "prerequisites": {
+            "allOf": [
+              "skill.invention"
+            ]
+          },
+          "evidence": [
+            "atwiki-hidden",
+            "zol-hidden",
+            "atwiki-editor-hidden"
+          ]
+        }
+      ]
+    }
+  ],
+  "imageCoverage": {
+    "start": {
+      "sourceLabel": "研究開始",
+      "imageCenter": [
+        511,
+        298
+      ]
+    },
+    "startTargets": [
+      "stat.war.low",
+      "stat.leadership.low",
+      "stat.intelligence.low",
+      "stat.politics.low"
+    ],
+    "baseNodeCount": 48,
+    "hiddenSlotCount": 10,
+    "baseArrowCount": 52,
+    "startArrowCount": 4,
+    "hiddenArrowCount": 29
+  },
+  "conflicts": [
+    {
+      "id": "hidden-intelligence-image-arrow",
+      "field": "imageIncoming",
+      "values": [
+        {
+          "source": "atwiki-tree-05",
+          "value": "no stat.charisma.low -> hidden.intelligence-ro arrow"
+        },
+        {
+          "source": "atwiki-hidden",
+          "value": "perception and chain-plan require stat.charisma.low AND skill.ambush"
+        },
+        {
+          "source": "zol-hidden",
+          "value": "same AND prerequisites as the wiki table"
+        }
+      ],
+      "resolution": "Use the explicit table for option prerequisites; preserve the actual image arrow set independently."
+    },
+    {
+      "id": "heart-attack-months",
+      "field": "months",
+      "values": [
+        {
+          "source": "atwiki-tree-05",
+          "value": 3
+        },
+        {
+          "source": "zol-hidden",
+          "value": 6
+        },
+        {
+          "source": "atwiki-editor-hidden",
+          "value": 3
+        }
+      ],
+      "resolution": "Guide value3: linked screenshot row48 corroborates image duration3 against older ZOL6. Native clean-stock equivalence remains unverified."
+    },
+    {
+      "id": "prayer-use-limit",
+      "field": "useLimit",
+      "values": [
+        {
+          "source": "atwiki-hidden",
+          "value": 5
+        },
+        {
+          "source": "zol-hidden",
+          "value": 3
+        },
+        {
+          "source": "atwiki-editor-hidden",
+          "value": 5
+        }
+      ],
+      "resolution": "Guide value5: linked screenshot row62 corroborates wiki table5 against older ZOL3. Names 祈願 and 祈祷 are source aliases; native clean-stock equivalence remains unverified."
+    },
+    {
+      "id": "hidden-selection-count",
+      "field": "semantics.hiddenSelection.documentedSlotsSelected",
+      "values": [
+        {
+          "source": "zol-hidden",
+          "value": "article opening says6; later note says5"
+        },
+        {
+          "source": "atwiki-hidden",
+          "value": 5
+        },
+        {
+          "source": "gamersky-hidden",
+          "value": 5
+        }
+      ],
+      "resolution": "Record the majority documented default5, preserve ZOL internal conflict; no selection algorithm or RNG implementation."
+    },
+    {
+      "id": "halberd-b-predecessor",
+      "field": "baseNodes.aptitude.halberd.b.prerequisites",
+      "values": [
+        {
+          "source": "atwiki-tree-05",
+          "value": "stat.war.low"
+        },
+        {
+          "source": "gamersky-tree",
+          "value": "stat.leadership.low"
+        }
+      ],
+      "resolution": "This base-tree transcription follows the directly viewed latest wiki image. The older prose disagrees; clean-stock native prerequisite equivalence remains unverified."
+    },
+    {
+      "id": "collection-invention-only",
+      "field": "hiddenSlots.hidden.politics-ro.option-3.prerequisites",
+      "values": [
+        {
+          "source": "atwiki-hidden",
+          "value": "skill.invention alone is one of three collection variants"
+        },
+        {
+          "source": "zol-hidden",
+          "value": "path summary lists politics-high or politics-high plus invention; invention-only is omitted"
+        }
+      ],
+      "resolution": "Preserve every explicit wiki table column as a separate alternative; the older summary is not exhaustive."
+    }
+  ],
+  "openBoundaries": [
+    "Hidden startup selection algorithm, weighting and global RNG",
+    "Complete ability-research and officer-training commands, eligibility, effects and scheduler",
+    "Native cancellation and completion integration",
+    "Documented source disagreements and native agreement with selected guide values remain unverified",
+    "Clean-stock PC-PK1.1 executable/runtime equivalence, Vanilla and console parity"
+  ]
+}
