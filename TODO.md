@@ -1,12 +1,20 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current integration: P0-77 native event9 live home getter
-> Integration baseline: PR #34 merged; this theme starts at `d811288e5e9110036678719af23b597a2450650c`
+> Current theme: static subordinate-base parent-city data
+> Integration baseline: PR #35 merged; this theme starts at `f2b0bc29044ad0bcff97080c6b5082b9b0aabdd9`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
 > Primary target: PC-PK1.1
-> Updated: 2026-10-05 (UTC)
+> Updated: 2026-10-06 (UTC)
+
+## Static data: 45 subordinate-base parent-city mappings
+
+- [x] Add [45 named parent relations](docs/sources/subordinate-bases.json), with 10 gates and 35 ports, stable repository IDs, exact existing city-name references and per-row source locators
+- [x] Preserve the source's spellings, explicit normalization, page timestamp, retrieval date and community-reference/unspecified-version boundary; retain factual projections and their SHA-256 pins
+- [x] Reconcile every one of the existing 42 city counts, including 15 zero-count cities; no count disagreement found. Existing `cities.json` bytes remain unchanged
+- [x] Add 9 static-data tests to the existing `npm run check` suite; [scope and contract](docs/rules/static-subordinate-bases.md)
+- Still open: 北海/建業/會稽 development-patch splits, hex coordinates/terrain/adjacency, original numeric base IDs and scenario initialization. Static parentage supplies no runtime ownership, capture, income, order or event behavior; all existing evidence debt below remains
 
 ## 1. Current progress
 

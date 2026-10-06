@@ -27,9 +27,11 @@
 # 三国志11规则总索引
 
 > 目标：建立可直接驱动规则引擎的《三国志11》规则规范，并严格区分无印（Vanilla）与威力加强版（PK）。
-> 更新日期：2026-10-05 UTC。
+> 更新日期：2026-10-06 UTC。
 
 ## 最新审计入口
+
+[港关静态所属城市](static-subordinate-bases.md)：45 个唯一据点（10 关、35 港）对应既有 42 城，逐行来源及所有城市数量一致；社区来源版本边界明确，三城开发分片仍未知，不涉及动态归属或事件执行。
 
 新增[100-empty-legion-redistribution.md](100-empty-legion-redistribution.md)新增独立版本，展开空军团primary/nonprimary分派、source/destination合并方向、完整两次roster复制、live据点扫描与人员迁移调用、raw44-byte reset。primary fallback丢弃ordinal查找值而直接使用global ID2..8的原生控制流保留；nearest距离与S1/S2 RNG分开，S2三次共享页读要求逐调用观察。004AD550/004A8270仍是明确可变深层边界，force灭亡仍atomic defer；旧API、stock/Vanilla/全局RNG边界不变。`python scripts/check_empty_legion_source.py`、`python scripts/check_empty_legion_profile.py`。
 
