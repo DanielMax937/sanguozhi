@@ -1,0 +1,609 @@
+{
+  "schemaVersion": 1,
+  "datasetVersion": "atwiki-77-2021-08-04-v1",
+  "scope": "static-subordinate-base-parentage",
+  "cityCatalog": "cities.json",
+  "cityKey": "name",
+  "counts": {
+    "cities": 42,
+    "bases": 45,
+    "gates": 10,
+    "ports": 35
+  },
+  "idPolicy": "Stable repository identifiers, not native game IDs or source-table row numbers. Preserve IDs across display-name or source-order changes.",
+  "sources": [
+    {
+      "id": "atwiki-city-data-77",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/77.html",
+      "title": "三國志11攻略wiki / 都市データ",
+      "language": "ja",
+      "section": "一覧表 > 港関",
+      "parentCountSection": "一覧表 > 都市 / 港関",
+      "pageLastUpdatedLocal": "2021-08-04 08:20",
+      "pageLastUpdatedTimezone": "not stated on page",
+      "retrievedDateUtc": "2026-10-06",
+      "evidenceClass": "community-reference",
+      "gameVersion": "三國志11; these table rows do not identify edition, platform or patch",
+      "versionBoundary": "No clean-stock PC-PK, Vanilla, console, scenario or MOD equivalence is certified.",
+      "baseRows": "subordinate-bases/atwiki-77-parentage.tsv",
+      "cityCountRows": "subordinate-bases/atwiki-77-city-counts.tsv",
+      "baseRowsSha256": "3735dcab30f0dd2c59ae490bd1bb50995a2275008827cf858305850808bb88ca",
+      "cityCountRowsSha256": "81505dee643d0c43541ce07f74427cefce73eff7ffb273041dc7397a0c319002"
+    }
+  ],
+  "normalization": {
+    "parentCityNames": {
+      "晋陽": "晉陽",
+      "寿春": "壽春",
+      "呉": "吳",
+      "会稽": "會稽"
+    },
+    "displayNames": {
+      "虎牢関": "虎牢關",
+      "剣閣": "劍閣",
+      "壺関": "壺關",
+      "綿竹関": "綿竹關",
+      "陽平関": "陽平關",
+      "葭萌関": "葭萌關",
+      "函谷関": "函谷關",
+      "潼関": "潼關",
+      "武関": "武關",
+      "涪水関": "涪水關",
+      "臨済港": "臨濟港",
+      "解県港": "解縣港",
+      "新豊港": "新豐港",
+      "羅県港": "羅縣港",
+      "巫県港": "巫縣港"
+    },
+    "policy": "Only the explicitly listed spelling conversions are applied. Source names remain verbatim; parentCity must exactly match cities.json cities[].name."
+  },
+  "disagreements": [],
+  "disagreementScope": "No parent-count mismatch between this source projection and all 42 existing city rows. This is one community source, not an independent original-game verification.",
+  "notes": [
+    "Static geographical parentage only: no current faction ownership, legion, capture, income, order or event behavior is inferred.",
+    "All existing cities.json bytes and unknown developmentPatches for 北海、建業、會稽 are preserved.",
+    "Source ordinals are 1-based data-row locators under 港関, excluding the header; they are not native IDs."
+  ],
+  "bases": [
+    {
+      "id": "gate-hulao",
+      "kind": "gate",
+      "name": "虎牢關",
+      "parentCity": "洛陽",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 1,
+        "sourceName": "虎牢関",
+        "sourceParentCity": "洛陽"
+      }
+    },
+    {
+      "id": "gate-jiange",
+      "kind": "gate",
+      "name": "劍閣",
+      "parentCity": "梓潼",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 2,
+        "sourceName": "剣閣",
+        "sourceParentCity": "梓潼"
+      }
+    },
+    {
+      "id": "gate-huguan",
+      "kind": "gate",
+      "name": "壺關",
+      "parentCity": "晉陽",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 3,
+        "sourceName": "壺関",
+        "sourceParentCity": "晋陽"
+      }
+    },
+    {
+      "id": "gate-mianzhu",
+      "kind": "gate",
+      "name": "綿竹關",
+      "parentCity": "成都",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 4,
+        "sourceName": "綿竹関",
+        "sourceParentCity": "成都"
+      }
+    },
+    {
+      "id": "gate-yangping",
+      "kind": "gate",
+      "name": "陽平關",
+      "parentCity": "漢中",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 5,
+        "sourceName": "陽平関",
+        "sourceParentCity": "漢中"
+      }
+    },
+    {
+      "id": "gate-jiameng",
+      "kind": "gate",
+      "name": "葭萌關",
+      "parentCity": "梓潼",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 6,
+        "sourceName": "葭萌関",
+        "sourceParentCity": "梓潼"
+      }
+    },
+    {
+      "id": "gate-hangu",
+      "kind": "gate",
+      "name": "函谷關",
+      "parentCity": "長安",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 7,
+        "sourceName": "函谷関",
+        "sourceParentCity": "長安"
+      }
+    },
+    {
+      "id": "gate-tongguan",
+      "kind": "gate",
+      "name": "潼關",
+      "parentCity": "長安",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 8,
+        "sourceName": "潼関",
+        "sourceParentCity": "長安"
+      }
+    },
+    {
+      "id": "gate-wuguan",
+      "kind": "gate",
+      "name": "武關",
+      "parentCity": "長安",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 9,
+        "sourceName": "武関",
+        "sourceParentCity": "長安"
+      }
+    },
+    {
+      "id": "gate-fushui",
+      "kind": "gate",
+      "name": "涪水關",
+      "parentCity": "成都",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 10,
+        "sourceName": "涪水関",
+        "sourceParentCity": "成都"
+      }
+    },
+    {
+      "id": "port-anping",
+      "kind": "port",
+      "name": "安平港",
+      "parentCity": "襄平",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 11,
+        "sourceName": "安平港",
+        "sourceParentCity": "襄平"
+      }
+    },
+    {
+      "id": "port-xihe",
+      "kind": "port",
+      "name": "西河港",
+      "parentCity": "晉陽",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 12,
+        "sourceName": "西河港",
+        "sourceParentCity": "晋陽"
+      }
+    },
+    {
+      "id": "port-baima",
+      "kind": "port",
+      "name": "白馬港",
+      "parentCity": "鄴",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 13,
+        "sourceName": "白馬港",
+        "sourceParentCity": "鄴"
+      }
+    },
+    {
+      "id": "port-gaotang",
+      "kind": "port",
+      "name": "高唐港",
+      "parentCity": "平原",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 14,
+        "sourceName": "高唐港",
+        "sourceParentCity": "平原"
+      }
+    },
+    {
+      "id": "port-linji",
+      "kind": "port",
+      "name": "臨濟港",
+      "parentCity": "北海",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 15,
+        "sourceName": "臨済港",
+        "sourceParentCity": "北海"
+      }
+    },
+    {
+      "id": "port-changyang",
+      "kind": "port",
+      "name": "昌陽港",
+      "parentCity": "北海",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 16,
+        "sourceName": "昌陽港",
+        "sourceParentCity": "北海"
+      }
+    },
+    {
+      "id": "port-hailing",
+      "kind": "port",
+      "name": "海陵港",
+      "parentCity": "下邳",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 17,
+        "sourceName": "海陵港",
+        "sourceParentCity": "下邳"
+      }
+    },
+    {
+      "id": "port-jiangdu",
+      "kind": "port",
+      "name": "江都港",
+      "parentCity": "下邳",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 18,
+        "sourceName": "江都港",
+        "sourceParentCity": "下邳"
+      }
+    },
+    {
+      "id": "port-dunqiu",
+      "kind": "port",
+      "name": "頓丘港",
+      "parentCity": "濮陽",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 19,
+        "sourceName": "頓丘港",
+        "sourceParentCity": "濮陽"
+      }
+    },
+    {
+      "id": "port-guandu",
+      "kind": "port",
+      "name": "官渡港",
+      "parentCity": "陳留",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 20,
+        "sourceName": "官渡港",
+        "sourceParentCity": "陳留"
+      }
+    },
+    {
+      "id": "port-mengjin",
+      "kind": "port",
+      "name": "孟津港",
+      "parentCity": "洛陽",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 21,
+        "sourceName": "孟津港",
+        "sourceParentCity": "洛陽"
+      }
+    },
+    {
+      "id": "port-jiexian",
+      "kind": "port",
+      "name": "解縣港",
+      "parentCity": "洛陽",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 22,
+        "sourceName": "解県港",
+        "sourceParentCity": "洛陽"
+      }
+    },
+    {
+      "id": "port-xinfeng",
+      "kind": "port",
+      "name": "新豐港",
+      "parentCity": "長安",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 23,
+        "sourceName": "新豊港",
+        "sourceParentCity": "長安"
+      }
+    },
+    {
+      "id": "port-xiayang",
+      "kind": "port",
+      "name": "夏陽港",
+      "parentCity": "長安",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 24,
+        "sourceName": "夏陽港",
+        "sourceParentCity": "長安"
+      }
+    },
+    {
+      "id": "port-ruxu",
+      "kind": "port",
+      "name": "濡須港",
+      "parentCity": "壽春",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 25,
+        "sourceName": "濡須港",
+        "sourceParentCity": "寿春"
+      }
+    },
+    {
+      "id": "port-wuhu",
+      "kind": "port",
+      "name": "蕪湖港",
+      "parentCity": "建業",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 26,
+        "sourceName": "蕪湖港",
+        "sourceParentCity": "建業"
+      }
+    },
+    {
+      "id": "port-hulin",
+      "kind": "port",
+      "name": "虎林港",
+      "parentCity": "建業",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 27,
+        "sourceName": "虎林港",
+        "sourceParentCity": "建業"
+      }
+    },
+    {
+      "id": "port-qua",
+      "kind": "port",
+      "name": "曲阿港",
+      "parentCity": "吳",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 28,
+        "sourceName": "曲阿港",
+        "sourceParentCity": "呉"
+      }
+    },
+    {
+      "id": "port-juzhang",
+      "kind": "port",
+      "name": "句章港",
+      "parentCity": "會稽",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 29,
+        "sourceName": "句章港",
+        "sourceParentCity": "会稽"
+      }
+    },
+    {
+      "id": "port-wankou",
+      "kind": "port",
+      "name": "皖口港",
+      "parentCity": "廬江",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 30,
+        "sourceName": "皖口港",
+        "sourceParentCity": "廬江"
+      }
+    },
+    {
+      "id": "port-poyang",
+      "kind": "port",
+      "name": "鄱陽港",
+      "parentCity": "柴桑",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 31,
+        "sourceName": "鄱陽港",
+        "sourceParentCity": "柴桑"
+      }
+    },
+    {
+      "id": "port-luling",
+      "kind": "port",
+      "name": "廬陵港",
+      "parentCity": "柴桑",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 32,
+        "sourceName": "廬陵港",
+        "sourceParentCity": "柴桑"
+      }
+    },
+    {
+      "id": "port-jiujiang",
+      "kind": "port",
+      "name": "九江港",
+      "parentCity": "柴桑",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 33,
+        "sourceName": "九江港",
+        "sourceParentCity": "柴桑"
+      }
+    },
+    {
+      "id": "port-lukou",
+      "kind": "port",
+      "name": "陸口港",
+      "parentCity": "柴桑",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 34,
+        "sourceName": "陸口港",
+        "sourceParentCity": "柴桑"
+      }
+    },
+    {
+      "id": "port-xiakou",
+      "kind": "port",
+      "name": "夏口港",
+      "parentCity": "江夏",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 35,
+        "sourceName": "夏口港",
+        "sourceParentCity": "江夏"
+      }
+    },
+    {
+      "id": "port-huyang",
+      "kind": "port",
+      "name": "湖陽港",
+      "parentCity": "新野",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 36,
+        "sourceName": "湖陽港",
+        "sourceParentCity": "新野"
+      }
+    },
+    {
+      "id": "port-zhonglu",
+      "kind": "port",
+      "name": "中廬港",
+      "parentCity": "襄陽",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 37,
+        "sourceName": "中廬港",
+        "sourceParentCity": "襄陽"
+      }
+    },
+    {
+      "id": "port-hanjin",
+      "kind": "port",
+      "name": "漢津港",
+      "parentCity": "江陵",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 38,
+        "sourceName": "漢津港",
+        "sourceParentCity": "江陵"
+      }
+    },
+    {
+      "id": "port-jiangjin",
+      "kind": "port",
+      "name": "江津港",
+      "parentCity": "江陵",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 39,
+        "sourceName": "江津港",
+        "sourceParentCity": "江陵"
+      }
+    },
+    {
+      "id": "port-wulin",
+      "kind": "port",
+      "name": "烏林港",
+      "parentCity": "江陵",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 40,
+        "sourceName": "烏林港",
+        "sourceParentCity": "江陵"
+      }
+    },
+    {
+      "id": "port-luoxian",
+      "kind": "port",
+      "name": "羅縣港",
+      "parentCity": "長沙",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 41,
+        "sourceName": "羅県港",
+        "sourceParentCity": "長沙"
+      }
+    },
+    {
+      "id": "port-gongan",
+      "kind": "port",
+      "name": "公安港",
+      "parentCity": "武陵",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 42,
+        "sourceName": "公安港",
+        "sourceParentCity": "武陵"
+      }
+    },
+    {
+      "id": "port-dongting",
+      "kind": "port",
+      "name": "洞庭港",
+      "parentCity": "武陵",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 43,
+        "sourceName": "洞庭港",
+        "sourceParentCity": "武陵"
+      }
+    },
+    {
+      "id": "port-fangling",
+      "kind": "port",
+      "name": "房陵港",
+      "parentCity": "上庸",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 44,
+        "sourceName": "房陵港",
+        "sourceParentCity": "上庸"
+      }
+    },
+    {
+      "id": "port-wuxian",
+      "kind": "port",
+      "name": "巫縣港",
+      "parentCity": "永安",
+      "evidence": {
+        "sourceId": "atwiki-city-data-77",
+        "sourceOrdinal": 45,
+        "sourceName": "巫県港",
+        "sourceParentCity": "永安"
+      }
+    }
+  ]
+}
