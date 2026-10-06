@@ -1249,7 +1249,7 @@ AI势力强度还存在君主ID硬编码 bonus，因此不能用一张现代通�
 3. 各标准剧本完整初始状态。
 4. 全历史事件结构化数据。**这已经不是资料缺失**：游民星空“全剧情发生条件官方资料”及日文 Wiki 已提供大量逐事件条件/结果，主要剩录入与版本核对。
 5. 遗迹/庙候选点完整坐标（发现规则已解决）。
-6. PK 能力研究：机制、次数、隐藏槽位规则已整理在 `15-pk-ability-research.md`；仅剩把官方/攻略图中的基础节点箭头完整转录为 JSON。
+6. PK 能力研究基础图转录已完成：`../sources/pk-ability-research/catalog.json` 收录48基础节点、52基础箭头/4起点箭头、10隐藏位置和50精确候选，独立逐图核对。此静态录入不再 open；攻略间差异、开局选择RNG、完整命令/scheduler/native cancellation/completion及clean-stock版本等价仍 open，见 `15-pk-ability-research.md` §8–9。
 
 ## D. 已不再属于 open 的项目
 

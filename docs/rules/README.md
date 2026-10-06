@@ -182,7 +182,7 @@ P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为�
 13. `12-pk.md` PK 专属系统总表
 14. `13-open-exactness.md` 尚缺精确内部公式与引擎临时采用值
 15. `14-evidence-audit-2026-09-29.md` 证据审计与升级记录
-16. `15-pk-ability-research.md` PK 能力研究完整机制、隐藏特技与培育上限
+16. `15-pk-ability-research.md` PK 能力研究机制、48节点完整基础图与50隐藏候选数据；来源冲突、开局RNG和命令/scheduler仍有明确边界
 17. `16-unresolved-rules-fallbacks.md` 15项未决规则逐项核对与引擎 fallback
 18. `17-post-15-source-audit.md` 后续逐点审计当前总表与历史记录入口
 19. `18-unit-panels.md` E3兵种基础参数、面板公式、修改器隔离和测试边界
