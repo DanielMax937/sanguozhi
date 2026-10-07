@@ -27,9 +27,13 @@
 # 三国志11规则总索引
 
 > 目标：建立可直接驱动规则引擎的《三国志11》规则规范，并严格区分无印（Vanilla）与威力加强版（PK）。
-> 更新日期：2026-10-06 UTC。
+> 更新日期：2026-10-07 UTC。
 
 ## 最新审计入口
+
+当前总表已对齐PR #36–41合并基线 `6095cc0cb16249988fbdbbdceb714441dba9efc0`。已交付：[港关静态所属](static-subordinate-bases.md)、[PK能力研究攻略树](15-pk-ability-research.md)、[所选史实资料](historical-event-source-data.md)，以及[训练沙盒CLI/私有重放/adapter证据合同](../engine/pk-training-lifecycle.md)修正。具体已交付/仍缺/下一证据见[STATUS](STATUS.md)与[缺口总表](../../缺少的数据.md)。
+
+这些资料和工程修正没有扩成完整游戏：研究/史实执行、三城null分片、40,000格地图、原剧本数据、clean-stock/跨版本/全局RNG/运行时仍有缺口。训练gate/reset已有source-profile证据；战斗与计略的实测公式不提升成stock opcode-exact。P0-78及依赖capture/force/native事务的工作不在本轮；下方历史审计数字和冻结证据不变。
 
 [港关静态所属城市](static-subordinate-bases.md)：45 个唯一据点（10 关、35 港）对应既有 42 城，逐行来源及所有城市数量一致；社区来源版本边界明确，三城开发分片仍未知，不涉及动态归属或事件执行。
 

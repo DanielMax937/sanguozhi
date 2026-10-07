@@ -1,12 +1,24 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current theme: static subordinate-base parent-city data
-> Integration baseline: PR #35 merged; this theme starts at `f2b0bc29044ad0bcff97080c6b5082b9b0aabdd9`
+> Current theme: reconcile current gap ledgers with already delivered evidence (documents only)
+> Integration baseline: PR #36–41 merged; this theme starts at `6095cc0cb16249988fbdbbdceb714441dba9efc0`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
-> Publication: fresh theme branch and draft PR; verify and independently review, then merge under the user's latest authorization (2026-10-04)
+> Publication: local review package only for this batch; remote writes require separate current authorization
 > Primary target: PC-PK1.1
-> Updated: 2026-10-06 (UTC)
+> Updated: 2026-10-07 (UTC)
+
+## Current reconciliation: delivered work and retained gaps
+
+This batch corrects propagation in current summaries; it adds no rule, engine behavior, source data, schema, test or metadata pin. The P0 history below retains its original validation counts and evidence scope. P0-78 and work dependent on capture, force extinction or native transactions are excluded, not declared complete.
+
+- Delivered, PR #36: [45 static port/gate parent-city relations](docs/rules/static-subordinate-bases.md), reconciled against all 42 city counts. Still missing: the three null development-patch splits, original numeric base IDs, 40,000-cell terrain/coordinate/adjacency data and original scenario initialization. Next evidence: independently attributable original map/scenario data, not inferred static parentage
+- Delivered, PR #37: [PK ability research guide transcription](docs/rules/15-pk-ability-research.md), with 48 base nodes, 52 base arrows, 4 start arrows and 50 hidden candidates in 10 positions; conflicting guide claims remain explicit. Still missing: original-data equivalence, ability-research/cultivation command execution, hidden-selection algorithm and RNG. Next evidence: source-bound original tables and callers; guide data is not stock certification
+- Delivered, PR #38: [selected historical guides](docs/rules/historical-event-source-data.md), 105 observations / 66 corpus event IDs / 41 source differences. Still missing: unstated flags, unresolved differences, PS2 source transcription, complete original catalog and evaluation/result execution. Next evidence: additional platform-qualified sources and original flag/caller/result paths
+- Delivered, PR #39–41: strict CLI parsing before effects, linear accumulation of private replay history with public dispatch isolation preserved, and RuleEvidence shape validation / reserved-name counting. See [training lifecycle](docs/engine/pk-training-lifecycle.md) and the root README's CLI contract. These improve only the Train / bounded EndTurn synthetic sandbox; no AI, economy, warfare, scenario execution or complete scheduler was added. Next evidence for original equivalence remains source-bound runtime/clean-stock validation, not passing sandbox tests
+- Reconciled current rule debt: [缺少的数据.md](缺少的数据.md) now separates delivered generic kernels and published formulas from their actual remaining exactness/version boundaries. [Training gate/reset](docs/rules/82-training-lifecycle-source-profile.md) is source-profile recovered; [auto-office](docs/rules/43-auto-office-selector-exactness.md) retains classifier/caller/qualification gaps; combat and strategy formulas keep their existing empirical evidence grades
+
+Clean-stock PK1.1, Vanilla/console equivalence, global RNG, original saves and full runtime remain open. No open item is closed merely to reach a zero count.
 
 ## Static data: 45 subordinate-base parent-city mappings
 

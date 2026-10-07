@@ -1,12 +1,24 @@
 # 规则审计当前状态
 
-更新：2026-10-06 UTC。
+更新：2026-10-07 UTC。当前对账基线：PR #36–41 已合并的 main `6095cc0cb16249988fbdbbdceb714441dba9efc0`。
+
+## 当前交付与仍缺证据
+
+本轮仅校正缺口总表传播失步，没有新增规则、引擎、数据、schema、测试或metadata pin。下列P0历史验证数字仍属于各自冻树，不能改写为当前测试结果。
+
+- PR #36 已交付[45条港关静态所属](static-subordinate-bases.md)，全部42城数量一致；三城开发分片null、原数值ID、40,000格地图和原剧本初始化仍缺，下一证据是可追溯的原作地图/剧本数据
+- PR #37 已交付[PK能力研究静态树](15-pk-ability-research.md)：48基础节点、52基础箭头、4起点箭头、10隐藏位置/50候选，攻略冲突保留；原生数据等价、研究/培育执行与隐藏抽取RNG仍缺，下一证据是原始表及其caller
+- PR #38 已交付[所选史实攻略](historical-event-source-data.md)：105条观测、66个资料事件ID、41项来源差异；未声明flag、差异裁决、PS2独立转录、原版完整目录及执行器仍缺，下一证据是分平台资料和原生条件/结果调用链
+- PR #39–41 已交付CLI参数预检、私有重放线性累积及adapter证据形状/保留名计数修正；见[训练生命周期](../engine/pk-training-lifecycle.md)。范围仍只有Train/限定EndTurn合成沙盒，不含AI、经济、战争、历史剧情执行或完整scheduler；下一证据不能由合成回归替代clean-stock/运行时认证
+- [缺口总表](../../缺少的数据.md)已区分已恢复通用核、实测公式与仍缺的原函数/版本边界；训练gate/reset以[82来源profile](82-training-lifecycle-source-profile.md)为准，不能继续统称未恢复，也不能把MOD关联source bytes提升为stock等价
+
+P0-78及依赖capture、force灭亡、native事务的工作不在本轮；clean-stock、Vanilla/主机、全局RNG、真实存档和完整运行时边界继续保留。本文校正记账，不宣称全部缺口清零。
 
 ## 静态数据补齐：45 个港关所属城市
 
 [静态所属关系](static-subordinate-bases.md)已结构化 10 关、35 港，全部 42 城计数逐项一致，27 城有所属港关、15 城为零。新 sidecar 保留稳定仓库 ID、源表名称/行定位/版本边界和事实投影；既有 cities.json 字节及三城未知开发分片不变。9 项静态数据回归纳入 `npm run check`。本项不认证 clean-stock、Vanilla 或任何运行时归属/事件逻辑；下列原有审计与证据债不变。
 
-## 最新完成：P0-77 event9 live home getter
+## 历史完成：P0-77 event9 live home getter
 
 [112-native-event9-home-getter.md](112-native-event9-home-getter.md)在新显式frame/version中仅展开004BA44C..45E：saved troop在00495525直接调用当前virtual08，不添加0047A630 wrapper，旧raw44=-1不是gate。unknown troop08仍精确完整frame/RNG effect-query；false保留callback变化并返回-1，true从同一saved troop当前storage读live leader，保存canonical person pointer、单次验证并从该saved person读signed homeBaseId。完整004A31E0证明既有person DWORD+98字段，所有signed32位模式保持，不与force byte+98混同、不新增重复字段或person08 callback域。25继承入口加event9-home-getter共26入口，新28组model原字节不变。
 
