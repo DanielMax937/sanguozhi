@@ -1,6 +1,7 @@
 import { createInterface } from 'node:readline/promises';
 import { readFile, writeFile } from 'node:fs/promises';
 import { stdin, stdout } from 'node:process';
+import { parseInput } from './parse-input.mjs';
 import { createSession, derivedWar, dispatch, evidenceSummary, inspectState, loadGame, previewCommand, replaySession, saveGame, syntheticScenario } from '../../packages/engine/src/index.ts';
 
 const initial = syntheticScenario();
@@ -20,6 +21,8 @@ save [path]              存档（默认training-save.json）
 load [path]              校验重放后载入存档
 replay                   重放并验证全部已接受命令
 help / quit
+含空格的路径请用成对单/双引号包住整个参数，如 save "我的存档.json"
+反斜杠按字面保留，不做shell展开；多余/空参数及未闭合引号会拒绝，空行忽略
 没有AI、经济、战争或历史剧本；原命令表现层RNG被省略，不能代表原游戏全局随机流。`;
 console.log(help);
 console.log(inspectState(session.state));
@@ -31,8 +34,10 @@ rl.setPrompt('\n训练> ');
 rl.prompt();
 try {
   for await (const line of rl) {
-    const [verb, arg, baseId = 'city1'] = line.trim().split(/\s+/);
     try {
+      const parsed = parseInput(line);
+      if (!parsed) continue;
+      const {verb, args: [arg, baseId = 'city1']} = parsed;
       if (verb === 'quit' || verb === 'exit') { quitting = true; break; }
       if (verb === 'help') { console.log(help); continue; }
       if (verb === 'inspect') { console.log(inspectState(session.state)); continue; }
