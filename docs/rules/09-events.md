@@ -29,7 +29,9 @@
 - https://w.atwiki.jp/sangokushi11/pages/88.html
 - https://w.atwiki.jp/sangokushi11/pages/100.html
 
-因此当前缺口从“规则未知”降级为：**把已有事件页结构化抄录成 scenario-events 数据**。
+已交付：所选游民12页与Wiki88史实部分已录入 `data/scenario-events/*.json`，共105条来源观测、66个资料事件ID、41项来源差异，详见第8节和[资料说明](historical-event-source-data.md)。状态仅 `public-guide-transcription`，不是原作执行证明。
+
+仍缺：来源未声明的一次性flag、相互冲突或缺失的条件/结果、PS2第100页独立转录、原版完整事件目录及条件求值/结果执行。下一证据：分平台补充资料与原生flag、caller和结果写入路径；不把未声明条件当作无条件，也不自行裁决41项差异。
 
 ## 3. 遗迹 / 庙
 

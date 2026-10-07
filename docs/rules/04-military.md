@@ -1253,10 +1253,9 @@ if (inFriendlyMusicPlatformRange) {
 
 ### 6.7 E4 尚存缺口
 
-- `005C4100` 的完整训练资格 gate；
-- “已训练”状态的完整重置 caller；
-- 军乐台/奏乐/诗想所在旬处理主函数尚未完整逐指令整理；
-- Vanilla / 主机版是否完全复用同训练公式。
+- 已交付：[82-training-lifecycle-source-profile.md](82-training-lifecycle-source-profile.md)已恢复 `005C4100` gate、参数/武将helper、`0059C423→00598630` 全局建筑/武将reset及非连续direct-clear尾块，并恢复 `0059C330→0059C2A0→0059A230` 野外气力tail-jump链；不再把这些整体列为未知
+- 仍缺：clean-stock PK独立hash/bytes、完整任务资格与属性合成、AP恢复在完整scheduler中的位置、其余旬处理与Vanilla/主机逐版本等价。两份IDB均MOD关联，局部调用序不证明完整EndTurn；reset后任务处理还可能重新置acted
+- 下一证据：独立原作样本与完整caller/任务/属性函数链。Train/限定EndTurn只适配当前合成状态域，不能据此替代原作全局重置或调度认证
 
 ## 7. 兵粮消耗
 
