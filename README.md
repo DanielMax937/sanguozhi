@@ -23,6 +23,7 @@ npm run play -- --growth-fixture
 
 交互命令支持用成对单引号或双引号包住整个参数，例如`save "存档目录/训练 存档.json"`、`load "存档目录/训练 存档.json"`（目录需已存在）。反斜杠按字面保留，不做shell展开；引号参数后必须空白或行尾，不支持部分参数拼接。命令的缺失、空或多余参数及未闭合引号会在执行前拒绝，空白行忽略。读档失败保留当前会话；输入结束会处理已收到的命令并等待存取档完成，无需额外输入`quit`。
 
+- [所选通用事件静态资料](docs/rules/generic-event-source-data.md)：Wiki31标题加游民2009两条观测，共33观测/31新资料ID；21空标题与10项未决问题保留，旧史实105/66/41不变，仅攻略转录
 - [训练切片入口](docs/engine/pk-training-slice.md)
 - [生命周期、配置、证据与迁移](docs/engine/pk-training-lifecycle.md)
 - [45 个港关的静态所属城市](docs/rules/static-subordinate-bases.md)：10 关、35 港与全部 42 城计数逐项一致，保留来源、拼写转换和版本边界；仅补静态数据，三城未知开发分片不变
