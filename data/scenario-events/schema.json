@@ -1,0 +1,627 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:scenario-events:schema:1",
+  "title": "Static source-qualified historical-event observations",
+  "description": "Descriptive facts only. No predicate evaluator or effect execution contract.",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "datasetId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "evidence": {
+      "const": "public-guide-transcription"
+    },
+    "executionEnabled": {
+      "const": false
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/event"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "datasetId",
+    "evidence",
+    "executionEnabled",
+    "events"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "json": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/json"
+          }
+        }
+      ]
+    },
+    "predicate": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/fact"
+        },
+        {
+          "$ref": "#/$defs/all"
+        },
+        {
+          "$ref": "#/$defs/any"
+        },
+        {
+          "$ref": "#/$defs/if"
+        }
+      ]
+    },
+    "fact": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "fact"
+        },
+        "category": {
+          "enum": [
+            "scenario",
+            "date",
+            "prerequisite",
+            "actor",
+            "force",
+            "city",
+            "mission",
+            "diplomacy",
+            "title",
+            "emperor",
+            "settings",
+            "other"
+          ]
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1
+            }
+          ]
+        },
+        "field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "$ref": "#/$defs/json"
+        },
+        "certainty": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "category",
+        "subject",
+        "field",
+        "operator",
+        "value",
+        "certainty"
+      ],
+      "additionalProperties": false
+    },
+    "all": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "all"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/predicate"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "any": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "any"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/predicate"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "if": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "if"
+        },
+        "condition": {
+          "$ref": "#/$defs/predicate"
+        },
+        "consequence": {
+          "$ref": "#/$defs/predicate"
+        }
+      },
+      "required": [
+        "kind",
+        "condition",
+        "consequence"
+      ],
+      "additionalProperties": false
+    },
+    "result": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/effect"
+        },
+        {
+          "$ref": "#/$defs/branch"
+        },
+        {
+          "$ref": "#/$defs/choice"
+        }
+      ]
+    },
+    "effect": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "effect"
+        },
+        "operation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1
+            }
+          ]
+        },
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/json"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "operation",
+        "target",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "branch": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "branch"
+        },
+        "branchId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "condition": {
+          "$ref": "#/$defs/predicate"
+        },
+        "orderedResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/result"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "kind",
+        "branchId",
+        "condition",
+        "orderedResults"
+      ],
+      "additionalProperties": false
+    },
+    "option": {
+      "type": "object",
+      "properties": {
+        "optionId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "orderedResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/result"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "optionId",
+        "orderedResults"
+      ],
+      "additionalProperties": false
+    },
+    "choice": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "choice"
+        },
+        "choiceId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "controller": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aiDefault": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/option"
+          },
+          "minItems": 2
+        }
+      },
+      "required": [
+        "kind",
+        "choiceId",
+        "controller",
+        "aiDefault",
+        "options"
+      ],
+      "additionalProperties": false
+    },
+    "delay": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "enum": [
+            "gte",
+            "gt",
+            "eq",
+            "lte",
+            "lt"
+          ]
+        },
+        "value": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unit": {
+          "enum": [
+            "days",
+            "months",
+            "years"
+          ]
+        }
+      },
+      "required": [
+        "operator",
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "prerequisite": {
+      "type": "object",
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "requirement": {
+          "enum": [
+            "required",
+            "conditional",
+            "required-if-occurred",
+            "alternative",
+            "may-accelerate"
+          ]
+        },
+        "delay": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/delay"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "eventId",
+        "requirement",
+        "delay"
+      ],
+      "additionalProperties": false
+    },
+    "version": {
+      "type": "object",
+      "properties": {
+        "game": {
+          "const": "SAN11"
+        },
+        "edition": {
+          "enum": [
+            "unspecified",
+            "vanilla",
+            "power-up-kit"
+          ]
+        },
+        "platform": {
+          "enum": [
+            "unspecified",
+            "PC",
+            "console"
+          ]
+        },
+        "patch": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "game",
+        "edition",
+        "platform",
+        "patch"
+      ],
+      "additionalProperties": false
+    },
+    "onceOnly": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "not-stated"
+        },
+        "flagId": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "flagId"
+      ],
+      "additionalProperties": false
+    },
+    "sourceLocator": {
+      "type": "object",
+      "properties": {
+        "startLine": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "endLine": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "startLine",
+        "endLine"
+      ],
+      "additionalProperties": false
+    },
+    "wuDateAlternatives": {
+      "type": "object",
+      "properties": {
+        "possibleGroupings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/predicate"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "possibleGroupings"
+      ],
+      "additionalProperties": false
+    },
+    "shuAcceleratedDate": {
+      "type": "object",
+      "properties": {
+        "baselineConditions": {
+          "$ref": "#/$defs/all"
+        },
+        "accelerationEvent": {
+          "const": "wei-emperor-accession"
+        },
+        "affectedBaselinePredicates": {
+          "const": "not-stated"
+        },
+        "replacementConditions": {
+          "const": "not-stated"
+        },
+        "accelerationWhen": {
+          "const": "event-already-occurred"
+        }
+      },
+      "required": [
+        "baselineConditions",
+        "accelerationEvent",
+        "affectedBaselinePredicates",
+        "replacementConditions"
+      ],
+      "additionalProperties": false
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "observationId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "sourceURL": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^https://"
+        },
+        "sourceSection": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceOrdinal": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sourceLocator": {
+          "$ref": "#/$defs/sourceLocator"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "evidence": {
+          "const": "public-guide-transcription"
+        },
+        "onceOnly": {
+          "$ref": "#/$defs/onceOnly"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/predicate"
+          }
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/prerequisite"
+          }
+        },
+        "orderedResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/result"
+          },
+          "minItems": 1
+        },
+        "uncertainties": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "eventId",
+        "observationId",
+        "title",
+        "sourceId",
+        "sourceURL",
+        "sourceSection",
+        "sourceOrdinal",
+        "version",
+        "evidence",
+        "onceOnly",
+        "conditions",
+        "prerequisites",
+        "orderedResults",
+        "uncertainties"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

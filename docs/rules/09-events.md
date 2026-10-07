@@ -207,10 +207,15 @@ SIRE 能确认武将有隐藏 `StrategicTendency` 字段，但尚未找到它被
 
 结果包括诸葛亮加入、军师身份、忠诚100、功绩12000，并按女性史实武将设置处理黄月英/诸葛均。
 
-因此后续应新增 `data/scenario-events/*.json` 批量录入，而不是继续把“历史事件”列为未知机制。
+所选两份攻略现已结构化到 `data/scenario-events/*.json`，详见下节；来源不明的版本、缺失结果与相互矛盾仍保留，不能把资料录入等同于原版执行证明。
 
 来源：
 - https://www.gamersky.com/handbook/200809/124174_7.shtml
 - https://www.gamersky.com/handbook/200809/124174_8.shtml
 - https://www.gamersky.com/handbook/200809/124174_10.shtml
 - https://w.atwiki.jp/sangokushi11/pages/88.html
+
+
+## 8. 所选史实来源转录
+
+重新读取游民原文全部12页及 Wiki88史实部分，按实际标题清单得到44+61条观测、66个资料事件ID。重复和空标题均保留；41项来源差异来自本次独立复核，没有硬套旧的差异数量。版本、日期分组/提前条件、任务/行动済、一次性flag、结果顺序与未知量均按来源表达。详见 [史实事件数据说明](historical-event-source-data.md) 及 [`data/scenario-events`](../../data/scenario-events/README.md)。状态仅 `public-guide-transcription`，不接入事件执行器；PS2独立资料与原版完整性/运行时核对仍open。
