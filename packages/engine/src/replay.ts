@@ -38,7 +38,7 @@ export function replaySession(session: Session, adapters: EngineAdapters = DEFAU
   return verifySession(clone(session),adapters);
 }
 export function evidenceSummary(session: Session): Record<string,number> {
-  const result: Record<string,number> = {};
+  const result: Record<string,number> = Object.create(null);
   for (const entry of session.trace) for (const use of entry.evidence) {
     result[use.evidence.level] = (result[use.evidence.level] ?? 0) + 1;
   }

@@ -1,6 +1,6 @@
 import { canonical, clone, RULES, RULESET, rulesetForAdapters } from './rules.ts';
 import { derivedWar } from './calculations.ts';
-import type { EngineAdapters, GameState, Officer, RngState, RandomSource } from './types.ts';
+import type { EngineAdapters, EvidenceLevel, GameState, Officer, RngState, RandomSource } from './types.ts';
 
 export const seededRandom: RandomSource = {
   id: 'xorshift32-engine-v1',
@@ -21,11 +21,31 @@ const id = (value: unknown): value is string => typeof value === 'string' && /^[
 const text = (value: unknown): value is string => typeof value === 'string' && value.length > 0 && value.length <= 200;
 const keys = (value: Record<string, unknown>, names: string[]): boolean => canonical(Object.keys(value).sort()) === canonical(names.sort());
 const facilities = ['none', 'building', 'complete'];
+const evidenceLevels: Record<EvidenceLevel, true> = {
+  'opcode-exact':true, 'address-level':true, 'reverse-engineered-partial':true,
+  'empirical-high':true, 'documented-guide':true, 'compatibility-assumption':true,
+  'compatibility-reconstruction':true, 'provisional-engine-rule':true, open:true,
+};
+/** Metadata shape only: custom provenance is not authenticated and value remains unknown. */
+function validEvidence(value: unknown): boolean {
+  if (!isRecord(value) || !['id','level','target','originalEvidence','source','note','value'].every(key => Object.hasOwn(value,key)) ||
+      !text(value.id) || typeof value.level !== 'string' || !Object.hasOwn(evidenceLevels,value.level) ||
+      !['target','originalEvidence','note'].every(key => typeof value[key] === 'string') || !isRecord(value.source)) return false;
+  const source = value.source;
+  if (!['repository','commit','path','section','url','originalUrls'].every(key => Object.hasOwn(source,key)) ||
+      !['repository','path','section'].every(key => typeof source[key] === 'string') ||
+      !(source.commit === null || typeof source.commit === 'string') || !(source.url === null || typeof source.url === 'string') ||
+      !Array.isArray(source.originalUrls) || ('introducedWith' in source && typeof source.introducedWith !== 'string')) return false;
+  for (let index = 0; index < source.originalUrls.length; index++) {
+    if (!Object.hasOwn(source.originalUrls,index) || typeof source.originalUrls[index] !== 'string') return false;
+  }
+  return true;
+}
 
 export function validateAdapters(adapters: EngineAdapters): string[] {
   if (!isRecord(adapters) || !isRecord(adapters.gate) || !isRecord(adapters.random) || !isRecord(adapters.growth) || !isRecord(adapters.turn)) return ['Invalid engine adapters'];
   for (const adapter of [adapters.gate,adapters.growth,adapters.turn]) {
-    if (!id(adapter.id) || !isRecord(adapter.evidence) || !text(adapter.evidence.id) || !text(adapter.evidence.level) || !isRecord(adapter.evidence.source)) return ['Invalid adapter identity/evidence'];
+    if (!id(adapter.id) || !validEvidence(adapter.evidence)) return ['Invalid adapter identity/evidence'];
   }
   if (typeof adapters.gate.evaluate !== 'function' || !id(adapters.random.id) || typeof adapters.random.next !== 'function') return ['Invalid adapter function'];
   const config = adapters.growth.config;

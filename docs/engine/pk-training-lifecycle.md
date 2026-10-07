@@ -61,6 +61,10 @@ trace写入阶段顺序和实际从true变false的据点/武将ID。港关同样
 
 规则profile保存gate ID、成长ID及完整有效配置、旬adapter ID及阶段顺序。即使调用方复用了同一个ID，配置变化也会使旧状态/存档拒绝；自定义成长配置的trace自动标`provisional-engine-rule`。通过`rulesetForAdapters(adapters)`显式构造匹配profile。
 
+gate/growth/turn的证据元数据在入口统一按`RuleEvidence`合同检查：必填字段须自有，`level`须属于声明的九档枚举；`id`沿用非空且最多200字符，其余文字字段检查string类型。`source`须包含repository、commit、path、section、url、originalUrls；commit/url允许null，originalUrls须为无空洞的string数组，introducedWith可省略、存在时须为string。缺字段、错类型或未知level在执行前拒绝，不改变状态、RNG或已接受日志。
+
+合法自定义证据、空文字、可空来源字段和额外元数据仍可使用；`value`保持unknown，仅要求字段存在，不在此新增递归JSON可序列化检查，存档仍受原JSON处理能力约束。此检查只约束元数据形状，不核验来源、URL、commit或证据真实性，也不证明原作规则已恢复。`evidenceSummary`使用无原型计数对象，直接统计时保留属性名也只作为普通计数键；现有JSON/canonical输出及枚举读取方式不变，调用者应使用`Object.hasOwn`等静态方法而非对象原型方法。默认规则、RNG、save版本和trace格式不变；合法custom的save/load/replay继续逐项一致。
+
 状态校验检查`war == derivedWar(warBase, warXp, config)`；不允许篡改单个派生能力或越过累计XP上限。preview/execute共用算术，奖励和成长先计算后一次性写回；失败不改变AP、XP、气力、flags、RNG或已接受日志。
 
 ## 5. Save v2 and explicit v1 state migration
