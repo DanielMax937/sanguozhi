@@ -1,14 +1,17 @@
 import { canonical, clone } from './rules.ts';
-import { createSession, DEFAULT_ADAPTERS, dispatch } from './engine.ts';
+import { createSession, DEFAULT_ADAPTERS, executeCommand } from './engine.ts';
 import { isRecord } from './state.ts';
 import type { Command, EngineAdapters, GameState, Session } from './types.ts';
 
 export function replayCommands(initial: GameState, commands: readonly Command[], adapters: EngineAdapters = DEFAULT_ADAPTERS): Session {
-  let session = createSession(initial,adapters);
+  const session = createSession(initial,adapters);
   for (const [index,command] of commands.entries()) {
-    const next = dispatch(session,command,adapters);
-    if (!next.result.ok) throw new Error(`Replay command ${index} rejected: ${next.result.reasons.join('; ')}`);
-    session = next.session;
+    const result = executeCommand(session.state,command,adapters);
+    if (!result.ok) throw new Error(`Replay command ${index} rejected: ${result.reasons.join('; ')}`);
+    const {state:after,...preview} = result;
+    // This session is private until return: isolate each new entry, not every historical prefix.
+    session.trace.push({...clone(preview),command:clone(command),before:clone(session.state),after:clone(after)});
+    session.state = clone(after);
   }
   return session;
 }
