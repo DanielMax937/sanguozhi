@@ -1,0 +1,320 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/san11/generic-events/inventory-schema.json",
+  "title": "Inert generic-event source inventory-schema.json",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "datasetId": {
+      "const": "san11.generic.inventory.20261007"
+    },
+    "evidence": {
+      "const": "public-guide-transcription"
+    },
+    "executionEnabled": {
+      "const": false
+    },
+    "observationCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "eventCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "coverageScope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "wikiCoverageCounts": {
+      "type": "object",
+      "properties": {
+        "substantive": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "conditions-only": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unverified-anecdote": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "qualitative-result-only": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "heading-only": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "substantive",
+        "conditions-only",
+        "unverified-anecdote",
+        "qualitative-result-only",
+        "heading-only"
+      ],
+      "additionalProperties": false
+    },
+    "gamerskySelectedCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sourceId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^https://"
+          },
+          "retrievalKind": {
+            "const": "web-tool-rendered-text-snapshot"
+          },
+          "observedAt": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^2026-10-07T[0-9:]+Z$"
+          },
+          "snapshotFile": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z0-9-]+\\.web-lines\\.txt$"
+          },
+          "snapshotSha256": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "lineNumberKind": {
+            "const": "web-tool-rendered-lines-not-html"
+          },
+          "selectionStartLine": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "selectionEndLine": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sourceCrawlAgeReported": {
+            "enum": [
+              "yesterday",
+              "last week"
+            ]
+          },
+          "rawHtmlAvailable": {
+            "const": false
+          },
+          "expectedObservationCount": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "observationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^generic\\.(atwiki88\\.[0-9]{2}|gamersky2009\\.(01\\.bronze-sparrow|13\\.taishan))$"
+            },
+            "minItems": 1
+          },
+          "originalTitles": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "sourceId",
+          "url",
+          "retrievalKind",
+          "observedAt",
+          "snapshotFile",
+          "snapshotSha256",
+          "lineNumberKind",
+          "selectionStartLine",
+          "selectionEndLine",
+          "sourceCrawlAgeReported",
+          "rawHtmlAvailable",
+          "expectedObservationCount",
+          "observationIds",
+          "originalTitles"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "mapping": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^generic\\.[a-z][a-z0-9-]*$"
+          },
+          "observationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^generic\\.(atwiki88\\.[0-9]{2}|gamersky2009\\.(01\\.bronze-sparrow|13\\.taishan))$"
+            },
+            "minItems": 1
+          },
+          "identityBasis": {
+            "const": "selected-source-topic-not-native-id"
+          }
+        },
+        "required": [
+          "eventId",
+          "observationIds",
+          "identityBasis"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "unresolvedIssues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^generic\\.(atwiki88\\.[0-9]{2}|gamersky2009\\.(01\\.bronze-sparrow|13\\.taishan))$"
+            },
+            "minItems": 1
+          },
+          "status": {
+            "const": "unresolved"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "observationIds",
+          "status",
+          "description"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "sourceIndependence": {
+      "const": "not-established"
+    },
+    "gamerskyGlobalCaveat": {
+      "type": "object",
+      "properties": {
+        "sourceId": {
+          "const": "gamersky-2009-01"
+        },
+        "startLine": {
+          "const": 263
+        },
+        "endLine": {
+          "const": 269
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "sourceId",
+        "startLine",
+        "endLine",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "selectionExclusions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "historicalCorpus": {
+      "type": "object",
+      "properties": {
+        "observationCount": {
+          "const": 105
+        },
+        "eventCount": {
+          "const": 66
+        },
+        "unresolvedDifferenceCount": {
+          "const": 41
+        },
+        "fileSha256": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      },
+      "required": [
+        "observationCount",
+        "eventCount",
+        "unresolvedDifferenceCount",
+        "fileSha256"
+      ],
+      "additionalProperties": false
+    },
+    "snapshotLimitations": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "datasetId",
+    "evidence",
+    "executionEnabled",
+    "observationCount",
+    "eventCount",
+    "coverageScope",
+    "wikiCoverageCounts",
+    "gamerskySelectedCount",
+    "sources",
+    "mapping",
+    "unresolvedIssues",
+    "sourceIndependence",
+    "gamerskyGlobalCaveat",
+    "selectionExclusions",
+    "historicalCorpus",
+    "snapshotLimitations"
+  ],
+  "additionalProperties": false
+}

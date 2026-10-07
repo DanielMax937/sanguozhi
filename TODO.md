@@ -1,8 +1,8 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current theme: reconcile current gap ledgers with already delivered evidence (documents only)
-> Integration baseline: PR #36–41 merged; this theme starts at `6095cc0cb16249988fbdbbdceb714441dba9efc0`
+> Current theme: independently transcribe selected generic-event public guides (static data only)
+> Integration baseline: PR #42 merged; this theme starts at `fe9682d8d70c2e538aafc941908ef2311644a9c2`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
 > Publication: local review package only for this batch; remote writes require separate current authorization
 > Primary target: PC-PK1.1
@@ -10,7 +10,7 @@
 
 ## Current reconciliation: delivered work and retained gaps
 
-This batch corrects propagation in current summaries; it adds no rule, engine behavior, source data, schema, test or metadata pin. The P0 history below retains its original validation counts and evidence scope. P0-78 and work dependent on capture, force extinction or native transactions are excluded, not declared complete.
+The preceding PR #42 corrected propagation in current summaries without changing rule data or runtime behavior. This batch adds only independent generic-guide data, static schemas/checks and narrowly related documentation. The P0 history below retains its original validation counts and evidence scope. P0-78 and work dependent on capture, force extinction or native transactions are excluded, not declared complete.
 
 - Delivered, PR #36: [45 static port/gate parent-city relations](docs/rules/static-subordinate-bases.md), reconciled against all 42 city counts. Still missing: the three null development-patch splits, original numeric base IDs, 40,000-cell terrain/coordinate/adjacency data and original scenario initialization. Next evidence: independently attributable original map/scenario data, not inferred static parentage
 - Delivered, PR #37: [PK ability research guide transcription](docs/rules/15-pk-ability-research.md), with 48 base nodes, 52 base arrows, 4 start arrows and 50 hidden candidates in 10 positions; conflicting guide claims remain explicit. Still missing: original-data equivalence, ability-research/cultivation command execution, hidden-selection algorithm and RNG. Next evidence: source-bound original tables and callers; guide data is not stock certification
@@ -19,6 +19,14 @@ This batch corrects propagation in current summaries; it adds no rule, engine be
 - Reconciled current rule debt: [缺少的数据.md](缺少的数据.md) now separates delivered generic kernels and published formulas from their actual remaining exactness/version boundaries. [Training gate/reset](docs/rules/82-training-lifecycle-source-profile.md) is source-profile recovered; [auto-office](docs/rules/43-auto-office-selector-exactness.md) retains classifier/caller/qualification gaps; combat and strategy formulas keep their existing empirical evidence grades
 
 Clean-stock PK1.1, Vanilla/console equivalence, global RNG, original saves and full runtime remain open. No open item is closed merely to reach a zero count.
+
+## Static data: selected generic-event guides
+
+- [x] Transcribe Wiki88's complete31-heading generic section and two selected GamerSky2009 PK observations into [an independent corpus](docs/rules/generic-event-source-data.md):33 observations,31 new generic IDs,10 unresolved source/interpretation issues
+- [x] Preserve the Wiki-only6/2/1/1/21 coverage breakdown:21 heading-only records contain no invented rules; civil-officer recommendation stays an unverified anecdote
+- [x] Keep unknown native IDs, one-shot flags, probabilities and qualitative deltas null; source URLs, selection boundaries, rendered-line snapshot hashes and uncertainty remain explicit
+- [x] Add independent closed schemas and78 static adversarial tests without importing historical checkers or engine code; historical105/66/41 files remain byte-identical
+- Still open: missing source conditions/results, unresolved comparisons, original event catalog, platform/build equivalence and executable behavior. No evaluator, scheduler or result executor was added; P0-78/native-dependent work remains excluded
 
 ## Static data: 45 subordinate-base parent-city mappings
 

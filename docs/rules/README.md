@@ -31,7 +31,9 @@
 
 ## 最新审计入口
 
-当前总表已对齐PR #36–41合并基线 `6095cc0cb16249988fbdbbdceb714441dba9efc0`。已交付：[港关静态所属](static-subordinate-bases.md)、[PK能力研究攻略树](15-pk-ability-research.md)、[所选史实资料](historical-event-source-data.md)，以及[训练沙盒CLI/私有重放/adapter证据合同](../engine/pk-training-lifecycle.md)修正。具体已交付/仍缺/下一证据见[STATUS](STATUS.md)与[缺口总表](../../缺少的数据.md)。
+新增[所选通用事件攻略静态资料](generic-event-source-data.md)：Wiki31标题加游民2009两条，共33观测/31新资料ID；21空标题与10项未决问题保留，无引擎执行，旧史实105/66/41字节不变。
+
+此前PR #42总表对账基于PR #36–41合并基线 `6095cc0cb16249988fbdbbdceb714441dba9efc0`。已交付：[港关静态所属](static-subordinate-bases.md)、[PK能力研究攻略树](15-pk-ability-research.md)、[所选史实资料](historical-event-source-data.md)，以及[训练沙盒CLI/私有重放/adapter证据合同](../engine/pk-training-lifecycle.md)修正。具体已交付/仍缺/下一证据见[STATUS](STATUS.md)与[缺口总表](../../缺少的数据.md)。
 
 这些资料和工程修正没有扩成完整游戏：研究/史实执行、三城null分片、40,000格地图、原剧本数据、clean-stock/跨版本/全局RNG/运行时仍有缺口。训练gate/reset已有source-profile证据；战斗与计略的实测公式不提升成stock opcode-exact。P0-78及依赖capture/force/native事务的工作不在本轮；下方历史审计数字和冻结证据不变。
 
