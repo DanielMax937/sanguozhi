@@ -30,7 +30,9 @@
 
 已交付：所选游民12页与Wiki88史实部分已录入 `data/scenario-events/*.json`，共105条来源观测、66个资料事件ID、41项来源差异，详见第8节和[资料说明](historical-event-source-data.md)。状态仅 `public-guide-transcription`，不是原作执行证明。
 
-仍缺：来源未声明的一次性flag、相互冲突或缺失的条件/结果、PS2第100页独立转录、原版完整事件目录及条件求值/结果执行。下一证据：分平台补充资料与原生flag、caller和结果写入路径；不把未声明条件当作无条件，也不自行裁决41项差异。
+PS2第100页正文另见[独立64项资料](ps2-historical-event-source-data.md)，24来源限制和PK归属未知保留，不并入上述105/66/41。
+
+仍缺：来源未声明的一次性flag、相互冲突或缺失的条件/结果、原版完整事件目录及条件求值/结果执行。下一证据：分平台补充资料与原生flag、caller和结果写入路径；不把未声明条件当作无条件，也不自行裁决41项差异。
 
 ## 3. 遗迹 / 庙
 
@@ -221,4 +223,4 @@ SIRE 能确认武将有隐藏 `StrategicTendency` 字段，但尚未找到它被
 
 ## 8. 所选史实来源转录
 
-重新读取游民原文全部12页及 Wiki88史实部分，按实际标题清单得到44+61条观测、66个资料事件ID。重复和空标题均保留；41项来源差异来自本次独立复核，没有硬套旧的差异数量。版本、日期分组/提前条件、任务/行动済、一次性flag、结果顺序与未知量均按来源表达。详见 [史实事件数据说明](historical-event-source-data.md) 及 [`data/scenario-events`](../../data/scenario-events/README.md)。状态仅 `public-guide-transcription`，不接入事件执行器；PS2独立资料与原版完整性/运行时核对仍open。
+重新读取游民原文全部12页及 Wiki88史实部分，按实际标题清单得到44+61条观测、66个资料事件ID。重复和空标题均保留；41项来源差异来自本次独立复核，没有硬套旧的差异数量。版本、日期分组/提前条件、任务/行动済、一次性flag、结果顺序与未知量均按来源表达。详见 [史实事件数据说明](historical-event-source-data.md) 及 [`data/scenario-events`](../../data/scenario-events/README.md)。状态仅 `public-guide-transcription`，不接入事件执行器。PS2正文已另存为[独立64项资料](ps2-historical-event-source-data.md)，来源限制、版本归属及原版完整性/运行时核对仍open。

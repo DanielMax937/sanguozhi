@@ -31,6 +31,8 @@
 
 ## 最新审计入口
 
+新增[PS2史实攻略独立资料](ps2-historical-event-source-data.md)：64观测/64独立ID、741来源节点；59条件结果（2仅接续）、4仅条件、1外链参照，保留24来源限制、PK归属未知及原生/运行时证据债。本次恢复数据后采用全新验收，不复用丢失的旧日志。
+
 新增[所选通用事件攻略静态资料](generic-event-source-data.md)：Wiki31标题加游民2009两条，共33观测/31新资料ID；21空标题与10项未决问题保留，无引擎执行，旧史实105/66/41字节不变。
 
 此前PR #42总表对账基于PR #36–41合并基线 `6095cc0cb16249988fbdbbdceb714441dba9efc0`。已交付：[港关静态所属](static-subordinate-bases.md)、[PK能力研究攻略树](15-pk-ability-research.md)、[所选史实资料](historical-event-source-data.md)，以及[训练沙盒CLI/私有重放/adapter证据合同](../engine/pk-training-lifecycle.md)修正。具体已交付/仍缺/下一证据见[STATUS](STATUS.md)与[缺口总表](../../缺少的数据.md)。

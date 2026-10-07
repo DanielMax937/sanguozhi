@@ -1,0 +1,337 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/san11/ps2-historical/inventory-schema.json",
+  "title": "Independent inert PS2 historical guide inventory-schema.json",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "datasetId": {
+      "const": "san11.ps2-historical.inventory.20261007"
+    },
+    "evidence": {
+      "const": "public-guide-transcription"
+    },
+    "executionEnabled": {
+      "const": false
+    },
+    "observationCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "eventCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "clauseCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "coverageCounts": {
+      "type": "object",
+      "properties": {
+        "conditions-and-results": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "conditions-only": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reference-only": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "conditions-and-results",
+        "conditions-only",
+        "reference-only"
+      ],
+      "additionalProperties": false
+    },
+    "continuationOnlyResultObservationIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "sourceIndependence": {
+      "const": "not-established"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "sourceId": {
+          "const": "atwiki-100-ps2"
+        },
+        "url": {
+          "const": "https://w.atwiki.jp/sangokushi11/pages/100.html"
+        },
+        "title": {
+          "const": "史実イベント（PS2）"
+        },
+        "retrievedUTC": {
+          "const": "2026-10-07"
+        },
+        "displayedLastUpdated": {
+          "const": "2010-03-09 16:52; timezone not stated"
+        },
+        "toolFreshness": {
+          "const": "Crawled: last month; not a live origin freshness certificate"
+        },
+        "snapshotFile": {
+          "const": "atwiki-100-ps2-rendered-lines.txt"
+        },
+        "snapshotSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "snapshotFormat": {
+          "const": "web-rendered-text-normalized-line-boundaries-not-raw-html"
+        },
+        "selectionStartLine": {
+          "const": 116
+        },
+        "selectionEndLine": {
+          "const": 1061
+        },
+        "bodyStartLine": {
+          "const": 191
+        },
+        "bodyEndLine": {
+          "const": 1061
+        },
+        "commentsIncluded": {
+          "const": false
+        },
+        "colorInformationRetained": {
+          "const": false
+        },
+        "expectedObservationCount": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "sourceId",
+        "url",
+        "title",
+        "retrievedUTC",
+        "displayedLastUpdated",
+        "toolFreshness",
+        "snapshotFile",
+        "snapshotSha256",
+        "snapshotFormat",
+        "selectionStartLine",
+        "selectionEndLine",
+        "bodyStartLine",
+        "bodyEndLine",
+        "commentsIncluded",
+        "colorInformationRetained",
+        "expectedObservationCount"
+      ],
+      "additionalProperties": false
+    },
+    "catalog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observationId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceOrdinal": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sourceSection": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceLocator": {
+            "type": "object",
+            "properties": {
+              "startLine": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "endLine": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "startLine",
+              "endLine"
+            ],
+            "additionalProperties": false
+          },
+          "coverageKind": {
+            "enum": [
+              "conditions-and-results",
+              "conditions-only",
+              "reference-only"
+            ]
+          },
+          "clauseCount": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "reviewedObservationSha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "eventId",
+          "observationId",
+          "sourceOrdinal",
+          "sourceSection",
+          "sourceLocator",
+          "coverageKind",
+          "clauseCount",
+          "reviewedObservationSha256"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "unresolvedIssues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "const": "unresolved"
+          },
+          "observationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "sourceLines": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "observationIds",
+          "sourceLines",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "preservedCorpora": {
+      "type": "object",
+      "properties": {
+        "historicalCounts": {
+          "type": "object",
+          "properties": {
+            "observations": {
+              "const": 105
+            },
+            "events": {
+              "const": 66
+            },
+            "unresolvedDifferences": {
+              "const": 41
+            }
+          },
+          "required": [
+            "observations",
+            "events",
+            "unresolvedDifferences"
+          ],
+          "additionalProperties": false
+        },
+        "genericCounts": {
+          "type": "object",
+          "properties": {
+            "observations": {
+              "const": 33
+            },
+            "events": {
+              "const": 31
+            },
+            "unresolvedIssues": {
+              "const": 10
+            }
+          },
+          "required": [
+            "observations",
+            "events",
+            "unresolvedIssues"
+          ],
+          "additionalProperties": false
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "historicalCounts",
+        "genericCounts",
+        "files"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "datasetId",
+    "evidence",
+    "executionEnabled",
+    "observationCount",
+    "eventCount",
+    "clauseCount",
+    "coverageCounts",
+    "continuationOnlyResultObservationIds",
+    "sourceIndependence",
+    "source",
+    "catalog",
+    "unresolvedIssues",
+    "preservedCorpora"
+  ],
+  "additionalProperties": false
+}
