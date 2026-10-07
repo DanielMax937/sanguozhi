@@ -1,0 +1,294 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:scenario-events:inventory-schema:1",
+  "title": "Fresh historical source inventory",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "evidence": {
+      "const": "public-guide-transcription"
+    },
+    "executionEnabled": {
+      "const": false
+    },
+    "observationCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "eventCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "coverageScope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resultOrderMeaning": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sourceId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^https://"
+          },
+          "articleTitle": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observedDate": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "retrievalKind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "retrievedContentSha256": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "expectedSectionCount": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "originalTitles": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "observationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "versionScope": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "sourceId",
+          "url",
+          "articleTitle",
+          "observedDate",
+          "retrievalKind",
+          "retrievedContentSha256",
+          "expectedSectionCount",
+          "originalTitles",
+          "observationIds",
+          "versionScope"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "eventCatalog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "observationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "eventId",
+          "observationIds"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "disagreements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "eventIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9-]*$"
+            },
+            "minItems": 1
+          },
+          "observationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 2
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "const": "unresolved"
+          },
+          "reviewBasis": {
+            "const": "fresh-source-comparison"
+          },
+          "differenceType": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceReferences": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "observationId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sourceURL": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^https://"
+                },
+                "sourceSection": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sourceLocator": {
+                  "type": "object",
+                  "properties": {
+                    "startLine": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "endLine": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "startLine",
+                    "endLine"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "observationId",
+                "sourceURL",
+                "sourceSection"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 2
+          }
+        },
+        "required": [
+          "id",
+          "eventIds",
+          "observationIds",
+          "fields",
+          "description",
+          "status",
+          "reviewBasis",
+          "differenceType",
+          "sourceReferences"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "exclusions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "section": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "source",
+          "section",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "globalUnknowns": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "evidence",
+    "executionEnabled",
+    "observationCount",
+    "eventCount",
+    "coverageScope",
+    "resultOrderMeaning",
+    "sources",
+    "eventCatalog",
+    "disagreements",
+    "exclusions",
+    "globalUnknowns"
+  ],
+  "additionalProperties": false
+}
