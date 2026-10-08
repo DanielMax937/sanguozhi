@@ -33,7 +33,7 @@ E3 的正文、来源、纠错、版本边界与测试说明见 [攻防面板与
 | C4 | 无印内政设施 | 已写回 | [历史详细记录](audit-history/17-through-e2.md) |
 | C5 | PK十设施 | 已写回，若干子公式仍待恢复 | [历史详细记录](audit-history/17-through-e2.md) |
 | C6 | PK吸收合并 | 已写回，工期证据分级保留 | [历史详细记录](audit-history/17-through-e2.md) |
-| C7 | 各设施精确开发日数 | 已写回，原函数体仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
+| C7 | 建设速度与开发日数 | 公开速率全文及稳定值核已恢复；完整工期/writer/调度仍缺，旧表重建不等价 | [当前更正](domestic-construction-rate.md)；[历史记录](audit-history/17-through-e2.md) |
 | C8 | 商人 / 粮食交易 | 已写回，政治连续闭式仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
 | C9 | 行动力 | 已写回，主恢复函数体仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
 | C10 | 治安 | 已写回，巡查/贼的部分边界仍缺 | [历史详细记录](audit-history/17-through-e2.md) |

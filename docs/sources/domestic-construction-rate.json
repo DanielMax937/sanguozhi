@@ -1,0 +1,140 @@
+{
+  "profileId": "domestic-construction-rate-stable-v1",
+  "scope": "standalone-resolved-stable-input-numerical-rate-only",
+  "level": "source-listing-reconstruction",
+  "stockOriginalVerified": false,
+  "originalExecutableExecuted": false,
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "内存资料/函数[计算内政建设速度].txt",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/%E5%86%85%E5%AD%98%E8%B5%84%E6%96%99/%E5%87%BD%E6%95%B0%5B%E8%AE%A1%E7%AE%97%E5%86%85%E6%94%BF%E5%BB%BA%E8%AE%BE%E9%80%9F%E5%BA%A6%5D.txt",
+    "gitBlobSha1": "76b1f9591a9f94830bcf4e5a67764d2911e19fd4",
+    "originalEncoding": "GBK",
+    "originalBytes": 5936,
+    "originalSha256": "cabc5cb11e62dee04fda39aadce804284d272ca20e98ece202fd16cedfbe9216",
+    "snapshot": "docs/sources/domestic-construction-rate-original.txt",
+    "snapshotEncoding": "UTF-8",
+    "snapshotSha256": "f092b0a16ab99ca74106c967e4dfb320211c2b4d2a066f0ca36b4be84272b132",
+    "byteAuthority": "public disassembly listing only; not a verified stock executable"
+  },
+  "domain": {
+    "politicsSlots": 3,
+    "politics": [
+      0,
+      255
+    ],
+    "emptySlot": null,
+    "missingTrailingSlots": "empty",
+    "facilityDurability": [
+      0,
+      65535
+    ],
+    "getterAssumption": "004890A0 returns the same resolved uint8 for every call on each supplied person",
+    "facilityAssumption": "00490B90 and all reached facility+0xC2 reads yield the same resolved uint16 durability",
+    "validation": "engineering input checks, not recovered command eligibility"
+  },
+  "constants": {
+    "politicsDivisor": 2,
+    "durabilityQuarterDivisor": 4,
+    "durabilityRemainderDivisor": 9,
+    "signedDivisionMagic": "0x38E38E39"
+  },
+  "arithmetic": "max(maxPolitics + floor(sumPolitics / 2), floor((D - floor(D / 4)) / 9))",
+  "originalListing": {
+    "start": "005BB1D0",
+    "endInclusive": "005BB2AA",
+    "endExclusive": "005BB2AB",
+    "instructionCount": 84,
+    "byteLength": 219,
+    "sha256": "8529878a0dca1cd080dfa805b5112ff940eba58631f31c5c5c83025400c7106c"
+  },
+  "excludedMod": {
+    "marker": "*",
+    "replacementSite": "005BB263",
+    "target": "008A9DE8",
+    "instructionCount": 9,
+    "listedByteLength": 31,
+    "listedBytesSha256": "6067cd400b4750217191e66a2e133f6327281261ebd033dd7e686c7ab98f4e03",
+    "executed": false
+  },
+  "evidence": {
+    "slotsAndStablePolitics": [
+      "005BB1E0..005BB213"
+    ],
+    "politicsHalfAndAdd": [
+      "005BB23E..005BB247"
+    ],
+    "stableFacilityReads": [
+      "005BB223",
+      "005BB22A",
+      "005BB237",
+      "005BB249",
+      "005BB26C",
+      "005BB279",
+      "005BB27E"
+    ],
+    "durabilityMinimum": [
+      "005BB249..005BB266",
+      "005BB26C..005BB29E"
+    ],
+    "selectAndReturn": [
+      "005BB268..005BB2AA"
+    ],
+    "excludedMod": [
+      "*005BB263..*008A9DFD"
+    ]
+  },
+  "remainingOpen": [
+    "004890A0 politics getter implementation and mutable getter behavior",
+    "00490B90 facility resolver implementation and mutable table behavior",
+    "initial durability writer; D>>2 here proves lower-bound arithmetic only",
+    "construction command eligibility, costs, participants and task writes",
+    "complete duration, per-turn progress, completion dispatch and scheduler",
+    "Train/EndTurn, mission, save and replay integration",
+    "clean-stock PC-PK1.1, Vanilla, console and cross-version equivalence"
+  ],
+  "counterexamples": [
+    {
+      "politics": [
+        75,
+        1,
+        0
+      ],
+      "facilityDurability": 450,
+      "sourceRate": 113,
+      "oldWikiReconstruction": 112
+    },
+    {
+      "politics": [
+        29,
+        1,
+        0
+      ],
+      "facilityDurability": 500,
+      "sourceRate": 44,
+      "oldWikiReconstruction": 43
+    },
+    {
+      "politics": [
+        0,
+        0,
+        0
+      ],
+      "facilityDurability": 500,
+      "sourceRate": 41,
+      "oldWikiReconstruction": 0
+    },
+    {
+      "politics": [
+        100,
+        100,
+        100
+      ],
+      "facilityDurability": 500,
+      "sourceRate": 250,
+      "oldWikiReconstruction": 250,
+      "role": "shared-anchor-not-domain-proof"
+    }
+  ]
+}

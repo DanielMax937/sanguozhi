@@ -33,6 +33,8 @@
 
 ## 最新审计入口
 
+新增[内政建设速度限定数值核](domestic-construction-rate.md)：已找到完整公开005BB1D0..2AA正文；稳定uint8政治与uint16设施耐久给出 `max(maxPolitics+floor(sumPolitics/2),floor((D-floor(D/4))/9))`。星号MOD隔离，Wiki重建不等价；完整工期/初始writer/进度/完成调度/getter/stock仍缺。
+
 新增[S1特技培育限定资格核](pk-skill-training-s1.md)：类别2分支的native signed32标量纯函数，完整caller/helper字节绑定；已有不同技能不阻挡，越界目标保留caller取反结果。不含完成/费用/调度，也不映射攻略ID；PR45五维与旧静态资料、运行时合同不变。
 
 新增[PS2史实攻略独立资料](ps2-historical-event-source-data.md)：64观测/64独立ID、741来源节点；59条件结果（2仅接续）、4仅条件、1外链参照，保留24来源限制、PK归属未知及原生/运行时证据债。本次恢复数据后采用全新验收，不复用丢失的旧日志。

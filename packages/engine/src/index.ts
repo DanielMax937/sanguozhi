@@ -11,3 +11,5 @@ export { PK_STAT_TRAINING_S1, qualifyPkStatTraining, completePkStatTraining } fr
 export type { PkStatTrainingAttribute, PkStatTrainingGrowth, PkStatTrainingInput, PkStatTrainingRejectionReason, PkStatTrainingRejection, PkStatTrainingEligibility, PkStatTrainingCompletion } from './pk-stat-training.ts';
 export { PK_SKILL_TRAINING_S1, qualifyPkSkillTraining } from './pk-skill-training.ts';
 export type { PkSkillTrainingInput, PkSkillTrainingRejectionReason, PkSkillTrainingRejection, PkSkillTrainingEligibility } from './pk-skill-training.ts';
+export { DOMESTIC_CONSTRUCTION_RATE, calculateDomesticConstructionRate } from './domestic-construction-rate.ts';
+export type { DomesticConstructionRateInput, DomesticConstructionRateRejectionReason, DomesticConstructionRateRejection, DomesticConstructionRateReceipt, DomesticConstructionRateResult } from './domestic-construction-rate.ts';

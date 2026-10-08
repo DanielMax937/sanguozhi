@@ -1,6 +1,8 @@
 # 已采用规则
 
-实现时以本文为准。人物、城市、特技、宝物、官职在 `docs/sources/` 的 JSON 里。攻防的副将合成、全兵种系数、战法气力表、城市收入和建设天数在 `docs/sources/crosscheck.md` 第 1–5 节，和本文一起采用。本文补的是 2026-09-24 对照日文 wiki 之后能落地的部分。
+实现时以本文为准。人物、城市、特技、宝物、官职在 `docs/sources/` 的 JSON 里。攻防的副将合成、全兵种系数、战法气力表、城市收入在 `docs/sources/crosscheck.md` 第 1–5 节，和本文一起采用。本文补的是 2026-09-24 对照日文 wiki 之后能落地的部分。
+
+建设项更正（2026-10-08）：crosscheck中的建设天数仅保留攻略观察；当前建设速度数值以[稳定值限定原函数核](rules/domestic-construction-rate.md)为准。`max(maxPolitics+floor(sumPolitics/2),floor((D-floor(D/4))/9))` 与旧Wiki综合政治重建不等价；完整日数、初始writer、进度/完成调度、getter及stock证明仍缺，不能据旧表直接实现完整建设。
 
 来源：[戦争](https://w.atwiki.jp/sangokushi11/pages/85.html)、[兵科](https://w.atwiki.jp/sangokushi11/pages/91.html)、[技巧研究](https://w.atwiki.jp/sangokushi11/pages/90.html)。
 
