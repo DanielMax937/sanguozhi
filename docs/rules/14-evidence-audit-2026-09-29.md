@@ -27,7 +27,7 @@
 | 舌战手牌 | 边界错误 | empirical-high | <70=3、70段=4、80段=5、≥90=6 |
 | 舌战再考 | 旧规则错误 | empirical-high | 4段足场，每崩一段恢复再考，通常整场4次 |
 | 武将寿命 | 模糊 | empirical-high | 自然死/不自然死大致时序已明确 |
-| 忠诚自然下降触发 | 模糊 | empirical-high | 换季；相性差≥25，或低义理+高野望；下降幅度仍未闭式 |
+| 忠诚自然下降触发 | 模糊 | caller-text correction（2026-10-08） | 换季；相性差>25（unsigned AL），或低义理+高野望，或 `004889E0` 非零（源注释厌恶君主）；[静态纠错](natural-loyalty-candidate-boundary.md)；callee/降量/RNG/stock仍open |
 | 委任AI | 空白 | empirical | 固定设施、治安、兵装/兵力阈值、输送倾向 |
 
 ## 仍未升级的原因
@@ -91,7 +91,7 @@
 ### 忠诚自然下降
 日文 Wiki 的长期实测页明确：
 - 换季时才做自然下降；
-- 相性与君主差≥25，或“低/较低义理 + 高/较高野望”时进入下降候选；
+- 该页的旧候选摘要现按[caller纠错](natural-loyalty-candidate-boundary.md)更新：相性差>25（unsigned AL），或“低/较低义理 + 高/较高野望”，或 `004889E0` 非零（原注释厌恶君主）；第三条来源为caller，不归给日文Wiki；
 - 下降幅度还受君主义理/野望影响。
 
 这部分升级为 **empirical-high**；精确下降点数继续 open。

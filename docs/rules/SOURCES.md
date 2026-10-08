@@ -814,9 +814,9 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
 ### D6 相性 / 义理 / 野望 / 汉室专项
 
 - 311MemoryResearch / SIRE tutorial：
-  - `00489F80 GetCompatibilityDifference` 完整反汇编；
+  - `00489F80 GetCompatibilityDifference` 历史公式资料；完整体未在本轮绑定来源内；
   - `raw=abs(A-B)`；
-  - 最终 `min(raw,150-raw)`，证明相性是150点环。
+  - 历史归纳为 `min(raw,150-raw)` 的150点环；本轮caller来源不包含00489F80完整体，见下述独立证据边界。
   https://github.com/sjn4048/311MemoryResearch
 - 311SireCustomizedPackageDev `struct_person`：
   - `+0x69` 相性；
@@ -840,7 +840,7 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/983.html
 - 日文 Wiki《小ネタ》：
   - 己方自然忠诚下降发生在季节转换；
-  - 候选为相性差>=25，或低/较低义理+高/较高野望；
+  - 历史候选摘要已由[固定caller纠错](natural-loyalty-candidate-boundary.md)更新：相性差>25（unsigned AL），或低/较低义理+高/较高野望，或 `004889E0` 非零；后一条来自caller及“厌恶君主”注释，不归给本Wiki；
   - 下降幅度还受君主义理/野望影响。
   https://w.atwiki.jp/sangokushi11/pages/15.html
 - 日文 Wiki《内政》/仁政武将页：
@@ -854,11 +854,13 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   https://w.atwiki.jp/sangokushi11/pages/1926.html
   https://w.atwiki.jp/sangokushi11/pages/2378.html
 - 311MemoryResearch `整理/Func-自动06-武将忠诚下降.txt`：
-  - `0058E510` 完整逐指令文本；
+  - `0058E510` 完整逐指令文本，固定commit/blob与GBK可逆UTF-8快照见[静态证据](natural-loyalty-candidate-boundary.md)；
+  - `0058E6BF JA` 确认相性差>25；`0058E6D6..DD` 确认 `004889E0` 非零的第三候选，源注释“厌恶君主”；
+  - 仅主函数 `0058E510..0058E82B` 入证，末尾两套MOD修改隔离；callee/stock完整语义未补齐；
   - 普通武将季初 gate 与俘虏跳过季初 gate；
   - 俘虏跳过仁政，但保留亲爱/配偶/义兄弟/父母子女豁免；
-  - 人心掌握：`Random(0..2)>=1` 跳过，精确2/3免降；
-  - 两个独立 `Random(0..2)`、符节台`+2`；
+  - 人心掌握：`00472150(3)` 后 `AX>=1` 跳过；2/3依赖均匀0..2随机约定；
+  - 两次 `00472150(3)` 调用、符节台`+2`；调用数不证明RNG独立性；
   - 君主义理最低且野望最高时追加 `floor((4-targetIdeals)/2)`。
   https://github.com/sjn4048/311MemoryResearch
 - SIRE 原作者更新说明：
@@ -873,10 +875,10 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
   - 援助/拒绝会让汉室重视配下分别涨/掉忠，幅度因人而异。
   https://w.atwiki.jp/sangokushi11/pages/958.html
 - 二次“代码研究”转载：
-  - 现仅作为历史cross-check；其中两个0..2随机、人心掌握约2/3、符节台+2、最低义理最高野望君主附加项均已被 `0058E510` 原EXE逐指令文本直接确认。
+  - 现仅作为历史cross-check；其中随机调用点、人心掌握比较、符节台+2、最低义理最高野望君主附加算术可由 `0058E510` caller复核；分布/独立性、最终writer和stock不由转载或caller单独证明。
   https://wenku.baidu.com/view/ad1f1482561252d381eb6edb?bfetype=new
 
-证据等级：相性公式、忠诚0..255/UI100与 `0058E510` 忠诚下降主路径均为PC-PK1.1 reverse-engineered；换季候选语义由原函数+日文Wiki交叉确认；汉室爵位/拥废/特定事件常量为documented exact。欠薪/流言/事件等非自然忠诚路径仍open。
+证据等级：忠诚0..255/UI100保留既有逆向证据；相性环公式保留历史资料结论。本轮 `0058E510` 仅为source-bound caller文本证据，`00489F80`、`004889E0` 完整callee、`004A6CF0` writer、RNG/降量端到端及stock/runtime仍open。汉室爵位/拥废/特定事件常量保留documented exact；非自然路径仍各自保留缺口。
 
 ### D7 太守 / 都督 / 军师专项
 
@@ -1007,7 +1009,7 @@ days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
 - 311MemoryResearch `整理/Func-自动06-武将忠诚下降.txt`：
   - 俘虏跳过季初限制与仁政；
   - 关系豁免仍生效；
-  - 人心掌握精确2/3免降；
+  - 人心掌握caller在AX>=1时跳过；2/3依赖均匀0..2随机约定，RNG/stock边界见[忠诚静态纠错](natural-loyalty-candidate-boundary.md)；
   - 两个0..2随机、符节台+2、特定君主义理/野望附加项。
   https://github.com/sjn4048/311MemoryResearch
 - 日文 Wiki《特技一覧》/武将页：

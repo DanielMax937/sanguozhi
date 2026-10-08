@@ -1,20 +1,21 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current theme: S1 category-2 PK skill-training scalar eligibility
-> Integration baseline: PR #45 merged; this theme starts at `4dad95554915935b9a0982c028eff71114d69cd3`
+> Current theme: static natural-loyalty candidate source correction
+> Integration baseline: PR #46 merged; this theme starts at `0f5ea43`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
-> Publication: this new scalar-eligibility batch is local-only pending results and separate publication confirmation
+> Publication: this static correction batch is local-only pending independent review and separate publication confirmation
 > Primary target: PC-PK1.1
 > Updated: 2026-10-08 (UTC)
 
 ## Current reconciliation: delivered work and retained gaps
 
-PR #42 reconciled summaries, PR #43 added generic-guide data and PR #44 delivered the rebuilt independent PS2 corpus. PR #45 delivered the bounded five-stat numerical core. This batch implements only S1 category-2 skill eligibility as a pure function. It does not add commands or a scheduler. Fresh checks are required; old passing logs are not reused. The P0 history below retains its original validation counts and evidence scope. P0-78 and work dependent on capture, force extinction or native transactions are excluded, not declared complete.
+PR #42 reconciled summaries, PR #43 added generic-guide data and PR #44 delivered the rebuilt independent PS2 corpus. PR #45 delivered the bounded five-stat numerical core and PR #46 the S1 category-2 skill eligibility function. This batch only corrects the natural-loyalty caller threshold and restores its third candidate branch in static source evidence and documentation. No runtime, commands or scheduler are added; earlier passing logs are not reused. The P0 history below retains its original validation counts and evidence scope. P0-78 and work dependent on capture, force extinction or native transactions are excluded, not declared complete.
 
+- This batch: [natural-loyalty candidate source correction](docs/rules/natural-loyalty-candidate-boundary.md), unsigned AL>25 OR signed duty<=1/ambition>=3 OR full EAX from004889E0 nonzero; prisoners bypass the three clauses. Immutable public source, two MOD sections isolated, no callee/writer/RNG/stock closure
 - Delivered, PR #44: [selected PS2 historical guide](docs/rules/ps2-historical-event-source-data.md), 64 independent observations/IDs and 741 source nodes; 59 condition/result sections (2 continuation-only), 4 condition-only openings and 1 reference-only section. The 24 source limitations, PK membership, original flags/catalog and runtime remain open. Historical105/66/41 and generic33/31/10 corpora remain byte-identical
 - Delivered, PR #36: [45 static port/gate parent-city relations](docs/rules/static-subordinate-bases.md), reconciled against all 42 city counts. Still missing: the three null development-patch splits, original numeric base IDs, 40,000-cell terrain/coordinate/adjacency data and original scenario initialization. Next evidence: independently attributable original map/scenario data, not inferred static parentage
-- This batch: [S1 PK skill-training scalar eligibility](docs/rules/pk-skill-training-s1.md), after category2 selection, with full native signed32 inputs, equality plus caller inversion and byte-bound S1 evidence. Another existing skill does not block; out-of-range targets yield caller true. No guide-ID mapping, state writes, completion, fees or scheduling
+- Delivered, PR #46: [S1 PK skill-training scalar eligibility](docs/rules/pk-skill-training-s1.md), after category2 selection, with full native signed32 inputs, equality plus caller inversion and byte-bound S1 evidence. Another existing skill does not block; out-of-range targets yield caller true. No guide-ID mapping, state writes, completion, fees or scheduling
 - Delivered, PR #45: [S1 PK five-stat numeric core](docs/rules/pk-stat-training-s1.md), separate start predicate and completion arithmetic with requested/credited XP, bounded ordinary or already-resolved getter inputs, explicit negative-delta rejection and byte-bound evidence. Full command gates, AP/gold/duration/use counters, native98 mapping, hidden RNG, scheduler and clean-stock equivalence remain open
 - Delivered, PR #37: [PK ability research guide transcription](docs/rules/15-pk-ability-research.md), with 48 base nodes, 52 base arrows, 4 start arrows and 50 hidden candidates in 10 positions; conflicting guide claims remain explicit. Still missing: original-data equivalence, ability-research/cultivation command execution, hidden-selection algorithm and RNG. Next evidence: source-bound original tables and callers; guide data is not stock certification
 - Delivered, PR #38: [selected historical guides](docs/rules/historical-event-source-data.md), 105 observations / 66 corpus event IDs / 41 source differences. Still missing: unstated flags, unresolved differences, complete original catalog and evaluation/result execution. Next evidence: additional platform-qualified sources and original flag/caller/result paths

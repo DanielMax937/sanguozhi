@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "audit": "natural-loyalty-candidate-source-correction",
+  "status": "static-caller-evidence-only",
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "内存资料/整理/Func-自动06-武将忠诚下降.txt",
+    "blob": "0ce79d11923901fdfb74f99ddf281f744b3d9880",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-自动06-武将忠诚下降.txt",
+    "snapshot": "docs/sources/natural-loyalty/0058E510-source-utf8.txt",
+    "snapshotSha256": "1ba952ffec7c91de3cacc991c854c412628f39e6f772a6a0a5368fcf6be8c36c",
+    "originalEncoding": "gbk",
+    "originalBytes": 21580,
+    "snapshotEncoding": "utf-8",
+    "snapshotBytes": 23159,
+    "sourceKind": "public-annotated-disassembly-text",
+    "claimedPlatform": "PC-PK1.1",
+    "cleanStockCertified": false
+  },
+  "sectionBoundary": {
+    "originalFunction": [
+      "0058E510",
+      "0058E82B"
+    ],
+    "originalInstructionCount": 238,
+    "originalInstructionBytes": 796,
+    "excludedSections": [
+      "修改1 - 掌握人心忠诚不下降概率可调整",
+      "修改2 - 忠诚下降基数可调整，君主魅力对忠诚下降概率有影响"
+    ],
+    "selection": "Only the function before 修改1; both modification sections remain archived, never merged into its instructions."
+  },
+  "gate": {
+    "precondition": "At 0058E6AA, all earlier ordinary/prisoner validity, season and relationship exemptions have already passed. Entry to 0058E6E3 is only a later-candidate continuation, not guaranteed loyalty loss.",
+    "start": "0058E6AA",
+    "endExclusive": "0058E6E3",
+    "admit": "0058E6E3",
+    "reject": "0058E7B9",
+    "prisonerBypass": true,
+    "ordinaryClauses": [
+      {
+        "kind": "compatibility-call-result",
+        "call": "00489F80",
+        "register": "AL",
+        "comparison": "unsigned-gt",
+        "value": 25
+      },
+      {
+        "kind": "duty-and-ambition",
+        "dutyOffset": "F0",
+        "dutyComparison": "signed-le",
+        "dutyValue": 1,
+        "ambitionOffset": "F4",
+        "ambitionComparison": "signed-ge",
+        "ambitionValue": 3
+      },
+      {
+        "kind": "relationship-call-result",
+        "call": "004889E0",
+        "register": "EAX",
+        "comparison": "nonzero",
+        "sourceAnnotation": "厌恶君主判定 / 判断A是否厌恶B",
+        "argumentBinding": "ECX=ESI (officer), pushed EDI (ruler ID saved at 0058E62D)",
+        "calleeBodyVerified": false
+      }
+    ],
+    "order": [
+      "prisoner",
+      "compatibility",
+      "duty",
+      "ambition-if-duty-le-1",
+      "relationship-if-prior-clauses-false"
+    ],
+    "instructions": [
+      {
+        "address": "0058E6AA",
+        "bytes": "8b ce",
+        "instruction": "mov ecx,esi"
+      },
+      {
+        "address": "0058E6AC",
+        "bytes": "e8 bf a5 ef ff",
+        "instruction": "call 00488c70"
+      },
+      {
+        "address": "0058E6B1",
+        "bytes": "85 c0",
+        "instruction": "test eax,eax"
+      },
+      {
+        "address": "0058E6B3",
+        "bytes": "75 2e",
+        "instruction": "jne 0058e6e3"
+      },
+      {
+        "address": "0058E6B5",
+        "bytes": "57",
+        "instruction": "push edi"
+      },
+      {
+        "address": "0058E6B6",
+        "bytes": "8b ce",
+        "instruction": "mov ecx,esi"
+      },
+      {
+        "address": "0058E6B8",
+        "bytes": "e8 c3 b8 ef ff",
+        "instruction": "call 00489f80"
+      },
+      {
+        "address": "0058E6BD",
+        "bytes": "3c 19",
+        "instruction": "cmp al,19"
+      },
+      {
+        "address": "0058E6BF",
+        "bytes": "77 22",
+        "instruction": "ja 0058e6e3"
+      },
+      {
+        "address": "0058E6C1",
+        "bytes": "83 be f0 00 00 00 01",
+        "instruction": "cmp dword ptr [esi+000000f0],01"
+      },
+      {
+        "address": "0058E6C8",
+        "bytes": "7f 09",
+        "instruction": "jg 0058e6d3"
+      },
+      {
+        "address": "0058E6CA",
+        "bytes": "83 be f4 00 00 00 03",
+        "instruction": "cmp dword ptr [esi+000000f4],03"
+      },
+      {
+        "address": "0058E6D1",
+        "bytes": "7d 10",
+        "instruction": "jnl 0058e6e3"
+      },
+      {
+        "address": "0058E6D3",
+        "bytes": "57",
+        "instruction": "push edi"
+      },
+      {
+        "address": "0058E6D4",
+        "bytes": "8b ce",
+        "instruction": "mov ecx,esi"
+      },
+      {
+        "address": "0058E6D6",
+        "bytes": "e8 05 a3 ef ff",
+        "instruction": "call 004889e0"
+      },
+      {
+        "address": "0058E6DB",
+        "bytes": "85 c0",
+        "instruction": "test eax,eax"
+      },
+      {
+        "address": "0058E6DD",
+        "bytes": "0f 84 d6 00 00 00",
+        "instruction": "je 0058e7b9"
+      }
+    ]
+  },
+  "retainedOpen": [
+    "00489F80 full callee and compatibility-domain semantics",
+    "004889E0 full callee and exact relationship predicate semantics",
+    "004A6CF0 full writer and final loyalty write/clamping",
+    "00472150 RNG internals, distribution and global sequence",
+    "end-to-end loyalty loss/runtime and scheduler validation",
+    "clean-stock PK1.1, Vanilla and console equivalence"
+  ],
+  "runtimeAdded": false
+}

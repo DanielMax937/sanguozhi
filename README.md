@@ -23,6 +23,7 @@ npm run play -- --growth-fixture
 
 交互命令支持用成对单引号或双引号包住整个参数，例如`save "存档目录/训练 存档.json"`、`load "存档目录/训练 存档.json"`（目录需已存在）。反斜杠按字面保留，不做shell展开；引号参数后必须空白或行尾，不支持部分参数拼接。命令的缺失、空或多余参数及未闭合引号会在执行前拒绝，空白行忽略。读档失败保留当前会话；输入结束会处理已收到的命令并等待存取档完成，无需额外输入`quit`。
 
+- [自然忠诚候选静态纠错](docs/rules/natural-loyalty-candidate-boundary.md)：相性返回AL严格>25、低义理高野望、或004889E0非零三选一；俘虏绕过这组三条，完整callee/writer/RNG/stock仍缺，不新增忠诚runtime
 - [PK特技培育S1限定资格核](docs/rules/pk-skill-training-s1.md)：已进入类别2后的native signed32标量查询；有效相同目标不合格，另一已有特技不阻挡，越界目标保留helper零/caller一；不写状态、不映射攻略ID、不实现完成/费用/调度
 - [PK五维培育限定数值核](docs/rules/pk-stat-training-s1.md)：S1资格XP<2000/成长低于目标，完成min(5,差)×100累计顶3000；两个纯函数分层，负差显式拒绝，完整命令/时长/使用数/隐藏RNG仍缺
 - [PS2史实事件独立静态资料](docs/rules/ps2-historical-event-source-data.md)：64观测/64独立资料ID、741来源节点；59项条件与结果（含2仅接续）、4项仅条件、1项外链参照；24来源限制和PK归属未知保留，不执行事件
