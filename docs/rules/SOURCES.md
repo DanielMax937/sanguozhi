@@ -352,41 +352,37 @@
   https://www.gamersky.com/handbook/200609/33180.shtml
 
 
-### C7 内政设施开发日数专项
+### C7 内政建设速度数值核与开发日数观察
 
-- 《三國志11 with パワーアップキット》官方说明书：
-  - 开发最多选择3名武将；
-  - 政治越高，开发期间越短；
-  - 多人开发可缩短显示日数。
-  https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
-- 日文 Wiki 内政：
-  - 综合政治 = 最高政治 + 其余两人政治之和/3（四舍五入）；
-  - 10～90日完整门槛表；
-  - 不足90日最低门槛时固定100日；
-  - 编辑器255政治时综合政治上限425，造币/谷仓与铜雀台仍无法10日完成。
-  https://w.atwiki.jp/sangokushi11/pages/74.html
-- 旧2ch/Wiki存档：
-  - 市场开始建设时125/500耐久的实测记录。
-  https://w.atwiki.jp/sangokushi11/pages/1869.html
-- 311SireCustomizedPackageDev：
-  - `struct_building_type +C2` 为最大耐久；
-  - `struct_building.Durability / ConstructionStatus` 保存建设进度状态。
-  https://github.com/sean2077/311SireCustomizedPackageDev
-- 311MemoryResearch：
-  - `内存资料/修改记录by sjn4048.txt` 定位“市场等内政建设”路径 `005BC4C1`；
-  - 当前公开资料未展开开发日数完整函数体。
-  https://github.com/sjn4048/311MemoryResearch
+主要来源是 [sjn4048/311MemoryResearch 完整建设速度文本](https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/函数%5B计算内政建设速度%5D.txt)：
 
-全表精确重建模型：
+- 固定提交 `66e167e40c3440929ec016f3872aefc3486434c1`，路径 `内存资料/函数[计算内政建设速度].txt`
+- 原 GBK blob `76b1f9591a9f94830bcf4e5a67764d2911e19fd4`，5936 bytes，SHA256 `cabc5cb11e62dee04fda39aadce804284d272ca20e98ece202fd16cedfbe9216`
+- 非星号正文完整覆盖 `005BB1D0..005BB2AA`；此前“只定位005BC4C1、未公开函数体”的概括错误。建设速度函数存在，完整开发日数 caller 仍未恢复
+- 政治 getter `004890A0` 重复调用，`AL` 零扩展；设施 getter `00490B90` 重复调用，最大耐久从类型 `+C2` 读取为 `uint16`
+- `005BB23E..247` 是有符号总和除2向零截断；`005BB249..266` 的 `SHR2`、相减、`IMUL 0x38E38E39` 高半部及 `SAR1` 是耐久剩余量除9；`005BB268..2AA` 返回较大项
+- 星号 `*005BB263 → 008A9DE8..008A9DFD` 是另列 MOD 改写，独立保存且排除于非星号数值核；其字面乘100再除100在本政治项0～637域内数值恒等，隔离依据是来源/结构，不能虚构行为反例
+- [解码快照](../sources/domestic-construction-rate-original.txt)、[证据清单](../sources/domestic-construction-rate.json)、[schema](../sources/domestic-construction-rate.schema.json)、[完整支持域说明](domestic-construction-rate.md)
+
+在0～3个已解析 `uint8` 政治值和稳定 `uint16` 设施耐久 `D` 域内：
 
 ```ts
-P = highestPolitics + floor((otherPoliticsSum + 1) / 3)
-initial = roundHalfUp(maxDurability / 4)
-gainPerTurn = floor(3 * P / 2)
-days = 10 * min(10, ceil((maxDurability - initial) / gainPerTurn))
+rate = max(
+  maxPolitics + floor(sumPolitics / 2),
+  floor((D - floor(D / 4)) / 9)
+)
 ```
 
-该式对日文 Wiki 所有设施类别、所有10～90日门槛逐格一致；证据等级标为 `empirical-exact table reconstruction`，不冒充已恢复原函数体。
+稳定政治 getter 与稳定设施表是纯函数投影的前提，不宣称可变 getter 等价。原字节中的 `D>>2` 只用于速率下界，不证明初始耐久 writer；公开逆向文本也不构成独立 clean-stock 认证。
+
+攻略/结构旁证独立保留：
+
+- [官方 PK 说明书](https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf)：最多3名武将，政治影响开发期间，多人可缩短显示日数
+- [日文 Wiki 内政](https://w.atwiki.jp/sangokushi11/pages/74.html)：综合政治的四舍五入式、10～90日门槛与最低档100日观察；不是上述速率函数的逐指令证据
+- [旧2ch/Wiki存档](https://w.atwiki.jp/sangokushi11/pages/1869.html)：市场开始建设时125/500的单项实测
+- [311SireCustomizedPackageDev](https://github.com/sean2077/311SireCustomizedPackageDev)：类型最大耐久 `+C2` 与建筑实例 `Durability / ConstructionStatus`；字段存在不证明写入时机
+
+旧 `P=highestPolitics+floor((otherPoliticsSum+1)/3)` 后算 `floor(3*P/2)` 的重建与源函数不等价：`[75,1,0], D450` 得113而旧式112；`[29,1,0], D500` 得44而旧式43；全0政治、D500仍有下界41而旧式0。三人100政治、D500同为250只能作锚点。旧“约25%初始耐久 + 1.5P/旬”的门槛表重建保留为历史假设，不能用来填补完整工期、初始 writer、每旬进度、完成调度、getter 本体和 clean-stock/跨版本缺口。
 
 ### C8 商人 / 粮食交易专项
 

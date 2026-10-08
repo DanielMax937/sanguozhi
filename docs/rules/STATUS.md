@@ -1,12 +1,13 @@
 # 规则审计当前状态
 
-更新：2026-10-08 UTC。当前自然忠诚静态纠错批基线：PR #46 已合并的 main `0f5ea43`；本批尚未发布远端。
+更新：2026-10-08 UTC。当前内政建设速率纯数值核基线：PR #47 已合并的 main `f0b88ff446fda4622fb186975b78fbb4a4f9b79d`；本批尚未发布远端。
 
 ## 当前交付与仍缺证据
 
-此前PR #42校正缺口总表，PR #43补通用资料，PR #44交付PS2独立静态资料；PR #45已交付五维限定数值核，PR #46已交付S1类别2特技资格纯函数；本轮仅纠正自然忠诚caller候选的严格阈值与遗漏第三分支，不新增runtime，不借用旧验收。下列P0历史验证数字仍属于各自冻树，不能改写为当前测试结果。
+此前PR #42校正缺口总表，PR #43补通用资料，PR #44交付PS2独立静态资料；PR #45已交付五维限定数值核，PR #46已交付S1类别2特技资格纯函数；PR #47已交付自然忠诚caller静态纠错；本轮只新增稳定已解析输入的内政建设速率纯函数，不增加建设命令、任务写入、逐旬推进或完成调度，不修改Train/EndTurn与存档，不借用旧验收。下列P0历史验证数字仍属于各自冻树，不能改写为当前测试结果。
 
-- 本批[自然忠诚候选静态纠错](natural-loyalty-candidate-boundary.md)：普通前置豁免后为unsigned AL>25、signed义理<=1且野望>=3、或004889E0完整EAX非零三选一；俘虏跳过全部三条。固定公开source/blob与两套MOD分隔可复核；callee/writer/降量/RNG/stock/runtime继续open，独立恢复审查结果随本批交付记录，发布仍须单独批准
+- 本批[内政建设速率纯数值核](domestic-construction-rate.md)：公开005BB1D0..005BB2AA原文完整；稳定getter/设施表域为max(maxPolitics+floor(sumPolitics/2),floor((D-floor(D/4))/9))，0～3个uint8政治及uint16耐久。原GBK Git blob、84条/219字节、9条星号MOD隔离可核；纯函数返回中间值和证据，不证明初始耐久writer、完整工期、getter实现、逐旬推进、完成调度或stock/跨版本等价。新树完整回归与独立恢复记录另行交付，发布须单独批准
+- PR #47已交付[自然忠诚候选静态纠错](natural-loyalty-candidate-boundary.md)：普通前置豁免后为unsigned AL>25、signed义理<=1且野望>=3、或004889E0完整EAX非零三选一；俘虏跳过全部三条。固定公开source/blob与两套MOD分隔可复核；callee/writer/降量/RNG/stock/runtime继续open，已发布的审查范围不扩展为callee/writer或运行时认证
 - PR #46已交付[S1特技培育限定资格核](pk-skill-training-s1.md)：已进入类别2后的native signed32输入，目标0..99且E8相同才helper真，caller取反；另一已有特技不阻挡，越界target即使相等也保持caller真。不映射攻略ID、不写人物/任务状态；完整命令/完成writer/费用/调度仍缺
 - PR #45已交付[S1五维培育限定数值核](pk-stat-training-s1.md)：XP<2000且成长低于目标的启动资格；完成独立计算min(5,差)×100累计顶3000，已开始任务不重跑资格，负差明确拒绝。普通无年龄域与已解析getter分开；完整命令/AP/时长/使用数/native98/隐藏RNG/scheduler/stock仍open
 - PR #44已交付[PS2史实攻略](ps2-historical-event-source-data.md)：64独立观测/资料ID、741来源节点；59条件结果（2仅接续）、4仅条件、1外链参照；24来源限制和全部edition未知保留。旧史实105/66/41、通用33/31/10及12文件字节不变，原生flag/目录/版本等价与运行时仍open

@@ -1,18 +1,19 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current theme: static natural-loyalty candidate source correction
-> Integration baseline: PR #46 merged; this theme starts at `0f5ea43`
+> Current theme: independent domestic construction-rate numerical core
+> Integration baseline: PR #47 merged; this theme starts at `f0b88ff446fda4622fb186975b78fbb4a4f9b79d`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
-> Publication: this static correction batch is local-only pending independent review and separate publication confirmation
+> Publication: this numerical-core batch is local-only pending full validation, independent recovery review and separate publication confirmation
 > Primary target: PC-PK1.1
 > Updated: 2026-10-08 (UTC)
 
 ## Current reconciliation: delivered work and retained gaps
 
-PR #42 reconciled summaries, PR #43 added generic-guide data and PR #44 delivered the rebuilt independent PS2 corpus. PR #45 delivered the bounded five-stat numerical core and PR #46 the S1 category-2 skill eligibility function. This batch only corrects the natural-loyalty caller threshold and restores its third candidate branch in static source evidence and documentation. No runtime, commands or scheduler are added; earlier passing logs are not reused. The P0 history below retains its original validation counts and evidence scope. P0-78 and work dependent on capture, force extinction or native transactions are excluded, not declared complete.
+PR #42 reconciled summaries, PR #43 added generic-guide data and PR #44 delivered the rebuilt independent PS2 corpus. PR #45 delivered the bounded five-stat numerical core and PR #46 the S1 category-2 skill eligibility function. PR #47 delivered the natural-loyalty caller correction. This batch adds only a standalone domestic construction-rate pure function for stable resolved uint8 politics and uint16 facility durability, bound to the complete public function listing. No construction commands, task writes, scheduling, Train/EndTurn changes or save integration are added; earlier passing logs are not reused. The P0 history below retains its original validation counts and evidence scope. P0-78 and work dependent on capture, force extinction or native transactions are excluded, not declared complete.
 
-- This batch: [natural-loyalty candidate source correction](docs/rules/natural-loyalty-candidate-boundary.md), unsigned AL>25 OR signed duty<=1/ambition>=3 OR full EAX from004889E0 nonzero; prisoners bypass the three clauses. Immutable public source, two MOD sections isolated, no callee/writer/RNG/stock closure
+- This batch: [domestic construction-rate numerical core](docs/rules/domestic-construction-rate.md), complete005BB1D0..005BB2AA public listing; max(maxPolitics+floor(sumPolitics/2),floor((D-floor(D/4))/9)) under stable getter/table assumptions. Original GBK blob and starred MOD separation are explicit; initial writer, full duration, mutable getters, per-turn progress, completion scheduling and clean-stock/cross-version equivalence remain open
+- Delivered, PR #47: [natural-loyalty candidate source correction](docs/rules/natural-loyalty-candidate-boundary.md), unsigned AL>25 OR signed duty<=1/ambition>=3 OR full EAX from004889E0 nonzero; prisoners bypass the three clauses. Immutable public source, two MOD sections isolated, no callee/writer/RNG/stock closure
 - Delivered, PR #44: [selected PS2 historical guide](docs/rules/ps2-historical-event-source-data.md), 64 independent observations/IDs and 741 source nodes; 59 condition/result sections (2 continuation-only), 4 condition-only openings and 1 reference-only section. The 24 source limitations, PK membership, original flags/catalog and runtime remain open. Historical105/66/41 and generic33/31/10 corpora remain byte-identical
 - Delivered, PR #36: [45 static port/gate parent-city relations](docs/rules/static-subordinate-bases.md), reconciled against all 42 city counts. Still missing: the three null development-patch splits, original numeric base IDs, 40,000-cell terrain/coordinate/adjacency data and original scenario initialization. Next evidence: independently attributable original map/scenario data, not inferred static parentage
 - Delivered, PR #46: [S1 PK skill-training scalar eligibility](docs/rules/pk-skill-training-s1.md), after category2 selection, with full native signed32 inputs, equality plus caller inversion and byte-bound S1 evidence. Another existing skill does not block; out-of-range targets yield caller true. No guide-ID mapping, state writes, completion, fees or scheduling

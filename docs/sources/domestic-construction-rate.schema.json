@@ -1,0 +1,637 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:domestic-construction-rate-stable-v1",
+  "title": "Closed evidence record for the stable-input domestic construction numerical core",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profileId",
+    "scope",
+    "level",
+    "stockOriginalVerified",
+    "originalExecutableExecuted",
+    "source",
+    "domain",
+    "constants",
+    "arithmetic",
+    "originalListing",
+    "excludedMod",
+    "evidence",
+    "remainingOpen",
+    "counterexamples"
+  ],
+  "properties": {
+    "profileId": {
+      "type": "string",
+      "const": "domestic-construction-rate-stable-v1"
+    },
+    "scope": {
+      "type": "string",
+      "const": "standalone-resolved-stable-input-numerical-rate-only"
+    },
+    "level": {
+      "type": "string",
+      "const": "source-listing-reconstruction"
+    },
+    "stockOriginalVerified": {
+      "type": "boolean",
+      "const": false
+    },
+    "originalExecutableExecuted": {
+      "type": "boolean",
+      "const": false
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "path",
+        "url",
+        "gitBlobSha1",
+        "originalEncoding",
+        "originalBytes",
+        "originalSha256",
+        "snapshot",
+        "snapshotEncoding",
+        "snapshotSha256",
+        "byteAuthority"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "const": "sjn4048/311MemoryResearch"
+        },
+        "commit": {
+          "type": "string",
+          "const": "66e167e40c3440929ec016f3872aefc3486434c1"
+        },
+        "path": {
+          "type": "string",
+          "const": "内存资料/函数[计算内政建设速度].txt"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/%E5%86%85%E5%AD%98%E8%B5%84%E6%96%99/%E5%87%BD%E6%95%B0%5B%E8%AE%A1%E7%AE%97%E5%86%85%E6%94%BF%E5%BB%BA%E8%AE%BE%E9%80%9F%E5%BA%A6%5D.txt"
+        },
+        "gitBlobSha1": {
+          "type": "string",
+          "const": "76b1f9591a9f94830bcf4e5a67764d2911e19fd4"
+        },
+        "originalEncoding": {
+          "type": "string",
+          "const": "GBK"
+        },
+        "originalBytes": {
+          "type": "integer",
+          "const": 5936
+        },
+        "originalSha256": {
+          "type": "string",
+          "const": "cabc5cb11e62dee04fda39aadce804284d272ca20e98ece202fd16cedfbe9216"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/domestic-construction-rate-original.txt"
+        },
+        "snapshotEncoding": {
+          "type": "string",
+          "const": "UTF-8"
+        },
+        "snapshotSha256": {
+          "type": "string",
+          "const": "f092b0a16ab99ca74106c967e4dfb320211c2b4d2a066f0ca36b4be84272b132"
+        },
+        "byteAuthority": {
+          "type": "string",
+          "const": "public disassembly listing only; not a verified stock executable"
+        }
+      }
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "politicsSlots",
+        "politics",
+        "emptySlot",
+        "missingTrailingSlots",
+        "facilityDurability",
+        "getterAssumption",
+        "facilityAssumption",
+        "validation"
+      ],
+      "properties": {
+        "politicsSlots": {
+          "type": "integer",
+          "const": 3
+        },
+        "politics": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 0
+            },
+            {
+              "type": "integer",
+              "const": 255
+            }
+          ],
+          "items": false
+        },
+        "emptySlot": {
+          "type": "null",
+          "const": null
+        },
+        "missingTrailingSlots": {
+          "type": "string",
+          "const": "empty"
+        },
+        "facilityDurability": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 0
+            },
+            {
+              "type": "integer",
+              "const": 65535
+            }
+          ],
+          "items": false
+        },
+        "getterAssumption": {
+          "type": "string",
+          "const": "004890A0 returns the same resolved uint8 for every call on each supplied person"
+        },
+        "facilityAssumption": {
+          "type": "string",
+          "const": "00490B90 and all reached facility+0xC2 reads yield the same resolved uint16 durability"
+        },
+        "validation": {
+          "type": "string",
+          "const": "engineering input checks, not recovered command eligibility"
+        }
+      }
+    },
+    "constants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "politicsDivisor",
+        "durabilityQuarterDivisor",
+        "durabilityRemainderDivisor",
+        "signedDivisionMagic"
+      ],
+      "properties": {
+        "politicsDivisor": {
+          "type": "integer",
+          "const": 2
+        },
+        "durabilityQuarterDivisor": {
+          "type": "integer",
+          "const": 4
+        },
+        "durabilityRemainderDivisor": {
+          "type": "integer",
+          "const": 9
+        },
+        "signedDivisionMagic": {
+          "type": "string",
+          "const": "0x38E38E39"
+        }
+      }
+    },
+    "arithmetic": {
+      "type": "string",
+      "const": "max(maxPolitics + floor(sumPolitics / 2), floor((D - floor(D / 4)) / 9))"
+    },
+    "originalListing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "endInclusive",
+        "endExclusive",
+        "instructionCount",
+        "byteLength",
+        "sha256"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "const": "005BB1D0"
+        },
+        "endInclusive": {
+          "type": "string",
+          "const": "005BB2AA"
+        },
+        "endExclusive": {
+          "type": "string",
+          "const": "005BB2AB"
+        },
+        "instructionCount": {
+          "type": "integer",
+          "const": 84
+        },
+        "byteLength": {
+          "type": "integer",
+          "const": 219
+        },
+        "sha256": {
+          "type": "string",
+          "const": "8529878a0dca1cd080dfa805b5112ff940eba58631f31c5c5c83025400c7106c"
+        }
+      }
+    },
+    "excludedMod": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "marker",
+        "replacementSite",
+        "target",
+        "instructionCount",
+        "listedByteLength",
+        "listedBytesSha256",
+        "executed"
+      ],
+      "properties": {
+        "marker": {
+          "type": "string",
+          "const": "*"
+        },
+        "replacementSite": {
+          "type": "string",
+          "const": "005BB263"
+        },
+        "target": {
+          "type": "string",
+          "const": "008A9DE8"
+        },
+        "instructionCount": {
+          "type": "integer",
+          "const": 9
+        },
+        "listedByteLength": {
+          "type": "integer",
+          "const": 31
+        },
+        "listedBytesSha256": {
+          "type": "string",
+          "const": "6067cd400b4750217191e66a2e133f6327281261ebd033dd7e686c7ab98f4e03"
+        },
+        "executed": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slotsAndStablePolitics",
+        "politicsHalfAndAdd",
+        "stableFacilityReads",
+        "durabilityMinimum",
+        "selectAndReturn",
+        "excludedMod"
+      ],
+      "properties": {
+        "slotsAndStablePolitics": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "prefixItems": [
+            {
+              "type": "string",
+              "const": "005BB1E0..005BB213"
+            }
+          ],
+          "items": false
+        },
+        "politicsHalfAndAdd": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "prefixItems": [
+            {
+              "type": "string",
+              "const": "005BB23E..005BB247"
+            }
+          ],
+          "items": false
+        },
+        "stableFacilityReads": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "prefixItems": [
+            {
+              "type": "string",
+              "const": "005BB223"
+            },
+            {
+              "type": "string",
+              "const": "005BB22A"
+            },
+            {
+              "type": "string",
+              "const": "005BB237"
+            },
+            {
+              "type": "string",
+              "const": "005BB249"
+            },
+            {
+              "type": "string",
+              "const": "005BB26C"
+            },
+            {
+              "type": "string",
+              "const": "005BB279"
+            },
+            {
+              "type": "string",
+              "const": "005BB27E"
+            }
+          ],
+          "items": false
+        },
+        "durabilityMinimum": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "string",
+              "const": "005BB249..005BB266"
+            },
+            {
+              "type": "string",
+              "const": "005BB26C..005BB29E"
+            }
+          ],
+          "items": false
+        },
+        "selectAndReturn": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "prefixItems": [
+            {
+              "type": "string",
+              "const": "005BB268..005BB2AA"
+            }
+          ],
+          "items": false
+        },
+        "excludedMod": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "prefixItems": [
+            {
+              "type": "string",
+              "const": "*005BB263..*008A9DFD"
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "remainingOpen": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "prefixItems": [
+        {
+          "type": "string",
+          "const": "004890A0 politics getter implementation and mutable getter behavior"
+        },
+        {
+          "type": "string",
+          "const": "00490B90 facility resolver implementation and mutable table behavior"
+        },
+        {
+          "type": "string",
+          "const": "initial durability writer; D>>2 here proves lower-bound arithmetic only"
+        },
+        {
+          "type": "string",
+          "const": "construction command eligibility, costs, participants and task writes"
+        },
+        {
+          "type": "string",
+          "const": "complete duration, per-turn progress, completion dispatch and scheduler"
+        },
+        {
+          "type": "string",
+          "const": "Train/EndTurn, mission, save and replay integration"
+        },
+        {
+          "type": "string",
+          "const": "clean-stock PC-PK1.1, Vanilla, console and cross-version equivalence"
+        }
+      ],
+      "items": false
+    },
+    "counterexamples": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "politics",
+            "facilityDurability",
+            "sourceRate",
+            "oldWikiReconstruction"
+          ],
+          "properties": {
+            "politics": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 75
+                },
+                {
+                  "type": "integer",
+                  "const": 1
+                },
+                {
+                  "type": "integer",
+                  "const": 0
+                }
+              ],
+              "items": false
+            },
+            "facilityDurability": {
+              "type": "integer",
+              "const": 450
+            },
+            "sourceRate": {
+              "type": "integer",
+              "const": 113
+            },
+            "oldWikiReconstruction": {
+              "type": "integer",
+              "const": 112
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "politics",
+            "facilityDurability",
+            "sourceRate",
+            "oldWikiReconstruction"
+          ],
+          "properties": {
+            "politics": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 29
+                },
+                {
+                  "type": "integer",
+                  "const": 1
+                },
+                {
+                  "type": "integer",
+                  "const": 0
+                }
+              ],
+              "items": false
+            },
+            "facilityDurability": {
+              "type": "integer",
+              "const": 500
+            },
+            "sourceRate": {
+              "type": "integer",
+              "const": 44
+            },
+            "oldWikiReconstruction": {
+              "type": "integer",
+              "const": 43
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "politics",
+            "facilityDurability",
+            "sourceRate",
+            "oldWikiReconstruction"
+          ],
+          "properties": {
+            "politics": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 0
+                },
+                {
+                  "type": "integer",
+                  "const": 0
+                },
+                {
+                  "type": "integer",
+                  "const": 0
+                }
+              ],
+              "items": false
+            },
+            "facilityDurability": {
+              "type": "integer",
+              "const": 500
+            },
+            "sourceRate": {
+              "type": "integer",
+              "const": 41
+            },
+            "oldWikiReconstruction": {
+              "type": "integer",
+              "const": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "politics",
+            "facilityDurability",
+            "sourceRate",
+            "oldWikiReconstruction",
+            "role"
+          ],
+          "properties": {
+            "politics": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 100
+                },
+                {
+                  "type": "integer",
+                  "const": 100
+                },
+                {
+                  "type": "integer",
+                  "const": 100
+                }
+              ],
+              "items": false
+            },
+            "facilityDurability": {
+              "type": "integer",
+              "const": 500
+            },
+            "sourceRate": {
+              "type": "integer",
+              "const": 250
+            },
+            "oldWikiReconstruction": {
+              "type": "integer",
+              "const": 250
+            },
+            "role": {
+              "type": "string",
+              "const": "shared-anchor-not-domain-proof"
+            }
+          }
+        }
+      ],
+      "items": false
+    }
+  }
+}
