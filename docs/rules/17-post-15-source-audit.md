@@ -43,7 +43,7 @@ E3 的正文、来源、纠错、版本边界与测试说明见 [攻防面板与
 | D3 | 五维 / 适性 / 成长 | 已写回，部分合成与取整仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
 | D4 | 人际关系 | 已写回，PC 关系 helper 仍不完整 | [历史详细记录](audit-history/17-through-e2.md) |
 | D5 | 登用优先级与普通概率 | 已写回，连续概率闭式仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
-| D6 | 相性 / 义理 / 野望 / 汉室 | 已写回，非自然忠诚路径仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
+| D6 | 相性 / 义理 / 野望 / 汉室 | 已写回；自然候选严格>25与第三分支已纠正，callee/writer/RNG/stock及非自然路径仍缺 | [当前静态纠错](natural-loyalty-candidate-boundary.md) / [历史详细记录](audit-history/17-through-e2.md) |
 | D7 | 太守 / 都督 / 军师 | 已写回，深层 selector 仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
 | D8 | 忠诚 / 俸禄 / 褒赏 | 已写回，褒赏与欠薪闭式仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
 | D9 | 俘虏 | 已写回，捕获保护/释放等边界仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
@@ -206,7 +206,7 @@ Lv4 TP5000 / 金10000
 
 源码级常量还包括矢盾/大盾30%、良马+4、军制改革+3000、云梯1.4/1.2、车轴+4、城壁强化+3000耐久、防御强化反击×2、神火计距离+2、木牛+3、政令整备50%。
 
-人心掌握已与D6同步：不再是“约67% empirical”，而是 `Random(0..2)>=1` 的精确2/3免降。
+人心掌握已与D6同步：caller确认 `00472150(3)` 后 `AX>=1` 跳过，2/3依赖均匀0..2随机约定；RNG体/序列与stock仍open，见[静态证据边界](natural-loyalty-candidate-boundary.md)。
 
 完整36项数据写入 `docs/sources/techniques.json`；参考校验覆盖ID、分支、费用与主要常量。
 

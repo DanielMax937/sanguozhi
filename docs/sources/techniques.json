@@ -709,7 +709,11 @@
       "pkOnly": true,
       "effect": {
         "loyaltyLossImmunityProbability": "2/3",
-        "scope": "reverse-engineered natural/prisoner loyalty-loss check"
+        "probabilityAssumption": "uniform-0..2-return-from-00472150(3)",
+        "callerBranch": "0058E713 call 00472150; 0058E71B cmp ax,1; 0058E71F jae skip",
+        "rngAndStockExactness": "open",
+        "sourceBoundary": "natural-loyalty-candidate-boundary.json",
+        "scope": "source-bound caller; probability conditional on RNG assumption"
       },
       "evidence": "reverse"
     }

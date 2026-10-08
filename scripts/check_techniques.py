@@ -49,6 +49,11 @@ def main() -> None:
     assert by_id[32]["effect"]["transportMobilityDelta"] == 3
     assert by_id[34]["effect"]["naturalOrderLossImmunityProbability"] == 0.50
     assert by_id[35]["effect"]["loyaltyLossImmunityProbability"] == "2/3"
+    assert by_id[35]["effect"]["probabilityAssumption"] == "uniform-0..2-return-from-00472150(3)"
+    assert by_id[35]["effect"]["rngAndStockExactness"] == "open"
+    assert by_id[35]["effect"]["sourceBoundary"] == "natural-loyalty-candidate-boundary.json"
+    assert by_id[35]["effect"]["callerBranch"] == "0058E713 call 00472150; 0058E71B cmp ax,1; 0058E71F jae skip"
+    assert by_id[35]["effect"]["scope"] == "source-bound caller; probability conditional on RNG assumption"
 
     assert data["techniquePointCap"] == 10000
     assert data["research"]["actionPoints"] == 50

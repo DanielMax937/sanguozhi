@@ -1757,7 +1757,7 @@ hardHiringGate()
 
 ## 6. 相性、义理、野望、汉室
 
-`[PC-PK1.1][reverse-engineered compatibility + reverse-engineered loyalty storage/display + empirical-high loyalty behavior + documented Han-event constants]`
+`[PC-PK1.1][historical compatibility formula + source-bound loyalty caller + reverse-engineered loyalty storage/display + documented Han-event constants]`
 
 这四项不是一个统一“忠诚性格分”。底层分别有独立字段，并在不同系统中读取。
 
@@ -1790,9 +1790,9 @@ hardHiringGate()
 
 ### 6.2 相性是 150 点环，不是普通绝对差
 
-`[PC-PK1.1][confirmed-by-disassembly]`
+`[PC-PK1.1][historical-formula; callee-body-open]`
 
-`00489F80` 函数体已经公开到逐指令。核心：
+历史资料把 `00489F80` 归纳为下列150点环公式。本轮绑定的 `0058E510` 原文只含它的调用，未补齐该 callee 完整体；公式保留为既有资料结论，不以 caller 证明 callee 或 clean-stock 等价。见[自然忠诚候选静态纠错](natural-loyalty-candidate-boundary.md)。
 
 ```ts
 raw = abs(a.compatibility - b.compatibility)
@@ -1817,7 +1817,7 @@ Math.abs(a.compatibility - b.compatibility)
 
 直接当最终相性差的实现都是错的。
 
-该函数对非法/超出原作正常范围的 MOD 数值没有做现代意义上的 normalize；fidelity 数据应优先约束在原作相性域，而不是把 255 等编辑值解释成新的圆环。
+此历史公式只作正常相性域的资料约束；未取得callee完整体，不能断言它对非法/MOD数值是否normalize。fidelity 数据仍应约束在原作正常域，不把255等编辑值推成新的圆环。
 
 ### 6.3 相性的已确认作用域
 
@@ -1920,39 +1920,30 @@ loyalty = min(loyalty, 100)
 
 那会破坏原作的隐藏忠诚缓冲。
 
-### 6.7 己方武将的自然掉忠：换季，不是每月
+### 6.7 己方武将的自然掉忠：换季与三条候选分支
 
-`[COMMON][empirical-high timing/trigger]`
+`[PC-PK1.1 source-attributed][caller-instruction-confirmed; callee/stock-open]`
 
-现役己方武将的自然忠诚下降在**季节转换**判定，也就是 1/4/7/10 月的季初。
-
-稳定实测的下降候选条件是满足任一：
+既有季初（1/4/7/10月）结论保留。固定来源 `0058E510` 的普通武将先通过季初、仁政和关系豁免等前置筛选，再满足下列任一项才进入 `0058E6E3` 后段：
 
 ```text
-A. 与君主相性差 >= 25
-
+A. 00489F80 返回的 AL 按无符号比较 >25
+   原注释称“相性差”；不是 >=，恰好25不由此分支入选
 OR
-
-B. 义理 = 低 / 较低
-   AND
-   野望 = 高 / 较高
+B. signed32 义理 <=1 AND signed32 野望 >=3
+   对原作五档域即低/较低义理 AND 高/较高野望
+OR
+C. 004889E0 返回的完整 EAX 非零
+   原注释称“厌恶君主”，ECX=当前武将、栈参数=先前取得的君主ID
 ```
 
-下降幅度还受**君主自己的义理/野望**影响；吕布、董卓这种低义理高野望君主常见掉得更多。
+`0058E6BD: cmp al,19` 后是 `0058E6BF: ja`，因此相性差 **>25**；`0058E6D6` 调用 `004889E0`，`6DB: test eax,eax / 6DD: je` 仅在零返回时拒绝，不能漏掉第三条。旧两条件摘要的包含边界已撤回。原文 `6D1` 注释写“相性差小于25”，但这一分支实际上也包含25，按指令取值。
 
-所以旧规则：
+仅当更早的候选条款失败才调用下一条 helper。俘虏在 `0058E6B3` 直接跳到 `6E3`，不经过这组三条普通候选；进入后段也不等于一定下降，还可能被人心掌握等后续判断挡住或得到零减量。
 
-```text
-相性差 >30
-+ 每月初判定
-```
+反例：其余豁免已过、义理2/野望2且无厌恶时，差25拒绝、26入选；厌恶返回非零时，差0/25均入选；差25、义理1/野望3且无厌恶亦入选。
 
-两处都需要纠正为：
-
-```text
-相性差 >=25
-+ 换季判定
-```
+[逐指令证据与边界](natural-loyalty-candidate-boundary.md)仅确认 caller 的分支、调用参数和注释归属。`00489F80`、`004889E0` 完整 callee、忠诚 writer、RNG和clean-stock仍 open；不把“厌恶君主”注释提升为已证的完整关系语义。原文末尾两套MOD修改与主函数隔离。
 
 ### 6.8 仁政 / 人心掌握：对己方与俘虏的边界不同
 
@@ -1981,13 +1972,13 @@ Random(0..2)
 == 0 -> 继续计算下降值
 ```
 
-因此原版 PC-PK1.1 的免降概率是精确的：
+源文把 `00472150(3)` 注释为0..2；若采用该均匀分布约定，免降概率为：
 
 ```text
 2/3
 ```
 
-这条现在升级为 reverse-engineered confirmed，不再标 empirical。
+caller 确认的是 `AX >=1` 的跳过分支。2/3依赖既有RNG约定；本轮未恢复该RNG体、全局序列或认证原版stock。
 
 ### 6.9 己方换季掉忠与俘虏月度掉忠是同函数里的不同 schedule
 
@@ -1997,7 +1988,7 @@ Random(0..2)
 
 ```text
 不是季初 -> 跳过
-季初 -> 再走相性/义理/野望 gate
+季初 -> 再走相性/义理野望/004889E0非零三分支候选 gate
 ```
 
 俘虏：
@@ -2005,7 +1996,7 @@ Random(0..2)
 ```text
 Identity=PRISONER
 -> 跳过季初 gate
--> 跳过普通武将的相性/义理/野望候选 gate
+-> 跳过普通武将的相性/义理野望/004889E0非零三分支候选 gate
 -> 每个月都可以进入后续忠诚下降判定
 ```
 
@@ -2018,18 +2009,18 @@ Identity=PRISONER
 
 不是旧稿的“己方每月 / 俘虏每旬”。
 
-俘虏虽然跳过普通候选 gate，但仍保留一组关系豁免。对当前所属/看守势力君主，若满足任一项则本月不降：
+俘虏虽然跳过普通候选 gate，但仍保留一组关系豁免。对caller先前经 `00489D40` 取得的君主ID（该helper在俘虏时的归属语义未在本轮恢复），若满足任一项则本月不降：
 
 - `00488910` 亲爱/亲善关系；
 - 配偶；
 - 义兄弟；
 - 父母子女。
 
-### 6.10 忠诚下降数值：主函数已恢复
+### 6.10 忠诚下降数值：保留caller算术与helper边界
 
 `[PC-PK1.1][confirmed-by-disassembly]`
 
-进入数值分支后：
+以下为既有正常属性域、0..2随机约定下的数值摘要；不是本轮新增的runtime实现。caller可见算术不补齐 `00472150` RNG或 `004A6CF0` 最终writer：
 
 ```ts
 loss = Random(0..2)
@@ -2039,8 +2030,8 @@ if (city.hasTokenPlatform) {
 }
 
 if (
-  captorLord.ideals === 0 &&
-  captorLord.ambition === 4
+  resolvedLord.ideals === 0 &&
+  resolvedLord.ambition === 4
 ) {
   loss += floor((4 - target.ideals) / 2)
 }
@@ -2049,7 +2040,7 @@ loss += Random(0..2)
 target.loyalty -= loss
 ```
 
-其中两次 `Random(0..2)` 独立，因此没有额外项时基础下降量为：
+按两次 `Random(0..2)` 均匀独立的既有参考约定，没有额外项时得到下列分布；caller有两次调用本身不证明RNG独立性或全局序列：
 
 | 基础损失 | 概率 |
 |---:|---:|
@@ -2062,7 +2053,7 @@ target.loyalty -= loss
 注意：
 
 - 符节台 `+2` 是进入掉忠数值分支后的附加值，不负责把原本不满足 gate 的普通武将“变成会掉忠”；
-- 人心掌握在这段数值计算**之前**以 2/3 概率直接跳过；
+- 人心掌握在这段数值计算**之前**按 `AX>=1` 跳过；2/3依赖上述均匀0..2约定；
 - 俘虏不吃仁政，但仍吃人心掌握和上面的关系豁免；
 - 欠薪、流言、事件等不是这条自然/月度忠诚路径，仍应分开建模。
 
@@ -2125,29 +2116,30 @@ target.loyalty -= loss
 
 已经锁定：
 
-- 相性是150点环，精确 `min(abs(a-b),150-abs(a-b))`；
+- 相性150点环公式保留历史资料结论 `min(abs(a-b),150-abs(a-b))`；本轮未补齐callee完整体；
 - 正常最大相性差75，1与149仅差2；
 - 义理与野望是两个独立五档字段；
 - 高义理=忠诚较难涨也较难掉、较难背叛；低义理相反；
 - 高野望提高独立倾向，但不存在已恢复的统一“野望→叛变概率”公式；
 - 真实忠诚存0..255，UI只显示 `min(value,100)`；
 - 己方自然掉忠发生在换季，不是每月；
-- 候选条件为相性差>=25，或低/较低义理+高/较高野望；
+- 普通候选为相性差>25（`00489F80` 的unsigned AL），或低/较低义理+高/较高野望，或 `004889E0` 非零（原注释“厌恶君主”，callee仍open）；
 - 仁政阻止同都市己方普通武将自然掉忠，但俘虏明确跳过仁政；
-- 人心掌握已由 `0058E510` 精确确认：`Random(0..2)>=1` 时跳过，即 2/3 免降；
+- 人心掌握caller确认 `00472150(3)` 后 `AX>=1` 跳过；2/3依赖既有均匀0..2随机约定，RNG体/序列仍open；
 - 俘虏跳过季初 gate，因此月初每月都可能判定掉忠，但亲爱/配偶/义兄弟/父母子女仍可豁免；
-- 进入数值路径后为两个独立 `Random(0..2)` + 符节台 `+2` + 特定君主义理/野望附加；
+- 数值caller包含两次 `00472150(3)` 调用、符节台 `+2` 与特定君主义理/野望附加；均匀独立性和最终忠诚写入不由caller单独证明；
 - 君主义理最低且野望最高时，附加 `floor((4-targetIdeals)/2)`；
 - 汉室是三档事件/爵位 mask data，爵位忠诚变化与拥立/废立的精确常量已核。
 
 仍 open：
 
+- 本轮来源未包含 `00489F80`、`004889E0` 完整callee以及 `004A6CF0` writer；RNG/降量端到端、clean-stock与runtime认证仍缺；
 - 欠薪、流言、事件等非自然忠诚变化的各自精确函数；
 - 野望参与驱虎吞狼/自然独立的精确连续函数；
 - Vanilla 各补丁与 PK1.1 在 loyalty scheduler 上是否逐字一致。
 
 来源：
-- 311MemoryResearch / SIRE tutorial：`00489F80` 相性环形距离完整反汇编
+- 311MemoryResearch / SIRE tutorial：历史相性环形距离资料；本轮仅绑定caller文本，不据此宣称补齐 `00489F80` 完整体
   https://github.com/sjn4048/311MemoryResearch
 - 311SireCustomizedPackageDev：相性/义理/野望/汉室/忠诚字段、`SetLoyalty(0..255)`
   https://github.com/sean2077/311SireCustomizedPackageDev
@@ -3116,16 +3108,17 @@ escape = ProbabilityRoll(p)
 - 随被俘时间**平方增长**，随武/智最大值线性增长；
 - 该自然逃亡函数只设最小概率1、没有本地 `min(100)`。P0-49已取得S1共用`004721D0`：p>100必成功且消费一次随机；这只闭合S1 helper语义，尚未认证stock等价或此自然逃亡caller的完整运行样本。
 
-### 9.4 俘虏月度掉忠：不再 open
+### 9.4 俘虏月度掉忠：caller已恢复，端到端仍open
 
-俘虏忠诚使用 D6 已恢复的 `0058E510`：
+俘虏忠诚使用 D6 的 `0058E510` caller。以下保留既有正常属性域/均匀0..2随机约定下的摘要，完整callee、writer、RNG/降量端到端及stock仍open，见[静态证据边界](natural-loyalty-candidate-boundary.md)：
 
 ```text
 月初
 -> 俘虏跳过季初限制
 -> 俘虏跳过仁政
 -> 关系豁免（亲爱/配偶/义兄弟/父母子女）
--> 人心掌握 2/3 免降
+-> 跳过普通三候选gate
+-> 人心掌握按AX>=1跳过（均匀0..2约定下2/3免降）
 -> Random(0..2)
    + 符节台 2
    + 特定君主义理/野望附加
@@ -3135,12 +3128,12 @@ escape = ProbabilityRoll(p)
 特定附加项：
 
 ```ts
-if (captorLord.ideals === 0 && captorLord.ambition === 4) {
+if (resolvedLord.ideals === 0 && resolvedLord.ambition === 4) {
   loss += floor((4 - prisoner.ideals) / 2)
 }
 ```
 
-所以旧“俘虏每旬 -1～2”“符节台翻倍”“基础月度闭式未知”均撤回。
+`resolvedLord`来自caller的 `00489D40` 结果，不凭注释断言俘虏时一定是看守君主。旧“俘虏每旬 -1～2”“符节台翻倍”仍撤回；caller算术可读不等于最终忠诚写入或整个系统已闭合。
 
 ### 9.5 50金维护与“养不起”释放/逃走：人数与选择架构已恢复
 
