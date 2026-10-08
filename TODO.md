@@ -1,19 +1,20 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
 > Working policy: one fresh theme branch from the latest GitHub `main`
-> Current theme: rebuild the selected independent PS2 historical-guide transcription (static data only)
-> Integration baseline: PR #43 merged; this theme starts at `0e01f0fd9c9ae051499923c02cab564570d6622e`
+> Current theme: S1 bounded PK five-stat training qualification and completion arithmetic
+> Integration baseline: PR #44 merged; this theme starts at `181a37d26044ff1d6ff994c777d82355b6c1b946`
 > History: PR #2 was merged into main at `5c5611bb067c0dfe13cea1126ad69a12dade697c`
-> Publication: this exact 17-file PS2 batch is approved for publication and PR merge; rebuilt evidence must pass fresh validation before merge
+> Publication: this new numerical-core batch is local-only pending results and separate publication confirmation
 > Primary target: PC-PK1.1
 > Updated: 2026-10-07 (UTC)
 
 ## Current reconciliation: delivered work and retained gaps
 
-PR #42 reconciled summaries and PR #43 added the generic-guide corpus. This batch rebuilds only the independent PS2 historical-guide data, static schemas/checks and related documentation after the first local package became unavailable. Fresh checks are required; old passing logs are not reused. The P0 history below retains its original validation counts and evidence scope. P0-78 and work dependent on capture, force extinction or native transactions are excluded, not declared complete.
+PR #42 reconciled summaries, PR #43 added generic-guide data and PR #44 delivered the rebuilt independent PS2 corpus. This batch implements only S1 stat-branch numerical qualification and completion as pure functions. It does not add commands or a scheduler. Fresh checks are required; old passing logs are not reused. The P0 history below retains its original validation counts and evidence scope. P0-78 and work dependent on capture, force extinction or native transactions are excluded, not declared complete.
 
-- This batch: [selected PS2 historical guide](docs/rules/ps2-historical-event-source-data.md), 64 independent observations/IDs and 741 source nodes; 59 condition/result sections (2 continuation-only), 4 condition-only openings and 1 reference-only section. The 24 source limitations, PK membership, original flags/catalog and runtime remain open. Historical105/66/41 and generic33/31/10 corpora remain byte-identical
+- Delivered, PR #44: [selected PS2 historical guide](docs/rules/ps2-historical-event-source-data.md), 64 independent observations/IDs and 741 source nodes; 59 condition/result sections (2 continuation-only), 4 condition-only openings and 1 reference-only section. The 24 source limitations, PK membership, original flags/catalog and runtime remain open. Historical105/66/41 and generic33/31/10 corpora remain byte-identical
 - Delivered, PR #36: [45 static port/gate parent-city relations](docs/rules/static-subordinate-bases.md), reconciled against all 42 city counts. Still missing: the three null development-patch splits, original numeric base IDs, 40,000-cell terrain/coordinate/adjacency data and original scenario initialization. Next evidence: independently attributable original map/scenario data, not inferred static parentage
+- This batch: [S1 PK five-stat numeric core](docs/rules/pk-stat-training-s1.md), separate start predicate and completion arithmetic with requested/credited XP, bounded ordinary or already-resolved getter inputs, explicit negative-delta rejection and byte-bound evidence. Full command gates, AP/gold/duration/use counters, native98 mapping, hidden RNG, scheduler and clean-stock equivalence remain open
 - Delivered, PR #37: [PK ability research guide transcription](docs/rules/15-pk-ability-research.md), with 48 base nodes, 52 base arrows, 4 start arrows and 50 hidden candidates in 10 positions; conflicting guide claims remain explicit. Still missing: original-data equivalence, ability-research/cultivation command execution, hidden-selection algorithm and RNG. Next evidence: source-bound original tables and callers; guide data is not stock certification
 - Delivered, PR #38: [selected historical guides](docs/rules/historical-event-source-data.md), 105 observations / 66 corpus event IDs / 41 source differences. Still missing: unstated flags, unresolved differences, complete original catalog and evaluation/result execution. Next evidence: additional platform-qualified sources and original flag/caller/result paths
 - Delivered, PR #39–41: strict CLI parsing before effects, linear accumulation of private replay history with public dispatch isolation preserved, and RuleEvidence shape validation / reserved-name counting. See [training lifecycle](docs/engine/pk-training-lifecycle.md) and the root README's CLI contract. These improve only the Train / bounded EndTurn synthetic sandbox; no AI, economy, warfare, scenario execution or complete scheduler was added. Next evidence for original equivalence remains source-bound runtime/clean-stock validation, not passing sandbox tests

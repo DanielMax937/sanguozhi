@@ -1,5 +1,7 @@
 > 最新capture人员/城市容量来源与有界模型：[P0-49](84-capture-personnel-source-profile.md)；完整人员迁移、AI处分和stock等价仍开放。
 
+新增[PK五维培育S1限定数值核](pk-stat-training-s1.md)：启动资格与完成算术分层，累计XP/3000裁剪与getter域显式；独立纯函数不接完整命令、原生98表或scheduler，clean-stock与其他版本仍open。
+
 新增[P0-77 event9 live home getter](112-native-event9-home-getter.md)：004BA44C..45E direct troop08、live leader/saved person signed homeBaseId与numeric building pointer；raw44=-1非gate，不读building row/validity，26入口，presentation与45E..46C reaction继续观察；最新main全新124/124命令、28 model、25 source及继承链、双IDB/1329 raw和8 probes通过；2184文件/index全程一致，集成delta与终态独审通过。
 
 新增[P0-76 event9 saved-troop原生raw44 reset](111-native-event9-troop-reset.md)：004BA442..44C单次saved troop live validity及raw44=-1 direct store；saved EBX force保持，25入口，presentation与44C..46C home/reaction继续观察；最新main全新122/122命令、34 model、20 source及继承链、双IDB/1327 raw和6 probes通过；2146文件/index全程一致，集成delta独审通过。

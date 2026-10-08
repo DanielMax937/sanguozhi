@@ -1,0 +1,50 @@
+{
+  "profileId": "s1-pk-stat-training-v1",
+  "version": "pk",
+  "scope": "stat-branch-numeric-qualification-and-completion-only",
+  "level": "compatibility-reconstruction",
+  "stockOriginalVerified": false,
+  "originalExecutableExecuted": false,
+  "source": {
+    "id": "S1",
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "url": "https://github.com/sjn4048/311MemoryResearch/tree/66e167e40c3440929ec016f3872aefc3486434c1",
+    "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+    "grade": "idb-stored-byte-exact / mod-associated-stock-unverified",
+    "manifest": "docs/sources/training-lifecycle-source-profile.json"
+  },
+  "attributes": ["leadership", "war", "intelligence", "politics", "charisma"],
+  "constants": {
+    "startXpExclusive": 2000,
+    "pointsPerCompletion": 5,
+    "xpPerPoint": 100,
+    "xpCap": 3000,
+    "growthMin": 1,
+    "growthMax": 100
+  },
+  "evidence": {
+    "qualification": ["0049DCAE..0049DCB4", "0049DCBF..0049DCD3"],
+    "completion": ["005D9283..005D9297", "005D929E..005D92CA"],
+    "writer": ["004A55CF", "0048A838..0048A84B"],
+    "getter": ["0048A3BB..0048A3FC", "0048A405..0048A44F"]
+  },
+  "domains": {
+    "xp": [0, 3000],
+    "target": [1, 100],
+    "resolved-native-growth": [1, 100],
+    "ordinary-no-age-talent": [0, 100],
+    "ordinaryExcludesNativePersonIds": [700, 799],
+    "negativeCompletionDelta": "explicitly-rejected-not-clamped-to-zero",
+    "resolvedGrowthAfter": "unknown-null-until-native-getter-resolved-again"
+  },
+  "remainingOpen": [
+    "complete research and cultivation command eligibility and execution",
+    "AP, gold, duration, use counters, mission clearing and presentation",
+    "native 98-record table mapping and original-data equivalence",
+    "hidden-selection algorithm, weights and RNG",
+    "age/special-person getter implementation and negative-delta raw-word behavior",
+    "full scheduler and engine/save/replay integration",
+    "clean-stock PC-PK1.1, S2, Vanilla and console equivalence"
+  ]
+}
