@@ -9,3 +9,5 @@ export { PK_ABILITY_RESEARCH } from './ability-research.ts';
 export type { AbilityResearchCatalog, AbilityResearchBaseNode, AbilityResearchHiddenAlternative, AbilityResearchHiddenSlot, AbilityResearchCategory, AbilityResearchPrerequisites } from './ability-research.ts';
 export { PK_STAT_TRAINING_S1, qualifyPkStatTraining, completePkStatTraining } from './pk-stat-training.ts';
 export type { PkStatTrainingAttribute, PkStatTrainingGrowth, PkStatTrainingInput, PkStatTrainingRejectionReason, PkStatTrainingRejection, PkStatTrainingEligibility, PkStatTrainingCompletion } from './pk-stat-training.ts';
+export { PK_SKILL_TRAINING_S1, qualifyPkSkillTraining } from './pk-skill-training.ts';
+export type { PkSkillTrainingInput, PkSkillTrainingRejectionReason, PkSkillTrainingRejection, PkSkillTrainingEligibility } from './pk-skill-training.ts';

@@ -1,0 +1,44 @@
+{
+  "profileId": "s1-pk-skill-training-v1",
+  "version": "pk",
+  "scope": "already-selected-category-2-scalar-eligibility-only",
+  "level": "compatibility-reconstruction",
+  "stockOriginalVerified": false,
+  "originalExecutableExecuted": false,
+  "source": {
+    "id": "S1",
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "url": "https://github.com/sjn4048/311MemoryResearch/tree/66e167e40c3440929ec016f3872aefc3486434c1",
+    "idbSha256": "c591cb40ce6d6be9246148002532dedc042463f36cd39c5ed300b7c449feefab",
+    "grade": "idb-stored-byte-exact / mod-associated-stock-unverified",
+    "callerManifest": "docs/sources/training-lifecycle-source-profile.json",
+    "helperManifest": "docs/sources/capture-personnel-source-profile.json",
+    "helperUse": "standalone-scalar-evidence-only-no-capture-execution"
+  },
+  "constants": { "targetMin": 0, "targetMax": 99 },
+  "evidence": {
+    "category": ["0049DD05..0049DD08"],
+    "targetAndCall": ["0049DD0A..0049DD10"],
+    "inversion": ["0049DD15..0049DD1D"],
+    "helperRange": ["004890F4..004890FB"],
+    "helperEquality": ["004890FE..0048910E"],
+    "helperOutOfRange": ["00489111..00489113"]
+  },
+  "domains": {
+    "person.rawE8": [-2147483648, 2147483647],
+    "trainingRecord.raw58": [-2147483648, 2147483647],
+    "entryPrecondition": "caller-already-passed-pointer-gates-and-selected-category-2",
+    "nativeIdMapping": "none-raw-scalars-not-guide-candidate-ids",
+    "outOfRangeTarget": "helper-false-caller-true-even-if-current-equals-target"
+  },
+  "remainingOpen": [
+    "complete research and cultivation command eligibility and execution",
+    "aptitude getter chain and aptitude/skill completion writers",
+    "AP, gold, duration, use counters, mission clearing and presentation",
+    "native 98-record table mapping and original-data equivalence",
+    "hidden-selection algorithm, weights and RNG",
+    "full scheduler and engine/save/replay integration",
+    "clean-stock PC-PK1.1, S2, Vanilla and console equivalence"
+  ]
+}
