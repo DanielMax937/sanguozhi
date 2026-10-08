@@ -7,3 +7,5 @@ export { replayCommands, replaySession, saveGame, loadGame, evidenceSummary } fr
 export { migrateLegacyState } from './migration.ts';
 export { PK_ABILITY_RESEARCH } from './ability-research.ts';
 export type { AbilityResearchCatalog, AbilityResearchBaseNode, AbilityResearchHiddenAlternative, AbilityResearchHiddenSlot, AbilityResearchCategory, AbilityResearchPrerequisites } from './ability-research.ts';
+export { PK_STAT_TRAINING_S1, qualifyPkStatTraining, completePkStatTraining } from './pk-stat-training.ts';
+export type { PkStatTrainingAttribute, PkStatTrainingGrowth, PkStatTrainingInput, PkStatTrainingRejectionReason, PkStatTrainingRejection, PkStatTrainingEligibility, PkStatTrainingCompletion } from './pk-stat-training.ts';
