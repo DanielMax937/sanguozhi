@@ -1,5 +1,7 @@
 > 最新capture人员/城市容量来源与有界模型：[P0-49](84-capture-personnel-source-profile.md)；完整人员迁移、AI处分和stock等价仍开放。
 
+新增[生产价格捕获输入整数核](production-price.md)：uint16保存原价、raw EAX只读AL；原45/113与MOD6/14隔离，EAX256不折/257折，无最低1。表/helper/完整扣费库存命令/调度/stock及跨版本仍缺。
+
 新增[PK五维培育S1限定数值核](pk-stat-training-s1.md)：启动资格与完成算术分层，累计XP/3000裁剪与getter域显式；独立纯函数不接完整命令、原生98表或scheduler，clean-stock与其他版本仍open。
 
 新增[P0-77 event9 live home getter](112-native-event9-home-getter.md)：004BA44C..45E direct troop08、live leader/saved person signed homeBaseId与numeric building pointer；raw44=-1非gate，不读building row/validity，26入口，presentation与45E..46C reaction继续观察；最新main全新124/124命令、28 model、25 source及继承链、双IDB/1329 raw和8 probes通过；2184文件/index全程一致，集成delta与终态独审通过。

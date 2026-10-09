@@ -131,6 +131,10 @@ orderLoss = floor(6300 / 400) = 15
 
 来源：https://w.atwiki.jp/sangokushi11/pages/74.html
 
+### 2.1 生产价格的独立限定核
+
+[生产价格捕获输入整数核](production-price.md)采用005C6350..005C63C0公开原体：原45条/113字节与另列MOD6条/14字节隔离。两层validator已通过，类型+0x98的uint16原价先保存，再观察特产helper raw EAX；仅AL非零时floor(8p/10)。EAX256不折、257折；1金折后0合法，没有最低1。源C1FA02为SAR EDX,2。不是按“锻冶700/厩舍800”硬码费用，也不决定上一节产量、完整生产命令、实际扣钱/库存writer或耗时。表/ID/helper原体与stock/跨版本仍缺，证据限定为source-listing-reconstruction。
+
 ## 3. 兵器与舰船开发时间
 
 `[COMMON][empirical-high]`

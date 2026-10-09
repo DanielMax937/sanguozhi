@@ -1871,3 +1871,8 @@ rate = max(
   https://gl.ali213.net/html/2006/5914.html
 
 证据等级：人才府-20日/最低10日为PC地址级exact；containing function由原IDB边界确认；超级阈值为empirical-high；完整base-time函数/矩阵、初级上级仍open。
+
+
+### 生产价格捕获输入整数核（2026-10-09）
+
+[完整支持域](production-price.md)；[固定原文](https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政10-计算生产价格.txt)，GBK blob `928b34bd8b9f06057dd44e9639db92dacc364c85`。原45条/113字节与独立MOD6条/14字节分别固定；[可逆快照](../sources/production-price-original.txt)、[证据记录](../sources/production-price.json)、[闭合schema](../sources/production-price.schema.json)、[Apache-2.0许可](../sources/production-price-LICENSE.txt)。005C637A先保存uint16原价；TEST AL清CF，JNA仅AL0不折；C1FA02为SAR EDX2，源sar dl错字保留。显示MOD80/100在全uint16域数值相同仍隔离。`source-listing-reconstruction`，不证明价格表/ID/helper/完整命令/writer/stock或跨版本。

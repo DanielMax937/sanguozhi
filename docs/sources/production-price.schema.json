@@ -1,0 +1,905 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:production-price-resolved-v1",
+  "title": "Closed evidence for the captured-input production price integer core",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profileId",
+    "scope",
+    "level",
+    "stockOriginalVerified",
+    "originalExecutableExecuted",
+    "source",
+    "license",
+    "domain",
+    "constants",
+    "arithmetic",
+    "originalListing",
+    "excludedMod",
+    "sourceCorrections",
+    "evidence",
+    "remainingOpen",
+    "counterexamples"
+  ],
+  "properties": {
+    "profileId": {
+      "type": "string",
+      "const": "production-price-resolved-v1"
+    },
+    "scope": {
+      "type": "string",
+      "const": "standalone-saved-resolved-input-numerical-price-only"
+    },
+    "level": {
+      "type": "string",
+      "const": "source-listing-reconstruction"
+    },
+    "stockOriginalVerified": {
+      "type": "boolean",
+      "const": false
+    },
+    "originalExecutableExecuted": {
+      "type": "boolean",
+      "const": false
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "path",
+        "url",
+        "gitBlobSha1",
+        "originalEncoding",
+        "originalBytes",
+        "originalSha256",
+        "snapshot",
+        "snapshotEncoding",
+        "snapshotBytes",
+        "snapshotSha256",
+        "byteAuthority",
+        "transformation"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "const": "sjn4048/311MemoryResearch"
+        },
+        "commit": {
+          "type": "string",
+          "const": "66e167e40c3440929ec016f3872aefc3486434c1"
+        },
+        "path": {
+          "type": "string",
+          "const": "内存资料/整理/Func-内政10-计算生产价格.txt"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政10-计算生产价格.txt"
+        },
+        "gitBlobSha1": {
+          "type": "string",
+          "const": "928b34bd8b9f06057dd44e9639db92dacc364c85"
+        },
+        "originalEncoding": {
+          "type": "string",
+          "const": "GBK"
+        },
+        "originalBytes": {
+          "type": "integer",
+          "const": 4178
+        },
+        "originalSha256": {
+          "type": "string",
+          "const": "6fbca37bcd8eaa8d1ac9c919100d3fa9ee33c49e49cc15786de06db4e86fe013"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/production-price-original.txt"
+        },
+        "snapshotEncoding": {
+          "type": "string",
+          "const": "UTF-8"
+        },
+        "snapshotBytes": {
+          "type": "integer",
+          "const": 4389
+        },
+        "snapshotSha256": {
+          "type": "string",
+          "const": "698a166f45fc1454349a5a88aeb9cd08c2e0093233ab6dc9604a20ade780f67c"
+        },
+        "byteAuthority": {
+          "type": "string",
+          "const": "public disassembly listing only; not an independently verified stock executable"
+        },
+        "transformation": {
+          "type": "string",
+          "const": "reversible UTF-8 transcoding only; original comments, MOD and incorrect sar dl mnemonic preserved"
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spdx",
+        "url",
+        "gitBlobSha1",
+        "snapshot",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "spdx": {
+          "type": "string",
+          "const": "Apache-2.0"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE"
+        },
+        "gitBlobSha1": {
+          "type": "string",
+          "const": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/production-price-LICENSE.txt"
+        },
+        "bytes": {
+          "type": "integer",
+          "const": 11357
+        },
+        "sha256": {
+          "type": "string",
+          "const": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        }
+      }
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "savedBasePriceWord",
+        "specialtyHelperEax",
+        "preconditions",
+        "helperObservation",
+        "snapshotSemantics",
+        "validation"
+      ],
+      "properties": {
+        "savedBasePriceWord": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 0
+            },
+            {
+              "type": "integer",
+              "const": 65535
+            }
+          ],
+          "items": false
+        },
+        "specialtyHelperEax": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 0
+            },
+            {
+              "type": "integer",
+              "const": 4294967295
+            }
+          ],
+          "items": false
+        },
+        "preconditions": {
+          "type": "string",
+          "const": "both 0047A630 validators have passed; savedBasePriceWord is the uint16 already captured at 005C637A before the three helper calls"
+        },
+        "helperObservation": {
+          "type": "string",
+          "const": "raw uint32 return from 0047B3A0 is supplied; only AL is consumed; no stock ID or specialty mapping inferred"
+        },
+        "snapshotSemantics": {
+          "type": "string",
+          "const": "subsequent helper changes to the price table do not replace the saved ESI value"
+        },
+        "validation": {
+          "type": "string",
+          "const": "closed own-data-property input; no coercion/accessors/unknown keys; engineering rejection is not native early return zero"
+        }
+      }
+    },
+    "constants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "discountNumerator",
+        "discountDenominator",
+        "signedDivisionMagic"
+      ],
+      "properties": {
+        "discountNumerator": {
+          "type": "integer",
+          "const": 8
+        },
+        "discountDenominator": {
+          "type": "integer",
+          "const": 10
+        },
+        "signedDivisionMagic": {
+          "type": "string",
+          "const": "0x66666667"
+        }
+      }
+    },
+    "arithmetic": {
+      "type": "string",
+      "const": "AL=specialtyHelperEax&255; returnedPrice=AL===0?savedBasePriceWord:floor(savedBasePriceWord*8/10)"
+    },
+    "originalListing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "endInclusive",
+        "endExclusive",
+        "instructionCount",
+        "byteLength",
+        "sha256",
+        "calls",
+        "branches"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "const": "005C6350"
+        },
+        "endInclusive": {
+          "type": "string",
+          "const": "005C63C0"
+        },
+        "endExclusive": {
+          "type": "string",
+          "const": "005C63C1"
+        },
+        "instructionCount": {
+          "type": "integer",
+          "const": 45
+        },
+        "byteLength": {
+          "type": "integer",
+          "const": 113
+        },
+        "sha256": {
+          "type": "string",
+          "const": "8231023624aacaa163f18e3e199a34858edf8ade601ad5043ddfaaba4bc685da"
+        },
+        "calls": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6356"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "0047A630"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C636A"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "0047A630"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6387"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "004914A0"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C638D"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "0047EC80"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6398"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "0047B3A0"
+                }
+              }
+            }
+          ],
+          "items": false
+        },
+        "branches": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6360"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C6364"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6374"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C6379"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C639F"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C63BB"
+                }
+              }
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "excludedMod": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "endInclusive",
+        "endExclusive",
+        "instructionCount",
+        "byteLength",
+        "sha256",
+        "marker",
+        "displayedMultiplier",
+        "displayedDivisor",
+        "displayedSettingEquivalentForAllUint16Prices",
+        "executedByProduction",
+        "reason"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "const": "005C63A1"
+        },
+        "endInclusive": {
+          "type": "string",
+          "const": "005C63AE"
+        },
+        "endExclusive": {
+          "type": "string",
+          "const": "005C63AF"
+        },
+        "instructionCount": {
+          "type": "integer",
+          "const": 6
+        },
+        "byteLength": {
+          "type": "integer",
+          "const": 14
+        },
+        "sha256": {
+          "type": "string",
+          "const": "031a517ac04ce7dbbd28b35632a2e715a69a489212d0872b81f86a70cc77d722"
+        },
+        "marker": {
+          "type": "string",
+          "const": "修改 - 特产城市折扣倍率自定义"
+        },
+        "displayedMultiplier": {
+          "type": "integer",
+          "const": 80
+        },
+        "displayedDivisor": {
+          "type": "integer",
+          "const": 100
+        },
+        "displayedSettingEquivalentForAllUint16Prices": {
+          "type": "boolean",
+          "const": true
+        },
+        "executedByProduction": {
+          "type": "boolean",
+          "const": false
+        },
+        "reason": {
+          "type": "string",
+          "const": "separately labelled custom-discount patch, never overlaid on original bytes; numerical equality at displayed 80/100 does not certify stock or other settings"
+        }
+      }
+    },
+    "sourceCorrections": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "address",
+            "bytes",
+            "sourceMnemonic",
+            "decodedMnemonic",
+            "reason"
+          ],
+          "properties": {
+            "address": {
+              "type": "string",
+              "const": "005C63AF"
+            },
+            "bytes": {
+              "type": "string",
+              "const": "C1 FA 02"
+            },
+            "sourceMnemonic": {
+              "type": "string",
+              "const": "sar dl,02"
+            },
+            "decodedMnemonic": {
+              "type": "string",
+              "const": "sar edx,2"
+            },
+            "reason": {
+              "type": "string",
+              "const": "C1 /7 with ModRM FA targets 32-bit EDX; source text is preserved, machine bytes govern decoding"
+            }
+          }
+        }
+      ],
+      "items": false
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "profile",
+        "source",
+        "originalRange",
+        "scope",
+        "stockOriginalVerified",
+        "originalExecutableExecuted",
+        "commandIntegrated"
+      ],
+      "properties": {
+        "level": {
+          "type": "string",
+          "const": "source-listing-reconstruction"
+        },
+        "profile": {
+          "type": "string",
+          "const": "production-price-resolved-v1"
+        },
+        "source": {
+          "type": "string",
+          "const": "docs/sources/production-price.json"
+        },
+        "originalRange": {
+          "type": "string",
+          "const": "005C6350..005C63C0"
+        },
+        "scope": {
+          "type": "string",
+          "const": "prevalidated captured uint16 price and observed uint32 specialty helper; only AL controls discount"
+        },
+        "stockOriginalVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "originalExecutableExecuted": {
+          "type": "boolean",
+          "const": false
+        },
+        "commandIntegrated": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "remainingOpen": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "prefixItems": [
+        {
+          "type": "string",
+          "const": "0047A630 validation and mutable pointer semantics"
+        },
+        {
+          "type": "string",
+          "const": "004914A0 pointer-to-ID, 0047EC80 category and 0047B3A0 specialty helper bodies"
+        },
+        {
+          "type": "string",
+          "const": "original equipment price table and stock equipment/category/specialty ID mapping"
+        },
+        {
+          "type": "string",
+          "const": "complete production command eligibility, gold debit and actual resource/stock writers, quantity accounting and caps"
+        },
+        {
+          "type": "string",
+          "const": "merit/EXP/AP/TP writes, duration, dispatch and completion scheduling"
+        },
+        {
+          "type": "string",
+          "const": "Train/EndTurn, state, save/replay and native runtime integration"
+        },
+        {
+          "type": "string",
+          "const": "clean-stock PC-PK1.1, exact executable/patch identity, Vanilla, console and cross-version equivalence"
+        }
+      ],
+      "items": false
+    },
+    "counterexamples": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "savedBasePriceWord",
+            "specialtyHelperEax",
+            "returnedPrice",
+            "role"
+          ],
+          "properties": {
+            "savedBasePriceWord": {
+              "type": "integer",
+              "const": 1
+            },
+            "specialtyHelperEax": {
+              "type": "integer",
+              "const": 1
+            },
+            "returnedPrice": {
+              "type": "integer",
+              "const": 0
+            },
+            "role": {
+              "type": "string",
+              "const": "no-minimum-one"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "savedBasePriceWord",
+            "specialtyHelperEax",
+            "returnedPrice",
+            "role"
+          ],
+          "properties": {
+            "savedBasePriceWord": {
+              "type": "integer",
+              "const": 2
+            },
+            "specialtyHelperEax": {
+              "type": "integer",
+              "const": 1
+            },
+            "returnedPrice": {
+              "type": "integer",
+              "const": 1
+            },
+            "role": {
+              "type": "string",
+              "const": "floor-not-round"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "savedBasePriceWord",
+            "specialtyHelperEax",
+            "returnedPrice",
+            "role"
+          ],
+          "properties": {
+            "savedBasePriceWord": {
+              "type": "integer",
+              "const": 9
+            },
+            "specialtyHelperEax": {
+              "type": "integer",
+              "const": 1
+            },
+            "returnedPrice": {
+              "type": "integer",
+              "const": 7
+            },
+            "role": {
+              "type": "string",
+              "const": "multiply-before-divide"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "savedBasePriceWord",
+            "specialtyHelperEax",
+            "returnedPrice",
+            "role"
+          ],
+          "properties": {
+            "savedBasePriceWord": {
+              "type": "integer",
+              "const": 65535
+            },
+            "specialtyHelperEax": {
+              "type": "integer",
+              "const": 1
+            },
+            "returnedPrice": {
+              "type": "integer",
+              "const": 52428
+            },
+            "role": {
+              "type": "string",
+              "const": "unsigned-word-domain"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "savedBasePriceWord",
+            "specialtyHelperEax",
+            "returnedPrice",
+            "role"
+          ],
+          "properties": {
+            "savedBasePriceWord": {
+              "type": "integer",
+              "const": 65535
+            },
+            "specialtyHelperEax": {
+              "type": "integer",
+              "const": 0
+            },
+            "returnedPrice": {
+              "type": "integer",
+              "const": 65535
+            },
+            "role": {
+              "type": "string",
+              "const": "no-discount-path"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "savedBasePriceWord",
+            "specialtyHelperEax",
+            "returnedPrice",
+            "role"
+          ],
+          "properties": {
+            "savedBasePriceWord": {
+              "type": "integer",
+              "const": 10
+            },
+            "specialtyHelperEax": {
+              "type": "integer",
+              "const": 256
+            },
+            "returnedPrice": {
+              "type": "integer",
+              "const": 10
+            },
+            "role": {
+              "type": "string",
+              "const": "nonzero-eax-with-zero-al"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "savedBasePriceWord",
+            "specialtyHelperEax",
+            "returnedPrice",
+            "role"
+          ],
+          "properties": {
+            "savedBasePriceWord": {
+              "type": "integer",
+              "const": 10
+            },
+            "specialtyHelperEax": {
+              "type": "integer",
+              "const": 257
+            },
+            "returnedPrice": {
+              "type": "integer",
+              "const": 8
+            },
+            "role": {
+              "type": "string",
+              "const": "nonzero-al-with-high-bits"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "savedBasePriceWord",
+            "specialtyHelperEax",
+            "returnedPrice",
+            "role"
+          ],
+          "properties": {
+            "savedBasePriceWord": {
+              "type": "integer",
+              "const": 10
+            },
+            "specialtyHelperEax": {
+              "type": "integer",
+              "const": 2147483648
+            },
+            "returnedPrice": {
+              "type": "integer",
+              "const": 10
+            },
+            "role": {
+              "type": "string",
+              "const": "high-sign-bit-is-not-specialty"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "savedBasePriceWord",
+            "specialtyHelperEax",
+            "returnedPrice",
+            "role"
+          ],
+          "properties": {
+            "savedBasePriceWord": {
+              "type": "integer",
+              "const": 10
+            },
+            "specialtyHelperEax": {
+              "type": "integer",
+              "const": 4294967295
+            },
+            "returnedPrice": {
+              "type": "integer",
+              "const": 8
+            },
+            "role": {
+              "type": "string",
+              "const": "all-bits-set"
+            }
+          }
+        }
+      ],
+      "items": false
+    }
+  }
+}

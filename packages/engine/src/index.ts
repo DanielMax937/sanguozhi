@@ -15,3 +15,5 @@ export { DOMESTIC_CONSTRUCTION_RATE, calculateDomesticConstructionRate } from '.
 export type { DomesticConstructionRateInput, DomesticConstructionRateRejectionReason, DomesticConstructionRateRejection, DomesticConstructionRateReceipt, DomesticConstructionRateResult } from './domestic-construction-rate.ts';
 export { PATROL_SECURITY_GAIN, calculatePatrolSecurityGain } from './patrol-security-gain.ts';
 export type { PatrolSecurityGainInput, PatrolSecurityGainRejectionReason, PatrolSecurityGainRejection, PatrolSecurityGainReceipt, PatrolSecurityGainResult } from './patrol-security-gain.ts';
+export { PRODUCTION_PRICE, calculateProductionPrice } from './production-price.ts';
+export type { ProductionPriceInput, ProductionPriceRejectionReason, ProductionPriceRejection, ProductionPriceReceipt, ProductionPriceResult } from './production-price.ts';
