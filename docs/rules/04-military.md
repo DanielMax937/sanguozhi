@@ -115,21 +115,17 @@ orderLoss = floor(6300 / 400) = 15
 
 ## 2. 枪/戟/弩/马生产量
 
-`[COMMON][empirical-high]`
+`[source-listing-reconstruction][resolved-input-only]`
 
-公式：
+[生产数量显式binary32限定核](production-quantity.md)依据固定公开 `005C63D0..005C64CD` 原88条/254字节；两套MOD隔离，不认证完整stock命令或跨版本。
 
-`生产量 = ((最高智力 + 100) + (其余两人智力之和)/2) × 10 × 生产设施补正 × 特技补正`
+- native signed32类型<0或>11返回0，5..11返回1，不读取后续helper；0..4扫描精确三槽，至少一槽有效即可，首槽可null
+- 有效槽智力getter只取AL（0..255），技能helper以完整EAX非零判断；type0查询-1、1..3查询80、4查询81，不能靠业务名跳过type0 helper
+- 基础量 `(最高AL+AL总和+200)*5`，技能存在先×2，再乘调用者已确认的设施ST0，向零转换后才按difficultyWord==2且cityVirtualEax==0翻倍
+- 本API只接受显式bitword 3F800000/3F99999A/3FC00000，不从设施Lv自动推导；完整设施选择和常量bytes仍缺
+- 原体没有9000上限或1010最低值：有效AL0可返回1000，AL全100加技能/1.5/超级可返回18000，AL全255同条件可到36600；返回量不等于后续库存writer实际入库量
 
-结果四舍五入。
-
-- 最低约 1010。
-- 上限 9000。
-- 能吏：枪/戟/弩最终生产量 ×2。
-- 繁殖：军马最终生产量 ×2。
-- 生产设施 Lv 会提供对应设施补正。
-
-来源：https://w.atwiki.jp/sangokushi11/pages/74.html
+旧[日文Wiki](https://w.atwiki.jp/sangokushi11/pages/74.html)观察公式 `((M+100)+(S-M)/2)*10` 在不提前取整时与新基础式代数等价；旧“结果四舍五入、最低约1010、上限9000”不再作为本源规则。全无效槽的原生INT32_MIN哨兵路径本API不支持，不伪造成原生0。名声、政治和MOD2直接特产倍率都不进入本原体；getter/skill/validator/设施/virtual/完整命令与实际库存裁剪仍缺。
 
 ### 2.1 生产价格的独立限定核
 

@@ -1,0 +1,1956 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:production-quantity-resolved-f32-v1",
+  "title": "Closed evidence for the resolved-input production quantity numerical core",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profileId",
+    "scope",
+    "level",
+    "stockOriginalVerified",
+    "originalExecutableExecuted",
+    "commandIntegrated",
+    "source",
+    "license",
+    "domain",
+    "arithmetic",
+    "floatingPointSupport",
+    "originalListing",
+    "excludedMods",
+    "sourceCorrections",
+    "supportingLocators",
+    "evidence",
+    "remainingOpen",
+    "counterexamples"
+  ],
+  "properties": {
+    "profileId": {
+      "type": "string",
+      "const": "production-quantity-resolved-f32-v1"
+    },
+    "scope": {
+      "type": "string",
+      "const": "standalone-resolved-input-numerical-quantity-only"
+    },
+    "level": {
+      "type": "string",
+      "const": "source-listing-reconstruction"
+    },
+    "stockOriginalVerified": {
+      "type": "boolean",
+      "const": false
+    },
+    "originalExecutableExecuted": {
+      "type": "boolean",
+      "const": false
+    },
+    "commandIntegrated": {
+      "type": "boolean",
+      "const": false
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "path",
+        "url",
+        "gitBlobSha1",
+        "originalEncoding",
+        "originalBytes",
+        "originalSha256",
+        "snapshot",
+        "snapshotEncoding",
+        "snapshotBytes",
+        "snapshotSha256",
+        "byteAuthority",
+        "transformation"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "const": "sjn4048/311MemoryResearch"
+        },
+        "commit": {
+          "type": "string",
+          "const": "66e167e40c3440929ec016f3872aefc3486434c1"
+        },
+        "path": {
+          "type": "string",
+          "const": "内存资料/整理/Func-内政11-计算生产数量.txt"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政11-计算生产数量.txt"
+        },
+        "gitBlobSha1": {
+          "type": "string",
+          "const": "e8c0c22e68e8557b202088290d52101abb02ca3a"
+        },
+        "originalEncoding": {
+          "type": "string",
+          "const": "GBK"
+        },
+        "originalBytes": {
+          "type": "integer",
+          "const": 9650
+        },
+        "originalSha256": {
+          "type": "string",
+          "const": "cadf90aa55d43b69f407620abebccf6fb4307ed7dcb5511f434779f38b722285"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/production-quantity-original.txt"
+        },
+        "snapshotEncoding": {
+          "type": "string",
+          "const": "UTF-8"
+        },
+        "snapshotBytes": {
+          "type": "integer",
+          "const": 10336
+        },
+        "snapshotSha256": {
+          "type": "string",
+          "const": "65be4259fef8c741dee5d3df32a3f8fd6b00214427536daa624c0e6c8da00c53"
+        },
+        "byteAuthority": {
+          "type": "string",
+          "const": "public disassembly listing only; not an independently verified stock executable"
+        },
+        "transformation": {
+          "type": "string",
+          "const": "reversible UTF-8 transcoding only; all comments, inline politics replacement suggestion, two MOD sections and source typo preserved"
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spdx",
+        "url",
+        "gitBlobSha1",
+        "snapshot",
+        "bytes",
+        "sha256",
+        "attribution",
+        "upstreamNoticePresent"
+      ],
+      "properties": {
+        "spdx": {
+          "type": "string",
+          "const": "Apache-2.0"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE"
+        },
+        "gitBlobSha1": {
+          "type": "string",
+          "const": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/production-price-LICENSE.txt"
+        },
+        "bytes": {
+          "type": "integer",
+          "const": 11357
+        },
+        "sha256": {
+          "type": "string",
+          "const": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        "attribution": {
+          "type": "string",
+          "const": "sjn4048/311MemoryResearch; this existing Apache-2.0 license copy also covers the production quantity source snapshot"
+        },
+        "upstreamNoticePresent": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nativeEquipmentType",
+        "earlyInputs",
+        "invalidType",
+        "singleItemType",
+        "quantityType",
+        "slots",
+        "getterAndHelperEax",
+        "getterConsumption",
+        "skillQueryIds",
+        "skillQueryMapping",
+        "resolvedFacilityFactorBits",
+        "factorPrecondition",
+        "difficultyWord",
+        "cityVirtualEax",
+        "cityVirtualPresence",
+        "validation",
+        "allInvalid",
+        "normalReturn"
+      ],
+      "properties": {
+        "nativeEquipmentType": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": -2147483648
+            },
+            {
+              "type": "integer",
+              "const": 2147483647
+            }
+          ],
+          "items": false
+        },
+        "earlyInputs": {
+          "type": "string",
+          "const": "closed own data record with profile and nativeEquipmentType only; no slots, factor, difficulty or city virtual input"
+        },
+        "invalidType": {
+          "type": "string",
+          "const": "signed type below 0 or above 11 returns zero; reason native-invalid-type-return-zero; downstream observations false"
+        },
+        "singleItemType": {
+          "type": "string",
+          "const": "signed type 5..11 returns one; reason single-item-return-one; downstream observations false"
+        },
+        "quantityType": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 0
+            },
+            {
+              "type": "integer",
+              "const": 4
+            }
+          ],
+          "items": false
+        },
+        "slots": {
+          "type": "string",
+          "const": "exactly three dense array slots; null is resolved validator failure, otherwise closed own data record {intelligenceGetterEax:uint32,skillHelperEax:uint32}; at least one non-null slot; first slot may be null"
+        },
+        "getterAndHelperEax": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 0
+            },
+            {
+              "type": "integer",
+              "const": 4294967295
+            }
+          ],
+          "items": false
+        },
+        "getterConsumption": {
+          "type": "string",
+          "const": "00489090 result AL only via MOVZX EAX,AL; 004890F0 full EAX nonzero means skill; no skill short-circuit of remaining slots"
+        },
+        "skillQueryIds": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": -1
+            },
+            {
+              "type": "integer",
+              "const": 80
+            },
+            {
+              "type": "integer",
+              "const": 81
+            }
+          ],
+          "items": false
+        },
+        "skillQueryMapping": {
+          "type": "string",
+          "const": "type 0 => -1, types 1..3 => 80, type 4 => 81; type 0 still calls skill helper"
+        },
+        "resolvedFacilityFactorBits": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {
+              "type": "string",
+              "const": "3F800000"
+            },
+            {
+              "type": "string",
+              "const": "3F99999A"
+            },
+            {
+              "type": "string",
+              "const": "3FC00000"
+            }
+          ],
+          "items": false
+        },
+        "factorPrecondition": {
+          "type": "string",
+          "const": "caller has resolved the actual 005C5F90 ST0 return and supplies its exact supported binary32 bitword; no facility level, defaults, arbitrary numeric factor or inferred stock constants"
+        },
+        "difficultyWord": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 0
+            },
+            {
+              "type": "integer",
+              "const": 4294967295
+            }
+          ],
+          "items": false
+        },
+        "cityVirtualEax": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 0
+            },
+            {
+              "type": "integer",
+              "const": 4294967295
+            }
+          ],
+          "items": false
+        },
+        "cityVirtualPresence": {
+          "type": "string",
+          "const": "required iff difficultyWord equals 2; otherwise property must be omitted, including null or undefined"
+        },
+        "validation": {
+          "type": "string",
+          "const": "closed own-data-property input; no coercion, accessors, unknown keys, symbols or sparse slots; engineering rejection is not native zero"
+        },
+        "allInvalid": {
+          "type": "string",
+          "const": "unsupported; native max stays INT32_MIN and base low32 is 0x800003E8 (signed -2147482648), not native early zero"
+        },
+        "normalReturn": {
+          "type": "string",
+          "const": "finite supported factor and normal x87/conversion return only; exception masks and original FPU runtime are not certified"
+        }
+      }
+    },
+    "arithmetic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseQuantity",
+        "skillAdjustedQuantity",
+        "order",
+        "convertedQuantity",
+        "superApplied",
+        "returnedQuantity",
+        "baseRange",
+        "skillAdjustedRange",
+        "maximumReturnedQuantity",
+        "excludedRules"
+      ],
+      "properties": {
+        "baseQuantity": {
+          "type": "string",
+          "const": "(maxAL + sumAL + 200) * 5"
+        },
+        "skillAdjustedQuantity": {
+          "type": "string",
+          "const": "skillApplied ? baseQuantity * 2 : baseQuantity"
+        },
+        "order": {
+          "type": "string",
+          "const": "skill doubling before facility multiplication; conversion toward zero before conditional super doubling"
+        },
+        "convertedQuantity": {
+          "type": "string",
+          "const": "3F800000 => n; 3F99999A => 6*n/5; 3FC00000 => floor(3*n/2), only for supported n=skillAdjustedQuantity"
+        },
+        "superApplied": {
+          "type": "string",
+          "const": "difficultyWord === 2 && cityVirtualEax === 0; full EAX, not AL or an inferred AI flag"
+        },
+        "returnedQuantity": {
+          "type": "string",
+          "const": "superApplied ? convertedQuantity * 2 : convertedQuantity"
+        },
+        "baseRange": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 1000
+            },
+            {
+              "type": "integer",
+              "const": 6100
+            }
+          ],
+          "items": false
+        },
+        "skillAdjustedRange": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 1000
+            },
+            {
+              "type": "integer",
+              "const": 12200
+            }
+          ],
+          "items": false
+        },
+        "maximumReturnedQuantity": {
+          "type": "integer",
+          "const": 36600
+        },
+        "excludedRules": {
+          "type": "string",
+          "const": "no 9000 cap, minimum 1010, politics, reputation or direct specialty multiplier; returned quantity is not actual stock writer delta"
+        }
+      }
+    },
+    "floatingPointSupport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bitwordType",
+        "factors",
+        "integerSuperset",
+        "precisionBits",
+        "roundingModes",
+        "comparisonCount",
+        "claim",
+        "conversionEvidence"
+      ],
+      "properties": {
+        "bitwordType": {
+          "type": "string",
+          "const": "uppercase eight-hex string; exactly one of the three listed bitwords"
+        },
+        "factors": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "bits",
+                "numerator",
+                "denominator"
+              ],
+              "properties": {
+                "bits": {
+                  "type": "string",
+                  "const": "3F800000"
+                },
+                "numerator": {
+                  "type": "integer",
+                  "const": 1
+                },
+                "denominator": {
+                  "type": "integer",
+                  "const": 1
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "bits",
+                "numerator",
+                "denominator"
+              ],
+              "properties": {
+                "bits": {
+                  "type": "string",
+                  "const": "3F99999A"
+                },
+                "numerator": {
+                  "type": "integer",
+                  "const": 5033165
+                },
+                "denominator": {
+                  "type": "integer",
+                  "const": 4194304
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "bits",
+                "numerator",
+                "denominator"
+              ],
+              "properties": {
+                "bits": {
+                  "type": "string",
+                  "const": "3FC00000"
+                },
+                "numerator": {
+                  "type": "integer",
+                  "const": 3
+                },
+                "denominator": {
+                  "type": "integer",
+                  "const": 2
+                }
+              }
+            }
+          ],
+          "items": false
+        },
+        "integerSuperset": {
+          "type": "string",
+          "const": "all 2241 multiples of five n from 1000 through 12200 inclusive"
+        },
+        "precisionBits": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 24
+            },
+            {
+              "type": "integer",
+              "const": 53
+            },
+            {
+              "type": "integer",
+              "const": 64
+            }
+          ],
+          "items": false
+        },
+        "roundingModes": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "prefixItems": [
+            {
+              "type": "string",
+              "const": "down"
+            },
+            {
+              "type": "string",
+              "const": "up"
+            },
+            {
+              "type": "string",
+              "const": "toward-zero"
+            },
+            {
+              "type": "string",
+              "const": "nearest-even"
+            }
+          ],
+          "items": false
+        },
+        "comparisonCount": {
+          "type": "integer",
+          "const": 80676
+        },
+        "claim": {
+          "type": "string",
+          "const": "normal-return products in this restricted domain have the same final truncation for all listed x87 precision and rounding modes; this does not authenticate actual constant-table bytes"
+        },
+        "conversionEvidence": {
+          "type": "string",
+          "const": "00707A74 identity uses existing P0-10 supporting evidence; no new same-version complete callee or clean-stock certification"
+        }
+      }
+    },
+    "originalListing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "endInclusive",
+        "endExclusive",
+        "listingRowCount",
+        "instructionCount",
+        "byteLength",
+        "sha256",
+        "calls",
+        "branches",
+        "indirectCalls"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "const": "005C63D0"
+        },
+        "endInclusive": {
+          "type": "string",
+          "const": "005C64CD"
+        },
+        "endExclusive": {
+          "type": "string",
+          "const": "005C64CE"
+        },
+        "listingRowCount": {
+          "type": "integer",
+          "const": 88
+        },
+        "instructionCount": {
+          "type": "integer",
+          "const": 88
+        },
+        "byteLength": {
+          "type": "integer",
+          "const": 254
+        },
+        "sha256": {
+          "type": "string",
+          "const": "083337e2420a74a923349256cc7add7e6c665ccccad6f3406ea2f343d3bbceb1"
+        },
+        "calls": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6438"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "0047A630"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6446"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "00489090"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C645D"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "004890F0"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C649B"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C5F90"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C64A7"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "00707A74"
+                }
+              }
+            }
+          ],
+          "items": false
+        },
+        "branches": {
+          "type": "array",
+          "minItems": 15,
+          "maxItems": 15,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C63DC"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C63E3"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C63E1"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C63EA"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C63EC"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C640C"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C63F1"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C6402"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C63F6"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C640C"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6400"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C6414"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C640A"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C6414"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C641D"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C64C6"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6442"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C646E"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6452"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C6456"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6464"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C646E"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6472"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C6430"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C6488"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C6491"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C64B5"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C64C4"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C64C0"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "005C64C4"
+                }
+              }
+            }
+          ],
+          "items": false
+        },
+        "indirectCalls": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "bytes",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "005C64BB"
+                },
+                "bytes": {
+                  "type": "string",
+                  "const": "FF 52 48"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "city-vtable+0x48"
+                }
+              }
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "excludedMods": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "marker",
+            "patch",
+            "trampoline",
+            "displayedMultiplier",
+            "displayedDivisor",
+            "displayedSettingEquivalentInSupportedDomain",
+            "executedByProduction",
+            "reason"
+          ],
+          "properties": {
+            "marker": {
+              "type": "string",
+              "const": "修改1 - 能吏繁殖效果自定义"
+            },
+            "patch": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "start",
+                "endInclusive",
+                "endExclusive",
+                "listingRowCount",
+                "instructionCount",
+                "byteLength",
+                "sha256"
+              ],
+              "properties": {
+                "start": {
+                  "type": "string",
+                  "const": "005C648A"
+                },
+                "endInclusive": {
+                  "type": "string",
+                  "const": "005C6490"
+                },
+                "endExclusive": {
+                  "type": "string",
+                  "const": "005C6491"
+                },
+                "listingRowCount": {
+                  "type": "integer",
+                  "const": 2
+                },
+                "instructionCount": {
+                  "type": "integer",
+                  "const": 3
+                },
+                "byteLength": {
+                  "type": "integer",
+                  "const": 7
+                },
+                "sha256": {
+                  "type": "string",
+                  "const": "6125f5f7f6c9c2ba63eb342048fe99e88c24c29acd9c4a2c7281a260d4d6b106"
+                }
+              }
+            },
+            "trampoline": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "start",
+                "endInclusive",
+                "endExclusive",
+                "listingRowCount",
+                "instructionCount",
+                "byteLength",
+                "sha256"
+              ],
+              "properties": {
+                "start": {
+                  "type": "string",
+                  "const": "008A95F8"
+                },
+                "endInclusive": {
+                  "type": "string",
+                  "const": "008A960E"
+                },
+                "endExclusive": {
+                  "type": "string",
+                  "const": "008A960F"
+                },
+                "listingRowCount": {
+                  "type": "integer",
+                  "const": 6
+                },
+                "instructionCount": {
+                  "type": "integer",
+                  "const": 6
+                },
+                "byteLength": {
+                  "type": "integer",
+                  "const": 23
+                },
+                "sha256": {
+                  "type": "string",
+                  "const": "b903c3a2e5461297bdfc3bb32924aeca36dcbbe257777186eedbff4424c139ab"
+                }
+              }
+            },
+            "displayedMultiplier": {
+              "type": "integer",
+              "const": 200
+            },
+            "displayedDivisor": {
+              "type": "integer",
+              "const": 100
+            },
+            "displayedSettingEquivalentInSupportedDomain": {
+              "type": "boolean",
+              "const": true
+            },
+            "executedByProduction": {
+              "type": "boolean",
+              "const": false
+            },
+            "reason": {
+              "type": "string",
+              "const": "separate custom skill patch and trampoline; never overlaid; displayed 200 percent equals doubling only within the supported normal arithmetic domain"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "marker",
+            "patch",
+            "trampoline",
+            "data",
+            "executedByProduction",
+            "reason"
+          ],
+          "properties": {
+            "marker": {
+              "type": "string",
+              "const": "修改2 - 特产/非特产城市产量自定义"
+            },
+            "patch": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "start",
+                "endInclusive",
+                "endExclusive",
+                "listingRowCount",
+                "instructionCount",
+                "byteLength",
+                "sha256"
+              ],
+              "properties": {
+                "start": {
+                  "type": "string",
+                  "const": "005C64A7"
+                },
+                "endInclusive": {
+                  "type": "string",
+                  "const": "005C64AB"
+                },
+                "endExclusive": {
+                  "type": "string",
+                  "const": "005C64AC"
+                },
+                "listingRowCount": {
+                  "type": "integer",
+                  "const": 1
+                },
+                "instructionCount": {
+                  "type": "integer",
+                  "const": 1
+                },
+                "byteLength": {
+                  "type": "integer",
+                  "const": 5
+                },
+                "sha256": {
+                  "type": "string",
+                  "const": "73c515cccd0de0ba26d8fabd800aa94cf5e7f009a0edb8deaf6bad13e47b6a6b"
+                }
+              }
+            },
+            "trampoline": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "start",
+                "endInclusive",
+                "endExclusive",
+                "listingRowCount",
+                "instructionCount",
+                "byteLength",
+                "sha256"
+              ],
+              "properties": {
+                "start": {
+                  "type": "string",
+                  "const": "008A9D48"
+                },
+                "endInclusive": {
+                  "type": "string",
+                  "const": "008A9D86"
+                },
+                "endExclusive": {
+                  "type": "string",
+                  "const": "008A9D87"
+                },
+                "listingRowCount": {
+                  "type": "integer",
+                  "const": 20
+                },
+                "instructionCount": {
+                  "type": "integer",
+                  "const": 20
+                },
+                "byteLength": {
+                  "type": "integer",
+                  "const": 63
+                },
+                "sha256": {
+                  "type": "string",
+                  "const": "729d96341ea81278f73ebb3d2b57b49bf7447189640155332e6f3280abbae09b"
+                }
+              }
+            },
+            "data": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "start",
+                "endInclusive",
+                "endExclusive",
+                "byteLength",
+                "sha256"
+              ],
+              "properties": {
+                "start": {
+                  "type": "string",
+                  "const": "008A8170"
+                },
+                "endInclusive": {
+                  "type": "string",
+                  "const": "008A817F"
+                },
+                "endExclusive": {
+                  "type": "string",
+                  "const": "008A8180"
+                },
+                "byteLength": {
+                  "type": "integer",
+                  "const": 16
+                },
+                "sha256": {
+                  "type": "string",
+                  "const": "2fece05476ea75674604c5d22ec05d755837b18fb0ddedea70b6a17d70bc276f"
+                }
+              }
+            },
+            "executedByProduction": {
+              "type": "boolean",
+              "const": false
+            },
+            "reason": {
+              "type": "string",
+              "const": "separate city+type+0x85 specialty flags and author data at 008A8170; never included in original arithmetic"
+            }
+          }
+        }
+      ],
+      "items": false
+    },
+    "sourceCorrections": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "address",
+            "bytes",
+            "sourceComment",
+            "interpretation"
+          ],
+          "properties": {
+            "address": {
+              "type": "string",
+              "const": "005C6446"
+            },
+            "bytes": {
+              "type": "string",
+              "const": "E8 45 2C EC FF"
+            },
+            "sourceComment": {
+              "type": "string",
+              "const": "inline replacement suggestion call 004890a0 for politics"
+            },
+            "interpretation": {
+              "type": "string",
+              "const": "original bytes call 00489090 intelligence; inline politics suggestion is excluded"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "address",
+            "bytes",
+            "sourceComment",
+            "interpretation"
+          ],
+          "properties": {
+            "address": {
+              "type": "string",
+              "const": "005C64C2"
+            },
+            "bytes": {
+              "type": "string",
+              "const": "03 F6"
+            },
+            "sourceComment": {
+              "type": "string",
+              "const": "超级难度电脑征兵加倍"
+            },
+            "interpretation": {
+              "type": "string",
+              "const": "copy-comment typo preserved; bytes double production quantity saved in ESI"
+            }
+          }
+        }
+      ],
+      "items": false
+    },
+    "supportingLocators": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "commit",
+            "path",
+            "gitBlobSha1",
+            "claim"
+          ],
+          "properties": {
+            "repository": {
+              "type": "string",
+              "const": "sjn4048/311MemoryResearch"
+            },
+            "commit": {
+              "type": "string",
+              "const": "66e167e40c3440929ec016f3872aefc3486434c1"
+            },
+            "path": {
+              "type": "string",
+              "const": "内存资料/整理/专题索引01-内政设施.txt"
+            },
+            "gitBlobSha1": {
+              "type": "string",
+              "const": "784fcb92531dd474fa5ea6ebbba789c51e714f4a"
+            },
+            "claim": {
+              "type": "string",
+              "const": "005C6048 FLD dword[0077B334], 005C605E FLD dword[00849118], 005C60E3 FLD dword[0074E718] locate loads only; complete 005C5F90 and actual constant bytes remain missing"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "commit",
+            "path",
+            "gitBlobSha1",
+            "claim"
+          ],
+          "properties": {
+            "repository": {
+              "type": "string",
+              "const": "sjn4048/311MemoryResearch"
+            },
+            "commit": {
+              "type": "string",
+              "const": "66e167e40c3440929ec016f3872aefc3486434c1"
+            },
+            "path": {
+              "type": "string",
+              "const": "内存资料/整理/Func-内政12-执行生产(非攻具舰船).txt"
+            },
+            "gitBlobSha1": {
+              "type": "string",
+              "const": "b21c4e03c048192e0144f64be35935f29b82bd04"
+            },
+            "claim": {
+              "type": "string",
+              "const": "005C6710 calls quantity then 005C6720 calls 004B4040; establishes downstream writer layering, not complete writer semantics or uncapped actual stock"
+            }
+          }
+        }
+      ],
+      "items": false
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "profile",
+        "source",
+        "originalRange",
+        "scope",
+        "stockOriginalVerified",
+        "originalExecutableExecuted",
+        "commandIntegrated"
+      ],
+      "properties": {
+        "level": {
+          "type": "string",
+          "const": "source-listing-reconstruction"
+        },
+        "profile": {
+          "type": "string",
+          "const": "production-quantity-resolved-f32-v1"
+        },
+        "source": {
+          "type": "string",
+          "const": "docs/sources/production-quantity.json"
+        },
+        "originalRange": {
+          "type": "string",
+          "const": "005C63D0..005C64CD"
+        },
+        "scope": {
+          "type": "string",
+          "const": "resolved three-slot getter/helper observations and explicit supported facility ST0 bitword; numerical return only"
+        },
+        "stockOriginalVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "originalExecutableExecuted": {
+          "type": "boolean",
+          "const": false
+        },
+        "commandIntegrated": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "remainingOpen": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "prefixItems": [
+        {
+          "type": "string",
+          "const": "0047A630 validator, 00489090 intelligence getter and 004890F0 skill helper full bodies and mutable call semantics"
+        },
+        {
+          "type": "string",
+          "const": "005C5F90 facility selection full body, original 0077B334/00849118/0074E718 constant bytes and actual ST0 provenance"
+        },
+        {
+          "type": "string",
+          "const": "city virtual+0x48 ownership semantics and clean original difficulty/state provenance"
+        },
+        {
+          "type": "string",
+          "const": "00707A74 complete same-source-version conversion body and original FPU runtime/exception behavior"
+        },
+        {
+          "type": "string",
+          "const": "all-invalid sentinel path and other unsupported factors or exceptional arithmetic are not accepted by this API"
+        },
+        {
+          "type": "string",
+          "const": "complete production eligibility, original equipment IDs, fees/AP/EXP/merit/TP, duration and completion scheduling"
+        },
+        {
+          "type": "string",
+          "const": "actual stock writer 004B4040, stock caps and actual credited delta versus numerical return"
+        },
+        {
+          "type": "string",
+          "const": "Train/EndTurn, state/save/replay and native runtime integration"
+        },
+        {
+          "type": "string",
+          "const": "clean-stock PC-PK1.1 executable/patch identity, Vanilla/console and cross-version equivalence"
+        }
+      ],
+      "items": false
+    },
+    "counterexamples": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "role",
+            "getterAl",
+            "skillApplied",
+            "factorBits",
+            "superApplied",
+            "returnedQuantity"
+          ],
+          "properties": {
+            "role": {
+              "type": "string",
+              "const": "first-slot-null-is-valid"
+            },
+            "getterAl": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "null",
+                  "const": null
+                },
+                {
+                  "type": "integer",
+                  "const": 100
+                },
+                {
+                  "type": "null",
+                  "const": null
+                }
+              ],
+              "items": false
+            },
+            "skillApplied": {
+              "type": "boolean",
+              "const": false
+            },
+            "factorBits": {
+              "type": "string",
+              "const": "3F800000"
+            },
+            "superApplied": {
+              "type": "boolean",
+              "const": false
+            },
+            "returnedQuantity": {
+              "type": "integer",
+              "const": 2000
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "role",
+            "getterAl",
+            "skillApplied",
+            "factorBits",
+            "superApplied",
+            "returnedQuantity"
+          ],
+          "properties": {
+            "role": {
+              "type": "string",
+              "const": "zero-al-is-valid-no-minimum-1010"
+            },
+            "getterAl": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 0
+                },
+                {
+                  "type": "null",
+                  "const": null
+                },
+                {
+                  "type": "null",
+                  "const": null
+                }
+              ],
+              "items": false
+            },
+            "skillApplied": {
+              "type": "boolean",
+              "const": false
+            },
+            "factorBits": {
+              "type": "string",
+              "const": "3F800000"
+            },
+            "superApplied": {
+              "type": "boolean",
+              "const": false
+            },
+            "returnedQuantity": {
+              "type": "integer",
+              "const": 1000
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "role",
+            "getterAl",
+            "skillApplied",
+            "factorBits",
+            "superApplied",
+            "returnedQuantity"
+          ],
+          "properties": {
+            "role": {
+              "type": "string",
+              "const": "truncate-after-facility"
+            },
+            "getterAl": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 1
+                },
+                {
+                  "type": "integer",
+                  "const": 1
+                },
+                {
+                  "type": "null",
+                  "const": null
+                }
+              ],
+              "items": false
+            },
+            "skillApplied": {
+              "type": "boolean",
+              "const": false
+            },
+            "factorBits": {
+              "type": "string",
+              "const": "3FC00000"
+            },
+            "superApplied": {
+              "type": "boolean",
+              "const": false
+            },
+            "returnedQuantity": {
+              "type": "integer",
+              "const": 1522
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "role",
+            "getterAl",
+            "skillApplied",
+            "factorBits",
+            "superApplied",
+            "returnedQuantity"
+          ],
+          "properties": {
+            "role": {
+              "type": "string",
+              "const": "skill-before-conversion"
+            },
+            "getterAl": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 1
+                },
+                {
+                  "type": "integer",
+                  "const": 1
+                },
+                {
+                  "type": "null",
+                  "const": null
+                }
+              ],
+              "items": false
+            },
+            "skillApplied": {
+              "type": "boolean",
+              "const": true
+            },
+            "factorBits": {
+              "type": "string",
+              "const": "3FC00000"
+            },
+            "superApplied": {
+              "type": "boolean",
+              "const": false
+            },
+            "returnedQuantity": {
+              "type": "integer",
+              "const": 3045
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "role",
+            "getterAl",
+            "skillApplied",
+            "factorBits",
+            "superApplied",
+            "returnedQuantity"
+          ],
+          "properties": {
+            "role": {
+              "type": "string",
+              "const": "super-after-conversion"
+            },
+            "getterAl": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 1
+                },
+                {
+                  "type": "integer",
+                  "const": 1
+                },
+                {
+                  "type": "null",
+                  "const": null
+                }
+              ],
+              "items": false
+            },
+            "skillApplied": {
+              "type": "boolean",
+              "const": false
+            },
+            "factorBits": {
+              "type": "string",
+              "const": "3FC00000"
+            },
+            "superApplied": {
+              "type": "boolean",
+              "const": true
+            },
+            "returnedQuantity": {
+              "type": "integer",
+              "const": 3044
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "role",
+            "getterAl",
+            "skillApplied",
+            "factorBits",
+            "superApplied",
+            "returnedQuantity"
+          ],
+          "properties": {
+            "role": {
+              "type": "string",
+              "const": "no-9000-cap"
+            },
+            "getterAl": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 100
+                },
+                {
+                  "type": "integer",
+                  "const": 100
+                },
+                {
+                  "type": "integer",
+                  "const": 100
+                }
+              ],
+              "items": false
+            },
+            "skillApplied": {
+              "type": "boolean",
+              "const": true
+            },
+            "factorBits": {
+              "type": "string",
+              "const": "3FC00000"
+            },
+            "superApplied": {
+              "type": "boolean",
+              "const": true
+            },
+            "returnedQuantity": {
+              "type": "integer",
+              "const": 18000
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "role",
+            "getterAl",
+            "skillApplied",
+            "factorBits",
+            "superApplied",
+            "returnedQuantity"
+          ],
+          "properties": {
+            "role": {
+              "type": "string",
+              "const": "full-uint8-domain"
+            },
+            "getterAl": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 255
+                },
+                {
+                  "type": "integer",
+                  "const": 255
+                },
+                {
+                  "type": "integer",
+                  "const": 255
+                }
+              ],
+              "items": false
+            },
+            "skillApplied": {
+              "type": "boolean",
+              "const": true
+            },
+            "factorBits": {
+              "type": "string",
+              "const": "3FC00000"
+            },
+            "superApplied": {
+              "type": "boolean",
+              "const": true
+            },
+            "returnedQuantity": {
+              "type": "integer",
+              "const": 36600
+            }
+          }
+        }
+      ],
+      "items": false
+    }
+  }
+}

@@ -1876,3 +1876,7 @@ rate = max(
 ### 生产价格捕获输入整数核（2026-10-09）
 
 [完整支持域](production-price.md)；[固定原文](https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政10-计算生产价格.txt)，GBK blob `928b34bd8b9f06057dd44e9639db92dacc364c85`。原45条/113字节与独立MOD6条/14字节分别固定；[可逆快照](../sources/production-price-original.txt)、[证据记录](../sources/production-price.json)、[闭合schema](../sources/production-price.schema.json)、[Apache-2.0许可](../sources/production-price-LICENSE.txt)。005C637A先保存uint16原价；TEST AL清CF，JNA仅AL0不折；C1FA02为SAR EDX2，源sar dl错字保留。显示MOD80/100在全uint16域数值相同仍隔离。`source-listing-reconstruction`，不证明价格表/ID/helper/完整命令/writer/stock或跨版本。
+
+### 生产数量显式binary32限定核（2026-10-09）
+
+[完整支持域](production-quantity.md)；[固定原文](https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政11-计算生产数量.txt)，GBK blob `e8c0c22e68e8557b202088290d52101abb02ca3a`。原88条/254字节、5 direct CALL/15 branch与两套MOD（含各自patch/trampoline及修改2数据）完全隔离；[可逆快照](../sources/production-quantity-original.txt)、[证据记录](../sources/production-quantity.json)、[闭合schema](../sources/production-quantity.schema.json)。源作者sjn4048，本数量快照明确复用[Apache-2.0许可](../sources/production-price-LICENSE.txt)。完整EAX验证/技能/virtual、getter仅AL，先技能倍增后FIMUL/向零转换再超级倍增；不把内联政治替换、名声或MOD2特产当原式。仅接受显式已解析3F800000/3F99999A/3FC00000，不由Lv注释填stock常量。原函数无9000cap，后续004B4040实际库存writer仍缺。`source-listing-reconstruction`，stockOriginalVerified=false、originalExecutableExecuted=false、commandIntegrated=false；完整callee/设施原表/运行时和跨版本仍开放。

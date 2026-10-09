@@ -1,0 +1,425 @@
+{
+  "profileId": "production-quantity-resolved-f32-v1",
+  "scope": "standalone-resolved-input-numerical-quantity-only",
+  "level": "source-listing-reconstruction",
+  "stockOriginalVerified": false,
+  "originalExecutableExecuted": false,
+  "commandIntegrated": false,
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "内存资料/整理/Func-内政11-计算生产数量.txt",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政11-计算生产数量.txt",
+    "gitBlobSha1": "e8c0c22e68e8557b202088290d52101abb02ca3a",
+    "originalEncoding": "GBK",
+    "originalBytes": 9650,
+    "originalSha256": "cadf90aa55d43b69f407620abebccf6fb4307ed7dcb5511f434779f38b722285",
+    "snapshot": "docs/sources/production-quantity-original.txt",
+    "snapshotEncoding": "UTF-8",
+    "snapshotBytes": 10336,
+    "snapshotSha256": "65be4259fef8c741dee5d3df32a3f8fd6b00214427536daa624c0e6c8da00c53",
+    "byteAuthority": "public disassembly listing only; not an independently verified stock executable",
+    "transformation": "reversible UTF-8 transcoding only; all comments, inline politics replacement suggestion, two MOD sections and source typo preserved"
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE",
+    "gitBlobSha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+    "snapshot": "docs/sources/production-price-LICENSE.txt",
+    "bytes": 11357,
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "attribution": "sjn4048/311MemoryResearch; this existing Apache-2.0 license copy also covers the production quantity source snapshot",
+    "upstreamNoticePresent": false
+  },
+  "domain": {
+    "nativeEquipmentType": [
+      -2147483648,
+      2147483647
+    ],
+    "earlyInputs": "closed own data record with profile and nativeEquipmentType only; no slots, factor, difficulty or city virtual input",
+    "invalidType": "signed type below 0 or above 11 returns zero; reason native-invalid-type-return-zero; downstream observations false",
+    "singleItemType": "signed type 5..11 returns one; reason single-item-return-one; downstream observations false",
+    "quantityType": [
+      0,
+      4
+    ],
+    "slots": "exactly three dense array slots; null is resolved validator failure, otherwise closed own data record {intelligenceGetterEax:uint32,skillHelperEax:uint32}; at least one non-null slot; first slot may be null",
+    "getterAndHelperEax": [
+      0,
+      4294967295
+    ],
+    "getterConsumption": "00489090 result AL only via MOVZX EAX,AL; 004890F0 full EAX nonzero means skill; no skill short-circuit of remaining slots",
+    "skillQueryIds": [
+      -1,
+      80,
+      81
+    ],
+    "skillQueryMapping": "type 0 => -1, types 1..3 => 80, type 4 => 81; type 0 still calls skill helper",
+    "resolvedFacilityFactorBits": [
+      "3F800000",
+      "3F99999A",
+      "3FC00000"
+    ],
+    "factorPrecondition": "caller has resolved the actual 005C5F90 ST0 return and supplies its exact supported binary32 bitword; no facility level, defaults, arbitrary numeric factor or inferred stock constants",
+    "difficultyWord": [
+      0,
+      4294967295
+    ],
+    "cityVirtualEax": [
+      0,
+      4294967295
+    ],
+    "cityVirtualPresence": "required iff difficultyWord equals 2; otherwise property must be omitted, including null or undefined",
+    "validation": "closed own-data-property input; no coercion, accessors, unknown keys, symbols or sparse slots; engineering rejection is not native zero",
+    "allInvalid": "unsupported; native max stays INT32_MIN and base low32 is 0x800003E8 (signed -2147482648), not native early zero",
+    "normalReturn": "finite supported factor and normal x87/conversion return only; exception masks and original FPU runtime are not certified"
+  },
+  "arithmetic": {
+    "baseQuantity": "(maxAL + sumAL + 200) * 5",
+    "skillAdjustedQuantity": "skillApplied ? baseQuantity * 2 : baseQuantity",
+    "order": "skill doubling before facility multiplication; conversion toward zero before conditional super doubling",
+    "convertedQuantity": "3F800000 => n; 3F99999A => 6*n/5; 3FC00000 => floor(3*n/2), only for supported n=skillAdjustedQuantity",
+    "superApplied": "difficultyWord === 2 && cityVirtualEax === 0; full EAX, not AL or an inferred AI flag",
+    "returnedQuantity": "superApplied ? convertedQuantity * 2 : convertedQuantity",
+    "baseRange": [
+      1000,
+      6100
+    ],
+    "skillAdjustedRange": [
+      1000,
+      12200
+    ],
+    "maximumReturnedQuantity": 36600,
+    "excludedRules": "no 9000 cap, minimum 1010, politics, reputation or direct specialty multiplier; returned quantity is not actual stock writer delta"
+  },
+  "floatingPointSupport": {
+    "bitwordType": "uppercase eight-hex string; exactly one of the three listed bitwords",
+    "factors": [
+      {
+        "bits": "3F800000",
+        "numerator": 1,
+        "denominator": 1
+      },
+      {
+        "bits": "3F99999A",
+        "numerator": 5033165,
+        "denominator": 4194304
+      },
+      {
+        "bits": "3FC00000",
+        "numerator": 3,
+        "denominator": 2
+      }
+    ],
+    "integerSuperset": "all 2241 multiples of five n from 1000 through 12200 inclusive",
+    "precisionBits": [
+      24,
+      53,
+      64
+    ],
+    "roundingModes": [
+      "down",
+      "up",
+      "toward-zero",
+      "nearest-even"
+    ],
+    "comparisonCount": 80676,
+    "claim": "normal-return products in this restricted domain have the same final truncation for all listed x87 precision and rounding modes; this does not authenticate actual constant-table bytes",
+    "conversionEvidence": "00707A74 identity uses existing P0-10 supporting evidence; no new same-version complete callee or clean-stock certification"
+  },
+  "originalListing": {
+    "start": "005C63D0",
+    "endInclusive": "005C64CD",
+    "endExclusive": "005C64CE",
+    "listingRowCount": 88,
+    "instructionCount": 88,
+    "byteLength": 254,
+    "sha256": "083337e2420a74a923349256cc7add7e6c665ccccad6f3406ea2f343d3bbceb1",
+    "calls": [
+      {
+        "address": "005C6438",
+        "target": "0047A630"
+      },
+      {
+        "address": "005C6446",
+        "target": "00489090"
+      },
+      {
+        "address": "005C645D",
+        "target": "004890F0"
+      },
+      {
+        "address": "005C649B",
+        "target": "005C5F90"
+      },
+      {
+        "address": "005C64A7",
+        "target": "00707A74"
+      }
+    ],
+    "branches": [
+      {
+        "address": "005C63DC",
+        "target": "005C63E3"
+      },
+      {
+        "address": "005C63E1",
+        "target": "005C63EA"
+      },
+      {
+        "address": "005C63EC",
+        "target": "005C640C"
+      },
+      {
+        "address": "005C63F1",
+        "target": "005C6402"
+      },
+      {
+        "address": "005C63F6",
+        "target": "005C640C"
+      },
+      {
+        "address": "005C6400",
+        "target": "005C6414"
+      },
+      {
+        "address": "005C640A",
+        "target": "005C6414"
+      },
+      {
+        "address": "005C641D",
+        "target": "005C64C6"
+      },
+      {
+        "address": "005C6442",
+        "target": "005C646E"
+      },
+      {
+        "address": "005C6452",
+        "target": "005C6456"
+      },
+      {
+        "address": "005C6464",
+        "target": "005C646E"
+      },
+      {
+        "address": "005C6472",
+        "target": "005C6430"
+      },
+      {
+        "address": "005C6488",
+        "target": "005C6491"
+      },
+      {
+        "address": "005C64B5",
+        "target": "005C64C4"
+      },
+      {
+        "address": "005C64C0",
+        "target": "005C64C4"
+      }
+    ],
+    "indirectCalls": [
+      {
+        "address": "005C64BB",
+        "bytes": "FF 52 48",
+        "target": "city-vtable+0x48"
+      }
+    ]
+  },
+  "excludedMods": [
+    {
+      "marker": "修改1 - 能吏繁殖效果自定义",
+      "patch": {
+        "start": "005C648A",
+        "endInclusive": "005C6490",
+        "endExclusive": "005C6491",
+        "listingRowCount": 2,
+        "instructionCount": 3,
+        "byteLength": 7,
+        "sha256": "6125f5f7f6c9c2ba63eb342048fe99e88c24c29acd9c4a2c7281a260d4d6b106"
+      },
+      "trampoline": {
+        "start": "008A95F8",
+        "endInclusive": "008A960E",
+        "endExclusive": "008A960F",
+        "listingRowCount": 6,
+        "instructionCount": 6,
+        "byteLength": 23,
+        "sha256": "b903c3a2e5461297bdfc3bb32924aeca36dcbbe257777186eedbff4424c139ab"
+      },
+      "displayedMultiplier": 200,
+      "displayedDivisor": 100,
+      "displayedSettingEquivalentInSupportedDomain": true,
+      "executedByProduction": false,
+      "reason": "separate custom skill patch and trampoline; never overlaid; displayed 200 percent equals doubling only within the supported normal arithmetic domain"
+    },
+    {
+      "marker": "修改2 - 特产/非特产城市产量自定义",
+      "patch": {
+        "start": "005C64A7",
+        "endInclusive": "005C64AB",
+        "endExclusive": "005C64AC",
+        "listingRowCount": 1,
+        "instructionCount": 1,
+        "byteLength": 5,
+        "sha256": "73c515cccd0de0ba26d8fabd800aa94cf5e7f009a0edb8deaf6bad13e47b6a6b"
+      },
+      "trampoline": {
+        "start": "008A9D48",
+        "endInclusive": "008A9D86",
+        "endExclusive": "008A9D87",
+        "listingRowCount": 20,
+        "instructionCount": 20,
+        "byteLength": 63,
+        "sha256": "729d96341ea81278f73ebb3d2b57b49bf7447189640155332e6f3280abbae09b"
+      },
+      "data": {
+        "start": "008A8170",
+        "endInclusive": "008A817F",
+        "endExclusive": "008A8180",
+        "byteLength": 16,
+        "sha256": "2fece05476ea75674604c5d22ec05d755837b18fb0ddedea70b6a17d70bc276f"
+      },
+      "executedByProduction": false,
+      "reason": "separate city+type+0x85 specialty flags and author data at 008A8170; never included in original arithmetic"
+    }
+  ],
+  "sourceCorrections": [
+    {
+      "address": "005C6446",
+      "bytes": "E8 45 2C EC FF",
+      "sourceComment": "inline replacement suggestion call 004890a0 for politics",
+      "interpretation": "original bytes call 00489090 intelligence; inline politics suggestion is excluded"
+    },
+    {
+      "address": "005C64C2",
+      "bytes": "03 F6",
+      "sourceComment": "超级难度电脑征兵加倍",
+      "interpretation": "copy-comment typo preserved; bytes double production quantity saved in ESI"
+    }
+  ],
+  "supportingLocators": [
+    {
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/专题索引01-内政设施.txt",
+      "gitBlobSha1": "784fcb92531dd474fa5ea6ebbba789c51e714f4a",
+      "claim": "005C6048 FLD dword[0077B334], 005C605E FLD dword[00849118], 005C60E3 FLD dword[0074E718] locate loads only; complete 005C5F90 and actual constant bytes remain missing"
+    },
+    {
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/Func-内政12-执行生产(非攻具舰船).txt",
+      "gitBlobSha1": "b21c4e03c048192e0144f64be35935f29b82bd04",
+      "claim": "005C6710 calls quantity then 005C6720 calls 004B4040; establishes downstream writer layering, not complete writer semantics or uncapped actual stock"
+    }
+  ],
+  "evidence": {
+    "level": "source-listing-reconstruction",
+    "profile": "production-quantity-resolved-f32-v1",
+    "source": "docs/sources/production-quantity.json",
+    "originalRange": "005C63D0..005C64CD",
+    "scope": "resolved three-slot getter/helper observations and explicit supported facility ST0 bitword; numerical return only",
+    "stockOriginalVerified": false,
+    "originalExecutableExecuted": false,
+    "commandIntegrated": false
+  },
+  "remainingOpen": [
+    "0047A630 validator, 00489090 intelligence getter and 004890F0 skill helper full bodies and mutable call semantics",
+    "005C5F90 facility selection full body, original 0077B334/00849118/0074E718 constant bytes and actual ST0 provenance",
+    "city virtual+0x48 ownership semantics and clean original difficulty/state provenance",
+    "00707A74 complete same-source-version conversion body and original FPU runtime/exception behavior",
+    "all-invalid sentinel path and other unsupported factors or exceptional arithmetic are not accepted by this API",
+    "complete production eligibility, original equipment IDs, fees/AP/EXP/merit/TP, duration and completion scheduling",
+    "actual stock writer 004B4040, stock caps and actual credited delta versus numerical return",
+    "Train/EndTurn, state/save/replay and native runtime integration",
+    "clean-stock PC-PK1.1 executable/patch identity, Vanilla/console and cross-version equivalence"
+  ],
+  "counterexamples": [
+    {
+      "role": "first-slot-null-is-valid",
+      "getterAl": [
+        null,
+        100,
+        null
+      ],
+      "skillApplied": false,
+      "factorBits": "3F800000",
+      "superApplied": false,
+      "returnedQuantity": 2000
+    },
+    {
+      "role": "zero-al-is-valid-no-minimum-1010",
+      "getterAl": [
+        0,
+        null,
+        null
+      ],
+      "skillApplied": false,
+      "factorBits": "3F800000",
+      "superApplied": false,
+      "returnedQuantity": 1000
+    },
+    {
+      "role": "truncate-after-facility",
+      "getterAl": [
+        1,
+        1,
+        null
+      ],
+      "skillApplied": false,
+      "factorBits": "3FC00000",
+      "superApplied": false,
+      "returnedQuantity": 1522
+    },
+    {
+      "role": "skill-before-conversion",
+      "getterAl": [
+        1,
+        1,
+        null
+      ],
+      "skillApplied": true,
+      "factorBits": "3FC00000",
+      "superApplied": false,
+      "returnedQuantity": 3045
+    },
+    {
+      "role": "super-after-conversion",
+      "getterAl": [
+        1,
+        1,
+        null
+      ],
+      "skillApplied": false,
+      "factorBits": "3FC00000",
+      "superApplied": true,
+      "returnedQuantity": 3044
+    },
+    {
+      "role": "no-9000-cap",
+      "getterAl": [
+        100,
+        100,
+        100
+      ],
+      "skillApplied": true,
+      "factorBits": "3FC00000",
+      "superApplied": true,
+      "returnedQuantity": 18000
+    },
+    {
+      "role": "full-uint8-domain",
+      "getterAl": [
+        255,
+        255,
+        255
+      ],
+      "skillApplied": true,
+      "factorBits": "3FC00000",
+      "superApplied": true,
+      "returnedQuantity": 36600
+    }
+  ]
+}
