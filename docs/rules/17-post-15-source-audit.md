@@ -9,6 +9,8 @@ A1–E2 的原始总表、逐项结论、源码地址和未决问题已完整保
 
 E3 的正文、来源、纠错、版本边界与测试说明见 [攻防面板与兵种基础参数](18-unit-panels.md)。
 
+巡查当前更正（2026-10-08）：[稳定输入限定数值核](patrol-security-gain.md)以原79条/204字节与另列MOD7条/21字节为界，已闭合先/28+2、完整EAX非零半减、严格>100上clip的整数顺序。早期记录“缺公式体/半减仅经验”不再代表当前证据；历史页保持原文，helper距离/stock归属及完整命令仍open。
+
 ## 当前总表
 
 | 编号 | 规则点 | 审计与写回 | 详细结论与剩余缺口 |
@@ -36,7 +38,7 @@ E3 的正文、来源、纠错、版本边界与测试说明见 [攻防面板与
 | C7 | 建设速度与开发日数 | 公开速率全文及稳定值核已恢复；完整工期/writer/调度仍缺，旧表重建不等价 | [当前更正](domestic-construction-rate.md)；[历史记录](audit-history/17-through-e2.md) |
 | C8 | 商人 / 粮食交易 | 已写回，政治连续闭式仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
 | C9 | 行动力 | 已写回，主恢复函数体仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
-| C10 | 治安 | 已写回，巡查/贼的部分边界仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
+| C10 | 治安 | 巡查完整公开数值函数与稳定输入核已补；helper/getter/资格/扣费/writer/调度及stock仍缺，贼的边界保留 | [当前更正](patrol-security-gain.md)；[历史详细记录](audit-history/17-through-e2.md) |
 | C11 | 灾害 | 已写回，发生率/持续/部分损失仍缺 | [历史详细记录](audit-history/17-through-e2.md) |
 | D1 | 武将生命周期 / 状态字段 | 已写回 | [历史详细记录](audit-history/17-through-e2.md) |
 | D2 | 登场 / 寿命 / 死亡 | 已写回，核心寿命函数仍缺 | [历史详细记录](audit-history/17-through-e2.md) |

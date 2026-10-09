@@ -33,6 +33,8 @@
 
 ## 最新审计入口
 
+新增[巡查治安增量限定数值核](patrol-security-gain.md)：公开005CBA10..005CBADB原79条/204字节与另列MOD7条/21字节隔离；稳定已解析1～3个uint8统率（首槽必有效）、城市byte和helper完整uint32 EAX，先/28+2、非零半减、严格>100上clip，保留负delta。首null不模拟原生gate0，helper/getter/资格/扣费/writer/技巧点/调度/stock仍缺；本地候选未发布，验收另记。
+
 新增[内政建设速度限定数值核](domestic-construction-rate.md)：已找到完整公开005BB1D0..2AA正文；稳定uint8政治与uint16设施耐久给出 `max(maxPolitics+floor(sumPolitics/2),floor((D-floor(D/4))/9))`。星号MOD隔离，Wiki重建不等价；完整工期/初始writer/进度/完成调度/getter/stock仍缺。
 
 新增[S1特技培育限定资格核](pk-skill-training-s1.md)：类别2分支的native signed32标量纯函数，完整caller/helper字节绑定；已有不同技能不阻挡，越界目标保留caller取反结果。不含完成/费用/调度，也不映射攻略ID；PR45五维与旧静态资料、运行时合同不变。

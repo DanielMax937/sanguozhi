@@ -2941,7 +2941,7 @@ empirical-exact formula
 
 ## 10. 治安
 
-`[COMMON/PK][mixed: PC-PK1.1 reverse-engineered + official-confirmed + empirical-high patrol]`
+`[COMMON/PK][mixed: PC-PK1.1 reverse-engineered + official-confirmed + source-listing-reconstruction patrol numerical core]`
 
 治安不是单一“防贼数值”。原作里它同时进入：
 
@@ -2998,17 +2998,23 @@ struct_city.CityActions bit0 = 已巡查
 
 ### 10.3 巡查治安上升公式
 
-`[COMMON][empirical-high]`
+`[311PK public listing][source-listing-reconstruction][stable resolved inputs only]`
 
-长期日文实测给出的普通状态公式：
+固定来源中的完整 `005CBA10..005CBADB` 公开函数已取得，原路径79条/204字节与另列“修改 - 巡查倍率可调整”7条/21字节严格分开。当前独立数值API、原GBK/UTF-8可逆身份、错字说明与全部支持域见[巡查治安增量限定数值核](patrol-security-gain.md)。它不是完整命令，也未认证 clean-stock PC-PK1.1 或跨版本等价。
+
+前提是设施、首槽武将、解析后城市三个gate已通过，且各槽校验、getter与读取稳定。首槽必须是已解析uint8，0合法，null不支持；尾槽null/缺少表示稳定空槽。统率输入是 `00489070` 返回的 `AL`，不能直接替换成基础属性。
 
 ```ts
-patrolGain = floor(sumLeadership / 28) + 2
+baseGain = floor(sumResolvedLeadershipAL / 28) + 2
+// TEST EAX,EAX: full uint32 zero/nonzero observation of 004B99B0
+afterPressure = pressureHelperEax === 0 ? baseGain : floor(baseGain / 2)
+capBranch = publicOrderByte + afterPressure > 100
+returnedDelta = capBranch ? 100 - publicOrderByte : afterPressure
 ```
 
-其中 `sumLeadership` 是最多3名执行武将的统率合计。
+顺序是先 `/28 + 2`、再按helper完整EAX非零半减、最后严格大于100才上clip；等于100保留非clip分支。输入保留三uint8总和0..765和城市byte0..255，基础量2..29；原码没有lower clamp，治安101返回−1、255返回−155。工程拒绝不是原生gate返回0。
 
-锚点：
+长期实测普通状态的锚点仍相容：
 
 | 统率合计 | 基础治安上升 |
 |---:|---:|
@@ -3021,17 +3027,11 @@ patrolGain = floor(sumLeadership / 28) + 2
 | 252 | 11 |
 | 280～300 | 12 |
 
-正常能力上限下三人统率合计最多300，因此普通巡查理论最大上升为12；最终仍受治安100封顶。
+若采用普通能力每人最多100的额外前提，三人总和最多300，基础最大12；这不是API的原生byte上限。
 
-官方说明书只给出“敌军在都市周围2格时上升量减少”；同期玩家实测称巡查效果约减半。由于当前公开逆向只定位到巡查执行点 `005CBF95`，没有展开完整公式体，所以当前 fidelity 可采用：
+半减的奇数取整已由公开字节闭合，不再只有empirical-high证据。未闭合的是 `004B99B0` 内部判定：官方说明书称“都市周围2格”，源注释称“城市3格、港关2格”，本批不裁决或实现距离/敌我/联盟规则；输入明确为 `pressureHelperEax`，不能把它改写成已经证明的 `enemyWithin2`。
 
-```ts
-if (enemyWithin2) {
-  patrolGain = floor(patrolGain / 2)
-}
-```
-
-但这条的**奇数取整边界仍标 empirical-high**，不能写成源码 confirmed。
+旧文“只定位到005CBF95且缺完整公式体”已更正：执行listing在 `005CBE8C` 调数值核，`005CBE9B` 调治安writer；`005CBF95` 是AP扣除调用。writer实际返回值与本API返回增量不自动等价，技巧点请求不实现也不串接。
 
 ### 10.4 征兵量如何吃治安
 
@@ -3303,8 +3303,8 @@ PC-PK1.1 default：按 threshold 80 -> 60 的 empirical-high 规则
 
 - `CitySecurity` 是独立城市运行时字段，正常0～100；
 - 巡查100金、20AP、最多3人、每城市每旬一次；
-- 普通巡查上升 `floor(统率和/28)+2`，正常最高12，标 empirical-high；
-- 敌军2格内巡查效果降低，当前半减规则标 empirical-high；
+- 巡查公开原函数在稳定已解析输入下先 `floor(统率和/28)+2`，完整uint8总和允许0..765、基础量2..29；普通三人各≤100时基础最高12；
+- `004B99B0` 完整EAX非零时基础量向下半减，再严格>100上clip；公开字节闭合整数顺序，helper内部距离规则仍未恢复；
 - 治安直接进入征兵量公式；
 - 征兵掉治安精确为 `floor(actualRecruited/(魅力和+100))`；
 - 名声通过实际征兵数间接放大治安损失，不存在第二次独立1.5倍；
@@ -3318,13 +3318,14 @@ PC-PK1.1 default：按 threshold 80 -> 60 的 empirical-high 规则
 
 仍 open：
 
-- 巡查在敌军2格内的精确整数取整顺序；
-- PC-PK1.1 巡查治安上升完整函数体；
+- 巡查 `004B99B0` 压力helper本体，官方都市2格与源注释城市3格/港关2格的归属；
+- 巡查getter/validator/resolver、完整资格/费用/治安writer/技巧点writer/调度，以及clean-stock PC-PK1.1和跨版本证明；
 - 贼/异民族根城每旬生成概率、候选格算法、刷新周期与兵力；
 - 威压不同 PC 版本的精确边界；
 - 任何“治安影响自然灾害概率”的直接公式。
 
 来源：
+- 巡查固定公开原函数、独立MOD、命令调用边界与许可：[专项证据](patrol-security-gain.md#3-固定来源许可与原路径mod-隔离)
 - 官方 PK 说明书：巡查100金/20AP/最多3人/每旬一次、统率合计、治安80防贼、敌军2格效果下降
   https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
 - 311MemoryResearch `Func-内政01-计算征兵数量.txt` / `Func-内政02-执行征兵.txt`

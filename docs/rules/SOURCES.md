@@ -470,6 +470,12 @@ rate = max(
 
 ### C10 治安专项
 
+- 巡查限定数值核：[固定提交原函数](https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政08-计算巡查效果.txt)，原GBK blob `71b6c28bdc4c3d0f591d0af5ee813c8fb9f4134a`；原79条/204字节与“修改 - 巡查倍率可调整”7条/21字节分隔
+  - [UTF-8可逆快照](../sources/patrol-security-gain-original.txt)、[证据记录](../sources/patrol-security-gain.json)、[闭合schema](../sources/patrol-security-gain.schema.json)、[Apache-2.0许可](../sources/patrol-security-gain-LICENSE.txt)、[完整支持域](patrol-security-gain.md)
+  - 稳定已解析统率AL合计先除28加2，`004B99B0`完整EAX非零再向下半减，最后严格大于100上clip；城市byte0..255保留负delta。原第65行`sar dl,04`保留，字节C1 FA04实为SAR EDX,4
+  - [固定执行巡查context](https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政09-执行巡查.txt)与[本地快照](../sources/patrol-security-gain-command-context.txt)：005CBE8C调数值核，005CBE9B调治安writer，005CBF95扣AP；技巧点消费writer返回，本批不实现、不串接
+  - 源注释城市3格/港关2格与官方都市2格并列保留；helper本体未取得。来源未提供本函数clean-stock EXE hash或精确补丁归属，不升级为stock PC-PK1.1或跨版本认证
+
 - 《三國志11 with パワーアップキット》官方说明书：
   - 巡查费用100金、20行动力、最多3人；
   - 每都市每回合仅1次；
@@ -509,7 +515,7 @@ rate = max(
   - 威压降低贼军出现治安阈值。
   https://dl.3dmgame.com/patch/26091.html
 
-当前证据等级：巡查基础公式 `empirical-high`；征兵掉治安、换季自然下降、整备政令为 PC-PK1.1 `reverse-engineered`。未把“治安影响瘟疫/蝗灾概率”写成规则。
+当前证据等级：巡查稳定已解析输入数值核为 `source-listing-reconstruction`，包含半减奇数取整和严格上clip分支；旧实测锚点相容。helper距离谓词、getter、命令资格/费用/writer/调度及clean-stock/跨版本仍open。征兵掉治安、换季自然下降、整备政令沿用既有 PC-PK1.1 `reverse-engineered` 标记，不因本批巡查证据扩级。未把“治安影响瘟疫/蝗灾概率”写成规则。
 
 ### C11 灾害专项
 

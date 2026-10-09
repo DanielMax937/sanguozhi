@@ -13,3 +13,5 @@ export { PK_SKILL_TRAINING_S1, qualifyPkSkillTraining } from './pk-skill-trainin
 export type { PkSkillTrainingInput, PkSkillTrainingRejectionReason, PkSkillTrainingRejection, PkSkillTrainingEligibility } from './pk-skill-training.ts';
 export { DOMESTIC_CONSTRUCTION_RATE, calculateDomesticConstructionRate } from './domestic-construction-rate.ts';
 export type { DomesticConstructionRateInput, DomesticConstructionRateRejectionReason, DomesticConstructionRateRejection, DomesticConstructionRateReceipt, DomesticConstructionRateResult } from './domestic-construction-rate.ts';
+export { PATROL_SECURITY_GAIN, calculatePatrolSecurityGain } from './patrol-security-gain.ts';
+export type { PatrolSecurityGainInput, PatrolSecurityGainRejectionReason, PatrolSecurityGainRejection, PatrolSecurityGainReceipt, PatrolSecurityGainResult } from './patrol-security-gain.ts';
