@@ -23,7 +23,8 @@ npm run play -- --growth-fixture
 
 交互命令支持用成对单引号或双引号包住整个参数，例如`save "存档目录/训练 存档.json"`、`load "存档目录/训练 存档.json"`（目录需已存在）。反斜杠按字面保留，不做shell展开；引号参数后必须空白或行尾，不支持部分参数拼接。命令的缺失、空或多余参数及未闭合引号会在执行前拒绝，空白行忽略。读档失败保留当前会话；输入结束会处理已收到的命令并等待存取档完成，无需额外输入`quit`。
 
-- [生产价格捕获输入整数核](docs/rules/production-price.md)：原45条/113字节，另列MOD6条/14字节独立；uint16已保存原价与特产helper完整uint32 EAX输入，仅AL非零才floor(8p/10)，EAX256不折、257折。无最低1，不捏造价格表/ID/helper/扣钱库存writer/命令/调度；本地候选未发布，新树验收另记
+- [生产数量显式binary32限定核](docs/rules/production-quantity.md)：原88条/254字节与两套MOD隔离；signed32类型早返0/1，0..4精确三槽getter AL与完整skill EAX、显式倍率bitword，仅difficulty2才观察city virtual。先技能倍增、倍率后向零转换、再超级倍增；无9000cap，不以返回量代替实际库存增量。当前本地候选未发布，新树验收另记
+- [生产价格捕获输入整数核](docs/rules/production-price.md)：原45条/113字节，另列MOD6条/14字节独立；uint16已保存原价与特产helper完整uint32 EAX输入，仅AL非零才floor(8p/10)，EAX256不折、257折。无最低1，不捏造价格表/ID/helper/扣钱库存writer/命令/调度；PR #50已合并交付，其原发布前冻结文字不代表尚未交付
 - [巡查治安增量限定数值核](docs/rules/patrol-security-gain.md)：稳定已解析1～3个uint8统率（首槽必有效）、城市byte与压力helper完整uint32 EAX；先总和/28+2、非零半减、严格>100上clip，允许负delta；原79条/204字节与另列MOD7条/21字节隔离。PR #49已交付；getter/helper/资格/扣费/writer/调度/stock及技巧点串接仍缺，不接入训练沙盒
 - [内政建设速度限定数值核](docs/rules/domestic-construction-rate.md)：公开005BB1D0..2AA非星号路径，稳定已解析uint8政治与uint16设施耐久；最高政治+总和一半与除9耐久下界取高；完整工期/writer/进度/调度/getter/stock仍缺，不接入训练沙盒
 - [自然忠诚候选静态纠错](docs/rules/natural-loyalty-candidate-boundary.md)：相性返回AL严格>25、低义理高野望、或004889E0非零三选一；俘虏绕过这组三条，完整callee/writer/RNG/stock仍缺，不新增忠诚runtime

@@ -17,3 +17,5 @@ export { PATROL_SECURITY_GAIN, calculatePatrolSecurityGain } from './patrol-secu
 export type { PatrolSecurityGainInput, PatrolSecurityGainRejectionReason, PatrolSecurityGainRejection, PatrolSecurityGainReceipt, PatrolSecurityGainResult } from './patrol-security-gain.ts';
 export { PRODUCTION_PRICE, calculateProductionPrice } from './production-price.ts';
 export type { ProductionPriceInput, ProductionPriceRejectionReason, ProductionPriceRejection, ProductionPriceReceipt, ProductionPriceResult } from './production-price.ts';
+export { PRODUCTION_QUANTITY, calculateProductionQuantity } from './production-quantity.ts';
+export type { ProductionQuantityFactorBits, ProductionQuantitySlot, ProductionQuantityInput, ProductionQuantityRejectionReason, ProductionQuantityRejection, ProductionQuantityEarlyReceipt, ProductionQuantitySlotReceipt, ProductionQuantityReceipt, ProductionQuantityResult } from './production-quantity.ts';

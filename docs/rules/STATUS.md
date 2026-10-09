@@ -1,12 +1,13 @@
 # 规则审计当前状态
 
-更新：2026-10-09 UTC。当前生产价格限定整数核基线：PR #49已合并的 main `1760b38e169bffc2953b17efe95674705a927c59`；本批为本地候选，尚未发布远端。
+更新：2026-10-09 UTC。当前生产数量限定数值核基线：PR #50已合并的 main `946bd63a83f4eae5256d4be8ac7d2674e01cedb3`；本批为本地候选，尚未发布远端。
 
 ## 当前交付与仍缺证据
 
-PR #42～48已交付项保留各自范围；PR #49巡查数值核也已合并。本轮只加入已捕获uint16原价与已观察特产helper EAX的生产价格纯函数，不增加完整生产命令、价格表/ID/helper、费用/库存writer或调度，不修改Train/EndTurn与存档。本树全新验收另记，历史P0/PR验证数字不代表本批结果。
+PR #42～48已交付项保留各自范围；PR #49巡查与PR #50价格数值核均已合并。本轮只加入三槽getter AL、完整skill EAX与显式设施ST0 bitword的生产数量限定纯函数，不增加完整生产命令、价格表/ID/helper、费用/库存writer或调度，不修改Train/EndTurn与存档。本树全新验收另记，历史P0/PR验证数字不代表本批结果。
 
-- 本批[生产价格整数核](production-price.md)：原005C6350..005C63C0完整45条/113字节，MOD6条/14字节独立；仅AL非零才八折向下取整，EAX256不折、257折，合法零值无最低1；005C637A读取值在helper前保存，C1FA02解为SAR EDX,2。两层校验与helper原体、原表/ID映射、完整命令/扣写/调度/stock及跨版本仍缺。独立字节oracle、全字域与新树聚合记录在外部验收包，发布另须批准
+- 本批[生产数量限定核](production-quantity.md)：原88条/254字节及两套MOD隔离，signed32类型早退0/1，精确三槽无首槽gate；仅支持显式3F800000/3F99999A/3FC00000。先技能倍增、倍率后向零转换、再条件超级倍增，无9000cap；完整callee、设施选择与常量bytes、city virtual、库存writer/调度/stock仍open。全无效槽和任意浮点域不支持，本地候选尚未发布，验收按新树另记
+- PR #50已交付[生产价格整数核](production-price.md)：原005C6350..005C63C0完整45条/113字节，MOD6条/14字节独立；仅AL非零才八折向下取整，EAX256不折、257折，合法零值无最低1；005C637A读取值在helper前保存，C1FA02解为SAR EDX,2。两层校验与helper原体、原表/ID映射、完整命令/扣写/调度/stock及跨版本仍缺。该已交付价格核的独立字节oracle、全字域与聚合记录属于PR #50，不能替代本数量新树验收
 - PR #49已交付[巡查治安增量纯数值核](patrol-security-gain.md)：原79条/204字节与MOD7条/21字节隔离；首槽有效、稳定uint8统率/城市byte、pressureHelperEax完整uint32，先floor(sum/28)+2、非零半减、严格>100上clip。负delta保留；getter/helper/资格/费用/writer/TP/调度及stock仍open。此前本地候选文字是发布前冻结记录，不能否认已交付
 - PR #48已交付[内政建设速率纯数值核](domestic-construction-rate.md)：公开005BB1D0..005BB2AA原文完整；稳定getter/设施表域为max(maxPolitics+floor(sumPolitics/2),floor((D-floor(D/4))/9))，0～3个uint8政治及uint16耐久。原GBK Git blob、84条/219字节、9条星号MOD隔离可核；不证明初始耐久writer、完整工期、getter实现、逐旬推进、完成调度或stock/跨版本等价。其历史验证不用于本批新增代码
 - PR #47已交付[自然忠诚候选静态纠错](natural-loyalty-candidate-boundary.md)：普通前置豁免后为unsigned AL>25、signed义理<=1且野望>=3、或004889E0完整EAX非零三选一；俘虏跳过全部三条。固定公开source/blob与两套MOD分隔可复核；callee/writer/降量/RNG/stock/runtime继续open，已发布的审查范围不扩展为callee/writer或运行时认证
