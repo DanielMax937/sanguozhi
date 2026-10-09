@@ -4,6 +4,8 @@
 
 建设项更正（2026-10-08）：crosscheck中的建设天数仅保留攻略观察；当前建设速度数值以[稳定值限定原函数核](rules/domestic-construction-rate.md)为准。`max(maxPolitics+floor(sumPolitics/2),floor((D-floor(D/4))/9))` 与旧Wiki综合政治重建不等价；完整日数、初始writer、进度/完成调度、getter及stock证明仍缺，不能据旧表直接实现完整建设。
 
+巡查项更正（2026-10-08）：当前[稳定输入巡查数值核](rules/patrol-security-gain.md)绑定完整公开函数；先floor(统率AL和/28)+2、helper完整EAX非零半减、最后严格>100上clip。首槽必须有效，保留uint8治安全域与负增量；helper内部距离、getter/资格/费用/writer/调度及stock仍缺，不据此实现完整命令。
+
 来源：[戦争](https://w.atwiki.jp/sangokushi11/pages/85.html)、[兵科](https://w.atwiki.jp/sangokushi11/pages/91.html)、[技巧研究](https://w.atwiki.jp/sangokushi11/pages/90.html)。
 
 没有出处、但不和已有出处冲突的数字，也按本文实现。这些条目标了「存疑」。清单和因冲突而没采用的候选，在 `docs/open-questions.md`。冲突时用有出处的。
@@ -597,7 +599,7 @@ PK 超级难度下，用论客把外交打成舌战的概率长期资料为 20%�
 
 ## 训练以外的城市指令
 
-存疑，巡查：治安 + 5 + floor(统率和魅力中较高者 × 0.15)，上限 100。
+巡查：旧 `5 + floor(max(统率,魅力)×0.15)` 候选式撤回。按[巡查限定数值核](rules/patrol-security-gain.md)，在设施/首将/城市gate已通过且读取稳定时，先 `floor(已解析统率AL合计/28)+2`，pressure helper完整EAX非零再半减，最后仅加后治安严格>100时返回 `100−原治安byte`。治安101..255会返回负增量，首槽null不受支持；资格、地图压力判定、费用、writer与技巧点/调度仍不实现。
 
 褒赏：官方为**每人100金 + 每人5行动力**，即时、无执行武将；一次可选多人，但同一武将每回合最多一次，显示忠诚100或正在部队中时不能执行。`00489140 HasPraised` 与“每人每回合一次”一致。忠诚上升量不是固定 +3～+10：实机可通过S/L得到不同上升值，君主魅力会影响效果，但精确 RNG / 魅力 / 义理闭式仍 open。一次褒赏可以把真实忠诚99推到100以上；底层不要clamp到100。授予宝物另耗10AP，宝物价值越高忠诚上升越多。
 

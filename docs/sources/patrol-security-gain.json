@@ -1,0 +1,330 @@
+{
+  "profileId": "patrol-security-gain-stable-v1",
+  "scope": "standalone-resolved-stable-input-numerical-gain-only",
+  "level": "source-listing-reconstruction",
+  "stockOriginalVerified": false,
+  "originalExecutableExecuted": false,
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "内存资料/整理/Func-内政08-计算巡查效果.txt",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政08-计算巡查效果.txt",
+    "gitBlobSha1": "71b6c28bdc4c3d0f591d0af5ee813c8fb9f4134a",
+    "originalEncoding": "GBK",
+    "originalBytes": 6637,
+    "originalSha256": "8f6c8f52f13c83804629202238e0db60c0e9f048c4b891501050c618ba9fc315",
+    "snapshot": "docs/sources/patrol-security-gain-original.txt",
+    "snapshotEncoding": "UTF-8",
+    "snapshotBytes": 7013,
+    "snapshotSha256": "3989a39a14e15d83c6f8ed7ef5b057a3fed92441c26ff3cc3ec60c0a08e6d52a",
+    "byteAuthority": "public disassembly listing only; not a verified stock executable",
+    "transformation": "UTF-8 transcoding only; original GBK bytes recovered reversibly and verified against the pinned Git blob; source comments and mnemonic typos unchanged"
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE",
+    "gitBlobSha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+    "snapshot": "docs/sources/patrol-security-gain-LICENSE.txt",
+    "bytes": 11357,
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "domain": {
+    "leadershipSlots": 3,
+    "minimumLeadershipSlots": 1,
+    "leadership": [
+      0,
+      255
+    ],
+    "firstSlot": "required valid resolved uint8; zero is valid, null is unsupported",
+    "emptyTrailingSlot": null,
+    "missingTrailingSlots": "empty",
+    "publicOrderByte": [
+      0,
+      255
+    ],
+    "pressureHelperEax": [
+      0,
+      4294967295
+    ],
+    "preconditions": "facility, first officer and resolved city pass 0047A630; pointer resolution, repeated validation and reached reads are stable",
+    "getterAssumption": "00489070 returns a stable already-resolved uint8 AL for each valid supplied officer; no raw/base leadership mapping inferred",
+    "pressureAssumption": "004B99B0 full uint32 EAX is observed externally; no distance, enemy or alliance predicate implemented",
+    "validation": "engineering input checks, not recovered command eligibility or native gate-return-zero projection"
+  },
+  "constants": {
+    "leadershipDivisor": 28,
+    "baseOffset": 2,
+    "pressureDivisor": 2,
+    "publicOrderCap": 100,
+    "signedDivisionMagic": "0x92492493"
+  },
+  "arithmetic": "B=floor(sum(resolvedValidLeadershipAL)/28)+2; H=pressureHelperEax===0?B:floor(B/2); returnedDelta=publicOrderByte+H<=100?H:100-publicOrderByte",
+  "originalListing": {
+    "start": "005CBA10",
+    "endInclusive": "005CBADB",
+    "endExclusive": "005CBADC",
+    "instructionCount": 79,
+    "byteLength": 204,
+    "sha256": "57471a89512c477dadcab409565d8b38fcb428963e894f828972714d87687543",
+    "calls": [
+      {
+        "address": "005CBA18",
+        "target": "0047A630"
+      },
+      {
+        "address": "005CBA30",
+        "target": "0047A630"
+      },
+      {
+        "address": "005CBA42",
+        "target": "004866F0"
+      },
+      {
+        "address": "005CBA4C",
+        "target": "0047A630"
+      },
+      {
+        "address": "005CBA65",
+        "target": "0047A630"
+      },
+      {
+        "address": "005CBA73",
+        "target": "00489070"
+      },
+      {
+        "address": "005CBAA2",
+        "target": "004B99B0"
+      }
+    ],
+    "branches": [
+      {
+        "address": "005CBA22",
+        "target": "005CBAD6"
+      },
+      {
+        "address": "005CBA3A",
+        "target": "005CBAD6"
+      },
+      {
+        "address": "005CBA56",
+        "target": "005CBAD6"
+      },
+      {
+        "address": "005CBA6F",
+        "target": "005CBA7D"
+      },
+      {
+        "address": "005CBA81",
+        "target": "005CBA60"
+      },
+      {
+        "address": "005CBAAB",
+        "target": "005CBAB6"
+      },
+      {
+        "address": "005CBAC7",
+        "target": "005CBAD0"
+      }
+    ]
+  },
+  "excludedMod": {
+    "marker": "修改 - 巡查倍率可调整",
+    "start": "005CBA83",
+    "endInclusive": "005CBA97",
+    "endExclusive": "005CBA98",
+    "instructionCount": 7,
+    "listedByteLength": 21,
+    "listedBytesSha256": "4a39ecdd13e7d2e72465ff60113b4a717810bc40c724822472fd6efebeaa8f50",
+    "displayedMultiplier": 100,
+    "displayedDivisor": 2800,
+    "displayedSettingEquivalentForAllSupportedSums": true,
+    "executed": false
+  },
+  "evidence": {
+    "entryGates": [
+      "005CBA18",
+      "005CBA30",
+      "005CBA4C"
+    ],
+    "gateFailureReturn": [
+      "005CBAD6..005CBADB"
+    ],
+    "slotsAndStableLeadership": [
+      "005CBA60..005CBA81"
+    ],
+    "leadershipDivisionAndOffset": [
+      "005CBA87..005CBA9E"
+    ],
+    "pressureHelperAndFullEaxTest": [
+      "005CBAA2..005CBAAB"
+    ],
+    "pressureHalving": [
+      "005CBAAD..005CBAB4"
+    ],
+    "publicOrderByteAndStrictUpperClip": [
+      "005CBABA..005CBACE"
+    ],
+    "selectAndReturn": [
+      "005CBAD0..005CBAD5"
+    ],
+    "excludedMod": [
+      "005CBA83..005CBA97 in separate 修改 section"
+    ]
+  },
+  "sourceCorrections": [
+    {
+      "address": "005CBA90",
+      "bytes": "C1 FA 04",
+      "sourceMnemonic": "sar dl,04",
+      "byteDerivedMnemonic": "sar edx,4",
+      "snapshotChanged": false
+    }
+  ],
+  "commandContext": {
+    "source": {
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/Func-内政09-执行巡查.txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政09-执行巡查.txt",
+      "gitBlobSha1": "8743c1da9deda198dbea7be004a36203b4ad8c4a",
+      "originalEncoding": "GBK",
+      "originalBytes": 18222,
+      "originalSha256": "71bd497a64593687ba7d42ad2c75f9e811b0db6b323cf59b28602f32aefdfe16",
+      "snapshot": "docs/sources/patrol-security-gain-command-context.txt",
+      "snapshotEncoding": "UTF-8",
+      "snapshotBytes": 18845,
+      "snapshotSha256": "c3dd3d3e33bbc0468c63c01ef8cc3697dcfe3bdf5552cf9486f11ea6e8a7d4fe",
+      "byteAuthority": "public disassembly listing only; not a verified stock executable",
+      "transformation": "UTF-8 transcoding only; original GBK bytes recovered reversibly and verified against the pinned Git blob; source comments and mnemonic typos unchanged"
+    },
+    "role": "caller and non-integration boundary only; not a recovered complete patrol command",
+    "numericCall": "005CBE8C -> 005CBA10",
+    "securityWriterCall": "005CBE9B -> 004B3ED0",
+    "writerReturnSaved": "005CBEA0 stores writer EAX in EDI",
+    "actionPointsCall": "005CBF95 -> 005B9340",
+    "techniquePointsSlice": "005CBF61..005CBF79 consumes writer return, not this API returnedDelta",
+    "techniquePointsImplemented": false
+  },
+  "remainingOpen": [
+    "00489070 leadership getter internals, base/display/affected attribute mapping and mutable behavior",
+    "0047A630 validation and 004866F0 city resolver internals; mutable pointer/read behavior",
+    "004B99B0 pressure helper internals; city 3-cell/port-gate 2-cell source comments versus official city 2-cell wording",
+    "complete patrol command eligibility, officer/facility/city gates, selection and fees",
+    "004B3ED0 public-order writer and actual credited delta; 004B6580 technique-points writer and net credit",
+    "technique-points request arithmetic is not implemented or wired to returnedDelta",
+    "patrol status writes, dispatch, scheduler, Train/EndTurn, mission, save and replay integration",
+    "clean-stock PC-PK1.1, exact executable/patch identity, Vanilla, console and cross-version equivalence"
+  ],
+  "counterexamples": [
+    {
+      "resolvedLeadershipSlots": [
+        0
+      ],
+      "publicOrderByte": 0,
+      "pressureHelperEax": 0,
+      "baseGain": 2,
+      "afterPressure": 2,
+      "returnedDelta": 2,
+      "capBranch": false,
+      "role": "valid-first-slot-zero-is-not-null"
+    },
+    {
+      "resolvedLeadershipSlots": [
+        28
+      ],
+      "publicOrderByte": 0,
+      "pressureHelperEax": 1,
+      "baseGain": 3,
+      "afterPressure": 1,
+      "returnedDelta": 1,
+      "capBranch": false,
+      "role": "divide-and-add-before-halving"
+    },
+    {
+      "resolvedLeadershipSlots": [
+        84
+      ],
+      "publicOrderByte": 97,
+      "pressureHelperEax": 1,
+      "baseGain": 5,
+      "afterPressure": 2,
+      "returnedDelta": 2,
+      "capBranch": false,
+      "role": "halve-before-upper-clip"
+    },
+    {
+      "resolvedLeadershipSlots": [
+        28
+      ],
+      "publicOrderByte": 97,
+      "pressureHelperEax": 0,
+      "baseGain": 3,
+      "afterPressure": 3,
+      "returnedDelta": 3,
+      "capBranch": false,
+      "role": "equality-does-not-take-clip-branch"
+    },
+    {
+      "resolvedLeadershipSlots": [
+        0
+      ],
+      "publicOrderByte": 101,
+      "pressureHelperEax": 0,
+      "baseGain": 2,
+      "afterPressure": 2,
+      "returnedDelta": -1,
+      "capBranch": true,
+      "role": "no-lower-clamp"
+    },
+    {
+      "resolvedLeadershipSlots": [
+        0
+      ],
+      "publicOrderByte": 255,
+      "pressureHelperEax": 0,
+      "baseGain": 2,
+      "afterPressure": 2,
+      "returnedDelta": -155,
+      "capBranch": true,
+      "role": "full-public-order-byte-domain"
+    },
+    {
+      "resolvedLeadershipSlots": [
+        255,
+        255,
+        255
+      ],
+      "publicOrderByte": 0,
+      "pressureHelperEax": 0,
+      "baseGain": 29,
+      "afterPressure": 29,
+      "returnedDelta": 29,
+      "capBranch": false,
+      "role": "full-leadership-byte-domain"
+    },
+    {
+      "resolvedLeadershipSlots": [
+        28
+      ],
+      "publicOrderByte": 0,
+      "pressureHelperEax": 2,
+      "baseGain": 3,
+      "afterPressure": 1,
+      "returnedDelta": 1,
+      "capBranch": false,
+      "role": "any-nonzero-eax"
+    },
+    {
+      "resolvedLeadershipSlots": [
+        28
+      ],
+      "publicOrderByte": 0,
+      "pressureHelperEax": 4294967295,
+      "baseGain": 3,
+      "afterPressure": 1,
+      "returnedDelta": 1,
+      "capBranch": false,
+      "role": "all-32-eax-bits-test"
+    }
+  ]
+}
