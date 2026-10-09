@@ -1,0 +1,193 @@
+{
+  "profileId": "production-price-resolved-v1",
+  "scope": "standalone-saved-resolved-input-numerical-price-only",
+  "level": "source-listing-reconstruction",
+  "stockOriginalVerified": false,
+  "originalExecutableExecuted": false,
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "内存资料/整理/Func-内政10-计算生产价格.txt",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政10-计算生产价格.txt",
+    "gitBlobSha1": "928b34bd8b9f06057dd44e9639db92dacc364c85",
+    "originalEncoding": "GBK",
+    "originalBytes": 4178,
+    "originalSha256": "6fbca37bcd8eaa8d1ac9c919100d3fa9ee33c49e49cc15786de06db4e86fe013",
+    "snapshot": "docs/sources/production-price-original.txt",
+    "snapshotEncoding": "UTF-8",
+    "snapshotBytes": 4389,
+    "snapshotSha256": "698a166f45fc1454349a5a88aeb9cd08c2e0093233ab6dc9604a20ade780f67c",
+    "byteAuthority": "public disassembly listing only; not an independently verified stock executable",
+    "transformation": "reversible UTF-8 transcoding only; original comments, MOD and incorrect sar dl mnemonic preserved"
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE",
+    "gitBlobSha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+    "snapshot": "docs/sources/production-price-LICENSE.txt",
+    "bytes": 11357,
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "domain": {
+    "savedBasePriceWord": [
+      0,
+      65535
+    ],
+    "specialtyHelperEax": [
+      0,
+      4294967295
+    ],
+    "preconditions": "both 0047A630 validators have passed; savedBasePriceWord is the uint16 already captured at 005C637A before the three helper calls",
+    "helperObservation": "raw uint32 return from 0047B3A0 is supplied; only AL is consumed; no stock ID or specialty mapping inferred",
+    "snapshotSemantics": "subsequent helper changes to the price table do not replace the saved ESI value",
+    "validation": "closed own-data-property input; no coercion/accessors/unknown keys; engineering rejection is not native early return zero"
+  },
+  "constants": {
+    "discountNumerator": 8,
+    "discountDenominator": 10,
+    "signedDivisionMagic": "0x66666667"
+  },
+  "arithmetic": "AL=specialtyHelperEax&255; returnedPrice=AL===0?savedBasePriceWord:floor(savedBasePriceWord*8/10)",
+  "originalListing": {
+    "start": "005C6350",
+    "endInclusive": "005C63C0",
+    "endExclusive": "005C63C1",
+    "instructionCount": 45,
+    "byteLength": 113,
+    "sha256": "8231023624aacaa163f18e3e199a34858edf8ade601ad5043ddfaaba4bc685da",
+    "calls": [
+      {
+        "address": "005C6356",
+        "target": "0047A630"
+      },
+      {
+        "address": "005C636A",
+        "target": "0047A630"
+      },
+      {
+        "address": "005C6387",
+        "target": "004914A0"
+      },
+      {
+        "address": "005C638D",
+        "target": "0047EC80"
+      },
+      {
+        "address": "005C6398",
+        "target": "0047B3A0"
+      }
+    ],
+    "branches": [
+      {
+        "address": "005C6360",
+        "target": "005C6364"
+      },
+      {
+        "address": "005C6374",
+        "target": "005C6379"
+      },
+      {
+        "address": "005C639F",
+        "target": "005C63BB"
+      }
+    ]
+  },
+  "excludedMod": {
+    "start": "005C63A1",
+    "endInclusive": "005C63AE",
+    "endExclusive": "005C63AF",
+    "instructionCount": 6,
+    "byteLength": 14,
+    "sha256": "031a517ac04ce7dbbd28b35632a2e715a69a489212d0872b81f86a70cc77d722",
+    "marker": "修改 - 特产城市折扣倍率自定义",
+    "displayedMultiplier": 80,
+    "displayedDivisor": 100,
+    "displayedSettingEquivalentForAllUint16Prices": true,
+    "executedByProduction": false,
+    "reason": "separately labelled custom-discount patch, never overlaid on original bytes; numerical equality at displayed 80/100 does not certify stock or other settings"
+  },
+  "sourceCorrections": [
+    {
+      "address": "005C63AF",
+      "bytes": "C1 FA 02",
+      "sourceMnemonic": "sar dl,02",
+      "decodedMnemonic": "sar edx,2",
+      "reason": "C1 /7 with ModRM FA targets 32-bit EDX; source text is preserved, machine bytes govern decoding"
+    }
+  ],
+  "evidence": {
+    "level": "source-listing-reconstruction",
+    "profile": "production-price-resolved-v1",
+    "source": "docs/sources/production-price.json",
+    "originalRange": "005C6350..005C63C0",
+    "scope": "prevalidated captured uint16 price and observed uint32 specialty helper; only AL controls discount",
+    "stockOriginalVerified": false,
+    "originalExecutableExecuted": false,
+    "commandIntegrated": false
+  },
+  "remainingOpen": [
+    "0047A630 validation and mutable pointer semantics",
+    "004914A0 pointer-to-ID, 0047EC80 category and 0047B3A0 specialty helper bodies",
+    "original equipment price table and stock equipment/category/specialty ID mapping",
+    "complete production command eligibility, gold debit and actual resource/stock writers, quantity accounting and caps",
+    "merit/EXP/AP/TP writes, duration, dispatch and completion scheduling",
+    "Train/EndTurn, state, save/replay and native runtime integration",
+    "clean-stock PC-PK1.1, exact executable/patch identity, Vanilla, console and cross-version equivalence"
+  ],
+  "counterexamples": [
+    {
+      "savedBasePriceWord": 1,
+      "specialtyHelperEax": 1,
+      "returnedPrice": 0,
+      "role": "no-minimum-one"
+    },
+    {
+      "savedBasePriceWord": 2,
+      "specialtyHelperEax": 1,
+      "returnedPrice": 1,
+      "role": "floor-not-round"
+    },
+    {
+      "savedBasePriceWord": 9,
+      "specialtyHelperEax": 1,
+      "returnedPrice": 7,
+      "role": "multiply-before-divide"
+    },
+    {
+      "savedBasePriceWord": 65535,
+      "specialtyHelperEax": 1,
+      "returnedPrice": 52428,
+      "role": "unsigned-word-domain"
+    },
+    {
+      "savedBasePriceWord": 65535,
+      "specialtyHelperEax": 0,
+      "returnedPrice": 65535,
+      "role": "no-discount-path"
+    },
+    {
+      "savedBasePriceWord": 10,
+      "specialtyHelperEax": 256,
+      "returnedPrice": 10,
+      "role": "nonzero-eax-with-zero-al"
+    },
+    {
+      "savedBasePriceWord": 10,
+      "specialtyHelperEax": 257,
+      "returnedPrice": 8,
+      "role": "nonzero-al-with-high-bits"
+    },
+    {
+      "savedBasePriceWord": 10,
+      "specialtyHelperEax": 2147483648,
+      "returnedPrice": 10,
+      "role": "high-sign-bit-is-not-specialty"
+    },
+    {
+      "savedBasePriceWord": 10,
+      "specialtyHelperEax": 4294967295,
+      "returnedPrice": 8,
+      "role": "all-bits-set"
+    }
+  ]
+}
