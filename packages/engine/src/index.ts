@@ -25,3 +25,5 @@ export { SEARCH_TALENT_BASELINE, calculateSearchTalentBaseline } from './search-
 export type { SearchTalentBaselineInput, SearchTalentBaselineRejectionReason, SearchTalentBaselineRejection, SearchTalentBaselineReceipt, SearchTalentBaselineResult } from './search-talent-baseline.ts';
 export { TREASURE_ROLL_ARGUMENT, calculateTreasureRollArgument } from './treasure-roll-argument.ts';
 export type { TreasureRollArgumentInput, TreasureRollArgumentRejectionReason, TreasureRollArgumentRejection, TreasureRollArgumentReceipt, TreasureRollArgumentResult } from './treasure-roll-argument.ts';
+export { SEARCH_GOLD_CALLER, calculateSearchGoldCallerProjection } from './search-gold-caller.ts';
+export type { SearchGoldSecondRead, SearchGoldCallerInput, SearchGoldCallerRejectionReason, SearchGoldCallerRejection, SearchGoldCallObservation, SearchGoldCallerReceipt, SearchGoldCallerResult } from './search-gold-caller.ts';

@@ -1,5 +1,8 @@
 # 规则审计当前状态
 
+2026-10-10 最新本地候选：[探索搜金caller整数投影](search-gold-caller.md)，基于已合并PR #54 main `cb76e148f35b519283cc296361b507674d0fff3a`。仅RNG返回后29条/82字节、逐调用点uint32观测与signed32分支；二轮getter仅裁剪时必填，不复用首轮，结果非实际奖励。人才PR #53、宝物参数PR #54已交付；以下旧“本地候选”及验收数字是各自历史冻结记录。本批新树单独验收、尚未发布；完整搜金/探索、RNG/helper/writer/stock仍open，P0-78及依赖排除。
+
+
 2026-10-10 当前本地候选：[探索宝物roll参数纯核](treasure-roll-argument.md)，基于PR #53已合并main ec8baea67f4ad36a27af40220ce7596c62065d58。只补005D5B45..005D5B6B前的12条/38字节参数块；过滤/选择/RNG/归属writer/完整命令与stock仍open，P0-78及依赖仍排除。旧人才profile中的searchTreasureRecovered=false不改。以下历史冻结文字和验证数字不是本候选验收；新的候选尚未发布。
 
 更新：2026-10-09 UTC。当前相性距离独立核为全新重建，基线：PR #51已合并的 main `2c38f06e2a3106cf25ad47e02458a2fd72c69a45`；新树验收与实际发布状态另记，不沿用旧候选或历史通过记录。
