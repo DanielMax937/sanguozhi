@@ -1,5 +1,8 @@
 # 三国志11规则研究与训练内核
 
+2026-10-10 最新本地候选：[探索搜金caller整数投影](docs/rules/search-gold-caller.md)，基于已合并PR #54 main `cb76e148f35b519283cc296361b507674d0fff3a`。仅RNG返回后29条/82字节、逐调用点uint32观测与signed32分支；二轮getter仅裁剪时必填，不复用首轮，结果非实际奖励。人才PR #53、宝物参数PR #54已交付；以下旧“本地候选”及验收数字是各自历史冻结记录。本批新树单独验收、尚未发布；完整搜金/探索、RNG/helper/writer/stock仍open，P0-78及依赖排除。
+
+
 新增本地候选：[探索宝物roll参数纯核](docs/rules/treasure-roll-argument.md)，基于已合并PR #53 main ec8baea；已选候选uint8价值，经trunc((61-value)/20)再最低1。公开listing 12条/38字节，止于RNG前；并非最终概率、候选选择或完整探索。新树验收另记，未发布。
 
 主目标逐步复现PC-PK1.1，再单独恢复Vanilla；已证实规则、实测、工程替代和原作证据债分开记录。

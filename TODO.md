@@ -1,5 +1,8 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
+2026-10-10 最新本地候选：[探索搜金caller整数投影](docs/rules/search-gold-caller.md)，基于已合并PR #54 main `cb76e148f35b519283cc296361b507674d0fff3a`。仅RNG返回后29条/82字节、逐调用点uint32观测与signed32分支；二轮getter仅裁剪时必填，不复用首轮，结果非实际奖励。人才PR #53、宝物参数PR #54已交付；以下旧“本地候选”及验收数字是各自历史冻结记录。本批新树单独验收、尚未发布；完整搜金/探索、RNG/helper/writer/stock仍open，P0-78及依赖排除。
+
+
 本地候选：[探索宝物roll参数核](docs/rules/treasure-roll-argument.md)已新增独立API，256值域及中间商需以本候选新验收为准。仍待候选过滤/选择、004721D0随机语义、005D3D90归属奖励、完整探索命令及stock版本认证。PR #53人才核已合并；其历史搜宝未恢复标记保留，本次不声称搜宝完整关闭。
 
 > Working policy: one fresh theme branch from the latest GitHub `main`

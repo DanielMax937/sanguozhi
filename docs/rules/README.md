@@ -1,5 +1,8 @@
 > 最新capture人员/城市容量来源与有界模型：[P0-49](84-capture-personnel-source-profile.md)；完整人员迁移、AI处分和stock等价仍开放。
 
+2026-10-10 最新本地候选：[探索搜金caller整数投影](search-gold-caller.md)，基于已合并PR #54 main `cb76e148f35b519283cc296361b507674d0fff3a`。仅RNG返回后29条/82字节、逐调用点uint32观测与signed32分支；二轮getter仅裁剪时必填，不复用首轮，结果非实际奖励。人才PR #53、宝物参数PR #54已交付；以下旧“本地候选”及验收数字是各自历史冻结记录。本批新树单独验收、尚未发布；完整搜金/探索、RNG/helper/writer/stock仍open，P0-78及依赖排除。
+
+
 新增本地候选：[探索宝物roll参数纯核](treasure-roll-argument.md)。已选候选的稳定uint8输入，12条/38字节，独立参数核；保留向零中间商，最低1，不执行004721D0。source-listing-reconstruction，不认证stock或完整搜宝；新验收另记，未发布。
 
 新增[生产数量显式binary32限定核](production-quantity.md)：原88条/254字节、两套MOD隔离；signed32类型gate、三槽AL与完整skill EAX、显式factor bits，技能先倍/转换向零/超级后倍，无9000cap或1010最低值。设施选择/常量、callee、实际writer/完整命令及stock仍缺，本地候选未发布。

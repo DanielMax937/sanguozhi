@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Search gold caller source metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profileId",
+    "scope",
+    "evidence",
+    "source",
+    "license",
+    "originalListing",
+    "arithmetic",
+    "inputSchema",
+    "validation",
+    "unresolved"
+  ],
+  "properties": {
+    "profileId": {
+      "const": "search-gold-caller-resolved-v1"
+    },
+    "scope": {
+      "const": "post-RNG caller arithmetic from explicit per-call uint32 captures; no helper or reward execution"
+    },
+    "evidence": {
+      "const": {
+        "level": "source-listing-reconstruction",
+        "profile": "search-gold-caller-resolved-v1",
+        "source": "docs/sources/search-gold-caller.json",
+        "originalRange": "005D5BA6 <= PC < 005D5BF8",
+        "scope": "post-RNG caller arithmetic from explicit per-call uint32 captures; no helper or reward execution",
+        "listedBytesVerified": true,
+        "interpretedCallSitesCaptured": true,
+        "stockOriginalVerified": false,
+        "originalExecutableExecuted": false,
+        "nativeHelpersReconstructed": false,
+        "callerIntegrated": false,
+        "realRewardRecovered": false,
+        "rngIntegrated": false,
+        "commandIntegrated": false,
+        "mutableStateRecovered": false,
+        "completeSearchRecovered": false,
+        "finalProbabilityRecovered": false
+      }
+    },
+    "source": {
+      "const": {
+        "repository": "sjn4048/311MemoryResearch",
+        "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+        "path": "内存资料/整理/Func-人才06-执行探索.txt",
+        "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-人才06-执行探索.txt",
+        "gitBlobSha1": "82bff04db2dae9ae0787e1e71ad72f1b4e6852de",
+        "snapshot": "docs/sources/treasure-search-original.gbk",
+        "snapshotEncoding": "GBK",
+        "snapshotBytes": 42874,
+        "snapshotSha256": "b8fb7965114ebc0d26cbb27058367c3a54ff47972bff9ab8dfc9e61867f8560a",
+        "utf8Snapshot": "docs/sources/treasure-search-original.txt",
+        "utf8Bytes": 44634,
+        "utf8Sha256": "5cbca6abd2d96ccf6980f26bee3eb4fd31b0baa0a942d65f5efb0d4c30220f0c",
+        "acquisition": "GitHub connector decoded text; GBK re-encoding matches pinned Git blob; not a direct raw download",
+        "authority": "Published research listing for 311PK, no authenticated executable hash or exact patch/version identity"
+      }
+    },
+    "license": {
+      "const": {
+        "spdx": "Apache-2.0",
+        "snapshot": "docs/sources/production-price-LICENSE.txt",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE",
+        "attribution": "sjn4048/311MemoryResearch"
+      }
+    },
+    "originalListing": {
+      "const": {
+        "start": "005D5BA6",
+        "endExclusive": "005D5BF8",
+        "instructionCount": 29,
+        "listedByteLength": 82,
+        "listedBytesSha256": "e4ecb097b0d272552d3203c1f2a60f834e7c0fc50f32a032f17c4f50f4135325",
+        "capturedCallCount": 4,
+        "conditionalBranchCount": 3,
+        "conditionalBranchOutcomeCount": 6,
+        "capturedCalls": [
+          {
+            "callAddress": "005D5BBE",
+            "target": "00486C80",
+            "capture": "firstGold"
+          },
+          {
+            "callAddress": "005D5BCB",
+            "target": "00486D30",
+            "capture": "firstCapacity"
+          },
+          {
+            "callAddress": "005D5BDA",
+            "target": "00486C80",
+            "capture": "secondRead.gold"
+          },
+          {
+            "callAddress": "005D5BE3",
+            "target": "00486D30",
+            "capture": "secondRead.capacity"
+          }
+        ],
+        "excludedHandlers": [
+          {
+            "callAddress": "005D5BF8",
+            "target": "005D3F80",
+            "outcome": "gold-handler"
+          },
+          {
+            "callAddress": "005D5C02",
+            "target": "005D4160",
+            "outcome": "nothing"
+          }
+        ],
+        "handlersExecuted": false,
+        "upstreamRngCall": "005D5BA1",
+        "upstreamRngTarget": "00472150",
+        "rngExecuted": false
+      }
+    },
+    "arithmetic": {
+      "const": {
+        "rngLow16": "rngEax & 65535 (MOVZX AX)",
+        "proposedAmount": "min(rngLow16,80)",
+        "firstSumU32": "(firstGold+proposedAmount) modulo 2^32",
+        "capacityExceeded": "signed32(firstCapacity) < signed32(firstSumU32)",
+        "amountU32": "capacityExceeded ? (secondRead.capacity-secondRead.gold) modulo 2^32 : proposedAmount",
+        "amountSigned": "signed32(amountU32)",
+        "outcome": "amountSigned < 30 ? nothing : gold-handler",
+        "secondRead": "required iff capacityExceeded; distinct call-site captures, never synthesized or reused",
+        "branchTrace": {
+          "rollCapTaken": "JG after CMP rngLow16,80",
+          "capacitySufficientTaken": "JNL after CMP signed32(firstCapacity),signed32(firstSumU32)",
+          "nothingTaken": "JNGE after CMP amountSigned,30"
+        },
+        "fullCapturedDomainAmountBoundedBy80": false,
+        "goldHandlerArgumentIsActualReward": false
+      }
+    },
+    "inputSchema": {
+      "const": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profile",
+          "rngEax",
+          "firstGold",
+          "firstCapacity"
+        ],
+        "properties": {
+          "profile": {
+            "const": "search-gold-caller-resolved-v1"
+          },
+          "rngEax": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "firstGold": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "firstCapacity": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "secondRead": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "gold",
+              "capacity"
+            ],
+            "properties": {
+              "gold": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              "capacity": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              }
+            }
+          }
+        }
+      }
+    },
+    "validation": {
+      "const": "Closed own data properties; plain or null prototype only; no coercion, accessors, inherited fields or symbols. Normalize negative zero. Runtime additionally requires secondRead exactly on the signed overflow-aware clipping path; JSON Schema describes shape only. Rejection is an engineering contract, not native failure."
+    },
+    "unresolved": {
+      "const": [
+        "00472150 RNG distribution, seed, consumption and relationship to upstream charisma capture",
+        "00486C80 and 00486D30 helper implementations, ABI, side effects, pointer lifetime and capture reachability",
+        "earlier talent, event and treasure conditions and complete-search conditional probability",
+        "005D3F80 and 005D4160 actual reward writes, experience, merit and messages",
+        "native mutable state, AP, complete command and scheduling",
+        "clean-stock executable, exact patch identity and cross-version equivalence",
+        "P0-78 and dependent capture/force/native transactions"
+      ]
+    }
+  }
+}
