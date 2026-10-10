@@ -21,3 +21,5 @@ export { PRODUCTION_QUANTITY, calculateProductionQuantity } from './production-q
 export type { ProductionQuantityFactorBits, ProductionQuantitySlot, ProductionQuantityInput, ProductionQuantityRejectionReason, ProductionQuantityRejection, ProductionQuantityEarlyReceipt, ProductionQuantitySlotReceipt, ProductionQuantityReceipt, ProductionQuantityResult } from './production-quantity.ts';
 export { AFFINITY_DISTANCE, calculateAffinityDistance } from './affinity-distance.ts';
 export type { AffinityDistanceInput, AffinityDistanceRejectionReason, AffinityDistanceRejection, AffinityDistanceReceipt, AffinityDistanceResult } from './affinity-distance.ts';
+export { SEARCH_TALENT_BASELINE, calculateSearchTalentBaseline } from './search-talent-baseline.ts';
+export type { SearchTalentBaselineInput, SearchTalentBaselineRejectionReason, SearchTalentBaselineRejection, SearchTalentBaselineReceipt, SearchTalentBaselineResult } from './search-talent-baseline.ts';

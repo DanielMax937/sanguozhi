@@ -1,0 +1,134 @@
+{
+  "profileId": "search-talent-resolved-v1",
+  "scope": "resolved stable inputs; filtered-candidate numerical baseline only",
+  "evidence": {
+    "level": "source-listing-reconstruction",
+    "profile": "search-talent-resolved-v1",
+    "source": "docs/sources/search-talent-baseline.json",
+    "originalRange": "005D1DF0..005D1E92",
+    "scope": "resolved stable inputs; filtered-candidate numerical baseline only",
+    "listedBytesVerified": true,
+    "stockOriginalVerified": false,
+    "originalExecutableExecuted": false,
+    "nativeHelpersReconstructed": false,
+    "callerIntegrated": false,
+    "finalProbabilityRecovered": false,
+    "rngIntegrated": false,
+    "searchGoldRecovered": false,
+    "searchTreasureRecovered": false
+  },
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "内存资料/整理/Func-人才05-计算探索是否成功.txt",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-人才05-计算探索是否成功.txt",
+    "gitBlobSha1": "d069a0a06b809de318b9f99deb1bb70f9b8dd3c7",
+    "snapshot": "docs/sources/search-talent-original.gbk",
+    "snapshotEncoding": "GBK",
+    "snapshotBytes": 9251,
+    "snapshotSha256": "b0c07d056947b42078e32574d1d91d429bad1db2ddf78d22a806330f5eaf578c",
+    "utf8Snapshot": "docs/sources/search-talent-original.txt",
+    "utf8Bytes": 9812,
+    "utf8Sha256": "cc5202aaf4a20b8ca6574b8145b83e1713f3298dcae442413af4c9761f09b7d3",
+    "acquisition": "GitHub connector decoded text; GBK re-encoding matches pinned Git blob; not a direct raw download",
+    "authority": "Published research listing for 311PK, no authenticated executable hash or exact patch/version identity"
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "snapshot": "docs/sources/production-price-LICENSE.txt",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE",
+    "attribution": "sjn4048/311MemoryResearch"
+  },
+  "originalListing": {
+    "start": "005D1DF0",
+    "endInclusive": "005D1E92",
+    "instructionCount": 66,
+    "listedByteLength": 163,
+    "listedBytesSha256": "0a1d67a620fa80d5d535290937e9ab5c742f685d16c0ef1ec8a238e270e2da9b",
+    "callCount": 5,
+    "conditionalBranchCount": 5,
+    "conditionalBranchOutcomeCount": 10,
+    "outerCallerRange": "005D1EA0..005D1F28",
+    "outerCallerIntegrated": false
+  },
+  "arithmetic": {
+    "zeroCount": "count=0 returns 0 before eye helper",
+    "eyeSkill": "positive count and full uint32 eyeSkillEax!=0 returns 100",
+    "normal": "floor((3*min(filteredCandidateCount,5)+7)*politicsAL*(cityRegion==officerBirthRegion?11:10)/300)",
+    "maximumNumerator": 61710,
+    "maximumReturn": 205,
+    "clampTo100": false,
+    "division": "listed signed multiply by 0x1B4E81B5, high-word SAR EDX,5 and sign correction; equals floor(n/300) over supported nonnegative domain"
+  },
+  "corrections": [
+    {
+      "address": "005D1E61..005D1E6B",
+      "original": "最小为5",
+      "corrected": "min(count,5), maximum 5",
+      "authority": "CMP ESI,5; MOV ECX,5; JG skips MOV ECX,ESI"
+    },
+    {
+      "address": "005D1E85",
+      "original": "sar dl,05",
+      "corrected": "sar edx,05",
+      "authority": "C1 FA 05 encodes 32-bit SAR EDX,5"
+    }
+  ],
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "profile",
+      "filteredCandidateCount",
+      "politicsAL",
+      "eyeSkillEax",
+      "cityRegion",
+      "officerBirthRegion"
+    ],
+    "properties": {
+      "profile": {
+        "const": "search-talent-resolved-v1"
+      },
+      "filteredCandidateCount": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 2147483647
+      },
+      "politicsAL": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      },
+      "eyeSkillEax": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      },
+      "cityRegion": {
+        "type": "integer",
+        "minimum": -2147483648,
+        "maximum": 2147483647
+      },
+      "officerBirthRegion": {
+        "type": "integer",
+        "minimum": -2147483648,
+        "maximum": 2147483647
+      }
+    }
+  },
+  "validation": "Closed own data properties only, no coercion/accessors/inherited fields/symbols. All fields must be valid even on early return. Normalize JS negative zero. Engineering rejection is not native failure. Region IDs remain uninterpreted signed32 values. Eye result is unsigned EAX bit pattern; signed -1 is represented as 4294967295.",
+  "unresolved": [
+    "005D1720 candidate-filter body and actual eligibility",
+    "0047A630 pointer validator",
+    "0047C4C0 city-to-facility helper",
+    "004CF590 candidate-list construction and mutation",
+    "004890F0 eye skill helper and 004890A0 politics getter bodies",
+    "native pointers/IDs, mutable observations and side effects",
+    "0059CC10 candidate selection, 00491310 pointer-to-ID, 00489F80 caller/source identity",
+    "005B8140 final finding/RNG semantics",
+    "gold/treasure search, complete command, recruitment, rewards and scheduler",
+    "clean-stock executable and cross-version equivalence",
+    "P0-78 and dependent capture/force/native transactions"
+  ]
+}
