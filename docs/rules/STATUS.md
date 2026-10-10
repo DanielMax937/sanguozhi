@@ -1,5 +1,7 @@
 # 规则审计当前状态
 
+2026-10-10 当前本地候选：[探索宝物roll参数纯核](treasure-roll-argument.md)，基于PR #53已合并main ec8baea67f4ad36a27af40220ce7596c62065d58。只补005D5B45..005D5B6B前的12条/38字节参数块；过滤/选择/RNG/归属writer/完整命令与stock仍open，P0-78及依赖仍排除。旧人才profile中的searchTreasureRecovered=false不改。以下历史冻结文字和验证数字不是本候选验收；新的候选尚未发布。
+
 更新：2026-10-09 UTC。当前相性距离独立核为全新重建，基线：PR #51已合并的 main `2c38f06e2a3106cf25ad47e02458a2fd72c69a45`；新树验收与实际发布状态另记，不沿用旧候选或历史通过记录。
 
 ## 当前交付与仍缺证据

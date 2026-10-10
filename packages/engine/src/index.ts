@@ -23,3 +23,5 @@ export { AFFINITY_DISTANCE, calculateAffinityDistance } from './affinity-distanc
 export type { AffinityDistanceInput, AffinityDistanceRejectionReason, AffinityDistanceRejection, AffinityDistanceReceipt, AffinityDistanceResult } from './affinity-distance.ts';
 export { SEARCH_TALENT_BASELINE, calculateSearchTalentBaseline } from './search-talent-baseline.ts';
 export type { SearchTalentBaselineInput, SearchTalentBaselineRejectionReason, SearchTalentBaselineRejection, SearchTalentBaselineReceipt, SearchTalentBaselineResult } from './search-talent-baseline.ts';
+export { TREASURE_ROLL_ARGUMENT, calculateTreasureRollArgument } from './treasure-roll-argument.ts';
+export type { TreasureRollArgumentInput, TreasureRollArgumentRejectionReason, TreasureRollArgumentRejection, TreasureRollArgumentReceipt, TreasureRollArgumentResult } from './treasure-roll-argument.ts';
