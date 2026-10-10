@@ -23,6 +23,7 @@ npm run play -- --growth-fixture
 
 交互命令支持用成对单引号或双引号包住整个参数，例如`save "存档目录/训练 存档.json"`、`load "存档目录/训练 存档.json"`（目录需已存在）。反斜杠按字面保留，不做shell展开；引号参数后必须空白或行尾，不支持部分参数拼接。命令的缺失、空或多余参数及未闭合引号会在执行前拒绝，空白行忽略。读档失败保留当前会话；输入结束会处理已收到的命令并等待存取档完成，无需额外输入`quit`。
 
+- [探索发现人才基准数值核](docs/rules/search-talent-baseline.md)：005D1DF0公开listing重构；已过滤count0先返回0，眼力完整EAX非零返回100，否则min(count,5)、政治AL和同异州整数式，允许205；非最终概率，无native/RNG/探索命令集成，搜金/宝物仍open。本批仅本地候选
 - [相性距离独立数值核](docs/rules/affinity-distance.md)：教程37条助记符的 `tutorial-source-projection`，双uint8已解析输入；`min(abs(a-b),150-abs(a-b))` 保留signed32、EAX位模式和AL，0/151返回-1与AL255，不取模或夹零。无opcode bytes，不认证stock/S1，不接自然忠诚或登用caller；本批全新重建，验收另记
 - [生产数量显式binary32限定核](docs/rules/production-quantity.md)：原88条/254字节与两套MOD隔离；signed32类型早返0/1，0..4精确三槽getter AL与完整skill EAX、显式倍率bitword，仅difficulty2才观察city virtual。先技能倍增、倍率后向零转换、再超级倍增；无9000cap，不以返回量代替实际库存增量。PR #51已合并交付，原发布前冻结文字不代表尚未交付
 - [生产价格捕获输入整数核](docs/rules/production-price.md)：原45条/113字节，另列MOD6条/14字节独立；uint16已保存原价与特产helper完整uint32 EAX输入，仅AL非零才floor(8p/10)，EAX256不折、257折。无最低1，不捏造价格表/ID/helper/扣钱库存writer/命令/调度；PR #50已合并交付，其原发布前冻结文字不代表尚未交付
