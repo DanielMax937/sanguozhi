@@ -1,0 +1,238 @@
+{
+  "profileId": "affinity-distance-tutorial-u8-v1",
+  "scope": "standalone-resolved-uint8-numerical-affinity-distance-only",
+  "level": "tutorial-source-projection",
+  "opcodeBytes": null,
+  "machineCodeVerified": false,
+  "stockOriginalVerified": false,
+  "originalExecutableExecuted": false,
+  "s1CallerIntegrated": false,
+  "loyaltyIntegrated": false,
+  "recruitmentIntegrated": false,
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "SireCustomizedPackageDev/README.md",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/SireCustomizedPackageDev/README.md",
+    "gitBlobSha1": "82420492d65150f217effd8cb6b93febdf1c3c2d",
+    "snapshot": "docs/sources/affinity-distance-tutorial-original.md",
+    "snapshotEncoding": "UTF-8",
+    "snapshotBytes": 33369,
+    "snapshotSha256": "d5e496619ce21736861f796223523e3897591a2b3374e482aa0505b03606acb3",
+    "transformation": "none; complete original tutorial bytes preserved, including surrounding patches, comments and incorrect prose",
+    "authority": "37 textual instruction mnemonics from a tutorial; no opcode bytes for this entry; addresses and symbolic call names are tutorial claims, not authenticated executable facts"
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE",
+    "snapshot": "docs/sources/production-price-LICENSE.txt",
+    "bytes": 11357,
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "gitBlobSha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+    "attribution": "sjn4048/311MemoryResearch; existing Apache-2.0 license copy covers the pinned tutorial snapshot"
+  },
+  "domain": {
+    "sourceAffinityByte": [
+      0,
+      255
+    ],
+    "targetAffinityByte": [
+      0,
+      255
+    ],
+    "normalGameDomainContext": [
+      0,
+      149
+    ],
+    "normalGameDomainClaim": "context only; never input coercion, modular normalization, clean-stock certification or a recovered upstream constraint",
+    "validation": "closed own data properties: profile, sourceAffinityByte, targetAffinityByte; strict integer uint8, no coercion, symbols, unknown keys, accessors or inherited required fields; engineering rejection is not native invalid-ID or invalid-pointer return"
+  },
+  "arithmetic": {
+    "absoluteDifference": "d = abs(sourceAffinityByte - targetAffinityByte)",
+    "complement": "150 - d",
+    "signedComparisonBranch": "signed d < complement => keep-d; otherwise use-complement, including d=75 tie",
+    "returnedSigned32": "signed min(d,150-d), range -105..75",
+    "returnedEax": "returnedSigned32 modulo 2^32 as unsigned register word",
+    "returnedAl": "returnedEax & 255; not sign-extended int8",
+    "normalDomainPairCount": 22500,
+    "uint8PairCount": 65536,
+    "negativeReturnPairCount": 11130,
+    "forbiddenSubstitutions": [
+      "no modulo-150 normalization",
+      "no zero clamping",
+      "no signed-byte affinity loads",
+      "no signed-byte return conversion",
+      "no unsigned complement comparison",
+      "no native pointer or ID emulation in production API"
+    ]
+  },
+  "originalListing": {
+    "start": "00489F80",
+    "endInclusive": "00489FD7",
+    "instructionCount": 37,
+    "conditionalBranchCount": 5,
+    "conditionalBranchOutcomeCount": 10,
+    "opcodeBytes": null,
+    "opcodeBytesSha256": null,
+    "machineCodeByteLength": null,
+    "canonicalMnemonicSha256": "74280ae3a22486cf499119b2b2e366eae2bf527d0d402e90eab9560e11a77ad3",
+    "canonicalMnemonicFormat": "one parsed instruction per line: uppercase eight-hex address, space, lowercase mnemonic, space, operands joined by comma-space, LF; not machine-code bytes",
+    "calls": [
+      {
+        "address": "00489F9F",
+        "symbol": "GetPersonPtr",
+        "bodyVerified": false
+      },
+      {
+        "address": "00489FA7",
+        "symbol": "IsLegalPtr",
+        "bodyVerified": false
+      }
+    ],
+    "branches": [
+      {
+        "address": "00489F89",
+        "mnemonic": "jl",
+        "target": "00489F92"
+      },
+      {
+        "address": "00489F90",
+        "mnemonic": "jle",
+        "target": "00489F98"
+      },
+      {
+        "address": "00489FB1",
+        "mnemonic": "jz",
+        "target": "00489FD3"
+      },
+      {
+        "address": "00489FBD",
+        "mnemonic": "jns",
+        "target": "00489FC1"
+      },
+      {
+        "address": "00489FCA",
+        "mnemonic": "jl",
+        "target": "00489FD5"
+      }
+    ]
+  },
+  "entryObservations": {
+    "nativeTargetIdDomain": "signed int32 0..1099 (0x44B), read from first stack argument",
+    "nativeInvalidId": "XOR AL,AL clears only low eight bits, preserving upper 24 EAX bits from target ID; no pointer calls or affinity reads",
+    "externalCalls": "GetPersonPtr and IsLegalPtr stay opaque; oracle uses explicit ABI/return observations, not reconstructed callee bodies",
+    "validatorConsumption": "TEST EAX,EAX consumes complete uint32; 0 fails, 256 and 0x80000000 succeed",
+    "invalidPointer": "validator EAX=0 skips both affinity reads and returns EAX=0; this does not establish invalid-ID EAX=0",
+    "sourcePointer": "source ECX pointer is saved in EDI; no source-pointer validator appears in this listed entry",
+    "affinityReadOrder": [
+      "00489FB3 target byte [ESI+69h], MOVZX ECX",
+      "00489FB7 source byte [EDI+69h], MOVZX EAX"
+    ],
+    "stack": "PUSH/POP preserve EDI and ESI; RETN 4 pops return address plus one four-byte argument; no three-result stack contract"
+  },
+  "sourceCorrections": [
+    {
+      "topic": "return registers",
+      "tutorialProse": "invalid ID returns 0",
+      "projection": "only AL is cleared on invalid ID; EAX upper 24 bits are preserved"
+    },
+    {
+      "topic": "stack",
+      "tutorialProse": "function pushes three values; RETN 4 prose conflates argument and return address",
+      "projection": "callee-saved register traffic is not three outputs; RETN 4 returns and additionally removes one four-byte argument"
+    }
+  ],
+  "evidence": {
+    "level": "tutorial-source-projection",
+    "profile": "affinity-distance-tutorial-u8-v1",
+    "source": "docs/sources/affinity-distance.json",
+    "originalRange": "00489F80..00489FD7",
+    "scope": "resolved unsigned affinity bytes; numerical return only",
+    "opcodeBytes": null,
+    "machineCodeVerified": false,
+    "stockOriginalVerified": false,
+    "originalExecutableExecuted": false,
+    "s1CallerIntegrated": false,
+    "loyaltyIntegrated": false,
+    "recruitmentIntegrated": false
+  },
+  "remainingOpen": [
+    "same-version opcode bytes and authenticated clean-stock executable identity",
+    "GetPersonPtr and IsLegalPtr complete bodies and ABI/runtime provenance",
+    "actual caller read width and mutable memory observations outside this restricted projection",
+    "S1 callers and natural-loyalty probability/writer integration",
+    "recruitment/loyalty command effects and entry eligibility",
+    "Train/EndTurn, state/save/replay and native runtime integration",
+    "Vanilla/PC-PK/console and cross-version equivalence"
+  ],
+  "counterexamples": [
+    {
+      "sourceAffinityByte": 1,
+      "targetAffinityByte": 149,
+      "absoluteDifference": 148,
+      "complement": 2,
+      "signedComparisonBranch": "use-complement",
+      "returnedSigned32": 2,
+      "returnedEax": 2,
+      "returnedAl": 2
+    },
+    {
+      "sourceAffinityByte": 0,
+      "targetAffinityByte": 75,
+      "absoluteDifference": 75,
+      "complement": 75,
+      "signedComparisonBranch": "use-complement",
+      "returnedSigned32": 75,
+      "returnedEax": 75,
+      "returnedAl": 75
+    },
+    {
+      "sourceAffinityByte": 0,
+      "targetAffinityByte": 151,
+      "absoluteDifference": 151,
+      "complement": -1,
+      "signedComparisonBranch": "use-complement",
+      "returnedSigned32": -1,
+      "returnedEax": 4294967295,
+      "returnedAl": 255
+    },
+    {
+      "sourceAffinityByte": 0,
+      "targetAffinityByte": 255,
+      "absoluteDifference": 255,
+      "complement": -105,
+      "signedComparisonBranch": "use-complement",
+      "returnedSigned32": -105,
+      "returnedEax": 4294967191,
+      "returnedAl": 151
+    }
+  ],
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "urn:san11:affinity-distance-tutorial-u8-v1:input",
+    "title": "JSON input contract; own-data properties and non-JSON values additionally guarded by TypeScript",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "profile",
+      "sourceAffinityByte",
+      "targetAffinityByte"
+    ],
+    "properties": {
+      "profile": {
+        "type": "string",
+        "const": "affinity-distance-tutorial-u8-v1"
+      },
+      "sourceAffinityByte": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      },
+      "targetAffinityByte": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      }
+    }
+  }
+}

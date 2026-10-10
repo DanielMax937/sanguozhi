@@ -401,8 +401,10 @@ rate = max(
   - `0047BD50 SetCityTradePrice`。
   https://github.com/sean2077/311SireCustomizedPackageDev
 - 311MemoryResearch：
-  - 商人命令执行路径 `005CAD1B`。
-  https://github.com/sjn4048/311MemoryResearch
+  - 商人命令执行路径 `005CAD1B`；
+  - 固定commit `66e167e40c3440929ec016f3872aefc3486434c1` 的 `Func-内政05-计算交易收支.txt` 已列 `005CA620..005CA76A` 原段135条/331 bytes，GBK9860 bytes复算Git blob `e53ce1f6f1945c1efd0d8c569eec161cffaaa560`；末尾商才MOD独立；
+  - [保留边界](02-economy.md#811-已有函数体与仍未闭合的精确合同)：`0070A330`/`0070A280`/`005CA5B0` 完整合同、原TradePrice/UI尺度、取整/溢出和writer未闭合，本批不实现交易。
+  https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政05-计算交易收支.txt
 - 游民星空 2007 实测：
   - 买粮无20%损失；
   - 卖粮固定×0.8；
@@ -816,10 +818,12 @@ rate = max(
 ### D6 相性 / 义理 / 野望 / 汉室专项
 
 - 311MemoryResearch / SIRE tutorial：
-  - `00489F80 GetCompatibilityDifference` 历史公式资料；完整体未在本轮绑定来源内；
-  - `raw=abs(A-B)`；
-  - 历史归纳为 `min(raw,150-raw)` 的150点环；本轮caller来源不包含00489F80完整体，见下述独立证据边界。
-  https://github.com/sjn4048/311MemoryResearch
+  - 固定 `66e167e40c3440929ec016f3872aefc3486434c1` 的 `SireCustomizedPackageDev/README.md`，完整33369 bytes，SHA-256 `d5e496619ce21736861f796223523e3897591a2b3374e482aa0505b03606acb3`；
+  - `00489F80..00489FD7` 共37条助记符，函数opcode bytes缺失；
+  - [相性距离独立投影](affinity-distance.md)为 `tutorial-source-projection`，双uint8算 `min(abs(A-B),150-abs(A-B))` 并保留signed32/EAX/AL，0/151=-1、AL255；
+  - 不取mod150、不夹零，native pointer/ID、教程到caller/S1同源与stock仍缺；不接自然忠诚或登用；
+  - [完整快照](../sources/affinity-distance-tutorial-original.md)、[证据JSON](../sources/affinity-distance.json)、[闭合schema](../sources/affinity-distance.schema.json)，不把教程原文hash当机器码校验。
+  https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/SireCustomizedPackageDev/README.md
 - 311SireCustomizedPackageDev `struct_person`：
   - `+0x69` 相性；
   - `+0xAC Loyalty`；
@@ -880,7 +884,7 @@ rate = max(
   - 现仅作为历史cross-check；其中随机调用点、人心掌握比较、符节台+2、最低义理最高野望君主附加算术可由 `0058E510` caller复核；分布/独立性、最终writer和stock不由转载或caller单独证明。
   https://wenku.baidu.com/view/ad1f1482561252d381eb6edb?bfetype=new
 
-证据等级：忠诚0..255/UI100保留既有逆向证据；相性环公式保留历史资料结论。本轮 `0058E510` 仅为source-bound caller文本证据，`00489F80`、`004889E0` 完整callee、`004A6CF0` writer、RNG/降量端到端及stock/runtime仍open。汉室爵位/拥废/特定事件常量保留documented exact；非自然路径仍各自保留缺口。
+证据等级：忠诚0..255/UI100保留既有逆向证据；相性独立核为教程助记符投影，不是byte-exact。`0058E510` 仍仅为source-bound caller文本证据，教程到caller/S1同源、native解析与原opcode仍缺；`004889E0`完整callee、`004A6CF0` writer、RNG/降量端到端及stock/runtime仍open。汉室爵位/拥废/特定事件常量保留documented exact；非自然路径仍各自保留缺口。
 
 ### D7 太守 / 都督 / 军师专项
 

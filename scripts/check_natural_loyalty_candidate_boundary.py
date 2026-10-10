@@ -18,7 +18,7 @@ MOD_HEADERS = [
     '修改2 - 忠诚下降基数可调整，君主魅力对忠诚下降概率有影响',
 ]
 OPEN = [
-    '00489F80 full callee and compatibility-domain semantics',
+    '00489F80 original opcode bytes, native pointer/ID resolution and tutorial-to-caller/S1 provenance; tutorial numerical projection is separate',
     '004889E0 full callee and exact relationship predicate semantics',
     '004A6CF0 full writer and final loyalty write/clamping',
     '00472150 RNG internals, distribution and global sequence',
@@ -207,6 +207,13 @@ CURRENT_SUMMARIES = CANDIDATE_SUMMARIES + [
 ]
 
 
+AFFINITY_SEPARATION_SUMMARIES = {
+    'README.md', 'TODO.md', 'docs/rules/STATUS.md', '缺少的数据.md', '确定规则.md',
+    'docs/rules/03-personnel.md', 'docs/rules/SOURCES.md',
+    'docs/rules/13-open-exactness.md',
+}
+
+
 def validate_summary_text(path, text):
     # Also catch the formerly missed "相性与君主差≥25", not only "相性差".
     need(re.search(r'相性[^\n]{0,40}(?:>=|≥|≧)\s*25', text) is None,
@@ -215,6 +222,11 @@ def validate_summary_text(path, text):
          'unqualified RNG probability in ' + path)
     need('natural-loyalty-candidate-boundary.md' in text,
          'source boundary link in ' + path)
+    if path in AFFINITY_SEPARATION_SUMMARIES:
+        need('affinity-distance.md' in text, 'independent tutorial projection link in ' + path)
+        for stale in ['callee-body-open', '本轮未补齐callee完整体', '完整体未在本轮绑定来源内',
+                      '未取得callee完整体', '教程已证明自然忠诚caller同源', '相性核已接入自然忠诚']:
+            need(stale not in text, 'stale or overstated affinity evidence in ' + path)
     if path in CANDIDATE_SUMMARIES:
         need('004889E0' in text, 'third clause in ' + path)
     if path == 'docs/rules/03-personnel.md':

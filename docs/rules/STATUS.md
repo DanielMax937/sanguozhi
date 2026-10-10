@@ -1,16 +1,17 @@
 # 规则审计当前状态
 
-更新：2026-10-09 UTC。当前生产数量限定数值核基线：PR #50已合并的 main `946bd63a83f4eae5256d4be8ac7d2674e01cedb3`；本批为本地候选，尚未发布远端。
+更新：2026-10-09 UTC。当前相性距离独立核为全新重建，基线：PR #51已合并的 main `2c38f06e2a3106cf25ad47e02458a2fd72c69a45`；新树验收与实际发布状态另记，不沿用旧候选或历史通过记录。
 
 ## 当前交付与仍缺证据
 
-PR #42～48已交付项保留各自范围；PR #49巡查与PR #50价格数值核均已合并。本轮只加入三槽getter AL、完整skill EAX与显式设施ST0 bitword的生产数量限定纯函数，不增加完整生产命令、价格表/ID/helper、费用/库存writer或调度，不修改Train/EndTurn与存档。本树全新验收另记，历史P0/PR验证数字不代表本批结果。
+PR #42～48已交付项保留各自范围；PR #49巡查、PR #50价格与PR #51数量数值核均已合并。本轮仅重建已解析双uint8的相性距离独立纯函数，不补native pointer/ID、不接自然忠诚或登用caller，不修改Train/EndTurn与存档。本树全新验收另记，历史P0/PR验证数字不代表本批结果。
 
-- 本批[生产数量限定核](production-quantity.md)：原88条/254字节及两套MOD隔离，signed32类型早退0/1，精确三槽无首槽gate；仅支持显式3F800000/3F99999A/3FC00000。先技能倍增、倍率后向零转换、再条件超级倍增，无9000cap；完整callee、设施选择与常量bytes、city virtual、库存writer/调度/stock仍open。全无效槽和任意浮点域不支持，本地候选尚未发布，验收按新树另记
-- PR #50已交付[生产价格整数核](production-price.md)：原005C6350..005C63C0完整45条/113字节，MOD6条/14字节独立；仅AL非零才八折向下取整，EAX256不折、257折，合法零值无最低1；005C637A读取值在helper前保存，C1FA02解为SAR EDX,2。两层校验与helper原体、原表/ID映射、完整命令/扣写/调度/stock及跨版本仍缺。该已交付价格核的独立字节oracle、全字域与聚合记录属于PR #50，不能替代本数量新树验收
+- 本批[相性距离独立核](affinity-distance.md)：`affinity-distance-tutorial-u8-v1` / `tutorial-source-projection`，固定教程37条助记符，无opcode bytes；signed32=min(d,150-d)，保留完整EAX与AL。0/151=-1、AL255，0/255=-105、AL151，不取模或夹零；教程到caller/S1归属、stock/跨版本、native解析及忠诚/登用集成仍open。65536组合、22500正常域、11130负返回与5分支/10结果由新树单独验收，不预报通过
+- PR #51已交付[生产数量限定核](production-quantity.md)：原88条/254字节及两套MOD隔离，signed32类型早退0/1，精确三槽无首槽gate；仅支持显式3F800000/3F99999A/3FC00000。先技能倍增、倍率后向零转换、再条件超级倍增，无9000cap；完整callee、设施选择与常量bytes、city virtual、库存writer/调度/stock仍open。全无效槽和任意浮点域不支持，原本地候选措辞为发布前冻结记录，不等于尚未交付
+- PR #50已交付[生产价格整数核](production-price.md)：原005C6350..005C63C0完整45条/113字节，MOD6条/14字节独立；仅AL非零才八折向下取整，EAX256不折、257折，合法零值无最低1；005C637A读取值在helper前保存，C1FA02解为SAR EDX,2。两层校验与helper原体、原表/ID映射、完整命令/扣写/调度/stock及跨版本仍缺。该已交付价格核的独立字节oracle、全字域与聚合记录属于PR #50，不能替代本相性新树验收
 - PR #49已交付[巡查治安增量纯数值核](patrol-security-gain.md)：原79条/204字节与MOD7条/21字节隔离；首槽有效、稳定uint8统率/城市byte、pressureHelperEax完整uint32，先floor(sum/28)+2、非零半减、严格>100上clip。负delta保留；getter/helper/资格/费用/writer/TP/调度及stock仍open。此前本地候选文字是发布前冻结记录，不能否认已交付
 - PR #48已交付[内政建设速率纯数值核](domestic-construction-rate.md)：公开005BB1D0..005BB2AA原文完整；稳定getter/设施表域为max(maxPolitics+floor(sumPolitics/2),floor((D-floor(D/4))/9))，0～3个uint8政治及uint16耐久。原GBK Git blob、84条/219字节、9条星号MOD隔离可核；不证明初始耐久writer、完整工期、getter实现、逐旬推进、完成调度或stock/跨版本等价。其历史验证不用于本批新增代码
-- PR #47已交付[自然忠诚候选静态纠错](natural-loyalty-candidate-boundary.md)：普通前置豁免后为unsigned AL>25、signed义理<=1且野望>=3、或004889E0完整EAX非零三选一；俘虏跳过全部三条。固定公开source/blob与两套MOD分隔可复核；callee/writer/降量/RNG/stock/runtime继续open，已发布的审查范围不扩展为callee/writer或运行时认证
+- PR #47已交付[自然忠诚候选静态纠错](natural-loyalty-candidate-boundary.md)：普通前置豁免后为unsigned AL>25、signed义理<=1且野望>=3、或004889E0完整EAX非零三选一；俘虏跳过全部三条。固定公开source/blob与两套MOD分隔可复核；相性教程投影单列，教程到caller/S1同源、native解析/其他callee/writer/降量/RNG/stock/runtime继续open，既有审查范围不扩展为忠诚端到端认证
 - PR #46已交付[S1特技培育限定资格核](pk-skill-training-s1.md)：已进入类别2后的native signed32输入，目标0..99且E8相同才helper真，caller取反；另一已有特技不阻挡，越界target即使相等也保持caller真。不映射攻略ID、不写人物/任务状态；完整命令/完成writer/费用/调度仍缺
 - PR #45已交付[S1五维培育限定数值核](pk-stat-training-s1.md)：XP<2000且成长低于目标的启动资格；完成独立计算min(5,差)×100累计顶3000，已开始任务不重跑资格，负差明确拒绝。普通无年龄域与已解析getter分开；完整命令/AP/时长/使用数/native98/隐藏RNG/scheduler/stock仍open
 - PR #44已交付[PS2史实攻略](ps2-historical-event-source-data.md)：64独立观测/资料ID、741来源节点；59条件结果（2仅接续）、4仅条件、1外链参照；24来源限制和全部edition未知保留。旧史实105/66/41、通用33/31/10及12文件字节不变，原生flag/目录/版本等价与运行时仍open

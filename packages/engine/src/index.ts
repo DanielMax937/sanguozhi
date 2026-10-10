@@ -19,3 +19,5 @@ export { PRODUCTION_PRICE, calculateProductionPrice } from './production-price.t
 export type { ProductionPriceInput, ProductionPriceRejectionReason, ProductionPriceRejection, ProductionPriceReceipt, ProductionPriceResult } from './production-price.ts';
 export { PRODUCTION_QUANTITY, calculateProductionQuantity } from './production-quantity.ts';
 export type { ProductionQuantityFactorBits, ProductionQuantitySlot, ProductionQuantityInput, ProductionQuantityRejectionReason, ProductionQuantityRejection, ProductionQuantityEarlyReceipt, ProductionQuantitySlotReceipt, ProductionQuantityReceipt, ProductionQuantityResult } from './production-quantity.ts';
+export { AFFINITY_DISTANCE, calculateAffinityDistance } from './affinity-distance.ts';
+export type { AffinityDistanceInput, AffinityDistanceRejectionReason, AffinityDistanceRejection, AffinityDistanceReceipt, AffinityDistanceResult } from './affinity-distance.ts';
