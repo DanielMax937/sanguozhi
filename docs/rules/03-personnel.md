@@ -1757,7 +1757,7 @@ hardHiringGate()
 
 ## 6. 相性、义理、野望、汉室
 
-`[PC-PK1.1][historical compatibility formula + source-bound loyalty caller + reverse-engineered loyalty storage/display + documented Han-event constants]`
+`[PC-PK1.1][tutorial compatibility projection + source-bound loyalty caller + reverse-engineered loyalty storage/display + documented Han-event constants]`
 
 这四项不是一个统一“忠诚性格分”。底层分别有独立字段，并在不同系统中读取。
 
@@ -1788,36 +1788,22 @@ hardHiringGate()
 
 因此“相性/义理/野望/汉室”必须作为独立 mask data 保存。
 
-### 6.2 相性是 150 点环，不是普通绝对差
+### 6.2 已解析相性byte的教程数值投影
 
-`[PC-PK1.1][historical-formula; callee-body-open]`
+`[tutorial-source-projection][affinity-distance-tutorial-u8-v1]`
 
-历史资料把 `00489F80` 归纳为下列150点环公式。本轮绑定的 `0058E510` 原文只含它的调用，未补齐该 callee 完整体；公式保留为既有资料结论，不以 caller 证明 callee 或 clean-stock 等价。见[自然忠诚候选静态纠错](natural-loyalty-candidate-boundary.md)。
-
-```ts
-raw = abs(a.compatibility - b.compatibility)
-compatibilityDiff = min(raw, 150 - raw)
-```
-
-正常原作人物的相性处在 150 点环上，因此最大有效差值为75。
-
-例：
+固定教程 `SireCustomizedPackageDev/README.md` 已公开 `00489F80..00489FD7` 的37条地址助记符，[相性距离独立核](affinity-distance.md)据此恢复已解析的 `sourceAffinityByte` 与 `targetAffinityByte` 双uint8计算。它没有该函数的opcode bytes；教程与自然忠诚caller、S1或stock的同源关系不能从地址相同推得，详见[自然忠诚候选边界](natural-loyalty-candidate-boundary.md)。
 
 ```text
-1 vs 149 -> raw 148 -> diff 2
-25 vs 100 -> diff 75
-25 vs 26  -> diff 1
+d = abs(sourceAffinityByte - targetAffinityByte)
+returnedSigned32 = min(d, 150 - d)
+returnedEax = returnedSigned32 的uint32位模式
+returnedAl = returnedEax & 255
 ```
 
-所以任何：
+正常0..149域中最大结果75，1与149为2，25与100为75，25与26为1；只用绝对差会丢掉环形比较。完整uint8域则还包括0与151返回-1/EAX4294967295/AL255，0与255返回-105/EAX4294967191/AL151。教程的signed比较不会先mod150，也没有非负夹取；不得把正常域的0..75范围扩大成所有byte的返回约束。
 
-```ts
-Math.abs(a.compatibility - b.compatibility)
-```
-
-直接当最终相性差的实现都是错的。
-
-此历史公式只作正常相性域的资料约束；未取得callee完整体，不能断言它对非法/MOD数值是否normalize。fidelity 数据仍应约束在原作正常域，不把255等编辑值推成新的圆环。
+d=75时两候选均为75，但 `JL` 不跳，走 `use-complement` 分支。生产API只收已解析的两个byte，不接受武将ID或native pointer，不模拟非法ID/指针回退，也不新增自然忠诚/登用调用。完整教程的入口/校验路径仅为独立source oracle的测试范围，不能冒充native resolver实现。
 
 ### 6.3 相性的已确认作用域
 
@@ -1943,7 +1929,7 @@ C. 004889E0 返回的完整 EAX 非零
 
 反例：其余豁免已过、义理2/野望2且无厌恶时，差25拒绝、26入选；厌恶返回非零时，差0/25均入选；差25、义理1/野望3且无厌恶亦入选。
 
-[逐指令证据与边界](natural-loyalty-candidate-boundary.md)仅确认 caller 的分支、调用参数和注释归属。`00489F80`、`004889E0` 完整 callee、忠诚 writer、RNG和clean-stock仍 open；不把“厌恶君主”注释提升为已证的完整关系语义。原文末尾两套MOD修改与主函数隔离。
+[逐指令证据与边界](natural-loyalty-candidate-boundary.md)仅确认 caller 的分支、调用参数和注释归属。`00489F80`的独立教程投影不证明此caller同源或native解析；`004889E0` 完整callee、忠诚writer、RNG和clean-stock仍open；不把“厌恶君主”注释提升为已证的完整关系语义。原文末尾两套MOD修改与主函数隔离。
 
 ### 6.8 仁政 / 人心掌握：对己方与俘虏的边界不同
 
@@ -2116,8 +2102,8 @@ target.loyalty -= loss
 
 已经锁定：
 
-- 相性150点环公式保留历史资料结论 `min(abs(a-b),150-abs(a-b))`；本轮未补齐callee完整体；
-- 正常最大相性差75，1与149仅差2；
+- 相性教程37条助记符支持双uint8独立投影 `min(abs(a-b),150-abs(a-b))`，保留signed32/EAX/AL；无opcode bytes，不接caller；
+- 正常0..149域最大相性差75，1与149仅差2；完整byte域可返回负signed32，其AL仍为无符号低byte；
 - 义理与野望是两个独立五档字段；
 - 高义理=忠诚较难涨也较难掉、较难背叛；低义理相反；
 - 高野望提高独立倾向，但不存在已恢复的统一“野望→叛变概率”公式；
@@ -2133,14 +2119,14 @@ target.loyalty -= loss
 
 仍 open：
 
-- 本轮来源未包含 `00489F80`、`004889E0` 完整callee以及 `004A6CF0` writer；RNG/降量端到端、clean-stock与runtime认证仍缺；
+- `00489F80`教程的原opcode、教程到caller/S1同源与native解析仍缺；`004889E0`完整callee及 `004A6CF0` writer、RNG/降量端到端、clean-stock与runtime仍缺；
 - 欠薪、流言、事件等非自然忠诚变化的各自精确函数；
 - 野望参与驱虎吞狼/自然独立的精确连续函数；
 - Vanilla 各补丁与 PK1.1 在 loyalty scheduler 上是否逐字一致。
 
 来源：
-- 311MemoryResearch / SIRE tutorial：历史相性环形距离资料；本轮仅绑定caller文本，不据此宣称补齐 `00489F80` 完整体
-  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch / SIRE tutorial：固定commit的37条 `00489F80..00489FD7` 助记符，[独立证据与边界](affinity-distance.md)，没有函数opcode bytes
+  https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/SireCustomizedPackageDev/README.md
 - 311SireCustomizedPackageDev：相性/义理/野望/汉室/忠诚字段、`SetLoyalty(0..255)`
   https://github.com/sean2077/311SireCustomizedPackageDev
 - 日文 Wiki mask data：相性、义理、野望、汉室语义与爵位/拥立常量

@@ -344,7 +344,7 @@ P0-5 专项见 [40-debut-death-exactness.md](40-debut-death-exactness.md)。
 
 已绑定公开 `0058E510` 完整逐指令文本；PC-PK1.1为来源归属，caller证据不等于clean-stock认证。见[自然忠诚候选静态纠错](natural-loyalty-candidate-boundary.md)：
 
-- `00489F80` 的150点环公式保留为历史资料结论；本轮只有调用点和unsigned AL比较，完整callee仍缺；
+- `00489F80` 已有[独立教程投影](affinity-distance.md)：37条助记符恢复已解析双uint8的signed32/EAX/AL返回，完整byte域允许负signed32；无opcode bytes，不证明教程到本caller/S1同源或native解析，caller仍只使用观测到的unsigned AL；
 - 己方普通武将自然掉忠只在换季；前置豁免已过后，候选为相性差>25（unsigned AL），或低/较低义理+高/较高野望，或 `004889E0` 非零（原注释“厌恶君主”，完整callee仍open）；
 - 真实忠诚为 byte 0..255，UI只显示到100；
 - `仁政` 阻止同都市己方武将自然掉忠，但俘虏明确跳过仁政；
@@ -356,7 +356,7 @@ P0-5 专项见 [40-debut-death-exactness.md](40-debut-death-exactness.md)。
 
 仍未知：
 
-- `00489F80`、`004889E0` 完整callee；`004A6CF0` 最终writer；RNG及忠诚降量端到端、clean-stock/runtime认证；
+- `00489F80` 原opcode、教程到caller/S1同源和native解析；`004889E0` 完整callee；`004A6CF0` 最终writer；RNG及忠诚降量端到端、clean-stock/runtime认证；
 - 欠薪、流言、事件等**非自然路径**各自的精确忠诚函数；
 - Vanilla/其他平台是否有常量差异。
 

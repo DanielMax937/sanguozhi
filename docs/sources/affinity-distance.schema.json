@@ -1,0 +1,1118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:affinity-distance-tutorial-u8-v1",
+  "title": "Closed tutorial-source projection evidence for uint8 affinity distance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profileId",
+    "scope",
+    "level",
+    "opcodeBytes",
+    "machineCodeVerified",
+    "stockOriginalVerified",
+    "originalExecutableExecuted",
+    "s1CallerIntegrated",
+    "loyaltyIntegrated",
+    "recruitmentIntegrated",
+    "source",
+    "license",
+    "domain",
+    "arithmetic",
+    "originalListing",
+    "entryObservations",
+    "sourceCorrections",
+    "evidence",
+    "remainingOpen",
+    "counterexamples",
+    "inputSchema"
+  ],
+  "properties": {
+    "profileId": {
+      "type": "string",
+      "const": "affinity-distance-tutorial-u8-v1"
+    },
+    "scope": {
+      "type": "string",
+      "const": "standalone-resolved-uint8-numerical-affinity-distance-only"
+    },
+    "level": {
+      "type": "string",
+      "const": "tutorial-source-projection"
+    },
+    "opcodeBytes": {
+      "type": "null",
+      "const": null
+    },
+    "machineCodeVerified": {
+      "type": "boolean",
+      "const": false
+    },
+    "stockOriginalVerified": {
+      "type": "boolean",
+      "const": false
+    },
+    "originalExecutableExecuted": {
+      "type": "boolean",
+      "const": false
+    },
+    "s1CallerIntegrated": {
+      "type": "boolean",
+      "const": false
+    },
+    "loyaltyIntegrated": {
+      "type": "boolean",
+      "const": false
+    },
+    "recruitmentIntegrated": {
+      "type": "boolean",
+      "const": false
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "path",
+        "url",
+        "gitBlobSha1",
+        "snapshot",
+        "snapshotEncoding",
+        "snapshotBytes",
+        "snapshotSha256",
+        "transformation",
+        "authority"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "const": "sjn4048/311MemoryResearch"
+        },
+        "commit": {
+          "type": "string",
+          "const": "66e167e40c3440929ec016f3872aefc3486434c1"
+        },
+        "path": {
+          "type": "string",
+          "const": "SireCustomizedPackageDev/README.md"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/SireCustomizedPackageDev/README.md"
+        },
+        "gitBlobSha1": {
+          "type": "string",
+          "const": "82420492d65150f217effd8cb6b93febdf1c3c2d"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/affinity-distance-tutorial-original.md"
+        },
+        "snapshotEncoding": {
+          "type": "string",
+          "const": "UTF-8"
+        },
+        "snapshotBytes": {
+          "type": "integer",
+          "const": 33369
+        },
+        "snapshotSha256": {
+          "type": "string",
+          "const": "d5e496619ce21736861f796223523e3897591a2b3374e482aa0505b03606acb3"
+        },
+        "transformation": {
+          "type": "string",
+          "const": "none; complete original tutorial bytes preserved, including surrounding patches, comments and incorrect prose"
+        },
+        "authority": {
+          "type": "string",
+          "const": "37 textual instruction mnemonics from a tutorial; no opcode bytes for this entry; addresses and symbolic call names are tutorial claims, not authenticated executable facts"
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spdx",
+        "url",
+        "snapshot",
+        "bytes",
+        "sha256",
+        "gitBlobSha1",
+        "attribution"
+      ],
+      "properties": {
+        "spdx": {
+          "type": "string",
+          "const": "Apache-2.0"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/production-price-LICENSE.txt"
+        },
+        "bytes": {
+          "type": "integer",
+          "const": 11357
+        },
+        "sha256": {
+          "type": "string",
+          "const": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        "gitBlobSha1": {
+          "type": "string",
+          "const": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+        },
+        "attribution": {
+          "type": "string",
+          "const": "sjn4048/311MemoryResearch; existing Apache-2.0 license copy covers the pinned tutorial snapshot"
+        }
+      }
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceAffinityByte",
+        "targetAffinityByte",
+        "normalGameDomainContext",
+        "normalGameDomainClaim",
+        "validation"
+      ],
+      "properties": {
+        "sourceAffinityByte": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 0
+            },
+            {
+              "type": "integer",
+              "const": 255
+            }
+          ],
+          "items": false
+        },
+        "targetAffinityByte": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 0
+            },
+            {
+              "type": "integer",
+              "const": 255
+            }
+          ],
+          "items": false
+        },
+        "normalGameDomainContext": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "const": 0
+            },
+            {
+              "type": "integer",
+              "const": 149
+            }
+          ],
+          "items": false
+        },
+        "normalGameDomainClaim": {
+          "type": "string",
+          "const": "context only; never input coercion, modular normalization, clean-stock certification or a recovered upstream constraint"
+        },
+        "validation": {
+          "type": "string",
+          "const": "closed own data properties: profile, sourceAffinityByte, targetAffinityByte; strict integer uint8, no coercion, symbols, unknown keys, accessors or inherited required fields; engineering rejection is not native invalid-ID or invalid-pointer return"
+        }
+      }
+    },
+    "arithmetic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "absoluteDifference",
+        "complement",
+        "signedComparisonBranch",
+        "returnedSigned32",
+        "returnedEax",
+        "returnedAl",
+        "normalDomainPairCount",
+        "uint8PairCount",
+        "negativeReturnPairCount",
+        "forbiddenSubstitutions"
+      ],
+      "properties": {
+        "absoluteDifference": {
+          "type": "string",
+          "const": "d = abs(sourceAffinityByte - targetAffinityByte)"
+        },
+        "complement": {
+          "type": "string",
+          "const": "150 - d"
+        },
+        "signedComparisonBranch": {
+          "type": "string",
+          "const": "signed d < complement => keep-d; otherwise use-complement, including d=75 tie"
+        },
+        "returnedSigned32": {
+          "type": "string",
+          "const": "signed min(d,150-d), range -105..75"
+        },
+        "returnedEax": {
+          "type": "string",
+          "const": "returnedSigned32 modulo 2^32 as unsigned register word"
+        },
+        "returnedAl": {
+          "type": "string",
+          "const": "returnedEax & 255; not sign-extended int8"
+        },
+        "normalDomainPairCount": {
+          "type": "integer",
+          "const": 22500
+        },
+        "uint8PairCount": {
+          "type": "integer",
+          "const": 65536
+        },
+        "negativeReturnPairCount": {
+          "type": "integer",
+          "const": 11130
+        },
+        "forbiddenSubstitutions": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "prefixItems": [
+            {
+              "type": "string",
+              "const": "no modulo-150 normalization"
+            },
+            {
+              "type": "string",
+              "const": "no zero clamping"
+            },
+            {
+              "type": "string",
+              "const": "no signed-byte affinity loads"
+            },
+            {
+              "type": "string",
+              "const": "no signed-byte return conversion"
+            },
+            {
+              "type": "string",
+              "const": "no unsigned complement comparison"
+            },
+            {
+              "type": "string",
+              "const": "no native pointer or ID emulation in production API"
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "originalListing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "endInclusive",
+        "instructionCount",
+        "conditionalBranchCount",
+        "conditionalBranchOutcomeCount",
+        "opcodeBytes",
+        "opcodeBytesSha256",
+        "machineCodeByteLength",
+        "canonicalMnemonicSha256",
+        "canonicalMnemonicFormat",
+        "calls",
+        "branches"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "const": "00489F80"
+        },
+        "endInclusive": {
+          "type": "string",
+          "const": "00489FD7"
+        },
+        "instructionCount": {
+          "type": "integer",
+          "const": 37
+        },
+        "conditionalBranchCount": {
+          "type": "integer",
+          "const": 5
+        },
+        "conditionalBranchOutcomeCount": {
+          "type": "integer",
+          "const": 10
+        },
+        "opcodeBytes": {
+          "type": "null",
+          "const": null
+        },
+        "opcodeBytesSha256": {
+          "type": "null",
+          "const": null
+        },
+        "machineCodeByteLength": {
+          "type": "null",
+          "const": null
+        },
+        "canonicalMnemonicSha256": {
+          "type": "string",
+          "const": "74280ae3a22486cf499119b2b2e366eae2bf527d0d402e90eab9560e11a77ad3"
+        },
+        "canonicalMnemonicFormat": {
+          "type": "string",
+          "const": "one parsed instruction per line: uppercase eight-hex address, space, lowercase mnemonic, space, operands joined by comma-space, LF; not machine-code bytes"
+        },
+        "calls": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "symbol",
+                "bodyVerified"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "00489F9F"
+                },
+                "symbol": {
+                  "type": "string",
+                  "const": "GetPersonPtr"
+                },
+                "bodyVerified": {
+                  "type": "boolean",
+                  "const": false
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "symbol",
+                "bodyVerified"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "00489FA7"
+                },
+                "symbol": {
+                  "type": "string",
+                  "const": "IsLegalPtr"
+                },
+                "bodyVerified": {
+                  "type": "boolean",
+                  "const": false
+                }
+              }
+            }
+          ],
+          "items": false
+        },
+        "branches": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "mnemonic",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "00489F89"
+                },
+                "mnemonic": {
+                  "type": "string",
+                  "const": "jl"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "00489F92"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "mnemonic",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "00489F90"
+                },
+                "mnemonic": {
+                  "type": "string",
+                  "const": "jle"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "00489F98"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "mnemonic",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "00489FB1"
+                },
+                "mnemonic": {
+                  "type": "string",
+                  "const": "jz"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "00489FD3"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "mnemonic",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "00489FBD"
+                },
+                "mnemonic": {
+                  "type": "string",
+                  "const": "jns"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "00489FC1"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "address",
+                "mnemonic",
+                "target"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "const": "00489FCA"
+                },
+                "mnemonic": {
+                  "type": "string",
+                  "const": "jl"
+                },
+                "target": {
+                  "type": "string",
+                  "const": "00489FD5"
+                }
+              }
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "entryObservations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nativeTargetIdDomain",
+        "nativeInvalidId",
+        "externalCalls",
+        "validatorConsumption",
+        "invalidPointer",
+        "sourcePointer",
+        "affinityReadOrder",
+        "stack"
+      ],
+      "properties": {
+        "nativeTargetIdDomain": {
+          "type": "string",
+          "const": "signed int32 0..1099 (0x44B), read from first stack argument"
+        },
+        "nativeInvalidId": {
+          "type": "string",
+          "const": "XOR AL,AL clears only low eight bits, preserving upper 24 EAX bits from target ID; no pointer calls or affinity reads"
+        },
+        "externalCalls": {
+          "type": "string",
+          "const": "GetPersonPtr and IsLegalPtr stay opaque; oracle uses explicit ABI/return observations, not reconstructed callee bodies"
+        },
+        "validatorConsumption": {
+          "type": "string",
+          "const": "TEST EAX,EAX consumes complete uint32; 0 fails, 256 and 0x80000000 succeed"
+        },
+        "invalidPointer": {
+          "type": "string",
+          "const": "validator EAX=0 skips both affinity reads and returns EAX=0; this does not establish invalid-ID EAX=0"
+        },
+        "sourcePointer": {
+          "type": "string",
+          "const": "source ECX pointer is saved in EDI; no source-pointer validator appears in this listed entry"
+        },
+        "affinityReadOrder": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "string",
+              "const": "00489FB3 target byte [ESI+69h], MOVZX ECX"
+            },
+            {
+              "type": "string",
+              "const": "00489FB7 source byte [EDI+69h], MOVZX EAX"
+            }
+          ],
+          "items": false
+        },
+        "stack": {
+          "type": "string",
+          "const": "PUSH/POP preserve EDI and ESI; RETN 4 pops return address plus one four-byte argument; no three-result stack contract"
+        }
+      }
+    },
+    "sourceCorrections": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "topic",
+            "tutorialProse",
+            "projection"
+          ],
+          "properties": {
+            "topic": {
+              "type": "string",
+              "const": "return registers"
+            },
+            "tutorialProse": {
+              "type": "string",
+              "const": "invalid ID returns 0"
+            },
+            "projection": {
+              "type": "string",
+              "const": "only AL is cleared on invalid ID; EAX upper 24 bits are preserved"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "topic",
+            "tutorialProse",
+            "projection"
+          ],
+          "properties": {
+            "topic": {
+              "type": "string",
+              "const": "stack"
+            },
+            "tutorialProse": {
+              "type": "string",
+              "const": "function pushes three values; RETN 4 prose conflates argument and return address"
+            },
+            "projection": {
+              "type": "string",
+              "const": "callee-saved register traffic is not three outputs; RETN 4 returns and additionally removes one four-byte argument"
+            }
+          }
+        }
+      ],
+      "items": false
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "profile",
+        "source",
+        "originalRange",
+        "scope",
+        "opcodeBytes",
+        "machineCodeVerified",
+        "stockOriginalVerified",
+        "originalExecutableExecuted",
+        "s1CallerIntegrated",
+        "loyaltyIntegrated",
+        "recruitmentIntegrated"
+      ],
+      "properties": {
+        "level": {
+          "type": "string",
+          "const": "tutorial-source-projection"
+        },
+        "profile": {
+          "type": "string",
+          "const": "affinity-distance-tutorial-u8-v1"
+        },
+        "source": {
+          "type": "string",
+          "const": "docs/sources/affinity-distance.json"
+        },
+        "originalRange": {
+          "type": "string",
+          "const": "00489F80..00489FD7"
+        },
+        "scope": {
+          "type": "string",
+          "const": "resolved unsigned affinity bytes; numerical return only"
+        },
+        "opcodeBytes": {
+          "type": "null",
+          "const": null
+        },
+        "machineCodeVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "stockOriginalVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "originalExecutableExecuted": {
+          "type": "boolean",
+          "const": false
+        },
+        "s1CallerIntegrated": {
+          "type": "boolean",
+          "const": false
+        },
+        "loyaltyIntegrated": {
+          "type": "boolean",
+          "const": false
+        },
+        "recruitmentIntegrated": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "remainingOpen": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "prefixItems": [
+        {
+          "type": "string",
+          "const": "same-version opcode bytes and authenticated clean-stock executable identity"
+        },
+        {
+          "type": "string",
+          "const": "GetPersonPtr and IsLegalPtr complete bodies and ABI/runtime provenance"
+        },
+        {
+          "type": "string",
+          "const": "actual caller read width and mutable memory observations outside this restricted projection"
+        },
+        {
+          "type": "string",
+          "const": "S1 callers and natural-loyalty probability/writer integration"
+        },
+        {
+          "type": "string",
+          "const": "recruitment/loyalty command effects and entry eligibility"
+        },
+        {
+          "type": "string",
+          "const": "Train/EndTurn, state/save/replay and native runtime integration"
+        },
+        {
+          "type": "string",
+          "const": "Vanilla/PC-PK/console and cross-version equivalence"
+        }
+      ],
+      "items": false
+    },
+    "counterexamples": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sourceAffinityByte",
+            "targetAffinityByte",
+            "absoluteDifference",
+            "complement",
+            "signedComparisonBranch",
+            "returnedSigned32",
+            "returnedEax",
+            "returnedAl"
+          ],
+          "properties": {
+            "sourceAffinityByte": {
+              "type": "integer",
+              "const": 1
+            },
+            "targetAffinityByte": {
+              "type": "integer",
+              "const": 149
+            },
+            "absoluteDifference": {
+              "type": "integer",
+              "const": 148
+            },
+            "complement": {
+              "type": "integer",
+              "const": 2
+            },
+            "signedComparisonBranch": {
+              "type": "string",
+              "const": "use-complement"
+            },
+            "returnedSigned32": {
+              "type": "integer",
+              "const": 2
+            },
+            "returnedEax": {
+              "type": "integer",
+              "const": 2
+            },
+            "returnedAl": {
+              "type": "integer",
+              "const": 2
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sourceAffinityByte",
+            "targetAffinityByte",
+            "absoluteDifference",
+            "complement",
+            "signedComparisonBranch",
+            "returnedSigned32",
+            "returnedEax",
+            "returnedAl"
+          ],
+          "properties": {
+            "sourceAffinityByte": {
+              "type": "integer",
+              "const": 0
+            },
+            "targetAffinityByte": {
+              "type": "integer",
+              "const": 75
+            },
+            "absoluteDifference": {
+              "type": "integer",
+              "const": 75
+            },
+            "complement": {
+              "type": "integer",
+              "const": 75
+            },
+            "signedComparisonBranch": {
+              "type": "string",
+              "const": "use-complement"
+            },
+            "returnedSigned32": {
+              "type": "integer",
+              "const": 75
+            },
+            "returnedEax": {
+              "type": "integer",
+              "const": 75
+            },
+            "returnedAl": {
+              "type": "integer",
+              "const": 75
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sourceAffinityByte",
+            "targetAffinityByte",
+            "absoluteDifference",
+            "complement",
+            "signedComparisonBranch",
+            "returnedSigned32",
+            "returnedEax",
+            "returnedAl"
+          ],
+          "properties": {
+            "sourceAffinityByte": {
+              "type": "integer",
+              "const": 0
+            },
+            "targetAffinityByte": {
+              "type": "integer",
+              "const": 151
+            },
+            "absoluteDifference": {
+              "type": "integer",
+              "const": 151
+            },
+            "complement": {
+              "type": "integer",
+              "const": -1
+            },
+            "signedComparisonBranch": {
+              "type": "string",
+              "const": "use-complement"
+            },
+            "returnedSigned32": {
+              "type": "integer",
+              "const": -1
+            },
+            "returnedEax": {
+              "type": "integer",
+              "const": 4294967295
+            },
+            "returnedAl": {
+              "type": "integer",
+              "const": 255
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sourceAffinityByte",
+            "targetAffinityByte",
+            "absoluteDifference",
+            "complement",
+            "signedComparisonBranch",
+            "returnedSigned32",
+            "returnedEax",
+            "returnedAl"
+          ],
+          "properties": {
+            "sourceAffinityByte": {
+              "type": "integer",
+              "const": 0
+            },
+            "targetAffinityByte": {
+              "type": "integer",
+              "const": 255
+            },
+            "absoluteDifference": {
+              "type": "integer",
+              "const": 255
+            },
+            "complement": {
+              "type": "integer",
+              "const": -105
+            },
+            "signedComparisonBranch": {
+              "type": "string",
+              "const": "use-complement"
+            },
+            "returnedSigned32": {
+              "type": "integer",
+              "const": -105
+            },
+            "returnedEax": {
+              "type": "integer",
+              "const": 4294967191
+            },
+            "returnedAl": {
+              "type": "integer",
+              "const": 151
+            }
+          }
+        }
+      ],
+      "items": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "$schema",
+        "$id",
+        "title",
+        "type",
+        "additionalProperties",
+        "required",
+        "properties"
+      ],
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "const": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "$id": {
+          "type": "string",
+          "const": "urn:san11:affinity-distance-tutorial-u8-v1:input"
+        },
+        "title": {
+          "type": "string",
+          "const": "JSON input contract; own-data properties and non-JSON values additionally guarded by TypeScript"
+        },
+        "type": {
+          "type": "string",
+          "const": "object"
+        },
+        "additionalProperties": {
+          "type": "boolean",
+          "const": false
+        },
+        "required": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {
+              "type": "string",
+              "const": "profile"
+            },
+            {
+              "type": "string",
+              "const": "sourceAffinityByte"
+            },
+            {
+              "type": "string",
+              "const": "targetAffinityByte"
+            }
+          ],
+          "items": false
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "profile",
+            "sourceAffinityByte",
+            "targetAffinityByte"
+          ],
+          "properties": {
+            "profile": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "const"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "string"
+                },
+                "const": {
+                  "type": "string",
+                  "const": "affinity-distance-tutorial-u8-v1"
+                }
+              }
+            },
+            "sourceAffinityByte": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "minimum",
+                "maximum"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "integer"
+                },
+                "minimum": {
+                  "type": "integer",
+                  "const": 0
+                },
+                "maximum": {
+                  "type": "integer",
+                  "const": 255
+                }
+              }
+            },
+            "targetAffinityByte": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "minimum",
+                "maximum"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "integer"
+                },
+                "minimum": {
+                  "type": "integer",
+                  "const": 0
+                },
+                "maximum": {
+                  "type": "integer",
+                  "const": 255
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

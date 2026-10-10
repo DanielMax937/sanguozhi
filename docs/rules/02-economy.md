@@ -2588,20 +2588,22 @@ finalGold = initialGold
 
 同一执行政治时就是 `initialGold * (priceA/priceB) * b² * 0.8`。但粮价按月变化，因此跨月运输必须使用实际卖出时的 `TradePrice`。
 
-### 8.11 仍未取得的精确闭式
+### 8.11 已有函数体与仍未闭合的精确合同
 
-当前仍没有公开反汇编锁定 `tradeEffect(politics)` 的内部闭式函数。
+公开[交易收支原文](https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政05-计算交易收支.txt)已包含 `005CA620..005CA76A` 完整原段：135条连续指令、331 bytes，固定GBK blob `e53ce1f6f1945c1efd0d8c569eec161cffaaa560`（9860 bytes原文）。后方“修改 - 有‘商才’特技则交易效果上升”另列，不混入原段。不能再称交易收支完全无公开函数体。
+
+该正文不等于完整闭式已证：`0070A330`、`0070A280`、`005CA5B0` 的完整合同仍未绑定，不能按CRT惯例把三个地址分别命名为某种乘法/除法/clamp后直接实现。原始byte `TradePrice` 与UI相场3..7的尺度关系也未闭合；上面的经验公式采用UI/实测尺度，不证明可直接代入内存byte。
 
 2007 文章里的 `1 + (政治-50) × 0.285736%` 是作者明确说明的线性近似，不能冒充原作公式。
 
 现阶段 fidelity 优先级：
 
-1. 以后若恢复原函数，直接替换；
+1. 先补齐上述helper、原始粮价尺度、取整/溢出和caller/writer证据，再验证原段数值投影；
 2. 当前使用已测政治点 lookup；
 3. 中间值使用单调插值；
 4. 明确标 `empirical`。
 
-同样，最终资源变化的逐步整数截断顺序目前也没有完整函数体支持。
+最终资源变化的逐步整数截断、溢出与入库/扣款writer仍须这些完整合同及caller验证。此次只纠正来源边界，不实现商人数值核或交易命令。
 
 ### 8.12 C8 当前结论
 
@@ -2622,8 +2624,8 @@ finalGold = initialGold
 
 仍 open：
 
-- 政治→交易效果的原始闭式函数；
-- 每一步整数取整/截断顺序；
+- `0070A330`/`0070A280`/`005CA5B0` 完整合同与原始TradePrice/UI尺度；
+- 完整政治交易效果、每一步整数取整/溢出及实际资源writer；
 - 原版商人出现/消失概率与生命周期；
 - 粮价每月变化的精确转移概率。
 
@@ -2632,8 +2634,8 @@ finalGold = initialGold
   https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf
 - 311SireCustomizedPackageDev：`struct_city.TradePrice / HasMerchant / CityActions`、`0047B6F0`、`0047BD50`
   https://github.com/sean2077/311SireCustomizedPackageDev
-- 311MemoryResearch：商人执行路径 `005CAD1B`
-  https://github.com/sjn4048/311MemoryResearch
+- 311MemoryResearch：商人执行路径 `005CAD1B`；固定原段 `005CA620..005CA76A`（135条/331 bytes）
+  https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政05-计算交易收支.txt
 - 游民星空 2007 大样本交易实测
   https://www.gamersky.com/handbook/200712/89446.shtml
 - 日文 Wiki 内政 / 相场

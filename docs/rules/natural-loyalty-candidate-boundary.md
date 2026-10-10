@@ -1,6 +1,6 @@
 # 自然忠诚普通候选：严格阈值与第三分支纠错
 
-本批基线：PR #46 已合并的 `0f5ea43`。仅静态来源、候选控制流和文档纠错；未新增忠诚runtime，未关闭完整忠诚系统，未借用PR #46的发布授权。
+原PR #47的静态纠错基线：PR #46 已合并的 `0f5ea43`。本页保留该批来源和候选控制流；2026-10-09仅精确修订相性证据债，未新增忠诚runtime或关闭完整忠诚系统。
 
 ## 固定一手资料与两套MOD隔离
 
@@ -45,7 +45,9 @@
 
 ## 边界与验证
 
-`00489F80`、`004889E0`完整callee，`004A6CF0`最终writer，`00472150` RNG内部/分布/全局序列仍未补齐。历史150点环公式、caller数值算术和参考0..2随机摘要继续保留各自证据层级；caller的两次调用不证明均匀独立性，2/3概率依赖该约定。忠诚降量端到端、stock PC-PK1.1、Vanilla、PS2/Wii、原存档及运行时不由本批认证。
+`00489F80`完整教程地址助记符现已单独存档为[相性距离独立核](affinity-distance.md)：37条、`tutorial-source-projection`，仅已解析双uint8的数值返回。原opcode bytes、native pointer/ID解析、教程到本caller及S1的同源证明仍缺，不能因存在callee教程而声称自然忠诚或登用caller已验证/接入。`004889E0`完整callee、`004A6CF0`最终writer与 `00472150` RNG内部/分布/全局序列仍未补齐。caller数值算术和参考0..2随机摘要继续保留各自证据层级；caller的两次调用不证明均匀独立性，2/3概率依赖该约定。忠诚降量端到端、stock PC-PK1.1、Vanilla、PS2/Wii、原存档及运行时不由本批认证。
+
+独立核保留signed32、EAX位模式及AL；例如0/151为-1但AL255。本页静态gate仍只接收已观测helper返回值并比较unsigned AL>25，不导入独立相性核，不将两个不同来源自动拼成可执行忠诚系统。
 
 静态checker核不可变来源hash、原GBK blob、主段/MOD分隔、全部连续性、候选18条投影、rel32/rel8目的地、三条件与文档一致性。测试包含25组边界/篡改检查和25600组普通五档域组合；独立作者另外运行28个固定反例与225792组原字节解释器比较，并用GNU objdump交叉核指令。
 
@@ -57,6 +59,6 @@ python -B scripts/test_natural_loyalty_candidate_boundary.py
 node --test packages/engine/test/natural-loyalty-source-data.test.mjs
 ```
 
-本批新跑 `npm run check`：TypeScript与204项Node tests全部通过（包含本静态wrapper的25组Python检查）；新静态checker及4项既有忠诚相关checker和技巧资料checker通过。25组中含25600组合，独立probe另有28固定例/225792组合。测试前后2244个在册及新增文件hash一致；只读依赖沿用基线，命令使用既有验证锁和heap512/semi16/TAP配置。没有运行游戏EXE或声称远端CI通过。
+以下是原PR #47的历史验收，不能作为当前相性重建的测试凭证。该批 `npm run check`：TypeScript与204项Node tests全部通过（包含本静态wrapper的25组Python检查）；新静态checker及4项既有忠诚相关checker和技巧资料checker通过。25组中含25600组合，独立probe另有28固定例/225792组合。测试前后2244个在册及新增文件hash一致；只读依赖沿用基线，命令使用既有验证锁和heap512/semi16/TAP配置。没有运行游戏EXE或声称远端CI通过。
 
-上述静态回归纳入现有 `npm run check`。历史134项native长测不以本批静态纠错重报；P0-78及capture/force灭亡/native事务依赖保持排除。首轮独审发现当前摘要中另一个“相性与君主差”的包含阈值写法，以及俘虏节/技巧摘要的边界措辞残留；已纠正并加入3项文档反例。15份当前摘要纳入检查，保留audit-history原文。修订后独立恢复复审结果随本批交付记录；发布仍须单独批准。
+上述静态回归纳入现有 `npm run check`。历史134项native长测不以本批静态纠错重报；P0-78及capture/force灭亡/native事务依赖保持排除。首轮独审发现当前摘要中另一个“相性与君主差”的包含阈值写法，以及俘虏节/技巧摘要的边界措辞残留；已纠正并加入3项文档反例。15份当前摘要纳入检查，保留audit-history原文。原纠错已随PR #47交付；当前相性重建须以新树实际测试与独审记录验收，不复用本段历史数字。

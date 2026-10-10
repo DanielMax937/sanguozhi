@@ -93,6 +93,11 @@ class NaturalLoyaltyCandidateTests(unittest.TestCase):
     def test_sidecar_runtime_and_closed_debt_rejected(self):
         self.reject_edit(lambda d: d.update(runtimeAdded=True))
         self.reject_edit(lambda d: d.update(retainedOpen=[]))
+        # A separate tutorial body exists; neither blanket absence nor caller closure is accurate.
+        for debt in ['00489F80 full callee and compatibility-domain semantics',
+                     '00489F80 fully verified and integrated into natural loyalty']:
+            with self.subTest(debt=debt):
+                self.reject_edit(lambda d: d['retainedOpen'].__setitem__(0, debt))
 
     def test_sidecar_signedness_and_return_width_rejected(self):
         self.reject_edit(lambda d: d['gate']['ordinaryClauses'][0].update(register='EAX'))
@@ -148,10 +153,15 @@ class NaturalLoyaltyCandidateTests(unittest.TestCase):
     def test_document_prisoner_blanket_closure_rejected(self):
         path = 'docs/rules/03-personnel.md'
         original = (ROOT / path).read_text(encoding='utf-8')
-        for stale in ['俘虏月度掉忠：不再 open', 'captorLord']:
+        for stale in ['俘虏月度掉忠：不再 open', 'captorLord', 'callee-body-open',
+                      '本轮未补齐callee完整体', '完整体未在本轮绑定来源内', '未取得callee完整体',
+                      '教程已证明自然忠诚caller同源', '相性核已接入自然忠诚']:
             validate_summary_text(path, original)
             with self.assertRaises(EvidenceError):
                 validate_summary_text(path, original + '\n' + stale)
+
+        with self.assertRaises(EvidenceError):
+            validate_summary_text(path, original.replace('affinity-distance.md', 'obsolete.md'))
 
     def test_unknown_sidecar_key_rejected(self):
         self.reject_edit(lambda d: d.update(assumedStock=True))
