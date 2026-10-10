@@ -1,5 +1,7 @@
 # TODO — SAN11 Rules Exactness Cleanup
 
+本地候选：[探索宝物roll参数核](docs/rules/treasure-roll-argument.md)已新增独立API，256值域及中间商需以本候选新验收为准。仍待候选过滤/选择、004721D0随机语义、005D3D90归属奖励、完整探索命令及stock版本认证。PR #53人才核已合并；其历史搜宝未恢复标记保留，本次不声称搜宝完整关闭。
+
 > Working policy: one fresh theme branch from the latest GitHub `main`
 > Current theme: local resolved-input search-talent baseline listing reconstruction
 > Integration baseline: PR #52 merged; this local candidate starts at `1053ce9fdee5668fc26bff4af20ff51dd913b39a`

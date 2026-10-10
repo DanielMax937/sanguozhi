@@ -1,0 +1,126 @@
+{
+  "profileId": "treasure-roll-resolved-v1",
+  "scope": "already selected candidate; stable resolved uint8 value; pre-RNG roll argument only",
+  "evidence": {
+    "level": "source-listing-reconstruction",
+    "profile": "treasure-roll-resolved-v1",
+    "source": "docs/sources/treasure-roll-argument.json",
+    "originalRange": "005D5B45 <= PC < 005D5B6B",
+    "scope": "already selected candidate; stable resolved uint8 value; pre-RNG roll argument only",
+    "listedBytesVerified": true,
+    "stockOriginalVerified": false,
+    "originalExecutableExecuted": false,
+    "nativeHelpersReconstructed": false,
+    "callerIntegrated": false,
+    "finalProbabilityRecovered": false,
+    "rngIntegrated": false,
+    "candidateSelectionRecovered": false,
+    "ownershipWriterRecovered": false,
+    "commandIntegrated": false
+  },
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "内存资料/整理/Func-人才06-执行探索.txt",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-人才06-执行探索.txt",
+    "gitBlobSha1": "82bff04db2dae9ae0787e1e71ad72f1b4e6852de",
+    "snapshot": "docs/sources/treasure-search-original.gbk",
+    "snapshotEncoding": "GBK",
+    "snapshotBytes": 42874,
+    "snapshotSha256": "b8fb7965114ebc0d26cbb27058367c3a54ff47972bff9ab8dfc9e61867f8560a",
+    "utf8Snapshot": "docs/sources/treasure-search-original.txt",
+    "utf8Bytes": 44634,
+    "utf8Sha256": "5cbca6abd2d96ccf6980f26bee3eb4fd31b0baa0a942d65f5efb0d4c30220f0c",
+    "acquisition": "GitHub connector decoded text; GBK re-encoding matches pinned Git blob; not a direct raw download",
+    "authority": "Published research listing for 311PK, no authenticated executable hash or exact patch/version identity"
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "snapshot": "docs/sources/production-price-LICENSE.txt",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE",
+    "attribution": "sjn4048/311MemoryResearch"
+  },
+  "originalListing": {
+    "start": "005D5B45",
+    "endExclusive": "005D5B6B",
+    "instructionCount": 12,
+    "listedByteLength": 38,
+    "listedBytesSha256": "938c72b44cad329072c4212548b4878f3d611dbfd3d6f6bd244f714eff3f7ec2",
+    "callCount": 0,
+    "conditionalBranchCount": 1,
+    "conditionalBranchOutcomeCount": 2,
+    "handoffPush": "005D5B6B",
+    "handoffIncludedInstructionCount": 13,
+    "handoffIncludedByteLength": 39,
+    "excludedCallAddress": "005D5B6C",
+    "excludedCallTarget": "004721D0",
+    "excludedCallExecuted": false
+  },
+  "arithmetic": {
+    "numerator": "61-treasureValueU8",
+    "quotient": "trunc(numerator/20), toward zero; normalize negative zero",
+    "rollArgument": "max(1,quotient)",
+    "minimumNumerator": -194,
+    "maximumNumerator": 61,
+    "minimumQuotient": -9,
+    "maximumQuotient": 3,
+    "outputBins": [
+      {
+        "valueMin": 0,
+        "valueMax": 1,
+        "rollArgument": 3
+      },
+      {
+        "valueMin": 2,
+        "valueMax": 21,
+        "rollArgument": 2
+      },
+      {
+        "valueMin": 22,
+        "valueMax": 255,
+        "rollArgument": 1
+      }
+    ],
+    "division": "signed IMUL 0x66666667 high word; SAR EDX,3; SHR EAX,31 sign correction",
+    "branch": "quotient<1 => minimum-clamp; otherwise quotient",
+    "finalProbability": false
+  },
+  "corrections": [
+    {
+      "address": "005D5B57",
+      "original": "sar dl,03",
+      "corrected": "sar edx,03",
+      "authority": "C1 FA 03 encodes 32-bit SAR EDX,3"
+    }
+  ],
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "profile",
+      "treasureValueU8"
+    ],
+    "properties": {
+      "profile": {
+        "const": "treasure-roll-resolved-v1"
+      },
+      "treasureValueU8": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      }
+    }
+  },
+  "validation": "Closed own data properties only, no coercion/accessors/inherited fields/symbols. Normalize JS negative zero. Engineering rejection is not native failure. The uint8 observation is already resolved from selected candidate +0x3C; no pointer or ID accepted.",
+  "unresolved": [
+    "004CDFB0 candidate filtering, 005D51D0 selection and 0047A630 validation",
+    "004721D0 RNG semantics, distribution, seed and consumption",
+    "preceding talent/event branches and complete-search conditional probability",
+    "005D3D90 treasure ownership/reward writer, AP, command and scheduling",
+    "native pointers/IDs and mutable observations",
+    "gold search and complete treasure-search behavior",
+    "clean-stock executable, exact patch identity and cross-version equivalence",
+    "P0-78 and dependent capture/force/native transactions"
+  ]
+}
