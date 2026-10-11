@@ -1,0 +1,221 @@
+{
+  "profileId": "production-time-observations-v1",
+  "scope": "standalone-captured-caller-integer-projection-only",
+  "level": "source-listing-reconstruction",
+  "stockOriginalVerified": false,
+  "originalExecutableExecuted": false,
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "内存资料/整理/Func-内政13-计算生产耗时.txt",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政13-计算生产耗时.txt",
+    "gitBlobSha1": "a42599657262ed157c1911d939c3828048e01e1e",
+    "originalEncoding": "GBK",
+    "originalBytes": 11701,
+    "originalSha256": "b6beaf54ca6a279bf9b999a499358d0986cab703767bdc2432f874624d80db13",
+    "snapshot": "docs/sources/production-time-original.txt",
+    "snapshotEncoding": "UTF-8",
+    "snapshotBytes": 12376,
+    "snapshotSha256": "27aeb37b6821a720946cb980721bae9ff599be3a66928693451405738afb902c",
+    "byteAuthority": "public disassembly listing only; not an independently verified stock executable",
+    "transformation": "reversible UTF-8 transcoding only; original comments, MOD and incorrect sar dl mnemonic preserved"
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE",
+    "gitBlobSha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+    "snapshot": "docs/sources/production-time-LICENSE.txt",
+    "bytes": 11357,
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "domain": {
+    "nativeEquipmentType": [
+      -2147483648,
+      2147483647
+    ],
+    "captureEax": [
+      0,
+      4294967295
+    ],
+    "validation": "Closed own-data-property input, dense array, exact dynamic call order; no coercion, accessors, symbols, missing or surplus captures. Engineering rejection is not native zero.",
+    "abstraction": "Specified normal callee returns and preserved caller locals/registers only. Captures do not establish real trace reachability, object identity, repeated memory-read semantics, callee side effects or native ABI safety."
+  },
+  "constants": {
+    "inventionSkill": 82,
+    "shipbuildingSkill": 83,
+    "facilityId": 45,
+    "divisor": 24,
+    "divisionMagic": "2AAAAAAB"
+  },
+  "arithmetic": "q=trunc(max(24,maxAL+sumAL-200)/24); base=10-q; facility=max(2,8-q); skill=trunc(value/2). No global minimum.",
+  "originalListing": {
+    "start": "005C6CA0",
+    "endExclusive": "005C6E34",
+    "instructionCount": 138,
+    "byteLength": 404,
+    "sha256": "7d5b7c84d0bac670be09671878ab1dd3bd236d6145d990d1f0f81100b8f64c09",
+    "calls": [
+      {
+        "address": "005C6CF8",
+        "target": "0047A630"
+      },
+      {
+        "address": "005C6D06",
+        "target": "00489090"
+      },
+      {
+        "address": "005C6D25",
+        "target": "004890F0"
+      },
+      {
+        "address": "005C6D90",
+        "target": "0047A630"
+      },
+      {
+        "address": "005C6DAA",
+        "target": "00490D00"
+      },
+      {
+        "address": "005C6DB0",
+        "target": "0047A630"
+      },
+      {
+        "address": "005C6DCA",
+        "target": "00490D00"
+      },
+      {
+        "address": "005C6DD1",
+        "target": "004866F0"
+      },
+      {
+        "address": "005C6DDE",
+        "target": "0049DAB0"
+      }
+    ]
+  },
+  "excludedMod": {
+    "patchAddress": "005C6D79",
+    "target": "008A9640",
+    "reason": "Separate appended MOD including a minimum one; never part of original body."
+  },
+  "evidence": {
+    "level": "source-listing-reconstruction",
+    "profile": "production-time-observations-v1",
+    "stockOriginalVerified": false,
+    "originalExecutableExecuted": false,
+    "scope": "captured-caller-integer-projection",
+    "limitations": [
+      "Helpers and native ABI not restored",
+      "Repeated person+0x98 memory reads and mutable object identity not modeled",
+      "Captured observations are not proof of native reachability",
+      "Returned integer is not certified actual days or completion schedule",
+      "No eligibility, costs, rewards, inventory writer, RNG, stock or cross-version certification"
+    ],
+    "nativeHelpersReconstructed": false,
+    "callerIntegrated": false,
+    "commandIntegrated": false,
+    "mutableStateRecovered": false,
+    "completeProductionRecovered": false
+  },
+  "tables": {
+    "start": "005C6E34",
+    "hex": "DC6C5C00E66C5C003C6D5C0000000000020101",
+    "sha256": "4285391581aea210a6b7005e14bc441dfaaefc01016cac32587af237cbd1cbdb"
+  },
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "profile",
+      "nativeEquipmentType",
+      "captures"
+    ],
+    "properties": {
+      "profile": {
+        "const": "production-time-observations-v1"
+      },
+      "nativeEquipmentType": {
+        "type": "integer",
+        "minimum": -2147483648,
+        "maximum": 2147483647
+      },
+      "captures": {
+        "type": "array",
+        "maxItems": 15,
+        "items": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "callAddress",
+                "slotIndex",
+                "eax"
+              ],
+              "properties": {
+                "callAddress": {
+                  "enum": [
+                    "005C6CF8",
+                    "005C6D06",
+                    "005C6D25"
+                  ]
+                },
+                "slotIndex": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2
+                },
+                "eax": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "callAddress",
+                "eax"
+              ],
+              "properties": {
+                "callAddress": {
+                  "enum": [
+                    "005C6D90",
+                    "005C6DAA",
+                    "005C6DB0",
+                    "005C6DCA",
+                    "005C6DD1",
+                    "005C6DDE"
+                  ]
+                },
+                "eax": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "validation": {
+    "runtime": "Exact conditional call order additionally checked by runtime; JSON Schema alone does not establish it. JS own data descriptors, prototype, symbol and dense-array checks are runtime-only. Proxy meta-traps are outside the supported plain-record contract.",
+    "oracle": "Independent listing-byte x86 interpreter with captured-return stubs; not execution of original machine code.",
+    "acceptance": "Fresh frozen-tree command receipts and independent review must be recorded externally; no historical pass imported."
+  },
+  "unresolved": [
+    "Full helper bodies and ABI",
+    "Native pointer/array/officer identity and mutable repeated person+0x98 reads",
+    "Actual trace reachability",
+    "Production eligibility/AP/fees/EXP/merit/TP",
+    "Inventory writes and completion scheduler",
+    "Real day conversion",
+    "Clean-stock exact version/patch and cross-version equality",
+    "P0-78 and its dependencies remain excluded"
+  ]
+}

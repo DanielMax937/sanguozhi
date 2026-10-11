@@ -357,3 +357,8 @@ P0-56以[91-return-mission-lifecycle.md](91-return-mission-lifecycle.md)为准�
 P0-57以[92-officer-return-finalizer.md](92-officer-return-finalizer.md)为准：004BF6F0四字段及完整列表/role调用顺序已有独立有界投影，ruler ownership原子defer；004BE2A0稳定非空军团角色协调为下一主题，完整callback/force/stock/Vanilla仍open。
 
 P0-58以[93-legion-role-reconciliation.md](93-legion-role-reconciliation.md)为准：原下一主题稳定军团与refresh=0太守标量协调已有独立有界API；事件监听、force灭亡/空军团及完整返回/capture仍open。
+
+
+## 2026-10-11 生产耗时独立caller投影
+
+已新增本地候选 `calculateProductionTimeProjection` / `production-time-observations-v1`（说明：production-time.md）。仅固定listing与逐调用观测驱动的整数/trace；全无效返回9、type9跳扫描、重复validity/设施解析独立、允许负数和零、技能向零减半。真实helpers/ABI/对象可变读取/命令/库存writer/完成调度/实际日数/stock仍open；未覆盖P0-78及依赖。新树验收和发布状态外部收据单列，不复用PR #55历史通过。

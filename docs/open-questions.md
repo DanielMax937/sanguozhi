@@ -85,3 +85,8 @@
 - 登用分数换成成功率的函数。E15 已闭合普通话题牌、大喝与诡辩反弹的通用心理伤害；舌战仅剩人物隐藏修正与平台/版本差异。
 - 每座城的格子坐标和邻接、北海/建業/會稽的开发分片仍 open。45 个港关的静态所属城市已在 [subordinate-bases.json](sources/subordinate-bases.json) 补齐，并与既有 42 城计数逐项对账；原作数值据点 ID、剧本初始状态与动态归属不由此推定，见[数据边界](rules/static-subordinate-bases.md)。
 - 剧本开局。历史事件的触发条件。
+
+
+## 2026-10-11 生产耗时独立caller投影
+
+已新增本地候选 `calculateProductionTimeProjection` / `production-time-observations-v1`（说明：docs/rules/production-time.md）。仅固定listing与逐调用观测驱动的整数/trace；全无效返回9、type9跳扫描、重复validity/设施解析独立、允许负数和零、技能向零减半。真实helpers/ABI/对象可变读取/命令/库存writer/完成调度/实际日数/stock仍open；未覆盖P0-78及依赖。新树验收和发布状态外部收据单列，不复用PR #55历史通过。

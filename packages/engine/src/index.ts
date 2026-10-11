@@ -27,3 +27,5 @@ export { TREASURE_ROLL_ARGUMENT, calculateTreasureRollArgument } from './treasur
 export type { TreasureRollArgumentInput, TreasureRollArgumentRejectionReason, TreasureRollArgumentRejection, TreasureRollArgumentReceipt, TreasureRollArgumentResult } from './treasure-roll-argument.ts';
 export { SEARCH_GOLD_CALLER, calculateSearchGoldCallerProjection } from './search-gold-caller.ts';
 export type { SearchGoldSecondRead, SearchGoldCallerInput, SearchGoldCallerRejectionReason, SearchGoldCallerRejection, SearchGoldCallObservation, SearchGoldCallerReceipt, SearchGoldCallerResult } from './search-gold-caller.ts';
+export { PRODUCTION_TIME, calculateProductionTimeProjection } from './production-time.ts';
+export type { ProductionTimeCapture, ProductionTimeInput, ProductionTimeRejectionReason, ProductionTimeRejection, ProductionTimeSlotReceipt, ProductionTimeCallDetail, ProductionTimeReceipt, ProductionTimeResult } from './production-time.ts';
