@@ -1884,3 +1884,8 @@ rate = max(
 ### 生产数量显式binary32限定核（2026-10-09）
 
 [完整支持域](production-quantity.md)；[固定原文](https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政11-计算生产数量.txt)，GBK blob `e8c0c22e68e8557b202088290d52101abb02ca3a`。原88条/254字节、5 direct CALL/15 branch与两套MOD（含各自patch/trampoline及修改2数据）完全隔离；[可逆快照](../sources/production-quantity-original.txt)、[证据记录](../sources/production-quantity.json)、[闭合schema](../sources/production-quantity.schema.json)。源作者sjn4048，本数量快照明确复用[Apache-2.0许可](../sources/production-price-LICENSE.txt)。完整EAX验证/技能/virtual、getter仅AL，先技能倍增后FIMUL/向零转换再超级倍增；不把内联政治替换、名声或MOD2特产当原式。仅接受显式已解析3F800000/3F99999A/3FC00000，不由Lv注释填stock常量。原函数无9000cap，后续004B4040实际库存writer仍缺。`source-listing-reconstruction`，stockOriginalVerified=false、originalExecutableExecuted=false、commandIntegrated=false；完整callee/设施原表/运行时和跨版本仍开放。
+
+
+### 征兵数量显式ST0逐调用限定核（2026-10-11）
+
+[完整支持域](recruitment-quantity.md)；固定sjn4048/311MemoryResearch commit `66e167e40c3440929ec016f3872aefc3486434c1`、GBK blob `0b122837b1ff1ae11789121595531b64e80ff8d2`。[可逆完整快照](../sources/recruitment-quantity-original.txt)、[metadata](../sources/recruitment-quantity.json)、[闭合schema](../sources/recruitment-quantity.schema.json)与[Apache-2.0许可](../sources/recruitment-quantity-LICENSE.txt)。原131条/373所列字节、15静态CALL-site与另列MOD14条严格隔离，源SAR DL与技能/设施栈注释错误保留并在解释中纠正。转录仅改编码，投影/解释器为新增实现。最多19EAX输入加explicit ST0，正常转换返回由有限合同推导，最大21动态calls；不能混称全memory trace、真实helper/ABI、stock或完整征兵。治安BL早于倍率helper保存，skill先整数调整再FIMUL，super先pressure，容量ADD32/signedJGE/独立二次SUB32，含负或大于候选返回。执行资格/费用/AP/人口/奖励/治安损失/实际入库与调度继续open。

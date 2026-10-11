@@ -29,3 +29,5 @@ export { SEARCH_GOLD_CALLER, calculateSearchGoldCallerProjection } from './searc
 export type { SearchGoldSecondRead, SearchGoldCallerInput, SearchGoldCallerRejectionReason, SearchGoldCallerRejection, SearchGoldCallObservation, SearchGoldCallerReceipt, SearchGoldCallerResult } from './search-gold-caller.ts';
 export { PRODUCTION_TIME, calculateProductionTimeProjection } from './production-time.ts';
 export type { ProductionTimeCapture, ProductionTimeInput, ProductionTimeRejectionReason, ProductionTimeRejection, ProductionTimeSlotReceipt, ProductionTimeCallDetail, ProductionTimeReceipt, ProductionTimeResult } from './production-time.ts';
+export { RECRUITMENT_QUANTITY, calculateRecruitmentQuantityProjection } from './recruitment-quantity.ts';
+export type { RecruitmentQuantityFactorBits, RecruitmentQuantityCapture, RecruitmentQuantityInput, RecruitmentQuantityRejectionReason, RecruitmentQuantityRejection, RecruitmentQuantitySlotReceipt, RecruitmentQuantityCallDetail, RecruitmentQuantityReceipt, RecruitmentQuantityResult } from './recruitment-quantity.ts';
