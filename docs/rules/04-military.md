@@ -2,37 +2,20 @@
 
 ## 1. 征兵
 
-### PC-PK 1.1 精确公式（代码逆向确认）
+### 公开listing的显式ST0限定数量投影
 
-`[PC-PK1.1][confirmed-by-disassembly]`
+`[source-listing-reconstruction][captured-caller-only]`
 
-311MemoryResearch 对 `San11PK.exe` 的 `005C3610`（计算征兵数量）和 `005C3A50`（执行征兵）做了逐指令逆向，因此这一项不再需要 provisional 公式。
+[征兵数量独立限定核](recruitment-quantity.md)固定005C3610..005C3785原131条/373所列字节与独立MOD。该原体不认证stock PC-PK1.1或完整执行征兵005C3A50；后续副作用资料保留各自来源边界，不因本核升级。
 
-定义：
+- C为3次循环分别验证有效的武将魅力AL之和（0..765），O为倍率helper前已保存的治安byte，S为技能完整EAX非零触发的10/15
+- A=1000+floor((O+20)*C/20)，N=floor(A*S/10)，R=trunc(N*capturedST0)。ST0仅接受调用者已确认的binary32 bitword1、1.2f、1.5，不按兵舍等级注释推导stock常量
+- 初设施/首槽/城市验证失败早退0；首槽初验不替代循环重验。三次loop全无效仍N1000，技能命中不跳过后槽
+- difficulty dword恰为2且city virtual48完整EAX为0才double；随后pressure完整EAX非零才signed向零half，本有限非负域等价floor。pressure helper原体/距离2或3格边界仍未恢复，不在此实现距离判断
+- 容量实际为signed JGE(firstCapacity,ADD32(firstTroops,R))；失败才独立二次读取troops/capacity并SUB32，不clamp。仅两轮读取稳定、普通非负无溢出时可简写min(R,capacity−troops)
+- 返回signed/raw EAX候选，不等于最终troop writer的实际入库量；费用/AP/人口/治安损失/调度等完整执行路径仍独立缺失
 
-- `C` = 最多 3 名执行武将的**魅力和**
-- `O` = 当前城市治安
-- `F` = 名声倍率：无名声 `1.0`；任一执行武将有“名声”则 `1.5`
-- `B` = 本次使用兵舍等级倍率：Lv1=`1.0`，Lv2=`1.2`，Lv3=`1.5`
-
-原始征兵量：
-
-```
-A = 1000 + floor((O + 20) * C / 20)
-A = floor(A * F)
-R = floor(A * B)
-```
-
-随后按顺序修正：
-
-1. 超级难度的 **AI 城市**：`R *= 2`
-2. 兵临城下：`R = floor(R / 2)`。官方 PK 说明书写作“城市周围 2 格”；逆向资料对其通用判定函数注释为“城市 3 格、港关 2 格”，因此**减半已确认，距离边界暂按官方 2 格实现并保留 distance=2/3 的回归测试**
-3. 城市兵力上限：`R = min(R, maxTroops - currentTroops)`
-
-因此当前治安不是只影响“能不能征兵”，而是直接线性进入基础公式。
-
-逆向来源：
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-内政01-计算征兵数量.txt
+治安确实进入此有限caller基础式；倍率选择/原常量、helpers/ABI/对象身份/真实trace、clean-stock与跨版本仍open。固定来源与许可见专项页。
 
 ### 征兵导致的治安下降
 
@@ -98,12 +81,12 @@ orderLoss = floor(6300 / 400) = 15
 
 无印没有 Lv2/Lv3 兵舍，因此 `B=1.0`。魅力、治安、名声、300金、20行动力、最多3人等机制在无印资料中一致存在。
 
-但目前拿到的**逐指令反汇编是 PC-PK 1.1**，尚未对 Vanilla 可执行文件做二进制逐字节对比。因此引擎中应：
+但目前拿到的**逐指令反汇编是 PC-PK 1.1**，尚未对 Vanilla 可执行文件做二进制逐字节对比。以下是旧资料的兼容建议，不属于新限定API的stock或跨版本认证：
 
 - Vanilla：采用同一核心公式，固定 `B=1.0`
-- PK：使用完整公式和 Lv1/2/3 倍率
+- PK旧资料：描述Lv1/2/3倍率；新API必须显式给已捕获ST0，完整选择与常量bytes仍缺
 - 标记 `formulaEvidence.vanilla = empirical-high`
-- 标记 `formulaEvidence.pk11 = confirmed-by-disassembly`
+- 新数量核标记 `source-listing-reconstruction`；公开listing不直接认证stock PC-PK1.1
 
 ### 重要纠错
 

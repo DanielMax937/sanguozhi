@@ -1,0 +1,355 @@
+{
+  "profileId": "recruitment-quantity-observations-f32-v1",
+  "scope": "standalone-captured-caller-finite-f32-projection-only",
+  "level": "source-listing-reconstruction",
+  "stockOriginalVerified": false,
+  "originalExecutableExecuted": false,
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "内存资料/整理/Func-内政01-计算征兵数量.txt",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政01-计算征兵数量.txt",
+    "gitBlobSha1": "0b122837b1ff1ae11789121595531b64e80ff8d2",
+    "originalEncoding": "GBK",
+    "originalBytes": 11348,
+    "originalSha256": "130f094728a1ccefe46c086e00f122a551fbe55e6c794626156a44072d2f43b9",
+    "snapshot": "docs/sources/recruitment-quantity-original.txt",
+    "snapshotEncoding": "UTF-8",
+    "snapshotBytes": 12020,
+    "snapshotSha256": "1460bf463ff0e7a42fb81da8b35248748a249209b9b6213548f5ee1802ae4344",
+    "byteAuthority": "public disassembly listing only; not independent raw executable extraction or clean-stock certification",
+    "transformation": "reversible UTF-8 transcoding only; original comments, SAR DL typos, mistaken stack-slot comments and separate appended MOD preserved"
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE",
+    "gitBlobSha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+    "snapshot": "docs/sources/recruitment-quantity-LICENSE.txt",
+    "bytes": 11357,
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "domain": {
+    "captureEax": [
+      0,
+      4294967295
+    ],
+    "savedSecurityByte": [
+      0,
+      255
+    ],
+    "charismaAl": [
+      0,
+      255
+    ],
+    "charismaSum": [
+      0,
+      765
+    ],
+    "difficultyWord": [
+      0,
+      4294967295
+    ],
+    "finiteSt0Bits": [
+      "3F800000",
+      "3F99999A",
+      "3FC00000"
+    ],
+    "preFpuIntegerSuperset": [
+      1000,
+      17277
+    ],
+    "validation": "Closed own-data-property records and dense plain arrays, exact conditional call order. Three successful entry gates require all numeric fields; early exits forbid them. Engineering rejection is not native zero.",
+    "abstraction": "Specified normal callee returns and preservation of caller locals/registers only. Observations do not establish real trace reachability, object identity, mutable repeated memory-read semantics, callee side effects or native ABI safety.",
+    "omittedDeadRead": "Per-valid-slot uint16 person+AE merit and its local maximum do not affect numerical output and are omitted from the minimal API. This is not a complete memory-read trace."
+  },
+  "constants": {
+    "skillId": 79,
+    "skillParameters": [
+      10,
+      15
+    ],
+    "baseQuantity": 1000,
+    "securityOffset": 20,
+    "firstDivisionMagic": "51EB851F",
+    "firstDivisionShift": 5,
+    "secondDivisionMagic": "66666667",
+    "secondDivisionShift": 2,
+    "difficultyAddress": "07201978",
+    "superDifficultyWord": 2
+  },
+  "arithmetic": "A=1000+floor((savedSecurityByte+20)*sumAL/20); N=floor(A*skillParameter/10); R=trunc(N*capturedST0). Then conditional ADD32 double, signed toward-zero pressure half, signed JGE(firstCapacity,ADD32(firstTroops,R)); fallback SUB32(secondCapacity,secondTroops) without clamp.",
+  "floatingPointContract": {
+    "factorValues": {
+      "3F800000": [
+        1,
+        1
+      ],
+      "3F99999A": [
+        5033165,
+        4194304
+      ],
+      "3FC00000": [
+        3,
+        2
+      ]
+    },
+    "meaning": "Input identifies an already captured ST0 whose exact value equals the selected binary32 bitword; it does not infer a facility level, load width, stock constant or supplier EAX.",
+    "conversion": "Normal finite multiplication and normal toward-zero conversion to integer under the specified profile. Converter output is derived, never an independent capture.",
+    "precisionScope": "N=1000..17277, factors listed here, x87 significand precisions24/53/64 and down/up/toward-zero/nearest-even. Rounded products may differ from exact; final truncation equality requires this finite-domain proof.",
+    "stockConstantsVerified": false,
+    "sameVersionConverterBodyVerified": false,
+    "fpuExceptionBehaviorVerified": false
+  },
+  "originalListing": {
+    "start": "005C3610",
+    "endExclusive": "005C3785",
+    "instructionCount": 131,
+    "byteLength": 373,
+    "sha256": "222db5df5e94f2ac910dbdf6148258e815cc1494f345fa92751b4ccc2e09a5bb",
+    "directCalls": [
+      {
+        "address": "005C3619",
+        "target": "0047A630"
+      },
+      {
+        "address": "005C3630",
+        "target": "0047A630"
+      },
+      {
+        "address": "005C3643",
+        "target": "004866F0"
+      },
+      {
+        "address": "005C364B",
+        "target": "0047A630"
+      },
+      {
+        "address": "005C367B",
+        "target": "0047A630"
+      },
+      {
+        "address": "005C3689",
+        "target": "004890B0"
+      },
+      {
+        "address": "005C36AA",
+        "target": "004890F0"
+      },
+      {
+        "address": "005C36C8",
+        "target": "005C3550"
+      },
+      {
+        "address": "005C3710",
+        "target": "00707A74"
+      },
+      {
+        "address": "005C3738",
+        "target": "004B99B0"
+      },
+      {
+        "address": "005C3757",
+        "target": "00486BC0"
+      },
+      {
+        "address": "005C376B",
+        "target": "00486BC0"
+      }
+    ],
+    "indirectCalls": [
+      {
+        "address": "005C3725",
+        "hex": "ff5248"
+      },
+      {
+        "address": "005C374E",
+        "hex": "ff5050"
+      },
+      {
+        "address": "005C3764",
+        "hex": "ff5250"
+      }
+    ]
+  },
+  "calls": {
+    "staticSites": 15,
+    "maximumDynamicCalls": 21,
+    "maximumEaxCaptures": 19,
+    "fullPathCount": "12+2*validSlotCount+(difficultyWord==2?1:0)+(capacityFallback?2:0)",
+    "earlyCallCounts": [
+      1,
+      2,
+      4
+    ],
+    "st0SupplierSite": "005C36C8",
+    "derivedConverterSite": "005C3710",
+    "loopSites": [
+      "005C367B",
+      "005C3689",
+      "005C36AA"
+    ],
+    "eaxOnlySites": [
+      "005C3619",
+      "005C3630",
+      "005C3643",
+      "005C364B",
+      "005C3725",
+      "005C3738",
+      "005C374E",
+      "005C3757",
+      "005C3764",
+      "005C376B"
+    ]
+  },
+  "excludedMod": {
+    "patchAddress": "005C3710",
+    "target": "008A9D88",
+    "instructionCountIncludingPatch": 14,
+    "reason": "Separate appended city-size multiplier trampoline, not the original caller. Its 6BC064 bytes encode100 despite mnemonic32; neither is mixed into this projection."
+  },
+  "evidence": {
+    "level": "source-listing-reconstruction",
+    "profile": "recruitment-quantity-observations-f32-v1",
+    "scope": "captured-caller-finite-f32-projection",
+    "stockOriginalVerified": false,
+    "originalExecutableExecuted": false,
+    "nativeHelpersReconstructed": false,
+    "callerIntegrated": false,
+    "commandIntegrated": false,
+    "mutableStateRecovered": false,
+    "completeRecruitmentRecovered": false,
+    "limitations": [
+      "Normal callee returns and caller local/register preservation are a contract, not a proven native ABI",
+      "Minimal numerical/control-flow observations omit dead merit reads and do not certify mutable object identity or real trace reachability",
+      "Only the three explicit binary32-valued ST0 observations and finite normal conversion domain are supported",
+      "No stock facility selection/constants or same-version converter/FPU exception proof",
+      "Returned quantity is not an actual troop write; eligibility, AP, fees, population, rewards, security loss and scheduling remain separate",
+      "No clean-stock or cross-version certification"
+    ]
+  },
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "profile",
+      "captures"
+    ],
+    "properties": {
+      "profile": {
+        "const": "recruitment-quantity-observations-f32-v1"
+      },
+      "captures": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 19,
+        "items": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "callAddress",
+                "slotIndex",
+                "eax"
+              ],
+              "properties": {
+                "callAddress": {
+                  "enum": [
+                    "005C367B",
+                    "005C3689",
+                    "005C36AA"
+                  ]
+                },
+                "slotIndex": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2
+                },
+                "eax": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "callAddress",
+                "eax"
+              ],
+              "properties": {
+                "callAddress": {
+                  "enum": [
+                    "005C3619",
+                    "005C3630",
+                    "005C3643",
+                    "005C364B",
+                    "005C3725",
+                    "005C3738",
+                    "005C374E",
+                    "005C3757",
+                    "005C3764",
+                    "005C376B"
+                  ]
+                },
+                "eax": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                }
+              }
+            }
+          ]
+        }
+      },
+      "savedSecurityByte": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      },
+      "resolvedFacilityFactorBits": {
+        "enum": [
+          "3F800000",
+          "3F99999A",
+          "3FC00000"
+        ]
+      },
+      "difficultyWord": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      }
+    },
+    "dependentRequired": {
+      "savedSecurityByte": [
+        "resolvedFacilityFactorBits",
+        "difficultyWord"
+      ],
+      "resolvedFacilityFactorBits": [
+        "savedSecurityByte",
+        "difficultyWord"
+      ],
+      "difficultyWord": [
+        "savedSecurityByte",
+        "resolvedFacilityFactorBits"
+      ]
+    }
+  },
+  "validation": {
+    "runtime": "Schema checks JSON shape and grouped numeric fields only. Exact conditional execution, allowed early fields, slots and call order are runtime checks. Own data descriptors, prototypes, symbols and dense arrays are runtime-only; hostile Proxy meta-traps are outside the plain-record contract.",
+    "oracle": "Independent restricted original listing-byte interpreter with synthetic memory and observed-return stubs; never executes original machine code or helper bodies.",
+    "acceptance": "Fresh frozen-tree command receipts and independent review are recorded externally. Prior arithmetic audits and prior PR passes do not validate this implementation."
+  },
+  "unresolved": [
+    "Full facility multiplier selection and original constant bytes",
+    "Same-version converter body, FPU environment and exception behavior",
+    "Validator, charisma, skill, pressure, capacity and virtual helper bodies",
+    "Normal native ABI/local preservation, object identity, memory safety and real trace reachability",
+    "Recruitment eligibility, AP/fees/population/rewards/security loss and actual troop writer",
+    "Full command integration, scheduler, clean-stock and cross-version behavior",
+    "P0-78 and its dependencies remain excluded from new implementation"
+  ]
+}
