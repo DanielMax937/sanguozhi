@@ -13,7 +13,7 @@
 
 ## 1. 征兵精确数量 / 治安下降
 
-### 结论：PC-PK 已由反汇编锁定
+### 结论：公开listing限定投影已落地，完整command与stock仍未锁定
 
 `[PC-PK1.1][reverse-engineered]`
 
@@ -28,6 +28,8 @@
 - `C` = 最多 3 名执行武将的魅力之和
 - `F` = 名声倍率：任一执行武将有“名声”则 1.5，否则 1.0
 - `B` = 兵舍等级倍率：Lv1=1.0、Lv2=1.2、Lv3=1.5
+
+以下为旧资料普通、稳定、非负且无溢出域的简式，不能当已实现writer：精确数量caller的两次getter、signed ADD/SUB与显式ST0边界见[征兵数量](recruitment-quantity.md)。
 
 核心数量：
 
@@ -44,7 +46,7 @@ if (underEnemyPressure) {
   recruits = floor(recruits / 2)
 }
 
-actualAdded = min(recruits, troopCap - currentTroops)
+quantityCandidate = min(recruits, troopCap - currentTroops) // 仅上述稳定普通域，非实际入库
 ```
 
 因此旧 fallback 中两点已被推翻：
@@ -52,24 +54,17 @@ actualAdded = min(recruits, troopCap - currentTroops)
 1. **治安直接进入征兵数量公式**，不是只通过后续风险间接作用。
 2. **兵临城下是直接减半**，不是旧 fallback 的 ×0.8。
 
-### 征兵导致的治安下降
+### 征兵治安请求参数，写回缺口仍保留
 
-`[PC-PK1.1][reverse-engineered]`
+`[source-listing-reconstruction][bounded-leaf-only]`
 
-执行函数直接给出：
+[独立治安参数叶](recruitment-security-argument.md)已实现 `-trunc(signed32(savedTroopReturnU32)/(savedCharmSum+100))`，只取入口两标量。C来自执行caller较早魅力AL累加，不能复用数量函数后来扫描；U来自入口ESI，最近显式定义保存004AE3C0 writer返回，而非数量返回。
 
-```ts
-orderLoss = floor(actualAdded / (C + 100))
-publicOrder -= orderLoss
-```
-
-注意分子是**考虑城市兵力上限后实际加入的兵力**，不是未裁剪的理论征兵量。
-
-“名声使治安下降约增加 50%”不是另有一条独立的 `×1.5` 治安惩罚；实际是名声先令征兵量 ×1.5，随后治安损失按实际征兵量计算，所以在整数取整边界外通常表现为约 1.5 倍。
+普通非负N可简写为 `-floor(N/(C+100))` 请求。旧“publicOrder -= orderLoss”和保证分子实际已入库的表述撤回，004AE3C0/004B3E70 writer、夹限/返回语义与状态仍缺。N为负必须IDIV向零截断，可返回正delta；不读当前治安，不带法治MOD，不执行完整征兵。
 
 ### 可复算锚点
 
-治安100、魅力100×3、Lv3、无名声：
+以下是普通域历史数值锚点；早期C=300且入口U等于所列数量时才给出请求−10/−15，非实际损失证明。治安100、魅力100×3、Lv3、无名声：
 
 ```
 C = 300
@@ -87,9 +82,9 @@ recruits = 6300
 orderLoss = floor(6300 / 400) = 15
 ```
 
-这也解释了社区长期记录的“名声征兵量 +50%，治安下降也约 +50%”。
+此处保留社区“名声征兵量 +50%，治安下降也约 +50%”的历史观察；小叶只核请求参数，实际writer写回仍未知，不能将观察提升为端到端保证。
 
-### 兵临城下范围：只剩一个边界口径需要回归测试
+### 兵临城下范围与callee合同仍待独立证据
 
 减半本身已由汇编确认。范围口径存在资料表述差异：
 
@@ -102,8 +97,8 @@ orderLoss = floor(6300 / 400) = 15
 
 - 300 金、20 行动力、最多 3 人。
 - 每名执行武将：魅力经验 +2、功绩 +50。
-- 新征士兵气力 = `floor(征兵前治安 / 2)`。
-- 新旧士兵气力按人数混合，最终城市气力最低为 20。
+- 005C3BDC较晚读取治安byte并SHR1作为混合helper参数，不保证等于数量函数前的治安。
+- 混合helper完整原体与writer仍未恢复；可见caller将helper返回signed<20时改20后传给writer。
 - 超级难度 AI 征兵量 ×2。
 
 ### Vanilla 版本边界

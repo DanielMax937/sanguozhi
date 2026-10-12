@@ -1,5 +1,7 @@
 # 已采用规则
 
+2026-10-11 新独立候选：[征兵治安writer请求参数叶](rules/recruitment-security-argument.md)，基于已合并PR #57 main d1e93ada18efa5f95c584afd9309b228f9391f0c。只接早期保存C与入口ESI的u32两标量，signed IDIV/NEG、规范+0；7条/19 bytes（含两push9条/21 bytes），不接写回/command、不复用数量输入、法治MOD隔离。实际征兵/治安损失、ABI/helpers/stock仍open；新验收另记，下方旧候选/最新数字不验证本树。P0-78及其依赖新增实现继续排除。
+
 实现时以本文为准。人物、城市、特技、宝物、官职在 `docs/sources/` 的 JSON 里。攻防的副将合成、全兵种系数、战法气力表、城市收入在 `docs/sources/crosscheck.md` 第 1–5 节，和本文一起采用。本文补的是 2026-09-24 对照日文 wiki 之后能落地的部分。
 
 建设项更正（2026-10-08）：crosscheck中的建设天数仅保留攻略观察；当前建设速度数值以[稳定值限定原函数核](rules/domestic-construction-rate.md)为准。`max(maxPolitics+floor(sumPolitics/2),floor((D-floor(D/4))/9))` 与旧Wiki综合政治重建不等价；完整日数、初始writer、进度/完成调度、getter及stock证明仍缺，不能据旧表直接实现完整建设。

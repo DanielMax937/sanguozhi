@@ -17,28 +17,19 @@
 
 治安确实进入此有限caller基础式；倍率选择/原常量、helpers/ABI/对象身份/真实trace、clean-stock与跨版本仍open。固定来源与许可见专项页。
 
-### 征兵导致的治安下降
+### 征兵治安请求参数（实际写回仍独立未明）
 
-`[PC-PK1.1][confirmed-by-disassembly]`
+`[source-listing-reconstruction][bounded-leaf-only]`
 
-执行征兵后，先取**实际增加进城市的兵力**（已经经过超级AI、兵临城下和城市兵力上限裁剪）：
+[独立治安参数叶](recruitment-security-argument.md)实现 `-trunc(signed32(savedTroopReturnU32)/(savedCharmSum+100))`。C是执行caller更早保存的三槽魅力AL和，不复用数量函数后来读取的C；U是leaf入口ESI，其最近显式定义保存004AE3C0增兵writer返回，不是数量函数返回。完整原文316条/955 bytes，实际算术仅7条/19 bytes（两push含入为9条/21 bytes）。
 
-```
-orderLoss = floor(actualRecruited / (C + 100))
-```
+普通非负N时，请求delta可简写为 `-floor(N/(C+100))`。撤回旧文直接写“治安 -= orderLoss”及将返回保证为实际已入库兵力的说法；004AE3C0/004B3E70完整writer、夹限与真实状态均未恢复。N为负则必须向零截断，允许正delta；无城市security clip、无法治MOD选项。名声不在此叶再次乘1.5；普通数值关联不证明实际治安损失必按1.5缩放。
 
-然后：
-
-`治安 -= orderLoss`
-
-这也解释了“名声会让治安下降约多 50%”：原版代码没有单独再乘一次治安惩罚，而是因为名声先把实际征兵量 ×1.5，治安损失再按实际征兵量计算。
-
-逆向来源：
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-内政02-执行征兵.txt
+固定来源、完整输入时序、signed IDIV、余数/规范+0与MOD隔离见专项页，不认证stock或完整征兵。
 
 ### 可复算锚点
 
-治安100、3名魅力100、无名声、Lv3兵舍：
+以下保留历史普通域数值锚点；仅在入口writer保存值等于所列R、早期C=300时得到请求delta，不能据此保证实际写回。治安100、3名魅力100、无名声、Lv3兵舍：
 
 ```
 C = 300
@@ -63,7 +54,7 @@ orderLoss = floor(6300 / 400) = 15
 - https://w.atwiki.jp/sangokushi11/pages/1190.html
 - https://w.atwiki.jp/sangokushi11/pages/13.html
 
-### 其他精确副作用
+### 同caller其他副作用线索（本叶不实现）
 
 `[PC-PK1.1][confirmed-by-disassembly]`
 
@@ -71,8 +62,8 @@ orderLoss = floor(6300 / 400) = 15
 - 行动力：20
 - 最多 3 名执行武将
 - 每名执行武将：魅力经验 +2、功绩 +50
-- 新征士兵气力 = `floor(征兵前治安 / 2)`
-- 与原驻军气力按人数加权混合；最终城市气力最低为 20
+- 005C3BDC较晚重新读城市治安byte并SHR1作为混合helper参数，不保证等于数量函数前保存的治安
+- 004B9840混合气力helper原体未恢复；caller仅可见返回signed<20时改成20再调用0047CC50 writer
 - 每次执行消耗 1 次可用兵舍征兵次数
 
 ### Vanilla 版本边界

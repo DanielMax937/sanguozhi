@@ -31,3 +31,5 @@ export { PRODUCTION_TIME, calculateProductionTimeProjection } from './production
 export type { ProductionTimeCapture, ProductionTimeInput, ProductionTimeRejectionReason, ProductionTimeRejection, ProductionTimeSlotReceipt, ProductionTimeCallDetail, ProductionTimeReceipt, ProductionTimeResult } from './production-time.ts';
 export { RECRUITMENT_QUANTITY, calculateRecruitmentQuantityProjection } from './recruitment-quantity.ts';
 export type { RecruitmentQuantityFactorBits, RecruitmentQuantityCapture, RecruitmentQuantityInput, RecruitmentQuantityRejectionReason, RecruitmentQuantityRejection, RecruitmentQuantitySlotReceipt, RecruitmentQuantityCallDetail, RecruitmentQuantityReceipt, RecruitmentQuantityResult } from './recruitment-quantity.ts';
+export { RECRUITMENT_SECURITY_ARGUMENT, calculateRecruitmentSecurityArgument } from './recruitment-security-argument.ts';
+export type { RecruitmentSecurityArgumentInput, RecruitmentSecurityArgumentRejectionReason, RecruitmentSecurityArgumentRejection, RecruitmentSecurityArgumentReceipt, RecruitmentSecurityArgumentResult } from './recruitment-security-argument.ts';
