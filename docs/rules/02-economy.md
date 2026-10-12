@@ -3060,66 +3060,38 @@ A = 1000 + floor((O + 20) * C / 20)
 治安50  -> 1000 +  70*300/20 = 2050
 ```
 
-### 10.5 征兵导致的精确治安下降
+### 10.5 征兵治安writer的请求参数
+
+`[source-listing-reconstruction][bounded-leaf-only]`
+
+[独立治安参数叶](recruitment-security-argument.md)固定完整005C3A50 caller原文，但只实现005C3C11..<005C3C24的7条/19 bytes。输入C为执行阶段早期保存的魅力AL和；U为leaf入口ESI，最近显式定义保存004AE3C0 writer返回，不是005C3610数量返回或较晚属性扫描。
+
+```text
+N = signed32(U)
+requestedDelta = -trunc(N / (C+100))
+```
+
+普通N>=0时为 `-floor(N/(C+100))`，C300、U4200/6300得到−10/−15请求。N−101、C0得到+1，不能floor。此叶不读取当前治安、不夹限、不应用法治MOD，不执行004B3E70。旧“实际最终入库兵力/精确掉治安/security -= orderLoss”描述撤回：writer完整实现、实际损失与写回仍未知；名声不是此叶另乘一次1.5，也不能据此保证端到端同比例。详见专项页的输入时序、端点、MOD和ABI边界。
+
+### 10.6 治安writer前的另一次治安读取与气力参数
 
 `[PC-PK1.1][confirmed-by-disassembly]`
 
-`005C3A50` 在所有征兵量修正完成之后，使用**实际最终增加进城市的兵力**计算治安损失：
+在治安writer之前，005C3BDC重新读取当前城市治安byte；这晚于数量函数的保存值，不能保证两次相同。下面仅描述传给004B9840混合helper的参数；其完整原体与0047CC50 writer未恢复：
 
 ```ts
-C = sumCharismaOfExecutingOfficers
-orderLoss = floor(actualRecruited / (C + 100))
-security -= orderLoss
+mixedHelperNewTroopArgument = floor(laterObservedSecurityByte / 2)
 ```
 
-这里的 `actualRecruited` 已经经过：
-
-- 名声倍率；
-- 兵舍等级；
-- 超级难度 AI 倍率；
-- 兵临城下减半；
-- 城市兵力上限裁剪。
-
-因此名声没有另一条隐藏的“治安再×1.5”代码。
-
-正确顺序是：
-
-```text
-名声 -> 征兵数×1.5
-↓
-使用放大后的实际征兵数计算治安下降
-```
-
-所以常见体验上治安损失也约放大1.5倍。
-
-例：治安100、三名魅力100、Lv3兵舍：
-
-```text
-无名声：4200兵 -> floor(4200/400)=10治安
-有名声：6300兵 -> floor(6300/400)=15治安
-```
-
-这与同期玩家记录完全吻合。
-
-### 10.6 征兵还会用征兵前治安决定新兵气力
-
-`[PC-PK1.1][confirmed-by-disassembly]`
-
-在扣除本次征兵导致的治安之前，源码先读取当前治安：
-
-```ts
-newRecruitMorale = floor(preRecruitSecurity / 2)
-```
-
-然后与原驻军气力按新旧兵力人数加权混合；最终城市气力最低保证20。
+随后调用004B9840；caller仅在其返回signed<20时将传给0047CC50 writer的参数改20。helper内部加权式与实际城市气力写回均未由本叶证明。
 
 所以顺序是：
 
 ```text
-旧治安
-→ 算新兵气力
-→ 混合城市气力
-→ 再按实际征兵数扣治安
+较晚读取的治安byte
+→ SHR1后传混合helper
+→ helper返回按signed<20修正参数并传气力writer
+→ 再计算并传递治安writer请求参数（实际写回未明）
 ```
 
 ### 10.7 治安对金 / 粮收入
@@ -3308,9 +3280,9 @@ PC-PK1.1 default：按 threshold 80 -> 60 的 empirical-high 规则
 - 巡查公开原函数在稳定已解析输入下先 `floor(统率和/28)+2`，完整uint8总和允许0..765、基础量2..29；普通三人各≤100时基础最高12；
 - `004B99B0` 完整EAX非零时基础量向下半减，再严格>100上clip；公开字节闭合整数顺序，helper内部距离规则仍未恢复；
 - 治安直接进入征兵量公式；
-- 征兵掉治安精确为 `floor(actualRecruited/(魅力和+100))`；
-- 名声通过实际征兵数间接放大治安损失，不存在第二次独立1.5倍；
-- 新兵初始气力使用征兵前治安的一半；
+- 征兵治安请求参数为 `-trunc(signed32(入口ESI)/(早期保存魅力和+100))`，实际writer损失未恢复；
+- 治安参数叶无第二次独立1.5倍；数量、writer返回与实际治安损失不能直接等同；
+- 较晚重新读取的治安byte右移1后作为混合helper参数；不保证等于数量阶段治安或已写回新兵气力；
 - 收入治安倍率最低按50，50～100线性；
 - 80只是贼生成安全线，不是收入断点；
 - 换季自然下降精确公式及太守魅力分布；

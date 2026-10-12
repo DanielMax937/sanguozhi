@@ -1,5 +1,7 @@
 # 存疑
 
+2026-10-11 新独立候选：[征兵治安writer请求参数叶](rules/recruitment-security-argument.md)，基于已合并PR #57 main d1e93ada18efa5f95c584afd9309b228f9391f0c。只接早期保存C与入口ESI的u32两标量，signed IDIV/NEG、规范+0；7条/19 bytes（含两push9条/21 bytes），不接写回/command、不复用数量输入、法治MOD隔离。实际征兵/治安损失、ABI/helpers/stock仍open；新验收另记，下方旧候选/最新数字不验证本树。P0-78及其依赖新增实现继续排除。
+
 本文只记账。规则正文在 `docs/rules.md`，标了「存疑」的也要按正文实现。和有出处的规则冲突时，正文已经改用有出处的，这里记下没采用的原因。
 
 ## 已经写进规则、但没有出处

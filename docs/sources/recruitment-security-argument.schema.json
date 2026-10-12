@@ -1,0 +1,604 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profileId",
+    "scope",
+    "evidence",
+    "source",
+    "license",
+    "fullCaller",
+    "leaf",
+    "excludedMod",
+    "inputSchema",
+    "inputProvenance",
+    "arithmetic",
+    "nonGoals"
+  ],
+  "properties": {
+    "profileId": {
+      "type": "string",
+      "const": "recruitment-security-argument-v1"
+    },
+    "scope": {
+      "type": "string",
+      "const": "leaf-entry scalar projection of the requested security writer argument only"
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "profile",
+        "source",
+        "originalRange",
+        "listedBytesVerified",
+        "stockOriginalVerified",
+        "originalExecutableExecuted",
+        "nativeHelpersReconstructed",
+        "abiVerified",
+        "realTraceReachabilityVerified",
+        "troopWriterRecovered",
+        "securityWriterRecovered",
+        "commandIntegrated",
+        "modLawExemptionIncluded"
+      ],
+      "properties": {
+        "level": {
+          "type": "string",
+          "const": "source-listing-reconstruction"
+        },
+        "profile": {
+          "type": "string",
+          "const": "recruitment-security-argument-v1"
+        },
+        "source": {
+          "type": "string",
+          "const": "docs/sources/recruitment-security-argument.json"
+        },
+        "originalRange": {
+          "type": "string",
+          "const": "005C3C11 <= PC < 005C3C24"
+        },
+        "listedBytesVerified": {
+          "type": "boolean",
+          "const": true
+        },
+        "stockOriginalVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "originalExecutableExecuted": {
+          "type": "boolean",
+          "const": false
+        },
+        "nativeHelpersReconstructed": {
+          "type": "boolean",
+          "const": false
+        },
+        "abiVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "realTraceReachabilityVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "troopWriterRecovered": {
+          "type": "boolean",
+          "const": false
+        },
+        "securityWriterRecovered": {
+          "type": "boolean",
+          "const": false
+        },
+        "commandIntegrated": {
+          "type": "boolean",
+          "const": false
+        },
+        "modLawExemptionIncluded": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "path",
+        "url",
+        "gitBlobSha1",
+        "snapshot",
+        "snapshotEncoding",
+        "snapshotBytes",
+        "snapshotSha256",
+        "utf8Snapshot",
+        "utf8Bytes",
+        "utf8Sha256",
+        "acquisition"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "const": "sjn4048/311MemoryResearch"
+        },
+        "commit": {
+          "type": "string",
+          "const": "66e167e40c3440929ec016f3872aefc3486434c1"
+        },
+        "path": {
+          "type": "string",
+          "const": "内存资料/整理/Func-内政02-执行征兵.txt"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政02-执行征兵.txt"
+        },
+        "gitBlobSha1": {
+          "type": "string",
+          "const": "3e1767ccafd7d217881119d142e8f4b02cdf88ce"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/recruitment-security-argument-original.gbk"
+        },
+        "snapshotEncoding": {
+          "type": "string",
+          "const": "GBK"
+        },
+        "snapshotBytes": {
+          "type": "integer",
+          "const": 22263
+        },
+        "snapshotSha256": {
+          "type": "string",
+          "const": "c057b8abab1bd4f58ad902a2e0266f09ec11fc08d8406061885535324c2ada71"
+        },
+        "utf8Snapshot": {
+          "type": "string",
+          "const": "docs/sources/recruitment-security-argument-original.txt"
+        },
+        "utf8Bytes": {
+          "type": "integer",
+          "const": 23221
+        },
+        "utf8Sha256": {
+          "type": "string",
+          "const": "6ef16de7adcece461dad2225bdb8aa84bdac73b2326c0214131e8861c2a071b2"
+        },
+        "acquisition": {
+          "type": "string",
+          "const": "GitHub connector decoded text; reversible GBK re-encoding matches pinned Git blob; not direct EXE extraction"
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spdx",
+        "snapshot",
+        "sha256",
+        "url",
+        "attribution"
+      ],
+      "properties": {
+        "spdx": {
+          "type": "string",
+          "const": "Apache-2.0"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/production-price-LICENSE.txt"
+        },
+        "sha256": {
+          "type": "string",
+          "const": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE"
+        },
+        "attribution": {
+          "type": "string",
+          "const": "sjn4048/311MemoryResearch"
+        }
+      }
+    },
+    "fullCaller": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "endExclusive",
+        "instructionCount",
+        "byteLength",
+        "sha256",
+        "directCallSites",
+        "indirectCallSites",
+        "directBranches",
+        "implemented"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "const": "005C3A50"
+        },
+        "endExclusive": {
+          "type": "string",
+          "const": "005C3E0B"
+        },
+        "instructionCount": {
+          "type": "integer",
+          "const": 316
+        },
+        "byteLength": {
+          "type": "integer",
+          "const": 955
+        },
+        "sha256": {
+          "type": "string",
+          "const": "69c8186fa9fd7807cd4a0747bcbb5ee6b84a6ee39c8a2735900ded05c3921f2e"
+        },
+        "directCallSites": {
+          "type": "integer",
+          "const": 51
+        },
+        "indirectCallSites": {
+          "type": "integer",
+          "const": 1
+        },
+        "directBranches": {
+          "type": "integer",
+          "const": 16
+        },
+        "implemented": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "leaf": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "endExclusive",
+        "instructionCount",
+        "byteLength",
+        "sha256",
+        "bytesHex",
+        "argumentEndExclusive",
+        "argumentInstructionCount",
+        "argumentByteLength",
+        "argumentSha256",
+        "excludedWriterCall",
+        "excludedWriterTarget",
+        "writerExecuted"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "const": "005C3C11"
+        },
+        "endExclusive": {
+          "type": "string",
+          "const": "005C3C24"
+        },
+        "instructionCount": {
+          "type": "integer",
+          "const": 7
+        },
+        "byteLength": {
+          "type": "integer",
+          "const": 19
+        },
+        "sha256": {
+          "type": "string",
+          "const": "8a537f7ccca746304043e2a71bba02596ea52bd8d968e6d835b4f6f28056d698"
+        },
+        "bytesHex": {
+          "type": "string",
+          "const": "8b4424108d48648bc699f7f9b95c899907f7d8"
+        },
+        "argumentEndExclusive": {
+          "type": "string",
+          "const": "005C3C26"
+        },
+        "argumentInstructionCount": {
+          "type": "integer",
+          "const": 9
+        },
+        "argumentByteLength": {
+          "type": "integer",
+          "const": 21
+        },
+        "argumentSha256": {
+          "type": "string",
+          "const": "6b4afd8e5857db8a562d0d127212f0b28fca91d9e9a9f5d8fe251dc65094bb89"
+        },
+        "excludedWriterCall": {
+          "type": "string",
+          "const": "005C3C26"
+        },
+        "excludedWriterTarget": {
+          "type": "string",
+          "const": "004B3E70"
+        },
+        "writerExecuted": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "excludedMod": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "instructionCount",
+        "byteLength",
+        "contiguous",
+        "executedByProduction",
+        "ranges"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "const": "law-skill exemption is a separate modification, not a vanilla option"
+        },
+        "instructionCount": {
+          "type": "integer",
+          "const": 16
+        },
+        "byteLength": {
+          "type": "integer",
+          "const": 48
+        },
+        "contiguous": {
+          "type": "boolean",
+          "const": false
+        },
+        "executedByProduction": {
+          "type": "boolean",
+          "const": false
+        },
+        "ranges": {
+          "type": "array",
+          "const": [
+            {
+              "start": "005C3C1D",
+              "endExclusive": "005C3C22",
+              "instructions": 1,
+              "bytes": 5
+            },
+            {
+              "start": "009107CA",
+              "endExclusive": "009107DB",
+              "instructions": 4,
+              "bytes": 17
+            },
+            {
+              "start": "009107B0",
+              "endExclusive": "009107CA",
+              "instructions": 11,
+              "bytes": 26
+            }
+          ]
+        }
+      }
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "additionalProperties",
+        "required",
+        "properties"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "object"
+        },
+        "additionalProperties": {
+          "type": "boolean",
+          "const": false
+        },
+        "required": {
+          "type": "array",
+          "const": [
+            "profile",
+            "savedCharmSum",
+            "savedTroopReturnU32"
+          ]
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "profile",
+            "savedCharmSum",
+            "savedTroopReturnU32"
+          ],
+          "properties": {
+            "profile": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "const"
+              ],
+              "properties": {
+                "const": {
+                  "type": "string",
+                  "const": "recruitment-security-argument-v1"
+                }
+              }
+            },
+            "savedCharmSum": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "minimum",
+                "maximum"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "integer"
+                },
+                "minimum": {
+                  "type": "integer",
+                  "const": 0
+                },
+                "maximum": {
+                  "type": "integer",
+                  "const": 765
+                }
+              }
+            },
+            "savedTroopReturnU32": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "minimum",
+                "maximum"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "integer"
+                },
+                "minimum": {
+                  "type": "integer",
+                  "const": 0
+                },
+                "maximum": {
+                  "type": "integer",
+                  "const": 4294967295
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "inputProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "savedCharmSum",
+        "savedTroopReturnU32"
+      ],
+      "properties": {
+        "savedCharmSum": {
+          "type": "string",
+          "const": "leaf-entry [ESP+10]; earlier execution scan accumulates three valid charisma AL values before their reward callees, saved at 005C3B7A; not the later quantity scan"
+        },
+        "savedTroopReturnU32": {
+          "type": "string",
+          "const": "leaf-entry ESI; most recent explicit caller definition 005C3BA9 saves 004AE3C0 return EAX, not 005C3610 quantity return; preservation/ABI and actual troop writes unproven"
+        }
+      }
+    },
+    "arithmetic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "signedTroopReturn",
+        "divisor",
+        "quotientSigned",
+        "remainderSigned",
+        "securityDeltaSigned",
+        "securityDeltaU32",
+        "divisorMin",
+        "divisorMax",
+        "quotientMin",
+        "quotientMax",
+        "deltaMin",
+        "deltaMax",
+        "zeroDivisorPossible",
+        "idivOverflowPossible",
+        "negOverflowPossible"
+      ],
+      "properties": {
+        "signedTroopReturn": {
+          "type": "string",
+          "const": "signed32(savedTroopReturnU32)"
+        },
+        "divisor": {
+          "type": "string",
+          "const": "savedCharmSum + 100"
+        },
+        "quotientSigned": {
+          "type": "string",
+          "const": "trunc(signedTroopReturn/divisor)"
+        },
+        "remainderSigned": {
+          "type": "string",
+          "const": "signedTroopReturn - quotientSigned*divisor"
+        },
+        "securityDeltaSigned": {
+          "type": "string",
+          "const": "-quotientSigned, canonical positive zero"
+        },
+        "securityDeltaU32": {
+          "type": "string",
+          "const": "securityDeltaSigned modulo 2^32"
+        },
+        "divisorMin": {
+          "type": "integer",
+          "const": 100
+        },
+        "divisorMax": {
+          "type": "integer",
+          "const": 865
+        },
+        "quotientMin": {
+          "type": "integer",
+          "const": -21474836
+        },
+        "quotientMax": {
+          "type": "integer",
+          "const": 21474836
+        },
+        "deltaMin": {
+          "type": "integer",
+          "const": -21474836
+        },
+        "deltaMax": {
+          "type": "integer",
+          "const": 21474836
+        },
+        "zeroDivisorPossible": {
+          "type": "boolean",
+          "const": false
+        },
+        "idivOverflowPossible": {
+          "type": "boolean",
+          "const": false
+        },
+        "negOverflowPossible": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "nonGoals": {
+      "type": "array",
+      "const": [
+        "No city security read, clipping, actual loss or before/after state",
+        "No character getters, quantity reuse, callbacks or pointers",
+        "No troop/security/energy/merit/experience/AP/gold/technique writers",
+        "No skill-law MOD, RNG, command, EndTurn, stock, Vanilla or console certification"
+      ]
+    }
+  }
+}
