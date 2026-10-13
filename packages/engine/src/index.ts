@@ -35,3 +35,5 @@ export { RECRUITMENT_SECURITY_ARGUMENT, calculateRecruitmentSecurityArgument } f
 export type { RecruitmentSecurityArgumentInput, RecruitmentSecurityArgumentRejectionReason, RecruitmentSecurityArgumentRejection, RecruitmentSecurityArgumentReceipt, RecruitmentSecurityArgumentResult } from './recruitment-security-argument.ts';
 export { CAPTIVE_ESCAPE_ROLL_ARGUMENT, calculateCaptiveEscapeRollArgument } from './captive-escape-roll-argument.ts';
 export type { CaptiveEscapeRollArgumentInput, CaptiveEscapeRollArgumentRejectionReason, CaptiveEscapeRollArgumentRejection, CaptiveEscapeRollArgumentReceipt, CaptiveEscapeRollArgumentResult } from './captive-escape-roll-argument.ts';
+export { CITY_MONEY_INCOME_PROJECTION, calculateCityMoneyIncomeProjection } from './city-money-income-projection.ts';
+export type { CityMoneyIncomeType, CityMoneyIncomeSlot, CityMoneyIncomeTypeRow, CityMoneyIncomeProjectionInput, CityMoneyIncomeProjectionRejectionReason, CityMoneyIncomeProjectionRejection, CityMoneyIncomeSlotReceipt, CityMoneyIncomeProjectionReceipt, CityMoneyIncomeProjectionResult } from './city-money-income-projection.ts';
