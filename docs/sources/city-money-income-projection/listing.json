@@ -1,0 +1,752 @@
+[
+  {
+    "address": "0049E590",
+    "bytesHex": "83ec0c",
+    "originalMnemonicAndComment": "sub esp,0c"
+  },
+  {
+    "address": "0049E593",
+    "bytesHex": "53",
+    "originalMnemonicAndComment": "push ebx"
+  },
+  {
+    "address": "0049E594",
+    "bytesHex": "8b5c2414",
+    "originalMnemonicAndComment": "mov ebx,[esp+14]                   ebx = 城市指针"
+  },
+  {
+    "address": "0049E598",
+    "bytesHex": "53",
+    "originalMnemonicAndComment": "push ebx"
+  },
+  {
+    "address": "0049E599",
+    "bytesHex": "894c2410",
+    "originalMnemonicAndComment": "mov [esp+10],ecx"
+  },
+  {
+    "address": "0049E59D",
+    "bytesHex": "e88ec0fdff",
+    "originalMnemonicAndComment": "call 0047a630                      校验指针"
+  },
+  {
+    "address": "0049E5A2",
+    "bytesHex": "83c404",
+    "originalMnemonicAndComment": "add esp,04"
+  },
+  {
+    "address": "0049E5A5",
+    "bytesHex": "85c0",
+    "originalMnemonicAndComment": "test eax,eax"
+  },
+  {
+    "address": "0049E5A7",
+    "bytesHex": "0f848f010000",
+    "originalMnemonicAndComment": "je 0049e73c                        校验失败跳转到返回0"
+  },
+  {
+    "address": "0049E5AD",
+    "bytesHex": "8b03",
+    "originalMnemonicAndComment": "mov eax,[ebx]                      ebx = 城市指针"
+  },
+  {
+    "address": "0049E5AF",
+    "bytesHex": "8bcb",
+    "originalMnemonicAndComment": "mov ecx,ebx"
+  },
+  {
+    "address": "0049E5B1",
+    "bytesHex": "ff5040",
+    "originalMnemonicAndComment": "call dword ptr [eax+40]            获取城市所属势力ID"
+  },
+  {
+    "address": "0049E5B4",
+    "bytesHex": "85c0",
+    "originalMnemonicAndComment": "test eax,eax"
+  },
+  {
+    "address": "0049E5B6",
+    "bytesHex": "0f8c80010000",
+    "originalMnemonicAndComment": "jl 0049e73c"
+  },
+  {
+    "address": "0049E5BC",
+    "bytesHex": "83f82e",
+    "originalMnemonicAndComment": "cmp eax,2e"
+  },
+  {
+    "address": "0049E5BF",
+    "bytesHex": "0f8f77010000",
+    "originalMnemonicAndComment": "jg 0049e73c                        如果势力ID不在0～46范围内则跳转到返回0"
+  },
+  {
+    "address": "0049E5C5",
+    "bytesHex": "55",
+    "originalMnemonicAndComment": "push ebp"
+  },
+  {
+    "address": "0049E5C6",
+    "bytesHex": "0fb76b7e",
+    "originalMnemonicAndComment": "movzx ebp,word ptr [ebx+7e]        ebp = 城市基础收钱"
+  },
+  {
+    "address": "0049E5CA",
+    "bytesHex": "56",
+    "originalMnemonicAndComment": "push esi"
+  },
+  {
+    "address": "0049E5CB",
+    "bytesHex": "8d8bf4000000",
+    "originalMnemonicAndComment": "lea ecx,[ebx+000000f4]             ecx = 城市内政设施数组指针"
+  },
+  {
+    "address": "0049E5D1",
+    "bytesHex": "57",
+    "originalMnemonicAndComment": "push edi"
+  },
+  {
+    "address": "0049E5D2",
+    "bytesHex": "894c2410",
+    "originalMnemonicAndComment": "mov [esp+10],ecx"
+  },
+  {
+    "address": "0049E5D6",
+    "bytesHex": "c74424141e000000",
+    "originalMnemonicAndComment": "mov [esp+14],0000001e              0x1e = 30(城市内政设施上限)"
+  },
+  {
+    "address": "0049E5DE",
+    "bytesHex": "8bff",
+    "originalMnemonicAndComment": "mov edi,edi"
+  },
+  {
+    "address": "0049E5E0",
+    "bytesHex": "8b542410",
+    "originalMnemonicAndComment": "mov edx,[esp+10]                   edx = 城市内政设施数组指针"
+  },
+  {
+    "address": "0049E5E4",
+    "bytesHex": "8b3a",
+    "originalMnemonicAndComment": "mov edi,[edx]                      edi = 设施指针"
+  },
+  {
+    "address": "0049E5E6",
+    "bytesHex": "57",
+    "originalMnemonicAndComment": "push edi"
+  },
+  {
+    "address": "0049E5E7",
+    "bytesHex": "e844c0fdff",
+    "originalMnemonicAndComment": "call 0047a630                      校验指针"
+  },
+  {
+    "address": "0049E5EC",
+    "bytesHex": "83c404",
+    "originalMnemonicAndComment": "add esp,04"
+  },
+  {
+    "address": "0049E5EF",
+    "bytesHex": "85c0",
+    "originalMnemonicAndComment": "test eax,eax"
+  },
+  {
+    "address": "0049E5F1",
+    "bytesHex": "0f84a0000000",
+    "originalMnemonicAndComment": "je 0049e697                        校验失败则跳转到循环下一个内政设施"
+  },
+  {
+    "address": "0049E5F7",
+    "bytesHex": "8b7708",
+    "originalMnemonicAndComment": "mov esi,[edi+08]                   esi = 设施类型"
+  },
+  {
+    "address": "0049E5FA",
+    "bytesHex": "8d46e1",
+    "originalMnemonicAndComment": "lea eax,[esi-1f]                   eax = 设施类型-31(内政设施从31号开始)"
+  },
+  {
+    "address": "0049E5FD",
+    "bytesHex": "83f814",
+    "originalMnemonicAndComment": "cmp eax,14                         0x14 = 市场Lv3"
+  },
+  {
+    "address": "0049E600",
+    "bytesHex": "0f8791000000",
+    "originalMnemonicAndComment": "ja 0049e697                        设施类型编号大于市场Lv3则跳转到循环下一个内政设施"
+  },
+  {
+    "address": "0049E606",
+    "bytesHex": "0fb68058e74900",
+    "originalMnemonicAndComment": "movzx eax,byte ptr [eax+0049e758]  取得31号-51号内政设施类型的对应处理编码"
+  },
+  {
+    "address": "0049E60D",
+    "bytesHex": "ff248548e74900",
+    "originalMnemonicAndComment": "jmp dword ptr [eax*4+0049e748]     根据处理编码取得跳转地址"
+  },
+  {
+    "address": "0049E614",
+    "bytesHex": "8b4714",
+    "originalMnemonicAndComment": "mov eax,[edi+14]                   eax = 设施是否建设完成"
+  },
+  {
+    "address": "0049E617",
+    "bytesHex": "85c0",
+    "originalMnemonicAndComment": "test eax,eax"
+  },
+  {
+    "address": "0049E619",
+    "bytesHex": "747c",
+    "originalMnemonicAndComment": "je 0049e697                        设施未建设完成则跳转到循环下一个内政设施"
+  },
+  {
+    "address": "0049E61B",
+    "bytesHex": "83feff",
+    "originalMnemonicAndComment": "cmp esi,ff"
+  },
+  {
+    "address": "0049E61E",
+    "bytesHex": "7477",
+    "originalMnemonicAndComment": "je 0049e697"
+  },
+  {
+    "address": "0049E620",
+    "bytesHex": "56",
+    "originalMnemonicAndComment": "push esi"
+  },
+  {
+    "address": "0049E621",
+    "bytesHex": "b958192007",
+    "originalMnemonicAndComment": "mov ecx,07201958"
+  },
+  {
+    "address": "0049E626",
+    "bytesHex": "e86525ffff",
+    "originalMnemonicAndComment": "call 00490b90                      根据设施类型ID获取设施类型指针"
+  },
+  {
+    "address": "0049E62B",
+    "bytesHex": "8bd8",
+    "originalMnemonicAndComment": "mov ebx,eax"
+  },
+  {
+    "address": "0049E62D",
+    "bytesHex": "53",
+    "originalMnemonicAndComment": "push ebx"
+  },
+  {
+    "address": "0049E62E",
+    "bytesHex": "e8fdbffdff",
+    "originalMnemonicAndComment": "call 0047a630                      校验指针"
+  },
+  {
+    "address": "0049E633",
+    "bytesHex": "83c404",
+    "originalMnemonicAndComment": "add esp,04"
+  },
+  {
+    "address": "0049E636",
+    "bytesHex": "85c0",
+    "originalMnemonicAndComment": "test eax,eax"
+  },
+  {
+    "address": "0049E638",
+    "bytesHex": "7459",
+    "originalMnemonicAndComment": "je 0049e693                        校验失败则跳转到循环下一个内政设施"
+  },
+  {
+    "address": "0049E63A",
+    "bytesHex": "83fe1f",
+    "originalMnemonicAndComment": "cmp esi,1f                         0x1f = 市场Lv1"
+  },
+  {
+    "address": "0049E63D",
+    "bytesHex": "0fb79bc0000000",
+    "originalMnemonicAndComment": "movzx ebx,word ptr [ebx+000000c0]  ebx = 设施产量"
+  },
+  {
+    "address": "0049E644",
+    "bytesHex": "740a",
+    "originalMnemonicAndComment": "je 0049e650                                                                    【修改】jmp 0049e650  //造币场对大市场、鱼市、黑市都有效"
+  },
+  {
+    "address": "0049E646",
+    "bytesHex": "83fe32",
+    "originalMnemonicAndComment": "cmp esi,32                         0x32 = 市场Lv2"
+  },
+  {
+    "address": "0049E649",
+    "bytesHex": "7405",
+    "originalMnemonicAndComment": "je 0049e650"
+  },
+  {
+    "address": "0049E64B",
+    "bytesHex": "83fe33",
+    "originalMnemonicAndComment": "cmp esi,33                         0x33 = 市场Lv3"
+  },
+  {
+    "address": "0049E64E",
+    "bytesHex": "7541",
+    "originalMnemonicAndComment": "jne 0049e691                       如果是黑市、鱼市、大市场，不进行造币场处理，跳转到累计设施产量"
+  },
+  {
+    "address": "0049E650",
+    "bytesHex": "8b17",
+    "originalMnemonicAndComment": "mov edx,[edi]"
+  },
+  {
+    "address": "0049E652",
+    "bytesHex": "8bcf",
+    "originalMnemonicAndComment": "mov ecx,edi"
+  },
+  {
+    "address": "0049E654",
+    "bytesHex": "ff523c",
+    "originalMnemonicAndComment": "call dword ptr [edx+3c]            获取设施坐标数组指针"
+  },
+  {
+    "address": "0049E657",
+    "bytesHex": "8b00",
+    "originalMnemonicAndComment": "mov eax,[eax]                      eax = 设施坐标"
+  },
+  {
+    "address": "0049E659",
+    "bytesHex": "8b4c2418",
+    "originalMnemonicAndComment": "mov ecx,[esp+18]                   ecx = 0x0780b3cc"
+  },
+  {
+    "address": "0049E65D",
+    "bytesHex": "6a26",
+    "originalMnemonicAndComment": "push 26                            0x26 = 造币场"
+  },
+  {
+    "address": "0049E65F",
+    "bytesHex": "50",
+    "originalMnemonicAndComment": "push eax"
+  },
+  {
+    "address": "0049E660",
+    "bytesHex": "e89bfeffff",
+    "originalMnemonicAndComment": "call 0049e500                      判断坐标周边一格有无指定设施"
+  },
+  {
+    "address": "0049E665",
+    "bytesHex": "85c0",
+    "originalMnemonicAndComment": "test eax,eax"
+  },
+  {
+    "address": "0049E667",
+    "bytesHex": "7428",
+    "originalMnemonicAndComment": "je 0049e691                        若无造币场则跳转到累计设施产量"
+  },
+  {
+    "address": "0049E669",
+    "bytesHex": "8d045b",
+    "originalMnemonicAndComment": "lea eax,[ebx+ebx*2]"
+  },
+  {
+    "address": "0049E66C",
+    "bytesHex": "99",
+    "originalMnemonicAndComment": "cdq"
+  },
+  {
+    "address": "0049E66D",
+    "bytesHex": "2bc2",
+    "originalMnemonicAndComment": "sub eax,edx"
+  },
+  {
+    "address": "0049E66F",
+    "bytesHex": "d1f8",
+    "originalMnemonicAndComment": "sar eax,1                          以上4句，有造币场设施产量*1.5"
+  },
+  {
+    "address": "0049E671",
+    "bytesHex": "03e8",
+    "originalMnemonicAndComment": "add ebp,eax                        ebp = 城市收钱累加+考虑造币场的设施产量"
+  },
+  {
+    "address": "0049E673",
+    "bytesHex": "eb1e",
+    "originalMnemonicAndComment": "jmp 0049e693                       跳转到循环下一个内政设施"
+  },
+  {
+    "address": "0049E675",
+    "bytesHex": "8b4714",
+    "originalMnemonicAndComment": "mov eax,[edi+14]                   eax = 设施是否建设完成"
+  },
+  {
+    "address": "0049E678",
+    "bytesHex": "85c0",
+    "originalMnemonicAndComment": "test eax,eax"
+  },
+  {
+    "address": "0049E67A",
+    "bytesHex": "759f",
+    "originalMnemonicAndComment": "jne 0049e61b"
+  },
+  {
+    "address": "0049E67C",
+    "bytesHex": "be1f000000",
+    "originalMnemonicAndComment": "mov esi,0000001f                   如果市场Lv2未建设完成，则按市场Lv1处理"
+  },
+  {
+    "address": "0049E681",
+    "bytesHex": "eb9d",
+    "originalMnemonicAndComment": "jmp 0049e620                       跳转到获取设施类型指针"
+  },
+  {
+    "address": "0049E683",
+    "bytesHex": "8b4714",
+    "originalMnemonicAndComment": "mov eax,[edi+14]                   eax = 设施是否建设完成"
+  },
+  {
+    "address": "0049E686",
+    "bytesHex": "85c0",
+    "originalMnemonicAndComment": "test eax,eax"
+  },
+  {
+    "address": "0049E688",
+    "bytesHex": "7591",
+    "originalMnemonicAndComment": "jne 0049e61b"
+  },
+  {
+    "address": "0049E68A",
+    "bytesHex": "be32000000",
+    "originalMnemonicAndComment": "mov esi,00000032                   如果市场Lv3未建设完成，则按市场Lv2处理"
+  },
+  {
+    "address": "0049E68F",
+    "bytesHex": "eb8f",
+    "originalMnemonicAndComment": "jmp 0049e620                       跳转到获取设施类型指针"
+  },
+  {
+    "address": "0049E691",
+    "bytesHex": "03eb",
+    "originalMnemonicAndComment": "add ebp,ebx                        ebp = 城市收钱累加+设施产量"
+  },
+  {
+    "address": "0049E693",
+    "bytesHex": "8b5c2420",
+    "originalMnemonicAndComment": "mov ebx,[esp+20]"
+  },
+  {
+    "address": "0049E697",
+    "bytesHex": "8b4c2410",
+    "originalMnemonicAndComment": "mov ecx,[esp+10]"
+  },
+  {
+    "address": "0049E69B",
+    "bytesHex": "8b442414",
+    "originalMnemonicAndComment": "mov eax,[esp+14]                   计数器(从30开始自减)"
+  },
+  {
+    "address": "0049E69F",
+    "bytesHex": "83c108",
+    "originalMnemonicAndComment": "add ecx,08                         ecx = 下一个内政设施指针"
+  },
+  {
+    "address": "0049E6A2",
+    "bytesHex": "48",
+    "originalMnemonicAndComment": "dec eax"
+  },
+  {
+    "address": "0049E6A3",
+    "bytesHex": "894c2410",
+    "originalMnemonicAndComment": "mov [esp+10],ecx"
+  },
+  {
+    "address": "0049E6A7",
+    "bytesHex": "89442414",
+    "originalMnemonicAndComment": "mov [esp+14],eax"
+  },
+  {
+    "address": "0049E6AB",
+    "bytesHex": "0f852fffffff",
+    "originalMnemonicAndComment": "jne 0049e5e0                       不为0则循环下一个内政设施"
+  },
+  {
+    "address": "0049E6B1",
+    "bytesHex": "a178192007",
+    "originalMnemonicAndComment": "mov eax,[07201978]                 eax = 游戏难度"
+  },
+  {
+    "address": "0049E6B6",
+    "bytesHex": "6bed64",
+    "originalMnemonicAndComment": "imul ebp,ebp,64                    ebp = 城市收钱累加*100"
+  },
+  {
+    "address": "0049E6B9",
+    "bytesHex": "83e800",
+    "originalMnemonicAndComment": "sub eax,00                         0x00 = 简单难度"
+  },
+  {
+    "address": "0049E6BC",
+    "bytesHex": "8bf5",
+    "originalMnemonicAndComment": "mov esi,ebp                        esi = 城市收钱累加*100"
+  },
+  {
+    "address": "0049E6BE",
+    "bytesHex": "7428",
+    "originalMnemonicAndComment": "je 0049e6e8"
+  },
+  {
+    "address": "0049E6C0",
+    "bytesHex": "83e802",
+    "originalMnemonicAndComment": "sub eax,02                         0x02 = 超级难度"
+  },
+  {
+    "address": "0049E6C3",
+    "bytesHex": "7539",
+    "originalMnemonicAndComment": "jne 0049e6fe"
+  },
+  {
+    "address": "0049E6C5",
+    "bytesHex": "8b13",
+    "originalMnemonicAndComment": "mov edx,[ebx]                      ebx = 城市指针"
+  },
+  {
+    "address": "0049E6C7",
+    "bytesHex": "8bcb",
+    "originalMnemonicAndComment": "mov ecx,ebx"
+  },
+  {
+    "address": "0049E6C9",
+    "bytesHex": "ff5248",
+    "originalMnemonicAndComment": "call dword ptr [edx+48]            是否是玩家势力"
+  },
+  {
+    "address": "0049E6CC",
+    "bytesHex": "85c0",
+    "originalMnemonicAndComment": "test eax,eax"
+  },
+  {
+    "address": "0049E6CE",
+    "bytesHex": "b81f85eb51",
+    "originalMnemonicAndComment": "mov eax,51eb851f"
+  },
+  {
+    "address": "0049E6D3",
+    "bytesHex": "7418",
+    "originalMnemonicAndComment": "je 0049e6ed                        如果是电脑势力则跳转到简单难度收入增加"
+  },
+  {
+    "address": "0049E6D5",
+    "bytesHex": "6bf64b",
+    "originalMnemonicAndComment": "imul esi,esi,4b                    超级难度收入减少到75%"
+  },
+  {
+    "address": "0049E6D8",
+    "bytesHex": "f7ee",
+    "originalMnemonicAndComment": "imul esi"
+  },
+  {
+    "address": "0049E6DA",
+    "bytesHex": "c1fa05",
+    "originalMnemonicAndComment": "sar dl,05"
+  },
+  {
+    "address": "0049E6DD",
+    "bytesHex": "8bca",
+    "originalMnemonicAndComment": "mov ecx,edx"
+  },
+  {
+    "address": "0049E6DF",
+    "bytesHex": "c1e91f",
+    "originalMnemonicAndComment": "shr ecx,1f"
+  },
+  {
+    "address": "0049E6E2",
+    "bytesHex": "03ca",
+    "originalMnemonicAndComment": "add ecx,edx"
+  },
+  {
+    "address": "0049E6E4",
+    "bytesHex": "8bf1",
+    "originalMnemonicAndComment": "mov esi,ecx                        esi = 超级难度减少后的收入"
+  },
+  {
+    "address": "0049E6E6",
+    "bytesHex": "eb16",
+    "originalMnemonicAndComment": "jmp 0049e6fe"
+  },
+  {
+    "address": "0049E6E8",
+    "bytesHex": "b81f85eb51",
+    "originalMnemonicAndComment": "mov eax,51eb851f"
+  },
+  {
+    "address": "0049E6ED",
+    "bytesHex": "6bf67d",
+    "originalMnemonicAndComment": "imul esi,esi,7d                    简单难度收入增加到125%"
+  },
+  {
+    "address": "0049E6F0",
+    "bytesHex": "f7ee",
+    "originalMnemonicAndComment": "imul esi"
+  },
+  {
+    "address": "0049E6F2",
+    "bytesHex": "c1fa05",
+    "originalMnemonicAndComment": "sar dl,05"
+  },
+  {
+    "address": "0049E6F5",
+    "bytesHex": "8bc2",
+    "originalMnemonicAndComment": "mov eax,edx"
+  },
+  {
+    "address": "0049E6F7",
+    "bytesHex": "c1e81f",
+    "originalMnemonicAndComment": "shr eax,1f"
+  },
+  {
+    "address": "0049E6FA",
+    "bytesHex": "03c2",
+    "originalMnemonicAndComment": "add eax,edx"
+  },
+  {
+    "address": "0049E6FC",
+    "bytesHex": "8bf0",
+    "originalMnemonicAndComment": "mov esi,eax                        esi = 简单难度增加后的收入"
+  },
+  {
+    "address": "0049E6FE",
+    "bytesHex": "8a8385000000",
+    "originalMnemonicAndComment": "mov al,[ebx+00000085]              al = 城市治安"
+  },
+  {
+    "address": "0049E704",
+    "bytesHex": "3c32",
+    "originalMnemonicAndComment": "cmp al,32"
+  },
+  {
+    "address": "0049E706",
+    "bytesHex": "7302",
+    "originalMnemonicAndComment": "jae 0049e70a"
+  },
+  {
+    "address": "0049E708",
+    "bytesHex": "b032",
+    "originalMnemonicAndComment": "mov al,32                          如果治安小于50则按50计算"
+  },
+  {
+    "address": "0049E70A",
+    "bytesHex": "0fb6c8",
+    "originalMnemonicAndComment": "movzx ecx,al                       ecx = 城市治安"
+  },
+  {
+    "address": "0049E70D",
+    "bytesHex": "0fafce",
+    "originalMnemonicAndComment": "imul ecx,esi                       治安50-100之间，收入线性衰减"
+  },
+  {
+    "address": "0049E710",
+    "bytesHex": "b81f85eb51",
+    "originalMnemonicAndComment": "mov eax,51eb851f"
+  },
+  {
+    "address": "0049E715",
+    "bytesHex": "f7e9",
+    "originalMnemonicAndComment": "imul ecx"
+  },
+  {
+    "address": "0049E717",
+    "bytesHex": "c1fa05",
+    "originalMnemonicAndComment": "sar dl,05"
+  },
+  {
+    "address": "0049E71A",
+    "bytesHex": "8bca",
+    "originalMnemonicAndComment": "mov ecx,edx"
+  },
+  {
+    "address": "0049E71C",
+    "bytesHex": "c1e91f",
+    "originalMnemonicAndComment": "shr ecx,1f                         以上6句，eax = eax*0.01"
+  },
+  {
+    "address": "0049E71F",
+    "bytesHex": "03ca",
+    "originalMnemonicAndComment": "add ecx,edx"
+  },
+  {
+    "address": "0049E721",
+    "bytesHex": "b81f85eb51",
+    "originalMnemonicAndComment": "mov eax,51eb851f"
+  },
+  {
+    "address": "0049E726",
+    "bytesHex": "f7e9",
+    "originalMnemonicAndComment": "imul ecx"
+  },
+  {
+    "address": "0049E728",
+    "bytesHex": "5f",
+    "originalMnemonicAndComment": "pop edi"
+  },
+  {
+    "address": "0049E729",
+    "bytesHex": "c1fa05",
+    "originalMnemonicAndComment": "sar dl,05"
+  },
+  {
+    "address": "0049E72C",
+    "bytesHex": "5e",
+    "originalMnemonicAndComment": "pop esi"
+  },
+  {
+    "address": "0049E72D",
+    "bytesHex": "8bc2",
+    "originalMnemonicAndComment": "mov eax,edx"
+  },
+  {
+    "address": "0049E72F",
+    "bytesHex": "c1e81f",
+    "originalMnemonicAndComment": "shr eax,1f                         以上6句，eax = eax*0.01"
+  },
+  {
+    "address": "0049E732",
+    "bytesHex": "5d",
+    "originalMnemonicAndComment": "pop ebp"
+  },
+  {
+    "address": "0049E733",
+    "bytesHex": "03c2",
+    "originalMnemonicAndComment": "add eax,edx                        eax = 城市收钱计算结果"
+  },
+  {
+    "address": "0049E735",
+    "bytesHex": "5b",
+    "originalMnemonicAndComment": "pop ebx"
+  },
+  {
+    "address": "0049E736",
+    "bytesHex": "83c40c",
+    "originalMnemonicAndComment": "add esp,0c"
+  },
+  {
+    "address": "0049E739",
+    "bytesHex": "c20400",
+    "originalMnemonicAndComment": "ret 0004"
+  },
+  {
+    "address": "0049E73C",
+    "bytesHex": "33c0",
+    "originalMnemonicAndComment": "xor eax,eax                        eax = 0"
+  },
+  {
+    "address": "0049E73E",
+    "bytesHex": "5b",
+    "originalMnemonicAndComment": "pop ebx"
+  },
+  {
+    "address": "0049E73F",
+    "bytesHex": "83c40c",
+    "originalMnemonicAndComment": "add esp,0c"
+  },
+  {
+    "address": "0049E742",
+    "bytesHex": "c20400",
+    "originalMnemonicAndComment": "ret 0004"
+  }
+]
