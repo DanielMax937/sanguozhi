@@ -561,7 +561,7 @@ S1固定fingerprint已恢复：
 - 配合 P0-10 `_ftol2`，18000兵结果精确为1800/1499/1200/900；
 - `0059BF40` 对进入旬时0粮的对象直接跳过；本旬扣到0也只记录粮尽消息，不扣兵；
 - 因此粮尽掉兵存在独立 handler；
-- `00599AA0` 是围城断粮据点人口衰减，不是野外 troop starvation；
+- `00599AA0` 固定 listing 是设施围城兵力减员 caller，没有显式粮0门槛，不是野外 troop starvation；旧 SIRE 标签 `ReducePopForStarvedBesiegedSP` 的“断粮人口”解读是误译 / 无依据外推，`004B99B0` 内部与版本身份仍 open，不能推广为所有版本均无断粮条件（[70 §5](70-food-overlap-starvation-function-boundary.md#5-00599aa0-不是野外-troop-starvation-handler)）；
 - 旧 `A*0.76^N` 缺乏可信出处，从 empirical-high 降为 legacy-compatibility-only。
 
 仍 open：
@@ -1383,3 +1383,7 @@ AI势力强度还存在君主ID硬编码 bonus，因此不能用一张现代通�
 ### P0-77 event9 live home getter
 
 [112-native-event9-home-getter.md](112-native-event9-home-getter.md)在新显式frame/version中仅展开004BA44C..45E：saved troop在00495525直接调用当前virtual08，不添加0047A630 wrapper，旧raw44=-1不是gate。unknown troop08仍精确完整frame/RNG effect-query；false保留callback变化并返回-1，true从同一saved troop当前storage读live leader，保存canonical person pointer、单次验证并从该saved person读signed homeBaseId。完整004A31E0证明既有person DWORD+98字段，所有signed32位模式保持，不与force byte+98混同、不新增重复字段或person08 callback域。25继承入口加event9-home-getter共26入口，新28组model原字节不变。 00490D00仅按signed0..16383构造fixed manager07201958下的building pointer，不读building row或validity；missing/invalid非base row仍可得到pointer，只有后续真实读取才要求storage。到达的troop/person storage缺失仍明确gap。getter RET及resolver RET4证明45E参数栈平衡，原manager、saved force/troop/subject/target、captured raw44、old/new scalars与cursor以及returned home scalar/building pointer持续绑定。opaque suffix明确绑定004AD220/site004BA467、incoming ECX0799895C、arguments[saved troop,4,building]及reverse PUSH顺序，不声称helper使用该ECX。presentation411..432与reaction45E..46C仍整体frame/RNG可变观察或atomic rejection；immutable-event只是支持域，参数cleanup不证明temporary析构、无别名或异步不保留。 实际presentation/reaction45E..46C、mutable event与16/18、capture/surrender/captive、force灭亡、recursive ruler ownership、positive refund/resources、其余cancel、S2 effects/full vtable tail、fallback reset scheduling、未建模temporary/formatter/external/platform/concurrent memory、全局RNG及clean-stock/Vanilla/console/original-save/runtime认证仍open。 MOD-associated S1/S2的相同selected bytes不证明stock规则；PKPC1.1优先、Vanilla隔离，旧版本契约与此前所有未闭合债继续保留。
+
+### 2026-10-12 自然逃亡：已知参数算术的工程覆盖与完整机制分开
+
+[自然逃亡roll参数纯整数API](captive-escape-roll-argument.md)新增工程实现；正常域公式早已在03-personnel记录，不能称发现未知概率。仅`00582CE4..<00582D31`26条/77 bytes，入口BL、AL和晚期月份三个严格U8；完整域参数上限108815，保留早晚月份两次读取边界。完整资格/名单、属性getter与ABI/可达性、同源RNG、释放/迁移和月初调度、stock与跨版本仍open；已有S1 RNG并不自动证明与此listing同源。新增实现不依赖P0-78/capture/force/native，原43组缺口清单按证据主题理解，不按新增叶函数数量计算清空比例。

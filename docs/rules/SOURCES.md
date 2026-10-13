@@ -1796,8 +1796,14 @@ rate = max(
   - 正粮扣到0只进入粮尽消息列表；
   - 公开函数体无 troop-strength reduction。
   https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-收支02-每旬耗粮.txt
-- SIRE：
-  - `00599AA0 ReducePopForStarvedBesiegedSP` 明确是围城断粮据点人口衰减，不是野外部队粮尽掉兵。
+- 311MemoryResearch 固定 `66e167e40c3440929ec016f3872aefc3486434c1` 的 `Func-自动04-兵临城下逃兵处理.txt`：
+  - `[00599AA0,00599B8A)`，85 条 / 234 bytes，原 GBK 5773 bytes，Git blob `3b6c61f221951851d7125aa4b3ca19f910e864aa`；完整 body SHA256 `6fba1cdb6ac06777a6057f35a6863840fc82370a96af69710a6169c93fbde31e`。
+  - 枚举设施0..86，校验所属0..46、设施兵力 signed >0、`004B99B0` 返回非零；`004AE3C0` 增减设施兵力，后读兵力 <=0 时清气力。应称“设施围城兵力减员 caller”。
+  - caller 没有显式兵粮读取或 food==0 比较；`004B99B0` 内部条件与版本身份仍 open，不能声称所有版本均无断粮条件。不是野外部队 starvation handler。
+  - 仅 source-listing-reconstruction；常量原 bytes、同源 x87 / 转换合同、RNG / helper / writer 及 stock 认证仍缺，未改算术行为。原文快照与离线身份校验保存在 `../sources/food-overlap-starvation-exactness.json` 与两份相关 checker。
+  https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-自动04-兵临城下逃兵处理.txt
+- SIRE 历史标签：
+  - 保留 `00599AA0 ReducePopForStarvedBesiegedSP` 原标签引用；旧文“围城断粮据点人口衰减”是误译 / 无依据外推，与上述固定 listing 的设施兵力操作冲突，不再作为业务合同。
   https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
 - KOEI PK官方说明书：
   - 无兵粮会导致士兵减少；未给具体比例。
@@ -1889,3 +1895,9 @@ rate = max(
 ### 征兵数量显式ST0逐调用限定核（2026-10-11）
 
 [完整支持域](recruitment-quantity.md)；固定sjn4048/311MemoryResearch commit `66e167e40c3440929ec016f3872aefc3486434c1`、GBK blob `0b122837b1ff1ae11789121595531b64e80ff8d2`。[可逆完整快照](../sources/recruitment-quantity-original.txt)、[metadata](../sources/recruitment-quantity.json)、[闭合schema](../sources/recruitment-quantity.schema.json)与[Apache-2.0许可](../sources/recruitment-quantity-LICENSE.txt)。原131条/373所列字节、15静态CALL-site与另列MOD14条严格隔离，源SAR DL与技能/设施栈注释错误保留并在解释中纠正。转录仅改编码，投影/解释器为新增实现。最多19EAX输入加explicit ST0，正常转换返回由有限合同推导，最大21动态calls；不能混称全memory trace、真实helper/ABI、stock或完整征兵。治安BL早于倍率helper保存，skill先整数调整再FIMUL，super先pressure，容量ADD32/signedJGE/独立二次SUB32，含负或大于候选返回。执行资格/费用/AP/人口/奖励/治安损失/实际入库与调度继续open。
+
+## 2026-10-12 俘虏自然逃亡roll参数独立API
+
+固定来源：[Func-自动07-俘虏逃走.txt](https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-自动07-俘虏逃走.txt)，Git blob `966493977fe3c19250fecc32d3d4f5bc23361d86`。原GBK 16828 bytes；完整caller266条/902 bytes；实现段`00582CE4..<00582D31`为26条/77 bytes、SHA256 `11335bc56749367435b1d5f70629b93b5c2139c063533c516833ca50e2defc83`。全文、原byte与连续listing、封闭source/schema见`../sources/captive-escape-roll-argument.json`及同名目录。
+
+[严格API合同](captive-escape-roll-argument.md)：入口BL、AL、00582CF9晚期月份各U8；unsigned最大属性、最低30、月份减2最低1后平方乘属性、floor除150最低1。完整域参数1..108815，无clip100。00582CCB早期gate另读值，不合并两次读取、不伪造getter ABI；`c1 fa 04`按SAR EDX,4解码，不沿用原助记符DL笔误。这是此前文档公式的工程覆盖，不是新概率发现，不执行RNG/释放/状态/调度，不依赖P0-78/capture/force/native，证据只到source-listing-reconstruction。

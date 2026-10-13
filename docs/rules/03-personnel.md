@@ -3052,7 +3052,7 @@ capture = ProbabilityRoll(p)
 - 部队全灭、据点陷落分别建模；
 - 血路对据点陷落的精确边界继续 open。
 
-### 9.3 据点俘虏的自然逃亡概率已恢复
+### 9.3 据点俘虏的自然逃亡roll参数与caller边界
 
 月初 dispatcher 的顺序是：
 
@@ -3068,19 +3068,20 @@ capture = ProbabilityRoll(p)
 
 因此野外部队携带的俘虏不进入这条据点逃亡判定；日文 Wiki 的长期实测“出阵部队携带的俘虏不会自行逃亡，回城后才可能逃亡”与源码结构一致。
 
-精确公式：
+已记录的caller摘要（下列两次月份读取不能默认来自稳定快照；资格/helper语义并非本批API）：
 
 ```ts
 if (!isValidFacility(prisoner.location)) {
   return NO_NATURAL_ESCAPE_ROLL
 }
 
-if (prisoner.captiveMonths < 2) {
+if (readEarlyCaptiveMonths() < 2) { // 00582CCB
   return NO_NATURAL_ESCAPE_ROLL
 }
 
-q = max(1, prisoner.captiveMonths - 2)
-stat = max(30, max(prisoner.war, prisoner.intelligence))
+// 两个属性getter之后的段入口AL/BL；不在此保证callee ABI
+stat = max(30, max(entryAL, entryBL))
+q = max(1, readLateCaptiveMonths() - 2) // 00582CF9再次读取
 
 p = max(1, floor(q * q * stat / 150))
 
@@ -3093,6 +3094,8 @@ escape = ProbabilityRoll(p)
 - 武力/智力取较高值，低于30按30；
 - 随被俘时间**平方增长**，随武/智最大值线性增长；
 - 该自然逃亡函数只设最小概率1、没有本地 `min(100)`。P0-49已取得S1共用`004721D0`：p>100必成功且消费一次随机；这只闭合S1 helper语义，尚未认证stock等价或此自然逃亡caller的完整运行样本。
+
+2026-10-12 独立工程补齐：[自然逃亡roll参数API](captive-escape-roll-argument.md)只实现 `[00582CE4,00582D31)`，输入为入口BL、AL和晚期月份三个严格U8。月份0/1在这个纯段域内有效，不证明能通过更早gate；函数不执行004721D0，也不借S1 helper的已有语义认证本来源。正常域公式此前已有文档，完整逃亡仍open。
 
 ### 9.4 俘虏月度掉忠：caller已恢复，端到端仍open
 
