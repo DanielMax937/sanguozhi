@@ -33,3 +33,5 @@ export { RECRUITMENT_QUANTITY, calculateRecruitmentQuantityProjection } from './
 export type { RecruitmentQuantityFactorBits, RecruitmentQuantityCapture, RecruitmentQuantityInput, RecruitmentQuantityRejectionReason, RecruitmentQuantityRejection, RecruitmentQuantitySlotReceipt, RecruitmentQuantityCallDetail, RecruitmentQuantityReceipt, RecruitmentQuantityResult } from './recruitment-quantity.ts';
 export { RECRUITMENT_SECURITY_ARGUMENT, calculateRecruitmentSecurityArgument } from './recruitment-security-argument.ts';
 export type { RecruitmentSecurityArgumentInput, RecruitmentSecurityArgumentRejectionReason, RecruitmentSecurityArgumentRejection, RecruitmentSecurityArgumentReceipt, RecruitmentSecurityArgumentResult } from './recruitment-security-argument.ts';
+export { CAPTIVE_ESCAPE_ROLL_ARGUMENT, calculateCaptiveEscapeRollArgument } from './captive-escape-roll-argument.ts';
+export type { CaptiveEscapeRollArgumentInput, CaptiveEscapeRollArgumentRejectionReason, CaptiveEscapeRollArgumentRejection, CaptiveEscapeRollArgumentReceipt, CaptiveEscapeRollArgumentResult } from './captive-escape-roll-argument.ts';

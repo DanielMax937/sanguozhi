@@ -16,8 +16,8 @@
     "troopFoodConsumption": "0049D2E0",
     "defenseFacilitySelector": "0049D180",
     "perTurnFoodScheduler": "0059BF40",
-    "besiegedStarvedStrategicPointPopulationLoss": "00599AA0",
-    "floatToInteger": "00707A74"
+    "floatToInteger": "00707A74",
+    "facilitySiegeTroopLossCaller": "00599AA0"
   },
   "defenseFoodMultipliers": {
     "none": {
@@ -90,5 +90,67 @@
     "first starving turn vs continuing starvation differences",
     "morale/person-stat involvement",
     "Vanilla/PS2/Wii differences"
-  ]
+  ],
+  "facilitySiegeTroopLoss": {
+    "address": "00599AA0",
+    "meaning": "facility-siege-troop-strength-loss-caller",
+    "evidenceLevel": "source-listing-reconstruction",
+    "historicalSireLabel": "ReducePopForStarvedBesiegedSP",
+    "historicalLabelPolicy": "preserve-source-label-reject-starved-population-interpretation",
+    "correction": "旧“断粮据点人口衰减”是从 SIRE 标签得到的误译 / 无依据外推；固定 listing 操作设施兵力。",
+    "explicitFoodZeroGateInCaller": false,
+    "foodZeroGateInside004B99B0": "open",
+    "allVersionsLackFoodZeroGate": "not-established",
+    "independentPopulationWriterEstablished": false,
+    "isFieldTroopStarvationHandler": false,
+    "cleanStockIdentity": "open",
+    "arithmeticBehaviorChanged": false,
+    "source": {
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/Func-自动04-兵临城下逃兵处理.txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/%E5%86%85%E5%AD%98%E8%B5%84%E6%96%99/%E6%95%B4%E7%90%86/Func-%E8%87%AA%E5%8A%A804-%E5%85%B5%E4%B8%B4%E5%9F%8E%E4%B8%8B%E9%80%83%E5%85%B5%E5%A4%84%E7%90%86.txt",
+      "gitBlobSha1": "3b6c61f221951851d7125aa4b3ca19f910e864aa",
+      "encoding": "GBK",
+      "byteLength": 5773,
+      "sha256": "5ab2acbcbea6d0a1cddc7c9eb3d1199fff7374332c894174cdb59fabbd98df6b",
+      "utf8Sha256": "83e6707c512db7bf9a91d440b97ed4d39da81dea2ca9e2c1db494d82249ddf7b",
+      "textUtf8": "功能: 每旬兵临城下逃兵处理\n参数表: ecx=??\n\n*****************************************************************************************************************************************************\n\n00599AA0 - 83 ec 08                   - sub esp,08\n00599AA3 - 53                         - push ebx\n00599AA4 - 55                         - push ebp\n00599AA5 - 56                         - push esi\n00599AA6 - 33 c0                      - xor eax,eax                    eax = 0\n00599AA8 - 57                         - push edi\n00599AA9 - 8b e9                      - mov ebp,ecx\n00599AAB - 89 44 24 10                - mov [esp+10],eax\n00599AAF - 90                         - nop\n\n【获取设施指针和兵力】\n00599AB0 - 50                         - push eax\n00599AB1 - b9 58 19 20 07             - mov ecx,07201958\n00599AB6 - e8 45 72 ef ff             - call 00490d00                  根据设施ID获取设施指针\n00599ABB - 8b f8                      - mov edi,eax                    edi = 设施指针\n00599ABD - 57                         - push edi\n00599ABE - e8 6d 0b ee ff             - call 0047a630                  校验指针\n00599AC3 - 83 c4 04                   - add esp,04\n00599AC6 - 85 c0                      - test eax,eax\n00599AC8 - 0f 84 a2 00 00 00          - je 00599b70\n00599ACE - 8b 07                      - mov eax,[edi]\n00599AD0 - 8b cf                      - mov ecx,edi\n00599AD2 - ff 50 40                   - call dword ptr [eax+40]        获取设施所属势力ID\n00599AD5 - 85 c0                      - test eax,eax\n00599AD7 - 0f 8c 93 00 00 00          - jl 00599b70\n00599ADD - 83 f8 2e                   - cmp eax,2e\n00599AE0 - 0f 8f 8a 00 00 00          - jg 00599b70                    无所属势力则循环下一个\n00599AE6 - 8b 17                      - mov edx,[edi]\n00599AE8 - 8b cf                      - mov ecx,edi\n00599AEA - ff 52 50                   - call dword ptr [edx+50]        获取设施兵力\n00599AED - 8b d8                      - mov ebx,eax                    ebx = 设施内的兵力\n00599AEF - 85 db                      - test ebx,ebx\n00599AF1 - 7e 7d                      - jle 00599b70                   兵力为0则循环下一个\n\n【计算兵临城下时逃兵数量】\n00599AF3 - 57                         - push edi                       edi = 设施指针\n00599AF4 - b9 5c 89 99 07             - mov ecx,0799895c\n00599AF9 - e8 b2 fe f1 ff             - call 004b99b0                  判断城市、港关附近（城市3格，港关2格）是否有敌方部队\n00599AFE - 85 c0                      - test eax,eax\n00599B00 - 74 6e                      - je 00599b70                                                                    【修改】jmp 00599b70  //兵临城下不会有逃兵\n00599B02 - 83 fb 64                   - cmp ebx,64\n00599B05 - 7f 05                      - jg 00599b0c\n00599B07 - bb 64 00 00 00             - mov ebx,00000064               如果设施内兵力小于100以100计算\n00599B0C - 6a 32                      - push 32\n00599B0E - e8 3d 86 ed ff             - call 00472150                  0～49随机\n00599B13 - 0f b7 f0                   - movzx esi,ax\n00599B16 - b8 1f 85 eb 51             - mov eax,51eb851f\n00599B1B - f7 eb                      - imul ebx\n00599B1D - c1 fa 05                   - sar dl,05\n00599B20 - 8b c2                      - mov eax,edx\n00599B22 - c1 e8 1f                   - shr eax,1f\n00599B25 - 03 c2                      - add eax,edx                    eax = 城市兵力*0.01\n00599B27 - 89 44 24 18                - mov [esp+18],eax\n00599B2B - 83 c4 04                   - add esp,04\n00599B2E - db 44 24 14                - fild dword ptr [esp+14]        加载浮点计算乘数\n00599B32 - d9 fa                      - fsqrt                          开平方根\n00599B34 - d8 0d a0 b0 84 00          - fmul dword ptr [0084b0a0]      逃兵数量 = 平方根(城市兵力×0.01)×(-30)\n00599B3A - e8 35 df 16 00             - call 00707a74\n00599B3F - 2b f0                      - sub esi,eax\n00599B41 - f7 de                      - neg esi                        esi = 逃兵数量(负值)\n\n【逃兵处理】\n00599B43 - 56                         - push esi\n00599B44 - 57                         - push edi                       edi = 设施指针\n00599B45 - b9 5c 89 99 07             - mov ecx,0799895c\n00599B4A - e8 71 48 f1 ff             - call 004ae3c0                  城市、港、关增减士兵\n00599B4F - 6a 00                      - push 00\n00599B51 - 57                         - push edi\n00599B52 - 6a 01                      - push 01\n00599B54 - 50                         - push eax\n00599B55 - 8b cd                      - mov ecx,ebp\n00599B57 - e8 f4 ef fe ff             - call 00588b50\n00599B5C - 8b 17                      - mov edx,[edi]\n00599B5E - 8b cf                      - mov ecx,edi\n00599B60 - ff 52 50                   - call dword ptr [edx+50]        获取设施兵力\n00599B63 - 85 c0                      - test eax,eax\n00599B65 - 7f 09                      - jg 00599b70                    兵力大于0则跳转盗循环下一个设施\n00599B67 - 6a 00                      - push 00                        气力为0(兵力为0则把城市、港、关的气力设置为0)\n00599B69 - 8b cf                      - mov ecx,edi\n00599B6B - e8 50 da ee ff             - call 004875c0                  设置城市、港、关气力\n\n【循环】\n00599B70 - 8b 44 24 10                - mov eax,[esp+10]\n00599B74 - 40                         - inc eax\n00599B75 - 83 f8 57                   - cmp eax,57\n00599B78 - 89 44 24 10                - mov [esp+10],eax\n00599B7C - 0f 8c 2e ff ff ff          - jl 00599ab0                    循环下一个设施\n\n00599B82 - 5f                         - pop edi\n00599B83 - 5e                         - pop esi\n00599B84 - 5d                         - pop ebp\n00599B85 - 5b                         - pop ebx\n00599B86 - 83 c4 08                   - add esp,08\n00599B89 - c3                         - ret\n"
+    },
+    "caller": {
+      "start": "00599AA0",
+      "endExclusive": "00599B8A",
+      "instructionCount": 85,
+      "byteLength": 234,
+      "sha256": "6fba1cdb6ac06777a6057f35a6863840fc82370a96af69710a6169c93fbde31e",
+      "facilityIdsInclusive": [
+        0,
+        86
+      ],
+      "explicitGates": [
+        "00490D00 resolves facility; 0047A630 result nonzero",
+        "virtual+0x40 owner signed in 0..46",
+        "virtual+0x50 facility troop strength signed > 0",
+        "004B99B0 result nonzero"
+      ],
+      "strengthGetterCallSites": [
+        "00599AEA",
+        "00599B60"
+      ],
+      "strengthWriterCallSite": "00599B4A",
+      "strengthWriter": "004AE3C0",
+      "zeroMoraleCallSite": "00599B6B",
+      "zeroMoraleWriter": "004875C0",
+      "instructionTextCorrection": "00599B1D c1 fa 05 = SAR EDX,5; source mnemonic SAR DL,05 is a typo",
+      "inlineModificationAdviceApplied": false
+    },
+    "open": [
+      "004B99B0 full body and all internal conditions",
+      "0084B0A0 original constant bytes",
+      "same-source x87 environment and 00707A74 conversion contract",
+      "same-source RNG range/distribution/sequence",
+      "full helper and actual strength/morale writer semantics",
+      "clean stock and cross-version identity"
+    ]
+  }
 }

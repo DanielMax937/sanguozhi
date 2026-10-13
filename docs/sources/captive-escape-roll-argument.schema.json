@@ -1,0 +1,625 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profileId",
+    "scope",
+    "evidence",
+    "source",
+    "license",
+    "fullCaller",
+    "leaf",
+    "inputSchema",
+    "inputProvenance",
+    "arithmetic",
+    "excludedContext",
+    "coverage",
+    "nonGoals"
+  ],
+  "properties": {
+    "profileId": {
+      "type": "string",
+      "const": "captive-escape-roll-argument-u8-v1"
+    },
+    "scope": {
+      "type": "string",
+      "const": "arithmetic-entry unsigned-byte projection of the natural captive escape roll argument only"
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "profile",
+        "source",
+        "originalRange",
+        "listedBytesVerified",
+        "stockOriginalVerified",
+        "originalExecutableExecuted",
+        "nativeHelpersReconstructed",
+        "abiVerified",
+        "realTraceReachabilityVerified",
+        "earlyMonthGateIntegrated",
+        "attributeGettersRecovered",
+        "rngRecovered",
+        "escapeReleaseRecovered",
+        "monthlySchedulerIntegrated",
+        "commandIntegrated",
+        "modBehaviorIncluded"
+      ],
+      "properties": {
+        "level": {
+          "type": "string",
+          "const": "source-listing-reconstruction"
+        },
+        "profile": {
+          "type": "string",
+          "const": "captive-escape-roll-argument-u8-v1"
+        },
+        "source": {
+          "type": "string",
+          "const": "docs/sources/captive-escape-roll-argument.json"
+        },
+        "originalRange": {
+          "type": "string",
+          "const": "00582CE4 <= PC < 00582D31"
+        },
+        "listedBytesVerified": {
+          "type": "boolean",
+          "const": true
+        },
+        "stockOriginalVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "originalExecutableExecuted": {
+          "type": "boolean",
+          "const": false
+        },
+        "nativeHelpersReconstructed": {
+          "type": "boolean",
+          "const": false
+        },
+        "abiVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "realTraceReachabilityVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "earlyMonthGateIntegrated": {
+          "type": "boolean",
+          "const": false
+        },
+        "attributeGettersRecovered": {
+          "type": "boolean",
+          "const": false
+        },
+        "rngRecovered": {
+          "type": "boolean",
+          "const": false
+        },
+        "escapeReleaseRecovered": {
+          "type": "boolean",
+          "const": false
+        },
+        "monthlySchedulerIntegrated": {
+          "type": "boolean",
+          "const": false
+        },
+        "commandIntegrated": {
+          "type": "boolean",
+          "const": false
+        },
+        "modBehaviorIncluded": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "path",
+        "url",
+        "gitBlobSha1",
+        "snapshot",
+        "snapshotEncoding",
+        "snapshotBytes",
+        "snapshotSha256",
+        "utf8Snapshot",
+        "utf8Bytes",
+        "utf8Sha256",
+        "acquisition"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "const": "sjn4048/311MemoryResearch"
+        },
+        "commit": {
+          "type": "string",
+          "const": "66e167e40c3440929ec016f3872aefc3486434c1"
+        },
+        "path": {
+          "type": "string",
+          "const": "内存资料/整理/Func-自动07-俘虏逃走.txt"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-自动07-俘虏逃走.txt"
+        },
+        "gitBlobSha1": {
+          "type": "string",
+          "const": "966493977fe3c19250fecc32d3d4f5bc23361d86"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/captive-escape-roll-argument-original.gbk"
+        },
+        "snapshotEncoding": {
+          "type": "string",
+          "const": "GBK"
+        },
+        "snapshotBytes": {
+          "type": "integer",
+          "const": 16828
+        },
+        "snapshotSha256": {
+          "type": "string",
+          "const": "9da5c1a1f927b069f38940090327184942adc98af9bea93150a04f1a7580114b"
+        },
+        "utf8Snapshot": {
+          "type": "string",
+          "const": "docs/sources/captive-escape-roll-argument-original.txt"
+        },
+        "utf8Bytes": {
+          "type": "integer",
+          "const": 17362
+        },
+        "utf8Sha256": {
+          "type": "string",
+          "const": "c69ad1694b96a608e0d362b468e27b7e51eae6372a0f38fd15471144d3824da9"
+        },
+        "acquisition": {
+          "type": "string",
+          "const": "Retained GitHub connector decoded text; reversible GBK re-encoding matches pinned Git blob; not direct EXE extraction"
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spdx",
+        "snapshot",
+        "sha256",
+        "url",
+        "attribution"
+      ],
+      "properties": {
+        "spdx": {
+          "type": "string",
+          "const": "Apache-2.0"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/production-price-LICENSE.txt"
+        },
+        "sha256": {
+          "type": "string",
+          "const": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE"
+        },
+        "attribution": {
+          "type": "string",
+          "const": "sjn4048/311MemoryResearch"
+        }
+      }
+    },
+    "fullCaller": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "endExclusive",
+        "instructionCount",
+        "byteLength",
+        "sha256",
+        "implemented"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "const": "00582BE0"
+        },
+        "endExclusive": {
+          "type": "string",
+          "const": "00582F66"
+        },
+        "instructionCount": {
+          "type": "integer",
+          "const": 266
+        },
+        "byteLength": {
+          "type": "integer",
+          "const": 902
+        },
+        "sha256": {
+          "type": "string",
+          "const": "1e86d9c476b08adffb5d1ca3435930b51205b68c651a357ef59a6d8923fc53fd"
+        },
+        "implemented": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "leaf": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "endExclusive",
+        "instructionCount",
+        "byteLength",
+        "sha256",
+        "bytesHex",
+        "prefixJoin",
+        "excludedRollCall",
+        "excludedRollTarget",
+        "containsCalls",
+        "rollHelperExecuted"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "const": "00582CE4"
+        },
+        "endExclusive": {
+          "type": "string",
+          "const": "00582D31"
+        },
+        "instructionCount": {
+          "type": "integer",
+          "const": 26
+        },
+        "byteLength": {
+          "type": "integer",
+          "const": 77
+        },
+        "sha256": {
+          "type": "string",
+          "const": "11335bc56749367435b1d5f70629b93b5c2139c063533c516833ca50e2defc83"
+        },
+        "bytesHex": {
+          "type": "string",
+          "const": "3ac376028ad80fb6c383f81eba1e0000007c028bd00fb6866901000083e80283f8017d05b8010000008bc80fafc80fafcab8b5814e1bf7e9c1fa048bc2c1e81f03c283f8017d05b80100000050"
+        },
+        "prefixJoin": {
+          "type": "string",
+          "const": "00582CEA"
+        },
+        "excludedRollCall": {
+          "type": "string",
+          "const": "00582D31"
+        },
+        "excludedRollTarget": {
+          "type": "string",
+          "const": "004721D0"
+        },
+        "containsCalls": {
+          "type": "boolean",
+          "const": false
+        },
+        "rollHelperExecuted": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "additionalProperties",
+        "required",
+        "properties"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "object"
+        },
+        "additionalProperties": {
+          "type": "boolean",
+          "const": false
+        },
+        "required": {
+          "type": "array",
+          "const": [
+            "profile",
+            "savedBlU8",
+            "currentAlU8",
+            "lateCaptiveMonthsU8"
+          ]
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "profile",
+            "savedBlU8",
+            "currentAlU8",
+            "lateCaptiveMonthsU8"
+          ],
+          "properties": {
+            "profile": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "const"
+              ],
+              "properties": {
+                "const": {
+                  "type": "string",
+                  "const": "captive-escape-roll-argument-u8-v1"
+                }
+              }
+            },
+            "savedBlU8": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "minimum",
+                "maximum"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "integer"
+                },
+                "minimum": {
+                  "type": "integer",
+                  "const": 0
+                },
+                "maximum": {
+                  "type": "integer",
+                  "const": 255
+                }
+              }
+            },
+            "currentAlU8": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "minimum",
+                "maximum"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "integer"
+                },
+                "minimum": {
+                  "type": "integer",
+                  "const": 0
+                },
+                "maximum": {
+                  "type": "integer",
+                  "const": 255
+                }
+              }
+            },
+            "lateCaptiveMonthsU8": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "minimum",
+                "maximum"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "integer"
+                },
+                "minimum": {
+                  "type": "integer",
+                  "const": 0
+                },
+                "maximum": {
+                  "type": "integer",
+                  "const": 255
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "inputProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "savedBlU8",
+        "currentAlU8",
+        "lateCaptiveMonthsU8"
+      ],
+      "properties": {
+        "savedBlU8": {
+          "type": "string",
+          "const": "BL at 00582CE4 entry; the caller saved an earlier AL at 00582CDD, but equality to that historical getter return requires unverified intervening getter ABI"
+        },
+        "currentAlU8": {
+          "type": "string",
+          "const": "AL at 00582CE4 entry immediately after CALL 00489080 at 00582CDF; no getter body reconstructed"
+        },
+        "lateCaptiveMonthsU8": {
+          "type": "string",
+          "const": "MOVZX byte [ESI+0x169] at 00582CF9, a new read after both attribute getter calls; not the earlier 00582CCB gate read"
+        }
+      }
+    },
+    "arithmetic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selectedMaximumByte",
+        "effectiveStat",
+        "effectiveMonthFactor",
+        "numerator",
+        "rollArgument",
+        "maximumNumerator",
+        "minimumRollArgument",
+        "maximumRollArgument",
+        "clipTo100",
+        "signed32ProductOverflowPossible",
+        "magicMultiplierHex",
+        "byteDecodedShift",
+        "originalMnemonicTypo"
+      ],
+      "properties": {
+        "selectedMaximumByte": {
+          "type": "string",
+          "const": "unsigned max(savedBlU8,currentAlU8)"
+        },
+        "effectiveStat": {
+          "type": "string",
+          "const": "max(30,selectedMaximumByte)"
+        },
+        "effectiveMonthFactor": {
+          "type": "string",
+          "const": "max(1,lateCaptiveMonthsU8-2)"
+        },
+        "numerator": {
+          "type": "string",
+          "const": "effectiveMonthFactor * effectiveMonthFactor * effectiveStat"
+        },
+        "rollArgument": {
+          "type": "string",
+          "const": "max(1,floor(numerator/150))"
+        },
+        "maximumNumerator": {
+          "type": "integer",
+          "const": 16322295
+        },
+        "minimumRollArgument": {
+          "type": "integer",
+          "const": 1
+        },
+        "maximumRollArgument": {
+          "type": "integer",
+          "const": 108815
+        },
+        "clipTo100": {
+          "type": "boolean",
+          "const": false
+        },
+        "signed32ProductOverflowPossible": {
+          "type": "boolean",
+          "const": false
+        },
+        "magicMultiplierHex": {
+          "type": "string",
+          "const": "1B4E81B5"
+        },
+        "byteDecodedShift": {
+          "type": "string",
+          "const": "SAR EDX,4"
+        },
+        "originalMnemonicTypo": {
+          "type": "string",
+          "const": "00582D1C original mnemonic says sar dl,04; unchanged bytes c1 fa 04 decode as SAR EDX,4"
+        }
+      }
+    },
+    "excludedContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "earlyMonthGate",
+        "twoReadsMerged",
+        "getterAbiAssumed",
+        "inlineModification",
+        "inlineModificationApplied"
+      ],
+      "properties": {
+        "earlyMonthGate": {
+          "type": "string",
+          "const": "00582CCB CMP byte [ESI+0x169],2 and 00582CD2 JB; outside the arithmetic entry contract"
+        },
+        "twoReadsMerged": {
+          "type": "boolean",
+          "const": false
+        },
+        "getterAbiAssumed": {
+          "type": "boolean",
+          "const": false
+        },
+        "inlineModification": {
+          "type": "string",
+          "const": "00582D3B original bytes 74 0a remain JE; the inline author suggestion to change to JMP is not applied"
+        },
+        "inlineModificationApplied": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "byteOracleAttributePairs",
+        "byteOracleMaximumMonthSuffixes",
+        "scalarTuplesCoveredByFactorization",
+        "fullSegmentEnumeratedForEveryScalarTuple",
+        "factorizationProof"
+      ],
+      "properties": {
+        "byteOracleAttributePairs": {
+          "type": "integer",
+          "const": 65536
+        },
+        "byteOracleMaximumMonthSuffixes": {
+          "type": "integer",
+          "const": 65536
+        },
+        "scalarTuplesCoveredByFactorization": {
+          "type": "integer",
+          "const": 16777216
+        },
+        "fullSegmentEnumeratedForEveryScalarTuple": {
+          "type": "boolean",
+          "const": false
+        },
+        "factorizationProof": {
+          "type": "string",
+          "const": "At 00582CEA only BL remains live from the attribute prefix. MOVZX overwrites EAX; EDX and ECX are assigned before use; CMP overwrites flags. Exhaustive byte-pair prefixes and maximum-byte/month suffixes compose over all 256^3 scalar tuples. This does not establish game reachability or exhaustive TypeScript full-tuple testing."
+        }
+      }
+    },
+    "nonGoals": {
+      "type": "array",
+      "const": [
+        "No first month gate, captive list, pointer validation or real-game tuple reachability",
+        "No getter body, getter ABI or equality of early and late month reads",
+        "No RNG distribution, seed consumption, success flag or percentage claim",
+        "No release, location, person, force or facility state changes; no command or EndTurn integration",
+        "No capture, force/native, P0-78 dependencies, MOD behavior, stock or cross-version certification"
+      ]
+    }
+  }
+}

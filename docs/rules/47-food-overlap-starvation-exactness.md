@@ -1,6 +1,6 @@
 # P0-12 阵 / 砦 / 城塞重叠耗粮与粮尽逃兵 exactness
 
-更新：2026-10-03。
+更新：2026-10-12（00599AA0 来源命名纠错；其余算术结论不变）。
 
 ## 1. 本轮结论
 
@@ -174,7 +174,13 @@ separate starvation/desertion handler
 
 ## 9. 00599AA0 不是野外粮尽逃兵函数
 
-SIRE 地址表命名 `00599AA0 ReducePopForStarvedBesiegedSP`，作用是“兵临城下 + 据点断粮 → 据点人口衰减”。它不能拿来解释野外 troop food==0 后的 strength 下降。
+SIRE 地址表原标签 `00599AA0 ReducePopForStarvedBesiegedSP` 保留为历史引用；旧文据此写成“断粮据点人口衰减”是误译 / 无依据外推，不能作为该 caller 的业务合同。
+
+固定来源 `311MemoryResearch@66e167e40c3440929ec016f3872aefc3486434c1` 的 `Func-自动04-兵临城下逃兵处理.txt` 完整 listing 为 `[00599AA0,00599B8A)`，85 条 / 234 bytes。它枚举设施 ID 0..86，依次校验设施、所属势力 0..46、设施兵力 signed > 0、`004B99B0` 返回非零；`00599B4A` 调 `004AE3C0` 增减设施兵力，再读取兵力并在 <=0 时清气力。应称为**设施围城兵力减员 caller**，没有证据将其 writer 称为独立人口字段。
+
+该完整 caller 没有显式兵粮读取或 `food==0` 比较；`004B99B0` 完整原体仍 open，不能由此宣称 helper 内或所有版本均无断粮条件。这仍不是野外 troop starvation handler，不能据此实现野外粮尽掉兵。
+
+证据级别仅为 `source-listing-reconstruction`，不认证 clean stock / 跨版本身份。`0084B0A0` 常量原 bytes、同源 x87 / `00707A74` 转换合同、RNG、资格 helper 和实际 writer 仍未完整绑定，未新增减兵算术实现。原文、GBK Git blob 与完整 body 摘要保存在 `../sources/food-overlap-starvation-exactness.json`，离线检查见 `check_food_overlap_starvation_exactness.py`；详见 [70 §5](70-food-overlap-starvation-function-boundary.md#5-00599aa0-不是野外-troop-starvation-handler)。
 
 ## 10. 旧 0.76 必须降级
 
@@ -249,7 +255,7 @@ overlap 通过可替换 selector；starvation 通过可替换 profile。严格 f
 - 10000/18000兵测试向量；
 - `0059BF40` 对进入旬时0粮对象直接跳过；
 - `0059BF40` 只负责扣粮和粮尽提示，不负责粮尽扣兵；
-- `00599AA0` 是断粮围城据点人口损失，不是野外部队逃兵；
+- `00599AA0` 固定 listing 是设施围城兵力减员 caller，没有显式粮0门槛；`004B99B0` 内部与版本身份仍 open，不是野外部队逃兵；
 - 0.76 从 empirical-high 降级为 provenance-unresolved legacy fallback。
 
 仍 open：
@@ -279,7 +285,7 @@ legacy-retention-0.76-downgraded
 
 - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-收支02-每旬耗粮.txt
 - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-收支10-计算部队兵粮支出.txt
-- https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/整理/Func-自动04-兵临城下逃兵处理.txt
+- https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-自动04-兵临城下逃兵处理.txt
 - https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
 - https://github.com/fudanglp/311resource/blob/master/extractor/ida/data/python_idb/san11pk_dump.exe_functions.csv
 - KOEI《三國志11 with パワーアップキット》说明书

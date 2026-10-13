@@ -10,7 +10,7 @@
       "0x49D200"
     ],
     "perTurnFoodScheduler": "0059BF40",
-    "besiegedStarvedSPPopulationLoss": "00599AA0"
+    "facilitySiegeTroopLossCaller": "00599AA0"
   },
   "resolved": {
     "selectorReturnsSingleType": true,
@@ -38,6 +38,23 @@
   "sources": [
     "https://github.com/sjn4048/311MemoryResearch",
     "https://github.com/sean2077/311SireCustomizedPackageDev",
-    "https://github.com/fudanglp/311resource"
-  ]
+    "https://github.com/fudanglp/311resource",
+    "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/%E5%86%85%E5%AD%98%E8%B5%84%E6%96%99/%E6%95%B4%E7%90%86/Func-%E8%87%AA%E5%8A%A804-%E5%85%B5%E4%B8%B4%E5%9F%8E%E4%B8%8B%E9%80%83%E5%85%B5%E5%A4%84%E7%90%86.txt"
+  ],
+  "facilitySiegeTroopLossBoundary": {
+    "sourceEvidenceFile": "food-overlap-starvation-exactness.json",
+    "sourceEvidenceKey": "facilitySiegeTroopLoss",
+    "address": "00599AA0",
+    "meaning": "facility-siege-troop-strength-loss-caller",
+    "evidenceLevel": "source-listing-reconstruction",
+    "historicalSireLabel": "ReducePopForStarvedBesiegedSP",
+    "historicalLabelPolicy": "preserve-source-label-reject-starved-population-interpretation",
+    "explicitFoodZeroGateInCaller": false,
+    "foodZeroGateInside004B99B0": "open",
+    "allVersionsLackFoodZeroGate": "not-established",
+    "independentPopulationWriterEstablished": false,
+    "isFieldTroopStarvationHandler": false,
+    "cleanStockIdentity": "open",
+    "arithmeticBehaviorChanged": false
+  }
 }

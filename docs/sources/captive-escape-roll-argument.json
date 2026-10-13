@@ -1,0 +1,137 @@
+{
+  "profileId": "captive-escape-roll-argument-u8-v1",
+  "scope": "arithmetic-entry unsigned-byte projection of the natural captive escape roll argument only",
+  "evidence": {
+    "level": "source-listing-reconstruction",
+    "profile": "captive-escape-roll-argument-u8-v1",
+    "source": "docs/sources/captive-escape-roll-argument.json",
+    "originalRange": "00582CE4 <= PC < 00582D31",
+    "listedBytesVerified": true,
+    "stockOriginalVerified": false,
+    "originalExecutableExecuted": false,
+    "nativeHelpersReconstructed": false,
+    "abiVerified": false,
+    "realTraceReachabilityVerified": false,
+    "earlyMonthGateIntegrated": false,
+    "attributeGettersRecovered": false,
+    "rngRecovered": false,
+    "escapeReleaseRecovered": false,
+    "monthlySchedulerIntegrated": false,
+    "commandIntegrated": false,
+    "modBehaviorIncluded": false
+  },
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "内存资料/整理/Func-自动07-俘虏逃走.txt",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-自动07-俘虏逃走.txt",
+    "gitBlobSha1": "966493977fe3c19250fecc32d3d4f5bc23361d86",
+    "snapshot": "docs/sources/captive-escape-roll-argument-original.gbk",
+    "snapshotEncoding": "GBK",
+    "snapshotBytes": 16828,
+    "snapshotSha256": "9da5c1a1f927b069f38940090327184942adc98af9bea93150a04f1a7580114b",
+    "utf8Snapshot": "docs/sources/captive-escape-roll-argument-original.txt",
+    "utf8Bytes": 17362,
+    "utf8Sha256": "c69ad1694b96a608e0d362b468e27b7e51eae6372a0f38fd15471144d3824da9",
+    "acquisition": "Retained GitHub connector decoded text; reversible GBK re-encoding matches pinned Git blob; not direct EXE extraction"
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "snapshot": "docs/sources/production-price-LICENSE.txt",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE",
+    "attribution": "sjn4048/311MemoryResearch"
+  },
+  "fullCaller": {
+    "start": "00582BE0",
+    "endExclusive": "00582F66",
+    "instructionCount": 266,
+    "byteLength": 902,
+    "sha256": "1e86d9c476b08adffb5d1ca3435930b51205b68c651a357ef59a6d8923fc53fd",
+    "implemented": false
+  },
+  "leaf": {
+    "start": "00582CE4",
+    "endExclusive": "00582D31",
+    "instructionCount": 26,
+    "byteLength": 77,
+    "sha256": "11335bc56749367435b1d5f70629b93b5c2139c063533c516833ca50e2defc83",
+    "bytesHex": "3ac376028ad80fb6c383f81eba1e0000007c028bd00fb6866901000083e80283f8017d05b8010000008bc80fafc80fafcab8b5814e1bf7e9c1fa048bc2c1e81f03c283f8017d05b80100000050",
+    "prefixJoin": "00582CEA",
+    "excludedRollCall": "00582D31",
+    "excludedRollTarget": "004721D0",
+    "containsCalls": false,
+    "rollHelperExecuted": false
+  },
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "profile",
+      "savedBlU8",
+      "currentAlU8",
+      "lateCaptiveMonthsU8"
+    ],
+    "properties": {
+      "profile": {
+        "const": "captive-escape-roll-argument-u8-v1"
+      },
+      "savedBlU8": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      },
+      "currentAlU8": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      },
+      "lateCaptiveMonthsU8": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      }
+    }
+  },
+  "inputProvenance": {
+    "savedBlU8": "BL at 00582CE4 entry; the caller saved an earlier AL at 00582CDD, but equality to that historical getter return requires unverified intervening getter ABI",
+    "currentAlU8": "AL at 00582CE4 entry immediately after CALL 00489080 at 00582CDF; no getter body reconstructed",
+    "lateCaptiveMonthsU8": "MOVZX byte [ESI+0x169] at 00582CF9, a new read after both attribute getter calls; not the earlier 00582CCB gate read"
+  },
+  "arithmetic": {
+    "selectedMaximumByte": "unsigned max(savedBlU8,currentAlU8)",
+    "effectiveStat": "max(30,selectedMaximumByte)",
+    "effectiveMonthFactor": "max(1,lateCaptiveMonthsU8-2)",
+    "numerator": "effectiveMonthFactor * effectiveMonthFactor * effectiveStat",
+    "rollArgument": "max(1,floor(numerator/150))",
+    "maximumNumerator": 16322295,
+    "minimumRollArgument": 1,
+    "maximumRollArgument": 108815,
+    "clipTo100": false,
+    "signed32ProductOverflowPossible": false,
+    "magicMultiplierHex": "1B4E81B5",
+    "byteDecodedShift": "SAR EDX,4",
+    "originalMnemonicTypo": "00582D1C original mnemonic says sar dl,04; unchanged bytes c1 fa 04 decode as SAR EDX,4"
+  },
+  "excludedContext": {
+    "earlyMonthGate": "00582CCB CMP byte [ESI+0x169],2 and 00582CD2 JB; outside the arithmetic entry contract",
+    "twoReadsMerged": false,
+    "getterAbiAssumed": false,
+    "inlineModification": "00582D3B original bytes 74 0a remain JE; the inline author suggestion to change to JMP is not applied",
+    "inlineModificationApplied": false
+  },
+  "coverage": {
+    "byteOracleAttributePairs": 65536,
+    "byteOracleMaximumMonthSuffixes": 65536,
+    "scalarTuplesCoveredByFactorization": 16777216,
+    "fullSegmentEnumeratedForEveryScalarTuple": false,
+    "factorizationProof": "At 00582CEA only BL remains live from the attribute prefix. MOVZX overwrites EAX; EDX and ECX are assigned before use; CMP overwrites flags. Exhaustive byte-pair prefixes and maximum-byte/month suffixes compose over all 256^3 scalar tuples. This does not establish game reachability or exhaustive TypeScript full-tuple testing."
+  },
+  "nonGoals": [
+    "No first month gate, captive list, pointer validation or real-game tuple reachability",
+    "No getter body, getter ABI or equality of early and late month reads",
+    "No RNG distribution, seed consumption, success flag or percentage claim",
+    "No release, location, person, force or facility state changes; no command or EndTurn integration",
+    "No capture, force/native, P0-78 dependencies, MOD behavior, stock or cross-version certification"
+  ]
+}

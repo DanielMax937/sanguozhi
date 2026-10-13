@@ -281,18 +281,9 @@ P0-10 已确认 `00707A74` 是 MSVC `_ftol2`，语义为向0截断。耗粮 raw 
 
 ### 8.1 00599AA0 不是野外部队粮尽函数
 
-```text
-00599AA0 ReducePopForStarvedBesiegedSP
-```
+SIRE 原标签 `00599AA0 ReducePopForStarvedBesiegedSP` 保留为来源引用；旧“断粮据点人口衰减”解读是误译 / 无依据外推。固定完整 listing 实际为**设施围城兵力减员 caller**：读取设施兵力，经 `004B99B0` 非零分支后调用 `004AE3C0` 增减兵力，后读兵力 signed <=0 时再清气力。
 
-是：
-
-```text
-兵临城下 + 据点断粮
-→ 据点人口衰减
-```
-
-不能拿来解释野外部队掉兵。
+该 caller 没有显式兵粮读取或 `food==0` 比较；`004B99B0` 内部及版本身份仍 open，不能声称所有版本均无断粮条件，也不能拿来解释野外部队掉兵。来源身份、完整 85 条 / 234 bytes 边界和证据限制见 [70 §5](70-food-overlap-starvation-function-boundary.md#5-00599aa0-不是野外-troop-starvation-handler)。本次不改算术行为。
 
 ### 8.2 旧 0.76 证据降级
 

@@ -1357,7 +1357,7 @@ A × 0.76^N
 
 经 P0-12 回查缺乏可验证来源，现降级为 `legacy-compatibility-only`；严格 fidelity 不使用。
 
-`00599AA0` 是“围城+断粮的据点人口衰减”，不是野外部队 starvation。
+`00599AA0` 固定 listing 是设施围城兵力减员 caller，不是野外部队 starvation；caller 没有显式兵粮读取或 `food==0` 比较。旧“断粮人口衰减”是从 SIRE 原标签 `ReducePopForStarvedBesiegedSP` 得出的误译 / 无依据外推；`004B99B0` 内部条件及版本身份仍 open，不能宣称所有版本均无断粮条件。详见 [70 §5](70-food-overlap-starvation-function-boundary.md#5-00599aa0-不是野外-troop-starvation-handler)。
 
 ### 7.7 E5 当前剩余缺口
 
