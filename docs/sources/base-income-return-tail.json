@@ -1,0 +1,586 @@
+{
+  "profileId": "base-income-return-tail-u32-v1",
+  "scope": "Pure post-city-callee captured-EAX and late raw DWORD type return-tail projection only",
+  "evidence": {
+    "level": "source-listing-reconstruction",
+    "profile": "base-income-return-tail-u32-v1",
+    "source": "docs/sources/base-income-return-tail.json",
+    "fullListingIdentityVerified": true,
+    "fullCallerExecuted": false,
+    "originalExecutableExecuted": false,
+    "stockOriginalVerified": false,
+    "vanillaVerified": false,
+    "nativeHelpersReconstructed": false,
+    "abiVerified": false,
+    "gameReachabilityVerified": false,
+    "entryGatesIntegrated": false,
+    "cityCalculatorCalled": false,
+    "lateTypeObservationRequired": true,
+    "incomeWriterIntegrated": false,
+    "monthlySchedulerIntegrated": false,
+    "rngIntegrated": false,
+    "modBehaviorIncluded": false
+  },
+  "sources": {
+    "money": {
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/Func-收支07-计算城市、港、关金钱收入.txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-收支07-计算城市、港、关金钱收入.txt",
+      "gitBlob": "fee219ac9a482d3a3cb4d8bdc489b98b10836944",
+      "gbkBytes": 4551,
+      "gbkSha256": "a1a7af12cc4c7b5f612b1db45d16623a92d9c17e3957358f9d9dcd09d1408d0b",
+      "utf8Bytes": 4754,
+      "utf8Sha256": "c826c7f68b087832e9c94ea6253c7a4a2ae6e928ffc4d1bcb037c5a300d8d91f",
+      "fullListing": {
+        "start": "0049E770",
+        "endExclusive": "0049E805",
+        "instructions": 66,
+        "bytes": 149,
+        "sha256": "429f5a7ff2efb81829926d2e5375051e8bdfc8021eda2b6e13c48231f696a9c0"
+      },
+      "capture": {
+        "cityCallInstruction": "0049E7D0",
+        "cityCalculatorReturnAt": "0049E7D5",
+        "lateTypeReadAt": "0049E7D7",
+        "readWidthBits": 32
+      },
+      "arithmetic": {
+        "start": "0049E7D5",
+        "endExclusive": "0049E7EE",
+        "instructions": 10,
+        "bytes": 25,
+        "sha256": "210bfcc2907afd3465d210652b2c022adaa8c4c92f9baf58fd2fd80b6c6eb88f"
+      },
+      "executedLeaf": {
+        "start": "0049E7D5",
+        "endExclusive": "0049E7F6",
+        "instructions": 15,
+        "bytes": 33,
+        "sha256": "44b235c89055a513a0a795bd6903e1cc61360e3599f981467b5ef59b22d03d2c"
+      },
+      "excludedInlineMod": {
+        "line": 45,
+        "address": "0049E7CB",
+        "originalHex": "7529",
+        "suggestion": "bypass ownership gate",
+        "executed": false
+      }
+    },
+    "food": {
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/Func-收支06-计算城市、港、关兵粮收入.txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-收支06-计算城市、港、关兵粮收入.txt",
+      "gitBlob": "2c44d123cab43fc8577ebbaa640d811dc5fc1e64",
+      "gbkBytes": 4552,
+      "gbkSha256": "0b401a880b6b60df70f5f2989c78bd9a1a4f44c32b5caa96b631dd3a4617c589",
+      "utf8Bytes": 4755,
+      "utf8Sha256": "64dec6ff6ac7f9179fa43cade5ac893f41cbd418f03161f4bb8a92a3c10de9c3",
+      "fullListing": {
+        "start": "0049EA30",
+        "endExclusive": "0049EAC5",
+        "instructions": 66,
+        "bytes": 149,
+        "sha256": "c578ba45587bf55af84eded966ff2b6909ab6afd77bfb0e511cdddbfeed0eb1c"
+      },
+      "capture": {
+        "cityCallInstruction": "0049EA90",
+        "cityCalculatorReturnAt": "0049EA95",
+        "lateTypeReadAt": "0049EA97",
+        "readWidthBits": 32
+      },
+      "arithmetic": {
+        "start": "0049EA95",
+        "endExclusive": "0049EAAE",
+        "instructions": 10,
+        "bytes": 25,
+        "sha256": "210bfcc2907afd3465d210652b2c022adaa8c4c92f9baf58fd2fd80b6c6eb88f"
+      },
+      "executedLeaf": {
+        "start": "0049EA95",
+        "endExclusive": "0049EAB6",
+        "instructions": 15,
+        "bytes": 33,
+        "sha256": "44b235c89055a513a0a795bd6903e1cc61360e3599f981467b5ef59b22d03d2c"
+      },
+      "excludedInlineMod": {
+        "line": 45,
+        "address": "0049EA8B",
+        "originalHex": "7529",
+        "suggestion": "bypass ownership gate",
+        "executed": false
+      }
+    }
+  },
+  "license": {
+    "name": "Apache-2.0",
+    "snapshot": "docs/sources/production-time-LICENSE.txt",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+  },
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "profile",
+      "resource",
+      "cityCalculatorReturnU32",
+      "lateFacilityTypeU32"
+    ],
+    "properties": {
+      "profile": {
+        "type": "string",
+        "const": "base-income-return-tail-u32-v1"
+      },
+      "resource": {
+        "type": "string",
+        "enum": [
+          "money",
+          "food"
+        ]
+      },
+      "cityCalculatorReturnU32": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      },
+      "lateFacilityTypeU32": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      }
+    }
+  },
+  "resultSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "oneOf": [
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "supported",
+          "profile",
+          "resource",
+          "cityCalculatorReturnU32",
+          "cityCalculatorReturnSigned",
+          "lateFacilityTypeU32",
+          "branch",
+          "division",
+          "returnedIncomeSigned",
+          "returnedIncomeU32",
+          "evidence"
+        ],
+        "properties": {
+          "supported": {
+            "type": "boolean",
+            "const": true
+          },
+          "profile": {
+            "type": "string",
+            "const": "base-income-return-tail-u32-v1"
+          },
+          "resource": {
+            "type": "string",
+            "enum": [
+              "money",
+              "food"
+            ]
+          },
+          "cityCalculatorReturnU32": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "cityCalculatorReturnSigned": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "lateFacilityTypeU32": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "branch": {
+            "type": "string",
+            "enum": [
+              "copy",
+              "signed-divide-by-five"
+            ]
+          },
+          "division": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "multiplierU32",
+                  "productSignedDecimal",
+                  "productLowU32",
+                  "productHighSigned",
+                  "sarHighSigned",
+                  "correctionU32"
+                ],
+                "properties": {
+                  "multiplierU32": {
+                    "type": "integer",
+                    "const": 1717986919
+                  },
+                  "productSignedDecimal": {
+                    "type": "string",
+                    "pattern": "^(?:0|-?[1-9][0-9]*)(?![\\s\\S])"
+                  },
+                  "productLowU32": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 4294967295
+                  },
+                  "productHighSigned": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  },
+                  "sarHighSigned": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  },
+                  "correctionU32": {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      1
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "returnedIncomeSigned": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "returnedIncomeU32": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "level",
+              "profile",
+              "source",
+              "fullListingIdentityVerified",
+              "fullCallerExecuted",
+              "originalExecutableExecuted",
+              "stockOriginalVerified",
+              "vanillaVerified",
+              "nativeHelpersReconstructed",
+              "abiVerified",
+              "gameReachabilityVerified",
+              "entryGatesIntegrated",
+              "cityCalculatorCalled",
+              "lateTypeObservationRequired",
+              "incomeWriterIntegrated",
+              "monthlySchedulerIntegrated",
+              "rngIntegrated",
+              "modBehaviorIncluded"
+            ],
+            "properties": {
+              "level": {
+                "type": "string",
+                "const": "source-listing-reconstruction"
+              },
+              "profile": {
+                "type": "string",
+                "const": "base-income-return-tail-u32-v1"
+              },
+              "source": {
+                "type": "string",
+                "const": "docs/sources/base-income-return-tail.json"
+              },
+              "fullListingIdentityVerified": {
+                "type": "boolean",
+                "const": true
+              },
+              "fullCallerExecuted": {
+                "type": "boolean",
+                "const": false
+              },
+              "originalExecutableExecuted": {
+                "type": "boolean",
+                "const": false
+              },
+              "stockOriginalVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "vanillaVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "nativeHelpersReconstructed": {
+                "type": "boolean",
+                "const": false
+              },
+              "abiVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "gameReachabilityVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "entryGatesIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "cityCalculatorCalled": {
+                "type": "boolean",
+                "const": false
+              },
+              "lateTypeObservationRequired": {
+                "type": "boolean",
+                "const": true
+              },
+              "incomeWriterIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "monthlySchedulerIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "rngIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "modBehaviorIncluded": {
+                "type": "boolean",
+                "const": false
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "lateFacilityTypeU32": {
+                  "const": 0
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "branch": {
+                  "const": "copy"
+                },
+                "division": {
+                  "type": "null"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "branch": {
+                  "const": "signed-divide-by-five"
+                },
+                "division": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "multiplierU32",
+                    "productSignedDecimal",
+                    "productLowU32",
+                    "productHighSigned",
+                    "sarHighSigned",
+                    "correctionU32"
+                  ],
+                  "properties": {
+                    "multiplierU32": {
+                      "type": "integer",
+                      "const": 1717986919
+                    },
+                    "productSignedDecimal": {
+                      "type": "string",
+                      "pattern": "^(?:0|-?[1-9][0-9]*)(?![\\s\\S])"
+                    },
+                    "productLowU32": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 4294967295
+                    },
+                    "productHighSigned": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647
+                    },
+                    "sarHighSigned": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647
+                    },
+                    "correctionU32": {
+                      "type": "integer",
+                      "enum": [
+                        0,
+                        1
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "supported",
+          "reason",
+          "evidence"
+        ],
+        "properties": {
+          "supported": {
+            "type": "boolean",
+            "const": false
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "invalid-input",
+              "unexpected-field",
+              "unsupported-profile",
+              "unsupported-resource"
+            ]
+          },
+          "evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "level",
+              "profile",
+              "source",
+              "fullListingIdentityVerified",
+              "fullCallerExecuted",
+              "originalExecutableExecuted",
+              "stockOriginalVerified",
+              "vanillaVerified",
+              "nativeHelpersReconstructed",
+              "abiVerified",
+              "gameReachabilityVerified",
+              "entryGatesIntegrated",
+              "cityCalculatorCalled",
+              "lateTypeObservationRequired",
+              "incomeWriterIntegrated",
+              "monthlySchedulerIntegrated",
+              "rngIntegrated",
+              "modBehaviorIncluded"
+            ],
+            "properties": {
+              "level": {
+                "type": "string",
+                "const": "source-listing-reconstruction"
+              },
+              "profile": {
+                "type": "string",
+                "const": "base-income-return-tail-u32-v1"
+              },
+              "source": {
+                "type": "string",
+                "const": "docs/sources/base-income-return-tail.json"
+              },
+              "fullListingIdentityVerified": {
+                "type": "boolean",
+                "const": true
+              },
+              "fullCallerExecuted": {
+                "type": "boolean",
+                "const": false
+              },
+              "originalExecutableExecuted": {
+                "type": "boolean",
+                "const": false
+              },
+              "stockOriginalVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "vanillaVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "nativeHelpersReconstructed": {
+                "type": "boolean",
+                "const": false
+              },
+              "abiVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "gameReachabilityVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "entryGatesIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "cityCalculatorCalled": {
+                "type": "boolean",
+                "const": false
+              },
+              "lateTypeObservationRequired": {
+                "type": "boolean",
+                "const": true
+              },
+              "incomeWriterIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "monthlySchedulerIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "rngIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "modBehaviorIncluded": {
+                "type": "boolean",
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "assumptions": [
+    "EAX captured immediately after the city callee returns; not recalculated by this API",
+    "Type DWORD captured from the later [ESI+08] read, not an earlier cached type",
+    "For the byte model only, synthetic saved registers and stack model the listed return suffix; no game ABI claim"
+  ],
+  "excluded": [
+    "entry and owner gates",
+    "native helpers and city calculation",
+    "earlier type reads and live-memory coherence",
+    "MOD ownership bypass",
+    "GameState and force/capture",
+    "writer, tick, monthly scheduler and RNG",
+    "PK stock or Vanilla authentication",
+    "game reachability",
+    "new mechanism discovery or reduction of original 43 unresolved topics"
+  ]
+}
