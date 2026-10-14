@@ -475,9 +475,11 @@ PC-PK1.1 reverse-engineered
 - https://w.atwiki.jp/sangokushi11/pages/13.html
 - https://game.ali213.net/forum.php?mod=viewthread&tid=1075291
 
-## 2. 粮食收入完整公式
+## 2. 粮食收入：caller位宽与后续链条分界
 
-`[PC-PK1.1][reverse-engineered]`
+`[PC-PK1.1][reverse-engineered]`（历史来源标签，不是本轮stock认证）
+
+2026-10-14 位宽纠正及独立工程覆盖见[城市粮食收入投影](city-food-income-projection.md)。固定公开listing仅能认证其所列caller字节重建；原表、真实helper、Easy、丰作/征收/米道/港关及入账/调度没有因新增API而完成。以下普通数值例与后续链条记录保留各自原有证据边界，不能代替新树验收。
 
 ### 2.1 城市原始季度粮收入 F0
 
@@ -502,7 +504,7 @@ struct_city + 0x80 = BaseFoodProduction
 
 ### 2.2 农场 / 谷仓
 
-原版农场基础产量：
+既有常规域资料记录的农场基础产量（本次caller来源不独立认证原表）：
 
 | 设施 | 基础季度粮 |
 |---|---:|
@@ -532,7 +534,9 @@ effectiveFarmYield = floor(baseFarmYield * 3 / 2)
 
 军屯农在设施类型分支中会直接跳到自己的兵力公式，**不会进入谷仓邻接加成分支**。
 
-原函数等价为：
+完整U32支持域的caller计算为 `floor(u32(maxUnsigned(troops,15000)*Y)/15000)`，Y是有效类型行U16产量；IMUL低32位之后是unsigned MUL除法。不能把U32高位兵力按负数处理，也不能在截断前使用无界除法。
+
+只有已取Y=1500且军屯乘积不回绕的常规域，才可简写为：
 
 ```ts
 militaryFarmYield =
@@ -543,7 +547,7 @@ militaryFarmYield =
   )
 ```
 
-即：
+同一常规域内即：
 
 ```ts
 militaryFarmYield =
@@ -605,27 +609,19 @@ difficultyAdjustedFood =
           : rawFood
 ```
 
-其中 `00707A74 ConvertFloatToInteger` 是原程序自己的浮点转整数 helper。为了做到逐点一致，Easy 分支最好保留这个 helper 语义，不要擅自改成 JS 的 `Math.round`。
+Easy分支有FILD、FMUL [007E7B68]及CALL00707A74；原文注释称1.25f，但常量原始bytes、helper完整body与x87控制字/异常合同未列出。上式Easy仅是历史符号描述，不是可执行的精确认证；新API对difficulty=0全部返回unsupported-easy-branch，包括rawFood=0，不能猜floor/round或直接输入转换后EAX。其他非0/2的U32难度直接保持rawFood，不引入金钱路径的×100。
 
 ### 2.7 治安修正
 
-和金收入一致：
+晚期治安读U8，只有下限50，没有100上限。精确局部返回为：
 
-```ts
-effectiveSecurity = max(city.security, 50)
-
-F = floor(
-  difficultyAdjustedFood
-  * effectiveSecurity
-  / 100
-)
+```text
+effectiveSecurity = max(securityByte, 50)
+P = u32(difficultyAdjustedFood * effectiveSecurity)
+F = truncTowardZero(signed32(P) / 100)
 ```
 
-这里的 `F` 就是：
-
-> 当前城市在“本次粮食收入 tick”进入丰作 / 征收 / 米道之前的基础粮收入。
-
-所以治安低于50时一律按50计算。
+只有乘积不超过INT32_MAX的非负常规域才可写成无界乘积的floor(/100)。新API支持域的最终乘积最大2758929405，未超过U32上限但可越过signed32边界，故允许负返回，不能clip0；`C1 FA 05`按bytes为SAR EDX,5而非原文SAR DL。返回F仍是局部函数值，不说明真实兵粮已增加或被扣除，外层caller/writer与下游丰作/征收/米道调度未接入。
 
 ### 2.8 主公式顺序
 
@@ -633,13 +629,13 @@ F = floor(
 城市基础粮
 + 普通农场
 + 谷仓对普通农场的1.5倍
-+ 军屯农（兵力/10，最低1500）
++ 军屯农（取类型行Y、U32最低15000兵、乘积低32位后unsigned /15000）
 ↓
 难度
 ↓
-治安（最低50）
+治安（最低50、无100上限，signed32解释后向零/100）
 ↓
-F
+F（局部返回；以下为另有证据边界的外层链）
 ↓
 丰作
 ↓
