@@ -1,0 +1,2929 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profileId",
+    "scope",
+    "evidence",
+    "source",
+    "license",
+    "originalListing",
+    "unlistedGap",
+    "tables",
+    "inputSchema",
+    "supportDomain",
+    "assumptions",
+    "excluded",
+    "resultSchema"
+  ],
+  "properties": {
+    "profileId": {
+      "type": "string",
+      "const": "city-food-income-stable-resolved-non-easy-u32-v1"
+    },
+    "scope": {
+      "type": "string",
+      "const": "Pure local non-Easy city-food return-value projection with stable resolved observations and exact U32/signed32 semantics; not income posting or scheduling"
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "profile",
+        "source",
+        "originalRange",
+        "fullCallerBytesVerified",
+        "entryGatesIntegrated",
+        "stableResolvedInputsRequired",
+        "stockOriginalVerified",
+        "originalExecutableExecuted",
+        "nativeHelpersReconstructed",
+        "abiVerified",
+        "realTraceReachabilityVerified",
+        "typeTableStockVerified",
+        "adjacencyHelperRecovered",
+        "easyBranchRecovered",
+        "easyBranchSupported",
+        "rngRecovered",
+        "monthlySchedulerIntegrated",
+        "incomeWriterIntegrated",
+        "commandIntegrated",
+        "modBehaviorIncluded"
+      ],
+      "properties": {
+        "level": {
+          "type": "string",
+          "const": "source-listing-reconstruction"
+        },
+        "profile": {
+          "type": "string",
+          "const": "city-food-income-stable-resolved-non-easy-u32-v1"
+        },
+        "source": {
+          "type": "string",
+          "const": "docs/sources/city-food-income-projection.json"
+        },
+        "originalRange": {
+          "type": "string",
+          "const": "0049E810 <= PC < 0049E9FE"
+        },
+        "fullCallerBytesVerified": {
+          "type": "boolean",
+          "const": true
+        },
+        "entryGatesIntegrated": {
+          "type": "boolean",
+          "const": false
+        },
+        "stableResolvedInputsRequired": {
+          "type": "boolean",
+          "const": true
+        },
+        "stockOriginalVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "originalExecutableExecuted": {
+          "type": "boolean",
+          "const": false
+        },
+        "nativeHelpersReconstructed": {
+          "type": "boolean",
+          "const": false
+        },
+        "abiVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "realTraceReachabilityVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "typeTableStockVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "adjacencyHelperRecovered": {
+          "type": "boolean",
+          "const": false
+        },
+        "easyBranchRecovered": {
+          "type": "boolean",
+          "const": false
+        },
+        "easyBranchSupported": {
+          "type": "boolean",
+          "const": false
+        },
+        "rngRecovered": {
+          "type": "boolean",
+          "const": false
+        },
+        "monthlySchedulerIntegrated": {
+          "type": "boolean",
+          "const": false
+        },
+        "incomeWriterIntegrated": {
+          "type": "boolean",
+          "const": false
+        },
+        "commandIntegrated": {
+          "type": "boolean",
+          "const": false
+        },
+        "modBehaviorIncluded": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "path",
+        "url",
+        "gitBlobSha1",
+        "snapshot",
+        "snapshotEncoding",
+        "snapshotBytes",
+        "snapshotSha256",
+        "utf8Snapshot",
+        "utf8Bytes",
+        "utf8Sha256",
+        "acquisition"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "const": "sjn4048/311MemoryResearch"
+        },
+        "commit": {
+          "type": "string",
+          "const": "66e167e40c3440929ec016f3872aefc3486434c1"
+        },
+        "path": {
+          "type": "string",
+          "const": "内存资料/整理/Func-收支05-计算城市收粮.txt"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-收支05-计算城市收粮.txt"
+        },
+        "gitBlobSha1": {
+          "type": "string",
+          "const": "79e949349af8be94b77eb70f37a948b8d3ff2f6a"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/city-food-income-projection-original.gbk"
+        },
+        "snapshotEncoding": {
+          "type": "string",
+          "const": "GBK"
+        },
+        "snapshotBytes": {
+          "type": "integer",
+          "const": 17016
+        },
+        "snapshotSha256": {
+          "type": "string",
+          "const": "ef5c0c6431e167389d76c84693e4807ffdc078f94807509c73dcb24690e39947"
+        },
+        "utf8Snapshot": {
+          "type": "string",
+          "const": "docs/sources/city-food-income-projection-original.txt"
+        },
+        "utf8Bytes": {
+          "type": "integer",
+          "const": 18184
+        },
+        "utf8Sha256": {
+          "type": "string",
+          "const": "5751f8775b63410459c7ad035177df11ee08b245222c38c1f74ac0bf42f1fa78"
+        },
+        "acquisition": {
+          "type": "string",
+          "const": "Copied the fixed audit snapshot locally; reversibly reconstructed GBK matches the pinned Git blob. No new executable extraction or runtime observation."
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spdx",
+        "snapshot",
+        "sha256",
+        "url",
+        "attribution"
+      ],
+      "properties": {
+        "spdx": {
+          "type": "string",
+          "const": "Apache-2.0"
+        },
+        "snapshot": {
+          "type": "string",
+          "const": "docs/sources/production-price-LICENSE.txt"
+        },
+        "sha256": {
+          "type": "string",
+          "const": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        "url": {
+          "type": "string",
+          "const": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE"
+        },
+        "attribution": {
+          "type": "string",
+          "const": "sjn4048/311MemoryResearch"
+        }
+      }
+    },
+    "originalListing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "endExclusive",
+        "instructionCount",
+        "byteLength",
+        "sha256",
+        "bytesHex",
+        "implementedEntry",
+        "entryGatesImplemented",
+        "externalCallsExecuted"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "const": "0049E810"
+        },
+        "endExclusive": {
+          "type": "string",
+          "const": "0049E9FE"
+        },
+        "instructionCount": {
+          "type": "integer",
+          "const": 160
+        },
+        "byteLength": {
+          "type": "integer",
+          "const": 494
+        },
+        "sha256": {
+          "type": "string",
+          "const": "176854e5670c2e5f5957f2de3ec06529ad69668c1548e94923a849a87db850b0"
+        },
+        "bytesHex": {
+          "type": "string",
+          "const": "83ec0c568b74241456894c2410e80ebefdff83c40485c00f84c80100008b068bceff504085c00f8cb901000083f82e0f8fb0010000550fb7ae8000000081c6f400000053896c24108974240cc74424101e000000578b4c24108b3957e8bfbdfdff83c40485c00f84d20000008b77088d46e083f8150f87c30000000fb69010ea4900ff249500ea49008b471485c00f84aa00000083feff0f84a100000056b958192007e8d822ffff8bd853e870bdfdff83c40485c00f848300000083fe200fb79bc0000000740a83fe34740583fe3575418b078bcfff503c8b086a27518b4c2420e80afcffff85c074288d045b992bc2d1f803e8eb488b471485c07597be20000000eb998b471485c07589be34000000eb8b83fe3175258b5424208b4a4081f9983a00007305b9983a00000fafcbb873b2e745f7e1c1ea0c03eaeb0203eb8b4c24108b44241483c10848894c2410894424140f85fdfeffffa17819200783e8005f896c24105b743d83e80275498b4c24188b01ff504885c08bcdb81f85eb5175136bc97df7e9c1fa058bcac1e91f03ca8be9eb226bc94bf7e9c1fa058bc2c1e81f03c2eb0fdb44240cd80d687b7e00e8b09026008be88b4c24188a81850000003c327302b0320fb6c80fafcdb81f85eb51f7e9c1fa058bc2c1e81f5d03c25e83c40cc2040033c05e83c40cc20400"
+        },
+        "implementedEntry": {
+          "type": "string",
+          "const": "0049E845"
+        },
+        "entryGatesImplemented": {
+          "type": "boolean",
+          "const": false
+        },
+        "externalCallsExecuted": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "unlistedGap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "endExclusive",
+        "byteLength",
+        "bytesKnown",
+        "paddingInserted"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "const": "0049E9FE"
+        },
+        "endExclusive": {
+          "type": "string",
+          "const": "0049EA00"
+        },
+        "byteLength": {
+          "type": "integer",
+          "const": 2
+        },
+        "bytesKnown": {
+          "type": "boolean",
+          "const": false
+        },
+        "paddingInserted": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "tables": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "jump",
+        "dispatch",
+        "handlers"
+      ],
+      "properties": {
+        "jump": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "endExclusive",
+            "byteLength",
+            "sha256",
+            "bytesHex"
+          ],
+          "properties": {
+            "start": {
+              "type": "string",
+              "const": "0049EA00"
+            },
+            "endExclusive": {
+              "type": "string",
+              "const": "0049EA10"
+            },
+            "byteLength": {
+              "type": "integer",
+              "const": 16
+            },
+            "sha256": {
+              "type": "string",
+              "const": "da490597343aadca41cdce8ddccac3c3bc6cf4918927a48017b3fb47b239e2ca"
+            },
+            "bytesHex": {
+              "type": "string",
+              "const": "99e8490006e9490014e949004ee94900"
+            }
+          }
+        },
+        "dispatch": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "endExclusive",
+            "byteLength",
+            "sha256",
+            "bytesHex"
+          ],
+          "properties": {
+            "start": {
+              "type": "string",
+              "const": "0049EA10"
+            },
+            "endExclusive": {
+              "type": "string",
+              "const": "0049EA26"
+            },
+            "byteLength": {
+              "type": "integer",
+              "const": 22
+            },
+            "sha256": {
+              "type": "string",
+              "const": "1ce093453d63cd6b18ffd8aea0004a08b709cc5559325d05c5ad422b58c3f9f6"
+            },
+            "bytesHex": {
+              "type": "string",
+              "const": "00030303030303030303030303030303030003030102"
+            }
+          }
+        },
+        "handlers": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "32",
+            "49",
+            "52",
+            "53",
+            "other"
+          ],
+          "properties": {
+            "32": {
+              "type": "string",
+              "const": "0049E899"
+            },
+            "49": {
+              "type": "string",
+              "const": "0049E899"
+            },
+            "52": {
+              "type": "string",
+              "const": "0049E906"
+            },
+            "53": {
+              "type": "string",
+              "const": "0049E914"
+            },
+            "other": {
+              "type": "string",
+              "const": "0049E94E"
+            }
+          }
+        }
+      }
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "additionalProperties",
+        "required",
+        "properties",
+        "allOf"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "object"
+        },
+        "additionalProperties": {
+          "type": "boolean",
+          "const": false
+        },
+        "required": {
+          "type": "array",
+          "const": [
+            "profile",
+            "baseFoodWord",
+            "slots",
+            "resolvedTypeRows",
+            "difficultyWord",
+            "securityByte"
+          ]
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "profile",
+            "baseFoodWord",
+            "slots",
+            "resolvedTypeRows",
+            "cityTroopsWord",
+            "difficultyWord",
+            "cityPlayerPredicate",
+            "securityByte"
+          ],
+          "properties": {
+            "profile": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "const"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "string"
+                },
+                "const": {
+                  "type": "string",
+                  "const": "city-food-income-stable-resolved-non-easy-u32-v1"
+                }
+              }
+            },
+            "baseFoodWord": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "minimum",
+                "maximum"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "integer"
+                },
+                "minimum": {
+                  "type": "integer",
+                  "const": 0
+                },
+                "maximum": {
+                  "type": "integer",
+                  "const": 65535
+                }
+              }
+            },
+            "slots": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "minItems",
+                "maxItems",
+                "items"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "array"
+                },
+                "minItems": {
+                  "type": "integer",
+                  "const": 30
+                },
+                "maxItems": {
+                  "type": "integer",
+                  "const": 30
+                },
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "anyOf"
+                  ],
+                  "properties": {
+                    "anyOf": {
+                      "type": "array",
+                      "const": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "facilityTypeWord",
+                            "constructionWord"
+                          ],
+                          "properties": {
+                            "facilityTypeWord": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 4294967295
+                            },
+                            "constructionWord": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 4294967295
+                            },
+                            "adjacentGranary": {
+                              "type": "boolean"
+                            }
+                          },
+                          "allOf": [
+                            {
+                              "if": {
+                                "anyOf": [
+                                  {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "required": [
+                                          "facilityTypeWord",
+                                          "constructionWord"
+                                        ],
+                                        "properties": {
+                                          "facilityTypeWord": {
+                                            "const": 32
+                                          },
+                                          "constructionWord": {
+                                            "not": {
+                                              "const": 0
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "type": "object",
+                                        "required": [
+                                          "facilityTypeWord",
+                                          "constructionWord"
+                                        ],
+                                        "properties": {
+                                          "facilityTypeWord": {
+                                            "const": 52
+                                          },
+                                          "constructionWord": {
+                                            "const": 0
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "required": [
+                                          "facilityTypeWord",
+                                          "constructionWord"
+                                        ],
+                                        "properties": {
+                                          "facilityTypeWord": {
+                                            "const": 52
+                                          },
+                                          "constructionWord": {
+                                            "not": {
+                                              "const": 0
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "type": "object",
+                                        "required": [
+                                          "facilityTypeWord",
+                                          "constructionWord"
+                                        ],
+                                        "properties": {
+                                          "facilityTypeWord": {
+                                            "const": 53
+                                          },
+                                          "constructionWord": {
+                                            "const": 0
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "type": "object",
+                                    "required": [
+                                      "facilityTypeWord",
+                                      "constructionWord"
+                                    ],
+                                    "properties": {
+                                      "facilityTypeWord": {
+                                        "const": 53
+                                      },
+                                      "constructionWord": {
+                                        "not": {
+                                          "const": 0
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              },
+                              "else": {
+                                "not": {
+                                  "required": [
+                                    "adjacentGranary"
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "resolvedTypeRows": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "additionalProperties",
+                "required",
+                "properties"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "object"
+                },
+                "additionalProperties": {
+                  "type": "boolean",
+                  "const": false
+                },
+                "required": {
+                  "type": "array",
+                  "const": []
+                },
+                "properties": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "32",
+                    "49",
+                    "52",
+                    "53"
+                  ],
+                  "properties": {
+                    "32": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "oneOf"
+                      ],
+                      "properties": {
+                        "oneOf": {
+                          "type": "array",
+                          "const": [
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "valid",
+                                "foodYieldWord"
+                              ],
+                              "properties": {
+                                "valid": {
+                                  "type": "boolean",
+                                  "const": true
+                                },
+                                "foodYieldWord": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 65535
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "valid"
+                              ],
+                              "properties": {
+                                "valid": {
+                                  "type": "boolean",
+                                  "const": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "49": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "oneOf"
+                      ],
+                      "properties": {
+                        "oneOf": {
+                          "type": "array",
+                          "const": [
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "valid",
+                                "foodYieldWord"
+                              ],
+                              "properties": {
+                                "valid": {
+                                  "type": "boolean",
+                                  "const": true
+                                },
+                                "foodYieldWord": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 65535
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "valid"
+                              ],
+                              "properties": {
+                                "valid": {
+                                  "type": "boolean",
+                                  "const": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "52": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "oneOf"
+                      ],
+                      "properties": {
+                        "oneOf": {
+                          "type": "array",
+                          "const": [
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "valid",
+                                "foodYieldWord"
+                              ],
+                              "properties": {
+                                "valid": {
+                                  "type": "boolean",
+                                  "const": true
+                                },
+                                "foodYieldWord": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 65535
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "valid"
+                              ],
+                              "properties": {
+                                "valid": {
+                                  "type": "boolean",
+                                  "const": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "53": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "oneOf"
+                      ],
+                      "properties": {
+                        "oneOf": {
+                          "type": "array",
+                          "const": [
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "valid",
+                                "foodYieldWord"
+                              ],
+                              "properties": {
+                                "valid": {
+                                  "type": "boolean",
+                                  "const": true
+                                },
+                                "foodYieldWord": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 65535
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "valid"
+                              ],
+                              "properties": {
+                                "valid": {
+                                  "type": "boolean",
+                                  "const": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "cityTroopsWord": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "minimum",
+                "maximum"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "integer"
+                },
+                "minimum": {
+                  "type": "integer",
+                  "const": 0
+                },
+                "maximum": {
+                  "type": "integer",
+                  "const": 4294967295
+                }
+              }
+            },
+            "difficultyWord": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "minimum",
+                "maximum"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "integer"
+                },
+                "minimum": {
+                  "type": "integer",
+                  "const": 1
+                },
+                "maximum": {
+                  "type": "integer",
+                  "const": 4294967295
+                }
+              }
+            },
+            "cityPlayerPredicate": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "boolean"
+                }
+              }
+            },
+            "securityByte": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "minimum",
+                "maximum"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "integer"
+                },
+                "minimum": {
+                  "type": "integer",
+                  "const": 0
+                },
+                "maximum": {
+                  "type": "integer",
+                  "const": 255
+                }
+              }
+            }
+          }
+        },
+        "allOf": {
+          "type": "array",
+          "const": [
+            {
+              "if": {
+                "properties": {
+                  "difficultyWord": {
+                    "const": 2
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "cityPlayerPredicate"
+                ]
+              },
+              "else": {
+                "not": {
+                  "required": [
+                    "cityPlayerPredicate"
+                  ]
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "slots": {
+                    "contains": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "facilityTypeWord",
+                            "constructionWord"
+                          ],
+                          "properties": {
+                            "facilityTypeWord": {
+                              "const": 32
+                            },
+                            "constructionWord": {
+                              "not": {
+                                "const": 0
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "facilityTypeWord",
+                            "constructionWord"
+                          ],
+                          "properties": {
+                            "facilityTypeWord": {
+                              "const": 52
+                            },
+                            "constructionWord": {
+                              "const": 0
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "resolvedTypeRows": {
+                    "required": [
+                      "32"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "resolvedTypeRows": {
+                    "required": [
+                      "32"
+                    ],
+                    "properties": {
+                      "32": {
+                        "required": [
+                          "valid"
+                        ],
+                        "properties": {
+                          "valid": {
+                            "const": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "slots": {
+                    "items": {
+                      "if": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "required": [
+                              "facilityTypeWord",
+                              "constructionWord"
+                            ],
+                            "properties": {
+                              "facilityTypeWord": {
+                                "const": 32
+                              },
+                              "constructionWord": {
+                                "not": {
+                                  "const": 0
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "facilityTypeWord",
+                              "constructionWord"
+                            ],
+                            "properties": {
+                              "facilityTypeWord": {
+                                "const": 52
+                              },
+                              "constructionWord": {
+                                "const": 0
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "then": {
+                        "required": [
+                          "adjacentGranary"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "slots": {
+                    "items": {
+                      "if": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "required": [
+                              "facilityTypeWord",
+                              "constructionWord"
+                            ],
+                            "properties": {
+                              "facilityTypeWord": {
+                                "const": 32
+                              },
+                              "constructionWord": {
+                                "not": {
+                                  "const": 0
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "facilityTypeWord",
+                              "constructionWord"
+                            ],
+                            "properties": {
+                              "facilityTypeWord": {
+                                "const": 52
+                              },
+                              "constructionWord": {
+                                "const": 0
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "then": {
+                        "not": {
+                          "required": [
+                            "adjacentGranary"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "slots": {
+                    "contains": {
+                      "type": "object",
+                      "required": [
+                        "facilityTypeWord",
+                        "constructionWord"
+                      ],
+                      "properties": {
+                        "facilityTypeWord": {
+                          "const": 49
+                        },
+                        "constructionWord": {
+                          "not": {
+                            "const": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "resolvedTypeRows": {
+                    "required": [
+                      "49"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "slots": {
+                    "contains": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "facilityTypeWord",
+                            "constructionWord"
+                          ],
+                          "properties": {
+                            "facilityTypeWord": {
+                              "const": 52
+                            },
+                            "constructionWord": {
+                              "not": {
+                                "const": 0
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "facilityTypeWord",
+                            "constructionWord"
+                          ],
+                          "properties": {
+                            "facilityTypeWord": {
+                              "const": 53
+                            },
+                            "constructionWord": {
+                              "const": 0
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "resolvedTypeRows": {
+                    "required": [
+                      "52"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "resolvedTypeRows": {
+                    "required": [
+                      "52"
+                    ],
+                    "properties": {
+                      "52": {
+                        "required": [
+                          "valid"
+                        ],
+                        "properties": {
+                          "valid": {
+                            "const": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "slots": {
+                    "items": {
+                      "if": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "required": [
+                              "facilityTypeWord",
+                              "constructionWord"
+                            ],
+                            "properties": {
+                              "facilityTypeWord": {
+                                "const": 52
+                              },
+                              "constructionWord": {
+                                "not": {
+                                  "const": 0
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "facilityTypeWord",
+                              "constructionWord"
+                            ],
+                            "properties": {
+                              "facilityTypeWord": {
+                                "const": 53
+                              },
+                              "constructionWord": {
+                                "const": 0
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "then": {
+                        "required": [
+                          "adjacentGranary"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "slots": {
+                    "items": {
+                      "if": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "required": [
+                              "facilityTypeWord",
+                              "constructionWord"
+                            ],
+                            "properties": {
+                              "facilityTypeWord": {
+                                "const": 52
+                              },
+                              "constructionWord": {
+                                "not": {
+                                  "const": 0
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "facilityTypeWord",
+                              "constructionWord"
+                            ],
+                            "properties": {
+                              "facilityTypeWord": {
+                                "const": 53
+                              },
+                              "constructionWord": {
+                                "const": 0
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "then": {
+                        "not": {
+                          "required": [
+                            "adjacentGranary"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "slots": {
+                    "contains": {
+                      "type": "object",
+                      "required": [
+                        "facilityTypeWord",
+                        "constructionWord"
+                      ],
+                      "properties": {
+                        "facilityTypeWord": {
+                          "const": 53
+                        },
+                        "constructionWord": {
+                          "not": {
+                            "const": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "resolvedTypeRows": {
+                    "required": [
+                      "53"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "resolvedTypeRows": {
+                    "required": [
+                      "53"
+                    ],
+                    "properties": {
+                      "53": {
+                        "required": [
+                          "valid"
+                        ],
+                        "properties": {
+                          "valid": {
+                            "const": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "slots": {
+                    "items": {
+                      "if": {
+                        "type": "object",
+                        "required": [
+                          "facilityTypeWord",
+                          "constructionWord"
+                        ],
+                        "properties": {
+                          "facilityTypeWord": {
+                            "const": 53
+                          },
+                          "constructionWord": {
+                            "not": {
+                              "const": 0
+                            }
+                          }
+                        }
+                      },
+                      "then": {
+                        "required": [
+                          "adjacentGranary"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "slots": {
+                    "items": {
+                      "if": {
+                        "type": "object",
+                        "required": [
+                          "facilityTypeWord",
+                          "constructionWord"
+                        ],
+                        "properties": {
+                          "facilityTypeWord": {
+                            "const": 53
+                          },
+                          "constructionWord": {
+                            "not": {
+                              "const": 0
+                            }
+                          }
+                        }
+                      },
+                      "then": {
+                        "not": {
+                          "required": [
+                            "adjacentGranary"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "resolvedTypeRows": {
+                        "required": [
+                          "49"
+                        ],
+                        "properties": {
+                          "49": {
+                            "required": [
+                              "valid"
+                            ],
+                            "properties": {
+                              "valid": {
+                                "const": true
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "slots": {
+                        "contains": {
+                          "type": "object",
+                          "required": [
+                            "facilityTypeWord",
+                            "constructionWord"
+                          ],
+                          "properties": {
+                            "facilityTypeWord": {
+                              "const": 49
+                            },
+                            "constructionWord": {
+                              "not": {
+                                "const": 0
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "then": {
+                "required": [
+                  "cityTroopsWord"
+                ]
+              },
+              "else": {
+                "not": {
+                  "required": [
+                    "cityTroopsWord"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "supportDomain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slots",
+        "rowTypes",
+        "rawFoodMaximum",
+        "militaryContributionMaximum",
+        "securityProductMaximum",
+        "easyDifficultyUnsupported",
+        "negativeSignedReturnsSupported",
+        "militaryModuloBeforeUnsignedDivision",
+        "finalSignedDivisionTruncatesTowardZero",
+        "defaultTypeYieldsProvided"
+      ],
+      "properties": {
+        "slots": {
+          "type": "integer",
+          "const": 30
+        },
+        "rowTypes": {
+          "type": "array",
+          "const": [
+            32,
+            49,
+            52,
+            53
+          ]
+        },
+        "rawFoodMaximum": {
+          "type": "integer",
+          "const": 8655465
+        },
+        "militaryContributionMaximum": {
+          "type": "integer",
+          "const": 286331
+        },
+        "securityProductMaximum": {
+          "type": "integer",
+          "const": 2758929405
+        },
+        "easyDifficultyUnsupported": {
+          "type": "boolean",
+          "const": true
+        },
+        "negativeSignedReturnsSupported": {
+          "type": "boolean",
+          "const": true
+        },
+        "militaryModuloBeforeUnsignedDivision": {
+          "type": "boolean",
+          "const": true
+        },
+        "finalSignedDivisionTruncatesTowardZero": {
+          "type": "boolean",
+          "const": true
+        },
+        "defaultTypeYieldsProvided": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "const": [
+        "City and owner entry gates have already passed",
+        "Facilities, rows, predicates and military troop observations are stable across repeated reads",
+        "Callees return normally and preserve caller-required stack and nonvolatile registers; their ABI and side effects are not recovered",
+        "null slot means validator explicitly returned zero, not missing capture",
+        "cityPlayerPredicate represents zero/nonzero of the whole virtual48 EAX, not AL"
+      ]
+    },
+    "excluded": {
+      "type": "array",
+      "const": [
+        "P0-78 and dependent work",
+        "city/owner entry gates",
+        "native getters, validators, row table and map adjacency helper bodies",
+        "Easy x87 constant bytes, helper and control word",
+        "all four MOD sections and inline proposed MODs",
+        "real income writer and full monthly/quarterly scheduler",
+        "harvest, levy, rice-road, ports and gates chains",
+        "RNG, real-save reachability, stock, Vanilla and cross-version certification"
+      ]
+    },
+    "resultSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "$schema",
+        "oneOf",
+        "$defs"
+      ],
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "const": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "oneOf": {
+          "type": "array",
+          "const": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "supported",
+                "profile",
+                "baseFoodWord",
+                "difficultyWord",
+                "securityByte",
+                "slots",
+                "rawFood",
+                "difficultyPercent",
+                "difficultyAdjusted",
+                "effectiveSecurity",
+                "securityProductRaw",
+                "securityProductU32",
+                "securityProductSigned",
+                "returnedIncomeSigned",
+                "returnedIncomeU32",
+                "evidence"
+              ],
+              "properties": {
+                "supported": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "profile": {
+                  "type": "string",
+                  "const": "city-food-income-stable-resolved-non-easy-u32-v1"
+                },
+                "baseFoodWord": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65535
+                },
+                "difficultyWord": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 4294967295
+                },
+                "securityByte": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 255
+                },
+                "slots": {
+                  "type": "array",
+                  "minItems": 30,
+                  "maxItems": 30,
+                  "items": false,
+                  "prefixItems": [
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 0
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 1
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 2
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 3
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 4
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 5
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 6
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 7
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 8
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 9
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 10
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 11
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 12
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 13
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 14
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 15
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 16
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 17
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 18
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 19
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 20
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 21
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 22
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 23
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 24
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 25
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 26
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 27
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 28
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/slotReceipt"
+                        },
+                        {
+                          "properties": {
+                            "index": {
+                              "const": 29
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "rawFood": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8655465
+                },
+                "difficultyPercent": {
+                  "type": "integer",
+                  "enum": [
+                    75,
+                    100,
+                    125
+                  ]
+                },
+                "difficultyAdjusted": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 10819331
+                },
+                "effectiveSecurity": {
+                  "type": "integer",
+                  "minimum": 50,
+                  "maximum": 255
+                },
+                "securityProductRaw": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2758929405
+                },
+                "securityProductU32": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2758929405
+                },
+                "securityProductSigned": {
+                  "type": "integer",
+                  "minimum": -2147483648,
+                  "maximum": 2147483647
+                },
+                "returnedIncomeSigned": {
+                  "type": "integer",
+                  "minimum": -21474836,
+                  "maximum": 21474836
+                },
+                "returnedIncomeU32": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                },
+                "evidence": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "level",
+                    "profile",
+                    "source",
+                    "originalRange",
+                    "fullCallerBytesVerified",
+                    "entryGatesIntegrated",
+                    "stableResolvedInputsRequired",
+                    "stockOriginalVerified",
+                    "originalExecutableExecuted",
+                    "nativeHelpersReconstructed",
+                    "abiVerified",
+                    "realTraceReachabilityVerified",
+                    "typeTableStockVerified",
+                    "adjacencyHelperRecovered",
+                    "easyBranchRecovered",
+                    "easyBranchSupported",
+                    "rngRecovered",
+                    "monthlySchedulerIntegrated",
+                    "incomeWriterIntegrated",
+                    "commandIntegrated",
+                    "modBehaviorIncluded"
+                  ],
+                  "properties": {
+                    "level": {
+                      "type": "string",
+                      "const": "source-listing-reconstruction"
+                    },
+                    "profile": {
+                      "type": "string",
+                      "const": "city-food-income-stable-resolved-non-easy-u32-v1"
+                    },
+                    "source": {
+                      "type": "string",
+                      "const": "docs/sources/city-food-income-projection.json"
+                    },
+                    "originalRange": {
+                      "type": "string",
+                      "const": "0049E810 <= PC < 0049E9FE"
+                    },
+                    "fullCallerBytesVerified": {
+                      "type": "boolean",
+                      "const": true
+                    },
+                    "entryGatesIntegrated": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "stableResolvedInputsRequired": {
+                      "type": "boolean",
+                      "const": true
+                    },
+                    "stockOriginalVerified": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "originalExecutableExecuted": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "nativeHelpersReconstructed": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "abiVerified": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "realTraceReachabilityVerified": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "typeTableStockVerified": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "adjacencyHelperRecovered": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "easyBranchRecovered": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "easyBranchSupported": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "rngRecovered": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "monthlySchedulerIntegrated": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "incomeWriterIntegrated": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "commandIntegrated": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "modBehaviorIncluded": {
+                      "type": "boolean",
+                      "const": false
+                    }
+                  }
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "difficultyWord": {
+                        "const": 2
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "difficultyPercent": {
+                        "enum": [
+                          75,
+                          125
+                        ]
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "difficultyPercent": {
+                        "const": 100
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "supported",
+                "reason",
+                "evidence"
+              ],
+              "properties": {
+                "supported": {
+                  "type": "boolean",
+                  "const": false
+                },
+                "reason": {
+                  "type": "string",
+                  "enum": [
+                    "invalid-input",
+                    "unexpected-field",
+                    "unsupported-profile",
+                    "missing-type-row",
+                    "missing-adjacent-granary",
+                    "missing-city-troops",
+                    "unsupported-easy-branch"
+                  ]
+                },
+                "evidence": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "level",
+                    "profile",
+                    "source",
+                    "originalRange",
+                    "fullCallerBytesVerified",
+                    "entryGatesIntegrated",
+                    "stableResolvedInputsRequired",
+                    "stockOriginalVerified",
+                    "originalExecutableExecuted",
+                    "nativeHelpersReconstructed",
+                    "abiVerified",
+                    "realTraceReachabilityVerified",
+                    "typeTableStockVerified",
+                    "adjacencyHelperRecovered",
+                    "easyBranchRecovered",
+                    "easyBranchSupported",
+                    "rngRecovered",
+                    "monthlySchedulerIntegrated",
+                    "incomeWriterIntegrated",
+                    "commandIntegrated",
+                    "modBehaviorIncluded"
+                  ],
+                  "properties": {
+                    "level": {
+                      "type": "string",
+                      "const": "source-listing-reconstruction"
+                    },
+                    "profile": {
+                      "type": "string",
+                      "const": "city-food-income-stable-resolved-non-easy-u32-v1"
+                    },
+                    "source": {
+                      "type": "string",
+                      "const": "docs/sources/city-food-income-projection.json"
+                    },
+                    "originalRange": {
+                      "type": "string",
+                      "const": "0049E810 <= PC < 0049E9FE"
+                    },
+                    "fullCallerBytesVerified": {
+                      "type": "boolean",
+                      "const": true
+                    },
+                    "entryGatesIntegrated": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "stableResolvedInputsRequired": {
+                      "type": "boolean",
+                      "const": true
+                    },
+                    "stockOriginalVerified": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "originalExecutableExecuted": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "nativeHelpersReconstructed": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "abiVerified": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "realTraceReachabilityVerified": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "typeTableStockVerified": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "adjacencyHelperRecovered": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "easyBranchRecovered": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "easyBranchSupported": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "rngRecovered": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "monthlySchedulerIntegrated": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "incomeWriterIntegrated": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "commandIntegrated": {
+                      "type": "boolean",
+                      "const": false
+                    },
+                    "modBehaviorIncluded": {
+                      "type": "boolean",
+                      "const": false
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "$defs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "slotReceipt"
+          ],
+          "properties": {
+            "slotReceipt": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "additionalProperties",
+                "required",
+                "properties",
+                "allOf"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "object"
+                },
+                "additionalProperties": {
+                  "type": "boolean",
+                  "const": false
+                },
+                "required": {
+                  "type": "array",
+                  "const": [
+                    "index",
+                    "facilityTypeWord",
+                    "effectiveType",
+                    "status",
+                    "foodYieldWord",
+                    "granaryApplied",
+                    "effectiveTroops",
+                    "militaryProductRaw",
+                    "militaryProductU32",
+                    "contribution"
+                  ]
+                },
+                "properties": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "index",
+                    "facilityTypeWord",
+                    "effectiveType",
+                    "status",
+                    "foodYieldWord",
+                    "granaryApplied",
+                    "effectiveTroops",
+                    "militaryProductRaw",
+                    "militaryProductU32",
+                    "contribution"
+                  ],
+                  "properties": {
+                    "index": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "minimum",
+                        "maximum"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "integer"
+                        },
+                        "minimum": {
+                          "type": "integer",
+                          "const": 0
+                        },
+                        "maximum": {
+                          "type": "integer",
+                          "const": 29
+                        }
+                      }
+                    },
+                    "facilityTypeWord": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "anyOf"
+                      ],
+                      "properties": {
+                        "anyOf": {
+                          "type": "array",
+                          "const": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 4294967295
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "effectiveType": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "anyOf"
+                      ],
+                      "properties": {
+                        "anyOf": {
+                          "type": "array",
+                          "const": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "integer",
+                              "enum": [
+                                32,
+                                49,
+                                52,
+                                53
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "status": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "enum"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "string"
+                        },
+                        "enum": {
+                          "type": "array",
+                          "const": [
+                            "invalid-slot",
+                            "ignored-type",
+                            "unfinished",
+                            "invalid-type-row",
+                            "yield"
+                          ]
+                        }
+                      }
+                    },
+                    "foodYieldWord": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "anyOf"
+                      ],
+                      "properties": {
+                        "anyOf": {
+                          "type": "array",
+                          "const": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 65535
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "granaryApplied": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "boolean"
+                        }
+                      }
+                    },
+                    "effectiveTroops": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "anyOf"
+                      ],
+                      "properties": {
+                        "anyOf": {
+                          "type": "array",
+                          "const": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "integer",
+                              "minimum": 15000,
+                              "maximum": 4294967295
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "militaryProductRaw": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "anyOf"
+                      ],
+                      "properties": {
+                        "anyOf": {
+                          "type": "array",
+                          "const": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 281470681677825
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "militaryProductU32": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "anyOf"
+                      ],
+                      "properties": {
+                        "anyOf": {
+                          "type": "array",
+                          "const": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 4294967295
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "contribution": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "minimum",
+                        "maximum"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "integer"
+                        },
+                        "minimum": {
+                          "type": "integer",
+                          "const": 0
+                        },
+                        "maximum": {
+                          "type": "integer",
+                          "const": 286331
+                        }
+                      }
+                    }
+                  }
+                },
+                "allOf": {
+                  "type": "array",
+                  "const": [
+                    {
+                      "if": {
+                        "properties": {
+                          "status": {
+                            "const": "invalid-slot"
+                          }
+                        }
+                      },
+                      "then": {
+                        "properties": {
+                          "facilityTypeWord": {
+                            "type": "null"
+                          }
+                        }
+                      },
+                      "else": {
+                        "properties": {
+                          "facilityTypeWord": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 4294967295
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": {
+                          "status": {
+                            "enum": [
+                              "yield",
+                              "invalid-type-row"
+                            ]
+                          }
+                        }
+                      },
+                      "then": {
+                        "properties": {
+                          "effectiveType": {
+                            "type": "integer",
+                            "enum": [
+                              32,
+                              49,
+                              52,
+                              53
+                            ]
+                          }
+                        }
+                      },
+                      "else": {
+                        "properties": {
+                          "effectiveType": {
+                            "type": "null"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": {
+                          "status": {
+                            "const": "yield"
+                          }
+                        }
+                      },
+                      "then": {
+                        "properties": {
+                          "foodYieldWord": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 65535
+                          }
+                        }
+                      },
+                      "else": {
+                        "properties": {
+                          "foodYieldWord": {
+                            "type": "null"
+                          },
+                          "granaryApplied": {
+                            "const": false
+                          },
+                          "contribution": {
+                            "const": 0
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": {
+                          "effectiveType": {
+                            "const": 49
+                          },
+                          "status": {
+                            "const": "yield"
+                          }
+                        }
+                      },
+                      "then": {
+                        "properties": {
+                          "effectiveTroops": {
+                            "type": "integer",
+                            "minimum": 15000,
+                            "maximum": 4294967295
+                          },
+                          "militaryProductRaw": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 281470681677825
+                          },
+                          "militaryProductU32": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 4294967295
+                          },
+                          "granaryApplied": {
+                            "const": false
+                          }
+                        }
+                      },
+                      "else": {
+                        "properties": {
+                          "effectiveTroops": {
+                            "type": "null"
+                          },
+                          "militaryProductRaw": {
+                            "type": "null"
+                          },
+                          "militaryProductU32": {
+                            "type": "null"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
