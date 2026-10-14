@@ -111,4 +111,6 @@ python -B scripts/oracle_city_food_income.py --mutants
 
 Easy路径的007E7B68常量原始bytes、00707A74完整helper、x87控制字/异常/转换没有闭合，因此difficulty0全拒绝。原文四组MOD（军屯吃谷仓、全局谷仓、变法2倍、屯田额外军屯）和inline E8D5建议均不启用，原固定30槽不扩大。
 
+[独立返回尾部模块](base-income-return-tail.md)仅补捕获city返回EAX和晚期raw type的向零/5标量步骤，不调用本API、不据此认证港关母城/ownership/callee/ABI或真实入账。
+
 仍open：city/owner门槛、getter/validator/ABI及可变读取、原类型表/地图邻接helper、Easy、丰作/征收/米道/港关、真实入账writer、完整月度/季度scheduler、RNG/真实存档、stock/Vanilla/主机与跨版本。没有减少原43组主题，没有恢复P0-78及依赖，也没有重新运行或挪用旧城市金钱179原run。

@@ -104,4 +104,4 @@ R=200000 可由 base=3395 加三个无造币 yield=65535 槽在字段位宽内�
 - oracle 支持 `--output report.json` 保存当次实际报告。执行结果与具体数量以该候选树产生的报告为准；身份守卫变异数量不能冒充行为 mutant 数量，本文件的公式单测也不是独立字节 oracle
 - 最终合并树必须另跑完整正式回归；本项局部通过不能替代旧验收，也不代表所有 rawMoney/设施组合 Cartesian 穷举
 
-未实现：城市和 owner getter/validator、stock 原始类型表认证、邻接 helper、收入特技、入账 writer、月初/每旬 scheduler、港关母城与 20% 份额、粮食与费用、完整经济命令、状态/RNG/native 事务。
+未实现：城市和 owner getter/validator、stock 原始类型表认证、邻接 helper、收入特技、入账 writer、月初/每旬 scheduler、港关母城与完整收入路径、费用、完整经济命令、状态/RNG/native 事务。20%份额的捕获EAX+晚期type纯标量尾部由[独立返回尾部模块](base-income-return-tail.md)部分补充；本尾部API保持全U32支持域，不依赖本city API的较窄支持域，也不代表港关完整caller闭合。粮食city投影另见[粮食模块](city-food-income-projection.md)。
