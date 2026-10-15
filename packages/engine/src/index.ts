@@ -41,3 +41,5 @@ export { CITY_FOOD_INCOME_PROJECTION, calculateCityFoodIncomeProjection } from '
 export type { CityFoodIncomeType, CityFoodIncomeSlot, CityFoodIncomeTypeRow, CityFoodIncomeProjectionInput, CityFoodIncomeProjectionRejectionReason, CityFoodIncomeProjectionRejection, CityFoodIncomeSlotReceipt, CityFoodIncomeProjectionReceipt, CityFoodIncomeProjectionResult } from './city-food-income-projection.ts';
 export { BASE_INCOME_RETURN_TAIL, calculateBaseIncomeReturnTail } from './base-income-return-tail.ts';
 export type { BaseIncomeReturnTailInput, BaseIncomeReturnTailRejectionReason, BaseIncomeReturnTailDivision, BaseIncomeReturnTailRejection, BaseIncomeReturnTailReceipt, BaseIncomeReturnTailResult } from './base-income-return-tail.ts';
+export { MONTHLY_CITY_FOOD_BASE_ARGUMENT, calculateMonthlyCityFoodBaseArgument } from './monthly-city-food-base-argument.ts';
+export type { MonthlyCityFoodBaseArgumentInput, MonthlyCityFoodBaseArgumentRejectionReason, MonthlyCityFoodHarvestTriple, MonthlyCityFoodBaseArgumentRejection, MonthlyCityFoodBaseArgumentReceipt, MonthlyCityFoodBaseArgumentResult } from './monthly-city-food-base-argument.ts';

@@ -3633,3 +3633,8 @@ C10 已确认：
   https://w.atwiki.jp/sangokushi11/pages/970.html
 - 早期无印丰作 flag bug 记录
   https://w.atwiki.jp/sangokushi11/pages/1828.html
+
+
+### 2026-10-14 独立月度城市粮食参数叶工程覆盖
+
+[monthly-city-food-base-argument](monthly-city-food-base-argument.md)只覆盖005905E0..00590603的harvest后levy参数变换与PUSH EDI选择：完整DWORD条件，LEA三倍先low32，两个signed向零/2。输入为当前EDI/EAX及独立晚期levy观测，不继承早期门槛或helper寄存器保留假设。只补§2.10、§2.12、§3.8已有规则的工程覆盖，不等于实际粮食入账或完整月度处理；C2/C3仍有证据债，原43不减，P0-78及依赖排除。

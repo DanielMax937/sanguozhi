@@ -1,0 +1,822 @@
+{
+  "profileId": "monthly-city-food-base-argument-u32-v1",
+  "scope": "Pure current EDI/EAX and separately observed late levy DWORD harvest-then-levy PUSH EDI argument projection only",
+  "evidence": {
+    "level": "source-listing-reconstruction",
+    "profile": "monthly-city-food-base-argument-u32-v1",
+    "source": "docs/sources/monthly-city-food-base-argument.json",
+    "projectTarget": "PC-PK1.1",
+    "sourceEditionClaim": "PK",
+    "exactSourceVersionVerified": false,
+    "fullListingIdentityVerified": true,
+    "fullCallerExecuted": false,
+    "originalExecutableExecuted": false,
+    "stockOriginalVerified": false,
+    "vanillaVerified": false,
+    "consoleVerified": false,
+    "nativeHelpersReconstructed": false,
+    "abiVerified": false,
+    "gameReachabilityVerified": false,
+    "entryEdiPreservationAssumed": false,
+    "earlyLevyReused": false,
+    "lateLevyObservationRequired": true,
+    "cityCalculatorCalled": false,
+    "baseReturnTailCalled": false,
+    "actualStackModified": false,
+    "incomeWriterIntegrated": false,
+    "ownerForceIntegrated": false,
+    "monthlySchedulerIntegrated": false,
+    "endTurnIntegrated": false,
+    "rngIntegrated": false,
+    "modBehaviorIncluded": false
+  },
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "内存资料/整理/Func-收支03-每月钱粮兵装收支.txt",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/%E5%86%85%E5%AD%98%E8%B5%84%E6%96%99/%E6%95%B4%E7%90%86/Func-%E6%94%B6%E6%94%AF03-%E6%AF%8F%E6%9C%88%E9%92%B1%E7%B2%AE%E5%85%B5%E8%A3%85%E6%94%B6%E6%94%AF.txt",
+    "gitBlob": "028fae66ba44f70716951edd9fae51420780cea0",
+    "gbkBytes": 44283,
+    "gbkSha256": "24c1f4c75185a3aef07aac7f493400bb778f2f071bf4fd8ef3d905457d43d617",
+    "utf8Bytes": 46993,
+    "utf8Sha256": "825c1ff948e122fb15da6baa92c95d978b5ccd664cb0e32a1ff72d70c53a7e7b",
+    "fullListing": {
+      "start": "00590490",
+      "endExclusive": "00590C23",
+      "instructions": 572,
+      "bytes": 1939,
+      "sha256": "e65552b27524fcce9e95e2b3a48a9117a185cd27ad3362cfe0e47dbb9c9ee88b"
+    },
+    "leaf": {
+      "start": "005905E0",
+      "endExclusive": "00590603",
+      "instructions": 16,
+      "bytes": 35,
+      "sha256": "5c6d98631284c667856b19e2319830b143ed291d9ca2e72e3b25d4dafe91749c",
+      "hex": "85c0740a8d047f992bc2d1f88bf88b8424b801000085c074098bc7992bc2d1f88bf857"
+    },
+    "capture": {
+      "entryRegistersAt": "005905E0",
+      "lateLevyReadAt": "005905EE",
+      "lateLevyAddress": "[ESP+1B8]",
+      "readWidthBits": 32,
+      "pushAt": "00590602"
+    }
+  },
+  "license": {
+    "name": "Apache-2.0",
+    "snapshot": "docs/sources/production-time-LICENSE.txt",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+  },
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "profile",
+      "entryFoodEdiU32",
+      "harvestPredicateEaxU32",
+      "lateLevyFlagDwordU32"
+    ],
+    "properties": {
+      "profile": {
+        "const": "monthly-city-food-base-argument-u32-v1"
+      },
+      "entryFoodEdiU32": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      },
+      "harvestPredicateEaxU32": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      },
+      "lateLevyFlagDwordU32": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      }
+    }
+  },
+  "resultSchema": {
+    "oneOf": [
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "supported",
+          "profile",
+          "entryFoodEdiU32",
+          "entryFoodEdiSigned",
+          "harvestPredicateEaxU32",
+          "lateLevyFlagDwordU32",
+          "harvestApplied",
+          "levyApplied",
+          "harvestTriple",
+          "postHarvestU32",
+          "postHarvestSigned",
+          "lateLevyRead",
+          "executedAddresses",
+          "instructionCount",
+          "pushAddress",
+          "continuationAddress",
+          "pushedArgumentU32",
+          "pushedArgumentSigned",
+          "evidence"
+        ],
+        "properties": {
+          "supported": {
+            "type": "boolean",
+            "const": true
+          },
+          "profile": {
+            "type": "string",
+            "const": "monthly-city-food-base-argument-u32-v1"
+          },
+          "entryFoodEdiU32": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "entryFoodEdiSigned": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "harvestPredicateEaxU32": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "lateLevyFlagDwordU32": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "harvestApplied": {
+            "type": "boolean"
+          },
+          "levyApplied": {
+            "type": "boolean"
+          },
+          "harvestTriple": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "unwrappedU64",
+                  "lowU32",
+                  "signed"
+                ],
+                "properties": {
+                  "unwrappedU64": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12884901885
+                  },
+                  "lowU32": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 4294967295
+                  },
+                  "signed": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              }
+            ]
+          },
+          "postHarvestU32": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "postHarvestSigned": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "lateLevyRead": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "address",
+              "widthBits",
+              "count"
+            ],
+            "properties": {
+              "address": {
+                "type": "string",
+                "const": "005905EE"
+              },
+              "widthBits": {
+                "type": "integer",
+                "const": 32
+              },
+              "count": {
+                "type": "integer",
+                "const": 1
+              }
+            }
+          },
+          "executedAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 6,
+            "maxItems": 16
+          },
+          "instructionCount": {
+            "type": "integer",
+            "enum": [
+              6,
+              11,
+              16
+            ]
+          },
+          "pushAddress": {
+            "type": "string",
+            "const": "00590602"
+          },
+          "continuationAddress": {
+            "type": "string",
+            "const": "00590603"
+          },
+          "pushedArgumentU32": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "pushedArgumentSigned": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "level",
+              "profile",
+              "source",
+              "projectTarget",
+              "sourceEditionClaim",
+              "exactSourceVersionVerified",
+              "fullListingIdentityVerified",
+              "fullCallerExecuted",
+              "originalExecutableExecuted",
+              "stockOriginalVerified",
+              "vanillaVerified",
+              "consoleVerified",
+              "nativeHelpersReconstructed",
+              "abiVerified",
+              "gameReachabilityVerified",
+              "entryEdiPreservationAssumed",
+              "earlyLevyReused",
+              "lateLevyObservationRequired",
+              "cityCalculatorCalled",
+              "baseReturnTailCalled",
+              "actualStackModified",
+              "incomeWriterIntegrated",
+              "ownerForceIntegrated",
+              "monthlySchedulerIntegrated",
+              "endTurnIntegrated",
+              "rngIntegrated",
+              "modBehaviorIncluded"
+            ],
+            "properties": {
+              "level": {
+                "type": "string",
+                "const": "source-listing-reconstruction"
+              },
+              "profile": {
+                "type": "string",
+                "const": "monthly-city-food-base-argument-u32-v1"
+              },
+              "source": {
+                "type": "string",
+                "const": "docs/sources/monthly-city-food-base-argument.json"
+              },
+              "projectTarget": {
+                "type": "string",
+                "const": "PC-PK1.1"
+              },
+              "sourceEditionClaim": {
+                "type": "string",
+                "const": "PK"
+              },
+              "exactSourceVersionVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "fullListingIdentityVerified": {
+                "type": "boolean",
+                "const": true
+              },
+              "fullCallerExecuted": {
+                "type": "boolean",
+                "const": false
+              },
+              "originalExecutableExecuted": {
+                "type": "boolean",
+                "const": false
+              },
+              "stockOriginalVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "vanillaVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "consoleVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "nativeHelpersReconstructed": {
+                "type": "boolean",
+                "const": false
+              },
+              "abiVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "gameReachabilityVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "entryEdiPreservationAssumed": {
+                "type": "boolean",
+                "const": false
+              },
+              "earlyLevyReused": {
+                "type": "boolean",
+                "const": false
+              },
+              "lateLevyObservationRequired": {
+                "type": "boolean",
+                "const": true
+              },
+              "cityCalculatorCalled": {
+                "type": "boolean",
+                "const": false
+              },
+              "baseReturnTailCalled": {
+                "type": "boolean",
+                "const": false
+              },
+              "actualStackModified": {
+                "type": "boolean",
+                "const": false
+              },
+              "incomeWriterIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "ownerForceIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "monthlySchedulerIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "endTurnIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "rngIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "modBehaviorIncluded": {
+                "type": "boolean",
+                "const": false
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "harvestPredicateEaxU32": {
+                  "const": 0
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "harvestApplied": {
+                  "const": false
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "harvestApplied": {
+                  "const": true
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "lateLevyFlagDwordU32": {
+                  "const": 0
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "levyApplied": {
+                  "const": false
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "levyApplied": {
+                  "const": true
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "harvestApplied": {
+                  "const": false
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "harvestTriple": {
+                  "type": "null"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "harvestTriple": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "unwrappedU64",
+                    "lowU32",
+                    "signed"
+                  ],
+                  "properties": {
+                    "unwrappedU64": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 12884901885
+                    },
+                    "lowU32": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 4294967295
+                    },
+                    "signed": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "harvestApplied": {
+                  "const": false
+                },
+                "levyApplied": {
+                  "const": false
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "executedAddresses": {
+                  "const": [
+                    "005905E0",
+                    "005905E2",
+                    "005905EE",
+                    "005905F5",
+                    "005905F7",
+                    "00590602"
+                  ]
+                },
+                "instructionCount": {
+                  "const": 6
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "harvestApplied": {
+                  "const": false
+                },
+                "levyApplied": {
+                  "const": true
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "executedAddresses": {
+                  "const": [
+                    "005905E0",
+                    "005905E2",
+                    "005905EE",
+                    "005905F5",
+                    "005905F7",
+                    "005905F9",
+                    "005905FB",
+                    "005905FC",
+                    "005905FE",
+                    "00590600",
+                    "00590602"
+                  ]
+                },
+                "instructionCount": {
+                  "const": 11
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "harvestApplied": {
+                  "const": true
+                },
+                "levyApplied": {
+                  "const": false
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "executedAddresses": {
+                  "const": [
+                    "005905E0",
+                    "005905E2",
+                    "005905E4",
+                    "005905E7",
+                    "005905E8",
+                    "005905EA",
+                    "005905EC",
+                    "005905EE",
+                    "005905F5",
+                    "005905F7",
+                    "00590602"
+                  ]
+                },
+                "instructionCount": {
+                  "const": 11
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "harvestApplied": {
+                  "const": true
+                },
+                "levyApplied": {
+                  "const": true
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "executedAddresses": {
+                  "const": [
+                    "005905E0",
+                    "005905E2",
+                    "005905E4",
+                    "005905E7",
+                    "005905E8",
+                    "005905EA",
+                    "005905EC",
+                    "005905EE",
+                    "005905F5",
+                    "005905F7",
+                    "005905F9",
+                    "005905FB",
+                    "005905FC",
+                    "005905FE",
+                    "00590600",
+                    "00590602"
+                  ]
+                },
+                "instructionCount": {
+                  "const": 16
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "supported",
+          "reason",
+          "evidence"
+        ],
+        "properties": {
+          "supported": {
+            "type": "boolean",
+            "const": false
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "invalid-input",
+              "unexpected-field",
+              "unsupported-profile"
+            ]
+          },
+          "evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "level",
+              "profile",
+              "source",
+              "projectTarget",
+              "sourceEditionClaim",
+              "exactSourceVersionVerified",
+              "fullListingIdentityVerified",
+              "fullCallerExecuted",
+              "originalExecutableExecuted",
+              "stockOriginalVerified",
+              "vanillaVerified",
+              "consoleVerified",
+              "nativeHelpersReconstructed",
+              "abiVerified",
+              "gameReachabilityVerified",
+              "entryEdiPreservationAssumed",
+              "earlyLevyReused",
+              "lateLevyObservationRequired",
+              "cityCalculatorCalled",
+              "baseReturnTailCalled",
+              "actualStackModified",
+              "incomeWriterIntegrated",
+              "ownerForceIntegrated",
+              "monthlySchedulerIntegrated",
+              "endTurnIntegrated",
+              "rngIntegrated",
+              "modBehaviorIncluded"
+            ],
+            "properties": {
+              "level": {
+                "type": "string",
+                "const": "source-listing-reconstruction"
+              },
+              "profile": {
+                "type": "string",
+                "const": "monthly-city-food-base-argument-u32-v1"
+              },
+              "source": {
+                "type": "string",
+                "const": "docs/sources/monthly-city-food-base-argument.json"
+              },
+              "projectTarget": {
+                "type": "string",
+                "const": "PC-PK1.1"
+              },
+              "sourceEditionClaim": {
+                "type": "string",
+                "const": "PK"
+              },
+              "exactSourceVersionVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "fullListingIdentityVerified": {
+                "type": "boolean",
+                "const": true
+              },
+              "fullCallerExecuted": {
+                "type": "boolean",
+                "const": false
+              },
+              "originalExecutableExecuted": {
+                "type": "boolean",
+                "const": false
+              },
+              "stockOriginalVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "vanillaVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "consoleVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "nativeHelpersReconstructed": {
+                "type": "boolean",
+                "const": false
+              },
+              "abiVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "gameReachabilityVerified": {
+                "type": "boolean",
+                "const": false
+              },
+              "entryEdiPreservationAssumed": {
+                "type": "boolean",
+                "const": false
+              },
+              "earlyLevyReused": {
+                "type": "boolean",
+                "const": false
+              },
+              "lateLevyObservationRequired": {
+                "type": "boolean",
+                "const": true
+              },
+              "cityCalculatorCalled": {
+                "type": "boolean",
+                "const": false
+              },
+              "baseReturnTailCalled": {
+                "type": "boolean",
+                "const": false
+              },
+              "actualStackModified": {
+                "type": "boolean",
+                "const": false
+              },
+              "incomeWriterIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "ownerForceIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "monthlySchedulerIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "endTurnIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "rngIntegrated": {
+                "type": "boolean",
+                "const": false
+              },
+              "modBehaviorIncluded": {
+                "type": "boolean",
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "assumptions": [
+    "Current EDI and EAX captured at005905E0 after the native predicate call; no EDI preservation assumption",
+    "Late DWORD [ESP+1B8] captured at005905EE separately from the earlier0059059E observation",
+    "All U32 observations accepted synthetically; no game reachability claim"
+  ],
+  "excluded": [
+    "city calculator and base-return API composition",
+    "early levy gate, quarter-start gate and caller reachability",
+    "native predicate behavior and ABI",
+    "real stack, food writer004AE300, caps, committed delta and helper return",
+    "ownership, force, capture and P0-78 dependencies",
+    "monthly scheduler, EndTurn, global state and RNG",
+    "original MOD suggestions",
+    "stock/Vanilla/console certification",
+    "original43 closure; C2/C3 are known-rule engineering debt only"
+  ]
+}
