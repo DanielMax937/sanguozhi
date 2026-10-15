@@ -1,0 +1,79 @@
+{
+  "schema": "san11.detached-food-supply.source-manifest",
+  "version": 1,
+  "implementation": "packages/engine/src/food-supply-lifecycle.ts",
+  "api": "docs/engine/food-supply-lifecycle.md",
+  "sources": [
+    {
+      "path": "docs/rules/20-food-consumption.md",
+      "sha256": "46f486340a8efafdc55cffeb832d1d866f60ba832ec9390365b3be83a511c0cf",
+      "usedScope": "Normal/fire summation, garrison coefficient, port/gate exemption and final truncation; no native scheduler integration."
+    },
+    {
+      "path": "docs/rules/47-food-overlap-starvation-exactness.md",
+      "sha256": "7c3a1b3e6e47191b3bcd00792ba95f2bbc373d6f008f3fc6097bf0f040d28390",
+      "usedScope": "Field multiplier bits, supplied single selector, transport bypass and known 10000/18000 vectors only; starvation and siege loss excluded."
+    },
+    {
+      "path": "docs/rules/21-supply-transport.md",
+      "sha256": "a5e06b9b23c1e2e664c5701062acdf27c431cdbdcb8846df6b43c6d266fe510a",
+      "usedScope": "Manual quantity, resource capacity, matching equipment and weighted morale constraints only; arrival, loss and finalizers excluded."
+    },
+    {
+      "path": "docs/rules/16-unresolved-rules-fallbacks.md",
+      "sha256": "edf607ffed62932a476fa5ad47ff63d45510b9502bb80fc0ec9d75216238eb32",
+      "usedScope": "Section 6.99 manual accepted-min/retained remainder and section 7.0.1 supplied coverage only."
+    },
+    {
+      "path": "docs/sources/food-overlap-starvation-exactness.json",
+      "sha256": "6626556929c1df339768d2003fa8982a19b6582c0f1ec5fac8f8c2f6c12cd44e",
+      "usedScope": "defenseFoodMultipliers, selector, vectors and food scheduler boundary only."
+    },
+    {
+      "path": "docs/sources/supply-transport-finalizer-exactness.json",
+      "sha256": "b7cdfdcd71214c83e14ca9749c4ea3ad2e11de0631bf4f00e3d758b8f3b80341",
+      "usedScope": "wildSupply and moraleMerge only; no transportArrival, transportLoss or actionPoint derivation."
+    }
+  ],
+  "evidenceBoundaries": {
+    "fieldBits": "0x40000000,0x3FD55555,0x3FAAAAAB,0x3F800000 and scale0x3D4CCCCD are current source-level evidence; no clean-stock identity certification.",
+    "evaluation": "BigInt exact rational decoding is an explicit evaluation policy, not an x87 emulator. Garrison1/40 and decimal fire expression use compatibility rational evaluation.",
+    "knownCamp18000": 1499,
+    "normalAndFire": "One conversion after summation, fire based on beginning food.",
+    "morale": "Both floor and nearest-half-up are explicit engineered policies. Native troop fractional helper rounding remains open.",
+    "coverage": "Caller supplies one selector, native winner priority remains open.",
+    "equipmentCapacity": "All equipment capacity slots are caller-provided account policy; no native per-type getter claim.",
+    "ledger": "Accepted min with retained inventory, atomic account deltas and zero-troop retention are detached resource semantics."
+  },
+  "excluded": [
+    "starvation troop loss including0.76",
+    "native departure/arrival/return",
+    "unit creation/death/revival/extinction",
+    "capture/ownership/force extinction",
+    "P078 and dependencies",
+    "native mission finalization",
+    "automatic supply",
+    "AP/merit/experience",
+    "implicit GameState v2 migration"
+  ],
+  "profiles": [
+    {
+      "id": "detached-food-supply-v1",
+      "arithmetic": "source-bits-exact-rational-v1",
+      "coverage": "supplied-single-selector-v1",
+      "morale": "weighted-floor-v1",
+      "transfer": "accepted-min-retain-v1",
+      "zeroTroops": "retain-account-no-unit-lifecycle-v1",
+      "shortage": "report-only-no-troop-loss-v1"
+    },
+    {
+      "id": "detached-food-supply-nearest-half-up-v1",
+      "arithmetic": "source-bits-exact-rational-v1",
+      "coverage": "supplied-single-selector-v1",
+      "morale": "weighted-nearest-half-up-v1",
+      "transfer": "accepted-min-retain-v1",
+      "zeroTroops": "retain-account-no-unit-lifecycle-v1",
+      "shortage": "report-only-no-troop-loss-v1"
+    }
+  ]
+}
