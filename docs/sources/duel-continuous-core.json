@@ -1,17 +1,67 @@
 {
   "schemaVersion": 1,
   "audit": "E14",
-  "target": "PC-PK-oriented generic duel core",
-  "evidenceLevel": "reverse-transcribed-cross-validated",
+  "target": "pinned modern translated-source duel reference; native PC-PK/PK1.1 unverified",
+  "evidenceLevel": "translated-source-reference",
   "provenance": {
     "translatedCore": {
       "repository": "tankyc/sango_infinity",
       "path": "Project/Assets/Sango/Scripts/Game/Duel/Duel.cs",
       "sourceClaim": "translated from s11_sys_duel.h + s11_sys_duel.cpp",
       "notes": [
-        "keeps original-style names and address-region annotations",
-        "generic core extracted before/around later data-driven person hooks"
-      ]
+        "modern remake source self-reports translation from C++; this is not independently authenticated original C++ or native PC-PK/PK1.1 code",
+        "address annotations and limited arithmetic/Wiki matches do not establish full-chain native equivalence",
+        "generic reference uses identity person hooks; later data-driven person exceptions are not original-game evidence",
+        "checker compares manifest literals only; it does not fetch or rehash upstream source at runtime"
+      ],
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "gitBlobSha1": "d0e825097067c58c95c37e067d1c2a2688a74898",
+      "utf8Bytes": 142829,
+      "sha256": "4c72e962a9b5dc07ae6bb26285c1e165a511c8c66d5b669520fd1d5b78e3ef07",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs",
+      "byteDefinition": "Complete saved connector content encoded as UTF-8 with LF; no newline or whitespace normalization",
+      "lineAttribution": {
+        "stanceCoefficients": [
+          276,
+          279
+        ],
+        "calcAttackDamage": [
+          1794,
+          1805
+        ],
+        "calcSpiritGain": [
+          2271,
+          2323
+        ],
+        "calcDamage": [
+          2573,
+          2677
+        ],
+        "rawSpiritInitialization": [
+          2630,
+          2631
+        ],
+        "invulnerableBranch": [
+          2645,
+          2652
+        ],
+        "blockBranch": [
+          2657,
+          2664
+        ],
+        "dodgeBranch": [
+          2665,
+          2673
+        ],
+        "invulnerableActionResult": [
+          2719,
+          2720
+        ],
+        "rawSpiritToRequestedGain": [
+          2790,
+          2801
+        ]
+      }
     },
     "directAddressCorroboration": {
       "repository": "sjn4048/311MemoryResearch",
@@ -26,7 +76,8 @@
         "cdq",
         "idiv ecx"
       ],
-      "semantic": "positive-value integer ratio = trunc(100*numerator/denominator)"
+      "semantic": "positive-value integer ratio = trunc(100*numerator/denominator)",
+      "scope": "limited final integer-ratio instruction fragment; not evidence for the complete duelScore, stance table, or native duel chain"
     }
   },
   "stances": {
@@ -153,6 +204,7 @@
       "n=clamp(n,10,99)"
     ],
     "resolutionOrder": [
+      "invulnerable returns blocked before random checks",
       "hit",
       "dodge",
       "block"
@@ -201,21 +253,47 @@
     "difficulty": {
       "easyPlayer": "*6/5",
       "hardPlayer": "*4/5",
-      "hardAI": "*6/5"
-    }
+      "hardAI": "*6/5",
+      "scope": "source Difficulty enum labels; native difficulty/version mapping unverified"
+    },
+    "inputRole": "raw CalcDamage output; attacker attack=true, defender attack=false even for dodge or invulnerability",
+    "zeroBeforeMinimum": "value<=0 returns 0 before any positive minimum",
+    "resultBranch": {
+      "n": "already-resolved pre-result damage; ordinary action after modifiers and identity person hook in regression anchors",
+      "outputTuple": [
+        "hpDamage",
+        "attackerRawSpirit",
+        "defenderRawSpirit"
+      ],
+      "priority": [
+        "invulnerable",
+        "ordinary result"
+      ],
+      "hit": "(n,n,n)",
+      "block": "(defense ? max(trunc(n*3/10),1) : trunc(n/2), trunc(n*3/4), max(trunc(n/2),1))",
+      "dodgeDefense": "(0,0,n)",
+      "dodgeSpirit": "(0,0,max(trunc(n/2),1))",
+      "dodgeAttackOrFury": "(0,0,0)",
+      "invulnerableDefenseOrSpirit": "(0,0,max(trunc(n/2),1))",
+      "invulnerableAttackOrFury": "(0,0,0)"
+    },
+    "regressionScope": "HP100, source Difficulty.Normal, no sword; requested increments before cap/writer, not actual spirit changes or native fixtures"
   },
   "versionBoundary": {
-    "pcPkGenericCore": "reverse-transcribed-cross-validated",
-    "vanilla": "compatibility-assumption until binary-level confirmation",
-    "console": "open"
+    "pcPkGenericCore": "translated-source-reference",
+    "pcPk11NativeEquivalence": "unverified",
+    "vanilla": "unverified",
+    "console": "open",
+    "originalUnresolvedGroups": 43
   },
   "open": [
+    "native PC-PK/PK1.1 whole-chain equivalence, original C++ provenance, and stock/patch identity",
     "original hard-coded person exceptions before modern data-driven refactor",
     "Vanilla binary-level equivalence",
     "PS2/Wii formula differences"
   ],
   "sources": [
-    "https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs",
+    "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs",
     "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/地址资料.txt",
     "https://w.atwiki.jp/sangokushi11/pages/2481.html",
     "https://w.atwiki.jp/sangokushi11/pages/30.html",

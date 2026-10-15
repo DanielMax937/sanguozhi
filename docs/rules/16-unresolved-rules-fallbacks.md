@@ -2055,13 +2055,13 @@ for (const person of city.officers) {
 
 ---
 
-## 8. 单挑连续命中 / 伤害函数（E14 已闭合通用核心）
+## 8. 单挑连续命中 / 伤害函数（E14 现代转录参考）
 
-### 结论：核心连续公式已找到，不再需要自拟 ratio fallback
+### 结论：参考公式可复算，原生PC-PK/PK1.1等价仍未证
 
-`[PC-PK-oriented][reverse-engineered]`
+`[modern-reference][translated-source-reference]`
 
-公开项目 `tankyc/sango_infinity` 的单挑子系统不是按攻略重新猜参数。其 `Duel.cs` 文件头明确写明：
+公开现代项目 `tankyc/sango_infinity` 的 `Duel.cs` 文件头自述：
 
 ```text
 单挑(Duel)系统主体
@@ -2075,13 +2075,13 @@ for (const person of city.officers) {
 - 方针静态表直接标出原数据地址 `8b1750 StanceCoef`；
 - 必杀斗志表标出 `837398 SpecialSpiritCost`。
 
-项目的数据导出脚本也直接以 `San11pk` 目录为输入。因此这套连续核心可作为 PC-PK 原作逆向实现的高置信来源。
+目录名、注释地址和翻译自述只说明来源背景，不能认证原始C++来源链、原生PC-PK/PK1.1全链等价或stock/patch身份。证据级别仅为固定现代 `translated-source-reference`；完整commit/blob/bytes/hash及行号见 `29-duel-continuous-formulas.md`。
 
-注意：该项目后来把吕布、关羽、张飞等**特定武将例外**改成了 `DuelPersonBehaviours` 数据驱动 hook。以下公式只抽取 hook 之前/之外的**通用原作核心**，不把该项目新增 MOD 配置反向当成原版事实。
+注意：该项目后来把吕布、关羽、张飞等**特定武将例外**改成了 `DuelPersonBehaviours` 数据驱动 hook。以下公式只描述**现代转录参考**，回归使用恒等damage hook，不把该项目新增MOD配置或其余通用部分自动视为原版事实。
 
 来源：
-- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
-- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/DuelEnum.cs
+- https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
+- https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Duel/DuelEnum.cs
 - https://github.com/tankyc/sango_infinity/blob/main/Data/事件系统-项目变更影响评估.md
 - https://github.com/tankyc/sango_infinity/blob/main/Data/Export/export311Scenario.bat
 
@@ -2098,7 +2098,7 @@ SD = defenderMartialAfterInjury
 
 所有除法均为 C/C# 整数除法（向 0 截断）。
 
-原函数可整理成：
+该来源函数可整理成：
 
 ```ts
 function duelScore(selfStr, otherStr) {
@@ -2159,7 +2159,7 @@ if (a >= d) {
 - 武力差 0 时，1/1 与 100/100 的普通伤害相同；
 - 但同样差 5，100/95 与 80/75 的伤害并不相同。
 
-原因就是原公式不是只看 `SA-SD`，而是通过上面的非线性 score 同时使用绝对武力和档位差。
+该参考式不是只看 `SA-SD`，而是通过上面的非线性 score 同时使用绝对武力和档位差。
 
 实测交叉：
 - https://w.atwiki.jp/sangokushi11/pages/30.html
@@ -2182,9 +2182,9 @@ if (a >= d) {
 
 ---
 
-### 8C. 普通攻击伤害：闭式解决
+### 8C. 现代参考的普通攻击伤害
 
-通用原函数：
+来源通用函数：
 
 ```ts
 n = stance.attack
@@ -2207,7 +2207,7 @@ baseDamage = max(n, 3)
 
 ### 后续通用倍率
 
-原核心继续按整数顺序应用：
+来源继续按整数顺序应用：
 
 ```ts
 damage = baseDamage
@@ -2389,7 +2389,7 @@ for (i = 0; i < actionCount; i++) {
 n = trunc(actionRatio * 20 / 55)
 ```
 
-原函数的整数运算顺序是：
+来源函数的整数运算顺序是：
 
 ```ts
 n = trunc(actionRatio * 20 / 55)
@@ -2419,7 +2419,7 @@ switch (special) {
   case STEADFAST:     n = 0;                 break
 }
 
-// 初级难度修正
+// 来源 Difficulty.Easy 修正
 if (difficulty === "easy") {
   if (playerAttacksAI) n = trunc(n * 11 / 10)
   if (aiAttacksPlayer) n = trunc(n * 4 / 5)
@@ -2450,15 +2450,16 @@ base = trunc(50 * 20 / 55) = 18
 
 ---
 
-### 8H. 斗志增长也已闭合
+### 8H. 现代参考的requested斗志增长
 
-E14 还恢复：
+E14记录以下参考式（省略的难度修正在剑之前，完整顺序见E14 §12）：
 
 ```ts
+if (value <= 0) return 0
 n = max(value, minimum)
 n = trunc(n * stance.spiritGain / 7)
 
-if (receivingHit)
+if (receivingSide)
   n = trunc(n * 5 / 4)
 
 if (hp < 30)
@@ -2470,21 +2471,23 @@ if (hasSword)
   n = trunc(n * 3 / 2)
 ```
 
-难度另有：
+来源Difficulty枚举另有（未认证原生难度映射）：
 
 ```text
-初级玩家 ×6/5
-超级玩家 ×4/5
-超级AI ×6/5
+Easy玩家 ×6/5
+Hard玩家 ×4/5
+Hard AI ×6/5
 ```
 
-其中 `minimum` 通常为3；被击且处于防御/斗志重视时为5。
+其中 `minimum` 通常为3；守方且处于防御/斗志重视时为5。`receivingSide`表示attack=false，dodge/无敌也成立，不要求实际命中。
 
-因此“剑提高斗志的系数”也不再 open，精确为最终增长 `×3/2`。
+raw spirit不能由最终HP伤害代替：Defense dodge保留完整n，Spirit dodge取max(trunc(n/2),1)，Attack/Fury为0。无敌先于普通结果独立返回HP0/攻方raw0，守方Defense/Spirit取半值最低1，其余0。n12且HP100/来源Normal/无剑时Defense dodge、Spirit dodge、Defense无敌分别请求16/10/7斗志；这是cap/writer前requested gain。
+
+该现代参考的剑倍率为 `×3/2`；原生等价仍open。
 
 ---
 
-### 8I. 原 fallback 删除
+### 8I. 原 fallback 与参考伪代码边界
 
 旧：
 
@@ -2495,16 +2498,16 @@ ratio = sqrt(
 )
 ```
 
-属于为了闭环自拟的近似，现在没有继续保留的必要。
+属于自拟近似；可在现代参考层用下列转录式替代，不据此宣称原生复现完成。
 
-单挑核心接口改为：
+下列仅为文档伪代码，不是现有engine API或本次新增接口：
 
 ```ts
 actionRatio =
-  calcOriginalDuelActionRatio(atkMartial, defMartial)
+  calcTranslatedReferenceDuelActionRatio(atkMartial, defMartial)
 
 actionResult =
-  calcOriginalDuelActionResult(
+  calcTranslatedReferenceDuelActionResult(
     actionRatio,
     atkStance,
     defStance,
@@ -2512,7 +2515,7 @@ actionResult =
   )
 
 damage =
-  calcOriginalDuelDamage(
+  calcTranslatedReferenceDuelDamage(
     actionRatio,
     actionResult,
     atkStance,
@@ -2527,7 +2530,7 @@ damage =
 
 ### 8J. 版本边界与剩余 exactness
 
-当前可以升级为高置信 reverse-engineered 的是：
+当前只在现代 `translated-source-reference` 层整理：
 
 - 通用 `actionRatio`；
 - 四方针系数表；
@@ -2540,19 +2543,20 @@ damage =
 
 仍需单独审计：
 
-1. 吕布、关羽、张飞、黄忠等人物特例在原 C++ 中的硬编码原貌；当前开源项目已重构成数据文件；
-2. Vanilla EXE 是否与该 PC-PK 导向 C++ 版本完全逐字一致；
-3. 各主机版是否同式。
+1. 原生PC-PK/PK1.1完整链、原始C++来源链及stock/patch身份；
+2. 吕布、关羽、张飞、黄忠等人物特例在原 C++ 中的硬编码原貌；当前开源项目已重构成数据文件；
+3. Vanilla EXE 是否与该现代参考等价；
+4. 各主机版是否同式。
 
 因此：
 
 ```ts
-pcPkGenericDuelCore.status = "reverse-engineered"
-vanillaGenericDuelCore.status =
-  "compatibility-assumption"
+modernDuelReference.evidenceLevel = "translated-source-reference"
+pcPk11NativeEquivalence.status = "unverified"
+vanillaGenericDuelCore.status = "unverified"
 ```
 
-但第 8 项原本真正关心的“连续命中 / 普通伤害连续公式”已经解决。
+第8项的现代参考可复算，但原生连续公式exactness未关闭；小范围参考回归不是原生oracle或完整命中/引擎验收，原43组未决证据主题不变。
 
 ---
 

@@ -1,6 +1,6 @@
 # E14 单挑连续公式
 
-更新：2026-09-30。主目标：PC-PK 导向通用单挑核心。
+更新：2026-10-15。范围：固定现代转录来源参考（`translated-source-reference`）；原生 PC-PK/PK1.1 等价未证。
 
 ## 1. 本轮结论
 
@@ -8,9 +8,9 @@
 
 > “武力绝对值 + 武力差 → 命中 / 格挡 / 实际伤害”的完整连续公式
 
-现在可以关闭**通用核心**。
+当前得到可复算的**现代转录参考**，不能关闭原生通用核心；原43组未决证据主题不变。
 
-证据来自三层互证：
+来源与有限交叉线索分层如下：
 
 1. `tankyc/sango_infinity` 的 `Duel.cs` 明确标注由 `s11_sys_duel.h + s11_sys_duel.cpp` 翻译，并保留原地址区间与静态表；
 2. SIRE / 311MemoryResearch 直接暴露单挑对比参数末端地址：
@@ -29,11 +29,11 @@
    - 武力相同基准伤害：攻击/防御/斗志重视 = 12 / 7 / 10；
    - 同样武力差5，100/95 与 80/75 的伤害不同，因此旧“只按武力差”表被撤回。
 
-完整公式恰好同时解释这些现象。
+参考公式与这些有限锚点一致；来源自述、末端指令片段和少量 Wiki 数值不能证明完整链是原生公式。
 
 ## 2. 证据边界
 
-### 2.1 可以升级为高置信 reverse-engineered / reverse-transcribed
+### 2.1 可作为 translated-source-reference 的内容
 
 - 武力 → `actionRatio`；
 - 四方针底层系数；
@@ -45,17 +45,18 @@
 - 气合 / 坚守倍率；
 - 斗志增长通用公式。
 
-### 2.2 不在本轮冒充通用公式的部分
+### 2.2 仍未核实的原生边界
 
+- 整条公式链与原生 PC-PK/PK1.1 的等价性、原始 C++ 来源链及 stock/patch 身份；
 - 吕布、关羽、张飞、赵云、马超、许褚、黄忠等人物硬编码例外；
 - Vanilla EXE 与 PC-PK 是否逐指令完全一致；
 - PS2 / Wii 特殊差异。
 
-现代开源项目已经把部分人物特例重构成数据驱动 hook，所以本轮只提取 hook 之外的通用核心。
+现代开源项目已把部分人物特例重构成数据驱动 hook。以下公式属于该固定来源；本次派生回归显式令 damage hook 为恒等映射，不认证完整原生行为。
 
 ## 3. 四方针静态表
 
-原表标注：`8B1750 StanceCoef`。
+来源表标注：`8B1750 StanceCoef`，固定来源行276–279；地址注释不是原表字节认证。
 
 | 方针 | speed | hit | attack | block | attackSub | spiritGain |
 |---|---:|---:|---:|---:|---:|---:|
@@ -170,7 +171,7 @@ idiv ecx
 score² × 100 / (双方score²之和)
 ```
 
-完全吻合，是对开源翻译公式的重要原地址交叉验证。
+在这一末端算术步骤上吻合；不能由此认证上游 `duelScore`、方针表、完整单挑链或原生版本身份。
 
 ## 6. 普攻基础伤害
 
@@ -207,7 +208,9 @@ damage = 12
 
 这正好复现 Wiki 当年发现的反例。
 
-## 7. Hit / Dodge / Block 完整流程
+## 7. 来源中的普通 Hit / Dodge / Block 流程
+
+来源 `CalcActionResult:2719–2720` 对无敌先返回 Blocked，早于随机命中/闪避；这不等于普通格挡伤害。以下仅为无敌早返之后的普通结果选择，checker 不覆盖完整随机判定。
 
 普通攻击先计算命中阈值：
 
@@ -265,7 +268,7 @@ if (defenderStance === DEFENSE)
 
 ## 8. 格挡 / 闪避后的伤害
 
-先有完整命中伤害 `n`。
+先有结果分支前伤害 `n`。无敌在普通结果之前独立返回零 HP 伤害，斗志输入见 §12.1；以下仅列非无敌结果。
 
 ```ts
 HIT:
@@ -293,12 +296,12 @@ DODGE:
 
 ## 9. 普攻后续倍率
 
-原通用核心按顺序：
+固定现代来源按顺序：
 
 ```ts
 damage = baseDamage
 
-// 初级
+// 来源 Difficulty.Easy
 if (playerAttacksAI)
   damage = trunc(damage * 11 / 10)
 
@@ -375,7 +378,7 @@ n = trunc(actionRatio * 20 / 55)
 → 武器
 → 人物例外
 → 必杀类型
-→ 初级难度
+→ 来源 Difficulty.Easy
 → 对手防御重视
 → 上限80
 ```
@@ -396,7 +399,7 @@ Wiki 等武力实测与该表一致。
 
 ## 12. 斗志增长连续公式
 
-输入 `value` 来自该次攻击伤害链的斗志基础值。
+输入 `value` 是 `CalcDamage` 的 raw spirit 输出，不是最终 HP 伤害。以下 `receivingSide` 表示守方调用 `attack=false`，即使 dodge/无敌也成立，不表示实际命中。返回值是 requested gain，未应用斗志上限或 writer。
 
 ```ts
 if (value <= 0)
@@ -406,7 +409,7 @@ n = value
 minimum = 3
 
 if (
-  receivingHit
+  receivingSide
   && (stance === DEFENSE
       || stance === SPIRIT)
 )
@@ -418,7 +421,7 @@ n = trunc(
   n * stance.spiritGain / 7
 )
 
-if (receivingHit)
+if (receivingSide)
   n = trunc(n * 5 / 4)
 
 if (hp < 30)
@@ -453,52 +456,76 @@ return max(n, 1)
 一击重视 7
 ```
 
-因此旧“剑提高斗志，但系数未知”可以升级为：
+仅在该转录来源中，“剑提高斗志”的系数可写为：
 
 ```text
 剑：最终斗志增长 ×3/2
 ```
 
-### 12.1 Block / Dodge 对斗志输入的影响
+### 12.1 普通结果与独立无敌分支的 raw spirit
 
-通用伤害函数在结果分支还会调整斗志输入：
+固定来源 `CalcDamage:2630–2676` 先令攻守 raw spirit 均为结果分支前的 `n`，再按下表处理。所有除法逐步向0截断，不合并乘除。
 
-- 普通格挡：
-  - 攻方输入 ×3/4；
-  - 守方输入约 ×1/2；
-- Dodge：
-  - 攻方输入 = 0；
-  - 守方只有在防御/斗志重视时保留约一半输入，否则0。
+| 分支 | HP伤害 | 攻方raw spirit | 守方raw spirit |
+|---|---:|---:|---:|
+| Hit（所有方针） | n | n | n |
+| 普通 Block，守方 Defense | max(trunc(n×3/10),1) | trunc(n×3/4) | max(trunc(n/2),1) |
+| 普通 Block，其他方针 | trunc(n/2) | trunc(n×3/4) | max(trunc(n/2),1) |
+| Dodge，守方 Defense | 0 | 0 | n |
+| Dodge，守方 Spirit | 0 | 0 | max(trunc(n/2),1) |
+| Dodge，守方 Attack/Fury | 0 | 0 | 0 |
+| 无敌，守方 Defense/Spirit | 0 | 0 | max(trunc(n/2),1) |
+| 无敌，守方 Attack/Fury | 0 | 0 | 0 |
 
-所以“伤害相同就一定涨同样斗志”也不成立。
+无敌分支2630行初始化后在2645–2652提前返回，优先于普通 Hit/Block/Dodge。Defense dodge 在2667–2668直接返回，保留完整守方 `n`；Spirit 才在2670折半且最低1。不能将 Defense dodge、Spirit dodge 和无敌合并为同一分支。
 
-## 13. 难度边界
+`ActionAnim:2790–2801` 将两项 raw spirit 分别传给 `CalcSpiritGain`，攻方 `attack=true`、守方 `attack=false`。限定双方已解析武力100、攻方 Attack、普通攻击、双方HP100、来源 Difficulty.Normal、无物品/增益、damage hook 恒等时，`actionRatio=50`、`n=12`：
 
-普通伤害部分：
+| 情况 | (HP伤害, 攻方raw, 守方raw) | (攻方requested gain, 守方requested gain) |
+|---|---|---|
+| Defense dodge | (0, 0, 12) | (0, 16) |
+| Spirit dodge | (0, 0, 6) | (0, 10) |
+| Attack/Fury dodge | (0, 0, 0) | (0, 0) |
+| Defense 无敌 | (0, 0, 6) | (0, 7) |
+| Spirit 无敌 | (0, 0, 6) | (0, 10) |
+| Attack/Fury 无敌 | (0, 0, 0) | (0, 0) |
+| Defense 普通 Block | (3, 9, 6) | (5, 7) |
+| Spirit 普通 Block | (6, 9, 6) | (5, 10) |
+| Defense Hit | (12, 12, 12) | (6, 16) |
+
+Defense dodge：12 → trunc(12×8/7)=13 → trunc(13×5/4)=16，不能融合为17；Spirit dodge：raw6 → 8 → 10；Defense无敌：raw6 → 6 → 7。
+
+checker 的两个纯参考helper仅接受整数n/raw value的0..13回归域；它们不构成engine API。checker 在四方针上检查普通 hit/block/dodge 与无敌优先级，并保留奇数 `n=13` 的 Defense raw13 / Spirit raw6。synthetic `n=1` 检查 Spirit dodge 和 Defense/Spirit 无敌 raw1 的最低值；它只是分支算术边界，不声称所有普通战斗前提下可达。gain(value=0) 必须先返回0，正value1守方 Defense/Spirit 经minimum5分别请求6/8。
+
+这些是现代参考的派生断言，不是原生实机 fixture；requested gain 不是经过cap300或writer后的实际斗志增量。
+
+## 13. 来源 Difficulty 枚举边界
+
+以下仅指现代来源的 `Easy / Normal / Hard` 标签，不默认对应原生各版本难度。普通伤害部分：
 
 ```text
-初级：
+Easy：
 玩家打AI ×11/10
 AI打玩家 ×4/5
 
-上级/超级：
+Normal/Hard：
 该伤害函数无统一倍率
 ```
 
 斗志部分：
 
 ```text
-初级玩家 ×6/5
+Easy玩家 ×6/5
 
-超级玩家 ×4/5
-超级AI ×6/5
+Hard玩家 ×4/5
+Hard AI ×6/5
 ```
 
-因此“超级单挑难”主要体现在斗志、一击必杀和其他 AI 分支，不是把全部普通伤害简单乘一个超级倍率。
+这些来源分支不能推定原生“超级单挑”的完整难度行为。
 
-## 14. E14 关闭的旧 open 项
+## 14. E14 参考层可复算，原生 exactness 仍 open
 
-以下旧表述撤回：
+以下笼统表述在现代转录参考层已可细化：
 
 ```text
 单挑的攻防、斗志和命中公式仍未知
@@ -506,20 +533,27 @@ AI打玩家 ×4/5
 只按武力差决定伤害
 ```
 
-通用 PC-PK 导向核心现已可实现。
+参考算术可复算；本次只修来源分级、dodge/无敌斗志分支和小范围回归，不新增 engine API，不证明完整游戏实现。原43组未决证据主题不减。
 
 ## 15. 仍 open
 
-1. 特定人物隐藏补正的原 C++ 硬编码逐人还原；
-2. Vanilla EXE 与 PC-PK 通用核心是否逐指令完全一致；
-3. PS2 / Wii 的公式差异；
-4. 某些人物/宝物例外在不同平台是否同值。
+1. 原生 PC-PK/PK1.1 全链等价、原始 C++ 来源链和 stock/patch 身份；
+2. 特定人物隐藏补正的原 C++ 硬编码逐人还原；
+3. Vanilla EXE 与 PC-PK 通用核心是否逐指令完全一致；
+4. PS2 / Wii 的公式差异；
+5. 某些人物/宝物例外在不同平台是否同值。
 
-## 16. 来源
+## 16. 固定来源与验证边界
+
+现代来源 commit `a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef`；Duel.cs Git blob `d0e825097067c58c95c37e067d1c2a2688a74898`；保存的完整 connector content 原样 UTF-8/LF 共142829 bytes，SHA-256 `4c72e962a9b5dc07ae6bb26285c1e165a511c8c66d5b669520fd1d5b78e3ef07`。不归一化空白或换行。
+
+行号：StanceCoef 276–279；CalcAttackDamage 1794–1805；CalcSpiritGain 2271–2323；CalcDamage 2573–2677（raw初始化2630–2631、无敌2645–2652、Block2657–2664、Dodge2665–2673）；CalcActionResult无敌早返2719–2720；raw→requested调用2790–2801。
+
+`docs/sources/duel-continuous-core.json` 保存固定身份与行归属；checker 只核对这些字面pin并检查参考算术，不联网读取或重算上游hash，不是独立原生oracle，也不验证完整命中判定或引擎集成。
 
 - `tankyc/sango_infinity`：
   - `Project/Assets/Sango/Scripts/Game/Duel/Duel.cs`
-  - https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
+  - https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
 - `sjn4048/311MemoryResearch`：
   - `内存资料/地址资料.txt`
   - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/地址资料.txt
