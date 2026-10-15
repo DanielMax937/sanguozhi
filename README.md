@@ -1,3 +1,7 @@
+## Ordinary recruitment provisional decision
+
+A standalone strict supplied-facts decision API with ordered empirical gates, exact-rational fallback and a newly specified deterministic FNV roll. Immutable replay receipts; no personnel effects or native equivalence claims. See [public usage and policy boundaries](docs/rules/ordinary-recruitment-policy.md). Original43 evidence groups unchanged; P078 and dependencies excluded.
+
 ## Supplied-map movement
 
 Apply explicit paths on finite supplied maps with atomic budget/position updates, immutable receipts, and JSON replay. See [usage and policy boundaries](docs/rules/supplied-map-movement.md). Cost arithmetic follows the captured AL routine; the standard table is a replaceable guide reference, not a native map or end-to-end native movement claim.
