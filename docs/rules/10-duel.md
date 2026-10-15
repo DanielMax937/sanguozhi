@@ -1,6 +1,6 @@
 # 单挑（一骑讨）
 
-> E14 已完成通用连续公式专项审计；完整证据矩阵与地址交叉见 `29-duel-continuous-formulas.md`。
+> E14现为固定现代 `translated-source-reference`；已纠正dodge/独立无敌斗志分支，原生PC-PK/PK1.1全链及stock/patch身份仍未证、原43组不减。固定身份与回归边界见 `29-duel-continuous-formulas.md`。
 
 ## 1. 胜负与回合
 
@@ -10,19 +10,19 @@
 - 体力归零败北；成功撤退也结束单挑。
 - 50 合未决出则平局。
 
-## 2. 通用单挑核心：反编译 C++ 移植
+## 2. 单挑公式：现代来源自述的 C++ 转录参考
 
-`[PC-PK-oriented][reverse-engineered]`
+`[modern-reference][translated-source-reference]`
 
-`sango_infinity` 的 `Duel.cs` 明确标注由 `s11_sys_duel.h + s11_sys_duel.cpp` 翻译而来，并保留原 C++ 命名、数据地址与代码区间。以下只采用其中**通用核心**；该项目后来新增的数据驱动人物特殊行为不自动视为原版规则。
+`sango_infinity` 的 `Duel.cs` 自述由 `s11_sys_duel.h + s11_sys_duel.cpp` 翻译，保留命名、数据地址与代码区间注释。这不是独立核实的原始C++来源链；以下仅为固定现代参考，damage hook按恒等基线讨论，不将现代人物行为视为原版规则。
 
 来源：
-- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
-- https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Duel/DuelEnum.cs
+- https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs
+- https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Duel/DuelEnum.cs
 
 ### 2.1 四方针底层系数
 
-原表 `8b1750 StanceCoef`：
+来源注释标作 `8b1750 StanceCoef` 的表（未认证原表字节）：
 
 | 方针 | speed | hit | attack | block | attackSub | spiritGain |
 |---|---:|---:|---:|---:|---:|---:|
@@ -35,7 +35,7 @@
 
 ### 2.2 武力 → actionRatio
 
-所有运算按原 C/C# 整数截断。
+所有运算按该来源 C# 整数截断。
 
 ```ts
 function duelScore(selfStr, otherStr) {
@@ -114,15 +114,7 @@ trunc(100 * numerator / denominator)
 
 社区补丁把这里替换成使用更宽中间值的乘除实现，是为了修正极端参数时的计算异常；数学语义仍然是“分数 ×100 / 总量”。这与上面的 `score² / (双方score²之和)` 末端完全吻合。
 
-因此 E14 的证据不是只依赖现代重实现，而是：
-
-```text
-C++逆向翻译
-+ 原PC地址字节
-+ Wiki实测结果
-```
-
-三层互证。
+E14的完整链来自现代转录参考；末端PC地址片段和有限Wiki数值只交叉支持局部算术，不能升级为整条原生公式、方针原表或版本身份认证。
 
 ## 3. 普攻：命中 / 格挡 / 闪避 / 伤害
 
@@ -213,15 +205,15 @@ else if (hasLongWeapon)
   damage = trunc(damage * 10 / 9)
 ```
 
-初级难度还存在玩家/COM 的 11/10 与 4/5 单挑伤害修正；上级/超级的普通攻击伤害在这段函数中没有统一倍率。
+来源Easy还存在玩家/COM的11/10与4/5单挑伤害修正；来源Normal/Hard的普通攻击伤害在这段函数中没有统一倍率。
 
 ### 3.5 难度修正
 
-`[PC-PK-oriented][reverse-engineered]`
+`[modern-reference][translated-source-reference]`
 
-原 C++ 翻译中难度不是一个“单挑总倍率”，而是分散在多个子系统：
+现代来源的Difficulty枚举不是一个“单挑总倍率”，而是分散在多个子系统；下表仅指来源Easy/Normal/Hard，不认证原生难度映射：
 
-| 子系统 | 初级 | 上级 | 超级 |
+| 子系统 | 来源Easy | 来源Normal | 来源Hard |
 |---|---:|---:|---:|
 | 玩家普通伤害 vs AI | ×1.1 | ×1 | ×1 |
 | AI普通伤害 vs 玩家 | ×0.8 | ×1 | ×1 |
@@ -231,13 +223,13 @@ else if (hasLongWeapon)
 | 玩家对AI一击必杀基础概率 | ×1 | ×4/5 | ×1/2 |
 | AI面对手动玩家的部分必杀尝试 | 基准 | ×1.2 | ×1.5 |
 
-因此“超级单挑更难”主要来自斗志与必杀相关分支，并不是把所有伤害统一乘一个系数。
+该参考的Hard修正分散于斗志与必杀分支，不是统一伤害倍率；不据此推定原生超级难度。
 
 对应代码区间见 `Duel.cs` 的 `CalcDuelFtkTeam`、普通伤害、斗志增长和必杀尝试相关函数。
 
 ### 3.6 斗志增长连续公式
 
-E14 进一步恢复了普通攻防链后的斗志增长：
+E14记录该来源的requested斗志增长，未应用cap/writer。`receivingSide`表示守方attack=false（dodge/无敌也成立），不表示实际命中：
 
 ```ts
 if (value <= 0) return 0
@@ -246,7 +238,7 @@ n = value
 minimum = 3
 
 if (
-  receivingHit &&
+  receivingSide &&
   (stance === DEFENSE || stance === SPIRIT)
 )
   minimum = 5
@@ -254,7 +246,7 @@ if (
 n = max(n, minimum)
 n = trunc(n * stance.spiritGain / 7)
 
-if (receivingHit)
+if (receivingSide)
   n = trunc(n * 5 / 4)
 
 if (hp < 30)
@@ -276,7 +268,7 @@ if (hasSword)
 return max(n, 1)
 ```
 
-因此旧“剑提高斗志但系数未知”撤回：**剑使该次斗志增长 ×3/2**。
+仅在该固定来源中，**剑使该次requested斗志增长 ×3/2**；原生等价仍待证。
 
 方针 `spiritGain` 为：
 
@@ -287,7 +279,7 @@ return max(n, 1)
 一击重视 7
 ```
 
-Block/Dodge 还会先改变送入该函数的 `value`，所以斗志增长不是单纯按最终体力伤害做线性换算。
+`value`来自raw spirit而非HP伤害：Defense dodge保留完整n；Spirit dodge取max(trunc(n/2),1)；Attack/Fury dodge为0。无敌独立优先返回HP0/攻方raw0，守方Defense/Spirit取半值最低1，其余0。HP100/来源Normal/无剑、n12时Defense dodge、Spirit dodge、Defense无敌分别请求16/10/7斗志；完整tuple及逐步取整见E14 §12.1。
 
 ## 4. 会心连击与必杀
 
@@ -344,7 +336,7 @@ actionRatio×20/55
 → 武器
 → 人物特殊修正（通用基线×1）
 → 必杀类型倍率
-→ 初级难度
+→ 来源 Difficulty.Easy
 → 对手防御重视×3/4
 → cap 80
 ```
@@ -430,11 +422,11 @@ https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html
 
 ## 8. 剩余未确认
 
-E14 后，核心“武力→攻击比例→命中/格挡/闪避→普通伤害→斗志增长”已不再 open。
+E14仅提供上述链的固定现代转录参考，原生PC-PK/PK1.1全链等价、原始C++来源链和stock/patch身份仍open；原43组不减。
 
 剩余主要是：
 
 - 吕布、关羽、张飞、黄忠等**特定人物例外**在原 C++ 中的完整硬编码；当前开源移植已将其重构为数据驱动配置，需要单独逐人核回原作。
 - 各性格对接受玩家主动挑战的准确概率。
 - 单挑结束后的所有平台一致俘虏概率。
-- Vanilla EXE 与上述 PC-PK 导向通用核心是否逐字一致；在无印二进制回归前标 `compatibility-assumption`。
+- Vanilla EXE及PS2/Wii与该现代参考的逐版本等价均未证。

@@ -62,7 +62,7 @@ E3 的正文、来源、纠错、版本边界与测试说明见 [攻防面板与
 | E10 | 应射 | 已写回；00584DC8入口、弩兵/箭类/战法/射程地形/支援与异常状态边界已核；完整PC caller、水战profile与连战链序仍open | [E10 正文与数据](25-response-fire.md) |
 | E11 | 技巧研究时间 | 已写回；超级70/140/210/280分档、210锚点、人才府-20日/最低10日及两组攻略显示时长已核；完整PC函数/超级完整矩阵/其他难度仍open | [E11 正文与数据](26-technique-research-time.md) |\n| E12 | 技巧研究完成功绩 | 已写回；现行500/1000/2000/3000与早期500/1000/1500/2500冲突已分级；Lv1/Lv2一致，PC-PK1.1 Lv3/Lv4 exact caller/版本映射仍open | [E12 正文与数据](27-technique-research-merit.md) |
 | E13 | 混乱 / 伪报持续与恢复 | 已写回；PC-PK1.1自然恢复为确定性倒计时，普通每旬-1、合资格阵系范围-2、到0恢复；少兵自动混乱1～2已源码确认；普通计略初始duration与重复施放仍open | [E13 正文与数据](28-status-duration-recovery.md) |
-| E14 | 单挑连续公式 | 已写回；非线性武力→actionRatio、命中/闪避/格挡、普通/必杀伤害与斗志增长通用核心已闭合；人物隐藏补正和Vanilla/主机版差异仍open | [E14 正文与数据](29-duel-continuous-formulas.md) |
+| E14 | 单挑连续公式 | 已写回固定现代translated-source-reference；纠正Defense/Spirit dodge及独立无敌斗志分支。原生PC-PK/PK1.1全链、stock/patch身份、人物及跨平台等价仍open；原43组不减 | [E14 正文与数据](29-duel-continuous-formulas.md) |
 | E15 | 舌战普通牌心理伤害 | 已写回；牌力与心理伤害分离、智力→attack、普通话题牌/大喝/诡辩反弹、怒气效果均已闭合；人物隐藏补正和跨平台常量仍open | [E15 正文与数据](30-debate-psychological-damage.md) |
 | E16 | 非骑战法来源的负伤 / 战死 | 已写回；撤回普通击破统一伤亡率，弩系狙伤、猛者50%、业火conditional casualty与火矢边界已分流；selector/severity与跨平台仍open | [E16 正文与数据](31-non-cavalry-casualty-sources.md) |
 | E17 | 地形伤害随机值 | 已写回；栈道100～299/格、毒泉200～399/格源码级闭合，落石1500/500与800/1000专用参数及踏破×0.1已恢复；common50 finalizer仍open | [E17 正文与数据](32-terrain-hazard-damage.md) |
@@ -446,7 +446,7 @@ PC-PK1.1 的异常状态“自然恢复”已经由原函数 `00599B90` 闭合�
 
 “单挑只看武力差”的旧模型正式撤回。
 
-PC-PK 导向通用核心现已恢复为：
+固定现代转录参考（commit `a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef`）可整理为，不能据此认证原生PC-PK/PK1.1：
 
 ```text
 伤病修正武力
@@ -500,9 +500,9 @@ cdq
 idiv ecx
 ```
 
-即最终百分比比值步骤，与 C++ 逆向翻译中的 `score² ×100 / sum` 相互验证。
+仅最终百分比比值步骤与现代转录中的 `score² ×100 / sum` 一致；这段末端字节不验证完整score、方针表或来源自称的原始C++链。
 
-E14 同时闭合：
+E14 在 `translated-source-reference` 层整理：
 
 - 四方针 speed/hit/attack/block/attackSub/spiritGain 表；
 - 普攻基础伤害；
@@ -516,10 +516,11 @@ E14 同时闭合：
 - 剑的斗志增长×3/2；
 - HP、难度、方针对斗志增长的连续修正。
 
-因此“单挑通用攻防/命中/斗志公式未知”已从 open 移除。
+参考式可复算不等于原生公式闭合。Defense dodge保留完整守方n；Spirit dodge和Defense/Spirit无敌取max(trunc(n/2),1)，无敌先于普通结果。HP100/来源Normal/无剑条件下n12的Defense dodge、Spirit dodge、Defense无敌分别请求16/10/7斗志，尚未应用cap/writer。固定身份与小范围回归边界见 `29-duel-continuous-formulas.md`；原43组不减。
 
 仍 open：
 
+- 原生PC-PK/PK1.1全链等价、stock/patch身份及原始C++来源链；
 - 特定人物隐藏补正原硬编码；
 - Vanilla EXE 逐指令等价性；
 - PS2/Wii公式差异。

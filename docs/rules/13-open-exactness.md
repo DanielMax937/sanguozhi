@@ -804,9 +804,9 @@ E13 已把“自然恢复概率”从 open 项中移除。PC-PK1.1 原函数 `00
 详见 `28-status-duration-recovery.md`。
 
 
-### 8. 单挑连续公式（E14 通用核心已闭合）
+### 8. 单挑连续公式（E14 现代转录参考，原生等价未证）
 
-E14 已恢复 PC-PK 导向的通用连续核心：
+E14 已整理固定现代 `translated-source-reference`，以下链条不代表原生PC-PK/PK1.1认证：
 
 ```text
 伤病修正后的武力
@@ -845,12 +845,13 @@ actionRatio = 50
 => imul eax,eax,100; cdq; idiv ecx
 ```
 
-与 `actionRatio` 最终百分比计算一致。
+仅与 `actionRatio` 末端百分比算术一致，不能验证完整链。
 
-因此本项原先的“完整连续公式未知”从 open 移除。
+现代参考中Defense dodge保留完整n；Spirit dodge及Defense/Spirit无敌取max(trunc(n/2),1)，无敌优先于普通结果。小范围回归不关闭原生exactness，原43组不减。
 
-仍需单独审计的只有：
+仍需单独审计：
 
+- 原生PC-PK/PK1.1全链等价、stock/patch身份及原始C++来源链；
 - 特定人物隐藏补正原硬编码；
 - Vanilla EXE 逐指令等价性；
 - PS2/Wii 平台差异。
@@ -1270,7 +1271,7 @@ AI势力强度还存在君主ID硬编码 bonus，因此不能用一张现代通�
 - 普通君主继承：玩家手选、COM关系类别优先与年长者分支（E18）
 - 地形伤害随机值：栈道/毒泉精确区间与落石专用参数（E17）
 - 非骑兵武将伤亡来源分流、弩系狙伤与业火conditional casualty（E16）
-- 单挑通用连续核心：actionRatio、命中/闪避/格挡、普通/必杀伤害与斗志增长（E14）
+- E14仅现代转录参考已整理：actionRatio、结果/伤害和斗志算术；本条不计为原生闭合，原生PC-PK/PK1.1仍open，原43组不减
 - 征兵数量与征兵治安下降公式（PC-PK1.1 confirmed-by-disassembly；Vanilla empirical-high）
 - 行动力完整恢复公式（empirical-high；原版逆向 + PK 存档复算）
 - 地形移动成本和战法地形限制
@@ -1287,7 +1288,7 @@ AI势力强度还存在君主ID硬编码 bonus，因此不能用一张现代通�
 - 城陷落后设施保留数量
 - 汉室态度/拥立废立忠诚变化
 - 遗迹/庙发现与奖励
-- 单挑方针/必杀核心数值
+- 单挑方针/必杀的现代转录参考数值（E14；原生等价仍open）
 - 舌战手牌与再考
 - PK人才府技巧研究固定-20日
 

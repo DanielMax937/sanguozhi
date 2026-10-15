@@ -119,7 +119,7 @@ E12技巧研究完成功绩以 `27-technique-research-merit.md` 为当前专项�
 
 E13混乱/伪报持续与恢复以 `28-status-duration-recovery.md` 为当前专项规范，结构化证据为 `../sources/status-duration-recovery.json`。PC-PK1.1自然恢复已确认是确定性倒计时：普通每旬-1、合资格阵系范围-2、到0恢复；普通计略初始duration和重复施放刷新语义仍保持open。
 
-E14单挑连续公式以 `29-duel-continuous-formulas.md` 为当前专项规范，结构化证据为 `../sources/duel-continuous-core.json`。PC-PK导向通用核心已闭合武力→actionRatio→Hit/Dodge/Block→伤害→斗志链；人物隐藏补正与Vanilla/主机版差异继续open。
+E14单挑连续公式以 `29-duel-continuous-formulas.md` 为当前专项规范，结构化参考为 `../sources/duel-continuous-core.json`。证据级别是固定现代 `translated-source-reference`；Defense dodge保留完整n、Spirit dodge与Defense/Spirit无敌取max(trunc(n/2),1)。原生PC-PK/PK1.1全链等价、stock/patch身份、人物及平台差异仍open；小范围参考回归不减少原43组。
 
 E15舌战普通牌心理伤害以 `30-debate-psychological-damage.md` 为当前专项规范，结构化证据为 `../sources/debate-psychological-damage.json`。牌力只决定胜负，心理伤害另走智力attack×牌等级×话题系数×愤激系数；大喝、诡辩、无视/镇静/激昂边界已拆开。
 
@@ -230,7 +230,7 @@ P0-13补给/输送finalizer以 `48-supply-transport-finalizer-exactness.md` 为�
 27. `26-technique-research-time.md` E11技巧研究时间分档、人才府修正与证据矩阵
 28. `27-technique-research-merit.md` E12技巧研究完成功绩冲突表、版本边界与PC exact缺口
 29. `28-status-duration-recovery.md` E13混乱/伪报状态计数、每旬恢复、阵系加速与初始duration边界
-30. `29-duel-continuous-formulas.md` E14单挑actionRatio、命中/闪避/格挡、伤害与斗志连续公式
+30. `29-duel-continuous-formulas.md` E14单挑连续公式的固定现代转录参考与原生未证边界
 31. `30-debate-psychological-damage.md` E15舌战牌力、心理伤害、怒气与话术反弹连续公式
 32. `31-non-cavalry-casualty-sources.md` E16弩系狙伤、猛者、业火与普通击破武将伤亡来源分流
 33. `32-terrain-hazard-damage.md` E17栈道、毒泉、落石随机伤害与免伤边界
