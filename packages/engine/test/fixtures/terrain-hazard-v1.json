@@ -1,0 +1,1167 @@
+{
+  "baseState": {
+    "schema": "san11-detached-hazard-state-v1",
+    "revision": 0,
+    "turn": 0,
+    "phase": "orders",
+    "map": {
+      "id": "o01-small",
+      "cells": [
+        {
+          "id": "A",
+          "terrainInfoU32": 0,
+          "adjacent": [
+            "P",
+            "Q",
+            "F"
+          ],
+          "blocked": false,
+          "unsupportedContext": false
+        },
+        {
+          "id": "F",
+          "terrainInfoU32": 0,
+          "adjacent": [
+            "N",
+            "A"
+          ],
+          "blocked": false,
+          "unsupportedContext": false
+        },
+        {
+          "id": "N",
+          "terrainInfoU32": 0,
+          "adjacent": [
+            "F"
+          ],
+          "blocked": false,
+          "unsupportedContext": false
+        },
+        {
+          "id": "P",
+          "terrainInfoU32": 11,
+          "adjacent": [
+            "Q",
+            "A"
+          ],
+          "blocked": false,
+          "unsupportedContext": false
+        },
+        {
+          "id": "Q",
+          "terrainInfoU32": 4,
+          "adjacent": [
+            "A",
+            "P"
+          ],
+          "blocked": false,
+          "unsupportedContext": false
+        }
+      ]
+    },
+    "unit": {
+      "id": "U",
+      "cellId": "A",
+      "troops": 2000,
+      "energy": 80,
+      "acted": false,
+      "status": "normal",
+      "remaining": 0
+    },
+    "traits": {
+      "traverse": false,
+      "antidote": false,
+      "difficultMarch": false
+    },
+    "defenseTier": 3,
+    "auras": [],
+    "fires": [],
+    "rng": {
+      "kind": "bounded-tape-v1",
+      "draws": [],
+      "cursor": 0
+    },
+    "policy": {
+      "id": "o01-detached-pk-reference-policy-v1",
+      "version": 1,
+      "terrain": "pk11-entry-100-200-v1",
+      "statusInitial": {
+        "mode": "ordinary-threshold-plus-one-v1",
+        "threshold": 70
+      },
+      "statusRefresh": "max-v1",
+      "recovery": "pk-qualified-any-step-v1",
+      "statusBehavior": "confused-consume-action-false-report-reject-v1",
+      "lifetimeBySource": {
+        "strategy": {
+          "kind": "weighted",
+          "weights": [
+            {
+              "turns": 1,
+              "weight": 70
+            },
+            {
+              "turns": 2,
+              "weight": 30
+            }
+          ],
+          "drawBound": 100,
+          "criticalBonus": 1
+        },
+        "fire-arrow": {
+          "kind": "weighted",
+          "weights": [
+            {
+              "turns": 1,
+              "weight": 70
+            },
+            {
+              "turns": 2,
+              "weight": 30
+            }
+          ],
+          "drawBound": 100,
+          "criticalBonus": 1
+        },
+        "fire-trap": {
+          "kind": "weighted",
+          "weights": [
+            {
+              "turns": 1,
+              "weight": 70
+            },
+            {
+              "turns": 2,
+              "weight": 30
+            }
+          ],
+          "drawBound": 100,
+          "criticalBonus": 1
+        },
+        "lightning": {
+          "kind": "weighted",
+          "weights": [
+            {
+              "turns": 1,
+              "weight": 70
+            },
+            {
+              "turns": 2,
+              "weight": 30
+            }
+          ],
+          "drawBound": 100,
+          "criticalBonus": 1
+        },
+        "scripted-event": {
+          "kind": "fixed",
+          "turns": 2,
+          "criticalBonus": 1
+        }
+      },
+      "reignition": "max-remaining-latest-source-v1",
+      "phase": "ignite-before-end-resolution-v1",
+      "naturalSpread": false,
+      "fatalTerrain": "reject-all-v1",
+      "fireExposure": "empty-only-reject-v1"
+    }
+  },
+  "vectors": [
+    {
+      "id": "terrain-low",
+      "stateOverrides": {
+        "rng.draws": [
+          {
+            "bound": 200,
+            "value": 0
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "P"
+        ]
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.troops": 1900,
+        "after.unit.energy": 80,
+        "after.rng.cursor": 1,
+        "entryDamage": [
+          100
+        ]
+      }
+    },
+    {
+      "id": "terrain-high",
+      "stateOverrides": {
+        "rng.draws": [
+          {
+            "bound": 200,
+            "value": 199
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "P"
+        ]
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.troops": 1701,
+        "after.unit.energy": 80,
+        "after.rng.cursor": 1,
+        "entryDamage": [
+          299
+        ]
+      }
+    },
+    {
+      "id": "poison-low",
+      "stateOverrides": {
+        "rng.draws": [
+          {
+            "bound": 200,
+            "value": 0
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "Q"
+        ]
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.troops": 1800,
+        "after.unit.energy": 80,
+        "after.rng.cursor": 1,
+        "entryDamage": [
+          200
+        ]
+      }
+    },
+    {
+      "id": "poison-high",
+      "stateOverrides": {
+        "rng.draws": [
+          {
+            "bound": 200,
+            "value": 199
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "Q"
+        ]
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.troops": 1601,
+        "after.unit.energy": 80,
+        "after.rng.cursor": 1,
+        "entryDamage": [
+          399
+        ]
+      }
+    },
+    {
+      "id": "masked-plank",
+      "stateOverrides": {
+        "map.cells.3.terrainInfoU32": 43,
+        "rng.draws": [
+          {
+            "bound": 200,
+            "value": 0
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "P"
+        ]
+      },
+      "expected": {
+        "ok": true,
+        "entryDamage": [
+          100
+        ]
+      }
+    },
+    {
+      "id": "immune-empty-tape-traverse",
+      "stateOverrides": {
+        "traits.traverse": true,
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "P"
+        ]
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.troops": 2000,
+        "after.rng.cursor": 0,
+        "entryDamage": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "immune-empty-tape-difficultMarch",
+      "stateOverrides": {
+        "traits.difficultMarch": true,
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "P"
+        ]
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.troops": 2000,
+        "after.rng.cursor": 0,
+        "entryDamage": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "immune-poison",
+      "stateOverrides": {
+        "traits.antidote": true,
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "Q"
+        ]
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.troops": 2000,
+        "after.rng.cursor": 0
+      }
+    },
+    {
+      "id": "reentry",
+      "stateOverrides": {
+        "rng.draws": [
+          {
+            "bound": 200,
+            "value": 0
+          },
+          {
+            "bound": 200,
+            "value": 199
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "P",
+          "A",
+          "P"
+        ]
+      },
+      "expected": {
+        "ok": true,
+        "entryDamage": [
+          100,
+          0,
+          299
+        ],
+        "after.unit.troops": 1601,
+        "after.rng.cursor": 2
+      }
+    },
+    {
+      "id": "status0",
+      "stateOverrides": {
+        "rng.draws": [
+          {
+            "bound": 100,
+            "value": 0
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "applyStatus",
+        "kind": "confused",
+        "critical": false
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.status": "confused",
+        "after.unit.remaining": 1,
+        "after.rng.cursor": 1
+      }
+    },
+    {
+      "id": "status69",
+      "stateOverrides": {
+        "rng.draws": [
+          {
+            "bound": 100,
+            "value": 69
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "applyStatus",
+        "kind": "confused",
+        "critical": false
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.status": "confused",
+        "after.unit.remaining": 1,
+        "after.rng.cursor": 1
+      }
+    },
+    {
+      "id": "status70",
+      "stateOverrides": {
+        "rng.draws": [
+          {
+            "bound": 100,
+            "value": 70
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "applyStatus",
+        "kind": "confused",
+        "critical": false
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.status": "confused",
+        "after.unit.remaining": 2,
+        "after.rng.cursor": 1
+      }
+    },
+    {
+      "id": "status99",
+      "stateOverrides": {
+        "rng.draws": [
+          {
+            "bound": 100,
+            "value": 99
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "applyStatus",
+        "kind": "confused",
+        "critical": false
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.status": "confused",
+        "after.unit.remaining": 2,
+        "after.rng.cursor": 1
+      }
+    },
+    {
+      "id": "critical69",
+      "stateOverrides": {
+        "rng.draws": [
+          {
+            "bound": 100,
+            "value": 69
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "applyStatus",
+        "kind": "confused",
+        "critical": true
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.remaining": 2,
+        "after.rng.cursor": 1
+      }
+    },
+    {
+      "id": "refresh-long",
+      "stateOverrides": {
+        "unit.status": "confused",
+        "unit.remaining": 3,
+        "rng.draws": [
+          {
+            "bound": 100,
+            "value": 69
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "applyStatus",
+        "kind": "confused",
+        "critical": false
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.remaining": 3,
+        "after.rng.cursor": 1
+      }
+    },
+    {
+      "id": "confused-one",
+      "stateOverrides": {
+        "unit.status": "confused",
+        "unit.remaining": 1,
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "resolveTurn"
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.status": "normal",
+        "after.unit.remaining": 0,
+        "after.unit.acted": true,
+        "orderedEffectTypes": [
+          "actionConsumed",
+          "statusCounted",
+          "statusCleared"
+        ],
+        "after.rng.cursor": 0
+      }
+    },
+    {
+      "id": "overlap-three",
+      "stateOverrides": {
+        "unit.status": "confused",
+        "unit.remaining": 3,
+        "auras": [
+          {
+            "id": "D1",
+            "facilityTier": 3,
+            "eligible": true,
+            "coveredCells": [
+              "A"
+            ]
+          },
+          {
+            "id": "D2",
+            "facilityTier": 3,
+            "eligible": true,
+            "coveredCells": [
+              "A"
+            ]
+          }
+        ],
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "resolveTurn"
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.remaining": 1,
+        "recoveryStep": 2,
+        "after.unit.acted": true
+      }
+    },
+    {
+      "id": "resolve-empty-tape",
+      "stateOverrides": {
+        "unit.status": "confused",
+        "unit.remaining": 3,
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "resolveTurn"
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.remaining": 2,
+        "after.rng.cursor": 0
+      }
+    },
+    {
+      "id": "false-report-unsupported",
+      "stateOverrides": {
+        "unit.status": "false-report",
+        "unit.remaining": 1,
+        "fires": [
+          {
+            "cellId": "F",
+            "source": "strategy",
+            "remaining": 1
+          }
+        ],
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "resolveTurn"
+      },
+      "expected": {
+        "ok": false,
+        "reason": "unsupported-retreat",
+        "afterEqualsBefore": true,
+        "effects": []
+      }
+    },
+    {
+      "id": "false-report-already-acted",
+      "stateOverrides": {
+        "unit.status": "false-report",
+        "unit.remaining": 1,
+        "unit.acted": true,
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "resolveTurn"
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.status": "normal",
+        "after.unit.remaining": 0,
+        "after.unit.acted": true
+      }
+    },
+    {
+      "id": "calm-confused",
+      "stateOverrides": {
+        "unit.status": "confused",
+        "unit.remaining": 2,
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "calm",
+        "critical": false
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.status": "normal",
+        "after.unit.remaining": 0,
+        "after.unit.acted": false,
+        "after.rng.cursor": 0
+      }
+    },
+    {
+      "id": "calm-false-report",
+      "stateOverrides": {
+        "unit.status": "false-report",
+        "unit.remaining": 2,
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "calm",
+        "critical": false
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.status": "normal",
+        "after.unit.remaining": 0,
+        "after.unit.acted": false,
+        "after.rng.cursor": 0
+      }
+    },
+    {
+      "id": "fire-critical69",
+      "stateOverrides": {
+        "rng.draws": [
+          {
+            "bound": 100,
+            "value": 69
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "igniteCell",
+        "cellId": "F",
+        "source": "strategy",
+        "critical": true
+      },
+      "expected": {
+        "ok": true,
+        "after.fires": [
+          {
+            "cellId": "F",
+            "source": "strategy",
+            "remaining": 2
+          }
+        ],
+        "after.rng.cursor": 1
+      }
+    },
+    {
+      "id": "reignite-long",
+      "stateOverrides": {
+        "fires": [
+          {
+            "cellId": "F",
+            "source": "lightning",
+            "remaining": 4
+          }
+        ],
+        "rng.draws": [
+          {
+            "bound": 100,
+            "value": 0
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "igniteCell",
+        "cellId": "F",
+        "source": "strategy",
+        "critical": false
+      },
+      "expected": {
+        "ok": true,
+        "after.fires": [
+          {
+            "cellId": "F",
+            "source": "strategy",
+            "remaining": 4
+          }
+        ],
+        "after.rng.cursor": 1
+      }
+    },
+    {
+      "id": "no-spread",
+      "stateOverrides": {
+        "fires": [
+          {
+            "cellId": "F",
+            "source": "strategy",
+            "remaining": 2
+          }
+        ],
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "resolveTurn"
+      },
+      "expected": {
+        "ok": true,
+        "after.fires": [
+          {
+            "cellId": "F",
+            "source": "strategy",
+            "remaining": 1
+          }
+        ],
+        "after.rng.cursor": 0
+      }
+    },
+    {
+      "id": "fire-one",
+      "stateOverrides": {
+        "fires": [
+          {
+            "cellId": "F",
+            "source": "strategy",
+            "remaining": 1
+          }
+        ],
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "resolveTurn"
+      },
+      "expected": {
+        "ok": true,
+        "after.fires": []
+      }
+    },
+    {
+      "id": "begin-preserves",
+      "stateOverrides": {
+        "phase": "resolved",
+        "unit.status": "confused",
+        "unit.remaining": 2,
+        "unit.acted": true,
+        "fires": [
+          {
+            "cellId": "F",
+            "source": "strategy",
+            "remaining": 2
+          }
+        ],
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "beginTurn"
+      },
+      "expected": {
+        "ok": true,
+        "after.turn": 1,
+        "after.unit.acted": false,
+        "after.unit.remaining": 2,
+        "after.fires": [
+          {
+            "cellId": "F",
+            "source": "strategy",
+            "remaining": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "late-lethal",
+      "stateOverrides": {
+        "unit.troops": 499,
+        "rng.draws": [
+          {
+            "bound": 200,
+            "value": 0
+          },
+          {
+            "bound": 200,
+            "value": 199
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "P",
+          "Q"
+        ]
+      },
+      "expected": {
+        "ok": false,
+        "reason": "unsupported-lethal-damage",
+        "failedIndex": 1,
+        "afterEqualsBefore": true,
+        "after.rng.cursor": 0,
+        "effects": []
+      }
+    },
+    {
+      "id": "one-survivor",
+      "stateOverrides": {
+        "unit.troops": 500,
+        "rng.draws": [
+          {
+            "bound": 200,
+            "value": 0
+          },
+          {
+            "bound": 200,
+            "value": 199
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "P",
+          "Q"
+        ]
+      },
+      "expected": {
+        "ok": true,
+        "after.unit.troops": 1,
+        "after.rng.cursor": 2
+      }
+    },
+    {
+      "id": "occupied-fire",
+      "stateOverrides": {
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "igniteCell",
+        "cellId": "A",
+        "source": "strategy",
+        "critical": false
+      },
+      "expected": {
+        "ok": false,
+        "reason": "unsupported-fire-damage",
+        "afterEqualsBefore": true,
+        "effects": []
+      }
+    },
+    {
+      "id": "burning-entry",
+      "stateOverrides": {
+        "fires": [
+          {
+            "cellId": "P",
+            "source": "strategy",
+            "remaining": 1
+          }
+        ],
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "P"
+        ]
+      },
+      "expected": {
+        "ok": false,
+        "reason": "unsupported-fire-damage",
+        "afterEqualsBefore": true,
+        "effects": []
+      }
+    },
+    {
+      "id": "replaced-strategy",
+      "stateOverrides": {
+        "policy.id": "o01-three-turn-strategy-v1",
+        "policy.lifetimeBySource.strategy.weights": [
+          {
+            "turns": 3,
+            "weight": 100
+          }
+        ],
+        "rng.draws": [
+          {
+            "bound": 100,
+            "value": 69
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "igniteCell",
+        "cellId": "F",
+        "source": "strategy",
+        "critical": true
+      },
+      "expected": {
+        "ok": true,
+        "after.fires": [
+          {
+            "cellId": "F",
+            "source": "strategy",
+            "remaining": 4
+          }
+        ],
+        "after.rng.cursor": 1
+      }
+    },
+    {
+      "id": "scripted-fixed",
+      "stateOverrides": {
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "igniteCell",
+        "cellId": "F",
+        "source": "scripted-event",
+        "critical": false
+      },
+      "expected": {
+        "ok": true,
+        "after.fires": [
+          {
+            "cellId": "F",
+            "source": "scripted-event",
+            "remaining": 2
+          }
+        ],
+        "after.rng.cursor": 0
+      }
+    },
+    {
+      "id": "wrong-bound",
+      "stateOverrides": {
+        "rng.draws": [
+          {
+            "bound": 100,
+            "value": 0
+          }
+        ]
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "P"
+        ]
+      },
+      "expected": {
+        "ok": false,
+        "reason": "rng-bound-mismatch",
+        "afterEqualsBefore": true,
+        "effects": []
+      }
+    },
+    {
+      "id": "exhausted",
+      "stateOverrides": {
+        "rng.draws": []
+      },
+      "command": {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "P"
+        ]
+      },
+      "expected": {
+        "ok": false,
+        "reason": "rng-exhausted",
+        "afterEqualsBefore": true,
+        "effects": []
+      }
+    }
+  ],
+  "scenario": {
+    "initialOverrides": {
+      "auras": [
+        {
+          "id": "D1",
+          "facilityTier": 3,
+          "eligible": true,
+          "coveredCells": [
+            "Q"
+          ]
+        },
+        {
+          "id": "D2",
+          "facilityTier": 3,
+          "eligible": true,
+          "coveredCells": [
+            "Q"
+          ]
+        }
+      ],
+      "rng.draws": [
+        {
+          "bound": 200,
+          "value": 0
+        },
+        {
+          "bound": 200,
+          "value": 199
+        },
+        {
+          "bound": 100,
+          "value": 70
+        },
+        {
+          "bound": 100,
+          "value": 69
+        },
+        {
+          "bound": 100,
+          "value": 69
+        }
+      ]
+    },
+    "commands": [
+      {
+        "expectedRevision": 0,
+        "type": "enterCells",
+        "path": [
+          "P",
+          "Q"
+        ]
+      },
+      {
+        "expectedRevision": 1,
+        "type": "applyStatus",
+        "kind": "confused",
+        "critical": true
+      },
+      {
+        "expectedRevision": 2,
+        "type": "applyStatus",
+        "kind": "confused",
+        "critical": false
+      },
+      {
+        "expectedRevision": 3,
+        "type": "igniteCell",
+        "cellId": "F",
+        "source": "strategy",
+        "critical": true
+      },
+      {
+        "expectedRevision": 4,
+        "type": "resolveTurn"
+      },
+      {
+        "expectedRevision": 5,
+        "type": "beginTurn"
+      },
+      {
+        "expectedRevision": 6,
+        "type": "resolveTurn"
+      },
+      {
+        "expectedRevision": 7,
+        "type": "beginTurn"
+      },
+      {
+        "expectedRevision": 8,
+        "type": "calm",
+        "critical": false
+      }
+    ],
+    "expectedFinal": {
+      "revision": 9,
+      "turn": 2,
+      "phase": "orders",
+      "unit": {
+        "id": "U",
+        "cellId": "Q",
+        "troops": 1501,
+        "energy": 80,
+        "acted": false,
+        "status": "normal",
+        "remaining": 0
+      },
+      "fires": [],
+      "rng.cursor": 5
+    }
+  }
+}

@@ -1,3 +1,7 @@
+## Detached terrain, status and empty-cell fire lifecycle
+
+A finite supplied-map state machine with positive-troop terrain exposure, ordinary status effects, explicit turn boundaries and vacant-cell fire counters. Immutable transactions, bounded RNG tape, replaceable per-source policy, save/load and independently recomputed replay. See [API, examples and evidence boundaries](docs/rules/terrain-hazard-lifecycle.md). False-report retreat, occupied/burning-cell damage and lethal terrain are atomically rejected; original43 and P078 exclusions remain unchanged.
+
 ## Ordinary recruitment provisional decision
 
 A standalone strict supplied-facts decision API with ordered empirical gates, exact-rational fallback and a newly specified deterministic FNV roll. Immutable replay receipts; no personnel effects or native equivalence claims. See [public usage and policy boundaries](docs/rules/ordinary-recruitment-policy.md). Original43 evidence groups unchanged; P078 and dependencies excluded.
