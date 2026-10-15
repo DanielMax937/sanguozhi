@@ -1586,3 +1586,8 @@ beginner-advanced-open
 
 下一 exactness gap：P0-15 技巧研究完成功绩 PC caller / 两套表冲突。
 
+
+
+### 2026-10-14 C2/C3已知规则工程补充：月度粮食参数叶
+
+新增[完整harvest→levy局部参数投影](monthly-city-food-base-argument.md)，固定16条/35 bytes，当前入口寄存器与晚期flag独立观测。属于已记录规则的source-bound工程债补充，不是原43组中某一组的关闭；原43仍43。完整原文572条/1939 bytes仅核验来源，不宣称执行完整caller。stock/native/ABI、真实writer与调度仍open，P0-78及全部依赖不纳入。
