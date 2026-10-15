@@ -47,3 +47,6 @@ export { MONTHLY_SPECIALTY_PRODUCTION, calculateMonthlySpecialtyProduction } fro
 export type { MonthlySpecialtyProductionInput, MonthlySpecialtyProductionSlot, MonthlySpecialtyProductionSlots, MonthlySpecialtyProductionCapturedReturn, MonthlySpecialtyProductionArithmetic, MonthlySpecialtyProductionQuantityRequest, MonthlySpecialtyProductionRejectionReason, MonthlySpecialtyProductionReceipt, MonthlySpecialtyProductionRejection, MonthlySpecialtyProductionResult } from './monthly-specialty-production.ts';
 export { projectSuppliedTerrainCost, moveOnSuppliedMap, GUIDE_REFERENCE_MOVEMENT_POLICY } from './supplied-map-movement.ts';
 export type { TerrainCostInput, TerrainCostReceipt, SuppliedMovementCell, SuppliedMovementState, SuppliedMovementPolicy, SuppliedMovementRequest, SuppliedMovementStep, SuppliedMovementFailure, SuppliedMovementResult } from './supplied-map-movement.ts';
+
+export { decideOrdinaryRecruitment, ORDINARY_RECRUITMENT_POLICY } from './ordinary-recruitment-policy.ts';
+export type { OrdinaryRecruitmentInput, OrdinaryRecruitmentResult, OrdinaryRecruitmentRelation, OrdinaryRecruitmentRejection, OrdinaryRecruitmentGate, OrdinaryRecruitmentRateDetails, OrdinaryRecruitmentRollDetails } from './ordinary-recruitment-policy.ts';
