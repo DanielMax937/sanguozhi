@@ -50,3 +50,5 @@ export type { TerrainCostInput, TerrainCostReceipt, SuppliedMovementCell, Suppli
 
 export { decideOrdinaryRecruitment, ORDINARY_RECRUITMENT_POLICY } from './ordinary-recruitment-policy.ts';
 export type { OrdinaryRecruitmentInput, OrdinaryRecruitmentResult, OrdinaryRecruitmentRelation, OrdinaryRecruitmentRejection, OrdinaryRecruitmentGate, OrdinaryRecruitmentRateDetails, OrdinaryRecruitmentRollDetails } from './ordinary-recruitment-policy.ts';
+export { DETACHED_HAZARD_POLICY, createHazardState, previewHazardCommand, executeHazardCommand, saveHazardState, loadHazardState, replayHazardTrace } from './terrain-hazard-lifecycle.ts';
+export type { HazardFireSource, HazardStatus, HazardFireProfile, HazardWeightedFireProfile, HazardFixedFireProfile, HazardPolicy, HazardCell, HazardFire, HazardState, HazardCommand, HazardEffect, HazardFailureReason, HazardSuccessReceipt, HazardFailureReceipt, HazardInputFailure, HazardCommandResult, HazardStateResult, HazardTrace, HazardReplayResult } from './terrain-hazard-lifecycle.ts';

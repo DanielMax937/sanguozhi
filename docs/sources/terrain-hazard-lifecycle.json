@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "component": "detached-terrain-status-empty-fire-lifecycle-v1",
+  "evidence": "mixed-source-plus-explicit-policy",
+  "originalExecutableExecuted": false,
+  "stockOriginalVerified": false,
+  "original43Closed": false,
+  "sources": [
+    {
+      "path": "docs/rules/28-status-duration-recovery.md",
+      "sha256": "531697127c103086d4ea6373e60e359522d731b01aa1dab7c4119f3cfdbdb9b1"
+    },
+    {
+      "path": "docs/rules/32-terrain-hazard-damage.md",
+      "sha256": "42eff692164eabf8b829f518e524cc5877b57825a5265b34df330293587ce636"
+    },
+    {
+      "path": "docs/rules/39-fire-lifetime-spread-exactness.md",
+      "sha256": "7958013d612febceb0015fa3620203e794d518b3454528f680afb06c939108c9"
+    },
+    {
+      "path": "docs/sources/status-duration-recovery.json",
+      "sha256": "73216e9562d884fcd1dde7d148d7c429d79177e28a23a44ea503f260dd5ae1b2"
+    },
+    {
+      "path": "docs/sources/terrain-hazard-damage.json",
+      "sha256": "8edc80c2a67a4d4c9aa197b41102722f5e18fc6603418f8973cc3168f1825417"
+    },
+    {
+      "path": "docs/sources/fire-lifetime-spread-exactness.json",
+      "sha256": "be54e2d4460bac87786e49b9c64a08f683845c64c47f0225eaba299b52c9efe6"
+    },
+    {
+      "path": "docs/sources/fire-lifetime-setter-boundary.json",
+      "sha256": "b743a4142058eb30d754776024b867011f531325506a2c2754c85995a1fb56b0"
+    },
+    {
+      "path": "docs/sources/fire-lifetime-rng-setter-candidate-boundary.json",
+      "sha256": "861d4d99729bd951fd36ebfeb970d3af8b5e201cf85a3155156f11ac6b055a30"
+    }
+  ],
+  "grades": {
+    "terrainRangesImmunities": "local-reverse-source-reference",
+    "statusBehaviorBeforeCountdown": "local-reverse-source-reference",
+    "qualifiedAuraStep": "local-reverse-source-reference-with-supplied-qualification",
+    "poisonNoExtraEnergy": "negative-evidence-high",
+    "ordinaryStatusInitialAndMax": "provisional-engine-rule",
+    "criticalFirePlusOne": "empirical-high-with-explicit-cross-source-policy",
+    "fireWeightedProfiles": "provisional-per-source-policy",
+    "emptyCellScope": "engineering-policy",
+    "tapeAndPhases": "engineering-policy",
+    "scriptedLifetime": "engineering-policy",
+    "reignitionMaxLatestSource": "engineering-policy-not-native-setter"
+  },
+  "open": [
+    "original-fire-setter",
+    "base-fire-RNG",
+    "decrement-extinguish-caller",
+    "visible-internal-phase-mapping",
+    "native-reignition",
+    "source-specific-native-setter-differences",
+    "Vanilla-console-equivalence"
+  ],
+  "excluded": [
+    "P078-and-dependencies",
+    "native-return-finalizers",
+    "capture-death-force-extinction-ownership",
+    "false-report-retreat",
+    "occupied-or-entered-fire-damage",
+    "attacks-trap-chains-rockfall",
+    "low-troop-trigger",
+    "training-GameState-integration",
+    "supplied-movement-adapter"
+  ],
+  "tests": [
+    "packages/engine/test/terrain-hazard-lifecycle.test.mjs",
+    "packages/engine/test/fixtures/terrain-hazard-v1.json"
+  ]
+}
