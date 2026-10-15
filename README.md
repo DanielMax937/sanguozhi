@@ -1,3 +1,7 @@
+## Supplied-map movement
+
+Apply explicit paths on finite supplied maps with atomic budget/position updates, immutable receipts, and JSON replay. See [usage and policy boundaries](docs/rules/supplied-map-movement.md). Cost arithmetic follows the captured AL routine; the standard table is a replaceable guide reference, not a native map or end-to-end native movement claim.
+
 2026-10-15 新独立候选：[每月特产兵装自动生产数量请求核](docs/rules/monthly-specialty-production.md)。逐equipment1..4、特产AL与30槽full-EAX捕获，独立政治AL；71条/256 bytes控制流重构，显式版本化comment-f32-rne-trunc算术政策。单次factor binary32存储，count8/政治80得到929，最后signed cap1500。没有writer/库存/owner/force/command/scheduler集成；不是stock/native认证，P0-78及依赖排除，旧43未决证据主题不减。当前树须全新验收/独审，历史通过数不验证本候选。
 
 2026-10-14 新独立本地工程候选：[每月城市粮食harvest→levy参数叶](docs/rules/monthly-city-food-base-argument.md)，基于main `f6b6a31d587a8094fbba4b6fd27371288e3f3287`。仅连续无CALL的16条/35 bytes `[005905E0,00590603)`，当前EDI/EAX与独立晚期levy DWORD三个完整U32；先low32三倍再signed向零半减，后levy再向零半减，投影PUSH EDI位模式与signed视图。只补C2/C3已知规则工程债，原43不减；不假定helper保留EDI、不复用早期levy、不组合city或return-tail API，不接stack/writer/owner/force/scheduler/EndTurn。source-listing-reconstruction不认证stock/Vanilla/native。P0-78及依赖继续排除；正式新树验收/发布另记，历史PASS不验证本候选。
