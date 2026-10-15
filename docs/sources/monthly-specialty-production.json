@@ -1,0 +1,1097 @@
+{
+  "profileId": "monthly-specialty-production-observed-v1",
+  "scope": "Per captured equipmentType1..4, standalone monthly specialty quantity argument computation; no inventory effect",
+  "evidence": {
+    "level": "source-listing-control-flow-with-provisional-arithmetic",
+    "controlFlow": "source-listing-reconstruction",
+    "arithmetic": "documented-replaceable-assumptions",
+    "profile": "monthly-specialty-production-observed-v1",
+    "arithmeticProfile": "comment-f32-rne-trunc-v1",
+    "source": "docs/sources/monthly-specialty-production.json",
+    "projectTarget": "PC-PK1.1",
+    "sourceEditionClaim": "PK",
+    "exactSourceVersionVerified": false,
+    "runtimeSourceRehashPerformed": false,
+    "nativeExecutableExecuted": false,
+    "nativeHelpersReconstructed": false,
+    "converterBodyKnown": false,
+    "memoryConstantBytesRecovered": false,
+    "stockOriginalVerified": false,
+    "vanillaVerified": false,
+    "abiVerified": false,
+    "fullCallerExecuted": false,
+    "stateWriterIntegrated": false,
+    "ownerForceIntegrated": false,
+    "schedulerIntegrated": false,
+    "rngIntegrated": false
+  },
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "内存资料/整理/Func-收支03-每月钱粮兵装收支.txt",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/%E5%86%85%E5%AD%98%E8%B5%84%E6%96%99/%E6%95%B4%E7%90%86/Func-%E6%94%B6%E6%94%AF03-%E6%AF%8F%E6%9C%88%E9%92%B1%E7%B2%AE%E5%85%B5%E8%A3%85%E6%94%B6%E6%94%AF.txt",
+    "gitBlob": "028fae66ba44f70716951edd9fae51420780cea0",
+    "gbkBytes": 44283,
+    "gbkSha256": "24c1f4c75185a3aef07aac7f493400bb778f2f071bf4fd8ef3d905457d43d617",
+    "utf8Bytes": 46993,
+    "utf8Sha256": "825c1ff948e122fb15da6baa92c95d978b5ccd664cb0e32a1ff72d70c53a7e7b",
+    "fullListing": {
+      "start": "00590490",
+      "endExclusive": "00590C23",
+      "instructions": 572,
+      "bytes": 1939,
+      "sha256": "e65552b27524fcce9e95e2b3a48a9117a185cd27ad3362cfe0e47dbb9c9ee88b"
+    },
+    "slice": {
+      "start": "00590A83",
+      "endExclusive": "00590B83",
+      "instructions": 71,
+      "bytes": 256,
+      "sha256": "0269b7298f452d1cebd6c22f8a15eca5606b99d51709ee7120974828b9f3f3fb"
+    }
+  },
+  "license": {
+    "name": "Apache-2.0",
+    "snapshot": "docs/sources/production-time-LICENSE.txt",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+  },
+  "arithmeticProfile": {
+    "id": "comment-f32-rne-trunc-v1",
+    "status": "provisional-documented-arithmetic",
+    "constants": {
+      "half": {
+        "address": "0074E9C8",
+        "bitsU32": 1056964608,
+        "value": 0.5
+      },
+      "one": {
+        "address": "0074E718",
+        "bitsU32": 1065353216,
+        "value": 1
+      },
+      "quarter": {
+        "address": "0077AA5C",
+        "bitsU32": 1048576000,
+        "value": 0.25
+      },
+      "two": {
+        "address": "0077B338",
+        "bitsU32": 1073741824,
+        "value": 2
+      },
+      "tenth": {
+        "address": "0079CC88",
+        "bitsU32": 1036831949,
+        "value": 0.10000000149011612
+      },
+      "three": {
+        "address": "00794FEC",
+        "bitsU32": 1077936128,
+        "value": 3
+      }
+    },
+    "constantEvidence": "Assumed binary32 encodings of source comments, not recovered memory bytes; only inline count-one 0x3F800000 is present in opcodes.",
+    "factorStore": "round-to-nearest-even binary32 once at00590B46; count1 is inline binary32 1",
+    "intermediates": "Exact dyadic arithmetic within bounded count1..30 and politicsAL0..255; binary64 implementation exact for both multiplies and adds in this domain; no rounding to binary32 after each multiply.",
+    "converter": "00707A74 body unavailable; assume truncation toward zero to signed32",
+    "replaceability": "Explicit versioned profile selected by ID; only this profile supported in v1, future profiles require a new identity and independently validated implementation."
+  },
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "profile",
+      "arithmeticProfile",
+      "equipmentType",
+      "specialtyEaxU32"
+    ],
+    "properties": {
+      "profile": {
+        "const": "monthly-specialty-production-observed-v1"
+      },
+      "arithmeticProfile": {
+        "const": "comment-f32-rne-trunc-v1"
+      },
+      "equipmentType": {
+        "type": "integer",
+        "enum": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "specialtyEaxU32": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      },
+      "slots": {
+        "type": "array",
+        "minItems": 30,
+        "maxItems": 30,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "validityEaxU32"
+          ],
+          "properties": {
+            "validityEaxU32": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "correspondingCompletedEaxU32": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            }
+          },
+          "if": {
+            "properties": {
+              "validityEaxU32": {
+                "const": 0
+              }
+            }
+          },
+          "then": {
+            "not": {
+              "required": [
+                "correspondingCompletedEaxU32"
+              ]
+            }
+          },
+          "else": {
+            "required": [
+              "correspondingCompletedEaxU32"
+            ]
+          }
+        }
+      },
+      "governorPoliticsEaxU32": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      }
+    },
+    "if": {
+      "properties": {
+        "specialtyEaxU32": {
+          "multipleOf": 256
+        }
+      }
+    },
+    "then": {
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "slots"
+            ]
+          },
+          {
+            "required": [
+              "governorPoliticsEaxU32"
+            ]
+          }
+        ]
+      }
+    },
+    "else": {
+      "required": [
+        "slots"
+      ],
+      "if": {
+        "properties": {
+          "slots": {
+            "contains": {
+              "type": "object",
+              "required": [
+                "validityEaxU32",
+                "correspondingCompletedEaxU32"
+              ],
+              "properties": {
+                "validityEaxU32": {
+                  "minimum": 1
+                },
+                "correspondingCompletedEaxU32": {
+                  "minimum": 1
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "governorPoliticsEaxU32"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "governorPoliticsEaxU32"
+          ]
+        }
+      }
+    }
+  },
+  "resultSchema": {
+    "oneOf": [
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "supported",
+          "profile",
+          "arithmeticProfile",
+          "equipmentType",
+          "observations",
+          "path",
+          "completedFacilityCount",
+          "capturedReturns",
+          "arithmetic",
+          "quantityRequest",
+          "evidence"
+        ],
+        "properties": {
+          "supported": {
+            "const": true
+          },
+          "profile": {
+            "const": "monthly-specialty-production-observed-v1"
+          },
+          "arithmeticProfile": {
+            "const": "comment-f32-rne-trunc-v1"
+          },
+          "equipmentType": {
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "observations": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "profile",
+              "arithmeticProfile",
+              "equipmentType",
+              "specialtyEaxU32"
+            ],
+            "properties": {
+              "profile": {
+                "const": "monthly-specialty-production-observed-v1"
+              },
+              "arithmeticProfile": {
+                "const": "comment-f32-rne-trunc-v1"
+              },
+              "equipmentType": {
+                "type": "integer",
+                "enum": [
+                  1,
+                  2,
+                  3,
+                  4
+                ]
+              },
+              "specialtyEaxU32": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              "slots": {
+                "type": "array",
+                "minItems": 30,
+                "maxItems": 30,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "validityEaxU32"
+                  ],
+                  "properties": {
+                    "validityEaxU32": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 4294967295
+                    },
+                    "correspondingCompletedEaxU32": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 4294967295
+                    }
+                  },
+                  "if": {
+                    "properties": {
+                      "validityEaxU32": {
+                        "const": 0
+                      }
+                    }
+                  },
+                  "then": {
+                    "not": {
+                      "required": [
+                        "correspondingCompletedEaxU32"
+                      ]
+                    }
+                  },
+                  "else": {
+                    "required": [
+                      "correspondingCompletedEaxU32"
+                    ]
+                  }
+                }
+              },
+              "governorPoliticsEaxU32": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              }
+            },
+            "if": {
+              "properties": {
+                "specialtyEaxU32": {
+                  "multipleOf": 256
+                }
+              }
+            },
+            "then": {
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "slots"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "governorPoliticsEaxU32"
+                    ]
+                  }
+                ]
+              }
+            },
+            "else": {
+              "required": [
+                "slots"
+              ],
+              "if": {
+                "properties": {
+                  "slots": {
+                    "contains": {
+                      "type": "object",
+                      "required": [
+                        "validityEaxU32",
+                        "correspondingCompletedEaxU32"
+                      ],
+                      "properties": {
+                        "validityEaxU32": {
+                          "minimum": 1
+                        },
+                        "correspondingCompletedEaxU32": {
+                          "minimum": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "governorPoliticsEaxU32"
+                ]
+              },
+              "else": {
+                "not": {
+                  "required": [
+                    "governorPoliticsEaxU32"
+                  ]
+                }
+              }
+            }
+          },
+          "path": {
+            "enum": [
+              "not-specialty",
+              "no-completed-facilities",
+              "production"
+            ]
+          },
+          "completedFacilityCount": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 30
+              }
+            ]
+          },
+          "capturedReturns": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 62,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "callAddress",
+                "target",
+                "kind",
+                "slotIndex",
+                "eaxU32",
+                "consumedWidthBits",
+                "consumedValue"
+              ],
+              "properties": {
+                "callAddress": {
+                  "type": "string",
+                  "enum": [
+                    "00590A7E",
+                    "00590AB3",
+                    "00590AC6",
+                    "00590B4E"
+                  ]
+                },
+                "target": {
+                  "type": "string",
+                  "enum": [
+                    "0047B3A0",
+                    "0047A630",
+                    "0049CFB0",
+                    "004890A0"
+                  ]
+                },
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "specialty",
+                    "validity",
+                    "corresponding-completed",
+                    "governor-politics"
+                  ]
+                },
+                "slotIndex": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 29
+                    }
+                  ]
+                },
+                "eaxU32": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                },
+                "consumedWidthBits": {
+                  "type": "integer",
+                  "enum": [
+                    8,
+                    32
+                  ]
+                },
+                "consumedValue": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                }
+              },
+              "oneOf": [
+                {
+                  "properties": {
+                    "kind": {
+                      "const": "specialty"
+                    },
+                    "callAddress": {
+                      "const": "00590A7E"
+                    },
+                    "target": {
+                      "const": "0047B3A0"
+                    },
+                    "consumedWidthBits": {
+                      "const": 8
+                    },
+                    "slotIndex": {
+                      "type": "null"
+                    },
+                    "consumedValue": {
+                      "maximum": 255
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "kind": {
+                      "const": "validity"
+                    },
+                    "callAddress": {
+                      "const": "00590AB3"
+                    },
+                    "target": {
+                      "const": "0047A630"
+                    },
+                    "consumedWidthBits": {
+                      "const": 32
+                    },
+                    "slotIndex": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 29
+                    },
+                    "consumedValue": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 4294967295
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "kind": {
+                      "const": "corresponding-completed"
+                    },
+                    "callAddress": {
+                      "const": "00590AC6"
+                    },
+                    "target": {
+                      "const": "0049CFB0"
+                    },
+                    "consumedWidthBits": {
+                      "const": 32
+                    },
+                    "slotIndex": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 29
+                    },
+                    "consumedValue": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 4294967295
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "kind": {
+                      "const": "governor-politics"
+                    },
+                    "callAddress": {
+                      "const": "00590B4E"
+                    },
+                    "target": {
+                      "const": "004890A0"
+                    },
+                    "consumedWidthBits": {
+                      "const": 8
+                    },
+                    "slotIndex": {
+                      "type": "null"
+                    },
+                    "consumedValue": {
+                      "maximum": 255
+                    }
+                  }
+                }
+              ]
+            },
+            "prefixItems": [
+              {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "callAddress",
+                      "target",
+                      "kind",
+                      "slotIndex",
+                      "eaxU32",
+                      "consumedWidthBits",
+                      "consumedValue"
+                    ],
+                    "properties": {
+                      "callAddress": {
+                        "type": "string",
+                        "enum": [
+                          "00590A7E",
+                          "00590AB3",
+                          "00590AC6",
+                          "00590B4E"
+                        ]
+                      },
+                      "target": {
+                        "type": "string",
+                        "enum": [
+                          "0047B3A0",
+                          "0047A630",
+                          "0049CFB0",
+                          "004890A0"
+                        ]
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "specialty",
+                          "validity",
+                          "corresponding-completed",
+                          "governor-politics"
+                        ]
+                      },
+                      "slotIndex": {
+                        "oneOf": [
+                          {
+                            "type": "null"
+                          },
+                          {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 29
+                          }
+                        ]
+                      },
+                      "eaxU32": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 4294967295
+                      },
+                      "consumedWidthBits": {
+                        "type": "integer",
+                        "enum": [
+                          8,
+                          32
+                        ]
+                      },
+                      "consumedValue": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 4294967295
+                      }
+                    },
+                    "oneOf": [
+                      {
+                        "properties": {
+                          "kind": {
+                            "const": "specialty"
+                          },
+                          "callAddress": {
+                            "const": "00590A7E"
+                          },
+                          "target": {
+                            "const": "0047B3A0"
+                          },
+                          "consumedWidthBits": {
+                            "const": 8
+                          },
+                          "slotIndex": {
+                            "type": "null"
+                          },
+                          "consumedValue": {
+                            "maximum": 255
+                          }
+                        }
+                      },
+                      {
+                        "properties": {
+                          "kind": {
+                            "const": "validity"
+                          },
+                          "callAddress": {
+                            "const": "00590AB3"
+                          },
+                          "target": {
+                            "const": "0047A630"
+                          },
+                          "consumedWidthBits": {
+                            "const": 32
+                          },
+                          "slotIndex": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 29
+                          },
+                          "consumedValue": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 4294967295
+                          }
+                        }
+                      },
+                      {
+                        "properties": {
+                          "kind": {
+                            "const": "corresponding-completed"
+                          },
+                          "callAddress": {
+                            "const": "00590AC6"
+                          },
+                          "target": {
+                            "const": "0049CFB0"
+                          },
+                          "consumedWidthBits": {
+                            "const": 32
+                          },
+                          "slotIndex": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 29
+                          },
+                          "consumedValue": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 4294967295
+                          }
+                        }
+                      },
+                      {
+                        "properties": {
+                          "kind": {
+                            "const": "governor-politics"
+                          },
+                          "callAddress": {
+                            "const": "00590B4E"
+                          },
+                          "target": {
+                            "const": "004890A0"
+                          },
+                          "consumedWidthBits": {
+                            "const": 8
+                          },
+                          "slotIndex": {
+                            "type": "null"
+                          },
+                          "consumedValue": {
+                            "maximum": 255
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "kind": {
+                        "const": "specialty"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "arithmetic": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "factorTier",
+                  "factorBitsU32",
+                  "factorValue",
+                  "politicsAL",
+                  "politicsTerm",
+                  "scaledValue",
+                  "convertedSigned32",
+                  "capApplied"
+                ],
+                "properties": {
+                  "factorTier": {
+                    "enum": [
+                      "one",
+                      "two-to-three",
+                      "four-to-seven",
+                      "eight-to-thirty"
+                    ]
+                  },
+                  "factorBitsU32": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 4294967295
+                  },
+                  "factorValue": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 5.4
+                  },
+                  "politicsAL": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "politicsTerm": {
+                    "type": "integer",
+                    "minimum": 60,
+                    "maximum": 187
+                  },
+                  "scaledValue": {
+                    "type": "number",
+                    "minimum": 180,
+                    "maximum": 3000
+                  },
+                  "convertedSigned32": {
+                    "type": "integer",
+                    "minimum": 180,
+                    "maximum": 3000
+                  },
+                  "capApplied": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            ]
+          },
+          "quantityRequest": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "pushAddress",
+                  "continuationAddress",
+                  "quantityU32",
+                  "quantitySigned32"
+                ],
+                "properties": {
+                  "pushAddress": {
+                    "const": "00590B82"
+                  },
+                  "continuationAddress": {
+                    "const": "00590B83"
+                  },
+                  "quantityU32": {
+                    "type": "integer",
+                    "minimum": 180,
+                    "maximum": 1500
+                  },
+                  "quantitySigned32": {
+                    "type": "integer",
+                    "minimum": 180,
+                    "maximum": 1500
+                  }
+                }
+              }
+            ]
+          },
+          "evidence": {
+            "const": {
+              "level": "source-listing-control-flow-with-provisional-arithmetic",
+              "controlFlow": "source-listing-reconstruction",
+              "arithmetic": "documented-replaceable-assumptions",
+              "profile": "monthly-specialty-production-observed-v1",
+              "arithmeticProfile": "comment-f32-rne-trunc-v1",
+              "source": "docs/sources/monthly-specialty-production.json",
+              "projectTarget": "PC-PK1.1",
+              "sourceEditionClaim": "PK",
+              "exactSourceVersionVerified": false,
+              "runtimeSourceRehashPerformed": false,
+              "nativeExecutableExecuted": false,
+              "nativeHelpersReconstructed": false,
+              "converterBodyKnown": false,
+              "memoryConstantBytesRecovered": false,
+              "stockOriginalVerified": false,
+              "vanillaVerified": false,
+              "abiVerified": false,
+              "fullCallerExecuted": false,
+              "stateWriterIntegrated": false,
+              "ownerForceIntegrated": false,
+              "schedulerIntegrated": false,
+              "rngIntegrated": false
+            }
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "path": {
+                "const": "not-specialty"
+              },
+              "completedFacilityCount": {
+                "type": "null"
+              },
+              "arithmetic": {
+                "type": "null"
+              },
+              "quantityRequest": {
+                "type": "null"
+              },
+              "observations": {
+                "properties": {
+                  "specialtyEaxU32": {
+                    "multipleOf": 256
+                  }
+                }
+              },
+              "capturedReturns": {
+                "minItems": 1,
+                "maxItems": 1,
+                "items": {
+                  "properties": {
+                    "kind": {
+                      "const": "specialty"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "path": {
+                "const": "no-completed-facilities"
+              },
+              "completedFacilityCount": {
+                "const": 0
+              },
+              "arithmetic": {
+                "type": "null"
+              },
+              "quantityRequest": {
+                "type": "null"
+              },
+              "observations": {
+                "required": [
+                  "slots"
+                ],
+                "not": {
+                  "required": [
+                    "governorPoliticsEaxU32"
+                  ]
+                }
+              },
+              "capturedReturns": {
+                "minItems": 31,
+                "maxItems": 61,
+                "not": {
+                  "contains": {
+                    "properties": {
+                      "kind": {
+                        "const": "governor-politics"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "path": {
+                "const": "production"
+              },
+              "completedFacilityCount": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 30
+              },
+              "arithmetic": {
+                "type": "object"
+              },
+              "quantityRequest": {
+                "type": "object"
+              },
+              "observations": {
+                "required": [
+                  "slots",
+                  "governorPoliticsEaxU32"
+                ]
+              },
+              "capturedReturns": {
+                "minItems": 33,
+                "maxItems": 62,
+                "contains": {
+                  "properties": {
+                    "kind": {
+                      "const": "governor-politics"
+                    }
+                  }
+                },
+                "minContains": 1,
+                "maxContains": 1
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "supported",
+          "reason",
+          "evidence"
+        ],
+        "properties": {
+          "supported": {
+            "const": false
+          },
+          "reason": {
+            "enum": [
+              "invalid-input",
+              "unexpected-field",
+              "unsupported-profile",
+              "stage-mismatch"
+            ]
+          },
+          "evidence": {
+            "const": {
+              "level": "source-listing-control-flow-with-provisional-arithmetic",
+              "controlFlow": "source-listing-reconstruction",
+              "arithmetic": "documented-replaceable-assumptions",
+              "profile": "monthly-specialty-production-observed-v1",
+              "arithmeticProfile": "comment-f32-rne-trunc-v1",
+              "source": "docs/sources/monthly-specialty-production.json",
+              "projectTarget": "PC-PK1.1",
+              "sourceEditionClaim": "PK",
+              "exactSourceVersionVerified": false,
+              "runtimeSourceRehashPerformed": false,
+              "nativeExecutableExecuted": false,
+              "nativeHelpersReconstructed": false,
+              "converterBodyKnown": false,
+              "memoryConstantBytesRecovered": false,
+              "stockOriginalVerified": false,
+              "vanillaVerified": false,
+              "abiVerified": false,
+              "fullCallerExecuted": false,
+              "stateWriterIntegrated": false,
+              "ownerForceIntegrated": false,
+              "schedulerIntegrated": false,
+              "rngIntegrated": false
+            }
+          }
+        }
+      }
+    ]
+  },
+  "sourceCommentCorrections": [
+    "00590B0F comment omits count-1; DEC EBP at00590AFA is authoritative",
+    "00590B2D comment omits count-3; ADD EBP,-3 at00590B16 is authoritative",
+    "00590B46 comment omits count-7; ADD EBP,-7 at00590B2F is authoritative",
+    "00590B27 operand is0077B338; its comment accidentally labels0074E718"
+  ],
+  "excluded": [
+    "P0-78 and every dependency",
+    "city/pointer reads and native helpers",
+    "full monthly caller and equipment loop scheduling",
+    "native floating environment or unknown converter certification",
+    "inventory capacity and actual inventory delta",
+    "writer/force/owner/command/EndTurn/RNG integration",
+    "stock PK/Vanilla/console certification"
+  ]
+}
