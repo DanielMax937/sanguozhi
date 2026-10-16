@@ -1,5 +1,8 @@
 # P0-57 武将返回的home/location/rawlegion/bit9有界投影
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #15](https://github.com/DanielMax937/sanguozhi/pull/15) 已合并。下文“候选”“未发布”“发布前/合并后须验证”等措辞及运行数字保留其原日期语境，不是当前发布条件或本次重新验证结果。该PR的有限支持域、未实现分支和来源等级不因合并扩大；本文档回溯未运行测试。涉及原生事务的历史内容仅作证据记录，不恢复P078及其依赖。
+
+
 更新：2026-10-04 UTC。基线main `1ff61538c16a1e95dddc15cd228f63d7e15cd356`（PR #14已合）。承接[P0-56](91-return-mission-lifecycle.md)。
 
 - [结构化证据](../sources/officer-return-finalizer.json) · [双源字节及来源说明](../sources/officer-return-finalizer/README.md)

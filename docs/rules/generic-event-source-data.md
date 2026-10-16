@@ -1,5 +1,8 @@
 # 所选通用事件公开攻略转录
 
+规则正文补充：[33条来源观察条件结果](historical-generic-events-catalog.md)及[未决与来源限制](historical-generic-events-inventory.md)。该补充保留来源版本、未知与工程政策等级，不提升原作等价性；原数据和本文历史证据不删除。
+
+
 状态：`public-guide-transcription`，`executionEnabled: false`。这是独立静态资料批，未加入事件求值器、scheduler、结果执行器或引擎依赖，未运行原游戏native。
 
 [Wiki88通用段](https://w.atwiki.jp/sangokushi11/pages/88.html)全部31标题，加[游民2009加强版攻略首页铜雀补记](https://www.gamersky.com/handbook/200902/134257.shtml)及[第13页泰山封禅](https://www.gamersky.com/handbook/200902/134257_13.shtml)，得到33条来源观测、31个新`generic.*`资料ID。独立目录和说明见[`data/generic-events`](../../data/generic-events/README.md)。旧史实目录保持105/66/41及全部原文件字节。

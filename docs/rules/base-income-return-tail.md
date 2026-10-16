@@ -1,5 +1,8 @@
 # 金钱/粮食据点收入返回尾部：捕获值的纯整数投影
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #62](https://github.com/DanielMax937/sanguozhi/pull/62) 已合并。下文“候选”“未发布”“发布前/合并后须验证”等措辞及运行数字保留其原日期语境，不是当前发布条件或本次重新验证结果。该PR的有限支持域、未实现分支和来源等级不因合并扩大；本文档回溯未运行测试。涉及原生事务的历史内容仅作证据记录，不恢复P078及其依赖。
+
+
 2026-10-14。本地候选基线为已合并 main `c508efac720574b17031ded707c052e19f3fb8d1`，tree `f39c3b2f8b0fc0f1724ba57a94c9604b4b252a03`。API `calculateBaseIncomeReturnTail` / Python `calculate_base_income_return_tail`，profile `base-income-return-tail-u32-v1`。仅补已有“港关20%份额”规则的一段可独立计算的标量工程覆盖，不是新机制发现，原43组未决主题不减。
 
 ## 来源和执行边界

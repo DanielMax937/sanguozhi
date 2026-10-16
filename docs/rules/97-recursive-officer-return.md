@@ -1,5 +1,8 @@
 # P0-62 return/list/role与event8/14原生递归组合
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #20](https://github.com/DanielMax937/sanguozhi/pull/20) 已合并。下文“候选”“未发布”“发布前/合并后须验证”等措辞及运行数字保留其原日期语境，不是当前发布条件或本次重新验证结果。该PR的有限支持域、未实现分支和来源等级不因合并扩大；本文档回溯未运行测试。涉及原生事务的历史内容仅作证据记录，不恢复P078及其依赖。
+
+
 更新：2026-10-04 UTC。基线main `a3c94e9d045688fe93c3c9b9172db30d5a89333a`（PR #19已合）。旧P0-57/58/59/60/61 API、schema和trace保持原样。
 
 - [结构化证据](../sources/recursive-officer-return.json) · [字节域](../sources/recursive-officer-return/README.md)

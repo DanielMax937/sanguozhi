@@ -1,5 +1,8 @@
 2026-10-14 新独立工程候选：[城市粮食收入非Easy稳定已解析输入投影](city-food-income-projection.md)，基于PR #60已合并main `57a2f4dd34d0d888b23d1e46e2cb78402b91a7b4`。固定160条/494 bytes和16+22 bytes两表、30槽与4种统一类型行；军屯农保留U32乘积低位后unsigned /15000，最后signed32向零/100支持负返回；difficulty0整个Easy分支拒绝。只补已有规则的工程覆盖，原43组未决证据主题不减。来源仅source-listing-reconstruction，不认证stock/Vanilla、真实helper/ABI、原表、city/owner、writer或scheduler，P0-78及依赖排除。实现和全新验收仅本地；正式聚合及独审结果另记，以下历史通过数字不验证本树，旧城市金钱179原run/证据保持不动。
 
+> 当前状态（2026-10-16）：下文PR #55等“最新候选/未发布”文字是当时的历史快照；[PR #55](https://github.com/DanielMax937/sanguozhi/pull/55)及截至PR #71的交付已合并，当前对应机制见[逐PR规则正文定位表](historical-pr-rule-index.md)。合并不关闭本页原作证据缺口，不升级旧API范围，不恢复P078及依赖；本次未运行测试，历史运行要求与失败原样保留。
+
+
 # 15 项未决规则：逐项证据核对与引擎 Fallback
 
 2026-10-10 最新本地候选：[探索搜金caller整数投影](search-gold-caller.md)，基于已合并PR #54 main `cb76e148f35b519283cc296361b507674d0fff3a`。仅RNG返回后29条/82字节、逐调用点uint32观测与signed32分支；二轮getter仅裁剪时必填，不复用首轮，结果非实际奖励。人才PR #53、宝物参数PR #54已交付；以下旧“本地候选”及验收数字是各自历史冻结记录。本批新树单独验收、尚未发布；完整搜金/探索、RNG/helper/writer/stock仍open，P0-78及依赖排除。

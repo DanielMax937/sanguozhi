@@ -1,5 +1,8 @@
 # P0-56 mission37完成、一步移动与延迟退款
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #14](https://github.com/DanielMax937/sanguozhi/pull/14) 已合并。下文“候选”“未发布”“发布前/合并后须验证”等措辞及运行数字保留其原日期语境，不是当前发布条件或本次重新验证结果。该PR的有限支持域、未实现分支和来源等级不因合并扩大；本文档回溯未运行测试。涉及原生事务的历史内容仅作证据记录，不恢复P078及其依赖。
+
+
 更新：2026-10-04 UTC。基线main `b488a9f6a38fbb45e6e6c2ac64cd68f6fa3f97ed`（PR #13已合）。承接[P0-55](90-special-mission-cancellation.md)。
 
 - [结构化证据](../sources/return-mission-lifecycle.json) · [文本字节与来源说明](../sources/return-mission-lifecycle/README.md)

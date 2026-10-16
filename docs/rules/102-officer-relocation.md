@@ -1,5 +1,8 @@
 # P0-67 武将迁移与固定参数移动准备
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #25](https://github.com/DanielMax937/sanguozhi/pull/25) 已合并。下文候选/发布前/合并后须验证措辞与运行数字保留原日期语境，不是当前发布条件或本次验证结果。该版本的有限支持域与未实现分支不因合并扩大。历史原生事务内容只作证据记录，不恢复P078及依赖；本次未运行测试。
+
+
 更新：2026-10-05 UTC。基线main `5215348ebd12cd4bc7b221008775052411fb92bb`（PR #24已合），tree `5abaed889e2d2329040c7f55f1a9b3cd90ef408d`与已审P0-66快照完全一致。本主题在此最新main上独立集成；旧API、frame和trace保持不变。
 
 - [来源manifest](../sources/officer-relocation.json) · [来源域与验证方式](../sources/officer-relocation/README.md)

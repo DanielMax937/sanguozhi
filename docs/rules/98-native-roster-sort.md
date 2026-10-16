@@ -1,5 +1,8 @@
 # P0-63 原生roster/role排序、capacity与可变S2查询
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #21](https://github.com/DanielMax937/sanguozhi/pull/21) 已合并。下文“候选”“未发布”“发布前/合并后须验证”等措辞及运行数字保留其原日期语境，不是当前发布条件或本次重新验证结果。该PR的有限支持域、未实现分支和来源等级不因合并扩大；本文档回溯未运行测试。涉及原生事务的历史内容仅作证据记录，不恢复P078及其依赖。
+
+
 更新：2026-10-04 UTC。基线main `fd1323511ae7f2d1a1f171e787bca2300444cc4b`（PR #20已合）。新增版本，不修改P0-62及更早API、frame或trace。
 
 - [结构化来源](../sources/native-roster-sort.json) · [字节域](../sources/native-roster-sort/README.md)

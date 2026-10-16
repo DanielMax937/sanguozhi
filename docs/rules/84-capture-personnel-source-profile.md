@@ -1,5 +1,8 @@
 # P0-49 据点捕获：城兵容量、人员分组与处分边界
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #7](https://github.com/DanielMax937/sanguozhi/pull/7) 已合并。下文候选/发布前/合并后须验证措辞与运行数字保留原日期语境，不是当前发布条件或本次验证结果。该版本的有限支持域与未实现分支不因合并扩大。历史原生事务内容只作证据记录，不恢复P078及依赖；本次未运行测试。
+
+
 更新：2026-10-04 UTC。基线main：`feca7b37678bccff55d0e8e5732cea463c457708`。承接[P0-48](83-capture-transaction-source-profile.md)。
 
 - [结构化证据](../sources/capture-personnel-source-profile.json) · [142个文本字节范围](../sources/capture-personnel-source-profile/)

@@ -1,5 +1,8 @@
 # P0-72: native live position and mutable fallback
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #30](https://github.com/DanielMax937/sanguozhi/pull/30) 已合并。下文候选/发布前/合并后须验证措辞与运行数字保留原日期语境，不是当前发布条件或本次验证结果。该版本的有限支持域与未实现分支不因合并扩大。历史原生事务内容只作证据记录，不恢复P078及依赖；本次未运行测试。
+
+
 This explicitly versioned source profile closes canonical00489610 position-pointer resolution and0047A950 packed-position/map evaluation. It preserves every old API/frame/trace and all18 inherited entry points. New direct entries are `position-pointer`, `position` and `movement-origin`; the new frame/version are `source-idb-S1-S2-native-live-position-frame-v1` and `source-idb-S1-S2-native-live-position-v1`.
 
 ## Native order and storage identity

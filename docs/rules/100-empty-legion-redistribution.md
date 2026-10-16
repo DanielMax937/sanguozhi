@@ -1,5 +1,8 @@
 # P0-65 空军团分派、合并与精确reset
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #23](https://github.com/DanielMax937/sanguozhi/pull/23) 已合并。下文“候选”“未发布”“发布前/合并后须验证”等措辞及运行数字保留其原日期语境，不是当前发布条件或本次重新验证结果。该PR的有限支持域、未实现分支和来源等级不因合并扩大；本文档回溯未运行测试。涉及原生事务的历史内容仅作证据记录，不恢复P078及其依赖。
+
+
 更新：2026-10-04 UTC。基线main `116c6dd44d7fc1d102b3dab6f9716a8dde3a4abe`（PR #22已合）。新增版本，不改变P0-64及更早API、frame、trace。
 
 - [结构化来源](../sources/empty-legion-redistribution.json) · [字节域](../sources/empty-legion-redistribution/README.md)

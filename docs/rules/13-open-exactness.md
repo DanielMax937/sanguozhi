@@ -1,5 +1,8 @@
 2026-10-14 新独立工程候选：[城市粮食收入非Easy稳定已解析输入投影](city-food-income-projection.md)，基于PR #60已合并main `57a2f4dd34d0d888b23d1e46e2cb78402b91a7b4`。固定160条/494 bytes和16+22 bytes两表、30槽与4种统一类型行；军屯农保留U32乘积低位后unsigned /15000，最后signed32向零/100支持负返回；difficulty0整个Easy分支拒绝。只补已有规则的工程覆盖，原43组未决证据主题不减。来源仅source-listing-reconstruction，不认证stock/Vanilla、真实helper/ABI、原表、city/owner、writer或scheduler，P0-78及依赖排除。实现和全新验收仅本地；正式聚合及独审结果另记，以下历史通过数字不验证本树，旧城市金钱179原run/证据保持不动。
 
+> 当前状态（2026-10-16）：下文PR #55等“最新候选/未发布”文字是当时的历史快照；[PR #55](https://github.com/DanielMax937/sanguozhi/pull/55)及截至PR #71的交付已合并，当前对应机制见[逐PR规则正文定位表](historical-pr-rule-index.md)。合并不关闭本页原作证据缺口，不升级旧API范围，不恢复P078及依赖；本次未运行测试，历史运行要求与失败原样保留。
+
+
 # 尚缺精确内部公式/版本验证的规则
 
 2026-10-11 新独立候选：[征兵治安writer请求参数叶](recruitment-security-argument.md)，基于已合并PR #57 main d1e93ada18efa5f95c584afd9309b228f9391f0c。只接早期保存C与入口ESI的u32两标量，signed IDIV/NEG、规范+0；7条/19 bytes（含两push9条/21 bytes），不接写回/command、不复用数量输入、法治MOD隔离。实际征兵/治安损失、ABI/helpers/stock仍open；新验收另记，下方旧候选/最新数字不验证本树。P0-78及其依赖新增实现继续排除。

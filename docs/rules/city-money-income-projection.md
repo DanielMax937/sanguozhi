@@ -1,5 +1,8 @@
 # 城市金钱收入：稳定已解析输入投影
 
+> 当前状态（2026-10-16）：本页对应 [PR #60](https://github.com/DanielMax937/sanguozhi/pull/60) 已合并。下文“最终合并树必须另跑”等为当时验证阶段记录，不是本轮运行计划。本次只补文档，未运行测试；旧失败与原证据/支持域保留。
+
+
 ## 定位和证据
 
 公开 API `calculateCityMoneyIncomeProjection` 与 Python `calculate_city_money_income_projection` 计算 `0049E590` 的一次本地城市金钱收入返回值。这里补的是已有收入规则的首次严格工程 API，不是新发现收入规则，也不是月收入实际入账或完整经济系统。

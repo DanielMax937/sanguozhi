@@ -1,5 +1,8 @@
 # 探索发现人才：已解析输入基准数值核
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #53](https://github.com/DanielMax937/sanguozhi/pull/53) 已合并。下文“候选”“未发布”“发布前/合并后须验证”等措辞及运行数字保留其原日期语境，不是当前发布条件或本次重新验证结果。该PR的有限支持域、未实现分支和来源等级不因合并扩大；本文档回溯未运行测试。涉及原生事务的历史内容仅作证据记录，不恢复P078及其依赖。
+
+
 本批是基于 main `1053ce9fdee5668fc26bff4af20ff51dd913b39a` 的新本地候选，尚未发布。证据等级 `source-listing-reconstruction`：公开研究 listing 的完整66条指令、163个所列字节，不能认证 clean-stock EXE、精确补丁版本或真实运行结果。以前的回归不验证本候选。
 
 ## 范围及使用
@@ -46,7 +49,7 @@ GitHub connector返回已解码文本，经GBK重新编码9251 bytes与固定Git
 
 外层 `005D1EA0..005D1F28` 先要求基准>0，再选候选并调用 `005B8140` 做最终判断；`0059CC10`选人、`00491310`人物ID、`00489F80`相性同源及最终RNG语义仍open。不得将本函数返回称为最终发现概率，不接Math.random，也不自动接PR52教程相性投影。
 
-搜金、搜宝物、完整探索命令/登用/奖励/调度、clean-stock和跨版本仍open。无新增游戏命令；Train/限定EndTurn、save/replay不集成此核。P0-78及依赖capture/force/native事务继续排除。
+本页早期范围中的搜金/搜宝“open”指完整系统；后续已合并的 [PR #54宝物roll参数核](treasure-roll-argument.md)与[PR #55搜金caller投影](search-gold-caller.md)补了各自有限算术，不是完整搜金/搜宝命令。候选过滤、最终随机、完整探索/登用/奖励/调度、clean-stock和跨版本仍open。本函数无新增游戏命令；Train/限定EndTurn、save/replay不集成此核。P0-78及依赖capture/force/native事务继续排除。
 
 ## 验证
 

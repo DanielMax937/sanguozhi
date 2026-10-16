@@ -1,5 +1,8 @@
 # PS2史实事件独立公开攻略资料
 
+规则正文补充：[观察1–32](historical-ps2-scenario-events-catalog-01-32.md)、[观察33–64](historical-ps2-scenario-events-catalog-33-64.md)及[版本/未决明细](historical-ps2-scenario-events-inventory.md)。该补充保留来源版本、未知与工程政策等级，不提升原作等价性；原数据和本文历史证据不删除。
+
+
 状态：`public-guide-transcription`、`executionEnabled: false`。仅独立PS2来源资料，不是PC规则修正或原生事件实现。
 
 [AtWiki第100页](https://w.atwiki.jp/sangokushi11/pages/100.html)正文渲染行191–1061的64标题独立转述为64观测/64资料ID。59项描述条件与结果，其中连环计②、三顾之礼②只说接续下一事件；4个开场项仅条件；孙策之死保持外链`reference-only`。741有序来源节点含123标签、360条件、254结果、3说明注释和1参照，不等于原生predicate或事件数。

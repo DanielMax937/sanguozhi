@@ -1,9 +1,21 @@
 # 当前工程规则入口
 
+## 历史PR逐机制规则导航
+
+[PR1–71规则正文定位表](historical-pr-rule-index.md)逐PR列出具体机制、正文和版本/证据边界；维护项明确无新增游戏规则。新增详细正文包括[训练运行与旬推进](training-runtime-policy.md)、[耗粮与手动补给](food-supply-lifecycle.md)、[编成与容量政策](unit-formation-policy.md)，以及下列完整有限事实：
+
+- [45处港关所属](historical-subordinate-bases-catalog.md)
+- [PK能力树48节点与50隐藏候选](historical-pk-ability-research-catalog.md)
+- 史实事件：[Wiki逐观察](historical-scenario-events-atwiki-catalog.md)、[游民逐观察](historical-scenario-events-gamersky-catalog.md)、[66项映射与分歧](historical-scenario-events-inventory.md)
+- 通用事件：[逐来源条件结果](historical-generic-events-catalog.md)、[未知与分歧](historical-generic-events-inventory.md)
+- PS2史实：[观察1–32](historical-ps2-scenario-events-catalog-01-32.md)、[观察33–64](historical-ps2-scenario-events-catalog-33-64.md)、[版本限制与未决](historical-ps2-scenario-events-inventory.md)
+
+这些是规则正文，不只列接口或外部数据链接；原数据与未知条件、冲突、版本等级仍保留。静态资料不因此可执行，原43主题不减。本次没有运行测试，历史默认全套失败不因文档补齐而消失。
+
 更新：2026-10-16 UTC。工程实现状态和原作证据等级是两件事；以下入口保留各自的 provisional/有限支持域。
 
-- [耗粮与手动补给资源会话](../engine/food-supply-lifecycle.md)：PR #69 已合并交付；含完整账户 schema、ConsumeTurn/ManualSupply、容量/库存守恒、气力政策与保存重放。账户不等于原生部队，不实现真实移动到达或任务终结
-- [编成与能力面板](../engine/unit-formation.md)：PR #70 已合并交付；含成员与关系、五维/六适性、兵装/技术面板、指挥容量、库存可行性及规范重放。只返回独立规格，不创建部队、扣账或迁移人员
+- [耗粮与手动补给规则](food-supply-lifecycle.md)：PR #69 已合并交付；ConsumeTurn/ManualSupply、容量/库存守恒、气力政策与边界正文；[接口合同](../engine/food-supply-lifecycle.md)。账户不等于原生部队，不实现真实移动到达或任务终结
+- [编成与能力面板规则](unit-formation-policy.md)：PR #70 已合并交付；成员关系、五维/六适性、兵装/技术面板、容量与库存规则正文；[接口合同](../engine/unit-formation.md)。只返回独立规格，不创建部队、扣账或迁移人员
 - [巡查、征兵与生产生命周期](city-command-lifecycle.md)：本次静态整理的独立服务；完整场景、具体算术与费用奖励、资源预约、跨旬与失败边界见专项页
 
 PR #69/#70 已完成各自此前版本的验收；这些历史结果不代表本次最终树重新运行过测试。本次只有静态整理，先前默认全套 food 文件失败仍未解决，详见[验证状态](city-command-lifecycle.md#validation-status)。P0-78 及依赖排除，原43组证据主题不减。

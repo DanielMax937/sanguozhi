@@ -1,5 +1,7 @@
 ## Current engineering-rule navigation
 
+- [PR1–71 game-rule coverage and detailed rule pages](docs/rules/historical-pr-rule-index.md): per-PR mechanisms, source/version limits, concrete service policies and full readable static catalogs. This is documentation coverage, not runtime validation or original-game equivalence.
+
 - [Food consumption and manual supply](docs/engine/food-supply-lifecycle.md): delivered in merged PR #69; detached resource accounts and atomic, bounded transfers
 - [Unit formation and capability panels](docs/engine/unit-formation.md): delivered in merged PR #70; pure specifications and inventory feasibility, without creating a runtime unit
 - [City commands](docs/rules/city-command-lifecycle.md): explicit service-policy patrol, recruitment and production lifecycle, with detailed formulas and resource rules

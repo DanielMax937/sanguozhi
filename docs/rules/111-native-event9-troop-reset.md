@@ -1,5 +1,8 @@
 # Native event9 saved-troop raw44 reset
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #34](https://github.com/DanielMax937/sanguozhi/pull/34) 已合并。下文候选/发布前/合并后须验证措辞与运行数字保留原日期语境，不是当前发布条件或本次验证结果。该版本的有限支持域与未实现分支不因合并扩大。历史原生事务内容只作证据记录，不恢复P078及依赖；本次未运行测试。
+
+
 Status: bounded source-local reconstruction. S1/S2 are MOD-associated IDBs,
 not certified clean-stock executables. No recovered machine code is executed.
 This version closes004BA442..004BA44C and the two complete direct reset helpers;
