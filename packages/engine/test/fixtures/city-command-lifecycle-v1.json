@@ -1,0 +1,4718 @@
+{
+  "schemaVersion": 1,
+  "evidenceScope": "Public-listing arithmetic and explicitly named service-policy examples; not clean-stock execution",
+  "scenario": {
+    "profile": "city-command-lifecycle-v1",
+    "date": {
+      "year": 226,
+      "month": 12,
+      "day": 21
+    },
+    "turn": 0,
+    "activeForceId": "forceA",
+    "corps": {
+      "id": "corpsA",
+      "actionPoints": 200
+    },
+    "city": {
+      "id": "cityA",
+      "kind": "city",
+      "gold": 10000,
+      "security": 80,
+      "troops": 1000,
+      "troopCapacity": 10000,
+      "morale": 80,
+      "moraleCap": 100,
+      "patrolUsedTurn": null,
+      "drillGroundComplete": false,
+      "inventory": {
+        "1": {
+          "quantity": 0,
+          "capacity": 10000
+        },
+        "2": {
+          "quantity": 0,
+          "capacity": 10000
+        },
+        "3": {
+          "quantity": 0,
+          "capacity": 10000
+        },
+        "4": {
+          "quantity": 0,
+          "capacity": 10000
+        },
+        "5": {
+          "quantity": 0,
+          "capacity": 10
+        },
+        "6": {
+          "quantity": 0,
+          "capacity": 10
+        },
+        "7": {
+          "quantity": 0,
+          "capacity": 10
+        },
+        "8": {
+          "quantity": 0,
+          "capacity": 10
+        },
+        "10": {
+          "quantity": 0,
+          "capacity": 10
+        },
+        "11": {
+          "quantity": 0,
+          "capacity": 10
+        }
+      }
+    },
+    "officers": [
+      {
+        "id": "o1",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "skillIds": [],
+        "xp": {
+          "leadership": 0,
+          "charm": 0,
+          "intelligence": 0,
+          "politics": 0,
+          "war": 0
+        },
+        "merit": 0,
+        "actedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "o2",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "skillIds": [],
+        "xp": {
+          "leadership": 0,
+          "charm": 0,
+          "intelligence": 0,
+          "politics": 0,
+          "war": 0
+        },
+        "merit": 0,
+        "actedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "o3",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "skillIds": [],
+        "xp": {
+          "leadership": 0,
+          "charm": 0,
+          "intelligence": 0,
+          "politics": 0,
+          "war": 0
+        },
+        "merit": 0,
+        "actedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "o4",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "skillIds": [],
+        "xp": {
+          "leadership": 0,
+          "charm": 0,
+          "intelligence": 0,
+          "politics": 0,
+          "war": 0
+        },
+        "merit": 0,
+        "actedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "o5",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "skillIds": [],
+        "xp": {
+          "leadership": 0,
+          "charm": 0,
+          "intelligence": 0,
+          "politics": 0,
+          "war": 0
+        },
+        "merit": 0,
+        "actedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "o6",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "skillIds": [],
+        "xp": {
+          "leadership": 0,
+          "charm": 0,
+          "intelligence": 0,
+          "politics": 0,
+          "war": 0
+        },
+        "merit": 0,
+        "actedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "o7",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "skillIds": [],
+        "xp": {
+          "leadership": 0,
+          "charm": 0,
+          "intelligence": 0,
+          "politics": 0,
+          "war": 0
+        },
+        "merit": 0,
+        "actedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "o8",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "skillIds": [],
+        "xp": {
+          "leadership": 0,
+          "charm": 0,
+          "intelligence": 0,
+          "politics": 0,
+          "war": 0
+        },
+        "merit": 0,
+        "actedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "o9",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "skillIds": [],
+        "xp": {
+          "leadership": 0,
+          "charm": 0,
+          "intelligence": 0,
+          "politics": 0,
+          "war": 0
+        },
+        "merit": 0,
+        "actedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "o10",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "skillIds": [],
+        "xp": {
+          "leadership": 0,
+          "charm": 0,
+          "intelligence": 0,
+          "politics": 0,
+          "war": 0
+        },
+        "merit": 0,
+        "actedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "o11",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "skillIds": [],
+        "xp": {
+          "leadership": 0,
+          "charm": 0,
+          "intelligence": 0,
+          "politics": 0,
+          "war": 0
+        },
+        "merit": 0,
+        "actedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "o12",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "skillIds": [],
+        "xp": {
+          "leadership": 0,
+          "charm": 0,
+          "intelligence": 0,
+          "politics": 0,
+          "war": 0
+        },
+        "merit": 0,
+        "actedTurn": null,
+        "reservationJobId": null
+      }
+    ],
+    "facilities": [
+      {
+        "id": "b1",
+        "cityId": "cityA",
+        "kind": "barracks",
+        "level": 3,
+        "complete": true,
+        "usedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "b2",
+        "cityId": "cityA",
+        "kind": "barracks",
+        "level": 1,
+        "complete": true,
+        "usedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "f1",
+        "cityId": "cityA",
+        "kind": "forge",
+        "level": 3,
+        "complete": true,
+        "usedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "s1",
+        "cityId": "cityA",
+        "kind": "stable",
+        "level": 1,
+        "complete": true,
+        "usedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "w1",
+        "cityId": "cityA",
+        "kind": "workshop",
+        "level": 1,
+        "complete": true,
+        "usedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "w2",
+        "cityId": "cityA",
+        "kind": "workshop",
+        "level": 1,
+        "complete": true,
+        "usedTurn": null,
+        "reservationJobId": null
+      },
+      {
+        "id": "y1",
+        "cityId": "cityA",
+        "kind": "shipyard",
+        "level": 1,
+        "complete": true,
+        "usedTurn": null,
+        "reservationJobId": null
+      }
+    ],
+    "catalog": {
+      "id": "example-supplied-equipment-table",
+      "version": 1,
+      "entries": {
+        "1": {
+          "basePriceWord": 700
+        },
+        "2": {
+          "basePriceWord": 700
+        },
+        "3": {
+          "basePriceWord": 700
+        },
+        "4": {
+          "basePriceWord": 800
+        },
+        "5": {
+          "basePriceWord": 1000
+        },
+        "6": {
+          "basePriceWord": 1000
+        },
+        "7": {
+          "basePriceWord": 1000
+        },
+        "8": {
+          "basePriceWord": 1000
+        },
+        "10": {
+          "basePriceWord": 1000
+        },
+        "11": {
+          "basePriceWord": 1000
+        }
+      }
+    },
+    "unlockedEquipmentTypes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10,
+      11
+    ],
+    "specialtyEquipmentTypes": [],
+    "pressureActive": false,
+    "difficulty": "normal",
+    "controller": "player",
+    "policies": {
+      "attributes": {
+        "id": "stable-effective-attributes-v1",
+        "version": 1,
+        "parameters": {
+          "snapshot": "command-start",
+          "xpChangesEffectiveAbility": false
+        }
+      },
+      "facilityMultiplier": {
+        "id": "guide-levels-f32-v1",
+        "version": 1,
+        "parameters": {
+          "levelBits": [
+            "3F800000",
+            "3F99999A",
+            "3FC00000"
+          ]
+        }
+      },
+      "writer": {
+        "id": "clip-and-return-actual-v1",
+        "version": 1,
+        "parameters": {
+          "overflow": "clip",
+          "returned": "actual-delta"
+        }
+      },
+      "morale": {
+        "id": "weighted-floor-presecurity-min20-v1",
+        "version": 1,
+        "parameters": {
+          "rounding": "floor",
+          "security": "before-write",
+          "minimum": 20
+        }
+      },
+      "time": {
+        "id": "raw-turns-min1-v1",
+        "version": 1,
+        "parameters": {
+          "nonpositive": "minimum-one",
+          "unit": "service-turn"
+        }
+      },
+      "productionAp": {
+        "id": "production-request20-effective20-v1",
+        "version": 1,
+        "parameters": {
+          "quantity": 20,
+          "piece": 20
+        }
+      },
+      "rewards": {
+        "id": "source-reward-compat-intelligence-v1",
+        "version": 1,
+        "parameters": {
+          "patrol": "leadership",
+          "recruit": "charm",
+          "quantity": "intelligence",
+          "piece": "intelligence",
+          "instantXp": 2,
+          "instantMerit": 50,
+          "completionXp": 4,
+          "completionMerit": 100,
+          "cap": 1000000000
+        }
+      },
+      "zeroYield": {
+        "id": "pay-zero-yield-instant-v1",
+        "version": 1,
+        "parameters": {
+          "zero": "pay-and-reward"
+        }
+      },
+      "reservations": {
+        "id": "reserve-piece-capacity-and-participants-v1",
+        "version": 1,
+        "parameters": {
+          "quantity": 1,
+          "facility": true,
+          "participants": "all-selected"
+        }
+      },
+      "turn": {
+        "id": "one-boundary-tick-complete-v1",
+        "version": 1,
+        "parameters": {
+          "boundaries": 1,
+          "order": "job-id-lexicographic",
+          "completionActors": "acted-new-turn",
+          "completionFacility": "available"
+        }
+      },
+      "apRecovery": {
+        "id": "fixed20-cap255-ap-recovery-v1",
+        "version": 1,
+        "parameters": {
+          "increment": 20,
+          "cap": 255
+        }
+      },
+      "presentation": {
+        "id": "no-presentation-rng-no-tp-v1",
+        "version": 1,
+        "parameters": {
+          "rngDraws": 0,
+          "techniquePoints": "not-modeled"
+        }
+      }
+    }
+  },
+  "policyConfigurations": {
+    "stable-effective-attributes-v1": {
+      "id": "stable-effective-attributes-v1",
+      "version": 1,
+      "parameters": {
+        "snapshot": "command-start",
+        "xpChangesEffectiveAbility": false
+      }
+    },
+    "guide-levels-f32-v1": {
+      "id": "guide-levels-f32-v1",
+      "version": 1,
+      "parameters": {
+        "levelBits": [
+          "3F800000",
+          "3F99999A",
+          "3FC00000"
+        ]
+      }
+    },
+    "flat-one-f32-v1": {
+      "id": "flat-one-f32-v1",
+      "version": 1,
+      "parameters": {
+        "levelBits": [
+          "3F800000",
+          "3F800000",
+          "3F800000"
+        ]
+      }
+    },
+    "clip-and-return-actual-v1": {
+      "id": "clip-and-return-actual-v1",
+      "version": 1,
+      "parameters": {
+        "overflow": "clip",
+        "returned": "actual-delta"
+      }
+    },
+    "reject-cap-overflow-v1": {
+      "id": "reject-cap-overflow-v1",
+      "version": 1,
+      "parameters": {
+        "overflow": "reject",
+        "returned": "actual-delta"
+      }
+    },
+    "clip-and-return-request-v1": {
+      "id": "clip-and-return-request-v1",
+      "version": 1,
+      "parameters": {
+        "overflow": "clip",
+        "returned": "requested"
+      }
+    },
+    "weighted-floor-presecurity-min20-v1": {
+      "id": "weighted-floor-presecurity-min20-v1",
+      "version": 1,
+      "parameters": {
+        "rounding": "floor",
+        "security": "before-write",
+        "minimum": 20
+      }
+    },
+    "weighted-ceil-presecurity-min20-v1": {
+      "id": "weighted-ceil-presecurity-min20-v1",
+      "version": 1,
+      "parameters": {
+        "rounding": "ceil",
+        "security": "before-write",
+        "minimum": 20
+      }
+    },
+    "raw-turns-min1-v1": {
+      "id": "raw-turns-min1-v1",
+      "version": 1,
+      "parameters": {
+        "nonpositive": "minimum-one",
+        "unit": "service-turn"
+      }
+    },
+    "positive-raw-turns-v1": {
+      "id": "positive-raw-turns-v1",
+      "version": 1,
+      "parameters": {
+        "nonpositive": "reject",
+        "unit": "service-turn"
+      }
+    },
+    "production-request20-effective20-v1": {
+      "id": "production-request20-effective20-v1",
+      "version": 1,
+      "parameters": {
+        "quantity": 20,
+        "piece": 20
+      }
+    },
+    "experimental-production-ap-v1": {
+      "id": "experimental-production-ap-v1",
+      "version": 1,
+      "parameters": {
+        "quantity": 25,
+        "piece": 30
+      }
+    },
+    "source-reward-compat-intelligence-v1": {
+      "id": "source-reward-compat-intelligence-v1",
+      "version": 1,
+      "parameters": {
+        "patrol": "leadership",
+        "recruit": "charm",
+        "quantity": "intelligence",
+        "piece": "intelligence",
+        "instantXp": 2,
+        "instantMerit": 50,
+        "completionXp": 4,
+        "completionMerit": 100,
+        "cap": 1000000000
+      }
+    },
+    "listed-byte-quantity-politics-v1": {
+      "id": "listed-byte-quantity-politics-v1",
+      "version": 1,
+      "parameters": {
+        "patrol": "leadership",
+        "recruit": "charm",
+        "quantity": "politics",
+        "piece": "intelligence",
+        "instantXp": 2,
+        "instantMerit": 50,
+        "completionXp": 4,
+        "completionMerit": 100,
+        "cap": 1000000000
+      }
+    },
+    "pay-zero-yield-instant-v1": {
+      "id": "pay-zero-yield-instant-v1",
+      "version": 1,
+      "parameters": {
+        "zero": "pay-and-reward"
+      }
+    },
+    "reject-zero-yield-instant-v1": {
+      "id": "reject-zero-yield-instant-v1",
+      "version": 1,
+      "parameters": {
+        "zero": "reject"
+      }
+    },
+    "reserve-piece-capacity-and-participants-v1": {
+      "id": "reserve-piece-capacity-and-participants-v1",
+      "version": 1,
+      "parameters": {
+        "quantity": 1,
+        "facility": true,
+        "participants": "all-selected"
+      }
+    },
+    "one-boundary-tick-complete-v1": {
+      "id": "one-boundary-tick-complete-v1",
+      "version": 1,
+      "parameters": {
+        "boundaries": 1,
+        "order": "job-id-lexicographic",
+        "completionActors": "acted-new-turn",
+        "completionFacility": "available"
+      }
+    },
+    "fixed20-cap255-ap-recovery-v1": {
+      "id": "fixed20-cap255-ap-recovery-v1",
+      "version": 1,
+      "parameters": {
+        "increment": 20,
+        "cap": 255
+      }
+    },
+    "fixed0-cap255-ap-recovery-v1": {
+      "id": "fixed0-cap255-ap-recovery-v1",
+      "version": 1,
+      "parameters": {
+        "increment": 0,
+        "cap": 255
+      }
+    },
+    "fixed40-cap255-ap-recovery-v1": {
+      "id": "fixed40-cap255-ap-recovery-v1",
+      "version": 1,
+      "parameters": {
+        "increment": 40,
+        "cap": 255
+      }
+    },
+    "no-presentation-rng-no-tp-v1": {
+      "id": "no-presentation-rng-no-tp-v1",
+      "version": 1,
+      "parameters": {
+        "rngDraws": 0,
+        "techniquePoints": "not-modeled"
+      }
+    }
+  },
+  "sourceLiteralVectors": [
+    {
+      "id": "L01",
+      "api": "calculatePatrolSecurityGain",
+      "input": {
+        "profile": "patrol-security-gain-stable-v1",
+        "resolvedLeadershipSlots": [
+          0
+        ],
+        "publicOrderByte": 0,
+        "pressureHelperEax": 0
+      },
+      "expected": {
+        "baseGain": 2,
+        "returnedDelta": 2,
+        "capBranch": false
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L02",
+      "api": "calculatePatrolSecurityGain",
+      "input": {
+        "profile": "patrol-security-gain-stable-v1",
+        "resolvedLeadershipSlots": [
+          28
+        ],
+        "publicOrderByte": 0,
+        "pressureHelperEax": 256
+      },
+      "expected": {
+        "baseGain": 3,
+        "afterPressure": 1,
+        "returnedDelta": 1
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L03",
+      "api": "calculatePatrolSecurityGain",
+      "input": {
+        "profile": "patrol-security-gain-stable-v1",
+        "resolvedLeadershipSlots": [
+          28
+        ],
+        "publicOrderByte": 97,
+        "pressureHelperEax": 0
+      },
+      "expected": {
+        "returnedDelta": 3,
+        "capBranch": false
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L04",
+      "api": "calculatePatrolSecurityGain",
+      "input": {
+        "profile": "patrol-security-gain-stable-v1",
+        "resolvedLeadershipSlots": [
+          84
+        ],
+        "publicOrderByte": 97,
+        "pressureHelperEax": 1
+      },
+      "expected": {
+        "afterPressure": 2,
+        "returnedDelta": 2,
+        "capBranch": false
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L05",
+      "api": "calculatePatrolSecurityGain",
+      "input": {
+        "profile": "patrol-security-gain-stable-v1",
+        "resolvedLeadershipSlots": [
+          0
+        ],
+        "publicOrderByte": 101,
+        "pressureHelperEax": 0
+      },
+      "expected": {
+        "returnedDelta": -1,
+        "capBranch": true
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L06",
+      "api": "calculatePatrolSecurityGain",
+      "input": {
+        "profile": "patrol-security-gain-stable-v1",
+        "resolvedLeadershipSlots": [
+          0
+        ],
+        "publicOrderByte": 255,
+        "pressureHelperEax": 0
+      },
+      "expected": {
+        "returnedDelta": -155
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L07",
+      "api": "calculatePatrolSecurityGain",
+      "input": {
+        "profile": "patrol-security-gain-stable-v1",
+        "resolvedLeadershipSlots": [
+          255,
+          255,
+          255
+        ],
+        "publicOrderByte": 0,
+        "pressureHelperEax": 0
+      },
+      "expected": {
+        "baseGain": 29,
+        "returnedDelta": 29
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L08",
+      "api": "calculatePatrolSecurityGain",
+      "input": {
+        "profile": "patrol-security-gain-stable-v1",
+        "resolvedLeadershipSlots": [
+          null,
+          100,
+          100
+        ],
+        "publicOrderByte": 0,
+        "pressureHelperEax": 0
+      },
+      "expected": {
+        "supported": false,
+        "reason": "invalid-leadership-slots"
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L09",
+      "api": "calculateProductionPrice",
+      "input": {
+        "profile": "production-price-resolved-v1",
+        "savedBasePriceWord": 11,
+        "specialtyHelperEax": 256
+      },
+      "expected": {
+        "returnedPrice": 11
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L10",
+      "api": "calculateProductionPrice",
+      "input": {
+        "profile": "production-price-resolved-v1",
+        "savedBasePriceWord": 11,
+        "specialtyHelperEax": 257
+      },
+      "expected": {
+        "returnedPrice": 8
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L11",
+      "api": "calculateProductionPrice",
+      "input": {
+        "profile": "production-price-resolved-v1",
+        "savedBasePriceWord": 1,
+        "specialtyHelperEax": 1
+      },
+      "expected": {
+        "returnedPrice": 0
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L12",
+      "api": "calculateProductionPrice",
+      "input": {
+        "profile": "production-price-resolved-v1",
+        "savedBasePriceWord": 65535,
+        "specialtyHelperEax": 4294967295
+      },
+      "expected": {
+        "returnedPrice": 52428
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L13",
+      "api": "calculateProductionQuantity",
+      "input": {
+        "profile": "production-quantity-resolved-f32-v1",
+        "nativeEquipmentType": 1,
+        "slots": [
+          {
+            "intelligenceGetterEax": 100,
+            "skillHelperEax": 256
+          },
+          {
+            "intelligenceGetterEax": 100,
+            "skillHelperEax": 0
+          },
+          {
+            "intelligenceGetterEax": 100,
+            "skillHelperEax": 0
+          }
+        ],
+        "resolvedFacilityFactorBits": "3FC00000",
+        "difficultyWord": 2,
+        "cityVirtualEax": 0
+      },
+      "expected": {
+        "baseQuantity": 3000,
+        "skillAdjustedQuantity": 6000,
+        "convertedQuantity": 9000,
+        "returnedQuantity": 18000
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L14",
+      "api": "calculateProductionQuantity",
+      "input": {
+        "profile": "production-quantity-resolved-f32-v1",
+        "nativeEquipmentType": 1,
+        "slots": [
+          {
+            "intelligenceGetterEax": 0,
+            "skillHelperEax": 0
+          },
+          null,
+          null
+        ],
+        "resolvedFacilityFactorBits": "3F99999A",
+        "difficultyWord": 0
+      },
+      "expected": {
+        "returnedQuantity": 1200
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L15",
+      "api": "calculateProductionQuantity",
+      "input": {
+        "profile": "production-quantity-resolved-f32-v1",
+        "nativeEquipmentType": 1,
+        "slots": [
+          {
+            "intelligenceGetterEax": 356,
+            "skillHelperEax": 0
+          },
+          null,
+          null
+        ],
+        "resolvedFacilityFactorBits": "3F800000",
+        "difficultyWord": 0
+      },
+      "expected": {
+        "intelligenceSum": 100,
+        "returnedQuantity": 2000
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L16",
+      "api": "calculateProductionQuantity",
+      "input": {
+        "profile": "production-quantity-resolved-f32-v1",
+        "nativeEquipmentType": 5
+      },
+      "expected": {
+        "returnedQuantity": 1,
+        "resolvedInputsObserved": false
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L17",
+      "api": "calculateProductionQuantity",
+      "input": {
+        "profile": "production-quantity-resolved-f32-v1",
+        "nativeEquipmentType": 1,
+        "slots": [
+          null,
+          null,
+          null
+        ],
+        "resolvedFacilityFactorBits": "3FC00000",
+        "difficultyWord": 0
+      },
+      "expected": {
+        "supported": false,
+        "reason": "no-valid-slot"
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L18",
+      "api": "calculateRecruitmentSecurityArgument",
+      "input": {
+        "profile": "recruitment-security-argument-v1",
+        "savedCharmSum": 300,
+        "savedTroopReturnU32": 4200
+      },
+      "expected": {
+        "securityDeltaSigned": -10
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L19",
+      "api": "calculateRecruitmentSecurityArgument",
+      "input": {
+        "profile": "recruitment-security-argument-v1",
+        "savedCharmSum": 300,
+        "savedTroopReturnU32": 6300
+      },
+      "expected": {
+        "securityDeltaSigned": -15
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L20",
+      "api": "calculateRecruitmentSecurityArgument",
+      "input": {
+        "profile": "recruitment-security-argument-v1",
+        "savedCharmSum": 0,
+        "savedTroopReturnU32": 4294967195
+      },
+      "expected": {
+        "securityDeltaSigned": 1
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L21",
+      "api": "calculateRecruitmentSecurityArgument",
+      "input": {
+        "profile": "recruitment-security-argument-v1",
+        "savedCharmSum": 300,
+        "savedTroopReturnU32": 1000
+      },
+      "expected": {
+        "securityDeltaSigned": -2
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L22",
+      "api": "calculateRecruitmentQuantity",
+      "input": {
+        "profile": "recruitment-quantity-observations-f32-v1",
+        "captures": [
+          {
+            "callAddress": "005C3619",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3630",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3643",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C364B",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 0,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 0,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 0,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 1,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 1,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 2,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 2,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 2,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C3738",
+            "eax": 0
+          },
+          {
+            "callAddress": "005C374E",
+            "eax": 1000
+          },
+          {
+            "callAddress": "005C3757",
+            "eax": 10000
+          }
+        ],
+        "savedSecurityByte": 100,
+        "resolvedFacilityFactorBits": "3FC00000",
+        "difficultyWord": 0
+      },
+      "expected": {
+        "returnedValue": 4200,
+        "capacityFallbackApplied": false
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L23",
+      "api": "calculateRecruitmentQuantity",
+      "input": {
+        "profile": "recruitment-quantity-observations-f32-v1",
+        "captures": [
+          {
+            "callAddress": "005C3619",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3630",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3643",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C364B",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 0,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 0,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 0,
+            "eax": 256
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 1,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 1,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 2,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 2,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 2,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C3738",
+            "eax": 0
+          },
+          {
+            "callAddress": "005C374E",
+            "eax": 1000
+          },
+          {
+            "callAddress": "005C3757",
+            "eax": 10000
+          }
+        ],
+        "savedSecurityByte": 100,
+        "resolvedFacilityFactorBits": "3FC00000",
+        "difficultyWord": 0
+      },
+      "expected": {
+        "returnedValue": 6300,
+        "skillParameter": 15
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L24",
+      "api": "calculateRecruitmentQuantity",
+      "input": {
+        "profile": "recruitment-quantity-observations-f32-v1",
+        "captures": [
+          {
+            "callAddress": "005C3619",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3630",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3643",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C364B",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 0,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 0,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 0,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 1,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 1,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 2,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 2,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 2,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C3738",
+            "eax": 0
+          },
+          {
+            "callAddress": "005C374E",
+            "eax": 9000
+          },
+          {
+            "callAddress": "005C3757",
+            "eax": 10000
+          },
+          {
+            "callAddress": "005C3764",
+            "eax": 9000
+          },
+          {
+            "callAddress": "005C376B",
+            "eax": 10000
+          }
+        ],
+        "savedSecurityByte": 100,
+        "resolvedFacilityFactorBits": "3FC00000",
+        "difficultyWord": 0
+      },
+      "expected": {
+        "convertedQuantity": 4200,
+        "returnedValue": 1000,
+        "capacityFallbackApplied": true
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L25",
+      "api": "calculateRecruitmentQuantity",
+      "input": {
+        "profile": "recruitment-quantity-observations-f32-v1",
+        "captures": [
+          {
+            "callAddress": "005C3619",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3630",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3643",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C364B",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 0,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 0,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 0,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 1,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 1,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 2,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 2,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 2,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C3738",
+            "eax": 256
+          },
+          {
+            "callAddress": "005C374E",
+            "eax": 1000
+          },
+          {
+            "callAddress": "005C3757",
+            "eax": 10000
+          }
+        ],
+        "savedSecurityByte": 100,
+        "resolvedFacilityFactorBits": "3FC00000",
+        "difficultyWord": 0
+      },
+      "expected": {
+        "returnedValue": 2100,
+        "pressureApplied": true
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L26",
+      "api": "calculateRecruitmentQuantity",
+      "input": {
+        "profile": "recruitment-quantity-observations-f32-v1",
+        "captures": [
+          {
+            "callAddress": "005C3619",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3630",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3643",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C364B",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 0,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 0,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 0,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 1,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 1,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C367B",
+            "slotIndex": 2,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C3689",
+            "slotIndex": 2,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C36AA",
+            "slotIndex": 2,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C3725",
+            "eax": 0
+          },
+          {
+            "callAddress": "005C3738",
+            "eax": 0
+          },
+          {
+            "callAddress": "005C374E",
+            "eax": 1000
+          },
+          {
+            "callAddress": "005C3757",
+            "eax": 10000
+          }
+        ],
+        "savedSecurityByte": 100,
+        "resolvedFacilityFactorBits": "3FC00000",
+        "difficultyWord": 2
+      },
+      "expected": {
+        "returnedValue": 8400,
+        "superApplied": true
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L27",
+      "api": "calculateProductionTimeProjection",
+      "input": {
+        "profile": "production-time-observations-v1",
+        "nativeEquipmentType": 5,
+        "captures": [
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 0,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 0,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 0,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 1,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 1,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 2,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 2,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 2,
+            "eax": 0
+          }
+        ]
+      },
+      "expected": {
+        "q": 8,
+        "beforeSkill": 2,
+        "returnedValue": 2
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L28",
+      "api": "calculateProductionTimeProjection",
+      "input": {
+        "profile": "production-time-observations-v1",
+        "nativeEquipmentType": 5,
+        "captures": [
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 0,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 0,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 0,
+            "eax": 256
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 1,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 1,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 2,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 2,
+            "eax": 100
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 2,
+            "eax": 0
+          }
+        ]
+      },
+      "expected": {
+        "returnedValue": 1
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L29",
+      "api": "calculateProductionTimeProjection",
+      "input": {
+        "profile": "production-time-observations-v1",
+        "nativeEquipmentType": 5,
+        "captures": [
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 0,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 0,
+            "eax": 105
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 0,
+            "eax": 256
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 1,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 1,
+            "eax": 105
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 2,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 2,
+            "eax": 105
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 2,
+            "eax": 0
+          }
+        ]
+      },
+      "expected": {
+        "q": 9,
+        "beforeSkill": 1,
+        "returnedValue": 0
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L30",
+      "api": "calculateProductionTimeProjection",
+      "input": {
+        "profile": "production-time-observations-v1",
+        "nativeEquipmentType": 5,
+        "captures": [
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 0,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 0,
+            "eax": 255
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 0,
+            "eax": 256
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 1,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 1,
+            "eax": 255
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 2,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 2,
+            "eax": 255
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 2,
+            "eax": 0
+          }
+        ]
+      },
+      "expected": {
+        "q": 34,
+        "beforeSkill": -24,
+        "returnedValue": -12
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L31",
+      "api": "calculateProductionTimeProjection",
+      "input": {
+        "profile": "production-time-observations-v1",
+        "nativeEquipmentType": 10,
+        "captures": [
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 0,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 0,
+            "eax": 80
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 0,
+            "eax": 256
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 1,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 1,
+            "eax": 80
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 2,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 2,
+            "eax": 80
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 2,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C6D90",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DAA",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DB0",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DCA",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DD1",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DDE",
+            "eax": 1
+          }
+        ]
+      },
+      "expected": {
+        "q": 5,
+        "beforeSkill": 3,
+        "returnedValue": 1,
+        "facilityApplied": true
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L32",
+      "api": "calculateProductionTimeProjection",
+      "input": {
+        "profile": "production-time-observations-v1",
+        "nativeEquipmentType": 10,
+        "captures": [
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 0,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 0,
+            "eax": 80
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 0,
+            "eax": 256
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 1,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 1,
+            "eax": 80
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 2,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 2,
+            "eax": 80
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 2,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C6D90",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DAA",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DB0",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DCA",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DD1",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DDE",
+            "eax": 0
+          }
+        ]
+      },
+      "expected": {
+        "returnedValue": 2,
+        "facilityApplied": false
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L33",
+      "api": "calculateProductionTimeProjection",
+      "input": {
+        "profile": "production-time-observations-v1",
+        "nativeEquipmentType": 9,
+        "captures": [
+          {
+            "callAddress": "005C6D90",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DAA",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DB0",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DCA",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DD1",
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6DDE",
+            "eax": 1
+          }
+        ]
+      },
+      "expected": {
+        "scannedSlots": false,
+        "q": 1,
+        "returnedValue": 7
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L34",
+      "api": "calculateProductionTimeProjection",
+      "input": {
+        "profile": "production-time-observations-v1",
+        "nativeEquipmentType": 5,
+        "captures": [
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 0,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 2,
+            "eax": 0
+          }
+        ]
+      },
+      "expected": {
+        "q": 1,
+        "returnedValue": 9
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L35",
+      "api": "calculateProductionTimeProjection",
+      "input": {
+        "profile": "production-time-observations-v1",
+        "nativeEquipmentType": 1,
+        "captures": []
+      },
+      "expected": {
+        "returnedValue": 0,
+        "scannedSlots": false
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L36",
+      "api": "calculateProductionQuantity",
+      "input": {
+        "profile": "production-quantity-resolved-f32-v1",
+        "nativeEquipmentType": 1,
+        "slots": [
+          {
+            "intelligenceGetterEax": 1,
+            "skillHelperEax": 256
+          },
+          {
+            "intelligenceGetterEax": 1,
+            "skillHelperEax": 0
+          },
+          null
+        ],
+        "resolvedFacilityFactorBits": "3FC00000",
+        "difficultyWord": 0
+      },
+      "expected": {
+        "baseQuantity": 1015,
+        "skillAdjustedQuantity": 2030,
+        "returnedQuantity": 3045
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L37",
+      "api": "calculateProductionTimeProjection",
+      "input": {
+        "profile": "production-time-observations-v1",
+        "nativeEquipmentType": 5,
+        "captures": [
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 0,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 0,
+            "eax": 249
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 0,
+            "eax": 256
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 1,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 1,
+            "eax": 249
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 1,
+            "eax": 0
+          },
+          {
+            "callAddress": "005C6CF8",
+            "slotIndex": 2,
+            "eax": 1
+          },
+          {
+            "callAddress": "005C6D06",
+            "slotIndex": 2,
+            "eax": 249
+          },
+          {
+            "callAddress": "005C6D25",
+            "slotIndex": 2,
+            "eax": 0
+          }
+        ]
+      },
+      "expected": {
+        "q": 33,
+        "beforeSkill": -23,
+        "returnedValue": -11
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L38",
+      "api": "calculateProductionQuantity",
+      "input": {
+        "profile": "production-quantity-resolved-f32-v1",
+        "nativeEquipmentType": 9
+      },
+      "expected": {
+        "returnedQuantity": 1
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    },
+    {
+      "id": "L39",
+      "api": "calculateProductionQuantity",
+      "input": {
+        "profile": "production-quantity-resolved-f32-v1",
+        "nativeEquipmentType": 0,
+        "slots": [
+          {
+            "intelligenceGetterEax": 0,
+            "skillHelperEax": 0
+          },
+          null,
+          null
+        ],
+        "resolvedFacilityFactorBits": "3F800000",
+        "difficultyWord": 0
+      },
+      "expected": {
+        "skillQueryId": -1,
+        "returnedQuantity": 1000
+      },
+      "evidenceClass": "existing-kernel-source-listing"
+    }
+  ],
+  "policyReferenceVectors": [
+    {
+      "id": "R01",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "state.city.security": 92,
+        "state.city.gold": 9900,
+        "state.corps.actionPoints": 180,
+        "eachSelected.xp.leadership": 2,
+        "eachSelected.merit": 50,
+        "eachSelected.actedTurn": 0,
+        "state.city.patrolUsedTurn": 0,
+        "state.revision": 1
+      }
+    },
+    {
+      "id": "R02",
+      "initialPatch": {
+        "/city/security": 99
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "calculation.securityWrite.requested": 1,
+        "calculation.securityWrite.actualDelta": 1,
+        "state.city.security": 100,
+        "state.city.gold": 9900
+      }
+    },
+    {
+      "id": "R03",
+      "initialPatch": {
+        "/city/security": 100
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "state.city.security": 100,
+        "state.city.gold": 9900,
+        "state.corps.actionPoints": 180,
+        "eachSelected.merit": 50
+      }
+    },
+    {
+      "id": "R04",
+      "initialPatch": {
+        "/officers/0/leadership": 28,
+        "/pressureActive": true
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1"
+          ]
+        }
+      },
+      "expected": {
+        "state.city.security": 81,
+        "eachSelected.xp.leadership": 2
+      }
+    },
+    {
+      "id": "R05",
+      "initialPatch": {
+        "/city/security": 100
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "calculation.quantityKernelReturn": 4200,
+        "calculation.troopWrite.requested": 4200,
+        "calculation.troopWrite.returned": 4200,
+        "calculation.troopWrite.actualDelta": 4200,
+        "state.city.troops": 5200,
+        "state.city.security": 90,
+        "state.city.morale": 55,
+        "state.city.gold": 9700,
+        "state.corps.actionPoints": 180,
+        "eachSelected.xp.charm": 2,
+        "eachSelected.merit": 50
+      }
+    },
+    {
+      "id": "R06",
+      "initialPatch": {
+        "/city/security": 100,
+        "/city/troops": 9000
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "calculation.quantityPreCapacity": 4200,
+        "calculation.quantityKernelReturn": 1000,
+        "state.city.troops": 10000,
+        "state.city.security": 98,
+        "state.city.morale": 77,
+        "state.city.gold": 9700,
+        "eachSelected.merit": 50
+      }
+    },
+    {
+      "id": "R07",
+      "initialPatch": {
+        "/city/security": 100,
+        "/officers/0/skillIds": [
+          79
+        ]
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "state.city.troops": 7300,
+        "state.city.security": 85,
+        "state.city.morale": 54
+      }
+    },
+    {
+      "id": "R08",
+      "initialPatch": {
+        "/city/security": 0
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "calculation.securityWrite.requested": -4,
+        "calculation.securityWrite.returned": 0,
+        "calculation.securityWrite.actualDelta": 0,
+        "state.city.security": 0,
+        "state.city.troops": 2950,
+        "state.city.morale": 27
+      }
+    },
+    {
+      "id": "R09",
+      "initialPatch": {
+        "/city/security": 0,
+        "/policies/writer": {
+          "id": "reject-cap-overflow-v1",
+          "version": 1,
+          "parameters": {
+            "overflow": "reject",
+            "returned": "actual-delta"
+          }
+        }
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "writer-cap-overflow",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "R10",
+      "initialPatch": {
+        "/city/troops": 10000
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "calculation.quantityKernelReturn": 0,
+        "state.city.troops": 10000,
+        "state.city.security": 80,
+        "state.city.morale": 80,
+        "state.city.gold": 9700,
+        "state.corps.actionPoints": 180
+      }
+    },
+    {
+      "id": "R11",
+      "initialPatch": {
+        "/city/troops": 0,
+        "/city/security": 0,
+        "/city/morale": 0
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "state.city.troops": 1950,
+        "state.city.morale": 20
+      }
+    },
+    {
+      "id": "R12",
+      "initialPatch": {
+        "/city/security": 100,
+        "/policies/facilityMultiplier": {
+          "id": "flat-one-f32-v1",
+          "version": 1,
+          "parameters": {
+            "levelBits": [
+              "3F800000",
+              "3F800000",
+              "3F800000"
+            ]
+          }
+        }
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "calculation.quantityKernelReturn": 2800,
+        "state.city.troops": 3800,
+        "state.city.security": 93,
+        "state.city.morale": 57
+      }
+    },
+    {
+      "id": "R13",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 1
+        }
+      },
+      "expected": {
+        "state.city.inventory.1.quantity": 4500,
+        "state.city.gold": 9300,
+        "state.corps.actionPoints": 180,
+        "eachSelected.xp.intelligence": 2,
+        "eachSelected.merit": 50,
+        "newJobs": 0,
+        "taskKind": "instant"
+      }
+    },
+    {
+      "id": "R14",
+      "initialPatch": {
+        "/city/inventory/1/quantity": 9900
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 1
+        }
+      },
+      "expected": {
+        "calculation.inventoryWrite.requested": 4500,
+        "calculation.inventoryWrite.returned": 100,
+        "calculation.inventoryWrite.actualDelta": 100,
+        "calculation.inventoryWrite.discarded": 4400,
+        "state.city.inventory.1.quantity": 10000,
+        "state.city.gold": 9300
+      }
+    },
+    {
+      "id": "R15",
+      "initialPatch": {
+        "/city/inventory/1/quantity": 9900,
+        "/policies/writer": {
+          "id": "reject-cap-overflow-v1",
+          "version": 1,
+          "parameters": {
+            "overflow": "reject",
+            "returned": "actual-delta"
+          }
+        }
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 1
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "writer-cap-overflow",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "R16",
+      "initialPatch": {
+        "/policies/facilityMultiplier": {
+          "id": "flat-one-f32-v1",
+          "version": 1,
+          "parameters": {
+            "levelBits": [
+              "3F800000",
+              "3F800000",
+              "3F800000"
+            ]
+          }
+        }
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 1
+        }
+      },
+      "expected": {
+        "state.city.inventory.1.quantity": 3000
+      }
+    },
+    {
+      "id": "R17",
+      "initialPatch": {
+        "/policies/productionAp": {
+          "id": "experimental-production-ap-v1",
+          "version": 1,
+          "parameters": {
+            "quantity": 25,
+            "piece": 30
+          }
+        }
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 1
+        }
+      },
+      "expected": {
+        "state.corps.actionPoints": 175
+      }
+    },
+    {
+      "id": "R18",
+      "initialPatch": {
+        "/policies/productionAp": {
+          "id": "experimental-production-ap-v1",
+          "version": 1,
+          "parameters": {
+            "quantity": 25,
+            "piece": 30
+          }
+        }
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "w1",
+          "equipmentType": 5
+        }
+      },
+      "expected": {
+        "state.corps.actionPoints": 170,
+        "state.city.gold": 9000,
+        "newJob.remainingTurns": 2
+      }
+    },
+    {
+      "id": "R19",
+      "initialPatch": {
+        "/policies/rewards": {
+          "id": "listed-byte-quantity-politics-v1",
+          "version": 1,
+          "parameters": {
+            "patrol": "leadership",
+            "recruit": "charm",
+            "quantity": "politics",
+            "piece": "intelligence",
+            "instantXp": 2,
+            "instantMerit": 50,
+            "completionXp": 4,
+            "completionMerit": 100,
+            "cap": 1000000000
+          }
+        }
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 1
+        }
+      },
+      "expected": {
+        "eachSelected.xp.politics": 2,
+        "eachSelected.xp.intelligence": 0,
+        "eachSelected.merit": 50
+      }
+    },
+    {
+      "id": "R20",
+      "initialPatch": {
+        "/specialtyEquipmentTypes": [
+          1
+        ],
+        "/catalog/entries/1/basePriceWord": 11
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 1
+        }
+      },
+      "expected": {
+        "calculation.priceKernelReturn": 8,
+        "state.city.gold": 9992
+      }
+    },
+    {
+      "id": "R21",
+      "initialPatch": {
+        "/specialtyEquipmentTypes": [
+          1
+        ],
+        "/catalog/entries/1/basePriceWord": 1,
+        "/city/gold": 0
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 1
+        }
+      },
+      "expected": {
+        "calculation.priceKernelReturn": 0,
+        "state.city.gold": 0,
+        "state.corps.actionPoints": 180
+      }
+    },
+    {
+      "id": "R22",
+      "initialPatch": {
+        "/difficulty": "super",
+        "/controller": "ai",
+        "/officers/0/skillIds": [
+          80
+        ]
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 1
+        }
+      },
+      "expected": {
+        "calculation.quantityKernelReturn": 18000,
+        "state.city.inventory.1.quantity": 10000,
+        "calculation.inventoryWrite.discarded": 8000
+      }
+    },
+    {
+      "id": "R23",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "w1",
+          "equipmentType": 5
+        }
+      },
+      "expected": {
+        "state.city.gold": 9000,
+        "state.corps.actionPoints": 180,
+        "state.city.inventory.5.quantity": 0,
+        "state.city.inventory.5.reserved": 1,
+        "newJob.remainingTurns": 2,
+        "newJob.dueTurn": 2,
+        "eachSelected.xp.intelligence": 0,
+        "eachSelected.merit": 0,
+        "eachSelected.actedTurn": 0,
+        "participantsReserved": 3,
+        "facilityReserved": "w1"
+      }
+    },
+    {
+      "id": "R24",
+      "initialPatch": {
+        "/officers/0/intelligence": 105,
+        "/officers/1/intelligence": 105,
+        "/officers/2/intelligence": 105,
+        "/officers/0/skillIds": [
+          82
+        ]
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "w1",
+          "equipmentType": 5
+        }
+      },
+      "expected": {
+        "calculation.timeKernelReturn": 0,
+        "newJob.remainingTurns": 1,
+        "newJob.dueTurn": 1,
+        "state.city.inventory.5.quantity": 0
+      }
+    },
+    {
+      "id": "R25",
+      "initialPatch": {
+        "/officers/0/intelligence": 105,
+        "/officers/1/intelligence": 105,
+        "/officers/2/intelligence": 105,
+        "/officers/0/skillIds": [
+          82
+        ],
+        "/policies/time": {
+          "id": "positive-raw-turns-v1",
+          "version": 1,
+          "parameters": {
+            "nonpositive": "reject",
+            "unit": "service-turn"
+          }
+        }
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "w1",
+          "equipmentType": 5
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "unsupported-nonpositive-production-time",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "R26",
+      "initialPatch": {
+        "/officers/0/intelligence": 255,
+        "/officers/1/intelligence": 255,
+        "/officers/2/intelligence": 255,
+        "/officers/0/skillIds": [
+          82
+        ]
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "w1",
+          "equipmentType": 5
+        }
+      },
+      "expected": {
+        "calculation.timeKernelReturn": -12,
+        "newJob.remainingTurns": 1
+      }
+    },
+    {
+      "id": "R27",
+      "initialPatch": {
+        "/officers/0/intelligence": 80,
+        "/officers/1/intelligence": 80,
+        "/officers/2/intelligence": 80,
+        "/officers/0/skillIds": [
+          83
+        ],
+        "/city/drillGroundComplete": true
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "y1",
+          "equipmentType": 10
+        }
+      },
+      "expected": {
+        "calculation.timeKernelReturn": 1,
+        "newJob.remainingTurns": 1
+      }
+    },
+    {
+      "id": "R28",
+      "initialPatch": {
+        "/officers/0/intelligence": 80,
+        "/officers/1/intelligence": 80,
+        "/officers/2/intelligence": 80,
+        "/officers/0/skillIds": [
+          82
+        ],
+        "/city/drillGroundComplete": true
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "w1",
+          "equipmentType": 5
+        }
+      },
+      "expected": {
+        "calculation.timeKernelReturn": 2,
+        "newJob.remainingTurns": 2,
+        "calculation.facilityApplied": false
+      }
+    },
+    {
+      "id": "R29",
+      "initialPatch": {
+        "/city/inventory/5/quantity": 10
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "w1",
+          "equipmentType": 5
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "piece-capacity-unavailable",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "R30",
+      "initialPatch": {
+        "/officers/0/intelligence": 80,
+        "/officers/0/skillIds": [
+          81
+        ]
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1"
+          ],
+          "facilityId": "s1",
+          "equipmentType": 4
+        }
+      },
+      "expected": {
+        "state.city.inventory.4.quantity": 3600,
+        "state.city.gold": 9200
+      }
+    },
+    {
+      "id": "R31",
+      "initialPatch": {
+        "/officers/0/xp/leadership": 999999999,
+        "/officers/0/merit": 999999999
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "state.officers.0.xp.leadership": 1000000000,
+        "state.officers.0.merit": 1000000000,
+        "officer0.reward.xp.requested": 2,
+        "officer0.reward.xp.actualDelta": 1,
+        "officer0.reward.merit.actualDelta": 1
+      }
+    },
+    {
+      "id": "R32",
+      "initialPatch": {
+        "/corps/actionPoints": 250
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "AdvanceCityTurn"
+        }
+      },
+      "expected": {
+        "state.corps.actionPoints": 255,
+        "state.turn": 1,
+        "state.date": {
+          "year": 227,
+          "month": 1,
+          "day": 1
+        },
+        "state.revision": 1
+      }
+    },
+    {
+      "id": "R33",
+      "initialPatch": {
+        "/officers/0/leadership": 0
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1"
+          ]
+        }
+      },
+      "expected": {
+        "state.city.security": 82,
+        "eachSelected.xp.leadership": 2
+      }
+    },
+    {
+      "id": "R34",
+      "initialPatch": {
+        "/officers/0/charm": 0
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "calculation.quantityKernelReturn": 1500,
+        "state.city.security": 65,
+        "state.city.morale": 56
+      }
+    },
+    {
+      "id": "R35",
+      "initialPatch": {
+        "/city/gold": 100,
+        "/corps/actionPoints": 20
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "state.city.gold": 0,
+        "state.corps.actionPoints": 0
+      }
+    },
+    {
+      "id": "R36",
+      "initialPatch": {
+        "/city/gold": 300,
+        "/corps/actionPoints": 20
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "state.city.gold": 0,
+        "state.corps.actionPoints": 0
+      }
+    },
+    {
+      "id": "R37",
+      "initialPatch": {
+        "/city/gold": 700,
+        "/corps/actionPoints": 20
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 1
+        }
+      },
+      "expected": {
+        "state.city.gold": 0,
+        "state.corps.actionPoints": 0
+      }
+    }
+  ],
+  "invalidInputVectors": [
+    {
+      "id": "I01",
+      "initialPatch": {
+        "/city/gold": 99
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "insufficient-gold",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I02",
+      "initialPatch": {
+        "/city/gold": 299
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "insufficient-gold",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I03",
+      "initialPatch": {
+        "/city/gold": 699
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 1
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "insufficient-gold",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I04",
+      "initialPatch": {
+        "/corps/actionPoints": 19
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "insufficient-ap",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I05",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o1"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "duplicate-officer",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I06",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": []
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "invalid-officer-count",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I07",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3",
+            "o4"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "invalid-officer-count",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I08",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "missing"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "unknown-officer",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I09",
+      "initialPatch": {
+        "/officers/2/available": false
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "officer-unavailable",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I10",
+      "initialPatch": {
+        "/officers/1/cityId": "cityB"
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "officer-not-present",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I11",
+      "initialPatch": {
+        "/officers/0/forceId": "forceB"
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "officer-not-member",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I12",
+      "initialPatch": {
+        "/officers/1/actedTurn": 0
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "officer-already-acted",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I13",
+      "initialPatch": {
+        "/facilities/0/complete": false
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "facility-incomplete",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I14",
+      "initialPatch": {
+        "/facilities/0/usedTurn": 0
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Recruit",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1"
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "facility-used-this-turn",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I15",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "b1",
+          "equipmentType": 1
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "wrong-facility-kind",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I16",
+      "initialPatch": {
+        "/unlockedEquipmentTypes": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "w1",
+          "equipmentType": 7
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "equipment-locked",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I17",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 0
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "unsupported-equipment",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I18",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "y1",
+          "equipmentType": 9
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "unsupported-equipment",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I19",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "f1",
+          "equipmentType": 1,
+          "quantity": 4500
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "unexpected-field",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I20",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Produce",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "facilityId": "w1",
+          "equipmentType": 5,
+          "duration": 1
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "unexpected-field",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I21",
+      "initialPatch": {},
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "other",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "unknown-city",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I22",
+      "initialPatch": {
+        "/policies/time": "original"
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "unsupported-policy",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I23",
+      "initialPatch": {
+        "/officers/0/leadership": 256
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "invalid-state",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I24",
+      "initialPatch": {
+        "/city/security": 101
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "invalid-state",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I25",
+      "initialPatch": {
+        "/city/inventory/1/quantity": 10001
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "invalid-state",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I26",
+      "initialPatch": {
+        "/city/gold": -1
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "invalid-state",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I27",
+      "initialPatch": {
+        "/catalog/entries/1/basePriceWord": 65536
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "invalid-state",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I28",
+      "initialPatch": {
+        "/city/security": 100,
+        "/policies/zeroYield": {
+          "id": "reject-zero-yield-instant-v1",
+          "version": 1,
+          "parameters": {
+            "zero": "reject"
+          }
+        }
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "Patrol",
+          "cityId": "cityA",
+          "officerIds": [
+            "o1",
+            "o2",
+            "o3"
+          ]
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "zero-yield",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "I29",
+      "initialPatch": {
+        "/date": {
+          "year": 9999,
+          "month": 12,
+          "day": 21
+        }
+      },
+      "envelope": {
+        "id": "c1",
+        "expectedRevision": 0,
+        "command": {
+          "type": "AdvanceCityTurn"
+        }
+      },
+      "expected": {
+        "ok": false,
+        "reason": "calendar-overflow",
+        "stateUnchanged": true
+      }
+    }
+  ],
+  "lifecycleVectors": [
+    {
+      "id": "C01",
+      "initialPatch": {},
+      "commands": [
+        {
+          "id": "patrol",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Patrol",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ]
+          }
+        },
+        {
+          "id": "again",
+          "expectedRevision": 1,
+          "command": {
+            "type": "Patrol",
+            "cityId": "cityA",
+            "officerIds": [
+              "o4"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "step0.ok": true,
+        "step1.ok": false,
+        "step1.reason": "patrol-already-used",
+        "step1.stateUnchanged": true,
+        "final.city.gold": 9900,
+        "final.revision": 1
+      }
+    },
+    {
+      "id": "C02",
+      "initialPatch": {},
+      "commands": [
+        {
+          "id": "r1",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Recruit",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "b1"
+          }
+        },
+        {
+          "id": "r2",
+          "expectedRevision": 1,
+          "command": {
+            "type": "Recruit",
+            "cityId": "cityA",
+            "officerIds": [
+              "o4",
+              "o5",
+              "o6"
+            ],
+            "facilityId": "b2"
+          }
+        }
+      ],
+      "expected": {
+        "step0.quantityKernelReturn": 3750,
+        "step1.quantityKernelReturn": 2365,
+        "final.city.troops": 7115,
+        "final.city.security": 66,
+        "final.city.gold": 9400,
+        "final.corps.actionPoints": 160
+      }
+    },
+    {
+      "id": "C03",
+      "initialPatch": {},
+      "commands": [
+        {
+          "id": "start",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "w1",
+            "equipmentType": 5
+          }
+        },
+        {
+          "id": "tick1",
+          "expectedRevision": 1,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        },
+        {
+          "id": "busy-person",
+          "expectedRevision": 2,
+          "command": {
+            "type": "Patrol",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1"
+            ]
+          }
+        },
+        {
+          "id": "busy-facility",
+          "expectedRevision": 2,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o4",
+              "o5",
+              "o6"
+            ],
+            "facilityId": "w1",
+            "equipmentType": 5
+          }
+        },
+        {
+          "id": "tick2",
+          "expectedRevision": 2,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        }
+      ],
+      "expected": {
+        "step0.jobRemaining": 2,
+        "step1.jobRemaining": 1,
+        "step2.reason": "officer-production-reserved",
+        "step3.reason": "facility-production-reserved",
+        "final.turn": 2,
+        "final.city.inventory.5.quantity": 1,
+        "final.city.inventory.5.reserved": 0,
+        "final.corps.actionPoints": 220,
+        "final.city.gold": 9000,
+        "completedParticipants.xp.intelligence": 4,
+        "completedParticipants.merit": 100,
+        "completedParticipants.actedTurn": 2,
+        "activeJobs": 0,
+        "completedJobs": 1,
+        "completionEvents": 1
+      }
+    },
+    {
+      "id": "C04",
+      "initialPatch": {},
+      "commands": [
+        {
+          "id": "same-start",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "w1",
+            "equipmentType": 5
+          }
+        },
+        {
+          "id": "same-start",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "w1",
+            "equipmentType": 5
+          }
+        },
+        {
+          "id": "t1",
+          "expectedRevision": 1,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        },
+        {
+          "id": "t1",
+          "expectedRevision": 1,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        },
+        {
+          "id": "t2",
+          "expectedRevision": 2,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        },
+        {
+          "id": "t3",
+          "expectedRevision": 3,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        }
+      ],
+      "expected": {
+        "duplicateSteps": [
+          1,
+          3
+        ],
+        "final.revision": 4,
+        "final.turn": 3,
+        "final.city.inventory.5.quantity": 1,
+        "completionEvents": 1,
+        "final.city.gold": 9000,
+        "completedParticipants.merit": 100
+      }
+    },
+    {
+      "id": "C05",
+      "initialPatch": {},
+      "commands": [
+        {
+          "id": "collision",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "w1",
+            "equipmentType": 5
+          }
+        },
+        {
+          "id": "collision",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "f1",
+            "equipmentType": 1
+          }
+        }
+      ],
+      "expected": {
+        "step1.reason": "command-id-conflict",
+        "step1.stateUnchanged": true,
+        "final.revision": 1
+      }
+    },
+    {
+      "id": "C06",
+      "initialPatch": {},
+      "commands": [
+        {
+          "id": "p",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Patrol",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ]
+          }
+        },
+        {
+          "id": "stale",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Recruit",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "b1"
+          }
+        }
+      ],
+      "expected": {
+        "step1.reason": "stale-revision",
+        "step1.stateUnchanged": true,
+        "final.revision": 1
+      }
+    },
+    {
+      "id": "C07",
+      "initialPatch": {
+        "/city/inventory/5/capacity": 1
+      },
+      "commands": [
+        {
+          "id": "j1",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "w1",
+            "equipmentType": 5
+          }
+        },
+        {
+          "id": "j2",
+          "expectedRevision": 1,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o4",
+              "o5",
+              "o6"
+            ],
+            "facilityId": "w2",
+            "equipmentType": 5
+          }
+        }
+      ],
+      "expected": {
+        "step1.reason": "piece-capacity-unavailable",
+        "step1.stateUnchanged": true,
+        "final.city.inventory.5.reserved": 1,
+        "final.city.gold": 9000
+      }
+    },
+    {
+      "id": "C08",
+      "initialPatch": {},
+      "commands": [
+        {
+          "id": "j1",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "w1",
+            "equipmentType": 5
+          }
+        },
+        {
+          "id": "j2",
+          "expectedRevision": 1,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o4",
+              "o5",
+              "o6"
+            ],
+            "facilityId": "w2",
+            "equipmentType": 5
+          }
+        },
+        {
+          "id": "t1",
+          "expectedRevision": 2,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        },
+        {
+          "id": "t2",
+          "expectedRevision": 3,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        }
+      ],
+      "expected": {
+        "final.city.inventory.5.quantity": 2,
+        "completedJobs": 2,
+        "completionEvents": 2,
+        "final.city.gold": 8000,
+        "final.corps.actionPoints": 200,
+        "eachOf6Participants.merit": 100
+      }
+    },
+    {
+      "id": "C09",
+      "initialPatch": {},
+      "commands": [
+        {
+          "id": "p",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Patrol",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ]
+          }
+        },
+        {
+          "id": "r",
+          "expectedRevision": 1,
+          "command": {
+            "type": "Recruit",
+            "cityId": "cityA",
+            "officerIds": [
+              "o4",
+              "o5",
+              "o6"
+            ],
+            "facilityId": "b1"
+          }
+        },
+        {
+          "id": "q",
+          "expectedRevision": 2,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o7",
+              "o8",
+              "o9"
+            ],
+            "facilityId": "f1",
+            "equipmentType": 1
+          }
+        },
+        {
+          "id": "j",
+          "expectedRevision": 3,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o10",
+              "o11",
+              "o12"
+            ],
+            "facilityId": "w1",
+            "equipmentType": 5
+          }
+        },
+        {
+          "operation": "save-load-roundtrip"
+        },
+        {
+          "id": "t1",
+          "expectedRevision": 4,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        },
+        {
+          "id": "t2",
+          "expectedRevision": 5,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        },
+        {
+          "id": "j",
+          "expectedRevision": 3,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o10",
+              "o11",
+              "o12"
+            ],
+            "facilityId": "w1",
+            "equipmentType": 5
+          }
+        }
+      ],
+      "expected": {
+        "afterRecruit.quantityKernelReturn": 4020,
+        "afterRecruit.security": 82,
+        "afterRecruit.morale": 52,
+        "final.turn": 2,
+        "final.date": {
+          "year": 227,
+          "month": 1,
+          "day": 11
+        },
+        "final.revision": 6,
+        "final.city.gold": 7900,
+        "final.corps.actionPoints": 160,
+        "final.city.troops": 5020,
+        "final.city.security": 82,
+        "final.city.morale": 52,
+        "final.city.inventory.1.quantity": 4500,
+        "final.city.inventory.5.quantity": 1,
+        "completedJobs": 1,
+        "duplicateFinal": true,
+        "replayEqualsFinal": true,
+        "saveLoadContinuationEqualsUninterrupted": true
+      }
+    },
+    {
+      "id": "C10",
+      "initialPatch": {},
+      "commands": [
+        {
+          "id": "j",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "w1",
+            "equipmentType": 5
+          }
+        },
+        {
+          "id": "t1",
+          "expectedRevision": 1,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        },
+        {
+          "id": "t2",
+          "expectedRevision": 2,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        },
+        {
+          "id": "same-turn",
+          "expectedRevision": 3,
+          "command": {
+            "type": "Patrol",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1"
+            ]
+          }
+        },
+        {
+          "id": "t3",
+          "expectedRevision": 3,
+          "command": {
+            "type": "AdvanceCityTurn"
+          }
+        },
+        {
+          "id": "next-turn",
+          "expectedRevision": 4,
+          "command": {
+            "type": "Patrol",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "step3.reason": "officer-already-acted",
+        "step5.ok": true,
+        "completedParticipants.intelligenceXpAfterExtraTicks": 4
+      }
+    },
+    {
+      "id": "C11",
+      "initialPatch": {
+        "/policies/facilityMultiplier": {
+          "id": "flat-one-f32-v1",
+          "version": 1,
+          "parameters": {
+            "levelBits": [
+              "3F800000",
+              "3F800000",
+              "3F800000"
+            ]
+          }
+        },
+        "/policies/productionAp": {
+          "id": "experimental-production-ap-v1",
+          "version": 1,
+          "parameters": {
+            "quantity": 25,
+            "piece": 30
+          }
+        },
+        "/policies/rewards": {
+          "id": "listed-byte-quantity-politics-v1",
+          "version": 1,
+          "parameters": {
+            "patrol": "leadership",
+            "recruit": "charm",
+            "quantity": "politics",
+            "piece": "intelligence",
+            "instantXp": 2,
+            "instantMerit": 50,
+            "completionXp": 4,
+            "completionMerit": 100,
+            "cap": 1000000000
+          }
+        }
+      },
+      "commands": [
+        {
+          "operation": "save-load-roundtrip"
+        },
+        {
+          "id": "q",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "f1",
+            "equipmentType": 1
+          }
+        }
+      ],
+      "expected": {
+        "final.city.inventory.1.quantity": 3000,
+        "final.corps.actionPoints": 175,
+        "eachSelected.xp.politics": 2,
+        "eachSelected.xp.intelligence": 0,
+        "savedPoliciesRestoredExactly": true
+      }
+    },
+    {
+      "id": "C12",
+      "initialPatch": {
+        "/city/inventory/1/quantity": 9900,
+        "/policies/writer": {
+          "id": "reject-cap-overflow-v1",
+          "version": 1,
+          "parameters": {
+            "overflow": "reject",
+            "returned": "actual-delta"
+          }
+        }
+      },
+      "commands": [
+        {
+          "operation": "save-load-roundtrip"
+        },
+        {
+          "id": "q",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "f1",
+            "equipmentType": 1
+          }
+        }
+      ],
+      "expected": {
+        "step1.reason": "writer-cap-overflow",
+        "final.revision": 0,
+        "final.city.gold": 10000
+      }
+    },
+    {
+      "id": "C13",
+      "initialPatch": {
+        "/officers/0/intelligence": 105,
+        "/officers/1/intelligence": 105,
+        "/officers/2/intelligence": 105,
+        "/officers/0/skillIds": [
+          82
+        ],
+        "/policies/time": {
+          "id": "positive-raw-turns-v1",
+          "version": 1,
+          "parameters": {
+            "nonpositive": "reject",
+            "unit": "service-turn"
+          }
+        }
+      },
+      "commands": [
+        {
+          "operation": "save-load-roundtrip"
+        },
+        {
+          "id": "j",
+          "expectedRevision": 0,
+          "command": {
+            "type": "Produce",
+            "cityId": "cityA",
+            "officerIds": [
+              "o1",
+              "o2",
+              "o3"
+            ],
+            "facilityId": "w1",
+            "equipmentType": 5
+          }
+        }
+      ],
+      "expected": {
+        "step1.reason": "unsupported-nonpositive-production-time",
+        "final.revision": 0,
+        "activeJobs": 0
+      }
+    }
+  ]
+}

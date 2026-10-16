@@ -1,3 +1,12 @@
+## Current engineering-rule navigation
+
+- [Food consumption and manual supply](docs/engine/food-supply-lifecycle.md): delivered in merged PR #69; detached resource accounts and atomic, bounded transfers
+- [Unit formation and capability panels](docs/engine/unit-formation.md): delivered in merged PR #70; pure specifications and inventory feasibility, without creating a runtime unit
+- [City commands](docs/rules/city-command-lifecycle.md): explicit service-policy patrol, recruitment and production lifecycle, with detailed formulas and resource rules
+- [Complete rule index](docs/rules/README.md) and [delivery/evidence status](docs/rules/STATUS.md)
+
+PR #69/#70's prior validation belongs to their historical revisions. This final revision has only static review and has not been retested; the earlier default-suite food-file failure remains unresolved. See [validation status](docs/rules/city-command-lifecycle.md#validation-status). Historical candidate/unpublished wording below is retained in its original dated context and does not override these delivery entries. Service delivery does not certify original-game equivalence or close the original43 evidence groups.
+
 ## Detached terrain, status and empty-cell fire lifecycle
 
 A finite supplied-map state machine with positive-troop terrain exposure, ordinary status effects, explicit turn boundaries and vacant-cell fire counters. Immutable transactions, bounded RNG tape, replaceable per-source policy, save/load and independently recomputed replay. See [API, examples and evidence boundaries](docs/rules/terrain-hazard-lifecycle.md). False-report retreat, occupied/burning-cell damage and lethal terrain are atomically rejected; original43 and P078 exclusions remain unchanged.
@@ -111,3 +120,7 @@ npm run play -- --growth-fixture
 - [独立耗粮与手动补给资源会话](docs/engine/food-supply-lifecycle.md)：实际库存消费/不足、手动金粮兵及匹配兵装守恒转移、两种显式气力取整政策，提供不可变预览/原子提交/严格保存加载重放。18000兵阵覆盖耗粮1499；零兵保留资源账户，不执行饥饿掉兵、原生部队生命周期、移动到达或任务终结
 
 - [独立编成与能力面板](docs/engine/unit-formation.md)：1–3人成员五维/六适性、12兵装与状态/技术、完整可替换profile、库存可行性预览、不可变单位规格及规范保存/重放。固有容量与来源限制分离；不创建runtime部队、不迁移人员或扣账，原43及原作证据边界保留
+
+### Standalone city-command lifecycle
+
+[API and evidence limits](docs/rules/city-command-lifecycle.md) cover atomic patrol/recruitment/quantity production, reserved piece production across service turns, and independent canonical save/replay. The existing scalar kernels are reused; eligibility, writer semantics, scheduling and full versioned policy snapshots are explicit service choices. Run the complete primitive example with `node apps/text/city-command-demo.mjs`. This does not change the legacy training state or close the original evidence gaps. This revision has not been retested; the earlier default-suite food-file failure remains unresolved, as recorded in the [validation status](docs/rules/city-command-lifecycle.md#validation-status).

@@ -1,3 +1,15 @@
+# 当前工程交付状态（2026-10-16）
+
+- [耗粮与手动补给资源会话](../engine/food-supply-lifecycle.md)：PR #69 已合并交付；含完整账户 schema、ConsumeTurn/ManualSupply、容量/库存守恒、气力政策与保存重放。账户不等于原生部队，不实现真实移动到达或任务终结
+- [编成与能力面板](../engine/unit-formation.md)：PR #70 已合并交付；含成员与关系、五维/六适性、兵装/技术面板、指挥容量、库存可行性及规范重放。只返回独立规格，不创建部队、扣账或迁移人员
+- [巡查、征兵与生产生命周期](city-command-lifecycle.md)：本次静态整理的独立服务；完整场景、具体算术与费用奖励、资源预约、跨旬与失败边界见专项页
+
+PR #69/#70 的历史验收只对各自版本有效；本次静态整理未重新运行测试，旧默认全套 food 文件失败仍未解决，后续诊断通过不构成正式全套通过。见[本次验证状态](city-command-lifecycle.md#validation-status)。这些服务实现不代表 clean-stock 或完整原生事务恢复，原43及P0-78边界保持。
+
+## 历史状态记录
+
+下列候选/未发布/最新措辞与数量保留其原日期语境，不用于覆盖上述当前交付状态。
+
 2026-10-15 新独立工程候选：[每月特产兵装自动生产数量请求核](monthly-specialty-production.md)：明确设备1..4、30槽逐调用捕获与政治AL的可调用TS/Python核；opcode控制流与假定comment binary32/未知converter向零政策分层，非完整生产/实际入库/native认证。原43组未决证据主题不减，P0-78及依赖排除；本树全新验收另记，历史PASS不适用。
 
 2026-10-14 新独立工程候选：[城市粮食收入非Easy稳定已解析输入投影](city-food-income-projection.md)，基于PR #60已合并main `57a2f4dd34d0d888b23d1e46e2cb78402b91a7b4`。固定160条/494 bytes和16+22 bytes两表、30槽与4种统一类型行；军屯农保留U32乘积低位后unsigned /15000，最后signed32向零/100支持负返回；difficulty0整个Easy分支拒绝。只补已有规则的工程覆盖，原43组未决证据主题不减。来源仅source-listing-reconstruction，不认证stock/Vanilla、真实helper/ABI、原表、city/owner、writer或scheduler，P0-78及依赖排除。实现和全新验收仅本地；正式聚合及独审结果另记，以下历史通过数字不验证本树，旧城市金钱179原run/证据保持不动。
