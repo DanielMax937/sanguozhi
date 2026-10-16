@@ -1,5 +1,9 @@
 # 当前工程规则入口
 
+## 独立PK能力研究与培育
+
+[完整规则](pk-ability-lifecycle.md)：48基础/50隐藏候选逐项表、显式5槽、真实两阶段Start/Advance、金/AP扣款、五维XP/六适性/单特技写回、共享次数预约与并行原子完成。[API](../engine/pk-ability-lifecycle.md)和[来源与完整政策](../sources/pk-ability-lifecycle.json)。明确guide/S1/provisional分层；本次仅静态代码文档，未执行测试/编译/build/checker/产品。旧默认food失败与43组证据口径保留，P078及native任务/归属/俘虏/取消链排除。
+
 ## 历史PR逐机制规则导航
 
 [PR1–71规则正文定位表](historical-pr-rule-index.md)逐PR列出具体机制、正文和版本/证据边界；维护项明确无新增游戏规则。新增详细正文包括[训练运行与旬推进](training-runtime-policy.md)、[耗粮与手动补给](food-supply-lifecycle.md)、[编成与容量政策](unit-formation-policy.md)，以及下列完整有限事实：
