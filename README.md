@@ -4,7 +4,8 @@
 
 - [Food consumption and manual supply](docs/engine/food-supply-lifecycle.md): delivered in merged PR #69; detached resource accounts and atomic, bounded transfers
 - [Unit formation and capability panels](docs/engine/unit-formation.md): delivered in merged PR #70; pure specifications and inventory feasibility, without creating a runtime unit
-- [City commands](docs/rules/city-command-lifecycle.md): explicit service-policy patrol, recruitment and production lifecycle, with detailed formulas and resource rules
+- [City commands](docs/rules/city-command-lifecycle.md): delivered in merged PR #71; explicit service-policy patrol, recruitment and production lifecycle, with detailed formulas and resource rules
+- [Technique research lifecycle](docs/rules/technique-research-lifecycle.md): independent 36-technique Start/Advance lifecycle with actual debits, automatic completion, explicit fallback timing and provisional reward policies; [API](docs/engine/technique-research-lifecycle.md) and [engineering API index](docs/engine/README.md). This addition has not been run or tested
 - [Complete rule index](docs/rules/README.md) and [delivery/evidence status](docs/rules/STATUS.md)
 
 PR #69/#70's prior validation belongs to their historical revisions. This final revision has only static review and has not been retested; the earlier default-suite food-file failure remains unresolved. See [validation status](docs/rules/city-command-lifecycle.md#validation-status). Historical candidate/unpublished wording below is retained in its original dated context and does not override these delivery entries. Service delivery does not certify original-game equivalence or close the original43 evidence groups.

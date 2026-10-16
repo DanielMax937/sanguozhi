@@ -42,7 +42,12 @@
     "forceResearchTimeLeftOffset": "0xA0",
     "researchTimeLeftType": "short",
     "unit": "turn/ten-day period",
-    "decrementPerTurn": 1
+    "decrementPerTurn": 1,
+    "structureDescriptionType": "short",
+    "observedCountdownReadWidthBits": 8,
+    "countdownReadAddress": "00599D7A",
+    "widthEvidence": "Existing S1/S2 source-local listings read AL from force+A0; both are MOD-associated. The retained short layout label does not establish a 16-bit decrement here.",
+    "unresolvedWidthScope": "Full field layout and setter write width are not established by this read."
   },
   "technologyStruct": {
     "count": 36,

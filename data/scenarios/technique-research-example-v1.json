@@ -1,0 +1,207 @@
+{
+  "profile": "standalone-technique-research-pk11-compat-v1",
+  "date": {
+    "year": 200,
+    "month": 1,
+    "day": 1
+  },
+  "turn": 0,
+  "force": {
+    "id": "force-1",
+    "techniquePoints": 10000,
+    "completedTechniqueIds": []
+  },
+  "corps": {
+    "id": "corps-1",
+    "actionPoints": 100
+  },
+  "city": {
+    "id": "city-1",
+    "gold": 20000,
+    "talentOffice": "complete",
+    "enemyWithinTwoCells": false
+  },
+  "officers": [
+    {
+      "id": "guide-1",
+      "forceId": "force-1",
+      "cityId": "city-1",
+      "available": true,
+      "effectiveAttributes": {
+        "leadership": 70,
+        "war": 65,
+        "intelligence": 80,
+        "politics": 75
+      },
+      "skillKeys": [
+        "guidance"
+      ],
+      "xp": {
+        "leadership": 0,
+        "war": 0,
+        "intelligence": 0,
+        "politics": 0
+      },
+      "merit": 0,
+      "actedTurn": null
+    },
+    {
+      "id": "researcher-2",
+      "forceId": "force-1",
+      "cityId": "city-1",
+      "available": true,
+      "effectiveAttributes": {
+        "leadership": 60,
+        "war": 75,
+        "intelligence": 85,
+        "politics": 60
+      },
+      "skillKeys": [],
+      "xp": {
+        "leadership": 0,
+        "war": 0,
+        "intelligence": 0,
+        "politics": 0
+      },
+      "merit": 0,
+      "actedTurn": null
+    }
+  ],
+  "difficulty": "super",
+  "policies": {
+    "participants": {
+      "id": "one-to-three-distinct-v1",
+      "version": 1,
+      "parameters": {
+        "minimum": 1,
+        "maximum": 3
+      }
+    },
+    "eligibility": {
+      "id": "supplied-city-force-availability-v1",
+      "version": 1,
+      "parameters": {
+        "enemyRadiusCells": 2,
+        "unavailableBlocks": true,
+        "actedThisTurnBlocks": true
+      }
+    },
+    "parallelism": {
+      "id": "single-active-force-project-v1",
+      "version": 1,
+      "parameters": {
+        "maximumActive": 1
+      }
+    },
+    "fees": {
+      "id": "catalog-exact-participating-guidance-v1",
+      "version": 1,
+      "parameters": {
+        "actionPoints": 50,
+        "guidanceGoldDivisor": 2,
+        "guidanceStacks": false
+      }
+    },
+    "attributes": {
+      "id": "start-effective-attributes-snapshot-v1",
+      "version": 1,
+      "parameters": {
+        "xpChangesEffectiveAbility": false
+      }
+    },
+    "time": {
+      "id": "guide-two-family-fallback-v1",
+      "version": 1,
+      "parameters": {
+        "militaryTrainingTurns": [
+          3,
+          4,
+          6,
+          9
+        ],
+        "otherTurns": [
+          4,
+          5,
+          7,
+          10
+        ],
+        "abilityDependent": false,
+        "difficultyDependent": false
+      }
+    },
+    "talentOffice": {
+      "id": "complete-local-talent-office-minus2-min1-v1",
+      "version": 1,
+      "parameters": {
+        "reduction": 2,
+        "minimum": 1
+      }
+    },
+    "merit": {
+      "id": "current-wiki-merit-candidate-v1",
+      "version": 1,
+      "parameters": {
+        "byLevel": [
+          500,
+          1000,
+          2000,
+          3000
+        ],
+        "provisional": true
+      }
+    },
+    "allocation": {
+      "id": "each-selected-full-reward-v1",
+      "version": 1,
+      "parameters": {
+        "recipients": "all-selected-in-command-order",
+        "provisional": true
+      }
+    },
+    "experience": {
+      "id": "consumed-tp-div100-per-selected-v1",
+      "version": 1,
+      "parameters": {
+        "divisor": 100,
+        "provisionalAllocation": true
+      }
+    },
+    "writer": {
+      "id": "exact-debits-saturating-rewards-v1",
+      "version": 1,
+      "parameters": {
+        "rewardCap": 1000000000,
+        "goldCap": 1000000000,
+        "techniquePointCap": 10000,
+        "actionPointCap": 255
+      }
+    },
+    "turn": {
+      "id": "one-boundary-auto-complete-v1",
+      "version": 1,
+      "parameters": {
+        "boundaries": 1,
+        "completion": "unlock-reward-release",
+        "completionActors": "acted-new-turn",
+        "requireRepresentableDueDate": true,
+        "reserveCompletionHistoryCapacity": true,
+        "provisional": true
+      }
+    },
+    "apRecovery": {
+      "id": "no-ap-recovery-v1",
+      "version": 1,
+      "parameters": {
+        "increment": 0,
+        "cap": 255
+      }
+    },
+    "presentation": {
+      "id": "no-presentation-rng-v1",
+      "version": 1,
+      "parameters": {
+        "rngDraws": 0
+      }
+    }
+  }
+}

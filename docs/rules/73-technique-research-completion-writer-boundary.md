@@ -21,7 +21,7 @@
 00599D90 ...                 ; 直接进入下一势力
 ```
 
-这里没有 completion callback。
+这里没有 completion callback。该连续片段只证明source-local控制流；现有S1/S2原文及身份manifest均标为MOD关联，不是stock实物认证。00599D7A读取的是AL低byte，与[49号文](49-technique-research-time-exactness.md#8-研究时间存储单位是旬)保留的short布局描述并列，完整字段与setter写宽仍不由此确定。
 
 相对地，能力研究分支在剩余时间减到0后明确：
 
@@ -204,3 +204,7 @@ participantDistribution = open
 - sjn4048/311MemoryResearch `内存资料/整理/Func-自动02-计数器处理【未】.txt`
 - sean2077/311SireCustomizedPackageDev `material/结构体汇总.md`
 - 关联：`50-technique-research-merit-exactness.md`、`27-technique-research-merit.md`
+
+## 独立服务不是原生完成链
+
+[独立技巧研究服务](technique-research-lifecycle.md)只用自己的reservation与跨旬事务：到零解锁、按具名候选给逐人奖励、释放本服务标记。没有调用本页原生任务链，不把00599CF0改标为完成writer。本页的原caller、分配及版本未知继续保留。

@@ -6,7 +6,11 @@
 
 - [耗粮与手动补给资源会话](../engine/food-supply-lifecycle.md)：PR #69 已合并交付；含完整账户 schema、ConsumeTurn/ManualSupply、容量/库存守恒、气力政策与保存重放。账户不等于原生部队，不实现真实移动到达或任务终结
 - [编成与能力面板](../engine/unit-formation.md)：PR #70 已合并交付；含成员与关系、五维/六适性、兵装/技术面板、指挥容量、库存可行性及规范重放。只返回独立规格，不创建部队、扣账或迁移人员
-- [巡查、征兵与生产生命周期](city-command-lifecycle.md)：本次静态整理的独立服务；完整场景、具体算术与费用奖励、资源预约、跨旬与失败边界见专项页
+- [巡查、征兵与生产生命周期](city-command-lifecycle.md)：PR #71 已合并的独立服务；完整场景、具体算术与费用奖励、资源预约、跨旬与失败边界见专项页
+
+- [独立技巧研究生命周期](technique-research-lifecycle.md)：新增独立实现，包含完整36项目录与前置、Start实际扣款、1–3名参与者、指导折扣、两格敌军supplied gate、具名时间/功绩政策、Advance自动完成及仅本服务预约释放；[API](../engine/technique-research-lifecycle.md)与[工程API索引](../engine/README.md)。时间完整矩阵、原生完成writer和人员分配仍open
+
+本次技巧研究代码、静态示例和规则仅作静态工作，未运行测试、typecheck、构建、checker、诊断或产品代码，没有新增运行计划。历史规则补齐已随PR #72 合并；其覆盖范围与本次研究服务的证据等级互不替代。
 
 PR #69/#70 的历史验收只对各自版本有效；本次静态整理未重新运行测试，旧默认全套 food 文件失败仍未解决，后续诊断通过不构成正式全套通过。见[本次验证状态](city-command-lifecycle.md#validation-status)。这些服务实现不代表 clean-stock 或完整原生事务恢复，原43及P0-78边界保持。
 

@@ -218,3 +218,7 @@ conflict = [500,1000,1500,2500]
 - 游民星空《三国志11 快速长功绩的方法》（2006-04-27）：https://www.gamersky.com/handbook/200604/22600.shtml
 - 游侠NETSHOW《三国志11pk内存修改(更新内容)》（繁中 PK1.1 地址）：https://game.ali213.net/thread-2168294-1-1.html
 - sjn4048/311MemoryResearch：`内存资料/修改记录by sjn4048.txt`、`内存资料/地址资料.txt`、`内存资料/整理/0000-研究目录备忘.txt`
+
+## 10. 独立服务候选与分配政策
+
+[独立技巧研究生命周期](technique-research-lifecycle.md#5-一次性费用与完成奖励)显式注册上述两套功绩候选，不将它们映射为Vanilla/PK。默认当前Wiki候选；每名实际所选者各拿全额为具名provisional政策，不声称原caller已恢复。奖励在服务跨旬归零事务内结算，饱和上限及discarded逐人记账；这不关闭本页逐人分配和完成writer缺口。
