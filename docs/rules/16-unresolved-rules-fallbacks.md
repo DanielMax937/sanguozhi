@@ -1564,6 +1564,8 @@ overflow discard 是PC empirical-high；逐字段 opcode/order仍open。
 
 ## 6.9 技巧研究时间（P0-14）
 
+2026-10-16工程补充：[独立技巧研究生命周期](technique-research-lifecycle.md)以具名compat政策使用下述两组fallback及人才府尾修正；它未实现能力/难度矩阵，原未决证据不关闭。两套功绩候选与逐人分配也明示provisional，本次未运行测试。
+
 > 专项： [49-technique-research-time-exactness.md](49-technique-research-time-exactness.md)。
 
 时间 calculator containing function：

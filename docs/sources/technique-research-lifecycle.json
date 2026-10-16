@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "id": "standalone-technique-research-lifecycle-v1",
+  "profile": "standalone-technique-research-pk11-compat-v1",
+  "catalog": "docs/sources/technique-research-lifecycle-catalog.json",
+  "rules": "docs/rules/technique-research-lifecycle.md",
+  "sourceSnapshots": [
+    {
+      "path": "docs/sources/techniques.json",
+      "baselineCommit": "c5450617001aaabac102b47120e61d0574cb3bd1",
+      "baselineBytes": 17989,
+      "baselineSha256": "c3037328cc2309201ad4415226d40cbc6e029b001faee3d8d0a01a23669d61a1",
+      "acquisition": "existing repository source read statically; no new binary extraction"
+    },
+    {
+      "path": "docs/sources/technique-research-time.json",
+      "baselineCommit": "c5450617001aaabac102b47120e61d0574cb3bd1",
+      "baselineBytes": 3483,
+      "baselineSha256": "19e659cf2afff2e2f29b7c8532977b79e1b92a5312f490655afce8553bbeaffd",
+      "acquisition": "existing repository source read statically; no new binary extraction"
+    },
+    {
+      "path": "docs/sources/technique-research-time-exactness.json",
+      "baselineCommit": "c5450617001aaabac102b47120e61d0574cb3bd1",
+      "baselineBytes": 3715,
+      "baselineSha256": "450ad6d5bde2fe24fc6c304cfa43f103e15ddd5a1123b172a2cf6b5f2dc76042",
+      "acquisition": "existing repository source read statically; no new binary extraction"
+    },
+    {
+      "path": "docs/sources/technique-research-merit.json",
+      "baselineCommit": "c5450617001aaabac102b47120e61d0574cb3bd1",
+      "baselineBytes": 2506,
+      "baselineSha256": "17b9d8a25de1e365471c1d3ef46a9320951538aa8dbe8b91c47b727f1c063d2c",
+      "acquisition": "existing repository source read statically; no new binary extraction"
+    },
+    {
+      "path": "docs/sources/technique-research-merit-exactness.json",
+      "baselineCommit": "c5450617001aaabac102b47120e61d0574cb3bd1",
+      "baselineBytes": 1833,
+      "baselineSha256": "949200490e7defd80f400a5605f9d087c11ef416f263896cbcc39fb0049cd204",
+      "acquisition": "existing repository source read statically; no new binary extraction"
+    },
+    {
+      "path": "docs/sources/technique-research-completion-writer-boundary.json",
+      "baselineCommit": "c5450617001aaabac102b47120e61d0574cb3bd1",
+      "baselineBytes": 1220,
+      "baselineSha256": "9d183eec9559c748de5e5a7aee40bccdc19a2356df7d1fda5a444e9b205302af",
+      "acquisition": "existing repository source read statically; no new binary extraction"
+    },
+    {
+      "path": "docs/sources/return-mission-lifecycle.json",
+      "baselineCommit": "c5450617001aaabac102b47120e61d0574cb3bd1",
+      "baselineBytes": 54636,
+      "baselineSha256": "0f502f7d32a60b035afea99def41fd399eeb43ecc6a8ddf30add817b3372d130",
+      "acquisition": "existing repository source read statically; no new binary extraction"
+    },
+    {
+      "path": "docs/sources/return-mission-lifecycle/S1-code.asm.txt",
+      "baselineCommit": "c5450617001aaabac102b47120e61d0574cb3bd1",
+      "baselineBytes": 122032,
+      "baselineSha256": "c977778f416569f2659568b84abb3ad0114c9f1ea1a33caaaa859f3309d015fb",
+      "acquisition": "existing repository source read statically; no new binary extraction"
+    },
+    {
+      "path": "docs/sources/return-mission-lifecycle/S2-code.asm.txt",
+      "baselineCommit": "c5450617001aaabac102b47120e61d0574cb3bd1",
+      "baselineBytes": 122034,
+      "baselineSha256": "52a78c50a94341fca0708b8f10478d0fbd4b1369b9f56a8d97571ef81686c1c5",
+      "acquisition": "existing repository source read statically; no new binary extraction"
+    }
+  ],
+  "snapshotNote": "Hashes identify baseline evidence before additive clarification metadata in this change, not current-file hashes or original EXE certification.",
+  "officialManual": {
+    "title": "Steam-distributed Japanese SAN11 with PK manual",
+    "url": "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf?t=1516151052",
+    "readDate": "2026-10-16",
+    "acquisition": "search-index text only",
+    "printedPages": {
+      "Playing Manual 18": "participating Guidance researcher halves gold cost",
+      "Playing Manual 38": "maximum three researchers; AP50; enemy within two cells prevents start",
+      "PK Manual 9": "Talent Office shortens research in its city"
+    },
+    "fullPdfByteLengthReported": 47138551,
+    "fullPdfAcquired": false,
+    "rawPdfSha256": null,
+    "pagePixelVerification": false,
+    "evidence": "official-manual-behavioral-documentation; no Chinese PC-PK1.1 binary equivalence"
+  },
+  "nativeCountdown": {
+    "readAddress": "00599D7A",
+    "observedReadWidthBits": 8,
+    "retainedStructureDescription": "short",
+    "completionCallInSelectedTechniqueBranch": false,
+    "setterWriteWidth": "unresolved",
+    "sourceIdentity": "S1 and S2 are MOD-associated; stockOriginalVerified=false"
+  },
+  "policies": {
+    "time": "compatibility-guide-fallback; ability/difficulty matrix not modeled",
+    "talentOffice": "existing address-level minus-two/min-one tail; supplied city-completion gate",
+    "merit": "current Wiki and early guide candidates both retained; exact original unresolved",
+    "allocation": "each selected participant receives full request; provisional",
+    "completion": "standalone atomic unlock/reward/release, not native completion writer"
+  },
+  "validation": {
+    "mode": "static-code-and-document-work-only",
+    "testsRun": false,
+    "typecheckRun": false,
+    "buildRun": false,
+    "checkerRun": false,
+    "diagnosticRun": false,
+    "productCodeExecuted": false,
+    "runtimeVerified": false
+  },
+  "original43EvidenceGroupsClosed": false,
+  "nativeTaskOrOwnershipIntegration": false
+}

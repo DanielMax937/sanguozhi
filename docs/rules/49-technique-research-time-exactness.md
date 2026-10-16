@@ -296,6 +296,8 @@ Lv4 90日
 +0xA0 ResearchTimeLeft (short)
 ```
 
+这里的short保留为所引结构布局描述。既有S1/S2源本的00599D7A实际以AL读取+A0低byte；不能由short名称断言本计数分支是16位，也不能由8位读取断言完整字段布局或setter写宽。两份源均MOD关联，参见[完成边界](73-technique-research-completion-writer-boundary.md)。独立服务remainingTurns为自己的有界整数，不模拟native字段宽度。
+
 每旬自动处理：
 
 ```text
