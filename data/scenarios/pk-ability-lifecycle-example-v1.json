@@ -1,0 +1,342 @@
+{
+  "profile": "standalone-pk-ability-guide-compat-v1",
+  "date": {
+    "year": 200,
+    "month": 1,
+    "day": 1
+  },
+  "turn": 0,
+  "scope": {
+    "forceId": "force-example",
+    "baseId": "base-example",
+    "corpsId": "corps-example",
+    "baseKind": "city"
+  },
+  "resources": {
+    "gold": 15900,
+    "actionPoints": 255,
+    "techniquePoints": 0
+  },
+  "hiddenSelections": [
+    {
+      "slotId": "hidden.war-i",
+      "candidateId": "hidden.war-i.option-1"
+    },
+    {
+      "slotId": "hidden.leadership-i",
+      "candidateId": "hidden.leadership-i.option-1"
+    },
+    {
+      "slotId": "hidden.intelligence-ro",
+      "candidateId": "hidden.intelligence-ro.option-1"
+    },
+    {
+      "slotId": "hidden.politics-i",
+      "candidateId": "hidden.politics-i.option-5"
+    },
+    {
+      "slotId": "hidden.politics-ro",
+      "candidateId": "hidden.politics-ro.option-3"
+    }
+  ],
+  "officers": [
+    {
+      "id": "officer-stat",
+      "forceId": "force-example",
+      "baseId": "base-example",
+      "available": true,
+      "actedTurn": null,
+      "stats": {
+        "leadership": {
+          "talent": 51,
+          "xp": 0
+        },
+        "war": {
+          "talent": 51,
+          "xp": 0
+        },
+        "intelligence": {
+          "talent": 51,
+          "xp": 0
+        },
+        "politics": {
+          "talent": 51,
+          "xp": 0
+        },
+        "charisma": {
+          "talent": 51,
+          "xp": 0
+        }
+      },
+      "aptitudes": {
+        "spear": "C",
+        "halberd": "C",
+        "crossbow": "C",
+        "cavalry": "C",
+        "siege": "C",
+        "navy": "C"
+      },
+      "skillKey": null
+    },
+    {
+      "id": "officer-aptitude",
+      "forceId": "force-example",
+      "baseId": "base-example",
+      "available": true,
+      "actedTurn": null,
+      "stats": {
+        "leadership": {
+          "talent": 51,
+          "xp": 0
+        },
+        "war": {
+          "talent": 51,
+          "xp": 0
+        },
+        "intelligence": {
+          "talent": 51,
+          "xp": 0
+        },
+        "politics": {
+          "talent": 51,
+          "xp": 0
+        },
+        "charisma": {
+          "talent": 51,
+          "xp": 0
+        }
+      },
+      "aptitudes": {
+        "spear": "C",
+        "halberd": "C",
+        "crossbow": "C",
+        "cavalry": "C",
+        "siege": "C",
+        "navy": "C"
+      },
+      "skillKey": null
+    },
+    {
+      "id": "officer-skill",
+      "forceId": "force-example",
+      "baseId": "base-example",
+      "available": true,
+      "actedTurn": null,
+      "stats": {
+        "leadership": {
+          "talent": 51,
+          "xp": 0
+        },
+        "war": {
+          "talent": 51,
+          "xp": 0
+        },
+        "intelligence": {
+          "talent": 51,
+          "xp": 0
+        },
+        "politics": {
+          "talent": 51,
+          "xp": 0
+        },
+        "charisma": {
+          "talent": 51,
+          "xp": 0
+        }
+      },
+      "aptitudes": {
+        "spear": "C",
+        "halberd": "C",
+        "crossbow": "C",
+        "cavalry": "C",
+        "siege": "C",
+        "navy": "C"
+      },
+      "skillKey": null
+    }
+  ],
+  "policies": {
+    "catalog": {
+      "id": "selected-guide-catalog-v1",
+      "version": 1,
+      "parameters": {
+        "catalogId": "pk-ability-research-guide-v1",
+        "canonicalSha256": "8f9480d1a032f94d1b0d934e477fd8c40d08a360f5ac9e7875a3fe6ef5abb0e9",
+        "preserveConflicts": 6
+      }
+    },
+    "hidden": {
+      "id": "explicit-five-fixed-v1",
+      "version": 1,
+      "parameters": {
+        "slots": 10,
+        "candidatesPerSlot": 5,
+        "selectedSlots": 5,
+        "candidatesPerSelectedSlot": 1,
+        "rngDraws": 0,
+        "mutable": false
+      }
+    },
+    "researchFees": {
+      "id": "guide-300g-20ap-zero-tp-v1",
+      "version": 1,
+      "parameters": {
+        "gold": 300,
+        "actionPoints": 20,
+        "techniquePoints": 0,
+        "debitAt": "start"
+      }
+    },
+    "researchActor": {
+      "id": "no-officer-assignment-v1",
+      "version": 1,
+      "parameters": {
+        "officerCount": 0,
+        "xp": 0,
+        "merit": 0
+      }
+    },
+    "researchCapacity": {
+      "id": "one-active-research-per-scope-v1",
+      "version": 1,
+      "parameters": {
+        "maximum": 1,
+        "mayOverlapCultivation": true
+      }
+    },
+    "researchClock": {
+      "id": "guide-months-times-three-boundaries-v1",
+      "version": 1,
+      "parameters": {
+        "boundariesPerMonth": 3,
+        "allowedMonths": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "tickAtStart": false
+      }
+    },
+    "cultivationFees": {
+      "id": "guide20ap-no-other-debit-v1",
+      "version": 1,
+      "parameters": {
+        "gold": 0,
+        "actionPoints": 20,
+        "techniquePoints": 0,
+        "debitAt": "start",
+        "zeroOtherDebitIsProvisional": true
+      }
+    },
+    "cultivationClock": {
+      "id": "fixed-three-boundaries-v1",
+      "version": 1,
+      "parameters": {
+        "durationTurns": 3,
+        "tickAtStart": false,
+        "provisional": true
+      }
+    },
+    "cultivationCapacity": {
+      "id": "one-active-per-category-distinct-person-v1",
+      "version": 1,
+      "parameters": {
+        "perCategory": 1,
+        "total": 3,
+        "samePersonAcrossCategories": false,
+        "scope": "whole-independent-force-scope"
+      }
+    },
+    "qualification": {
+      "id": "supplied-same-scope-available-unacted-unreserved-v1",
+      "version": 1,
+      "parameters": {
+        "sameForce": true,
+        "sameBase": true,
+        "available": true,
+        "actedThisTurnBlocks": true,
+        "reservedBlocks": true
+      }
+    },
+    "uses": {
+      "id": "reserve-at-start-spend-at-completion-v1",
+      "version": 1,
+      "parameters": {
+        "reserveAt": "start",
+        "spendAt": "completion",
+        "sharedAcrossOfficers": true
+      }
+    },
+    "stats": {
+      "id": "s1-ordinary-no-age-guide-targets-v1",
+      "version": 1,
+      "parameters": {
+        "core": "s1-pk-stat-training-v1",
+        "low": 70,
+        "medium": 80,
+        "high": 95,
+        "externalMidJobWrites": false
+      }
+    },
+    "aptitude": {
+      "id": "adjacent-c-to-b-b-to-a-v1",
+      "version": 1,
+      "parameters": {
+        "forB": "C",
+        "forA": "B",
+        "mayTrainS": false,
+        "rawNativeEncoding": false
+      }
+    },
+    "skill": {
+      "id": "guide-key-single-skill-replacement-v1",
+      "version": 1,
+      "parameters": {
+        "equalTargetBlocks": true,
+        "replacement": true,
+        "stacking": false,
+        "nativeIdMapping": false
+      }
+    },
+    "completion": {
+      "id": "research-then-stat-aptitude-skill-atomic-v1",
+      "version": 1,
+      "parameters": {
+        "order": [
+          "research",
+          "stat",
+          "aptitude",
+          "skill"
+        ],
+        "officerActedAt": "completion-turn",
+        "atomic": true
+      }
+    },
+    "apRecovery": {
+      "id": "fixed20-cap255-v1",
+      "version": 1,
+      "parameters": {
+        "increment": 20,
+        "cap": 255
+      }
+    },
+    "persistence": {
+      "id": "strict-reexecute-from-genesis-v1",
+      "version": 1,
+      "parameters": {
+        "maxCommands": 4096,
+        "reserveMaximumActiveRemaining": true,
+        "compareFullStateAndReceipts": true
+      }
+    },
+    "presentation": {
+      "id": "no-rng-no-native-callback-v1",
+      "version": 1,
+      "parameters": {
+        "rngDraws": 0,
+        "callbacks": false
+      }
+    }
+  }
+}

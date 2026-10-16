@@ -1,5 +1,7 @@
 # PK 能力研究与武将培育
 
+当前独立工程补充：[能力研究与三类培育生命周期](pk-ability-lifecycle.md)提供实际Start/Advance、费用、解锁、次数预约及完成写回。该组合采用显式攻略/S1/provisional政策；不改变本文原有来源证据、raw API或原生未决边界，也不认证clean-stock。新增实现未运行测试或编译。
+
 规则正文补充：[48基础节点、50隐藏候选及冲突明细](historical-pk-ability-research-catalog.md)。该补充保留来源版本、未知与工程政策等级，不提升原作等价性；原数据和本文历史证据不删除。
 
 

@@ -9,5 +9,6 @@
 | 编成与面板 | [编成接口](unit-formation.md) | [编成政策](../rules/unit-formation-policy.md) |
 | 独立城市命令 | [场景、收据及保存接口](../rules/city-command-lifecycle.md) | 同页巡查/征兵/生产公式、费用与预约 |
 | 独立技巧研究 | [研究接口](technique-research-lifecycle.md) | [36项、费用、时长、奖励和完成规则](../rules/technique-research-lifecycle.md) |
+| 独立PK能力研究与培育 | [两阶段接口、收据及持久化](pk-ability-lifecycle.md) | [完整目录、资格、费用、次数、效果与并行完成](../rules/pk-ability-lifecycle.md) |
 
 技巧研究采用明确provisional政策，未修改训练GameState或共享任何其他服务的账户/预约。本次新增代码和规则只做静态工作，没有运行测试、编译、构建或诊断；历史验收不覆盖本次最终树。

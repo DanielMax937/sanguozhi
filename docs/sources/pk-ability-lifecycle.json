@@ -1,0 +1,460 @@
+{
+  "id": "standalone-pk-ability-guide-compat-v1",
+  "schemaVersion": 1,
+  "implementationLevel": "provisional-engine-rule",
+  "module": "packages/engine/src/pk-ability-lifecycle.ts",
+  "rules": "docs/rules/pk-ability-lifecycle.md",
+  "catalog": {
+    "path": "docs/sources/pk-ability-research/catalog.json",
+    "id": "pk-ability-research-guide-v1",
+    "rawBytesSha256": "ed731ae89f88ca1729712d3ca0d0889718cdec6ecc6566d4c7e384bb69a13b77",
+    "canonicalJsonSha256": "8f9480d1a032f94d1b0d934e477fd8c40d08a360f5ac9e7875a3fe6ef5abb0e9",
+    "baseNodes": 48,
+    "baseEdges": 52,
+    "roots": 4,
+    "hiddenSlots": 10,
+    "hiddenCandidates": 50,
+    "distinctHiddenSkills": 44,
+    "selectedSlots": 5,
+    "effectiveNodesPerScenario": 53,
+    "preservedConflicts": [
+      {
+        "id": "hidden-intelligence-image-arrow",
+        "field": "imageIncoming",
+        "values": [
+          {
+            "source": "atwiki-tree-05",
+            "value": "no stat.charisma.low -> hidden.intelligence-ro arrow"
+          },
+          {
+            "source": "atwiki-hidden",
+            "value": "perception and chain-plan require stat.charisma.low AND skill.ambush"
+          },
+          {
+            "source": "zol-hidden",
+            "value": "same AND prerequisites as the wiki table"
+          }
+        ],
+        "resolution": "Use the explicit table for option prerequisites; preserve the actual image arrow set independently."
+      },
+      {
+        "id": "heart-attack-months",
+        "field": "months",
+        "values": [
+          {
+            "source": "atwiki-tree-05",
+            "value": 3
+          },
+          {
+            "source": "zol-hidden",
+            "value": 6
+          },
+          {
+            "source": "atwiki-editor-hidden",
+            "value": 3
+          }
+        ],
+        "resolution": "Guide value3: linked screenshot row48 corroborates image duration3 against older ZOL6. Native clean-stock equivalence remains unverified."
+      },
+      {
+        "id": "prayer-use-limit",
+        "field": "useLimit",
+        "values": [
+          {
+            "source": "atwiki-hidden",
+            "value": 5
+          },
+          {
+            "source": "zol-hidden",
+            "value": 3
+          },
+          {
+            "source": "atwiki-editor-hidden",
+            "value": 5
+          }
+        ],
+        "resolution": "Guide value5: linked screenshot row62 corroborates wiki table5 against older ZOL3. Names 祈願 and 祈祷 are source aliases; native clean-stock equivalence remains unverified."
+      },
+      {
+        "id": "hidden-selection-count",
+        "field": "semantics.hiddenSelection.documentedSlotsSelected",
+        "values": [
+          {
+            "source": "zol-hidden",
+            "value": "article opening says6; later note says5"
+          },
+          {
+            "source": "atwiki-hidden",
+            "value": 5
+          },
+          {
+            "source": "gamersky-hidden",
+            "value": 5
+          }
+        ],
+        "resolution": "Record the majority documented default5, preserve ZOL internal conflict; no selection algorithm or RNG implementation."
+      },
+      {
+        "id": "halberd-b-predecessor",
+        "field": "baseNodes.aptitude.halberd.b.prerequisites",
+        "values": [
+          {
+            "source": "atwiki-tree-05",
+            "value": "stat.war.low"
+          },
+          {
+            "source": "gamersky-tree",
+            "value": "stat.leadership.low"
+          }
+        ],
+        "resolution": "This base-tree transcription follows the directly viewed latest wiki image. The older prose disagrees; clean-stock native prerequisite equivalence remains unverified."
+      },
+      {
+        "id": "collection-invention-only",
+        "field": "hiddenSlots.hidden.politics-ro.option-3.prerequisites",
+        "values": [
+          {
+            "source": "atwiki-hidden",
+            "value": "skill.invention alone is one of three collection variants"
+          },
+          {
+            "source": "zol-hidden",
+            "value": "path summary lists politics-high or politics-high plus invention; invention-only is omitted"
+          }
+        ],
+        "resolution": "Preserve every explicit wiki table column as a separate alternative; the older summary is not exhaustive."
+      }
+    ]
+  },
+  "policies": {
+    "catalog": [
+      {
+        "id": "selected-guide-catalog-v1",
+        "version": 1,
+        "parameters": {
+          "catalogId": "pk-ability-research-guide-v1",
+          "canonicalSha256": "8f9480d1a032f94d1b0d934e477fd8c40d08a360f5ac9e7875a3fe6ef5abb0e9",
+          "preserveConflicts": 6
+        }
+      }
+    ],
+    "hidden": [
+      {
+        "id": "explicit-five-fixed-v1",
+        "version": 1,
+        "parameters": {
+          "slots": 10,
+          "candidatesPerSlot": 5,
+          "selectedSlots": 5,
+          "candidatesPerSelectedSlot": 1,
+          "rngDraws": 0,
+          "mutable": false
+        }
+      }
+    ],
+    "researchFees": [
+      {
+        "id": "guide-300g-20ap-zero-tp-v1",
+        "version": 1,
+        "parameters": {
+          "gold": 300,
+          "actionPoints": 20,
+          "techniquePoints": 0,
+          "debitAt": "start"
+        }
+      }
+    ],
+    "researchActor": [
+      {
+        "id": "no-officer-assignment-v1",
+        "version": 1,
+        "parameters": {
+          "officerCount": 0,
+          "xp": 0,
+          "merit": 0
+        }
+      }
+    ],
+    "researchCapacity": [
+      {
+        "id": "one-active-research-per-scope-v1",
+        "version": 1,
+        "parameters": {
+          "maximum": 1,
+          "mayOverlapCultivation": true
+        }
+      }
+    ],
+    "researchClock": [
+      {
+        "id": "guide-months-times-three-boundaries-v1",
+        "version": 1,
+        "parameters": {
+          "boundariesPerMonth": 3,
+          "allowedMonths": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "tickAtStart": false
+        }
+      }
+    ],
+    "cultivationFees": [
+      {
+        "id": "guide20ap-no-other-debit-v1",
+        "version": 1,
+        "parameters": {
+          "gold": 0,
+          "actionPoints": 20,
+          "techniquePoints": 0,
+          "debitAt": "start",
+          "zeroOtherDebitIsProvisional": true
+        }
+      }
+    ],
+    "cultivationClock": [
+      {
+        "id": "fixed-three-boundaries-v1",
+        "version": 1,
+        "parameters": {
+          "durationTurns": 3,
+          "tickAtStart": false,
+          "provisional": true
+        }
+      }
+    ],
+    "cultivationCapacity": [
+      {
+        "id": "one-active-per-category-distinct-person-v1",
+        "version": 1,
+        "parameters": {
+          "perCategory": 1,
+          "total": 3,
+          "samePersonAcrossCategories": false,
+          "scope": "whole-independent-force-scope"
+        }
+      }
+    ],
+    "qualification": [
+      {
+        "id": "supplied-same-scope-available-unacted-unreserved-v1",
+        "version": 1,
+        "parameters": {
+          "sameForce": true,
+          "sameBase": true,
+          "available": true,
+          "actedThisTurnBlocks": true,
+          "reservedBlocks": true
+        }
+      }
+    ],
+    "uses": [
+      {
+        "id": "reserve-at-start-spend-at-completion-v1",
+        "version": 1,
+        "parameters": {
+          "reserveAt": "start",
+          "spendAt": "completion",
+          "sharedAcrossOfficers": true
+        }
+      }
+    ],
+    "stats": [
+      {
+        "id": "s1-ordinary-no-age-guide-targets-v1",
+        "version": 1,
+        "parameters": {
+          "core": "s1-pk-stat-training-v1",
+          "low": 70,
+          "medium": 80,
+          "high": 95,
+          "externalMidJobWrites": false
+        }
+      }
+    ],
+    "aptitude": [
+      {
+        "id": "adjacent-c-to-b-b-to-a-v1",
+        "version": 1,
+        "parameters": {
+          "forB": "C",
+          "forA": "B",
+          "mayTrainS": false,
+          "rawNativeEncoding": false
+        }
+      }
+    ],
+    "skill": [
+      {
+        "id": "guide-key-single-skill-replacement-v1",
+        "version": 1,
+        "parameters": {
+          "equalTargetBlocks": true,
+          "replacement": true,
+          "stacking": false,
+          "nativeIdMapping": false
+        }
+      }
+    ],
+    "completion": [
+      {
+        "id": "research-then-stat-aptitude-skill-atomic-v1",
+        "version": 1,
+        "parameters": {
+          "order": [
+            "research",
+            "stat",
+            "aptitude",
+            "skill"
+          ],
+          "officerActedAt": "completion-turn",
+          "atomic": true
+        }
+      }
+    ],
+    "apRecovery": [
+      {
+        "id": "fixed20-cap255-v1",
+        "version": 1,
+        "parameters": {
+          "increment": 20,
+          "cap": 255
+        }
+      },
+      {
+        "id": "no-ap-recovery-v1",
+        "version": 1,
+        "parameters": {
+          "increment": 0,
+          "cap": 255
+        }
+      }
+    ],
+    "persistence": [
+      {
+        "id": "strict-reexecute-from-genesis-v1",
+        "version": 1,
+        "parameters": {
+          "maxCommands": 4096,
+          "reserveMaximumActiveRemaining": true,
+          "compareFullStateAndReceipts": true
+        }
+      }
+    ],
+    "presentation": [
+      {
+        "id": "no-rng-no-native-callback-v1",
+        "version": 1,
+        "parameters": {
+          "rngDraws": 0,
+          "callbacks": false
+        }
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "docs/sources/pk-ability-research/catalog.json",
+      "level": "documented-guide",
+      "supports": "selected nodes, allOf prerequisites, guide months, costs and use limits; no native identity"
+    },
+    {
+      "path": "docs/sources/pk-stat-training-s1.json",
+      "level": "compatibility-reconstruction",
+      "supports": "S1 stat qualification and already-started arithmetic in ordinary-no-age domain; MOD-associated, not clean-stock certification"
+    },
+    {
+      "path": "docs/sources/pk-skill-training-s1.json",
+      "level": "compatibility-reconstruction",
+      "supports": "comparison observation only; raw signed32 API is not called with guide keys or invented IDs"
+    },
+    {
+      "path": "docs/rules/15-pk-ability-research.md",
+      "level": "documented-guide",
+      "supports": "research300G/20AP/0TP, cultivation20AP, usual30-day account; scheduling and write points provisional"
+    }
+  ],
+  "sources": [
+    {
+      "id": "atwiki-tree-05",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/46.html",
+      "section": "能力研究ツリー / 三國志11能力研究05.png",
+      "scope": "all base labels, months, black arrows, and hidden-slot image geometry; image directly viewed"
+    },
+    {
+      "id": "atwiki-uses",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/46.html",
+      "section": "養成回数",
+      "scope": "base use limits"
+    },
+    {
+      "id": "atwiki-hidden",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/46.html",
+      "section": "隠し特技一覧",
+      "scope": "10 rows x 5 exact alternatives, prerequisites and use limits"
+    },
+    {
+      "id": "zol-base",
+      "url": "https://game.zol.com.cn/228/2285144.html",
+      "section": "一般能力研究 / 基本能力研究",
+      "scope": "independent complete base months and use-limit cross-check"
+    },
+    {
+      "id": "zol-hidden",
+      "url": "https://game.zol.com.cn/228/2285144.html",
+      "section": "额外能力研究 / 研究路径整理",
+      "scope": "hidden months and prerequisites; conflicting fields retained separately"
+    },
+    {
+      "id": "gamersky-tree",
+      "url": "https://www.gamersky.com/handbook/200707/69811.shtml",
+      "section": "能力研究的注意事项 / 修改研究的路径",
+      "scope": "300 gold / 20 AP, AND meaning of incoming arrows, fame and war-medium prerequisite cross-check"
+    },
+    {
+      "id": "gamersky-hidden",
+      "url": "https://www.gamersky.com/handbook/200707/69578.shtml",
+      "section": "hidden-position description",
+      "scope": "five selected positions from ten; numbering mapped through rule15Position"
+    },
+    {
+      "id": "gamersky-timing",
+      "url": "https://www.gamersky.com/handbook/200704/59216.shtml",
+      "section": "research difficulty discussion",
+      "scope": "qualitative path cross-check only; star ratings are not research months"
+    },
+    {
+      "id": "atwiki-editor-hidden",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/1139.html",
+      "section": "San11Editor01.PNG, visible rows48..97",
+      "scope": "Directly viewed editor screenshot: all50 hidden prerequisite/month/use records, including heart-attack3 months and prayer5 uses. Screenshot provenance is not executable authentication."
+    }
+  ],
+  "unresolved": [
+    "clean-stock PC-PK1.1 identity and runtime equivalence",
+    "native98-table and skill ID mapping",
+    "startup hidden RNG and weighting",
+    "native aptitude getter and completion writer",
+    "exact native scheduling, charge and use-count write points",
+    "age and special-officer stat getters",
+    "Vanilla and console equivalence"
+  ],
+  "scopeExclusions": [
+    "P078 and dependencies",
+    "native task, ownership, captive, cancellation and return integration",
+    "battle or domestic activation of learned skill labels",
+    "external mid-job officer writes",
+    "shared accounts or old dispatcher changes"
+  ],
+  "validation": {
+    "testsRun": false,
+    "buildRun": false,
+    "compilationRun": false,
+    "checkerRun": false,
+    "productExecuted": false,
+    "status": "static implementation and documentation only; existing earlier default-suite food-file failure remains unresolved"
+  },
+  "policyReplacement": "New registry/version/profile and migration design are required; same ID with altered parameters is rejected and existing snapshots are never reinterpreted."
+}

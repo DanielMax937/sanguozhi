@@ -1,5 +1,7 @@
 # PR37：PK能力研究节点与隐藏候选完整明细
 
+当前独立工程补充：[能力研究与三类培育生命周期](pk-ability-lifecycle.md)提供实际Start/Advance、费用、解锁、次数预约及完成写回。该组合采用显式攻略/S1/provisional政策；不改变本文原有来源证据、raw API或原生未决边界，也不认证clean-stock。新增实现未运行测试或编译。
+
 本页列出48个基础节点、10个隐藏槽位、50个隐藏候选和6项来源冲突。数值是攻略资料中的选择值；确切补丁、平台及纯净原生数据的对应关系未确认。
 
 来源数据：[能力研究目录](../sources/pk-ability-research/catalog.json)。目录标识：pk-ability-research-guide-v1；版本：pk。
