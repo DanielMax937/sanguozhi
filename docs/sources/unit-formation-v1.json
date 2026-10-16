@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "module": "detached-unit-formation-and-capabilities",
+  "sources": [
+    {
+      "path": "docs/rules/04-military.md",
+      "sha256": "ec44e2c10d4ba59a348b332308d6f6ebeaf967bbaa9a03e5ba5eb2c35879449a"
+    },
+    {
+      "path": "docs/rules/18-unit-panels.md",
+      "sha256": "c416b43bbd0739770962f5cf9bde00afb1edfefd3957f4413992db50b75e40bd"
+    },
+    {
+      "path": "docs/rules/45-deputy-rounding-exactness.md",
+      "sha256": "b969ef615cc1054fbe04854051929970a8d4298bba691493a0c1c98564ae4719"
+    },
+    {
+      "path": "docs/rules/68-deputy-blood-third-pc-opcode-boundary.md",
+      "sha256": "3e5bb5e8720e42e879b7a3f3510067bdd62e41db8a64b73e8992604832bac5aa"
+    },
+    {
+      "path": "docs/sources/unit-panels.json",
+      "sha256": "eeaee5c04f08c0ebbaff3367c3b8c983be899136d9fc101cdc2fe6caf89ce2ef"
+    },
+    {
+      "path": "docs/sources/deputy-rounding-exactness.json",
+      "sha256": "c323989f72cc6e4530df8f81750764a2516db5cc8166472bfcada377d17e36c1"
+    },
+    {
+      "path": "docs/sources/deputy-blood-third-pc-opcode-boundary.json",
+      "sha256": "5a7151875980e074e349a9896a75f6d0b74b9f0220f5ad2817167f0267aae271"
+    }
+  ],
+  "evidence": {
+    "equipment": "documented-crosschecked-table-not-clean-stock-binary-dump",
+    "ordinaryQuarterAndLoveHalf": "PC-opcode-backed",
+    "spouseAndSwornFullShare": "PC-high-and-PS2-exact-reference-not-complete-PC-body-proof",
+    "bloodThird": "PS2-empirical-exact-cross-platform-high-PC-body-open",
+    "finalConversion": "recovered-_ftol2-toward-zero",
+    "intermediatePrecision": "named-rational-reference-or-experimental-stage-grid-not-x87-proof",
+    "quantityCargoCap100000": "reverse-history-high",
+    "pieceCargoCaps": "explicit-new-detached-policy",
+    "commandClasses": "caller-supplied-illustrative-categories-not-native-rank-mapping",
+    "relationDirection": "named-replaceable-policy"
+  },
+  "publicEntrypoints": [
+    "calculateUnitCapabilities",
+    "previewUnitFormation",
+    "saveUnitFormationReceipt",
+    "replayUnitFormationReceipt"
+  ],
+  "explicitPolicies": {
+    "profile": "o03-detached-reference-v1",
+    "command": "supplied-command-classes-v1",
+    "relation": "declared-pairs-deputy-like-v1",
+    "precision": "exact-rational-panel-v1",
+    "pieceCargo": "detached-piece-cargo-cap-100-v1"
+  },
+  "preservedBoundaries": {
+    "stockOriginalVerified": false,
+    "original43Closed": false,
+    "nativeTransactions": false,
+    "runtimeUnitsCreated": false,
+    "personnelMoved": false,
+    "sourceInventoryDebited": false,
+    "oldSaveSchemaChanged": false
+  },
+  "excluded": [
+    "P078 and dependencies",
+    "capture",
+    "death",
+    "force extinction",
+    "ownership",
+    "return",
+    "mission",
+    "native finalizer",
+    "personnel migration",
+    "real resource transactions"
+  ],
+  "corrections": [
+    {
+      "topic": "Final conversion",
+      "use": "18-unit-panels and 45-deputy-rounding document _ftol2 toward-zero",
+      "limit": "Stale unit-panels.json rounding metadata does not undo final-conversion evidence; blood PC /3 and x87 intermediate chains remain open"
+    },
+    {
+      "topic": "Transport cargo",
+      "use": "04-military later section 4.9 distinguishes quantity100000 from unknown piece paths",
+      "limit": "Reference piece100 is a new explicit policy, not native evidence"
+    }
+  ]
+}
