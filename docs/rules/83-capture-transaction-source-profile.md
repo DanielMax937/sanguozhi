@@ -1,5 +1,8 @@
 # P0-48 据点陷落：caller cause、完整候选收集与事务 finalizer
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #6](https://github.com/DanielMax937/sanguozhi/pull/6) 已合并。下文候选/发布前/合并后须验证措辞与运行数字保留原日期语境，不是当前发布条件或本次验证结果。该版本的有限支持域与未实现分支不因合并扩大。历史原生事务内容只作证据记录，不恢复P078及依赖；本次未运行测试。
+
+
 更新：2026-10-04 UTC。基线：`9462f8cf1e9e24147757f0032aec1f11df579033`。延续[P0-46](81-capture-selector-source-profile.md)，不扩展成整个战斗/人物系统。
 
 - [结构化证据](../sources/capture-transaction-source-profile.json)

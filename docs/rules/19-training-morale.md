@@ -122,7 +122,9 @@ techniquePoints =
 
 例如本来可训练+19，但据点从95只能升到100，则 `actualGain=5`，本次技巧点为7。
 
-P0-11 已进一步确认：`005C4100` 是独立的**据点级资格 gate**，函数范围为 `005C4100..005C421F`，执行训练 `005C4220` 先只把据点指针传给它，之后才由 `005B8320` 校验包含执行武将在内的命令参数。因此 `005C4100` 不负责1～3名执行武将数组本身。完整内部条件（满气力/零兵力/所属等）仍 open。专项见 [46-training-morale-exactness.md](46-training-morale-exactness.md)。
+P0-11 当时确认 `005C4100` 是独立的**据点级资格 gate**，但其“完整内部条件仍 open”结论已由后续[训练生命周期源内研究 §1](82-training-lifecycle-source-profile.md#1-training-qualification-and-parameter-validation)部分取代：源内已读到有效势力/军团与AP检查、至少一名合格候选、当旬训练标记、零兵拒绝和当前气力大于等于上限时拒绝。执行训练 `005C4220` 先只把据点指针传给它，之后才由 `005B8320` 校验包含执行武将在内的命令参数；据点gate并不校验所选1～3名武将数组本身。
+
+实际解码函数范围为 `005C4100..005C4219`，end-exclusive 为 `005C421A`（282 bytes）；旧列表写到 `421F` 包含下一函数前的padding，并非六条额外指令。所选人员去重、同属/同据点等更强约束应分别标为工程支持域，不能全部归给该参数helper；部分任务状态解释仍未完成。上述恢复仅适用于已标识的MOD关联/source-local材料，不认证clean-stock、所有原生状态或跨版本等价。早期证据链仍见 [46-training-morale-exactness.md](46-training-morale-exactness.md)。
 
 ## 6. 部队气力上限
 

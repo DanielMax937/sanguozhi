@@ -1,5 +1,8 @@
 # P0-59 event8/14任务监听与有界效果观察
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #17](https://github.com/DanielMax937/sanguozhi/pull/17) 已合并。下文候选/发布前/合并后须验证措辞与运行数字保留原日期语境，不是当前发布条件或本次验证结果。该版本的有限支持域与未实现分支不因合并扩大。历史原生事务内容只作证据记录，不恢复P078及依赖；本次未运行测试。
+
+
 更新：2026-10-04 UTC。基线main `de7f0218eefe528687b82c9659feeee1de77b8a3`（PR #16已合）。承接[P0-58稳定军团/太守](93-legion-role-reconciliation.md)。
 
 - [结构化证据](../sources/mission-event-listeners.json) · [来源与字节域](../sources/mission-event-listeners/README.md)

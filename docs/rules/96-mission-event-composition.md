@@ -1,5 +1,8 @@
 # P0-61 共享live frame的event8/14与handler/tail事务
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #19](https://github.com/DanielMax937/sanguozhi/pull/19) 已合并。下文“候选”“未发布”“发布前/合并后须验证”等措辞及运行数字保留其原日期语境，不是当前发布条件或本次重新验证结果。该PR的有限支持域、未实现分支和来源等级不因合并扩大；本文档回溯未运行测试。涉及原生事务的历史内容仅作证据记录，不恢复P078及其依赖。
+
+
 更新：2026-10-04 UTC。基线main `1e5862e045c9aec3db14540c2bd8decc565a321b`（PR #18已合）。承接[P0-59](94-mission-event-listeners.md)与[P0-60](95-mission-notification-tail.md)，两个旧API、schema与trace不改。
 
 - [结构化证据](../sources/mission-event-composition.json) · [字节域](../sources/mission-event-composition/README.md)

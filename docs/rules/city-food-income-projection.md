@@ -1,5 +1,8 @@
 # 城市粮食收入：非 Easy 稳定已解析输入投影
 
+> 当前状态（2026-10-16）：本页对应 [PR #61](https://github.com/DanielMax937/sanguozhi/pull/61) 已合并。下文“未远端发布”“本批必须回归”等保留历史日期语境，不是当前状态或本轮运行计划；本次只补文档，未运行测试，旧失败与原证据边界保留。
+
+
 2026-10-14。基线是 PR #60 已合并的 main `57a2f4dd34d0d888b23d1e46e2cb78402b91a7b4`，tree `823489c4475dff86cafb2733f4b1fb41a6e9db1b`。本地新增公开 API `calculateCityFoodIncomeProjection`，profile `city-food-income-stable-resolved-non-easy-u32-v1`，证据等级仅 `source-listing-reconstruction`。这是已有粮食规则的工程覆盖，不是发现未知规则，也不把原43组未决证据主题减为42。
 
 本项只有通过 city/owner 门槛后的局部数值投影；不接 GameState、capture、force灭亡、native事务、P0-78及其依赖、writer 或 scheduler。未远端发布。下面旧项目的历史验收数字不验证本树；正式全新聚合验收与独立 byte oracle 结果必须另行生成，不能由本实现自证。

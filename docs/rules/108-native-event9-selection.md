@@ -1,5 +1,8 @@
 # Native event9 live troop selection
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #31](https://github.com/DanielMax937/sanguozhi/pull/31) 已合并。下文候选/发布前/合并后须验证措辞与运行数字保留原日期语境，不是当前发布条件或本次验证结果。该版本的有限支持域与未实现分支不因合并扩大。历史原生事务内容只作证据记录，不恢复P078及依赖；本次未运行测试。
+
+
 Status: bounded source-local reconstruction, additive version only. The two
 pinned sources are MOD-associated IDBs, not verified clean-stock executables.
 No recovered machine code or original executable is executed. Event9 reaction,

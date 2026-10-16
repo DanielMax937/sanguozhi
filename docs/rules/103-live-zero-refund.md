@@ -1,5 +1,8 @@
 # P0-68 live 零退款取消 handler 9/10/12/22
 
+> 当前交付状态（2026-10-16）：本页对应 [PR #26](https://github.com/DanielMax937/sanguozhi/pull/26) 已合并。下文“候选”“未发布”“发布前/合并后须验证”等措辞及运行数字保留其原日期语境，不是当前发布条件或本次重新验证结果。该PR的有限支持域、未实现分支和来源等级不因合并扩大；本文档回溯未运行测试。涉及原生事务的历史内容仅作证据记录，不恢复P078及其依赖。
+
+
 更新：2026-10-05 UTC。基线为 PR #25 已合并后的 main `e8bae319e5d1b08057fd091a90d305d58c9d7669`。本层新增有界实现与证据，不修改既有 P0-66/P0-67 API、frame、replay、trace 或来源文件；不表示已远端发布、已合并或原版游戏认证。
 
 - [来源 manifest](../sources/live-zero-refund.json) · [来源检查方法](../sources/live-zero-refund/README.md)

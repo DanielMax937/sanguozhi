@@ -1,5 +1,8 @@
 # 史实事件公开攻略结构化资料
 
+规则正文补充：[Wiki逐观察](historical-scenario-events-atwiki-catalog.md)、[游民逐观察](historical-scenario-events-gamersky-catalog.md)及[66项映射/分歧](historical-scenario-events-inventory.md)。该补充保留来源版本、未知与工程政策等级，不提升原作等价性；原数据和本文历史证据不删除。
+
+
 状态：`public-guide-transcription`，仅静态数据；不是原版运行时认证。
 
 本次重新读取游民星空原文全部12页及 Wiki第88页史实部分，由实际标题清单得到44+61=105条来源观测、66个资料事件ID。重复赵云段落、6个空标题、中文重复的吴王标题均保留。完整来源清单、条件、前置事件、分支、按攻略描述顺序的结果和41项新复核的来源差异见 [`data/scenario-events`](../../data/scenario-events/README.md)。数量由来源推导，不作为凑数目标。
