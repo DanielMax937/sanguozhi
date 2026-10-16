@@ -6,7 +6,7 @@ const fixture = JSON.parse(readFileSync(new URL('./fixtures/food-supply-lifecycl
 const copy = x => JSON.parse(JSON.stringify(x));
 const vector = id => copy(fixture.vectors.find(v => v.id === id));
 const sessionVector = id => copy(fixture.sessions.find(v => v.id === id));
-const success = r => { assert.equal(r.ok, true, JSON.stringify(r)); return r; };
+const success = r => { assert.equal(r.ok, true, r.ok === true ? undefined : JSON.stringify(r)); return r; };
 const create = s => success(api.createFoodSupplySession(s)).session;
 const save = s => success(api.saveFoodSupply(s)).json;
 const roundtrip = s => success(api.loadFoodSupply(save(s))).session;

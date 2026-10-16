@@ -1,5 +1,13 @@
 # 征兵、兵装、编成、训练、补给与技巧
 
+## 对应工程规则入口
+
+- [耗粮与手动补给资源会话](../engine/food-supply-lifecycle.md)（已交付 PR #69）：真实账户余额消费/有界守恒转移、完整 schema 与两种明确气力取整政策；不模拟原生到达/finalizer
+- [独立编成与能力面板](../engine/unit-formation.md)（已交付 PR #70）：成员关系、五维/六适性、兵装与技术、指挥容量和库存条件；不创建部队或迁移人员
+- [城市命令服务](city-command-lifecycle.md)：巡查/征兵/生产的完整输入、具体公式、费用奖励、预约与跨旬规则；服务政策不提升下文原生 writer/helper 的证据等级
+
+这些链接补充可调用工程接口；下文原作规则与来源限制仍分别有效。PR #69/#70 的此前验收不等于本次最终树已重测，参见[当前验证状态](city-command-lifecycle.md#validation-status)。
+
 ## 1. 征兵
 
 ### 公开listing的显式ST0限定数量投影
