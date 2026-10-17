@@ -1,3 +1,7 @@
+## Ordinary diplomacy: gift, alliance and ceasefire
+
+[Detailed rules](docs/rules/ordinary-diplomacy-service.md) and [API](docs/engine/ordinary-diplomacy-service.md): a standalone PK-era empirical service with exact rational thresholds, a force-pair relationship ledger, actual independent gold/AP settlement, explicit immediate-refund policy, single-xun ceasefire expiry and fully recomputed persistence. Dangerous failure is atomically unsupported; no native mission/person lifecycle or TP/merit/XP rewards. Named provisional policies and all evidence gaps remain visible. This addition has not been run or tested.
+
 ## Current engineering-rule navigation
 
 - [PR1–71 game-rule coverage and detailed rule pages](docs/rules/historical-pr-rule-index.md): per-PR mechanisms, source/version limits, concrete service policies and full readable static catalogs. This is documentation coverage, not runtime validation or original-game equivalence.

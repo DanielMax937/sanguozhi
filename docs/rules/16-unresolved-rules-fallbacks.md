@@ -370,6 +370,8 @@ success = roll < p
 
 ## 3. 外交公式版本边界（P0-2 边界已解决，常量仍open）
 
+2026-10-17：[O08普通外交独立服务](ordinary-diplomacy-service.md)已补亲善/同盟/停战具体工程规则及代码。只接受固定PK经验profile；本节旧resolver是历史fallback建议，不是该服务的Vanilla运行入口。费用/退款/取整/期限等采用具名provisional政策，危险失败与特殊上下文原子unsupported，不应用奖励；原生函数体与版本常量仍open，原43不减。本次未运行任何测试或产品。
+
 P0-2 专项证据：`37-diplomacy-version-boundaries.md`；结构化数据：`../sources/diplomacy-version-boundaries.json`。
 
 ### 结论：不要再使用“Vanilla晚期≈PK”作为默认事实

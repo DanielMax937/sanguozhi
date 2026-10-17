@@ -1,3 +1,7 @@
+## 2026-10-17：普通外交独立服务（O08）
+
+[完整具体规则](ordinary-diplomacy-service.md)：亲善/同盟/停战三公式、严格阈值、方向关系与优先级、外交府及固定费用、普通失败即时退款、危险失败原子拒绝、同盟/停战转换、单旬期限与完整保存重放。[API](../engine/ordinary-diplomacy-service.md)、[来源与完整policy](../sources/ordinary-diplomacy-service.json)、[静态场景](../../data/scenarios/ordinary-diplomacy-example-v1.json)。公式为PK经验语料、精确build仍open；取整/失败/期限等明确provisional。未运行测试/编译/build/checker/产品/诊断；原43不减，旧默认food失败保留，P078及native任务/归属/返还/捕获与奖励应用不纳入。
+
 # 当前工程规则入口
 
 ## 独立PK能力研究与培育

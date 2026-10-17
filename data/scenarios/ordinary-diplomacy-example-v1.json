@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Static API scenario and hand-derived expectations, not executed receipts",
+  "executionStatus": "not-run",
+  "scenario": {
+    "xun": 0,
+    "difficulty": "beginner",
+    "resources": {
+      "gold": 10000,
+      "actionPoints": 100
+    },
+    "sourceCity": {
+      "id": 10,
+      "forceId": 1,
+      "diplomacyOfficeCompleted": false
+    },
+    "executor": {
+      "id": 100,
+      "forceId": 1,
+      "politics": 80,
+      "affinity": 0,
+      "hasDebater": false
+    },
+    "targets": [
+      {
+        "ruler": {
+          "id": 200,
+          "forceId": 2,
+          "affinity": 0
+        },
+        "relationFacts": {
+          "swornSiblings": false,
+          "spouses": false,
+          "targetRulerLikesExecutor": false,
+          "targetRulerDislikesExecutor": false
+        },
+        "specialGateFacts": {
+          "resolution": "known",
+          "formerServiceConflict": false,
+          "rulerHatredConflict": false
+        }
+      },
+      {
+        "ruler": {
+          "id": 300,
+          "forceId": 3,
+          "affinity": 149
+        },
+        "relationFacts": {
+          "swornSiblings": false,
+          "spouses": false,
+          "targetRulerLikesExecutor": false,
+          "targetRulerDislikesExecutor": false
+        },
+        "specialGateFacts": {
+          "resolution": "known",
+          "formerServiceConflict": false,
+          "rulerHatredConflict": false
+        }
+      }
+    ],
+    "relations": [
+      {
+        "forceAId": 1,
+        "forceBId": 2,
+        "friendship": 50,
+        "allied": false,
+        "ceasefireRemainingXun": 0
+      },
+      {
+        "forceAId": 1,
+        "forceBId": 3,
+        "friendship": 40,
+        "allied": false,
+        "ceasefireRemainingXun": 0
+      }
+    ]
+  },
+  "commands": [
+    {
+      "type": "OfferAlliance",
+      "expectedRevision": 0,
+      "sourceCityId": 10,
+      "executorId": 100,
+      "targetForceId": 2,
+      "offeredGold": 1500
+    },
+    {
+      "type": "AmicabilityGift",
+      "expectedRevision": 1,
+      "sourceCityId": 10,
+      "executorId": 100,
+      "targetForceId": 2
+    },
+    {
+      "type": "OfferAlliance",
+      "expectedRevision": 2,
+      "sourceCityId": 10,
+      "executorId": 100,
+      "targetForceId": 2,
+      "offeredGold": 1500
+    },
+    {
+      "type": "OfferCeasefire",
+      "expectedRevision": 3,
+      "sourceCityId": 10,
+      "executorId": 100,
+      "targetForceId": 3,
+      "offeredGold": 4000,
+      "durationMonths": 6
+    },
+    {
+      "type": "AdvanceDiplomacyXun",
+      "expectedRevision": 4,
+      "expectedXun": 0
+    }
+  ],
+  "expectedByHand": [
+    {
+      "revision": 1,
+      "classification": "ordinary-failure",
+      "formula": "V=100 equals success threshold100; exceeds secondary60",
+      "gold": 10000,
+      "actionPoints": 80,
+      "friendshipForce2": 40,
+      "reservedGold": 1500,
+      "spentGold": 0,
+      "refundedGold": 1500,
+      "netGoldCost": 0
+    },
+    {
+      "revision": 2,
+      "classification": "success",
+      "formula": "gift rawGain20; final floor20",
+      "gold": 9000,
+      "actionPoints": 60,
+      "friendshipForce2": 60
+    },
+    {
+      "revision": 3,
+      "classification": "success",
+      "formula": "V100 > threshold80",
+      "gold": 7500,
+      "actionPoints": 40,
+      "friendshipForce2": 70,
+      "alliedForce2": true
+    },
+    {
+      "revision": 4,
+      "classification": "success",
+      "formula": "D=1, V=99.8 > threshold73",
+      "gold": 3500,
+      "actionPoints": 20,
+      "friendshipForce3": 40,
+      "ceasefireForce3": 18
+    },
+    {
+      "revision": 5,
+      "xun": 1,
+      "gold": 3500,
+      "actionPoints": 20,
+      "ceasefireForce3": 17,
+      "alliedForce2": true
+    }
+  ],
+  "strictBoundaryDesigns": [
+    {
+      "command": "OfferAlliance",
+      "difficulty": "beginner",
+      "P": 80,
+      "D": 0,
+      "F": 50,
+      "G": 1500,
+      "c": 1,
+      "hasDebater": false,
+      "V": "100",
+      "successThreshold": "100",
+      "secondaryThreshold": "60",
+      "classification": "ordinary-failure"
+    },
+    {
+      "command": "OfferAlliance",
+      "difficulty": "beginner",
+      "P": 40,
+      "D": 0,
+      "F": 50,
+      "G": 1500,
+      "c": 1,
+      "hasDebater": false,
+      "V": "60",
+      "successThreshold": "100",
+      "secondaryThreshold": "60",
+      "classification": "dangerous-failure",
+      "execute": "unsupported-dangerous-failure"
+    },
+    {
+      "command": "OfferCeasefire",
+      "difficulty": "beginner",
+      "P": 53,
+      "D": 0,
+      "F": 40,
+      "G": 4000,
+      "durationMonths": 6,
+      "c": 10,
+      "hasDebater": false,
+      "V": "73",
+      "successThreshold": "73",
+      "secondaryThreshold": "63",
+      "classification": "ordinary-failure"
+    },
+    {
+      "command": "OfferCeasefire",
+      "difficulty": "beginner",
+      "P": 43,
+      "D": 0,
+      "F": 40,
+      "G": 4000,
+      "durationMonths": 6,
+      "c": 10,
+      "hasDebater": false,
+      "V": "63",
+      "successThreshold": "73",
+      "secondaryThreshold": "63",
+      "classification": "dangerous-failure",
+      "execute": "unsupported-dangerous-failure"
+    }
+  ]
+}

@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 1,
+  "module": "O08 ordinary diplomacy standalone service",
+  "profile": "ordinary-diplomacy-pk-empirical-v1",
+  "formulaProfile": "pk-pc-formula-corpus",
+  "formulaEvidence": "empirical-high",
+  "exactBuild": "open",
+  "stockOriginalVerified": false,
+  "nativeLifecycleIntegrated": false,
+  "compatibilityAssumption": false,
+  "policy": {
+    "id": "ordinary-diplomacy-standalone-policy-v1",
+    "profile": "ordinary-diplomacy-pk-empirical-v1",
+    "domains": {
+      "politicsMin": 0,
+      "politicsMax": 100,
+      "idMin": 0,
+      "idMax": 2147483647,
+      "maxTargets": 32,
+      "maxPairs": 528,
+      "initialRevision": 0,
+      "maxTextCodeUnits": 16777216
+    },
+    "formulas": {
+      "gift": "((20*c+max(P-D/2,0)+100)/10)*t",
+      "alliance": "(G/150+P-D/5+10*c)*t",
+      "ceasefire": "(G/400+P-D/5+c)*t",
+      "allianceSuccess": "2*(100-F)",
+      "allianceSecondary": "2*(80-F)",
+      "ceasefireSuccess": "80+months/2-F/4",
+      "ceasefireSecondary": "70+months/2-F/4",
+      "giftAllianceCTwice": {
+        "preferred": 3,
+        "disliked": -2,
+        "ordinary": 2
+      },
+      "ceasefireC": {
+        "preferred": 20,
+        "disliked": -15,
+        "ordinary": 10
+      }
+    },
+    "arithmetic": {
+      "id": "rational-formula-final-floor-v1",
+      "comparison": "strict-greater",
+      "giftRounding": "final-floor",
+      "difficultyTenths": {
+        "beginner": 10,
+        "advanced": 8,
+        "super": 7
+      }
+    },
+    "relationships": {
+      "id": "preferred-before-disliked-v1",
+      "precedence": [
+        "sworn-or-spouse-or-target-likes",
+        "target-dislikes",
+        "ordinary"
+      ],
+      "affinityRing": 150,
+      "affinityMin": 0,
+      "affinityMax": 149
+    },
+    "actionPoints": {
+      "id": "diplomacy-ap20-office-half-v1",
+      "ordinary": 20,
+      "completedOffice": 10
+    },
+    "gift": {
+      "id": "amicability-flat1000-office-half-v1",
+      "ordinaryGold": 1000,
+      "completedOfficeGold": 500
+    },
+    "offers": {
+      "id": "offer-gold-no-office-discount-v1",
+      "officeDiscount": false,
+      "maxGold": 1000000000
+    },
+    "refund": {
+      "id": "immediate-refund-on-ordinary-failure-v1",
+      "requireFullReservation": true,
+      "ordinaryFailureRefund": "full",
+      "ordinaryFailureApRefund": false
+    },
+    "friendship": {
+      "id": "friendship-clamp0-100-v1",
+      "min": 0,
+      "max": 100,
+      "allianceSuccessDelta": 10,
+      "ordinaryFailureDelta": -10,
+      "ceasefireSuccessDelta": 0
+    },
+    "ceasefire": {
+      "id": "ceasefire-months-to-xun3-v1",
+      "formulaPeriodUnit": "months",
+      "xunPerMonth": 3,
+      "minMonths": 1,
+      "maxMonths": 24,
+      "existingCeasefire": "replace-on-success"
+    },
+    "alliance": {
+      "id": "alliance-indefinite-ceasefire-exclusive-v1",
+      "expires": false,
+      "successClearsCeasefire": true,
+      "rejectAllianceOrCeasefireWhenAllied": true
+    },
+    "specialGate": {
+      "id": "reject-unresolved-special-context-v1",
+      "rejectUnknown": true,
+      "rejectFormerServiceConflict": true,
+      "rejectRulerHatredConflict": true
+    },
+    "dangerousFailure": {
+      "id": "atomic-unsupported-dangerous-failure-v1",
+      "settlement": "none"
+    },
+    "advancement": {
+      "id": "diplomacy-only-single-xun-v1",
+      "actionPointRecovery": 0,
+      "otherGameProgression": false
+    },
+    "rewards": {
+      "id": "defer-diplomacy-rewards-v1",
+      "applyTechniquePoints": false,
+      "applyMerit": false,
+      "applyPoliticsExperience": false
+    },
+    "persistence": {
+      "id": "full-policy-genesis-recompute-v1",
+      "maxEntries": 256,
+      "maxCounter": 1000000000
+    }
+  },
+  "evidenceClassifications": {
+    "relationshipPrecedence": "provisional-engine-rule",
+    "rounding": "provisional-engine-rule",
+    "feeConstants": "documented anchors with provisional standalone contract",
+    "refundTiming": "provisional-engine-rule",
+    "friendshipDomain": "provisional-engine-rule",
+    "allianceSuccessDelta": "historical-formula-corpus",
+    "ordinaryFailureDelta": "provisional-engine-rule",
+    "ceasefireSuccessDelta": "provisional-engine-rule",
+    "monthsUnitAnd3XunConversionAnd24Limit": "provisional-engine-rule",
+    "treatyTransitions": "provisional-engine-rule",
+    "specialGateBody": "open"
+  },
+  "rewardConflict": {
+    "applied": false,
+    "ceasefireTechniquePoints": [
+      {
+        "value": 35,
+        "source": "repo-reward-ap-tables",
+        "scope": "Repository historical reward table; exact build not fixed"
+      },
+      {
+        "value": 30,
+        "source": "historical-ceasefire-repost-baidu",
+        "scope": "Ceasefire agreement results in a historical full-diplomacy formula repost; original research provenance and exact build remain open"
+      }
+    ],
+    "resolution": "unresolved; neither promoted to confirmed",
+    "otherUnappliedAnnotations": [
+      "Amicability politics XP3 and merit50 in address references",
+      "Alliance politics XP5, merit500, TP50 in 07 corpus",
+      "Ceasefire politics XP5 and merit500 address annotations"
+    ]
+  },
+  "sources": [
+    {
+      "id": "repo-formula-corpus",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/173fb31440379bcb2f460be60b1d69dd8f6fcfe6/docs/rules/07-diplomacy.md",
+      "evidence": "empirical-high",
+      "supports": [
+        "Three formulas and difficulty multipliers",
+        "Directed target-ruler relationship c",
+        "Strict alliance and ceasefire thresholds",
+        "Alliance friendship +10"
+      ],
+      "limits": [
+        "Exact PK build and native instruction bodies open",
+        "Special forced-failure gates incomplete",
+        "No full failure settlement table"
+      ]
+    },
+    {
+      "id": "repo-version-boundaries",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/173fb31440379bcb2f460be60b1d69dd8f6fcfe6/docs/rules/37-diplomacy-version-boundaries.md",
+      "manifest": "https://github.com/DanielMax937/sanguozhi/blob/173fb31440379bcb2f460be60b1d69dd8f6fcfe6/docs/sources/diplomacy-version-boundaries.json",
+      "evidence": "official-version-boundaries-plus-historical-formula-context",
+      "supports": [
+        "Vanilla version separation",
+        "PK formula corpus binding"
+      ],
+      "limits": [
+        "Public changelog stability is not binary equality"
+      ]
+    },
+    {
+      "id": "repo-fallback-3",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/173fb31440379bcb2f460be60b1d69dd8f6fcfe6/docs/rules/16-unresolved-rules-fallbacks.md",
+      "section": "3",
+      "supports": [
+        "Version resolver is evidence policy, not original constants"
+      ],
+      "limits": [
+        "O08 does not expose the old Vanilla fallback resolver"
+      ]
+    },
+    {
+      "id": "repo-economy-office",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/173fb31440379bcb2f460be60b1d69dd8f6fcfe6/docs/rules/02-economy.md",
+      "sections": [
+        "5.13",
+        "5.16"
+      ],
+      "supports": [
+        "Diplomacy office AP and gift-gold half-price"
+      ],
+      "limits": [
+        "No offer-price discount or success multiplier established"
+      ]
+    },
+    {
+      "id": "repo-reward-ap-tables",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/173fb31440379bcb2f460be60b1d69dd8f6fcfe6/docs/rules.md",
+      "supports": [
+        "20 AP base",
+        "Historical reward table"
+      ],
+      "limits": [
+        "Ceasefire TP35 conflicts with formula-repost TP30",
+        "Not used as a complete native caller body"
+      ]
+    },
+    {
+      "id": "official-pk-office",
+      "url": "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf",
+      "evidence": "official-manual",
+      "supports": [
+        "Diplomacy office halves diplomatic AP and amicability cost"
+      ],
+      "limits": [
+        "Does not document a success bonus or standalone refund timing"
+      ]
+    },
+    {
+      "id": "historical-formula-ali213",
+      "url": "https://game.ali213.net/forum.php?action=printable&mod=viewthread&tid=1262010",
+      "evidence": "historical-formula-corpus",
+      "supports": [
+        "Empirical diplomacy formulas and reward discussion"
+      ],
+      "limits": [
+        "Not official source code",
+        "Build and some settlement details unresolved"
+      ]
+    },
+    {
+      "id": "historical-formula-ptt",
+      "url": "https://www.ptt.cc/bbs/Koei/M.1217946021.A.1FA.html",
+      "evidence": "historical-formula-repost",
+      "supports": [
+        "Surrender-only historical formula and reward context; surrender is outside O08"
+      ],
+      "limits": [
+        "This page does not contain ceasefire TP30 and is not evidence for the O08 ceasefire reward"
+      ]
+    },
+    {
+      "id": "historical-formula-qa",
+      "url": "https://zhidao.ali213.net/q/13047392.html",
+      "evidence": "historical-community",
+      "supports": [
+        "PK super-difficulty formula context"
+      ],
+      "limits": [
+        "Not native disassembly"
+      ]
+    },
+    {
+      "id": "memory-facility-index",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/专题索引01-内政设施.txt",
+      "anchors": [
+        "005BD07C diplomacy office check",
+        "005758D3 write 1000",
+        "005758DB call 005C3200",
+        "005C2FCC and 005C3250 AI/player amicability half-price checks"
+      ],
+      "evidence": "reverse-address-index",
+      "limits": [
+        "Anchors do not close full cost or refund contract"
+      ]
+    },
+    {
+      "id": "memory-address-reference",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/地址资料.txt",
+      "anchors": [
+        "005B20F7 / 005B2119 alliance debater and super 20 parameter",
+        "005B637D / 005B639F ceasefire corresponding parameters",
+        "005C2DAC / 005B235B / 005B65D1 reward neighborhoods"
+      ],
+      "evidence": "reverse-address-index",
+      "limits": [
+        "Debater trigger not implemented",
+        "Reward annotations not applied"
+      ]
+    },
+    {
+      "id": "sire-addresses",
+      "url": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/material/内存地址汇总.md",
+      "anchors": [
+        "004811b0 alliance query",
+        "004812c0 remaining ceasefire",
+        "005BD040 diplomacy AP cost",
+        "005B8400 personnel return includes diplomacy failure money"
+      ],
+      "evidence": "reverse-support",
+      "limits": [
+        "Native personnel return is excluded and does not prove immediate standalone refund"
+      ]
+    },
+    {
+      "id": "sire-structures",
+      "url": "https://github.com/sean2077/311SireCustomizedPackageDev/blob/43afe4efe273cf3b6ab7833b9b6f5822bd331fd4/material/结构体汇总.md",
+      "anchors": [
+        "struct_force +50 AllianceFlags",
+        "+64 PeaceTime",
+        "+99 DiplomacyCounter"
+      ],
+      "evidence": "reverse-structure-reference",
+      "limits": [
+        "Fields do not establish time units, treaty conversion, expiration or scheduler"
+      ]
+    },
+    {
+      "id": "official-vanilla-11",
+      "url": "https://www.gamecity.ne.jp/regist_c/user/san11/san11_update.htm",
+      "supports": [
+        "1.1 friendship balance changes"
+      ]
+    },
+    {
+      "id": "official-vanilla-12-plus",
+      "url": "https://www.gamecity.ne.jp/regist_c/user/san11/san11_update02_history.htm",
+      "supports": [
+        "1.2 friendship and diplomacy success balance changes"
+      ]
+    },
+    {
+      "id": "official-pk-patches",
+      "url": "https://www.gamecity.ne.jp/regist_c/user/san11/pk/san11pk_update.htm",
+      "supports": [
+        "No explicit later diplomacy change in public changelog"
+      ],
+      "limits": [
+        "Absence is not binary equality"
+      ]
+    },
+    {
+      "id": "contemporary-pk-review",
+      "url": "https://www.4gamer.net/review/sangokushi11pk/sangokushi11pk.shtml",
+      "supports": [
+        "Super difficulty introduced in PK"
+      ]
+    },
+    {
+      "id": "historical-ceasefire-repost-baidu",
+      "url": "https://zhidao.baidu.com/question/693845718520080364/answer/2870151990.html",
+      "evidence": "historical-repost-low-confidence",
+      "supports": [
+        "Ceasefire agreement result section lists success technique points +30"
+      ],
+      "limits": [
+        "Repost, not the original researcher or native evidence",
+        "Exact build open",
+        "Conflicts with repository historical TP35 table",
+        "Reward not applied by O08",
+        "Content was visible through search rendering for this exact answer URL; direct page opening was unavailable"
+      ],
+      "retrieval": {
+        "mode": "search-rendered-content",
+        "directOpen": "unavailable",
+        "fullOriginalPageHashRecorded": false
+      }
+    }
+  ],
+  "open": [
+    "Exact PK build and complete original diplomacy instruction bodies",
+    "Native intermediate rounding and overflow",
+    "Complete former-service and ruler-hatred forced-failure gates",
+    "Native payment, personnel-return refund, capture, mission and ownership lifecycle",
+    "Original treaty period units, upper bounds, conversion and scheduler",
+    "Debate trigger and victory",
+    "Reward conflict",
+    "Vanilla and console constants"
+  ],
+  "exclusions": [
+    "P078 and dependencies",
+    "Capture and prisoner exchange",
+    "Surrender, break-alliance and reinforcements",
+    "Native mission, return, personnel ownership and scheduler",
+    "TP, merit and politics-XP application"
+  ],
+  "original43EvidenceGroups": "unchanged",
+  "validation": {
+    "mode": "static-source-and-document-review-only",
+    "tests": "not-run",
+    "compiler": "not-run",
+    "build": "not-run",
+    "checkers": "not-run",
+    "productOrDiagnostics": "not-run",
+    "oldTests": "unchanged",
+    "historicalDefaultFoodFailure": "unresolved; prior passes do not validate this tree"
+  }
+}
