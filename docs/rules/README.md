@@ -1,3 +1,7 @@
+## 当前新增：O10-B单城商人即时交易（2026-10-17）
+
+[完整具体规则](city-merchant-lifecycle.md)逐项写明12政治锚点、严格单调有理插值、买ceil/卖floor、sell-only4/5、20AP/每城每旬一次、两格敌情及盟友、整笔capacity拒绝、AP20/0/XP5、外部旬输入和保存重建。[API](../engine/city-merchant-lifecycle.md) · [完整来源/政策](../sources/city-merchant-lifecycle.json) · [未运行场景](../../data/scenarios/city-merchant-example-v1.json)。原135条listing存在，但helper/raw相场尺度/native writer未闭合；原43不减、O10-A/B仍非全财政。代码文档仅静态新增，未运行测试或产品，旧测试与旧food失败保留。
+
 ## 当前新增：O10-A固定单城有限财政（2026-10-17）
 
 [完整规则正文](city-finance-lifecycle.md)包含全部字段、30槽设施映射、80官职月薪、金/粮原核逐步公式、四技能时点、旬月季年顺序、旧治安收入、逐笔cap/弃置、季降tape、足薪与不足整旬拒绝、特产binary32及完整保存重算。[API](../engine/city-finance-lifecycle.md) · [source/policy](../sources/city-finance-lifecycle.json) · [未运行场景](../../data/scenarios/city-finance-example-v1.json)。仅固定owner/完整普通有官薪名单、无俘虏的独立子域；所有者/调度/writer等仍provisional，不宣称全财政或native认证，原43不减。

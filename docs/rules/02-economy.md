@@ -2440,6 +2440,8 @@ PK 新增设施在攻略表中按最大耐久分组，并不足以证明全部�
 
 ## 8. 商人 / 粮食交易
 
+2026-10-17新增独立O10-B：[城市商人即时买卖粮服务](city-merchant-lifecycle.md)实现每城每旬一次/20AP、完整supplied两格敌情、UI3..7、政治20..100观测lookup与有理插值、买ceil/卖floor、整笔容量拒绝、行动/XP/AP与保存重建。下列原证据/经验与未知保留；135条listing存在并不闭合三helper、raw尺度或native writer。新服务只作静态代码和具体规则，未运行测试或产品，不代表全部财政完成，原43不减。O04和O10-A状态不变。
+
 `[COMMON/PK][official-confirmed command semantics + empirical-high formula + reverse-engineered-structure]`
 
 C8 处理原版/PK 的都市“商人”命令，不把 SIRE 后续的“交易优势”“商贸城市”等 MOD 扩展倒推成原作。

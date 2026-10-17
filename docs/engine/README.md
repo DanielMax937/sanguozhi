@@ -1,3 +1,7 @@
+## 当前新增：O10-B独立单城商人
+
+[create/preview/execute/save/load/replay API](city-merchant-lifecycle.md) · [完整买卖规则、12政治锚点及公式](../rules/city-merchant-lifecycle.md) · [source/policy](../sources/city-merchant-lifecycle.json)。BuyFood/SellFood/单旬推进、整笔资源/AP/XP写入和完整重建；独立于O04/O10-A，原43不减，不代表全财政或native认证。代码与场景仅静态新增，未运行测试、编译或产品。
+
 ## 当前新增：O10-A有限单城财政
 
 [create/preview/execute/save/load/replay API](city-finance-lifecycle.md) · [完整游戏规则、80薪表与设施公式](../rules/city-finance-lifecycle.md) · [source/policy](../sources/city-finance-lifecycle.json)。独立固定owner/完整驻城名单、无俘虏、最多360旬；月薪不足整旬回滚。写入本服务金粮/治安/兵装，不修改O04/schema；全genesis/receipt/snapshot重算。静态新增未运行任何测试、编译或产品；仅O10-A子域，原生财政与原43证据缺口不关闭。

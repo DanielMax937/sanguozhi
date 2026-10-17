@@ -57,6 +57,8 @@ save成功 `{ok:true,json}`，json是完整canonical state。load成功 `{ok:tru
 
 save自身也重算，不直接序列化不可信余额。load的有限JSON parser拒绝重复解码key，然后重新创建genesis snapshot、按原序执行每个接受命令、逐字段比较receipt/最终snapshot。未知政策、修改目录薪水、改写余额/RNG/日期/receipt都不能仅靠改hash通过。一个完整自洽的新合法场景不是签名伪造检测的目标；本服务不提供身份认证。
 
+2026-10-17保存一致性强化：reconstruct先检查初态预算，每个accepted step都构造与execute相同的完整CommandResult再检查预算，之后比较receipt。保留原限额、财政算法与政策；这是静态合同一致性强化，尚未证明原支持域内可触达反例，也未运行测试或性能评估，不是已复现故障的修复声明。
+
 对象key顺序可变化，数组顺序必须保留。JSON数值允许语法上1.0表达整数1；primitive语义仍要求安全整数，禁止负零。只有派生核receipt允许有限小数。无系统时钟、联网或当前main依赖。
 
 ## replayCityFinanceCommands(trace)

@@ -396,13 +396,16 @@ function reconstruct(v: unknown): State {
   if (!same(r.policies, POLICIES) || r.policyDigest !== POLICY_DIGEST) fail('policy-mismatch');
   if (!same(r.catalogs, CATALOGS) || !same(r.catalogDigests, CATALOG_DIGESTS)) fail('catalog-mismatch');
   const genesis = object(r.genesis, ['scenario', 'snapshot']);
-  let s = initialState(scenario(genesis.scenario));
+  let s = initialState(scenario(genesis.scenario)); budget(s);
   if (!same(genesis.snapshot, s.snapshot)) fail('genesis-snapshot-mismatch');
   const entries = list(r.acceptedCommands, s.genesis.scenario.advanceLimit);
   for (let i = 0; i < entries.length; i++) {
     try {
       const entry = object(entries[i], ['envelope', 'receipt']), next = append(s, envelope(entry.envelope));
       if (next.duplicate) fail('duplicate-accepted-entry');
+      // Keep persistence reconstruction subject to the complete execute-output budget.
+      const execution: CommandResult = { ok: true, committed: true, duplicate: false, state: next.state, receipt: next.receipt };
+      budget(execution);
       if (!same(entry.receipt, next.receipt)) fail('receipt-mismatch');
       s = next.state;
     } catch (e) { const f = failure(e); fail(f.reason, i, f.proposal); }

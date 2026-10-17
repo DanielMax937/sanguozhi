@@ -1,3 +1,11 @@
+# 当前状态：O10-B单城商人静态代码与具体规则（2026-10-17）
+
+[完整规则](city-merchant-lifecycle.md) · [API](../engine/city-merchant-lifecycle.md) · [来源/全部政策](../sources/city-merchant-lifecycle.json) · [未运行场景](../../data/scenarios/city-merchant-example-v1.json)
+
+独立BuyFood/SellFood/AdvanceMerchantTurn、每城每旬一次与20AP、supplied敌情两格、UI3..7、政治20..100精确锚点/有理插值、买ceil/卖floor与卖侧4/5、库存/cap整笔拒绝、XP5不自动成长、AP20/0政策、完整genesis/receipt/finalstate重建已补静态代码。完整135条交易listing存在，三helper/raw scale/native writer仍open；nativeExecution/stockVerified均false，原43不减。与O10-A状态独立，两批不表示全部财政完成。
+
+未运行测试、typecheck、编译、build、checker、诊断、产品或示例，旧测试没有修改，历史默认food全套失败仍保留。P078及native capture/ownership/mission/return/finalizers、俘虏欠薪均不接入。下方旧“当前”标题和结果保留各自日期，不是本树运行验收。
+
 # 当前状态：O10-A有限单城财政静态交付（2026-10-17）
 
 [完整规则](city-finance-lifecycle.md) · [API](../engine/city-finance-lifecycle.md) · [固定来源/完整政策](../sources/city-finance-lifecycle.json) · [静态场景](../../data/scenarios/city-finance-example-v1.json)

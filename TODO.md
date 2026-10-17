@@ -1,3 +1,9 @@
+# 当前工作范围：O10-B单城商人（2026-10-17）
+
+已补[具体规则](docs/rules/city-merchant-lifecycle.md)、[API](docs/engine/city-merchant-lifecycle.md)、独立代码、完整政策/lookup、schema与未运行场景：20AP/每城每旬一次、敌情两格、政治精确有理插值、买卖整笔入账与容量拒绝、AP/XP/行动、旬输入及全量保存重建。仅静态工作，没有执行测试/typecheck/编译/build/checker/诊断/产品/示例，旧测试与旧food失败保留。
+
+仍开放：三交易helper完整语义、raw相场尺度、native取整/writer/owner/几何/AP/商人和价格生成、跨城运输、港关和全财政集成；原43不减。O10-A/B是两个独立有限子批，不能称全部财政完成；P078及native capture/mission/return/finalizers、俘虏欠薪排除。下方既有记录保留原日期语境。
+
 # 当前工作范围：O10-A有限单城财政（2026-10-17）
 
 已补本批独立代码与[完整规则](docs/rules/city-finance-lifecycle.md)、[API](docs/engine/city-finance-lifecycle.md)、[来源/政策](docs/sources/city-finance-lifecycle.json)、[未运行场景](data/scenarios/city-finance-example-v1.json)：固定owner、完整驻城普通有官薪名单、30设施金粮计算、旬/月/季结算、足额工资、逐兵种特产和cap、完整genesis重算。支持域内是代码覆盖，未运行测试/编译/build/checker/诊断/产品或示例，旧测试未改；历史food失败保留。
