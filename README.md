@@ -1,3 +1,9 @@
+## 当前新增：标准设施建设与吸收（O11-A，2026-10-17）
+
+[完整具体规则](docs/rules/facility-construction-lifecycle.md)、[API](docs/engine/facility-construction-lifecycle.md)：独立单城供应地块上的9类建设/5类吸收，实际扣费/占地腾地/人员预留/逐旬进度/完工TP与XP功绩、16组可组合具名政策、旧级效力与既有金粮核只读投影、完整genesis/命令/回执/snapshot重建。[政策与设施表](data/catalogs/facility-construction-policies-v1.json)、[来源](docs/sources/facility-construction-lifecycle.json)、[未运行场景](data/scenarios/facility-construction-example-v1.json)。
+
+工作量与战斗HP分开，本模块不提供HP；初始work/调度/奖励writer是明确政策，功绩100/造币150冲突保留。维修、PK特殊楼、全局组合与原生任务仍未完成；不称全部O11，原43不减。未运行测试、typecheck、编译、build、checker、诊断、产品或示例，旧测试未改，历史food失败保留。
+
 ## 当前新增：单城商人即时粮食交易（O10-B，2026-10-17）
 
 [完整具体规则](docs/rules/city-merchant-lifecycle.md)与[API](docs/engine/city-merchant-lifecycle.md)：每城每旬一次、20AP、完整supplied两格敌情、UI相场3..7、政治20..100的12观测锚点与精确有理插值、买ceil/卖floor且仅卖侧4/5、整笔容量拒绝、行动/XP5、固定外部旬输入及AP20/0政策、完整genesis/receipt/finalstate重建。见[来源及完整政策](docs/sources/city-merchant-lifecycle.json)和[未运行场景](data/scenarios/city-merchant-example-v1.json)。

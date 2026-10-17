@@ -1,3 +1,7 @@
+## 2026-10-17：O11-A标准设施建设与吸收
+
+[完整规则](facility-construction-lifecycle.md)与[API](../engine/facility-construction-lifecycle.md)补9类建设、5类吸收的实际独立账本、人员预留/完工奖励、有限推进和全历史重算；已有速率核和金粮核真实复用。官方/社区/源listing/临时policy分层，功绩冲突保留。维修、PK特殊楼、combatHP与原生writer/全局调度仍未恢复；原43不减。未运行测试、typecheck、编译、build、checker、诊断、产品或示例，旧测试未改，历史food失败保留。
+
 # 当前状态：O10-B单城商人静态代码与具体规则（2026-10-17）
 
 [完整规则](city-merchant-lifecycle.md) · [API](../engine/city-merchant-lifecycle.md) · [来源/全部政策](../sources/city-merchant-lifecycle.json) · [未运行场景](../../data/scenarios/city-merchant-example-v1.json)

@@ -1,3 +1,7 @@
+## 标准设施建设与吸收独立规则（O11-A）
+
+[facility-construction-lifecycle.md](facility-construction-lifecycle.md)：9类费用/耐久/TP、5类合法吸收与type映射、城心敌情/忙碌人员、精确速率/非HP工作量政策、完成奖励争议与16组政策、旧级效力/旧金粮核投影、有限日历及完整保存重放。含[API](../engine/facility-construction-lifecycle.md)、[来源](../sources/facility-construction-lifecycle.json)与未运行场景；不关闭维修/PK特殊楼或原生证据债。
+
 ## 当前新增：O10-B单城商人即时交易（2026-10-17）
 
 [完整具体规则](city-merchant-lifecycle.md)逐项写明12政治锚点、严格单调有理插值、买ceil/卖floor、sell-only4/5、20AP/每城每旬一次、两格敌情及盟友、整笔capacity拒绝、AP20/0/XP5、外部旬输入和保存重建。[API](../engine/city-merchant-lifecycle.md) · [完整来源/政策](../sources/city-merchant-lifecycle.json) · [未运行场景](../../data/scenarios/city-merchant-example-v1.json)。原135条listing存在，但helper/raw相场尺度/native writer未闭合；原43不减、O10-A/B仍非全财政。代码文档仅静态新增，未运行测试或产品，旧测试与旧food失败保留。
