@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "profile": "duel-ordinary-translated-reference-v1",
+  "scope": "ordinary three-stance standalone subset; not complete duel",
+  "evidenceLevel": "translated-source-reference",
+  "nativeEquivalent": false,
+  "stockOriginalVerified": false,
+  "originalUnresolvedGroups": 43,
+  "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+  "sourceIdentityClaim": "Modern project self-reports C++ translation; original C++ provenance and native PC-PK/PK1.1 equivalence remain open",
+  "byteDefinition": "Complete connector content encoded as UTF-8/LF; no whitespace or newline normalization",
+  "staticSourceRead": "Both pinned files independently re-read and metadata hashes compared in the 2026-10-17 static review; source code was not executed",
+  "files": [
+    {
+      "repository": "tankyc/sango_infinity",
+      "path": "Project/Assets/Sango/Scripts/Game/Duel/Duel.cs",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Duel/Duel.cs",
+      "gitBlobSha1": "d0e825097067c58c95c37e067d1c2a2688a74898",
+      "utf8Bytes": 142829,
+      "sha256": "4c72e962a9b5dc07ae6bb26285c1e165a511c8c66d5b669520fd1d5b78e3ef07",
+      "lineAttribution": {
+        "hpSpiritCaps": [
+          33,
+          37
+        ],
+        "defaultBlowLimit": [
+          67,
+          67
+        ],
+        "ordinaryStances": [
+          276,
+          278
+        ],
+        "excludedFury": [
+          279,
+          279
+        ],
+        "calcResult": [
+          1746,
+          1787
+        ],
+        "ordinaryBaseDamage": [
+          1794,
+          1805
+        ],
+        "actorSelection": [
+          1962,
+          1988
+        ],
+        "actionRatio": [
+          2214,
+          2267
+        ],
+        "spiritGain": [
+          2271,
+          2323
+        ],
+        "dodgeChance": [
+          2359,
+          2369
+        ],
+        "damageAndRawSpirits": [
+          2573,
+          2677
+        ],
+        "actionResult": [
+          2712,
+          2744
+        ],
+        "singleActorAndActionCount": [
+          2754,
+          2774
+        ],
+        "ordinaryActionAnimation": [
+          2778,
+          2825
+        ],
+        "rawSpiritToRequestedGain": [
+          2790,
+          2801
+        ],
+        "ordinaryNonDodgeBlow": [
+          2815,
+          2815
+        ],
+        "hpWriter": [
+          3154,
+          3164
+        ],
+        "spiritWriter": [
+          3168,
+          3181
+        ]
+      }
+    },
+    {
+      "repository": "tankyc/sango_infinity",
+      "path": "Project/Assets/Sango/Scripts/Game/Duel/DuelPhase.cs",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Duel/DuelPhase.cs",
+      "gitBlobSha1": "9098e6541d84ac5b36ecafa6112beb082442c53f",
+      "utf8Bytes": 25227,
+      "sha256": "90d1c7ff9b6a878ce9e3d0b1d29ed0609d8461cd8bca7c2a6779bd8578ffb5ad",
+      "lineAttribution": {
+        "turnEndBlowLimit": [
+          397,
+          429
+        ],
+        "actionEndHpResultBeforeTurnEnd": [
+          657,
+          705
+        ]
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "subject": "duelScore squared share; actor speed-share; stepwise damage/hit/dodge; raw spirits; pre-write HP requested gains; clamp writer",
+      "level": "translated-source-reference",
+      "restrictions": "source Normal, generic identity hooks, no items/buffs, exactly one participant per side"
+    },
+    {
+      "subject": "HP terminal result before remaining TurnEnd blow-limit branch",
+      "level": "translated-source-reference",
+      "support": "Duel.cs CalcResult plus DuelPhase.cs ActionEnd and TurnEnd; not the limit check alone"
+    },
+    {
+      "subject": "ordinary-only scheduling; exchange-start simultaneous stance selection; all identity hooks disabled; bounds and identifiers; percentage LT adapter; persistence and capacity",
+      "level": "provisional-engine-rule",
+      "restrictions": "No native action schedule, RNG implementation, identity system or save compatibility claim"
+    }
+  ],
+  "registeredPolicies": {
+    "id": "ordinary-duel-standalone-policy-v1",
+    "profile": "duel-ordinary-translated-reference-v1",
+    "actions": {
+      "id": "three-stance-ordinary-only-v1",
+      "stances": [
+        "Attack",
+        "Defense",
+        "Spirit"
+      ],
+      "action": "ResolveOrdinaryExchange",
+      "critical": false,
+      "counterattack": false
+    },
+    "identities": {
+      "id": "generic-identity-hooks-v1",
+      "allPersonHooks": "identity-or-disabled",
+      "realPersonMapping": false
+    },
+    "context": {
+      "id": "source-normal-no-items-no-buffs-v1",
+      "difficulty": "source-normal",
+      "items": false,
+      "buffs": false
+    },
+    "stanceTiming": {
+      "id": "simultaneous-stance-at-exchange-start-v1",
+      "freeStanceCommand": false
+    },
+    "actor": {
+      "id": "pinned-source-speed-share-actor-v1",
+      "reverse": false,
+      "fasterFirst": true,
+      "equalSpeedKeepsChallengerFirst": true
+    },
+    "randomness": {
+      "id": "bounded-percent-lt-v1",
+      "percentBound": 100,
+      "jitterBound": 10,
+      "comparison": "strict-less-than",
+      "draws": "three-if-hit-otherwise-four",
+      "nativePrng": false
+    },
+    "arithmetic": {
+      "id": "source-stepwise-integer-truncation-v1",
+      "ratio": "duelScore-squared-share",
+      "division": "toward-zero",
+      "intermediate": "exact-bigint"
+    },
+    "spirit": {
+      "id": "source-pre-write-hp-spirit-v1",
+      "hpTiming": "before-hp-writer",
+      "zeroBeforeMinimum": true,
+      "minimum": 3,
+      "receivingDefenseSpiritMinimum": 5
+    },
+    "writer": {
+      "id": "source-hp100-spirit300-clamp-v1",
+      "hpMin": 0,
+      "hpMax": 100,
+      "spiritMin": 0,
+      "spiritMax": 300
+    },
+    "termination": {
+      "id": "source-nondodge-blow-limit50-v1",
+      "blowLimit": 50,
+      "dodgeBlows": 0,
+      "hitBlockBlows": 1,
+      "priority": [
+        "hp-defeat",
+        "blow-limit-draw"
+      ]
+    },
+    "domains": {
+      "id": "bounded-generic-participants-v1",
+      "participants": 2,
+      "strengthMin": 1,
+      "strengthMax": 100,
+      "initialHpMin": 1,
+      "idMaxAsciiCharacters": 64
+    },
+    "persistence": {
+      "id": "full-policy-genesis-recompute-v1",
+      "receipts": "compare-all-fields",
+      "snapshot": "compare-all-fields"
+    },
+    "capacity": {
+      "id": "bounded-history-reject-v1",
+      "maxEntries": 4096,
+      "maxCanonicalUtf8Bytes": 16777216,
+      "maxInputNodes": 1000000,
+      "maxInputDepth": 32,
+      "exhaustion": "atomic-rejection"
+    }
+  },
+  "formulas": {
+    "score": "Complete stepwise formula and intermediates: docs/rules/duel-ordinary-session-v1.md section 5",
+    "ordinaryDamage": "max(trunc(trunc(attack*ratio/50)*attackSub*7/27),3)",
+    "hit": "clamp(trunc(trunc(atkHit*(100-defBlock)/80)*ratio/50)+jitter,10,99)",
+    "dodge": "clamp(10+trunc((defStrength-atkStrength)/3),5,30)+(Defense?25:0)",
+    "blockTuple": "(Defense?max(trunc(n*3/10),1):trunc(n/2),trunc(n*3/4),max(trunc(n/2),1))",
+    "dodgeDefenseTuple": "(0,0,n)",
+    "dodgeSpiritTuple": "(0,0,max(trunc(n/2),1))",
+    "dodgeAttackTuple": "(0,0,0)",
+    "spirit": "raw<=0:0; minimum then coef/7, receiving*5/4, pre-write HP<30*2 else HP<50*3/2; each division truncates toward zero; positive final minimum1"
+  },
+  "excluded": [
+    "Fury",
+    "critical",
+    "special moves",
+    "attack/defense buffs",
+    "invulnerability",
+    "equipment",
+    "all real-person hooks",
+    "switching/assistance",
+    "retreat",
+    "first-turn kill",
+    "injury",
+    "non-Normal difficulty",
+    "multiple participants per side",
+    "debate",
+    "P078/native mission/return",
+    "captives/execution/ownership",
+    "external rewards"
+  ],
+  "validation": {
+    "status": "static-only-not-executed",
+    "product": false,
+    "tests": false,
+    "compilation": false,
+    "build": false,
+    "checker": false,
+    "diagnostics": false,
+    "scenario": "paper-design-not-run",
+    "existingTests": "unchanged",
+    "legacyPythonScope": "raw0..13, HP100, sourceNormal, no sword; not session writer or low-HP verification"
+  },
+  "open": [
+    "native PC-PK/PK1.1 whole-chain equivalence",
+    "original C++ provenance and stock/patch identity",
+    "complete duel action lifecycle and identity exceptions",
+    "Vanilla/PS2/Wii equivalence"
+  ]
+}

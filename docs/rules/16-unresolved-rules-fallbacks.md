@@ -2064,6 +2064,8 @@ for (const person of city.officers) {
 
 ## 8. 单挑连续命中 / 伤害函数（E14 现代转录参考）
 
+工程补充：[O09a普通单挑独立session](duel-ordinary-session-v1.md)仅实现三方针普通子集，完整条件随机、单actor、无反击、pre-write HP斗志、writer、Dodge不加合/HP优先50合与genesis重放。新增代码和纸面场景未运行；旧Python HP100/raw0..13专项不验证该session。Fury/会心/必杀/人物/装备等仍排除，不关闭原生E14全链或原43组。
+
 ### 结论：参考公式可复算，原生PC-PK/PK1.1等价仍未证
 
 `[modern-reference][translated-source-reference]`

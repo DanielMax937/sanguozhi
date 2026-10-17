@@ -1,5 +1,7 @@
 # E14 单挑连续公式
 
+> 2026-10-17另增[O09a普通单挑独立session](duel-ordinary-session-v1.md)：三方针普通子集，全部人物hook关闭，加入条件随机、先攻、双计数、低HPrequested增益、实际writer与终局保存重放。该新增代码/纸面场景仅静态编写，未运行；本页旧Python raw0..13、HP100专项不覆盖新低HP/writer/session，也不被称为本轮通过。非全部单挑，E14原生全链和原43组不关闭。
+
 更新：2026-10-15。范围：固定现代转录来源参考（`translated-source-reference`）；原生 PC-PK/PK1.1 等价未证。
 
 ## 1. 本轮结论
