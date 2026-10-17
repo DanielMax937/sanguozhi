@@ -1,3 +1,11 @@
+## 2026-10-17 O13-A：固定单城Search静态交付状态
+
+[规则](city-search-lifecycle.md)与[API](../engine/city-search-lifecycle.md)新增有限内部候选过滤／排序／选择／RNG、人才／宝物发现登记、金／AP／行动／奖励／旬序及完整genesis逐receipt重建。PR53／54／55三个限定数值核均已发布；其source-listing-reconstruction等级、false flags与历史候选正文不改。新policy包含阈值映射、稳定二读、cap及只发现奖励，不认证原作最终概率、writer或stock。
+
+O13-B相邻遗迹／庙尚未实现，独立有限到达／发现／待选奖励合同见[规则第10节](city-search-lifecycle.md#10-o13-b明确尚未实现的独立有限后续)。整个O13、原43与45快照不关闭、不新增分母；城市事件／跨服务一致性仍为O14／O15，native人员／宝物归属及P078依赖排除。
+
+验证状态：仅静态阅读与编辑，没有运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例。4096历史是硬上限而非性能保证；旧核、历史food失败和旧验证结果保持原日期语境，不作本批通过证据。
+
 ## 2026-10-17：O12-B固定双城普通流言标量，静态新增
 
 [完整规则](rumor-scalar-lifecycle.md)与[API](../engine/rumor-scalar-lifecycle.md)补固定双城普通名单的独立数值服务：内部新odds、三人平均防守、关系保护、至多一人加空槽、义理抗性与分离loss、200金/30AP及actor每旬机会、true忠诚/治安、独立旬序/RNG、完整policy/原子幂等保存重算。上述具体算法全为synthetic；仅费用与智力方向等官方事实和10/12的独立listing参数依据分开保留。

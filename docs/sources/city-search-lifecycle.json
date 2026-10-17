@@ -1,0 +1,440 @@
+{
+  "schemaVersion": 1,
+  "profile": "standalone-city-search-v1",
+  "scope": "one-fixed-city-discovery-only",
+  "status": "static-implementation-not-executed",
+  "updated": "2026-10-17",
+  "base": {
+    "repository": "DanielMax937/sanguozhi",
+    "mainCommit": "6ead48d9384b2435ee4517f25856ba72e1681838",
+    "tree": "73c8ec4f636ede9132492665cfde978aed347510",
+    "publishedPr": 84,
+    "meaning": "Baseline identity only; no validation claim for this addition"
+  },
+  "artifacts": {
+    "implementation": "packages/engine/src/city-search-lifecycle.ts",
+    "policy": "data/catalogs/city-search-policy-v1.json",
+    "rules": "docs/rules/city-search-lifecycle.md",
+    "api": "docs/engine/city-search-lifecycle.md",
+    "schema": "docs/sources/city-search-lifecycle.schema.json",
+    "example": "data/scenarios/city-search-example-v1.json"
+  },
+  "evidenceLayers": [
+    {
+      "id": "listing-numeric-kernels",
+      "level": "source-listing-reconstruction",
+      "meaning": "Previously delivered bounded numerical projections; unchanged native-evidence flags and all original inputs/outputs",
+      "stockCertified": false
+    },
+    {
+      "id": "listing-reward-requests",
+      "level": "selected-listing-call-sites-not-native-writers",
+      "meaning": "Selected caller requests only; no callee writer, ownership or recruitment handoff recovery",
+      "stockCertified": false
+    },
+    {
+      "id": "manual-and-guide",
+      "level": "manual-summary-and-guide-observation",
+      "meaning": "Official command-table summary and public guide facts, separately scoped and version-limited",
+      "stockCertified": false
+    },
+    {
+      "id": "service-policy",
+      "level": "synthetic-replaceable-policy",
+      "meaning": "New filtering, sequencing, RNG and probability mapping, stable reads, discovery-only rewards, ledgers, caps, time and persistence",
+      "stockCertified": false
+    }
+  ],
+  "deliveredKernels": [
+    {
+      "name": "search-talent-baseline",
+      "api": "calculateSearchTalentBaseline",
+      "publishedPr": 53,
+      "profile": "search-talent-resolved-v1",
+      "sourceManifest": "docs/sources/search-talent-baseline.json",
+      "baselineManifestGitBlob": "b54f4677624f46f20580f213e55fced777990b3f",
+      "source": {
+        "repository": "sjn4048/311MemoryResearch",
+        "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+        "path": "内存资料/整理/Func-人才05-计算探索是否成功.txt",
+        "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-人才05-计算探索是否成功.txt",
+        "gitBlobSha1": "d069a0a06b809de318b9f99deb1bb70f9b8dd3c7",
+        "snapshot": "docs/sources/search-talent-original.gbk",
+        "snapshotEncoding": "GBK",
+        "snapshotBytes": 9251,
+        "snapshotSha256": "b0c07d056947b42078e32574d1d91d429bad1db2ddf78d22a806330f5eaf578c",
+        "utf8Snapshot": "docs/sources/search-talent-original.txt",
+        "utf8Bytes": 9812,
+        "utf8Sha256": "cc5202aaf4a20b8ca6574b8145b83e1713f3298dcae442413af4c9761f09b7d3",
+        "acquisition": "GitHub connector decoded text; GBK re-encoding matches pinned Git blob; not a direct raw download",
+        "authority": "Published research listing for 311PK, no authenticated executable hash or exact patch/version identity"
+      },
+      "originalListing": {
+        "start": "005D1DF0",
+        "endInclusive": "005D1E92",
+        "endExclusive": null,
+        "instructionCount": 66,
+        "listedByteLength": 163,
+        "listedBytesSha256": "0a1d67a620fa80d5d535290937e9ab5c742f685d16c0ef1ec8a238e270e2da9b"
+      },
+      "evidence": {
+        "level": "source-listing-reconstruction",
+        "profile": "search-talent-resolved-v1",
+        "source": "docs/sources/search-talent-baseline.json",
+        "originalRange": "005D1DF0..005D1E92",
+        "scope": "resolved stable inputs; filtered-candidate numerical baseline only",
+        "listedBytesVerified": true,
+        "stockOriginalVerified": false,
+        "originalExecutableExecuted": false,
+        "nativeHelpersReconstructed": false,
+        "callerIntegrated": false,
+        "finalProbabilityRecovered": false,
+        "rngIntegrated": false,
+        "searchGoldRecovered": false,
+        "searchTreasureRecovered": false
+      }
+    },
+    {
+      "name": "treasure-roll-argument",
+      "api": "calculateTreasureRollArgument",
+      "publishedPr": 54,
+      "profile": "treasure-roll-resolved-v1",
+      "sourceManifest": "docs/sources/treasure-roll-argument.json",
+      "baselineManifestGitBlob": "93d582d35091dd4c2d06bf3f0a4409be33311aec",
+      "source": {
+        "repository": "sjn4048/311MemoryResearch",
+        "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+        "path": "内存资料/整理/Func-人才06-执行探索.txt",
+        "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-人才06-执行探索.txt",
+        "gitBlobSha1": "82bff04db2dae9ae0787e1e71ad72f1b4e6852de",
+        "snapshot": "docs/sources/treasure-search-original.gbk",
+        "snapshotEncoding": "GBK",
+        "snapshotBytes": 42874,
+        "snapshotSha256": "b8fb7965114ebc0d26cbb27058367c3a54ff47972bff9ab8dfc9e61867f8560a",
+        "utf8Snapshot": "docs/sources/treasure-search-original.txt",
+        "utf8Bytes": 44634,
+        "utf8Sha256": "5cbca6abd2d96ccf6980f26bee3eb4fd31b0baa0a942d65f5efb0d4c30220f0c",
+        "acquisition": "GitHub connector decoded text; GBK re-encoding matches pinned Git blob; not a direct raw download",
+        "authority": "Published research listing for 311PK, no authenticated executable hash or exact patch/version identity"
+      },
+      "originalListing": {
+        "start": "005D5B45",
+        "endInclusive": null,
+        "endExclusive": "005D5B6B",
+        "instructionCount": 12,
+        "listedByteLength": 38,
+        "listedBytesSha256": "938c72b44cad329072c4212548b4878f3d611dbfd3d6f6bd244f714eff3f7ec2"
+      },
+      "evidence": {
+        "level": "source-listing-reconstruction",
+        "profile": "treasure-roll-resolved-v1",
+        "source": "docs/sources/treasure-roll-argument.json",
+        "originalRange": "005D5B45 <= PC < 005D5B6B",
+        "scope": "already selected candidate; stable resolved uint8 value; pre-RNG roll argument only",
+        "listedBytesVerified": true,
+        "stockOriginalVerified": false,
+        "originalExecutableExecuted": false,
+        "nativeHelpersReconstructed": false,
+        "callerIntegrated": false,
+        "finalProbabilityRecovered": false,
+        "rngIntegrated": false,
+        "candidateSelectionRecovered": false,
+        "ownershipWriterRecovered": false,
+        "commandIntegrated": false
+      }
+    },
+    {
+      "name": "search-gold-caller",
+      "api": "calculateSearchGoldCallerProjection",
+      "publishedPr": 55,
+      "profile": "search-gold-caller-resolved-v1",
+      "sourceManifest": "docs/sources/search-gold-caller.json",
+      "baselineManifestGitBlob": "5cce27a1fc3ef8e4b9fd4dec446b17b0a6fc2806",
+      "source": {
+        "repository": "sjn4048/311MemoryResearch",
+        "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+        "path": "内存资料/整理/Func-人才06-执行探索.txt",
+        "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-人才06-执行探索.txt",
+        "gitBlobSha1": "82bff04db2dae9ae0787e1e71ad72f1b4e6852de",
+        "snapshot": "docs/sources/treasure-search-original.gbk",
+        "snapshotEncoding": "GBK",
+        "snapshotBytes": 42874,
+        "snapshotSha256": "b8fb7965114ebc0d26cbb27058367c3a54ff47972bff9ab8dfc9e61867f8560a",
+        "utf8Snapshot": "docs/sources/treasure-search-original.txt",
+        "utf8Bytes": 44634,
+        "utf8Sha256": "5cbca6abd2d96ccf6980f26bee3eb4fd31b0baa0a942d65f5efb0d4c30220f0c",
+        "acquisition": "GitHub connector decoded text; GBK re-encoding matches pinned Git blob; not a direct raw download",
+        "authority": "Published research listing for 311PK, no authenticated executable hash or exact patch/version identity"
+      },
+      "originalListing": {
+        "start": "005D5BA6",
+        "endInclusive": null,
+        "endExclusive": "005D5BF8",
+        "instructionCount": 29,
+        "listedByteLength": 82,
+        "listedBytesSha256": "e4ecb097b0d272552d3203c1f2a60f834e7c0fc50f32a032f17c4f50f4135325"
+      },
+      "evidence": {
+        "level": "source-listing-reconstruction",
+        "profile": "search-gold-caller-resolved-v1",
+        "source": "docs/sources/search-gold-caller.json",
+        "originalRange": "005D5BA6 <= PC < 005D5BF8",
+        "scope": "post-RNG caller arithmetic from explicit per-call uint32 captures; no helper or reward execution",
+        "listedBytesVerified": true,
+        "interpretedCallSitesCaptured": true,
+        "stockOriginalVerified": false,
+        "originalExecutableExecuted": false,
+        "nativeHelpersReconstructed": false,
+        "callerIntegrated": false,
+        "realRewardRecovered": false,
+        "rngIntegrated": false,
+        "commandIntegrated": false,
+        "mutableStateRecovered": false,
+        "completeSearchRecovered": false,
+        "finalProbabilityRecovered": false
+      }
+    }
+  ],
+  "inheritedEvidenceNotice": "listedBytesVerified and other true flags inside old kernel evidence are historical metadata preserved verbatim, not new execution or byte-check results. New service policy does not upgrade native helper, command, writer, stock or final-probability flags",
+  "license": {
+    "spdx": "Apache-2.0",
+    "attribution": "sjn4048/311MemoryResearch",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE"
+  },
+  "listingRequests": {
+    "sourceUrl": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-人才06-执行探索.txt",
+    "sourceCommit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "sourceBlob": "82bff04db2dae9ae0787e1e71ad72f1b4e6852de",
+    "readingBoundary": "Dispatcher skeleton and separate action/reward request blocks only; no ownership or recruitment/debate handoff implementation",
+    "dispatcher": "talent -> city events -> treasure -> gold/nothing",
+    "serviceOrderIsDifferent": true,
+    "serviceOrder": "talent -> treasure -> gold/nothing",
+    "blocks": [
+      {
+        "range": "005D3F01..005D3F70",
+        "outcome": "treasure",
+        "requests": {
+          "acted": 1,
+          "merit": 50,
+          "politicsXp": 1,
+          "techniquePoints": 2,
+          "apHelper": "005D1F30"
+        },
+        "writerCertified": false
+      },
+      {
+        "range": "005D3F92..005D3FCA; 005D4103..005D4147",
+        "outcome": "gold",
+        "requests": {
+          "acted": 1,
+          "merit": 50,
+          "politicsXp": 1,
+          "techniquePoints": 2,
+          "cityGold": "final amount",
+          "apHelper": "005D1F30"
+        },
+        "writerCertified": false
+      },
+      {
+        "range": "005D427B..005D42C3",
+        "outcome": "nothing",
+        "requests": {
+          "acted": 1,
+          "merit": 10,
+          "politicsXp": 1,
+          "techniquePointIncreaseRequestPresent": false,
+          "apHelper": "005D1F30"
+        },
+        "writerCertified": false
+      }
+    ],
+    "textDefect": "005D42B8 target annotation contains an extra zero; no new opcode authentication or corrected binary claim",
+    "newOpcodeOracleOrByteCheckRun": false
+  },
+  "guideSources": [
+    {
+      "id": "official-pk-manual",
+      "url": "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf",
+      "kind": "official-manual-summary-and-search-index",
+      "supports": [
+        "Search gold cost 0, AP20 and talent office AP10 from existing 03-personnel section 8.14 command-table summary",
+        "search increases politics/merit and successful search technique points in search-index excerpts",
+        "eye skill guarantees a finding when eligible free talent exists, as qualitative manual context"
+      ],
+      "retrievalBoundary": "Full PDF retrieval failed at 47138551 bytes; no new full-document download, hash, page authentication or Search AP helper reconstruction",
+      "doesNotSupport": [
+        "new RNG",
+        "candidate-filter reconstruction",
+        "exact writer behavior",
+        "discovery-only merit/TP zero"
+      ]
+    },
+    {
+      "id": "wiki79-experience",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/79.html",
+      "kind": "guide-observation",
+      "reviewDate": "2026-10-17",
+      "supports": [
+        "ordinary exploration politics XP1",
+        "talent discovery without hiring politics XP0",
+        "hiring choice politics XP3 belongs to another flow",
+        "ruin/temple discovery charisma XP10"
+      ],
+      "doesNotSupport": [
+        "native PC writer",
+        "stock or patch identity",
+        "discovery-only merit or TP zero"
+      ]
+    },
+    {
+      "id": "wiki113-merit",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/113.html",
+      "kind": "guide-observation",
+      "reviewDate": "2026-10-17",
+      "supports": [
+        "gold search merit50",
+        "search failure merit10",
+        "discovery then failed hiring merit100 is separate"
+      ],
+      "doesNotSupport": [
+        "merit100 for discovery without hiring"
+      ]
+    },
+    {
+      "id": "wiki968-adjacent-sites",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/968.html",
+      "kind": "guide-observation-future-profile-only",
+      "reviewDate": "2026-10-17",
+      "supports": [
+        "leader merit10000 and unit charisma80",
+        "adjacent discovery",
+        "12-month ruin rewards",
+        "all discovering members charisma XP10",
+        "fourth-temple high-grade availability",
+        "platform differences"
+      ],
+      "doesNotSupport": [
+        "original site coordinates or placement sampling",
+        "original discovery probability",
+        "exact native skill pools or writers",
+        "O13-B implementation"
+      ]
+    },
+    {
+      "id": "wiki8-faq",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/8.html",
+      "kind": "guide-observation-future-profile-only",
+      "reviewDate": "2026-10-17",
+      "supports": [
+        "first adjacent visit may fail and another visit may be needed"
+      ],
+      "doesNotSupport": [
+        "50 percent original probability"
+      ]
+    },
+    {
+      "id": "wiki149-geography",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/149.html",
+      "kind": "source-location-only-future-profile",
+      "supports": [
+        "candidate reference location"
+      ],
+      "coordinatesExtracted": false
+    }
+  ],
+  "syntheticPolicy": {
+    "policyId": "city-search-policy-v1",
+    "fullDefinition": "data/catalogs/city-search-policy-v1.json",
+    "completeDefinitionFrozenInGenesis": true,
+    "identityDigestOnly": false,
+    "treasureImportCatalog": "none-supplied-instance-facts-only",
+    "treasureSupplyTruthAuthenticated": false,
+    "initialDiscovered": "immutable supplied flag only; runtime discovered is derived from registry ID membership",
+    "talentReward": {
+      "merit": 0,
+      "politicsXp": 0,
+      "techniquePoints": 0,
+      "politicsXpEvidence": "guide-observation",
+      "meritAndTpEvidence": "synthetic-conservative-zero"
+    },
+    "rng": "LCG32 multiply-high; seed zero allowed; bounded mapping is not strictly unbiased",
+    "onlyRegisteredAdvancePolicy": "search-service-ap-recovery20-v1",
+    "nativeOwnershipGranted": false,
+    "arbitraryPolicyCallbacks": false,
+    "objectInputBoundary": "Non-Proxy plain/null-prototype own-data JSON DTOs only. Reflection may trigger Proxy traps; hostile Proxy and polluted runtime are unsupported, not universally detected/rejected. JSON-string load is parsed separately."
+  },
+  "limits": {
+    "actors": 256,
+    "talents": 1024,
+    "treasures": 128,
+    "advanceLimit": 360,
+    "acceptedCommands": 4096,
+    "traceAttempts": 4096,
+    "completeUtf8Bytes": 16777216,
+    "nodes": 1048576,
+    "depth": 24,
+    "arrayLength": 4096,
+    "objectKeys": 128,
+    "escapedSaveResultIncluded": true,
+    "allOldIdempotentReceiptReturnsReserved": true,
+    "performance": "Static boundedness only. Full-history reconstruction, per-step budgets and old-receipt capacity scans grow at least quadratically in history; 4096 is a hard cap, not a latency, efficiency or benchmark claim."
+  },
+  "persistence": {
+    "genesis": "complete canonical scenario plus initial snapshot",
+    "history": "all accepted envelopes and complete receipts",
+    "load": "reconstruct genesis and recompute each receipt and state; compare final snapshot, RNG and discovery registries; repeat all intermediate budgets",
+    "duplicateId": "same envelope returns original receipt before stale-revision checks; different envelope rejects",
+    "duplicateDecodedJsonKeysRejected": true,
+    "transaction": "late failures do not mutate any state, charge resources, consume RNG or reserve IDs",
+    "authenticity": "Deterministic self-consistency, not cryptographic authenticity. A coherently rewritten genesis and history is another supplied scenario; arbitrary forgery detection is not claimed."
+  },
+  "validation": {
+    "performed": "static authoring and reading only",
+    "productExecuted": false,
+    "exampleExecuted": false,
+    "testsRun": false,
+    "typecheckRun": false,
+    "compileRun": false,
+    "buildRun": false,
+    "checkerRun": false,
+    "diagnosticsRun": false,
+    "schemaValidationRun": false,
+    "historicalResultsValidateThisAddition": false
+  },
+  "remaining": {
+    "O13B": {
+      "profile": "standalone-adjacent-site-discovery-v1",
+      "status": "not-implemented",
+      "finiteContract": "docs/rules/city-search-lifecycle.md#10-o13-b明确尚未实现的独立有限后续",
+      "scope": "fixed roster/units/sites and at most 360 supplied arrivals; internal adjacency, gates, new chance, pending ruin/month or temple/skill rewards with separate persistence",
+      "citySearchFourthReward": false
+    },
+    "E": [
+      "stock/executable/patch and cross-version identity",
+      "native talent filtering/selection/final chance/getters",
+      "native treasure filtering/selection/probability",
+      "native gold RNG/helper stability/capacity",
+      "full Search AP/qualification/writers/rewards",
+      "city event branch",
+      "original ruin/temple coordinates, placement, chances, skill pools and writers",
+      "original map/scenario and cross-service scheduling"
+    ],
+    "X": [
+      "P078 and all dependencies",
+      "native ownership/personnel transfer",
+      "capture",
+      "force extinction",
+      "ruler transfer/succession",
+      "native mission/return/finalizers",
+      "immediate recruitment/debate native handoff",
+      "native treasure ownership writer"
+    ],
+    "original43Reduced": false,
+    "original45SnapshotReduced": false,
+    "newCountingDenominator": false,
+    "legacyCorpusExecutionEnabledChanged": false,
+    "wholeO13Complete": false,
+    "O14": "ordinary safe city events separate finite executor",
+    "O15": "cross-service balances/actions/time/movement/event integration"
+  }
+}

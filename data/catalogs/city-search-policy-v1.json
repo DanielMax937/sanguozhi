@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "id": "city-search-policy-v1",
+  "evidenceLevel": "synthetic-replaceable-policy",
+  "filter": {
+    "id": "search-local-ordinary-filter-v1",
+    "ordering": "ascii-id-ascending",
+    "talentLifeStatus": "living",
+    "talentServiceStatus": "free",
+    "treasureKind": "ordinary",
+    "treasureHolder": null,
+    "initialDiscoveryOrigin": "supplied-initial",
+    "importCatalog": "none-supplied-instance-facts-only"
+  },
+  "selection": {
+    "id": "search-talent-treasure-gold-v1",
+    "cityEvents": "not-executed",
+    "talentRollBound": 100,
+    "treasureRollBound": 100,
+    "comparison": "roll-less-than-unclipped-kernel-value",
+    "singletonConsumesSelector": false,
+    "goldBound": "charmU8-plus-one"
+  },
+  "rng": {
+    "kind": "search-lcg32-multiply-high-v1",
+    "multiplier": 1664525,
+    "increment": 1013904223,
+    "modulus": 4294967296,
+    "mapping": "floor-state-times-bound-over-modulus",
+    "zeroSeedAllowed": true,
+    "maxDrawsPerSearch": 5,
+    "strictlyUnbiased": false
+  },
+  "costs": {
+    "gold": 0,
+    "actionPoints": 20,
+    "withTalentOfficeActionPoints": 10,
+    "actorFrequency": "once-per-local-turn",
+    "cityFrequencyLimit": null
+  },
+  "gold": {
+    "id": "search-stable-city-gold-read-v1",
+    "secondRead": "exactly-when-first-gold-plus-proposed-exceeds-capacity",
+    "writer": "exact-affordable-credit-v1",
+    "minimumCredit": 30,
+    "maximumCredit": 80,
+    "maximumCapacity": 1000000000
+  },
+  "rewards": {
+    "id": "search-ledger-saturating-v1",
+    "meritCap": 1000000000,
+    "politicsXpCap": 1000000000,
+    "techniquePointCap": 10000,
+    "talent": {
+      "id": "discovery-only-no-hire-reward-v1",
+      "merit": 0,
+      "politicsXp": 0,
+      "techniquePoints": 0
+    },
+    "treasure": {
+      "merit": 50,
+      "politicsXp": 1,
+      "techniquePoints": 2
+    },
+    "gold": {
+      "merit": 50,
+      "politicsXp": 1,
+      "techniquePoints": 2
+    },
+    "nothing": {
+      "merit": 10,
+      "politicsXp": 1,
+      "techniquePoints": 0
+    }
+  },
+  "time": {
+    "id": "search-service-ap-recovery20-v1",
+    "actionPointRecovery": 20,
+    "actionPointCap": 255,
+    "days": [
+      1,
+      11,
+      21
+    ],
+    "otherServiceEffects": false
+  },
+  "limits": {
+    "actors": 256,
+    "talents": 1024,
+    "treasures": 128,
+    "advances": 360,
+    "acceptedCommands": 4096,
+    "traceAttempts": 4096,
+    "completeResultBytes": 16777216,
+    "nodes": 1048576,
+    "depth": 24,
+    "arrayLength": 4096,
+    "objectKeys": 128
+  },
+  "sourceIdentities": {
+    "researchCommit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "talentBlob": "d069a0a06b809de318b9f99deb1bb70f9b8dd3c7",
+    "treasureAndGoldBlob": "82bff04db2dae9ae0787e1e71ad72f1b4e6852de",
+    "talentUtf8Sha256": "cc5202aaf4a20b8ca6574b8145b83e1713f3298dcae442413af4c9761f09b7d3",
+    "treasureAndGoldUtf8Sha256": "5cbca6abd2d96ccf6980f26bee3eb4fd31b0baa0a942d65f5efb0d4c30220f0c",
+    "talentKernelProfile": "search-talent-resolved-v1",
+    "treasureKernelProfile": "treasure-roll-resolved-v1",
+    "goldKernelProfile": "search-gold-caller-resolved-v1",
+    "sourceLevel": "source-listing-reconstruction",
+    "stockCertified": false
+  }
+}

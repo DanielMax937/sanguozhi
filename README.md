@@ -1,3 +1,9 @@
+## 当前新增：固定单城探索与发现（O13-A，2026-10-17）
+
+[完整规则](docs/rules/city-search-lifecycle.md)与[六个API](docs/engine/city-search-lifecycle.md)：从完整有限原始人才／宝物池自行过滤、排序、选项与抽样，复用PR53／54／55已发布人才基准、宝物roll参数及搜金caller核，实际维护独立发现名录、金／AP／行动／奖励、旬序、RNG及完整genesis保存重算。见[完整新政策](data/catalogs/city-search-policy-v1.json)、[四层来源](docs/sources/city-search-lifecycle.json)、[schema](docs/sources/city-search-lifecycle.schema.json)、[未运行场景](data/scenarios/city-search-example-v1.json)。
+
+保留人才原返回205、条件稳定二读与金钱不足30不入账；过滤／RNG／阈值／只发现奖励／writer均明确为新政策，listing请求和攻略不升级为stock或原世界认证。无当场登用、native宝物归属或其他人员事务；O13-B移动相邻遗迹／庙明确尚未实现，有限后续合同见规则第10节。原43主题与45快照不减；旧三核页面的候选措辞按原日期理解。仅静态交付，未运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例，历史结果不验证本批，旧food失败保持原状。
+
 ## 当前新增：固定双城普通流言标量（O12-B，2026-10-17）
 
 [完整规则](docs/rules/rumor-scalar-lifecycle.md)与[API](docs/engine/rumor-scalar-lifecycle.md)：固定双城普通名单，内部新odds成功判定、关系保护、至多一人加空槽、义理抗性、分离忠诚/治安loss；实际独立扣200金/30AP、执行者每旬一次、真实byte/UI分层、旬序、新RNG、完整policy及原子幂等保存重算。见[政策](data/catalogs/rumor-scalar-policy-v1.json)、[来源](docs/sources/rumor-scalar-lifecycle.json)、[schema](docs/sources/rumor-scalar-lifecycle.schema.json)、[未运行场景](data/scenarios/rumor-scalar-example-v1.json)。

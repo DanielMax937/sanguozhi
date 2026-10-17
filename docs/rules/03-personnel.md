@@ -1,5 +1,11 @@
 # 武将生命周期、人际关系、忠诚、登用、俘虏、官职
 
+## 当前工程导航：只发现的固定单城Search（2026-10-17）
+
+[O13-A完整规则](city-search-lifecycle.md)与[六个API](../engine/city-search-lifecycle.md)复用PR53／54／55已发布三个有限数值核，独立执行人才／宝物发现登记与金／AP／行动／奖励、旬序及保存重建。运行时discovered由registry派生，不改变人才serviceStatus或宝物holderRef；人才只发现、不登用的XP0有攻略观察，功绩0／TP0为新保守政策，不能套用下方当场登用失败的100功绩／XP3。Search AP20／人才府10见§8.14，新资格／RNG／writer不是原生helper认证。
+
+O13-B移动相邻遗迹／庙尚未实现；原43／45、stock及完整原世界Search均不关闭。不接当场登用／舌战交接、native归属或任务finalizers。新产物仅静态，无测试、typecheck、编译、build、checker、诊断、schema、产品或示例执行。以下既有原生研究条目不因这个独立服务取得新的实现或验证状态。
+
 ## 1. 武将生命周期 / 状态字段
 
 `[PC-PK1.1][reverse-engineered-structure]`
@@ -2923,6 +2929,8 @@ salarySum > remainingGold
 正式撤回。
 
 ### 8.14 褒赏、授予的 AP 表同步纠错
+
+2026-10-17工程使用：[O13-A固定单城Search](city-search-lifecycle.md)采用下表探索20／10AP与金0，实际扣费及每人每旬一次是独立服务政策；这不恢复原AP helper或当场登用流程。
 
 官方命令表：
 

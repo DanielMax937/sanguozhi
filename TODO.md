@@ -1,3 +1,11 @@
+## 2026-10-17 O13-A：固定单城Search有限覆盖
+
+- [x] 静态新增内部过滤／选择／新RNG、三旧核复用、人才／宝物发现登记、金／AP／行动／奖励、有限旬序与完整genesis逐receipt保存重算；[完整规则](docs/rules/city-search-lifecycle.md)、[API](docs/engine/city-search-lifecycle.md)、[policy](data/catalogs/city-search-policy-v1.json)、[source](docs/sources/city-search-lifecycle.json)、[schema](docs/sources/city-search-lifecycle.schema.json)及[未运行场景](data/scenarios/city-search-example-v1.json)
+- [x] 明确PR53／54／55仅三个已发布限定核；205原值不clip、宝物1／2／3不是原概率、稳定二读是新服务模型、最终金不足30实际入账0。新政策／listing调用点／攻略观察／旧核来源严格分层
+- [ ] O13-B移动相邻遗迹／庙仍未实现；[规则第10节](docs/rules/city-search-lifecycle.md#10-o13-b明确尚未实现的独立有限后续)保留固定roster／部队／sites、有限到达、内部相邻资格／新抽样、月份／技能待选奖励及独立保存的有限合同，不将其归为模糊全地图缺数据
+- [ ] 原过滤／选择／RNG／AP helper／writer／stock／跨版本与O14事件、O15跨服务一致性继续开放；不实现当场登用、native归属、capture、force继承、任务return/finalizers或P078依赖
+- [ ] 原43主题与45快照不减、不重新编号或新增分母。静态覆盖不等于验收通过；本批未运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验，旧验证及历史food失败保持原状
+
 ## 2026-10-17 O12-B：固定双城普通流言标量有限覆盖
 
 - [x] 补[完整规则](docs/rules/rumor-scalar-lifecycle.md)、[API](docs/engine/rumor-scalar-lifecycle.md)、新政策/来源/schema/未运行场景；内部success、保护/稀疏selector/抗性与loss，独立200金/30AP/actor频次、真实byte/治安、日历/RNG/原子幂等保存重算
