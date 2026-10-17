@@ -123,38 +123,40 @@ displayLoyalty = min(trueLoyalty, 100)
 - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/修改记录by%20sjn4048.txt
 - https://github.com/sean2077/311SireCustomizedPackageDev/blob/dev/material/内存地址汇总.md
 
-## 4. 金钱褒赏增量：随机 + 君主魅力影响，但闭式仍 open
+## 4. 金钱褒赏增量：版本分开的观察与定性影响，闭式仍 open
 
-多个独立来源确认：
+2026-10-17来源纠正：旧列+5/+8/+9日记是**无印Sourcenext版，非PK**，作者反复S/L选择较高结果，存在选择偏差，不能用于估计PK范围、权重或随机频率。Wiki能力值页只支持魅力影响的定性说明，不能与日记拼成已恢复的PK公式。
+
+分开保留：
 
 - 君主魅力会影响褒赏忠诚上升量；
-- 同一局中单次褒赏增量会变化；
-- 可通过改变 RNG / S-L 观察到不同结果；
-- 实际已有 +5、+8、+9 等记录。
+- 无印Sourcenext日记在同一局中观察到不同单次增量，并通过S/L选择高值；
+- 可定位的无印记录有+8/+9，另篇搜索索引有+5；不把它们称作PK分布样本。
 
-例如玩家逐旬记录：
+无印Sourcenext玩家逐旬记录：
 
 ```text
 陈兰 82 -> 90  (+8)
 陈兰 90 -> 98  (+8)
 许攸 87 -> 96  (+9)
 韩浩 88 -> 93  (+5)
-周泰 85 -> 94  (+9)
 ```
 
-另一个 PC-PK 编辑器记录：
+陈兰/许攸来自[#1](https://note.com/juicy_fox4269/n/nf69a4b2b4dae)，韩浩来自[#3](https://note.com/juicy_fox4269/n/n106990f3f5b6)的搜索索引。旧列周泰85→94本次未重新定位，不作为新增核实样本。
+
+另一个2026-04-22 PC-PK玩家编辑器观察，经[公开镜像](https://www.pttweb.cc/bbs/Koei/M.1776854540.A.47B)核到：
 
 ```text
 99 -> 108 (+9)
 ```
 
-因此：
+该PK观察只支持真实忠诚可越过UI100；不据此推断PK概率、魅力/义理系数或与无印同式。把所有版本统一实现成下述固定常数，没有足够来源支持：
 
 ```ts
 rewardGain = fixedConstant
 ```
 
-是错误模型。
+它也无法表达无印日记已经记录的变化。
 
 同时不能把现代复刻项目当前的：
 
@@ -163,7 +165,7 @@ rewardGain = fixedConstant
 + 按性格概率再加1..5
 ```
 
-反向当成原作。它与原作可观察到的 +5 / +8 / +9 直接不兼容，最多属于该项目自己的 gameplay reconstruction。
+反向当成原作。它与已定位的无印+5/+8/+9观察不兼容，最多属于该项目自己的 gameplay reconstruction；PK观察在此仍只用于隐藏忠诚越100边界，不能建立跨版本同一增量公式。
 
 正确边界：
 
@@ -186,8 +188,13 @@ rewardGain =
 
 来源：
 - https://w.atwiki.jp/sangokushi11/pages/1598.html
-- https://w.atwiki.jp/sangokushi11/pages/79.html
+- https://note.com/juicy_fox4269/n/nf69a4b2b4dae
+- https://note.com/juicy_fox4269/n/n106990f3f5b6
 - https://www.ptt.cc/bbs/Koei/M.1776854540.A.47B.html
+
+旧列 https://w.atwiki.jp/sangokushi11/pages/79.html 当前标题是“各種経験値”，此次未找到“忠誠”或“褒賞”匹配，不能直接支持这些现金增量。此为当前引用相关性更正，不推断所有历史版本都不相关；旧来源JSON保持不变。
+
+[O12-A独立软件服务](personnel-loyalty-lifecycle.md)另以 `synthetic-cash-uniform5to9-v1` 明确定义5+roll5，不使用君主魅力/目标义理，不从上述观察估计分布，并公开与原作定性作用的保真差异。它补有限软件执行，不关闭本节原函数/RNG/魅力义理证据债、整个O12或原43；没有新增或运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例。
 
 ## 5. 宝物授予：价值越高，加忠越多
 
@@ -648,7 +655,7 @@ blanket-rumor-model-rejected
 官方 / Wiki：
 - KOEI《三國志11 with パワーアップキット》说明书
 - https://w.atwiki.jp/sangokushi11/pages/74.html
-- https://w.atwiki.jp/sangokushi11/pages/79.html
+- https://w.atwiki.jp/sangokushi11/pages/79.html （当前“各種経験値”，不作为现金增量证据，见§4更正）
 - https://w.atwiki.jp/sangokushi11/pages/1598.html
 - https://w.atwiki.jp/sangokushi11/pages/95.html
 

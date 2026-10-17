@@ -1,3 +1,9 @@
+## 2026-10-17：O12-A固定驻城忠诚软件服务，静态新增
+
+[完整规则](personnel-loyalty-lifecycle.md)与[API](../engine/personnel-loyalty-lifecycle.md)补固定单城普通名单的现金褒赏和季度自然忠诚实际账本：100N金/5NAP、每旬一次、新现金5+roll5，仁政/关系优先、教程核returnedAl>25/义理野望/dislikes候选、人心掌握及两次loss、真实byte与显示100、共享新非零xorshift、完整policy/幂等/保存重算。
+
+现金政策明确不使用魅力/义理，有已知保真差异；41/56/03旧+5/+8/+9记录更正为无印Sourcenext且S/L选高值，pages/79当前不能支持现金增量，旧JSON证据不改。自然caller来源、教程来源、新关系图和writer分层，原global RNG/stock未认证。此项只补O12-A有限软件执行，不关闭整个O12、原43或原作闭式；P078及全部依赖、登用ownership、俘虏和欠薪后果排除。没有新增或运行测试、typecheck、编译、build、checker、诊断、schema验证、产品或示例，旧测试和历史food失败保留，下方PASS不适用本树。
+
 ## 2026-10-17：O11-B已完成内政设施自动修复，静态新增
 
 [完整规则](domestic-repair-lifecycle.md)与[API](../engine/domestic-repair-lifecycle.md)补独立正HP账本：从供应的固定太守政治自行计算 `clamp(floor(9P/2),150,450)`，无工兵/有工兵分别floor(3B/20)/floor(3B/10)，按设施中心敌情逐旬跳过或cap写入；幂等、首次到满回执、完整genesis/命令/回执/快照保存重算。目录只有类型身份，maxHP由场景供应。旧“工兵最终整数精确×2”已在现行规则纠正；原始旧来源保留。

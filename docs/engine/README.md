@@ -1,3 +1,7 @@
+## 固定驻城自然忠诚与现金褒赏（O12-A）
+
+[create/inspect/preview/execute/save/load/replay API](personnel-loyalty-lifecycle.md) · [完整规则](../rules/personnel-loyalty-lifecycle.md) · [固定policy](../../data/catalogs/personnel-loyalty-policies-v1.json)。两个真实命令，独立资源/真实忠诚byte/频次/日历与新共享RNG，完整genesis/receipt重算。现金5..9不使用魅力/义理，关系图与writer为明确软件政策；不接登用ownership、欠薪、俘虏、P078及全部依赖。仅静态交付，未运行测试、编译、schema或产品；整个O12和原43不关闭。
+
 ## Facility construction and absorption
 
 [Facility construction lifecycle v1](facility-construction-lifecycle.md): standalone supplied-lot StartDevelopment/StartAbsorption/AdvanceFacilityTurn, exact debits, busy actors, work progress and completion rewards, registered alternatives, full reconstruction and existing income-kernel effect projections. [Detailed rules](../rules/facility-construction-lifecycle.md). Static implementation only; not run or tested; no repair, combat HP or native task integration.

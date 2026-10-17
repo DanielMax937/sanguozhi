@@ -1,3 +1,11 @@
+## 2026-10-17 O12-A：固定驻城自然忠诚与现金褒赏有限覆盖
+
+- [x] 静态新增两个真实命令及独立true忠诚/金/AP/每旬褒赏/日期/RNG账本；[完整规则](docs/rules/personnel-loyalty-lifecycle.md)和[API](docs/engine/personnel-loyalty-lifecycle.md)覆盖原子幂等、完整policy、逐receipt保存重算
+- [x] 复用既有相性uint8教程核并仅消费returnedAl；明确自然三分支/豁免/两次loss、true0仍抽路径随机及true>100正常扣减
+- [x] 新现金5+roll5不使用魅力/义理；公开保真差异、无印Sourcenext与S/L样本偏差、pages/79当前引用相关性纠正，保留旧来源JSON
+- [ ] 原现金增量闭式/魅力义理/global RNG、原关系helper/writer、stock与跨版本身份继续开放；本批不实现登用ownership、俘虏、欠薪后果、native任务及P078所有依赖
+- [ ] 整个O12与原43证据组不关闭；本树未运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例，旧测试与历史food失败保持原状
+
 ## 2026-10-17 O11-B：已完成标准内政设施自动修复
 
 - [x] 静态新增独立HP账本、政治9P/2与150..450夹值、两支独立floor、设施中心敌情、cap/弃置/首次到满、幂等与genesis保存重算代码及[完整规则](docs/rules/domestic-repair-lifecycle.md)

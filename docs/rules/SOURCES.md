@@ -1,5 +1,17 @@
 # 主要来源
 
+## 2026-10-17：O12-A自然忠诚与现金褒赏
+
+[完整来源分层及规则](personnel-loyalty-lifecycle.md#11-来源纠正与仍开放范围) · [来源manifest](../sources/personnel-loyalty-lifecycle.json) · [完整新软件policy](../../data/catalogs/personnel-loyalty-policies-v1.json)。新现金 `synthetic-cash-uniform5to9-v1` 不从玩家样本估计，不使用魅力/义理；新关系图、RNG与writer均不认证原作等价，原43不减。
+
+- 自然caller固定于311MemoryResearch commit `66e167e40c3440929ec016f3872aefc3486434c1`，`Func-自动06-武将忠诚下降.txt`，Git blob `0ce79d11923901fdfb74f99ddf281f744b3d9880`；本轮读取已归档正文，未声称重新在线下载。教程相性→此caller同源、关系helper、RNG与writer仍open
+- 官方PK手册的褒赏搜索索引段支持100金/5AP每人、同城多人/每人每回合一次与显示100/部队资格限制；整份PDF因大小未能打开，本轮没有新增页码/页图/hash核验
+- [无印Sourcenext日记#1](https://note.com/juicy_fox4269/n/nf69a4b2b4dae)记+8/+9，[#3](https://note.com/juicy_fox4269/n/n106990f3f5b6)索引记+5。作者反复S/L选择较高值，不是PK或无偏随机频率样本；旧周泰85→94本轮未重新定位
+- [PK玩家99→108观察](https://www.ptt.cc/bbs/Koei/M.1776854540.A.47B.html)本轮经[公开镜像](https://www.pttweb.cc/bbs/Koei/M.1776854540.A.47B)读取，仅支持隐藏忠诚可越过UI100，不推出原分布/魅力义理系数
+- [能力值页](https://w.atwiki.jp/sangokushi11/pages/1598.html)仅支持魅力作用的定性说明；[pages/79](https://w.atwiki.jp/sangokushi11/pages/79.html)现为“各種経験値”，此次未找到忠诚/褒赏匹配，不能用它作为现金增量来源。不推断所有历史版本均不相关
+
+上述更正同步03/41/56现行解释，不改写旧来源JSON。仅静态交付，未运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例。
+
 ## 官方资料
 
 - 《三國志11 with パワーアップキット》官方说明书（Steam 附带）
@@ -821,7 +833,7 @@ rate = max(
   - 固定 `66e167e40c3440929ec016f3872aefc3486434c1` 的 `SireCustomizedPackageDev/README.md`，完整33369 bytes，SHA-256 `d5e496619ce21736861f796223523e3897591a2b3374e482aa0505b03606acb3`；
   - `00489F80..00489FD7` 共37条助记符，函数opcode bytes缺失；
   - [相性距离独立投影](affinity-distance.md)为 `tutorial-source-projection`，双uint8算 `min(abs(A-B),150-abs(A-B))` 并保留signed32/EAX/AL，0/151=-1、AL255；
-  - 不取mod150、不夹零，native pointer/ID、教程到caller/S1同源与stock仍缺；不接自然忠诚或登用；
+  - 不取mod150、不夹零，native pointer/ID、教程到caller/S1同源与stock仍缺；该纯核原交付不接自然忠诚或登用，新O12-A以显式software adapter另行复用，不提高旧证据等级；
   - [完整快照](../sources/affinity-distance-tutorial-original.md)、[证据JSON](../sources/affinity-distance.json)、[闭合schema](../sources/affinity-distance.schema.json)，不把教程原文hash当机器码校验。
   https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/SireCustomizedPackageDev/README.md
 - 311SireCustomizedPackageDev `struct_person`：

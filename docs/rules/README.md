@@ -1,3 +1,9 @@
+## 固定驻城自然忠诚与现金褒赏独立规则（O12-A）
+
+[personnel-loyalty-lifecycle.md](personnel-loyalty-lifecycle.md)：100金/5AP每人、每旬一次、显示100拒绝与99→108、明确新现金5+roll5；季度仁政/关系豁免、returnedAl>25/义理野望/dislikes短路、人心掌握、两次loss及符节台/君主附加；真实byte、共享新xorshift、原子幂等与完整保存重算。[API](../engine/personnel-loyalty-lifecycle.md) · [政策](../../data/catalogs/personnel-loyalty-policies-v1.json) · [来源](../sources/personnel-loyalty-lifecycle.json) · [未运行场景](../../data/scenarios/personnel-loyalty-example-v1.json)。
+
+这是限定软件服务，现金忽略魅力/义理的保真差异公开；无印Sourcenext/S-L观察不作PK概率证据。原global RNG、关系helper、writer及stock仍open；登用ownership、俘虏、欠薪后果和P078全部依赖排除。整个O12与原43不关闭；未新增或运行测试、typecheck、编译、build、checker、诊断、schema或产品。
+
 ## 已完成内政设施自动修复独立规则（O11-B）
 
 [domestic-repair-lifecycle.md](domestic-repair-lifecycle.md)：标准设施身份/供应正HP、固定单母城与太守、9P半除及150..450夹值、工兵两支独立整数取整、设施中心两格敌情、实际cap写入/弃置/首次到满、有限旬输入与完整genesis保存重放。[API](../engine/domestic-repair-lifecycle.md) · [来源与固定政策](../sources/domestic-repair-lifecycle.json) · [结构schema](../sources/domestic-repair-lifecycle.schema.json) · [未运行场景](../../data/scenarios/domestic-repair-example-v1.json)。源listing、注释派生距离与服务writer分层；城市港关/堤坝/PK特殊楼/native与全局调度仍开放，原43不减。仅静态新增，没有执行验收。

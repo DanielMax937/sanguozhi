@@ -1,0 +1,3175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:personnel-loyalty-lifecycle:v1",
+  "title": "Standalone fixed-city ordinary personnel loyalty v1 JSON interchange structures",
+  "description": "Closed structures for scenario, command envelope, successful receipt, saved state and typed replay trace. All policy values, source-boundary fields and embedded affinity evidence are fixed to this version. Runtime reconstruction is authoritative: schema conformance is neither evidence of original-game fidelity nor proof of reachable state, correct arithmetic, RNG progression, source provenance or passed execution checks. API result schemas are available in $defs. Non-JSON descriptor restrictions, duplicate textual JSON keys, negative zero, canonical ordering, cross-field references and complete byte/node/depth budgets require runtime enforcement. Individual collection and numeric maxima share total runtime budgets and are not guaranteed to be simultaneously attainable; the save-result budget includes the escaped canonical state JSON string in its result wrapper.",
+  "$comment": "Use the root union for the five document kinds, or a specific #/$defs reference. Policy changes require a new version/ID. This schema is authored as documentation; it does not replace execute/load/replay recomputation.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/scenario"
+    },
+    {
+      "$ref": "#/$defs/envelope"
+    },
+    {
+      "$ref": "#/$defs/receipt"
+    },
+    {
+      "$ref": "#/$defs/state"
+    },
+    {
+      "$ref": "#/$defs/trace"
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+    },
+    "date": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "year",
+        "month",
+        "day"
+      ],
+      "properties": {
+        "year": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "month": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "day": {
+          "enum": [
+            1,
+            11,
+            21
+          ]
+        }
+      }
+    },
+    "policies": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "calendar",
+        "selection",
+        "affinityAdapter",
+        "ordinaryCandidate",
+        "naturalLoss",
+        "cashReward",
+        "writer",
+        "rng",
+        "transaction",
+        "persistence"
+      ],
+      "properties": {
+        "scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "maximumOfficers",
+            "membershipMutable",
+            "rulerMutable",
+            "locationMutable",
+            "capturesAllowed",
+            "salaryConsequencesAllowed"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "const": "fixed-one-city-ordinary-roster-v1"
+            },
+            "maximumOfficers": {
+              "type": "integer",
+              "const": 80
+            },
+            "membershipMutable": {
+              "type": "boolean",
+              "const": false
+            },
+            "rulerMutable": {
+              "type": "boolean",
+              "const": false
+            },
+            "locationMutable": {
+              "type": "boolean",
+              "const": false
+            },
+            "capturesAllowed": {
+              "type": "boolean",
+              "const": false
+            },
+            "salaryConsequencesAllowed": {
+              "type": "boolean",
+              "const": false
+            }
+          },
+          "const": {
+            "id": "fixed-one-city-ordinary-roster-v1",
+            "maximumOfficers": 80,
+            "membershipMutable": false,
+            "rulerMutable": false,
+            "locationMutable": false,
+            "capturesAllowed": false,
+            "salaryConsequencesAllowed": false
+          }
+        },
+        "calendar": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "days",
+            "quarterMonths",
+            "initialDateAlreadySettled",
+            "maximumAdvances",
+            "apRegeneration",
+            "goldRegeneration"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "const": "three-xun-quarter-entry-v1"
+            },
+            "days": {
+              "type": "array",
+              "const": [
+                1,
+                11,
+                21
+              ],
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 1
+                },
+                {
+                  "type": "integer",
+                  "const": 11
+                },
+                {
+                  "type": "integer",
+                  "const": 21
+                }
+              ],
+              "items": false
+            },
+            "quarterMonths": {
+              "type": "array",
+              "const": [
+                1,
+                4,
+                7,
+                10
+              ],
+              "minItems": 4,
+              "maxItems": 4,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 1
+                },
+                {
+                  "type": "integer",
+                  "const": 4
+                },
+                {
+                  "type": "integer",
+                  "const": 7
+                },
+                {
+                  "type": "integer",
+                  "const": 10
+                }
+              ],
+              "items": false
+            },
+            "initialDateAlreadySettled": {
+              "type": "boolean",
+              "const": true
+            },
+            "maximumAdvances": {
+              "type": "integer",
+              "const": 360
+            },
+            "apRegeneration": {
+              "type": "integer",
+              "const": 0
+            },
+            "goldRegeneration": {
+              "type": "integer",
+              "const": 0
+            }
+          },
+          "const": {
+            "id": "three-xun-quarter-entry-v1",
+            "days": [
+              1,
+              11,
+              21
+            ],
+            "quarterMonths": [
+              1,
+              4,
+              7,
+              10
+            ],
+            "initialDateAlreadySettled": true,
+            "maximumAdvances": 360,
+            "apRegeneration": 0,
+            "goldRegeneration": 0
+          }
+        },
+        "selection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "targetOrder",
+            "likesDirectional",
+            "dislikesDirectional",
+            "spouseSymmetric",
+            "swornSiblingSymmetric",
+            "parentChildExemptionBothDirections",
+            "benevolenceDerivedFromSameCityRulerAndRoster"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "const": "explicit-local-relation-graph-v1"
+            },
+            "targetOrder": {
+              "type": "string",
+              "const": "ascii-code-unit-id-ascending"
+            },
+            "likesDirectional": {
+              "type": "boolean",
+              "const": true
+            },
+            "dislikesDirectional": {
+              "type": "boolean",
+              "const": true
+            },
+            "spouseSymmetric": {
+              "type": "boolean",
+              "const": true
+            },
+            "swornSiblingSymmetric": {
+              "type": "boolean",
+              "const": true
+            },
+            "parentChildExemptionBothDirections": {
+              "type": "boolean",
+              "const": true
+            },
+            "benevolenceDerivedFromSameCityRulerAndRoster": {
+              "type": "boolean",
+              "const": true
+            }
+          },
+          "const": {
+            "id": "explicit-local-relation-graph-v1",
+            "targetOrder": "ascii-code-unit-id-ascending",
+            "likesDirectional": true,
+            "dislikesDirectional": true,
+            "spouseSymmetric": true,
+            "swornSiblingSymmetric": true,
+            "parentChildExemptionBothDirections": true,
+            "benevolenceDerivedFromSameCityRulerAndRoster": true
+          }
+        },
+        "affinityAdapter": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "coreProfile",
+            "inputRange",
+            "consumedReturn",
+            "strictGreaterThan",
+            "nativeCalleeProvenanceCertified"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "const": "tutorial-u8-to-synthetic-candidate-v1"
+            },
+            "coreProfile": {
+              "type": "string",
+              "const": "affinity-distance-tutorial-u8-v1"
+            },
+            "inputRange": {
+              "type": "array",
+              "const": [
+                0,
+                255
+              ],
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 0
+                },
+                {
+                  "type": "integer",
+                  "const": 255
+                }
+              ],
+              "items": false
+            },
+            "consumedReturn": {
+              "type": "string",
+              "const": "returnedAl"
+            },
+            "strictGreaterThan": {
+              "type": "integer",
+              "const": 25
+            },
+            "nativeCalleeProvenanceCertified": {
+              "type": "boolean",
+              "const": false
+            }
+          },
+          "const": {
+            "id": "tutorial-u8-to-synthetic-candidate-v1",
+            "coreProfile": "affinity-distance-tutorial-u8-v1",
+            "inputRange": [
+              0,
+              255
+            ],
+            "consumedReturn": "returnedAl",
+            "strictGreaterThan": 25,
+            "nativeCalleeProvenanceCertified": false
+          }
+        },
+        "ordinaryCandidate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "giriMaximum",
+            "ambitionMinimum",
+            "thirdBranch",
+            "inputGiriRange",
+            "inputAmbitionRange"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "const": "source-shaped-ordinary-three-or-v1"
+            },
+            "giriMaximum": {
+              "type": "integer",
+              "const": 1
+            },
+            "ambitionMinimum": {
+              "type": "integer",
+              "const": 3
+            },
+            "thirdBranch": {
+              "type": "string",
+              "const": "target-dislikes-ruler-map-to-nonzero"
+            },
+            "inputGiriRange": {
+              "type": "array",
+              "const": [
+                0,
+                4
+              ],
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 0
+                },
+                {
+                  "type": "integer",
+                  "const": 4
+                }
+              ],
+              "items": false
+            },
+            "inputAmbitionRange": {
+              "type": "array",
+              "const": [
+                0,
+                4
+              ],
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 0
+                },
+                {
+                  "type": "integer",
+                  "const": 4
+                }
+              ],
+              "items": false
+            }
+          },
+          "const": {
+            "id": "source-shaped-ordinary-three-or-v1",
+            "giriMaximum": 1,
+            "ambitionMinimum": 3,
+            "thirdBranch": "target-dislikes-ruler-map-to-nonzero",
+            "inputGiriRange": [
+              0,
+              4
+            ],
+            "inputAmbitionRange": [
+              0,
+              4
+            ]
+          }
+        },
+        "naturalLoss": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "controlBound",
+            "controlSkipMinimum",
+            "firstLossBound",
+            "secondLossBound",
+            "tokenPlatformAddition",
+            "lordGiriEquals",
+            "lordAmbitionEqualsWithinNormalDomain",
+            "lordAddition",
+            "prisonerBranchSupported",
+            "globalRngCertified"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "const": "source-shaped-normal-trait-loss-v1"
+            },
+            "controlBound": {
+              "type": "integer",
+              "const": 3
+            },
+            "controlSkipMinimum": {
+              "type": "integer",
+              "const": 1
+            },
+            "firstLossBound": {
+              "type": "integer",
+              "const": 3
+            },
+            "secondLossBound": {
+              "type": "integer",
+              "const": 3
+            },
+            "tokenPlatformAddition": {
+              "type": "integer",
+              "const": 2
+            },
+            "lordGiriEquals": {
+              "type": "integer",
+              "const": 0
+            },
+            "lordAmbitionEqualsWithinNormalDomain": {
+              "type": "integer",
+              "const": 4
+            },
+            "lordAddition": {
+              "type": "string",
+              "const": "floor((4-targetGiri)/2)"
+            },
+            "prisonerBranchSupported": {
+              "type": "boolean",
+              "const": false
+            },
+            "globalRngCertified": {
+              "type": "boolean",
+              "const": false
+            }
+          },
+          "const": {
+            "id": "source-shaped-normal-trait-loss-v1",
+            "controlBound": 3,
+            "controlSkipMinimum": 1,
+            "firstLossBound": 3,
+            "secondLossBound": 3,
+            "tokenPlatformAddition": 2,
+            "lordGiriEquals": 0,
+            "lordAmbitionEqualsWithinNormalDomain": 4,
+            "lordAddition": "floor((4-targetGiri)/2)",
+            "prisonerBranchSupported": false,
+            "globalRngCertified": false
+          }
+        },
+        "cashReward": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "goldPerTarget",
+            "apPerTarget",
+            "minimumGain",
+            "outcomeCount",
+            "drawsPerTarget",
+            "usesRulerCharisma",
+            "usesTargetGiri",
+            "notEstimatedFromObservedSamples",
+            "knownFidelityDivergence",
+            "requiresDisplayedLoyaltyBelow",
+            "maximumPerTargetPerTurn",
+            "multiSelectFailureMode",
+            "executingOfficerRequired",
+            "actedCost",
+            "meritReward",
+            "techniquePointReward"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "const": "synthetic-cash-uniform5to9-v1"
+            },
+            "goldPerTarget": {
+              "type": "integer",
+              "const": 100
+            },
+            "apPerTarget": {
+              "type": "integer",
+              "const": 5
+            },
+            "minimumGain": {
+              "type": "integer",
+              "const": 5
+            },
+            "outcomeCount": {
+              "type": "integer",
+              "const": 5
+            },
+            "drawsPerTarget": {
+              "type": "integer",
+              "const": 1
+            },
+            "usesRulerCharisma": {
+              "type": "boolean",
+              "const": false
+            },
+            "usesTargetGiri": {
+              "type": "boolean",
+              "const": false
+            },
+            "notEstimatedFromObservedSamples": {
+              "type": "boolean",
+              "const": true
+            },
+            "knownFidelityDivergence": {
+              "type": "string",
+              "const": "Original qualitative charm/loyalty-trait effects are not modeled by this synthetic gain policy"
+            },
+            "requiresDisplayedLoyaltyBelow": {
+              "type": "integer",
+              "const": 100
+            },
+            "maximumPerTargetPerTurn": {
+              "type": "integer",
+              "const": 1
+            },
+            "multiSelectFailureMode": {
+              "type": "string",
+              "const": "all-or-nothing"
+            },
+            "executingOfficerRequired": {
+              "type": "boolean",
+              "const": false
+            },
+            "actedCost": {
+              "type": "boolean",
+              "const": false
+            },
+            "meritReward": {
+              "type": "integer",
+              "const": 0
+            },
+            "techniquePointReward": {
+              "type": "integer",
+              "const": 0
+            }
+          },
+          "const": {
+            "id": "synthetic-cash-uniform5to9-v1",
+            "goldPerTarget": 100,
+            "apPerTarget": 5,
+            "minimumGain": 5,
+            "outcomeCount": 5,
+            "drawsPerTarget": 1,
+            "usesRulerCharisma": false,
+            "usesTargetGiri": false,
+            "notEstimatedFromObservedSamples": true,
+            "knownFidelityDivergence": "Original qualitative charm/loyalty-trait effects are not modeled by this synthetic gain policy",
+            "requiresDisplayedLoyaltyBelow": 100,
+            "maximumPerTargetPerTurn": 1,
+            "multiSelectFailureMode": "all-or-nothing",
+            "executingOfficerRequired": false,
+            "actedCost": false,
+            "meritReward": 0,
+            "techniquePointReward": 0
+          }
+        },
+        "writer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "minimum",
+            "maximum",
+            "displayMaximum",
+            "loyaltyZeroTriggersMembershipChange",
+            "nativeWriterCertified"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "const": "saturating-loyalty-byte-v1"
+            },
+            "minimum": {
+              "type": "integer",
+              "const": 0
+            },
+            "maximum": {
+              "type": "integer",
+              "const": 255
+            },
+            "displayMaximum": {
+              "type": "integer",
+              "const": 100
+            },
+            "loyaltyZeroTriggersMembershipChange": {
+              "type": "boolean",
+              "const": false
+            },
+            "nativeWriterCertified": {
+              "type": "boolean",
+              "const": false
+            }
+          },
+          "const": {
+            "id": "saturating-loyalty-byte-v1",
+            "minimum": 0,
+            "maximum": 255,
+            "displayMaximum": 100,
+            "loyaltyZeroTriggersMembershipChange": false,
+            "nativeWriterCertified": false
+          }
+        },
+        "rng": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "minimumSeed",
+            "maximumSeed",
+            "xorShiftSteps",
+            "normalizeAfterEachStep",
+            "boundedResult",
+            "supportedBounds",
+            "drawsPerCall",
+            "stream",
+            "nativeRandomStreamEquivalent"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "const": "xorshift32-nonzero-mod35-v1"
+            },
+            "minimumSeed": {
+              "type": "integer",
+              "const": 1
+            },
+            "maximumSeed": {
+              "type": "integer",
+              "const": 4294967295
+            },
+            "xorShiftSteps": {
+              "type": "array",
+              "const": [
+                [
+                  "left",
+                  13
+                ],
+                [
+                  "unsigned-right",
+                  17
+                ],
+                [
+                  "left",
+                  5
+                ]
+              ],
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "array",
+                  "const": [
+                    "left",
+                    13
+                  ],
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "type": "string",
+                      "const": "left"
+                    },
+                    {
+                      "type": "integer",
+                      "const": 13
+                    }
+                  ],
+                  "items": false
+                },
+                {
+                  "type": "array",
+                  "const": [
+                    "unsigned-right",
+                    17
+                  ],
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "type": "string",
+                      "const": "unsigned-right"
+                    },
+                    {
+                      "type": "integer",
+                      "const": 17
+                    }
+                  ],
+                  "items": false
+                },
+                {
+                  "type": "array",
+                  "const": [
+                    "left",
+                    5
+                  ],
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "type": "string",
+                      "const": "left"
+                    },
+                    {
+                      "type": "integer",
+                      "const": 5
+                    }
+                  ],
+                  "items": false
+                }
+              ],
+              "items": false
+            },
+            "normalizeAfterEachStep": {
+              "type": "string",
+              "const": "uint32"
+            },
+            "boundedResult": {
+              "type": "string",
+              "const": "(state-1)%bound"
+            },
+            "supportedBounds": {
+              "type": "array",
+              "const": [
+                3,
+                5
+              ],
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "const": 3
+                },
+                {
+                  "type": "integer",
+                  "const": 5
+                }
+              ],
+              "items": false
+            },
+            "drawsPerCall": {
+              "type": "integer",
+              "const": 1
+            },
+            "stream": {
+              "type": "string",
+              "const": "session-local-shared-by-cash-and-natural-only"
+            },
+            "nativeRandomStreamEquivalent": {
+              "type": "boolean",
+              "const": false
+            }
+          },
+          "const": {
+            "id": "xorshift32-nonzero-mod35-v1",
+            "minimumSeed": 1,
+            "maximumSeed": 4294967295,
+            "xorShiftSteps": [
+              [
+                "left",
+                13
+              ],
+              [
+                "unsigned-right",
+                17
+              ],
+              [
+                "left",
+                5
+              ]
+            ],
+            "normalizeAfterEachStep": "uint32",
+            "boundedResult": "(state-1)%bound",
+            "supportedBounds": [
+              3,
+              5
+            ],
+            "drawsPerCall": 1,
+            "stream": "session-local-shared-by-cash-and-natural-only",
+            "nativeRandomStreamEquivalent": false
+          }
+        },
+        "transaction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "successfulRevisionIncrement",
+            "failureChangesState",
+            "sameIdSameEnvelope",
+            "sameIdDifferentEnvelope",
+            "failedIdsReserved",
+            "previewMutates"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "const": "immutable-whole-command-ledger-v1"
+            },
+            "successfulRevisionIncrement": {
+              "type": "integer",
+              "const": 1
+            },
+            "failureChangesState": {
+              "type": "boolean",
+              "const": false
+            },
+            "sameIdSameEnvelope": {
+              "type": "string",
+              "const": "return-original-receipt-with-current-state"
+            },
+            "sameIdDifferentEnvelope": {
+              "type": "string",
+              "const": "reject"
+            },
+            "failedIdsReserved": {
+              "type": "boolean",
+              "const": false
+            },
+            "previewMutates": {
+              "type": "boolean",
+              "const": false
+            }
+          },
+          "const": {
+            "id": "immutable-whole-command-ledger-v1",
+            "successfulRevisionIncrement": 1,
+            "failureChangesState": false,
+            "sameIdSameEnvelope": "return-original-receipt-with-current-state",
+            "sameIdDifferentEnvelope": "reject",
+            "failedIdsReserved": false,
+            "previewMutates": false
+          }
+        },
+        "persistence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "maximumAcceptedCommands",
+            "maximumCanonicalSaveUtf8Bytes",
+            "maximumScenarioUtf8Bytes",
+            "maximumJsonDepth",
+            "maximumJsonNodes",
+            "loadTrustsFinalSnapshot",
+            "loadComparesEachFullReceipt",
+            "validateEveryIntermediateOutputBudget",
+            "unknownProfile"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "const": "full-policy-seed-history-recompute-v1"
+            },
+            "maximumAcceptedCommands": {
+              "type": "integer",
+              "const": 4096
+            },
+            "maximumCanonicalSaveUtf8Bytes": {
+              "type": "integer",
+              "const": 8388608
+            },
+            "maximumScenarioUtf8Bytes": {
+              "type": "integer",
+              "const": 524288
+            },
+            "maximumJsonDepth": {
+              "type": "integer",
+              "const": 32
+            },
+            "maximumJsonNodes": {
+              "type": "integer",
+              "const": 262144
+            },
+            "loadTrustsFinalSnapshot": {
+              "type": "boolean",
+              "const": false
+            },
+            "loadComparesEachFullReceipt": {
+              "type": "boolean",
+              "const": true
+            },
+            "validateEveryIntermediateOutputBudget": {
+              "type": "boolean",
+              "const": true
+            },
+            "unknownProfile": {
+              "type": "string",
+              "const": "reject"
+            }
+          },
+          "const": {
+            "id": "full-policy-seed-history-recompute-v1",
+            "maximumAcceptedCommands": 4096,
+            "maximumCanonicalSaveUtf8Bytes": 8388608,
+            "maximumScenarioUtf8Bytes": 524288,
+            "maximumJsonDepth": 32,
+            "maximumJsonNodes": 262144,
+            "loadTrustsFinalSnapshot": false,
+            "loadComparesEachFullReceipt": true,
+            "validateEveryIntermediateOutputBudget": true,
+            "unknownProfile": "reject"
+          }
+        }
+      },
+      "const": {
+        "scope": {
+          "id": "fixed-one-city-ordinary-roster-v1",
+          "maximumOfficers": 80,
+          "membershipMutable": false,
+          "rulerMutable": false,
+          "locationMutable": false,
+          "capturesAllowed": false,
+          "salaryConsequencesAllowed": false
+        },
+        "calendar": {
+          "id": "three-xun-quarter-entry-v1",
+          "days": [
+            1,
+            11,
+            21
+          ],
+          "quarterMonths": [
+            1,
+            4,
+            7,
+            10
+          ],
+          "initialDateAlreadySettled": true,
+          "maximumAdvances": 360,
+          "apRegeneration": 0,
+          "goldRegeneration": 0
+        },
+        "selection": {
+          "id": "explicit-local-relation-graph-v1",
+          "targetOrder": "ascii-code-unit-id-ascending",
+          "likesDirectional": true,
+          "dislikesDirectional": true,
+          "spouseSymmetric": true,
+          "swornSiblingSymmetric": true,
+          "parentChildExemptionBothDirections": true,
+          "benevolenceDerivedFromSameCityRulerAndRoster": true
+        },
+        "affinityAdapter": {
+          "id": "tutorial-u8-to-synthetic-candidate-v1",
+          "coreProfile": "affinity-distance-tutorial-u8-v1",
+          "inputRange": [
+            0,
+            255
+          ],
+          "consumedReturn": "returnedAl",
+          "strictGreaterThan": 25,
+          "nativeCalleeProvenanceCertified": false
+        },
+        "ordinaryCandidate": {
+          "id": "source-shaped-ordinary-three-or-v1",
+          "giriMaximum": 1,
+          "ambitionMinimum": 3,
+          "thirdBranch": "target-dislikes-ruler-map-to-nonzero",
+          "inputGiriRange": [
+            0,
+            4
+          ],
+          "inputAmbitionRange": [
+            0,
+            4
+          ]
+        },
+        "naturalLoss": {
+          "id": "source-shaped-normal-trait-loss-v1",
+          "controlBound": 3,
+          "controlSkipMinimum": 1,
+          "firstLossBound": 3,
+          "secondLossBound": 3,
+          "tokenPlatformAddition": 2,
+          "lordGiriEquals": 0,
+          "lordAmbitionEqualsWithinNormalDomain": 4,
+          "lordAddition": "floor((4-targetGiri)/2)",
+          "prisonerBranchSupported": false,
+          "globalRngCertified": false
+        },
+        "cashReward": {
+          "id": "synthetic-cash-uniform5to9-v1",
+          "goldPerTarget": 100,
+          "apPerTarget": 5,
+          "minimumGain": 5,
+          "outcomeCount": 5,
+          "drawsPerTarget": 1,
+          "usesRulerCharisma": false,
+          "usesTargetGiri": false,
+          "notEstimatedFromObservedSamples": true,
+          "knownFidelityDivergence": "Original qualitative charm/loyalty-trait effects are not modeled by this synthetic gain policy",
+          "requiresDisplayedLoyaltyBelow": 100,
+          "maximumPerTargetPerTurn": 1,
+          "multiSelectFailureMode": "all-or-nothing",
+          "executingOfficerRequired": false,
+          "actedCost": false,
+          "meritReward": 0,
+          "techniquePointReward": 0
+        },
+        "writer": {
+          "id": "saturating-loyalty-byte-v1",
+          "minimum": 0,
+          "maximum": 255,
+          "displayMaximum": 100,
+          "loyaltyZeroTriggersMembershipChange": false,
+          "nativeWriterCertified": false
+        },
+        "rng": {
+          "id": "xorshift32-nonzero-mod35-v1",
+          "minimumSeed": 1,
+          "maximumSeed": 4294967295,
+          "xorShiftSteps": [
+            [
+              "left",
+              13
+            ],
+            [
+              "unsigned-right",
+              17
+            ],
+            [
+              "left",
+              5
+            ]
+          ],
+          "normalizeAfterEachStep": "uint32",
+          "boundedResult": "(state-1)%bound",
+          "supportedBounds": [
+            3,
+            5
+          ],
+          "drawsPerCall": 1,
+          "stream": "session-local-shared-by-cash-and-natural-only",
+          "nativeRandomStreamEquivalent": false
+        },
+        "transaction": {
+          "id": "immutable-whole-command-ledger-v1",
+          "successfulRevisionIncrement": 1,
+          "failureChangesState": false,
+          "sameIdSameEnvelope": "return-original-receipt-with-current-state",
+          "sameIdDifferentEnvelope": "reject",
+          "failedIdsReserved": false,
+          "previewMutates": false
+        },
+        "persistence": {
+          "id": "full-policy-seed-history-recompute-v1",
+          "maximumAcceptedCommands": 4096,
+          "maximumCanonicalSaveUtf8Bytes": 8388608,
+          "maximumScenarioUtf8Bytes": 524288,
+          "maximumJsonDepth": 32,
+          "maximumJsonNodes": 262144,
+          "loadTrustsFinalSnapshot": false,
+          "loadComparesEachFullReceipt": true,
+          "validateEveryIntermediateOutputBudget": true,
+          "unknownProfile": "reject"
+        }
+      }
+    },
+    "policyDigest": {
+      "type": "string",
+      "const": "dcc467236cb6f14c30390fbcd8d33323a1a79c9bd491bcae4f78242f36a23fb1"
+    },
+    "sourceBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceLevel",
+        "naturalCallerStockCertified",
+        "affinityCallerSameSourceCertified",
+        "relationSemantics",
+        "relationNativeHelpersCertified",
+        "cashGain",
+        "cashSamplesArePkDistribution",
+        "cashUsesRulerCharisma",
+        "cashUsesTargetGiri",
+        "cashFidelityDivergence",
+        "randomStream",
+        "nativeRandomStreamEquivalent",
+        "nativeWriterCertified",
+        "nativePersonnelMutation",
+        "zeroLoyaltyChangesMembership",
+        "original43GroupsReduced",
+        "tokenPlatformAdditionBasis",
+        "tokenPlatformStockCertified"
+      ],
+      "properties": {
+        "sourceLevel": {
+          "type": "string",
+          "const": "public-caller-shape-and-explicit-standalone-software-policies"
+        },
+        "naturalCallerStockCertified": {
+          "type": "boolean",
+          "const": false
+        },
+        "affinityCallerSameSourceCertified": {
+          "type": "boolean",
+          "const": false
+        },
+        "relationSemantics": {
+          "type": "string",
+          "const": "explicit-local-relation-graph-v1"
+        },
+        "relationNativeHelpersCertified": {
+          "type": "boolean",
+          "const": false
+        },
+        "cashGain": {
+          "type": "string",
+          "const": "synthetic-cash-uniform5to9-v1"
+        },
+        "cashSamplesArePkDistribution": {
+          "type": "boolean",
+          "const": false
+        },
+        "cashUsesRulerCharisma": {
+          "type": "boolean",
+          "const": false
+        },
+        "cashUsesTargetGiri": {
+          "type": "boolean",
+          "const": false
+        },
+        "cashFidelityDivergence": {
+          "type": "string",
+          "const": "Original qualitative charm/loyalty-trait effects are not modeled by this synthetic gain policy"
+        },
+        "randomStream": {
+          "type": "string",
+          "const": "session-local-shared-by-cash-and-natural-only"
+        },
+        "nativeRandomStreamEquivalent": {
+          "type": "boolean",
+          "const": false
+        },
+        "nativeWriterCertified": {
+          "type": "boolean",
+          "const": false
+        },
+        "nativePersonnelMutation": {
+          "type": "boolean",
+          "const": false
+        },
+        "zeroLoyaltyChangesMembership": {
+          "type": "boolean",
+          "const": false
+        },
+        "original43GroupsReduced": {
+          "type": "boolean",
+          "const": false
+        },
+        "tokenPlatformAdditionBasis": {
+          "type": "string",
+          "const": "selected-listing-modification-marked-0058E759"
+        },
+        "tokenPlatformStockCertified": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "const": {
+        "sourceLevel": "public-caller-shape-and-explicit-standalone-software-policies",
+        "naturalCallerStockCertified": false,
+        "affinityCallerSameSourceCertified": false,
+        "relationSemantics": "explicit-local-relation-graph-v1",
+        "relationNativeHelpersCertified": false,
+        "cashGain": "synthetic-cash-uniform5to9-v1",
+        "cashSamplesArePkDistribution": false,
+        "cashUsesRulerCharisma": false,
+        "cashUsesTargetGiri": false,
+        "cashFidelityDivergence": "Original qualitative charm/loyalty-trait effects are not modeled by this synthetic gain policy",
+        "randomStream": "session-local-shared-by-cash-and-natural-only",
+        "nativeRandomStreamEquivalent": false,
+        "nativeWriterCertified": false,
+        "nativePersonnelMutation": false,
+        "zeroLoyaltyChangesMembership": false,
+        "original43GroupsReduced": false,
+        "tokenPlatformAdditionBasis": "selected-listing-modification-marked-0058E759",
+        "tokenPlatformStockCertified": false
+      }
+    },
+    "unsupported": {
+      "type": "array",
+      "const": [
+        "native-capture",
+        "ownership-changes",
+        "force-extinction",
+        "ruler-succession",
+        "return",
+        "mission",
+        "relocation",
+        "native-finalizers",
+        "recruitment-membership-commit",
+        "prisoners",
+        "salary-consequences",
+        "salary-or-account-synchronization",
+        "rumors",
+        "treasures",
+        "death-or-illness",
+        "office-assignment",
+        "units",
+        "ports-or-gates",
+        "multi-city",
+        "global-turn-scheduling",
+        "native-saves"
+      ],
+      "minItems": 21,
+      "maxItems": 21,
+      "prefixItems": [
+        {
+          "type": "string",
+          "const": "native-capture"
+        },
+        {
+          "type": "string",
+          "const": "ownership-changes"
+        },
+        {
+          "type": "string",
+          "const": "force-extinction"
+        },
+        {
+          "type": "string",
+          "const": "ruler-succession"
+        },
+        {
+          "type": "string",
+          "const": "return"
+        },
+        {
+          "type": "string",
+          "const": "mission"
+        },
+        {
+          "type": "string",
+          "const": "relocation"
+        },
+        {
+          "type": "string",
+          "const": "native-finalizers"
+        },
+        {
+          "type": "string",
+          "const": "recruitment-membership-commit"
+        },
+        {
+          "type": "string",
+          "const": "prisoners"
+        },
+        {
+          "type": "string",
+          "const": "salary-consequences"
+        },
+        {
+          "type": "string",
+          "const": "salary-or-account-synchronization"
+        },
+        {
+          "type": "string",
+          "const": "rumors"
+        },
+        {
+          "type": "string",
+          "const": "treasures"
+        },
+        {
+          "type": "string",
+          "const": "death-or-illness"
+        },
+        {
+          "type": "string",
+          "const": "office-assignment"
+        },
+        {
+          "type": "string",
+          "const": "units"
+        },
+        {
+          "type": "string",
+          "const": "ports-or-gates"
+        },
+        {
+          "type": "string",
+          "const": "multi-city"
+        },
+        {
+          "type": "string",
+          "const": "global-turn-scheduling"
+        },
+        {
+          "type": "string",
+          "const": "native-saves"
+        }
+      ],
+      "items": false
+    },
+    "skills": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 1,
+      "items": {
+        "type": "string",
+        "const": "benevolent-governance"
+      },
+      "uniqueItems": true
+    },
+    "force": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "rulerId",
+        "hasHumanHeartControl"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "rulerId": {
+          "$ref": "#/$defs/id"
+        },
+        "hasHumanHeartControl": {
+          "type": "boolean"
+        }
+      }
+    },
+    "city": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "ownerForceId",
+        "hasTokenPlatform",
+        "gold",
+        "actionPoints"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "ownerForceId": {
+          "$ref": "#/$defs/id"
+        },
+        "hasTokenPlatform": {
+          "type": "boolean"
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "actionPoints": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      }
+    },
+    "ruler": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "forceId",
+        "affinityByte",
+        "giriInternal",
+        "ambitionInternal",
+        "charisma",
+        "skills"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "forceId": {
+          "$ref": "#/$defs/id"
+        },
+        "affinityByte": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "giriInternal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "ambitionInternal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "charisma": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "skills": {
+          "$ref": "#/$defs/skills"
+        }
+      }
+    },
+    "officer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "forceId",
+        "cityId",
+        "kind",
+        "trueLoyalty",
+        "affinityByte",
+        "giriInternal",
+        "ambitionInternal",
+        "skills",
+        "praisedThisTurn"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "forceId": {
+          "$ref": "#/$defs/id"
+        },
+        "cityId": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "type": "string",
+          "const": "ordinary-fixed-resident"
+        },
+        "trueLoyalty": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "affinityByte": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "giriInternal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "ambitionInternal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "skills": {
+          "$ref": "#/$defs/skills"
+        },
+        "praisedThisTurn": {
+          "type": "boolean"
+        }
+      }
+    },
+    "directedRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from",
+        "to"
+      ],
+      "properties": {
+        "from": {
+          "$ref": "#/$defs/id"
+        },
+        "to": {
+          "$ref": "#/$defs/id"
+        }
+      }
+    },
+    "symmetricRelation": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/id"
+        },
+        {
+          "$ref": "#/$defs/id"
+        }
+      ],
+      "items": false,
+      "uniqueItems": true,
+      "description": "Runtime normalizes each pair and rejects reverse duplicates and self-pairs."
+    },
+    "parentChildRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parent",
+        "child"
+      ],
+      "properties": {
+        "parent": {
+          "$ref": "#/$defs/id"
+        },
+        "child": {
+          "$ref": "#/$defs/id"
+        }
+      }
+    },
+    "relations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "likes",
+        "dislikes",
+        "spouses",
+        "swornSiblings",
+        "parentChild"
+      ],
+      "properties": {
+        "likes": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 6480,
+          "items": {
+            "$ref": "#/$defs/directedRelation"
+          },
+          "uniqueItems": true
+        },
+        "dislikes": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 6480,
+          "items": {
+            "$ref": "#/$defs/directedRelation"
+          },
+          "uniqueItems": true
+        },
+        "spouses": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 3240,
+          "items": {
+            "$ref": "#/$defs/symmetricRelation"
+          },
+          "uniqueItems": true
+        },
+        "swornSiblings": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 3240,
+          "items": {
+            "$ref": "#/$defs/symmetricRelation"
+          },
+          "uniqueItems": true
+        },
+        "parentChild": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 162,
+          "items": {
+            "$ref": "#/$defs/parentChildRelation"
+          },
+          "uniqueItems": true
+        }
+      },
+      "description": "Membership, self-reference, normalized duplicate pairs, spouse/parent cardinality and ancestry cycles are enforced by runtime."
+    },
+    "initialRng": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "seed"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "xorshift32-nonzero-mod35-v1"
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "profile",
+        "date",
+        "initialDateAlreadySettled",
+        "advanceLimit",
+        "force",
+        "city",
+        "ruler",
+        "officers",
+        "relations",
+        "rng",
+        "policies"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "profile": {
+          "type": "string",
+          "const": "standalone-personnel-loyalty-v1"
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "initialDateAlreadySettled": {
+          "type": "boolean",
+          "const": true
+        },
+        "advanceLimit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 360
+        },
+        "force": {
+          "$ref": "#/$defs/force"
+        },
+        "city": {
+          "$ref": "#/$defs/city"
+        },
+        "ruler": {
+          "$ref": "#/$defs/ruler"
+        },
+        "officers": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 80,
+          "items": {
+            "$ref": "#/$defs/officer"
+          }
+        },
+        "relations": {
+          "$ref": "#/$defs/relations"
+        },
+        "rng": {
+          "$ref": "#/$defs/initialRng"
+        },
+        "policies": {
+          "$ref": "#/$defs/policies"
+        }
+      },
+      "description": "Initial scenario. Runtime checks the fixed identities, unique officer IDs, relation graph, date horizon and complete canonical scenario budget, then sorts the roster and relations. Creation does not settle the initial date again."
+    },
+    "cashRewardCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "targetOfficerIds"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "CashReward"
+        },
+        "targetOfficerIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 80,
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "advancePersonnelTurnCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "AdvancePersonnelTurn"
+        }
+      }
+    },
+    "command": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/cashRewardCommand"
+        },
+        {
+          "$ref": "#/$defs/advancePersonnelTurnCommand"
+        }
+      ]
+    },
+    "envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "expectedRevision",
+        "command"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "command": {
+          "$ref": "#/$defs/command"
+        }
+      },
+      "description": "Cash target order is canonicalized by code-unit ID order. The canonical envelope, including expectedRevision, determines successful-command ID equality."
+    },
+    "officerState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "trueLoyalty",
+        "lastPraisedTurn"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "trueLoyalty": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "lastPraisedTurn": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 360
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "rngState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "drawCount"
+      ],
+      "properties": {
+        "state": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "drawCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision",
+        "turn",
+        "advancedCount",
+        "date",
+        "gold",
+        "actionPoints",
+        "officers",
+        "rng"
+      ],
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "turn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "advancedCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "actionPoints": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "officers": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 80,
+          "items": {
+            "$ref": "#/$defs/officerState"
+          }
+        },
+        "rng": {
+          "$ref": "#/$defs/rngState"
+        }
+      },
+      "description": "Every value must equal runtime reconstruction. Cross-field equality, roster identity, sort order and reachability are not established by this structure."
+    },
+    "affinityEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "profile",
+        "source",
+        "originalRange",
+        "scope",
+        "opcodeBytes",
+        "machineCodeVerified",
+        "stockOriginalVerified",
+        "originalExecutableExecuted",
+        "s1CallerIntegrated",
+        "loyaltyIntegrated",
+        "recruitmentIntegrated"
+      ],
+      "properties": {
+        "level": {
+          "type": "string",
+          "const": "tutorial-source-projection"
+        },
+        "profile": {
+          "type": "string",
+          "const": "affinity-distance-tutorial-u8-v1"
+        },
+        "source": {
+          "type": "string",
+          "const": "docs/sources/affinity-distance.json"
+        },
+        "originalRange": {
+          "type": "string",
+          "const": "00489F80..00489FD7"
+        },
+        "scope": {
+          "type": "string",
+          "const": "resolved unsigned affinity bytes; numerical return only"
+        },
+        "opcodeBytes": {
+          "type": "null",
+          "const": null
+        },
+        "machineCodeVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "stockOriginalVerified": {
+          "type": "boolean",
+          "const": false
+        },
+        "originalExecutableExecuted": {
+          "type": "boolean",
+          "const": false
+        },
+        "s1CallerIntegrated": {
+          "type": "boolean",
+          "const": false
+        },
+        "loyaltyIntegrated": {
+          "type": "boolean",
+          "const": false
+        },
+        "recruitmentIntegrated": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "const": {
+        "level": "tutorial-source-projection",
+        "profile": "affinity-distance-tutorial-u8-v1",
+        "source": "docs/sources/affinity-distance.json",
+        "originalRange": "00489F80..00489FD7",
+        "scope": "resolved unsigned affinity bytes; numerical return only",
+        "opcodeBytes": null,
+        "machineCodeVerified": false,
+        "stockOriginalVerified": false,
+        "originalExecutableExecuted": false,
+        "s1CallerIntegrated": false,
+        "loyaltyIntegrated": false,
+        "recruitmentIntegrated": false
+      }
+    },
+    "affinityReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supported",
+        "profile",
+        "sourceAffinityByte",
+        "targetAffinityByte",
+        "absoluteDifference",
+        "complement",
+        "signedComparisonBranch",
+        "returnedSigned32",
+        "returnedEax",
+        "returnedAl",
+        "evidence"
+      ],
+      "properties": {
+        "supported": {
+          "type": "boolean",
+          "const": true
+        },
+        "profile": {
+          "type": "string",
+          "const": "affinity-distance-tutorial-u8-v1"
+        },
+        "sourceAffinityByte": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "targetAffinityByte": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "absoluteDifference": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "complement": {
+          "type": "integer",
+          "minimum": -105,
+          "maximum": 150
+        },
+        "signedComparisonBranch": {
+          "enum": [
+            "keep-d",
+            "use-complement"
+          ]
+        },
+        "returnedSigned32": {
+          "type": "integer",
+          "minimum": -105,
+          "maximum": 75
+        },
+        "returnedEax": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "returnedAl": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "evidence": {
+          "$ref": "#/$defs/affinityEvidence"
+        }
+      },
+      "description": "Complete existing affinity numerical receipt. The new candidate adapter reads returnedAl, preserving the kernel evidence and all numerical outputs."
+    },
+    "traitBranch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "giriInternal",
+        "ambitionInternal",
+        "matched"
+      ],
+      "properties": {
+        "giriInternal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "ambitionInternal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "matched": {
+          "type": "boolean"
+        }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policyId",
+        "reason",
+        "eligible",
+        "benevolenceHolderIds",
+        "relationExemption",
+        "affinity",
+        "traitBranch",
+        "syntheticDislikeEax"
+      ],
+      "properties": {
+        "policyId": {
+          "type": "string",
+          "const": "explicit-local-relation-graph-v1"
+        },
+        "reason": {
+          "enum": [
+            "benevolence-exempt",
+            "relation-exempt",
+            "affinity-above-25",
+            "low-giri-high-ambition",
+            "dislikes-ruler",
+            "not-candidate"
+          ]
+        },
+        "eligible": {
+          "type": "boolean"
+        },
+        "benevolenceHolderIds": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 81,
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "relationExemption": {
+          "enum": [
+            "likes-ruler",
+            "spouse",
+            "sworn-sibling",
+            "parent-child",
+            null
+          ]
+        },
+        "affinity": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/affinityReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "traitBranch": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/traitBranch"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "syntheticDislikeEax": {
+          "enum": [
+            0,
+            1,
+            null
+          ]
+        }
+      },
+      "description": "Null later branches record short-circuiting. Runtime recomputation determines consistency of reason, eligibility, evidence and evaluated branches."
+    },
+    "loyaltyWrite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trueBefore",
+        "displayBefore",
+        "requestedGain",
+        "actualGain",
+        "requestedLoss",
+        "actualLoss",
+        "trueAfter",
+        "displayAfter",
+        "policyId"
+      ],
+      "properties": {
+        "trueBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "displayBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "requestedGain": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9
+        },
+        "actualGain": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9
+        },
+        "requestedLoss": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "actualLoss": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "trueAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "displayAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "policyId": {
+          "type": "string",
+          "const": "saturating-loyalty-byte-v1"
+        }
+      },
+      "description": "True loyalty is a 0..255 byte; displays are min(true,100). Arithmetic and requested/actual differences are recomputed by runtime."
+    },
+    "cashGain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policyId",
+        "roll",
+        "minimumGain",
+        "gain"
+      ],
+      "properties": {
+        "policyId": {
+          "type": "string",
+          "const": "synthetic-cash-uniform5to9-v1"
+        },
+        "roll": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "minimumGain": {
+          "type": "integer",
+          "const": 5
+        },
+        "gain": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 9
+        }
+      }
+    },
+    "naturalLoss": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "firstRoll",
+        "tokenAddition",
+        "lordAddition",
+        "secondRoll",
+        "lordBranch",
+        "requestedLoss"
+      ],
+      "properties": {
+        "firstRoll": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "tokenAddition": {
+          "enum": [
+            0,
+            2
+          ]
+        },
+        "lordAddition": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "secondRoll": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "lordBranch": {
+          "type": "boolean"
+        },
+        "requestedLoss": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        }
+      }
+    },
+    "officerReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "officerId",
+        "qualification",
+        "candidate",
+        "status",
+        "loyalty",
+        "lastPraisedTurnBefore",
+        "lastPraisedTurnAfter",
+        "controlRoll",
+        "cashGain",
+        "naturalLoss"
+      ],
+      "properties": {
+        "officerId": {
+          "$ref": "#/$defs/id"
+        },
+        "qualification": {
+          "enum": [
+            "cash-eligible",
+            "natural-quarter-entry"
+          ]
+        },
+        "candidate": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/candidate"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "enum": [
+            "cash-rewarded",
+            "exempt",
+            "not-candidate",
+            "human-heart-protected",
+            "natural-loss-applied"
+          ]
+        },
+        "loyalty": {
+          "$ref": "#/$defs/loyaltyWrite"
+        },
+        "lastPraisedTurnBefore": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 360
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lastPraisedTurnAfter": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 360
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "controlRoll": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cashGain": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/cashGain"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "naturalLoss": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/naturalLoss"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "description": "Cash and natural branch field consistency, current-turn qualification and praise changes are runtime assertions."
+    },
+    "draw": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "drawIndex",
+        "label",
+        "targetId",
+        "bound",
+        "beforeState",
+        "afterState",
+        "value"
+      ],
+      "properties": {
+        "drawIndex": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "label": {
+          "enum": [
+            "cash-gain",
+            "human-heart-control",
+            "natural-loss-first",
+            "natural-loss-second-lord",
+            "natural-loss-second-ordinary"
+          ]
+        },
+        "targetId": {
+          "$ref": "#/$defs/id"
+        },
+        "bound": {
+          "enum": [
+            3,
+            5
+          ]
+        },
+        "beforeState": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "afterState": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "bound": {
+                "const": 3
+              }
+            },
+            "required": [
+              "bound"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "label": {
+                "const": "cash-gain"
+              }
+            },
+            "required": [
+              "label"
+            ]
+          },
+          "then": {
+            "properties": {
+              "bound": {
+                "type": "integer",
+                "const": 5
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "bound": {
+                "type": "integer",
+                "const": 3
+              }
+            }
+          }
+        }
+      ],
+      "description": "One real call in the shared session-local stream. Runtime verifies transition, value, consecutive drawIndex, target order and label."
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "goldBefore",
+        "goldCost",
+        "goldAfter",
+        "actionPointsBefore",
+        "actionPointsCost",
+        "actionPointsAfter"
+      ],
+      "properties": {
+        "goldBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "goldCost": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8000
+        },
+        "goldAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "actionPointsBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "actionPointsCost": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 400
+        },
+        "actionPointsAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      }
+    },
+    "writeSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "before",
+        "after"
+      ],
+      "properties": {
+        "before": {
+          "$ref": "#/$defs/snapshot"
+        },
+        "after": {
+          "$ref": "#/$defs/snapshot"
+        }
+      }
+    },
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "profile",
+        "commandId",
+        "envelope",
+        "policies",
+        "policyDigest",
+        "sourceBoundary",
+        "unsupported",
+        "revisionBefore",
+        "revisionAfter",
+        "turnBefore",
+        "turnAfter",
+        "dateBefore",
+        "dateAfter",
+        "quarterEntry",
+        "sortedTargetIds",
+        "officers",
+        "resources",
+        "draws",
+        "writeSet"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "profile": {
+          "type": "string",
+          "const": "standalone-personnel-loyalty-v1"
+        },
+        "commandId": {
+          "$ref": "#/$defs/id"
+        },
+        "envelope": {
+          "$ref": "#/$defs/envelope"
+        },
+        "policies": {
+          "$ref": "#/$defs/policies"
+        },
+        "policyDigest": {
+          "$ref": "#/$defs/policyDigest"
+        },
+        "sourceBoundary": {
+          "$ref": "#/$defs/sourceBoundary"
+        },
+        "unsupported": {
+          "$ref": "#/$defs/unsupported"
+        },
+        "revisionBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4095
+        },
+        "revisionAfter": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "turnBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "turnAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "dateBefore": {
+          "$ref": "#/$defs/date"
+        },
+        "dateAfter": {
+          "$ref": "#/$defs/date"
+        },
+        "quarterEntry": {
+          "type": "boolean"
+        },
+        "sortedTargetIds": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 80,
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "officers": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 80,
+          "items": {
+            "$ref": "#/$defs/officerReceipt"
+          }
+        },
+        "resources": {
+          "$ref": "#/$defs/resources"
+        },
+        "draws": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 240,
+          "items": {
+            "$ref": "#/$defs/draw"
+          }
+        },
+        "writeSet": {
+          "$ref": "#/$defs/writeSet"
+        }
+      },
+      "description": "Successful derived receipt. Supplied receipts never drive computation; replay compares the entire recomputed value, including every policy/evidence field, draw and before/after snapshot."
+    },
+    "genesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario",
+        "snapshot"
+      ],
+      "properties": {
+        "scenario": {
+          "$ref": "#/$defs/scenario"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/snapshot"
+        }
+      }
+    },
+    "acceptedCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "envelope",
+        "receipt"
+      ],
+      "properties": {
+        "envelope": {
+          "$ref": "#/$defs/envelope"
+        },
+        "receipt": {
+          "$ref": "#/$defs/receipt"
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tag",
+        "schemaVersion",
+        "profile",
+        "policies",
+        "policyDigest",
+        "genesis",
+        "snapshot",
+        "acceptedCommands"
+      ],
+      "properties": {
+        "tag": {
+          "type": "string",
+          "const": "personnel-loyalty-state-v1"
+        },
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "profile": {
+          "type": "string",
+          "const": "standalone-personnel-loyalty-v1"
+        },
+        "policies": {
+          "$ref": "#/$defs/policies"
+        },
+        "policyDigest": {
+          "$ref": "#/$defs/policyDigest"
+        },
+        "genesis": {
+          "$ref": "#/$defs/genesis"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/snapshot"
+        },
+        "acceptedCommands": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4096,
+          "items": {
+            "$ref": "#/$defs/acceptedCommand"
+          }
+        }
+      },
+      "description": "Parsed save document. Runtime reconstructs from canonical genesis, re-executes each unique accepted envelope, validates every intermediate command-result and save-result budget, compares full receipts and final snapshot, and returns a new immutable state. The escaped JSON string inside SaveResult also counts toward the 8 MiB total result budget."
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "committed",
+        "reason",
+        "revision",
+        "turn",
+        "commandId",
+        "index"
+      ],
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "const": false
+        },
+        "committed": {
+          "type": "boolean",
+          "const": false
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4096
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "turn": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 360
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "commandId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "index": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4095
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "description": "Failure contains no state or successful receipt. index is the failing replay/accepted-history entry when applicable. Runtime failures do not consume command IDs, resources or random draws."
+    },
+    "expectedSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "duplicate",
+        "receipt"
+      ],
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "const": true
+        },
+        "duplicate": {
+          "type": "boolean"
+        },
+        "receipt": {
+          "$ref": "#/$defs/receipt"
+        }
+      }
+    },
+    "expectedOutcome": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/expectedSuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "traceAttempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "envelope",
+        "expectedOutcome"
+      ],
+      "properties": {
+        "envelope": {
+          "$ref": "#/$defs/envelope"
+        },
+        "expectedOutcome": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/expectedOutcome"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tag",
+        "scenario",
+        "attempts",
+        "expectedFinalSnapshot"
+      ],
+      "properties": {
+        "tag": {
+          "type": "string",
+          "const": "personnel-loyalty-trace-v1"
+        },
+        "scenario": {
+          "$ref": "#/$defs/scenario"
+        },
+        "attempts": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4096,
+          "items": {
+            "$ref": "#/$defs/traceAttempt"
+          }
+        },
+        "expectedFinalSnapshot": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/snapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "description": "Typed replay trace. Null expected fields disable only comparison; runtime still derives the outcome. Malformed-envelope defensive replay inputs are outside this typed JSON interchange schema, although runtime can record them as failures. Business failures and same-ID retries with valid envelopes are represented here."
+    },
+    "stateSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "state"
+      ],
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "const": true
+        },
+        "state": {
+          "$ref": "#/$defs/state"
+        }
+      }
+    },
+    "stateResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/stateSuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "commandSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "committed",
+        "duplicate",
+        "state",
+        "receipt"
+      ],
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "const": true
+        },
+        "committed": {
+          "type": "boolean"
+        },
+        "duplicate": {
+          "type": "boolean"
+        },
+        "state": {
+          "$ref": "#/$defs/state"
+        },
+        "receipt": {
+          "$ref": "#/$defs/receipt"
+        }
+      }
+    },
+    "commandResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/commandSuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "previewSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "committed",
+        "duplicate",
+        "receipt",
+        "projectedSnapshot"
+      ],
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "const": true
+        },
+        "committed": {
+          "type": "boolean",
+          "const": false
+        },
+        "duplicate": {
+          "type": "boolean"
+        },
+        "receipt": {
+          "$ref": "#/$defs/receipt"
+        },
+        "projectedSnapshot": {
+          "$ref": "#/$defs/snapshot"
+        }
+      }
+    },
+    "previewResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/previewSuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "saveSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "json"
+      ],
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "const": true
+        },
+        "json": {
+          "type": "string",
+          "description": "Canonical JSON encoding of state. Runtime budgets the complete SaveResult after escaping this string inside its wrapper, and independently reconstructs the parsed state."
+        }
+      }
+    },
+    "saveResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/saveSuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "inspectedOfficer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "trueLoyalty",
+        "displayedLoyalty",
+        "praisedThisTurn",
+        "cashEligible"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "trueLoyalty": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "displayedLoyalty": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "praisedThisTurn": {
+          "type": "boolean"
+        },
+        "cashEligible": {
+          "type": "boolean"
+        }
+      }
+    },
+    "inspectionSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "snapshot",
+        "officers",
+        "sourceBoundary",
+        "unsupported"
+      ],
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "const": true
+        },
+        "snapshot": {
+          "$ref": "#/$defs/snapshot"
+        },
+        "officers": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 80,
+          "items": {
+            "$ref": "#/$defs/inspectedOfficer"
+          }
+        },
+        "sourceBoundary": {
+          "$ref": "#/$defs/sourceBoundary"
+        },
+        "unsupported": {
+          "$ref": "#/$defs/unsupported"
+        }
+      }
+    },
+    "inspection": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/inspectionSuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "replaySuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "state",
+        "outcomes"
+      ],
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "const": true
+        },
+        "state": {
+          "$ref": "#/$defs/state"
+        },
+        "outcomes": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4096,
+          "items": {
+            "$ref": "#/$defs/expectedOutcome"
+          }
+        }
+      }
+    },
+    "replayResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/replaySuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    }
+  }
+}

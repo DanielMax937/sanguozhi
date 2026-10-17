@@ -1803,7 +1803,7 @@ returnedAl = returnedEax & 255
 
 正常0..149域中最大结果75，1与149为2，25与100为75，25与26为1；只用绝对差会丢掉环形比较。完整uint8域则还包括0与151返回-1/EAX4294967295/AL255，0与255返回-105/EAX4294967191/AL151。教程的signed比较不会先mod150，也没有非负夹取；不得把正常域的0..75范围扩大成所有byte的返回约束。
 
-d=75时两候选均为75，但 `JL` 不跳，走 `use-complement` 分支。生产API只收已解析的两个byte，不接受武将ID或native pointer，不模拟非法ID/指针回退，也不新增自然忠诚/登用调用。完整教程的入口/校验路径仅为独立source oracle的测试范围，不能冒充native resolver实现。
+d=75时两候选均为75，但 `JL` 不跳，走 `use-complement` 分支。该纯核API只收已解析的两个byte，不接受武将ID或native pointer，不模拟非法ID/指针回退，本身不内置自然忠诚/登用调用。新[O12-A](personnel-loyalty-lifecycle.md)以明确software adapter复用它并消费returnedAl，不改变其全uint8域或提升教程与原caller同源证据。完整教程的入口/校验路径仅为独立source oracle的历史测试范围，不能冒充native resolver实现。
 
 ### 6.3 相性的已确认作用域
 
@@ -2004,15 +2004,15 @@ Identity=PRISONER
 
 ### 6.10 忠诚下降数值：保留caller算术与helper边界
 
-`[PC-PK1.1][confirmed-by-disassembly]`
+`[selected-public-listing][stock-identity-unverified]`
 
-以下为既有正常属性域、0..2随机约定下的数值摘要；不是本轮新增的runtime实现。caller可见算术不补齐 `00472150` RNG或 `004A6CF0` 最终writer：
+以下为所选公开listing在正常属性域、0..2随机约定下的算术摘要，属于selected-listing软件policy的依据，不是已认证的PC-PK1.1 stock行为。固定快照 `0058E759` 符节台 `+2` 行旁有作者原注“【修改】符节台附加忠诚下降值”，必须保留此修改提示；末尾两套MOD亦与所选主段隔离。caller可见算术不补齐 `00472150` RNG或 `004A6CF0` 最终writer。新[O12-A软件执行](personnel-loyalty-lifecycle.md)另用显式新RNG与饱和byte writer，不提高本段原作证据等级。所选listing的野望比较为signed `>=4`，下面 `===4` 仅在本段正常0..4域中等价：
 
 ```ts
 loss = Random(0..2)
 
 if (city.hasTokenPlatform) {
-  loss += 2
+  loss += 2 // selected-listing；0058E759标注【修改】，非stock常量认证
 }
 
 if (
@@ -2038,7 +2038,7 @@ target.loyalty -= loss
 
 注意：
 
-- 符节台 `+2` 是进入掉忠数值分支后的附加值，不负责把原本不满足 gate 的普通武将“变成会掉忠”；
+- 本selected-listing政策选用的符节台 `+2` 带有上述【修改】原注，stock身份未认证；它仅是进入掉忠数值分支后的附加值，不负责把原本不满足 gate 的普通武将“变成会掉忠”；
 - 人心掌握在这段数值计算**之前**按 `AX>=1` 跳过；2/3依赖上述均匀0..2约定；
 - 俘虏不吃仁政，但仍吃人心掌握和上面的关系豁免；
 - 欠薪、流言、事件等不是这条自然/月度忠诚路径，仍应分开建模。
@@ -2637,9 +2637,9 @@ C5 已经锁定人才府的原作 AP 减免作用域是：
 
 ### 8.4 褒赏忠诚上升不是固定值，而是随机结果
 
-`[COMMON][empirical-high]`
+`[Vanilla Sourcenext observations; not PK distribution evidence]`
 
-公开玩家逐旬记录直接证明同一君主的褒赏上升量会变化，并且可以通过 S/L 刷取较高结果。
+以下玩家逐旬记录来自明确标注“無印ソースネクスト版”的日记，不能归为PK样本。同一君主的褒赏上升量会变化，作者反复S/L选择高值，因此存在选择偏差，不能用出现频次推算随机分布。
 
 刘备实机记录包括：
 
@@ -2648,10 +2648,9 @@ C5 已经锁定人才府的原作 AP 减免作用域是：
 陈兰 90 -> 98  (+8)
 许攸 87 -> 96  (+9)
 韩浩 88 -> 93  (+5)
-周泰 85 -> 94  (+9)
 ```
 
-记录作者还明确说明“忠诚的上升幅度是随机的”，会重读直到得到较高数字。
+陈兰/许攸来自[#1](https://note.com/juicy_fox4269/n/nf69a4b2b4dae)，韩浩来自[#3](https://note.com/juicy_fox4269/n/n106990f3f5b6)的搜索索引；旧列周泰85→94本次未重新定位，不再作为新增核实样本。PK的99→108是另一条独立玩家观察，只支持可越过UI100的边界，不证明与无印同式。
 
 所以旧规则：
 
@@ -2660,7 +2659,7 @@ C5 已经锁定人才府的原作 AP 减免作用域是：
 基数 = 君主魅力*0.05 + 义理修正
 ```
 
-不能继续作为原作公式。
+不能继续作为原作公式；这些观察也不能推出“PK均匀5..9”。[O12-A新现金政策](personnel-loyalty-lifecycle.md#4-现金增量是新软件政策)明确自行定义5+roll5，不使用魅力/义理，公开与原作定性作用的保真差异。
 
 ### 8.5 魅力影响褒赏效果，但精确闭式仍 open
 
@@ -2975,15 +2974,16 @@ salarySum > remainingGold
   https://github.com/sjn4048/311MemoryResearch
 - 311SireCustomizedPackageDev：`00489140 HasPraised`、忠诚存储/修改 helper
   https://github.com/sean2077/311SireCustomizedPackageDev
-- 日文 Wiki 能力值/经验：君主魅力影响褒赏忠诚上升量
+- 日文 Wiki 能力值：君主魅力影响褒赏忠诚上升量的定性说明
   https://w.atwiki.jp/sangokushi11/pages/1598.html
-  https://w.atwiki.jp/sangokushi11/pages/79.html
+  旧列pages/79当前为“各種経験値”，本次未找到忠诚/褒赏匹配，不能作为该增量结论来源；不推断其全部历史版本
 - 日文 Wiki 内政：褒赏/宝物作为忠诚提升路径
   https://w.atwiki.jp/sangokushi11/pages/74.html
 - 日文 Wiki 爵位・官职：官职升降本身不改变忠诚
   https://w.atwiki.jp/sangokushi11/pages/111.html
-- Vanilla刘备逐旬实录：褒赏+5/+8/+9等、明确说明上升幅度随机
+- 无印Sourcenext刘备逐旬实录：+8/+9及另篇索引+5；反复S/L选高值，有选择偏差，不是PK分布样本
   https://note.com/juicy_fox4269/n/nf69a4b2b4dae
+  https://note.com/juicy_fox4269/n/n106990f3f5b6
 - PC-PK忠诚黑数实测：99褒赏后可变108
   https://www.ptt.cc/bbs/Koei/M.1776854540.A.47B.html
 - PC/PK宝物没收-30的独立实机记录（当前只作empirical-high）
@@ -3734,3 +3734,9 @@ caller list 本身按什么顺序构造
 [O10-A月薪规则与完整80项表](city-finance-lifecycle.md#5-完整驻城有官薪人员与月俸)仅适用完整驻城普通有官薪名单且无俘虏。工资不足整旬拒绝是新服务政策，不是本页所述原作不足后果；没有接入未知工资身份或欠薪链。
 
 本次连接仅静态代码和规则交付，未运行测试、编译、build、checker、诊断、产品或示例；本页历史通过记录不覆盖新服务。
+
+## 2026-10-17：固定驻城自然忠诚与现金褒赏独立连接
+
+[O12-A完整规则](personnel-loyalty-lifecycle.md)与[API](../engine/personnel-loyalty-lifecycle.md)只适用固定单城普通非俘虏名单。两个真实命令维护true byte、金/AP、每旬褒赏、日期与新共享xorshift；现金5+roll5明确不使用魅力/义理，季度先仁政/关系豁免再三分支候选及人心掌握/两次loss。true0不提前跳过随机，true>100正常下降，99+9写108。来源层、software adapter与新writer保持分开。
+
+不实现登用ownership、工资/欠薪后果、俘虏或P078所有依赖；整个O12与原43不关闭。仅静态代码/规则交付，未运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例，旧测试及历史food失败保留。
