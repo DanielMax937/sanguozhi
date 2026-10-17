@@ -636,7 +636,7 @@ E8 已确认：
 - Vanilla与PK是独立官方补丁链；
 - Vanilla Ver1.0→后期资料有7条明确技巧差异；
 - 官方changelog未给逐技巧transition patch，因此不能统一标“1.2修改”；
-- PK1.1工兵育成：内政设施×2、城市/港/关×2.5；
+- 工兵内政公开listing：B=clamp(floor(9P/2),150,450)，无工兵floor(3B/20)、有工兵floor(3B/10)；取整前比率2不等于最终整数精确×2；城市港关同址指令冲突及stock认证仍open，见[O11-B](domestic-repair-lifecycle.md)；
 - PK1.1爆药炼成原BUG看被烧/防守方技巧所有权；
 - 社区修复改为看点火/攻击方；
 - 矢盾/大盾挡战法属于社区patch，不是官方默认；

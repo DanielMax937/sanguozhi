@@ -1,6 +1,10 @@
+## 已完成内政设施自动修复独立规则（O11-B）
+
+[domestic-repair-lifecycle.md](domestic-repair-lifecycle.md)：标准设施身份/供应正HP、固定单母城与太守、9P半除及150..450夹值、工兵两支独立整数取整、设施中心两格敌情、实际cap写入/弃置/首次到满、有限旬输入与完整genesis保存重放。[API](../engine/domestic-repair-lifecycle.md) · [来源与固定政策](../sources/domestic-repair-lifecycle.json) · [结构schema](../sources/domestic-repair-lifecycle.schema.json) · [未运行场景](../../data/scenarios/domestic-repair-example-v1.json)。源listing、注释派生距离与服务writer分层；城市港关/堤坝/PK特殊楼/native与全局调度仍开放，原43不减。仅静态新增，没有执行验收。
+
 ## 标准设施建设与吸收独立规则（O11-A）
 
-[facility-construction-lifecycle.md](facility-construction-lifecycle.md)：9类费用/耐久/TP、5类合法吸收与type映射、城心敌情/忙碌人员、精确速率/非HP工作量政策、完成奖励争议与16组政策、旧级效力/旧金粮核投影、有限日历及完整保存重放。含[API](../engine/facility-construction-lifecycle.md)、[来源](../sources/facility-construction-lifecycle.json)与未运行场景；不关闭维修/PK特殊楼或原生证据债。
+[facility-construction-lifecycle.md](facility-construction-lifecycle.md)：9类费用/耐久/TP、5类合法吸收与type映射、城心敌情/忙碌人员、精确速率/非HP工作量政策、完成奖励争议与16组政策、旧级效力/旧金粮核投影、有限日历及完整保存重放。含[API](../engine/facility-construction-lifecycle.md)、[来源](../sources/facility-construction-lifecycle.json)与未运行场景；本建设模块不覆盖维修，独立维修子域见上方O11-B；不关闭维修其余边界/PK特殊楼或原生证据债。
 
 ## 当前新增：O10-B单城商人即时交易（2026-10-17）
 

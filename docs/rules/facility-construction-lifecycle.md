@@ -2,7 +2,7 @@
 
 2026-10-17，O11-A。`standalone-facility-construction-v1` 在供应的单城开发地上执行9类新建和5类吸收：扣费、占地/腾地、锁定人员、逐旬施工、完工奖励、有效等级及金粮数值投影、保存和重放。它是实际独立状态转换，不只是建设速度的另一层包装。
 
-本页给出可执行服务的完整规则。官方命令说明、社区数据、已交付公开速率listing与新增工程政策分开标注；原生初始/进度writer、真实调度、原游戏存档、战斗HP及维修均未因此恢复。O11的维修、PK特殊建筑和组合运行时仍开放，原43组未决证据主题不减。
+本页给出可执行服务的完整规则。官方命令说明、社区数据、已交付公开速率listing与新增工程政策分开标注；原生初始/进度writer、真实调度、原游戏存档、战斗HP及维修均未因此恢复。本模块不覆盖维修；[O11-B](domestic-repair-lifecycle.md)另提供已完成标准内政设施的独立正HP维修账本，不自动连接本模块work。维修其余边界、PK特殊建筑和组合运行时仍开放，原43组未决证据主题不减。
 
 本批只有静态代码、文档和人工设计场景；未运行测试、typecheck、编译、build、checker、诊断、产品入口或示例，未修改旧测试。历史通过数不验证本树，既有全套food失败未处理。API见[接口文档](../engine/facility-construction-lifecycle.md)，数据见[设施表](../../data/catalogs/facility-construction-catalog-v1.json)、[全部政策](../../data/catalogs/facility-construction-policies-v1.json)、[来源](../sources/facility-construction-lifecycle.json)和[结构schema](../sources/facility-construction-lifecycle.schema.json)。
 

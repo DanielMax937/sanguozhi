@@ -1,6 +1,12 @@
+## 2026-10-17：O11-B已完成内政设施自动修复，静态新增
+
+[完整规则](domestic-repair-lifecycle.md)与[API](../engine/domestic-repair-lifecycle.md)补独立正HP账本：从供应的固定太守政治自行计算 `clamp(floor(9P/2),150,450)`，无工兵/有工兵分别floor(3B/20)/floor(3B/10)，按设施中心敌情逐旬跳过或cap写入；幂等、首次到满回执、完整genesis/命令/回执/快照保存重算。目录只有类型身份，maxHP由场景供应。旧“工兵最终整数精确×2”已在现行规则纠正；原始旧来源保留。
+
+敌情距离仅源注释派生政策，writer与事件是独立服务合同。公开混合listing不是clean-stock认证；城市/港/关同址指令冲突、堤坝、PK特殊楼、原生getter/helper/writer/callback、建设HP迁移与全局组合仍open，整个O11及原43组均不关闭。本批没有运行测试、typecheck、编译、build、checker、诊断、产品、示例或schema validator，旧测试未改，历史food失败保留；下方历史PASS不是本树验收。
+
 ## 2026-10-17：O11-A标准设施建设与吸收
 
-[完整规则](facility-construction-lifecycle.md)与[API](../engine/facility-construction-lifecycle.md)补9类建设、5类吸收的实际独立账本、人员预留/完工奖励、有限推进和全历史重算；已有速率核和金粮核真实复用。官方/社区/源listing/临时policy分层，功绩冲突保留。维修、PK特殊楼、combatHP与原生writer/全局调度仍未恢复；原43不减。未运行测试、typecheck、编译、build、checker、诊断、产品或示例，旧测试未改，历史food失败保留。
+[完整规则](facility-construction-lifecycle.md)与[API](../engine/facility-construction-lifecycle.md)补9类建设、5类吸收的实际独立账本、人员预留/完工奖励、有限推进和全历史重算；已有速率核和金粮核真实复用。官方/社区/源listing/临时policy分层，功绩冲突保留。O11-A不覆盖维修；独立已完成内政维修见上方O11-B，维修其余边界、PK特殊楼、combatHP与原生writer/全局调度仍未恢复；原43不减。未运行测试、typecheck、编译、build、checker、诊断、产品或示例，旧测试未改，历史food失败保留。
 
 # 当前状态：O10-B单城商人静态代码与具体规则（2026-10-17）
 

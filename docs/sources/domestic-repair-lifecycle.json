@@ -1,0 +1,685 @@
+{
+  "schemaVersion": 1,
+  "profile": "completed-domestic-auto-repair-v1",
+  "scope": "O11-B completed standard domestic facilities; independent fixed-owned-city positive-HP repair ledger",
+  "sourceLevel": "public-mixed-research-listing-with-explicit-service-policies",
+  "nativeExecution": false,
+  "stockVerified": false,
+  "original43GroupsReduced": false,
+  "sources": [
+    {
+      "id": "public-domestic-repair-listing",
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/Func-自动01-耐久恢复.txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/%E5%86%85%E5%AD%98%E8%B5%84%E6%96%99/%E6%95%B4%E7%90%86/Func-%E8%87%AA%E5%8A%A801-%E8%80%90%E4%B9%85%E6%81%A2%E5%A4%8D.txt",
+      "gitBlobSha1": "726708dd50c8350bf2949dff6afddd8310ec403f",
+      "gitBlobIdentityProvenance": "repository-tree-metadata; not a rehash of retrieved original GBK bytes",
+      "originalEncoding": "GBK",
+      "originalBytes": 24621,
+      "originalBytesProvenance": "repository-tree-metadata",
+      "originalBytesRetrieved": false,
+      "originalSha256": null,
+      "retrieval": "UTF-8 transcoded text returned by GitHub contents; statically read",
+      "transcodedTextObservation": {
+        "encoding": "UTF-8",
+        "bytes": 26278,
+        "sha256": "42b6da98c7a72136cf0c41f763c65c09a9b36681505c70f49641d96653ffedb6",
+        "retainedInRepository": false,
+        "path": null,
+        "hashAuthority": "observed UTF-8 text only; not original GBK bytes, Git blob contents, executable bytes or a complete-function byte reconstruction"
+      },
+      "entryAddress": "00599710",
+      "sourceLevel": "public-mixed-research-listing",
+      "byteAuthority": "Listed opcode text; no independently acquired original GBK blob or clean-stock executable",
+      "limitations": [
+        "Listing includes modification annotations and appended construction-skill MOD",
+        "Two mutually incompatible instructions are listed at each of 00599943 and 00599971 in the city/port/gate branch",
+        "Enemy helper 004B99B0, maximum-HP getter 00487150, native durability writer 004AE360 and native callbacks are not reconstructed",
+        "Function addresses identify evidence locations only; this manifest makes no contiguous native-byte count or hash claim"
+      ]
+    },
+    {
+      "id": "existing-standard-domestic-type-identities",
+      "sourceManifest": "docs/sources/facility-construction-lifecycle.json",
+      "sourceCatalog": "data/catalogs/facility-construction-catalog-v1.json",
+      "grade": "existing-community-type-identities-not-native-max-hp-table",
+      "supports": [
+        "Nine standard kinds and 19 legal kind/level/typeId identities"
+      ],
+      "limits": [
+        "Only kind/name/level/typeId is reused",
+        "No documented durability becomes a native maximum-HP table",
+        "No construction work, rates, costs, rewards or production occupancy are imported"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "completed-damaged-eligibility",
+      "grade": "listed-control-flow",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "00599720..00599738",
+        "0059973E..00599743",
+        "00599749..0059975C"
+      ],
+      "supports": [
+        "Facility lookup/validity call precedes completed and currentHP<maximumHP gates",
+        "CurrentHP is sign-extended from a word; maximumHP is zero-extended"
+      ],
+      "limits": [
+        "Service restricts both supplied HP values to 1..32767; native validity and maximum-HP getter internals remain open",
+        "Zero HP, destruction and resurrection are excluded"
+      ]
+    },
+    {
+      "id": "enemy-gate",
+      "grade": "listed-caller-and-source-comment",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "00599762..0059976F"
+      ],
+      "supports": [
+        "Nonzero 004B99B0 result skips ordinary repair",
+        "Source comment describes city radius3 and port/gate/domestic radius2"
+      ],
+      "limits": [
+        "Helper body not reconstructed",
+        "Facility-centered axial distance<=2 is an explicitly named source-comment-derived-distance-policy, not helper equivalence"
+      ]
+    },
+    {
+      "id": "domestic-dispatch",
+      "grade": "listed-control-flow",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "00599775..00599787"
+      ],
+      "supports": [
+        "Kind 0 fixed bases and kind 4 domestic facilities are the two ordinary branches"
+      ],
+      "limits": [
+        "This profile accepts only its standard-nine domestic identity catalog; fixed bases and other types are excluded"
+      ]
+    },
+    {
+      "id": "parent-city-and-governor",
+      "grade": "listed-caller-with-supplied-facts",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "0059978D..005997DD",
+        "005997E3..005997ED",
+        "005997F3..00599812"
+      ],
+      "supports": [
+        "Domestic facility resolves a parent city from its map position",
+        "A valid city, owned force and governor are required"
+      ],
+      "limits": [
+        "Map/city/ownership/getter implementations are not recovered",
+        "Service supplies one fixed city and owner; a missing or mismatched city rejects; governor null is a legal no-repair condition"
+      ]
+    },
+    {
+      "id": "engineering-force",
+      "grade": "listed-caller",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "00599818..00599844"
+      ],
+      "supports": [
+        "Engineering uses parent-city force and technique ID 0x18 (24)"
+      ],
+      "limits": [
+        "Service supplies a stable boolean for that fixed owner; no native technique or force resolver is invoked"
+      ]
+    },
+    {
+      "id": "politics-byte",
+      "grade": "listed-integer-operations",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "00599848..0059984D",
+        "0059989A..0059989F"
+      ],
+      "supports": [
+        "Governor politics is taken from AL and zero-extended"
+      ],
+      "limits": [
+        "004890A0 getter internals and mutable politics are not reconstructed; scenario P is a fixed resolved uint8"
+      ]
+    },
+    {
+      "id": "base-nine-half-clamp",
+      "grade": "listed-integer-operations",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "00599850..0059985F",
+        "00599878..0059987F",
+        "005998A2..005998B1",
+        "005998C8..005998CF"
+      ],
+      "supports": [
+        "In nonnegative uint8 domain B=clamp(floor(9P/2),150,450)"
+      ],
+      "limits": [
+        "This conclusion is specific to unambiguous domestic branches; it does not resolve the conflicting city/port/gate instructions"
+      ]
+    },
+    {
+      "id": "engineering-independent-floor",
+      "grade": "listed-integer-operations",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "00599864..00599870",
+        "00599884..00599890",
+        "0059999F..005999A4"
+      ],
+      "supports": [
+        "Engineering forms 6B then signed integer divide 20; in this domain request=floor(3B/10)"
+      ],
+      "limits": [
+        "C1 FA 03 means SAR EDX,3; source mnemonic SAR DL,3 is a transcription error",
+        "The result must not be obtained by doubling the already-rounded ordinary request"
+      ]
+    },
+    {
+      "id": "ordinary-independent-floor",
+      "grade": "listed-integer-operations",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "005998B6..005998C0",
+        "005998D4..005998DE",
+        "0059999F..005999A4"
+      ],
+      "supports": [
+        "Ordinary forms 3B then signed integer divide 20; in this domain request=floor(3B/20)"
+      ],
+      "limits": [
+        "The two ratios differ by2 before flooring; final integer recovery need not be exactly doubled"
+      ]
+    },
+    {
+      "id": "hp-write-boundary",
+      "grade": "listed-call-only",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "005999AE..005999BE"
+      ],
+      "supports": [
+        "Caller invokes 004AE360 with the requested amount and later retains its return value"
+      ],
+      "limits": [
+        "Native writer body and exact return semantics are not recovered",
+        "This independent service implements only its registered cap-to-max writer and separately reports requested, actual and discarded"
+      ]
+    },
+    {
+      "id": "full-hp-event-boundary",
+      "grade": "listed-comparison-and-call-only",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "005999D2..005999F7",
+        "00599A63..00599A73"
+      ],
+      "supports": [
+        "Listing compares post-write HP with maximum and calls native completion/notification functions"
+      ],
+      "limits": [
+        "Native completion and notification implementations are excluded",
+        "DomesticFacilityHpFull is a standalone once-on-first-reaching-cap event, not the native callback contract"
+      ]
+    },
+    {
+      "id": "base-conflicting-instructions",
+      "grade": "conflicting-public-listing",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "00599943",
+        "00599971"
+      ],
+      "supports": [
+        "Each address lists both 6B C0 08 (IMUL EAX,EAX,8) and 8D 04 C0 (LEA EAX,[EAX+EAX*8])"
+      ],
+      "limits": [
+        "Conflicting city/port/gate base formulas cannot be certified as one stock byte stream; entire base branch remains excluded"
+      ]
+    },
+    {
+      "id": "dam-and-native-tail-exclusion",
+      "grade": "scope-boundary-only",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "005999F9..00599A5E",
+        "00599A63..00599A93"
+      ],
+      "supports": [
+        "Dam follows special incomplete-state restoration and completion/tail paths"
+      ],
+      "limits": [
+        "No dam restoration, state transition, ownership mutation, callback or UI tail is implemented"
+      ]
+    },
+    {
+      "id": "appended-mod-exclusion",
+      "grade": "scope-boundary-only",
+      "sourceId": "public-domestic-repair-listing",
+      "addressRanges": [
+        "008A9A78"
+      ],
+      "supports": [
+        "The source appends a construction-skill recovery modification"
+      ],
+      "limits": [
+        "MOD is excluded; no modified recovery or native patch is loaded"
+      ]
+    }
+  ],
+  "domain": {
+    "singleFixedCity": true,
+    "fixedOwner": true,
+    "governor": "null or fixed {id,politics:uint8}",
+    "engineering": "fixed boolean for parent-city owner technique 24",
+    "maxFacilities": 30,
+    "facilityPhases": [
+      "complete",
+      "building",
+      "absorbing"
+    ],
+    "repairPhase": "complete",
+    "hp": "1 <= currentHP <= maxHP <= 32767",
+    "maxHpAuthority": "explicit supplied fact; not inferred from type catalog",
+    "facilityPosition": "unique axial position, distinct from city position; each coordinate integer -1000000..1000000",
+    "fieldUnits": "complete explicit snapshot at every future boundary; unit membership, forceId and positions may change; at most 128 distinct unit IDs per snapshot; shared positions allowed",
+    "hostileForceIds": "fixed distinct IDs, maximum 128; cannot include ownerForceId",
+    "calendar": "year1..9999, month1..12, day1/11/21; entire horizon must be representable",
+    "advanceLimit": [
+      1,
+      360
+    ],
+    "turn": "nonnegative safe integer and turn+advanceLimit must remain safe",
+    "turnInputsLength": "exactly advanceLimit",
+    "initialFieldUnits": null,
+    "firstRepair": "first AdvanceRepairTurn consumes turnInputs[0]; create does not repair",
+    "sourceAnswerInputsAccepted": false,
+    "phaseMeaning": "supplied repair-eligibility marker only; all legal kind/level identities accept each phase, without proving construction-state reachability"
+  },
+  "arithmetic": {
+    "base": "B=min(450,max(150,floor(9P/2)))",
+    "ordinary": "floor(3B/20)",
+    "engineering": "floor(3B/10)",
+    "floorOrder": "each branch performs its own final integer division; never floor ordinary then multiply by2",
+    "hpWriter": "actual=min(request,maxHP-currentHP); after=currentHP+actual; discarded=request-actual",
+    "enemyDistance": "max(abs(dq),abs(dr),abs(dq+dr)) <=2 around each facility",
+    "nearestHostileTie": "ASCII unit ID",
+    "facilityOrder": "ASCII facility ID",
+    "statusPriority": [
+      "not-complete",
+      "already-full",
+      "hostile-nearby",
+      "no-governor",
+      "repaired"
+    ],
+    "fullEvent": "DomesticFacilityHpFull only on positive write reaching cap; never on create or already-full skip"
+  },
+  "paperArithmeticExamples": [
+    {
+      "politics": 0,
+      "halfFloor": 0,
+      "clampedBase": 150,
+      "ordinaryRequest": 22,
+      "engineeringRequest": 45
+    },
+    {
+      "politics": 33,
+      "halfFloor": 148,
+      "clampedBase": 150,
+      "ordinaryRequest": 22,
+      "engineeringRequest": 45
+    },
+    {
+      "politics": 34,
+      "halfFloor": 153,
+      "clampedBase": 153,
+      "ordinaryRequest": 22,
+      "engineeringRequest": 45
+    },
+    {
+      "politics": 35,
+      "halfFloor": 157,
+      "clampedBase": 157,
+      "ordinaryRequest": 23,
+      "engineeringRequest": 47
+    },
+    {
+      "politics": 99,
+      "halfFloor": 445,
+      "clampedBase": 445,
+      "ordinaryRequest": 66,
+      "engineeringRequest": 133
+    },
+    {
+      "politics": 100,
+      "halfFloor": 450,
+      "clampedBase": 450,
+      "ordinaryRequest": 67,
+      "engineeringRequest": 135
+    },
+    {
+      "politics": 255,
+      "halfFloor": 1147,
+      "clampedBase": 450,
+      "ordinaryRequest": 67,
+      "engineeringRequest": 135
+    }
+  ],
+  "paperExamplesExecution": "not executed; direct integer arithmetic derivation only",
+  "catalog": {
+    "version": "standard-domestic-repair-types-v1",
+    "evidence": "existing-community-type-identities-not-native-max-hp-table",
+    "entries": [
+      {
+        "kind": "market",
+        "name": "市场",
+        "levels": [
+          {
+            "level": 1,
+            "typeId": 31
+          },
+          {
+            "level": 2,
+            "typeId": 50
+          },
+          {
+            "level": 3,
+            "typeId": 51
+          }
+        ]
+      },
+      {
+        "kind": "farm",
+        "name": "农场",
+        "levels": [
+          {
+            "level": 1,
+            "typeId": 32
+          },
+          {
+            "level": 2,
+            "typeId": 52
+          },
+          {
+            "level": 3,
+            "typeId": 53
+          }
+        ]
+      },
+      {
+        "kind": "barracks",
+        "name": "兵舍",
+        "levels": [
+          {
+            "level": 1,
+            "typeId": 33
+          },
+          {
+            "level": 2,
+            "typeId": 54
+          },
+          {
+            "level": 3,
+            "typeId": 55
+          }
+        ]
+      },
+      {
+        "kind": "forge",
+        "name": "锻冶",
+        "levels": [
+          {
+            "level": 1,
+            "typeId": 34
+          },
+          {
+            "level": 2,
+            "typeId": 56
+          },
+          {
+            "level": 3,
+            "typeId": 57
+          }
+        ]
+      },
+      {
+        "kind": "stable",
+        "name": "厩舍",
+        "levels": [
+          {
+            "level": 1,
+            "typeId": 35
+          },
+          {
+            "level": 2,
+            "typeId": 58
+          },
+          {
+            "level": 3,
+            "typeId": 59
+          }
+        ]
+      },
+      {
+        "kind": "workshop",
+        "name": "工房",
+        "levels": [
+          {
+            "level": 1,
+            "typeId": 36
+          }
+        ]
+      },
+      {
+        "kind": "shipyard",
+        "name": "造船厂",
+        "levels": [
+          {
+            "level": 1,
+            "typeId": 37
+          }
+        ]
+      },
+      {
+        "kind": "mint",
+        "name": "造币厂",
+        "levels": [
+          {
+            "level": 1,
+            "typeId": 38
+          }
+        ]
+      },
+      {
+        "kind": "granary",
+        "name": "谷仓",
+        "levels": [
+          {
+            "level": 1,
+            "typeId": 39
+          }
+        ]
+      }
+    ]
+  },
+  "policyDefinitions": {
+    "version": "domestic-repair-policies-v1",
+    "recovery": {
+      "id": "listed-domestic-governor9-clamp150450-v1",
+      "version": 1,
+      "politicsMin": 0,
+      "politicsMax": 255,
+      "baseNumerator": 9,
+      "baseDenominator": 2,
+      "baseMin": 150,
+      "baseMax": 450,
+      "recoveryNumerator": 3,
+      "ordinaryDenominator": 20,
+      "engineeringDenominator": 10,
+      "rounding": "floor-at-each-division",
+      "evidence": "public-mixed-research-listing-not-clean-stock"
+    },
+    "hostility": {
+      "id": "facility-centered-two-hex-source-comment-v1",
+      "version": 1,
+      "completeFieldUnitsRequired": true,
+      "explicitHostileForceIds": true,
+      "distance": "max(abs(dq),abs(dr),abs(dq+dr))",
+      "facilityCenteredBlockingDistanceInclusive": 2,
+      "coordinateMin": -1000000,
+      "coordinateMax": 1000000,
+      "evidence": "source-comment-derived-distance-policy",
+      "nativeHelperRecovered": false
+    },
+    "eligibility": {
+      "id": "complete-only-positive-hp-v1",
+      "version": 1,
+      "phases": [
+        "complete",
+        "building",
+        "absorbing"
+      ],
+      "repairPhase": "complete",
+      "currentHpMinimum": 1,
+      "maxHpMaximum": 32767,
+      "governorRequired": true,
+      "fixedParentCityOwnerGovernorAndEngineering": true,
+      "phaseChanges": false,
+      "productionOccupancyGate": false,
+      "facilityAtCityAllowed": false,
+      "duplicateFacilityPositionsAllowed": false
+    },
+    "writer": {
+      "id": "standalone-clamp-to-max-writer-v1",
+      "version": 1,
+      "actual": "min(requested,maxHP-currentHP)",
+      "discarded": "requested-actual",
+      "nativeWriterRecovered": false
+    },
+    "scheduler": {
+      "id": "one-ten-day-boundary-v1",
+      "version": 1,
+      "days": [
+        1,
+        11,
+        21
+      ],
+      "minYear": 1,
+      "maxYear": 9999,
+      "firstRepair": "next-boundary",
+      "inputIndex": "advancedCount-before",
+      "facilityOrder": "ASCII-id",
+      "closestHostileTieBreak": "ASCII-unit-id",
+      "globalSchedulerRecovered": false
+    },
+    "events": {
+      "id": "no-native-completion-side-effects-v1",
+      "version": 1,
+      "hpFullEvent": "DomesticFacilityHpFull",
+      "actionPointsGoldXpAndMeritModeled": false,
+      "nativeCallbacks": false,
+      "ownershipChanges": false,
+      "constructionWorkIntegration": false
+    },
+    "budget": {
+      "id": "domestic-repair-bounded-json-v1",
+      "version": 1,
+      "maxFacilities": 30,
+      "maxFieldUnits": 128,
+      "maxHostileForces": 128,
+      "maxAdvanceLimit": 360,
+      "maxAcceptedCommands": 360,
+      "maxTraceAttempts": 1080,
+      "maxCanonicalUtf8Bytes": 67108864,
+      "maxInputNodes": 4000000,
+      "maxInputDepth": 48,
+      "maxArrayLength": 4096,
+      "maxObjectKeys": 128,
+      "maxIdLength": 64
+    },
+    "persistence": {
+      "id": "domestic-repair-canonical-recompute-v1",
+      "version": 1,
+      "schemaVersion": 1,
+      "comparison": "full-policy-catalog-genesis-receipts-snapshot",
+      "digest": "sha256-canonical-json",
+      "duplicateJsonKeys": "reject",
+      "inputObjectKeyOrder": "irrelevant",
+      "inputArrayOrder": "preserved",
+      "executeOutputBudgetAtEveryAcceptedStep": true
+    }
+  },
+  "registeredPolicyProfiles": 1,
+  "alternativeWriterRegistered": false,
+  "persistence": {
+    "onlyCommand": "AdvanceRepairTurn",
+    "idempotency": "same full envelope returns prior receipt and its events with committed=false without advancing; changed envelope with same ID rejects; consumers process events only when committed=true",
+    "createExecutePreviewSaveLoadReplay": "genesis, complete fixed policies/catalog, accepted history, receipts and final snapshot are reconstructed and compared",
+    "malformedOrOverBudget": "atomic rejection without partial HP/calendar/history writes",
+    "duplicateJsonKeys": "reject",
+    "digestRole": "canonical SHA256 policy/catalog identity only; not a substitute for complete semantic reconstruction",
+    "schemaArtifact": "docs/sources/domestic-repair-lifecycle.schema.json",
+    "schemaBoundary": "structural shapes and exact policy/catalog constants; runtime cross-field constraints and arithmetic remain necessary"
+  },
+  "validation": {
+    "staticCodeAndDocumentReviewOnly": true,
+    "testsRun": false,
+    "typecheckRun": false,
+    "compileRun": false,
+    "buildRun": false,
+    "checkerRun": false,
+    "diagnosticsRun": false,
+    "productRun": false,
+    "exampleRun": false,
+    "schemaValidatorRun": false,
+    "oldTestsModified": false,
+    "historicalPassCountsApply": false,
+    "historicalFoodFailureResolved": false
+  },
+  "remainingOpen": [
+    "Clean-stock PC-PK1.1, Vanilla, console and cross-version identity",
+    "Original GBK blob acquisition and original-byte rehash",
+    "Parent-city map resolution and native validity/force/governor/attribute getters",
+    "Native enemy helper004B99B0 and original map geometry semantics",
+    "Native maximum-HP getter/table00487150 and durability writer004AE360",
+    "Native completion, notification and UI callbacks",
+    "City/port/gate base formula conflicts and complete repair lifecycle",
+    "Dam special-state repair lifecycle and FAQ scope conflict",
+    "Ten PK special domestic facilities",
+    "Native global scheduler, actual saves and cross-service combination",
+    "Construction work to combat-HP migration and external damage/phase changes"
+  ],
+  "excluded": [
+    "Appended construction-skill MOD008A9A78 and other patch substitutions",
+    "AP, gold, TP, merit, XP, reservation and officer-action side effects",
+    "Production occupancy as a repair gate",
+    "Automatic construction-work or finance integration and EndTurn",
+    "P078/P0-78 and dependent capture, ownership, extinction, native mission, return, cancellation and finalizer chains"
+  ],
+  "artifacts": [
+    {
+      "path": "data/catalogs/domestic-repair-catalog-v1.json",
+      "bytes": 2184,
+      "sha256": "a5e14b88a4774e8055a962fe5170ed5fd613235f412934ab7abf044af3a224ad"
+    },
+    {
+      "path": "data/catalogs/domestic-repair-policies-v1.json",
+      "bytes": 3042,
+      "sha256": "403e5397d426e4371fdd0fcfd7f307e8c05567b84f994dbe53315e73f4285fee"
+    },
+    {
+      "path": "docs/sources/domestic-repair-lifecycle.schema.json",
+      "bytes": 47313,
+      "sha256": "526ca105304ddfd4d8583f3cdb9fda98b90aa5bca51169e6a804e69e23b99806"
+    }
+  ]
+}
