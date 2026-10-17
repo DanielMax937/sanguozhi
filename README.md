@@ -1,3 +1,9 @@
+## 当前新增：固定驻城自然忠诚与现金褒赏（O12-A，2026-10-17）
+
+[完整规则](docs/rules/personnel-loyalty-lifecycle.md)与[API](docs/engine/personnel-loyalty-lifecycle.md)：独立固定单城普通名单，CashReward实际扣每人100金/5AP、每旬一次、内部新政策5+roll5；AdvancePersonnelTurn自行判定季度入口、仁政/关系豁免、AL>25/义理野望/dislikes三分支及人心掌握/两次loss。真实byte0..255与UI100分离，true0仍消费其候选路径draw，true>100正常下降，99+9保留108。完整policy、共享新非零xorshift流、原子幂等及genesis/receipt/snapshot保存重算。见[政策](data/catalogs/personnel-loyalty-policies-v1.json)、[来源](docs/sources/personnel-loyalty-lifecycle.json)、[未运行场景](data/scenarios/personnel-loyalty-example-v1.json)。
+
+现金5..9是明确不使用魅力/义理的新软件规则，与原作定性作用存在保真差异；旧+5/+8/+9日记已纠正为无印Sourcenext且有S/L选择偏差，不作PK分布证据。原global RNG/关系helper/writer与stock仍未证；不接登用ownership、工资/欠薪后果、俘虏或P078及所有依赖。仅O12-A有限软件服务，整个O12及原43不关闭；未新增或运行测试，未运行typecheck、编译、build、checker、诊断、schema校验、产品或示例，旧测试和历史food失败保留。
+
 ## 当前新增：已完成内政设施自动修复（O11-B，2026-10-17）
 
 [完整具体规则](docs/rules/domestic-repair-lifecycle.md)、[API](docs/engine/domestic-repair-lifecycle.md)：固定单城/owner/可空太守与工兵、最多30座标准设施原始正HP、逐旬完整敌军位置，独立计算 `B=clamp(floor(9P/2),150,450)` 与无工兵 `floor(3B/20)` / 有工兵 `floor(3B/10)`，再实际cap写入、记录弃置和首次到满事件。只支持AdvanceRepairTurn与完整genesis保存重算；[来源与政策](docs/sources/domestic-repair-lifecycle.json)、[结构schema](docs/sources/domestic-repair-lifecycle.schema.json)、[未运行场景](data/scenarios/domestic-repair-example-v1.json)。
@@ -109,12 +115,12 @@ npm run play -- --growth-fixture
 交互命令支持用成对单引号或双引号包住整个参数，例如`save "存档目录/训练 存档.json"`、`load "存档目录/训练 存档.json"`（目录需已存在）。反斜杠按字面保留，不做shell展开；引号参数后必须空白或行尾，不支持部分参数拼接。命令的缺失、空或多余参数及未闭合引号会在执行前拒绝，空白行忽略。读档失败保留当前会话；输入结束会处理已收到的命令并等待存取档完成，无需额外输入`quit`。
 
 - [探索发现人才基准数值核](docs/rules/search-talent-baseline.md)：005D1DF0公开listing重构；已过滤count0先返回0，眼力完整EAX非零返回100，否则min(count,5)、政治AL和同异州整数式，允许205；非最终概率，无native/RNG/探索命令集成，搜金/宝物仍open。本批仅本地候选
-- [相性距离独立数值核](docs/rules/affinity-distance.md)：教程37条助记符的 `tutorial-source-projection`，双uint8已解析输入；`min(abs(a-b),150-abs(a-b))` 保留signed32、EAX位模式和AL，0/151返回-1与AL255，不取模或夹零。无opcode bytes，不认证stock/S1，不接自然忠诚或登用caller；本批全新重建，验收另记
+- [相性距离独立数值核](docs/rules/affinity-distance.md)：教程37条助记符的 `tutorial-source-projection`，双uint8已解析输入；`min(abs(a-b),150-abs(a-b))` 保留signed32、EAX位模式和AL，0/151返回-1与AL255，不取模或夹零。无opcode bytes，不认证stock/S1；该纯核原交付不接自然忠诚或登用caller，新O12-A另以显式software adapter复用，不改变旧证据等级；原批次验收记录不验证新模块
 - [生产数量显式binary32限定核](docs/rules/production-quantity.md)：原88条/254字节与两套MOD隔离；signed32类型早返0/1，0..4精确三槽getter AL与完整skill EAX、显式倍率bitword，仅difficulty2才观察city virtual。先技能倍增、倍率后向零转换、再超级倍增；无9000cap，不以返回量代替实际库存增量。PR #51已合并交付，原发布前冻结文字不代表尚未交付
 - [生产价格捕获输入整数核](docs/rules/production-price.md)：原45条/113字节，另列MOD6条/14字节独立；uint16已保存原价与特产helper完整uint32 EAX输入，仅AL非零才floor(8p/10)，EAX256不折、257折。无最低1，不捏造价格表/ID/helper/扣钱库存writer/命令/调度；PR #50已合并交付，其原发布前冻结文字不代表尚未交付
 - [巡查治安增量限定数值核](docs/rules/patrol-security-gain.md)：稳定已解析1～3个uint8统率（首槽必有效）、城市byte与压力helper完整uint32 EAX；先总和/28+2、非零半减、严格>100上clip，允许负delta；原79条/204字节与另列MOD7条/21字节隔离。PR #49已交付；getter/helper/资格/扣费/writer/调度/stock及技巧点串接仍缺，不接入训练沙盒
 - [内政建设速度限定数值核](docs/rules/domestic-construction-rate.md)：公开005BB1D0..2AA非星号路径，稳定已解析uint8政治与uint16设施耐久；最高政治+总和一半与除9耐久下界取高；完整工期/writer/进度/调度/getter/stock仍缺，不接入训练沙盒
-- [自然忠诚候选静态纠错](docs/rules/natural-loyalty-candidate-boundary.md)：相性返回AL严格>25、低义理高野望、或004889E0非零三选一；俘虏绕过这组三条，相性教程投影另见上项，但教程与caller同源、native解析/其他callee/writer/RNG/stock仍缺，不新增忠诚runtime
+- [自然忠诚候选静态纠错](docs/rules/natural-loyalty-candidate-boundary.md)：相性返回AL严格>25、低义理高野望、或004889E0非零三选一；俘虏绕过这组三条，相性教程投影另见上项，但教程与caller同源、native解析/其他callee/writer/RNG/stock仍缺。该历史静态批次没有新增忠诚runtime；新O12-A有限软件执行见顶部，不能提升旧证据等级
 - [PK特技培育S1限定资格核](docs/rules/pk-skill-training-s1.md)：已进入类别2后的native signed32标量查询；有效相同目标不合格，另一已有特技不阻挡，越界目标保留helper零/caller一；不写状态、不映射攻略ID、不实现完成/费用/调度
 - [PK五维培育限定数值核](docs/rules/pk-stat-training-s1.md)：S1资格XP<2000/成长低于目标，完成min(5,差)×100累计顶3000；两个纯函数分层，负差显式拒绝，完整命令/时长/使用数/隐藏RNG仍缺
 - [PS2史实事件独立静态资料](docs/rules/ps2-historical-event-source-data.md)：64观测/64独立资料ID、741来源节点；59项条件与结果（含2仅接续）、4项仅条件、1项外链参照；24来源限制和PK归属未知保留，不执行事件

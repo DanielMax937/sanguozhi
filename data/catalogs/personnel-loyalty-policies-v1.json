@@ -1,0 +1,153 @@
+{
+  "scope": {
+    "id": "fixed-one-city-ordinary-roster-v1",
+    "maximumOfficers": 80,
+    "membershipMutable": false,
+    "rulerMutable": false,
+    "locationMutable": false,
+    "capturesAllowed": false,
+    "salaryConsequencesAllowed": false
+  },
+  "calendar": {
+    "id": "three-xun-quarter-entry-v1",
+    "days": [
+      1,
+      11,
+      21
+    ],
+    "quarterMonths": [
+      1,
+      4,
+      7,
+      10
+    ],
+    "initialDateAlreadySettled": true,
+    "maximumAdvances": 360,
+    "apRegeneration": 0,
+    "goldRegeneration": 0
+  },
+  "selection": {
+    "id": "explicit-local-relation-graph-v1",
+    "targetOrder": "ascii-code-unit-id-ascending",
+    "likesDirectional": true,
+    "dislikesDirectional": true,
+    "spouseSymmetric": true,
+    "swornSiblingSymmetric": true,
+    "parentChildExemptionBothDirections": true,
+    "benevolenceDerivedFromSameCityRulerAndRoster": true
+  },
+  "affinityAdapter": {
+    "id": "tutorial-u8-to-synthetic-candidate-v1",
+    "coreProfile": "affinity-distance-tutorial-u8-v1",
+    "inputRange": [
+      0,
+      255
+    ],
+    "consumedReturn": "returnedAl",
+    "strictGreaterThan": 25,
+    "nativeCalleeProvenanceCertified": false
+  },
+  "ordinaryCandidate": {
+    "id": "source-shaped-ordinary-three-or-v1",
+    "giriMaximum": 1,
+    "ambitionMinimum": 3,
+    "thirdBranch": "target-dislikes-ruler-map-to-nonzero",
+    "inputGiriRange": [
+      0,
+      4
+    ],
+    "inputAmbitionRange": [
+      0,
+      4
+    ]
+  },
+  "naturalLoss": {
+    "id": "source-shaped-normal-trait-loss-v1",
+    "controlBound": 3,
+    "controlSkipMinimum": 1,
+    "firstLossBound": 3,
+    "secondLossBound": 3,
+    "tokenPlatformAddition": 2,
+    "lordGiriEquals": 0,
+    "lordAmbitionEqualsWithinNormalDomain": 4,
+    "lordAddition": "floor((4-targetGiri)/2)",
+    "prisonerBranchSupported": false,
+    "globalRngCertified": false
+  },
+  "cashReward": {
+    "id": "synthetic-cash-uniform5to9-v1",
+    "goldPerTarget": 100,
+    "apPerTarget": 5,
+    "minimumGain": 5,
+    "outcomeCount": 5,
+    "drawsPerTarget": 1,
+    "usesRulerCharisma": false,
+    "usesTargetGiri": false,
+    "notEstimatedFromObservedSamples": true,
+    "knownFidelityDivergence": "Original qualitative charm/loyalty-trait effects are not modeled by this synthetic gain policy",
+    "requiresDisplayedLoyaltyBelow": 100,
+    "maximumPerTargetPerTurn": 1,
+    "multiSelectFailureMode": "all-or-nothing",
+    "executingOfficerRequired": false,
+    "actedCost": false,
+    "meritReward": 0,
+    "techniquePointReward": 0
+  },
+  "writer": {
+    "id": "saturating-loyalty-byte-v1",
+    "minimum": 0,
+    "maximum": 255,
+    "displayMaximum": 100,
+    "loyaltyZeroTriggersMembershipChange": false,
+    "nativeWriterCertified": false
+  },
+  "rng": {
+    "id": "xorshift32-nonzero-mod35-v1",
+    "minimumSeed": 1,
+    "maximumSeed": 4294967295,
+    "xorShiftSteps": [
+      [
+        "left",
+        13
+      ],
+      [
+        "unsigned-right",
+        17
+      ],
+      [
+        "left",
+        5
+      ]
+    ],
+    "normalizeAfterEachStep": "uint32",
+    "boundedResult": "(state-1)%bound",
+    "supportedBounds": [
+      3,
+      5
+    ],
+    "drawsPerCall": 1,
+    "stream": "session-local-shared-by-cash-and-natural-only",
+    "nativeRandomStreamEquivalent": false
+  },
+  "transaction": {
+    "id": "immutable-whole-command-ledger-v1",
+    "successfulRevisionIncrement": 1,
+    "failureChangesState": false,
+    "sameIdSameEnvelope": "return-original-receipt-with-current-state",
+    "sameIdDifferentEnvelope": "reject",
+    "failedIdsReserved": false,
+    "previewMutates": false
+  },
+  "persistence": {
+    "id": "full-policy-seed-history-recompute-v1",
+    "maximumAcceptedCommands": 4096,
+    "maximumCanonicalSaveUtf8Bytes": 8388608,
+    "maximumScenarioUtf8Bytes": 524288,
+    "maximumJsonDepth": 32,
+    "maximumJsonNodes": 262144,
+    "loadTrustsFinalSnapshot": false,
+    "loadComparesEachFullReceipt": true,
+    "validateEveryIntermediateOutputBudget": true,
+    "unknownProfile": "reject"
+  }
+}

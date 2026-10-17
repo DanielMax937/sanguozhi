@@ -137,7 +137,7 @@ RNG range/distribution = ?
 
 ## 6. 现有实测只负责约束结果空间
 
-原作观测已有：
+2026-10-17版本与引用纠正：旧列以下增量来自无印Sourcenext日记及同作者另一篇搜索索引，不能称PK分布样本：
 
 ```text
 +5
@@ -145,9 +145,11 @@ RNG range/distribution = ?
 +9
 ```
 
-并且 S/L 可改变结果、君主魅力会影响上升量。
+日记[#1](https://note.com/juicy_fox4269/n/nf69a4b2b4dae)明确“無印ソースネクスト版”，记+8/+9；[#3](https://note.com/juicy_fox4269/n/n106990f3f5b6)索引记+5。作者反复S/L选高值，有选择偏差。旧周泰85→94本次未重新定位，不作新增核实。
 
-所以可以继续排除：
+独立的[PK玩家99→108观察](https://www.ptt.cc/bbs/Koei/M.1776854540.A.47B.html)只用于隐藏忠诚能越过UI100，不恢复PK随机概率或魅力/义理系数。[Wiki能力值页](https://w.atwiki.jp/sangokushi11/pages/1598.html)支持魅力作用的定性说明；旧列[pages/79](https://w.atwiki.jp/sangokushi11/pages/79.html)现为“各種経験値”，此次未找到忠诚/褒赏匹配，不能拿来支持增量，不推断其全部历史版本。
+
+这些版本分开的观察不支持将下述数值宣称为通用原作公式：
 
 ```text
 固定 +10
@@ -155,7 +157,9 @@ RNG range/distribution = ?
 现代复刻“保底11再加随机”
 ```
 
-但不能据此拟合一个看似漂亮的闭式。
+同样不能据此拟合PK闭式或均匀5..9分布；原gain、RNG、魅力/义理路径仍open。旧来源JSON不改写。
+
+[O12-A独立规则](personnel-loyalty-lifecycle.md)另定义 `synthetic-cash-uniform5to9-v1`：服务内部5+roll5，明确不使用魅力/义理，有已知保真差异。它使用新共享非零xorshift与新饱和byte writer，不证明原global RNG或原writer顺序，不关闭整个O12/原43。代码和规则仅静态新增，未运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例。
 
 ## 7. 建议实现接口
 

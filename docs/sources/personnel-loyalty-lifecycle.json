@@ -1,0 +1,527 @@
+{
+  "schemaVersion": 1,
+  "profile": "standalone-personnel-loyalty-v1",
+  "title": "Fixed-city ordinary personnel loyalty lifecycle: source boundaries and software policies",
+  "version": "1",
+  "date": "2026-10-17",
+  "delivery": {
+    "softwarePolicyImplemented": true,
+    "implementation": "packages/engine/src/personnel-loyalty-lifecycle.ts",
+    "policyCatalog": "data/catalogs/personnel-loyalty-policies-v1.json",
+    "interchangeSchema": "docs/sources/personnel-loyalty-lifecycle.schema.json",
+    "commands": [
+      "CashReward",
+      "AdvancePersonnelTurn"
+    ],
+    "publicFunctions": [
+      "createPersonnelLoyaltyState",
+      "inspectPersonnelLoyalty",
+      "previewPersonnelLoyaltyCommand",
+      "executePersonnelLoyaltyCommand",
+      "savePersonnelLoyaltyState",
+      "loadPersonnelLoyaltyState",
+      "replayPersonnelLoyaltyCommands"
+    ],
+    "qualification": "Implemented standalone software policies, not authenticated original-executable mechanics or native personnel transactions. This manifest and its schema make no execution-verification claim."
+  },
+  "sourceBoundary": {
+    "sourceLevel": "public-caller-shape-and-explicit-standalone-software-policies",
+    "naturalCallerStockCertified": false,
+    "affinityCallerSameSourceCertified": false,
+    "relationSemantics": "explicit-local-relation-graph-v1",
+    "relationNativeHelpersCertified": false,
+    "cashGain": "synthetic-cash-uniform5to9-v1",
+    "cashSamplesArePkDistribution": false,
+    "cashUsesRulerCharisma": false,
+    "cashUsesTargetGiri": false,
+    "cashFidelityDivergence": "Original qualitative charm/loyalty-trait effects are not modeled by this synthetic gain policy",
+    "randomStream": "session-local-shared-by-cash-and-natural-only",
+    "nativeRandomStreamEquivalent": false,
+    "nativeWriterCertified": false,
+    "nativePersonnelMutation": false,
+    "zeroLoyaltyChangesMembership": false,
+    "original43GroupsReduced": false,
+    "tokenPlatformAdditionBasis": "selected-listing-modification-marked-0058E759",
+    "tokenPlatformStockCertified": false
+  },
+  "policies": {
+    "scope": {
+      "id": "fixed-one-city-ordinary-roster-v1",
+      "maximumOfficers": 80,
+      "membershipMutable": false,
+      "rulerMutable": false,
+      "locationMutable": false,
+      "capturesAllowed": false,
+      "salaryConsequencesAllowed": false
+    },
+    "calendar": {
+      "id": "three-xun-quarter-entry-v1",
+      "days": [
+        1,
+        11,
+        21
+      ],
+      "quarterMonths": [
+        1,
+        4,
+        7,
+        10
+      ],
+      "initialDateAlreadySettled": true,
+      "maximumAdvances": 360,
+      "apRegeneration": 0,
+      "goldRegeneration": 0
+    },
+    "selection": {
+      "id": "explicit-local-relation-graph-v1",
+      "targetOrder": "ascii-code-unit-id-ascending",
+      "likesDirectional": true,
+      "dislikesDirectional": true,
+      "spouseSymmetric": true,
+      "swornSiblingSymmetric": true,
+      "parentChildExemptionBothDirections": true,
+      "benevolenceDerivedFromSameCityRulerAndRoster": true
+    },
+    "affinityAdapter": {
+      "id": "tutorial-u8-to-synthetic-candidate-v1",
+      "coreProfile": "affinity-distance-tutorial-u8-v1",
+      "inputRange": [
+        0,
+        255
+      ],
+      "consumedReturn": "returnedAl",
+      "strictGreaterThan": 25,
+      "nativeCalleeProvenanceCertified": false
+    },
+    "ordinaryCandidate": {
+      "id": "source-shaped-ordinary-three-or-v1",
+      "giriMaximum": 1,
+      "ambitionMinimum": 3,
+      "thirdBranch": "target-dislikes-ruler-map-to-nonzero",
+      "inputGiriRange": [
+        0,
+        4
+      ],
+      "inputAmbitionRange": [
+        0,
+        4
+      ]
+    },
+    "naturalLoss": {
+      "id": "source-shaped-normal-trait-loss-v1",
+      "controlBound": 3,
+      "controlSkipMinimum": 1,
+      "firstLossBound": 3,
+      "secondLossBound": 3,
+      "tokenPlatformAddition": 2,
+      "lordGiriEquals": 0,
+      "lordAmbitionEqualsWithinNormalDomain": 4,
+      "lordAddition": "floor((4-targetGiri)/2)",
+      "prisonerBranchSupported": false,
+      "globalRngCertified": false
+    },
+    "cashReward": {
+      "id": "synthetic-cash-uniform5to9-v1",
+      "goldPerTarget": 100,
+      "apPerTarget": 5,
+      "minimumGain": 5,
+      "outcomeCount": 5,
+      "drawsPerTarget": 1,
+      "usesRulerCharisma": false,
+      "usesTargetGiri": false,
+      "notEstimatedFromObservedSamples": true,
+      "knownFidelityDivergence": "Original qualitative charm/loyalty-trait effects are not modeled by this synthetic gain policy",
+      "requiresDisplayedLoyaltyBelow": 100,
+      "maximumPerTargetPerTurn": 1,
+      "multiSelectFailureMode": "all-or-nothing",
+      "executingOfficerRequired": false,
+      "actedCost": false,
+      "meritReward": 0,
+      "techniquePointReward": 0
+    },
+    "writer": {
+      "id": "saturating-loyalty-byte-v1",
+      "minimum": 0,
+      "maximum": 255,
+      "displayMaximum": 100,
+      "loyaltyZeroTriggersMembershipChange": false,
+      "nativeWriterCertified": false
+    },
+    "rng": {
+      "id": "xorshift32-nonzero-mod35-v1",
+      "minimumSeed": 1,
+      "maximumSeed": 4294967295,
+      "xorShiftSteps": [
+        [
+          "left",
+          13
+        ],
+        [
+          "unsigned-right",
+          17
+        ],
+        [
+          "left",
+          5
+        ]
+      ],
+      "normalizeAfterEachStep": "uint32",
+      "boundedResult": "(state-1)%bound",
+      "supportedBounds": [
+        3,
+        5
+      ],
+      "drawsPerCall": 1,
+      "stream": "session-local-shared-by-cash-and-natural-only",
+      "nativeRandomStreamEquivalent": false
+    },
+    "transaction": {
+      "id": "immutable-whole-command-ledger-v1",
+      "successfulRevisionIncrement": 1,
+      "failureChangesState": false,
+      "sameIdSameEnvelope": "return-original-receipt-with-current-state",
+      "sameIdDifferentEnvelope": "reject",
+      "failedIdsReserved": false,
+      "previewMutates": false
+    },
+    "persistence": {
+      "id": "full-policy-seed-history-recompute-v1",
+      "maximumAcceptedCommands": 4096,
+      "maximumCanonicalSaveUtf8Bytes": 8388608,
+      "maximumScenarioUtf8Bytes": 524288,
+      "maximumJsonDepth": 32,
+      "maximumJsonNodes": 262144,
+      "loadTrustsFinalSnapshot": false,
+      "loadComparesEachFullReceipt": true,
+      "validateEveryIntermediateOutputBudget": true,
+      "unknownProfile": "reject"
+    }
+  },
+  "policyDigest": {
+    "algorithm": "SHA-256",
+    "encoding": "UTF-8",
+    "canonicalization": "JSON object keys sorted by code unit at every level; array order retained; no whitespace",
+    "value": "dcc467236cb6f14c30390fbcd8d33323a1a79c9bd491bcae4f78242f36a23fb1",
+    "purpose": "Policy identity index only; runtime compares all policy values and recomputes all accepted commands and receipts."
+  },
+  "scope": {
+    "forceCount": 1,
+    "cityCount": 1,
+    "fixedRuler": true,
+    "maximumOrdinaryOfficers": 80,
+    "personnelKind": "ordinary-fixed-resident",
+    "membershipMutable": false,
+    "locationMutable": false,
+    "closedBudget": "Gold and AP belong to this standalone ledger. They are not synchronized with other services and do not regenerate on advance.",
+    "initialDateAlreadySettled": true,
+    "maximumAdvances": 360,
+    "noInitialLoyaltyFormula": "Scenario trueLoyalty is supplied initial data; it is not a recovered post-recruitment loyalty formula.",
+    "zeroLoyalty": "A zero loyalty byte remains in this fixed roster and triggers no membership or world consequence."
+  },
+  "sources": [
+    {
+      "id": "natural-loyalty-public-caller",
+      "kind": "pinned-public-source-text",
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/Func-自动06-武将忠诚下降.txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-自动06-武将忠诚下降.txt",
+      "gitBlobSha1": "0ce79d11923901fdfb74f99ddf281f744b3d9880",
+      "snapshotEncoding": "UTF-8",
+      "snapshotBytes": 23159,
+      "snapshotSha256": "1ba952ffec7c91de3cacc991c854c412628f39e6f772a6a0a5368fcf6be8c36c",
+      "versionAttribution": "Public annotated caller text; an authenticated clean-stock executable and edition match are not established.",
+      "supports": [
+        "Ordinary seasonal-entry filtering and exemption-before-candidate short circuit",
+        "Unsigned AL greater than 25, low-giri/high-ambition, then nonzero full-EAX candidate branches",
+        "Human-heart-control bound-three branch before two bound-three loss calls",
+        "Selected listing token-platform +2 and normal-trait lord addition; not authenticated stock behavior"
+      ],
+      "sourceSeparation": "Only the selected main listing shape informs this software policy; it is already modification-annotated at 0058E759. The two MOD variants appended to the source are kept separate and are not combined with the selected main listing.",
+      "limitations": [
+        "No authenticated opcode bytes or clean-stock executable identity",
+        "Relationship helper bodies remain unresolved",
+        "Affinity tutorial and this caller are not certified as the same binary/version",
+        "Original random generator, global consumption order and final loyalty writer remain unresolved",
+        "At 0058E759 the token-platform +2 line is explicitly annotated 【修改】符节台附加忠诚下降值. This profile adopts that selected-listing +2 as a software policy, not proof that stock ordinary residents receive it."
+      ]
+    },
+    {
+      "id": "affinity-tutorial-u8",
+      "kind": "pinned-tutorial-numerical-projection",
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "SireCustomizedPackageDev/README.md",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/SireCustomizedPackageDev/README.md",
+      "gitBlobSha1": "82420492d65150f217effd8cb6b93febdf1c3c2d",
+      "snapshotEncoding": "UTF-8",
+      "snapshotBytes": 33369,
+      "snapshotSha256": "d5e496619ce21736861f796223523e3897591a2b3374e482aa0505b03606acb3",
+      "profile": "affinity-distance-tutorial-u8-v1",
+      "license": {
+        "spdx": "Apache-2.0",
+        "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE",
+        "gitBlobSha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      },
+      "supports": "Existing pure numerical kernel preserves unsigned-byte inputs and signed32/EAX/AL outputs.",
+      "limitations": "Reusing this kernel in a new software caller does not establish original caller provenance. Embedded affinity evidence remains unchanged, including its original integration flags."
+    },
+    {
+      "id": "official-pk-cash-reward-manual",
+      "kind": "official-manual-indexed-excerpt",
+      "versionAttribution": "Romance of the Three Kingdoms XI with Power Up Kit (PC-PK), official Steam manual resource",
+      "url": "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf?t=1516151052",
+      "supports": [
+        "100 gold per target",
+        "5 action points per target",
+        "No executing officer required",
+        "Immediate action",
+        "Multiple targets in the same city",
+        "At most one reward per target per turn",
+        "Displayed loyalty 100 is ineligible",
+        "Personnel serving in units are ineligible"
+      ],
+      "coverage": "Indexed official reward passage only. No verified page number, page image or downloaded PDF hash is asserted.",
+      "page": null,
+      "snapshotSha256": null,
+      "limitations": "The complete 47,138,551-byte PDF is outside the available excerpt evidence. The passage does not establish the exact loyalty-gain formula or distribution."
+    },
+    {
+      "id": "sourcenext-diary-1",
+      "kind": "first-person-player-observation",
+      "author": "juicy_fox4269",
+      "date": "2025-08-06",
+      "url": "https://note.com/juicy_fox4269/n/nf69a4b2b4dae",
+      "versionAttribution": "Vanilla Sourcenext edition (無印ソースネクスト版), explicitly not PK",
+      "observations": [
+        "Chen Lan: 82 to 90 (+8)",
+        "Chen Lan: 90 to 98 (+8)",
+        "Xu You: 87 to 96 (+9)"
+      ],
+      "selectionBias": "The author repeatedly saved and reloaded to choose larger gains. These are selected outcomes, not unbiased frequency samples.",
+      "supports": "These outcomes and save/reload-dependent variation were reported for this named edition.",
+      "doesNotSupport": [
+        "A PK gain distribution",
+        "Equal likelihood of 5 through 9",
+        "Charisma or giri coefficients",
+        "Cross-version equivalence"
+      ]
+    },
+    {
+      "id": "sourcenext-diary-3",
+      "kind": "player-diary-indexed-excerpt",
+      "author": "juicy_fox4269",
+      "url": "https://note.com/juicy_fox4269/n/n106990f3f5b6",
+      "versionAttribution": "Same vanilla Sourcenext diary series; not PK",
+      "observations": [
+        "Han Hao: 88 to 93 (+5)"
+      ],
+      "coverage": "Indexed passage; no complete unbiased run or probability sample.",
+      "limitations": "A previously cited Zhou Tai 85 to 94 observation is not included as independently located evidence here."
+    },
+    {
+      "id": "pk-hidden-loyalty-player-observation",
+      "kind": "first-person-player-editor-observation",
+      "date": "2026-04-22",
+      "url": "https://www.ptt.cc/bbs/Koei/M.1776854540.A.47B.html",
+      "publicMirror": "https://www.pttweb.cc/bbs/Koei/M.1776854540.A.47B",
+      "versionAttribution": "Author reports PK on super difficulty.",
+      "observations": [
+        "The author reports an editor-observed true loyalty change from 99 to 108."
+      ],
+      "supports": "True loyalty may exceed the UI display cap of 100.",
+      "limitations": "Player testimony, not authenticated stock memory capture. It does not establish gain probabilities, coefficients, edition equivalence or other personnel transactions."
+    },
+    {
+      "id": "wiki-charisma-qualitative",
+      "kind": "secondary-wiki-qualitative-claim",
+      "updated": "2024-04-25",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/1598.html",
+      "supports": "The ability-value page qualitatively says charisma affects loyalty gained from rewards.",
+      "limitations": "No closed cash-gain formula, random distribution or giri coefficient is supplied. It does not justify fitting coefficients from the diary outcomes."
+    },
+    {
+      "id": "wiki-79-citation-correction",
+      "kind": "source-relevance-correction",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/79.html",
+      "currentTitle": "各種経験値",
+      "finding": "The current page has no located match for 褒賞 or 忠誠; it cannot substitute for specific cash-gain observation sources.",
+      "limitations": "This is a statement about the current page evidence, not every historical revision."
+    }
+  ],
+  "corrections": [
+    {
+      "topic": "Version attribution",
+      "correction": "The +5/+8/+9 diary observations belong to vanilla Sourcenext. They must not be labeled as a PC-PK probability sample."
+    },
+    {
+      "topic": "Selection bias",
+      "correction": "Save/reload selection for larger gains prevents frequency inference. Five equally spaced synthetic outcomes are an explicit software choice, not an estimate from those examples."
+    },
+    {
+      "topic": "Original qualitative trait effects",
+      "correction": "The synthetic cash rule ignores ruler charisma and target giri. That is a known fidelity divergence; no replacement coefficient is invented."
+    },
+    {
+      "topic": "True versus displayed loyalty",
+      "correction": "Persist and mutate the true 0..255 byte. Display only min(trueLoyalty,100). A successful reward can change 99 to 108; an existing displayed 100 is ineligible."
+    },
+    {
+      "topic": "Caller return width",
+      "correction": "The new adapter consumes returnedAl > 25 without modulo-150 normalization. It does not compare signed32 or full EAX for this branch. The third candidate branch is a local graph mapping to synthetic full EAX 0 or 1."
+    },
+    {
+      "topic": "Lord ambition comparison",
+      "correction": "Original signed ambition >=4 is represented by ===4 only within the explicitly supported 0..4 trait domain; no full-domain equivalence is claimed."
+    },
+    {
+      "topic": "Existing evidence",
+      "correction": "New software integration does not change existing affinity, natural-candidate or nonnatural-loyalty evidence records, and does not close or reduce the original 43 evidence groups."
+    }
+  ],
+  "softwareSemantics": {
+    "cash": {
+      "cost": "100*N gold and 5*N AP",
+      "qualification": "Every target exists in the fixed ordinary roster, has displayed loyalty below 100 and has not been praised in the current turn. Any failure rejects the whole selection before random draws.",
+      "targetOrder": "ASCII code-unit ID ascending",
+      "gain": "5 + nextBounded(5), exactly one draw per target",
+      "requestedGainRange": [
+        5,
+        9
+      ],
+      "writer": "min(255,max(0,trueBefore+gain))",
+      "perTurn": "lastPraisedTurn becomes the current turn",
+      "charismaUsed": false,
+      "targetGiriUsed": false,
+      "provenance": "Explicit new synthetic policy, not a recovered PK formula."
+    },
+    "natural": {
+      "calendar": "Advance 1 -> 11 -> 21 -> next month 1; run natural loyalty only when entering January, April, July or October 1.",
+      "candidateOrder": [
+        "Same-city ruler/roster benevolent-governance exemption",
+        "Officer likes ruler, spouse, sworn sibling, or either parent-child direction exemption",
+        "Existing uint8 affinity kernel returnedAl > 25",
+        "Officer giri <= 1 and ambition >= 3",
+        "Officer-directed dislikes-ruler graph edge mapped to nonzero synthetic EAX"
+      ],
+      "selectionLimit": "Relation interpretation, ordered roster and tutorial-to-caller adapter are standalone software policies, not recovered native helpers.",
+      "control": "For a candidate with human-heart-control, nextBounded(3) >= 1 protects; no loss calls follow protection.",
+      "loss": "nextBounded(3) + (tokenPlatform ? 2 : 0) + (ruler.giri==0 && ruler.ambition==4 ? floor((4-officer.giri)/2) : 0) + nextBounded(3)",
+      "lossRange": [
+        0,
+        8
+      ],
+      "writer": "max(0,trueBefore-requestedLoss)",
+      "zeroAndAbove100": "Candidates at true loyalty 0 still consume their full selected draw path. Values above 100 are reduced as true bytes and may still display 100.",
+      "nonCandidate": "Exemptions and failed candidate gates consume no natural RNG. Token-platform presence cannot create a candidate.",
+      "tokenPlatformBasis": "Selected-listing software policy: 0058E759 +2 bears the author annotation 【修改】符节台附加忠诚下降值. It is not certified stock behavior; the two appended MOD variants remain separate."
+    },
+    "rng": {
+      "id": "xorshift32-nonzero-mod35-v1",
+      "seedRange": [
+        1,
+        4294967295
+      ],
+      "transition": [
+        "x = uint32(x xor (x << 13))",
+        "x = uint32(x xor (x >>> 17))",
+        "x = uint32(x xor (x << 5))"
+      ],
+      "boundedValue": "(x-1) % bound",
+      "supportedBounds": [
+        3,
+        5
+      ],
+      "stream": "Cash and natural commands share one persistent session-local stream. Other services, existing recruitment rolls and original global random streams do not consume it.",
+      "drawRecord": [
+        "drawIndex",
+        "label",
+        "targetId",
+        "bound",
+        "beforeState",
+        "afterState",
+        "value"
+      ],
+      "distributionQualification": "The complete nonzero xorshift32 cycle has 2^32-1 states, divisible by 3 and 5, so full-cycle bucket counts balance. This does not certify finite-sequence independence, seed quality, or any original-game distribution.",
+      "sourceProbabilityQualification": "A two-thirds control skip and triangular two-roll illustration assume independent uniform draws; they are not authenticated original random-stream probabilities."
+    },
+    "transactions": {
+      "atomicity": "Validate all targets, resources, revision and complete output budgets before accepting the detached result. A failure changes no state and reserves no ID.",
+      "idempotence": "Same ID and canonical envelope returns the original receipt with current state. Same ID and different canonical envelope rejects.",
+      "preview": "Uses the same detached derivation, command output budget and save-result budget gates, plus a budget for its own result; consumes no persistent random state and does not reserve the ID.",
+      "canonicalization": "Officer IDs and cash targets sort by code unit; relation edges are sorted, and symmetric pairs are normalized before comparison."
+    },
+    "persistence": {
+      "contents": "Full canonical initial scenario, genesis snapshot, complete policy values and digest, accepted envelopes and receipts, and final snapshot.",
+      "authority": "Runtime replays from the initial scenario and seed, recomputes every accepted command, compares complete receipts and final snapshot, and enforces every intermediate command and save-result output budget. Supplied snapshots and digests are never state authority.",
+      "schemaRole": "The JSON Schema describes closed JSON structures and constants. It is not a proof of reachable state, source fidelity, deterministic execution, or runtime conformance.",
+      "traceRole": "Expected outcomes and expectedFinalSnapshot are optional assertions represented by null when omitted; they never provide selected personnel, rolls, gain/loss or state mutations.",
+      "limits": {
+        "acceptedCommands": 4096,
+        "traceAttempts": 4096,
+        "canonicalOutputUtf8Bytes": 8388608,
+        "scenarioUtf8Bytes": 524288,
+        "jsonDepth": 32,
+        "jsonNodes": 262144,
+        "arrayEntries": 8192
+      },
+      "budgetQualification": "The 8 MiB limit includes canonical serialization of complete result wrappers. In particular, SaveResult {ok:true,json:canonical(state)} is budgeted after the saved JSON string is escaped inside the wrapper. Creation and each successful detached command check this save-result budget before acceptance; preview checks its own result too. Individual maxima share the byte, node and depth limits and are not promised to be simultaneously attainable."
+    }
+  },
+  "runtimeOnlyInvariants": [
+    "Reject accessors, symbols, hidden data, custom prototypes, sparse arrays, cycles, undefined, nonfinite numbers, fractions and negative zero before domain processing.",
+    "Check ID membership and uniqueness, fixed force/city/ruler links, no self-relations, undirected pair normalization, one spouse per person, at most two parents per child and an acyclic parent-child graph.",
+    "Check the initial advance horizon cannot cross year 9999; synchronize turn, advancedCount and dates by actual accepted commands.",
+    "Recompute policy digest, true/display loyalty, trait and relation short circuits, costs, random transitions, draw labels/order, praise flags and all before/after values.",
+    "Require canonical genesis and accepted envelopes, unique accepted IDs, correct revisions, exact full receipts and exact final snapshot.",
+    "Enforce total UTF-8, node, depth, scenario and history budgets; a structural schema match does not establish any of these semantic properties."
+  ],
+  "originalMechanismEvidenceDebt": [
+    "Authenticated clean-stock executable identity and same-version opcode evidence for the caller, affinity callee and native writer",
+    "Native relationship helper semantics and ABI, including the third candidate branch",
+    "Original RNG algorithm, seed/state and global call consumption order",
+    "Exact original cash gain formula and any charisma/giri coefficients or distributions",
+    "Cross-version equivalence among vanilla Sourcenext, PC-PK and console versions",
+    "Original final loyalty writer and world-level consequences outside a fixed roster",
+    "All existing original-mechanism evidence groups remain open unless independently closed by their own evidence"
+  ],
+  "unsupported": [
+    "native-capture",
+    "ownership-changes",
+    "force-extinction",
+    "ruler-succession",
+    "return",
+    "mission",
+    "relocation",
+    "native-finalizers",
+    "recruitment-membership-commit",
+    "prisoners",
+    "salary-consequences",
+    "salary-or-account-synchronization",
+    "rumors",
+    "treasures",
+    "death-or-illness",
+    "office-assignment",
+    "units",
+    "ports-or-gates",
+    "multi-city",
+    "global-turn-scheduling",
+    "native-saves"
+  ],
+  "nonGoals": "No ownership transaction, unit roster, prisoner or salary consequence, rumor, treasure, membership commit, native save or global world scheduler is provided by this profile.",
+  "sourceArtifacts": [
+    {
+      "path": "packages/engine/src/personnel-loyalty-lifecycle.ts",
+      "bytes": 40881,
+      "sha256": "2f556a90d7566fca1c76168a78c8175cc4978d1d6db48bd7b99d8b1e7fd4c402",
+      "meaning": "Source artifact identity, not execution or original-mechanism certification"
+    },
+    {
+      "path": "data/catalogs/personnel-loyalty-policies-v1.json",
+      "bytes": 4007,
+      "sha256": "0c7fc9138b3fee053ef6f51ecaa2d0f0a2c1064b09f5bc1d96f75e9330de9293",
+      "meaning": "Source artifact identity, not execution or original-mechanism certification"
+    }
+  ]
+}
