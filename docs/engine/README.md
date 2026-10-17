@@ -36,3 +36,7 @@
 - [普通外交独立服务](ordinary-diplomacy-service.md)：固定PK经验profile、Gift/Alliance/Ceasefire/单旬、金/AP/关系/期限、全量policy与genesis重放；[完整规则](../rules/ordinary-diplomacy-service.md)。危险失败不提交，不应用奖励，未运行或测试
 
 - [三方针普通单挑独立session](ordinary-duel-session-v1.md)：create/inspect/preview/execute/save/load/replay，原始draw、双计数和HP/斗志收据；[全部具体规则](../rules/duel-ordinary-session-v1.md)。仅普通子集，现代转录参考，静态新增未运行
+
+## 独立内政设施自动修复
+
+[Domestic repair lifecycle v1](domestic-repair-lifecycle.md)：完成设施的太守政治整式、工兵独立取整、设施中心两格供应敌军门槛、正 signed16 HP 自写封顶与本域 hp-full 事件，带 create/preview/execute/save/load/replay 完整重算合同。只读[具体规则与证据边界](../rules/domestic-repair-lifecycle.md)；不自动共享建设 work、生产 state 或全局调度。本批仅静态审阅，未运行代码、schema 或验证流程。

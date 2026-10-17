@@ -1,8 +1,14 @@
+## 当前新增：已完成内政设施自动修复（O11-B，2026-10-17）
+
+[完整具体规则](docs/rules/domestic-repair-lifecycle.md)、[API](docs/engine/domestic-repair-lifecycle.md)：固定单城/owner/可空太守与工兵、最多30座标准设施原始正HP、逐旬完整敌军位置，独立计算 `B=clamp(floor(9P/2),150,450)` 与无工兵 `floor(3B/20)` / 有工兵 `floor(3B/10)`，再实际cap写入、记录弃置和首次到满事件。只支持AdvanceRepairTurn与完整genesis保存重算；[来源与政策](docs/sources/domestic-repair-lifecycle.json)、[结构schema](docs/sources/domestic-repair-lifecycle.schema.json)、[未运行场景](data/scenarios/domestic-repair-example-v1.json)。
+
+敌情为明确的设施中心两格注释派生政策，不等价于未恢复helper，也不是建设城心gate。工兵最终整数不能先floor再×2；22/45和67/135为纸面反例。目录仅给类型身份，maxHP供应；writer/事件为独立合同，无AP/金/XP或native副作用。城市港关同址指令冲突、堤坝、PK特殊楼、原版身份与全局组合仍开放，整个O11与原43不关闭。仅静态新增，未运行测试、typecheck、编译、build、checker、诊断、产品或示例；旧测试及历史food失败保留。
+
 ## 当前新增：标准设施建设与吸收（O11-A，2026-10-17）
 
 [完整具体规则](docs/rules/facility-construction-lifecycle.md)、[API](docs/engine/facility-construction-lifecycle.md)：独立单城供应地块上的9类建设/5类吸收，实际扣费/占地腾地/人员预留/逐旬进度/完工TP与XP功绩、16组可组合具名政策、旧级效力与既有金粮核只读投影、完整genesis/命令/回执/snapshot重建。[政策与设施表](data/catalogs/facility-construction-policies-v1.json)、[来源](docs/sources/facility-construction-lifecycle.json)、[未运行场景](data/scenarios/facility-construction-example-v1.json)。
 
-工作量与战斗HP分开，本模块不提供HP；初始work/调度/奖励writer是明确政策，功绩100/造币150冲突保留。维修、PK特殊楼、全局组合与原生任务仍未完成；不称全部O11，原43不减。未运行测试、typecheck、编译、build、checker、诊断、产品或示例，旧测试未改，历史food失败保留。
+工作量与战斗HP分开，本模块不提供HP；初始work/调度/奖励writer是明确政策，功绩100/造币150冲突保留。本建设模块不覆盖维修；独立维修子域见上方O11-B。PK特殊楼、维修其余边界、全局组合与原生任务仍未完成；不称全部O11，原43不减。未运行测试、typecheck、编译、build、checker、诊断、产品或示例，旧测试未改，历史food失败保留。
 
 ## 当前新增：单城商人即时粮食交易（O10-B，2026-10-17）
 

@@ -1,8 +1,15 @@
+## 2026-10-17 O11-B：已完成标准内政设施自动修复
+
+- [x] 静态新增独立HP账本、政治9P/2与150..450夹值、两支独立floor、设施中心敌情、cap/弃置/首次到满、幂等与genesis保存重算代码及[完整规则](docs/rules/domestic-repair-lifecycle.md)
+- [x] 明确混合listing身份、原GBK元数据与仅观察UTF-8 hash的区别；更正旧规则把最终整数工兵效果写成精确×2的误述
+- [ ] 城市/港/关同址指令冲突、堤坝、PK特殊楼、native getter/helper/writer/callback、原版身份、全局调度与建设HP组合继续开放
+- [ ] 本树尚未运行测试、typecheck、编译、build、checker、诊断、产品或示例；静态覆盖不等于验收通过，原43不减，旧测试及历史food失败保留
+
 ## 2026-10-17 O11-A：建设/吸收有限覆盖
 
 - [x] 新增标准9设施建设与5类吸收独立状态机，完整费用/占地/人员/任务/奖励/保存重放代码和[详细规则](docs/rules/facility-construction-lifecycle.md)
 - [x] 明确quarter/zero工作量、AP20/0、功绩争议和完工行动标记16种政策组合，复用旧速率与金粮核
-- [ ] O11维修、PK十类特殊楼、战斗HP/升级HP writer与跨服务组合仍开放
+- [ ] O11维修其余边界、PK十类特殊楼、战斗HP/升级HP writer与跨服务组合仍开放；已完成标准内政设施的独立维修见上方O11-B
 - 本批仅静态代码/文档审查，未运行测试、typecheck、编译、build、checker、诊断、产品或示例。原43不减，既有food失败和P078依赖禁区不变
 
 # 当前工作范围：O10-B单城商人（2026-10-17）

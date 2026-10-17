@@ -1,0 +1,377 @@
+{
+  "status": "static-unexecuted-example",
+  "description": "Three independently supplied repair boundaries: facility-centered pressure changes, capped HP writes and local hp-full events; no production or construction integration.",
+  "scenario": {
+    "schemaVersion": 1,
+    "profile": "completed-domestic-auto-repair-v1",
+    "date": {
+      "year": 208,
+      "month": 12,
+      "day": 21
+    },
+    "turn": 0,
+    "advanceLimit": 3,
+    "city": {
+      "id": "city-a",
+      "kind": "city",
+      "ownerForceId": "force-a",
+      "position": {
+        "q": 0,
+        "r": 0
+      }
+    },
+    "governor": {
+      "id": "governor-a",
+      "politics": 0
+    },
+    "engineering": true,
+    "facilities": [
+      {
+        "id": "market-a",
+        "cityId": "city-a",
+        "kind": "market",
+        "level": 1,
+        "phase": "complete",
+        "position": {
+          "q": 5,
+          "r": 0
+        },
+        "currentHP": 450,
+        "maxHP": 500
+      },
+      {
+        "id": "farm-a",
+        "cityId": "city-a",
+        "kind": "farm",
+        "level": 1,
+        "phase": "complete",
+        "position": {
+          "q": 0,
+          "r": 5
+        },
+        "currentHP": 490,
+        "maxHP": 500
+      },
+      {
+        "id": "workshop-a",
+        "cityId": "city-a",
+        "kind": "workshop",
+        "level": 1,
+        "phase": "building",
+        "position": {
+          "q": 5,
+          "r": 5
+        },
+        "currentHP": 200,
+        "maxHP": 800
+      }
+    ],
+    "hostileForceIds": [
+      "force-b"
+    ],
+    "completeFieldUnits": true,
+    "turnInputs": [
+      {
+        "fieldUnits": [
+          {
+            "id": "enemy-a",
+            "forceId": "force-b",
+            "position": {
+              "q": 3,
+              "r": 0
+            }
+          }
+        ]
+      },
+      {
+        "fieldUnits": [
+          {
+            "id": "enemy-a",
+            "forceId": "force-b",
+            "position": {
+              "q": 2,
+              "r": 0
+            }
+          }
+        ]
+      },
+      {
+        "fieldUnits": []
+      }
+    ],
+    "policies": {
+      "version": "domestic-repair-policies-v1",
+      "recovery": {
+        "id": "listed-domestic-governor9-clamp150450-v1",
+        "version": 1,
+        "politicsMin": 0,
+        "politicsMax": 255,
+        "baseNumerator": 9,
+        "baseDenominator": 2,
+        "baseMin": 150,
+        "baseMax": 450,
+        "recoveryNumerator": 3,
+        "ordinaryDenominator": 20,
+        "engineeringDenominator": 10,
+        "rounding": "floor-at-each-division",
+        "evidence": "public-mixed-research-listing-not-clean-stock"
+      },
+      "hostility": {
+        "id": "facility-centered-two-hex-source-comment-v1",
+        "version": 1,
+        "completeFieldUnitsRequired": true,
+        "explicitHostileForceIds": true,
+        "distance": "max(abs(dq),abs(dr),abs(dq+dr))",
+        "facilityCenteredBlockingDistanceInclusive": 2,
+        "coordinateMin": -1000000,
+        "coordinateMax": 1000000,
+        "evidence": "source-comment-derived-distance-policy",
+        "nativeHelperRecovered": false
+      },
+      "eligibility": {
+        "id": "complete-only-positive-hp-v1",
+        "version": 1,
+        "phases": [
+          "complete",
+          "building",
+          "absorbing"
+        ],
+        "repairPhase": "complete",
+        "currentHpMinimum": 1,
+        "maxHpMaximum": 32767,
+        "governorRequired": true,
+        "fixedParentCityOwnerGovernorAndEngineering": true,
+        "phaseChanges": false,
+        "productionOccupancyGate": false,
+        "facilityAtCityAllowed": false,
+        "duplicateFacilityPositionsAllowed": false
+      },
+      "writer": {
+        "id": "standalone-clamp-to-max-writer-v1",
+        "version": 1,
+        "actual": "min(requested,maxHP-currentHP)",
+        "discarded": "requested-actual",
+        "nativeWriterRecovered": false
+      },
+      "scheduler": {
+        "id": "one-ten-day-boundary-v1",
+        "version": 1,
+        "days": [
+          1,
+          11,
+          21
+        ],
+        "minYear": 1,
+        "maxYear": 9999,
+        "firstRepair": "next-boundary",
+        "inputIndex": "advancedCount-before",
+        "facilityOrder": "ASCII-id",
+        "closestHostileTieBreak": "ASCII-unit-id",
+        "globalSchedulerRecovered": false
+      },
+      "events": {
+        "id": "no-native-completion-side-effects-v1",
+        "version": 1,
+        "hpFullEvent": "DomesticFacilityHpFull",
+        "actionPointsGoldXpAndMeritModeled": false,
+        "nativeCallbacks": false,
+        "ownershipChanges": false,
+        "constructionWorkIntegration": false
+      },
+      "budget": {
+        "id": "domestic-repair-bounded-json-v1",
+        "version": 1,
+        "maxFacilities": 30,
+        "maxFieldUnits": 128,
+        "maxHostileForces": 128,
+        "maxAdvanceLimit": 360,
+        "maxAcceptedCommands": 360,
+        "maxTraceAttempts": 1080,
+        "maxCanonicalUtf8Bytes": 67108864,
+        "maxInputNodes": 4000000,
+        "maxInputDepth": 48,
+        "maxArrayLength": 4096,
+        "maxObjectKeys": 128,
+        "maxIdLength": 64
+      },
+      "persistence": {
+        "id": "domestic-repair-canonical-recompute-v1",
+        "version": 1,
+        "schemaVersion": 1,
+        "comparison": "full-policy-catalog-genesis-receipts-snapshot",
+        "digest": "sha256-canonical-json",
+        "duplicateJsonKeys": "reject",
+        "inputObjectKeyOrder": "irrelevant",
+        "inputArrayOrder": "preserved",
+        "executeOutputBudgetAtEveryAcceptedStep": true
+      }
+    },
+    "catalog": {
+      "version": "standard-domestic-repair-types-v1",
+      "evidence": "existing-community-type-identities-not-native-max-hp-table",
+      "entries": [
+        {
+          "kind": "market",
+          "name": "市场",
+          "levels": [
+            {
+              "level": 1,
+              "typeId": 31
+            },
+            {
+              "level": 2,
+              "typeId": 50
+            },
+            {
+              "level": 3,
+              "typeId": 51
+            }
+          ]
+        },
+        {
+          "kind": "farm",
+          "name": "农场",
+          "levels": [
+            {
+              "level": 1,
+              "typeId": 32
+            },
+            {
+              "level": 2,
+              "typeId": 52
+            },
+            {
+              "level": 3,
+              "typeId": 53
+            }
+          ]
+        },
+        {
+          "kind": "barracks",
+          "name": "兵舍",
+          "levels": [
+            {
+              "level": 1,
+              "typeId": 33
+            },
+            {
+              "level": 2,
+              "typeId": 54
+            },
+            {
+              "level": 3,
+              "typeId": 55
+            }
+          ]
+        },
+        {
+          "kind": "forge",
+          "name": "锻冶",
+          "levels": [
+            {
+              "level": 1,
+              "typeId": 34
+            },
+            {
+              "level": 2,
+              "typeId": 56
+            },
+            {
+              "level": 3,
+              "typeId": 57
+            }
+          ]
+        },
+        {
+          "kind": "stable",
+          "name": "厩舍",
+          "levels": [
+            {
+              "level": 1,
+              "typeId": 35
+            },
+            {
+              "level": 2,
+              "typeId": 58
+            },
+            {
+              "level": 3,
+              "typeId": 59
+            }
+          ]
+        },
+        {
+          "kind": "workshop",
+          "name": "工房",
+          "levels": [
+            {
+              "level": 1,
+              "typeId": 36
+            }
+          ]
+        },
+        {
+          "kind": "shipyard",
+          "name": "造船厂",
+          "levels": [
+            {
+              "level": 1,
+              "typeId": 37
+            }
+          ]
+        },
+        {
+          "kind": "mint",
+          "name": "造币厂",
+          "levels": [
+            {
+              "level": 1,
+              "typeId": 38
+            }
+          ]
+        },
+        {
+          "kind": "granary",
+          "name": "谷仓",
+          "levels": [
+            {
+              "level": 1,
+              "typeId": 39
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "commands": [
+    {
+      "id": "repair-1",
+      "expectedRevision": 0,
+      "command": {
+        "type": "AdvanceRepairTurn"
+      }
+    },
+    {
+      "id": "repair-2",
+      "expectedRevision": 1,
+      "command": {
+        "type": "AdvanceRepairTurn"
+      }
+    },
+    {
+      "id": "repair-3",
+      "expectedRevision": 2,
+      "command": {
+        "type": "AdvanceRepairTurn"
+      }
+    }
+  ],
+  "manualExpectations": [
+    "These are arithmetic design expectations, not observed execution results.",
+    "At P=0, multipliedPolitics=0, halfFloor=0, clampedBase=150; engineering requests floor(450/10)=45, ordinary would request floor(450/20)=22.",
+    "First boundary is 209-01-01: market-a at (5,0) is blocked by enemy-a at (3,0), distance 2, although the enemy is distance 3 from the city. farm-a repairs 490 to 500, request 45, actual 10, discarded 35, one DomesticFacilityHpFull event. workshop-a stays building with HP 200.",
+    "Second boundary is 209-01-11: enemy moves to (2,0), distance 3 from market-a and distance 2 from city; market-a repairs 450 to 495. farm-a remains full and emits no event.",
+    "Third boundary is 209-01-21 with no supplied units: market-a repairs 495 to 500, request 45, actual 5, discarded 40, one hp-full event. All phases remain unchanged.",
+    "Repeated identical envelope repair-1 returns the original receipt and does not advance again; a new command past the three-turn horizon is rejected."
+  ]
+}
