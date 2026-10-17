@@ -1,3 +1,9 @@
+## 2026-10-17固定来源补充与O09b边界
+
+E15既有`reverse-transcribed-cross-validated`普通核心标签和下方公式保持；本轮仅将此前main链接固定为commit `a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef`、Debate.cs blob `0137498d10773cd4596d497083ccdf6a26b3a261`（71288字节、SHA-256 `622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28`），独立读取实际字节与行号，未重跑checker。现代转录是来源身份，官方报道仅支持机制，不能认证全部常数或原生全链。
+
+新增[普通话题牌session规则](debate-topic-session-v1.md)、[API](../engine/topic-debate-session-v1.md)和[完整source manifest](../sources/debate-topic-session-v1.json)。其状态机标pinned-modern-translated-reference、牌序工程policy，nativeEquivalent=false、stockOriginalVerified=false。终局先于愤激与补牌，非终局stress100原子拒绝；再考、话术、四性格、人物/平台与结束结算全部保持未完成。本批未运行测试/typecheck/编译/build/checker/产品/诊断或样例，原43不减。
+
 # E15 舌战普通牌心理伤害
 
 更新：2026-10-01。主目标：PC-PK 导向通用舌战核心。
@@ -543,7 +549,7 @@ Vanilla 的 131 / 40 / 10 / 15 / 20 / 6 / 10 等连续常量
 ## 16. 来源
 
 - C++逆向翻译：
-  - https://github.com/tankyc/sango_infinity/blob/main/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
+  - https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs
 - 官方同期介绍：
   - https://www.4gamer.net/games/024/G002453/20060210150000/
 - 同期中文攻略：

@@ -1,3 +1,7 @@
+## 2026-10-17：普通话题牌独立舌战（O09b）
+
+[完整字段、九牌表、公式、顺序、边界和保存规则](debate-topic-session-v1.md) · [API](../engine/topic-debate-session-v1.md) · [固定来源与完整policy](../sources/debate-topic-session-v1.json) · [未运行五轮纸面设计](../../data/scenarios/topic-debate-example-v1.json)。仅普通牌支持域；非终局stress100原子拒绝，终局先于愤激与补牌。现代参考状态机与E15公式证据分层；原43不减，五话术/四性格/再考/人物/平台/结束结算仍开放。本批代码文档静态新增，未运行任何测试或检查器。
+
 ## 2026-10-17：普通单挑独立session（O09a）
 
 - [O09a三方针普通单挑独立session](duel-ordinary-session-v1.md)：完整输入域、全部公式、条件draw、顺序/writer/胜负、错误原子与重放；仅普通子集、现代转录参考，新增代码与纸面场景未运行，不关闭E14原生全链或原43组

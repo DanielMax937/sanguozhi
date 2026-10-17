@@ -2572,6 +2572,8 @@ vanillaGenericDuelCore.status = "unverified"
 
 ## 9. 舌战普通牌心理伤害（E15 已闭合通用核心）
 
+工程补充（2026-10-17）：[O09b普通话题牌独立session](debate-topic-session-v1.md)和[API](../engine/topic-debate-session-v1.md)补显式牌带/token、3/4/5/6普通手牌、精确普通公式、HP优先终局、非终局stress100原子拒绝与保存重放。源总槽4/5/6/7保留再考槽，不提供再考动作；终局不补牌，牌带耗尽不拒绝终局胜利。五话术、四性格愤激、再考、人物/书籍、平台与结束结果仍未完成。E15核心标签保留，固定现代来源见[新manifest](../sources/debate-topic-session-v1.json)，不扩大为原生整场认证。新增代码及五轮纸面设计未运行任何测试/编译/build/checker/产品/诊断，旧测试/旧food失败与原43组保留；不接P078/native任务或外交自动结算。
+
 ### 结论：普通话题牌心理伤害公式已恢复，不再需要 provisional fallback
 
 `[PC-PK-oriented][reverse-engineered]`

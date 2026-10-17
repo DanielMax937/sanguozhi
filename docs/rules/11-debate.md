@@ -1,3 +1,9 @@
+## O09b工程子集（2026-10-17）
+
+[普通话题牌独立session完整规则](debate-topic-session-v1.md)和[API](../engine/topic-debate-session-v1.md)现有静态实现：显式牌序与逐张token、普通容量3/4/5/6、HP/stress writer、非终局话题/先手、补牌与保存重放。终局优先于愤激/补牌，非终局stress100整轮拒绝；没有可用再考按钮。源内部总槽4/5/6/7含保留再考槽，不能把全部槽都给普通牌。
+
+以下完整原作机制研究保留，但五话术、四性格愤激、再考、书籍/特殊人物、平台差异及结束结算不在此session中。[固定现代来源与证据层级](../sources/debate-topic-session-v1.json)不认证原生；E15普通公式等级不升级到整场。未运行本批代码/样例/测试/检查器，原43证据主题不减。
+
 # 舌战（论战）
 
 > E15 已完成普通话题牌心理伤害专项审计；结构化证据、golden table 与版本边界见 `30-debate-psychological-damage.md`。

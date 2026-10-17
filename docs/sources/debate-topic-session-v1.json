@@ -1,0 +1,435 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-topic-session-v1",
+  "scope": "O09b independent ordinary-topic-only session; not whole debate",
+  "implementation": "packages/engine/src/topic-debate.ts",
+  "ruleDocument": "docs/rules/debate-topic-session-v1.md",
+  "evidence": {
+    "formulaEvidence": "reverse-transcribed-cross-validated",
+    "formulaEvidenceScope": "existing-E15-generic-ordinary-core-only",
+    "stateMachineEvidence": "pinned-modern-translated-reference",
+    "dealPolicyEvidence": "provided-sequence-engine-policy",
+    "sessionEvidence": "bounded-modern-reference-subset",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+    "debatePhaseBlob": "6aa98f855a5d4d172cde7e8ffc18a141b8a7b587",
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "completeDebate": false,
+    "originalUnresolvedGroups": 43,
+    "genericIdentity": "engine-restricted-source-identity-hooks",
+    "initialTopic": "provided-engine-policy",
+    "pairedChoice": "atomic-engine-policy",
+    "capacityAndPersistence": "engine-policy",
+    "rhetoric": "excluded",
+    "angerAndPersonality": "unsupported-boundary",
+    "rethink": "excluded",
+    "realPersonExceptions": "excluded",
+    "closingConsequences": "excluded",
+    "nativeWholeChain": "open"
+  },
+  "policies": {
+    "id": "topic-debate-standalone-policy-v1",
+    "profile": "debate-topic-only-reference-v1",
+    "cards": {
+      "id": "topic-only-no-rhetoric-v1",
+      "topics": [
+        "story",
+        "logic",
+        "trend"
+      ],
+      "levels": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "power": "1+levelIndex+10-if-current-topic",
+      "levelCoefficients": [
+        10,
+        15,
+        20
+      ],
+      "stressCoefficients": [
+        10,
+        15,
+        20
+      ],
+      "drawStressEach": 15
+    },
+    "identities": {
+      "id": "generic-identity-debate-hooks-v1",
+      "realPersonMapping": false,
+      "allPersonHooks": "identity-or-disabled",
+      "attackHook": "identity",
+      "hpDamageHook": "identity",
+      "difficulty": "source-normal",
+      "items": false,
+      "personality": false
+    },
+    "initialTopic": {
+      "id": "provided-initial-topic-v1",
+      "generated": false
+    },
+    "deal": {
+      "id": "provided-ordered-card-tapes-v1",
+      "shuffle": false,
+      "nativeDistribution": false,
+      "token": "participantId:tapeIndex",
+      "order": "tape-order-stable-retained-hand",
+      "sourceDisplaySort": false
+    },
+    "hand": {
+      "id": "source-reserved-rethink-slot-v1",
+      "intelligenceThresholds": [
+        70,
+        80,
+        90
+      ],
+      "sourceSlotCounts": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "ordinaryCapacities": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "reservedRethinkSlots": 1,
+      "rethinkPlayable": false
+    },
+    "round": {
+      "id": "paired-choice-atomic-round-v1",
+      "action": "ResolveTopicRound",
+      "choicesOrder": "scenario-participant-order",
+      "resolutionOrder": "first-then-other-recorded-only",
+      "firstDamageBonus": false
+    },
+    "topic": {
+      "id": "source-topic-winner-follow-v1",
+      "damageTopic": "round-start",
+      "nonterminalWinnerSets": [
+        "firstId",
+        "currentTopic"
+      ],
+      "drawKeeps": [
+        "firstId",
+        "currentTopic"
+      ]
+    },
+    "arithmetic": {
+      "id": "source-normal-integer-topic-damage-v1",
+      "attack": "100+trunc(40*(myINT-opponentINT)/(131-myINT))",
+      "hpDamage": "trunc((attack+jitter)*10*levelCoef*topicCoef/1000)",
+      "division": "toward-zero",
+      "intermediate": "exact-bigint",
+      "matchingTopicCoefficient": 10,
+      "nonmatchingTopicCoefficient": 6,
+      "angerCoefficient": 10,
+      "jitterBound": 5,
+      "nativePrng": false
+    },
+    "writer": {
+      "id": "source-hp-minus100-to1000-stress0-to100-v1",
+      "hpMin": -100,
+      "hpMax": 1000,
+      "stressMin": 0,
+      "stressMax": 100
+    },
+    "anger": {
+      "id": "reject-nonterminal-anger-trigger-v1",
+      "triggerStress": 100,
+      "rejection": "whole-round-atomic",
+      "cap99": false,
+      "reset": false,
+      "skip": false
+    },
+    "closing": {
+      "id": "session-result-only-closing-v1",
+      "defeatHp": 0,
+      "priority": [
+        "hp-defeat",
+        "unsupported-anger-trigger",
+        "crumble",
+        "topic-and-first",
+        "refill"
+      ],
+      "terminalRefill": false,
+      "terminalTopicChange": false,
+      "campaignWrite": false
+    },
+    "opening": {
+      "id": "no-opening-instant-win-v1",
+      "initialHp": 1000,
+      "initialStress": 0,
+      "initialAngerTimer": 0
+    },
+    "rethink": {
+      "id": "no-rethink-v1",
+      "crumbleStep": 250,
+      "crumbleMax": 3,
+      "exposedAvailableAction": false
+    },
+    "refill": {
+      "id": "fill-next-round-from-tape-v1",
+      "fillOnlyVacancies": true,
+      "terminalRefill": false,
+      "insufficientTape": "whole-round-atomic-rejection"
+    },
+    "capacity": {
+      "id": "bounded-session-reject-v1",
+      "maxEntries": 4096,
+      "maxTapePerParticipant": 512,
+      "maxCanonicalUtf8Bytes": 16777216,
+      "maxInputNodes": 1000000,
+      "maxInputDepth": 32,
+      "exhaustion": "rejection-not-game-draw"
+    },
+    "persistence": {
+      "id": "full-policy-genesis-recompute-v1",
+      "policyComparison": "all-fields",
+      "genesisSnapshot": "recompute",
+      "receipts": "compare-all-fields",
+      "snapshot": "compare-all-fields"
+    }
+  },
+  "sources": [
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "blob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+      "sha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+      "bytes": 71288,
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "evidenceLevel": "pinned-modern-translated-reference",
+      "sourceClaim": "modern C# translation of original C++; does not authenticate original binaries",
+      "readback": "independently read fixed-ref bytes; matched Git blob and SHA-256; not executed"
+    },
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+      "blob": "6aa98f855a5d4d172cde7e8ffc18a141b8a7b587",
+      "sha256": "5b47f7b6a89d6123a23e7c14f22168e59c9edd549e98d9bc0258d8a55bb9cbf3",
+      "bytes": 14048,
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+      "evidenceLevel": "pinned-modern-translated-reference",
+      "sourceClaim": "modern C# translation of original C++; does not authenticate original binaries",
+      "readback": "independently read fixed-ref bytes; matched Git blob and SHA-256; not executed"
+    }
+  ],
+  "lineAttribution": [
+    {
+      "file": "Debate.cs",
+      "startLine": 343,
+      "endLine": 354,
+      "supports": "source total slots 4/5/6/7",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L343-L354"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 413,
+      "endLine": 438,
+      "supports": "reserved rethink slot; fill vacancies; source display sort",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L413-L438"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 513,
+      "endLine": 534,
+      "supports": "HP/stress clamp writer",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L513-L534"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 554,
+      "endLine": 570,
+      "supports": "attack and person hook; stress0/anger0",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L554-L570"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 908,
+      "endLine": 926,
+      "supports": "ordinary power",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L908-L926"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 991,
+      "endLine": 999,
+      "supports": "card consumption",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L991-L999"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1046,
+      "endLine": 1126,
+      "supports": "turn start refill and turn end first/topic",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1046-L1126"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1129,
+      "endLine": 1142,
+      "supports": "power winner",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1129-L1142"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1146,
+      "endLine": 1195,
+      "supports": "HP damage and person hook",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1146-L1195"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1199,
+      "endLine": 1208,
+      "supports": "ordinary stress",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1199-L1208"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1216,
+      "endLine": 1223,
+      "supports": "draw stress15 each",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1216-L1223"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1239,
+      "endLine": 1251,
+      "supports": "ordinary writer",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1239-L1251"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1300,
+      "endLine": 1517,
+      "supports": "excluded anger/chain/counter/closing",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1300-L1517"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1380,
+      "endLine": 1395,
+      "supports": "HP winner",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1380-L1395"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1405,
+      "endLine": 1405,
+      "supports": "excluded critical <=-100 threshold",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1405-L1405"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1520,
+      "endLine": 1531,
+      "supports": "crumble",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1520-L1531"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1535,
+      "endLine": 1560,
+      "supports": "initial random topic1538 and first1560; topic replaced by provided input",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1535-L1560"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1567,
+      "endLine": 1580,
+      "supports": "effect order",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1567-L1580"
+    },
+    {
+      "file": "DebatePhase.cs",
+      "startLine": 164,
+      "endLine": 168,
+      "supports": "turn start",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs#L164-L168"
+    },
+    {
+      "file": "DebatePhase.cs",
+      "startLine": 172,
+      "endLine": 253,
+      "supports": "first/other choice and excluded rethink",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs#L172-L253"
+    },
+    {
+      "file": "DebatePhase.cs",
+      "startLine": 333,
+      "endLine": 389,
+      "supports": "excluded anger",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs#L333-L389"
+    },
+    {
+      "file": "DebatePhase.cs",
+      "startLine": 394,
+      "endLine": 420,
+      "supports": "Attack Effect HP winner before Anger",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs#L394-L420"
+    }
+  ],
+  "publicMechanismCrosscheck": [
+    {
+      "url": "https://www.4gamer.net/games/024/G002453/20060210150000/",
+      "kind": "official-release-material-via-4Gamer",
+      "scope": "historical E15 mechanism crosscheck; not proof of continuous constants/full session"
+    },
+    {
+      "url": "https://www.gamersky.com/handbook/200604/22092.shtml",
+      "kind": "strategy-guide",
+      "scope": "historical mechanism crosscheck"
+    },
+    {
+      "url": "https://w.atwiki.jp/sangokushi11/pages/141.html",
+      "kind": "community-wiki",
+      "scope": "historical hand/topic/anger mechanisms; not native authentication"
+    }
+  ],
+  "boundaries": {
+    "officialMaterialCertifiesFullConstants": false,
+    "modernSourceCertifiesNative": false,
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "completeDebate": false,
+    "originalUnresolvedGroups": 43,
+    "allPersonHooks": "identity-or-disabled",
+    "sourceDisplaySort": "not implemented; stable ordered occurrences engineering policy",
+    "terminalOrder": "HP defeat skips anger/crumble/TurnEnd/refill",
+    "nonterminalAnger": "whole-round rejection; no cap99/reset/skip",
+    "nativeDealDistribution": "not implemented",
+    "campaignIntegration": false,
+    "excluded": [
+      "rhetoric",
+      "rethink",
+      "four-personality anger",
+      "opening instant win",
+      "critical pursuit/mercy",
+      "real person/book exceptions",
+      "P078/native personnel tasks",
+      "capture/execution/ownership",
+      "return/mission",
+      "diplomacy auto settlement"
+    ]
+  },
+  "validation": {
+    "mode": "static-source-and-document-review-only",
+    "tests": "not-run",
+    "typecheck": "not-run",
+    "compiler": "not-run",
+    "build": "not-run",
+    "checkers": "not-run",
+    "productOrDiagnostics": "not-run",
+    "examples": "paper-design-not-run",
+    "oldTests": "unchanged",
+    "priorDefaultFoodFailure": "retained"
+  }
+}
