@@ -1,3 +1,7 @@
+## 普通单挑独立session（O09a，静态新增）
+
+三方针Attack/Defense/Spirit、原始有界随机、Hit/Dodge/Block、HP/斗志writer、双计数、HP胜负/50合平局与genesis保存重放已补独立代码和[完整具体规则](docs/rules/duel-ordinary-session-v1.md)，见[API](docs/engine/ordinary-duel-session-v1.md)和[纸面场景](data/scenarios/ordinary-duel-example-v1.json)。仅普通子集；Fury/会心/必杀/装备/人物特例与舌战不在本模块。现代转录来源不是原生PC-PK/PK1.1认证，原43组未决主题不减；无P078/native人员任务链。本轮未运行测试、编译、build、checker、产品或诊断，历史通过数不覆盖本树，旧默认food失败仍保留。
+
 ## Ordinary diplomacy: gift, alliance and ceasefire
 
 [Detailed rules](docs/rules/ordinary-diplomacy-service.md) and [API](docs/engine/ordinary-diplomacy-service.md): a standalone PK-era empirical service with exact rational thresholds, a force-pair relationship ledger, actual independent gold/AP settlement, explicit immediate-refund policy, single-xun ceasefire expiry and fully recomputed persistence. Dangerous failure is atomically unsupported; no native mission/person lifecycle or TP/merit/XP rewards. Named provisional policies and all evidence gaps remain visible. This addition has not been run or tested.

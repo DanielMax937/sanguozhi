@@ -16,3 +16,5 @@
 - [独立官职分配服务](office-assignment-service.md)：80有名职selector→plan→apply，明确fill/rebuild、资格与排序政策，单关系状态与请求重放；不接native角色/归属事务
 
 - [普通外交独立服务](ordinary-diplomacy-service.md)：固定PK经验profile、Gift/Alliance/Ceasefire/单旬、金/AP/关系/期限、全量policy与genesis重放；[完整规则](../rules/ordinary-diplomacy-service.md)。危险失败不提交，不应用奖励，未运行或测试
+
+- [三方针普通单挑独立session](ordinary-duel-session-v1.md)：create/inspect/preview/execute/save/load/replay，原始draw、双计数和HP/斗志收据；[全部具体规则](../rules/duel-ordinary-session-v1.md)。仅普通子集，现代转录参考，静态新增未运行

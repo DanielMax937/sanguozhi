@@ -1,0 +1,410 @@
+{
+  "schemaVersion": 1,
+  "description": "Hand-calculated design only; read scenario and commands separately. This is neither an executed test nor a saved session.",
+  "validationStatus": "paper-design-not-run",
+  "nativeEquivalent": false,
+  "scenario": {
+    "schemaVersion": 1,
+    "profile": "duel-ordinary-translated-reference-v1",
+    "genericOnly": true,
+    "difficulty": "source-normal",
+    "policies": {
+      "id": "ordinary-duel-standalone-policy-v1",
+      "profile": "duel-ordinary-translated-reference-v1",
+      "actions": {
+        "id": "three-stance-ordinary-only-v1",
+        "stances": [
+          "Attack",
+          "Defense",
+          "Spirit"
+        ],
+        "action": "ResolveOrdinaryExchange",
+        "critical": false,
+        "counterattack": false
+      },
+      "identities": {
+        "id": "generic-identity-hooks-v1",
+        "allPersonHooks": "identity-or-disabled",
+        "realPersonMapping": false
+      },
+      "context": {
+        "id": "source-normal-no-items-no-buffs-v1",
+        "difficulty": "source-normal",
+        "items": false,
+        "buffs": false
+      },
+      "stanceTiming": {
+        "id": "simultaneous-stance-at-exchange-start-v1",
+        "freeStanceCommand": false
+      },
+      "actor": {
+        "id": "pinned-source-speed-share-actor-v1",
+        "reverse": false,
+        "fasterFirst": true,
+        "equalSpeedKeepsChallengerFirst": true
+      },
+      "randomness": {
+        "id": "bounded-percent-lt-v1",
+        "percentBound": 100,
+        "jitterBound": 10,
+        "comparison": "strict-less-than",
+        "draws": "three-if-hit-otherwise-four",
+        "nativePrng": false
+      },
+      "arithmetic": {
+        "id": "source-stepwise-integer-truncation-v1",
+        "ratio": "duelScore-squared-share",
+        "division": "toward-zero",
+        "intermediate": "exact-bigint"
+      },
+      "spirit": {
+        "id": "source-pre-write-hp-spirit-v1",
+        "hpTiming": "before-hp-writer",
+        "zeroBeforeMinimum": true,
+        "minimum": 3,
+        "receivingDefenseSpiritMinimum": 5
+      },
+      "writer": {
+        "id": "source-hp100-spirit300-clamp-v1",
+        "hpMin": 0,
+        "hpMax": 100,
+        "spiritMin": 0,
+        "spiritMax": 300
+      },
+      "termination": {
+        "id": "source-nondodge-blow-limit50-v1",
+        "blowLimit": 50,
+        "dodgeBlows": 0,
+        "hitBlockBlows": 1,
+        "priority": [
+          "hp-defeat",
+          "blow-limit-draw"
+        ]
+      },
+      "domains": {
+        "id": "bounded-generic-participants-v1",
+        "participants": 2,
+        "strengthMin": 1,
+        "strengthMax": 100,
+        "initialHpMin": 1,
+        "idMaxAsciiCharacters": 64
+      },
+      "persistence": {
+        "id": "full-policy-genesis-recompute-v1",
+        "receipts": "compare-all-fields",
+        "snapshot": "compare-all-fields"
+      },
+      "capacity": {
+        "id": "bounded-history-reject-v1",
+        "maxEntries": 4096,
+        "maxCanonicalUtf8Bytes": 16777216,
+        "maxInputNodes": 1000000,
+        "maxInputDepth": 32,
+        "exhaustion": "atomic-rejection"
+      }
+    },
+    "participants": [
+      {
+        "id": "challenger",
+        "resolvedStrength": 100,
+        "hp": 100,
+        "spirit": 0,
+        "stance": "Attack"
+      },
+      {
+        "id": "challenged",
+        "resolvedStrength": 100,
+        "hp": 100,
+        "spirit": 0,
+        "stance": "Attack"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "type": "ResolveOrdinaryExchange",
+      "expectedRevision": 0,
+      "expectedExchangeIndex": 0,
+      "expectedBlowCount": 0,
+      "stances": [
+        "Attack",
+        "Attack"
+      ],
+      "rawDraws": [
+        {
+          "role": "actor-percent",
+          "bound": 100,
+          "value": 0
+        },
+        {
+          "role": "hit-jitter",
+          "bound": 10,
+          "value": 0
+        },
+        {
+          "role": "hit-percent",
+          "bound": 100,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveOrdinaryExchange",
+      "expectedRevision": 1,
+      "expectedExchangeIndex": 1,
+      "expectedBlowCount": 1,
+      "stances": [
+        "Attack",
+        "Attack"
+      ],
+      "rawDraws": [
+        {
+          "role": "actor-percent",
+          "bound": 100,
+          "value": 0
+        },
+        {
+          "role": "hit-jitter",
+          "bound": 10,
+          "value": 0
+        },
+        {
+          "role": "hit-percent",
+          "bound": 100,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveOrdinaryExchange",
+      "expectedRevision": 2,
+      "expectedExchangeIndex": 2,
+      "expectedBlowCount": 2,
+      "stances": [
+        "Attack",
+        "Attack"
+      ],
+      "rawDraws": [
+        {
+          "role": "actor-percent",
+          "bound": 100,
+          "value": 0
+        },
+        {
+          "role": "hit-jitter",
+          "bound": 10,
+          "value": 0
+        },
+        {
+          "role": "hit-percent",
+          "bound": 100,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveOrdinaryExchange",
+      "expectedRevision": 3,
+      "expectedExchangeIndex": 3,
+      "expectedBlowCount": 3,
+      "stances": [
+        "Attack",
+        "Attack"
+      ],
+      "rawDraws": [
+        {
+          "role": "actor-percent",
+          "bound": 100,
+          "value": 0
+        },
+        {
+          "role": "hit-jitter",
+          "bound": 10,
+          "value": 0
+        },
+        {
+          "role": "hit-percent",
+          "bound": 100,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveOrdinaryExchange",
+      "expectedRevision": 4,
+      "expectedExchangeIndex": 4,
+      "expectedBlowCount": 4,
+      "stances": [
+        "Attack",
+        "Attack"
+      ],
+      "rawDraws": [
+        {
+          "role": "actor-percent",
+          "bound": 100,
+          "value": 0
+        },
+        {
+          "role": "hit-jitter",
+          "bound": 10,
+          "value": 0
+        },
+        {
+          "role": "hit-percent",
+          "bound": 100,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveOrdinaryExchange",
+      "expectedRevision": 5,
+      "expectedExchangeIndex": 5,
+      "expectedBlowCount": 5,
+      "stances": [
+        "Attack",
+        "Attack"
+      ],
+      "rawDraws": [
+        {
+          "role": "actor-percent",
+          "bound": 100,
+          "value": 0
+        },
+        {
+          "role": "hit-jitter",
+          "bound": 10,
+          "value": 0
+        },
+        {
+          "role": "hit-percent",
+          "bound": 100,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveOrdinaryExchange",
+      "expectedRevision": 6,
+      "expectedExchangeIndex": 6,
+      "expectedBlowCount": 6,
+      "stances": [
+        "Attack",
+        "Attack"
+      ],
+      "rawDraws": [
+        {
+          "role": "actor-percent",
+          "bound": 100,
+          "value": 0
+        },
+        {
+          "role": "hit-jitter",
+          "bound": 10,
+          "value": 0
+        },
+        {
+          "role": "hit-percent",
+          "bound": 100,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveOrdinaryExchange",
+      "expectedRevision": 7,
+      "expectedExchangeIndex": 7,
+      "expectedBlowCount": 7,
+      "stances": [
+        "Attack",
+        "Attack"
+      ],
+      "rawDraws": [
+        {
+          "role": "actor-percent",
+          "bound": 100,
+          "value": 0
+        },
+        {
+          "role": "hit-jitter",
+          "bound": 10,
+          "value": 0
+        },
+        {
+          "role": "hit-percent",
+          "bound": 100,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveOrdinaryExchange",
+      "expectedRevision": 8,
+      "expectedExchangeIndex": 8,
+      "expectedBlowCount": 8,
+      "stances": [
+        "Attack",
+        "Attack"
+      ],
+      "rawDraws": [
+        {
+          "role": "actor-percent",
+          "bound": 100,
+          "value": 0
+        },
+        {
+          "role": "hit-jitter",
+          "bound": 10,
+          "value": 0
+        },
+        {
+          "role": "hit-percent",
+          "bound": 100,
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "paperExpected": {
+    "ratio": 50,
+    "actorThreshold": 50,
+    "hitThreshold": 78,
+    "baseDamage": 12,
+    "defenderHpAfterEachExchange": [
+      88,
+      76,
+      64,
+      52,
+      40,
+      28,
+      16,
+      4,
+      0
+    ],
+    "defenderRequestedSpiritByExchange": [
+      7,
+      7,
+      7,
+      7,
+      7,
+      10,
+      14,
+      14,
+      14
+    ],
+    "lastRequestedHpDamage": 12,
+    "lastActualHpLoss": 4,
+    "challengerFinalHp": 100,
+    "challengerFinalSpirit": 54,
+    "challengedFinalSpirit": 87,
+    "revision": 9,
+    "exchangeIndex": 9,
+    "blowCount": 9,
+    "status": "finished",
+    "outcome": {
+      "kind": "hp-defeat",
+      "winnerId": "challenger",
+      "loserId": "challenged"
+    }
+  }
+}

@@ -1,5 +1,7 @@
 # 单挑（一骑讨）
 
+> 工程定位：另见[三方针普通单挑独立session](duel-ordinary-session-v1.md)。已补普通子集代码与具体规则，含Hit/Dodge/Block、无反击、Dodge不加合、HP优先50合和保存重放；Fury/会心/必杀/人物/装备等下文参考内容未因此开放。新增实现未运行，原生等价仍open。
+
 > E14现为固定现代 `translated-source-reference`；已纠正dodge/独立无敌斗志分支，原生PC-PK/PK1.1全链及stock/patch身份仍未证、原43组不减。固定身份与回归边界见 `29-duel-continuous-formulas.md`。
 
 ## 1. 胜负与回合

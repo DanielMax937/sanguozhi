@@ -1,3 +1,9 @@
+# 2026-10-17：O09a普通单挑独立session，静态代码与规则覆盖
+
+[三方针普通session规则](duel-ordinary-session-v1.md)与[API](../engine/ordinary-duel-session-v1.md)新增：完整duelScore平方份额、stepwise截断、SourceNormal通用身份、条件3/4原始draw、Hit/Dodge/Block无反击、pre-write HP斗志、cap writer、exchange/blow双计数、HP胜负先于50合平局，以及完整policy/evidence/genesis/receipt/snapshot重放。所有人物hook关闭；普通动作调度、方针时机、有界输入/RNG适配为具名工程policy。
+
+仅普通子集；Fury/会心/必杀/装备/特殊人物、多队员、撤退/负伤和舌战未完成。证据为固定现代translated-source-reference，nativeEquivalent=false、stockOriginalVerified=false，E14原生全链及原43组继续open；P078/native任务、return/mission、俘虏/处斩/归属完全排除。新增代码和静态场景未运行测试、编译、build、checker、产品或诊断，不改旧测试，旧默认全套food失败继续保留；以下历史通过数不验证本树。
+
 # 2026-10-17 普通外交独立服务静态实现
 
 [规则正文](ordinary-diplomacy-service.md)与[API](../engine/ordinary-diplomacy-service.md)补齐单城市/执行者/多目标的亲善、同盟、停战，BigInt精确比较、独立金/AP与无序pair关系账本、普通失败退款及逐旬到期；完整policy/genesis/snapshot/receipt逐项重算。危险失败与未知特殊门槛原子拒绝。
