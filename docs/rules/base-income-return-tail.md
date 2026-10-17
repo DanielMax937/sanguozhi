@@ -83,3 +83,10 @@ oracle不从产品模块导入公式、预期结果或生成器。它从已核�
 有限broad覆盖全部65536 raw U16 types × 正/负N × 双resource；dense −8192..8192与零/高位type；每个mod5余数、signed极值、高位pattern、2与5幂边界、固定种子U32样本。不是完整U32×U32 Cartesian穷举。真实TS行为mutants另入口，涵盖unsigned/floor/ceil/round、4/6除数、SAR/校正错误、U8/U16/type枚举缩窄、负值clip、返回被type覆盖的EAX、错误bits、−0和证据越界声明；每个mutant前重新执行未改控制，来源hash拒绝不算行为kill。
 
 本模块只部分收窄 [金钱模块未决边界](city-money-income-projection.md) 和 [粮食模块未决边界](city-food-income-projection.md) 的20%标量尾部。母城查找、所有权/validity gate、可变读取、callee/ABI、Easy、收入特技、GameState、force/capture、writer/tick/月度季度scheduler、RNG和真实游戏整合仍未实现。P0-78及依赖排除。旧金钱179原run/证据不触碰。本地focused开发检查不替代协调者负责的新冻结完整适用聚合验收；不写入/推送GitHub、不创建PR、不发布Library。
+
+
+## 2026-10-17：单城财政的排除边界
+
+[O10-A支持域](city-finance-lifecycle.md#1-证据场景与所有权边界)仅城市，不连接本港关返回尾部，不据此扩展本核到真实港关入账、owner、writer或调度。原核和原证据保持不变。
+
+本次连接仅静态代码和规则交付，未运行测试、编译、build、checker、诊断、产品或示例；本页历史通过记录不覆盖新服务。

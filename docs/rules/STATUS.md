@@ -1,3 +1,13 @@
+# 当前状态：O10-A有限单城财政静态交付（2026-10-17）
+
+[完整规则](city-finance-lifecycle.md) · [API](../engine/city-finance-lifecycle.md) · [固定来源/完整政策](../sources/city-finance-lifecycle.json) · [静态场景](../../data/scenarios/city-finance-example-v1.json)
+
+独立profile已补固定owner/完整驻城普通有官薪名单、30设施到四个旧核的adapter、单旬月季历、请求base上的富豪/米道、丰作先于征收、收入先于季降、足额工资与不足整旬回滚、特产旧binary32政策及cap入库、完整保存重算。normal映射1，super2；Easy仅新服务拒绝。支持域不含港关、俘虏/未知工资身份、欠薪后果或原生任务/归属链。
+
+这是O10-A子批，不是全财政完成；所有者/payer、稳定helper、邻接、writer/cap、调度、RNG均为具名provisional政策，source核证据不被升级；nativeExecution=false、stockVerified=false，原43组不减。没有运行测试/typecheck/编译/build/checker/产品/诊断/示例，没有修改旧测试。历史默认food全套失败仍保留。
+
+以下是历史版本交付记录，不是当前候选运行验收；旧“当前”“待运行”“通过数”等标题/措辞只属于其原日期，不能覆盖本页顶部状态。普通外交/单挑/话题牌等只在各自子域有实现，不代表整个原生机制完成。
+
 # 2026-10-17：O09b普通话题牌独立舌战，静态代码与规则覆盖
 
 [完整规则](debate-topic-session-v1.md)、[API](../engine/topic-debate-session-v1.md)、[固定来源与完整policy](../sources/debate-topic-session-v1.json)：普通九模板、ordered tape/token、智力3/4/5/6普通手牌（保留再考槽）、精确attack/power/HP/stress、旧topic算伤、终局优先、非终局stress100原子拒绝、补牌及全genesis/receipt/snapshot重算已补。五话术/四性格愤激/再考/人物/开场与结束结算仍未实现；普通支持域不能覆盖任意原作牌局。

@@ -3638,3 +3638,10 @@ C10 已确认：
 ### 2026-10-14 独立月度城市粮食参数叶工程覆盖
 
 [monthly-city-food-base-argument](monthly-city-food-base-argument.md)只覆盖005905E0..00590603的harvest后levy参数变换与PUSH EDI选择：完整DWORD条件，LEA三倍先low32，两个signed向零/2。输入为当前EDI/EAX及独立晚期levy观测，不继承早期门槛或helper寄存器保留假设。只补§2.10、§2.12、§3.8已有规则的工程覆盖，不等于实际粮食入账或完整月度处理；C2/C3仍有证据债，原43不减，P0-78及依赖排除。
+
+
+## 2026-10-17：有限单城财政工程连接
+
+[O10-A完整财政子域](city-finance-lifecycle.md)以独立30槽、基础产值和明确政策连接已有金粮与特产核，具体[月初顺序](city-finance-lifecycle.md#33-月初1日的严格顺序)保持收入读取旧治安；[季降](city-finance-lifecycle.md#4-季初治安与随机带)的tape/writer仍provisional。本页历史原规则不因新服务而变成stock/native全链认证。
+
+本次连接仅静态代码和规则交付，未运行测试、编译、build、checker、诊断、产品或示例；本页历史通过记录不覆盖新服务。

@@ -108,3 +108,10 @@ R=200000 可由 base=3395 加三个无造币 yield=65535 槽在字段位宽内�
 - 最终合并树必须另跑完整正式回归；本项局部通过不能替代旧验收，也不代表所有 rawMoney/设施组合 Cartesian 穷举
 
 未实现：城市和 owner getter/validator、stock 原始类型表认证、邻接 helper、收入特技、入账 writer、月初/每旬 scheduler、港关母城与完整收入路径、费用、完整经济命令、状态/RNG/native 事务。20%份额的捕获EAX+晚期type纯标量尾部由[独立返回尾部模块](base-income-return-tail.md)部分补充；本尾部API保持全U32支持域，不依赖本city API的较窄支持域，也不代表港关完整caller闭合。粮食city投影另见[粮食模块](city-food-income-projection.md)。
+
+
+## 2026-10-17：金钱请求连接
+
+[O10-A金钱核适配与逐步公式](city-finance-lifecycle.md#21-金钱核在此域的具体计算)从固定primitive设施表生成输入，normal→1、super→2；随后独立credit及富豪/征税政策见[月初顺序](city-finance-lifecycle.md#33-月初1日的严格顺序)。本核仍只返回局部值，旧Easy0支持域未改；新所有者、stable helper与writer/cap均provisional。
+
+本次连接仅静态代码和规则交付，未运行测试、编译、build、checker、诊断、产品或示例；本页历史通过记录不覆盖新服务。

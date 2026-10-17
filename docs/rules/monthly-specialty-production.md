@@ -64,3 +64,10 @@ oracle独立用Fraction和整数ties-to-even推导gold，绝不调用产品计�
 ## 明确保留的缺口
 
 太守/城市/特产/helper内部及ABI、真实常量字节、converter与浮点控制环境、前置owner/force、完整月度循环、库存容量与实际增加量、writer/command/scheduler/EndTurn/RNG和stock PK/Vanilla/console认证均未完成。本核不接训练沙盒、不调用其他财政/生产API，不新增P0-78及依赖。
+
+
+## 2026-10-17：有限月特产库存连接
+
+[O10-A四类月特产](city-finance-lifecycle.md#6-月特产四类兵装)在完整月薪成功后按1→4调用本核，保留政治80/count8请求929。固定完成设施匹配与独立库存capacity饱和writer均为provisional；不把核1500请求cap当库存上限，也不把派生输入当native capture。
+
+本次连接仅静态代码和规则交付，未运行测试、编译、build、checker、诊断、产品或示例；本页历史通过记录不覆盖新服务。

@@ -1,0 +1,217 @@
+{
+  "version": "city-finance-policies-v1",
+  "calendar": {
+    "id": "finite-ten-day-calendar-v1",
+    "days": [
+      1,
+      11,
+      21
+    ],
+    "quarterMonths": [
+      1,
+      4,
+      7,
+      10
+    ],
+    "minYear": 1,
+    "maxYear": 9999,
+    "maxAdvanceLimit": 360,
+    "initialDateAlreadySettled": true,
+    "advanceCountPerCommand": 1
+  },
+  "ownership": {
+    "id": "fixed-owned-city-v1",
+    "cityKind": "city",
+    "activeForceMustOwn": true,
+    "ownershipChanges": false
+  },
+  "payroll": {
+    "id": "complete-named-office-payroll-v1",
+    "catalogVersion": "named-offices-v1",
+    "officeRange": [
+      0,
+      79
+    ],
+    "maxOfficers": 80,
+    "role": "ordinary-officer",
+    "uniqueOffice": true,
+    "completeResidentRoster": true,
+    "prisonerCount": 0,
+    "order": "ascending-code-unit-id",
+    "payer": "fixed-city"
+  },
+  "incomeRoster": {
+    "id": "stable-income-roster-v1",
+    "skills": [
+      "wealthy",
+      "rice-way",
+      "taxation",
+      "levy"
+    ],
+    "stacking": "boolean-existence",
+    "refresh": "each-advance",
+    "source": "fixed-complete-resident-roster",
+    "security": "before-seasonal-loss"
+  },
+  "adjacency": {
+    "id": "supplied-axial-complete-support-v1",
+    "distance": "max(abs(dq),abs(dr),abs(dq+dr))",
+    "distanceRequired": 1,
+    "supportMustBeComplete": true,
+    "mintKinds": [
+      "market"
+    ],
+    "granaryKinds": [
+      "farm"
+    ],
+    "stacking": "boolean-existence"
+  },
+  "facilities": {
+    "id": "documented-income-facility-table-v1",
+    "slots": 30,
+    "catalogVersion": "documented-income-facility-table-v1",
+    "incompleteUpgradeFallback": "kernel",
+    "completeWord": 1,
+    "incompleteWord": 0,
+    "forgeStableIncomeTypeSentinel": 0
+  },
+  "harvest": {
+    "id": "post-monthly-harvest-snapshot-v1",
+    "completeFutureMonthList": true,
+    "initialCurrent": null,
+    "application": "before-monthly-income",
+    "missing": "reject",
+    "nativeDisasterGeneration": false
+  },
+  "income": {
+    "id": "documented-month-quarter-income-order-v1",
+    "normalDifficultyWord": 1,
+    "superDifficultyWord": 2,
+    "easy": "reject-profile-only",
+    "monthlyOrder": [
+      "money-base",
+      "wealthy-bonus",
+      "food-base",
+      "rice-way-bonus",
+      "seasonal-security",
+      "full-salary",
+      "specialty-1-to-4"
+    ],
+    "taxation": "floor(M/2)-each-ten-day-turn",
+    "wealthy": "month-start-only-floor(requested-money-base/2)",
+    "foodGate": "quarter-start-or-levy",
+    "foodModifiers": [
+      "harvest-floor(3F/2)",
+      "levy-floor(G/2)"
+    ],
+    "riceWay": "quarter-start-only-floor(requested-food-base/2)"
+  },
+  "credit": {
+    "id": "saturating-positive-credit-v1",
+    "accepted": "min(requested,capacity-before)",
+    "discarded": "requested-accepted",
+    "bonusBasis": "requested-base",
+    "caps": "explicit-scenario-not-native"
+  },
+  "debit": {
+    "id": "exact-affordable-salary-debit-v1",
+    "amount": "sum-of-catalog-monthlySalary",
+    "affordability": "after-income-caps",
+    "partialPayment": false,
+    "personCashWallet": false
+  },
+  "shortfall": {
+    "id": "atomic-month-reject-shortfall-v1",
+    "reason": "unsupported-salary-shortfall",
+    "rollback": "whole-advance-including-calendar-and-rng",
+    "nativeFinalizer": false
+  },
+  "security": {
+    "id": "seasonal-security-bounded-tape-v1",
+    "adminBound": 100,
+    "adminSkipBelow": 50,
+    "lossBound": 3,
+    "missingGovernorCharm": 0,
+    "base": "floor(max(1,90-charm)/10)",
+    "requestedLoss": "min(5,base+roll3)",
+    "floor": 0,
+    "adminSkipConsumesLossDraw": false,
+    "noGovernorStillConsumesLossDraw": true,
+    "nativePrng": false,
+    "evidence": "provisional-engine-rule"
+  },
+  "specialty": {
+    "id": "documented-matching-complete-facilities-v1",
+    "order": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "matchingKinds": {
+      "1": "forge",
+      "2": "forge",
+      "3": "forge",
+      "4": "stable"
+    },
+    "completedFacilityWeight": 1,
+    "governorRequired": true,
+    "arithmeticProfile": "comment-f32-rne-trunc-v1",
+    "kernelRequestCap": 1500,
+    "nativeMatchingHelperRecovered": false
+  },
+  "capacity": {
+    "id": "bounded-finance-input-v1",
+    "maxGoldFoodCapacity": 1000000000,
+    "maxEquipmentCapacity": 1000000,
+    "maxTroops": 150000,
+    "maxSecurity": 100,
+    "maxBaseProductionWord": 65535,
+    "maxRngDraws": 720,
+    "maxTraceAttempts": 1080,
+    "maxCanonicalUtf8Bytes": 67108864,
+    "maxInputNodes": 4000000,
+    "maxInputDepth": 48,
+    "maxArrayLength": 1080,
+    "maxObjectKeys": 128,
+    "maxIdLength": 64,
+    "capacityFailure": "budget-exceeded"
+  },
+  "persistence": {
+    "id": "canonical-recompute-v1",
+    "schemaVersion": 1,
+    "policyComparison": "full-parameters",
+    "catalogComparison": "full-snapshot",
+    "digest": "sha256-canonical-json",
+    "genesisSnapshot": "recompute",
+    "receipts": "compare-all-fields",
+    "finalSnapshot": "compare-all-fields",
+    "jsonDuplicateKeys": "reject",
+    "objectKeyOrder": "irrelevant",
+    "arrayOrder": "preserved",
+    "nativeExecution": false
+  },
+  "specialtyArithmetic": {
+    "id": "comment-f32-rne-trunc-v1",
+    "constantBitsU32": {
+      "half": 1056964608,
+      "one": 1065353216,
+      "quarter": 1048576000,
+      "two": 1073741824,
+      "tenth": 1036831949,
+      "three": 1077936128
+    },
+    "factorTiers": [
+      "count=1:1",
+      "2..3:1+(count-1)*half",
+      "4..7:2+(count-3)*quarter",
+      "8..30:3+(count-7)*tenth"
+    ],
+    "factorStore": "one-binary32-round-to-nearest-even",
+    "politicsTerm": "floor(politics/2)+60",
+    "scaledValue": "politicsTerm*storedFactor*three",
+    "converter": "truncate-toward-zero",
+    "requestCap": 1500,
+    "evidence": "provisional-comment-constants-and-converter"
+  }
+}

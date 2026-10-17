@@ -1,3 +1,9 @@
+## 当前新增：有限单城财政（O10-A，2026-10-17）
+
+固定owner与完整驻城有官薪名单、30设施和U16基础产值自行推导金粮，单旬推进、月金粮/季初治安/足额月薪/四类月特产顺序、独立库存cap与逐笔弃置、完整genesis/receipt/snapshot重算已补静态代码。见[完整具体规则](docs/rules/city-finance-lifecycle.md)、[API](docs/engine/city-finance-lifecycle.md)、[固定来源与全部政策](docs/sources/city-finance-lifecycle.json)、[未运行静态场景](data/scenarios/city-finance-example-v1.json)。不足薪资整旬拒绝，无俘虏/未知工资身份；每未来月丰作primitive必须明确提供。
+
+这仅完成O10-A有限服务的代码/规则覆盖，不是全部财政或原生事务认证；O04/schema与旧核不改。所有者、payer/名单、稳定helper、实际writer/cap、随机带与调度均为provisional。原43不减。未运行测试、typecheck、编译、build、checker、产品、诊断或示例，未改旧测试；历史food全套失败未解决，历史通过数不验证本树。下面按主题保留以前交付导航和历史措辞，各自有限支持域仍以正文为准，不能当作本次运行结果。
+
 ## 普通话题牌独立舌战session（O09b，静态新增）
 
 三类九种普通牌、显式有序牌带与occurrence token、智力3/4/5/6普通手牌、精确attack/power/damage/stress、旧话题算伤/非终局胜者更新话题与先手、HP终局优先、完整genesis/receipt保存重放见[完整规则](docs/rules/debate-topic-session-v1.md)、[API](docs/engine/topic-debate-session-v1.md)、[未运行五轮纸面设计](data/scenarios/topic-debate-example-v1.json)。非终局stress100整轮拒绝；五话术/四性格愤激/再考/人物/结束结算尚未完成。E15公式等级保留，新session仅固定现代转录子集，不是native认证；原43不减、P078及任务/归属/外交自动结算排除。没有运行测试、typecheck、编译、build、checker、产品、诊断或示例；旧测试及旧food失败保留。
