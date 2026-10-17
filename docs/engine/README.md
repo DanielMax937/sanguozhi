@@ -1,3 +1,7 @@
+## 普通话题牌独立舌战
+
+[O09b API](topic-debate-session-v1.md)与[完整规则](../rules/debate-topic-session-v1.md)：ordered tape/token、3/4/5/6普通容量、原子round、HP先于anger/refill、严格genesis保存重放。现代转录普通子集，五话术/愤激/再考/人物/结束结算保留；静态新增，未运行测试/typecheck/编译/build/checker/产品或诊断。
+
 # 工程API入口
 
 接口与实际游戏规则分开定位；各模块的版本、支持域和证据等级以各自正文为准。最新工程/证据状态见[STATUS](../rules/STATUS.md)，完整游戏规则见[规则索引](../rules/README.md)。

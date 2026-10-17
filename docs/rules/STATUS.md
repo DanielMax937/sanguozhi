@@ -1,3 +1,9 @@
+# 2026-10-17：O09b普通话题牌独立舌战，静态代码与规则覆盖
+
+[完整规则](debate-topic-session-v1.md)、[API](../engine/topic-debate-session-v1.md)、[固定来源与完整policy](../sources/debate-topic-session-v1.json)：普通九模板、ordered tape/token、智力3/4/5/6普通手牌（保留再考槽）、精确attack/power/HP/stress、旧topic算伤、终局优先、非终局stress100原子拒绝、补牌及全genesis/receipt/snapshot重算已补。五话术/四性格愤激/再考/人物/开场与结束结算仍未实现；普通支持域不能覆盖任意原作牌局。
+
+E15既有formulaEvidence保留，新增状态机仅pinned-modern-translated-reference，牌序为工程政策；nativeEquivalent=false、stockOriginalVerified=false，原43及全部平台/人物未决不减。P078、native任务、俘虏/处斩/归属、return/mission和外交自动结算排除。未运行测试/typecheck/编译/build/checker/产品/诊断或样例，未改旧测试，旧默认food失败保留；历史通过数不验证本树。
+
 # 2026-10-17：O09a普通单挑独立session，静态代码与规则覆盖
 
 [三方针普通session规则](duel-ordinary-session-v1.md)与[API](../engine/ordinary-duel-session-v1.md)新增：完整duelScore平方份额、stepwise截断、SourceNormal通用身份、条件3/4原始draw、Hit/Dodge/Block无反击、pre-write HP斗志、cap writer、exchange/blow双计数、HP胜负先于50合平局，以及完整policy/evidence/genesis/receipt/snapshot重放。所有人物hook关闭；普通动作调度、方针时机、有界输入/RNG适配为具名工程policy。

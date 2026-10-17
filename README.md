@@ -1,3 +1,7 @@
+## 普通话题牌独立舌战session（O09b，静态新增）
+
+三类九种普通牌、显式有序牌带与occurrence token、智力3/4/5/6普通手牌、精确attack/power/damage/stress、旧话题算伤/非终局胜者更新话题与先手、HP终局优先、完整genesis/receipt保存重放见[完整规则](docs/rules/debate-topic-session-v1.md)、[API](docs/engine/topic-debate-session-v1.md)、[未运行五轮纸面设计](data/scenarios/topic-debate-example-v1.json)。非终局stress100整轮拒绝；五话术/四性格愤激/再考/人物/结束结算尚未完成。E15公式等级保留，新session仅固定现代转录子集，不是native认证；原43不减、P078及任务/归属/外交自动结算排除。没有运行测试、typecheck、编译、build、checker、产品、诊断或示例；旧测试及旧food失败保留。
+
 ## 普通单挑独立session（O09a，静态新增）
 
 三方针Attack/Defense/Spirit、原始有界随机、Hit/Dodge/Block、HP/斗志writer、双计数、HP胜负/50合平局与genesis保存重放已补独立代码和[完整具体规则](docs/rules/duel-ordinary-session-v1.md)，见[API](docs/engine/ordinary-duel-session-v1.md)和[纸面场景](data/scenarios/ordinary-duel-example-v1.json)。仅普通子集；Fury/会心/必杀/装备/人物特例与舌战不在本模块。现代转录来源不是原生PC-PK/PK1.1认证，原43组未决主题不减；无P078/native人员任务链。本轮未运行测试、编译、build、checker、产品或诊断，历史通过数不覆盖本树，旧默认food失败仍保留。
