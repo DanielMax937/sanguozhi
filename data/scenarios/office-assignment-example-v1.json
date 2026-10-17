@@ -1,0 +1,255 @@
+{
+  "schemaVersion": 1,
+  "description": "Manual static examples for independent named-office service, not executed evidence",
+  "scenario": {
+    "titleKey": "provincial-inspector",
+    "officers": [
+      {
+        "personId": 10,
+        "role": "ordinary-officer",
+        "appointmentStatus": "ready",
+        "merit": 4000,
+        "trueLoyalty": 100,
+        "selectorStats": {
+          "leadership": 80,
+          "war": 80,
+          "intelligence": 75,
+          "politics": 75
+        }
+      },
+      {
+        "personId": 20,
+        "role": "ordinary-officer",
+        "appointmentStatus": "ready",
+        "merit": 4000,
+        "trueLoyalty": 90,
+        "selectorStats": {
+          "leadership": 40,
+          "war": 40,
+          "intelligence": 85,
+          "politics": 90
+        }
+      },
+      {
+        "personId": 30,
+        "role": "ordinary-officer",
+        "appointmentStatus": "ready",
+        "merit": 3999,
+        "trueLoyalty": 100,
+        "selectorStats": {
+          "leadership": 60,
+          "war": 60,
+          "intelligence": 60,
+          "politics": 70
+        }
+      },
+      {
+        "personId": 40,
+        "role": "ordinary-officer",
+        "appointmentStatus": "ready",
+        "merit": 0,
+        "trueLoyalty": 89,
+        "selectorStats": {
+          "leadership": 100,
+          "war": 100,
+          "intelligence": 100,
+          "politics": 100
+        }
+      },
+      {
+        "personId": 50,
+        "role": "ordinary-officer",
+        "appointmentStatus": "ready",
+        "merit": 0,
+        "trueLoyalty": 90,
+        "selectorStats": {
+          "leadership": 60,
+          "war": 1,
+          "intelligence": 30,
+          "politics": 30
+        }
+      }
+    ],
+    "assignments": []
+  },
+  "independentRequests": [
+    {
+      "request": {
+        "mode": "weighted-threshold",
+        "incumbentPolicy": "fill-vacancies-v1"
+      },
+      "manuallyDerivedAfterAssignments": [
+        {
+          "officeId": 64,
+          "personId": 10
+        },
+        {
+          "officeId": 65,
+          "personId": 20
+        },
+        {
+          "officeId": 72,
+          "personId": 30
+        },
+        {
+          "officeId": 76,
+          "personId": 50
+        }
+      ],
+      "manuallyDerivedRevision": 1
+    },
+    {
+      "request": {
+        "mode": "role-affinity",
+        "incumbentPolicy": "fill-vacancies-v1"
+      },
+      "manuallyDerivedAfterAssignments": [
+        {
+          "officeId": 64,
+          "personId": 20
+        },
+        {
+          "officeId": 68,
+          "personId": 10
+        },
+        {
+          "officeId": 72,
+          "personId": 30
+        },
+        {
+          "officeId": 76,
+          "personId": 50
+        }
+      ],
+      "manuallyDerivedRevision": 1
+    }
+  ],
+  "incumbentScenario": {
+    "titleKey": "provincial-inspector",
+    "officers": [
+      {
+        "personId": 10,
+        "role": "ordinary-officer",
+        "appointmentStatus": "ready",
+        "merit": 4000,
+        "trueLoyalty": 100,
+        "selectorStats": {
+          "leadership": 80,
+          "war": 80,
+          "intelligence": 75,
+          "politics": 75
+        }
+      },
+      {
+        "personId": 20,
+        "role": "ordinary-officer",
+        "appointmentStatus": "ready",
+        "merit": 4000,
+        "trueLoyalty": 90,
+        "selectorStats": {
+          "leadership": 40,
+          "war": 40,
+          "intelligence": 85,
+          "politics": 90
+        }
+      },
+      {
+        "personId": 30,
+        "role": "ordinary-officer",
+        "appointmentStatus": "ready",
+        "merit": 3999,
+        "trueLoyalty": 100,
+        "selectorStats": {
+          "leadership": 60,
+          "war": 60,
+          "intelligence": 60,
+          "politics": 70
+        }
+      },
+      {
+        "personId": 40,
+        "role": "ordinary-officer",
+        "appointmentStatus": "ready",
+        "merit": 0,
+        "trueLoyalty": 89,
+        "selectorStats": {
+          "leadership": 100,
+          "war": 100,
+          "intelligence": 100,
+          "politics": 100
+        }
+      },
+      {
+        "personId": 50,
+        "role": "ordinary-officer",
+        "appointmentStatus": "ready",
+        "merit": 0,
+        "trueLoyalty": 90,
+        "selectorStats": {
+          "leadership": 60,
+          "war": 1,
+          "intelligence": 30,
+          "politics": 30
+        }
+      }
+    ],
+    "assignments": [
+      {
+        "officeId": 79,
+        "personId": 10
+      }
+    ]
+  },
+  "incumbentRequests": [
+    {
+      "request": {
+        "mode": "weighted-threshold",
+        "incumbentPolicy": "fill-vacancies-v1"
+      },
+      "manuallyDerivedAfterAssignments": [
+        {
+          "officeId": 64,
+          "personId": 20
+        },
+        {
+          "officeId": 72,
+          "personId": 30
+        },
+        {
+          "officeId": 76,
+          "personId": 50
+        },
+        {
+          "officeId": 79,
+          "personId": 10
+        }
+      ]
+    },
+    {
+      "request": {
+        "mode": "weighted-threshold",
+        "incumbentPolicy": "rebuild-all-v1"
+      },
+      "manuallyDerivedAfterAssignments": [
+        {
+          "officeId": 64,
+          "personId": 10
+        },
+        {
+          "officeId": 65,
+          "personId": 20
+        },
+        {
+          "officeId": 72,
+          "personId": 30
+        },
+        {
+          "officeId": 76,
+          "personId": 50
+        }
+      ]
+    }
+  ],
+  "usage": "Pass scenario or incumbentScenario only to createOfficeAssignmentState. Run each independentRequests item from the same initial state; these rows are alternatives, not a sequence. plan then apply, or replay with explicit initialState plus request sequence. Expected fields are explanatory and must not be supplied as commands.",
+  "execution": "not-run"
+}

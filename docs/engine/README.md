@@ -12,3 +12,5 @@
 | 独立PK能力研究与培育 | [两阶段接口、收据及持久化](pk-ability-lifecycle.md) | [完整目录、资格、费用、次数、效果与并行完成](../rules/pk-ability-lifecycle.md) |
 
 技巧研究采用明确provisional政策，未修改训练GameState或共享任何其他服务的账户/预约。本次新增代码和规则只做静态工作，没有运行测试、编译、构建或诊断；历史验收不覆盖本次最终树。
+
+- [独立官职分配服务](office-assignment-service.md)：80有名职selector→plan→apply，明确fill/rebuild、资格与排序政策，单关系状态与请求重放；不接native角色/归属事务

@@ -768,3 +768,9 @@ mode-caller-mapping-open
 SIRE 历史交叉：
 - https://games.sina.com.cn/d/e/pc/140457.shtml
 - https://patch.ali213.net/showpatch/18430.html
+
+## 2026-10-16 后继资格边界与独立服务说明
+
+本页保留历史审计正文。§11“005FA4D0功绩门槛已经确定”的早期措辞请结合后继[65：资格helper边界](65-auto-office-qualification-helper-boundary.md)：目录功绩门槛和真实×4000阶梯有支持，但005FA4D0完整body、具体opcode和tier读取仍open。不可将其他功绩/UI helper的opcode当作本helper内部实现已恢复，也不必撤回资料表门槛。
+
+新增[独立官职分配服务](office-assignment-service.md)提供80有名官职的selector→plan→apply、分离爵位元数据、具体工程资格/调度政策及保存重放；它不升级原helper/caller/writer证据级别。entry80仍未知，独立未任职为null；详见[API](../engine/office-assignment-service.md)。

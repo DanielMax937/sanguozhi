@@ -405,3 +405,7 @@ P0-58以[93-legion-role-reconciliation.md](93-legion-role-reconciliation.md)为�
 ## 2026-10-11 生产耗时独立caller投影
 
 已新增本地候选 `calculateProductionTimeProjection` / `production-time-observations-v1`（说明：production-time.md）。仅固定listing与逐调用观测驱动的整数/trace；全无效返回9、type9跳扫描、重复validity/设施解析独立、允许负数和零、技能向零减半。真实helpers/ABI/对象可变读取/命令/库存writer/完成调度/实际日数/stock仍open；未覆盖P0-78及依赖。新树验收和发布状态外部收据单列，不复用PR #55历史通过。
+
+## 独立官职分配服务（2026-10-16）
+
+[完整规则正文](office-assignment-service.md)记录全部80个一般官职、10个分离爵位元数据、六分支评分、资格/爵位门、稳定调度、即时移出、fill/rebuild及原子状态保存重放。[来源manifest](../sources/office-assignment-service.json)区分4000功绩表证据与005FA4D0 body-open；[API](../engine/office-assignment-service.md)提供真实可提交接口。此工程服务不关闭64/65/66的原生证据债。本次只做静态代码/文档，不执行测试或编译类检查。

@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "profile": "independent-office-assignment-v1",
+  "scope": "80 named general offices, separate 10 ruler-title metadata rows, selector/plan/apply and detached JSON replay",
+  "baselineCommit": "991fbddae7610df43501c1dc0d4c62de76fd4c55",
+  "catalog": {
+    "path": "data/catalogs/named-offices-v1.json",
+    "version": "named-offices-v1",
+    "sha256": "949e956340414969224406315ce93d141e97379ca8a5403923bb9714bb8aa7c1",
+    "sourceRows": 80,
+    "rulerTitleRows": 10,
+    "idNormalization": "officeId equals zero-based ranks.json offices array index",
+    "entry80": "unknown, unsupported, never an unassigned sentinel",
+    "unassigned": "null derived from absent detached assignment relation",
+    "originalTableUrl": "https://w.atwiki.jp/sangokushi11/pages/111.html"
+  },
+  "sources": [
+    {
+      "path": "docs/rules/43-auto-office-selector-exactness.md",
+      "revision": "991fbddae7610df43501c1dc0d4c62de76fd4c55",
+      "sha256": "ab0087b62b3c0b614bfa87766a327d89cf83aa87b76e7ad43249acb599346162",
+      "claim": "005FAF00 score branches and strict-greater first-wins; early qualification wording is superseded by rule 65",
+      "evidenceLevel": "source-listing-selector-exact"
+    },
+    {
+      "path": "docs/sources/auto-office-selector-exactness.json",
+      "revision": "991fbddae7610df43501c1dc0d4c62de76fd4c55",
+      "sha256": "968ee9092845db3c3dd9e8cc12e34f8be37f16efe59944c3edacf2ddea6f1da6",
+      "claim": "Selector call convention, scoring and classification boundary",
+      "evidenceLevel": "source-listing-and-reverse-inference"
+    },
+    {
+      "path": "docs/sources/ranks.json",
+      "revision": "991fbddae7610df43501c1dc0d4c62de76fd4c55",
+      "sha256": "9b8c836e1d0b0c13dddf37d78393c323dfc86ffe98b897be1e79dfe823da4752",
+      "claim": "80 named general offices; 10 repeated ruler-title metadata groups; row-specific values",
+      "evidenceLevel": "documented-table"
+    },
+    {
+      "path": "scripts/check_auto_office_selector_exactness.py",
+      "revision": "991fbddae7610df43501c1dc0d4c62de76fd4c55",
+      "sha256": "d9e8d3ebbf428a1fb315e4cac2e1d9940bad59a1e40f56d7af246aba5dade0f9",
+      "claim": "Historical formula reference text only; not a qualification/scheduler/writer implementation",
+      "evidenceLevel": "reference-text-not-executed"
+    },
+    {
+      "path": "docs/rules/16-unresolved-rules-fallbacks.md",
+      "revision": "991fbddae7610df43501c1dc0d4c62de76fd4c55",
+      "sha256": "6964dd2ef887b1c938d33e7c4f86e840ee8193addf0c4e3370a4873fe4055e86",
+      "claim": "Provisional stable candidate/office order and immediate removal, section 7.3",
+      "evidenceLevel": "provisional-caller-scheduler"
+    },
+    {
+      "path": "docs/rules/65-auto-office-qualification-helper-boundary.md",
+      "revision": "991fbddae7610df43501c1dc0d4c62de76fd4c55",
+      "sha256": "3e929fea3ad4f5392fc8992d4de3198a286b50d76787063a8f7be51e842fd121",
+      "claim": "005FA4D0 call contract exact; body/tier opcode/state/location/identity conditions remain open",
+      "evidenceLevel": "boundary-exact-body-open"
+    },
+    {
+      "path": "docs/sources/auto-office-qualification-helper-boundary.json",
+      "revision": "991fbddae7610df43501c1dc0d4c62de76fd4c55",
+      "sha256": "803ae915ea8d3fe035d065f50eda436b2457b376b47d0e8219c581c30bb5511a",
+      "claim": "Merit threshold body evidence distinction",
+      "evidenceLevel": "documented-empirical-high-not-body-exact"
+    },
+    {
+      "path": "docs/rules/64-auto-office-scheduler-boundary.md",
+      "revision": "991fbddae7610df43501c1dc0d4c62de76fd4c55",
+      "sha256": "b2e675689c16864a8b99c40f88eb114110452f79b4d1c6ad1cac8492a2eb77d1",
+      "claim": "Original candidate builder, caller order, mode use and multi-office writer remain open",
+      "evidenceLevel": "open-native-scheduler"
+    },
+    {
+      "path": "docs/rules/66-office-classifier-entry80-boundary.md",
+      "revision": "991fbddae7610df43501c1dc0d4c62de76fd4c55",
+      "sha256": "b2be53c8cb50f92d8b5e034a8f2c9d99bbf2169886abdccb32454583a4dd0dc6",
+      "claim": "0..79 classification high-confidence; internal entry80 semantics unknown",
+      "evidenceLevel": "reverse-inferred-high-entry80-open"
+    },
+    {
+      "path": "docs/rules/03-personnel.md",
+      "revision": "991fbddae7610df43501c1dc0d4c62de76fd4c55",
+      "sha256": "3b35d79ee0599d823086e1ba2203636aa7cd9ada4e54307dcd3578f7a6df2ea2",
+      "claim": "Independent merit/UI helper support for real 4000 ladder; ordinary appointment has no loyalty write",
+      "evidenceLevel": "documented-and-separate-helper-evidence"
+    }
+  ],
+  "policyIds": {
+    "eligibility": "detached-ready-merit-title-v1",
+    "scheduler": "stable-ascending-immediate-removal-v1",
+    "stats": "fixed-effective-stats-1-to-100-v1",
+    "persistence": "canonical-recompute-v1",
+    "incumbents": [
+      "fill-vacancies-v1",
+      "rebuild-all-v1"
+    ]
+  },
+  "policiesAre": "Concrete engineering replacements, not restored native helper/caller/writer implementations",
+  "meritDistinction": {
+    "tableLadder": "0..36000 in 4000 increments retained",
+    "qualificationBody": "005FA4D0 body and exact tier reads remain open; documented/empirical-high is not opcode-exact"
+  },
+  "selectorInputStats": "Fixed effective snapshots per plan; not a reconstruction of original getters or modifiers",
+  "prohibitedEffects": [
+    "native graph writes",
+    "loyalty changes",
+    "salary payments",
+    "AP/gold ledger writes",
+    "base-stat increments",
+    "title acquisition",
+    "RNG draws"
+  ],
+  "remainingOpen": [
+    "005FA4D0 body",
+    "005FA650 body",
+    "entry80",
+    "native candidate construction and order",
+    "native mode mapping",
+    "native multi-office order and writer",
+    "stock/Vanilla/console equivalence"
+  ],
+  "validation": {
+    "execution": "not-run",
+    "tests": "not-run",
+    "typecheck": "not-run",
+    "build": "not-run",
+    "compiler": "not-run",
+    "checkers": "not-run",
+    "productOrDiagnostics": "not-run",
+    "existingTests": "unchanged",
+    "staticExamples": "manual rule derivations, not execution receipts"
+  },
+  "stockOriginalVerified": false
+}
