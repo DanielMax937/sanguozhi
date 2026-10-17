@@ -1,0 +1,2503 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:city-search-lifecycle:v1",
+  "title": "Standalone fixed-city discovery-only Search v1 JSON interchange structures",
+  "description": "Closed scenario, envelope, receipt, state and trace with API result definitions. Authored statically; not executed or schema-validated. Shape does not establish calculation, historical reachability, native fidelity or authenticity. Runtime additionally rejects non-own/accessor/inherited/symbol properties, negative zero, unsafe integers, duplicate decoded JSON keys, noncanonical saved genesis, invalid references and derived-state mismatches. Every complete input/result/save has 16MiB UTF-8, 1048576 nodes, depth24, array4096 and object128-key limits; the escaped SaveResult and all old idempotent returns are included. Individual maxima share these budgets and are not necessarily jointly attainable. Only O13-A is implemented; O13-B is not accepted. Object APIs support only non-Proxy plain/null-prototype own-data JSON DTOs; reflection may trigger Proxy traps, and hostile Proxy or polluted runtime are unsupported rather than guaranteed detectable. JSON-string load has a separate bounded parser. Full reconstruction and repeated history/receipt budget scans grow at least quadratically in history; 4096 is a hard limit, not a latency or benchmark guarantee.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/scenario"
+    },
+    {
+      "$ref": "#/$defs/envelope"
+    },
+    {
+      "$ref": "#/$defs/receipt"
+    },
+    {
+      "$ref": "#/$defs/state"
+    },
+    {
+      "$ref": "#/$defs/trace"
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+    },
+    "date": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "year",
+        "month",
+        "day"
+      ],
+      "properties": {
+        "year": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "month": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "day": {
+          "enum": [
+            1,
+            11,
+            21
+          ]
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "const": {
+        "schemaVersion": 1,
+        "id": "city-search-policy-v1",
+        "evidenceLevel": "synthetic-replaceable-policy",
+        "filter": {
+          "id": "search-local-ordinary-filter-v1",
+          "ordering": "ascii-id-ascending",
+          "talentLifeStatus": "living",
+          "talentServiceStatus": "free",
+          "treasureKind": "ordinary",
+          "treasureHolder": null,
+          "initialDiscoveryOrigin": "supplied-initial",
+          "importCatalog": "none-supplied-instance-facts-only"
+        },
+        "selection": {
+          "id": "search-talent-treasure-gold-v1",
+          "cityEvents": "not-executed",
+          "talentRollBound": 100,
+          "treasureRollBound": 100,
+          "comparison": "roll-less-than-unclipped-kernel-value",
+          "singletonConsumesSelector": false,
+          "goldBound": "charmU8-plus-one"
+        },
+        "rng": {
+          "kind": "search-lcg32-multiply-high-v1",
+          "multiplier": 1664525,
+          "increment": 1013904223,
+          "modulus": 4294967296,
+          "mapping": "floor-state-times-bound-over-modulus",
+          "zeroSeedAllowed": true,
+          "maxDrawsPerSearch": 5,
+          "strictlyUnbiased": false
+        },
+        "costs": {
+          "gold": 0,
+          "actionPoints": 20,
+          "withTalentOfficeActionPoints": 10,
+          "actorFrequency": "once-per-local-turn",
+          "cityFrequencyLimit": null
+        },
+        "gold": {
+          "id": "search-stable-city-gold-read-v1",
+          "secondRead": "exactly-when-first-gold-plus-proposed-exceeds-capacity",
+          "writer": "exact-affordable-credit-v1",
+          "minimumCredit": 30,
+          "maximumCredit": 80,
+          "maximumCapacity": 1000000000
+        },
+        "rewards": {
+          "id": "search-ledger-saturating-v1",
+          "meritCap": 1000000000,
+          "politicsXpCap": 1000000000,
+          "techniquePointCap": 10000,
+          "talent": {
+            "id": "discovery-only-no-hire-reward-v1",
+            "merit": 0,
+            "politicsXp": 0,
+            "techniquePoints": 0
+          },
+          "treasure": {
+            "merit": 50,
+            "politicsXp": 1,
+            "techniquePoints": 2
+          },
+          "gold": {
+            "merit": 50,
+            "politicsXp": 1,
+            "techniquePoints": 2
+          },
+          "nothing": {
+            "merit": 10,
+            "politicsXp": 1,
+            "techniquePoints": 0
+          }
+        },
+        "time": {
+          "id": "search-service-ap-recovery20-v1",
+          "actionPointRecovery": 20,
+          "actionPointCap": 255,
+          "days": [
+            1,
+            11,
+            21
+          ],
+          "otherServiceEffects": false
+        },
+        "limits": {
+          "actors": 256,
+          "talents": 1024,
+          "treasures": 128,
+          "advances": 360,
+          "acceptedCommands": 4096,
+          "traceAttempts": 4096,
+          "completeResultBytes": 16777216,
+          "nodes": 1048576,
+          "depth": 24,
+          "arrayLength": 4096,
+          "objectKeys": 128
+        },
+        "sourceIdentities": {
+          "researchCommit": "66e167e40c3440929ec016f3872aefc3486434c1",
+          "talentBlob": "d069a0a06b809de318b9f99deb1bb70f9b8dd3c7",
+          "treasureAndGoldBlob": "82bff04db2dae9ae0787e1e71ad72f1b4e6852de",
+          "talentUtf8Sha256": "cc5202aaf4a20b8ca6574b8145b83e1713f3298dcae442413af4c9761f09b7d3",
+          "treasureAndGoldUtf8Sha256": "5cbca6abd2d96ccf6980f26bee3eb4fd31b0baa0a942d65f5efb0d4c30220f0c",
+          "talentKernelProfile": "search-talent-resolved-v1",
+          "treasureKernelProfile": "treasure-roll-resolved-v1",
+          "goldKernelProfile": "search-gold-caller-resolved-v1",
+          "sourceLevel": "source-listing-reconstruction",
+          "stockCertified": false
+        }
+      },
+      "description": "Only the complete registered city-search-policy-v1 value is accepted. A future policy requires a different profile/version and new genesis, never an ID-only override."
+    },
+    "sourceBoundary": {
+      "type": "object",
+      "const": {
+        "serviceEvidence": "synthetic-replaceable-policy",
+        "kernelsEvidence": "source-listing-reconstruction",
+        "rewardRequestsEvidence": "selected-listing-call-sites-not-native-writers",
+        "talentNoHirePoliticsXpEvidence": "guide-observation",
+        "talentNoHireMeritAndTpEvidence": "synthetic-conservative-zero",
+        "originalCommandEquivalent": false,
+        "stockOrCrossVersionCertified": false,
+        "originalRandomStreamEquivalent": false,
+        "originalTalentFilterRecovered": false,
+        "originalTreasureFilterRecovered": false,
+        "originalTreasureProbabilityRecovered": false,
+        "sourceReturn205Preserved": true,
+        "stableGoldReadsArePolicy": true,
+        "nativeWriterCertified": false,
+        "ownershipFrozen": true,
+        "talentDiscoveryIsRecruitment": false,
+        "treasureDiscoveryGrantsOwnership": false,
+        "cityEvents": "not-executed",
+        "adjacentSiteDiscovery": "O13-B-not-implemented",
+        "original43GroupsReduced": false,
+        "original45SnapshotReduced": false
+      }
+    },
+    "force": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "techniquePoints"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "techniquePoints": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        }
+      }
+    },
+    "city": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "forceId",
+        "corpsId",
+        "gold",
+        "goldCapacity",
+        "talentOfficeComplete",
+        "regionId"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "const": "city"
+        },
+        "forceId": {
+          "$ref": "#/$defs/id"
+        },
+        "corpsId": {
+          "$ref": "#/$defs/id"
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "goldCapacity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "talentOfficeComplete": {
+          "type": "boolean"
+        },
+        "regionId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    },
+    "corps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "forceId",
+        "actionPoints"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "forceId": {
+          "$ref": "#/$defs/id"
+        },
+        "actionPoints": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "forceId",
+        "cityId",
+        "ordinary",
+        "available",
+        "politicsU8",
+        "charmU8",
+        "birthRegionI32",
+        "eyeSkillEaxU32",
+        "merit",
+        "politicsXp",
+        "actedTurn"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "forceId": {
+          "$ref": "#/$defs/id"
+        },
+        "cityId": {
+          "$ref": "#/$defs/id"
+        },
+        "ordinary": {
+          "type": "boolean"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "politicsU8": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "charmU8": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "birthRegionI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "eyeSkillEaxU32": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "merit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "politicsXp": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "actedTurn": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "talent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "cityId",
+        "lifeStatus",
+        "serviceStatus",
+        "availableFromTurn",
+        "discovered"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "cityId": {
+          "$ref": "#/$defs/id"
+        },
+        "lifeStatus": {
+          "enum": [
+            "living",
+            "dead"
+          ]
+        },
+        "serviceStatus": {
+          "enum": [
+            "free",
+            "serving",
+            "prisoner"
+          ]
+        },
+        "availableFromTurn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "discovered": {
+          "type": "boolean"
+        }
+      }
+    },
+    "treasure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "searchCityId",
+        "kind",
+        "holderRef",
+        "availableFromTurn",
+        "valueU8",
+        "discovered"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "searchCityId": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "ordinary",
+            "imperial-seal",
+            "bronze-pheasant"
+          ]
+        },
+        "holderRef": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "availableFromTurn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "valueU8": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "discovered": {
+          "type": "boolean"
+        }
+      }
+    },
+    "scenarioRng": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "seed"
+      ],
+      "properties": {
+        "kind": {
+          "const": "search-lcg32-multiply-high-v1"
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "profile",
+        "scope",
+        "date",
+        "turn",
+        "advanceLimit",
+        "activeForceId",
+        "force",
+        "city",
+        "corps",
+        "actors",
+        "talents",
+        "treasures",
+        "rng",
+        "policy"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "standalone-city-search-v1"
+        },
+        "scope": {
+          "const": "one-fixed-city-discovery-only"
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "turn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "advanceLimit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 360
+        },
+        "activeForceId": {
+          "$ref": "#/$defs/id"
+        },
+        "force": {
+          "$ref": "#/$defs/force"
+        },
+        "city": {
+          "$ref": "#/$defs/city"
+        },
+        "corps": {
+          "$ref": "#/$defs/corps"
+        },
+        "actors": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/actor"
+          }
+        },
+        "talents": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/talent"
+          }
+        },
+        "treasures": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/$defs/treasure"
+          }
+        },
+        "rng": {
+          "$ref": "#/$defs/scenarioRng"
+        },
+        "policy": {
+          "$ref": "#/$defs/policy"
+        }
+      },
+      "description": "Runtime additionally enforces force/corps references, balance <= capacity, unique actor+talent IDs and unique treasure instance IDs, actedTurn <= initial turn, appearance <= horizon end, safe turn+advanceLimit, and the complete calendar horizon. Create canonicalizes raw pool order by ASCII ID. There is no automatic treasure catalog import or authenticity certification."
+    },
+    "actorState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "merit",
+        "politicsXp",
+        "actedTurn"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "merit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "politicsXp": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "actedTurn": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "initialDiscovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "origin",
+        "commandId",
+        "turn",
+        "date",
+        "actorId"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "origin": {
+          "const": "supplied-initial"
+        },
+        "commandId": {
+          "type": "null"
+        },
+        "turn": {
+          "type": "null"
+        },
+        "date": {
+          "type": "null"
+        },
+        "actorId": {
+          "type": "null"
+        }
+      }
+    },
+    "searchDiscovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "origin",
+        "commandId",
+        "turn",
+        "date",
+        "actorId"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "origin": {
+          "const": "search"
+        },
+        "commandId": {
+          "$ref": "#/$defs/id"
+        },
+        "turn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "actorId": {
+          "$ref": "#/$defs/id"
+        }
+      }
+    },
+    "discovery": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/initialDiscovery"
+        },
+        {
+          "$ref": "#/$defs/searchDiscovery"
+        }
+      ]
+    },
+    "rngState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "drawCount"
+      ],
+      "properties": {
+        "state": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "drawCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20480
+        }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision",
+        "turn",
+        "advancedCount",
+        "date",
+        "gold",
+        "actionPoints",
+        "techniquePoints",
+        "actors",
+        "talentRegistry",
+        "treasureRegistry",
+        "rng"
+      ],
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "turn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "advancedCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "actionPoints": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "techniquePoints": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "actors": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/actorState"
+          }
+        },
+        "talentRegistry": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/discovery"
+          }
+        },
+        "treasureRegistry": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/$defs/discovery"
+          }
+        },
+        "rng": {
+          "$ref": "#/$defs/rngState"
+        }
+      },
+      "description": "Registries, sorted by ASCII ID, are authoritative runtime discovery state. Raw genesis discovered flags stay immutable. IDs, chronological metadata, counts and every derived scalar are verified by replay, not merely shape."
+    },
+    "searchCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "cityId",
+        "actorId"
+      ],
+      "properties": {
+        "type": {
+          "const": "Search"
+        },
+        "cityId": {
+          "$ref": "#/$defs/id"
+        },
+        "actorId": {
+          "$ref": "#/$defs/id"
+        }
+      }
+    },
+    "advanceCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "AdvanceSearchTurn"
+        }
+      }
+    },
+    "command": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/searchCommand"
+        },
+        {
+          "$ref": "#/$defs/advanceCommand"
+        }
+      ]
+    },
+    "envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "expectedRevision",
+        "command"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "command": {
+          "$ref": "#/$defs/command"
+        }
+      }
+    },
+    "draw": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "drawIndex",
+        "label",
+        "bound",
+        "beforeState",
+        "afterState",
+        "value"
+      ],
+      "properties": {
+        "drawIndex": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20480
+        },
+        "label": {
+          "enum": [
+            "talent-selector",
+            "talent-roll",
+            "treasure-selector",
+            "treasure-roll",
+            "gold-roll"
+          ]
+        },
+        "bound": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "beforeState": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "afterState": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1023
+        }
+      }
+    },
+    "talentExclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "reasons"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "reasons": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "enum": [
+              "not-living",
+              "not-free",
+              "other-city",
+              "not-yet-available",
+              "already-discovered"
+            ]
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "treasureExclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "reasons"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "reasons": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "enum": [
+              "special-kind",
+              "already-held",
+              "other-city",
+              "not-yet-available",
+              "already-discovered"
+            ]
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "talentKernel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supported",
+        "profile",
+        "filteredCandidateCount",
+        "politicsAL",
+        "eyeSkillEax",
+        "cityRegion",
+        "officerBirthRegion",
+        "branch",
+        "cappedCandidateCount",
+        "regionFactor",
+        "numerator",
+        "returnedEax",
+        "evidence"
+      ],
+      "properties": {
+        "supported": {
+          "const": true
+        },
+        "profile": {
+          "const": "search-talent-resolved-v1"
+        },
+        "filteredCandidateCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1024
+        },
+        "politicsAL": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "eyeSkillEax": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "cityRegion": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "officerBirthRegion": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "branch": {
+          "enum": [
+            "no-candidates",
+            "eye-skill",
+            "arithmetic"
+          ]
+        },
+        "cappedCandidateCount": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "regionFactor": {
+          "oneOf": [
+            {
+              "enum": [
+                10,
+                11
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "numerator": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 61710
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "returnedEax": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 205
+        },
+        "evidence": {
+          "type": "object",
+          "const": {
+            "level": "source-listing-reconstruction",
+            "profile": "search-talent-resolved-v1",
+            "source": "docs/sources/search-talent-baseline.json",
+            "originalRange": "005D1DF0..005D1E92",
+            "scope": "resolved stable inputs; filtered-candidate numerical baseline only",
+            "listedBytesVerified": true,
+            "stockOriginalVerified": false,
+            "originalExecutableExecuted": false,
+            "nativeHelpersReconstructed": false,
+            "callerIntegrated": false,
+            "finalProbabilityRecovered": false,
+            "rngIntegrated": false,
+            "searchGoldRecovered": false,
+            "searchTreasureRecovered": false
+          }
+        }
+      },
+      "description": "Unchanged published kernel receipt in this service's <=1024 filtered-candidate domain; returnedEax205 is preserved. Embedded historical evidence true flags do not claim a new validation run."
+    },
+    "treasureKernel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supported",
+        "profile",
+        "treasureValueU8",
+        "numerator",
+        "quotient",
+        "rollArgument",
+        "branch",
+        "evidence"
+      ],
+      "properties": {
+        "supported": {
+          "const": true
+        },
+        "profile": {
+          "const": "treasure-roll-resolved-v1"
+        },
+        "treasureValueU8": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "numerator": {
+          "type": "integer",
+          "minimum": -194,
+          "maximum": 61
+        },
+        "quotient": {
+          "type": "integer",
+          "minimum": -9,
+          "maximum": 3
+        },
+        "rollArgument": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "branch": {
+          "enum": [
+            "minimum-clamp",
+            "quotient"
+          ]
+        },
+        "evidence": {
+          "type": "object",
+          "const": {
+            "level": "source-listing-reconstruction",
+            "profile": "treasure-roll-resolved-v1",
+            "source": "docs/sources/treasure-roll-argument.json",
+            "originalRange": "005D5B45 <= PC < 005D5B6B",
+            "scope": "already selected candidate; stable resolved uint8 value; pre-RNG roll argument only",
+            "listedBytesVerified": true,
+            "stockOriginalVerified": false,
+            "originalExecutableExecuted": false,
+            "nativeHelpersReconstructed": false,
+            "callerIntegrated": false,
+            "finalProbabilityRecovered": false,
+            "rngIntegrated": false,
+            "candidateSelectionRecovered": false,
+            "ownershipWriterRecovered": false,
+            "commandIntegrated": false
+          }
+        }
+      }
+    },
+    "goldSecondRead": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gold",
+        "capacity"
+      ],
+      "properties": {
+        "gold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "capacity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      }
+    },
+    "goldRead": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "callAddress",
+        "target",
+        "value"
+      ],
+      "properties": {
+        "callAddress": {
+          "enum": [
+            "005D5BBE",
+            "005D5BCB",
+            "005D5BDA",
+            "005D5BE3"
+          ]
+        },
+        "target": {
+          "enum": [
+            "00486C80",
+            "00486D30"
+          ]
+        },
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      }
+    },
+    "goldKernel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supported",
+        "profile",
+        "rngEax",
+        "firstGold",
+        "firstCapacity",
+        "rngLow16",
+        "proposedAmount",
+        "firstSumU32",
+        "capacityExceeded",
+        "amountU32",
+        "amountSigned",
+        "outcome",
+        "branchTrace",
+        "reads",
+        "exitAddress",
+        "handlerTarget",
+        "goldHandlerArgument",
+        "evidence"
+      ],
+      "properties": {
+        "supported": {
+          "const": true
+        },
+        "profile": {
+          "const": "search-gold-caller-resolved-v1"
+        },
+        "rngEax": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "firstGold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "firstCapacity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "secondRead": {
+          "$ref": "#/$defs/goldSecondRead"
+        },
+        "rngLow16": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "proposedAmount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 80
+        },
+        "firstSumU32": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000080
+        },
+        "capacityExceeded": {
+          "type": "boolean"
+        },
+        "amountU32": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 80
+        },
+        "amountSigned": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 80
+        },
+        "outcome": {
+          "enum": [
+            "nothing",
+            "gold-handler"
+          ]
+        },
+        "branchTrace": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "rollCapTaken",
+            "capacitySufficientTaken",
+            "nothingTaken"
+          ],
+          "properties": {
+            "rollCapTaken": {
+              "type": "boolean"
+            },
+            "capacitySufficientTaken": {
+              "type": "boolean"
+            },
+            "nothingTaken": {
+              "type": "boolean"
+            }
+          }
+        },
+        "reads": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/goldRead"
+          }
+        },
+        "exitAddress": {
+          "enum": [
+            "005D5BF8",
+            "005D5C02"
+          ]
+        },
+        "handlerTarget": {
+          "enum": [
+            "005D3F80",
+            "005D4160"
+          ]
+        },
+        "goldHandlerArgument": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 30,
+              "maximum": 80
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence": {
+          "type": "object",
+          "const": {
+            "level": "source-listing-reconstruction",
+            "profile": "search-gold-caller-resolved-v1",
+            "source": "docs/sources/search-gold-caller.json",
+            "originalRange": "005D5BA6 <= PC < 005D5BF8",
+            "scope": "post-RNG caller arithmetic from explicit per-call uint32 captures; no helper or reward execution",
+            "listedBytesVerified": true,
+            "interpretedCallSitesCaptured": true,
+            "stockOriginalVerified": false,
+            "originalExecutableExecuted": false,
+            "nativeHelpersReconstructed": false,
+            "callerIntegrated": false,
+            "realRewardRecovered": false,
+            "rngIntegrated": false,
+            "commandIntegrated": false,
+            "mutableStateRecovered": false,
+            "completeSearchRecovered": false,
+            "finalProbabilityRecovered": false
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "capacityExceeded": {
+                "const": true
+              }
+            },
+            "required": [
+              "capacityExceeded"
+            ]
+          },
+          "then": {
+            "required": [
+              "secondRead"
+            ],
+            "properties": {
+              "reads": {
+                "minItems": 4,
+                "maxItems": 4
+              }
+            }
+          },
+          "else": {
+            "not": {
+              "required": [
+                "secondRead"
+              ]
+            },
+            "properties": {
+              "reads": {
+                "minItems": 2,
+                "maxItems": 2
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "gold-handler"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "properties": {
+              "amountU32": {
+                "type": "integer",
+                "minimum": 30,
+                "maximum": 80
+              },
+              "amountSigned": {
+                "type": "integer",
+                "minimum": 30,
+                "maximum": 80
+              },
+              "goldHandlerArgument": {
+                "type": "integer",
+                "minimum": 30,
+                "maximum": 80
+              },
+              "exitAddress": {
+                "const": "005D5BF8"
+              },
+              "handlerTarget": {
+                "const": "005D3F80"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "amountU32": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 29
+              },
+              "amountSigned": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 29
+              },
+              "goldHandlerArgument": {
+                "type": "null"
+              },
+              "exitAddress": {
+                "const": "005D5C02"
+              },
+              "handlerTarget": {
+                "const": "005D4160"
+              }
+            }
+          }
+        }
+      ],
+      "description": "Published full-U32 kernel is unchanged. This receipt shape is restricted to this service's stable 0..1e9 city/cap and 0..255 RNG domain; second read values equal the first pair exactly when required, enforced by recomputation. Other old-API U32 results are not service receipts."
+    },
+    "talentSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rawCandidateIds",
+        "eligibleIds",
+        "excluded",
+        "selectedId",
+        "roll",
+        "kernel"
+      ],
+      "properties": {
+        "rawCandidateIds": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "eligibleIds": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "excluded": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/talentExclusion"
+          }
+        },
+        "selectedId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "roll": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 99
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kernel": {
+          "$ref": "#/$defs/talentKernel"
+        }
+      }
+    },
+    "treasureSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rawCandidateIds",
+        "eligibleIds",
+        "excluded",
+        "selectedId",
+        "roll",
+        "reached",
+        "kernel"
+      ],
+      "properties": {
+        "rawCandidateIds": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "eligibleIds": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "excluded": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/$defs/treasureExclusion"
+          }
+        },
+        "selectedId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "roll": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 99
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reached": {
+          "type": "boolean"
+        },
+        "kernel": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/treasureKernel"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "credit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "before",
+        "requested",
+        "actual",
+        "discarded",
+        "after"
+      ],
+      "properties": {
+        "before": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "requested": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "actual": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "discarded": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "after": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      },
+      "description": "before/after plus requested, actual and discarded; actual=min(requested, cap-before), discarded=requested-actual. Field-specific caps and exact requests are enforced by runtime."
+    },
+    "goldWrite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "before",
+        "capacity",
+        "after",
+        "actualDelta",
+        "capacityDiscarded",
+        "belowMinimumDiscarded",
+        "kernel"
+      ],
+      "properties": {
+        "before": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "capacity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "after": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "actualDelta": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 80
+        },
+        "capacityDiscarded": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 80
+        },
+        "belowMinimumDiscarded": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 29
+        },
+        "kernel": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/goldKernel"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "goldCost",
+        "actionPointsBefore",
+        "actionPointsCost",
+        "actionPointRecovery",
+        "actionPointsAfter"
+      ],
+      "properties": {
+        "goldCost": {
+          "const": 0
+        },
+        "actionPointsBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "actionPointsCost": {
+          "enum": [
+            0,
+            10,
+            20
+          ]
+        },
+        "actionPointRecovery": {
+          "$ref": "#/$defs/credit"
+        },
+        "actionPointsAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    "rewards": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "merit",
+        "politicsXp",
+        "techniquePoints"
+      ],
+      "properties": {
+        "merit": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/credit"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "politicsXp": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/credit"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "techniquePoints": {
+          "$ref": "#/$defs/credit"
+        }
+      }
+    },
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "profile",
+        "scope",
+        "commandId",
+        "envelope",
+        "policyId",
+        "sourceBoundary",
+        "revisionBefore",
+        "revisionAfter",
+        "turnBefore",
+        "turnAfter",
+        "dateBefore",
+        "dateAfter",
+        "cityId",
+        "actorId",
+        "outcome",
+        "talent",
+        "treasure",
+        "discovery",
+        "gold",
+        "resources",
+        "rewards",
+        "actorBefore",
+        "actorAfter",
+        "rngBefore",
+        "rngAfter",
+        "draws"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "standalone-city-search-v1"
+        },
+        "scope": {
+          "const": "one-fixed-city-discovery-only"
+        },
+        "commandId": {
+          "$ref": "#/$defs/id"
+        },
+        "envelope": {
+          "$ref": "#/$defs/envelope"
+        },
+        "policyId": {
+          "const": "city-search-policy-v1"
+        },
+        "sourceBoundary": {
+          "$ref": "#/$defs/sourceBoundary"
+        },
+        "revisionBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4095
+        },
+        "revisionAfter": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "turnBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "turnAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "dateBefore": {
+          "$ref": "#/$defs/date"
+        },
+        "dateAfter": {
+          "$ref": "#/$defs/date"
+        },
+        "cityId": {
+          "$ref": "#/$defs/id"
+        },
+        "actorId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "outcome": {
+          "enum": [
+            "talent-found",
+            "treasure-found",
+            "gold-found",
+            "nothing",
+            "turn-advanced"
+          ]
+        },
+        "talent": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/talentSelection"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "treasure": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/treasureSelection"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "discovery": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/searchDiscovery"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "gold": {
+          "$ref": "#/$defs/goldWrite"
+        },
+        "resources": {
+          "$ref": "#/$defs/resources"
+        },
+        "rewards": {
+          "$ref": "#/$defs/rewards"
+        },
+        "actorBefore": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/actorState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actorAfter": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/actorState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rngBefore": {
+          "$ref": "#/$defs/rngState"
+        },
+        "rngAfter": {
+          "$ref": "#/$defs/rngState"
+        },
+        "draws": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/$defs/draw"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "turn-advanced"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "properties": {
+              "actorId": {
+                "type": "null"
+              },
+              "talent": {
+                "type": "null"
+              },
+              "treasure": {
+                "type": "null"
+              },
+              "discovery": {
+                "type": "null"
+              },
+              "actorBefore": {
+                "type": "null"
+              },
+              "actorAfter": {
+                "type": "null"
+              },
+              "draws": {
+                "maxItems": 0
+              },
+              "envelope": {
+                "properties": {
+                  "command": {
+                    "$ref": "#/$defs/advanceCommand"
+                  }
+                }
+              },
+              "rewards": {
+                "properties": {
+                  "merit": {
+                    "type": "null"
+                  },
+                  "politicsXp": {
+                    "type": "null"
+                  }
+                }
+              },
+              "resources": {
+                "properties": {
+                  "actionPointsCost": {
+                    "const": 0
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "actorId": {
+                "$ref": "#/$defs/id"
+              },
+              "talent": {
+                "$ref": "#/$defs/talentSelection"
+              },
+              "treasure": {
+                "$ref": "#/$defs/treasureSelection"
+              },
+              "actorBefore": {
+                "$ref": "#/$defs/actorState"
+              },
+              "actorAfter": {
+                "$ref": "#/$defs/actorState"
+              },
+              "draws": {
+                "minItems": 1
+              },
+              "envelope": {
+                "properties": {
+                  "command": {
+                    "$ref": "#/$defs/searchCommand"
+                  }
+                }
+              },
+              "rewards": {
+                "properties": {
+                  "merit": {
+                    "$ref": "#/$defs/credit"
+                  },
+                  "politicsXp": {
+                    "$ref": "#/$defs/credit"
+                  }
+                }
+              },
+              "resources": {
+                "properties": {
+                  "actionPointsCost": {
+                    "enum": [
+                      10,
+                      20
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "talent-found",
+                  "treasure-found"
+                ]
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "properties": {
+              "discovery": {
+                "$ref": "#/$defs/searchDiscovery"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "discovery": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ],
+      "description": "Complete derived accepted-command receipt, including paid nothing. Kernel evidence is preserved; service mapping and writers retain separate evidence labels. Load/replay compare the whole value. No complete genesis is copied per receipt."
+    },
+    "genesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario",
+        "snapshot"
+      ],
+      "properties": {
+        "scenario": {
+          "$ref": "#/$defs/scenario"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/snapshot"
+        }
+      }
+    },
+    "acceptedCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "envelope",
+        "receipt"
+      ],
+      "properties": {
+        "envelope": {
+          "$ref": "#/$defs/envelope"
+        },
+        "receipt": {
+          "$ref": "#/$defs/receipt"
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tag",
+        "schemaVersion",
+        "profile",
+        "scope",
+        "policy",
+        "sourceBoundary",
+        "genesis",
+        "snapshot",
+        "acceptedCommands"
+      ],
+      "properties": {
+        "tag": {
+          "const": "city-search-state-v1"
+        },
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "standalone-city-search-v1"
+        },
+        "scope": {
+          "const": "one-fixed-city-discovery-only"
+        },
+        "policy": {
+          "$ref": "#/$defs/policy"
+        },
+        "sourceBoundary": {
+          "$ref": "#/$defs/sourceBoundary"
+        },
+        "genesis": {
+          "$ref": "#/$defs/genesis"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/snapshot"
+        },
+        "acceptedCommands": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4096,
+          "items": {
+            "$ref": "#/$defs/acceptedCommand"
+          }
+        }
+      },
+      "description": "Complete persisted state. Runtime rebuilds canonical genesis and each unique accepted envelope, compares full receipts and final snapshot, and enforces save and complete return budgets at every step. Every new state reserves return capacity for all original accepted idempotent receipts, including receipts larger/deeper than the newest one. Self-consistency is not cryptographic authenticity; a coherently rewritten genesis/history is a different supplied scenario."
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "committed",
+        "reason",
+        "revision",
+        "turn",
+        "commandId",
+        "index"
+      ],
+      "properties": {
+        "ok": {
+          "const": false
+        },
+        "committed": {
+          "const": false
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "revision": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4096
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "turn": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "commandId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "index": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4095
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "description": "No committed state or receipt; failures preserve caller state and RNG. index identifies a failing history/trace entry if available. A paid nothing outcome is an accepted receipt, not this failure shape."
+    },
+    "stateSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "state"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "state": {
+          "$ref": "#/$defs/state"
+        }
+      }
+    },
+    "stateResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/stateSuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "commandSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "committed",
+        "duplicate",
+        "state",
+        "receipt"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "committed": {
+          "type": "boolean"
+        },
+        "duplicate": {
+          "type": "boolean"
+        },
+        "state": {
+          "$ref": "#/$defs/state"
+        },
+        "receipt": {
+          "$ref": "#/$defs/receipt"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "duplicate": {
+                "const": true
+              }
+            },
+            "required": [
+              "duplicate"
+            ]
+          },
+          "then": {
+            "properties": {
+              "committed": {
+                "const": false
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "committed": {
+                "const": true
+              }
+            }
+          }
+        }
+      ],
+      "description": "New accepted command: committed=true/duplicate=false. Exact accepted envelope retry: committed=false/duplicate=true, original receipt and current state. Retry is recognized before stale revision checks."
+    },
+    "commandResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/commandSuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "previewSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "committed",
+        "duplicate",
+        "receipt",
+        "projectedSnapshot"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "committed": {
+          "const": false
+        },
+        "duplicate": {
+          "type": "boolean"
+        },
+        "receipt": {
+          "$ref": "#/$defs/receipt"
+        },
+        "projectedSnapshot": {
+          "$ref": "#/$defs/snapshot"
+        }
+      },
+      "description": "Does not commit or reserve ID/RNG/resources. Uses the same command/save/all-old-retry gate and full preview budget. Duplicate preview returns original receipt and current snapshot."
+    },
+    "previewResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/previewSuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "saveSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "json"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "json": {
+          "type": "string",
+          "maxLength": 16777216,
+          "description": "Canonical full state JSON. 16MiB applies to the full escaped SaveResult UTF-8 serialization, not merely this inner string; UTF-8 and object budgets are runtime obligations."
+        }
+      }
+    },
+    "saveResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/saveSuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "expectedSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "duplicate",
+        "receipt"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "duplicate": {
+          "type": "boolean"
+        },
+        "receipt": {
+          "$ref": "#/$defs/receipt"
+        }
+      }
+    },
+    "expectedOutcome": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/expectedSuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "traceAttempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "envelope",
+        "expectedOutcome"
+      ],
+      "properties": {
+        "envelope": {
+          "$ref": "#/$defs/envelope"
+        },
+        "expectedOutcome": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/expectedOutcome"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tag",
+        "scenario",
+        "attempts",
+        "expectedFinalSnapshot"
+      ],
+      "properties": {
+        "tag": {
+          "const": "city-search-trace-v1"
+        },
+        "scenario": {
+          "$ref": "#/$defs/scenario"
+        },
+        "attempts": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4096,
+          "items": {
+            "$ref": "#/$defs/traceAttempt"
+          }
+        },
+        "expectedFinalSnapshot": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/snapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "description": "Null expectedOutcome or expectedFinalSnapshot disables that comparison only; actual qualification, selection, RNG and results are still computed. Typed interchange includes valid-envelope failures and retries. Runtime defensive recording of malformed envelopes is outside this typed envelope schema."
+    },
+    "replaySuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "state",
+        "outcomes"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "state": {
+          "$ref": "#/$defs/state"
+        },
+        "outcomes": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4096,
+          "items": {
+            "$ref": "#/$defs/expectedOutcome"
+          }
+        }
+      }
+    },
+    "replayResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/replaySuccess"
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    }
+  }
+}

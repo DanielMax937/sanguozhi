@@ -1,3 +1,9 @@
+## 2026-10-17：固定单城探索与发现（O13-A）
+
+[完整具体规则](city-search-lifecycle.md) · [API](../engine/city-search-lifecycle.md) · [policy](../../data/catalogs/city-search-policy-v1.json) · [source](../sources/city-search-lifecycle.json) · [schema](../sources/city-search-lifecycle.schema.json)。A1–A7覆盖固定域／费用、原始候选过滤、选人／新LCG、人才原值205、宝物参数新映射、稳定二读与金不足30不发、分支奖励、独立旬序及原子幂等完整重建。PR53／54／55三个有限核已发布，旧候选措辞保留其历史日期含义。
+
+仅独立发现登记，不登用或写native ownership；listing数值核、请求段、攻略与新政策分层，原stock／RNG／writer仍E。O13-B移动相邻遗迹／庙尚未实现，有限后续见新规则第10节；O13整体及原43／45不关闭。只完成静态代码／规则／数据，未运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验，历史通过结果不验证本批。
+
 ## 固定双城普通流言标量规则（O12-B）
 
 [rumor-scalar-lifecycle.md](rumor-scalar-lifecycle.md)：200金/30AP、执行者每旬一次、内部synthetic odds、三人平均防守、关系保护、至多一人加空槽、义理阈值、分离loss、true byte/UI、独立旬序/RNG及原子幂等保存重算。[API](../engine/rumor-scalar-lifecycle.md) · [政策](../../data/catalogs/rumor-scalar-policy-v1.json) · [来源](../sources/rumor-scalar-lifecycle.json) · [schema](../sources/rumor-scalar-lifecycle.schema.json) · [未运行场景](../../data/scenarios/rumor-scalar-example-v1.json)。

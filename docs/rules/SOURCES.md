@@ -1,5 +1,16 @@
 # 主要来源
 
+## 2026-10-17：O13-A固定单城Search四层来源
+
+[完整规则与证据边界](city-search-lifecycle.md#1-已交付基础与证据分层) · [来源manifest](../sources/city-search-lifecycle.json) · [完整新政策](../../data/catalogs/city-search-policy-v1.json)。
+
+- PR53／54／55已发布人才基准、宝物roll参数和搜金caller三个限定核。共同研究commit `66e167e40c3440929ec016f3872aefc3486434c1`；人才blob `d069a0a06b809de318b9f99deb1bb70f9b8dd3c7`，执行探索blob `82bff04db2dae9ae0787e1e71ad72f1b4e6852de`。完整GBK／UTF-8／旧指令段hash见manifest；不认证clean-stock／确切patch／跨版本
+- 同一执行探索listing的独立请求段：宝物50功绩／XP1／TP2，金钱50／1／2，nothing10／1且无TP增加请求；AP helper仅调用点。请求不等于native writer，未恢复归属或人才交接实现
+- [官方PK手册](https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf)的既有命令表整理支持Search金0／AP20／人才府10；整份47,138,551 bytes PDF未完整获取，不声称新逐页／hash认证。[Wiki79经验资料](https://w.atwiki.jp/sangokushi11/pages/79.html)区分普通XP1、发现人才不登用XP0与选择登用XP3；[Wiki113功绩](https://w.atwiki.jp/sangokushi11/pages/113.html)不支持把登用失败100挪到只发现
+- 新过滤／排序／LCG／阈值、稳定二读、登记册、只发现功绩与TP零、饱和writer及AP20旬推进全部synthetic-replaceable-policy。[Wiki968遗迹／庙](https://w.atwiki.jp/sangokushi11/pages/968.html)与[FAQ](https://w.atwiki.jp/sangokushi11/pages/8.html)只支持尚未实现的O13-B有限后续的攻略事实，不证明50%原概率或完整技能池
+
+旧核evidence的历史true flags原样保留，非本批新验证；全部新产物仅静态，未运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验。原43／45不减，O13-B明确未实现。
+
 ## 2026-10-17：O12-B普通流言标量来源分层
 
 [完整规则](rumor-scalar-lifecycle.md#2-证据等级与当前基线) · [来源manifest](../sources/rumor-scalar-lifecycle.json) · [完整policy](../../data/catalogs/rumor-scalar-policy-v1.json)。odds/平均防守、关系绝对保护、至多一人加空槽、义理表、loss与RNG都是synthetic；不能把有限软件能力提升为原成功概率或完整原命令证据。

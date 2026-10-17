@@ -1,3 +1,9 @@
+## 固定单城探索与发现（O13-A）
+
+[create/preview/execute/save/load/replay V1 API](city-search-lifecycle.md) · [完整规则](../rules/city-search-lifecycle.md) · [policy](../../data/catalogs/city-search-policy-v1.json) · [source](../sources/city-search-lifecycle.json) · [schema](../sources/city-search-lifecycle.schema.json) · [未运行场景](../../data/scenarios/city-search-example-v1.json)。复用PR53／54／55已发布数值核；内部过滤／选择／LCG抽样与独立发现、金／AP／行动／奖励账本，保留205和条件稳定二读，完整保存重建、4096历史／16MiB全返回及全部旧幂等receipt容量。仅AP20独立旬推进，无inspect或原世界适配器。
+
+新policy不等于原概率／writer／stock认证；O13-B遗迹／庙明确尚未实现，原43／45不减。没有运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验；历史核验证不覆盖本批。
+
 ## 固定双城普通流言标量（O12-B）
 
 [create/inspect/preview/execute/save/load/replay V1 API](rumor-scalar-lifecycle.md) · [规则](../rules/rumor-scalar-lifecycle.md) · [完整policy](../../data/catalogs/rumor-scalar-policy-v1.json) · [schema](../sources/rumor-scalar-lifecycle.schema.json)。独立success、稀疏selector、抗性/loss、200金/30AP和actor频次、true loyalty/security、旬序/RNG及完整保存重算；所有具体数值公式和RNG均synthetic。原成功率E；被捕风险 unresolved-not-modeled、travel/failureDiplomacy/xpMeritTp未模拟、ownershipFrozen=true，完整原动作X。PR83的O12-A已交付；O12与原43不关闭、不新增分母。静态交付未运行任何测试、编译、checker、schema或产品。
