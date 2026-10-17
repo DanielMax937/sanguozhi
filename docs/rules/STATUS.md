@@ -1,3 +1,11 @@
+# 2026-10-17 普通外交独立服务静态实现
+
+[规则正文](ordinary-diplomacy-service.md)与[API](../engine/ordinary-diplomacy-service.md)补齐单城市/执行者/多目标的亲善、同盟、停战，BigInt精确比较、独立金/AP与无序pair关系账本、普通失败退款及逐旬到期；完整policy/genesis/snapshot/receipt逐项重算。危险失败与未知特殊门槛原子拒绝。
+
+工程覆盖不等于原生外交：PK经验公式exactBuild仍open；关系冲突、末尾floor、费用退款、0..100、月数和3旬转换等具名provisional政策不升级。停战TP35/30冲突保留，本批不应用TP/功绩/政治经验，也不接P078/native捕获、mission、return、人员归属、交换或劝降。原43组证据主题不减。
+
+本树未运行测试、typecheck、编译、build、checker、产品或诊断；无测试文件修改。静态场景/手算预期不是通过记录。历史默认food失败仍未解决，过去通过数字只属于过去版本，不能覆盖本树。
+
 # 当前工程交付状态（2026-10-16）
 
 ## 2026-10-16：独立PK能力研究与培育静态实现

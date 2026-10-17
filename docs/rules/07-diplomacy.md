@@ -1,3 +1,5 @@
+> 2026-10-17 工程入口：[普通外交独立服务具体规则](ordinary-diplomacy-service.md)与[API](../engine/ordinary-diplomacy-service.md)。只实现本页亲善/同盟/停战的PK经验公式与显式独立结算policy，危险失败仅preview、执行原子unsupported；不应用奖励或接入原生人员/任务。下列原作资料与劝降/交换等规则仍为证据正文，不因此变成完整可执行外交。未测试，版本与原43缺口保留。
+
 # 外交关系与外交指令
 
 > 外交是已确认存在**补丁级版本平衡差异**的系统。P0-2 已把边界收紧到 Vanilla 1.0 / 1.1 / 1.2-plus / PK formula corpus；完整证据见 `37-diplomacy-version-boundaries.md`。
