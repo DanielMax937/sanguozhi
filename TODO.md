@@ -1,3 +1,11 @@
+## 2026-10-17 O12-B：固定双城普通流言标量有限覆盖
+
+- [x] 补[完整规则](docs/rules/rumor-scalar-lifecycle.md)、[API](docs/engine/rumor-scalar-lifecycle.md)、新政策/来源/schema/未运行场景；内部success、保护/稀疏selector/抗性与loss，独立200金/30AP/actor频次、真实byte/治安、日历/RNG/原子幂等保存重算
+- [x] 明确平均防守、odds、绝对关系保护、最多一人加空槽、义理阈值、loss和RNG均新设计；纠正旧“成功率公式已知”扩大表述，10/12仅独立listing参数事实
+- [ ] 原成功概率/角色helper/selector/loss/writer/RNG、stock与跨版本继续E；原被捕风险 unresolved-not-modeled，行程/失败外交/XP功绩TP未模拟、ownershipFrozen=true，完整原世界命令与P078所有依赖仍X
+- [ ] O12-A自然/现金已由PR83交付，但整个O12与原43不关闭、不增加分母；宝物E/未来物品范围非本批新增必做，普通item登记不自动归native ownership X
+- [ ] 本批未运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例；静态产物不等于验收通过，旧测试及历史food失败保留
+
 ## 2026-10-17 O12-A：固定驻城自然忠诚与现金褒赏有限覆盖
 
 - [x] 静态新增两个真实命令及独立true忠诚/金/AP/每旬褒赏/日期/RNG账本；[完整规则](docs/rules/personnel-loyalty-lifecycle.md)和[API](docs/engine/personnel-loyalty-lifecycle.md)覆盖原子幂等、完整policy、逐receipt保存重算

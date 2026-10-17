@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "profile": "standalone-rumor-scalar-v1",
+  "title": "Fixed two-city ordinary rumor scalar lifecycle: synthetic policies and original-command boundaries",
+  "date": "2026-10-17",
+  "baseline": {
+    "commit": "c9127cd5b911ef0b17e712379431562e741bd996",
+    "tree": "2a03082efa32d2d98f0df8d99ba5bdcb7bb4bbf0",
+    "priorPersonnelLoyaltyDelivery": "O12-A delivered in PR83; natural loyalty and cash reward are separate services",
+    "baselineIdentityIsCandidateTreeOrExecutionProof": false
+  },
+  "delivery": {
+    "scope": "O12-B independent finite rumor scalar software service only",
+    "implementation": "packages/engine/src/rumor-scalar-lifecycle.ts",
+    "rules": "docs/rules/rumor-scalar-lifecycle.md",
+    "api": "docs/engine/rumor-scalar-lifecycle.md",
+    "policyCatalog": "data/catalogs/rumor-scalar-policy-v1.json",
+    "interchangeSchema": "docs/sources/rumor-scalar-lifecycle.schema.json",
+    "unexecutedScenario": "data/scenarios/rumor-scalar-example-v1.json",
+    "commands": ["AttemptRumorScalar", "AdvanceRumorTurn"],
+    "publicFunctions": [
+      "createRumorScalarStateV1",
+      "inspectRumorScalarV1",
+      "previewRumorScalarV1",
+      "executeRumorScalarV1",
+      "saveRumorScalarV1",
+      "loadRumorScalarV1",
+      "replayRumorScalarV1"
+    ],
+    "executionVerified": false,
+    "duplicateReturnBudget": "Before a new state is accepted, reserve the complete current-state plus any original accepted receipt duplicate result using separate canonical UTF-8 bytes, node, depth and raw string/key-byte extrema; load/replay repeat this for each intermediate state. This can reject new commands earlier, but does not charge resources or reserve command IDs",
+    "validation": "Static source, rule and JSON work only; no tests, typecheck, compile, build, checker, diagnostics, schema validation, product or example execution"
+  },
+  "originalCommandBoundary": {
+    "originalCommandEquivalent": false,
+    "worldActionSupported": false,
+    "originalCaptureRisk": "unresolved-not-modeled",
+    "travelAndMission": "not-modeled",
+    "failureDiplomacy": "not-modeled",
+    "xpMeritTp": "not-modeled",
+    "ownershipAndDeparture": "frozen-not-modeled",
+    "ownershipFrozen": true,
+    "banditAndWorldConsequences": "not-modeled",
+    "worldRequestRejection": "unsupported-world-rumor-command",
+    "unknownCaptureRiskMeansZero": false,
+    "officialFailureDiplomacyConsequenceExists": true
+  },
+  "sourceBoundary": {
+    "allConcreteSuccessAndEffectFormulas": "synthetic-software-policy",
+    "defenseAggregator": "synthetic-floor-mean-of-three",
+    "relationProtection": "synthetic-not-certified-original-absolute-immunity",
+    "selector": "synthetic-at-most-one-with-empty-slot",
+    "giriThresholds": "synthetic-not-estimated-from-observations",
+    "loyaltyAndSecurityLossDistributions": "synthetic-not-estimated-from-observations",
+    "randomStream": "new-session-local-xorshift32-rejection",
+    "nativeRandomStreamEquivalent": false,
+    "nativeWriterCertified": false,
+    "nativeRoleSelectorCertified": false,
+    "originalSuccessProbabilityRestored": false,
+    "cleanStockCertified": false,
+    "crossVersionEquivalent": false,
+    "officiallySupportedNumericConstants": {"goldCost": 200, "actionPointCost": 30},
+    "officialQualitativeIntelligenceDirection": true,
+    "strategyOffice10To12": "separate-public-listing-parameter-fact-not-proof-of-synthetic-odds-contribution"
+  },
+  "syntheticPolicySummary": {
+    "id": "rumor-scalar-policy-v1",
+    "intelligenceOffset": 20,
+    "defenseAggregator": "floor-mean-of-three",
+    "attackWeightWithoutStrategyOffice": 10,
+    "attackWeightWithStrategyOffice": 12,
+    "defenseWeight": 10,
+    "rollDenominator": 10000,
+    "successFormula": "floor(10000*((actorIntelligence+20)*facilityWeight)/(((actorIntelligence+20)*facilityWeight)+((floor((governorIntelligence+rulerIntelligence+strategistIntelligence)/3)+20)*10)))",
+    "successComparison": "roll < threshold",
+    "protection": ["target-directed-likes-ruler", "spouse-of-ruler", "sworn-sibling-of-ruler"],
+    "selection": "code-unit-ID-sorted unprotected pool; draw in [0,n], n is empty; empty pool draws nothing",
+    "maximumSelectedOfficersPerSuccess": 1,
+    "giriAcceptedBelow": [80, 60, 40, 20, 10],
+    "requestedSecurityLoss": "1+nextBounded(6)",
+    "requestedLoyaltyLoss": "1+nextBounded(12), only after susceptibility accepts",
+    "writer": "max(0,before-requestedLoss); actualLoss=before-after; displayedLoyalty=min(trueLoyalty,100)",
+    "trueZeroStillConsumesApplicableDraws": true,
+    "securityZeroStillConsumesApplicableDraws": true,
+    "usesAffinity": false,
+    "usesBenevolentGovernance": false,
+    "usesHumanHeartControl": false,
+    "usesTokenPlatform": false,
+    "costTiming": "accepted probability success and failure both consume full 200 gold, 30 AP, and actor current-turn opportunity",
+    "time": "immediate settlement and separate three-xun calendar; no resource regeneration or natural loyalty",
+    "rng": {
+      "kind": "xorshift32-nonzero-rejection-v1",
+      "seedMinimum": 1,
+      "seedMaximum": 4294967295,
+      "shifts": [13, 17, 5],
+      "rawDomainSize": 4294967295,
+      "mappedRaw": "state-1",
+      "limit": "M-(M%bound)",
+      "acceptedValue": "u%bound only if u<limit",
+      "maximumRawDrawsPerBounded": 32,
+      "maximumBoundedDrawsPerAttempt": 5,
+      "maximumRawDrawsPerAttempt": 160,
+      "labels": ["success", "security-loss", "target-slot", "susceptibility", "loyalty-loss"]
+    }
+  },
+  "sources": [
+    {
+      "id": "official-pk-manual",
+      "url": "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf?t=1516151052",
+      "kind": "official-manual-search-index",
+      "supports": ["200 gold", "30 AP", "command duration exists", "higher actor intelligence helps", "lower defending governor/ruler/strategist intelligence helps", "success lowers security and loyalty", "failure lowers diplomacy"],
+      "retrievalBoundary": "Prior source review read search-index material; full PDF open returned size limit at 47138551 bytes. No new page authentication, full download or PDF hash in this delivery",
+      "doesNotSupport": ["synthetic odds formula", "mean defense", "charge timing", "instant execution", "actor frequency", "zero capture risk", "effect distribution"]
+    },
+    {
+      "id": "public-rumor-success-listing",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[计算流言是否成功].txt",
+      "kind": "public-reverse-engineering-text",
+      "gitBlobSha1": "61de21c7a0924c83fc11066a7ffeeb1b8e2dc0ff",
+      "observedUtf8TextSha256": "dc3725f31d44628284df98a27eaf7e2695b31289bbde40110093ccb01f0a4611",
+      "hashIsExecutableIdentity": false,
+      "supports": ["listing at 005D02A0..005D05AD", "strategy office parameter 10 to 12", "005BA410 call exists", "separate following function addresses 005D05B0 and 005D05F0"],
+      "textConflict": "005D0540/005D055A write sar dl,02/03 while adjacent bytes are c1 fa 02/03; operand-width text conflict retained without decoding or source repair",
+      "open": ["005BA410 semantics", "role/list helpers", "final random comparison and RNG", "stock identity", "exact original probability", "005D05B0/005D05F0 business roles and bodies"],
+      "calleeBodiesPursued": false
+    },
+    {
+      "id": "player-sparse-observation-2018",
+      "url": "https://www.ptt.cc/bbs/Koei/M.1526989285.A.762.html",
+      "kind": "primary-player-observation-search-index",
+      "supports": ["reported 100-plus-officer city", "reported more than 300 successful rumors", "some targets remained largely unaffected while security was zero", "counterexample to universal synchronous fixed loyalty loss"],
+      "doesNotSupport": ["exactly or at most one selected target", "empty-slot distribution", "all-game selector distribution", "stock or cross-version authentication"]
+    },
+    {
+      "id": "player-hidden-loyalty-2026",
+      "url": "https://www.ptt.cc/bbs/Koei/M.1776854540.A.47B.html",
+      "kind": "primary-pc-pk-super-difficulty-player-observation-search-index",
+      "supports": ["reported hidden loyalty 120 to 109", "success determination and effect RNG described separately", "true loyalty can change while UI remains 100"],
+      "doesNotSupport": ["uniform loss 1 to 12", "giri coefficients", "native writer order", "cross-version equivalence"]
+    },
+    {
+      "id": "wiki-qualitative-relations",
+      "urls": ["https://w.atwiki.jp/sangokushi11/pages/95.html", "https://w.atwiki.jp/sangokushi11/pages/1153.html"],
+      "kind": "secondary-qualitative-reference",
+      "supports": ["historical qualitative relationship, giri and affinity discussion"],
+      "doesNotSupport": ["absolute likes immunity", "fixed linear giri coefficient", "exact affinity gate", "missing native helper semantics"]
+    }
+  ],
+  "retainedEvidenceAndExclusions": {
+    "E": ["original success probability and shared helper semantics", "role/list selection", "text operand-width conflict", "effect helper business roles", "relation/giri/affinity gates", "selector and per-officer/security loss distributions", "native writer timing", "stock and cross-version identity"],
+    "X": ["original world rumor action", "native capture and personnel/city/force ownership", "travel/mission/return/relocation/finalizer integration", "force extinction and ruler succession", "prisoner and salary-shortfall consequence chains", "P078 and all dependencies"],
+    "treasure": "Original grant/value/confiscation AP/-30/version/order remain E or future broader item scope, not a required new module in this batch. Ordinary item registration is not categorically native personnel ownership X; departure consequences remain X",
+    "wholeO12Closed": false,
+    "original43GroupsReduced": false,
+    "newCountingDenominatorIntroduced": false,
+    "olderSourceJsonRewritten": false
+  }
+}

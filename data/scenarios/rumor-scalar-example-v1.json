@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "profile": "standalone-rumor-scalar-v1",
+  "scope": "two-fixed-cities-ordinary-scalar-only",
+  "date": {
+    "year": 200,
+    "month": 12,
+    "day": 21
+  },
+  "advanceLimit": 36,
+  "attackingForce": {
+    "id": "attacking-force"
+  },
+  "targetForce": {
+    "id": "target-force",
+    "rulerId": "target-ruler"
+  },
+  "relation": "hostile",
+  "originCity": {
+    "id": "origin-city",
+    "forceId": "attacking-force",
+    "gold": 2000,
+    "actionPoints": 300,
+    "hasStrategyOffice": false
+  },
+  "targetCity": {
+    "id": "target-city",
+    "forceId": "target-force",
+    "security": 60,
+    "defense": {
+      "governorId": "target-governor",
+      "strategistId": "target-strategist",
+      "governorIntelligence": 60,
+      "rulerIntelligence": 70,
+      "strategistIntelligence": 80
+    }
+  },
+  "actors": [
+    {
+      "id": "actor-a",
+      "forceId": "attacking-force",
+      "cityId": "origin-city",
+      "kind": "ordinary-fixed-resident",
+      "intelligence": 80,
+      "usedThisTurn": false
+    },
+    {
+      "id": "actor-b",
+      "forceId": "attacking-force",
+      "cityId": "origin-city",
+      "kind": "ordinary-fixed-resident",
+      "intelligence": 60,
+      "usedThisTurn": false
+    }
+  ],
+  "targetOfficers": [
+    {
+      "id": "target-hidden",
+      "forceId": "target-force",
+      "cityId": "target-city",
+      "kind": "ordinary-fixed-resident",
+      "trueLoyalty": 120,
+      "giriInternal": 1
+    },
+    {
+      "id": "target-protected",
+      "forceId": "target-force",
+      "cityId": "target-city",
+      "kind": "ordinary-fixed-resident",
+      "trueLoyalty": 90,
+      "giriInternal": 2
+    },
+    {
+      "id": "target-zero",
+      "forceId": "target-force",
+      "cityId": "target-city",
+      "kind": "ordinary-fixed-resident",
+      "trueLoyalty": 0,
+      "giriInternal": 0
+    }
+  ],
+  "relations": {
+    "likes": [
+      {
+        "from": "target-protected",
+        "to": "target-ruler"
+      }
+    ],
+    "spouses": [],
+    "swornSiblings": []
+  },
+  "rng": {
+    "kind": "xorshift32-nonzero-rejection-v1",
+    "seed": 20261017
+  },
+  "policy": {
+    "schemaVersion": 1,
+    "id": "rumor-scalar-policy-v1",
+    "evidenceLevel": "explicit-synthetic-software-policy",
+    "success": {
+      "intelligenceOffset": 20,
+      "facilityWeights": {
+        "withoutStrategyOffice": 10,
+        "withStrategyOffice": 12
+      },
+      "defenseWeight": 10,
+      "defenseAggregator": "floor-mean-of-three",
+      "rollDenominator": 10000,
+      "comparison": "roll-less-than-threshold"
+    },
+    "selection": {
+      "protection": [
+        "likes-ruler",
+        "spouse-of-ruler",
+        "sworn-sibling-of-ruler"
+      ],
+      "ordering": "id-code-unit-ascending",
+      "maximumSelected": 1,
+      "emptySlots": 1,
+      "zeroLoyaltyEligible": true
+    },
+    "susceptibility": {
+      "acceptanceThresholdsByGiri": [
+        80,
+        60,
+        40,
+        20,
+        10
+      ],
+      "rollDenominator": 100,
+      "comparison": "roll-less-than-threshold"
+    },
+    "loss": {
+      "securityMinimum": 1,
+      "securityBound": 6,
+      "loyaltyMinimum": 1,
+      "loyaltyBound": 12,
+      "writer": "saturating-true-byte-loss-v1",
+      "displayCap": 100
+    },
+    "costs": {
+      "gold": 200,
+      "actionPoints": 30,
+      "probabilityFailurePays": true,
+      "actorUse": "once-per-local-turn"
+    },
+    "time": {
+      "settlement": "immediate-scalar-only",
+      "goldRefresh": 0,
+      "actionPointRefresh": 0,
+      "securityRefresh": 0,
+      "naturalLoyaltyChange": 0
+    },
+    "rng": {
+      "kind": "xorshift32-nonzero-rejection-v1",
+      "nonzeroDomainSize": 4294967295,
+      "maxRawPerBoundedDraw": 32,
+      "maxBoundedDrawsPerAttempt": 5
+    },
+    "limits": {
+      "actors": 32,
+      "targetOfficers": 128,
+      "advances": 360,
+      "acceptedCommands": 1024,
+      "traceAttempts": 1024,
+      "scenarioBytes": 524288,
+      "completeResultBytes": 8388608,
+      "nodes": 262144,
+      "depth": 32
+    }
+  }
+}

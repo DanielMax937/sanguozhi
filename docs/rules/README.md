@@ -1,3 +1,9 @@
+## 固定双城普通流言标量规则（O12-B）
+
+[rumor-scalar-lifecycle.md](rumor-scalar-lifecycle.md)：200金/30AP、执行者每旬一次、内部synthetic odds、三人平均防守、关系保护、至多一人加空槽、义理阈值、分离loss、true byte/UI、独立旬序/RNG及原子幂等保存重算。[API](../engine/rumor-scalar-lifecycle.md) · [政策](../../data/catalogs/rumor-scalar-policy-v1.json) · [来源](../sources/rumor-scalar-lifecycle.json) · [schema](../sources/rumor-scalar-lifecycle.schema.json) · [未运行场景](../../data/scenarios/rumor-scalar-example-v1.json)。
+
+具体公式/关系保护/平均防守/selector/义理/loss/RNG全是新政策；200/30与智力方向有官方依据，计略府10/12只有独立listing参数依据。原成功率E、完整原命令X；原被捕风险 unresolved-not-modeled，travel/failureDiplomacy/xpMeritTp未模拟、ownershipFrozen=true。PR83的O12-A已交付，整个O12及原43不关闭、不新增分母；未运行测试、typecheck、编译、build、checker、诊断、schema、产品或示例。
+
 ## 固定驻城自然忠诚与现金褒赏独立规则（O12-A）
 
 [personnel-loyalty-lifecycle.md](personnel-loyalty-lifecycle.md)：100金/5AP每人、每旬一次、显示100拒绝与99→108、明确新现金5+roll5；季度仁政/关系豁免、returnedAl>25/义理野望/dislikes短路、人心掌握、两次loss及符节台/君主附加；真实byte、共享新xorshift、原子幂等与完整保存重算。[API](../engine/personnel-loyalty-lifecycle.md) · [政策](../../data/catalogs/personnel-loyalty-policies-v1.json) · [来源](../sources/personnel-loyalty-lifecycle.json) · [未运行场景](../../data/scenarios/personnel-loyalty-example-v1.json)。
@@ -243,7 +249,7 @@ P0-21现金褒赏忠诚以 `56-cash-reward-loyalty-boundary.md` 为专项记录�
 
 P0-22欠薪忠诚以 `57-salary-shortfall-loyalty-boundary.md` 为专项记录，结构化证据为 `../sources/salary-shortfall-loyalty-boundary.json`；`0058D5E0` 逐欠薪据点准备并写入跨据点累计容器，`0058C190` 在全部设施扫描后统一finalize；selector与每人掉忠公式仍open。
 
-P0-23流言 effect helper 以 `58-rumor-effect-helper-boundary.md` 为专项记录，结构化证据为 `../sources/rumor-effect-helper-boundary.json`；流言成功率函数在`005D05AD`前返回，随后`005D05B0`与`005D05F0`是两个独立函数，确认 success 与 effect 分层；目标筛选、逐人掉忠与治安下降的角色分配仍open。
+P0-23流言 effect helper 以 `58-rumor-effect-helper-boundary.md` 为专项记录，结构化证据为 `../sources/rumor-effect-helper-boundary.json`；流言成功计算listing在`005D05AD`前返回，随后`005D05B0`与`005D05F0`是两个独立函数；原完整成功率/helper/RNG及sar文本宽度冲突仍open，后续selector/忠诚/治安业务角色未证。O12-B另有明确synthetic有限软件服务，不提升原证据。
 
 P0-24宝物授予/没收忠诚以 `59-treasure-loyalty-opcode-boundary.md` 为专项记录，结构化证据为 `../sources/treasure-loyalty-opcode-boundary.json`；TreasureValue `+0x3C`、宝物owner/city setter、state setter与`004A6CF0 ModifyPersonLoyalty`独立，确认ownership/state mutation与loyalty side effect分层；gain=value与没收-30仍非opcode exact。
 

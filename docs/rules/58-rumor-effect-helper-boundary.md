@@ -1,10 +1,10 @@
 # P0-23 流言 effect helper / target-selector 边界
 
-更新：2026-10-03。主目标版本：PC-PK1.1。
+原边界记录：2026-10-03；现行措辞纠正：2026-10-17。主目标版本标签为PC-PK1.1，不据此认证clean-stock身份。
 
 ## 1. 本轮结论
 
-公开逆向资料已经把流言成功率计算函数完整展开到：
+公开逆向资料中的流言成功计算listing列出到以下返回边界；它未补齐被调helper、原角色/名单、最终随机比较及RNG，因此不称端到端完整原成功概率已恢复：
 
 ```text
 ...
@@ -21,7 +21,7 @@
 005D07C0 next function
 ```
 
-因此可以二进制层面确认：
+据既有函数边界资料，可以分开登记：
 
 ```text
 rumor success-rate calculator
@@ -31,14 +31,15 @@ rumor success-rate calculator
 005D05F0
 ```
 
-也就是说，成功率计算与成功后的 effect-side 处理至少被拆成独立函数层。
+也就是说，成功计算listing与两个后续函数不是同一函数。后续函数的effect-side业务角色仍未证明，不能把地址相邻当作成功后的实际调用关系。
 
 状态：
 
 ```text
 P0-23-audit-complete
-success-vs-effect-separation-exact
-two-post-success-functions-exact
+success-listing-and-following-functions-separated
+two-following-function-boundaries-recorded
+original-complete-success-probability-open
 effect-role-assignment-open
 target-selector-open
 per-target-loyalty-loss-open
@@ -57,16 +58,18 @@ security-loss-open
 
 因此这不是同一函数内部的两个 label，而是两个独立 subroutine。
 
-这点很重要，因为旧文档只能笼统写“流言相关函数”，现在至少可以确定 effect-side 有多个函数层。
+这收紧了“两个独立后续函数”的边界，但不证明effect-side实际业务分工、调用顺序或writer。
 
-## 3. 成功率函数与 effect helper 明确分离
+## 3. 成功计算listing与后续函数边界分开，effect业务角色未证
 
-流言成功率函数已经展开出：
+所列成功计算文本可见：
 
-- 计略府加成；
-- 若干全局/势力参数；
-- `005BA410`；
-- 最终整数成功率结果。
+- 计略府参数10→12这一独立事实；
+- 若干读取与参数传递；
+- `005BA410`调用；
+- 末段整数运算及返回。
+
+这些内容不证明完整原概率或其输入语义。005D0540/005D055A的文本写sar dl,02/03，旁列bytes为c1 fa 02/03，操作宽度冲突继续E；未解码、未修源。
 
 并在 `005D05AD` 返回。
 
@@ -82,7 +85,7 @@ security-loss-open
 流言成功后忠诚下降公式
 ```
 
-两者是不同函数层。
+两者应按不同证据问题处理；原完整成功率和后续具体效果均仍open。
 
 ## 4. 不能仅凭函数大小给 005D05B0 / 005D05F0 强行命名
 
@@ -171,7 +174,7 @@ function applyRumorSuccess(ctx) {
 
 ```text
 success roll:
-  reverse-engineered separately
+  visible listing; original helpers/role selection/comparison/RNG remain open
 
 target selector:
   open
@@ -189,8 +192,8 @@ security loss:
 
 - 流言成功率函数在 `005D05AD` 前结束；
 - `005D05B0` 与 `005D05F0` 是两个独立后续函数；
-- 成功率与成功后 effect-side 逻辑二进制层面分离；
-- 不能从成功率公式直接推忠诚/治安损失。
+- 成功计算listing与两后续函数边界分开；后续effect业务角色及实际调用顺序仍未证；
+- 不能从可见成功listing直接推完整原概率、忠诚或治安损失。
 
 ### 仍 open
 
@@ -203,10 +206,15 @@ security loss:
 7. 亲爱/义理/相性 gate；
 8. RNG helper 与调用顺序；
 9. 到 `004A6CF0` / 城市治安 setter 的 exact xref；
-10. Vanilla / PS2 / Wii 差异。
+10. Vanilla / PS2 / Wii 差异；
+11. 原成功概率的005BA410/角色与名单helper/最终随机比较，以及sar文本宽度冲突。
 
 ## 9. 来源
 
 - sjn4048/311MemoryResearch `内存资料/函数[计算流言是否成功].txt`
 - fudanglp/311resource `san11pk_dump.exe_functions.csv`
 - 关联：`41-nonnatural-loyalty-exactness.md`
+
+## 10. O12-B有限软件服务不关闭原证据
+
+[完整规则](rumor-scalar-lifecycle.md)另实现固定双城普通标量：新odds与三人平均防守、关系保护、至多一人加空槽、义理表、分离loss及独立RNG均synthetic，不从玩家观察恢复分布。200金/30AP与智力方向有官方依据，10/12只为listing单独参数事实。原被捕风险 unresolved-not-modeled，不是0；travel/failureDiplomacy/xpMeritTp未模拟，ownershipFrozen=true。原成功/效果仍E，完整原世界命令和P078依赖仍X；O12与原43不关闭、不新增分母。仅静态交付，未运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例。

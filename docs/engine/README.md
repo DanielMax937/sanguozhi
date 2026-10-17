@@ -1,3 +1,7 @@
+## 固定双城普通流言标量（O12-B）
+
+[create/inspect/preview/execute/save/load/replay V1 API](rumor-scalar-lifecycle.md) · [规则](../rules/rumor-scalar-lifecycle.md) · [完整policy](../../data/catalogs/rumor-scalar-policy-v1.json) · [schema](../sources/rumor-scalar-lifecycle.schema.json)。独立success、稀疏selector、抗性/loss、200金/30AP和actor频次、true loyalty/security、旬序/RNG及完整保存重算；所有具体数值公式和RNG均synthetic。原成功率E；被捕风险 unresolved-not-modeled、travel/failureDiplomacy/xpMeritTp未模拟、ownershipFrozen=true，完整原动作X。PR83的O12-A已交付；O12与原43不关闭、不新增分母。静态交付未运行任何测试、编译、checker、schema或产品。
+
 ## 固定驻城自然忠诚与现金褒赏（O12-A）
 
 [create/inspect/preview/execute/save/load/replay API](personnel-loyalty-lifecycle.md) · [完整规则](../rules/personnel-loyalty-lifecycle.md) · [固定policy](../../data/catalogs/personnel-loyalty-policies-v1.json)。两个真实命令，独立资源/真实忠诚byte/频次/日历与新共享RNG，完整genesis/receipt重算。现金5..9不使用魅力/义理，关系图与writer为明确软件政策；不接登用ownership、欠薪、俘虏、P078及全部依赖。仅静态交付，未运行测试、编译、schema或产品；整个O12和原43不关闭。
