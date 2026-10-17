@@ -1,3 +1,9 @@
+## 当前新增：单城商人即时粮食交易（O10-B，2026-10-17）
+
+[完整具体规则](docs/rules/city-merchant-lifecycle.md)与[API](docs/engine/city-merchant-lifecycle.md)：每城每旬一次、20AP、完整supplied两格敌情、UI相场3..7、政治20..100的12观测锚点与精确有理插值、买ceil/卖floor且仅卖侧4/5、整笔容量拒绝、行动/XP5、固定外部旬输入及AP20/0政策、完整genesis/receipt/finalstate重建。见[来源及完整政策](docs/sources/city-merchant-lifecycle.json)和[未运行场景](data/scenarios/city-merchant-example-v1.json)。
+
+这是独立O10-B子域，不扩O04或O10-A；两批不等于全财政完成，原43不减。原交易135条listing存在，但三helper/raw byte尺度/native writer仍未闭合；经验与provisional政策不升级为native认证。未运行测试、typecheck、编译、build、checker、诊断、产品或示例，旧测试未改，旧food失败保留。以下原有“当前”与历史通过措辞按其原日期保留。
+
 ## 当前新增：有限单城财政（O10-A，2026-10-17）
 
 固定owner与完整驻城有官薪名单、30设施和U16基础产值自行推导金粮，单旬推进、月金粮/季初治安/足额月薪/四类月特产顺序、独立库存cap与逐笔弃置、完整genesis/receipt/snapshot重算已补静态代码。见[完整具体规则](docs/rules/city-finance-lifecycle.md)、[API](docs/engine/city-finance-lifecycle.md)、[固定来源与全部政策](docs/sources/city-finance-lifecycle.json)、[未运行静态场景](data/scenarios/city-finance-example-v1.json)。不足薪资整旬拒绝，无俘虏/未知工资身份；每未来月丰作primitive必须明确提供。
