@@ -1,3 +1,7 @@
+## Facility construction and absorption
+
+[Facility construction lifecycle v1](facility-construction-lifecycle.md): standalone supplied-lot StartDevelopment/StartAbsorption/AdvanceFacilityTurn, exact debits, busy actors, work progress and completion rewards, registered alternatives, full reconstruction and existing income-kernel effect projections. [Detailed rules](../rules/facility-construction-lifecycle.md). Static implementation only; not run or tested; no repair, combat HP or native task integration.
+
 ## 当前新增：O10-B独立单城商人
 
 [create/preview/execute/save/load/replay API](city-merchant-lifecycle.md) · [完整买卖规则、12政治锚点及公式](../rules/city-merchant-lifecycle.md) · [source/policy](../sources/city-merchant-lifecycle.json)。BuyFood/SellFood/单旬推进、整笔资源/AP/XP写入和完整重建；独立于O04/O10-A，原43不减，不代表全财政或native认证。代码与场景仅静态新增，未运行测试、编译或产品。

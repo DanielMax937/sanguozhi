@@ -1,3 +1,10 @@
+## 2026-10-17 O11-A：建设/吸收有限覆盖
+
+- [x] 新增标准9设施建设与5类吸收独立状态机，完整费用/占地/人员/任务/奖励/保存重放代码和[详细规则](docs/rules/facility-construction-lifecycle.md)
+- [x] 明确quarter/zero工作量、AP20/0、功绩争议和完工行动标记16种政策组合，复用旧速率与金粮核
+- [ ] O11维修、PK十类特殊楼、战斗HP/升级HP writer与跨服务组合仍开放
+- 本批仅静态代码/文档审查，未运行测试、typecheck、编译、build、checker、诊断、产品或示例。原43不减，既有food失败和P078依赖禁区不变
+
 # 当前工作范围：O10-B单城商人（2026-10-17）
 
 已补[具体规则](docs/rules/city-merchant-lifecycle.md)、[API](docs/engine/city-merchant-lifecycle.md)、独立代码、完整政策/lookup、schema与未运行场景：20AP/每城每旬一次、敌情两格、政治精确有理插值、买卖整笔入账与容量拒绝、AP/XP/行动、旬输入及全量保存重建。仅静态工作，没有执行测试/typecheck/编译/build/checker/诊断/产品/示例，旧测试与旧food失败保留。

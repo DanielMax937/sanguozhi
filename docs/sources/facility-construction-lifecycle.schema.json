@@ -1,0 +1,2131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Facility construction lifecycle v1 structural shapes",
+  "description": "Static schema, not executed. Runtime also checks unique IDs/coordinates, ownership, caps, calendar horizon, catalog semantics, complete kernel receipts, exact policy snapshots, budgets and complete history reconstruction. No runtime correctness is established by this file. Trace envelope shapes cover typed commands only; the unknown-input runtime can additionally record rejected malformed or unsupported-command attempts outside these shapes.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/scenario"
+    },
+    {
+      "$ref": "#/$defs/envelope"
+    },
+    {
+      "$ref": "#/$defs/state"
+    },
+    {
+      "$ref": "#/$defs/trace"
+    }
+  ],
+  "$defs": {
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "q",
+        "r"
+      ],
+      "properties": {
+        "q": {
+          "type": "integer",
+          "minimum": -1000000,
+          "maximum": 1000000
+        },
+        "r": {
+          "type": "integer",
+          "minimum": -1000000,
+          "maximum": 1000000
+        }
+      }
+    },
+    "date": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "year",
+        "month",
+        "day"
+      ],
+      "properties": {
+        "year": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "month": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "day": {
+          "enum": [
+            1,
+            11,
+            21
+          ]
+        }
+      }
+    },
+    "force": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "techniquePoints"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "techniquePoints": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        }
+      }
+    },
+    "corps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "forceId",
+        "actionPoints"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "forceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "actionPoints": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    "city": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "ownerForceId",
+        "position",
+        "gold",
+        "goldCapacity"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "kind": {
+          "const": "city"
+        },
+        "ownerForceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "goldCapacity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      }
+    },
+    "economy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseMoneyWord",
+        "baseFoodWord",
+        "securityByte",
+        "difficulty",
+        "controller"
+      ],
+      "properties": {
+        "baseMoneyWord": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "baseFoodWord": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "securityByte": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "difficulty": {
+          "enum": [
+            "normal",
+            "super"
+          ]
+        },
+        "controller": {
+          "enum": [
+            "player",
+            "ai"
+          ]
+        }
+      }
+    },
+    "primitiveOfficer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "forceId",
+        "cityId",
+        "available",
+        "politics",
+        "politicsXp",
+        "merit",
+        "actedTurn"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "forceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "cityId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "politics": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "politicsXp": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "merit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "actedTurn": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          ]
+        }
+      }
+    },
+    "officer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "forceId",
+        "cityId",
+        "available",
+        "politics",
+        "politicsXp",
+        "merit",
+        "actedTurn",
+        "reservationJobId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "forceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "cityId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "politics": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "politicsXp": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "merit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "actedTurn": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          ]
+        },
+        "reservationJobId": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            }
+          ]
+        }
+      }
+    },
+    "lot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "cityId",
+        "position"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "cityId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        }
+      }
+    },
+    "primitiveFacility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "lotId",
+        "kind",
+        "level"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "lotId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "kind": {
+          "enum": [
+            "market",
+            "farm",
+            "barracks",
+            "forge",
+            "stable",
+            "workshop",
+            "shipyard",
+            "mint",
+            "granary"
+          ]
+        },
+        "level": {
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    },
+    "facility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "lotId",
+        "kind",
+        "level",
+        "typeId",
+        "status",
+        "effectiveLevel",
+        "jobId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "lotId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "kind": {
+          "enum": [
+            "market",
+            "farm",
+            "barracks",
+            "forge",
+            "stable",
+            "workshop",
+            "shipyard",
+            "mint",
+            "granary"
+          ]
+        },
+        "level": {
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "typeId": {
+          "type": "integer",
+          "minimum": 31,
+          "maximum": 59
+        },
+        "status": {
+          "enum": [
+            "complete",
+            "developing",
+            "absorbing"
+          ]
+        },
+        "effectiveLevel": {
+          "enum": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "jobId": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            }
+          ]
+        }
+      }
+    },
+    "fieldUnit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "forceId",
+        "position"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "forceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        }
+      }
+    },
+    "turnInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fieldUnits"
+      ],
+      "properties": {
+        "fieldUnits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fieldUnit"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        }
+      }
+    },
+    "policies": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "calendar",
+        "development",
+        "absorption",
+        "hostility",
+        "ownership",
+        "scheduler",
+        "writer",
+        "effects",
+        "budget",
+        "persistence",
+        "apRecovery",
+        "initialWork",
+        "rewards",
+        "completionActors"
+      ],
+      "properties": {
+        "version": {
+          "const": "facility-construction-policies-v1"
+        },
+        "calendar": {
+          "const": {
+            "id": "finite-facility-ten-day-calendar-v1",
+            "version": 1,
+            "days": [
+              1,
+              11,
+              21
+            ],
+            "minYear": 1,
+            "maxYear": 9999,
+            "maxAdvanceLimit": 360
+          }
+        },
+        "development": {
+          "const": {
+            "id": "standard-nine-development-v1",
+            "version": 1,
+            "actionPoints": 20,
+            "minActors": 1,
+            "maxActors": 3,
+            "level": 1,
+            "rateProfile": "domestic-construction-rate-stable-v1",
+            "politicsMinimum": 0,
+            "politicsMaximum": 255
+          }
+        },
+        "absorption": {
+          "const": {
+            "id": "same-kind-adjacent-lv1-absorption-v1",
+            "version": 1,
+            "actionPoints": 10,
+            "goldCost": 100,
+            "actors": 1,
+            "donorLevel": 1,
+            "receiverLevels": [
+              1,
+              2
+            ],
+            "adjacencyDistance": 1,
+            "fastPoliticsThreshold": 70,
+            "fastTurns": 1,
+            "slowTurns": 2,
+            "completionTechniquePoints": 10,
+            "timingEvidence": "empirical-guide"
+          }
+        },
+        "hostility": {
+          "const": {
+            "id": "facility-start-only-pressure-gate-v1",
+            "version": 1,
+            "completeFieldUnitsRequired": true,
+            "explicitHostileForceIds": true,
+            "distance": "max(abs(dq),abs(dr),abs(dq+dr))",
+            "cityCenteredBlockingDistanceInclusive": 2,
+            "blockAdvance": false,
+            "coordinateMin": -1000000,
+            "coordinateMax": 1000000
+          }
+        },
+        "ownership": {
+          "const": {
+            "id": "fixed-owned-city-supplied-lots-v1",
+            "version": 1,
+            "ownershipChanges": false,
+            "lotAtCityAllowed": false,
+            "externalActiveJobsSupported": false,
+            "usedFacilityIdReuse": false
+          }
+        },
+        "scheduler": {
+          "const": {
+            "id": "next-boundary-capped-work-v1",
+            "version": 1,
+            "startProgressAdvances": 0,
+            "firstProgress": "next-boundary",
+            "order": [
+              "calendar",
+              "ap-recovery",
+              "jobs-in-ASCII-id-order",
+              "completion-rewards-release"
+            ],
+            "rateSnapshot": "start",
+            "workProgressCap": "required-work",
+            "forcedTenTurnCompletion": false,
+            "requireCompletionWithinHorizon": true,
+            "nativeSchedulerRecovered": false
+          }
+        },
+        "writer": {
+          "const": {
+            "id": "facility-exact-debit-saturating-reward-v1",
+            "version": 1,
+            "actionPointCap": 255,
+            "techniquePointCap": 10000,
+            "rewardCap": 1000000000,
+            "goldMaximum": 1000000000,
+            "partialDebits": false,
+            "overflowCredit": "clip-and-record-discarded"
+          }
+        },
+        "effects": {
+          "const": {
+            "id": "facility-active-level-kernel-view-v1",
+            "version": 1,
+            "developmentEffectiveLevel": 0,
+            "absorptionEffectiveLevel": "target-minus-one",
+            "completedEffectiveLevel": "target",
+            "income": "existing-kernel-read-only-projection",
+            "supportAdjacencyDistance": 1,
+            "supportMultiplierStacks": false,
+            "combatHpModeled": false,
+            "repairsModeled": false,
+            "automaticPoliticsGrowth": false
+          }
+        },
+        "budget": {
+          "const": {
+            "id": "facility-bounded-json-v1",
+            "version": 1,
+            "maxLots": 30,
+            "maxOfficers": 128,
+            "maxFieldUnits": 128,
+            "maxHostileForces": 128,
+            "maxJobs": 512,
+            "maxAcceptedCommands": 872,
+            "maxTraceAttempts": 2616,
+            "maxCanonicalUtf8Bytes": 67108864,
+            "maxInputNodes": 4000000,
+            "maxInputDepth": 48,
+            "maxArrayLength": 4096,
+            "maxObjectKeys": 128,
+            "maxIdLength": 64
+          }
+        },
+        "persistence": {
+          "const": {
+            "id": "facility-canonical-recompute-v1",
+            "version": 1,
+            "schemaVersion": 1,
+            "comparison": "full-policy-catalog-genesis-receipts-snapshot",
+            "digest": "sha256-canonical-json",
+            "duplicateJsonKeys": "reject",
+            "inputObjectKeyOrder": "irrelevant",
+            "inputArrayOrder": "preserved",
+            "executeOutputBudgetAtEveryAcceptedStep": true
+          }
+        },
+        "apRecovery": {
+          "enum": [
+            {
+              "id": "facility-ap20-cap255-v1",
+              "version": 1,
+              "perAdvance": 20,
+              "cap": 255,
+              "nativeFormulaRecovered": false
+            },
+            {
+              "id": "facility-ap0-cap255-v1",
+              "version": 1,
+              "perAdvance": 0,
+              "cap": 255,
+              "nativeFormulaRecovered": false
+            }
+          ]
+        },
+        "initialWork": {
+          "enum": [
+            {
+              "id": "facility-work-quarter-floor-v1",
+              "version": 1,
+              "mode": "quarter-floor",
+              "divisor": 4,
+              "nativeInitialWriterRecovered": false
+            },
+            {
+              "id": "facility-work-zero-v1",
+              "version": 1,
+              "mode": "zero",
+              "divisor": 4,
+              "nativeInitialWriterRecovered": false
+            }
+          ]
+        },
+        "rewards": {
+          "enum": [
+            {
+              "id": "facility-community-rewards-v1",
+              "version": 1,
+              "ordinaryDevelopmentPoliticsXp": 3,
+              "supportDevelopmentPoliticsXp": 4,
+              "absorptionPoliticsXp": 2,
+              "mintDevelopmentMerit": 100,
+              "otherMerit": 100,
+              "allocation": "full-per-selected-at-completion",
+              "nativeRewardWriterRecovered": false
+            },
+            {
+              "id": "facility-mint150-rewards-v1",
+              "version": 1,
+              "ordinaryDevelopmentPoliticsXp": 3,
+              "supportDevelopmentPoliticsXp": 4,
+              "absorptionPoliticsXp": 2,
+              "mintDevelopmentMerit": 150,
+              "otherMerit": 100,
+              "allocation": "full-per-selected-at-completion",
+              "nativeRewardWriterRecovered": false
+            }
+          ]
+        },
+        "completionActors": {
+          "enum": [
+            {
+              "id": "facility-completion-actors-acted-v1",
+              "version": 1,
+              "actedOnCompletion": true,
+              "nativeMarkerRecovered": false
+            },
+            {
+              "id": "facility-completion-actors-available-v1",
+              "version": 1,
+              "actedOnCompletion": false,
+              "nativeMarkerRecovered": false
+            }
+          ]
+        }
+      }
+    },
+    "catalog": {
+      "const": {
+        "version": "standard-nine-facilities-community-v1",
+        "evidence": "community-tables-and-existing-rule-transcription-not-stock-data",
+        "entries": [
+          {
+            "kind": "market",
+            "name": "市场",
+            "goldCost": 200,
+            "completionTechniquePoints": 30,
+            "absorbable": true,
+            "levels": [
+              {
+                "level": 1,
+                "typeId": 31,
+                "maxDurability": 500
+              },
+              {
+                "level": 2,
+                "typeId": 50,
+                "maxDurability": 600
+              },
+              {
+                "level": 3,
+                "typeId": 51,
+                "maxDurability": 700
+              }
+            ]
+          },
+          {
+            "kind": "farm",
+            "name": "农场",
+            "goldCost": 200,
+            "completionTechniquePoints": 30,
+            "absorbable": true,
+            "levels": [
+              {
+                "level": 1,
+                "typeId": 32,
+                "maxDurability": 500
+              },
+              {
+                "level": 2,
+                "typeId": 52,
+                "maxDurability": 600
+              },
+              {
+                "level": 3,
+                "typeId": 53,
+                "maxDurability": 700
+              }
+            ]
+          },
+          {
+            "kind": "barracks",
+            "name": "兵舍",
+            "goldCost": 300,
+            "completionTechniquePoints": 30,
+            "absorbable": true,
+            "levels": [
+              {
+                "level": 1,
+                "typeId": 33,
+                "maxDurability": 800
+              },
+              {
+                "level": 2,
+                "typeId": 54,
+                "maxDurability": 900
+              },
+              {
+                "level": 3,
+                "typeId": 55,
+                "maxDurability": 1000
+              }
+            ]
+          },
+          {
+            "kind": "forge",
+            "name": "锻冶",
+            "goldCost": 300,
+            "completionTechniquePoints": 30,
+            "absorbable": true,
+            "levels": [
+              {
+                "level": 1,
+                "typeId": 34,
+                "maxDurability": 800
+              },
+              {
+                "level": 2,
+                "typeId": 56,
+                "maxDurability": 900
+              },
+              {
+                "level": 3,
+                "typeId": 57,
+                "maxDurability": 1000
+              }
+            ]
+          },
+          {
+            "kind": "stable",
+            "name": "厩舍",
+            "goldCost": 300,
+            "completionTechniquePoints": 30,
+            "absorbable": true,
+            "levels": [
+              {
+                "level": 1,
+                "typeId": 35,
+                "maxDurability": 800
+              },
+              {
+                "level": 2,
+                "typeId": 58,
+                "maxDurability": 900
+              },
+              {
+                "level": 3,
+                "typeId": 59,
+                "maxDurability": 1000
+              }
+            ]
+          },
+          {
+            "kind": "workshop",
+            "name": "工房",
+            "goldCost": 300,
+            "completionTechniquePoints": 30,
+            "absorbable": false,
+            "levels": [
+              {
+                "level": 1,
+                "typeId": 36,
+                "maxDurability": 800
+              }
+            ]
+          },
+          {
+            "kind": "shipyard",
+            "name": "造船厂",
+            "goldCost": 300,
+            "completionTechniquePoints": 30,
+            "absorbable": false,
+            "levels": [
+              {
+                "level": 1,
+                "typeId": 37,
+                "maxDurability": 800
+              }
+            ]
+          },
+          {
+            "kind": "mint",
+            "name": "造币厂",
+            "goldCost": 400,
+            "completionTechniquePoints": 50,
+            "absorbable": false,
+            "levels": [
+              {
+                "level": 1,
+                "typeId": 38,
+                "maxDurability": 1000
+              }
+            ]
+          },
+          {
+            "kind": "granary",
+            "name": "谷仓",
+            "goldCost": 400,
+            "completionTechniquePoints": 50,
+            "absorbable": false,
+            "levels": [
+              {
+                "level": 1,
+                "typeId": 39,
+                "maxDurability": 1000
+              }
+            ]
+          }
+        ],
+        "incomeRows": {
+          "market": [
+            100,
+            120,
+            150
+          ],
+          "farm": [
+            1500,
+            1800,
+            2250
+          ]
+        },
+        "combatHpWriterRecovered": false
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "profile",
+        "date",
+        "turn",
+        "advanceLimit",
+        "activeForceId",
+        "force",
+        "corps",
+        "city",
+        "economy",
+        "officers",
+        "lots",
+        "facilities",
+        "hostileForceIds",
+        "completeFieldUnits",
+        "fieldUnits",
+        "turnInputs",
+        "policies",
+        "catalog"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "standalone-facility-construction-v1"
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "turn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "advanceLimit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 360
+        },
+        "activeForceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "force": {
+          "$ref": "#/$defs/force"
+        },
+        "corps": {
+          "$ref": "#/$defs/corps"
+        },
+        "city": {
+          "$ref": "#/$defs/city"
+        },
+        "economy": {
+          "$ref": "#/$defs/economy"
+        },
+        "officers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/primitiveOfficer"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        },
+        "lots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/lot"
+          },
+          "minItems": 0,
+          "maxItems": 30
+        },
+        "facilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/primitiveFacility"
+          },
+          "minItems": 0,
+          "maxItems": 30
+        },
+        "hostileForceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "completeFieldUnits": {
+          "const": true
+        },
+        "fieldUnits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fieldUnit"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        },
+        "turnInputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/turnInput"
+          },
+          "minItems": 1,
+          "maxItems": 360
+        },
+        "policies": {
+          "$ref": "#/$defs/policies"
+        },
+        "catalog": {
+          "$ref": "#/$defs/catalog"
+        }
+      }
+    },
+    "command": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "cityId",
+            "lotId",
+            "facilityId",
+            "facilityKind",
+            "officerIds"
+          ],
+          "properties": {
+            "type": {
+              "const": "StartDevelopment"
+            },
+            "cityId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "lotId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "facilityId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "facilityKind": {
+              "enum": [
+                "market",
+                "farm",
+                "barracks",
+                "forge",
+                "stable",
+                "workshop",
+                "shipyard",
+                "mint",
+                "granary"
+              ]
+            },
+            "officerIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+              },
+              "minItems": 1,
+              "maxItems": 3,
+              "uniqueItems": true
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "cityId",
+            "receiverId",
+            "donorId",
+            "officerId"
+          ],
+          "properties": {
+            "type": {
+              "const": "StartAbsorption"
+            },
+            "cityId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "donorId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "officerId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "const": "AdvanceFacilityTurn"
+            }
+          }
+        }
+      ]
+    },
+    "envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "expectedRevision",
+        "command"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 872
+        },
+        "command": {
+          "$ref": "#/$defs/command"
+        }
+      }
+    },
+    "work": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "initial",
+        "current",
+        "required",
+        "perAdvance",
+        "rate"
+      ],
+      "properties": {
+        "initial": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "current": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "required": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "perAdvance": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "rate": {
+          "type": "object",
+          "description": "Exact complete DomesticConstructionRateReceipt, recomputed field-for-field by runtime"
+        }
+      }
+    },
+    "job": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "facilityId",
+        "facilityKind",
+        "fromLevel",
+        "targetLevel",
+        "officerIds",
+        "politics",
+        "startTurn",
+        "dueTurn",
+        "dueDate",
+        "durationTurns",
+        "remainingTurns",
+        "work",
+        "completedTurn"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "kind": {
+          "enum": [
+            "development",
+            "absorption"
+          ]
+        },
+        "facilityId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "facilityKind": {
+          "enum": [
+            "market",
+            "farm",
+            "barracks",
+            "forge",
+            "stable",
+            "workshop",
+            "shipyard",
+            "mint",
+            "granary"
+          ]
+        },
+        "fromLevel": {
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "targetLevel": {
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "officerIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "politics": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "startTurn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "dueTurn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "dueDate": {
+          "$ref": "#/$defs/date"
+        },
+        "durationTurns": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 360
+        },
+        "remainingTurns": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "work": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/work"
+            }
+          ]
+        },
+        "completedTurn": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          ]
+        }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "profile",
+        "revision",
+        "advancedCount",
+        "date",
+        "turn",
+        "force",
+        "corps",
+        "city",
+        "officers",
+        "facilities",
+        "jobs",
+        "usedFacilityIds",
+        "completeFieldUnits",
+        "fieldUnits"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "standalone-facility-construction-v1"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 872
+        },
+        "advancedCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "turn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "force": {
+          "$ref": "#/$defs/force"
+        },
+        "corps": {
+          "$ref": "#/$defs/corps"
+        },
+        "city": {
+          "$ref": "#/$defs/city"
+        },
+        "officers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/officer"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        },
+        "facilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/facility"
+          },
+          "minItems": 0,
+          "maxItems": 30
+        },
+        "jobs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/job"
+          },
+          "minItems": 0,
+          "maxItems": 512
+        },
+        "usedFacilityIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+          },
+          "minItems": 0,
+          "maxItems": 542,
+          "uniqueItems": true
+        },
+        "completeFieldUnits": {
+          "const": true
+        },
+        "fieldUnits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fieldUnit"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        }
+      }
+    },
+    "write": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "before",
+        "requestedDelta",
+        "actualDelta",
+        "after",
+        "cap",
+        "discarded",
+        "policyId"
+      ],
+      "properties": {
+        "before": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "requestedDelta": {
+          "type": "integer",
+          "minimum": -1000000000,
+          "maximum": 1000000000
+        },
+        "actualDelta": {
+          "type": "integer",
+          "minimum": -1000000000,
+          "maximum": 1000000000
+        },
+        "after": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "cap": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "discarded": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "policyId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        }
+      }
+    },
+    "unitCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unitId",
+        "forceId",
+        "position",
+        "hostile",
+        "distance",
+        "blocks"
+      ],
+      "properties": {
+        "unitId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "forceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "hostile": {
+          "type": "boolean"
+        },
+        "distance": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4000000
+        },
+        "blocks": {
+          "type": "boolean"
+        }
+      }
+    },
+    "reward": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "officerId",
+        "politicsXp",
+        "merit",
+        "politicsBefore",
+        "politicsAfter"
+      ],
+      "properties": {
+        "officerId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "politicsXp": {
+          "$ref": "#/$defs/write"
+        },
+        "merit": {
+          "$ref": "#/$defs/write"
+        },
+        "politicsBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "politicsAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "jobId",
+        "facilityId",
+        "typeId",
+        "level",
+        "effectiveLevel",
+        "techniquePoints",
+        "rewards",
+        "releasedOfficerIds",
+        "policyId"
+      ],
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "facilityId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "typeId": {
+          "type": "integer",
+          "minimum": 31,
+          "maximum": 59
+        },
+        "level": {
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "effectiveLevel": {
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "techniquePoints": {
+          "$ref": "#/$defs/write"
+        },
+        "rewards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reward"
+          },
+          "minItems": 0,
+          "maxItems": 3
+        },
+        "releasedOfficerIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+          },
+          "minItems": 0,
+          "maxItems": 3
+        },
+        "policyId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        }
+      }
+    },
+    "start": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "job",
+        "createdFacility",
+        "receiverBefore",
+        "receiverAfter",
+        "removedDonor",
+        "unitChecks"
+      ],
+      "properties": {
+        "job": {
+          "$ref": "#/$defs/job"
+        },
+        "createdFacility": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/facility"
+            }
+          ]
+        },
+        "receiverBefore": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/facility"
+            }
+          ]
+        },
+        "receiverAfter": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/facility"
+            }
+          ]
+        },
+        "removedDonor": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/facility"
+            }
+          ]
+        },
+        "unitChecks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/unitCheck"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        }
+      }
+    },
+    "advance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputIndex",
+        "origin",
+        "input",
+        "progress",
+        "completions"
+      ],
+      "properties": {
+        "inputIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 359
+        },
+        "origin": {
+          "const": "fixed-external-scenario"
+        },
+        "input": {
+          "$ref": "#/$defs/turnInput"
+        },
+        "progress": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "jobId",
+              "remainingBefore",
+              "remainingAfter",
+              "workBefore",
+              "workAfter"
+            ],
+            "properties": {
+              "jobId": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+              },
+              "remainingBefore": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 360
+              },
+              "remainingAfter": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 360
+              },
+              "workBefore": {
+                "anyOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 65535
+                  }
+                ]
+              },
+              "workAfter": {
+                "anyOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 65535
+                  }
+                ]
+              }
+            }
+          },
+          "minItems": 0,
+          "maxItems": 30
+        },
+        "completions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/completion"
+          },
+          "minItems": 0,
+          "maxItems": 30
+        }
+      }
+    },
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "profile",
+        "commandId",
+        "command",
+        "revisionBefore",
+        "revisionAfter",
+        "dateBefore",
+        "dateAfter",
+        "turnBefore",
+        "turnAfter",
+        "policyDigest",
+        "catalogDigest",
+        "sourceBoundary",
+        "ownerSnapshot",
+        "cityId",
+        "actionPoints",
+        "gold",
+        "rngDraws",
+        "start",
+        "advance"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "standalone-facility-construction-v1"
+        },
+        "commandId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "command": {
+          "$ref": "#/$defs/command"
+        },
+        "revisionBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 872
+        },
+        "revisionAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 872
+        },
+        "dateBefore": {
+          "$ref": "#/$defs/date"
+        },
+        "dateAfter": {
+          "$ref": "#/$defs/date"
+        },
+        "turnBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "turnAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "policyDigest": {
+          "type": "string"
+        },
+        "catalogDigest": {
+          "type": "string"
+        },
+        "sourceBoundary": {
+          "const": {
+            "sourceLevel": "official-guide-and-public-rate-listing-with-provisional-service",
+            "nativeExecution": false,
+            "stockVerified": false,
+            "constructionRate": "stable-resolved-public-listing-only",
+            "constructionWriterAndSchedule": "provisional-engine-rule",
+            "absorptionTimingAndTp": "empirical-guide",
+            "levelDurability": "community-guide-reference-not-stock-table",
+            "combatHpModeled": false,
+            "nativeTasksModeled": false,
+            "repairModeled": false
+          }
+        },
+        "ownerSnapshot": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "activeForceId",
+            "ownerForceId",
+            "corpsId",
+            "corpsForceId"
+          ],
+          "properties": {
+            "activeForceId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "ownerForceId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "corpsId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "corpsForceId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            }
+          }
+        },
+        "cityId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "actionPoints": {
+          "$ref": "#/$defs/write"
+        },
+        "gold": {
+          "$ref": "#/$defs/write"
+        },
+        "rngDraws": {
+          "const": 0
+        },
+        "start": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/start"
+            }
+          ]
+        },
+        "advance": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/advance"
+            }
+          ]
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tag",
+        "schemaVersion",
+        "profile",
+        "scope",
+        "policies",
+        "catalog",
+        "policyDigest",
+        "catalogDigest",
+        "genesis",
+        "snapshot",
+        "acceptedCommands"
+      ],
+      "properties": {
+        "tag": {
+          "const": "facility-construction-state-v1"
+        },
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "standalone-facility-construction-v1"
+        },
+        "scope": {
+          "const": "independent-fixed-owned-city"
+        },
+        "policies": {
+          "$ref": "#/$defs/policies"
+        },
+        "catalog": {
+          "$ref": "#/$defs/catalog"
+        },
+        "policyDigest": {
+          "type": "string"
+        },
+        "catalogDigest": {
+          "type": "string"
+        },
+        "genesis": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "scenario",
+            "snapshot"
+          ],
+          "properties": {
+            "scenario": {
+              "$ref": "#/$defs/scenario"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/snapshot"
+            }
+          }
+        },
+        "snapshot": {
+          "$ref": "#/$defs/snapshot"
+        },
+        "acceptedCommands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "envelope",
+              "receipt"
+            ],
+            "properties": {
+              "envelope": {
+                "$ref": "#/$defs/envelope"
+              },
+              "receipt": {
+                "$ref": "#/$defs/receipt"
+              }
+            }
+          },
+          "minItems": 0,
+          "maxItems": 872
+        }
+      }
+    },
+    "outcome": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ok",
+            "duplicate",
+            "receipt"
+          ],
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "duplicate": {
+              "type": "boolean"
+            },
+            "receipt": {
+              "$ref": "#/$defs/receipt"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ok",
+            "reason",
+            "blockingUnitId"
+          ],
+          "properties": {
+            "ok": {
+              "const": false
+            },
+            "reason": {
+              "type": "string"
+            },
+            "blockingUnitId": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tag",
+        "scenario",
+        "attempts",
+        "expectedFinalSnapshot"
+      ],
+      "properties": {
+        "tag": {
+          "const": "facility-construction-trace-v1"
+        },
+        "scenario": {
+          "$ref": "#/$defs/scenario"
+        },
+        "attempts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "envelope",
+              "expectedOutcome"
+            ],
+            "properties": {
+              "envelope": {
+                "$ref": "#/$defs/envelope"
+              },
+              "expectedOutcome": {
+                "anyOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/$defs/outcome"
+                  }
+                ]
+              }
+            }
+          },
+          "minItems": 0,
+          "maxItems": 2616
+        },
+        "expectedFinalSnapshot": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/snapshot"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

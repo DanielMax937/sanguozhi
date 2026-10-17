@@ -1430,6 +1430,8 @@ interface CitySeasonState {
 
 ## 4. 无印内政设施
 
+2026-10-17：本节相关机制的独立O11-A工程覆盖见[标准设施建设与吸收完整规则](facility-construction-lifecycle.md)。该服务包含实际费用/任务/奖励，初始work/调度采用明确政策；不是战斗HP、维修或原生writer恢复。本节原有来源等级及历史证据边界保留。
+
 `[VANILLA][confirmed-mechanism / empirical-high-data]`
 
 无印《三國志11》的都市开发体系包含 9 类标准内政设施；PK 保留这 9 类，再在其上新增特殊设施与吸收合并。
@@ -2137,6 +2139,8 @@ city.hasStrategyOffice
 
 ## 6. PK 吸收合并
 
+2026-10-17：本节相关机制的独立O11-A工程覆盖见[标准设施建设与吸收完整规则](facility-construction-lifecycle.md)。该服务包含实际费用/任务/奖励，初始work/调度采用明确政策；不是战斗HP、维修或原生writer恢复。本节原有来源等级及历史证据边界保留。
+
 `[PK][official-confirmed + PC-PK1.1 reverse-engineered-structure + empirical-high timing]`
 
 PK 的“吸收合并”不是普通开发的别名，而是独立内政行动。SIRE 数据层把它列为：
@@ -2328,6 +2332,8 @@ Lv3 = Lv1 效果 ×1.5
   https://www.gamersky.com/handbook/200609/33180.shtml
 
 ## 7. 内政建设速度数值核与开发日数观察
+
+2026-10-17：本节相关机制的独立O11-A工程覆盖见[标准设施建设与吸收完整规则](facility-construction-lifecycle.md)。该服务包含实际费用/任务/奖励，初始work/调度采用明确政策；不是战斗HP、维修或原生writer恢复。本节原有来源等级及历史证据边界保留。
 
 `[PC-PK1.1-oriented public-source profile][stable-value domain]`
 

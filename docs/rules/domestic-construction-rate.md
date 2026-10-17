@@ -1,5 +1,7 @@
 # 内政建设速度：稳定值限定数值核
 
+2026-10-17新增[独立标准设施建设/吸收服务](facility-construction-lifecycle.md)实际调用本速率核；其quarter/zero初始work、下一边界推进及完成规则为具名工程政策，不是本源函数已证明初始HP或原生调度。此文件及数值核保留原有支持域与证据等级。
+
 基线：`f0b88ff446fda4622fb186975b78fbb4a4f9b79d`。本批恢复公开非星号反汇编在稳定已解析值域内的建设速度，证据等级为 `source-listing-reconstruction`。它是独立纯函数，不是完整开发命令或工期实现；不接入 Train、EndTurn、存档、重放、mission 或 scheduler。P0-78 及 capture/force/native 事务相关工作不在本批。
 
 ## 1. 结论与输入域
