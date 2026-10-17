@@ -128,3 +128,13 @@ npm run play -- --growth-fixture
 ### Standalone city-command lifecycle
 
 [API and evidence limits](docs/rules/city-command-lifecycle.md) cover atomic patrol/recruitment/quantity production, reserved piece production across service turns, and independent canonical save/replay. The existing scalar kernels are reused; eligibility, writer semantics, scheduling and full versioned policy snapshots are explicit service choices. Run the complete primitive example with `node apps/text/city-command-demo.mjs`. This does not change the legacy training state or close the original evidence gaps. This revision has not been retested; the earlier default-suite food-file failure remains unresolved, as recorded in the [validation status](docs/rules/city-command-lifecycle.md#validation-status).
+
+## 独立官职分配服务
+
+已提供80有名官职的单职selector、多职plan和独立状态原子apply；10个君主爵位元数据分离，fill保留既任、显式rebuild可重新分配，保存/回放按请求重算。评分来源与资格/调度工程政策分层；entry80和原生资格/调度/writer仍open。
+
+- [完整官职规则与80行表](docs/rules/office-assignment-service.md)
+- [API、原子提交及持久化](docs/engine/office-assignment-service.md)
+- [静态使用情景](data/scenarios/office-assignment-example-v1.json)
+
+本次仅静态代码/文档交付，未执行测试、typecheck、build、编译、checker、产品或诊断；旧测试不增删。

@@ -353,3 +353,11 @@ A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完
 ## 2026-10-11 生产耗时独立caller投影
 
 已新增本地候选 `calculateProductionTimeProjection` / `production-time-observations-v1`（说明：production-time.md）。仅固定listing与逐调用观测驱动的整数/trace；全无效返回9、type9跳扫描、重复validity/设施解析独立、允许负数和零、技能向零减半。真实helpers/ABI/对象可变读取/命令/库存writer/完成调度/实际日数/stock仍open；未覆盖P0-78及依赖。新树验收和发布状态外部收据单列，不复用PR #55历史通过。
+
+## 2026-10-16 独立官职分配服务
+
+已提供80有名官职的selector、稳定升序/即时移出planner、带完整state绑定和重算核对的原子apply，以及单状态JSON和initialState+requests完整receipt重放。资格policy明确ordinary/ready/merit/title/占用门，既任默认fill、显式rebuild；一般职与10个君主爵位元数据分开，null未任职与内部entry80不混用。
+
+[具体规则、80行表及手算示例](office-assignment-service.md) · [API](../engine/office-assignment-service.md) · [来源](../sources/office-assignment-service.json)
+
+仍open：005FA4D0/005FA650 body、entry80、原caller候选顺序和mode映射、多职writer、stock/Vanilla/console等价。4000真实资料阶梯保留，但不把其他helper opcode当成005FA4D0 body证据。本次未执行测试、typecheck、build、编译、checker、产品/诊断，旧测试不增删；不复用历史通过状态。未连接P0-78/native军团太守/归属/capture/return/mission依赖。
