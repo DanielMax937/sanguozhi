@@ -424,7 +424,7 @@ PC-PK1.1：不存在外层部分支付。
 005D05F0 流言相关函数
 ```
 
-但这两个 effect-side helper 没有展开。
+但这两个独立后续函数没有展开；其effect-side业务角色是待证假说，不能凭地址相邻完成角色命名。
 
 因此：
 
@@ -434,7 +434,9 @@ rumor success roll
 rumor loyalty/security effect
 ```
 
-成功率公式已知，不代表成功后的掉忠量也已知。
+可见成功计算listing不等于完整原成功概率已知：005BA410、角色/名单helper、最终随机比较与RNG未齐，005D0540/005D055A另有sar文字与bytes操作宽度冲突。success/effect分层不关闭上述E，也不证明后续函数的业务分工。
+
+[O12-B独立标量服务](rumor-scalar-lifecycle.md)采用新odds/三人平均防守、关系保护、至多一人加空槽、义理阈值及分离loss；这些都是synthetic。200金/30AP与智力方向有官方依据，10/12仅独立listing参数事实。原被捕风险 unresolved-not-modeled、travel/failureDiplomacy/xpMeritTp未模拟、ownershipFrozen=true，完整原命令继续X。其软件交付不关闭O12、原43或原作成功/效果证据，没有本批运行验证。
 
 来源：
 - https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[计算流言是否成功].txt
@@ -614,7 +616,7 @@ salary payment transaction
 - 月俸外层事务为**整笔支付 / 整笔不支付**；
 - 欠薪时不会先把据点剩余金钱按比例发掉；
 - 欠薪准备 `0058D5E0`、实际忠诚处理 `0058C190`；
-- 流言成功率与效果函数分离；
+- 流言成功计算listing与两个后续函数边界分开，后续effect业务角色及原完整成功概率仍未证；
 - 流言“全城全员统一掉忠”模型被实机反例否定；
 - 流言要保留 target selector 与 loss RNG。
 

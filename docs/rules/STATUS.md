@@ -1,3 +1,9 @@
+## 2026-10-17：O12-B固定双城普通流言标量，静态新增
+
+[完整规则](rumor-scalar-lifecycle.md)与[API](../engine/rumor-scalar-lifecycle.md)补固定双城普通名单的独立数值服务：内部新odds、三人平均防守、关系保护、至多一人加空槽、义理抗性与分离loss、200金/30AP及actor每旬机会、true忠诚/治安、独立旬序/RNG、完整policy/原子幂等保存重算。上述具体算法全为synthetic；仅费用与智力方向等官方事实和10/12的独立listing参数依据分开保留。
+
+原成功率、helper/selector/loss/writer/RNG和stock继续E；原被捕风险 unresolved-not-modeled，行程/失败外交/XP功绩TP不模拟，ownershipFrozen=true，完整原世界流言及P078依赖仍X。基线main c9127cd5b911ef0b17e712379431562e741bd996（tree 2a03082efa32d2d98f0df8d99ba5bdcb7bb4bbf0），PR83已交付O12-A；整个O12和原43不关闭，不新增计数分母。未运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例；旧测试及历史food失败保留，下方历史PASS不适用本批。
+
 ## 2026-10-17：O12-A固定驻城忠诚软件服务，静态新增
 
 [完整规则](personnel-loyalty-lifecycle.md)与[API](../engine/personnel-loyalty-lifecycle.md)补固定单城普通名单的现金褒赏和季度自然忠诚实际账本：100N金/5NAP、每旬一次、新现金5+roll5，仁政/关系优先、教程核returnedAl>25/义理野望/dislikes候选、人心掌握及两次loss、真实byte与显示100、共享新非零xorshift、完整policy/幂等/保存重算。

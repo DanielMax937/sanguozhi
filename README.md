@@ -1,3 +1,9 @@
+## 当前新增：固定双城普通流言标量（O12-B，2026-10-17）
+
+[完整规则](docs/rules/rumor-scalar-lifecycle.md)与[API](docs/engine/rumor-scalar-lifecycle.md)：固定双城普通名单，内部新odds成功判定、关系保护、至多一人加空槽、义理抗性、分离忠诚/治安loss；实际独立扣200金/30AP、执行者每旬一次、真实byte/UI分层、旬序、新RNG、完整policy及原子幂等保存重算。见[政策](data/catalogs/rumor-scalar-policy-v1.json)、[来源](docs/sources/rumor-scalar-lifecycle.json)、[schema](docs/sources/rumor-scalar-lifecycle.schema.json)、[未运行场景](data/scenarios/rumor-scalar-example-v1.json)。
+
+所有具体公式、平均防守、保护、selector、义理/loss和RNG均synthetic；官方仅支持200/30及智力方向等定性事实，计略府10/12只为listing独立参数依据。原成功率仍E；原被捕风险 unresolved-not-modeled，travel/failureDiplomacy/xpMeritTp均不模拟，ownershipFrozen=true；完整原世界流言仍X。PR83已交付O12-A自然/现金，本批不重做；整个O12与原43不关闭、不新增分母。仅静态交付，未运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例，旧测试及历史food失败保留。
+
 ## 当前新增：固定驻城自然忠诚与现金褒赏（O12-A，2026-10-17）
 
 [完整规则](docs/rules/personnel-loyalty-lifecycle.md)与[API](docs/engine/personnel-loyalty-lifecycle.md)：独立固定单城普通名单，CashReward实际扣每人100金/5AP、每旬一次、内部新政策5+roll5；AdvancePersonnelTurn自行判定季度入口、仁政/关系豁免、AL>25/义理野望/dislikes三分支及人心掌握/两次loss。真实byte0..255与UI100分离，true0仍消费其候选路径draw，true>100正常下降，99+9保留108。完整policy、共享新非零xorshift流、原子幂等及genesis/receipt/snapshot保存重算。见[政策](data/catalogs/personnel-loyalty-policies-v1.json)、[来源](docs/sources/personnel-loyalty-lifecycle.json)、[未运行场景](data/scenarios/personnel-loyalty-example-v1.json)。

@@ -2479,7 +2479,7 @@ FAQ 明确：
 军师 -> 太守 -> 君主
 ```
 
-抵抗者回退链以及各自如何进入最终流言闭式，目前在现代逆向复刻中有明确实现，但原公开 EXE 文本还未完成同等级核对，因此 D7 只锁“这些角色会参与”，不把复刻项目的回退链冒充原程序逐指令事实。
+抵抗者回退链以及各自如何进入最终流言闭式仍没有同等级原公开文本证明。可见listing及计略府参数10→12不补齐角色/名单helper、005BA410、最终随机比较或RNG；不能称完整原成功率已知。[O12-B独立标量服务](rumor-scalar-lifecycle.md)要求三名不同固定防守角色，取其智力floor平均，这是明确synthetic政策，不恢复原selector或缺位回退。原被捕风险 unresolved-not-modeled，travel/failureDiplomacy/xpMeritTp未模拟、ownershipFrozen=true；完整原命令继续X。
 
 ### 7.13 驱虎吞狼直接以太守为目标
 
@@ -3740,3 +3740,7 @@ caller list 本身按什么顺序构造
 [O12-A完整规则](personnel-loyalty-lifecycle.md)与[API](../engine/personnel-loyalty-lifecycle.md)只适用固定单城普通非俘虏名单。两个真实命令维护true byte、金/AP、每旬褒赏、日期与新共享xorshift；现金5+roll5明确不使用魅力/义理，季度先仁政/关系豁免再三分支候选及人心掌握/两次loss。true0不提前跳过随机，true>100正常下降，99+9写108。来源层、software adapter与新writer保持分开。
 
 不实现登用ownership、工资/欠薪后果、俘虏或P078所有依赖；整个O12与原43不关闭。仅静态代码/规则交付，未运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例，旧测试及历史food失败保留。
+
+## 2026-10-17：普通流言独立标量连接
+
+[O12-B完整规则](rumor-scalar-lifecycle.md)与[API](../engine/rumor-scalar-lifecycle.md)只适用固定双城普通子场景。success/关系保护/稀疏至多一人加空槽/义理抗性/loss由服务内部新政策生成，200金/30AP及actor本旬机会实际写入独立账本；true0..255与显示100分开。所有具体算法及RNG为synthetic，原成功概率与效果证据E不关闭；未知被捕风险不得写0，行程/失败外交/XP功绩TP不模拟、ownershipFrozen=true，完整原动作及P078依赖X。PR83的O12-A已交付，本批不重复自然/现金，不追加宝物必做或把普通item登记误列X。整个O12与原43不关闭、不新增分母；未运行测试、typecheck、编译、build、checker、诊断、schema、产品或示例。

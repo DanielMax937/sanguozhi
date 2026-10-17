@@ -1,5 +1,16 @@
 # 主要来源
 
+## 2026-10-17：O12-B普通流言标量来源分层
+
+[完整规则](rumor-scalar-lifecycle.md#2-证据等级与当前基线) · [来源manifest](../sources/rumor-scalar-lifecycle.json) · [完整policy](../../data/catalogs/rumor-scalar-policy-v1.json)。odds/平均防守、关系绝对保护、至多一人加空槽、义理表、loss与RNG都是synthetic；不能把有限软件能力提升为原成功概率或完整原命令证据。
+
+- [官方PK手册](https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf?t=1516151052)：来源链搜索索引支持200金/30AP、智力方向、有期间、成功降忠/治安和失败外交下降。整份47,138,551字节PDF打开受大小限制；本批未重新下载/核页/hash
+- [公开流言listing](https://github.com/sjn4048/311MemoryResearch/blob/master/内存资料/函数[计算流言是否成功].txt)：blob 61de21c7a0924c83fc11066a7ffeeb1b8e2dc0ff，观察UTF-8文本SHA256 dc3725f31d44628284df98a27eaf7e2695b31289bbde40110093ccb01f0a4611。10→12仅单独参数事实；005BA410/角色/最终随机比较仍E。005D0540/005D055A的sar文字与bytes宽度冲突保留，未解码或修源
+- [2018玩家观察](https://www.ptt.cc/bbs/Koei/M.1526989285.A.762.html)反对全员同步固定掉忠，不证明新至多一人/空槽分布；[2026玩家120→109](https://www.ptt.cc/bbs/Koei/M.1776854540.A.47B.html)支持true/UI分离，不证明1..12均匀loss
+- Wiki关系/义理定性资料不证明绝对免疫或精确阈值。005D05B0/005D05F0只保留独立函数边界，不能推定业务分工
+
+03/06/41/58现行措辞同步收紧，旧sources JSON保留。原被捕风险 unresolved-not-modeled；官方失败外交后果有据但未模拟；travel/xpMeritTp未模拟、ownershipFrozen=true，完整原命令X。仅静态交付，未运行测试、typecheck、编译、build、checker、诊断、schema、产品或示例；O12及原43不关闭、不新增分母。
+
 ## 2026-10-17：O12-A自然忠诚与现金褒赏
 
 [完整来源分层及规则](personnel-loyalty-lifecycle.md#11-来源纠正与仍开放范围) · [来源manifest](../sources/personnel-loyalty-lifecycle.json) · [完整新软件policy](../../data/catalogs/personnel-loyalty-policies-v1.json)。新现金 `synthetic-cash-uniform5to9-v1` 不从玩家样本估计，不使用魅力/义理；新关系图、RNG与writer均不认证原作等价，原43不减。

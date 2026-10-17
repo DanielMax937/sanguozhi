@@ -129,13 +129,13 @@ https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html
 
 目标：降低敌城治安与武将忠诚，给后续登用/策反创造条件。
 
-- `[PK][PC-PK1.1 reverse-engineered]` 计略府确实提高流言成功率，但不是固定“+15%”或“+20个百分点”。
-- 原 `005D02A0` 流言成功率函数先设内部参数 `10`；若执行者所在城市存在计略府（设施 `0x2C`），则在 `005D04E3` 改为 `12`。这个参数继续进入后面的完整概率式。
-- 因此准确实现应是“**流言公式参数 10 → 12**”，而不是最后对 UI 成功率直接加常数。
-- 当前没有源码证据证明计略府同时提高二虎竞食、驱虎吞狼等其他城市计略的成功率。
-- 成功率与效果结算必须分层：公开逆向还标出 `005D05B0 / 005D05F0` 两个流言相关 effect-side helper，但函数体未展开。
-- P0-6 已用大样本实测排除“成功一次就给全城所有武将统一扣固定忠诚”的模型；原作效果必须保留目标武将 selector 与单人损失 RNG。忠诚隐藏值>100同样会被流言向下削减。
-- 流言成功后的 target selector、忠诚损失和治安损失精确分布仍 open，详见 [41-nonnatural-loyalty-exactness.md](41-nonnatural-loyalty-exactness.md)。
+- 官方PK手册支持200金/30AP、有期间，执行者智力越高及目标太守/君主/军师智力越低越容易成功；失败降低外交关系
+- 公开 `005D02A0..005D05AD` listing先设参数10，计略府分支在 `005D04E3` 改为12。这个独立参数事实不等于固定“+15%/+20个百分点”，也不证明完整原成功概率已恢复
+- `005BA410`、目标角色/名单helper、最终随机比较与RNG仍open；005D0540/005D055A的sar助记符宽度与旁列bytes存在文本冲突。不能把可见末段整数算术写成端到端完整原概率式
+- `005D05B0 / 005D05F0`是两个独立后续函数，业务分工/body仍open；分层不证明哪个是selector、忠诚或治安loss
+- 玩家百人城/300多次成功的观察反对“全城全员同步固定扣忠”，并有隐藏120→109记录；这些观察不恢复selector人数或loss分布，详见[41](41-nonnatural-loyalty-exactness.md)与[58](58-rumor-effect-helper-boundary.md)
+- [O12-B独立标量服务](rumor-scalar-lifecycle.md)另以synthetic odds/三人平均防守、关系保护、至多一人加空槽、义理阈值及分离loss实现有限软件行为；10/12接入新权重也仍synthetic。其独立预算/旬序/RNG不接原世界命令
+- 原被捕风险 unresolved-not-modeled，不是0；travel/failureDiplomacy/xpMeritTp未模拟、ownershipFrozen=true。原成功率仍E、完整原动作仍X；O12与原43不关闭，没有本批运行验收
 
 ### 二虎竞食
 
