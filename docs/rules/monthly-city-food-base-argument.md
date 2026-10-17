@@ -73,3 +73,10 @@ python -B scripts/oracle_monthly_city_food_base_argument.py --mutants
 ## 明确排除
 
 不自动调用city-food calculator或base-income return-tail；不接前置季度/levy gate、native predicate语义、helper ABI、writer004AE300及cap/实际delta、PUSH EBX、callee结果、owner/force、全局状态、技能生成、Midao后续分支、RNG、月度调度、EndTurn、P0-78及全部依赖。完整月度粮食机制仍缺原生与状态证据，不能由这个局部叶段的通过数代替。
+
+
+## 2026-10-17：稳定服务快照连接
+
+[O10-A月粮顺序](city-finance-lifecycle.md#33-月初1日的严格顺序)把自己算得F、显式未来月丰作和驻城征收存在性生成derived-adapter-observations；仍调用本核执行harvest后levy，不假称原native current EDI/EAX/late DWORD已捕获。stable helper、季度米道和cap写回是新服务政策，本叶段原边界不变。
+
+本次连接仅静态代码和规则交付，未运行测试、编译、build、checker、诊断、产品或示例；本页历史通过记录不覆盖新服务。

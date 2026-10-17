@@ -1,3 +1,13 @@
+# 当前工作范围：O10-A有限单城财政（2026-10-17）
+
+已补本批独立代码与[完整规则](docs/rules/city-finance-lifecycle.md)、[API](docs/engine/city-finance-lifecycle.md)、[来源/政策](docs/sources/city-finance-lifecycle.json)、[未运行场景](data/scenarios/city-finance-example-v1.json)：固定owner、完整驻城普通有官薪名单、30设施金粮计算、旬/月/季结算、足额工资、逐兵种特产和cap、完整genesis重算。支持域内是代码覆盖，未运行测试/编译/build/checker/诊断/产品或示例，旧测试未改；历史food失败保留。
+
+仍开放：港关财政、未知工资身份、欠薪后果、灾害生成、native owner/getter/helper/writer/调度/PRNG与stock版本认证。O10-A不是全部财政清零，原43组不减少；P078及其依赖继续不接入。其他普通子集不因此变成完整机制。
+
+## 以前的候选与审计记录（历史，不是当前执行计划）
+
+以下内容原样保留以追溯各自版本；旧“最新”“本地候选”“须验收”和通过数字不构成本次状态或运行结果。当前导航以上方入口及[STATUS](docs/rules/STATUS.md)为准。
+
 2026-10-15 新独立工程候选：[每月特产兵装自动生产数量请求核](docs/rules/monthly-specialty-production.md)：明确设备1..4、30槽逐调用捕获与政治AL的可调用TS/Python核；opcode控制流与假定comment binary32/未知converter向零政策分层，非完整生产/实际入库/native认证。原43组未决证据主题不减，P0-78及依赖排除；本树全新验收另记，历史PASS不适用。
 
 2026-10-14 新独立本地工程候选：[每月城市粮食harvest→levy参数叶](docs/rules/monthly-city-food-base-argument.md)，基于main `f6b6a31d587a8094fbba4b6fd27371288e3f3287`。仅连续无CALL的16条/35 bytes `[005905E0,00590603)`，当前EDI/EAX与独立晚期levy DWORD三个完整U32；先low32三倍再signed向零半减，后levy再向零半减，投影PUSH EDI位模式与signed视图。只补C2/C3已知规则工程债，原43不减；不假定helper保留EDI、不复用早期levy、不组合city或return-tail API，不接stack/writer/owner/force/scheduler/EndTurn。source-listing-reconstruction不认证stock/Vanilla/native。P0-78及依赖继续排除；正式新树验收/发布另记，历史PASS不验证本候选。

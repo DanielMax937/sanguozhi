@@ -1,3 +1,9 @@
+## 当前新增：O10-A有限单城财政
+
+[create/preview/execute/save/load/replay API](city-finance-lifecycle.md) · [完整游戏规则、80薪表与设施公式](../rules/city-finance-lifecycle.md) · [source/policy](../sources/city-finance-lifecycle.json)。独立固定owner/完整驻城名单、无俘虏、最多360旬；月薪不足整旬回滚。写入本服务金粮/治安/兵装，不修改O04/schema；全genesis/receipt/snapshot重算。静态新增未运行任何测试、编译或产品；仅O10-A子域，原生财政与原43证据缺口不关闭。
+
+以下为既有模块导航，各自历史验收仅对原版本有效。
+
 ## 普通话题牌独立舌战
 
 [O09b API](topic-debate-session-v1.md)与[完整规则](../rules/debate-topic-session-v1.md)：ordered tape/token、3/4/5/6普通容量、原子round、HP先于anger/refill、严格genesis保存重放。现代转录普通子集，五话术/愤激/再考/人物/结束结算保留；静态新增，未运行测试/typecheck/编译/build/checker/产品或诊断。

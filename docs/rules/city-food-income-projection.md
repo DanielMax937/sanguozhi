@@ -117,3 +117,10 @@ Easy路径的007E7B68常量原始bytes、00707A74完整helper、x87控制字/异
 [独立返回尾部模块](base-income-return-tail.md)仅补捕获city返回EAX和晚期raw type的向零/5标量步骤，不调用本API、不据此认证港关母城/ownership/callee/ABI或真实入账。
 
 仍open：city/owner门槛、getter/validator/ABI及可变读取、原类型表/地图邻接helper、Easy、丰作/征收/米道/港关、真实入账writer、完整月度/季度scheduler、RNG/真实存档、stock/Vanilla/主机与跨版本。没有减少原43组主题，没有恢复P0-78及依赖，也没有重新运行或挪用旧城市金钱179原run。
+
+
+## 2026-10-17：粮食请求连接
+
+[O10-A粮食适配](city-finance-lifecycle.md#22-粮食核在此域的具体计算)限定非负无回绕子域，完整军屯才附troops，普通回退路径才附granary，使用下降前治安。新服务拒绝Easy，但没有修改本核原U32/负返回域；实际入账见[月初顺序](city-finance-lifecycle.md#33-月初1日的严格顺序)，是独立政策。
+
+本次连接仅静态代码和规则交付，未运行测试、编译、build、checker、诊断、产品或示例；本页历史通过记录不覆盖新服务。

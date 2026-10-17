@@ -1,3 +1,9 @@
+## 当前新增：O10-A固定单城有限财政（2026-10-17）
+
+[完整规则正文](city-finance-lifecycle.md)包含全部字段、30槽设施映射、80官职月薪、金/粮原核逐步公式、四技能时点、旬月季年顺序、旧治安收入、逐笔cap/弃置、季降tape、足薪与不足整旬拒绝、特产binary32及完整保存重算。[API](../engine/city-finance-lifecycle.md) · [source/policy](../sources/city-finance-lifecycle.json) · [未运行场景](../../data/scenarios/city-finance-example-v1.json)。仅固定owner/完整普通有官薪名单、无俘虏的独立子域；所有者/调度/writer等仍provisional，不宣称全财政或native认证，原43不减。
+
+代码及文档仅静态新增，没有运行测试/typecheck/编译/build/checker/诊断/产品或示例，旧测试未改。以下历史导航及历史数字不验证本树，各普通子集不能替代完整机制。
+
 ## 2026-10-17：普通话题牌独立舌战（O09b）
 
 [完整字段、九牌表、公式、顺序、边界和保存规则](debate-topic-session-v1.md) · [API](../engine/topic-debate-session-v1.md) · [固定来源与完整policy](../sources/debate-topic-session-v1.json) · [未运行五轮纸面设计](../../data/scenarios/topic-debate-example-v1.json)。仅普通牌支持域；非终局stress100原子拒绝，终局先于愤激与补牌。现代参考状态机与E15公式证据分层；原43不减，五话术/四性格/再考/人物/平台/结束结算仍开放。本批代码文档静态新增，未运行任何测试或检查器。
