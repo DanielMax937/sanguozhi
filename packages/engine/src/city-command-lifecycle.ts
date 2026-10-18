@@ -4,11 +4,12 @@
  * does not certify native writers, scheduling, effective attributes or stock data.
  * Public contract and source boundaries: docs/rules/city-command-lifecycle.md.
  */
-import { ACCUMULATE, DEBIT, NOT_MODELED, copyOwned, emptyCalculation, facilityFactor, planRewards, productionPrice, productionQuantity, retainKernel, writeDomestic } from './internal/city-domestic-leaves.ts';
+import { ACCUMULATE, DEBIT, NOT_MODELED, copyOwned, emptyCalculation, writeDomestic } from './internal/city-domestic-leaves.ts';
 import { reduceDomesticInstant } from './internal/city-instant-reducer.ts';
-import type { DeepRO, DomesticInstantAction, DomesticInstantFrame, DomesticLeafResult, PieceEquipment, QuantityEquipment } from './internal/city-service-types.ts';
-import { calculateProductionTimeProjection } from './production-time.ts';
-import type { ProductionTimeCapture } from './production-time.ts';
+import { planPieceStart, planPieceStartFees } from './internal/city-piece-start-reducer.ts';
+import { planPieceCompletion } from './internal/city-piece-completion-reducer.ts';
+import type { DeepRO, DomesticInstantAction, DomesticInstantFrame, DomesticLeafResult } from './internal/city-service-types.ts';
+import type { PieceStartAction, PieceStartFrame } from './internal/city-piece-types.ts';
 
 type Frozen<T> = T extends object ? { readonly [K in keyof T]: Frozen<T[K]> } : T;
 type Stat = 'leadership' | 'charm' | 'intelligence' | 'politics' | 'war';
@@ -205,26 +206,19 @@ function initialState(s: Scenario): State {
 /** Typed leaf failures re-enter this owner's original Invalid/fail boundary. */
 function unwrapDomestic<T>(result: DomesticLeafResult<T>): T { if (!result.ok) fail(result.reason); return result.value; }
 function write(before: number, requested: number, cap: number, p: DeepRO<Policy>): Write { return unwrapDomestic(writeDomestic(before, requested, cap, p)); }
-function kernel<T extends { supported: boolean }>(calculation: Calculation, api: string, input: unknown, output: T): T & { supported: true } { return unwrapDomestic(retainKernel(calculation, api, input, output)); }
-function production(s: State, people: Officer[], facility: Facility, t: Equipment, calc: Calculation): { price: number; quantity: number; duration: number } {
-  const price = unwrapDomestic(productionPrice(s.catalog.entries[t].basePriceWord, s.specialtyEquipmentTypes.includes(t), calc));
-  const quantity = unwrapDomestic(productionQuantity(t >= 5
-    ? { kind: 'piece', equipmentType: t as PieceEquipment }
-    : { kind: 'quantity', equipmentType: t as QuantityEquipment, people, factor: facilityFactor(facility, s.policies.facilityMultiplier), difficulty: s.difficulty, controller: s.controller }, calc));
-  if (t <= 4) return { price, quantity, duration: 0 };
-  const captures: ProductionTimeCapture[] = [];
-  for (let i = 0; i < 3; i++) { const o = people[i]; captures.push({ callAddress: '005C6CF8', slotIndex: i, eax: o ? 1 : 0 }); if (o) captures.push({ callAddress: '005C6D06', slotIndex: i, eax: o.intelligence }, { callAddress: '005C6D25', slotIndex: i, eax: o.skillIds.includes(t <= 8 ? 82 : 83) ? 1 : 0 }); }
-  if (t >= 10) captures.push(...['005C6D90', '005C6DAA', '005C6DB0', '005C6DCA', '005C6DD1'].map(callAddress => ({ callAddress, eax: 1 })), { callAddress: '005C6DDE', eax: s.city.drillGroundComplete ? 1 : 0 });
-  const timeInput = { profile: 'production-time-observations-v1' as const, nativeEquipmentType: t, captures };
-  const time = kernel(calc, 'calculateProductionTimeProjection', timeInput, calculateProductionTimeProjection(timeInput));
-  const raw = time.returnedValue; calc.timeKernelReturn = raw; calc.facilityApplied = time.facilityApplied;
-  if (raw <= 0 && s.policies.time.parameters.nonpositive === 'reject') fail('unsupported-nonpositive-production-time');
-  return { price, quantity, duration: Math.max(1, raw) };
-}
-function reward(people: Officer[], kind: 'patrol' | 'recruit' | 'quantity' | 'piece', p: Policy): Reward[] {
-  const plan = unwrapDomestic(planRewards(people, kind, p));
-  for (let i = 0; i < people.length; i++) { const progress = plan.progress[i]!; people[i]!.xp[progress.attribute] = progress.xp; people[i]!.merit = progress.merit; }
-  return plan.rewards;
+/** Value-shaped fee/completion results; start's distinct plan shell is handled explicitly. */
+function unwrapPiece<T>(result: { readonly ok: true; readonly value: T } | { readonly ok: false; readonly reason: string }): T { if (!result.ok) fail(result.reason); return result.value; }
+function pieceStartFrame(s: State): PieceStartFrame {
+  // Only the old read set, preserving all records and their array order. This is
+  // an owned primitive-preserving view, not a replacement for StartSnapshot JSON copies.
+  return copyOwned<PieceStartFrame>({ activeForceId: s.activeForceId,
+    city: { id: s.city.id, drillGroundComplete: s.city.drillGroundComplete,
+      inventory: { 5: s.city.inventory[5], 6: s.city.inventory[6], 7: s.city.inventory[7], 8: s.city.inventory[8], 10: s.city.inventory[10], 11: s.city.inventory[11] } },
+    officers: s.officers.map(o => ({ id: o.id, forceId: o.forceId, cityId: o.cityId, available: o.available, intelligence: o.intelligence, skillIds: o.skillIds, actedTurn: o.actedTurn, reservationJobId: o.reservationJobId })),
+    facilities: s.facilities.map(f => ({ id: f.id, cityId: f.cityId, kind: f.kind, complete: f.complete, usedTurn: f.usedTurn, reservationJobId: f.reservationJobId })),
+    unlockedEquipmentTypes: s.unlockedEquipmentTypes, specialtyEquipmentTypes: s.specialtyEquipmentTypes,
+    productionPrices: { 5: s.catalog.entries[5], 6: s.catalog.entries[6], 7: s.catalog.entries[7], 8: s.catalog.entries[8], 10: s.catalog.entries[10], 11: s.catalog.entries[11] },
+    policies: { time: s.policies.time, productionAp: s.policies.productionAp }, productionJobCount: s.productionJobs.length });
 }
 function isDomesticInstant(c: Exclude<Command, { type: 'AdvanceCityTurn' }>): c is DomesticInstantAction { return c.type !== 'Produce' || c.equipmentType <= 4; }
 function instantFrame(s: State): DomesticInstantFrame {
@@ -269,12 +263,13 @@ function advance(s: State, receipt: Receipt): void {
     job.remainingTurns--;
     if (job.remainingTurns > 0) continue;
     const stock = s.city.inventory[job.equipmentType];
-    const inventoryWrite = write(stock.quantity, job.reservedQuantity, stock.capacity, s.policies.writer);
-    if (inventoryWrite.actualDelta !== job.reservedQuantity) fail('completion-reservation-mismatch');
     const people = job.officerIds.map(oid => s.officers.find(o => o.id === oid)!);
-    const rewards = reward(people, 'piece', s.policies.rewards);
-    const completion: Completion = { jobId: job.id, turn: s.turn, inventoryWrite, rewards };
-    stock.quantity = inventoryWrite.after; stock.reserved -= job.reservedQuantity;
+    const planned = unwrapPiece(planPieceCompletion({ turn: s.turn }, { stock,
+      people: people.map(o => ({ id: o.id, xp: o.xp, merit: o.merit })), policies: { writer: s.policies.writer, rewards: s.policies.rewards } },
+    { jobId: job.id, reservedQuantity: job.reservedQuantity }));
+    for (let i = 0; i < people.length; i++) { const progress = planned.progress[i]!; people[i]!.xp[progress.attribute] = progress.xp; people[i]!.merit = progress.merit; }
+    const completion = copyOwned<Completion>(planned.completion);
+    stock.quantity = planned.stockAfter.quantity; stock.reserved = planned.stockAfter.reserved;
     for (const person of people) { person.reservationJobId = null; person.actedTurn = s.turn; }
     const facility = s.facilities.find(f => f.id === job.facilityId)!; facility.reservationJobId = null;
     job.status = 'completed'; job.completedTurn = s.turn; job.completion = completion;
@@ -295,41 +290,21 @@ function transition(original: State, e: Envelope): Outcome {
     if (c.type === 'AdvanceCityTurn') advance(s, receipt);
     else if (isDomesticInstant(c)) applyInstant(s, e, c, receipt);
     else {
-      if (c.cityId !== s.city.id) fail('unknown-city');
-      const people = c.officerIds.map(oid => {
-        const o = s.officers.find(x => x.id === oid); if (!o) fail('unknown-officer');
-        if (o.forceId !== s.activeForceId) fail('officer-not-member'); if (o.cityId !== s.city.id) fail('officer-not-present');
-        if (!o.available) fail('officer-unavailable'); if (o.reservationJobId !== null) fail('officer-production-reserved'); if (o.actedTurn === s.turn) fail('officer-already-acted'); return o;
-      });
-      calc.selectedOfficerIds = [...c.officerIds];
-      let facility: Facility | null = null;
-      {
-        facility = s.facilities.find(f => f.id === c.facilityId) ?? null; if (!facility) fail('unknown-facility');
-        if (facility.cityId !== s.city.id) fail('facility-not-present'); if (!facility.complete) fail('facility-incomplete');
-        const kind: FacilityKind = c.equipmentType <= 3 ? 'forge' : c.equipmentType === 4 ? 'stable' : c.equipmentType <= 8 ? 'workshop' : 'shipyard';
-        if (facility.kind !== kind) fail('wrong-facility-kind'); if (facility.reservationJobId !== null) fail('facility-production-reserved'); if (facility.usedTurn === s.turn) fail('facility-used-this-turn');
-      }
-      let gold = 300, ap = 20;
-      {
-        if (!s.unlockedEquipmentTypes.includes(c.equipmentType)) fail('equipment-locked');
-        const t = c.equipmentType, result = production(s, people, facility!, t, calc); gold = result.price;
-        ap = s.policies.productionAp.parameters[t <= 4 ? 'quantity' : 'piece'] as number;
-        const stock = s.city.inventory[t];
-        {
-          if (s.productionJobs.length >= MAX_RECORDS) fail('production-history-full');
-          if (stock.quantity + stock.reserved + result.quantity > stock.capacity) fail('piece-capacity-unavailable');
-          const duration = result.duration, dueTurn = uint(s.turn + duration), jobId = 'job:' + e.id;
-          const snapshot: StartSnapshot = { envelope: copy(e), turn: s.turn, date: copy(s.date), officers: copy(people), facility: copy(facility!), catalog: copy(s.catalog), policies: copy(s.policies), citySecurity: s.city.security, drillGroundComplete: s.city.drillGroundComplete, specialtyEquipmentTypes: [...s.specialtyEquipmentTypes], difficulty: s.difficulty, controller: s.controller };
-          const job: Job = { id: jobId, status: 'active', cityId: s.city.id, facilityId: facility!.id, officerIds: [...c.officerIds], equipmentType: t, startTurn: s.turn, remainingTurns: duration, dueTurn, durationTurns: duration, reservedQuantity: 1, startSnapshot: snapshot, calculation: calc, fees: receipt.fees, completedTurn: null, completion: null };
-          s.productionJobs.push(job); stock.reserved += result.quantity; facility!.reservationJobId = jobId; for (const o of people) o.reservationJobId = jobId;
-          receipt.taskKind = 'production-start'; receipt.newJobId = jobId; receipt.events.push({ type: 'production-started', subjectId: jobId });
-        }
-      }
-      if (s.city.gold < gold) fail('insufficient-gold'); if (s.corps.actionPoints < ap) fail('insufficient-ap');
-      const fees: Fees = { gold: write(s.city.gold, -gold || 0, MAX_VALUE, DEBIT), actionPoints: write(s.corps.actionPoints, -ap, 255, DEBIT), sourceApRequest: 20, effectiveApCost: ap };
-      s.city.gold = fees.gold.after; s.corps.actionPoints = fees.actionPoints.after; receipt.fees = fees;
+      // Public validation and the preceding dispatch leave exactly types 5..8/10..11.
+      const result = planPieceStart({ commandId: e.id, turn: s.turn }, pieceStartFrame(s), c as PieceStartAction);
+      if (!result.ok) fail(result.reason);
+      const plan = result.plan, people = plan.officerIds.map(oid => s.officers.find(o => o.id === oid)!), facility = s.facilities.find(f => f.id === plan.facilityId)!;
+      const stock = s.city.inventory[plan.equipmentType], calculation = copyOwned<Calculation>(plan.calculation);
+      receipt.calculation = calculation;
+      const snapshot: StartSnapshot = { envelope: copy(e), turn: s.turn, date: copy(s.date), officers: copy(people), facility: copy(facility), catalog: copy(s.catalog), policies: copy(s.policies), citySecurity: s.city.security, drillGroundComplete: s.city.drillGroundComplete, specialtyEquipmentTypes: [...s.specialtyEquipmentTypes], difficulty: s.difficulty, controller: s.controller };
+      const job: Job = { id: plan.jobId, status: 'active', cityId: plan.cityId, facilityId: plan.facilityId, officerIds: [...plan.officerIds], equipmentType: plan.equipmentType, startTurn: plan.startTurn, remainingTurns: plan.remainingTurns, dueTurn: plan.dueTurn, durationTurns: plan.durationTurns, reservedQuantity: plan.reservedQuantity, startSnapshot: snapshot, calculation, fees: receipt.fees, completedTurn: null, completion: null };
+      s.productionJobs.push(job); stock.reserved += plan.quantityToReserve; facility.reservationJobId = plan.jobId; for (const o of people) o.reservationJobId = plan.jobId;
+      receipt.taskKind = 'production-start'; receipt.newJobId = plan.jobId; receipt.events.push({ type: 'production-started', subjectId: plan.jobId });
+      const charged = unwrapPiece(planPieceStartFees({ gold: s.city.gold, actionPoints: s.corps.actionPoints }, { goldCost: plan.goldCost, actionPointsCost: plan.actionPointsCost }));
+      const fees = copyOwned<Fees>(charged.fees);
+      s.city.gold = charged.goldAfter; s.corps.actionPoints = charged.actionPointsAfter; receipt.fees = fees;
       if (receipt.newJobId !== null) s.productionJobs.find(j => j.id === receipt.newJobId)!.fees = fees;
-      for (const o of people) o.actedTurn = s.turn; if (facility) facility.usedTurn = s.turn;
+      for (const o of people) o.actedTurn = s.turn; facility.usedTurn = s.turn;
       receipt.events.push({ type: 'command-committed', subjectId: e.id });
     }
     s.revision++;

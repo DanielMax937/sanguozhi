@@ -4,9 +4,9 @@ This service combines existing scalar APIs with explicitly named, replaceable se
 
 ## Internal reducer maintenance
 
-Patrol, Recruit and quantity Produce (equipment 1–4) now delegate their detached candidate calculation to package-private reducers. This is an internal compatibility refactor: the rules, policy variants, rejection order, receipt fields, production reservations, turn advancement and public save/replay interfaces below remain applicable. Piece production and its completion stay with the existing lifecycle owner.
+Patrol, Recruit and quantity Produce (equipment 1–4) delegate their detached candidate calculation to package-private reducers. Piece Produce (5–8/10–11) also uses private calculation, start-preparation, fee and single-completion planners. These are internal compatibility refactors: all rules, policy variants, rejection order, receipt fields, production reservations, turn advancement and public save/replay interfaces below remain applicable. The existing lifecycle owner still constructs snapshots/jobs/receipts, commits changes, advances the clock, recovers AP and records history.
 
-The reducers are not public entrypoints and do not create trusted states, a shared resource ledger, a new scenario/profile or cross-service turns. See [internal instant-command engineering contract](../engine/instant-command-reducers.md) for the input views, permitted write-back fields and maintenance boundaries. This change has only been inspected as text; no test, typecheck, compilation, build, runtime, example, checker or validator has been run for it.
+The reducers and planners are not public entrypoints and do not create trusted states, a shared resource ledger, a new scenario/profile or cross-service turns. See the [instant-command engineering contract](../engine/instant-command-reducers.md) and [piece-command engineering contract](../engine/piece-command-planners.md) for input views, permitted write-back fields and maintenance boundaries. These refactors have only been inspected as text; no test, typecheck, compilation, build, runtime, example, checker or validator has been run for them.
 
 ## Validation status
 
@@ -92,11 +92,43 @@ Availability compares each used/acted marker to the current turn; a boundary doe
 
 Reserved inventory is not usable stock. A piece start requires `quantity + reserved + 1 <= capacity`; completion converts only that job's reservation into actual quantity. Active and completed jobs remain in the history. Officers remain locked across boundaries until their job completes. Completion clears that job's facility/participant locks and marks those participants acted in the new turn. The facility may be reused by another eligible group then; the completed participants cannot act again until a later turn.
 
+### Exact piece-start ordering and snapshots
+
+After the common duplicate/revision/history gates, piece start checks the following in this order:
+
+1. City ID; then each selected officer in command order: existence, force membership, city presence, availability, reservation, current-turn action marker
+2. Selected facility: existence, city presence, completion, required workshop/shipyard kind, reservation, current-turn use marker
+3. Equipment unlock; then price, one-piece quantity and time kernels in that order; then the selected time policy's nonpositive rejection
+4. Policy piece AP cost and stock; total job history including completed records (4096); inventory quantity + reserved + one; representability of `turn + duration`
+5. Complete pre-reservation StartSnapshot, new active job, one stock-space reservation, participant/facility locks, and production-started event
+6. Gold affordability, AP affordability, gold debit, AP debit; replace the job's zero-fee placeholder with the same final fees object used by the receipt
+7. Selected participants acted this turn, selected facility used this turn, command-committed event, one revision increment and one accepted history record
+
+The snapshot retains the complete envelope, turn/date, selected officer records in order, complete facility, all ten catalog entries, all twelve policy families, city security, drill-ground flag, full specialty list, difficulty and controller. It is captured before reservation, acted/used markers or charges. Envelope/date/officers/facility/catalog/policies use their original JSON copies; specialty uses an array copy. JSON normalization at these existing points is retained, including its treatment of derived negative zero. Calculation/fee/completion audit objects do not gain a JSON round trip.
+
+The job and receipt share the same calculation and final fees; a job initially references the receipt's zero-fee seed until fee planning succeeds. This staging is private: an insufficient balance or other later rejection discards the whole candidate. It does not leave a job or reservation behind. A start never grants completion XP/merit or changes actual piece quantity.
+
+Jobs store `dueTurn`, remaining turns and duration, without a due date or future-calendar reachability check. An unrepresentable `turn + duration` still rejects as `invalid-state`, after job-history and capacity checks and before affordability. Starting at the last supported calendar boundary can therefore succeed; a later boundary may reject `calendar-overflow`. No new horizon or smaller participant/history limits are applied to this existing profile.
+
+### Exact piece-completion ordering
+
+An Advance first computes the next date, then validates the incremented turn, then applies AP recovery once. Thus calendar overflow precedes turn overflow. AP recovery uses the saturating accumulator and records the selected recovery policy ID, including a zero-increment Write.
+
+Jobs are visited using an ASCII lexicographic sort of a separate array; `job:a10` precedes `job:a2`, and the state's stored job order is unchanged. Completed jobs are skipped. Every active job decrements once; only a positive remaining value skips completion. There is no extra equality-to-dueTurn or exactly-zero gate.
+
+For a due item, the current stock goes through the selected resource writer with request one. A writer rejection precedes `completion-reservation-mismatch` if the actual received quantity is not one. Completion rewards use current participant XP/merit, in the job's participant order, and the selected reward policy. Both registered reward policies request intelligence XP4 and merit100 for pieces, saturated independently at 1e9. The next job is planned only after the preceding job's writes; start-snapshot XP and a shared pre-boundary batch snapshot are not used.
+
+Write-back order is participant XP/merit, inventory quantity/reserved, participant lock release and new-turn acted markers, facility lock release, completed job fields, then completion receipt/event. The facility's `usedTurn` remains unchanged; older patrol/action/facility markers are not globally erased. The job and boundary receipt reference the same completion object. No completion fee or gold write occurs. After all items have been processed, the boundary adds its final turn-advanced event and commits once; a failure in any item rolls back the entire boundary.
+
+Advance keeps an empty top-level calculation, original zero command fees, empty top-level rewards and null newJobId. Completion rewards appear only inside the ordered completions array. Unfinished jobs receive no extra progress receipt.
+
 ## Rejection and duplicate behavior
 
 The service first validates its state and the complete envelope. For an existing command ID, the entire envelope must match, including `expectedRevision` and ordered participants. An identical retry returns the original receipt with `duplicate: true`, without another debit, reward, history entry, revision increment or boundary tick. A different envelope with that ID returns `command-id-conflict`, even if its revision is stale. For new IDs, revision matching precedes history capacity and command-specific eligibility.
 
 Representative rejection reasons include `stale-revision`, `command-history-full`, `unknown-officer`, `officer-already-acted`, `officer-production-reserved`, `wrong-facility-kind`, `facility-used-this-turn`, `facility-production-reserved`, `equipment-locked`, `piece-capacity-unavailable`, `zero-yield`, `insufficient-gold`, `insufficient-ap` and `writer-cap-overflow`. Reasons identify the first reached check, not a list of all invalid fields. A rejection never commits staged fees, rewards, stock changes, turn advancement or reservations, including when the rejection occurs after arithmetic or during a later completion in the same boundary.
+
+For pieces, simultaneous failures retain these priorities: nonmember before absent; unavailable before reserved before acted; wrong facility kind before reserved before used; locked equipment before a time-policy rejection; nonpositive-time rejection before full job history/capacity/fees; full job history before capacity; capacity before dueTurn representability; dueTurn before fees; and insufficient gold before insufficient AP. The common command-history limit can reject before the piece-specific production-history limit. No completion reservation-identity, stock-reserved minimum, availability or due-date checks are added: the existing validated history remains the source of those derived invariants.
 
 ## Arithmetic and accounting
 
@@ -125,6 +157,10 @@ These formulas describe this service's bounded, stable inputs to the existing ke
 For the default facility policy, level1/2/3 uses `F = 1`, `5033165/4194304`, `3/2`, corresponding to exact binary32 bits `3F800000`, `3F99999A`, `3FC00000`. The middle value is not an arbitrary JavaScript1.2 constant or recovered stock-table proof. The flat alternative supplies1 at every level. Skill adjustment precedes factor conversion in both quantity kernels; super/AI multiplication follows conversion.
 
 **Piece time, types5–8/10–11.** Using intelligence `I` and `M`, let `q = trunc(max(24, M + I - 200) / 24)`. The ordinary raw result before the skill step is `10 - q`. For ships10–11 only, the service's successful facility observations and `drillGroundComplete: true` select `max(2, 8 - q)` instead. If any selected officer has skill ID82 for5–8 or ID83 for10–11, halve that result toward zero last. The raw result may be zero or negative; the default time policy schedules `max(1, raw)` service turns, whereas the positive-time alternative rejects a nonpositive raw result. Facility level does not multiply time, and super/AI/pressure do not enter this time kernel. See [production time](production-time.md). The quantity kernel independently returns one piece for the supported piece types.
+
+The retained piece audit always contains price, quantity and time kernel entries in that order. The quantity input has only profile/type, with no fabricated quantity slots, facility factor or difficulty. Time observes slots 0/1/2 in order, validity first and intelligence/skill only for present officers; ships alone append their five successful facility-chain observations and drill bit. Retained trace and call-details order, null fields and absent capture slotIndex fields keep their original shapes. Only each output's top-level evidence field is removed. In this service domain rawX is −200..820, q is 1..34 and signed raw time is −24..9; both the signed return and its `>>>0` U32 form remain in the audit. Scheduling clamping does not overwrite that raw return.
+
+Piece starts use effective AP20 or AP30 under the selected production policy, with sourceApRequest20 in both cases. The three inventory writers remain available for completion; start debits always use the separate exact-affordable writer. Completion reward accumulation always uses its separate saturating writer. All other registered policy objects remain intact in snapshots even when piece calculation does not read their parameters; quantity AP20/25, quantity intelligence/politics rewards, zero-instant-yield and facility/morale alternatives keep their existing instantaneous behavior.
 
 ### Writer and boundary ordering
 

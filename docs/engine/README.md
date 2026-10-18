@@ -1,3 +1,9 @@
+## 件数生产私有计划器兼容抽取（2026-10-18，静态）
+
+[计算／开工准备／收费／无时钟完成计划](piece-command-planners.md) · [具体规则与兼容边界](../rules/city-command-lifecycle.md)
+
+旧city-command的件数装备5–8／10–11抽到包内计划器；公开接口、政策、保存回执、首错顺序、StartSnapshot复制时点、多任务完成次序和原owner时钟／AP恢复保持。没有新共享任务root或原生人员任务集成；计划器不从公共index导出。未运行产品、测试、编译、构建或validator，静态兼容审查不证明运行等价。
+
 ## 固定单城共享根（2026-10-18，静态）
 
 [八API、连续legal分页与独立CLI](bounded-city-economy.md) · [具体规则](../rules/bounded-city-economy.md)
