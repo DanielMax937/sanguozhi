@@ -1,6 +1,9 @@
 /** Independent supplied-city merchant service; observed pricing and explicit provisional writers. */
 import policyData from '../../../data/catalogs/city-merchant-policies-v1.json' with { type: 'json' };
 import catalogData from '../../../data/catalogs/city-merchant-politics-v1.json' with { type: 'json' };
+import type { Position, UiPrice, Corps, City, Officer, FieldUnit, Policies, Catalog, Write, TradeDetail,
+  MerchantTradeFrame, MerchantTradeAudit } from './internal/city-merchant-types.ts';
+import { reduceMerchantTrade } from './internal/city-merchant-trade-reducer.ts';
 
 type Frozen<T> = T extends object ? { readonly [K in keyof T]: Frozen<T[K]> } : T;
 const PROFILE = 'standalone-city-merchant-v1' as const;
@@ -8,33 +11,12 @@ const TAG = 'city-merchant-state-v1' as const;
 const TRACE_TAG = 'city-merchant-trace-v1' as const;
 const MAX_BYTES = 67_108_864, MAX_NODES = 4_000_000, MAX_DEPTH = 48, MAX_ARRAY = 4096;
 type DateV1 = { year: number; month: number; day: 1 | 11 | 21 };
-type Position = { q: number; r: number };
-type UiPrice = 3 | 4 | 5 | 6 | 7;
-type Corps = { id: string; forceId: string; actionPoints: number };
-type City = { id: string; kind: 'city'; ownerForceId: string; position: Position; gold: number; goldCapacity: number; food: number; foodCapacity: number; merchantPresent: boolean; uiTradePrice: UiPrice; merchantUsedTurn: number | null };
-type Officer = { id: string; forceId: string; cityId: string; available: boolean; politics: number; politicsXp: number; actedTurn: number | null };
-type FieldUnit = { id: string; forceId: string; position: Position };
 type TurnInput = { merchantPresent: boolean; uiTradePrice: UiPrice; fieldUnits: FieldUnit[] };
-type Policies = typeof policyData.common & { apRecovery: typeof policyData.apRecoveryPolicies[number] };
-type Catalog = typeof catalogData;
 type Scenario = { schemaVersion: 1; profile: typeof PROFILE; date: DateV1; turn: number; advanceLimit: number; activeForceId: string; corps: Corps; city: City; officers: Officer[]; hostileForceIds: string[]; completeFieldUnits: true; fieldUnits: FieldUnit[]; turnInputs: TurnInput[]; policies: Policies; catalog: Catalog };
 type Snapshot = { schemaVersion: 1; profile: typeof PROFILE; revision: number; advancedCount: number; date: DateV1; turn: number; corps: Corps; city: City; officers: Officer[]; completeFieldUnits: true; fieldUnits: FieldUnit[] };
 type TradeCommand = { type: 'BuyFood' | 'SellFood'; cityId: string; officerId: string; foodAmount: number };
 type Command = TradeCommand | { type: 'AdvanceMerchantTurn' };
 type Envelope = { id: string; expectedRevision: number; command: Command };
-type Fraction = { numerator: string; denominator: string };
-type Write = { resource: 'gold' | 'food'; before: number; requested: number; actualDelta: number; after: number; cap: number; discarded: 0; policyId: string };
-type UnitCheck = { unitId: string; forceId: string; position: Position; hostile: boolean; distance: number; blocks: boolean };
-type Effect = { politics: number; lowerPolitics: number; upperPolitics: number; lowerEffectMillionths: number; upperEffectMillionths: number; fraction: Fraction; interpolationPolicyId: string };
-type TradeDetail = {
-  officerId: string; direction: 'buy' | 'sell'; priceScale: 'ui-food-per-gold'; uiTradePrice: UiPrice;
-  foodRequested: number; foodTransferred: number; politicsEffect: Effect; sellFactor: Fraction;
-  exactGold: Fraction; rounding: 'ceil' | 'floor'; divisionRemainder: string; roundingDifference: Fraction; settledGold: number;
-  eligibility: { merchantPresent: true; cityUsedBefore: number | null; actorActedBefore: number | null; actorAvailable: true; completeSuppliedFieldUnits: true; unitChecks: UnitCheck[] };
-  merchantUsedTurnAfter: number; actorActedTurnAfter: number; writes: Write[];
-  merchantCounterparty: { goldDelta: number; foodDelta: number; balanceMode: 'external-untracked' };
-  politicsXp: { before: number; requested: 5; actualDelta: number; after: number; cap: 1000000000; discarded: number; politicsBefore: number; politicsAfter: number };
-};
 const BOUNDARY = { sourceLevel: 'official-command-and-empirical-lookup-with-provisional-service', nativeExecution: false, stockVerified: false,
   pricingEvidence: 'approximate-observed-anchors-selected-as-exact-service-constants', roundingAndWriter: 'provisional-engine-rule', suppliedGeometryAndHostility: 'provisional-engine-rule',
   schedulerAndAp: 'provisional-engine-rule', nativeFullFinance: false } as const;
@@ -232,23 +214,6 @@ function initialState(s: Scenario): State {
   return { tag: TAG, schemaVersion: 1, profile: PROFILE, scope: 'independent-fixed-owned-city', policies: clone(s.policies), catalog: clone(CATALOG), policyDigest: digest(s.policies), catalogDigest: CATALOG_DIGEST,
     genesis: { scenario: s, snapshot: clone(snapshot) }, snapshot, acceptedCommands: [] };
 }
-function fraction(n: bigint, d: bigint): Fraction { if (n < 0n || d <= 0n) fail('invalid-rational'); return { numerator: n.toString(), denominator: d.toString() }; }
-function politicsEffect(p: number): { receipt: Effect; n: bigint; d: bigint } {
-  uint(p, 100, 20);
-  const exact = CATALOG.anchors.find(a => a.politics === p);
-  const lower = exact ?? [...CATALOG.anchors].reverse().find(a => a.politics < p);
-  const upper = exact ?? CATALOG.anchors.find(a => a.politics > p);
-  if (!lower || !upper) fail('unsupported-politics');
-  const n = exact ? BigInt(exact.effectMillionths) : BigInt(lower.effectMillionths) * BigInt(upper.politics - p) + BigInt(upper.effectMillionths) * BigInt(p - lower.politics);
-  const d = exact ? 1_000_000n : 1_000_000n * BigInt(upper.politics - lower.politics);
-  return { n, d, receipt: { politics: p, lowerPolitics: lower.politics, upperPolitics: upper.politics, lowerEffectMillionths: lower.effectMillionths,
-    upperEffectMillionths: upper.effectMillionths, fraction: fraction(n, d), interpolationPolicyId: CATALOG.version } };
-}
-function unitChecks(s: Scenario, before: Snapshot): UnitCheck[] {
-  return before.fieldUnits.map(u => { const dq = u.position.q - before.city.position.q, dr = u.position.r - before.city.position.r;
-    const distance = Math.max(Math.abs(dq), Math.abs(dr), Math.abs(dq + dr)), hostile = s.hostileForceIds.includes(u.forceId);
-    return { unitId: u.id, forceId: u.forceId, position: clone(u.position), hostile, distance, blocks: hostile && distance <= 2 }; });
-}
 function resolve(s: Scenario, before: Snapshot, env: Envelope): { snapshot: Snapshot; receipt: Receipt } {
   const after = clone(before), p = s.policies;
   const receipt: Receipt = { schemaVersion: 1, profile: PROFILE, commandId: env.id, command: clone(env.command), revisionBefore: before.revision, revisionAfter: before.revision + 1,
@@ -267,44 +232,34 @@ function resolve(s: Scenario, before: Snapshot, env: Envelope): { snapshot: Snap
     receipt.advance = { inputIndex: before.advancedCount, origin: 'fixed-external-scenario', input: clone(input), apRecoveryPolicyId: p.apRecovery.id };
   } else {
     const c = env.command;
-    if (c.cityId !== before.city.id) fail('city-mismatch');
-    if (before.city.kind !== 'city') fail('unsupported-city-kind');
-    if (before.city.ownerForceId !== s.activeForceId || before.corps.forceId !== s.activeForceId) fail('owner-corps-mismatch');
-    if (!before.city.merchantPresent) fail('merchant-absent');
-    if (before.city.merchantUsedTurn === before.turn) fail('city-merchant-already-used');
-    const actorIndex = before.officers.findIndex(o => o.id === c.officerId), actor = before.officers[actorIndex];
-    if (!actor) fail('officer-not-found');
-    if (actor.cityId !== before.city.id || actor.forceId !== s.activeForceId) fail('officer-city-force-mismatch');
-    if (!actor.available) fail('officer-unavailable');
-    if (actor.actedTurn === before.turn) fail('officer-already-acted');
-    uint(actor.politics, 100, 20);
-    const checks = unitChecks(s, before), blocking = checks.find(u => u.blocks);
-    if (blocking) fail('hostile-within-two', null, blocking.unitId);
-    if (before.corps.actionPoints < 20) fail('insufficient-action-points');
-    const effect = politicsEffect(actor.politics), q = BigInt(c.foodAmount), ui = BigInt(before.city.uiTradePrice), buy = c.type === 'BuyFood';
-    const n = buy ? q * effect.d : q * effect.n * 4n, d = buy ? ui * effect.n : ui * effect.d * 5n;
-    const settled = buy ? (n + d - 1n) / d : n / d;
-    if (!buy && settled === 0n) fail('zero-value-sale');
-    if (settled < 0n || settled > 1_000_000_000n) fail('gold-amount-out-of-range');
-    const gold = Number(settled);
-    if (buy && before.city.gold < gold) fail('insufficient-gold');
-    if (buy && before.city.food + c.foodAmount > before.city.foodCapacity) fail('food-capacity-exceeded');
-    if (!buy && before.city.food < c.foodAmount) fail('insufficient-food');
-    if (!buy && before.city.gold + gold > before.city.goldCapacity) fail('gold-capacity-exceeded');
-    const goldDelta = buy ? -gold : gold, foodDelta = buy ? c.foodAmount : -c.foodAmount;
-    after.city.gold += goldDelta; after.city.food += foodDelta; after.corps.actionPoints -= 20; after.city.merchantUsedTurn = before.turn;
-    const changedActor = after.officers[actorIndex]!; changedActor.actedTurn = before.turn; changedActor.politicsXp = Math.min(1_000_000_000, actor.politicsXp + 5);
-    const xpDelta = changedActor.politicsXp - actor.politicsXp;
-    receipt.actionPoints = { before: before.corps.actionPoints, requestedDelta: -20, actualDelta: -20, after: after.corps.actionPoints, cap: 255, policyId: p.eligibility.id };
-    receipt.trade = { officerId: actor.id, direction: buy ? 'buy' : 'sell', priceScale: 'ui-food-per-gold', uiTradePrice: before.city.uiTradePrice,
-      foodRequested: c.foodAmount, foodTransferred: c.foodAmount, politicsEffect: effect.receipt, sellFactor: buy ? fraction(1n, 1n) : fraction(4n, 5n), exactGold: fraction(n, d),
-      rounding: buy ? 'ceil' : 'floor', divisionRemainder: (n % d).toString(), roundingDifference: fraction(buy ? settled * d - n : n - settled * d, d), settledGold: gold,
-      eligibility: { merchantPresent: true, cityUsedBefore: before.city.merchantUsedTurn, actorActedBefore: actor.actedTurn, actorAvailable: true, completeSuppliedFieldUnits: true, unitChecks: checks },
-      merchantUsedTurnAfter: before.turn, actorActedTurnAfter: before.turn,
-      writes: [{ resource: 'gold', before: before.city.gold, requested: gold, actualDelta: goldDelta, after: after.city.gold, cap: before.city.goldCapacity, discarded: 0, policyId: p.capacity.id },
-        { resource: 'food', before: before.city.food, requested: c.foodAmount, actualDelta: foodDelta, after: after.city.food, cap: before.city.foodCapacity, discarded: 0, policyId: p.capacity.id }],
-      merchantCounterparty: { goldDelta: -goldDelta, foodDelta: -foodDelta, balanceMode: 'external-untracked' },
-      politicsXp: { before: actor.politicsXp, requested: 5, actualDelta: xpDelta, after: changedActor.politicsXp, cap: 1000000000, discarded: 5 - xpDelta, politicsBefore: actor.politics, politicsAfter: changedActor.politics } };
+    // Project only this trade's read set into an owner-owned plain-data view.
+    const frame: MerchantTradeFrame = clone({ activeForceId: s.activeForceId, hostileForceIds: s.hostileForceIds,
+      corps: before.corps, city: before.city, officers: before.officers,
+      completeFieldUnits: before.completeFieldUnits, fieldUnits: before.fieldUnits,
+      policies: { ownership: p.ownership, eligibility: p.eligibility, hostility: p.hostility, pricing: p.pricing,
+        zeroSale: p.zeroSale, capacity: p.capacity, rewards: p.rewards }, catalog: CATALOG });
+    const result = reduceMerchantTrade({ commandId: env.id, turn: before.turn }, frame, clone(c));
+    if (!result.ok) fail(result.reason, null, result.blockingUnitId);
+    const candidate = result.candidate, actorIndex = before.officers.findIndex(o => o.id === c.officerId);
+    after.city.gold = candidate.city.gold; after.city.food = candidate.city.food;
+    after.corps.actionPoints = candidate.corps.actionPoints; after.city.merchantUsedTurn = candidate.city.merchantUsedTurn;
+    after.officers[actorIndex]!.actedTurn = candidate.officers[actorIndex]!.actedTurn;
+    after.officers[actorIndex]!.politicsXp = candidate.officers[actorIndex]!.politicsXp;
+    // Copy the owned audit structurally, preserving every number without a JSON round trip.
+    const audit: MerchantTradeAudit = { ...result.audit,
+      ownerSnapshot: { ...result.audit.ownerSnapshot }, actionPoints: { ...result.audit.actionPoints },
+      trade: { ...result.audit.trade,
+        politicsEffect: { ...result.audit.trade.politicsEffect, fraction: { ...result.audit.trade.politicsEffect.fraction } },
+        sellFactor: { ...result.audit.trade.sellFactor }, exactGold: { ...result.audit.trade.exactGold },
+        roundingDifference: { ...result.audit.trade.roundingDifference },
+        eligibility: { ...result.audit.trade.eligibility,
+          unitChecks: result.audit.trade.eligibility.unitChecks.map(check => ({ ...check, position: { ...check.position } })) },
+        writes: result.audit.trade.writes.map(write => ({ ...write })),
+        merchantCounterparty: { ...result.audit.trade.merchantCounterparty }, politicsXp: { ...result.audit.trade.politicsXp } } };
+    receipt.ownerSnapshot = audit.ownerSnapshot; receipt.actionPoints = audit.actionPoints;
+    receipt.fixedGoldFee = audit.fixedGoldFee; receipt.meritDelta = audit.meritDelta;
+    receipt.techniquePointsDelta = audit.techniquePointsDelta; receipt.loyaltyDelta = audit.loyaltyDelta;
+    receipt.rngDraws = audit.rngDraws; receipt.trade = audit.trade;
   }
   after.revision++; receipt.dateAfter = clone(after.date); receipt.turnAfter = after.turn;
   return { snapshot: after, receipt };
