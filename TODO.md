@@ -1,8 +1,17 @@
+## O13-B：相邻遗迹／庙有限事件静态覆盖
+
+更新：2026-10-18 UTC。
+
+- [x] 补[完整具体规则](docs/rules/adjacent-site-discovery-lifecycle.md)、[API](docs/engine/adjacent-site-discovery-lifecycle.md)、[policy](data/catalogs/adjacent-site-discovery-policy-v1.json)、[source](docs/sources/adjacent-site-discovery-lifecycle.json)、[schema](docs/sources/adjacent-site-discovery-lifecycle.schema.json)及[未运行场景](data/scenarios/adjacent-site-discovery-example-v1.json)：固定名单／编成／放置点／到达事实，内部相邻门槛、选择／抽样、真实发现／XP及12个月奖励、庙offer／替换、pending和独立完整保存重建
+- [x] 区分攻略事实、supplied输入与新50阈值／LCG／cap／技能实验池；第4庙仅开放最高级池，不保证抽中；原作概率／坐标／具体池／writer及stock仍E
+- [ ] 静态新增不等于运行验收；产品、示例、测试、typecheck、编译、build、checker、诊断和schema校验均未执行，其他模块的历史结果不验证本批
+- [ ] 原43主题／45历史快照不减、不换分母；O14普通城市事件、O15全局集成仍分开，P078及native人员／归属／捕获／灭亡继承／任务return与finalizers继续X
+
 ## 2026-10-17 O13-A：固定单城Search有限覆盖
 
 - [x] 静态新增内部过滤／选择／新RNG、三旧核复用、人才／宝物发现登记、金／AP／行动／奖励、有限旬序与完整genesis逐receipt保存重算；[完整规则](docs/rules/city-search-lifecycle.md)、[API](docs/engine/city-search-lifecycle.md)、[policy](data/catalogs/city-search-policy-v1.json)、[source](docs/sources/city-search-lifecycle.json)、[schema](docs/sources/city-search-lifecycle.schema.json)及[未运行场景](data/scenarios/city-search-example-v1.json)
 - [x] 明确PR53／54／55仅三个已发布限定核；205原值不clip、宝物1／2／3不是原概率、稳定二读是新服务模型、最终金不足30实际入账0。新政策／listing调用点／攻略观察／旧核来源严格分层
-- [ ] O13-B移动相邻遗迹／庙仍未实现；[规则第10节](docs/rules/city-search-lifecycle.md#10-o13-b明确尚未实现的独立有限后续)保留固定roster／部队／sites、有限到达、内部相邻资格／新抽样、月份／技能待选奖励及独立保存的有限合同，不将其归为模糊全地图缺数据
+- [x] O13-B有限到达／发现／奖励合同已补独立静态profile，见[相邻发现规则](docs/rules/adjacent-site-discovery-lifecycle.md)；A的历史来源身份与账本不改，未执行任何运行验收
 - [ ] 原过滤／选择／RNG／AP helper／writer／stock／跨版本与O14事件、O15跨服务一致性继续开放；不实现当场登用、native归属、capture、force继承、任务return/finalizers或P078依赖
 - [ ] 原43主题与45快照不减、不重新编号或新增分母。静态覆盖不等于验收通过；本批未运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验，旧验证及历史food失败保持原状
 

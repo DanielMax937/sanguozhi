@@ -1,8 +1,18 @@
+## O13-B：相邻遗迹／庙发现事件静态交付状态
+
+更新：2026-10-18 UTC。
+
+[规则](adjacent-site-discovery-lifecycle.md)与[API](../engine/adjacent-site-discovery-lifecycle.md)新增有限独立到达发现能力：完整预供序列、内部相邻和部队门槛、选择／新阈值抽样、真实发现与XP、冻结pending、12个月素质／适性或庙技能实际写入、原子幂等和全genesis逐receipt重建。基线为PR85 main `7cf050fdf57cd40641bf5f139b2c34c548aae820`／tree `c515fd47bdec5a1f8b9502da58130dad91372a09`，仅代表版本身份。
+
+O13-A原sourceBoundary及source manifest冻结在其交付时点；其中B未实现的标记不能改成新的原作认证，也不代表本新增B仍不存在。新B有自己的profile／来源／政策／schema，两个独立账本不证明全局集成。原概率／坐标／原技能池／writer、原43／45与E／X均保留；O14／O15另有范围。
+
+验证状态：仅静态撰写与阅读，产品、示例、测试、typecheck、编译、build、checker、诊断和schema校验均未执行；其他模块的历史结果不验证本新增。4096历史／16MiB为硬边界，不是实测性能保证。
+
 ## 2026-10-17 O13-A：固定单城Search静态交付状态
 
 [规则](city-search-lifecycle.md)与[API](../engine/city-search-lifecycle.md)新增有限内部候选过滤／排序／选择／RNG、人才／宝物发现登记、金／AP／行动／奖励／旬序及完整genesis逐receipt重建。PR53／54／55三个限定数值核均已发布；其source-listing-reconstruction等级、false flags与历史候选正文不改。新policy包含阈值映射、稳定二读、cap及只发现奖励，不认证原作最终概率、writer或stock。
 
-O13-B相邻遗迹／庙尚未实现，独立有限到达／发现／待选奖励合同见[规则第10节](city-search-lifecycle.md#10-o13-b明确尚未实现的独立有限后续)。整个O13、原43与45快照不关闭、不新增分母；城市事件／跨服务一致性仍为O14／O15，native人员／宝物归属及P078依赖排除。
+O13-B相邻遗迹／庙现有[独立静态profile](adjacent-site-discovery-lifecycle.md)，保留与A分离的到达／发现／待选奖励及保存合同。A／B有限合同均已有静态软件覆盖；O13原作等价证据、原43与45快照不关闭、不新增分母；城市事件／跨服务一致性仍为O14／O15，native人员／宝物归属及P078依赖排除。
 
 验证状态：仅静态阅读与编辑，没有运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例。4096历史是硬上限而非性能保证；旧核、历史food失败和旧验证结果保持原日期语境，不作本批通过证据。
 

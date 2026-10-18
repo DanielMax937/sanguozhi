@@ -1,8 +1,16 @@
+## 当前新增：相邻遗迹／庙发现事件（O13-B，静态新增）
+
+更新：2026-10-18 UTC。
+
+[完整B1–B5规则](docs/rules/adjacent-site-discovery-lifecycle.md)与[六个API](docs/engine/adjacent-site-discovery-lifecycle.md)：从有限预供到达自行检查相邻、主将功绩10000／部队魅力80和未发现点，内部独立LCG／新50阈值，实际记录发现与全体部队成员魅力XP10，冻结pending，再写入12个月素质／适性奖励或庙所选技能。第4庙起最高级进入实验技能池，不保证被抽中；同技能重学或cap全挡也消耗奖励。见[完整政策](data/catalogs/adjacent-site-discovery-policy-v1.json)、[分层来源](docs/sources/adjacent-site-discovery-lifecycle.json)、[schema](docs/sources/adjacent-site-discovery-lifecycle.schema.json)、[未运行场景](data/scenarios/adjacent-site-discovery-example-v1.json)。
+
+B与单城Search分开，非全地图移动或原世界事务；来源为攻略观察、供应事实与明确新政策，原概率／坐标／原技能池／writer／stock仍未知。原43主题、45快照及E／X保留，O14城市事件／O15跨服务一致性另属其范围。基线PR85 main `7cf050fdf57cd40641bf5f139b2c34c548aae820`／tree `c515fd47bdec5a1f8b9502da58130dad91372a09`仅标版本。仅静态撰写，产品、示例、测试、typecheck、编译、build、checker、诊断及schema校验均未执行；旧结果不验证本批。
+
 ## 当前新增：固定单城探索与发现（O13-A，2026-10-17）
 
 [完整规则](docs/rules/city-search-lifecycle.md)与[六个API](docs/engine/city-search-lifecycle.md)：从完整有限原始人才／宝物池自行过滤、排序、选项与抽样，复用PR53／54／55已发布人才基准、宝物roll参数及搜金caller核，实际维护独立发现名录、金／AP／行动／奖励、旬序、RNG及完整genesis保存重算。见[完整新政策](data/catalogs/city-search-policy-v1.json)、[四层来源](docs/sources/city-search-lifecycle.json)、[schema](docs/sources/city-search-lifecycle.schema.json)、[未运行场景](data/scenarios/city-search-example-v1.json)。
 
-保留人才原返回205、条件稳定二读与金钱不足30不入账；过滤／RNG／阈值／只发现奖励／writer均明确为新政策，listing请求和攻略不升级为stock或原世界认证。无当场登用、native宝物归属或其他人员事务；O13-B移动相邻遗迹／庙明确尚未实现，有限后续合同见规则第10节。原43主题与45快照不减；旧三核页面的候选措辞按原日期理解。仅静态交付，未运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例，历史结果不验证本批，旧food失败保持原状。
+保留人才原返回205、条件稳定二读与金钱不足30不入账；过滤／RNG／阈值／只发现奖励／writer均明确为新政策，listing请求和攻略不升级为stock或原世界认证。无当场登用、native宝物归属或其他人员事务；O13-B移动相邻遗迹／庙已有独立静态新增profile，见[相邻发现规则](docs/rules/adjacent-site-discovery-lifecycle.md)；A的接口仍只接受城市Search命令。原43主题与45快照不减；旧三核页面的候选措辞按原日期理解。仅静态交付，未运行测试、typecheck、编译、build、checker、诊断、schema校验、产品或示例，历史结果不验证本批，旧food失败保持原状。
 
 ## 当前新增：固定双城普通流言标量（O12-B，2026-10-17）
 
