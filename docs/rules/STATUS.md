@@ -1,3 +1,9 @@
+## 2026-10-18 O14 field：有限正兵力动作静态状态
+
+[规则](field-combat-lifecycle.md)和[六API](../engine/field-combat-lifecycle.md)已有独立场景／命令／状态／完整receipt／保存重放静态实现。集成基线PR86 main `a04ee326fdaa68e930681430352f4d98fee5209e`／tree `df4e2be515e2434e4e64476517c8e58f0d3afaf0`；读取的主伤害、计略、应射、技能／技巧与O01文献身份仍逐项保留其PR85来源，不把集成版本改写为新证据认证。
+
+本profile真实目标是内部兵损／气力／acted／异常账本；反击1/半值、普通会心复用、覆盖与holder／概率取整／状态分布均明示新政策。nativeEquivalent=false、stockVerified=false。O14其余事件查询、council、灾害及O15全局接续不关闭。原43证据组与45条snapshot不减，全部原作exactness E及域外X保留。没有运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验；静态代码存在不是运行通过。
+
 ## O13-B：相邻遗迹／庙发现事件静态交付状态
 
 更新：2026-10-18 UTC。

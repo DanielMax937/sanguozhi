@@ -1,0 +1,2380 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:field-combat-lifecycle:v1",
+  "title": "O14 detached positive field combat v1 complete DTOs",
+  "description": "Static companion schema, not run or validated. Use the named $defs for each API. Runtime additionally enforces exact registered policy, full rectangle/unique identities, skill aliases, complete prerequisite chains, side equality, positive troops and status invariants, command legality, stage-tape order, cross-field equalities, canonical full-genesis replay and all full receipts. Hash labels are non-authenticating. JSON Schema cannot express UTF-8 aggregate bytes, nodes/depth, escaped SaveResult or historical duplicate-output budgets. The implementation enforces those. Individual limits share aggregate budgets and are not jointly guaranteed attainable. Reconstructing history and reserving every old receipt return grows at least quadratically; limits are not latency guarantees. The object API accepts only non-Proxy plain or null-prototype own-data JSON DTOs in an unpolluted runtime. Negative zero, accessors, symbols and duplicate decoded JSON keys are rejected by the implementation. No native lifecycle/rewards/ownership/global turns and no original43/45 closure.",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/Scenario"
+    },
+    {
+      "$ref": "#/$defs/State"
+    },
+    {
+      "$ref": "#/$defs/Snapshot"
+    },
+    {
+      "$ref": "#/$defs/Command"
+    },
+    {
+      "$ref": "#/$defs/Receipt"
+    },
+    {
+      "$ref": "#/$defs/Trace"
+    },
+    {
+      "$ref": "#/$defs/StateResult"
+    },
+    {
+      "$ref": "#/$defs/CommandResult"
+    },
+    {
+      "$ref": "#/$defs/PreviewResult"
+    },
+    {
+      "$ref": "#/$defs/SaveResult"
+    },
+    {
+      "$ref": "#/$defs/ReplayResult"
+    }
+  ],
+  "$defs": {
+    "Policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "const": "o14-detached-positive-field-action-v1"
+        },
+        "version": {
+          "const": 1
+        },
+        "evidenceGrade": {
+          "const": "mixed-empirical-and-explicit-simulation-policy"
+        },
+        "nativeEquivalent": {
+          "const": false
+        },
+        "stockVerified": {
+          "const": false
+        },
+        "arithmetic": {
+          "const": "binary64-source-formula-v1"
+        },
+        "reaction": {
+          "const": "post-hit-reverse-core-counter-v1"
+        },
+        "reactionScale": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ordinaryNumerator": {
+              "const": 1
+            },
+            "ordinaryDenominator": {
+              "const": 1
+            },
+            "successfulTacticNumerator": {
+              "const": 1
+            },
+            "successfulTacticDenominator": {
+              "const": 2
+            }
+          },
+          "required": [
+            "ordinaryNumerator",
+            "ordinaryDenominator",
+            "successfulTacticNumerator",
+            "successfulTacticDenominator"
+          ],
+          "const": {
+            "ordinaryNumerator": 1,
+            "ordinaryDenominator": 1,
+            "successfulTacticNumerator": 1,
+            "successfulTacticDenominator": 2
+          }
+        },
+        "normalCritical": {
+          "const": "normal-critical-reuse-tactic-rate-v1"
+        },
+        "coverage": {
+          "const": "one-activation-primary-hit-v1"
+        },
+        "reactionEligibility": {
+          "const": "primary-response-only-v1"
+        },
+        "probability": {
+          "const": "probability-floor-clip-v1"
+        },
+        "shield": {
+          "const": "one-shield-gate-v1"
+        },
+        "skillHolder": {
+          "const": "resolved-skill-holder-max-intelligence-v1"
+        },
+        "status": {
+          "const": "o01-status-adapter-max-70-30-v1"
+        },
+        "falseReport": {
+          "const": "status-only-no-retreat-v1"
+        },
+        "map": {
+          "const": "complete-axial-rectangle-conservative-ray-v1"
+        },
+        "panels": {
+          "const": "resolved-state-panels-tech-already-included-v1"
+        },
+        "techniqueFacts": {
+          "const": "complete-prerequisite-chains-v1"
+        },
+        "contentHash": {
+          "const": "fnv1a64-canonical-utf16-v1-nonauthenticating"
+        },
+        "drum": {
+          "const": 1
+        },
+        "statusBaseOneThreshold": {
+          "const": 70
+        },
+        "shieldRate": {
+          "const": 30
+        },
+        "raidAvoidanceRate": {
+          "const": 50
+        },
+        "spiralNoncriticalGate": {
+          "const": 30
+        },
+        "unsupportedStrategySkills": {
+          "type": "array",
+          "const": [
+            "神算",
+            "连环",
+            "反计"
+          ],
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "enum": [
+              "神算",
+              "连环",
+              "反计"
+            ]
+          }
+        },
+        "unsupportedPhysicalSkills": {
+          "type": "array",
+          "const": [
+            "扫荡",
+            "威风",
+            "攻心",
+            "怒发",
+            "连战",
+            "金刚",
+            "不屈",
+            "藤甲",
+            "猛者",
+            "枪将",
+            "戟将",
+            "勇将",
+            "神将",
+            "飞将",
+            "驱逐",
+            "辅佐"
+          ],
+          "minItems": 16,
+          "maxItems": 16,
+          "items": {
+            "enum": [
+              "扫荡",
+              "威风",
+              "攻心",
+              "怒发",
+              "连战",
+              "金刚",
+              "不屈",
+              "藤甲",
+              "猛者",
+              "枪将",
+              "戟将",
+              "勇将",
+              "神将",
+              "飞将",
+              "驱逐",
+              "辅佐"
+            ]
+          }
+        },
+        "supportedSkills": {
+          "type": "array",
+          "const": [
+            "急袭",
+            "射手",
+            "枪神",
+            "戟神",
+            "斗神",
+            "霸王",
+            "洞察",
+            "看破",
+            "规律",
+            "沉着",
+            "明镜",
+            "言毒",
+            "机略",
+            "虚实",
+            "深谋",
+            "妙计",
+            "秘计",
+            "百出",
+            "鬼谋",
+            "倾国"
+          ],
+          "minItems": 20,
+          "maxItems": 20,
+          "items": {
+            "enum": [
+              "急袭",
+              "射手",
+              "枪神",
+              "戟神",
+              "斗神",
+              "霸王",
+              "洞察",
+              "看破",
+              "规律",
+              "沉着",
+              "明镜",
+              "言毒",
+              "机略",
+              "虚实",
+              "深谋",
+              "妙计",
+              "秘计",
+              "百出",
+              "鬼谋",
+              "倾国"
+            ]
+          }
+        },
+        "aliases": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "急襲": {
+              "const": "急袭"
+            },
+            "槍神": {
+              "const": "枪神"
+            },
+            "鬥神": {
+              "const": "斗神"
+            },
+            "規律": {
+              "const": "规律"
+            },
+            "沉著": {
+              "const": "沉着"
+            },
+            "明鏡": {
+              "const": "明镜"
+            },
+            "機略": {
+              "const": "机略"
+            },
+            "虛實": {
+              "const": "虚实"
+            },
+            "深謀": {
+              "const": "深谋"
+            },
+            "妙計": {
+              "const": "妙计"
+            },
+            "秘計": {
+              "const": "秘计"
+            },
+            "鬼謀": {
+              "const": "鬼谋"
+            },
+            "傾國": {
+              "const": "倾国"
+            },
+            "連環": {
+              "const": "连环"
+            },
+            "反計": {
+              "const": "反计"
+            },
+            "掃蕩": {
+              "const": "扫荡"
+            },
+            "威風": {
+              "const": "威风"
+            },
+            "連戰": {
+              "const": "连战"
+            },
+            "金剛": {
+              "const": "金刚"
+            },
+            "槍將": {
+              "const": "枪将"
+            },
+            "戟將": {
+              "const": "戟将"
+            },
+            "勇將": {
+              "const": "勇将"
+            },
+            "神將": {
+              "const": "神将"
+            },
+            "飛將": {
+              "const": "飞将"
+            },
+            "驅逐": {
+              "const": "驱逐"
+            },
+            "突襲": {
+              "const": "急袭"
+            },
+            "突袭": {
+              "const": "急袭"
+            },
+            "連擊": {
+              "const": "连战"
+            },
+            "连击": {
+              "const": "连战"
+            },
+            "怒髮": {
+              "const": "怒发"
+            },
+            "心攻": {
+              "const": "攻心"
+            },
+            "機智": {
+              "const": "机略"
+            },
+            "机智": {
+              "const": "机略"
+            },
+            "輔佐": {
+              "const": "辅佐"
+            },
+            "扫讨": {
+              "const": "扫荡"
+            }
+          },
+          "required": [
+            "急襲",
+            "槍神",
+            "鬥神",
+            "規律",
+            "沉著",
+            "明鏡",
+            "機略",
+            "虛實",
+            "深謀",
+            "妙計",
+            "秘計",
+            "鬼謀",
+            "傾國",
+            "連環",
+            "反計",
+            "掃蕩",
+            "威風",
+            "連戰",
+            "金剛",
+            "槍將",
+            "戟將",
+            "勇將",
+            "神將",
+            "飛將",
+            "驅逐",
+            "突襲",
+            "突袭",
+            "連擊",
+            "连击",
+            "怒髮",
+            "心攻",
+            "機智",
+            "机智",
+            "輔佐",
+            "扫讨"
+          ],
+          "const": {
+            "急襲": "急袭",
+            "槍神": "枪神",
+            "鬥神": "斗神",
+            "規律": "规律",
+            "沉著": "沉着",
+            "明鏡": "明镜",
+            "機略": "机略",
+            "虛實": "虚实",
+            "深謀": "深谋",
+            "妙計": "妙计",
+            "秘計": "秘计",
+            "鬼謀": "鬼谋",
+            "傾國": "倾国",
+            "連環": "连环",
+            "反計": "反计",
+            "掃蕩": "扫荡",
+            "威風": "威风",
+            "連戰": "连战",
+            "金剛": "金刚",
+            "槍將": "枪将",
+            "戟將": "戟将",
+            "勇將": "勇将",
+            "神將": "神将",
+            "飛將": "飞将",
+            "驅逐": "驱逐",
+            "突襲": "急袭",
+            "突袭": "急袭",
+            "連擊": "连战",
+            "连击": "连战",
+            "怒髮": "怒发",
+            "心攻": "攻心",
+            "機智": "机略",
+            "机智": "机略",
+            "輔佐": "辅佐",
+            "扫讨": "扫荡"
+          }
+        },
+        "limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "cells": {
+              "const": 256
+            },
+            "units": {
+              "const": 64
+            },
+            "membersPerUnit": {
+              "const": 3
+            },
+            "troops": {
+              "const": 1000000
+            },
+            "tape": {
+              "const": 4096
+            },
+            "history": {
+              "const": 64
+            },
+            "attempts": {
+              "const": 4096
+            },
+            "bytes": {
+              "const": 16777216
+            },
+            "nodes": {
+              "const": 1048576
+            },
+            "depth": {
+              "const": 32
+            },
+            "array": {
+              "const": 4096
+            }
+          },
+          "required": [
+            "cells",
+            "units",
+            "membersPerUnit",
+            "troops",
+            "tape",
+            "history",
+            "attempts",
+            "bytes",
+            "nodes",
+            "depth",
+            "array"
+          ],
+          "const": {
+            "cells": 256,
+            "units": 64,
+            "membersPerUnit": 3,
+            "troops": 1000000,
+            "tape": 4096,
+            "history": 64,
+            "attempts": 4096,
+            "bytes": 16777216,
+            "nodes": 1048576,
+            "depth": 32,
+            "array": 4096
+          }
+        },
+        "shieldSource": {
+          "const": "crossbow-weapon-including-melee-v1"
+        },
+        "height": {
+          "const": "recorded-no-scalar-modifier-supported-actions-v1"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "evidenceGrade",
+        "nativeEquivalent",
+        "stockVerified",
+        "arithmetic",
+        "reaction",
+        "reactionScale",
+        "normalCritical",
+        "coverage",
+        "reactionEligibility",
+        "probability",
+        "shield",
+        "skillHolder",
+        "status",
+        "falseReport",
+        "map",
+        "panels",
+        "techniqueFacts",
+        "contentHash",
+        "drum",
+        "statusBaseOneThreshold",
+        "shieldRate",
+        "raidAvoidanceRate",
+        "spiralNoncriticalGate",
+        "unsupportedStrategySkills",
+        "unsupportedPhysicalSkills",
+        "supportedSkills",
+        "aliases",
+        "limits",
+        "shieldSource",
+        "height"
+      ],
+      "const": {
+        "id": "o14-detached-positive-field-action-v1",
+        "version": 1,
+        "evidenceGrade": "mixed-empirical-and-explicit-simulation-policy",
+        "nativeEquivalent": false,
+        "stockVerified": false,
+        "arithmetic": "binary64-source-formula-v1",
+        "reaction": "post-hit-reverse-core-counter-v1",
+        "reactionScale": {
+          "ordinaryNumerator": 1,
+          "ordinaryDenominator": 1,
+          "successfulTacticNumerator": 1,
+          "successfulTacticDenominator": 2
+        },
+        "normalCritical": "normal-critical-reuse-tactic-rate-v1",
+        "coverage": "one-activation-primary-hit-v1",
+        "reactionEligibility": "primary-response-only-v1",
+        "probability": "probability-floor-clip-v1",
+        "shield": "one-shield-gate-v1",
+        "skillHolder": "resolved-skill-holder-max-intelligence-v1",
+        "status": "o01-status-adapter-max-70-30-v1",
+        "falseReport": "status-only-no-retreat-v1",
+        "map": "complete-axial-rectangle-conservative-ray-v1",
+        "panels": "resolved-state-panels-tech-already-included-v1",
+        "techniqueFacts": "complete-prerequisite-chains-v1",
+        "contentHash": "fnv1a64-canonical-utf16-v1-nonauthenticating",
+        "drum": 1,
+        "statusBaseOneThreshold": 70,
+        "shieldRate": 30,
+        "raidAvoidanceRate": 50,
+        "spiralNoncriticalGate": 30,
+        "unsupportedStrategySkills": [
+          "神算",
+          "连环",
+          "反计"
+        ],
+        "unsupportedPhysicalSkills": [
+          "扫荡",
+          "威风",
+          "攻心",
+          "怒发",
+          "连战",
+          "金刚",
+          "不屈",
+          "藤甲",
+          "猛者",
+          "枪将",
+          "戟将",
+          "勇将",
+          "神将",
+          "飞将",
+          "驱逐",
+          "辅佐"
+        ],
+        "supportedSkills": [
+          "急袭",
+          "射手",
+          "枪神",
+          "戟神",
+          "斗神",
+          "霸王",
+          "洞察",
+          "看破",
+          "规律",
+          "沉着",
+          "明镜",
+          "言毒",
+          "机略",
+          "虚实",
+          "深谋",
+          "妙计",
+          "秘计",
+          "百出",
+          "鬼谋",
+          "倾国"
+        ],
+        "aliases": {
+          "急襲": "急袭",
+          "槍神": "枪神",
+          "鬥神": "斗神",
+          "規律": "规律",
+          "沉著": "沉着",
+          "明鏡": "明镜",
+          "機略": "机略",
+          "虛實": "虚实",
+          "深謀": "深谋",
+          "妙計": "妙计",
+          "秘計": "秘计",
+          "鬼謀": "鬼谋",
+          "傾國": "倾国",
+          "連環": "连环",
+          "反計": "反计",
+          "掃蕩": "扫荡",
+          "威風": "威风",
+          "連戰": "连战",
+          "金剛": "金刚",
+          "槍將": "枪将",
+          "戟將": "戟将",
+          "勇將": "勇将",
+          "神將": "神将",
+          "飛將": "飞将",
+          "驅逐": "驱逐",
+          "突襲": "急袭",
+          "突袭": "急袭",
+          "連擊": "连战",
+          "连击": "连战",
+          "怒髮": "怒发",
+          "心攻": "攻心",
+          "機智": "机略",
+          "机智": "机略",
+          "輔佐": "辅佐",
+          "扫讨": "扫荡"
+        },
+        "limits": {
+          "cells": 256,
+          "units": 64,
+          "membersPerUnit": 3,
+          "troops": 1000000,
+          "tape": 4096,
+          "history": 64,
+          "attempts": 4096,
+          "bytes": 16777216,
+          "nodes": 1048576,
+          "depth": 32,
+          "array": 4096
+        },
+        "shieldSource": "crossbow-weapon-including-melee-v1",
+        "height": "recorded-no-scalar-modifier-supported-actions-v1"
+      }
+    },
+    "SourceBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "nativeEquivalent": {
+          "const": false
+        },
+        "stockVerified": {
+          "const": false
+        },
+        "originalRandomEquivalent": {
+          "const": false
+        },
+        "rewards": {
+          "const": "not-modeled"
+        },
+        "nativeActionPoints": {
+          "const": "not-modeled"
+        },
+        "lifecycle": {
+          "const": "fixed-episode-no-turn-reset"
+        },
+        "falseReport": {
+          "const": "status-only-no-retreat"
+        },
+        "original43GroupsReduced": {
+          "const": false
+        },
+        "original45SnapshotReduced": {
+          "const": false
+        },
+        "stateHashAuthenticatesProvenance": {
+          "const": false
+        }
+      },
+      "required": [
+        "nativeEquivalent",
+        "stockVerified",
+        "originalRandomEquivalent",
+        "rewards",
+        "nativeActionPoints",
+        "lifecycle",
+        "falseReport",
+        "original43GroupsReduced",
+        "original45SnapshotReduced",
+        "stateHashAuthenticatesProvenance"
+      ],
+      "const": {
+        "nativeEquivalent": false,
+        "stockVerified": false,
+        "originalRandomEquivalent": false,
+        "rewards": "not-modeled",
+        "nativeActionPoints": "not-modeled",
+        "lifecycle": "fixed-episode-no-turn-reset",
+        "falseReport": "status-only-no-retreat",
+        "original43GroupsReduced": false,
+        "original45SnapshotReduced": false,
+        "stateHashAuthenticatesProvenance": false
+      }
+    },
+    "Panel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "attack": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "defense": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        }
+      },
+      "required": [
+        "attack",
+        "defense"
+      ]
+    },
+    "Panels": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "resolved-state-panels-v1"
+        },
+        "techAndStatusIncluded": {
+          "const": true
+        },
+        "normal": {
+          "$ref": "#/$defs/Panel"
+        },
+        "confused": {
+          "$ref": "#/$defs/Panel"
+        }
+      },
+      "required": [
+        "kind",
+        "techAndStatusIncluded",
+        "normal",
+        "confused"
+      ]
+    },
+    "Member": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "intelligence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "sex": {
+          "enum": [
+            "male",
+            "female"
+          ]
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "急袭",
+              "射手",
+              "枪神",
+              "戟神",
+              "斗神",
+              "霸王",
+              "洞察",
+              "看破",
+              "规律",
+              "沉着",
+              "明镜",
+              "言毒",
+              "机略",
+              "虚实",
+              "深谋",
+              "妙计",
+              "秘计",
+              "百出",
+              "鬼谋",
+              "倾国",
+              "扫荡",
+              "威风",
+              "攻心",
+              "怒发",
+              "连战",
+              "金刚",
+              "不屈",
+              "藤甲",
+              "猛者",
+              "枪将",
+              "戟将",
+              "勇将",
+              "神将",
+              "飞将",
+              "驱逐",
+              "辅佐",
+              "神算",
+              "连环",
+              "反计",
+              "急襲",
+              "槍神",
+              "鬥神",
+              "規律",
+              "沉著",
+              "明鏡",
+              "機略",
+              "虛實",
+              "深謀",
+              "妙計",
+              "秘計",
+              "鬼謀",
+              "傾國",
+              "連環",
+              "反計",
+              "掃蕩",
+              "威風",
+              "連戰",
+              "金剛",
+              "槍將",
+              "戟將",
+              "勇將",
+              "神將",
+              "飛將",
+              "驅逐",
+              "突襲",
+              "突袭",
+              "連擊",
+              "连击",
+              "怒髮",
+              "心攻",
+              "機智",
+              "机智",
+              "輔佐",
+              "扫讨"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "relationshipToLeader": {
+          "enum": [
+            "leader",
+            "none",
+            "like",
+            "spouse",
+            "sworn",
+            "dislike"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "intelligence",
+        "sex",
+        "skills",
+        "relationshipToLeader"
+      ]
+    },
+    "UnitState": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "cellId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "troops": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "energy": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 120
+        },
+        "acted": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "normal",
+            "confused",
+            "false-report"
+          ]
+        },
+        "remaining": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        }
+      },
+      "required": [
+        "id",
+        "cellId",
+        "troops",
+        "energy",
+        "acted",
+        "status",
+        "remaining"
+      ]
+    },
+    "Unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "cellId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "troops": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "energy": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 120
+        },
+        "acted": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "normal",
+            "confused",
+            "false-report"
+          ]
+        },
+        "remaining": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "side": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "weapon": {
+          "enum": [
+            "sword",
+            "spear",
+            "halberd",
+            "crossbow",
+            "cavalry"
+          ]
+        },
+        "aptitude": {
+          "enum": [
+            "C",
+            "B",
+            "A",
+            "S"
+          ]
+        },
+        "energyCap": {
+          "enum": [
+            100,
+            120
+          ]
+        },
+        "difficulty": {
+          "enum": [
+            "normal",
+            "super-player"
+          ]
+        },
+        "intelligence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "charm": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "martial": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "temperament": {
+          "enum": [
+            "timid",
+            "calm",
+            "bold",
+            "reckless"
+          ]
+        },
+        "panels": {
+          "$ref": "#/$defs/Panels"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Member"
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "techniques": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 35
+          },
+          "minItems": 0,
+          "maxItems": 36,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "cellId",
+        "troops",
+        "energy",
+        "acted",
+        "status",
+        "remaining",
+        "side",
+        "weapon",
+        "aptitude",
+        "energyCap",
+        "difficulty",
+        "intelligence",
+        "charm",
+        "martial",
+        "temperament",
+        "panels",
+        "members",
+        "techniques"
+      ]
+    },
+    "Cell": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "q": {
+          "type": "integer",
+          "minimum": -255,
+          "maximum": 255
+        },
+        "r": {
+          "type": "integer",
+          "minimum": -255,
+          "maximum": 255
+        },
+        "terrain": {
+          "enum": [
+            "plain",
+            "grass",
+            "sand",
+            "forest",
+            "wasteland",
+            "wetland",
+            "road"
+          ]
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "blocked": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "q",
+        "r",
+        "terrain",
+        "height",
+        "blocked"
+      ]
+    },
+    "Map": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "qMin": {
+          "type": "integer",
+          "minimum": -255,
+          "maximum": 255
+        },
+        "qMax": {
+          "type": "integer",
+          "minimum": -255,
+          "maximum": 255
+        },
+        "rMin": {
+          "type": "integer",
+          "minimum": -255,
+          "maximum": 255
+        },
+        "rMax": {
+          "type": "integer",
+          "minimum": -255,
+          "maximum": 255
+        },
+        "cells": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "minItems": 1,
+          "maxItems": 256
+        }
+      },
+      "required": [
+        "qMin",
+        "qMax",
+        "rMin",
+        "rMax",
+        "cells"
+      ]
+    },
+    "TapeEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stage": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "bound": {
+          "enum": [
+            2,
+            100
+          ]
+        },
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        }
+      },
+      "required": [
+        "stage",
+        "bound",
+        "value"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "bound": {
+                "const": 2
+              }
+            },
+            "required": [
+              "bound"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "o14-detached-positive-field-action-v1"
+        },
+        "episodeId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "round": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "detached-ground-only"
+            },
+            "allMembersAndSkillsComplete": {
+              "const": true
+            },
+            "allTechniquesComplete": {
+              "const": true
+            },
+            "crossUnitRelations": {
+              "type": "array",
+              "items": false,
+              "minItems": 0,
+              "maxItems": 0
+            },
+            "unsupportedEntities": {
+              "type": "array",
+              "items": false,
+              "minItems": 0,
+              "maxItems": 0
+            }
+          },
+          "required": [
+            "kind",
+            "allMembersAndSkillsComplete",
+            "allTechniquesComplete",
+            "crossUnitRelations",
+            "unsupportedEntities"
+          ]
+        },
+        "map": {
+          "$ref": "#/$defs/Map"
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Unit"
+          },
+          "minItems": 1,
+          "maxItems": 64
+        },
+        "rng": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "stage-bounded-tape-v1"
+            },
+            "tape": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/TapeEntry"
+              },
+              "minItems": 0,
+              "maxItems": 4096
+            }
+          },
+          "required": [
+            "kind",
+            "tape"
+          ]
+        },
+        "policy": {
+          "$ref": "#/$defs/Policy"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "profile",
+        "episodeId",
+        "round",
+        "context",
+        "map",
+        "units",
+        "rng",
+        "policy"
+      ]
+    },
+    "Snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 64
+        },
+        "episodeId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "round": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UnitState"
+          },
+          "minItems": 1,
+          "maxItems": 64
+        },
+        "rngCursor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        }
+      },
+      "required": [
+        "revision",
+        "episodeId",
+        "round",
+        "units",
+        "rngCursor"
+      ]
+    },
+    "Command": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "commandId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 64
+        },
+        "actorId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "targetId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "action": {
+          "enum": [
+            "normal-melee",
+            "normal-arrow",
+            "spiral-thrust",
+            "halberd-sweep",
+            "halberd-whirlwind",
+            "disturb",
+            "false-report-status"
+          ]
+        }
+      },
+      "required": [
+        "commandId",
+        "expectedRevision",
+        "actorId",
+        "targetId",
+        "action"
+      ]
+    },
+    "Step": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stage": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "sourceKey": {
+          "enum": [
+            "field-damage",
+            "tactic-table",
+            "strategy-success",
+            "strategy-critical",
+            "response-fire",
+            "skill-facts",
+            "technique-facts",
+            "o01-status",
+            "field-policy"
+          ]
+        },
+        "evidenceGrade": {
+          "enum": [
+            "empirical-high",
+            "source-listing-reconstruction",
+            "explicit-simulation-policy"
+          ]
+        },
+        "policyId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "actorId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "targetId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "decision": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "numbers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+                "maxLength": 64,
+                "minLength": 1
+              },
+              "value": {
+                "type": "number",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "name",
+              "value"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+                "maxLength": 64,
+                "minLength": 1
+              },
+              "value": {
+                "type": "string",
+                "maxLength": 128
+              }
+            },
+            "required": [
+              "name",
+              "value"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 16
+        }
+      },
+      "required": [
+        "stage",
+        "sourceKey",
+        "evidenceGrade",
+        "policyId",
+        "actorId",
+        "targetId",
+        "decision",
+        "reason",
+        "numbers",
+        "labels"
+      ]
+    },
+    "Draw": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4095
+        },
+        "stage": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "bound": {
+          "enum": [
+            2,
+            100
+          ]
+        },
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        }
+      },
+      "required": [
+        "index",
+        "stage",
+        "bound",
+        "value"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "bound": {
+                "const": 2
+              }
+            },
+            "required": [
+              "bound"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "NumericWrite": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "before": {
+          "type": "integer",
+          "minimum": -1000000,
+          "maximum": 1000000
+        },
+        "requestedAfter": {
+          "type": "integer",
+          "minimum": -1000000,
+          "maximum": 1000000
+        },
+        "requestedDelta": {
+          "type": "integer",
+          "minimum": -1000000,
+          "maximum": 1000000
+        },
+        "actualDelta": {
+          "type": "integer",
+          "minimum": -1000000,
+          "maximum": 1000000
+        },
+        "after": {
+          "type": "integer",
+          "minimum": -1000000,
+          "maximum": 1000000
+        }
+      },
+      "required": [
+        "before",
+        "requestedAfter",
+        "requestedDelta",
+        "actualDelta",
+        "after"
+      ]
+    },
+    "Effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "unitId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "side": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "cellBefore": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "cellAfter": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "troops": {
+          "$ref": "#/$defs/NumericWrite"
+        },
+        "energy": {
+          "$ref": "#/$defs/NumericWrite"
+        },
+        "acted": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "before": {
+              "type": "boolean"
+            },
+            "requestedAfter": {
+              "type": "boolean"
+            },
+            "after": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "before",
+            "requestedAfter",
+            "after"
+          ]
+        },
+        "status": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "before": {
+              "enum": [
+                "normal",
+                "confused",
+                "false-report"
+              ]
+            },
+            "requestedKind": {
+              "enum": [
+                "normal",
+                "confused",
+                "false-report"
+              ]
+            },
+            "after": {
+              "enum": [
+                "normal",
+                "confused",
+                "false-report"
+              ]
+            },
+            "remaining": {
+              "$ref": "#/$defs/NumericWrite"
+            }
+          },
+          "required": [
+            "before",
+            "requestedKind",
+            "after",
+            "remaining"
+          ]
+        }
+      },
+      "required": [
+        "unitId",
+        "side",
+        "cellBefore",
+        "cellAfter",
+        "troops",
+        "energy",
+        "acted",
+        "status"
+      ]
+    },
+    "Coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cellId": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "occupantId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+              "maxLength": 64,
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "side": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+              "maxLength": 64,
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "disposition": {
+          "enum": [
+            "primary",
+            "secondary",
+            "friendly-skipped",
+            "empty",
+            "outside-map"
+          ]
+        },
+        "order": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "cellId",
+        "occupantId",
+        "side",
+        "disposition",
+        "order"
+      ]
+    },
+    "Receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "o14-detached-positive-field-action-v1"
+        },
+        "policyId": {
+          "const": "o14-detached-positive-field-action-v1"
+        },
+        "policyHash": {
+          "type": "string",
+          "pattern": "^fnv1a64-utf16:[0-9a-f]{16}$"
+        },
+        "sourceBoundary": {
+          "$ref": "#/$defs/SourceBoundary"
+        },
+        "command": {
+          "$ref": "#/$defs/Command"
+        },
+        "episodeId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "round": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "revisionBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 63
+        },
+        "revisionAfter": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "stateHashBefore": {
+          "type": "string",
+          "pattern": "^fnv1a64-utf16:[0-9a-f]{16}$"
+        },
+        "stateHashAfter": {
+          "type": "string",
+          "pattern": "^fnv1a64-utf16:[0-9a-f]{16}$"
+        },
+        "actorSide": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "targetSide": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "actionStartCellId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "activationCellId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "range": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "coverage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Coverage"
+          },
+          "minItems": 1,
+          "maxItems": 6
+        },
+        "outcome": {
+          "enum": [
+            "physical",
+            "tactic-fallback",
+            "strategy-succeeded",
+            "strategy-failed"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Step"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        },
+        "draws": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Draw"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "rngBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "rngAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "effects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Effect"
+          },
+          "minItems": 1,
+          "maxItems": 7
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "profile",
+        "policyId",
+        "policyHash",
+        "sourceBoundary",
+        "command",
+        "episodeId",
+        "round",
+        "revisionBefore",
+        "revisionAfter",
+        "stateHashBefore",
+        "stateHashAfter",
+        "actorSide",
+        "targetSide",
+        "actionStartCellId",
+        "activationCellId",
+        "range",
+        "coverage",
+        "outcome",
+        "steps",
+        "draws",
+        "rngBefore",
+        "rngAfter",
+        "effects"
+      ]
+    },
+    "State": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tag": {
+          "const": "field-combat-state-v1"
+        },
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "o14-detached-positive-field-action-v1"
+        },
+        "policy": {
+          "$ref": "#/$defs/Policy"
+        },
+        "sourceBoundary": {
+          "$ref": "#/$defs/SourceBoundary"
+        },
+        "genesis": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "scenario": {
+              "$ref": "#/$defs/Scenario"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            }
+          },
+          "required": [
+            "scenario",
+            "snapshot"
+          ]
+        },
+        "snapshot": {
+          "$ref": "#/$defs/Snapshot"
+        },
+        "acceptedCommands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "command": {
+                "$ref": "#/$defs/Command"
+              },
+              "receipt": {
+                "$ref": "#/$defs/Receipt"
+              }
+            },
+            "required": [
+              "command",
+              "receipt"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 64
+        }
+      },
+      "required": [
+        "tag",
+        "schemaVersion",
+        "profile",
+        "policy",
+        "sourceBoundary",
+        "genesis",
+        "snapshot",
+        "acceptedCommands"
+      ]
+    },
+    "Failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "const": false
+        },
+        "committed": {
+          "const": false
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "commandId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+              "maxLength": 64,
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "index": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4095
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "before": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Snapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "after": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Snapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "effects": {
+          "type": "array",
+          "items": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      },
+      "required": [
+        "ok",
+        "committed",
+        "reason",
+        "commandId",
+        "index",
+        "before",
+        "after",
+        "effects"
+      ]
+    },
+    "StateSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "state": {
+          "$ref": "#/$defs/State"
+        }
+      },
+      "required": [
+        "ok",
+        "state"
+      ]
+    },
+    "StateResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/StateSuccess"
+        },
+        {
+          "$ref": "#/$defs/Failure"
+        }
+      ]
+    },
+    "CommandSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "committed": {
+          "type": "boolean"
+        },
+        "duplicate": {
+          "type": "boolean"
+        },
+        "state": {
+          "$ref": "#/$defs/State"
+        },
+        "receipt": {
+          "$ref": "#/$defs/Receipt"
+        }
+      },
+      "required": [
+        "ok",
+        "committed",
+        "duplicate",
+        "state",
+        "receipt"
+      ]
+    },
+    "CommandResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/CommandSuccess"
+        },
+        {
+          "$ref": "#/$defs/Failure"
+        }
+      ]
+    },
+    "PreviewSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "committed": {
+          "const": false
+        },
+        "duplicate": {
+          "type": "boolean"
+        },
+        "receipt": {
+          "$ref": "#/$defs/Receipt"
+        },
+        "projectedSnapshot": {
+          "$ref": "#/$defs/Snapshot"
+        }
+      },
+      "required": [
+        "ok",
+        "committed",
+        "duplicate",
+        "receipt",
+        "projectedSnapshot"
+      ]
+    },
+    "PreviewResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/PreviewSuccess"
+        },
+        {
+          "$ref": "#/$defs/Failure"
+        }
+      ]
+    },
+    "SaveSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "json": {
+          "type": "string",
+          "maxLength": 16777216
+        }
+      },
+      "required": [
+        "ok",
+        "json"
+      ]
+    },
+    "SaveResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SaveSuccess"
+        },
+        {
+          "$ref": "#/$defs/Failure"
+        }
+      ]
+    },
+    "ExpectedSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "duplicate": {
+          "type": "boolean"
+        },
+        "receipt": {
+          "$ref": "#/$defs/Receipt"
+        }
+      },
+      "required": [
+        "ok",
+        "duplicate",
+        "receipt"
+      ]
+    },
+    "ExpectedOutcome": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ExpectedSuccess"
+        },
+        {
+          "$ref": "#/$defs/Failure"
+        }
+      ]
+    },
+    "Trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tag": {
+          "const": "field-combat-trace-v1"
+        },
+        "scenario": {
+          "$ref": "#/$defs/Scenario"
+        },
+        "attempts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "command": {
+                "$ref": "#/$defs/Command"
+              },
+              "expectedOutcome": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/ExpectedOutcome"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "command",
+              "expectedOutcome"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 4096
+        },
+        "expectedFinalSnapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Snapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "tag",
+        "scenario",
+        "attempts",
+        "expectedFinalSnapshot"
+      ]
+    },
+    "ReplaySuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "state": {
+          "$ref": "#/$defs/State"
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ExpectedOutcome"
+          },
+          "minItems": 0,
+          "maxItems": 4096
+        }
+      },
+      "required": [
+        "ok",
+        "state",
+        "outcomes"
+      ]
+    },
+    "ReplayResult": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ReplaySuccess"
+        },
+        {
+          "$ref": "#/$defs/Failure"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,334 @@
+{
+  "tag": "field-combat-trace-v1",
+  "scenario": {
+    "schemaVersion": 1,
+    "profile": "o14-detached-positive-field-action-v1",
+    "episodeId": "example-fixed-episode-unrun",
+    "round": 0,
+    "context": {
+      "kind": "detached-ground-only",
+      "allMembersAndSkillsComplete": true,
+      "allTechniquesComplete": true,
+      "crossUnitRelations": [],
+      "unsupportedEntities": []
+    },
+    "map": {
+      "qMin": 0,
+      "qMax": 2,
+      "rMin": 0,
+      "rMax": 2,
+      "cells": [
+        {
+          "id": "c00",
+          "q": 0,
+          "r": 0,
+          "terrain": "plain",
+          "height": 0,
+          "blocked": false
+        },
+        {
+          "id": "c01",
+          "q": 0,
+          "r": 1,
+          "terrain": "plain",
+          "height": 0,
+          "blocked": false
+        },
+        {
+          "id": "c02",
+          "q": 0,
+          "r": 2,
+          "terrain": "plain",
+          "height": 0,
+          "blocked": false
+        },
+        {
+          "id": "c10",
+          "q": 1,
+          "r": 0,
+          "terrain": "plain",
+          "height": 0,
+          "blocked": false
+        },
+        {
+          "id": "c11",
+          "q": 1,
+          "r": 1,
+          "terrain": "plain",
+          "height": 0,
+          "blocked": false
+        },
+        {
+          "id": "c12",
+          "q": 1,
+          "r": 2,
+          "terrain": "plain",
+          "height": 0,
+          "blocked": false
+        },
+        {
+          "id": "c20",
+          "q": 2,
+          "r": 0,
+          "terrain": "plain",
+          "height": 0,
+          "blocked": false
+        },
+        {
+          "id": "c21",
+          "q": 2,
+          "r": 1,
+          "terrain": "plain",
+          "height": 0,
+          "blocked": false
+        },
+        {
+          "id": "c22",
+          "q": 2,
+          "r": 2,
+          "terrain": "plain",
+          "height": 0,
+          "blocked": false
+        }
+      ]
+    },
+    "units": [
+      {
+        "id": "red",
+        "cellId": "c11",
+        "troops": 10000,
+        "energy": 100,
+        "acted": false,
+        "status": "normal",
+        "remaining": 0,
+        "side": "red-side",
+        "weapon": "sword",
+        "aptitude": "C",
+        "energyCap": 100,
+        "difficulty": "normal",
+        "intelligence": 60,
+        "charm": 60,
+        "martial": 60,
+        "temperament": "calm",
+        "panels": {
+          "kind": "resolved-state-panels-v1",
+          "techAndStatusIncluded": true,
+          "normal": {
+            "attack": 100,
+            "defense": 100
+          },
+          "confused": {
+            "attack": 80,
+            "defense": 80
+          }
+        },
+        "members": [
+          {
+            "id": "red-leader",
+            "intelligence": 60,
+            "sex": "male",
+            "skills": [],
+            "relationshipToLeader": "leader"
+          }
+        ],
+        "techniques": []
+      },
+      {
+        "id": "blue",
+        "cellId": "c21",
+        "troops": 10000,
+        "energy": 100,
+        "acted": false,
+        "status": "normal",
+        "remaining": 0,
+        "side": "blue-side",
+        "weapon": "sword",
+        "aptitude": "C",
+        "energyCap": 100,
+        "difficulty": "normal",
+        "intelligence": 60,
+        "charm": 60,
+        "martial": 60,
+        "temperament": "calm",
+        "panels": {
+          "kind": "resolved-state-panels-v1",
+          "techAndStatusIncluded": true,
+          "normal": {
+            "attack": 100,
+            "defense": 100
+          },
+          "confused": {
+            "attack": 80,
+            "defense": 80
+          }
+        },
+        "members": [
+          {
+            "id": "blue-leader",
+            "intelligence": 60,
+            "sex": "male",
+            "skills": [],
+            "relationshipToLeader": "leader"
+          }
+        ],
+        "techniques": []
+      }
+    ],
+    "rng": {
+      "kind": "stage-bounded-tape-v1",
+      "tape": []
+    },
+    "policy": {
+      "id": "o14-detached-positive-field-action-v1",
+      "version": 1,
+      "evidenceGrade": "mixed-empirical-and-explicit-simulation-policy",
+      "nativeEquivalent": false,
+      "stockVerified": false,
+      "arithmetic": "binary64-source-formula-v1",
+      "reaction": "post-hit-reverse-core-counter-v1",
+      "reactionScale": {
+        "ordinaryNumerator": 1,
+        "ordinaryDenominator": 1,
+        "successfulTacticNumerator": 1,
+        "successfulTacticDenominator": 2
+      },
+      "normalCritical": "normal-critical-reuse-tactic-rate-v1",
+      "coverage": "one-activation-primary-hit-v1",
+      "reactionEligibility": "primary-response-only-v1",
+      "probability": "probability-floor-clip-v1",
+      "shield": "one-shield-gate-v1",
+      "skillHolder": "resolved-skill-holder-max-intelligence-v1",
+      "status": "o01-status-adapter-max-70-30-v1",
+      "falseReport": "status-only-no-retreat-v1",
+      "map": "complete-axial-rectangle-conservative-ray-v1",
+      "panels": "resolved-state-panels-tech-already-included-v1",
+      "techniqueFacts": "complete-prerequisite-chains-v1",
+      "contentHash": "fnv1a64-canonical-utf16-v1-nonauthenticating",
+      "drum": 1,
+      "statusBaseOneThreshold": 70,
+      "shieldRate": 30,
+      "raidAvoidanceRate": 50,
+      "spiralNoncriticalGate": 30,
+      "unsupportedStrategySkills": [
+        "神算",
+        "连环",
+        "反计"
+      ],
+      "unsupportedPhysicalSkills": [
+        "扫荡",
+        "威风",
+        "攻心",
+        "怒发",
+        "连战",
+        "金刚",
+        "不屈",
+        "藤甲",
+        "猛者",
+        "枪将",
+        "戟将",
+        "勇将",
+        "神将",
+        "飞将",
+        "驱逐",
+        "辅佐"
+      ],
+      "supportedSkills": [
+        "急袭",
+        "射手",
+        "枪神",
+        "戟神",
+        "斗神",
+        "霸王",
+        "洞察",
+        "看破",
+        "规律",
+        "沉着",
+        "明镜",
+        "言毒",
+        "机略",
+        "虚实",
+        "深谋",
+        "妙计",
+        "秘计",
+        "百出",
+        "鬼谋",
+        "倾国"
+      ],
+      "aliases": {
+        "急襲": "急袭",
+        "槍神": "枪神",
+        "鬥神": "斗神",
+        "規律": "规律",
+        "沉著": "沉着",
+        "明鏡": "明镜",
+        "機略": "机略",
+        "虛實": "虚实",
+        "深謀": "深谋",
+        "妙計": "妙计",
+        "秘計": "秘计",
+        "鬼謀": "鬼谋",
+        "傾國": "倾国",
+        "連環": "连环",
+        "反計": "反计",
+        "掃蕩": "扫荡",
+        "威風": "威风",
+        "連戰": "连战",
+        "金剛": "金刚",
+        "槍將": "枪将",
+        "戟將": "戟将",
+        "勇將": "勇将",
+        "神將": "神将",
+        "飛將": "飞将",
+        "驅逐": "驱逐",
+        "突襲": "急袭",
+        "突袭": "急袭",
+        "連擊": "连战",
+        "连击": "连战",
+        "怒髮": "怒发",
+        "心攻": "攻心",
+        "機智": "机略",
+        "机智": "机略",
+        "輔佐": "辅佐",
+        "扫讨": "扫荡"
+      },
+      "limits": {
+        "cells": 256,
+        "units": 64,
+        "membersPerUnit": 3,
+        "troops": 1000000,
+        "tape": 4096,
+        "history": 64,
+        "attempts": 4096,
+        "bytes": 16777216,
+        "nodes": 1048576,
+        "depth": 32,
+        "array": 4096
+      },
+      "shieldSource": "crossbow-weapon-including-melee-v1",
+      "height": "recorded-no-scalar-modifier-supported-actions-v1"
+    }
+  },
+  "attempts": [
+    {
+      "command": {
+        "commandId": "example-melee-unrun",
+        "expectedRevision": 0,
+        "actorId": "red",
+        "targetId": "blue",
+        "action": "normal-melee"
+      },
+      "expectedOutcome": null
+    },
+    {
+      "command": {
+        "commandId": "example-melee-unrun",
+        "expectedRevision": 0,
+        "actorId": "red",
+        "targetId": "blue",
+        "action": "normal-melee"
+      },
+      "expectedOutcome": null
+    }
+  ],
+  "expectedFinalSnapshot": null
+}

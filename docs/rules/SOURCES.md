@@ -1,3 +1,9 @@
+## 2026-10-18 O14 field：主核证据与执行政策分层
+
+[来源manifest](../sources/field-combat-lifecycle.json) · [规则](field-combat-lifecycle.md) · [固定policy](../../data/catalogs/field-combat-policy-v1.json)。主伤害与战法表是玩家实测／重构；普通计略成功率沿固定06章；会心listing只取稳定snapshot分支并校正最低3及EDX助记符。技能holder最大智力、反击重算1/半值、普通会心复用、主目标反应／多目标顺序、概率floor/clip、状态70/30与几何都明确为有限policy。
+
+PR85原文件Git blob／SHA身份与来源版本保留；本批集成于PR86 main `a04ee326fdaa68e930681430352f4d98fee5209e`／tree `df4e2be515e2434e4e64476517c8e58f0d3afaf0`不扩大原作证据级别。原公式counter是兵种克制，不是反击系数；Wiki普通反击80–85%描述不升级成完整闭式。矢盾的弩近接范围和无高度标量另列政策，O01只作状态语义adapter。原43证据组与45条snapshot不减，全部原作exactness E及域外X保留。没有运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验；静态代码存在不是运行通过。
+
 # 主要来源
 
 ## 相邻遗迹／庙（O13-B）的独立来源层

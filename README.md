@@ -1,3 +1,11 @@
+## 当前新增：有限正兵力野战动作（O14 field，2026-10-18 静态）
+
+[完整具体规则](docs/rules/field-combat-lifecycle.md) · [六API](docs/engine/field-combat-lifecycle.md) · [固定政策](data/catalogs/field-combat-policy-v1.json) · [来源分层](docs/sources/field-combat-lifecycle.json) · [完整DTO schema](docs/sources/field-combat-lifecycle.schema.json) · [未运行trace](data/scenarios/field-combat-example-v1.json)
+
+固定episode独立账本支持普通近接／弩攻、至多一次合法反击或应射、非位移螺旋／横扫／旋风、扰乱与明确仅状态伪报；内部计算命中／会心／兵损／气力／acted／count。任何主击、旁击或反击致命均整命令拒绝，不夹兵力至1。完整地图枚举旁目标，未知能力／未支持副效应拒绝，O01状态语义只作内部adapter，完整genesis与逐阶段receipt回算、全部旧ID幂等及转义save预算均保留。
+
+反击1或1/2、普通会心复用、几何、holder解析及状态70/30均是公开可替换政策；`counter`指兵种克制而非反击倍率，精锐伤害1.15覆盖锻炼1.10。不是完整原作战斗结算，没有XP／功绩／势力技巧P、军团AP、全局旬、死亡／移动／火／建筑HP。O14事件查询、council、灾害及O15集成另有范围。集成基线为PR86 main `a04ee326fdaa68e930681430352f4d98fee5209e`／tree `df4e2be515e2434e4e64476517c8e58f0d3afaf0`。原43证据组与45条snapshot不减，全部原作exactness E及域外X保留。没有运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验；静态代码存在不是运行通过。
+
 ## 当前新增：相邻遗迹／庙发现事件（O13-B，静态新增）
 
 更新：2026-10-18 UTC。

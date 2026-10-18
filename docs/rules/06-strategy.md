@@ -161,3 +161,7 @@ https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html
 - `GovernorRebelled`
 
 这样才能用于存档回放和 AI 训练。
+
+## O14 独立扰乱 / 伪报状态 profile（2026-10-18）
+
+[有限野战动作规则](field-combat-lifecycle.md#7-扰乱与伪报状态)与[引擎合同](../engine/field-combat-lifecycle.md)另定义由原始属性 / 完整成员技能快照计算命中、会心、费用、acted 与状态的封闭动作。普通计略会心的 listing 子域、技能 holder 最大智力替代政策、概率 floor/clip 及 O01 同类 max / 70-30 adapter 分别标证据与 policy。false-report-status 只改异常且位置不变，不执行原作伪报撤退；落雷、火计及其他计略不因此成为合法执行命令。上述历史 E、原 43 证据组与 45 条 snapshot 均不关闭；此次仅静态编写，没有运行验收。
