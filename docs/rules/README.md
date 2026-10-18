@@ -1,3 +1,9 @@
+## 即时命令内部维护（2026-10-18，静态）
+
+[包内即时命令说明](../engine/instant-command-reducers.md) · [城市命令具体规则](city-command-lifecycle.md) · [商人买卖粮具体规则](city-merchant-lifecycle.md)
+
+此次仅作内部兼容抽取，原规则与公共接口继续适用，不新增玩法或共享账本。未运行产品、示例、测试、typecheck、编译、build、runtime、checker或validator；既有验证限制保留。
+
 ## 当前规则入口：固定单城季节 simulation（2026-10-18，静态）
 
 [详细季节规则](city-season-lifecycle.md) · [六API](../engine/city-season-lifecycle.md) · [policy](../../data/catalogs/city-season-policy-v1.json) · [设施catalog](../../data/catalogs/city-season-food-facilities-v1.json) · [source](../sources/city-season-lifecycle.json) · [schema](../sources/city-season-lifecycle.schema.json) · [未运行trace](../../data/scenarios/city-season-example-v1.json)

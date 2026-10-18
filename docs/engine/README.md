@@ -1,3 +1,9 @@
+## 即时命令内部维护（2026-10-18，静态）
+
+[包内即时命令说明](instant-command-reducers.md) · [城市命令具体规则](../rules/city-command-lifecycle.md) · [商人买卖粮具体规则](../rules/city-merchant-lifecycle.md)
+
+此次仅作内部兼容抽取，原规则与公共接口继续适用，不新增玩法或共享账本。未运行产品、示例、测试、typecheck、编译、build、runtime、checker或validator；既有验证限制保留。
+
 ## 固定单城季节：独立simulation六API（2026-10-18，静态）
 
 [CitySeason V1](city-season-lifecycle.md)通过公共[src/index.ts](../../packages/engine/src/index.ts)导出 `createCitySeasonState`、`previewCitySeasonCommand`、`executeCitySeasonCommand`、`saveCitySeasonState`、`loadCitySeasonState`、`replayCitySeasonTrace`，以及 `CITY_SEASON_POLICY_V1`、`CITY_SEASON_FOOD_CATALOG_V1`、`CITY_SEASON_SOURCES_V1` 和11个类型。[具体规则](../rules/city-season-lifecycle.md) · [policy](../../data/catalogs/city-season-policy-v1.json) · [设施catalog](../../data/catalogs/city-season-food-facilities-v1.json) · [source](../sources/city-season-lifecycle.json) · [schema](../sources/city-season-lifecycle.schema.json) · [未运行trace](../../data/scenarios/city-season-example-v1.json)。

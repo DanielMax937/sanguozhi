@@ -4,18 +4,13 @@
  * does not certify native writers, scheduling, effective attributes or stock data.
  * Public contract and source boundaries: docs/rules/city-command-lifecycle.md.
  */
-import { calculatePatrolSecurityGain } from './patrol-security-gain.ts';
-import { calculateRecruitmentQuantityProjection } from './recruitment-quantity.ts';
-import type { RecruitmentQuantityCapture, RecruitmentQuantityFactorBits } from './recruitment-quantity.ts';
-import { calculateRecruitmentSecurityArgument } from './recruitment-security-argument.ts';
-import { calculateProductionPrice } from './production-price.ts';
-import { calculateProductionQuantity } from './production-quantity.ts';
-import type { ProductionQuantitySlot } from './production-quantity.ts';
+import { ACCUMULATE, DEBIT, NOT_MODELED, copyOwned, emptyCalculation, facilityFactor, planRewards, productionPrice, productionQuantity, retainKernel, writeDomestic } from './internal/city-domestic-leaves.ts';
+import { reduceDomesticInstant } from './internal/city-instant-reducer.ts';
+import type { DeepRO, DomesticInstantAction, DomesticInstantFrame, DomesticLeafResult, PieceEquipment, QuantityEquipment } from './internal/city-service-types.ts';
 import { calculateProductionTimeProjection } from './production-time.ts';
 import type { ProductionTimeCapture } from './production-time.ts';
 
 type Frozen<T> = T extends object ? { readonly [K in keyof T]: Frozen<T[K]> } : T;
-type Json = null | boolean | number | string | Json[] | { [key: string]: Json };
 type Stat = 'leadership' | 'charm' | 'intelligence' | 'politics' | 'war';
 type Equipment = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 10 | 11;
 type FacilityKind = 'barracks' | 'forge' | 'stable' | 'workshop' | 'shipyard';
@@ -70,7 +65,6 @@ export type CityCommandReplayResultV1 = Frozen<{ ok: true; state: State; outcome
 const EQUIPMENT: Equipment[] = [1, 2, 3, 4, 5, 6, 7, 8, 10, 11];
 const STATS: Stat[] = ['leadership', 'charm', 'intelligence', 'politics', 'war'];
 const MAX_RECORDS = 4096, MAX_VALUE = 1_000_000_000, MAX_BYTES = 64 * 1024 * 1024;
-const NOT_MODELED = ['technique-points', 'native-stat-growth', 'native-writer-semantics', 'native-personnel-tasks', 'native-corps-effects', 'presentation-rng'];
 class Invalid extends Error { readonly reason: string; constructor(reason = 'invalid-input') { super(reason); this.reason = reason; } }
 function fail(reason = 'invalid-input'): never { throw new Invalid(reason); }
 function freeze<T>(v: T): Frozen<T> { if (v !== null && typeof v === 'object' && !Object.isFrozen(v)) { for (const x of Object.values(v)) freeze(x); Object.freeze(v); } return v as Frozen<T>; }
@@ -208,49 +202,15 @@ function initialState(s: Scenario): State {
   return { ...copy(s), schemaVersion: 1, scope: 'standalone-city-command-lifecycle', revision: 0, city,
     initialScenario: copy(s), policyDigest: digest(s.policies), catalogDigest: digest(s.catalog), productionJobs: [], appliedCommands: [] };
 }
-/** All accumulators are service writers, not recovered native writer implementations. */
-function write(before: number, requested: number, cap: number, p: Policy): Write {
-  const raw = before + requested;
-  if (p.parameters.overflow === 'reject' && requested !== 0 && (raw < 0 || raw > cap)) fail('writer-cap-overflow');
-  const after = Math.max(0, Math.min(cap, raw)), actualDelta = after - before;
-  const returned = p.parameters.returned === 'requested' ? requested : actualDelta;
-  return { before, requested, returned, actualDelta, after, cap, discarded: requested - actualDelta, policyId: p.id };
-}
-const ACCUMULATE = policy('saturating-accumulator-v1', { overflow: 'clip', returned: 'actual-delta' });
-const DEBIT = policy('exact-affordable-debit-v1', { overflow: 'reject', returned: 'actual-delta' });
-function emptyCalculation(): Calculation { return { observationKind: 'derived-adapter-observations', selectedOfficerIds: [], securityKernelReturn: null, quantityKernelReturn: null, quantityPreCapacity: null, priceKernelReturn: null, timeKernelReturn: null, facilityApplied: false, earlyCharmSum: null, moraleSecuritySnapshot: null, newRecruitMorale: null, securityWrite: null, troopWrite: null, inventoryWrite: null, moraleWrite: null, kernels: [] }; }
-function kernel<T extends { supported: boolean }>(calculation: Calculation, api: string, input: unknown, output: T): T & { supported: true } {
-  if (!output.supported) fail('kernel-rejected');
-  const retained = Object.fromEntries(Object.entries(output).filter(([k]) => k !== 'evidence'));
-  calculation.kernels.push({ api, input: copy(input) as Json, output: copy(retained) as Json });
-  return output as T & { supported: true };
-}
-function factor(s: State, f: Facility): RecruitmentQuantityFactorBits { return (s.policies.facilityMultiplier.parameters.levelBits as string[])[f.level - 1] as RecruitmentQuantityFactorBits; }
-function recruit(s: State, people: Officer[], facility: Facility, calc: Calculation): number {
-  const captures: RecruitmentQuantityCapture[] = ['005C3619', '005C3630', '005C3643', '005C364B'].map(callAddress => ({ callAddress, eax: 1 }));
-  for (let i = 0; i < 3; i++) { const o = people[i]; captures.push({ callAddress: '005C367B', slotIndex: i, eax: o ? 1 : 0 }); if (o) captures.push({ callAddress: '005C3689', slotIndex: i, eax: o.charm }, { callAddress: '005C36AA', slotIndex: i, eax: o.skillIds.includes(79) ? 1 : 0 }); }
-  const difficultyWord = s.difficulty === 'super' ? 2 : 0;
-  if (difficultyWord === 2) captures.push({ callAddress: '005C3725', eax: s.controller === 'player' ? 1 : 0 });
-  captures.push({ callAddress: '005C3738', eax: s.pressureActive ? 1 : 0 });
-  // Query the existing kernel in a stable nonbinding capacity first, solely to select its observation branch.
-  const probeInput = { profile: 'recruitment-quantity-observations-f32-v1' as const, captures: [...captures, { callAddress: '005C374E', eax: 0 }, { callAddress: '005C3757', eax: 1_000_000 }], savedSecurityByte: s.city.security, resolvedFacilityFactorBits: factor(s, facility), difficultyWord };
-  const probe = calculateRecruitmentQuantityProjection(probeInput); if (!probe.supported) fail('kernel-rejected');
-  captures.push({ callAddress: '005C374E', eax: s.city.troops }, { callAddress: '005C3757', eax: s.city.troopCapacity });
-  if (s.city.troops + probe.returnedValue > s.city.troopCapacity) captures.push({ callAddress: '005C3764', eax: s.city.troops }, { callAddress: '005C376B', eax: s.city.troopCapacity });
-  const input = { ...probeInput, captures };
-  const result = kernel(calc, 'calculateRecruitmentQuantityProjection', input, calculateRecruitmentQuantityProjection(input));
-  calc.quantityPreCapacity = result.afterPressureU32; calc.quantityKernelReturn = result.returnedValue;
-  return result.returnedValue;
-}
+/** Typed leaf failures re-enter this owner's original Invalid/fail boundary. */
+function unwrapDomestic<T>(result: DomesticLeafResult<T>): T { if (!result.ok) fail(result.reason); return result.value; }
+function write(before: number, requested: number, cap: number, p: DeepRO<Policy>): Write { return unwrapDomestic(writeDomestic(before, requested, cap, p)); }
+function kernel<T extends { supported: boolean }>(calculation: Calculation, api: string, input: unknown, output: T): T & { supported: true } { return unwrapDomestic(retainKernel(calculation, api, input, output)); }
 function production(s: State, people: Officer[], facility: Facility, t: Equipment, calc: Calculation): { price: number; quantity: number; duration: number } {
-  const priceInput = { profile: 'production-price-resolved-v1' as const, savedBasePriceWord: s.catalog.entries[t].basePriceWord, specialtyHelperEax: s.specialtyEquipmentTypes.includes(t) ? 1 : 0 };
-  const price = kernel(calc, 'calculateProductionPrice', priceInput, calculateProductionPrice(priceInput)).returnedPrice;
-  calc.priceKernelReturn = price;
-  const difficultyWord = s.difficulty === 'super' ? 2 : 0;
-  const slots = [0, 1, 2].map(i => { const o = people[i]; return o ? { intelligenceGetterEax: o.intelligence, skillHelperEax: o.skillIds.includes(t === 4 ? 81 : 80) ? 1 : 0 } : null; }) as [ProductionQuantitySlot, ProductionQuantitySlot, ProductionQuantitySlot];
-  const quantityInput = t >= 5 ? { profile: 'production-quantity-resolved-f32-v1' as const, nativeEquipmentType: t } : { profile: 'production-quantity-resolved-f32-v1' as const, nativeEquipmentType: t, slots, resolvedFacilityFactorBits: factor(s, facility), difficultyWord, ...(difficultyWord === 2 ? { cityVirtualEax: s.controller === 'player' ? 1 : 0 } : {}) };
-  const quantity = kernel(calc, 'calculateProductionQuantity', quantityInput, calculateProductionQuantity(quantityInput)).returnedQuantity;
-  calc.quantityKernelReturn = quantity; calc.quantityPreCapacity = quantity;
+  const price = unwrapDomestic(productionPrice(s.catalog.entries[t].basePriceWord, s.specialtyEquipmentTypes.includes(t), calc));
+  const quantity = unwrapDomestic(productionQuantity(t >= 5
+    ? { kind: 'piece', equipmentType: t as PieceEquipment }
+    : { kind: 'quantity', equipmentType: t as QuantityEquipment, people, factor: facilityFactor(facility, s.policies.facilityMultiplier), difficulty: s.difficulty, controller: s.controller }, calc));
   if (t <= 4) return { price, quantity, duration: 0 };
   const captures: ProductionTimeCapture[] = [];
   for (let i = 0; i < 3; i++) { const o = people[i]; captures.push({ callAddress: '005C6CF8', slotIndex: i, eax: o ? 1 : 0 }); if (o) captures.push({ callAddress: '005C6D06', slotIndex: i, eax: o.intelligence }, { callAddress: '005C6D25', slotIndex: i, eax: o.skillIds.includes(t <= 8 ? 82 : 83) ? 1 : 0 }); }
@@ -262,10 +222,36 @@ function production(s: State, people: Officer[], facility: Facility, t: Equipmen
   return { price, quantity, duration: Math.max(1, raw) };
 }
 function reward(people: Officer[], kind: 'patrol' | 'recruit' | 'quantity' | 'piece', p: Policy): Reward[] {
-  const attribute = p.parameters[kind] as Stat;
-  const xpRequested = p.parameters[kind === 'piece' ? 'completionXp' : 'instantXp'] as number;
-  const meritRequested = p.parameters[kind === 'piece' ? 'completionMerit' : 'instantMerit'] as number;
-  return people.map(o => { const xp = write(o.xp[attribute], xpRequested, p.parameters.cap as number, ACCUMULATE), merit = write(o.merit, meritRequested, p.parameters.cap as number, ACCUMULATE); o.xp[attribute] = xp.after; o.merit = merit.after; return { officerId: o.id, attribute, xp, merit }; });
+  const plan = unwrapDomestic(planRewards(people, kind, p));
+  for (let i = 0; i < people.length; i++) { const progress = plan.progress[i]!; people[i]!.xp[progress.attribute] = progress.xp; people[i]!.merit = progress.merit; }
+  return plan.rewards;
+}
+function isDomesticInstant(c: Exclude<Command, { type: 'AdvanceCityTurn' }>): c is DomesticInstantAction { return c.type !== 'Produce' || c.equipmentType <= 4; }
+function instantFrame(s: State): DomesticInstantFrame {
+  // Detached, exact read view; preserve the actual reservation fields and old wide actor/facility domain.
+  return copy({ activeForceId: s.activeForceId, corps: { actionPoints: s.corps.actionPoints },
+    city: { id: s.city.id, gold: s.city.gold, security: s.city.security, troops: s.city.troops, troopCapacity: s.city.troopCapacity, morale: s.city.morale, moraleCap: s.city.moraleCap, patrolUsedTurn: s.city.patrolUsedTurn,
+      inventory: { 1: s.city.inventory[1], 2: s.city.inventory[2], 3: s.city.inventory[3], 4: s.city.inventory[4] } },
+    officers: s.officers, facilities: s.facilities, pressureActive: s.pressureActive, difficulty: s.difficulty, controller: s.controller,
+    unlockedEquipmentTypes: s.unlockedEquipmentTypes, specialtyEquipmentTypes: s.specialtyEquipmentTypes,
+    productionPrices: { 1: s.catalog.entries[1], 2: s.catalog.entries[2], 3: s.catalog.entries[3], 4: s.catalog.entries[4] },
+    policies: { attributes: s.policies.attributes, facilityMultiplier: s.policies.facilityMultiplier, writer: s.policies.writer, morale: s.policies.morale, productionAp: s.policies.productionAp, rewards: s.policies.rewards, zeroYield: s.policies.zeroYield, presentation: s.policies.presentation } });
+}
+function applyInstant(s: State, e: Envelope, c: DomesticInstantAction, receipt: Receipt): void {
+  const result = reduceDomesticInstant({ commandId: e.id, turn: s.turn }, instantFrame(s), copy(c));
+  if (!result.ok) fail(result.reason);
+  const after = result.candidate, audit = result.audit;
+  s.city.gold = after.city.gold; s.corps.actionPoints = after.corps.actionPoints;
+  if (c.type === 'Patrol') { s.city.security = after.city.security; s.city.patrolUsedTurn = after.city.patrolUsedTurn; }
+  else if (c.type === 'Recruit') { s.city.troops = after.city.troops; s.city.security = after.city.security; s.city.morale = after.city.morale; }
+  else s.city.inventory[c.equipmentType].quantity = after.city.inventory[c.equipmentType].quantity;
+  for (let i = 0; i < c.officerIds.length; i++) {
+    const oid = c.officerIds[i]!, person = s.officers.find(o => o.id === oid)!, progress = after.officers.find(o => o.id === oid)!, attribute = audit.rewards[i]!.attribute;
+    person.xp[attribute] = progress.xp[attribute]; person.merit = progress.merit; person.actedTurn = progress.actedTurn;
+  }
+  if (c.type !== 'Patrol') s.facilities.find(f => f.id === c.facilityId)!.usedTurn = after.facilities.find(f => f.id === c.facilityId)!.usedTurn;
+  receipt.calculation = copyOwned<Calculation>(audit.calculation); receipt.fees = copyOwned<Fees>(audit.fees); receipt.rewards = copyOwned<Reward[]>(audit.rewards);
+  receipt.events = copyOwned<Receipt['events']>(audit.events); receipt.sideEffectsNotModeled = [...audit.sideEffectsNotModeled]; receipt.rngDraws = audit.rngDraws;
 }
 function nextDate(d: DateV1): DateV1 {
   if (d.day === 1) return { ...d, day: 11 }; if (d.day === 11) return { ...d, day: 21 };
@@ -307,9 +293,9 @@ function transition(original: State, e: Envelope): Outcome {
     const receipt: Receipt = { commandId: e.id, revision: original.revision + 1, turn: s.turn, taskKind: c.type === 'AdvanceCityTurn' ? 'turn-boundary' : 'instant', calculation: calc,
       fees: { gold: write(s.city.gold, 0, MAX_VALUE, DEBIT), actionPoints: write(s.corps.actionPoints, 0, 255, DEBIT), sourceApRequest: 0, effectiveApCost: 0 }, rewards: [], newJobId: null, completions: [], apRecovery: null, events: [], sideEffectsNotModeled: [...NOT_MODELED], rngDraws: 0 };
     if (c.type === 'AdvanceCityTurn') advance(s, receipt);
+    else if (isDomesticInstant(c)) applyInstant(s, e, c, receipt);
     else {
       if (c.cityId !== s.city.id) fail('unknown-city');
-      if (c.type === 'Patrol' && s.city.patrolUsedTurn === s.turn) fail('patrol-already-used');
       const people = c.officerIds.map(oid => {
         const o = s.officers.find(x => x.id === oid); if (!o) fail('unknown-officer');
         if (o.forceId !== s.activeForceId) fail('officer-not-member'); if (o.cityId !== s.city.id) fail('officer-not-present');
@@ -317,41 +303,19 @@ function transition(original: State, e: Envelope): Outcome {
       });
       calc.selectedOfficerIds = [...c.officerIds];
       let facility: Facility | null = null;
-      if (c.type !== 'Patrol') {
+      {
         facility = s.facilities.find(f => f.id === c.facilityId) ?? null; if (!facility) fail('unknown-facility');
         if (facility.cityId !== s.city.id) fail('facility-not-present'); if (!facility.complete) fail('facility-incomplete');
-        const kind: FacilityKind = c.type === 'Recruit' ? 'barracks' : c.equipmentType <= 3 ? 'forge' : c.equipmentType === 4 ? 'stable' : c.equipmentType <= 8 ? 'workshop' : 'shipyard';
+        const kind: FacilityKind = c.equipmentType <= 3 ? 'forge' : c.equipmentType === 4 ? 'stable' : c.equipmentType <= 8 ? 'workshop' : 'shipyard';
         if (facility.kind !== kind) fail('wrong-facility-kind'); if (facility.reservationJobId !== null) fail('facility-production-reserved'); if (facility.usedTurn === s.turn) fail('facility-used-this-turn');
       }
-      let gold = c.type === 'Patrol' ? 100 : 300, ap = 20, yieldActual = 0;
-      if (c.type === 'Patrol') {
-        const input = { profile: 'patrol-security-gain-stable-v1' as const, resolvedLeadershipSlots: people.map(o => o.leadership), publicOrderByte: s.city.security, pressureHelperEax: s.pressureActive ? 1 : 0 };
-        const result = kernel(calc, 'calculatePatrolSecurityGain', input, calculatePatrolSecurityGain(input)); calc.securityKernelReturn = result.returnedDelta;
-        const w = write(s.city.security, result.returnedDelta, 100, s.policies.writer); calc.securityWrite = w; s.city.security = w.after; yieldActual = w.actualDelta;
-        s.city.patrolUsedTurn = s.turn; receipt.rewards = reward(people, 'patrol', s.policies.rewards);
-      } else if (c.type === 'Recruit') {
-        const earlyCharmSum = people.reduce((sum, o) => sum + o.charm, 0), oldSecurity = s.city.security, oldTroops = s.city.troops, oldMorale = s.city.morale;
-        calc.earlyCharmSum = earlyCharmSum; calc.moraleSecuritySnapshot = oldSecurity;
-        const quantity = recruit(s, people, facility!, calc), troopWrite = write(oldTroops, quantity, s.city.troopCapacity, s.policies.writer); calc.troopWrite = troopWrite;
-        const input = { profile: 'recruitment-security-argument-v1' as const, savedCharmSum: earlyCharmSum, savedTroopReturnU32: troopWrite.returned >>> 0 };
-        const result = kernel(calc, 'calculateRecruitmentSecurityArgument', input, calculateRecruitmentSecurityArgument(input));
-        const securityWrite = write(oldSecurity, result.securityDeltaSigned, 100, s.policies.writer); calc.securityWrite = securityWrite;
-        const newMorale = Math.floor(oldSecurity / 2), a = troopWrite.actualDelta; calc.newRecruitMorale = newMorale;
-        const total = oldTroops + a, raw = total > 0 ? (oldTroops * oldMorale + a * newMorale) / total : oldMorale;
-        const rounded = s.policies.morale.parameters.rounding === 'ceil' ? Math.ceil(raw) : Math.floor(raw);
-        const morale = Math.min(s.city.moraleCap, Math.max(s.policies.morale.parameters.minimum as number, rounded));
-        calc.moraleWrite = write(oldMorale, morale - oldMorale, s.city.moraleCap, ACCUMULATE); calc.moraleWrite.policyId = s.policies.morale.id;
-        s.city.troops = troopWrite.after; s.city.security = securityWrite.after; s.city.morale = morale; yieldActual = a;
-        receipt.rewards = reward(people, 'recruit', s.policies.rewards);
-      } else {
+      let gold = 300, ap = 20;
+      {
         if (!s.unlockedEquipmentTypes.includes(c.equipmentType)) fail('equipment-locked');
         const t = c.equipmentType, result = production(s, people, facility!, t, calc); gold = result.price;
         ap = s.policies.productionAp.parameters[t <= 4 ? 'quantity' : 'piece'] as number;
         const stock = s.city.inventory[t];
-        if (t <= 4) {
-          const w = write(stock.quantity, result.quantity, stock.capacity - stock.reserved, s.policies.writer); calc.inventoryWrite = w; stock.quantity = w.after; yieldActual = w.actualDelta;
-          receipt.rewards = reward(people, 'quantity', s.policies.rewards);
-        } else {
+        {
           if (s.productionJobs.length >= MAX_RECORDS) fail('production-history-full');
           if (stock.quantity + stock.reserved + result.quantity > stock.capacity) fail('piece-capacity-unavailable');
           const duration = result.duration, dueTurn = uint(s.turn + duration), jobId = 'job:' + e.id;
@@ -361,7 +325,6 @@ function transition(original: State, e: Envelope): Outcome {
           receipt.taskKind = 'production-start'; receipt.newJobId = jobId; receipt.events.push({ type: 'production-started', subjectId: jobId });
         }
       }
-      if (receipt.taskKind === 'instant' && yieldActual === 0 && s.policies.zeroYield.parameters.zero === 'reject') fail('zero-yield');
       if (s.city.gold < gold) fail('insufficient-gold'); if (s.corps.actionPoints < ap) fail('insufficient-ap');
       const fees: Fees = { gold: write(s.city.gold, -gold || 0, MAX_VALUE, DEBIT), actionPoints: write(s.corps.actionPoints, -ap, 255, DEBIT), sourceApRequest: 20, effectiveApCost: ap };
       s.city.gold = fees.gold.after; s.corps.actionPoints = fees.actionPoints.after; receipt.fees = fees;

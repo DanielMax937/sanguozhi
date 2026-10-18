@@ -2,6 +2,12 @@
 
 This service combines existing scalar APIs with explicitly named, replaceable service policies. It supports selecting officers and a facility, side-effect-free preview, atomic patrol/recruitment/quantity production, piece-production reservations across turns, and canonical save/load/replay. It does not extend the training engine's `GameState`, `Command`, save format or `EndTurn`.
 
+## Internal reducer maintenance
+
+Patrol, Recruit and quantity Produce (equipment 1–4) now delegate their detached candidate calculation to package-private reducers. This is an internal compatibility refactor: the rules, policy variants, rejection order, receipt fields, production reservations, turn advancement and public save/replay interfaces below remain applicable. Piece production and its completion stay with the existing lifecycle owner.
+
+The reducers are not public entrypoints and do not create trusted states, a shared resource ledger, a new scenario/profile or cross-service turns. See [internal instant-command engineering contract](../engine/instant-command-reducers.md) for the input views, permitted write-back fields and maintenance boundaries. This change has only been inspected as text; no test, typecheck, compilation, build, runtime, example, checker or validator has been run for it.
+
 ## Validation status
 
 This revision is prepared by static review and has not been retested. An earlier default aggregate run failed at the food-supply test file; that failure remains unresolved. A later instrumented diagnostic passed, but it does not replace a successful default aggregate run. No complete validation or original-game equivalence is claimed.
