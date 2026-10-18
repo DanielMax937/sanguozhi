@@ -1,3 +1,12 @@
+## 2026-10-18 O14 field：有限正兵力动作静态批次
+
+- [x] 新增独立七动作／一次主目标反应、内部完整数值与状态写入，合法性／能力副效应／正兵力原子边界、六API、完整schema／固定policy／未运行example及[具体规则](docs/rules/field-combat-lifecycle.md)
+- [x] 逐阶段来源与模拟政策分开，命中／会心／伤害／目标顺序／RNG全部receipt留证；genesis重算、所有历史重复ID、SaveResult转义和返回预算静态实现
+- [ ] 原反击闭式、原普通会心、计略取整／helper／caller、stock字节及跨版本等价仍E；原native奖励、军团AP、死亡／capture／ownership／移动／火及全局事务仍域外
+- [ ] O14事件／council／灾害、O15跨服务一致性不由本动作账本完成
+
+集成基线：PR86 main `a04ee326fdaa68e930681430352f4d98fee5209e`／tree `df4e2be515e2434e4e64476517c8e58f0d3afaf0`。原43证据组与45条snapshot不减，全部原作exactness E及域外X保留。没有运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验；静态代码存在不是运行通过。
+
 ## O13-B：相邻遗迹／庙有限事件静态覆盖
 
 更新：2026-10-18 UTC。

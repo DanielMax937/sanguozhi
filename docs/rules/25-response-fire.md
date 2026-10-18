@@ -283,3 +283,7 @@ PC-PK1.1 地址表新增一条关键精确边界：
 两者不能共用一个“hasDoubleStrike -> roll50” gate。
 
 当前仍不能从 `00586E12` 单独证明它是否显式检查 technique9；完整 `00584DC8` caller 仍 open。
+
+## O14 有限单次应射 profile（2026-10-18）
+
+[有限野战动作规则](field-combat-lifecycle.md#51-反击的独立模拟政策)与[引擎合同](../engine/field-combat-lifecycle.md)只在独立地上弩普通间接攻击域内，按应射技巧、normal 状态、当前合法范围 / 森林 / 保守阻挡条件，给主目标至多一次反应。急袭按 50% 整次规避；应射伤害受击后反向重算，其 scale=1 是明确模拟选择。这里不扩大到本文记载的其他箭类来源，不支持多次还射、连战 / 连击链、水军或 collateral 应射，不把本 profile 当作完整 00584DC8 caller。本文历史 open 项、原 43 证据组与 45 条 snapshot 均保持；此次仅静态编写，没有运行验收。

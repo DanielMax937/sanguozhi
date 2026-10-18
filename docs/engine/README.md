@@ -1,3 +1,9 @@
+## O14 field：独立正兵力动作服务（静态新增）
+
+[FieldCombat V1](field-combat-lifecycle.md)公开 createFieldCombatStateV1／previewFieldCombatV1／executeFieldCombatV1／saveFieldCombatV1／loadFieldCombatV1／replayFieldCombatV1，支持固定episode七动作和最多一次反应。闭合DTO、内部阶段tape、全genesis逐receipt重算、所有历史重复结果及转义SaveResult预算保持同一提交边界。当前只有独立兵力／气力／acted／状态账本，未结算原生奖励或全局回合。
+
+[具体规则](../rules/field-combat-lifecycle.md)与[来源](../sources/field-combat-lifecycle.json)明确反击等新政策。集成基线PR86 main `a04ee326fdaa68e930681430352f4d98fee5209e`／tree `df4e2be515e2434e4e64476517c8e58f0d3afaf0`。原43证据组与45条snapshot不减，全部原作exactness E及域外X保留。没有运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验；静态代码存在不是运行通过。
+
 ## 相邻遗迹／庙独立事件（O13-B）
 
 更新：2026-10-18 UTC。

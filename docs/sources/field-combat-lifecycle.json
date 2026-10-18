@@ -1,0 +1,466 @@
+{
+  "schemaVersion": 1,
+  "topic": "O14 detached positive-troop field action lifecycle",
+  "profileId": "o14-detached-positive-field-action-v1",
+  "updatedAt": "2026-10-18",
+  "baseline": {
+    "pullRequest": 85,
+    "commit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+    "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09",
+    "identityNote": "The 2026-10-17 research proposal used PR83. That historical identity is not asserted as the current implementation baseline."
+  },
+  "status": {
+    "evidenceGrade": "mixed-empirical-and-explicit-simulation-policy",
+    "nativeEquivalent": false,
+    "stockVerified": false,
+    "runtimeVerified": false,
+    "validation": "static-authoring-only; no product, tests, typecheck, compile, build, checker, diagnostic, schema validation, or example execution",
+    "originalEvidenceGroupCount": 43,
+    "snapshotBulletCount": 45,
+    "closesOriginalEvidenceGroups": false,
+    "closesSnapshotBullets": false
+  },
+  "scope": {
+    "commands": [
+      "normal-melee",
+      "normal-arrow",
+      "spiral-thrust",
+      "halberd-sweep",
+      "halberd-whirlwind",
+      "disturb",
+      "false-report-status"
+    ],
+    "stateWrites": [
+      "troops",
+      "energy",
+      "acted",
+      "status",
+      "remaining",
+      "revision",
+      "rngCursor",
+      "receipts"
+    ],
+    "episode": "fixed; no automatic turn progression or acted reset",
+    "terminalRule": "Reject the entire command if any active, collateral, or reaction effect makes troops non-positive.",
+    "falseReport": "Status only; no retreat, movement, mission, home, or path effects.",
+    "rewards": "XP, merit, force technique points, and native corps action points are not settled.",
+    "notIntegrated": [
+      "O01 global turn scheduler",
+      "O02 resource accounts",
+      "O03 native panel getters",
+      "native save",
+      "training sandbox"
+    ]
+  },
+  "sources": [
+    {
+      "sourceKey": "field-damage",
+      "evidenceGrade": "empirical-high",
+      "title": "freedomv20 / 红色三倍速高达：三国志11 战斗伤害计算公式",
+      "url": "https://game.ali213.net/thread-5983352-1-1.html",
+      "publishedAt": "2016-01-17",
+      "lastResearchRead": "2026-10-17",
+      "repositorySnapshot": {
+        "path": "docs/rules/05-combat.md",
+        "blobSha": "66cf4e9f9d3724c8c76d1daa31b06d120f7598a0",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/7cf050fdf57cd40641bf5f139b2c34c548aae820/docs/rules/05-combat.md",
+        "bytes": 26496,
+        "sha256": "bf9dbe3c4e200e5d8acdb688a1bf0889199a324ddc5cd680a4e746d7c521cd12",
+        "gitBlob": "66cf4e9f9d3724c8c76d1daa31b06d120f7598a0"
+      },
+      "usedFor": [
+        "Main damage expression",
+        "floor and signed truncation locations",
+        "counter means weapon matchup, not reaction multiplier"
+      ],
+      "correction": "The historical post's training naming is not restored: corresponding training supplies 1.10; 熟练兵 is an energy-cap fact.",
+      "reactionNonEquivalenceEvidence": {
+        "title": "三國志11攻略wiki：部隊攻撃力と防御力",
+        "url": "https://w.atwiki.jp/sangokushi11/pages/92.html",
+        "researchRead": "2026-10-18",
+        "observation": "The section describes ordinary counterattack damage around 80-85 percent in empirical comparisons.",
+        "boundary": "This is not a recovered counterattack closed form or sampling-time specification. Reverse-core recomputation with scale 1 or 1/2 can differ from this observation; no native-equivalence claim follows."
+      },
+      "notEstablished": [
+        "clean-stock executable identity",
+        "x87 or other native arithmetic equivalence",
+        "native damage RNG",
+        "complete caller",
+        "independent reaction formula or reaction scales"
+      ]
+    },
+    {
+      "sourceKey": "tactic-table",
+      "evidenceGrade": "documented-and-empirical",
+      "title": "三國志11攻略wiki：兵科",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/91.html",
+      "pageReportedUpdatedAt": "2023-08-07",
+      "lastResearchRead": "2026-10-17",
+      "usedFor": [
+        "Spiral and sweep final A75/S80 table",
+        "Whirlwind final S75 table",
+        "Weapon and terrain limits",
+        "Action-start position as a distinct fact",
+        "Physical tactic critical and spiral duration facts from separately attributed 05-combat sections 11/12"
+      ],
+      "evidenceLayers": [
+        {
+          "claim": "Final tactic aptitude table and weapon/terrain limits",
+          "source": "Wiki page 91",
+          "grade": "documented-and-empirical"
+        },
+        {
+          "claim": "Physical tactic natural-critical martial/aptitude/relationship expression",
+          "source": "Fixed docs/rules/05-combat.md section 11, which attributes the numeric formula to PTT and uses Wiki page 85 as qualitative cross-check",
+          "grade": "empirical-high"
+        },
+        {
+          "claim": "Spiral noncritical 30% entry with 0/1 count and critical 1/2 count",
+          "source": "Fixed docs/rules/05-combat.md section 12, which attributes the observations to PTT",
+          "grade": "empirical-high-with-explicit-staged-sampling"
+        }
+      ],
+      "additionalRuleSnapshot": {
+        "path": "docs/rules/05-combat.md",
+        "blobSha": "66cf4e9f9d3724c8c76d1daa31b06d120f7598a0",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/7cf050fdf57cd40641bf5f139b2c34c548aae820/docs/rules/05-combat.md"
+      },
+      "attributionNote": "The Wiki tactic table is not itself evidence for the numeric physical-critical expression or spiral distribution; those are separately attributed fixed-rule text facts.",
+      "heightCrossCheck": {
+        "path": "docs/rules/01-map.md",
+        "section": "6. 高度与高低差",
+        "blobSha": "1283b8e758740623b7b2984b4e72cbd89906c745",
+        "sha256": "f8abb090e63ce5613862a4de0c378521eb514ca83b0c85ece0d3688b66f18df7",
+        "bytes": 46028,
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/7cf050fdf57cd40641bf5f139b2c34c548aae820/docs/rules/01-map.md",
+        "claim": "Height is not a global attack/defense multiplier. Its documented tactic-success layer principally concerns displacement tactics; spiral, sweep, and whirlwind are explicitly excluded from that layer.",
+        "crossCheck": "Wiki page 91, 戦法成功率と地形効果, read 2026-10-18",
+        "boundary": "The profile records height but applies no scalar modifier to its supported actions; original caller and version evidence remain open.",
+        "gitBlob": "1283b8e758740623b7b2984b4e72cbd89906c745"
+      },
+      "notEstablished": [
+        "stock raw tactic table",
+        "resolution of alternative base-rate tables",
+        "complete collateral caller",
+        "universal height adjustment"
+      ]
+    },
+    {
+      "sourceKey": "strategy-success",
+      "evidenceGrade": "empirical-high",
+      "title": "PTT Koei probability research, source-bound ordinary strategy formulas",
+      "url": "https://www.ptt.cc/man/Koei/D802/D96B/D4AA/M.1371726847.A.536.html",
+      "lastResearchRead": "2026-10-17",
+      "repositorySnapshot": {
+        "path": "docs/rules/06-strategy.md",
+        "blobSha": "2940ed1632f1a2e9f41dc132ab355c3e15bd4878",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/7cf050fdf57cd40641bf5f139b2c34c548aae820/docs/rules/06-strategy.md",
+        "bytes": 5494,
+        "sha256": "651ae25f875c076d685c2e3c664e7fed089c0136dc60cd2f1b500a4e8776617f",
+        "gitBlob": "2940ed1632f1a2e9f41dc132ab355c3e15bd4878"
+      },
+      "usedFor": [
+        "Separate false-report and disturb V1/V2 expressions",
+        "Target personality in success rate",
+        "Abnormal target bonus and superior-target-intelligence penalty"
+      ],
+      "notEstablished": [
+        "native probability rounding",
+        "full original strategy caller",
+        "full lightning execution",
+        "native false-report retreat"
+      ]
+    },
+    {
+      "sourceKey": "strategy-critical",
+      "evidenceGrade": "reverse-engineered-listing-stable-snapshot-subdomain",
+      "title": "sjn4048/311MemoryResearch：函数[计策爆击率].txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/master/%E5%86%85%E5%AD%98%E8%B5%84%E6%96%99/%E5%87%BD%E6%95%B0%5B%E8%AE%A1%E7%AD%96%E7%88%86%E5%87%BB%E7%8E%87%5D.txt",
+      "retrievedAt": "2026-10-17",
+      "repositoryBlobSha": "33b9c050c64d2d3c819af046a2362699ee2b23b4",
+      "decodedUtf8TextSha256": "70ab041d0ebb70373d846976b0a556d85d18262a75d5dfbcc8208fe985f52034",
+      "decodedUtf8TextGitBlobSha": "0215a5b7da00ff019eadcf21bcd20087a7902210",
+      "identityNote": "Original repository blob identity and locally decoded UTF-8 text identity differ. Original encoding and line conversion were not resolved. No original-byte SHA-256 or clean-stock executable identity is claimed.",
+      "addressRanges": {
+        "resolvedIntelligenceReads": "005AF5BB..005AF5D3",
+        "skillCriticalBranches": "005AF5DF..005AF631",
+        "ordinaryPersonalityBranches": "005AF66C..005AF70F",
+        "stableSnapshotReturn": "005AF7B3..005AF7CC"
+      },
+      "usedFor": [
+        "max(3,trunc((actor intelligence + actor personality adjustment - floor(target intelligence/2))/10))",
+        "深谋 presence critical branch",
+        "妙计 helper greater-than-target comparison",
+        "秘计 helper nonnegative and less-than-target comparison",
+        "神算 presence is a source fact for critical, distinct from success; relevant strategy contexts with 神算 are rejected in this profile"
+      ],
+      "transcriptionCorrections": [
+        "3 is a minimum, not the listing comment's maximum",
+        "C1 FA 02 is SAR EDX,2; the copied sar dl,02 mnemonic is inconsistent",
+        "Success uses target personality; critical uses actor leader personality"
+      ],
+      "notEstablished": [
+        "00495680 helper semantics",
+        "skill vtable semantics",
+        "map and unit resolvers",
+        "stability of two native personality reads",
+        "original caller",
+        "global RNG",
+        "executable version or stock identity",
+        "cross-platform equivalence"
+      ]
+    },
+    {
+      "sourceKey": "response-fire",
+      "evidenceGrade": "address-level-plus-empirical-high",
+      "title": "E10 应射 fixed rule snapshot",
+      "repositorySnapshot": {
+        "path": "docs/rules/25-response-fire.md",
+        "blobSha": "6720bebda861a0c3c6fcc737c3bcf79c8a1b96c1",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/7cf050fdf57cd40641bf5f139b2c34c548aae820/docs/rules/25-response-fire.md",
+        "bytes": 7660,
+        "sha256": "717560668f7b9374a6cf34d5d8d0f2737f636f011e17039c9bf6b9405013a5c8",
+        "gitBlob": "6720bebda861a0c3c6fcc737c3bcf79c8a1b96c1"
+      },
+      "address": "00584DC8",
+      "techniqueId": 9,
+      "usedFor": [
+        "Land crossbow response eligibility",
+        "Normal legal range and forest constraints",
+        "Abnormal-state exclusion",
+        "急袭 can avoid response-fire damage",
+        "No inference of a PC chain limit"
+      ],
+      "profileRestriction": "Only normal crossbow arrows are legal incoming indirect attacks here; the broader historical arrow-family list does not make fire arrows, ships, cavalry arrows, or collateral arrow tactics executable.",
+      "notEstablished": [
+        "complete PC caller",
+        "native attack-type and unit-type comparison constants",
+        "naval active profile",
+        "native collateral response order",
+        "PC double-strike chain depth",
+        "reaction damage formula"
+      ]
+    },
+    {
+      "sourceKey": "skill-facts",
+      "evidenceGrade": "documented-with-explicit-holder-policy",
+      "title": "Fixed skill source snapshot",
+      "repositorySnapshot": {
+        "path": "docs/sources/skills.json",
+        "blobSha": "878fb349d3865ba5a2553feb3de870ed0ba566c2",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/7cf050fdf57cd40641bf5f139b2c34c548aae820/docs/sources/skills.json",
+        "bytes": 72567,
+        "sha256": "65b1a78c69f5485857d7e8d7adc63665263383196c8e38325fe1e3d8e3959b4c",
+        "gitBlob": "878fb349d3865ba5a2553feb3de870ed0ba566c2"
+      },
+      "usedFor": [
+        "Canonical skill identity",
+        "Supported skill descriptions",
+        "Immunity before conditional guaranteed success",
+        "百出, 鬼谋, 倾国, 射手, 急袭 descriptions"
+      ],
+      "notEstablished": [
+        "complete original skill helpers",
+        "maximum-holder-intelligence as a stock helper",
+        "unconditional support of every skill in the source catalog"
+      ]
+    },
+    {
+      "sourceKey": "technique-facts",
+      "evidenceGrade": "source-graded-reverse-and-wiki",
+      "title": "Fixed technique source snapshot",
+      "repositorySnapshot": {
+        "path": "docs/sources/techniques.json",
+        "blobSha": "506d3f8839c694b201a0c425c1d686afa48a4091",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/7cf050fdf57cd40641bf5f139b2c34c548aae820/docs/sources/techniques.json",
+        "bytes": 18746,
+        "sha256": "7f925a354a26be99f7c49189b6e7a3fbff3eda470bdf8ae050303bded00fd639",
+        "gitBlob": "506d3f8839c694b201a0c425c1d686afa48a4091"
+      },
+      "usedFor": [
+        "Training 1.10 and elite 1.15 override",
+        "Elite panel +10 is a separate layer",
+        "Shield descriptions",
+        "Strong-crossbow range",
+        "Response-fire ID9",
+        "Forest no-counter technique ID2",
+        "Food-raid ID1 requires rejection of unsupported active resource effects",
+        "Sequential research context must not be silently erased"
+      ],
+      "notEstablished": [
+        "source catalog is a complete executable combat lifecycle",
+        "overlapping shield native order",
+        "food-raid RNG",
+        "native resource settlement"
+      ]
+    },
+    {
+      "sourceKey": "o01-status",
+      "evidenceGrade": "existing-software-contract-and-explicit-simulation-policy",
+      "title": "O01 detached terrain/status lifecycle fixed implementation snapshot",
+      "repositorySnapshot": {
+        "path": "packages/engine/src/terrain-hazard-lifecycle.ts",
+        "blobSha": "e467f15127bfcc832c003f5c808d14d69881e596",
+        "url": "https://github.com/DanielMax937/sanguozhi/blob/7cf050fdf57cd40641bf5f139b2c34c548aae820/packages/engine/src/terrain-hazard-lifecycle.ts",
+        "bytes": 27278,
+        "sha256": "3e04b1948dfdfc2ed1d9b1a81994ce47950288b594c001e5c7f116f7413917a9",
+        "gitBlob": "e467f15127bfcc832c003f5c808d14d69881e596"
+      },
+      "existingPolicyId": "o01-detached-pk-reference-policy-v1",
+      "usedFor": [
+        "normal iff remaining is zero",
+        "same-status max refresh",
+        "reject replacement by a different abnormal status",
+        "ordinary duration 70/30 base1/base2 with critical +1",
+        "false-report retreat is not silently resolved"
+      ],
+      "integration": "Explicit internal semantic adapter only; no public already-successful applyStatus command and no automatic O01 turn invocation.",
+      "notEstablished": [
+        "70/30 is a stock distribution",
+        "O14 provides the original status caller",
+        "global O01/O02/O03 scheduling integration"
+      ]
+    },
+    {
+      "sourceKey": "field-policy",
+      "evidenceGrade": "explicit-simulation-policy",
+      "title": "Versioned bounded field-action choices",
+      "document": "docs/rules/field-combat-lifecycle.md",
+      "usedFor": [
+        "All openly selected numeric, ordering, holder, schema, transactional, and replay rules below"
+      ],
+      "notEstablished": [
+        "native equivalence",
+        "stock verification",
+        "runtime acceptance"
+      ]
+    }
+  ],
+  "policies": [
+    {
+      "id": "binary64-source-formula-v1",
+      "choice": "Use the written binary64 expression order, floor and signed truncation points; no additional damage randomness.",
+      "stockClaim": false
+    },
+    {
+      "id": "post-hit-reverse-core-counter-v1",
+      "choice": "Recompute reverse ordinary damage from post-hit troops/status; normal or failed-tactic reaction scale 1; successful melee-tactic scale 1/2, floored after full damage.",
+      "stockClaim": false
+    },
+    {
+      "id": "normal-critical-reuse-tactic-rate-v1",
+      "choice": "Ordinary and reaction critical rates reuse the tactic natural-rate expression.",
+      "stockClaim": false
+    },
+    {
+      "id": "one-activation-primary-hit-v1",
+      "choice": "One primary hit decision; engine-enumerated coverage; primary first then cellId order; independent per-target critical; all active damage uses the action-start snapshot.",
+      "stockClaim": false
+    },
+    {
+      "id": "primary-response-only-v1",
+      "choice": "At most one response, by the primary target after active damage and status; no collateral or recursive response.",
+      "stockClaim": false
+    },
+    {
+      "id": "probability-floor-clip-v1",
+      "choice": "Complete the raw strategy expression and applicable single 倾国 multiplier, then floor and clip 0..100; deterministic endpoints consume no RNG.",
+      "stockClaim": false
+    },
+    {
+      "id": "one-shield-gate-v1",
+      "choice": "One applicable 30% shield gate; 大盾 overrides 矢盾. 矢盾 applies to ordinary damage from weapon=crossbow, including melee ordinary attacks and melee counters; this source-weapon choice is explicit simulation, not a recovered stock caller. Gate precedes critical; blocked active attacks may still receive a legal primary response.",
+      "stockClaim": false
+    },
+    {
+      "id": "resolved-skill-holder-max-intelligence-v1",
+      "choice": "For a supported intelligence-conditional skill, use maximum intelligence among members actually holding that skill; absence is not zero.",
+      "stockClaim": false
+    },
+    {
+      "id": "o01-status-adapter-max-70-30-v1",
+      "choice": "Internal O01 status semantic adapter: same-kind max; different-kind rejection; ordinary duration base1/base2 at 70/30 plus critical one; spiral supplies its own duration.",
+      "stockClaim": false
+    },
+    {
+      "id": "status-only-no-retreat-v1",
+      "choice": "False report writes only abnormal state and remaining count; no movement, home, path, mission, or automatic turn action.",
+      "stockClaim": false
+    },
+    {
+      "id": "complete-axial-rectangle-conservative-ray-v1",
+      "choice": "Require the full bounded axial rectangle. Reject a ranged action if any intermediate cell on any shortest axial path is blocked. This is a conservative profile restriction, not stock line-of-sight.",
+      "stockClaim": false
+    },
+    {
+      "id": "resolved-state-panels-tech-already-included-v1",
+      "choice": "Use separately supplied normal/confused attack and defense panels with all panel-layer technique and status effects already included; no native getter certification.",
+      "stockClaim": false
+    },
+    {
+      "id": "complete-prerequisite-chains-v1",
+      "choice": "All technique facts are supplied; each four-level branch includes all prerequisites and same-side units agree. Spear technique 2 necessarily includes technique 1, making the active spear action reject before no-counter behavior can execute.",
+      "stockClaim": false
+    },
+    {
+      "id": "fnv1a64-canonical-utf16-v1-nonauthenticating",
+      "choice": "FNV-1a64 over canonical JSON UTF-16 code units is a non-authenticating content label. Replay safety uses full genesis recomputation and full receipt comparison, not hash equality alone.",
+      "stockClaim": false
+    },
+    {
+      "id": "crossbow-weapon-including-melee-v1",
+      "choice": "矢盾 source classification includes all ordinary damage from weapon=crossbow, including normal melee and melee counterattack. Explicit source-weapon simulation choice, not stock caller recovery.",
+      "stockClaim": false
+    },
+    {
+      "id": "recorded-no-scalar-modifier-supported-actions-v1",
+      "choice": "Record source and target heights and action-start cell; do not add a global attack/defense scalar or tactic-hit height adjustment to supported actions. Fixed 01-map section 6 supports the limited tactic scope while native exactness remains open.",
+      "stockClaim": false
+    }
+  ],
+  "softwareLimits": {
+    "bytes": 16777216,
+    "nodes": 1048576,
+    "depth": 32,
+    "array": 4096,
+    "cells": 256,
+    "units": 64,
+    "membersPerUnit": 3,
+    "tape": 4096,
+    "acceptedHistory": 64,
+    "replayAttempts": 4096,
+    "saveAndDuplicateResultBudgetedBeforeCommit": true,
+    "inputThreatModel": "Non-Proxy plain JSON DTOs in an unpolluted runtime; reflection may invoke Proxy traps.",
+    "provenanceAuthentication": false
+  },
+  "openEvidence": [
+    "Main damage native precision, RNG, callers, version attribution, and reaction formula",
+    "Ordinary strategy probability rounding, distance caller, and unsupported strategy formulas",
+    "Full original skill/helper semantics, including 神算 defensive composition",
+    "Original physical ordinary/reaction critical rate",
+    "Original tactic-table conflicts and collateral ordering",
+    "Complete PC response-fire and double-strike caller",
+    "Native action-point and reward settlement",
+    "Status initialization distributions and automatic false-report retreat",
+    "Building durability and terminal-effect callers",
+    "Original O14 event/council/disaster scope"
+  ],
+  "excluded": [
+    "P078/P0-78 and dependencies",
+    "native capture",
+    "person/force/city ownership",
+    "force elimination and ruler inheritance",
+    "mission/return/finalizers",
+    "death/injury/disbandment and terminal settlement",
+    "fire arrows/lightning/fire/traps/buildings/naval/transports/siege",
+    "movement/collision/cavalry tactics/support/multi-response chains",
+    "old rules-audit-a1-b3/PR2/money179"
+  ],
+  "acceptanceNote": "The 34 design vectors in the 2026-10-17 research are static review expectations, not executed tests or PASS results. This manifest does not close historical evidence or alter prior failure records.",
+  "integrationBaseline": {
+    "pullRequest": 86,
+    "commit": "a04ee326fdaa68e930681430352f4d98fee5209e",
+    "tree": "df4e2be515e2434e4e64476517c8e58f0d3afaf0",
+    "note": "Parent independently read back actual main and full metadata. Original source reads retain PR85 identities; no source or runtime certification is implied."
+  }
+}

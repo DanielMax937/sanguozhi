@@ -1,3 +1,9 @@
+## O14 field：有限正兵力动作完整规则（2026-10-18 静态）
+
+[完整规则](field-combat-lifecycle.md) · [API](../engine/field-combat-lifecycle.md) · [政策](../../data/catalogs/field-combat-policy-v1.json) · [来源](../sources/field-combat-lifecycle.json) · [DTO schema](../sources/field-combat-lifecycle.schema.json)。普通近接／弩攻、一次反应、螺旋／横扫／旋风、扰乱与仅状态伪报形成一个固定episode事务；任何致命结果或未支持副效应都整体拒绝。伤害counter是克制；反击重算与scale单列模拟政策，精锐覆盖锻炼，O01状态不重复计功。
+
+集成基线PR86 main `a04ee326fdaa68e930681430352f4d98fee5209e`／tree `df4e2be515e2434e4e64476517c8e58f0d3afaf0`。不含全战斗奖励、全旬、终局、建筑伤害、火、事件／council／灾害；原43证据组与45条snapshot不减，全部原作exactness E及域外X保留。没有运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验；静态代码存在不是运行通过。
+
 ## 相邻遗迹／庙发现完整规则（O13-B，静态新增）
 
 更新：2026-10-18 UTC。

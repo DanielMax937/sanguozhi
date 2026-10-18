@@ -868,3 +868,7 @@ resolveOrdinaryTroopDestruction() {
 - 猛者目标选择与伤病等级；
 - Vanilla / PS2 / Wii 逐项等价性。
 
+
+## O14 独立正兵力动作 profile（2026-10-18）
+
+[有限野战动作规则](field-combat-lifecycle.md)与[引擎合同](../engine/field-combat-lifecycle.md)另定义普通近接 / 弩间接、不位移螺旋 / 横扫 / 旋风及一次合法主目标反应。反击反向重算与 1 / 1/2 scale、普通会心复用战法率、多目标顺序均明确为模拟 policy；全命令包括反击后仍为正兵力才提交。它不接击破、捕获、伤亡或其他原生终局处置，不认证完整原作战斗 caller；上述历史 E、原 43 证据组与 45 条 snapshot 均不关闭。此次仅静态编写，未运行产品、测试、typecheck、编译、build、checker、诊断或 schema 验证。
