@@ -1,3 +1,15 @@
+## 2026-10-18 一次内政评定：有限静态覆盖
+
+- [x] 新增[完整规则](docs/rules/single-council-lifecycle.md)、[七个API](docs/engine/single-council-lifecycle.md)、完整policy／sources／schema及未运行trace；公共index导出全部函数、固定policy和14个类型
+- [x] 固定完整roster、君主关系及最多6参与者，方针／具体案两阶段采决；内部合法候选生成、提案／赞同去重、可改选和唯一Complete／Abort终态
+- [x] 三类普通内政案复用原city-command公开API：Patrol、Recruit、Produce装备1–4；共享同一child真实费用／资源／XP／功绩／acted／used，整条原子提交，保留所有child receipt
+- [x] 完整genesis重算、固定新PRNG与全部raw、同ID幂等、终态限制、escaped SaveResult与所有历史receipt预算的静态实现
+- [ ] 其他19类、件数兵器／舰船、native chooser／完整筛选／执行调用链／次序／原奖励资格、普通案TP与全局接续仍未实现或未证实；+10只为完成奖projection，不能认作完整force TP
+- [ ] 原版事件／灾害与跨服务一致性未集成；原43主题／45快照未决项不减，22类池不等于22类可执行
+- [ ] 产品、示例、测试、typecheck、编译、build、runtime、checker、诊断及schema验证均未运行；以上勾选仅指静态代码与说明存在
+
+公共入口集成基线为PR88 main `8063d39731a42af87646168d4b36b92bd9d3ed3d`／tree `5e555fcda99f97e71e50c9c8565810dca50915be`；来源manifest继续保留PR86原始读取身份，普通city-command源码blob `f07b0762e045dfb77caeb8e46c06e7cee8bd255f`在两版本间相同，不把集成版本当成新的原作证据。下方既有批次按各自日期与支持域保留。
+
 ## 2026-10-18 O14 query：固定来源三值查询静态覆盖
 
 - [x] 新增[完整规则](docs/rules/source-event-query.md)、[三个API](docs/engine/source-event-query.md)、固定registry、来源身份、输入／响应schema与未运行输入示例；公共index导出查询及类型

@@ -1,0 +1,15 @@
+{
+  "id": "single-council-domestic-policy-20261018-v1",
+  "version": 1,
+  "profile": "single-council-domestic-v1",
+  "nativeEquivalent": false,
+  "roster": { "id": "complete-fixed-single-city-supplied-roles-v1", "maxOfficers": 256, "maxParticipants": 6, "excludeLord": true, "openRequiresAvailableUnactedUnreserved": true },
+  "policySpeech": { "id": "first-domestic-rest-agree-v1", "rngWords": 0 },
+  "chooser": { "id": "single-actor-public-preview-rejection-map-v1", "candidateOrder": ["type-code-unit", "facility-id-code-unit", "equipment-type-numeric"], "singleOfficer": true, "equipmentTypes": [1, 2, 3, 4], "jointLegalityGuaranteed": false, "strictlyUnbiased": false },
+  "deduplication": { "id": "type-city-facility-equipment-first-proposer-v1", "ignoreProposerInKey": true, "agreeAddsActor": false },
+  "execution": { "id": "frozen-participant-order-atomic-public-child-v1", "ordinaryProposalTp": "not-modeled", "cityStateMutation": "public-api-only", "turnAdvance": false },
+  "completion": { "id": "normal-finish-including-reject-all-v1", "requestedTechniquePoints": 10, "cap": 10000, "abortedRequested": 0, "scope": "council-completion-only", "globalForceTechniquePoints": "not-exported", "terminal": true },
+  "rng": { "id": "xorshift32-nonzero-domain-rejection-v1", "seedMin": 1, "seedMax": 4294967295, "shifts": [13, 17, 5], "sample": "raw-minus-one", "domainSize": 4294967295, "limit": "floor(domainSize/bound)*bound", "accept": "sample<limit", "value": "sample%bound", "boundMax": 1000000, "boundOneConsumesWord": true, "strictlyUnbiased": false, "nativeEquivalent": false, "cryptographic": false },
+  "budgets": { "acceptedCommands": 256, "rawWords": 4096, "depth": 32, "nodes": 250000, "utf8Bytes": 16777216, "traceAttempts": 4096, "includesEscapedSaveResult": true, "includesAllEarlierReceipts": true },
+  "sourceBoundary": { "typePool": "confirmed-static-message-data", "completionReward": "contemporary-guide-empirical-high", "chooserFiltersOrderDeduplicationRewardEligibility": "new-engine-policy", "nativeCommandCallChain": "open", "original43GroupsReduced": false, "original45SnapshotsReduced": false }
+}
