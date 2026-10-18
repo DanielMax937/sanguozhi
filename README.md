@@ -1,3 +1,13 @@
+## 当前新增：固定单城内政／商人共享账本（2026-10-18，静态）
+
+[具体规则](docs/rules/bounded-city-economy.md) · [八个API与独立CLI](docs/engine/bounded-city-economy.md) · [固定政策](data/policies/bounded-city-economy-v1.json) · [来源身份](data/sources/bounded-city-economy-v1.json) · [完整DTO schema](data/schemas/bounded-city-economy-v1.schema.json) · [合成场景](data/scenarios/bounded-city-economy-example-v1.json)
+
+`bounded-city-domestic-merchant-v1`把巡查、征兵、1–4号数量装备生产、买粮与卖粮接入同一固定城／旬的金、粮、AP、人物五维XP／功绩和行动机会账本。一个事务按给定顺序执行1–8个动作，后一步读取前一步的真实余额；任一步拒绝则全部不提交。商人所得金可供另一人物后续征兵，同人行动标记不能跨服务绕过。
+
+独立genesis与完整历史重算、幂等ID、完整预算、绑定完整state／request的连续legal分页与严格JSON文件CLI共同限定这个新profile。CLI显式create／load，无默认重置；execute仅内存提交，save只新建不覆盖，quit不保存。没有EndTurn／Advance，不导入旧独立state，不借子genesis覆盖或delta相加伪造一致性。
+
+它仍不是完整世界：时钟／任务预约／设施HP／其他人物服务／部队地图／完整TP与全局RNG未整合。商人功绩保持原值且未建模，普通TP仍未建模；有效属性、技能与两种压力事实为明确supplied边界。原43主题／45快照的native证据缺口不减少。基于PR91 `aab86f1482ce0951fcd229f8f163d5b072e87104` 的私有reducer复用；未运行产品、测试、typecheck、编译、build、示例或schema validator，静态审查不证明运行正确。
+
 ## 当前新增：固定单城季节状态 simulation（2026-10-18，静态）
 
 [完整规则](docs/rules/city-season-lifecycle.md) · [六个API](docs/engine/city-season-lifecycle.md) · [固定政策](data/catalogs/city-season-policy-v1.json) · [设施目录](data/catalogs/city-season-food-facilities-v1.json) · [来源身份](docs/sources/city-season-lifecycle.json) · [完整DTO schema](docs/sources/city-season-lifecycle.schema.json) · [未运行trace](data/scenarios/city-season-example-v1.json)

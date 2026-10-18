@@ -1,0 +1,461 @@
+{
+  "tag": "san11-bounded-city-economy-trace-v1",
+  "scenario": {
+    "schemaVersion": 1,
+    "profile": "bounded-city-domestic-merchant-v1",
+    "episodeId": "synthetic-shared-city-example",
+    "clock": {
+      "date": {
+        "year": 200,
+        "month": 1,
+        "day": 1
+      },
+      "turn": 0
+    },
+    "activeForceId": "forceA",
+    "corps": {
+      "id": "corpsA",
+      "forceId": "forceA",
+      "initialActionPoints": 60
+    },
+    "city": {
+      "id": "cityA",
+      "kind": "city",
+      "ownerForceId": "forceA",
+      "position": {
+        "q": 0,
+        "r": 0
+      },
+      "goldCapacity": 1000000000,
+      "foodCapacity": 100000,
+      "troopCapacity": 100000,
+      "moraleCap": 100,
+      "initial": {
+        "gold": 200,
+        "food": 1000,
+        "security": 80,
+        "troops": 1000,
+        "morale": 80,
+        "patrolUsedTurn": null,
+        "merchantUsedTurn": null
+      },
+      "inventory": {
+        "1": {
+          "quantity": 0,
+          "capacity": 100000
+        },
+        "2": {
+          "quantity": 0,
+          "capacity": 100000
+        },
+        "3": {
+          "quantity": 0,
+          "capacity": 100000
+        },
+        "4": {
+          "quantity": 0,
+          "capacity": 100000
+        }
+      }
+    },
+    "officers": [
+      {
+        "id": "merchantA",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "politics": 50,
+        "skillIds": [],
+        "initial": {
+          "xp": {
+            "leadership": 0,
+            "charm": 0,
+            "intelligence": 0,
+            "politics": 0,
+            "war": 0
+          },
+          "merit": 123,
+          "actedTurn": null
+        }
+      },
+      {
+        "id": "recruiterB",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "politics": 50,
+        "skillIds": [],
+        "initial": {
+          "xp": {
+            "leadership": 0,
+            "charm": 0,
+            "intelligence": 0,
+            "politics": 0,
+            "war": 0
+          },
+          "merit": 0,
+          "actedTurn": null
+        }
+      },
+      {
+        "id": "artisanC",
+        "forceId": "forceA",
+        "cityId": "cityA",
+        "available": true,
+        "leadership": 100,
+        "charm": 100,
+        "intelligence": 100,
+        "politics": 50,
+        "skillIds": [],
+        "initial": {
+          "xp": {
+            "leadership": 0,
+            "charm": 0,
+            "intelligence": 0,
+            "politics": 0,
+            "war": 0
+          },
+          "merit": 0,
+          "actedTurn": null
+        }
+      }
+    ],
+    "facilities": [
+      {
+        "id": "barracksA",
+        "cityId": "cityA",
+        "kind": "barracks",
+        "level": 1,
+        "complete": true,
+        "initialUsedTurn": null
+      },
+      {
+        "id": "forgeA",
+        "cityId": "cityA",
+        "kind": "forge",
+        "level": 1,
+        "complete": true,
+        "initialUsedTurn": null
+      },
+      {
+        "id": "stableA",
+        "cityId": "cityA",
+        "kind": "stable",
+        "level": 1,
+        "complete": true,
+        "initialUsedTurn": null
+      }
+    ],
+    "domestic": {
+      "pressureActive": false,
+      "difficulty": "normal",
+      "controller": "player",
+      "unlockedEquipmentTypes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "specialtyEquipmentTypes": []
+    },
+    "merchant": {
+      "present": true,
+      "uiTradePrice": 5,
+      "hostileForceIds": [],
+      "completeFieldUnits": true,
+      "fieldUnits": []
+    },
+    "productionCatalog": {
+      "id": "synthetic-quantity-prices-v1",
+      "version": 1,
+      "entries": {
+        "1": {
+          "basePriceWord": 100
+        },
+        "2": {
+          "basePriceWord": 100
+        },
+        "3": {
+          "basePriceWord": 100
+        },
+        "4": {
+          "basePriceWord": 100
+        }
+      }
+    },
+    "merchantCatalog": {
+      "version": "merchant-politics-observed-linear-v1",
+      "evidence": "selected-approximate-observations-not-native-exact",
+      "minPolitics": 20,
+      "maxPolitics": 100,
+      "anchorDenominator": 1000000,
+      "anchors": [
+        {
+          "politics": 20,
+          "effectMillionths": 930240
+        },
+        {
+          "politics": 50,
+          "effectMillionths": 1000000
+        },
+        {
+          "politics": 51,
+          "effectMillionths": 1002516
+        },
+        {
+          "politics": 60,
+          "effectMillionths": 1025650
+        },
+        {
+          "politics": 70,
+          "effectMillionths": 1052642
+        },
+        {
+          "politics": 80,
+          "effectMillionths": 1081090
+        },
+        {
+          "politics": 90,
+          "effectMillionths": 1111122
+        },
+        {
+          "politics": 92,
+          "effectMillionths": 1117328
+        },
+        {
+          "politics": 97,
+          "effectMillionths": 1133154
+        },
+        {
+          "politics": 98,
+          "effectMillionths": 1136374
+        },
+        {
+          "politics": 99,
+          "effectMillionths": 1139612
+        },
+        {
+          "politics": 100,
+          "effectMillionths": 1142868
+        }
+      ],
+      "betweenAnchors": "N=A_l*(h-p)+A_h*(p-l);D=1000000*(h-l)",
+      "anchorFraction": "N=A_p;D=1000000",
+      "reduction": "unreduced",
+      "outsideRange": "reject"
+    },
+    "policy": {
+      "id": "bounded-city-domestic-merchant-v1",
+      "version": 1,
+      "clock": "fixed-genesis-xun-v1",
+      "ownership": "fixed-supplied-city-corps-force-v1",
+      "ordering": "caller-action-order-no-reordering-v1",
+      "transaction": "all-or-nothing-batch-v1",
+      "legalOrdering": "genesis-facility-and-request-order-v1",
+      "legalPaging": "stateless-contiguous-prefix-full-state-bound-v1",
+      "rewardScope": "shared-xp-merit-partial-no-tp-v1",
+      "pressureBinding": "independent-supplied-domestic-helper-v1",
+      "domestic": {
+        "attributes": {
+          "id": "stable-effective-attributes-v1",
+          "version": 1,
+          "parameters": {
+            "snapshot": "command-start",
+            "xpChangesEffectiveAbility": false
+          }
+        },
+        "facilityMultiplier": {
+          "id": "guide-levels-f32-v1",
+          "version": 1,
+          "parameters": {
+            "levelBits": [
+              "3F800000",
+              "3F99999A",
+              "3FC00000"
+            ]
+          }
+        },
+        "writer": {
+          "id": "clip-and-return-actual-v1",
+          "version": 1,
+          "parameters": {
+            "overflow": "clip",
+            "returned": "actual-delta"
+          }
+        },
+        "morale": {
+          "id": "weighted-floor-presecurity-min20-v1",
+          "version": 1,
+          "parameters": {
+            "rounding": "floor",
+            "security": "before-write",
+            "minimum": 20
+          }
+        },
+        "productionAp": {
+          "id": "production-request20-effective20-v1",
+          "version": 1,
+          "parameters": {
+            "quantity": 20,
+            "piece": 20
+          }
+        },
+        "rewards": {
+          "id": "source-reward-compat-intelligence-v1",
+          "version": 1,
+          "parameters": {
+            "patrol": "leadership",
+            "recruit": "charm",
+            "quantity": "intelligence",
+            "piece": "intelligence",
+            "instantXp": 2,
+            "instantMerit": 50,
+            "completionXp": 4,
+            "completionMerit": 100,
+            "cap": 1000000000
+          }
+        },
+        "zeroYield": {
+          "id": "pay-zero-yield-instant-v1",
+          "version": 1,
+          "parameters": {
+            "zero": "pay-and-reward"
+          }
+        },
+        "presentation": {
+          "id": "no-presentation-rng-no-tp-v1",
+          "version": 1,
+          "parameters": {
+            "rngDraws": 0,
+            "techniquePoints": "not-modeled"
+          }
+        }
+      },
+      "merchant": {
+        "ownership": {
+          "id": "merchant-fixed-owned-city-v1",
+          "cityKind": "city",
+          "activeOwnerCorpsMustMatch": true,
+          "ownershipChanges": false
+        },
+        "eligibility": {
+          "id": "merchant-once-city-actor-turn-v1",
+          "cityTradesPerTurn": 1,
+          "actorsPerTrade": 1,
+          "actorMustBeAvailable": true,
+          "actorMustMatchCityAndForce": true,
+          "actionPointsCost": 20,
+          "fixedGoldFee": 0,
+          "minFoodAmount": 1,
+          "maxFoodAmount": 1000000000
+        },
+        "hostility": {
+          "id": "supplied-axial-distance-v1",
+          "completeFieldUnitsRequired": true,
+          "hostileForceIdsExplicit": true,
+          "differentForceImpliesHostile": false,
+          "distance": "max(abs(dq),abs(dr),abs(dq+dr))",
+          "blockingDistanceInclusive": 2,
+          "coordinateMin": -1000000,
+          "coordinateMax": 1000000,
+          "nativeGeometryRecovered": false
+        },
+        "pricing": {
+          "id": "merchant-ui-rational-rounding-v1",
+          "priceScale": "ui-food-per-gold",
+          "uiTradePrices": [
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "rawTradePriceAccepted": false,
+          "requestUnit": "food",
+          "buyGold": "ceil(Q*D/(uiPrice*N))",
+          "sellGold": "floor(Q*N*4/(uiPrice*D*5))",
+          "buyFactor": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "sellFactor": {
+            "numerator": 4,
+            "denominator": 5
+          },
+          "interpolation": "exact-unreduced-rational-v1",
+          "goldFraction": "unreduced-nonnegative-decimal-strings-v1",
+          "nativeRoundingRecovered": false
+        },
+        "zeroSale": {
+          "id": "reject-zero-value-sale-v1",
+          "minimumGoldCredit": 1
+        },
+        "capacity": {
+          "id": "merchant-full-fill-cap-reject-v1",
+          "maxBalanceAndCapacity": 1000000000,
+          "partialFill": false,
+          "discarded": 0,
+          "failure": "atomic-reject"
+        },
+        "rewards": {
+          "id": "merchant-politics-xp5-no-growth-v1",
+          "politicsXpRequested": 5,
+          "politicsXpCap": 1000000000,
+          "automaticPoliticsGrowth": false,
+          "meritDelta": 0,
+          "techniquePointsDelta": 0,
+          "loyaltyDelta": 0,
+          "meritApplication": "not-integrated-profile-zero",
+          "nativeMeritRewardRecovered": false
+        }
+      },
+      "budgets": {
+        "acceptedCommands": 128,
+        "actionsPerCommand": 8,
+        "traceAttempts": 512,
+        "legalCandidates": 128,
+        "legalPageSize": 4,
+        "maxUtf8Bytes": 8388608,
+        "maxNodes": 250000,
+        "maxDepth": 48,
+        "maxArray": 4096,
+        "maxObjectKeys": 128
+      }
+    }
+  },
+  "attempts": [
+    {
+      "envelope": {
+        "id": "example-sell-then-recruit",
+        "expectedRevision": 0,
+        "command": {
+          "type": "ExecuteCityActions",
+          "actions": [
+            {
+              "type": "SellFood",
+              "cityId": "cityA",
+              "officerId": "merchantA",
+              "foodAmount": 1000
+            },
+            {
+              "type": "Recruit",
+              "cityId": "cityA",
+              "officerIds": [
+                "recruiterB"
+              ],
+              "facilityId": "barracksA"
+            }
+          ]
+        }
+      },
+      "expected": null
+    }
+  ],
+  "expectedFinalState": null
+}

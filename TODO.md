@@ -1,3 +1,9 @@
+## 2026-10-18 固定单城共享账本纵切（静态）
+
+新增[规则](docs/rules/bounded-city-economy.md)与[API／CLI](docs/engine/bounded-city-economy.md)：单genesis、单ledger、五类即时动作、1–8步原子批次、全历史重算和无状态连续legal分页。仅这一固定城／固定旬支持域合并普通内政与商人的余额和人物进度，不能标整个O15或全游戏完成。
+
+继续未覆盖：跨旬scheduler／任务预约、共用设施HP、跨服务人物属性与成长、部队／地图、完整TP／奖励、全局RNG、原始历史剧本及完整世界保存／AI。旧服务仍独立；原43主题与45快照保持历史分母和证据边界。所有新实现和示例仅静态，未运行测试、编译、构建或任何产品验证。下方各旧批次按其时点保留，旧测试结果不覆盖本批。
+
 ## 2026-10-18 固定单城季节：有限simulation静态覆盖
 
 - [x] 新增[完整规则](docs/rules/city-season-lifecycle.md)、[六API](docs/engine/city-season-lifecycle.md)、policy／设施catalog／source／schema及未运行trace；公共index导出六函数、三常量和11类型

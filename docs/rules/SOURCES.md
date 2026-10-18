@@ -1,3 +1,11 @@
+## 2026-10-18：共享单城即时动作来源边界
+
+[来源身份与固定文件](../../data/sources/bounded-city-economy-v1.json) · [固定政策](../../data/policies/bounded-city-economy-v1.json)
+
+[具体规则](bounded-city-economy.md)复用既有巡查／征兵／生产纯核和商人有理数报价，不重新宣称这些核为新恢复成果。集成基线PR91 `aab86f1482ce0951fcd229f8f163d5b072e87104`，私有reducer抽取仅静态核对；源公式、caller capture、writer和旧policy的证据版本仍以各原专题为准。
+
+唯一ledger、顺序原子批次、全历史比较、完整state绑定分页、严格CLI与保存预算属于新工程政策。固定supplied属性／技能／敌情／domestic压力不代替原getter或完整世界。普通TP、商人功绩、世界clock／jobs／RNG等未恢复部分继续公开列明；原43主题／45快照不清空。未运行测试或产品验证。
+
 ## 2026-10-18 单城季节：来源复用与simulation边界
 
 [规则](city-season-lifecycle.md) · [API](../engine/city-season-lifecycle.md) · [完整来源manifest](../sources/city-season-lifecycle.json) · [新政策](../../data/catalogs/city-season-policy-v1.json) · [收窄设施目录](../../data/catalogs/city-season-food-facilities-v1.json)
