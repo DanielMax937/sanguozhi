@@ -130,18 +130,15 @@ create／preview／execute／save／load／replay使用同一确定性规则。p
 
 每次新接受command恰有一条历史且revision+1；duplicate无新历史；rejected不增revision、不耗RNG、不改AP、行动、余额、名录或奖励。任何后期预算／schema／核拒绝也全部回滚。receipt保留候选ID／排除理由／核收据／差额，不逐条复制整个genesis。与给定genesis／政策不一致的seed、候选、cap、排序、被选项、receipt或快照变化由完整重建比对拒绝。这是自洽性检查，不是密码学真实性认证；若协调改写整个genesis与相容历史，得到的是另一份所供场景，不能声称可检测任意伪造。
 
-## 10. O13-B：明确尚未实现的独立有限后续
+<a id="10-o13-b明确尚未实现的独立有限后续"></a>
 
-O13-A不包含、也不关闭O13-B `standalone-adjacent-site-discovery-v1`。后者已限定为一个独立到达事件服务，不是泛化“地图资料不足”或新的城市随机奖品：
+## 10. O13-B：独立相邻发现profile的当前路由
 
-- 固定势力与至多256名普通roster、1..16个固定编成部队、0..64个实际放置的ruin／temple、至多4096个supplied普通可站立六角格、最多360条预供到达事实。每部队1..3人、不重复编组；leader是成员，resolvedCharm为显式部队能力；初始已发现庙须有连续来源序号。到达事实必须连续且相邻、每部队每旬至多一条，并不认证原生移动合法性、移动力或粮耗
-- `ProcessNextArrival` 消费下一到达、更新观察位置；内部以轴坐标d=max(|dq|,|dr|,|dq+dr|)检查d=1、leader功绩≥10000、部队resolvedCharm≥80、兵≥1。门槛不符或没有候选时仍消费到达，但不抽随机或奖励；有合格候选才按ID选择并以新阈值50/100抽取。抽样失败也消费到达和实际selector／roll，只是不发奖励；50不是原概率
-- 成功设置唯一pending，并使发现部队每名成员魅力XP请求+10、cap1e9。事件账本无AP／金／TP／功绩差额，这些零不代表原生移动全部成本为零
-- `ResolveRuin` 用冻结的发现月份向同势力普通roster中所选一人请求+1：1骑兵、2统率、3弩兵、4武力、5兵器、6魅力、7水军、8智力、9枪兵、10政治、11戟兵、12魅力。素质cap255、适性C/B/A/S cap3均为明示writer；不是普通培养XP，不动XP或+30额度。cap全挡仍消耗奖励
-- `ResolveTemple` 使用场景完整有限guide技能目录：不重叠、各非空standard／highest池，总计≤256。前三庙仅standard，第四座起并集按新独立RNG无放回最多3个offer；不是保证最高级。offer在发现时冻结，目标技能被替换，同技能relearn也消耗奖励。具体原技能池与概率仍未知
-- pending未解决时拒绝下个到达；同site不能重领，同arrival不能重roll。独立seed／状态／保存／重放，不消费城市Search随机流；明确采用同一4096历史、16MiB／depth24、原子与幂等要求
+O13-A的命令、schema和场景只接受固定城市Search；O13-B现已补为[独立静态相邻遗迹／庙profile](adjacent-site-discovery-lifecycle.md)，完整API见[相邻发现工程文档](../engine/adjacent-site-discovery-lifecycle.md)。B自行消费有限到达、检查相邻及部队门槛、抽取发现、冻结月份／庙offer，并实际写入XP／素质／适性／技能；A不将其接入城市Search类别链或共享RNG／账本。
 
-以上是尚未交付的有限后续合同，不是现有API或可执行profile；本schema和场景不接受这些命令。遗迹／庙全部原坐标、初始放置概率、发现概率、原技能池及writer证据继续开放。
+A交付时的sourceBoundary、source manifest及其B未实现标记保留为当时的冻结身份；它们描述A自身交付时点的范围，不代表当前仓库没有B，也不因B存在而升级A的原作证据。旧锚点保留仅用于历史导航。B新政策独立保存和重建，未运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验。
+
+遗迹／庙全部原坐标、初始放置抽样、原发现概率、原技能池和native writer继续E；B不是原地图移动、全局事件系统或原世界集成。完整月份表、门槛、cap和技能抽样详见新B规则，不再把它列为当前未交付的有限功能。
 
 ## 11. 未关闭项与历史计数
 
@@ -151,7 +148,7 @@ E继续保留：三个核的stock／EXE／精确patch与跨版本身份；原人
 
 本服务不实现P078及其依赖、native ownership或人员势力迁移、capture、force灭亡、ruler transfer／继承、native return／mission／相连finalizers、当场登用或舌战后原生交接、宝物native归属writer。旧核与旧验证历史保持原状。独立宝物发现登记并不自动成为native归属事务。
 
-原43证据主题不减，45条历史快照不重新编号、不新增分母。O13-A只覆盖ordinal16的Search AP子项与ordinal30的探索有限服务子项；ordinal30外交仍归O08，ordinal37地图、40原剧本、41–43静态corpus证据债均保留，ordinal24其他TP事件不由Search关闭。历史corpus的executionEnabled=false不改。不得称完整O13、全探索原作等价或原43清零。
+原43证据主题不减，45条历史快照不重新编号、不新增分母。O13-A只覆盖ordinal16的Search AP子项与ordinal30的探索有限服务子项；ordinal30外交仍归O08，ordinal37地图、40原剧本、41–43静态corpus证据债均保留，ordinal24其他TP事件不由Search关闭。历史corpus的executionEnabled=false不改。A与B的有限静态软件覆盖不等于完整原探索；不得称全探索原作等价或原43清零。
 
 ## 12. 静态检查义务（均未执行）
 

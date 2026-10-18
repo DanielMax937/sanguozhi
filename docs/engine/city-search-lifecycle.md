@@ -2,7 +2,7 @@
 
 profile：`standalone-city-search-v1`；scope：`one-fixed-city-discovery-only`。实现位于[city-search-lifecycle.ts](../../packages/engine/src/city-search-lifecycle.ts)，通过engine index导出。见[完整规则](../rules/city-search-lifecycle.md)、[政策](../../data/catalogs/city-search-policy-v1.json)、[来源](../sources/city-search-lifecycle.json)、[JSON interchange schema](../sources/city-search-lifecycle.schema.json)与[未运行场景](../../data/scenarios/city-search-example-v1.json)。
 
-这是内部过滤／选人／抽样并实际更新独立账本的O13-A服务，不是接受caller最终结果的wrapper。人才只记已知名录，宝物只记发现登记，均不改变原生归属。O13-B相邻遗迹／庙是明确尚未实现的独立有限后续，详见规则第10节。
+这是内部过滤／选人／抽样并实际更新独立账本的O13-A服务，不是接受caller最终结果的wrapper。人才只记已知名录，宝物只记发现登记，均不改变原生归属。O13-B相邻遗迹／庙另有[独立静态profile](adjacent-site-discovery-lifecycle.md)，详见规则第10节的当前路由；A的命令和账本不变。
 
 本批只有静态实现和文档；没有执行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验。本文API形状及纸面行为说明不是执行验证结果。
 
@@ -129,7 +129,7 @@ outcome只有talent-found、treasure-found、gold-found、nothing、turn-advance
 - Credit：`{before, requested, actual, discarded, after}`。actual=min(requested,cap−before)，discarded=requested−actual。功绩／XP cap1e9，TP cap10000，AP cap255；gold不使用此writer
 - Draw：`{drawIndex,label,bound,beforeState,afterState,value}`。label限定talent-selector／talent-roll／treasure-selector／treasure-roll／gold-roll；每Search最多5条，advance为0条。所有RNG计算以精确BigInt整数进行，seed0合法；乘高映射不宣称严格无偏或原作RNG
 
-旧核receipt的evidence原样保留，包括历史listedBytesVerified=true；它不意味着本批重新运行字节检查。新receipt的sourceBoundary另行声明新政策、调用点请求、攻略观察、stock未认证、原writer／ownership未接入及O13-B未实现。
+旧核receipt的evidence原样保留，包括历史listedBytesVerified=true；它不意味着本批重新运行字节检查。新receipt的sourceBoundary另行声明新政策、调用点请求、攻略观察、stock未认证及原writer／ownership未接入。其中O13-B未实现标记保持A交付时点的冻结身份，不因后来独立B的新增而改写；当前B能力与来源见其独立文档，不能将此旧标记误读为当前仓库状态。
 
 ## 6. State与完整保存重建
 

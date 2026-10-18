@@ -1,8 +1,16 @@
+## 相邻遗迹／庙发现完整规则（O13-B，静态新增）
+
+更新：2026-10-18 UTC。
+
+[完整规则](adjacent-site-discovery-lifecycle.md) · [API](../engine/adjacent-site-discovery-lifecycle.md) · [完整政策](../../data/catalogs/adjacent-site-discovery-policy-v1.json) · [来源](../sources/adjacent-site-discovery-lifecycle.json) · [schema](../sources/adjacent-site-discovery-lifecycle.schema.json)。B1固定到达／编成、B2相邻／10000与80门槛／新随机、B3完整12个月奖励、B4第3／4庙技能池／冻结offer与真实替换、B5 pending／幂等／独立保存均明确。发现全体成员XP10，cap全挡或同技能重学仍消费奖励。
+
+来源是guide-observation与supplied事实；50阈值、LCG、cap、技能池和生命周期均明示synthetic。原概率／坐标／原池／writer仍E，人员native事务等X保留，原43／45不减。O13-A与B分开，O14城市事件及O15集成不由此关闭。全部仅静态撰写，未执行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验。
+
 ## 2026-10-17：固定单城探索与发现（O13-A）
 
 [完整具体规则](city-search-lifecycle.md) · [API](../engine/city-search-lifecycle.md) · [policy](../../data/catalogs/city-search-policy-v1.json) · [source](../sources/city-search-lifecycle.json) · [schema](../sources/city-search-lifecycle.schema.json)。A1–A7覆盖固定域／费用、原始候选过滤、选人／新LCG、人才原值205、宝物参数新映射、稳定二读与金不足30不发、分支奖励、独立旬序及原子幂等完整重建。PR53／54／55三个有限核已发布，旧候选措辞保留其历史日期含义。
 
-仅独立发现登记，不登用或写native ownership；listing数值核、请求段、攻略与新政策分层，原stock／RNG／writer仍E。O13-B移动相邻遗迹／庙尚未实现，有限后续见新规则第10节；O13整体及原43／45不关闭。只完成静态代码／规则／数据，未运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验，历史通过结果不验证本批。
+仅独立发现登记，不登用或写native ownership；listing数值核、请求段、攻略与新政策分层，原stock／RNG／writer仍E。O13-B移动相邻遗迹／庙已补[独立静态profile](adjacent-site-discovery-lifecycle.md)，不进入A命令集；O13整体及原43／45不关闭。只完成静态代码／规则／数据，未运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验，历史通过结果不验证本批。
 
 ## 固定双城普通流言标量规则（O12-B）
 

@@ -36,14 +36,17 @@ PS2第100页正文另见[独立64项资料](ps2-historical-event-source-data.md)
 
 ## 3. 遗迹 / 庙
 
-`[PC][empirical-high]`
+`[PC-oriented guide-observation][native-exactness-unverified]`
 
-- 候选点中开局随机配置。
+以下为公开攻略记载的门槛、配置和奖励，不是原函数、确切补丁或stock认证。
+
+- 攻略记载候选点中开局随机配置；原始抽点算法与权重未恢复。
 - PC 常见配置：遗迹 1、庙 6。
 - PS2 无印：遗迹 4、庙 4。
 - CS/PK 报告：遗迹 6、庙 6。
 - PC 发现条件：主将功绩 ≥10000、部队魅力 ≥80，并移动到候选点**相邻格**。
-- 主机版条件更宽松，未完全满足也可能发现。
+- 主机版条件更宽松，未完全满足也可能发现；不能把这些差异混为PC默认规则。
+- [FAQ](https://w.atwiki.jp/sangokushi11/pages/8.html)记载首次经过可能未发现、需再次靠近；相邻与门槛不构成原作必成证明。
 
 来源：
 - https://w.atwiki.jp/sangokushi11/pages/149.html
@@ -79,7 +82,9 @@ PS2第100页正文另见[独立64项资料](ps2-historical-event-source-data.md)
 
 ### 尚缺
 
-候选点**完整坐标清单**仍需要结构化导入；规则本身已不再 provisional。
+门槛、月份奖励和第四庙起最高级可出现已有上述guide观察；它们不使整个遗迹／庙原作机制成为已认证规则。仍缺候选点**完整坐标清单**、开局放置抽样、原发现概率与RNG、具体技能池／分组及原月份／素质／适性／XP／技能writer与cap，另缺stock／确切patch与跨版本等价。
+
+[O13-B独立相邻发现服务](adjacent-site-discovery-lifecycle.md)已补有限预供到达、内部相邻／门槛、新LCG和50阈值、真实发现／XP、冻结月份／技能offer与奖励写入、pending及保存重建。50、软件cap、实验技能池和writer都是明确的新政策，不是上述未知原作机制的恢复；不是全地图移动或普通城市Search随机奖品。产品、示例、测试、typecheck、编译、build、checker、诊断及schema校验均未执行，原43／45及E／X不减；历史事件与corpus的静态／executionEnabled边界不变。
 
 ## 4. 评定
 

@@ -1,8 +1,16 @@
+## 相邻遗迹／庙独立事件（O13-B）
+
+更新：2026-10-18 UTC。
+
+[create/preview/execute/save/load/replay V1 API](adjacent-site-discovery-lifecycle.md) · [完整B1–B5规则](../rules/adjacent-site-discovery-lifecycle.md) · [policy](../../data/catalogs/adjacent-site-discovery-policy-v1.json) · [source](../sources/adjacent-site-discovery-lifecycle.json) · [schema](../sources/adjacent-site-discovery-lifecycle.schema.json) · [未运行场景](../../data/scenarios/adjacent-site-discovery-example-v1.json)。冻结到达自行过滤／资格／独立LCG抽样，pending冻结12个月奖励或庙offer，实际写XP／素质／适性／技能；完整genesis、收据与状态重建、4096历史／16MiB预算。仅三命令，无inspect或全局移动适配器。
+
+攻略、供应事实与新政策分层；原概率／坐标／技能池／writer未恢复，原43／45及E／X不变。静态撰写，产品、示例、测试、typecheck、编译、build、checker、诊断和schema校验均未执行。
+
 ## 固定单城探索与发现（O13-A）
 
 [create/preview/execute/save/load/replay V1 API](city-search-lifecycle.md) · [完整规则](../rules/city-search-lifecycle.md) · [policy](../../data/catalogs/city-search-policy-v1.json) · [source](../sources/city-search-lifecycle.json) · [schema](../sources/city-search-lifecycle.schema.json) · [未运行场景](../../data/scenarios/city-search-example-v1.json)。复用PR53／54／55已发布数值核；内部过滤／选择／LCG抽样与独立发现、金／AP／行动／奖励账本，保留205和条件稳定二读，完整保存重建、4096历史／16MiB全返回及全部旧幂等receipt容量。仅AP20独立旬推进，无inspect或原世界适配器。
 
-新policy不等于原概率／writer／stock认证；O13-B遗迹／庙明确尚未实现，原43／45不减。没有运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验；历史核验证不覆盖本批。
+新policy不等于原概率／writer／stock认证；O13-B遗迹／庙另见[独立静态profile](adjacent-site-discovery-lifecycle.md)，不进入A命令集，原43／45不减。没有运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验；历史核验证不覆盖本批。
 
 ## 固定双城普通流言标量（O12-B）
 

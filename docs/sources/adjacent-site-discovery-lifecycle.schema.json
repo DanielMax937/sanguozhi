@@ -1,0 +1,2129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:adjacent-site-discovery-lifecycle:v1",
+  "title": "Standalone supplied-arrival ruin and temple discovery v1 JSON interchange structures",
+  "description": "Closed scenario, envelope, receipt, state and trace, plus API-result definitions. Authored statically; no product, example, test, compiler, typecheck or schema validation was run. Shape alone proves neither native fidelity nor history reachability. Runtime checks all raw references, exact registered policy, complete frozen arrival sequence, derived snapshots/receipts/RNG and canonical saved genesis. Shared hard budgets are 16MiB UTF-8 per full input/output, depth24, nodes1048576, arrays4096 and object keys128; the escaped SaveResult and all old-ID results are included. These maxima are not promised jointly attainable, efficient, or benchmarked. Only non-Proxy plain/null-prototype own-data JSON DTOs are supported. Runtime reflection may invoke Proxy traps; hostile Proxies or runtime pollution are not universally detectable or isolated. Accessors, symbols, inherited data, sparse arrays, unsafe/negative-zero/nonfinite numbers and duplicate decoded JSON object keys are rejected in the supported input domain. Replay validates consistency against the supplied genesis; it is not a signature or independent authentication of a coordinated rewrite. Source/guide observations and synthetic policies remain separate, provisional layers. No native skill98 table, world-state, old corpus execution flag or O13-A ledger is changed.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/scenario"
+    },
+    {
+      "$ref": "#/$defs/envelope"
+    },
+    {
+      "$ref": "#/$defs/receipt"
+    },
+    {
+      "$ref": "#/$defs/state"
+    },
+    {
+      "$ref": "#/$defs/trace"
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+    },
+    "skillId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 64,
+      "pattern": "^guide:[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+    },
+    "date": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "year",
+        "month",
+        "day"
+      ],
+      "properties": {
+        "year": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "month": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "day": {
+          "enum": [
+            1,
+            11,
+            21
+          ]
+        }
+      }
+    },
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "q",
+        "r"
+      ],
+      "properties": {
+        "q": {
+          "type": "integer",
+          "minimum": -1000000,
+          "maximum": 1000000
+        },
+        "r": {
+          "type": "integer",
+          "minimum": -1000000,
+          "maximum": 1000000
+        }
+      }
+    },
+    "talents": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "leadership",
+        "strength",
+        "intelligence",
+        "politics",
+        "charm"
+      ],
+      "properties": {
+        "leadership": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "strength": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "intelligence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "politics": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "charm": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    "aptitudes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spear",
+        "halberd",
+        "crossbow",
+        "cavalry",
+        "siege",
+        "navy"
+      ],
+      "properties": {
+        "spear": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "halberd": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "crossbow": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "cavalry": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "siege": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "navy": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "const": {
+        "schemaVersion": 1,
+        "id": "adjacent-site-discovery-policy-v1",
+        "profile": "standalone-adjacent-site-discovery-v1",
+        "evidence": "synthetic-replaceable-policy",
+        "sourceIdentity": "guide-observations-not-authenticated-native-code",
+        "provisional": true,
+        "limits": {
+          "actors": 256,
+          "units": 16,
+          "membersPerUnit": 3,
+          "sites": 64,
+          "groundCells": 4096,
+          "arrivals": 360,
+          "skills": 256,
+          "acceptedCommands": 4096,
+          "replayAttempts": 4096,
+          "serializedBytes": 16777216,
+          "depth": 24,
+          "nodes": 1048576
+        },
+        "geometry": {
+          "id": "adjacent-axial-distance-one-v1",
+          "coordinateMagnitude": 1000000,
+          "requiredDistance": 1
+        },
+        "eligibility": {
+          "id": "adjacent-pc-guide-threshold-v1",
+          "leaderMeritMinimum": 10000,
+          "resolvedUnitCharmMinimum": 80,
+          "troopsMinimum": 1,
+          "troopsMaximum": 1000000
+        },
+        "selection": {
+          "id": "adjacent-discovery-half-v1",
+          "sort": "ascii-code-unit-ascending",
+          "selectorForSingleton": false,
+          "rollBound": 100,
+          "successBelow": 50,
+          "rollAlwaysForNonemptyEligiblePool": true
+        },
+        "rng": {
+          "kind": "adjacent-lcg32-multiply-high-v1",
+          "multiplier": 1664525,
+          "increment": 1013904223,
+          "modulus": 4294967296,
+          "maxDrawsPerArrival": 5,
+          "originalRandomStream": false,
+          "strictlyUnbiased": false
+        },
+        "rewards": {
+          "discoveryCharmXpPerMember": 10,
+          "charmXpCap": 1000000000,
+          "meritMaximum": 1000000000,
+          "actionPointsDelta": 0,
+          "goldDelta": 0,
+          "techniquePointsDelta": 0,
+          "meritDelta": 0
+        },
+        "ruin": {
+          "id": "ruin-raw-talent-aptitude-saturating-v1",
+          "requestedIncrement": 1,
+          "talentCap": 255,
+          "aptitudeCap": 3,
+          "aptitudeEncoding": [
+            "C",
+            "B",
+            "A",
+            "S"
+          ],
+          "monthRewards": [
+            {
+              "month": 1,
+              "kind": "aptitude",
+              "field": "cavalry"
+            },
+            {
+              "month": 2,
+              "kind": "talent",
+              "field": "leadership"
+            },
+            {
+              "month": 3,
+              "kind": "aptitude",
+              "field": "crossbow"
+            },
+            {
+              "month": 4,
+              "kind": "talent",
+              "field": "strength"
+            },
+            {
+              "month": 5,
+              "kind": "aptitude",
+              "field": "siege"
+            },
+            {
+              "month": 6,
+              "kind": "talent",
+              "field": "charm"
+            },
+            {
+              "month": 7,
+              "kind": "aptitude",
+              "field": "navy"
+            },
+            {
+              "month": 8,
+              "kind": "talent",
+              "field": "intelligence"
+            },
+            {
+              "month": 9,
+              "kind": "aptitude",
+              "field": "spear"
+            },
+            {
+              "month": 10,
+              "kind": "talent",
+              "field": "politics"
+            },
+            {
+              "month": 11,
+              "kind": "aptitude",
+              "field": "halberd"
+            },
+            {
+              "month": 12,
+              "kind": "talent",
+              "field": "charm"
+            }
+          ],
+          "changesTrainingXpOrAllowance": false,
+          "recomputesResolvedAbilities": false,
+          "consumeAtCap": true
+        },
+        "temple": {
+          "id": "temple-supplied-guide-offer-v1",
+          "namespace": "supplied-guide-v1",
+          "highestPoolFromOrdinal": 4,
+          "maximumOffers": 3,
+          "withoutReplacement": true,
+          "freezeOfferAtDiscovery": true,
+          "allowRelearnSameSkill": true,
+          "highestGuaranteed": false
+        },
+        "lifecycle": {
+          "id": "frozen-arrival-pending-resolution-v1",
+          "pendingBlocksArrival": true,
+          "targetScope": "fixed-own-ordinary-roster",
+          "emptyOrIneligibleArrivalConsumed": true,
+          "sourceArrivalProvesNativeMovement": false,
+          "fullGenesisReconstruction": true,
+          "reserveAllOldReceiptResults": true,
+          "escapedSaveResultBudgeted": true
+        }
+      }
+    },
+    "sourceBoundary": {
+      "type": "object",
+      "const": {
+        "serviceEvidence": "synthetic-replaceable-policy",
+        "eligibilityAndMonthTableEvidence": "guide-observation",
+        "guideCatalogIdentity": "supplied-reference-not-authenticated-native-table",
+        "provisional": true,
+        "originalDiscoveryProbabilityRecovered": false,
+        "originalCoordinatesRecovered": false,
+        "originalSkillPoolsRecovered": false,
+        "originalWritersCertified": false,
+        "stockOrCrossVersionCertified": false,
+        "sourceArrivalProvesNativeMovement": false,
+        "originalRandomStreamEquivalent": false,
+        "strictlyUnbiased": false,
+        "ownershipFrozen": true,
+        "resolvedAbilitiesRecomputed": false,
+        "trainingXpAndAllowanceChanged": false,
+        "citySearchLedgerShared": false,
+        "oldCorpusExecutionEnabledChanged": false,
+        "original43GroupsReduced": false,
+        "original45SnapshotReduced": false
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "forceId",
+        "ordinary",
+        "merit",
+        "charmXp",
+        "talents",
+        "aptitudes",
+        "skillRef"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "forceId": {
+          "$ref": "#/$defs/id"
+        },
+        "ordinary": {
+          "const": true
+        },
+        "merit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "charmXp": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "talents": {
+          "$ref": "#/$defs/talents"
+        },
+        "aptitudes": {
+          "$ref": "#/$defs/aptitudes"
+        },
+        "skillRef": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/skillId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "forceId",
+        "memberIds",
+        "leaderId",
+        "resolvedCharmU8",
+        "troops",
+        "position"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "forceId": {
+          "$ref": "#/$defs/id"
+        },
+        "memberIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "leaderId": {
+          "$ref": "#/$defs/id"
+        },
+        "resolvedCharmU8": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "troops": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        }
+      }
+    },
+    "initialSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceId",
+        "templeOrdinal"
+      ],
+      "properties": {
+        "sourceId": {
+          "$ref": "#/$defs/id"
+        },
+        "templeOrdinal": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 64
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "position",
+        "discovered",
+        "resolved",
+        "initialSource"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "ruin",
+            "temple"
+          ]
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "discovered": {
+          "type": "boolean"
+        },
+        "resolved": {
+          "type": "boolean"
+        },
+        "initialSource": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/initialSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "description": "Initial states are false/false with null source or true/true with source. Initial temple ordinals must be unique and exactly 1..N; ruins have null ordinal. Runtime checks identities and placement."
+    },
+    "arrival": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "arrivalId",
+        "unitId",
+        "from",
+        "to",
+        "date"
+      ],
+      "properties": {
+        "arrivalId": {
+          "$ref": "#/$defs/id"
+        },
+        "unitId": {
+          "$ref": "#/$defs/id"
+        },
+        "from": {
+          "$ref": "#/$defs/position"
+        },
+        "to": {
+          "$ref": "#/$defs/position"
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        }
+      }
+    },
+    "guideCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "namespace",
+        "sourceIdentity",
+        "skills",
+        "standardPool",
+        "highestPool"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "version": {
+          "const": 1
+        },
+        "namespace": {
+          "const": "supplied-guide-v1"
+        },
+        "sourceIdentity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "reference"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "supplied-guide-reference",
+                "synthetic-example"
+              ]
+            },
+            "reference": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048,
+              "pattern": "\\S"
+            }
+          }
+        },
+        "skills": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 256,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/skillId"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "\\S"
+              }
+            }
+          }
+        },
+        "standardPool": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/skillId"
+          },
+          "uniqueItems": true
+        },
+        "highestPool": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/skillId"
+          },
+          "uniqueItems": true
+        }
+      },
+      "description": "Complete supplied catalog for this scenario, not the native 98 table. Pools are nonempty, disjoint, total at most 256 and refer only to listed skills. Actor skillRef may also reference a catalog skill outside both offer pools. Source references are recorded, not authenticated."
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "profile",
+        "scope",
+        "date",
+        "activeForceId",
+        "actors",
+        "units",
+        "sites",
+        "groundCells",
+        "arrivals",
+        "guideCatalog",
+        "rng",
+        "policy"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "standalone-adjacent-site-discovery-v1"
+        },
+        "scope": {
+          "const": "one-fixed-force-frozen-arrival-events"
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "activeForceId": {
+          "$ref": "#/$defs/id"
+        },
+        "actors": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/actor"
+          }
+        },
+        "units": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/unit"
+          }
+        },
+        "sites": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/site"
+          }
+        },
+        "groundCells": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4096,
+          "items": {
+            "$ref": "#/$defs/position"
+          },
+          "uniqueItems": true
+        },
+        "arrivals": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 360,
+          "items": {
+            "$ref": "#/$defs/arrival"
+          }
+        },
+        "guideCatalog": {
+          "$ref": "#/$defs/guideCatalog"
+        },
+        "rng": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "seed"
+          ],
+          "properties": {
+            "kind": {
+              "const": "adjacent-lcg32-multiply-high-v1"
+            },
+            "seed": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            }
+          }
+        },
+        "policy": {
+          "$ref": "#/$defs/policy"
+        }
+      },
+      "description": "All raw records are validated before use. Same force/ordinary roster, no member in two units; sites outside ground. Full ordered arrival facts must chain from each initial unit position, have axial distance one, stay on supplied ground, never reverse global dates, and occur at most once per unit per ten-day period. This does not validate original movement legality or costs. Collections canonicalize by ID or q/r; arrival order is preserved."
+    },
+    "command": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "const": "ProcessNextArrival"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "siteId",
+            "targetId"
+          ],
+          "properties": {
+            "type": {
+              "const": "ResolveRuin"
+            },
+            "siteId": {
+              "$ref": "#/$defs/id"
+            },
+            "targetId": {
+              "$ref": "#/$defs/id"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "siteId",
+            "targetId",
+            "skillId"
+          ],
+          "properties": {
+            "type": {
+              "const": "ResolveTemple"
+            },
+            "siteId": {
+              "$ref": "#/$defs/id"
+            },
+            "targetId": {
+              "$ref": "#/$defs/id"
+            },
+            "skillId": {
+              "$ref": "#/$defs/skillId"
+            }
+          }
+        }
+      ]
+    },
+    "envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "expectedRevision",
+        "command"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "command": {
+          "$ref": "#/$defs/command"
+        }
+      }
+    },
+    "actorState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "charmXp",
+        "talents",
+        "aptitudes",
+        "skillRef"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "charmXp": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "talents": {
+          "$ref": "#/$defs/talents"
+        },
+        "aptitudes": {
+          "$ref": "#/$defs/aptitudes"
+        },
+        "skillRef": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/skillId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "discovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "siteId",
+        "kind",
+        "origin",
+        "sourceId",
+        "commandId",
+        "arrivalId",
+        "unitId",
+        "date",
+        "templeOrdinal"
+      ],
+      "properties": {
+        "siteId": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "ruin",
+            "temple"
+          ]
+        },
+        "origin": {
+          "enum": [
+            "supplied-initial",
+            "arrival"
+          ]
+        },
+        "sourceId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "commandId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "arrivalId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unitId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "date": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/date"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "templeOrdinal": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 64
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "description": "Supplied initial records carry only their source identity and optional temple ordinal; command, arrival, unit and date are null. Runtime discovery records carry command, arrival, unit and date, with null sourceId. The temple ordinal is derived, never a free counter."
+    },
+    "siteState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "discovered",
+        "resolved",
+        "discovery"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "discovered": {
+          "type": "boolean"
+        },
+        "resolved": {
+          "type": "boolean"
+        },
+        "discovery": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/discovery"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "ruinReward": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "field"
+          ],
+          "properties": {
+            "kind": {
+              "const": "talent"
+            },
+            "field": {
+              "enum": [
+                "leadership",
+                "strength",
+                "intelligence",
+                "politics",
+                "charm"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "field"
+          ],
+          "properties": {
+            "kind": {
+              "const": "aptitude"
+            },
+            "field": {
+              "enum": [
+                "spear",
+                "halberd",
+                "crossbow",
+                "cavalry",
+                "siege",
+                "navy"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "pending": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "siteId",
+            "commandId",
+            "arrivalId",
+            "unitId",
+            "date",
+            "kind",
+            "month",
+            "reward"
+          ],
+          "properties": {
+            "siteId": {
+              "$ref": "#/$defs/id"
+            },
+            "commandId": {
+              "$ref": "#/$defs/id"
+            },
+            "arrivalId": {
+              "$ref": "#/$defs/id"
+            },
+            "unitId": {
+              "$ref": "#/$defs/id"
+            },
+            "date": {
+              "$ref": "#/$defs/date"
+            },
+            "kind": {
+              "const": "ruin"
+            },
+            "month": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 12
+            },
+            "reward": {
+              "$ref": "#/$defs/ruinReward"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "siteId",
+            "commandId",
+            "arrivalId",
+            "unitId",
+            "date",
+            "kind",
+            "templeOrdinal",
+            "offerSkillIds"
+          ],
+          "properties": {
+            "siteId": {
+              "$ref": "#/$defs/id"
+            },
+            "commandId": {
+              "$ref": "#/$defs/id"
+            },
+            "arrivalId": {
+              "$ref": "#/$defs/id"
+            },
+            "unitId": {
+              "$ref": "#/$defs/id"
+            },
+            "date": {
+              "$ref": "#/$defs/date"
+            },
+            "kind": {
+              "const": "temple"
+            },
+            "templeOrdinal": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 64
+            },
+            "offerSkillIds": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 3,
+              "items": {
+                "$ref": "#/$defs/skillId"
+              },
+              "uniqueItems": true
+            }
+          }
+        }
+      ]
+    },
+    "rngState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "drawCount"
+      ],
+      "properties": {
+        "state": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "drawCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1800
+        }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision",
+        "cursor",
+        "date",
+        "actors",
+        "units",
+        "sites",
+        "pending",
+        "rng"
+      ],
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "cursor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "actors": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/actorState"
+          }
+        },
+        "units": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "position"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "position": {
+                "$ref": "#/$defs/position"
+              }
+            }
+          }
+        },
+        "sites": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/siteState"
+          }
+        },
+        "pending": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/pending"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rng": {
+          "$ref": "#/$defs/rngState"
+        }
+      }
+    },
+    "credit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "before",
+        "requested",
+        "actual",
+        "discarded",
+        "after"
+      ],
+      "properties": {
+        "before": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "requested": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "actual": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "discarded": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "after": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      },
+      "description": "Actual=min(requested,cap-before); discarded=requested-actual; after=before+actual. Charm XP requests 10/cap1e9, ruin raw talent requests1/cap255, aptitude requests1/cap3. Runtime reconstructs every value."
+    },
+    "arrivalEvaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "arrival",
+        "observationBefore",
+        "observationAfter",
+        "eligibility",
+        "rawSiteIds",
+        "eligibleSiteIds",
+        "excluded",
+        "selectedSiteId",
+        "roll"
+      ],
+      "properties": {
+        "arrival": {
+          "$ref": "#/$defs/arrival"
+        },
+        "observationBefore": {
+          "$ref": "#/$defs/position"
+        },
+        "observationAfter": {
+          "$ref": "#/$defs/position"
+        },
+        "eligibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "leaderId",
+            "leaderMerit",
+            "resolvedCharmU8",
+            "troops",
+            "passed",
+            "reasons"
+          ],
+          "properties": {
+            "leaderId": {
+              "$ref": "#/$defs/id"
+            },
+            "leaderMerit": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "resolvedCharmU8": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            },
+            "troops": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "passed": {
+              "type": "boolean"
+            },
+            "reasons": {
+              "type": "array",
+              "minItems": 0,
+              "maxItems": 3,
+              "items": {
+                "enum": [
+                  "leader-merit-below-minimum",
+                  "unit-charm-below-minimum",
+                  "no-troops"
+                ]
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "rawSiteIds": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "eligibleSiteIds": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "excluded": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 64,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "distance",
+              "reasons"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "distance": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4000000
+              },
+              "reasons": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 3,
+                "items": {
+                  "enum": [
+                    "already-discovered",
+                    "not-adjacent",
+                    "unit-ineligible"
+                  ]
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        },
+        "selectedSiteId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "roll": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 99
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "draw": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "drawIndex",
+        "label",
+        "bound",
+        "beforeState",
+        "afterState",
+        "value"
+      ],
+      "properties": {
+        "drawIndex": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1800
+        },
+        "label": {
+          "enum": [
+            "site-selector",
+            "discovery-roll",
+            "temple-offer"
+          ]
+        },
+        "bound": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 256
+        },
+        "beforeState": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "afterState": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    "ruinWrite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetId",
+        "reward",
+        "value"
+      ],
+      "properties": {
+        "targetId": {
+          "$ref": "#/$defs/id"
+        },
+        "reward": {
+          "$ref": "#/$defs/ruinReward"
+        },
+        "value": {
+          "$ref": "#/$defs/credit"
+        }
+      }
+    },
+    "templeWrite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetId",
+        "beforeSkillRef",
+        "requestedSkillId",
+        "afterSkillRef",
+        "requestedReplacements",
+        "actualReplacements",
+        "discardedReplacements",
+        "relearned"
+      ],
+      "properties": {
+        "targetId": {
+          "$ref": "#/$defs/id"
+        },
+        "beforeSkillRef": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/skillId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "requestedSkillId": {
+          "$ref": "#/$defs/skillId"
+        },
+        "afterSkillRef": {
+          "$ref": "#/$defs/skillId"
+        },
+        "requestedReplacements": {
+          "const": 1
+        },
+        "actualReplacements": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "discardedReplacements": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "relearned": {
+          "type": "boolean"
+        }
+      },
+      "description": "Same skill is accepted and consumes the pending reward: requested1, actual0, discarded1, relearned=true. A changed skill records requested1, actual1, discarded0. No refund or second XP award."
+    },
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "profile",
+        "scope",
+        "commandId",
+        "envelope",
+        "policyId",
+        "sourceBoundary",
+        "revisionBefore",
+        "revisionAfter",
+        "cursorBefore",
+        "cursorAfter",
+        "dateBefore",
+        "dateAfter",
+        "outcome",
+        "arrival",
+        "discovery",
+        "pendingBefore",
+        "pendingAfter",
+        "rewards",
+        "eventLedger",
+        "rngBefore",
+        "rngAfter",
+        "draws"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "standalone-adjacent-site-discovery-v1"
+        },
+        "scope": {
+          "const": "one-fixed-force-frozen-arrival-events"
+        },
+        "commandId": {
+          "$ref": "#/$defs/id"
+        },
+        "envelope": {
+          "$ref": "#/$defs/envelope"
+        },
+        "policyId": {
+          "const": "adjacent-site-discovery-policy-v1"
+        },
+        "sourceBoundary": {
+          "$ref": "#/$defs/sourceBoundary"
+        },
+        "revisionBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "revisionAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "cursorBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "cursorAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "dateBefore": {
+          "$ref": "#/$defs/date"
+        },
+        "dateAfter": {
+          "$ref": "#/$defs/date"
+        },
+        "outcome": {
+          "enum": [
+            "arrival-no-discovery",
+            "ruin-discovered",
+            "temple-discovered",
+            "ruin-resolved",
+            "temple-resolved"
+          ]
+        },
+        "arrival": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/arrivalEvaluation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "discovery": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/discovery"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pendingBefore": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/pending"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pendingAfter": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/pending"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rewards": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "charmXp",
+            "ruin",
+            "temple"
+          ],
+          "properties": {
+            "charmXp": {
+              "type": "array",
+              "minItems": 0,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "actorId",
+                  "value"
+                ],
+                "properties": {
+                  "actorId": {
+                    "$ref": "#/$defs/id"
+                  },
+                  "value": {
+                    "$ref": "#/$defs/credit"
+                  }
+                }
+              }
+            },
+            "ruin": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/ruinWrite"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "temple": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/templeWrite"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "eventLedger": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "actionPointsDelta",
+            "goldDelta",
+            "techniquePointsDelta",
+            "meritDelta"
+          ],
+          "properties": {
+            "actionPointsDelta": {
+              "const": 0
+            },
+            "goldDelta": {
+              "const": 0
+            },
+            "techniquePointsDelta": {
+              "const": 0
+            },
+            "meritDelta": {
+              "const": 0
+            }
+          }
+        },
+        "rngBefore": {
+          "$ref": "#/$defs/rngState"
+        },
+        "rngAfter": {
+          "$ref": "#/$defs/rngState"
+        },
+        "draws": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/$defs/draw"
+          }
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tag",
+        "schemaVersion",
+        "profile",
+        "scope",
+        "policy",
+        "sourceBoundary",
+        "genesis",
+        "snapshot",
+        "acceptedCommands"
+      ],
+      "properties": {
+        "tag": {
+          "const": "adjacent-site-discovery-state-v1"
+        },
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "standalone-adjacent-site-discovery-v1"
+        },
+        "scope": {
+          "const": "one-fixed-force-frozen-arrival-events"
+        },
+        "policy": {
+          "$ref": "#/$defs/policy"
+        },
+        "sourceBoundary": {
+          "$ref": "#/$defs/sourceBoundary"
+        },
+        "genesis": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "scenario",
+            "snapshot"
+          ],
+          "properties": {
+            "scenario": {
+              "$ref": "#/$defs/scenario"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/snapshot"
+            }
+          }
+        },
+        "snapshot": {
+          "$ref": "#/$defs/snapshot"
+        },
+        "acceptedCommands": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4096,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "envelope",
+              "receipt"
+            ],
+            "properties": {
+              "envelope": {
+                "$ref": "#/$defs/envelope"
+              },
+              "receipt": {
+                "$ref": "#/$defs/receipt"
+              }
+            }
+          }
+        }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "committed",
+        "reason",
+        "revision",
+        "cursor",
+        "commandId",
+        "index"
+      ],
+      "properties": {
+        "ok": {
+          "const": false
+        },
+        "committed": {
+          "const": false
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "\\S"
+        },
+        "revision": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4096
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 360
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "commandId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "index": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4095
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "stateResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ok",
+            "state"
+          ],
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "state": {
+              "$ref": "#/$defs/state"
+            }
+          }
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "commandResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ok",
+            "committed",
+            "duplicate",
+            "state",
+            "receipt"
+          ],
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "committed": {
+              "type": "boolean"
+            },
+            "duplicate": {
+              "type": "boolean"
+            },
+            "state": {
+              "$ref": "#/$defs/state"
+            },
+            "receipt": {
+              "$ref": "#/$defs/receipt"
+            }
+          }
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "previewResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ok",
+            "committed",
+            "duplicate",
+            "receipt",
+            "projectedSnapshot"
+          ],
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "committed": {
+              "const": false
+            },
+            "duplicate": {
+              "type": "boolean"
+            },
+            "receipt": {
+              "$ref": "#/$defs/receipt"
+            },
+            "projectedSnapshot": {
+              "$ref": "#/$defs/snapshot"
+            }
+          }
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "saveResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ok",
+            "json"
+          ],
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "json": {
+              "type": "string",
+              "maxLength": 16777216
+            }
+          }
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "expectedOutcome": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ok",
+            "duplicate",
+            "receipt"
+          ],
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "duplicate": {
+              "type": "boolean"
+            },
+            "receipt": {
+              "$ref": "#/$defs/receipt"
+            }
+          }
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tag",
+        "scenario",
+        "attempts",
+        "expectedFinalSnapshot"
+      ],
+      "properties": {
+        "tag": {
+          "const": "adjacent-site-discovery-trace-v1"
+        },
+        "scenario": {
+          "$ref": "#/$defs/scenario"
+        },
+        "attempts": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4096,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "envelope",
+              "expectedOutcome"
+            ],
+            "properties": {
+              "envelope": {
+                "$ref": "#/$defs/envelope"
+              },
+              "expectedOutcome": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/expectedOutcome"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "expectedFinalSnapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/snapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "replayResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ok",
+            "state",
+            "outcomes"
+          ],
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "state": {
+              "$ref": "#/$defs/state"
+            },
+            "outcomes": {
+              "type": "array",
+              "minItems": 0,
+              "maxItems": 4096,
+              "items": {
+                "$ref": "#/$defs/expectedOutcome"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/$defs/failure"
+        }
+      ]
+    }
+  }
+}

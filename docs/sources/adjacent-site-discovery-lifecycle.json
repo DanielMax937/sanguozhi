@@ -1,0 +1,408 @@
+{
+  "schemaVersion": 1,
+  "profile": "standalone-adjacent-site-discovery-v1",
+  "scope": "one-fixed-force-frozen-arrival-events",
+  "status": "static-implementation-not-executed",
+  "researchDate": "2026-10-17",
+  "updated": "2026-10-18",
+  "base": {
+    "repository": "DanielMax937/sanguozhi",
+    "publishedPr": 85,
+    "mainCommit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+    "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09",
+    "meaning": "Baseline version identity, not a run or validation receipt for this addition"
+  },
+  "artifacts": {
+    "implementation": "packages/engine/src/adjacent-site-discovery-lifecycle.ts",
+    "policy": "data/catalogs/adjacent-site-discovery-policy-v1.json",
+    "rules": "docs/rules/adjacent-site-discovery-lifecycle.md",
+    "api": "docs/engine/adjacent-site-discovery-lifecycle.md",
+    "schema": "docs/sources/adjacent-site-discovery-lifecycle.schema.json",
+    "example": "data/scenarios/adjacent-site-discovery-example-v1.json"
+  },
+  "evidenceLayers": [
+    {
+      "id": "public-guide-observations",
+      "level": "guide-observation",
+      "meaning": "Publicly documented adjacency, leader/unit gates, month rewards, discovery charisma XP and fourth-temple eligibility; not native code or authenticated patch evidence",
+      "stockCertified": false
+    },
+    {
+      "id": "scenario-and-catalog-facts",
+      "level": "supplied-scenario-facts",
+      "meaning": "Fixed roster, units, placed sites, ground cells, complete arrivals and versioned guide skill catalog; internal consistency is checked, historical or external truth is not authenticated",
+      "stockCertified": false
+    },
+    {
+      "id": "standalone-service-policy",
+      "level": "synthetic-replaceable-policy",
+      "meaning": "Exact geometry, filtering, selection, independent RNG, threshold 50, offer sampling, pending, caps, same-skill relearning, ledgers and persistence",
+      "stockCertified": false
+    }
+  ],
+  "sourceIdentity": {
+    "kind": "guide-observations-not-authenticated-native-code",
+    "targetContext": "PC-oriented public guide facts; exact PC/PK executable or patch not independently authenticated",
+    "sourceExecutableHash": null,
+    "sourceNativeFunctionRange": null,
+    "sourcePageRawHash": null,
+    "newWebRetrievalPerformed": false,
+    "researchBoundary": "Static authoring from recorded public-guide observations dated 2026-10-17. No fresh full-page capture, native-code recovery, binary execution or cross-version authentication",
+    "listingKernels": "PR53/54/55 belong to O13-A only. O13-B neither calls them nor inherits their instruction-byte, repository-license or listing authority as evidence for site discovery"
+  },
+  "guideSources": [
+    {
+      "id": "wiki968-adjacent-sites",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/968.html",
+      "title": "遺跡・廟発見",
+      "kind": "guide-observation",
+      "researchObservationDate": "2026-10-17",
+      "reportedPageUpdated": "2013-02-02",
+      "recordedTextLocation": "Public-page body lines 126-154 in the recorded research reading",
+      "supports": [
+        "move to adjacent tile",
+        "leader merit at least 10000",
+        "resolved unit charisma at least 80",
+        "12-month ruin reward mapping",
+        "one selected force officer receives the ruin or temple reward",
+        "each discovering-unit member receives charisma XP10",
+        "highest-grade skills can appear from fourth temple",
+        "PC, CS and CSPK configuration and gate differences"
+      ],
+      "doesNotSupport": [
+        "original complete coordinates or placement sampling",
+        "50/100 original discovery rate",
+        "LCG32 native equivalence",
+        "original exact standard/highest skill pools",
+        "offer count or sampling distribution",
+        "native cap, XP, talent, aptitude or skill writers",
+        "stock or exact patch identity"
+      ]
+    },
+    {
+      "id": "wiki79-experience",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/79.html",
+      "title": "各種経験値",
+      "kind": "guide-observation",
+      "researchObservationDate": "2026-10-17",
+      "recordedTextLocation": "Line 260 in the recorded research reading",
+      "supports": [
+        "ruin/temple discovery charisma XP10"
+      ],
+      "doesNotSupport": [
+        "native writer or cap",
+        "exact stock version",
+        "extra XP at Resolve"
+      ]
+    },
+    {
+      "id": "wiki8-faq",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/8.html",
+      "title": "FAQ",
+      "kind": "guide-observation-search-text",
+      "researchObservationDate": "2026-10-17",
+      "supports": [
+        "first adjacent visit may fail; another visit may be required"
+      ],
+      "doesNotSupport": [
+        "exact original probability",
+        "50 percent original probability",
+        "native RNG or seed"
+      ]
+    },
+    {
+      "id": "wiki149-geography",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/149.html",
+      "title": "地理",
+      "kind": "source-location-only",
+      "researchObservationDate": "2026-10-17",
+      "coordinatesExtracted": false,
+      "supports": [
+        "location of a public geographical reference"
+      ],
+      "doesNotSupport": [
+        "full original map extraction",
+        "complete site coordinate catalog",
+        "initial placement algorithm"
+      ]
+    }
+  ],
+  "monthRewards": [
+    {
+      "month": 1,
+      "kind": "aptitude",
+      "field": "cavalry",
+      "label": "骑兵",
+      "requested": 1,
+      "cap": 3,
+      "mappingEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy"
+    },
+    {
+      "month": 2,
+      "kind": "talent",
+      "field": "leadership",
+      "label": "统率",
+      "requested": 1,
+      "cap": 255,
+      "mappingEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy"
+    },
+    {
+      "month": 3,
+      "kind": "aptitude",
+      "field": "crossbow",
+      "label": "弩兵",
+      "requested": 1,
+      "cap": 3,
+      "mappingEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy"
+    },
+    {
+      "month": 4,
+      "kind": "talent",
+      "field": "strength",
+      "label": "武力",
+      "requested": 1,
+      "cap": 255,
+      "mappingEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy"
+    },
+    {
+      "month": 5,
+      "kind": "aptitude",
+      "field": "siege",
+      "label": "兵器",
+      "requested": 1,
+      "cap": 3,
+      "mappingEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy"
+    },
+    {
+      "month": 6,
+      "kind": "talent",
+      "field": "charm",
+      "label": "魅力",
+      "requested": 1,
+      "cap": 255,
+      "mappingEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy"
+    },
+    {
+      "month": 7,
+      "kind": "aptitude",
+      "field": "navy",
+      "label": "水军",
+      "requested": 1,
+      "cap": 3,
+      "mappingEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy"
+    },
+    {
+      "month": 8,
+      "kind": "talent",
+      "field": "intelligence",
+      "label": "智力",
+      "requested": 1,
+      "cap": 255,
+      "mappingEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy"
+    },
+    {
+      "month": 9,
+      "kind": "aptitude",
+      "field": "spear",
+      "label": "枪兵",
+      "requested": 1,
+      "cap": 3,
+      "mappingEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy"
+    },
+    {
+      "month": 10,
+      "kind": "talent",
+      "field": "politics",
+      "label": "政治",
+      "requested": 1,
+      "cap": 255,
+      "mappingEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy"
+    },
+    {
+      "month": 11,
+      "kind": "aptitude",
+      "field": "halberd",
+      "label": "戟兵",
+      "requested": 1,
+      "cap": 3,
+      "mappingEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy"
+    },
+    {
+      "month": 12,
+      "kind": "talent",
+      "field": "charm",
+      "label": "魅力",
+      "requested": 1,
+      "cap": 255,
+      "mappingEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy"
+    }
+  ],
+  "syntheticPolicy": {
+    "policyId": "adjacent-site-discovery-policy-v1",
+    "fullDefinition": "data/catalogs/adjacent-site-discovery-policy-v1.json",
+    "completeDefinitionFrozenInGenesis": true,
+    "identityDigestOnly": false,
+    "arbitraryCallbacks": false,
+    "geometry": {
+      "model": "axial",
+      "distance": "max(abs(dq),abs(dr),abs(dq+dr))",
+      "requiredDistance": 1,
+      "sourceArrivalProvesNativeMovement": false
+    },
+    "filter": "undiscovered sites adjacent to arrival.to; ASCII code-unit ID order",
+    "eligibility": {
+      "leaderMeritMinimum": 10000,
+      "resolvedUnitCharmMinimum": 80,
+      "troopsMinimum": 1,
+      "personalCharismaSubstitution": false
+    },
+    "rng": {
+      "kind": "adjacent-lcg32-multiply-high-v1",
+      "formula": "state=(1664525*state+1013904223) mod 2^32; draw(n)=floor(state*n/2^32)",
+      "allUint32SeedsAccepted": true,
+      "exactIntegerArithmetic": true,
+      "strictlyUnbiased": false,
+      "sharedWithCitySearch": false,
+      "maxDrawsPerArrival": 5,
+      "maxDrawsForSiteSelectionAndRoll": 2
+    },
+    "discovery": {
+      "thresholdPolicy": "adjacent-discovery-half-v1",
+      "successBelow": 50,
+      "rollBound": 100,
+      "originalProbabilityRecovered": false,
+      "singletonSelectorDraw": false,
+      "everyEligibleNonemptyAttemptRolls": true,
+      "failureConsumesArrival": true,
+      "ineligibleOrEmptyArrivalConsumesWithoutRng": true
+    },
+    "discoveryRewards": {
+      "charmXpPerDiscoveringMember": 10,
+      "charmXpCap": 1000000000,
+      "requestEvidence": "guide-observation",
+      "writerEvidence": "synthetic-replaceable-policy",
+      "actionPointsDelta": 0,
+      "goldDelta": 0,
+      "techniquePointsDelta": 0,
+      "meritDelta": 0,
+      "zeroDeltasMeaning": "Standalone event ledger only; not a claim that native movement or event costs are all zero"
+    },
+    "ruin": {
+      "policyId": "ruin-raw-talent-aptitude-saturating-v1",
+      "monthFrozenAtDiscovery": true,
+      "target": "fixed-own-ordinary-roster, including non-discovering members",
+      "talentCap": 255,
+      "aptitudeCap": 3,
+      "aptitudeEncoding": [
+        "C",
+        "B",
+        "A",
+        "S"
+      ],
+      "consumeAtCap": true,
+      "changesTrainingXpOrAllowance": false,
+      "recomputesResolvedAbilities": false
+    },
+    "temple": {
+      "policyId": "temple-supplied-guide-offer-v1",
+      "catalogNamespace": "supplied-guide-v1",
+      "standardAndHighestPoolsNonempty": true,
+      "poolsDisjoint": true,
+      "maximumTotalSkills": 256,
+      "highestFromOrdinal": 4,
+      "maximumOffers": 3,
+      "withoutReplacement": true,
+      "singletonDraw": false,
+      "offerFrozenAtDiscovery": true,
+      "highestGuaranteed": false,
+      "allowSameSkillRelearn": true,
+      "native98Mapping": false,
+      "originalPoolsRecovered": false
+    },
+    "pending": "At most one; blocks next arrival until matching Resolve; no skip, cancellation, reroll, automatic resolve or extra discovery XP",
+    "completion": "All supplied arrivals consumed and no pending reward; no requirement to discover every site",
+    "objectInputBoundary": "Non-Proxy plain/null-prototype own-data JSON DTOs. Reflection can trigger Proxy traps; hostile Proxy or polluted runtime are unsupported, not universally detectable. JSON-string load uses a separate bounded parser"
+  },
+  "limits": {
+    "actors": 256,
+    "units": 16,
+    "membersPerUnit": 3,
+    "sites": 64,
+    "groundCells": 4096,
+    "arrivals": 360,
+    "skills": 256,
+    "acceptedCommands": 4096,
+    "traceAttempts": 4096,
+    "completeUtf8Bytes": 16777216,
+    "nodes": 1048576,
+    "depth": 24,
+    "arrayLength": 4096,
+    "objectKeys": 128,
+    "escapedSaveResultIncluded": true,
+    "allOldIdempotentReceiptReturnsReserved": true,
+    "performance": "Static boundedness only. Complete history reconstruction and repeated receipt/result budget scans are not a latency, efficiency or benchmark guarantee"
+  },
+  "persistence": {
+    "genesis": "Complete canonical scenario, initial snapshot, full policy, source identities and supplied guide catalog",
+    "history": "Every accepted envelope and complete receipt, in order",
+    "load": "Reconstruct from genesis, recompute each receipt and compare final snapshot, cursor, positions, site discovery/resolution, pending, XP, talents, aptitudes, skills and RNG; repeat intermediate budgets",
+    "duplicateId": "Same envelope returns original receipt before stale-revision checks; changed envelope rejects; duplicate does not append history",
+    "duplicateDecodedJsonKeysRejected": true,
+    "atomicRejection": "No revision, ID reservation, cursor, position, date, RNG, site, XP, skill or pending changes on any rejection, including late budgets",
+    "authenticity": "Deterministic self-consistency, not cryptographic authenticity; coherently rewritten genesis and matching history form another supplied scenario"
+  },
+  "validation": {
+    "performed": "static authoring and reading only",
+    "productExecuted": false,
+    "exampleExecuted": false,
+    "testsRun": false,
+    "typecheckRun": false,
+    "compileRun": false,
+    "buildRun": false,
+    "checkerRun": false,
+    "diagnosticsRun": false,
+    "schemaValidationRun": false,
+    "historicalResultsValidateThisAddition": false
+  },
+  "remaining": {
+    "E": [
+      "original complete site coordinates and placement sampling",
+      "original discovery probability, RNG and consumption",
+      "original exact skill pools and grade groups",
+      "native month, talent, aptitude, XP and skill writers/caps",
+      "stock/executable/exact patch and cross-version identities",
+      "original map, scenario initialization and global event scheduling"
+    ],
+    "X": [
+      "P078/P0-78 and all dependencies",
+      "native ownership and personnel-force transfers",
+      "capture",
+      "force extinction",
+      "ruler transfer and succession",
+      "native mission/return and related finalizers",
+      "immediate recruitment or debate native handoff",
+      "native treasure ownership writer",
+      "rules-audit-a1-b3/PR2/money179 restoration"
+    ],
+    "O14": "Ordinary safe city-event finite executor remains separate",
+    "O15": "Cross-service balances/actions/time/movement/events remain separate",
+    "O13A": "Existing standalone-city-search-v1 remains separate; its frozen sourceBoundary and source manifest describe its own delivery-time scope and are not rewritten by B",
+    "original43Reduced": false,
+    "original45SnapshotReduced": false,
+    "newCountingDenominator": false,
+    "legacyCorpusExecutionEnabledChanged": false,
+    "completeOriginalSearchEquivalent": false
+  }
+}
