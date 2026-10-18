@@ -107,3 +107,7 @@ export type { FieldCombatScenarioV1, FieldCombatStateV1, FieldCombatSnapshotV1, 
 
 export { getSourceEventQueryProfileV1, listSourceEventObservationsV1, querySourceEventV1 } from './source-event-query.ts';
 export type { SourceEventQueryInputV1, SourceEventQueryResultV1, SourceEventQueryProfileV1, SourceEventQueryProfileResultV1, SourceEventObservationListResultV1, SourceEventObservationSummaryV1, SourceEventTruthV1 } from './source-event-query.ts';
+
+// Single fixed domestic council episode; ordinary proposal TP remains not modeled.
+export { SINGLE_COUNCIL_POLICY_V1, createSingleCouncilState, previewSingleCouncilCommand, executeSingleCouncilCommand, querySingleCouncilState, saveSingleCouncilState, loadSingleCouncilState, replaySingleCouncilCommands } from './single-council-lifecycle.ts';
+export type { SingleCouncilScenarioV1, SingleCouncilStateV1, SingleCouncilEnvelopeV1, SingleCouncilReceiptV1, SingleCouncilSnapshotV1, SingleCouncilPolicyV1, SingleCouncilFailureV1, SingleCouncilResultV1, SingleCouncilPreviewV1, SingleCouncilSaveResultV1, SingleCouncilTraceV1, SingleCouncilStateResultV1, SingleCouncilQueryResultV1, SingleCouncilReplayResultV1 } from './single-council-lifecycle.ts';

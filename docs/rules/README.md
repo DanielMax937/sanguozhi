@@ -1,3 +1,11 @@
+## 一次内政评定：具体规则（2026-10-18，静态）
+
+[完整规则](single-council-lifecycle.md) · [七个API](../engine/single-council-lifecycle.md) · [固定policy](../../data/catalogs/single-council-policy-v1.json) · [来源manifest](../sources/single-council-lifecycle.json) · [DTO schema](../sources/single-council-lifecycle.schema.json) · [未运行trace](../../data/scenarios/single-council-example-v1.json)。
+
+一个固定单城episode，完整roster与君主／势力关系交叉匹配，最多6名下属；方针与具体案分别生成、采决，赞同解析到原提案且不增加执行人。仅巡查、征兵、数量兵装1–4三类由普通city-command硬门／preview生成候选，caller只选择生成的speech ID。其他19类与件数兵器／舰船排除；采纳集合按冻结参与顺序共享child执行真实费用／资源／奖励／标记，后案失败或预算失败整体回滚。
+
+评定本身0金／AP；正常Complete请求唯一+10、cap10000，只写完成奖projection。普通案TP未模拟，child不加TP字段，不输出全局finalTP。全否发奖／abort不发、过滤／chooser／PRNG／去重／顺序都是新policy；completed／aborted不可重开、推进或重复发奖。完整genesis、保存和逐收据重算不证明原作等价。公共入口集成基线为PR88 main `8063d39731a42af87646168d4b36b92bd9d3ed3d`／tree `5e555fcda99f97e71e50c9c8565810dca50915be`；来源manifest继续保留PR86原始读取身份，普通city-command源码blob `f07b0762e045dfb77caeb8e46c06e7cee8bd255f`在两版本间相同，不把集成版本当成新的原作证据。原43主题与45快照中的未决证据不减，原版事件与跨服务一致性尚未集成。仅静态实现，未运行产品、示例、测试、typecheck、编译、build、runtime、checker、诊断或schema验证；下方历史结果不验证本新增。
+
 ## O14 query：来源事件三值查询具体规则（2026-10-18 静态）
 
 [完整规则](source-event-query.md) · [三个API](../engine/source-event-query.md) · [固定registry](../../data/catalogs/source-event-query-profile-v1.json) · [来源身份](../sources/source-event-query.json) · [输入schema](../../data/schemas/source-event-query-v1.schema.json) · [响应schema](../../data/schemas/source-event-query-response-v1.schema.json) · [未运行输入示例](../../data/scenarios/source-event-query-example-v1.json)。明确固定观测身份、typed facts与显式bindings、strict eq/ne/order/set及三值all/any、完整原条款和子节点pointer；算子支持不代表所有来源分组已核。

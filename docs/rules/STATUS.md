@@ -1,3 +1,11 @@
+## 2026-10-18 一次内政评定：有限静态状态
+
+[规则](single-council-lifecycle.md)与[七个API](../engine/single-council-lifecycle.md)新增固定单城／完整名单／最多6人两阶段独立episode。内部候选、提案与赞同、采决、公开child真实普通内政事务、完成／中止终态、完整保存重建均已有静态代码；22类池只执行Patrol／Recruit／Produce1–4三类，19类及件数生产仍排除。原有city-command能力仅复用，不扩大其native证据。
+
+唯一正常完成+10仅是cap10000的completion projection；普通案TP保持not-modeled，没有全局finalTP或child状态注入。全否完成发奖、abort不发、chooser／过滤／去重／次序与PRNG均为显式新政策，nativeEquivalent=false。相同ID幂等，所有新终态命令拒绝，后案／预算失败回滚整个Complete，保存重算包括全部旧receipt返回与escaped SaveResult预算。
+
+公共入口集成基线为PR88 main `8063d39731a42af87646168d4b36b92bd9d3ed3d`／tree `5e555fcda99f97e71e50c9c8565810dca50915be`；来源manifest继续保留PR86原始读取身份，普通city-command源码blob `f07b0762e045dfb77caeb8e46c06e7cee8bd255f`在两版本间相同，不把集成版本当成新的原作证据。原43主题与45快照中的未决证据不减，原版事件与跨服务一致性尚未集成。仅静态实现，未运行产品、示例、测试、typecheck、编译、build、runtime、checker、诊断或schema验证；下方历史结果不验证本新增。
+
 ## 2026-10-18 O14 query：固定来源三值查询静态状态
 
 [具体规则](source-event-query.md)与[三个API](../engine/source-event-query.md)新增只读query，不建立事件session或世界账本。202条独立观测可定位原始条款与已知结构子条款；注册比较仅管辂治安≥90和于吉同城四原子项，共五原子／一局部all。片段comparison可met／not-met／unknown，完整clause仍受覆盖与版本限制；当前所有整体documentedConditionsStatus为unknown，executionEligibility固定disabled-source-corpus。

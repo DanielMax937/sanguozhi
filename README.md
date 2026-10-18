@@ -1,3 +1,13 @@
+## 当前新增：一次内政评定（2026-10-18，静态）
+
+[完整具体规则](docs/rules/single-council-lifecycle.md) · [七个API](docs/engine/single-council-lifecycle.md) · [固定政策](data/catalogs/single-council-policy-v1.json) · [来源身份](docs/sources/single-council-lifecycle.json) · [完整DTO schema](docs/sources/single-council-lifecycle.schema.json) · [未运行trace](data/scenarios/single-council-example-v1.json)
+
+`single-council-domestic-v1`是固定单城／势力／军团标签、完整驻城名单与同一旬的一次独立episode，最多6名下属参加，君主角色及城／势力关系与supplied事实逐项匹配。真实两阶段为方针建议／采决、具体建议／采决，再原子执行或中止。引擎内部枚举公开city-command preview合法候选，按固定可重放PRNG与新去重政策形成提案／赞同；caller不能提供最终提案、成功或delta。
+
+22类静态池仅支持巡查、征兵、生产兵装三类，生产仅1–4号数量装备；其他19类和件数兵器／舰船不生成执行。选中普通案复用既有Patrol／Recruit／Produce公开服务的真实费用、资源、XP／功绩及人物／设施标记，失败整条回滚。评定自身0金／0AP；唯一完成奖请求+10、封顶10000，仅是`council-completion-only`投影，`ordinaryProposalTp='not-modeled'`，没有全局finalTP。正常全否完成发奖、abort不发、chooser／筛选／次序／去重与PRNG都是显式新政策，不认证native。
+
+完整genesis、policy／sources、child保存及所有receipt重算；同ID幂等、终态不重开／推进／重复发奖，preview与执行共用原子和转义SaveResult／所有旧receipt预算。公共入口集成基线为PR88 main `8063d39731a42af87646168d4b36b92bd9d3ed3d`／tree `5e555fcda99f97e71e50c9c8565810dca50915be`；来源manifest继续保留PR86原始读取身份，普通city-command源码blob `f07b0762e045dfb77caeb8e46c06e7cee8bd255f`在两版本间相同，不把集成版本当成新的原作证据。原43主题与45快照中的未决证据不减，原版事件与跨服务一致性尚未集成。仅静态实现，未运行产品、示例、测试、typecheck、编译、build、runtime、checker、诊断或schema验证；下方历史结果不验证本新增。
+
 ## 当前新增：固定来源事件三值查询（O14 query，2026-10-18 静态）
 
 [完整具体规则](docs/rules/source-event-query.md) · [三个查询API](docs/engine/source-event-query.md) · [固定predicate registry](data/catalogs/source-event-query-profile-v1.json) · [来源身份](docs/sources/source-event-query.json) · [输入schema](data/schemas/source-event-query-v1.schema.json) · [响应schema](data/schemas/source-event-query-response-v1.schema.json) · [未运行输入示例](data/scenarios/source-event-query-example-v1.json)

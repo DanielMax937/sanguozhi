@@ -1,3 +1,11 @@
+## 一次内政评定：独立episode API（2026-10-18，静态）
+
+[SingleCouncil V1](single-council-lifecycle.md)通过公共src/index导出 `createSingleCouncilState`、`previewSingleCouncilCommand`、`executeSingleCouncilCommand`、`querySingleCouncilState`、`saveSingleCouncilState`、`loadSingleCouncilState`、`replaySingleCouncilCommands`，以及 `SINGLE_COUNCIL_POLICY_V1` 与14个类型。[具体规则](../rules/single-council-lifecycle.md) · [policy](../../data/catalogs/single-council-policy-v1.json) · [source](../sources/single-council-lifecycle.json) · [schema](../sources/single-council-lifecycle.schema.json) · [未运行trace](../../data/scenarios/single-council-example-v1.json)。
+
+完整CityScenario与supplied角色／roster进入单次服务；最多6名下属，方针／具体案两阶段建议及采决。只有Patrol／Recruit／Produce1–4由引擎内部选成提案并通过原child公开API原子执行；19类与件数生产排除。Complete后不能继续，Abort无普通案提交；可查询／保存／重放及旧ID幂等重试。普通内政账本复用而不重写，原child没有TP，wrapper只记录封顶10000的一次+10完成奖projection，ordinaryProposalTp保持not-modeled，无全局finalTP。
+
+完整genesis与child保存重算、每次完整receipt、固定raw−1非零域PRNG映射、所有历史幂等返回与escaped SaveResult预算均保持同一原子边界；这不证明原作chooser或整体抽样严格无偏。公共入口集成基线为PR88 main `8063d39731a42af87646168d4b36b92bd9d3ed3d`／tree `5e555fcda99f97e71e50c9c8565810dca50915be`；来源manifest继续保留PR86原始读取身份，普通city-command源码blob `f07b0762e045dfb77caeb8e46c06e7cee8bd255f`在两版本间相同，不把集成版本当成新的原作证据。原43主题与45快照中的未决证据不减，原版事件与跨服务一致性尚未集成。仅静态实现，未运行产品、示例、测试、typecheck、编译、build、runtime、checker、诊断或schema验证；下方历史结果不验证本新增。
+
 ## O14 query：固定来源事件三值查询（静态新增）
 
 [SourceEventQuery V1](source-event-query.md)通过公共src/index导出 `getSourceEventQueryProfileV1`、`listSourceEventObservationsV1`、`querySourceEventV1`及七个类型；成功分别返回ok/profile、ok/observations与query结果，共享带pointerStatus的小型failure。[完整规则](../rules/source-event-query.md) · [固定registry](../../data/catalogs/source-event-query-profile-v1.json) · [来源](../sources/source-event-query.json) · [输入schema](../../data/schemas/source-event-query-v1.schema.json) · [响应schema](../../data/schemas/source-event-query-response-v1.schema.json) · [未运行示例](../../data/scenarios/source-event-query-example-v1.json)。

@@ -1,3 +1,11 @@
+## 2026-10-18 一次内政评定：来源与兼容政策分层
+
+[来源manifest](../sources/single-council-lifecycle.json) · [完整规则](single-council-lifecycle.md) · [固定policy](../../data/catalogs/single-council-policy-v1.json)。官方手册确认评定0金／AP、至多6人和君主在据点；MSG资料确认两阶段、赞同／采决与22类静态池。完成评定+10取固定[同期GamerSky攻略证据链](https://www.gamersky.com/handbook/200604/22088.shtml)，不标原函数写入地址；TP cap10000沿既有技巧规则。manifest保留原文件完整Git blob、SHA256、bytes与PR86读取身份，不宣称新获取外站或native／stock认证。
+
+一次单城episode只执行巡查、征兵、数量兵装1–4三类；19类与件数生产排除。原city-command公开服务已覆盖普通费用、核、资源writer、XP／功绩和行动／设施标记，本层复用而不重计新证据；它根本没有TP。wrapper仅给唯一完成奖projection，ordinaryProposalTp为not-modeled且无全局finalTP。完整roster角色、额外过滤、候选chooser、raw−1非零域PRNG、去重／执行次序、全否与abort奖励资格均为新具名policy；有限接受映射不认证整体严格无偏或native随机性。
+
+公共入口集成基线为PR88 main `8063d39731a42af87646168d4b36b92bd9d3ed3d`／tree `5e555fcda99f97e71e50c9c8565810dca50915be`；来源manifest继续保留PR86原始读取身份，普通city-command源码blob `f07b0762e045dfb77caeb8e46c06e7cee8bd255f`在两版本间相同，不把集成版本当成新的原作证据。原43主题与45快照中的未决证据不减，原版事件与跨服务一致性尚未集成。仅静态实现，未运行产品、示例、测试、typecheck、编译、build、runtime、checker、诊断或schema验证；下方历史结果不验证本新增。
+
 ## 2026-10-18 O14 query：固定转录身份与有限谓词证据
 
 [来源manifest](../sources/source-event-query.json) · [完整规则](source-event-query.md) · [固定registry](../../data/catalogs/source-event-query-profile-v1.json)。五份旧语料为generic-events的Wiki88／GamerSky2009、scenario-events的Wiki88／GamerSky2008和PS2 Wiki100，等级仍public-guide-transcription。sourceFiles保留完整Git blob、SHA-256、bytes、commit／tree；sourceJSONPointer与完整sourceClause绑定每条已核表达式，不按相同标题合并观测。

@@ -1,0 +1,4018 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:single-council-domestic:v1",
+  "title": "Single council domestic v1 complete wrapper DTOs and bounded child-service subset",
+  "description": "Static companion only; never executed or schema-validated. Runtime additionally enforces exact source/policy snapshots, complete roster and supplied role identity, child scenario and command legality, phase/revision and idempotence, complete genesis replay and every derived receipt/child save, numeric and resource cross-relations, negative zero, own-data/non-Proxy DTO contract, duplicate decoded JSON keys and aggregate depth/node/UTF-8 budgets including escaped SaveResult and each historical receipt return. Child kernel input/output leaves preserve opaque existing evidence as Json; only full public-API replay validates them. No ordinary proposal TP or global finalTP, native chooser/PRNG certification, turn advancement, nineteen other proposal types or original43/45 closure. Individual schema maxima are not jointly attainable guarantees.",
+  "$defs": {
+    "Json": {
+      "anyOf": [
+        {
+          "const": null
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        {
+          "type": "string",
+          "maxLength": 16777216
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Json"
+          },
+          "minItems": 0,
+          "maxItems": 4096
+        },
+        {
+          "type": "object",
+          "maxProperties": 256,
+          "additionalProperties": {
+            "$ref": "#/$defs/Json"
+          }
+        }
+      ]
+    },
+    "Policy": {
+      "const": {
+        "id": "single-council-domestic-policy-20261018-v1",
+        "version": 1,
+        "profile": "single-council-domestic-v1",
+        "nativeEquivalent": false,
+        "roster": {
+          "id": "complete-fixed-single-city-supplied-roles-v1",
+          "maxOfficers": 256,
+          "maxParticipants": 6,
+          "excludeLord": true,
+          "openRequiresAvailableUnactedUnreserved": true
+        },
+        "policySpeech": {
+          "id": "first-domestic-rest-agree-v1",
+          "rngWords": 0
+        },
+        "chooser": {
+          "id": "single-actor-public-preview-rejection-map-v1",
+          "candidateOrder": [
+            "type-code-unit",
+            "facility-id-code-unit",
+            "equipment-type-numeric"
+          ],
+          "singleOfficer": true,
+          "equipmentTypes": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "jointLegalityGuaranteed": false,
+          "strictlyUnbiased": false
+        },
+        "deduplication": {
+          "id": "type-city-facility-equipment-first-proposer-v1",
+          "ignoreProposerInKey": true,
+          "agreeAddsActor": false
+        },
+        "execution": {
+          "id": "frozen-participant-order-atomic-public-child-v1",
+          "ordinaryProposalTp": "not-modeled",
+          "cityStateMutation": "public-api-only",
+          "turnAdvance": false
+        },
+        "completion": {
+          "id": "normal-finish-including-reject-all-v1",
+          "requestedTechniquePoints": 10,
+          "cap": 10000,
+          "abortedRequested": 0,
+          "scope": "council-completion-only",
+          "globalForceTechniquePoints": "not-exported",
+          "terminal": true
+        },
+        "rng": {
+          "id": "xorshift32-nonzero-domain-rejection-v1",
+          "seedMin": 1,
+          "seedMax": 4294967295,
+          "shifts": [
+            13,
+            17,
+            5
+          ],
+          "sample": "raw-minus-one",
+          "domainSize": 4294967295,
+          "limit": "floor(domainSize/bound)*bound",
+          "accept": "sample<limit",
+          "value": "sample%bound",
+          "boundMax": 1000000,
+          "boundOneConsumesWord": true,
+          "strictlyUnbiased": false,
+          "nativeEquivalent": false,
+          "cryptographic": false
+        },
+        "budgets": {
+          "acceptedCommands": 256,
+          "rawWords": 4096,
+          "depth": 32,
+          "nodes": 250000,
+          "utf8Bytes": 16777216,
+          "traceAttempts": 4096,
+          "includesEscapedSaveResult": true,
+          "includesAllEarlierReceipts": true
+        },
+        "sourceBoundary": {
+          "typePool": "confirmed-static-message-data",
+          "completionReward": "contemporary-guide-empirical-high",
+          "chooserFiltersOrderDeduplicationRewardEligibility": "new-engine-policy",
+          "nativeCommandCallChain": "open",
+          "original43GroupsReduced": false,
+          "original45SnapshotsReduced": false
+        }
+      }
+    },
+    "Sources": {
+      "const": {
+        "schemaVersion": 1,
+        "profile": "single-council-domestic-v1",
+        "status": "static-implementation-not-executed",
+        "updated": "2026-10-18",
+        "base": {
+          "repository": "DanielMax937/sanguozhi",
+          "mainCommit": "a04ee326fdaa68e930681430352f4d98fee5209e",
+          "tree": "df4e2be515e2434e4e64476517c8e58f0d3afaf0",
+          "publishedPr": 86,
+          "researchBasePr": 85,
+          "researchBaseCommit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+          "researchBaseTree": "c515fd47bdec5a1f8b9502da58130dad91372a09"
+        },
+        "artifacts": {
+          "implementation": "packages/engine/src/single-council-lifecycle.ts",
+          "policy": "data/catalogs/single-council-policy-v1.json",
+          "rules": "docs/rules/single-council-lifecycle.md",
+          "api": "docs/engine/single-council-lifecycle.md",
+          "schema": "docs/sources/single-council-lifecycle.schema.json",
+          "example": "data/scenarios/single-council-example-v1.json"
+        },
+        "pinnedInputs": [
+          {
+            "path": "data/scenarios/city-command-example-v1.json",
+            "bytes": 10809,
+            "gitBlobSha1": "9b27665c5e264768f46caf7eeca4716eed7953dd",
+            "sha256": "a7502c0ecd849edb0c5abf9eefc4139e5799a6e3a0602f96caa02bcef80693f8",
+            "pinnedBlobSha1": "9b27665c5e264768f46caf7eeca4716eed7953dd",
+            "matchesPinned": true,
+            "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/data/scenarios/city-command-example-v1.json"
+          },
+          {
+            "path": "docs/rules/22-techniques.md",
+            "bytes": 15519,
+            "gitBlobSha1": "591973b26ccc4ceeb749e5f586f566096ede2d94",
+            "sha256": "c6a4b86aab46a6d3829ada61e82e4add89fc6aa8841fb9d578ddfb8fba9ee1fc",
+            "pinnedBlobSha1": "591973b26ccc4ceeb749e5f586f566096ede2d94",
+            "matchesPinned": true,
+            "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/docs/rules/22-techniques.md"
+          },
+          {
+            "path": "docs/rules/34-council-proposal-pool.md",
+            "bytes": 9901,
+            "gitBlobSha1": "6f0d9a0534192e469e7cef1e698b55ff3f96fcf6",
+            "sha256": "36005616a91bc98baf2b7df9e810308f4141ae65c321fe5a41218efaea1431e3",
+            "pinnedBlobSha1": "6f0d9a0534192e469e7cef1e698b55ff3f96fcf6",
+            "matchesPinned": true,
+            "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/docs/rules/34-council-proposal-pool.md"
+          },
+          {
+            "path": "docs/rules/city-command-lifecycle.md",
+            "bytes": 24754,
+            "gitBlobSha1": "b9d85319af69faacd08a9edeb4deaca3da3dd71c",
+            "sha256": "b4f71ab5abddd82e4f57ded932b03079abdb8f0117d5668e2d81246d20da55a7",
+            "pinnedBlobSha1": "b9d85319af69faacd08a9edeb4deaca3da3dd71c",
+            "matchesPinned": true,
+            "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/docs/rules/city-command-lifecycle.md"
+          },
+          {
+            "path": "docs/sources/council-proposal-pool.json",
+            "bytes": 5918,
+            "gitBlobSha1": "8ab06f66d6ef279be8c9de95a85a8c6e37b53a49",
+            "sha256": "09e36292cb9c17b77f2bcf27963861c8e86a11078a429ef866ef0d65e15cf1c1",
+            "pinnedBlobSha1": "8ab06f66d6ef279be8c9de95a85a8c6e37b53a49",
+            "matchesPinned": true,
+            "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/docs/sources/council-proposal-pool.json"
+          },
+          {
+            "path": "packages/engine/src/city-command-lifecycle.ts",
+            "bytes": 47467,
+            "gitBlobSha1": "f07b0762e045dfb77caeb8e46c06e7cee8bd255f",
+            "sha256": "0e7422d746f07d033e8506424c64e124dca0d6d92d668b6768b3ef3603cd1b20",
+            "pinnedBlobSha1": "f07b0762e045dfb77caeb8e46c06e7cee8bd255f",
+            "matchesPinned": true,
+            "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/packages/engine/src/city-command-lifecycle.ts"
+          }
+        ],
+        "sourceFacts": {
+          "councilOwnGoldCost": 0,
+          "councilOwnApCost": 0,
+          "maximumParticipants": 6,
+          "requiresLordAtBase": true,
+          "stages": [
+            "policy-speeches",
+            "policy-decision",
+            "concrete-speeches",
+            "concrete-decision",
+            "execute"
+          ],
+          "typePoolCount": 22,
+          "completionTechniquePointsRequest": 10,
+          "techniquePointCap": 10000,
+          "ordinaryProposalTp": "not-modeled",
+          "childHasTechniquePointField": false
+        },
+        "evidenceLayers": [
+          {
+            "id": "manual",
+            "claim": "Council itself costs no gold/AP, at most six participants, lord at base",
+            "grade": "official-manual-as-recorded-in-pinned-rule-document",
+            "url": "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf"
+          },
+          {
+            "id": "message-pool",
+            "claim": "Two stages, agree and decision modes; 22 static proposal types",
+            "grade": "confirmed-static-message-data",
+            "url": "https://www.sanguogame.com.cn/special/san11/1920.html"
+          },
+          {
+            "id": "completion-reward",
+            "claim": "Council completion +10TP",
+            "grade": "contemporary-guide-empirical-high-not-native-write-address",
+            "url": "https://www.gamersky.com/handbook/200604/22088.shtml"
+          },
+          {
+            "id": "tp-cap",
+            "claim": "Technique-point cap 10000",
+            "grade": "pinned-rule-document",
+            "path": "docs/rules/22-techniques.md",
+            "gitBlobSha1": "591973b26ccc4ceeb749e5f586f566096ede2d94"
+          },
+          {
+            "id": "ordinary-city-service",
+            "claim": "Reuse public API, existing scalar kernels, service writers, policies and unresolved evidence boundaries",
+            "grade": "compatibility-service-not-native-council-call-chain",
+            "path": "packages/engine/src/city-command-lifecycle.ts"
+          },
+          {
+            "id": "new-policy",
+            "claim": "Supplied full roster roles; filtering; chooser; candidate order; deduplication; atomic execution; rejected-all and aborted reward eligibility; terminal episode",
+            "grade": "explicit-new-engine-policy"
+          }
+        ],
+        "poolMetadata": {
+          "displayGroups": [
+            "domestic",
+            "sortie",
+            "diplomacy-strategy"
+          ],
+          "messageSpeechSubtypes": [
+            "sortie-attack",
+            "sortie-defense",
+            "domestic",
+            "diplomacy-strategy"
+          ],
+          "proposals": [
+            {
+              "id": "domestic-build",
+              "name": "内政建设",
+              "displayGroup": "domestic",
+              "msgRange": "3043",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "recruit",
+              "name": "征兵",
+              "displayGroup": "domestic",
+              "msgRange": "3034~3054 (source index overlaps domestic-build; type is unambiguous)",
+              "execution": "supported-domestic-profile",
+              "equipmentTypes": []
+            },
+            {
+              "id": "produce-equipment",
+              "name": "生产兵装",
+              "displayGroup": "domestic",
+              "msgRange": "3055~3065",
+              "execution": "supported-domestic-profile",
+              "equipmentTypes": [
+                1,
+                2,
+                3,
+                4
+              ]
+            },
+            {
+              "id": "patrol",
+              "name": "巡查",
+              "displayGroup": "domestic",
+              "msgRange": "3066~3076",
+              "execution": "supported-domestic-profile",
+              "equipmentTypes": []
+            },
+            {
+              "id": "train",
+              "name": "训练",
+              "displayGroup": "domestic",
+              "msgRange": "3077~3087",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "search",
+              "name": "探索",
+              "displayGroup": "domestic",
+              "msgRange": "3111~3117",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "hire",
+              "name": "登用",
+              "displayGroup": "domestic",
+              "msgRange": "3118~3124",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "appoint-strategist",
+              "name": "任命军师",
+              "displayGroup": "domestic",
+              "msgRange": "3201~3206",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "remove-facility",
+              "name": "撤除设施",
+              "displayGroup": "domestic",
+              "msgRange": "3207~3209",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "invade",
+              "name": "侵略",
+              "displayGroup": "sortie",
+              "msgRange": "3088~3098",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "intercept",
+              "name": "迎击",
+              "displayGroup": "sortie",
+              "msgRange": "3099~3104",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "military-build",
+              "name": "军事建设",
+              "displayGroup": "sortie",
+              "msgRange": "3105~3110",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "amicability-gift",
+              "name": "献上/亲善",
+              "displayGroup": "diplomacy-strategy",
+              "msgRange": "3125~3131",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "alliance",
+              "name": "同盟",
+              "displayGroup": "diplomacy-strategy",
+              "msgRange": "3132~3138",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "break-alliance",
+              "name": "摒弃/破弃同盟",
+              "displayGroup": "diplomacy-strategy",
+              "msgRange": "3139~3145",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "ceasefire",
+              "name": "停战",
+              "displayGroup": "diplomacy-strategy",
+              "msgRange": "3146~3152",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "demand-surrender",
+              "name": "劝降",
+              "displayGroup": "diplomacy-strategy",
+              "msgRange": "3153~3159",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "exchange-prisoner",
+              "name": "交换俘虏",
+              "displayGroup": "diplomacy-strategy",
+              "msgRange": "3160~3172",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "request-reinforcement",
+              "name": "求援",
+              "displayGroup": "diplomacy-strategy",
+              "msgRange": "3173~3179",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "two-tigers",
+              "name": "二虎竞食",
+              "displayGroup": "diplomacy-strategy",
+              "msgRange": "3180~3186",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "drive-tiger",
+              "name": "驱虎吞狼",
+              "displayGroup": "diplomacy-strategy",
+              "msgRange": "3187~3193",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            },
+            {
+              "id": "rumor",
+              "name": "流言",
+              "displayGroup": "diplomacy-strategy",
+              "msgRange": "3194~3200",
+              "execution": "unsupported",
+              "equipmentTypes": []
+            }
+          ]
+        },
+        "prng": {
+          "id": "xorshift32-nonzero-domain-rejection-v1",
+          "description": "Nonzero xorshift32 output raw1..4294967295 maps sample=raw-1; M=4294967295; limit=floor(M/B)*B; reject sample>=limit; return sample%B. Every raw counts; B1 consumes a word. The accepted finite mapping has equal residue preimage counts. Deterministic correlations and finite budget do not establish unbiased independent chooser outputs.",
+          "strictlyUnbiased": false,
+          "nativeEquivalent": false,
+          "cryptographic": false,
+          "corrects": "Earlier research used full-2^32 raw-domain rejection despite a nonzero state space; that proposal is superseded for this implementation."
+        },
+        "open": [
+          "Native chooser and weights",
+          "Native complete participant and proposal-specific filters",
+          "Exact native command call chain and multiple-proposal order",
+          "Original agreement/deduplication rules",
+          "Completion +10 eligibility on reject-all/abort across versions",
+          "Ordinary proposal TP values and global TP settlement",
+          "Child scalar source/writer/stock/version uncertainties",
+          "All excluded nineteen proposal classes and piece-equipment branches"
+        ],
+        "limits": {
+          "nativeEquivalent": false,
+          "original43GroupsReduced": false,
+          "original45SnapshotsReduced": false,
+          "executionOfEventCorpora": false,
+          "implementsGlobalWorld": false,
+          "newExternalSourceAcquisition": false,
+          "externalSourcesArePinnedRepositoryEvidenceChain": true,
+          "runsTestsTypechecksCompilersExamplesCheckersOrValidators": false
+        }
+      }
+    },
+    "Boundary": {
+      "const": {
+        "nativeEquivalent": false,
+        "ordinaryProposalTp": "not-modeled",
+        "tpScope": "council-completion-only",
+        "globalForceTechniquePoints": "not-exported",
+        "selectionDoesNotGuaranteeJointLegality": true,
+        "original43GroupsReduced": false,
+        "original45SnapshotsReduced": false,
+        "replayAuthenticatesProvenance": false
+      }
+    },
+    "Date": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "year": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "month": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "day": {
+          "enum": [
+            1,
+            11,
+            21
+          ]
+        }
+      },
+      "required": [
+        "year",
+        "month",
+        "day"
+      ]
+    },
+    "Marker": {
+      "anyOf": [
+        {
+          "const": null
+        },
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      ]
+    },
+    "Officer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "forceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "cityId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "leadership": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "charm": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "intelligence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "skillIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "minItems": 0,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "xp": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "leadership": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "charm": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "intelligence": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "politics": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "war": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            }
+          },
+          "required": [
+            "leadership",
+            "charm",
+            "intelligence",
+            "politics",
+            "war"
+          ]
+        },
+        "merit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "actedTurn": {
+          "$ref": "#/$defs/Marker"
+        },
+        "reservationJobId": {
+          "const": null
+        }
+      },
+      "required": [
+        "id",
+        "forceId",
+        "cityId",
+        "available",
+        "leadership",
+        "charm",
+        "intelligence",
+        "skillIds",
+        "xp",
+        "merit",
+        "actedTurn",
+        "reservationJobId"
+      ]
+    },
+    "Facility": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "cityId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "kind": {
+          "enum": [
+            "barracks",
+            "forge",
+            "stable",
+            "workshop",
+            "shipyard"
+          ]
+        },
+        "level": {
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "usedTurn": {
+          "$ref": "#/$defs/Marker"
+        },
+        "reservationJobId": {
+          "const": null
+        }
+      },
+      "required": [
+        "id",
+        "cityId",
+        "kind",
+        "level",
+        "complete",
+        "usedTurn",
+        "reservationJobId"
+      ]
+    },
+    "Catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "version": {
+          "const": 1
+        },
+        "entries": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "1": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "basePriceWord": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65535
+                }
+              },
+              "required": [
+                "basePriceWord"
+              ]
+            },
+            "2": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "basePriceWord": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65535
+                }
+              },
+              "required": [
+                "basePriceWord"
+              ]
+            },
+            "3": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "basePriceWord": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65535
+                }
+              },
+              "required": [
+                "basePriceWord"
+              ]
+            },
+            "4": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "basePriceWord": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65535
+                }
+              },
+              "required": [
+                "basePriceWord"
+              ]
+            },
+            "5": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "basePriceWord": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65535
+                }
+              },
+              "required": [
+                "basePriceWord"
+              ]
+            },
+            "6": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "basePriceWord": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65535
+                }
+              },
+              "required": [
+                "basePriceWord"
+              ]
+            },
+            "7": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "basePriceWord": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65535
+                }
+              },
+              "required": [
+                "basePriceWord"
+              ]
+            },
+            "8": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "basePriceWord": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65535
+                }
+              },
+              "required": [
+                "basePriceWord"
+              ]
+            },
+            "10": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "basePriceWord": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65535
+                }
+              },
+              "required": [
+                "basePriceWord"
+              ]
+            },
+            "11": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "basePriceWord": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65535
+                }
+              },
+              "required": [
+                "basePriceWord"
+              ]
+            }
+          },
+          "required": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "10",
+            "11"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "entries"
+      ]
+    },
+    "ChildPolicies": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "attributes": {
+          "anyOf": [
+            {
+              "const": {
+                "id": "stable-effective-attributes-v1",
+                "version": 1,
+                "parameters": {
+                  "snapshot": "command-start",
+                  "xpChangesEffectiveAbility": false
+                }
+              }
+            }
+          ]
+        },
+        "facilityMultiplier": {
+          "anyOf": [
+            {
+              "const": {
+                "id": "guide-levels-f32-v1",
+                "version": 1,
+                "parameters": {
+                  "levelBits": [
+                    "3F800000",
+                    "3F99999A",
+                    "3FC00000"
+                  ]
+                }
+              }
+            },
+            {
+              "const": {
+                "id": "flat-one-f32-v1",
+                "version": 1,
+                "parameters": {
+                  "levelBits": [
+                    "3F800000",
+                    "3F800000",
+                    "3F800000"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "writer": {
+          "anyOf": [
+            {
+              "const": {
+                "id": "clip-and-return-actual-v1",
+                "version": 1,
+                "parameters": {
+                  "overflow": "clip",
+                  "returned": "actual-delta"
+                }
+              }
+            },
+            {
+              "const": {
+                "id": "reject-cap-overflow-v1",
+                "version": 1,
+                "parameters": {
+                  "overflow": "reject",
+                  "returned": "actual-delta"
+                }
+              }
+            },
+            {
+              "const": {
+                "id": "clip-and-return-request-v1",
+                "version": 1,
+                "parameters": {
+                  "overflow": "clip",
+                  "returned": "requested"
+                }
+              }
+            }
+          ]
+        },
+        "morale": {
+          "anyOf": [
+            {
+              "const": {
+                "id": "weighted-floor-presecurity-min20-v1",
+                "version": 1,
+                "parameters": {
+                  "rounding": "floor",
+                  "security": "before-write",
+                  "minimum": 20
+                }
+              }
+            },
+            {
+              "const": {
+                "id": "weighted-ceil-presecurity-min20-v1",
+                "version": 1,
+                "parameters": {
+                  "rounding": "ceil",
+                  "security": "before-write",
+                  "minimum": 20
+                }
+              }
+            }
+          ]
+        },
+        "time": {
+          "anyOf": [
+            {
+              "const": {
+                "id": "raw-turns-min1-v1",
+                "version": 1,
+                "parameters": {
+                  "nonpositive": "minimum-one",
+                  "unit": "service-turn"
+                }
+              }
+            },
+            {
+              "const": {
+                "id": "positive-raw-turns-v1",
+                "version": 1,
+                "parameters": {
+                  "nonpositive": "reject",
+                  "unit": "service-turn"
+                }
+              }
+            }
+          ]
+        },
+        "productionAp": {
+          "anyOf": [
+            {
+              "const": {
+                "id": "production-request20-effective20-v1",
+                "version": 1,
+                "parameters": {
+                  "quantity": 20,
+                  "piece": 20
+                }
+              }
+            },
+            {
+              "const": {
+                "id": "experimental-production-ap-v1",
+                "version": 1,
+                "parameters": {
+                  "quantity": 25,
+                  "piece": 30
+                }
+              }
+            }
+          ]
+        },
+        "rewards": {
+          "anyOf": [
+            {
+              "const": {
+                "id": "source-reward-compat-intelligence-v1",
+                "version": 1,
+                "parameters": {
+                  "patrol": "leadership",
+                  "recruit": "charm",
+                  "quantity": "intelligence",
+                  "piece": "intelligence",
+                  "instantXp": 2,
+                  "instantMerit": 50,
+                  "completionXp": 4,
+                  "completionMerit": 100,
+                  "cap": 1000000000
+                }
+              }
+            },
+            {
+              "const": {
+                "id": "listed-byte-quantity-politics-v1",
+                "version": 1,
+                "parameters": {
+                  "patrol": "leadership",
+                  "recruit": "charm",
+                  "quantity": "politics",
+                  "piece": "intelligence",
+                  "instantXp": 2,
+                  "instantMerit": 50,
+                  "completionXp": 4,
+                  "completionMerit": 100,
+                  "cap": 1000000000
+                }
+              }
+            }
+          ]
+        },
+        "zeroYield": {
+          "anyOf": [
+            {
+              "const": {
+                "id": "pay-zero-yield-instant-v1",
+                "version": 1,
+                "parameters": {
+                  "zero": "pay-and-reward"
+                }
+              }
+            },
+            {
+              "const": {
+                "id": "reject-zero-yield-instant-v1",
+                "version": 1,
+                "parameters": {
+                  "zero": "reject"
+                }
+              }
+            }
+          ]
+        },
+        "reservations": {
+          "anyOf": [
+            {
+              "const": {
+                "id": "reserve-piece-capacity-and-participants-v1",
+                "version": 1,
+                "parameters": {
+                  "quantity": 1,
+                  "facility": true,
+                  "participants": "all-selected"
+                }
+              }
+            }
+          ]
+        },
+        "turn": {
+          "anyOf": [
+            {
+              "const": {
+                "id": "one-boundary-tick-complete-v1",
+                "version": 1,
+                "parameters": {
+                  "boundaries": 1,
+                  "order": "job-id-lexicographic",
+                  "completionActors": "acted-new-turn",
+                  "completionFacility": "available"
+                }
+              }
+            }
+          ]
+        },
+        "apRecovery": {
+          "anyOf": [
+            {
+              "const": {
+                "id": "fixed20-cap255-ap-recovery-v1",
+                "version": 1,
+                "parameters": {
+                  "increment": 20,
+                  "cap": 255
+                }
+              }
+            },
+            {
+              "const": {
+                "id": "fixed0-cap255-ap-recovery-v1",
+                "version": 1,
+                "parameters": {
+                  "increment": 0,
+                  "cap": 255
+                }
+              }
+            },
+            {
+              "const": {
+                "id": "fixed40-cap255-ap-recovery-v1",
+                "version": 1,
+                "parameters": {
+                  "increment": 40,
+                  "cap": 255
+                }
+              }
+            }
+          ]
+        },
+        "presentation": {
+          "anyOf": [
+            {
+              "const": {
+                "id": "no-presentation-rng-no-tp-v1",
+                "version": 1,
+                "parameters": {
+                  "rngDraws": 0,
+                  "techniquePoints": "not-modeled"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "required": [
+        "attributes",
+        "facilityMultiplier",
+        "writer",
+        "morale",
+        "time",
+        "productionAp",
+        "rewards",
+        "zeroYield",
+        "reservations",
+        "turn",
+        "apRecovery",
+        "presentation"
+      ]
+    },
+    "ChildCityScenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "kind": {
+          "const": "city"
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "security": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "troops": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "troopCapacity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "morale": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "moraleCap": {
+          "type": "integer",
+          "minimum": 20,
+          "maximum": 255
+        },
+        "patrolUsedTurn": {
+          "$ref": "#/$defs/Marker"
+        },
+        "drillGroundComplete": {
+          "type": "boolean"
+        },
+        "inventory": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "1": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity"
+              ]
+            },
+            "2": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity"
+              ]
+            },
+            "3": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity"
+              ]
+            },
+            "4": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity"
+              ]
+            },
+            "5": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity"
+              ]
+            },
+            "6": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity"
+              ]
+            },
+            "7": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity"
+              ]
+            },
+            "8": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity"
+              ]
+            },
+            "10": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity"
+              ]
+            },
+            "11": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity"
+              ]
+            }
+          },
+          "required": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "10",
+            "11"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "gold",
+        "security",
+        "troops",
+        "troopCapacity",
+        "morale",
+        "moraleCap",
+        "patrolUsedTurn",
+        "drillGroundComplete",
+        "inventory"
+      ]
+    },
+    "ChildCityState": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "kind": {
+          "const": "city"
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "security": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "troops": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "troopCapacity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "morale": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "moraleCap": {
+          "type": "integer",
+          "minimum": 20,
+          "maximum": 255
+        },
+        "patrolUsedTurn": {
+          "$ref": "#/$defs/Marker"
+        },
+        "drillGroundComplete": {
+          "type": "boolean"
+        },
+        "inventory": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "1": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "reserved": {
+                  "const": 0
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity",
+                "reserved"
+              ]
+            },
+            "2": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "reserved": {
+                  "const": 0
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity",
+                "reserved"
+              ]
+            },
+            "3": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "reserved": {
+                  "const": 0
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity",
+                "reserved"
+              ]
+            },
+            "4": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "reserved": {
+                  "const": 0
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity",
+                "reserved"
+              ]
+            },
+            "5": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "reserved": {
+                  "const": 0
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity",
+                "reserved"
+              ]
+            },
+            "6": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "reserved": {
+                  "const": 0
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity",
+                "reserved"
+              ]
+            },
+            "7": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "reserved": {
+                  "const": 0
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity",
+                "reserved"
+              ]
+            },
+            "8": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "reserved": {
+                  "const": 0
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity",
+                "reserved"
+              ]
+            },
+            "10": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "reserved": {
+                  "const": 0
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity",
+                "reserved"
+              ]
+            },
+            "11": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000
+                },
+                "reserved": {
+                  "const": 0
+                }
+              },
+              "required": [
+                "quantity",
+                "capacity",
+                "reserved"
+              ]
+            }
+          },
+          "required": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "10",
+            "11"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "gold",
+        "security",
+        "troops",
+        "troopCapacity",
+        "morale",
+        "moraleCap",
+        "patrolUsedTurn",
+        "drillGroundComplete",
+        "inventory"
+      ]
+    },
+    "ChildScenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "city-command-lifecycle-v1"
+        },
+        "date": {
+          "$ref": "#/$defs/Date"
+        },
+        "turn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "activeForceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "corps": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+            },
+            "actionPoints": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            }
+          },
+          "required": [
+            "id",
+            "actionPoints"
+          ]
+        },
+        "city": {
+          "$ref": "#/$defs/ChildCityScenario"
+        },
+        "officers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Officer"
+          },
+          "minItems": 2,
+          "maxItems": 256
+        },
+        "facilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Facility"
+          },
+          "minItems": 0,
+          "maxItems": 30
+        },
+        "catalog": {
+          "$ref": "#/$defs/Catalog"
+        },
+        "unlockedEquipmentTypes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              10,
+              11
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 10,
+          "uniqueItems": true
+        },
+        "specialtyEquipmentTypes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              10,
+              11
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 10,
+          "uniqueItems": true
+        },
+        "pressureActive": {
+          "type": "boolean"
+        },
+        "difficulty": {
+          "enum": [
+            "normal",
+            "super"
+          ]
+        },
+        "controller": {
+          "enum": [
+            "player",
+            "ai"
+          ]
+        },
+        "policies": {
+          "$ref": "#/$defs/ChildPolicies"
+        }
+      },
+      "required": [
+        "profile",
+        "date",
+        "turn",
+        "activeForceId",
+        "corps",
+        "city",
+        "officers",
+        "facilities",
+        "catalog",
+        "unlockedEquipmentTypes",
+        "specialtyEquipmentTypes",
+        "pressureActive",
+        "difficulty",
+        "controller",
+        "policies"
+      ]
+    },
+    "DomesticCommand": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "Patrol"
+            },
+            "cityId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+            },
+            "officerIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "minItems": 1,
+              "maxItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "type",
+            "cityId",
+            "officerIds"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "Recruit"
+            },
+            "cityId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+            },
+            "officerIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "minItems": 1,
+              "maxItems": 1,
+              "uniqueItems": true
+            },
+            "facilityId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+            }
+          },
+          "required": [
+            "type",
+            "cityId",
+            "officerIds",
+            "facilityId"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "Produce"
+            },
+            "cityId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+            },
+            "officerIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "minItems": 1,
+              "maxItems": 1,
+              "uniqueItems": true
+            },
+            "facilityId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+            },
+            "equipmentType": {
+              "enum": [
+                1,
+                2,
+                3,
+                4
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "cityId",
+            "officerIds",
+            "facilityId",
+            "equipmentType"
+          ]
+        }
+      ]
+    },
+    "ChildEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "command": {
+          "$ref": "#/$defs/DomesticCommand"
+        }
+      },
+      "required": [
+        "id",
+        "expectedRevision",
+        "command"
+      ]
+    },
+    "ChildWrite": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "before": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "requested": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "returned": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "actualDelta": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "after": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "cap": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "discarded": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "policyId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        }
+      },
+      "required": [
+        "before",
+        "requested",
+        "returned",
+        "actualDelta",
+        "after",
+        "cap",
+        "discarded",
+        "policyId"
+      ]
+    },
+    "ChildReward": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "officerId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "attribute": {
+          "enum": [
+            "leadership",
+            "charm",
+            "intelligence",
+            "politics",
+            "war"
+          ]
+        },
+        "xp": {
+          "$ref": "#/$defs/ChildWrite"
+        },
+        "merit": {
+          "$ref": "#/$defs/ChildWrite"
+        }
+      },
+      "required": [
+        "officerId",
+        "attribute",
+        "xp",
+        "merit"
+      ]
+    },
+    "ChildFees": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "gold": {
+          "$ref": "#/$defs/ChildWrite"
+        },
+        "actionPoints": {
+          "$ref": "#/$defs/ChildWrite"
+        },
+        "sourceApRequest": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "effectiveApCost": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "gold",
+        "actionPoints",
+        "sourceApRequest",
+        "effectiveApCost"
+      ]
+    },
+    "ChildCalculation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "observationKind": {
+          "const": "derived-adapter-observations"
+        },
+        "selectedOfficerIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "minItems": 1,
+          "maxItems": 1,
+          "uniqueItems": true
+        },
+        "facilityApplied": {
+          "type": "boolean"
+        },
+        "kernels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "api": {
+                "type": "string",
+                "maxLength": 16777216
+              },
+              "input": {
+                "$ref": "#/$defs/Json"
+              },
+              "output": {
+                "$ref": "#/$defs/Json"
+              }
+            },
+            "required": [
+              "api",
+              "input",
+              "output"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "securityKernelReturn": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          ]
+        },
+        "quantityKernelReturn": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          ]
+        },
+        "quantityPreCapacity": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          ]
+        },
+        "priceKernelReturn": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          ]
+        },
+        "timeKernelReturn": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          ]
+        },
+        "earlyCharmSum": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          ]
+        },
+        "moraleSecuritySnapshot": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          ]
+        },
+        "newRecruitMorale": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          ]
+        },
+        "securityWrite": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "$ref": "#/$defs/ChildWrite"
+            }
+          ]
+        },
+        "troopWrite": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "$ref": "#/$defs/ChildWrite"
+            }
+          ]
+        },
+        "inventoryWrite": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "$ref": "#/$defs/ChildWrite"
+            }
+          ]
+        },
+        "moraleWrite": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "$ref": "#/$defs/ChildWrite"
+            }
+          ]
+        }
+      },
+      "required": [
+        "observationKind",
+        "selectedOfficerIds",
+        "facilityApplied",
+        "kernels",
+        "securityKernelReturn",
+        "quantityKernelReturn",
+        "quantityPreCapacity",
+        "priceKernelReturn",
+        "timeKernelReturn",
+        "earlyCharmSum",
+        "moraleSecuritySnapshot",
+        "newRecruitMorale",
+        "securityWrite",
+        "troopWrite",
+        "inventoryWrite",
+        "moraleWrite"
+      ]
+    },
+    "ChildReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "commandId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "turn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "taskKind": {
+          "const": "instant"
+        },
+        "calculation": {
+          "$ref": "#/$defs/ChildCalculation"
+        },
+        "fees": {
+          "$ref": "#/$defs/ChildFees"
+        },
+        "rewards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ChildReward"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "newJobId": {
+          "const": null
+        },
+        "completions": {
+          "const": []
+        },
+        "apRecovery": {
+          "const": null
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "type": "string",
+                "maxLength": 16777216
+              },
+              "subjectId": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+              }
+            },
+            "required": [
+              "type",
+              "subjectId"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "sideEffectsNotModeled": {
+          "const": [
+            "technique-points",
+            "native-stat-growth",
+            "native-writer-semantics",
+            "native-personnel-tasks",
+            "native-corps-effects",
+            "presentation-rng"
+          ]
+        },
+        "rngDraws": {
+          "const": 0
+        }
+      },
+      "required": [
+        "commandId",
+        "revision",
+        "turn",
+        "taskKind",
+        "calculation",
+        "fees",
+        "rewards",
+        "newJobId",
+        "completions",
+        "apRecovery",
+        "events",
+        "sideEffectsNotModeled",
+        "rngDraws"
+      ]
+    },
+    "ChildFailure": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "const": false
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 16777216
+        }
+      },
+      "required": [
+        "ok",
+        "reason"
+      ]
+    },
+    "ChildPreview": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "receipt": {
+              "$ref": "#/$defs/ChildReceipt"
+            },
+            "duplicate": {
+              "const": false
+            },
+            "baseRevision": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "ok",
+            "receipt",
+            "duplicate",
+            "baseRevision"
+          ]
+        },
+        {
+          "$ref": "#/$defs/ChildFailure"
+        }
+      ]
+    },
+    "ChildSaveSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "serialized": {
+          "type": "string",
+          "maxLength": 16777216
+        }
+      },
+      "required": [
+        "ok",
+        "serialized"
+      ]
+    },
+    "ChildState": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "city-command-lifecycle-v1"
+        },
+        "date": {
+          "$ref": "#/$defs/Date"
+        },
+        "turn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "activeForceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "corps": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+            },
+            "actionPoints": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            }
+          },
+          "required": [
+            "id",
+            "actionPoints"
+          ]
+        },
+        "city": {
+          "$ref": "#/$defs/ChildCityState"
+        },
+        "officers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Officer"
+          },
+          "minItems": 2,
+          "maxItems": 256
+        },
+        "facilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Facility"
+          },
+          "minItems": 0,
+          "maxItems": 30
+        },
+        "catalog": {
+          "$ref": "#/$defs/Catalog"
+        },
+        "unlockedEquipmentTypes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              10,
+              11
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 10,
+          "uniqueItems": true
+        },
+        "specialtyEquipmentTypes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              10,
+              11
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 10,
+          "uniqueItems": true
+        },
+        "pressureActive": {
+          "type": "boolean"
+        },
+        "difficulty": {
+          "enum": [
+            "normal",
+            "super"
+          ]
+        },
+        "controller": {
+          "enum": [
+            "player",
+            "ai"
+          ]
+        },
+        "policies": {
+          "$ref": "#/$defs/ChildPolicies"
+        },
+        "schemaVersion": {
+          "const": 1
+        },
+        "scope": {
+          "const": "standalone-city-command-lifecycle"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "initialScenario": {
+          "$ref": "#/$defs/ChildScenario"
+        },
+        "policyDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "catalogDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "productionJobs": {
+          "const": []
+        },
+        "appliedCommands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "envelope": {
+                "$ref": "#/$defs/ChildEnvelope"
+              },
+              "envelopeDigest": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "committedRevision": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "receipt": {
+                "$ref": "#/$defs/ChildReceipt"
+              }
+            },
+            "required": [
+              "envelope",
+              "envelopeDigest",
+              "committedRevision",
+              "receipt"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 6
+        }
+      },
+      "required": [
+        "profile",
+        "date",
+        "turn",
+        "activeForceId",
+        "corps",
+        "city",
+        "officers",
+        "facilities",
+        "catalog",
+        "unlockedEquipmentTypes",
+        "specialtyEquipmentTypes",
+        "pressureActive",
+        "difficulty",
+        "controller",
+        "policies",
+        "schemaVersion",
+        "scope",
+        "revision",
+        "initialScenario",
+        "policyDigest",
+        "catalogDigest",
+        "productionJobs",
+        "appliedCommands"
+      ]
+    },
+    "Context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "completeCityRoster": {
+          "const": true
+        },
+        "membershipFrozen": {
+          "const": true
+        },
+        "cityId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "forceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "corpsId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        },
+        "lordOfficerId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "roster": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "officerId": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+              },
+              "role": {
+                "enum": [
+                  "lord",
+                  "subordinate"
+                ]
+              }
+            },
+            "required": [
+              "officerId",
+              "role"
+            ]
+          },
+          "minItems": 2,
+          "maxItems": 256
+        }
+      },
+      "required": [
+        "completeCityRoster",
+        "membershipFrozen",
+        "cityId",
+        "forceId",
+        "corpsId",
+        "lordOfficerId",
+        "roster"
+      ]
+    },
+    "Scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "single-council-domestic-v1"
+        },
+        "episodeId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "childScenario": {
+          "$ref": "#/$defs/ChildScenario"
+        },
+        "context": {
+          "$ref": "#/$defs/Context"
+        },
+        "initialTechniquePoints": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "policy": {
+          "$ref": "#/$defs/Policy"
+        },
+        "sources": {
+          "$ref": "#/$defs/Sources"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "profile",
+        "episodeId",
+        "childScenario",
+        "context",
+        "initialTechniquePoints",
+        "seed",
+        "policy",
+        "sources"
+      ]
+    },
+    "Decision": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "accept-one"
+            },
+            "speechId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            }
+          },
+          "required": [
+            "kind",
+            "speechId"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "accept-subset"
+            },
+            "speechIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+              },
+              "minItems": 1,
+              "maxItems": 6,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "kind",
+            "speechIds"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "accept-all"
+            }
+          },
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "reject-all"
+            }
+          },
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "abort"
+            }
+          },
+          "required": [
+            "kind"
+          ]
+        }
+      ]
+    },
+    "Command": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "OpenCouncil"
+            },
+            "participantIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+              },
+              "minItems": 1,
+              "maxItems": 6,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "type",
+            "participantIds"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "DecidePolicy"
+            },
+            "decision": {
+              "$ref": "#/$defs/Decision"
+            }
+          },
+          "required": [
+            "type",
+            "decision"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "DecideConcrete"
+            },
+            "decision": {
+              "$ref": "#/$defs/Decision"
+            }
+          },
+          "required": [
+            "type",
+            "decision"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "CompleteCouncil"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "AbortCouncil"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ]
+    },
+    "Envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "command": {
+          "$ref": "#/$defs/Command"
+        }
+      },
+      "required": [
+        "id",
+        "expectedRevision",
+        "command"
+      ]
+    },
+    "Speech": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "officerId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "kind": {
+              "const": "new-proposal"
+            },
+            "proposalId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "proposal": {
+              "anyOf": [
+                {
+                  "const": "domestic"
+                },
+                {
+                  "$ref": "#/$defs/DomesticCommand"
+                }
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "officerId",
+            "kind",
+            "proposalId",
+            "proposal"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "officerId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "kind": {
+              "const": "agree"
+            },
+            "proposalId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "proposerId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            }
+          },
+          "required": [
+            "id",
+            "officerId",
+            "kind",
+            "proposalId",
+            "proposerId"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "officerId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            },
+            "kind": {
+              "const": "abort"
+            },
+            "reason": {
+              "const": "no-legal-speech"
+            }
+          },
+          "required": [
+            "id",
+            "officerId",
+            "kind",
+            "reason"
+          ]
+        }
+      ]
+    },
+    "Phase": {
+      "enum": [
+        "unopened",
+        "policy",
+        "concrete",
+        "ready",
+        "completed",
+        "aborted"
+      ]
+    },
+    "Snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 256
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "participantIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+          },
+          "minItems": 0,
+          "maxItems": 6,
+          "uniqueItems": true
+        },
+        "policySpeeches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Speech"
+          },
+          "minItems": 0,
+          "maxItems": 6
+        },
+        "concreteSpeeches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Speech"
+          },
+          "minItems": 0,
+          "maxItems": 6
+        },
+        "domesticAccepted": {
+          "type": "boolean"
+        },
+        "selectedProposalIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+          },
+          "minItems": 0,
+          "maxItems": 6,
+          "uniqueItems": true
+        },
+        "rng": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "word": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "cursor": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4096
+            }
+          },
+          "required": [
+            "word",
+            "cursor"
+          ]
+        },
+        "councilCompletionTechniquePoints": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "revision",
+        "phase",
+        "participantIds",
+        "policySpeeches",
+        "concreteSpeeches",
+        "domesticAccepted",
+        "selectedProposalIds",
+        "rng",
+        "councilCompletionTechniquePoints"
+      ]
+    },
+    "RawWord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "raw": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "sample": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967294
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "rejected": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "raw",
+        "sample",
+        "limit",
+        "rejected"
+      ]
+    },
+    "Draw": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "bound": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "words": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RawWord"
+          },
+          "minItems": 1,
+          "maxItems": 4096
+        },
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 999999
+        },
+        "cursorBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "cursorAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "seedBefore": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "seedAfter": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "policyId": {
+          "const": "xorshift32-nonzero-domain-rejection-v1"
+        }
+      },
+      "required": [
+        "label",
+        "bound",
+        "words",
+        "value",
+        "cursorBefore",
+        "cursorAfter",
+        "seedBefore",
+        "seedAfter",
+        "policyId"
+      ]
+    },
+    "CandidateAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "officerId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "command": {
+                "$ref": "#/$defs/DomesticCommand"
+              },
+              "preview": {
+                "$ref": "#/$defs/ChildPreview"
+              }
+            },
+            "required": [
+              "command",
+              "preview"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 91
+        },
+        "selectedCandidateIndex": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 90
+            }
+          ]
+        },
+        "speechId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        }
+      },
+      "required": [
+        "officerId",
+        "candidates",
+        "selectedCandidateIndex",
+        "speechId"
+      ]
+    },
+    "Write": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "before": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "requested": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "after": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "actualDelta": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "discarded": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "policyId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+        }
+      },
+      "required": [
+        "before",
+        "requested",
+        "after",
+        "actualDelta",
+        "discarded",
+        "policyId"
+      ]
+    },
+    "ChildExecution": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "proposalId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+        },
+        "envelope": {
+          "$ref": "#/$defs/ChildEnvelope"
+        },
+        "receipt": {
+          "$ref": "#/$defs/ChildReceipt"
+        },
+        "ordinaryProposalTp": {
+          "const": "not-modeled"
+        }
+      },
+      "required": [
+        "proposalId",
+        "envelope",
+        "receipt",
+        "ordinaryProposalTp"
+      ]
+    },
+    "Receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "envelope": {
+          "$ref": "#/$defs/Envelope"
+        },
+        "policyId": {
+          "const": "single-council-domestic-policy-20261018-v1"
+        },
+        "phaseBefore": {
+          "$ref": "#/$defs/Phase"
+        },
+        "phaseAfter": {
+          "$ref": "#/$defs/Phase"
+        },
+        "revisionBefore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 256
+        },
+        "revisionAfter": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 256
+        },
+        "snapshotAfter": {
+          "$ref": "#/$defs/Snapshot"
+        },
+        "candidateAudits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CandidateAudit"
+          },
+          "minItems": 0,
+          "maxItems": 6
+        },
+        "draws": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Draw"
+          },
+          "minItems": 0,
+          "maxItems": 6
+        },
+        "childExecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ChildExecution"
+          },
+          "minItems": 0,
+          "maxItems": 6
+        },
+        "councilOwnFees": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "gold": {
+              "$ref": "#/$defs/Write"
+            },
+            "actionPoints": {
+              "$ref": "#/$defs/Write"
+            }
+          },
+          "required": [
+            "gold",
+            "actionPoints"
+          ]
+        },
+        "completionTechniquePoints": {
+          "$ref": "#/$defs/Write"
+        },
+        "sourceBoundary": {
+          "$ref": "#/$defs/Boundary"
+        }
+      },
+      "required": [
+        "envelope",
+        "policyId",
+        "phaseBefore",
+        "phaseAfter",
+        "revisionBefore",
+        "revisionAfter",
+        "snapshotAfter",
+        "candidateAudits",
+        "draws",
+        "childExecutions",
+        "councilOwnFees",
+        "completionTechniquePoints",
+        "sourceBoundary"
+      ]
+    },
+    "State": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tag": {
+          "const": "san11-single-council-state-v1"
+        },
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "single-council-domestic-v1"
+        },
+        "genesis": {
+          "$ref": "#/$defs/Scenario"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/Snapshot"
+        },
+        "childState": {
+          "$ref": "#/$defs/ChildState"
+        },
+        "acceptedCommands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "envelope": {
+                "$ref": "#/$defs/Envelope"
+              },
+              "receipt": {
+                "$ref": "#/$defs/Receipt"
+              }
+            },
+            "required": [
+              "envelope",
+              "receipt"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "sourceBoundary": {
+          "$ref": "#/$defs/Boundary"
+        }
+      },
+      "required": [
+        "tag",
+        "schemaVersion",
+        "profile",
+        "genesis",
+        "snapshot",
+        "childState",
+        "acceptedCommands",
+        "sourceBoundary"
+      ]
+    },
+    "Failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "const": false
+        },
+        "committed": {
+          "const": false
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 16777216
+        },
+        "commandId": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            }
+          ]
+        },
+        "proposalId": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+            }
+          ]
+        },
+        "childReason": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "type": "string",
+              "maxLength": 16777216
+            }
+          ]
+        },
+        "effects": {
+          "const": []
+        }
+      },
+      "required": [
+        "ok",
+        "committed",
+        "reason",
+        "commandId",
+        "proposalId",
+        "childReason",
+        "effects"
+      ]
+    },
+    "StateResult": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "state": {
+              "$ref": "#/$defs/State"
+            }
+          },
+          "required": [
+            "ok",
+            "state"
+          ]
+        },
+        {
+          "$ref": "#/$defs/Failure"
+        }
+      ]
+    },
+    "Result": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "committed": {
+              "type": "boolean"
+            },
+            "duplicate": {
+              "type": "boolean"
+            },
+            "state": {
+              "$ref": "#/$defs/State"
+            },
+            "receipt": {
+              "$ref": "#/$defs/Receipt"
+            }
+          },
+          "required": [
+            "ok",
+            "committed",
+            "duplicate",
+            "state",
+            "receipt"
+          ]
+        },
+        {
+          "$ref": "#/$defs/Failure"
+        }
+      ]
+    },
+    "Preview": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "committed": {
+              "const": false
+            },
+            "duplicate": {
+              "type": "boolean"
+            },
+            "projectedState": {
+              "$ref": "#/$defs/State"
+            },
+            "receipt": {
+              "$ref": "#/$defs/Receipt"
+            }
+          },
+          "required": [
+            "ok",
+            "committed",
+            "duplicate",
+            "projectedState",
+            "receipt"
+          ]
+        },
+        {
+          "$ref": "#/$defs/Failure"
+        }
+      ]
+    },
+    "SaveResult": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "serialized": {
+              "type": "string",
+              "maxLength": 16777216
+            }
+          },
+          "required": [
+            "ok",
+            "serialized"
+          ]
+        },
+        {
+          "$ref": "#/$defs/Failure"
+        }
+      ]
+    },
+    "SaveRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tag": {
+          "const": "san11-single-council-save-v1"
+        },
+        "state": {
+          "$ref": "#/$defs/State"
+        },
+        "childSave": {
+          "$ref": "#/$defs/ChildSaveSuccess"
+        }
+      },
+      "required": [
+        "tag",
+        "state",
+        "childSave"
+      ]
+    },
+    "Expected": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "duplicate": {
+              "type": "boolean"
+            },
+            "receipt": {
+              "$ref": "#/$defs/Receipt"
+            }
+          },
+          "required": [
+            "ok",
+            "duplicate",
+            "receipt"
+          ]
+        },
+        {
+          "$ref": "#/$defs/Failure"
+        }
+      ]
+    },
+    "Trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tag": {
+          "const": "san11-single-council-trace-v1"
+        },
+        "scenario": {
+          "$ref": "#/$defs/Scenario"
+        },
+        "attempts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "envelope": {
+                "$ref": "#/$defs/Envelope"
+              },
+              "expected": {
+                "anyOf": [
+                  {
+                    "const": null
+                  },
+                  {
+                    "$ref": "#/$defs/Expected"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "envelope",
+              "expected"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 4096
+        },
+        "expectedFinalState": {
+          "anyOf": [
+            {
+              "const": null
+            },
+            {
+              "$ref": "#/$defs/State"
+            }
+          ]
+        }
+      },
+      "required": [
+        "tag",
+        "scenario",
+        "attempts",
+        "expectedFinalState"
+      ]
+    },
+    "ReplayResult": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "state": {
+              "$ref": "#/$defs/State"
+            },
+            "outcomes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Expected"
+              },
+              "minItems": 0,
+              "maxItems": 4096
+            }
+          },
+          "required": [
+            "ok",
+            "state",
+            "outcomes"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ok": {
+              "const": false
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 16777216
+            },
+            "index": {
+              "type": "integer",
+              "minimum": -1,
+              "maximum": 4095
+            },
+            "state": {
+              "anyOf": [
+                {
+                  "const": null
+                },
+                {
+                  "$ref": "#/$defs/State"
+                }
+              ]
+            }
+          },
+          "required": [
+            "ok",
+            "reason",
+            "index",
+            "state"
+          ]
+        }
+      ]
+    },
+    "QueryResult": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "childState": {
+              "$ref": "#/$defs/ChildState"
+            },
+            "sourceBoundary": {
+              "$ref": "#/$defs/Boundary"
+            }
+          },
+          "required": [
+            "ok",
+            "snapshot",
+            "childState",
+            "sourceBoundary"
+          ]
+        },
+        {
+          "$ref": "#/$defs/Failure"
+        }
+      ]
+    }
+  },
+  "anyOf": [
+    {
+      "$ref": "#/$defs/Scenario"
+    },
+    {
+      "$ref": "#/$defs/State"
+    },
+    {
+      "$ref": "#/$defs/Snapshot"
+    },
+    {
+      "$ref": "#/$defs/Envelope"
+    },
+    {
+      "$ref": "#/$defs/Receipt"
+    },
+    {
+      "$ref": "#/$defs/Trace"
+    },
+    {
+      "$ref": "#/$defs/StateResult"
+    },
+    {
+      "$ref": "#/$defs/Result"
+    },
+    {
+      "$ref": "#/$defs/Preview"
+    },
+    {
+      "$ref": "#/$defs/SaveRecord"
+    },
+    {
+      "$ref": "#/$defs/SaveResult"
+    },
+    {
+      "$ref": "#/$defs/ReplayResult"
+    },
+    {
+      "$ref": "#/$defs/QueryResult"
+    }
+  ]
+}
