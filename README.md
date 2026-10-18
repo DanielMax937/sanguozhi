@@ -1,3 +1,15 @@
+## 当前新增：固定单城季节状态 simulation（2026-10-18，静态）
+
+[完整规则](docs/rules/city-season-lifecycle.md) · [六个API](docs/engine/city-season-lifecycle.md) · [固定政策](data/catalogs/city-season-policy-v1.json) · [设施目录](data/catalogs/city-season-food-facilities-v1.json) · [来源身份](docs/sources/city-season-lifecycle.json) · [完整DTO schema](docs/sources/city-season-lifecycle.schema.json) · [未运行trace](data/scenarios/city-season-example-v1.json)
+
+`single-city-season-simulation-v1`固定单城／owner、完整驻城名单与30设施槽，逐月维护疫病／蝗灾／丰作current与scheduled。引擎从seed自行生成事件、持续、兵粮损失、健康恶化和Lv1农场移除；每座实际移除扣30TP，Lv3不拆，Lv2与未知设施／技能拒绝。任何死亡边界、非正兵粮或TP不足整月回滚，不夹1或部分提交。风水只阻挡新生成／到期激活，不清旧current；祈愿只用显式新阈值。
+
+季初用灾害后的真实兵数与剩余设施，串联既有city-food纯核和monthly-harvest叶，完整F先丰作变换，再按本账本容量入粮；两份request／receipt、实际delta及丢弃量全部保存。概率、持续、损失、月序、技能门与PRNG均为可替换的具名simulation policy；等原像结论只限accepted nonzero raw domain，strictlyUnbiased=false。不是原版全局scheduler，也未整合完整财政或其他服务的时钟／账本。
+
+公共[src/index.ts](packages/engine/src/index.ts)导出六API、三个固定快照常量和11个已定义类型。完整genesis逐receipt重算、同ID幂等、preview及escaped SaveResult／全部旧返回预算保持原子边界；API结果须使用文档列明的schema fragment，单独shape匹配不能代替完整replay。
+
+公共入口集成基线为PR89 main `0c5ad00667d40960e72f2d8b14c9c20f7eec30fc`／tree `a88a940c92a37c85ac8a827f1f8988ae18401aea`；来源manifest保留PR86历史读取身份。两粮核、两份来源依赖与设施catalog在这两个基线间Git blob相同，不把集成版本提升为新的原作证据。 仅静态实现，产品、示例、测试、typecheck、编译、build、runtime、checker、诊断及schema验证均未运行。原43主题与45快照的证据缺口不减少，下方历史结果不验证本新增。
+
 ## 当前新增：一次内政评定（2026-10-18，静态）
 
 [完整具体规则](docs/rules/single-council-lifecycle.md) · [七个API](docs/engine/single-council-lifecycle.md) · [固定政策](data/catalogs/single-council-policy-v1.json) · [来源身份](docs/sources/single-council-lifecycle.json) · [完整DTO schema](docs/sources/single-council-lifecycle.schema.json) · [未运行trace](data/scenarios/single-council-example-v1.json)

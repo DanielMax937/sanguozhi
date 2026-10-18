@@ -1,0 +1,171 @@
+{
+  "id": "season-simulation-20261018-v1",
+  "version": 1,
+  "profile": "single-city-season-simulation-v1",
+  "evidence": "new-simulation-policy-not-native-constants",
+  "rng": {
+    "id": "xorshift32-nonzero-domain-rejection-v1",
+    "seedMinimum": 1,
+    "seedMaximum": 4294967295,
+    "nonzeroDomainSize": 4294967295,
+    "sample": "raw-minus-one",
+    "limit": "floor(nonzeroDomainSize/bound)*bound",
+    "reject": "sample>=limit",
+    "value": "sample%bound",
+    "shifts": [
+      13,
+      17,
+      5
+    ],
+    "maximumBound": 1000000,
+    "boundOneConsumesWord": true,
+    "everyRawCounts": true,
+    "strictlyUnbiased": false,
+    "independentDrawsCertified": false,
+    "cryptographic": false,
+    "nativeEquivalent": false,
+    "equalPreimageScope": "accepted-nonzero-raw-domain-only"
+  },
+  "occurrence": {
+    "denominator": 1000,
+    "plague": 8,
+    "locust": 13,
+    "harvest": 21,
+    "harvestWithPrayer": 42,
+    "holdersStack": false,
+    "securityAffectsProbability": false
+  },
+  "durationMonths": {
+    "plague": {
+      "minimum": 1,
+      "maximum": 3
+    },
+    "locust": {
+      "minimum": 1,
+      "maximum": 2
+    },
+    "harvest": {
+      "minimum": 1,
+      "maximum": 2
+    }
+  },
+  "plague": {
+    "troopLossBasisPoints": {
+      "minimum": 125,
+      "maximum": 375,
+      "denominator": 10000
+    },
+    "healthWorsenThreshold": 37,
+    "healthDrawBound": 1000,
+    "healthIncrement": 1
+  },
+  "locust": {
+    "foodLossBasisPoints": {
+      "minimum": 200,
+      "maximum": 700,
+      "denominator": 10000
+    },
+    "farmRemovalDrawBound": 3,
+    "farmRemovalSelectedValue": 0,
+    "removableFarmLevel": 1,
+    "techniquePointsPerFarm": 30
+  },
+  "timing": {
+    "id": "decrement-activate-damage-income-generate-v1",
+    "initialMonthAlreadySettled": true,
+    "step": "one-calendar-month-day-one",
+    "scheduledLeadMonths": 1,
+    "currentDecayBeforeActivation": 1,
+    "noSameKindActiveAndScheduled": true,
+    "activationCountsAsFirstEffectiveMonth": true,
+    "generateOnlyIfInactiveAndNoPending": true,
+    "processingOrder": [
+      "decay-and-activate",
+      "plague",
+      "locust",
+      "quarterly-food",
+      "generate-next-month"
+    ],
+    "eventOrder": [
+      "plague",
+      "locust",
+      "harvest"
+    ],
+    "officerAndFacilityOrder": "ascending-code-unit-id",
+    "seasonMonths": [
+      1,
+      4,
+      7,
+      10
+    ],
+    "horizonLookaheadMonths": 1
+  },
+  "fengshui": {
+    "id": "new-generation-and-activation-double-gate-v1",
+    "blocks": [
+      "plague",
+      "locust"
+    ],
+    "blocksGenerationWithoutDraw": true,
+    "blocksScheduledActivation": true,
+    "clearsExistingCurrent": false,
+    "blocksHarvest": false
+  },
+  "foodAdapter": {
+    "id": "complete-axial-granary-season-food-v1",
+    "evidence": "derived-adapter-observations",
+    "slots": 30,
+    "completeWord": 1,
+    "granaryDistance": 1,
+    "granaryStacks": false,
+    "levy": false,
+    "usePostDamageTroopsAndFacilities": true,
+    "ordinaryFarmSupport": "max(abs(dq),abs(dr),abs(dq+dr))==1",
+    "posting": "after-harvest-credit-cap",
+    "noIncomeSkills": true
+  },
+  "writer": {
+    "id": "season-local-resource-writer-v1",
+    "partialCommit": false,
+    "terminalEffect": "reject-whole-month",
+    "insufficientTechniquePoints": "reject-whole-month",
+    "zeroLoss": "preserve-zero",
+    "foodCapOverflow": "retain-request-and-discarded",
+    "healthRecovery": false
+  },
+  "budgets": {
+    "acceptedCommands": 256,
+    "traceAttempts": 256,
+    "rawWords": 4096,
+    "depth": 32,
+    "nodes": 250000,
+    "utf8Bytes": 16777216,
+    "arrayLength": 4096,
+    "objectKeys": 256,
+    "minimumMonths": 1,
+    "maximumMonths": 36
+  },
+  "validation": {
+    "closedNonProxyDTO": true,
+    "privateDeepFrozenRegistrySnapshots": true,
+    "duplicateDecodedJsonKeys": "reject",
+    "completeGenesisReplay": true,
+    "everyReceiptCompared": true,
+    "escapedSaveResultBudgeted": true,
+    "allOlderDuplicateExecuteAndPreviewBudgeted": true
+  },
+  "limits": {
+    "troops": 150000,
+    "foodCapacity": 1000000000,
+    "techniquePoints": 10000,
+    "officers": 80,
+    "healthMaximum": 3,
+    "coordinateAbsolute": 1000000,
+    "baseFoodWord": 65535
+  },
+  "originalProbabilityEvidenceClosed": false,
+  "originalWriterEvidenceClosed": false,
+  "original43GroupsReduced": false,
+  "original45SnapshotsReduced": false,
+  "crossServiceIntegrationComplete": false
+}

@@ -1,3 +1,11 @@
+## 2026-10-18 单城季节状态：静态simulation，不关闭原作证据
+
+[完整规则](city-season-lifecycle.md)与[六API](../engine/city-season-lifecycle.md)新增固定单城／完整驻军roster／30槽的有限月步进：current与scheduled持久化，内部seed生成／持续，真实兵粮／健康效果、Lv1移除30TP及季初两旧粮纯核串联到账。完整genesis逐receipt重建、同ID幂等、preview和所有旧返回／escaped SaveResult预算均有静态实现。
+
+发生率／持续／损失／祈愿数值／月序与双门／PRNG是可替换simulation；风水不清旧current，Lv2及未知设施／技能拒绝，死亡边界、兵粮零、TP不足整月回滚。软件合同不代表原版全局scheduler或完整财政集成。原概率、原迁移时点、健康RNG、Lv2、原writer／技能getter／stock身份仍未恢复；跨服务账本和时钟继续未集成。原43主题／45快照保持原分母和未决项，不因独立profile而关闭。
+
+公共入口集成基线为PR89 main `0c5ad00667d40960e72f2d8b14c9c20f7eec30fc`／tree `a88a940c92a37c85ac8a827f1f8988ae18401aea`；来源manifest保留PR86历史读取身份。两粮核、两份来源依赖与设施catalog在这两个基线间Git blob相同，不把集成版本提升为新的原作证据。 仅静态实现，产品、示例、测试、typecheck、编译、build、runtime、checker、诊断及schema验证均未运行。原43主题与45快照的证据缺口不减少，下方历史结果不验证本新增。
+
 ## 2026-10-18 一次内政评定：有限静态状态
 
 [规则](single-council-lifecycle.md)与[七个API](../engine/single-council-lifecycle.md)新增固定单城／完整名单／最多6人两阶段独立episode。内部候选、提案与赞同、采决、公开child真实普通内政事务、完成／中止终态、完整保存重建均已有静态代码；22类池只执行Patrol／Recruit／Produce1–4三类，19类及件数生产仍排除。原有city-command能力仅复用，不扩大其native证据。

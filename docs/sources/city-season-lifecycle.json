@@ -1,0 +1,120 @@
+{
+  "id": "city-season-lifecycle-source-binding-v1",
+  "schemaVersion": 1,
+  "profile": "single-city-season-simulation-v1",
+  "repository": "DanielMax937/sanguozhi",
+  "baseCommit": "a04ee326fdaa68e930681430352f4d98fee5209e",
+  "baseTree": "df4e2be515e2434e4e64476517c8e58f0d3afaf0",
+  "files": [
+    {
+      "path": "data/catalogs/city-finance-facilities-v1.json",
+      "bytes": 2648,
+      "gitBlob": "4224d534b90bc2f42d1a6bf325153d03e7bf1101",
+      "sha256": "b7317c35bfc614a426f235a38fb32b124d808c9dbdf65ce483de17e2f2baa0d8",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/data/catalogs/city-finance-facilities-v1.json"
+    },
+    {
+      "path": "docs/rules/28-status-duration-recovery.md",
+      "bytes": 9295,
+      "gitBlob": "9295ba373076a7d2063bcc748677fbb3e3e7e9d2",
+      "sha256": "531697127c103086d4ea6373e60e359522d731b01aa1dab7c4119f3cfdbdb9b1",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/docs/rules/28-status-duration-recovery.md"
+    },
+    {
+      "path": "docs/rules/city-finance-lifecycle.md",
+      "bytes": 35370,
+      "gitBlob": "1c7336e4eca95edb61ed8fe51ffef6c748e9c428",
+      "sha256": "4e8fe6be2e6386aef16a29ca33982c92f36e1bceb9293ea26f70dbe7b07e87a9",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/docs/rules/city-finance-lifecycle.md"
+    },
+    {
+      "path": "docs/sources/city-food-income-projection.json",
+      "bytes": 59600,
+      "gitBlob": "fc750f915a2d54b9c7cd9b37ca4b573e8d40dc1d",
+      "sha256": "05c9213f3353da4caa5897fd297633d020eeba578c9c76786cfd2ce4ba098a86",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/docs/sources/city-food-income-projection.json"
+    },
+    {
+      "path": "docs/sources/monthly-city-food-base-argument.json",
+      "bytes": 24467,
+      "gitBlob": "4dd424e1dedf057aaeb4707793c40a2d8e367e7d",
+      "sha256": "659e18f4a5ac972b8c284f1ee9ebbc0c505bf445c87e0fc5920843502ea9cfca",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/docs/sources/monthly-city-food-base-argument.json"
+    },
+    {
+      "path": "packages/engine/src/city-food-income-projection.ts",
+      "bytes": 12045,
+      "gitBlob": "4cdf4fb244045d8a800464ef4c25699ffce1b8cb",
+      "sha256": "168f3acc64fa4f88f6d139dfdba17a00ec052cb4275068b2476e491ce93545d8",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/packages/engine/src/city-food-income-projection.ts"
+    },
+    {
+      "path": "packages/engine/src/monthly-city-food-base-argument.ts",
+      "bytes": 6274,
+      "gitBlob": "041b3c522806d56a0b71d3aa3c83fa45fcc6fd2e",
+      "sha256": "2d725ea8465d1ee1813bfe3ac0fe845b463b262996f29eefaa73c1dd104b6a29",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/packages/engine/src/monthly-city-food-base-argument.ts"
+    }
+  ],
+  "scope": "independent-single-city-monthly-simulation",
+  "runtimeStatus": "not-run",
+  "nativeEquivalent": false,
+  "reuse": {
+    "cityFood": "calculateCityFoodIncomeProjection",
+    "harvestLeaf": "calculateMonthlyCityFoodBaseArgument",
+    "financeLifecycleImported": false,
+    "statusLifecycleImported": false,
+    "sameAbilitiesRecounted": false
+  },
+  "sourceFacts": [
+    "current/scheduled plague, locust and harvest state layers",
+    "month-start state processing precedes food income",
+    "current harvest transforms full F before levy",
+    "fengshui prevents new plague/locust without healing current",
+    "prayer favors harvest without a recovered original numeric rate",
+    "removed Lv1 farm costs 30 technique points in the cited rules"
+  ],
+  "newPolicyFacts": [
+    "all occurrence thresholds and duration ranges",
+    "all troop/food loss and health rates",
+    "farm destruction sampling and month frequency",
+    "decrement/activation/generation order and one-month lead",
+    "fengshui generation and activation double gate",
+    "whole-month rollback, positive-food/positive-troops boundary, TP insufficiency rejection",
+    "fixed roster, coordinate adjacency and bounded local resource writer",
+    "xorshift32 nonzero-domain rejection and finite budgets"
+  ],
+  "remainingEvidence": [
+    "original occurrence probabilities and prayer numeric effect",
+    "original scheduled/current transition and duration distributions",
+    "original casualty/food/health rates and farm level-2 behavior",
+    "native RNG, skill getters, facility lookup/adjacency, resource writers",
+    "stock/patch identity and global scheduling equivalence",
+    "cross-service state and clock consistency"
+  ],
+  "exclusions": [
+    "native ownership and capture",
+    "death, force extinction and inheritance",
+    "native mission-return-finalizers",
+    "gold, salaries, specialty inventory and natural security decline",
+    "cross-service ledger and clock integration"
+  ],
+  "original43GroupsReduced": false,
+  "original45SnapshotsReduced": false,
+  "originalProbabilityEvidenceClosed": false,
+  "originalWriterEvidenceClosed": false,
+  "crossServiceIntegrationComplete": false,
+  "excerpts": [
+    {
+      "path": "docs/rules/02-economy.md",
+      "firstLine": 3328,
+      "lastLine": 3645,
+      "fullFileGitBlobFromFixedTree": "f73fecb1d6977368312b0f49b2f7068cd2a0882b",
+      "fullFileBytesFromFixedTree": 102070,
+      "excerptBytes": 9422,
+      "excerptSha256": "3364a28d76eb3892a504d35cd3219771977ee806ac5b4b0257171ef596957700",
+      "fullFileRead": false,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/a04ee326fdaa68e930681430352f4d98fee5209e/docs/rules/02-economy.md#L3328-L3645"
+    }
+  ]
+}

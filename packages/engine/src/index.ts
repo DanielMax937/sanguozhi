@@ -111,3 +111,7 @@ export type { SourceEventQueryInputV1, SourceEventQueryResultV1, SourceEventQuer
 // Single fixed domestic council episode; ordinary proposal TP remains not modeled.
 export { SINGLE_COUNCIL_POLICY_V1, createSingleCouncilState, previewSingleCouncilCommand, executeSingleCouncilCommand, querySingleCouncilState, saveSingleCouncilState, loadSingleCouncilState, replaySingleCouncilCommands } from './single-council-lifecycle.ts';
 export type { SingleCouncilScenarioV1, SingleCouncilStateV1, SingleCouncilEnvelopeV1, SingleCouncilReceiptV1, SingleCouncilSnapshotV1, SingleCouncilPolicyV1, SingleCouncilFailureV1, SingleCouncilResultV1, SingleCouncilPreviewV1, SingleCouncilSaveResultV1, SingleCouncilTraceV1, SingleCouncilStateResultV1, SingleCouncilQueryResultV1, SingleCouncilReplayResultV1 } from './single-council-lifecycle.ts';
+
+// Fixed-city seasonal simulation; original disaster rates and global finance remain unresolved.
+export { CITY_SEASON_POLICY_V1, CITY_SEASON_FOOD_CATALOG_V1, CITY_SEASON_SOURCES_V1, createCitySeasonState, previewCitySeasonCommand, executeCitySeasonCommand, saveCitySeasonState, loadCitySeasonState, replayCitySeasonTrace } from './city-season-lifecycle.ts';
+export type { CitySeasonScenarioV1, CitySeasonStateV1, CitySeasonEnvelopeV1, CitySeasonSnapshotV1, CitySeasonReceiptV1, CitySeasonResultV1, CitySeasonFailureV1, CitySeasonPreviewV1, CitySeasonSaveResultV1, CitySeasonTraceV1, CitySeasonReplayResultV1 } from './city-season-lifecycle.ts';
