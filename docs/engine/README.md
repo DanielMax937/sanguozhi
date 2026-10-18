@@ -1,3 +1,13 @@
+## 固定单城季节：独立simulation六API（2026-10-18，静态）
+
+[CitySeason V1](city-season-lifecycle.md)通过公共[src/index.ts](../../packages/engine/src/index.ts)导出 `createCitySeasonState`、`previewCitySeasonCommand`、`executeCitySeasonCommand`、`saveCitySeasonState`、`loadCitySeasonState`、`replayCitySeasonTrace`，以及 `CITY_SEASON_POLICY_V1`、`CITY_SEASON_FOOD_CATALOG_V1`、`CITY_SEASON_SOURCES_V1` 和11个类型。[具体规则](../rules/city-season-lifecycle.md) · [policy](../../data/catalogs/city-season-policy-v1.json) · [设施catalog](../../data/catalogs/city-season-food-facilities-v1.json) · [source](../sources/city-season-lifecycle.json) · [schema](../sources/city-season-lifecycle.schema.json) · [未运行trace](../../data/scenarios/city-season-example-v1.json)。
+
+唯一AdvanceSeasonMonth在固定单城／完整名单／30槽中推进current与scheduled，内部PRNG派生概率／持续／兵粮损失／健康恶化／Lv1移除，真实扣30TP并在季初串联两旧粮纯核后入账。风水不治疗旧current；祈愿、月序、概率／持续／损失均显式simulation。任一死亡边界、非正兵粮、TP不足及后段预算失败均回滚整月。Lv2和未知设施／技能整体拒绝；不是原版全局scheduler或完整财政接续。
+
+完整genesis、policy／catalog／sources和每个receipt重新计算；保存／加载、preview、历史ID幂等与escaped SaveResult及全部旧返回预算都共享有界合同。API返回使用相应schema result fragment，create/load共用stateResult；条件字段关系仍由adapter／纯核／完整replay约束，不把shape schema当语义认证。strictlyUnbiased=false，非原版PRNG。
+
+公共入口集成基线为PR89 main `0c5ad00667d40960e72f2d8b14c9c20f7eec30fc`／tree `a88a940c92a37c85ac8a827f1f8988ae18401aea`；来源manifest保留PR86历史读取身份。两粮核、两份来源依赖与设施catalog在这两个基线间Git blob相同，不把集成版本提升为新的原作证据。 仅静态实现，产品、示例、测试、typecheck、编译、build、runtime、checker、诊断及schema验证均未运行。原43主题与45快照的证据缺口不减少，下方历史结果不验证本新增。
+
 ## 一次内政评定：独立episode API（2026-10-18，静态）
 
 [SingleCouncil V1](single-council-lifecycle.md)通过公共src/index导出 `createSingleCouncilState`、`previewSingleCouncilCommand`、`executeSingleCouncilCommand`、`querySingleCouncilState`、`saveSingleCouncilState`、`loadSingleCouncilState`、`replaySingleCouncilCommands`，以及 `SINGLE_COUNCIL_POLICY_V1` 与14个类型。[具体规则](../rules/single-council-lifecycle.md) · [policy](../../data/catalogs/single-council-policy-v1.json) · [source](../sources/single-council-lifecycle.json) · [schema](../sources/single-council-lifecycle.schema.json) · [未运行trace](../../data/scenarios/single-council-example-v1.json)。

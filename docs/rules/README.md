@@ -1,3 +1,13 @@
+## 当前规则入口：固定单城季节 simulation（2026-10-18，静态）
+
+[详细季节规则](city-season-lifecycle.md) · [六API](../engine/city-season-lifecycle.md) · [policy](../../data/catalogs/city-season-policy-v1.json) · [设施catalog](../../data/catalogs/city-season-food-facilities-v1.json) · [source](../sources/city-season-lifecycle.json) · [schema](../sources/city-season-lifecycle.schema.json) · [未运行trace](../../data/scenarios/city-season-example-v1.json)
+
+固定单城、完整驻城名单与30槽，current／scheduled月初处理后先疫病、再蝗灾、再季粮、最后生成下月pending。疫病实际扣兵并恶化健康；蝗灾实际损粮、按新抽样拆Lv1并扣每座30TP；Lv3不拆，Lv2与未知设施／技能出域。死亡边界、兵粮零、TP不足均整月拒绝，不夹1或留部分写入。风水仅预防新生成／激活，祈愿只切换显式新阈值。
+
+完整F来自灾害后的真实兵数／剩余设施并真实调用旧粮核，当前丰作由第二个旧叶处理后才credit封顶；request、receipt、实际delta与discarded全部保留。发生率、持续、损失、顺序、风水激活门与PRNG是可替换simulation参数，不是原作常量。原版全局scheduler、完整财政和跨服务账本／时钟均未集成；原概率／writer／skill getter／stock及Lv2证据缺口不减少。
+
+公共入口集成基线为PR89 main `0c5ad00667d40960e72f2d8b14c9c20f7eec30fc`／tree `a88a940c92a37c85ac8a827f1f8988ae18401aea`；来源manifest保留PR86历史读取身份。两粮核、两份来源依赖与设施catalog在这两个基线间Git blob相同，不把集成版本提升为新的原作证据。 仅静态实现，产品、示例、测试、typecheck、编译、build、runtime、checker、诊断及schema验证均未运行。原43主题与45快照的证据缺口不减少，下方历史结果不验证本新增。
+
 ## 一次内政评定：具体规则（2026-10-18，静态）
 
 [完整规则](single-council-lifecycle.md) · [七个API](../engine/single-council-lifecycle.md) · [固定policy](../../data/catalogs/single-council-policy-v1.json) · [来源manifest](../sources/single-council-lifecycle.json) · [DTO schema](../sources/single-council-lifecycle.schema.json) · [未运行trace](../../data/scenarios/single-council-example-v1.json)。

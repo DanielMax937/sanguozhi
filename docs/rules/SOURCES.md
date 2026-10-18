@@ -1,3 +1,23 @@
+## 2026-10-18 单城季节：来源复用与simulation边界
+
+[规则](city-season-lifecycle.md) · [API](../engine/city-season-lifecycle.md) · [完整来源manifest](../sources/city-season-lifecycle.json) · [新政策](../../data/catalogs/city-season-policy-v1.json) · [收窄设施目录](../../data/catalogs/city-season-food-facilities-v1.json)
+
+既有经济§11只提供current／scheduled两层、月初状态先于粮收入、完整F丰作变换、风水预防而不治疗、祈愿定性倾向、疫病兵力／健康后果和蝗灾粮／农场后果；Lv1拆除扣30TP、Lv3不拆按原证据等级保留。新的发生率、祈愿数值、持续分布、损失率、健康抽样、Lv1选中概率、迁移／生成顺序和TP不足回滚全部是simulation policy，原始证据缺口未关闭。旧部队status恢复与城市灾害不混用。
+
+PR89固定集成基线重新读取的相关依赖与PR86来源manifest具有相同Git blob：
+
+| 文件 | 未变Git blob |
+|---|---|
+| packages/engine/src/city-food-income-projection.ts | 4cdf4fb244045d8a800464ef4c25699ffce1b8cb |
+| packages/engine/src/monthly-city-food-base-argument.ts | 041b3c522806d56a0b71d3aa3c83fa45fcc6fd2e |
+| docs/sources/city-food-income-projection.json | fc750f915a2d54b9c7cd9b37ca4b573e8d40dc1d |
+| docs/sources/monthly-city-food-base-argument.json | 4dd424e1dedf057aaeb4707793c40a2d8e367e7d |
+| data/catalogs/city-finance-facilities-v1.json | 4224d534b90bc2f42d1a6bf325153d03e7bf1101 |
+
+两核真实调用的完整request／receipt与原evidence保留；wrapper的derived-adapter-observations与本地credit不升级原leaf为native writer或scheduler认证。源manifest的PR86身份不改写，经济§11片段hash不冒充全文hash；本次版本比对不是新原作研究。原版全局scheduler与完整财政未集成，strictlyUnbiased=false，原43主题／45快照不减。
+
+公共入口集成基线为PR89 main `0c5ad00667d40960e72f2d8b14c9c20f7eec30fc`／tree `a88a940c92a37c85ac8a827f1f8988ae18401aea`；来源manifest保留PR86历史读取身份。两粮核、两份来源依赖与设施catalog在这两个基线间Git blob相同，不把集成版本提升为新的原作证据。 仅静态实现，产品、示例、测试、typecheck、编译、build、runtime、checker、诊断及schema验证均未运行。原43主题与45快照的证据缺口不减少，下方历史结果不验证本新增。
+
 ## 2026-10-18 一次内政评定：来源与兼容政策分层
 
 [来源manifest](../sources/single-council-lifecycle.json) · [完整规则](single-council-lifecycle.md) · [固定policy](../../data/catalogs/single-council-policy-v1.json)。官方手册确认评定0金／AP、至多6人和君主在据点；MSG资料确认两阶段、赞同／采决与22类静态池。完成评定+10取固定[同期GamerSky攻略证据链](https://www.gamersky.com/handbook/200604/22088.shtml)，不标原函数写入地址；TP cap10000沿既有技巧规则。manifest保留原文件完整Git blob、SHA256、bytes与PR86读取身份，不宣称新获取外站或native／stock认证。

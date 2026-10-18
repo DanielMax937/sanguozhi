@@ -1,3 +1,15 @@
+## 2026-10-18 固定单城季节：有限simulation静态覆盖
+
+- [x] 新增[完整规则](docs/rules/city-season-lifecycle.md)、[六API](docs/engine/city-season-lifecycle.md)、policy／设施catalog／source／schema及未运行trace；公共index导出六函数、三常量和11类型
+- [x] 固定单城、完整驻城名单和30槽；current／scheduled月步进、内部固定seed生成与持续、实际扣兵粮／健康恶化／Lv1农场移除和每座30TP
+- [x] 真正复用两旧粮纯核：灾害后30槽／兵数→完整F→当前丰作→本地粮余额，完整请求／核receipt／实际到账和discarded保留
+- [x] 风水只对新生成与激活双门、祈愿显式新参数；死亡／兵粮零／TP不足整月拒绝；genesis完整重算、幂等、preview及escaped SaveResult／全部旧返回预算的静态代码存在
+- [ ] 原发生概率、祈愿数值、原迁移时点／持续／损失／健康RNG、Lv2边界、原writer／skill getter／stock版本仍未恢复；新政策不清这些证据债
+- [ ] 原版全局scheduler、完整财政与跨服务账本／时钟未集成；原43主题／45快照不减少
+- [ ] 产品、示例、测试、typecheck、编译、build、runtime、checker、诊断和schema验证均未运行；勾选项仅指静态代码与说明存在
+
+公共入口集成基线为PR89 main `0c5ad00667d40960e72f2d8b14c9c20f7eec30fc`／tree `a88a940c92a37c85ac8a827f1f8988ae18401aea`；来源manifest保留PR86历史读取身份。两粮核、两份来源依赖与设施catalog在这两个基线间Git blob相同，不把集成版本提升为新的原作证据。 下方既有批次按各自日期与支持域保留。
+
 ## 2026-10-18 一次内政评定：有限静态覆盖
 
 - [x] 新增[完整规则](docs/rules/single-council-lifecycle.md)、[七个API](docs/engine/single-council-lifecycle.md)、完整policy／sources／schema及未运行trace；公共index导出全部函数、固定policy和14个类型
