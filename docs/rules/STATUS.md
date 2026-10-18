@@ -1,3 +1,11 @@
+## 2026-10-18 O14 query：固定来源三值查询静态状态
+
+[具体规则](source-event-query.md)与[三个API](../engine/source-event-query.md)新增只读query，不建立事件session或世界账本。202条独立观测可定位原始条款与已知结构子条款；注册比较仅管辂治安≥90和于吉同城四原子项，共五原子／一局部all。片段comparison可met／not-met／unknown，完整clause仍受覆盖与版本限制；当前所有整体documentedConditionsStatus为unknown，executionEligibility固定disabled-source-corpus。
+
+代码边界包括封闭non-Proxy DTO、安全数／重复ID拒绝、显式bindings、缺失事实unknown、完整响应4MiB／65536值／深48预算及小型failure。原句、sourceJSONPointer、文件／条款证据身份与fact／binding路径保留；未知分组不自动求值，onceOnly未明不视为可重复，结果不执行。仅静态阅读与撰写，没有运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验；预算不是实测性能，历史通过数不覆盖本批。
+
+实现集成基线PR87 main `021097bdb63ed882bb7b1e1d11f6bdeaf8af017b`／tree `077cb16ad83c8a3a32a6f60a26b3a00cee1b0a93`；PR85五语料Git blob未变，来源版本和全部原始限制保留。通用33／31／10、史实105／66／41、PS2 64／741／24及原43主题／45快照不减，corpus executionEnabled=false。O14完整事件／评定／灾害与O15仍开放；野战既有合同不改。下方历史批次按各自日期解释。
+
 ## 2026-10-18 O14 field：有限正兵力动作静态状态
 
 [规则](field-combat-lifecycle.md)和[六API](../engine/field-combat-lifecycle.md)已有独立场景／命令／状态／完整receipt／保存重放静态实现。集成基线PR86 main `a04ee326fdaa68e930681430352f4d98fee5209e`／tree `df4e2be515e2434e4e64476517c8e58f0d3afaf0`；读取的主伤害、计略、应射、技能／技巧与O01文献身份仍逐项保留其PR85来源，不把集成版本改写为新证据认证。

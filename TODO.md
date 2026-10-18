@@ -1,3 +1,14 @@
+## 2026-10-18 O14 query：固定来源三值查询静态覆盖
+
+- [x] 新增[完整规则](docs/rules/source-event-query.md)、[三个API](docs/engine/source-event-query.md)、固定registry、来源身份、输入／响应schema与未运行输入示例；公共index导出查询及类型
+- [x] 独立浏览通用33／史实105／PS2 64观测，保留已知形状子条款pointer与unknown原因；只比较管辂治安≥90和于吉同城四原子项，共五原子／一局部all，不把资料数当实现数
+- [x] 静态代码区分片段comparison、完整clause、整体条件与禁用执行；封闭typed facts＋bindings输入，缺失／版本／未知分组保守unknown；完整响应预算与小型failure另设界限
+- [ ] 完整观测条件分组、管辂灾害scope、其余来源条款、原生ID／版本／一次性flag／概率／完整结果继续未决，heading-only不判true；corpus executionEnabled=false不改，事件发生与结果执行均无实现
+- [ ] 评定／灾害、完整O14与O15跨服务一致性仍开放；原43主题／45快照及全部E／X不减，既有野战等服务不扩域
+- [ ] 运行验收未执行：产品、示例、测试、typecheck、编译、build、checker、诊断与schema校验均未运行，静态覆盖不等于通过
+
+实现集成基线PR87 main `021097bdb63ed882bb7b1e1d11f6bdeaf8af017b`／tree `077cb16ad83c8a3a32a6f60a26b3a00cee1b0a93`；来源仍固定PR85五个未变Git blob。下方既有批次保留其各自日期与范围。
+
 ## 2026-10-18 O14 field：有限正兵力动作静态批次
 
 - [x] 新增独立七动作／一次主目标反应、内部完整数值与状态写入，合法性／能力副效应／正兵力原子边界、六API、完整schema／固定policy／未运行example及[具体规则](docs/rules/field-combat-lifecycle.md)

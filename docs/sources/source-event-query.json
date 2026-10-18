@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "profile": "source-event-query-v1",
+  "status": "static-implementation-not-run",
+  "executionEnabled": false,
+  "integrationBase": {
+    "repository": "DanielMax937/sanguozhi",
+    "commit": "021097bdb63ed882bb7b1e1d11f6bdeaf8af017b",
+    "tree": "077cb16ad83c8a3a32a6f60a26b3a00cee1b0a93",
+    "evidence": "Fixed-commit public navigation and index reads; integration-tree metadata retains the same five source Git blobs."
+  },
+  "baseIdentityPolicy": "integrationBase identifies the implementation integration revision. fixedBase and sourceFiles retain the original source-evidence revision and byte identities; unchanged Git blobs do not constitute new original-game evidence or runtime verification.",
+  "fixedBase": {
+    "repository": "DanielMax937/sanguozhi",
+    "commit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+    "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09"
+  },
+  "sourceFiles": [
+    {
+      "family": "generic-events",
+      "path": "data/generic-events/atwiki-88.json",
+      "gitBlobSha": "527988afe81227bf07a08b591919c16e35308a16",
+      "sha256": "cd76844fe0b6f8417acea0f84fbeaf3f94d5b2edfc51b645ce07be026e330d28",
+      "bytes": 55758,
+      "commit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+      "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09",
+      "datasetId": "san11.generic.atwiki88.20261007",
+      "collection": "observations",
+      "evidence": "public-guide-transcription"
+    },
+    {
+      "family": "generic-events",
+      "path": "data/generic-events/gamersky-2009.json",
+      "gitBlobSha": "cc1466e898494960f94328ec8149e730089e1ea8",
+      "sha256": "1285ebb2097ef373b9404316aa47977df7d501b9c9d62768def80da31ca7c29d",
+      "bytes": 4544,
+      "commit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+      "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09",
+      "datasetId": "san11.generic.gamersky2009.20261007",
+      "collection": "observations",
+      "evidence": "public-guide-transcription"
+    },
+    {
+      "family": "scenario-events",
+      "path": "data/scenario-events/atwiki-88.json",
+      "gitBlobSha": "c037ec66d2e968e7318ebb7eabb2d239edfaefb6",
+      "sha256": "c309ed1024df30e62f5a7ff6f4f16bb82fd98cac3e7aed19f80a833afe746552",
+      "bytes": 297611,
+      "commit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+      "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09",
+      "datasetId": "san11-historical-events-atwiki-88",
+      "collection": "events",
+      "evidence": "public-guide-transcription"
+    },
+    {
+      "family": "scenario-events",
+      "path": "data/scenario-events/gamersky-2008.json",
+      "gitBlobSha": "07dcb7600e519b775415c657cf70eb3973014e8d",
+      "sha256": "45cb47718d2e90eebd59b06fcc81ea24972852bcae2dc436aa60e45c8fa1c8e5",
+      "bytes": 216050,
+      "commit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+      "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09",
+      "datasetId": "san11-historical-events-gamersky-2008",
+      "collection": "events",
+      "evidence": "public-guide-transcription"
+    },
+    {
+      "family": "ps2-scenario-events",
+      "path": "data/ps2-scenario-events/atwiki-100.json",
+      "gitBlobSha": "611ed737d5143970aad50d4cbd4e785e0f83de42",
+      "sha256": "b52d8a2a710e8bc359648d7df753caf492cd334611bde4f4f9618443c6724658",
+      "bytes": 310620,
+      "commit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+      "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09",
+      "datasetId": "san11.ps2-historical.atwiki100.20261007",
+      "collection": "observations",
+      "evidence": "public-guide-transcription"
+    }
+  ],
+  "registryEvidence": [
+    {
+      "id": "generic.atwiki88.12.safe-city-clause-v1",
+      "sourcePath": "data/generic-events/atwiki-88.json",
+      "sourceGitBlobSha": "527988afe81227bf07a08b591919c16e35308a16",
+      "sourceJSONPointer": "/observations/11/conditions/2",
+      "sourceClause": {
+        "scope": "event",
+        "text": "没有蝗灾或疫病；执行探索的城市治安至少90。",
+        "certainty": "source-stated",
+        "sourceLocator": {
+          "startLine": 1210,
+          "endLine": 1211
+        },
+        "quantities": [
+          {
+            "name": "search-city-order",
+            "operator": "gte",
+            "value": 90,
+            "unit": "public-order"
+          }
+        ]
+      },
+      "sourceClauseSha256": "ea3bc9f038b7beb0f2d2e09b180a74f56ba1daca71cb88a4c5b40ca1853b6571",
+      "sourceClauseHashEncoding": "UTF-8 JSON, recursively sorted object keys, compact separators, no newline; original paraphrase bytes preserved",
+      "semanticScope": "Source-described search-city primitive comparison only; no exploration trigger or event occurrence.",
+      "clauseCoverage": "partial",
+      "uncoveredReasons": [
+        "disaster-scope-unresolved"
+      ]
+    },
+    {
+      "id": "generic.atwiki88.15.safe-city-clause-v1",
+      "sourcePath": "data/generic-events/atwiki-88.json",
+      "sourceGitBlobSha": "527988afe81227bf07a08b591919c16e35308a16",
+      "sourceJSONPointer": "/observations/14/conditions/1",
+      "sourceClause": {
+        "scope": "event",
+        "text": "探索城市没有疫病或蝗灾，治安至少90，资金至少2001。",
+        "certainty": "source-stated",
+        "sourceLocator": {
+          "startLine": 1227,
+          "endLine": 1229
+        },
+        "quantities": [
+          {
+            "name": "search-city-order",
+            "operator": "gte",
+            "value": 90,
+            "unit": "public-order"
+          },
+          {
+            "name": "search-city-gold",
+            "operator": "gte",
+            "value": 2001,
+            "unit": "gold"
+          }
+        ]
+      },
+      "sourceClauseSha256": "b0270bd68fdbbaa122efff1451c530c03ed2c92b05b83cac6a917b50bd6a08c0",
+      "sourceClauseHashEncoding": "UTF-8 JSON, recursively sorted object keys, compact separators, no newline; original paraphrase bytes preserved",
+      "semanticScope": "Source-described search-city primitive comparison only; no exploration trigger or event occurrence.",
+      "clauseCoverage": "complete",
+      "uncoveredReasons": []
+    }
+  ],
+  "deduplication": {
+    "existingCorpus": "Existing generic-event README explicitly supplies no evaluator/scheduler/executor/engine dependency. Historical and PS2 records remain descriptive.",
+    "existingReference": "Existing packages/engine/src/rules.ts exposes training rules and evidence references, not typed event fact/binding evaluation.",
+    "treeEvidence": "The pinned source tree path inventory contained no same-semantics API; the freshly read PR87 public index still has no source-event-query export before this integration.",
+    "newCapability": "Read-only observations with fixed reviewed primitive comparisons, explicit bindings, per-clause pointers and unknown reasons."
+  },
+  "excluded": [
+    "P078 and its dependencies",
+    "native ownership/capture/transfer/extinction/succession/death/mission-return-finalizers",
+    "council/disaster/field-combat implementation",
+    "world-state integration and event execution"
+  ],
+  "verification": {
+    "staticSourceRead": true,
+    "sourceBytesHashed": true,
+    "productCodeExecuted": false,
+    "testsRun": false,
+    "typecheckRun": false,
+    "buildRun": false,
+    "schemaValidatorRun": false,
+    "examplesRun": false,
+    "runtimeEquivalent": false
+  },
+  "scopeNarrowing": {
+    "topic": "Guan Lu disaster scope",
+    "rejectedInterpretation": "Treat Guan Lu's no plague/locust wording as exploration-city facts without explicit scope evidence.",
+    "primarySourceClausePointer": "/observations/11/conditions/2",
+    "primarySourceClause": {
+      "scope": "event",
+      "text": "没有蝗灾或疫病；执行探索的城市治安至少90。",
+      "certainty": "source-stated",
+      "sourceLocator": {
+        "startLine": 1210,
+        "endLine": 1211
+      },
+      "quantities": [
+        {
+          "name": "search-city-order",
+          "operator": "gte",
+          "value": 90,
+          "unit": "public-order"
+        }
+      ]
+    },
+    "correctedDecision": "Only the expressly city-scoped security>=90 fragment is compared. Disaster scope remains unknown.",
+    "support": {
+      "path": "data/generic-events/README.md",
+      "gitBlobSha": "fe9f135d04baf46f0d9da7839f4ecbc35ad34909",
+      "sha256": "fa384f796eac4bad72f245bb25fa888f9d5192eebcd8d3211bc0b3caa1ddfe39",
+      "sourceURL": "https://github.com/DanielMax937/sanguozhi/blob/7cf050fdf57cd40641bf5f139b2c34c548aae820/data/generic-events/README.md",
+      "exactSentence": "Guan Lu: the relationship conjunction and unspecified low-level probability remain unresolved. Disaster conditions in Guan Lu/Xu Shao are not silently assigned Yu Ji's explicit city scope"
+    }
+  },
+  "clauseTraversal": {
+    "status": "static-implementation-not-run",
+    "semantics": "nodeShape labels descriptive source structure, never executable grouping",
+    "knownChildren": [
+      "all/any.items",
+      "if.condition/consequence",
+      "branch.condition/orderedResults",
+      "choice.options",
+      "option.orderedResults",
+      "fact.value.baselineConditions",
+      "fact.value.possibleGroupings"
+    ],
+    "unknownShape": "source-node-shape-unrecognized; structural descendants remain readable unknown",
+    "literalPayloads": "effect.values, generic quantities, locators and prerequisite delay remain intact on parent nodes"
+  },
+  "responseBoundary": {
+    "canonicalUtf8Bytes": 4194304,
+    "valueNodes": 65536,
+    "maxDepth": 48,
+    "failurePointerUtf8Bytes": 1024,
+    "overflow": "fixed-small-output-budget-failure",
+    "overlongFailurePointer": "null with pointerStatus omitted-too-long",
+    "apiWrappers": [
+      "query ok plus top-level query fields; no result wrapper",
+      "profile ok/profile",
+      "list ok/observations"
+    ],
+    "status": "not-run"
+  }
+}
