@@ -1,3 +1,9 @@
+## 固定单城共享根（2026-10-18，静态）
+
+[八API、连续legal分页与独立CLI](bounded-city-economy.md) · [具体规则](../rules/bounded-city-economy.md)
+
+普通内政与商人即时动作共用一份genesis／ledger／历史；原子批次按动作顺序求值，完整保存重算。仅固定单城／单旬，无世界推进，不导入旧state，原TP／奖励和证据边界保留。基于PR91私有reducer；静态代码与文件核对不等于运行验收，未运行测试、编译、构建或产品。
+
 ## 即时命令内部维护（2026-10-18，静态）
 
 [包内即时命令说明](instant-command-reducers.md) · [城市命令具体规则](../rules/city-command-lifecycle.md) · [商人买卖粮具体规则](../rules/city-merchant-lifecycle.md)

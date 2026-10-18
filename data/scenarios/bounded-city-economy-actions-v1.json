@@ -1,0 +1,23 @@
+{
+  "id": "example-sell-then-recruit",
+  "expectedRevision": 0,
+  "command": {
+    "type": "ExecuteCityActions",
+    "actions": [
+      {
+        "type": "SellFood",
+        "cityId": "cityA",
+        "officerId": "merchantA",
+        "foodAmount": 1000
+      },
+      {
+        "type": "Recruit",
+        "cityId": "cityA",
+        "officerIds": [
+          "recruiterB"
+        ],
+        "facilityId": "barracksA"
+      }
+    ]
+  }
+}

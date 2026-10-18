@@ -1,3 +1,9 @@
+## 2026-10-18：固定单城内政／商人共享根
+
+[具体规则](bounded-city-economy.md)与[API／CLI](../engine/bounded-city-economy.md)覆盖固定城／旬唯一ledger、五类即时动作、原子1–8步顺序批次、完整genesis重放与连续legal分页。这只是跨这两个服务的限定整合；完整世界clock、jobs／预约、设施HP、其他人物服务、部队地图、TP和全局RNG仍开放。商人功绩未建模且保留原值，普通TP未建模。
+
+PR91是私有reducer集成基线，原公式证据按原来源版本保留；新事务／保存／分页／CLI政策不冒称native。原43主题／45快照不减少，任何旧运行结果均不验证本新增。未运行产品、测试、编译、build或schema validator。
+
 ## 2026-10-18 单城季节状态：静态simulation，不关闭原作证据
 
 [完整规则](city-season-lifecycle.md)与[六API](../engine/city-season-lifecycle.md)新增固定单城／完整驻军roster／30槽的有限月步进：current与scheduled持久化，内部seed生成／持续，真实兵粮／健康效果、Lv1移除30TP及季初两旧粮纯核串联到账。完整genesis逐receipt重建、同ID幂等、preview和所有旧返回／escaped SaveResult预算均有静态实现。

@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "profile": "bounded-city-domestic-merchant-v1",
+  "classification": "provisional-simulation-composition",
+  "nativeIntegration": false,
+  "nativeExecutionVerified": false,
+  "stockVerified": false,
+  "validationStatus": "static-review-only-not-run",
+  "historicalServiceCommit": "0c5ad00667d40960e72f2d8b14c9c20f7eec30fc",
+  "historicalServiceTree": "a88a940c92a37c85ac8a827f1f8988ae18401aea",
+  "reducerBaselineCommit": "aab86f1482ce0951fcd229f8f163d5b072e87104",
+  "reducerBaselineTree": "03502a5ddcdc3fcae4795721cce412709dd6458f",
+  "sourceFiles": [
+    {
+      "path": "packages/engine/src/city-command-lifecycle.ts",
+      "commit": "0c5ad00667d40960e72f2d8b14c9c20f7eec30fc",
+      "gitBlob": "f07b0762e045dfb77caeb8e46c06e7cee8bd255f",
+      "bytes": 47467,
+      "sha256": "0e7422d746f07d033e8506424c64e124dca0d6d92d668b6768b3ef3603cd1b20",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/0c5ad00667d40960e72f2d8b14c9c20f7eec30fc/packages/engine/src/city-command-lifecycle.ts",
+      "role": "historical-service-behavior-or-observation-catalog; not native equivalence"
+    },
+    {
+      "path": "packages/engine/src/city-merchant-lifecycle.ts",
+      "commit": "0c5ad00667d40960e72f2d8b14c9c20f7eec30fc",
+      "gitBlob": "1d83c03afcaa7e9112e4f652b107f817abc8a5ea",
+      "bytes": 37378,
+      "sha256": "d821fcdfcda43cdccbeeba195bf1a5775058f1e3fe70e984aa185d46fcabb778",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/0c5ad00667d40960e72f2d8b14c9c20f7eec30fc/packages/engine/src/city-merchant-lifecycle.ts",
+      "role": "historical-service-behavior-or-observation-catalog; not native equivalence"
+    },
+    {
+      "path": "data/catalogs/city-merchant-policies-v1.json",
+      "commit": "0c5ad00667d40960e72f2d8b14c9c20f7eec30fc",
+      "gitBlob": "2547e707cfd2b69925383d7dec2693d37d41e4ac",
+      "bytes": 4142,
+      "sha256": "a022343cf84a90df291340fe1dc5750ee23adedc9a8186b4df0b41159b29917b",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/0c5ad00667d40960e72f2d8b14c9c20f7eec30fc/data/catalogs/city-merchant-policies-v1.json",
+      "role": "historical-service-behavior-or-observation-catalog; not native equivalence"
+    },
+    {
+      "path": "data/catalogs/city-merchant-politics-v1.json",
+      "commit": "0c5ad00667d40960e72f2d8b14c9c20f7eec30fc",
+      "gitBlob": "522c9366af95ec1f1b7379180b2969f299ee32e8",
+      "bytes": 1202,
+      "sha256": "73b6e17e31fa26d19a2ecbedc518c0900b4c200031d283938d1adf2b19350d06",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/0c5ad00667d40960e72f2d8b14c9c20f7eec30fc/data/catalogs/city-merchant-politics-v1.json",
+      "role": "historical-service-behavior-or-observation-catalog; not native equivalence"
+    },
+    {
+      "path": "packages/engine/src/internal/city-instant-reducer.ts",
+      "commit": "aab86f1482ce0951fcd229f8f163d5b072e87104",
+      "gitBlob": "86f4f97df368aec8d4507990cbc23b80671cd5b7",
+      "bytes": 7392,
+      "sha256": "03e304bfdab0cd755fbd8925d08b574d830aadd218c9963228bbade6ed2bca0f",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/aab86f1482ce0951fcd229f8f163d5b072e87104/packages/engine/src/internal/city-instant-reducer.ts",
+      "role": "package-private instantaneous service reduction; not a world state or native certification"
+    },
+    {
+      "path": "packages/engine/src/internal/city-domestic-leaves.ts",
+      "commit": "aab86f1482ce0951fcd229f8f163d5b072e87104",
+      "gitBlob": "e361d40b1617c47d9efa3307975d08e38f7b4fb3",
+      "bytes": 10608,
+      "sha256": "2b9ea6a33e27bc51a35b79330e89c213fa2cd36c46b8b52ac606a0d4f8680bd5",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/aab86f1482ce0951fcd229f8f163d5b072e87104/packages/engine/src/internal/city-domestic-leaves.ts",
+      "role": "package-private instantaneous service reduction; not a world state or native certification"
+    },
+    {
+      "path": "packages/engine/src/internal/city-merchant-trade-reducer.ts",
+      "commit": "aab86f1482ce0951fcd229f8f163d5b072e87104",
+      "gitBlob": "d704217d95fc92ae34fdcb352d41e7c03bf05e58",
+      "bytes": 8528,
+      "sha256": "3df651076887dddfb84d4df4341bc20f4e3174b9e017be05b77c59cf2a819723",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/aab86f1482ce0951fcd229f8f163d5b072e87104/packages/engine/src/internal/city-merchant-trade-reducer.ts",
+      "role": "package-private instantaneous service reduction; not a world state or native certification"
+    },
+    {
+      "path": "packages/engine/src/production-quantity.ts",
+      "commit": "0c5ad00667d40960e72f2d8b14c9c20f7eec30fc",
+      "gitBlob": "510f8c7cfb268d6cb9182741bffdc6cff30596c5",
+      "bytes": 9724,
+      "sha256": "948fae7d095e7d2f4874dc8d916e9412fcfc397b00de15dd184d3965ce0c245c",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/0c5ad00667d40960e72f2d8b14c9c20f7eec30fc/packages/engine/src/production-quantity.ts",
+      "role": "original-listing numerical projection; helper/stock/native execution equivalence not established"
+    },
+    {
+      "path": "packages/engine/src/recruitment-quantity.ts",
+      "commit": "0c5ad00667d40960e72f2d8b14c9c20f7eec30fc",
+      "gitBlob": "270a6b2ee5694d6e473c68313638edd478cf0e9e",
+      "bytes": 13649,
+      "sha256": "8fecc508e87ea4c1905d0ec0b6b8e4ea168bbb482e2a89b89bc14fb7da386e95",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/0c5ad00667d40960e72f2d8b14c9c20f7eec30fc/packages/engine/src/recruitment-quantity.ts",
+      "role": "original-listing numerical projection; helper/stock/native execution equivalence not established"
+    },
+    {
+      "path": "packages/engine/src/patrol-security-gain.ts",
+      "commit": "0c5ad00667d40960e72f2d8b14c9c20f7eec30fc",
+      "gitBlob": "698f7cbc1b01fe1430517bb70bb41f634e303833",
+      "bytes": 5221,
+      "sha256": "568b4af3e6b40ddbb1a911b4acaa9dd6fb2b1490b943302f5d2fd3ca5904ce5c",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/0c5ad00667d40960e72f2d8b14c9c20f7eec30fc/packages/engine/src/patrol-security-gain.ts",
+      "role": "original-listing numerical projection; helper/stock/native execution equivalence not established"
+    },
+    {
+      "path": "packages/engine/src/production-price.ts",
+      "commit": "0c5ad00667d40960e72f2d8b14c9c20f7eec30fc",
+      "gitBlob": "29d7759df388c2c4bcbe4da576139dc42543b920",
+      "bytes": 3972,
+      "sha256": "a87f43a0134adbd38d6341731306fa0da6b6ae8d7012ae23fc3ecb026ea3904e",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/0c5ad00667d40960e72f2d8b14c9c20f7eec30fc/packages/engine/src/production-price.ts",
+      "role": "original-listing numerical projection; helper/stock/native execution equivalence not established"
+    },
+    {
+      "path": "packages/engine/src/recruitment-security-argument.ts",
+      "commit": "0c5ad00667d40960e72f2d8b14c9c20f7eec30fc",
+      "gitBlob": "f6fde535f7f68ee1da49de57d2af0f4ee40c2b09",
+      "bytes": 4531,
+      "sha256": "7b9f30f3a81209a2af0890e8e6b59d68cadc584ad7601e31cea3f8b7c85b6d9b",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/0c5ad00667d40960e72f2d8b14c9c20f7eec30fc/packages/engine/src/recruitment-security-argument.ts",
+      "role": "original-listing numerical projection; helper/stock/native execution equivalence not established"
+    }
+  ],
+  "scalarRuleReferences": [
+    {
+      "rule": "patrol-security-gain",
+      "documentation": "docs/rules/patrol-security-gain.md",
+      "sourceSnapshot": "docs/sources/patrol-security-gain.json"
+    },
+    {
+      "rule": "recruitment-quantity",
+      "documentation": "docs/rules/recruitment-quantity.md",
+      "sourceSnapshot": "docs/sources/recruitment-quantity.json"
+    },
+    {
+      "rule": "recruitment-security-argument",
+      "documentation": "docs/rules/recruitment-security-argument.md",
+      "sourceSnapshot": "docs/sources/recruitment-security-argument.json"
+    },
+    {
+      "rule": "production-price",
+      "documentation": "docs/rules/production-price.md",
+      "sourceSnapshot": "docs/sources/production-price.json"
+    },
+    {
+      "rule": "production-quantity",
+      "documentation": "docs/rules/production-quantity.md",
+      "sourceSnapshot": "docs/sources/production-quantity.json"
+    }
+  ],
+  "merchantEvidence": {
+    "officialManual": "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf",
+    "observations": [
+      "https://www.gamersky.com/handbook/200712/89446.shtml",
+      "https://w.atwiki.jp/sangokushi11/pages/74.html",
+      "https://w.atwiki.jp/sangokushi11/pages/79.html"
+    ],
+    "publishedListing": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政05-计算交易收支.txt",
+    "nativeHelpersStillOpen": [
+      "0070A330",
+      "0070A280",
+      "005CA5B0"
+    ],
+    "catalogStatus": "selected-approximate-observations-not-native-exact"
+  },
+  "newSimulationPolicies": [
+    "one fixed city and xun",
+    "one authoritative shared ledger",
+    "caller action order and all-or-nothing batches",
+    "closed bounded DTO and complete canonical recomputation",
+    "stable changed-path ordering",
+    "full-state-bound stateless contiguous legal pages",
+    "fixed no-growth accumulators and partial reward scope"
+  ],
+  "notEstablished": [
+    "native city/force/corps identity transitions",
+    "native geometry or pressure-helper mapping",
+    "native merchant appearance or price transition",
+    "native writer/rounding equivalence",
+    "merchant merit and loyalty rewards",
+    "force technique-points ledger",
+    "ability growth from XP",
+    "cross-service scheduler or complete playable world"
+  ],
+  "syntheticExamples": [
+    "data/scenarios/bounded-city-economy-example-v1.json",
+    "data/scenarios/bounded-city-economy-actions-v1.json",
+    "data/scenarios/bounded-city-economy-legal-v1.json",
+    "data/scenarios/bounded-city-economy-trace-v1.json"
+  ]
+}

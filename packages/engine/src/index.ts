@@ -115,3 +115,29 @@ export type { SingleCouncilScenarioV1, SingleCouncilStateV1, SingleCouncilEnvelo
 // Fixed-city seasonal simulation; original disaster rates and global finance remain unresolved.
 export { CITY_SEASON_POLICY_V1, CITY_SEASON_FOOD_CATALOG_V1, CITY_SEASON_SOURCES_V1, createCitySeasonState, previewCitySeasonCommand, executeCitySeasonCommand, saveCitySeasonState, loadCitySeasonState, replayCitySeasonTrace } from './city-season-lifecycle.ts';
 export type { CitySeasonScenarioV1, CitySeasonStateV1, CitySeasonEnvelopeV1, CitySeasonSnapshotV1, CitySeasonReceiptV1, CitySeasonResultV1, CitySeasonFailureV1, CitySeasonPreviewV1, CitySeasonSaveResultV1, CitySeasonTraceV1, CitySeasonReplayResultV1 } from './city-season-lifecycle.ts';
+
+// Fixed-city, fixed-xun shared domestic/merchant ledger; static-only implementation.
+export { BOUNDED_CITY_ECONOMY_POLICY, createBoundedCityEconomyV1, inspectBoundedCityEconomyV1, previewBoundedCityEconomyV1, executeBoundedCityEconomyV1, listBoundedCityActionsV1, saveBoundedCityEconomyV1, loadBoundedCityEconomyV1, replayBoundedCityEconomyV1 } from './bounded-city-economy.ts';
+export type {
+  BoundedCityEconomyScenarioV1,
+  BoundedCityEconomyStateV1,
+  BoundedCityEconomyPolicyV1,
+  BoundedCityEconomyLedgerV1,
+  BoundedCityEconomyActionV1,
+  BoundedCityEconomyEnvelopeV1,
+  BoundedCityEconomyReceiptV1,
+  BoundedCityEconomyStepReceiptV1,
+  BoundedCityEconomyKernelAuditV1,
+  BoundedCityEconomyFailureV1,
+  BoundedCityEconomyExecuteResultV1,
+  BoundedCityEconomyPreviewResultV1,
+  BoundedCityEconomyCreateOrLoadResultV1,
+  BoundedCityEconomyInspectResultV1,
+  BoundedCityEconomySaveResultV1,
+  BoundedCityEconomyLegalRequestV1,
+  BoundedCityEconomyLegalCursorV1,
+  BoundedCityEconomyLegalResultV1,
+  BoundedCityEconomyTraceV1,
+  BoundedCityEconomyReplayOutcomeV1,
+  BoundedCityEconomyReplayResultV1,
+} from './bounded-city-economy.ts';

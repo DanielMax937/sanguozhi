@@ -1,3 +1,10 @@
+## 固定单城共享账本：具体规则与接口（2026-10-18，静态）
+
+- [完整游戏规则与工程政策](bounded-city-economy.md)：普通内政／商人唯一余额、人物行动、原子动作顺序、费用与饱和、未建模TP／功绩边界
+- [八API／分页legal／严格文件CLI](../engine/bounded-city-economy.md)：固定单城单旬的新profile，完整genesis重算；没有世界时钟或旧state导入
+
+只覆盖这个独立支持域，原43主题／45快照证据缺口不减。未运行测试、编译、构建、示例或validator。下方历史专题和当轮结论按版本保留。
+
 ## 即时命令内部维护（2026-10-18，静态）
 
 [包内即时命令说明](../engine/instant-command-reducers.md) · [城市命令具体规则](city-command-lifecycle.md) · [商人买卖粮具体规则](city-merchant-lifecycle.md)
