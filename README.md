@@ -1,3 +1,13 @@
+## 当前新增：固定来源事件三值查询（O14 query，2026-10-18 静态）
+
+[完整具体规则](docs/rules/source-event-query.md) · [三个查询API](docs/engine/source-event-query.md) · [固定predicate registry](data/catalogs/source-event-query-profile-v1.json) · [来源身份](docs/sources/source-event-query.json) · [输入schema](data/schemas/source-event-query-v1.schema.json) · [响应schema](data/schemas/source-event-query-response-v1.schema.json) · [未运行输入示例](data/scenarios/source-event-query-example-v1.json)
+
+固定五份来源的202条观测分别浏览，保留原条款、子条款JSONpointer、证据身份与unknown原因；202是资料数量，不是已实现事件数。唯一已核比较是管辂的探索城治安≥90，以及于吉同城无疫病／蝗灾、治安≥90、资金≥2001：共两条registry、五个原子项、一个局部all。管辂灾害scope仍unknown；typed facts与显式bindings不能由caller truth或eligible替代。
+
+片段comparison、完整clause与整体documentedConditionsStatus分开；后两者受版本／完整性限制，当前整体条件始终unknown。executionEnabled=false，executionEligibility为disabled-source-corpus，onceOnly未明仍unknown-repeatability；无事件发生、效果写入或保存／重放历史。评定／灾害／完整事件与O15集成仍开放，野战独立服务保持原合同。原43主题／45快照与三corpus全部未知项不减。
+
+实现集成于PR87 main `021097bdb63ed882bb7b1e1d11f6bdeaf8af017b`／tree `077cb16ad83c8a3a32a6f60a26b3a00cee1b0a93`；五语料仍为PR85固定来源的相同Git blob，旧corpus不修改。仅静态代码与规则，未运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验；下方历史结果不验证本批。
+
 ## 当前新增：有限正兵力野战动作（O14 field，2026-10-18 静态）
 
 [完整具体规则](docs/rules/field-combat-lifecycle.md) · [六API](docs/engine/field-combat-lifecycle.md) · [固定政策](data/catalogs/field-combat-policy-v1.json) · [来源分层](docs/sources/field-combat-lifecycle.json) · [完整DTO schema](docs/sources/field-combat-lifecycle.schema.json) · [未运行trace](data/scenarios/field-combat-example-v1.json)

@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:source-event-query-input-v1",
+  "title": "Closed read-only source-event query input v1",
+  "description": "Input-only contract. Schema has not been executed. It cannot express non-Proxy/own-descriptor/-0/cycle checks or uniqueness by ID; the module enforces those DTO restrictions. This file does not accept caller truth or caller predicates.",
+  "allOf": [
+    {
+      "$ref": "#/$defs/input"
+    }
+  ],
+  "$defs": {
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "queryProfile",
+        "observationRef",
+        "targetVersion",
+        "facts",
+        "bindings"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "queryProfile": {
+          "const": "source-event-query-v1"
+        },
+        "observationRef": {
+          "$ref": "#/$defs/observationRef"
+        },
+        "targetVersion": {
+          "$ref": "#/$defs/targetVersion"
+        },
+        "facts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "cities",
+            "persons"
+          ],
+          "properties": {
+            "cities": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/city"
+              },
+              "maxItems": 64
+            },
+            "persons": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/person"
+              },
+              "maxItems": 64
+            }
+          }
+        },
+        "bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/binding"
+          },
+          "maxItems": 3
+        }
+      }
+    },
+    "observationRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "family",
+        "sourcePath",
+        "gitBlobSha",
+        "sha256",
+        "observationId"
+      ],
+      "properties": {
+        "family": {
+          "enum": [
+            "generic-events",
+            "scenario-events",
+            "ps2-scenario-events"
+          ]
+        },
+        "sourcePath": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "gitBlobSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}(?![\\s\\S])"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
+        },
+        "observationId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,95}(?![\\s\\S])"
+        }
+      }
+    },
+    "targetVersion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edition",
+        "platform",
+        "patch"
+      ],
+      "properties": {
+        "edition": {
+          "enum": [
+            "PK",
+            "Vanilla",
+            null
+          ]
+        },
+        "platform": {
+          "enum": [
+            "PC",
+            "PS2",
+            "Wii",
+            null
+          ]
+        },
+        "patch": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            }
+          ]
+        }
+      }
+    },
+    "city": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,95}(?![\\s\\S])"
+        },
+        "security": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "current": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [],
+          "properties": {
+            "plague": {
+              "type": "boolean"
+            },
+            "locust": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "person": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,95}(?![\\s\\S])"
+        },
+        "cityId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,95}(?![\\s\\S])"
+        }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "symbol",
+        "entityKind",
+        "entityId"
+      ],
+      "properties": {
+        "symbol": {
+          "enum": [
+            "search-city",
+            "searching-person",
+            "yu-ji"
+          ]
+        },
+        "entityKind": {
+          "enum": [
+            "city",
+            "person"
+          ]
+        },
+        "entityId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,95}(?![\\s\\S])"
+        }
+      }
+    }
+  },
+  "$comment": "All API responses follow source-event-query-response-v1.schema.json; success/failure output budgets are independent of this input shape."
+}

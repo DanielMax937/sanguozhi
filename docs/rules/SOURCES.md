@@ -1,3 +1,13 @@
+## 2026-10-18 O14 query：固定转录身份与有限谓词证据
+
+[来源manifest](../sources/source-event-query.json) · [完整规则](source-event-query.md) · [固定registry](../../data/catalogs/source-event-query-profile-v1.json)。五份旧语料为generic-events的Wiki88／GamerSky2009、scenario-events的Wiki88／GamerSky2008和PS2 Wiki100，等级仍public-guide-transcription。sourceFiles保留完整Git blob、SHA-256、bytes、commit／tree；sourceJSONPointer与完整sourceClause绑定每条已核表达式，不按相同标题合并观测。
+
+来源证据版本PR85 `7cf050fdf57cd40641bf5f139b2c34c548aae820`／tree `c515fd47bdec5a1f8b9502da58130dad91372a09`不变。实现集成基线PR87 main `021097bdb63ed882bb7b1e1d11f6bdeaf8af017b`／tree `077cb16ad83c8a3a32a6f60a26b3a00cee1b0a93`的五个Git blob均与原固定语料一致；此身份连续性不升级攻略的原作版本证据，也不宣称重新抓取外站或运行时文件hash认证。
+
+管辂原句“没有蝗灾或疫病；执行探索的城市治安至少90。”只明确后一项城市scope；旧[通用资料说明](../../data/generic-events/README.md)又明确禁止把管辂／许劭灾害范围套用为于吉的城市范围，因此只核security≥90。于吉原句“探索城市没有疫病或蝗灾，治安至少90，资金至少2001。”支持四原子局部all；两人的同城bindings只校验查询上下文，不证明已执行探索。原句、行号、完整条款和证据身份见manifest；其余文字不做NLP猜解。
+
+五原子／一局部all不等于完整事件条件、概率或效果；旧source-only all/any不因遍历而获得已核逻辑资格。原43／45及三corpus全部未知项保留，executionEnabled=false；无新native／stock／patch认证。产品、示例、测试、typecheck、编译、build、checker、诊断和schema校验均未运行。
+
 ## 2026-10-18 O14 field：主核证据与执行政策分层
 
 [来源manifest](../sources/field-combat-lifecycle.json) · [规则](field-combat-lifecycle.md) · [固定policy](../../data/catalogs/field-combat-policy-v1.json)。主伤害与战法表是玩家实测／重构；普通计略成功率沿固定06章；会心listing只取稳定snapshot分支并校正最低3及EDX助记符。技能holder最大智力、反击重算1/半值、普通会心复用、主目标反应／多目标顺序、概率floor/clip、状态70/30与几何都明确为有限policy。

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "queryProfile": "source-event-query-v1",
+  "observationRef": {
+    "family": "generic-events",
+    "sourcePath": "data/generic-events/atwiki-88.json",
+    "gitBlobSha": "527988afe81227bf07a08b591919c16e35308a16",
+    "sha256": "cd76844fe0b6f8417acea0f84fbeaf3f94d5b2edfc51b645ce07be026e330d28",
+    "observationId": "generic.atwiki88.15"
+  },
+  "targetVersion": {
+    "edition": "PK",
+    "platform": "PC",
+    "patch": "1.1"
+  },
+  "facts": {
+    "cities": [
+      {
+        "id": "city-1",
+        "security": 90,
+        "gold": 2001,
+        "current": {
+          "plague": false,
+          "locust": false
+        }
+      }
+    ],
+    "persons": [
+      {
+        "id": "officer-1",
+        "cityId": "city-1"
+      },
+      {
+        "id": "visitor-yu-ji",
+        "cityId": "city-1"
+      }
+    ]
+  },
+  "bindings": [
+    {
+      "symbol": "search-city",
+      "entityKind": "city",
+      "entityId": "city-1"
+    },
+    {
+      "symbol": "searching-person",
+      "entityKind": "person",
+      "entityId": "officer-1"
+    },
+    {
+      "symbol": "yu-ji",
+      "entityKind": "person",
+      "entityId": "visitor-yu-ji"
+    }
+  ]
+}

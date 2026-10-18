@@ -1,3 +1,11 @@
+## O14 query：固定来源事件三值查询（静态新增）
+
+[SourceEventQuery V1](source-event-query.md)通过公共src/index导出 `getSourceEventQueryProfileV1`、`listSourceEventObservationsV1`、`querySourceEventV1`及七个类型；成功分别返回ok/profile、ok/observations与query结果，共享带pointerStatus的小型failure。[完整规则](../rules/source-event-query.md) · [固定registry](../../data/catalogs/source-event-query-profile-v1.json) · [来源](../sources/source-event-query.json) · [输入schema](../../data/schemas/source-event-query-v1.schema.json) · [响应schema](../../data/schemas/source-event-query-response-v1.schema.json) · [未运行示例](../../data/scenarios/source-event-query-example-v1.json)。
+
+固定观察身份＋typed facts＋显式bindings，只核五原子／一局部all；缺失／版本／未解析／未知分组保持unknown。完整原始观察、子条款pointer、证据和fact路径可读；comparison不是documentedConditionsStatus或executionEligibility。所有整体条件仍unknown，executionEnabled=false，无执行／保存／重放API。输入1MiB／16384节点／深24与成功响应4MiB／65536值／深48分别限额；失败pointer超过1024 UTF-8 bytes置null并标明原因，完整failure小于8KiB。
+
+实现集成于PR87 main `021097bdb63ed882bb7b1e1d11f6bdeaf8af017b`／tree `077cb16ad83c8a3a32a6f60a26b3a00cee1b0a93`，五语料仍为PR85固定相同Git blob。原43／45和O14／O15未决范围保留。仅静态实现，未运行产品、示例、测试、typecheck、编译、build、checker、诊断或schema校验。
+
 ## O14 field：独立正兵力动作服务（静态新增）
 
 [FieldCombat V1](field-combat-lifecycle.md)公开 createFieldCombatStateV1／previewFieldCombatV1／executeFieldCombatV1／saveFieldCombatV1／loadFieldCombatV1／replayFieldCombatV1，支持固定episode七动作和最多一次反应。闭合DTO、内部阶段tape、全genesis逐receipt重算、所有历史重复结果及转义SaveResult预算保持同一提交边界。当前只有独立兵力／气力／acted／状态账本，未结算原生奖励或全局回合。

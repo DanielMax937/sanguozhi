@@ -1,0 +1,1006 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:san11:source-event-query-response-v1",
+  "title": "Read-only source event query/profile/list responses",
+  "description": "Authored, not executed. All responses are bounded independently of input: canonical UTF-8 <=4194304 bytes, visited values <=65536 and depth <=48. Success is rejected in full on overflow. Failure uses a fixed small object; paths above 1024 UTF-8 bytes become null with pointerStatus, never a truncated or oversized echo. JSON Schema cannot enforce serialized UTF-8 bytes or recursive aggregate node/depth budgets. Those bounds are implemented by the module.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/querySuccess"
+    },
+    {
+      "$ref": "#/$defs/profileSuccess"
+    },
+    {
+      "$ref": "#/$defs/listSuccess"
+    },
+    {
+      "$ref": "#/$defs/failure"
+    }
+  ],
+  "$defs": {
+    "json": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/json"
+          }
+        }
+      ]
+    },
+    "truth": {
+      "enum": [
+        "met",
+        "not-met",
+        "unknown"
+      ]
+    },
+    "reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "sourceJSONPointer",
+        "factJSONPointer",
+        "detail"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "sourceJSONPointer": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "factJSONPointer": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "detail": {
+          "type": "string"
+        }
+      }
+    },
+    "literal": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "const": "integer"
+            },
+            "value": {
+              "type": "integer"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "const": "boolean"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "const": "id"
+            },
+            "value": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceRef",
+        "commit",
+        "tree",
+        "datasetId",
+        "evidence",
+        "sourceURL",
+        "sourceJSONPointer",
+        "sourceLocator",
+        "snapshotSha256"
+      ],
+      "properties": {
+        "sourceRef": {
+          "$ref": "#/$defs/observationRef"
+        },
+        "commit": {
+          "type": "string"
+        },
+        "tree": {
+          "type": "string"
+        },
+        "datasetId": {
+          "type": "string"
+        },
+        "evidence": {
+          "const": "public-guide-transcription"
+        },
+        "sourceURL": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "sourceJSONPointer": {
+          "type": "string"
+        },
+        "sourceLocator": {
+          "$ref": "#/$defs/json"
+        },
+        "snapshotSha256": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "predicateId",
+        "kind",
+        "comparisonStatus",
+        "semanticScope",
+        "factJSONPointers",
+        "bindingJSONPointers",
+        "actual",
+        "operator",
+        "literals",
+        "reasons",
+        "children"
+      ],
+      "properties": {
+        "predicateId": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "atom",
+            "all",
+            "any"
+          ]
+        },
+        "comparisonStatus": {
+          "$ref": "#/$defs/truth"
+        },
+        "semanticScope": {
+          "type": "string"
+        },
+        "factJSONPointers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bindingJSONPointers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actual": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/literal"
+            }
+          ]
+        },
+        "operator": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "enum": [
+                "eq",
+                "ne",
+                "lt",
+                "lte",
+                "gt",
+                "gte",
+                "in",
+                "not-in"
+              ]
+            }
+          ]
+        },
+        "literals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/literal"
+          }
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reason"
+          }
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/comparison"
+          }
+        }
+      }
+    },
+    "clause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodeShape",
+        "evidence",
+        "originalClause",
+        "originalText",
+        "role",
+        "status",
+        "comparison",
+        "reasons"
+      ],
+      "properties": {
+        "nodeShape": {
+          "enum": [
+            "generic-claim",
+            "ps2-clause",
+            "historical-fact",
+            "historical-all",
+            "historical-any",
+            "historical-if",
+            "historical-effect",
+            "historical-branch",
+            "historical-choice",
+            "historical-option",
+            "historical-prerequisite",
+            "ps2-reference",
+            "unresolved-date-wrapper",
+            "source-note",
+            "unrecognized-source-node"
+          ]
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "originalClause": {
+          "$ref": "#/$defs/json"
+        },
+        "originalText": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "role": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/truth"
+        },
+        "comparison": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/comparison"
+            }
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reason"
+          }
+        }
+      }
+    },
+    "versionResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "source",
+        "target",
+        "reasons"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "unknown",
+            "conflict",
+            "matched"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/json"
+        },
+        "target": {
+          "$ref": "#/$defs/targetVersion"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reason"
+          }
+        }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "executionEnabled",
+        "executionEligibility",
+        "repeatability",
+        "eventOccurrence",
+        "effects",
+        "originalRuntimeEquivalent"
+      ],
+      "properties": {
+        "executionEnabled": {
+          "const": false
+        },
+        "executionEligibility": {
+          "const": "disabled-source-corpus"
+        },
+        "repeatability": {
+          "const": "unknown-repeatability"
+        },
+        "eventOccurrence": {
+          "const": "not-evaluated"
+        },
+        "effects": {
+          "const": "not-executed"
+        },
+        "originalRuntimeEquivalent": {
+          "const": false
+        }
+      }
+    },
+    "querySuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "schemaVersion",
+        "queryProfile",
+        "observationRef",
+        "resolution",
+        "documentedConditionsStatus",
+        "conditionCompleteness",
+        "resultCompleteness",
+        "versionResolution",
+        "onceOnly",
+        "boundary",
+        "evidence",
+        "originalObservation",
+        "clauses",
+        "reasons"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "schemaVersion": {
+          "const": 1
+        },
+        "queryProfile": {
+          "const": "source-event-query-v1"
+        },
+        "observationRef": {
+          "$ref": "#/$defs/observationRef"
+        },
+        "resolution": {
+          "enum": [
+            "resolved",
+            "unknown"
+          ]
+        },
+        "documentedConditionsStatus": {
+          "$ref": "#/$defs/truth"
+        },
+        "conditionCompleteness": {
+          "type": "string"
+        },
+        "resultCompleteness": {
+          "type": "string"
+        },
+        "versionResolution": {
+          "$ref": "#/$defs/versionResolution"
+        },
+        "onceOnly": {
+          "$ref": "#/$defs/json"
+        },
+        "boundary": {
+          "$ref": "#/$defs/boundary"
+        },
+        "evidence": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/evidence"
+            }
+          ]
+        },
+        "originalObservation": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/json"
+              }
+            }
+          ]
+        },
+        "clauses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/clause"
+          }
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reason"
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observationRef",
+        "title",
+        "sourceURL",
+        "sourceJSONPointer",
+        "coverageKind",
+        "registeredPredicateIds",
+        "executionEnabled"
+      ],
+      "properties": {
+        "observationRef": {
+          "$ref": "#/$defs/observationRef"
+        },
+        "title": {
+          "type": "string"
+        },
+        "sourceURL": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "sourceJSONPointer": {
+          "type": "string"
+        },
+        "coverageKind": {
+          "type": "string"
+        },
+        "registeredPredicateIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "executionEnabled": {
+          "const": false
+        }
+      }
+    },
+    "profileSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "profile"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "profile": {
+          "const": {
+            "schemaVersion": 1,
+            "id": "source-event-query-v1",
+            "executionEnabled": false,
+            "sourceIdentityPolicy": "Trusted installed repository data at the pinned commit; request identity must match family/path/blob/SHA-256 exactly. Complete registered clause equality is checked before comparison. This is not runtime byte authentication of installed files.",
+            "sources": [
+              {
+                "family": "generic-events",
+                "path": "data/generic-events/atwiki-88.json",
+                "gitBlobSha": "527988afe81227bf07a08b591919c16e35308a16",
+                "sha256": "cd76844fe0b6f8417acea0f84fbeaf3f94d5b2edfc51b645ce07be026e330d28",
+                "bytes": 55758,
+                "commit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+                "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09",
+                "datasetId": "san11.generic.atwiki88.20261007",
+                "collection": "observations",
+                "evidence": "public-guide-transcription"
+              },
+              {
+                "family": "generic-events",
+                "path": "data/generic-events/gamersky-2009.json",
+                "gitBlobSha": "cc1466e898494960f94328ec8149e730089e1ea8",
+                "sha256": "1285ebb2097ef373b9404316aa47977df7d501b9c9d62768def80da31ca7c29d",
+                "bytes": 4544,
+                "commit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+                "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09",
+                "datasetId": "san11.generic.gamersky2009.20261007",
+                "collection": "observations",
+                "evidence": "public-guide-transcription"
+              },
+              {
+                "family": "scenario-events",
+                "path": "data/scenario-events/atwiki-88.json",
+                "gitBlobSha": "c037ec66d2e968e7318ebb7eabb2d239edfaefb6",
+                "sha256": "c309ed1024df30e62f5a7ff6f4f16bb82fd98cac3e7aed19f80a833afe746552",
+                "bytes": 297611,
+                "commit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+                "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09",
+                "datasetId": "san11-historical-events-atwiki-88",
+                "collection": "events",
+                "evidence": "public-guide-transcription"
+              },
+              {
+                "family": "scenario-events",
+                "path": "data/scenario-events/gamersky-2008.json",
+                "gitBlobSha": "07dcb7600e519b775415c657cf70eb3973014e8d",
+                "sha256": "45cb47718d2e90eebd59b06fcc81ea24972852bcae2dc436aa60e45c8fa1c8e5",
+                "bytes": 216050,
+                "commit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+                "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09",
+                "datasetId": "san11-historical-events-gamersky-2008",
+                "collection": "events",
+                "evidence": "public-guide-transcription"
+              },
+              {
+                "family": "ps2-scenario-events",
+                "path": "data/ps2-scenario-events/atwiki-100.json",
+                "gitBlobSha": "611ed737d5143970aad50d4cbd4e785e0f83de42",
+                "sha256": "b52d8a2a710e8bc359648d7df753caf492cd334611bde4f4f9618443c6724658",
+                "bytes": 310620,
+                "commit": "7cf050fdf57cd40641bf5f139b2c34c548aae820",
+                "tree": "c515fd47bdec5a1f8b9502da58130dad91372a09",
+                "datasetId": "san11.ps2-historical.atwiki100.20261007",
+                "collection": "observations",
+                "evidence": "public-guide-transcription"
+              }
+            ],
+            "predicates": [
+              {
+                "id": "generic.atwiki88.12.safe-city-clause-v1",
+                "observationId": "generic.atwiki88.12",
+                "sourcePath": "data/generic-events/atwiki-88.json",
+                "sourceGitBlobSha": "527988afe81227bf07a08b591919c16e35308a16",
+                "sourceJSONPointer": "/observations/11/conditions/2",
+                "sourceClause": {
+                  "scope": "event",
+                  "text": "没有蝗灾或疫病；执行探索的城市治安至少90。",
+                  "certainty": "source-stated",
+                  "sourceLocator": {
+                    "startLine": 1210,
+                    "endLine": 1211
+                  },
+                  "quantities": [
+                    {
+                      "name": "search-city-order",
+                      "operator": "gte",
+                      "value": 90,
+                      "unit": "public-order"
+                    }
+                  ]
+                },
+                "sourceClauseSha256": "ea3bc9f038b7beb0f2d2e09b180a74f56ba1daca71cb88a4c5b40ca1853b6571",
+                "sourceClauseHashEncoding": "UTF-8 JSON, recursively sorted object keys, compact separators, no newline; original paraphrase bytes preserved",
+                "certainty": "source-stated",
+                "semanticScope": "Source-described search-city primitive comparison only; no exploration trigger or event occurrence.",
+                "clauseCoverage": "partial",
+                "uncoveredReasons": [
+                  "disaster-scope-unresolved"
+                ],
+                "requiredBindings": [
+                  "search-city"
+                ],
+                "expression": {
+                  "kind": "atom",
+                  "id": "generic.atwiki88.12.security",
+                  "symbol": "search-city",
+                  "entityKind": "city",
+                  "field": "security",
+                  "valueType": "integer",
+                  "operator": "gte",
+                  "literals": [
+                    {
+                      "type": "integer",
+                      "value": 90
+                    }
+                  ],
+                  "certainty": "source-stated",
+                  "semanticScope": "The explicitly stated city executing exploration has security at least 90."
+                }
+              },
+              {
+                "id": "generic.atwiki88.15.safe-city-clause-v1",
+                "observationId": "generic.atwiki88.15",
+                "sourcePath": "data/generic-events/atwiki-88.json",
+                "sourceGitBlobSha": "527988afe81227bf07a08b591919c16e35308a16",
+                "sourceJSONPointer": "/observations/14/conditions/1",
+                "sourceClause": {
+                  "scope": "event",
+                  "text": "探索城市没有疫病或蝗灾，治安至少90，资金至少2001。",
+                  "certainty": "source-stated",
+                  "sourceLocator": {
+                    "startLine": 1227,
+                    "endLine": 1229
+                  },
+                  "quantities": [
+                    {
+                      "name": "search-city-order",
+                      "operator": "gte",
+                      "value": 90,
+                      "unit": "public-order"
+                    },
+                    {
+                      "name": "search-city-gold",
+                      "operator": "gte",
+                      "value": 2001,
+                      "unit": "gold"
+                    }
+                  ]
+                },
+                "sourceClauseSha256": "b0270bd68fdbbaa122efff1451c530c03ed2c92b05b83cac6a917b50bd6a08c0",
+                "sourceClauseHashEncoding": "UTF-8 JSON, recursively sorted object keys, compact separators, no newline; original paraphrase bytes preserved",
+                "certainty": "source-stated",
+                "semanticScope": "Source-described search-city primitive comparison only; no exploration trigger or event occurrence.",
+                "clauseCoverage": "complete",
+                "uncoveredReasons": [],
+                "requiredBindings": [
+                  "search-city",
+                  "searching-person",
+                  "yu-ji"
+                ],
+                "expression": {
+                  "kind": "all",
+                  "id": "generic.atwiki88.15.city-conjunction",
+                  "certainty": "source-stated",
+                  "semanticScope": "The four conjuncts explicitly describe the same exploration city.",
+                  "groupingEvidence": "The complete clause explicitly joins no plague/locust, security at least 90 and gold at least 2001; this local all does not establish whole-event grouping.",
+                  "children": [
+                    {
+                      "kind": "atom",
+                      "id": "generic.atwiki88.15.current-plague",
+                      "symbol": "search-city",
+                      "entityKind": "city",
+                      "field": "current.plague",
+                      "valueType": "boolean",
+                      "operator": "eq",
+                      "literals": [
+                        {
+                          "type": "boolean",
+                          "value": false
+                        }
+                      ],
+                      "certainty": "source-stated",
+                      "semanticScope": "No plague in the explicitly named exploration city."
+                    },
+                    {
+                      "kind": "atom",
+                      "id": "generic.atwiki88.15.current-locust",
+                      "symbol": "search-city",
+                      "entityKind": "city",
+                      "field": "current.locust",
+                      "valueType": "boolean",
+                      "operator": "eq",
+                      "literals": [
+                        {
+                          "type": "boolean",
+                          "value": false
+                        }
+                      ],
+                      "certainty": "source-stated",
+                      "semanticScope": "No locust disaster in the explicitly named exploration city."
+                    },
+                    {
+                      "kind": "atom",
+                      "id": "generic.atwiki88.15.security",
+                      "symbol": "search-city",
+                      "entityKind": "city",
+                      "field": "security",
+                      "valueType": "integer",
+                      "operator": "gte",
+                      "literals": [
+                        {
+                          "type": "integer",
+                          "value": 90
+                        }
+                      ],
+                      "certainty": "source-stated",
+                      "semanticScope": "Exploration-city security at least 90."
+                    },
+                    {
+                      "kind": "atom",
+                      "id": "generic.atwiki88.15.gold",
+                      "symbol": "search-city",
+                      "entityKind": "city",
+                      "field": "gold",
+                      "valueType": "integer",
+                      "operator": "gte",
+                      "literals": [
+                        {
+                          "type": "integer",
+                          "value": 2001
+                        }
+                      ],
+                      "certainty": "source-stated",
+                      "semanticScope": "Exploration-city gold at least 2001."
+                    }
+                  ]
+                }
+              }
+            ],
+            "operatorPolicy": {
+              "equality": "eq/ne require identical primitive types; no coercion",
+              "ordering": "lt/lte/gt/gte only for safe integers; no date/rank/string ordering",
+              "membership": "in/not-in on a nonempty, same-type fixed literal set only; not caller predicates",
+              "all": "nonempty: any not-met => not-met; all met => met; else unknown",
+              "any": "nonempty: any met => met; all not-met => not-met; else unknown",
+              "emptyGroup": "unknown",
+              "sourceGroups": "Only the explicitly reviewed Yu Ji local all is active. No reviewed any group; dormant operator support is not additional source coverage.",
+              "version": "Comparison truth describes the reviewed source fragment only. Clause status remains unknown unless source and target edition/platform/patch match. Whole-observation grouping is unreviewed and documentedConditionsStatus remains unknown.",
+              "date": "No date fields in v1 facts and no date predicate; source dates remain unknown. No precision completion or day/month conversion."
+            },
+            "limitations": [
+              "202 independent observations remain separate: generic 33, historical 105, PS2 64; this is not 202 implemented rules.",
+              "Only two reviewed clauses, five atomic comparisons and one local all. Guan Lu disaster scope remains unresolved.",
+              "A city binding is an explicit caller assumption, never name matching or an engine save/native ID assertion. Yu Ji requires coherent, distinct searching-person and yu-ji bindings to that city, without proving exploration took place.",
+              "All source result, conditional, prerequisite, relationship, date and unreviewed group nodes remain readable unknown.",
+              "No event scheduler, RNG, execution, history, state, save/load/replay, resource writes or native effect handlers.",
+              "Unknown once-only flags do not establish repeatability.",
+              "No original 43-topic or 45-snapshot completion claim; source inventory differences and O14/O15 evidence gaps remain open."
+            ]
+          }
+        }
+      }
+    },
+    "listSuccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "observations"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/summary"
+          }
+        }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "reason",
+        "inputJSONPointer",
+        "pointerStatus"
+      ],
+      "properties": {
+        "ok": {
+          "const": false
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "inputJSONPointer": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "maxLength": 1024
+            }
+          ]
+        },
+        "pointerStatus": {
+          "enum": [
+            "provided",
+            "omitted-too-long",
+            "omitted-output-budget"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "pointerStatus": {
+                "const": "provided"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "inputJSONPointer": {
+                "type": "string"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "inputJSONPointer": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "observationRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "family",
+        "sourcePath",
+        "gitBlobSha",
+        "sha256",
+        "observationId"
+      ],
+      "properties": {
+        "family": {
+          "enum": [
+            "generic-events",
+            "scenario-events",
+            "ps2-scenario-events"
+          ]
+        },
+        "sourcePath": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "gitBlobSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}(?![\\s\\S])"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
+        },
+        "observationId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,95}(?![\\s\\S])"
+        }
+      }
+    },
+    "targetVersion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edition",
+        "platform",
+        "patch"
+      ],
+      "properties": {
+        "edition": {
+          "enum": [
+            "PK",
+            "Vanilla",
+            null
+          ]
+        },
+        "platform": {
+          "enum": [
+            "PC",
+            "PS2",
+            "Wii",
+            null
+          ]
+        },
+        "patch": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            }
+          ]
+        }
+      }
+    }
+  }
+}

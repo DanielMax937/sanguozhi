@@ -1,3 +1,11 @@
+## O14 query：来源事件三值查询具体规则（2026-10-18 静态）
+
+[完整规则](source-event-query.md) · [三个API](../engine/source-event-query.md) · [固定registry](../../data/catalogs/source-event-query-profile-v1.json) · [来源身份](../sources/source-event-query.json) · [输入schema](../../data/schemas/source-event-query-v1.schema.json) · [响应schema](../../data/schemas/source-event-query-response-v1.schema.json) · [未运行输入示例](../../data/scenarios/source-event-query-example-v1.json)。明确固定观测身份、typed facts与显式bindings、strict eq/ne/order/set及三值all/any、完整原条款和子节点pointer；算子支持不代表所有来源分组已核。
+
+registry只含管辂治安≥90与于吉同城无疫病／蝗灾、治安≥90、资金≥2001，共五原子和一个局部all。不得把于吉明确的城市范围套用于管辂灾害条件；其余条款与分组可读unknown，heading-only非true。片段comparison不等于完整clause或整体documentedConditionsStatus；当前整体仍unknown，executionEligibility始终disabled-source-corpus，repeatability仍unknown-repeatability。
+
+202观测只是浏览范围；通用33／31／10、史实105／66／41、PS2 64／741／24与原43主题／45快照不减，executionEnabled=false不改，无发生／效果／世界state。实现集成基线PR87 main `021097bdb63ed882bb7b1e1d11f6bdeaf8af017b`／tree `077cb16ad83c8a3a32a6f60a26b3a00cee1b0a93`；来源仍为PR85相同五个Git blob。O14与O15未关闭；仅静态新增，产品、示例、测试、typecheck、编译、build、checker、诊断和schema校验均未运行。
+
 ## O14 field：有限正兵力动作完整规则（2026-10-18 静态）
 
 [完整规则](field-combat-lifecycle.md) · [API](../engine/field-combat-lifecycle.md) · [政策](../../data/catalogs/field-combat-policy-v1.json) · [来源](../sources/field-combat-lifecycle.json) · [DTO schema](../sources/field-combat-lifecycle.schema.json)。普通近接／弩攻、一次反应、螺旋／横扫／旋风、扰乱与仅状态伪报形成一个固定episode事务；任何致命结果或未支持副效应都整体拒绝。伤害counter是克制；反击重算与scale单列模拟政策，精锐覆盖锻炼，O01状态不重复计功。

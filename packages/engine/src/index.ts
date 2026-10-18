@@ -104,3 +104,6 @@ export type { AdjacentSiteDiscoveryScenarioV1, AdjacentSiteDiscoveryStateV1, Adj
 
 export { FIELD_COMBAT_POLICY_REGISTRY_V1, FIELD_COMBAT_DEFAULT_POLICY_V1, FIELD_COMBAT_EVIDENCE_V1, createFieldCombatStateV1, previewFieldCombatV1, executeFieldCombatV1, saveFieldCombatV1, loadFieldCombatV1, replayFieldCombatV1 } from './field-combat-lifecycle.ts';
 export type { FieldCombatScenarioV1, FieldCombatStateV1, FieldCombatSnapshotV1, FieldCombatCommandV1, FieldCombatPolicyV1, FieldCombatReceiptV1, FieldCombatFailureV1, FieldCombatStateResultV1, FieldCombatCommandResultV1, FieldCombatPreviewResultV1, FieldCombatSaveResultV1, FieldCombatTraceV1, FieldCombatReplayResultV1 } from './field-combat-lifecycle.ts';
+
+export { getSourceEventQueryProfileV1, listSourceEventObservationsV1, querySourceEventV1 } from './source-event-query.ts';
+export type { SourceEventQueryInputV1, SourceEventQueryResultV1, SourceEventQueryProfileV1, SourceEventQueryProfileResultV1, SourceEventObservationListResultV1, SourceEventObservationSummaryV1, SourceEventTruthV1 } from './source-event-query.ts';
