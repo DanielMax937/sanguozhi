@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 1,
+  "profile": "bounded-forge-monthly-production-v1",
+  "classification": "provisional-bounded-forge-monthly-specialty-composition",
+  "nativeIntegration": false,
+  "nativeExecutionVerified": false,
+  "stockVerified": false,
+  "validationStatus": "static-source-review-only-not-run",
+  "validationBoundary": "No product, tests, build, compilation, typecheck, runtime, schema validator, scenario sequence, product serialization or output-size measurement was run. Static source/schema documents and paper bounds are not execution or native-equivalence evidence.",
+  "implementationBase": {
+    "commit": "ec9e279e8c5056c5469cd275c8862d299d7ad602",
+    "tree": "bb556e3f3d7b05a88a395e970829fac599485b87",
+    "pullRequest": "https://github.com/DanielMax937/sanguozhi/pull/98",
+    "mergedAt": "2026-10-19T07:16:48Z"
+  },
+  "deliveredDependencies": [
+    {
+      "name": "bounded-forge-development-production-v1",
+      "pullRequest": "https://github.com/DanielMax937/sanguozhi/pull/96",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "tree": "a8a83abd434bd3e7482a12dd90a768aa62b42912",
+      "status": "delivered"
+    },
+    {
+      "name": "clock-free-monthly-specialty-phases",
+      "pullRequest": "https://github.com/DanielMax937/sanguozhi/pull/97",
+      "commit": "d7339b39cf8b85de394a77ce5cd481293682bcd0",
+      "tree": "bd7b490d744e944eb6c0cf10bcc52f1a71c6803e",
+      "status": "delivered"
+    },
+    {
+      "name": "compatible-private-forge-core",
+      "pullRequest": "https://github.com/DanielMax937/sanguozhi/pull/98",
+      "commit": "ec9e279e8c5056c5469cd275c8862d299d7ad602",
+      "tree": "bb556e3f3d7b05a88a395e970829fac599485b87",
+      "status": "delivered",
+      "dependencyBoundary": "The core is an actual merged dependency at this fixed commit; the earlier candidate tree alone was not sufficient. This records dependency identity, not delivery or runtime validation of the new monthly root."
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "packages/engine/src/bounded-forge-development-production.ts",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "gitBlob": "ba17782812176a88fbe91518760c470187092d72",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/packages/engine/src/bounded-forge-development-production.ts",
+      "role": "Historical parser, first-error order, invariants, full ordered fold and public wrappers; shared business now comes from the delivered core"
+    },
+    {
+      "path": "packages/engine/src/internal/bounded-forge-development-production-types.ts",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "gitBlob": "85e1614640d0706767cf3295721c593a2471244f",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/packages/engine/src/internal/bounded-forge-development-production-types.ts",
+      "role": "Complete closed shared leaf DTOs; new root imports these unchanged"
+    },
+    {
+      "path": "packages/engine/src/internal/bounded-forge-development-production-registry.ts",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "gitBlob": "1b6029f1a349f67b867b0ec79e023221806a9ec1",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/packages/engine/src/internal/bounded-forge-development-production-registry.ts",
+      "role": "Full BasePolicy, ConstructionPolicy and nine-facility ConstructionCatalog identities"
+    },
+    {
+      "path": "packages/engine/src/internal/bounded-forge-development-production-json.ts",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "gitBlob": "abd886023ee4c9fd718fa3becc3b5e6cf151d495",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/packages/engine/src/internal/bounded-forge-development-production-json.ts",
+      "role": "Structural safe JSON source; old integer-only root remains unchanged"
+    },
+    {
+      "path": "packages/engine/src/index.ts",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "gitBlob": "71447ce8d9ec88344fca1d528d77976d327446c8",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/packages/engine/src/index.ts",
+      "role": "Existing 71 aliases and seven APIs remain; new profile adds a separate 84 aliases and seven APIs"
+    },
+    {
+      "path": "data/policies/bounded-forge-development-production-v1.json",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "gitBlob": "c8fe45075198e9d29476a5643c3dd2fcb867d572",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/data/policies/bounded-forge-development-production-v1.json",
+      "role": "Complete nested base policy with original traceAttempts 512"
+    },
+    {
+      "path": "data/schemas/bounded-forge-development-production-v1.schema.json",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "gitBlob": "cc37ec4f73b8bef8543661f04378aaf8a4ab9ca9",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/data/schemas/bounded-forge-development-production-v1.schema.json",
+      "role": "Complete unchanged shared schema definitions; root-specific wrappers and new monthly definitions are separate"
+    },
+    {
+      "path": "data/scenarios/bounded-forge-development-production-example-v1.json",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "gitBlob": "cb1074764e4be75736fb0425d1f22aea7565b61d",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/data/scenarios/bounded-forge-development-production-example-v1.json",
+      "role": "Synthetic example common facts; neither old nor new example executed for this composition"
+    },
+    {
+      "path": "data/sources/bounded-forge-development-production-v1.json",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "gitBlob": "4af876c658dc3c0a34a5f3d35c4ae759b160ce65",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/data/sources/bounded-forge-development-production-v1.json",
+      "role": "Source-local ordinary production and construction evidence and unresolved native claims remain in scope unchanged"
+    },
+    {
+      "path": "packages/engine/src/monthly-specialty-production.ts",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "gitBlob": "63237b6bf55239d2e5936ab5e3f0cd6446a33adf",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/packages/engine/src/monthly-specialty-production.ts",
+      "role": "Existing monthly quantity kernel and complete source observation/evidence receipt"
+    },
+    {
+      "path": "data/catalogs/city-finance-policies-v1.json",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "gitBlob": "bd44cb42416b34f450cc6c43e94788b82b1c950b",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/data/catalogs/city-finance-policies-v1.json",
+      "role": "Full specialty, specialtyArithmetic and credit subtrees retained under monthly policy; other finance phases are not integrated"
+    },
+    {
+      "path": "docs/sources/monthly-specialty-production.json",
+      "commit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+      "gitBlob": "d053f820084d843d9b6ee1ef744ecca9f338d91a",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/docs/sources/monthly-specialty-production.json",
+      "role": "Fixed project manifest carrying original listing identity and all provisional arithmetic/native caveats"
+    },
+    {
+      "path": "packages/engine/src/internal/monthly-specialty-types.ts",
+      "commit": "d7339b39cf8b85de394a77ce5cd481293682bcd0",
+      "gitBlob": "167d5cbd6c67bb40d78be5bd198fb01663f541fd",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/d7339b39cf8b85de394a77ce5cd481293682bcd0/packages/engine/src/internal/monthly-specialty-types.ts",
+      "role": "Private readonly monthly phase facts and stock-only writer contract"
+    },
+    {
+      "path": "packages/engine/src/internal/monthly-specialty-leaves.ts",
+      "commit": "d7339b39cf8b85de394a77ce5cd481293682bcd0",
+      "gitBlob": "88b74d9340c6ae35d4c32f27b050f70b4725c4f5",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/d7339b39cf8b85de394a77ce5cd481293682bcd0/packages/engine/src/internal/monthly-specialty-leaves.ts",
+      "role": "Existing complete observation derivation and positive saturating credit arithmetic"
+    },
+    {
+      "path": "packages/engine/src/internal/monthly-specialty-phases.ts",
+      "commit": "d7339b39cf8b85de394a77ce5cd481293682bcd0",
+      "gitBlob": "319f2533ae454e7a710cffc804f4a465a49a208b",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/d7339b39cf8b85de394a77ce5cd481293682bcd0/packages/engine/src/internal/monthly-specialty-phases.ts",
+      "role": "Clock-free single-equipment phase called in order 1,2,3; existing full finance owner is not called"
+    },
+    {
+      "path": "packages/engine/src/bounded-forge-development-production.ts",
+      "commit": "ec9e279e8c5056c5469cd275c8862d299d7ad602",
+      "gitBlob": "e9889793f1a8df1bbfe0b9cce3539284226a3b6f",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/ec9e279e8c5056c5469cd275c8862d299d7ad602/packages/engine/src/bounded-forge-development-production.ts",
+      "role": "Delivered compatible old root after core extraction; old 71 aliases, seven APIs, saves and trace domain unchanged"
+    },
+    {
+      "path": "packages/engine/src/internal/bounded-forge-core-data.ts",
+      "commit": "ec9e279e8c5056c5469cd275c8862d299d7ad602",
+      "gitBlob": "95a9847e04139408861ae4a9da666b8f41b5c72b",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/ec9e279e8c5056c5469cd275c8862d299d7ad602/packages/engine/src/internal/bounded-forge-core-data.ts",
+      "role": "Shared integer domain readers and exact old policy facts; new root owns separate safe half-number JSON helpers"
+    },
+    {
+      "path": "packages/engine/src/internal/bounded-forge-core-errors.ts",
+      "commit": "ec9e279e8c5056c5469cd275c8862d299d7ad602",
+      "gitBlob": "9af967b0f039ce2df3af5cab648a90b8f680339c",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/ec9e279e8c5056c5469cd275c8862d299d7ad602/packages/engine/src/internal/bounded-forge-core-errors.ts",
+      "role": "Shared finite Failure/Reason/Stage and the same private error brand"
+    },
+    {
+      "path": "packages/engine/src/internal/bounded-forge-core-types.ts",
+      "commit": "ec9e279e8c5056c5469cd275c8862d299d7ad602",
+      "gitBlob": "958166da88784e746235d515facce9777b6c78fe",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/ec9e279e8c5056c5469cd275c8862d299d7ad602/packages/engine/src/internal/bounded-forge-core-types.ts",
+      "role": "Exact twelve-field ForgeCoreFacts; new root passes policy.base without widening the old contract"
+    },
+    {
+      "path": "packages/engine/src/internal/bounded-forge-core.ts",
+      "commit": "ec9e279e8c5056c5469cd275c8862d299d7ad602",
+      "gitBlob": "6e4c9922e4629904f935c67310f94bf829a0cc6c",
+      "mode": "100644",
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/ec9e279e8c5056c5469cd275c8862d299d7ad602/packages/engine/src/internal/bounded-forge-core.ts",
+      "role": "Delivered shared startForge, produce and advanceShared business, immutable snapshots and complete reducer audits"
+    }
+  ],
+  "originalMonthlyListing": {
+    "attribution": "Identity and arithmetic caveats retained from the fixed project monthly manifest; no new native executable execution, helper recovery or runtime source rehash is asserted.",
+    "source": {
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/Func-收支03-每月钱粮兵装收支.txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/%E5%86%85%E5%AD%98%E8%B5%84%E6%96%99/%E6%95%B4%E7%90%86/Func-%E6%94%B6%E6%94%AF03-%E6%AF%8F%E6%9C%88%E9%92%B1%E7%B2%AE%E5%85%B5%E8%A3%85%E6%94%B6%E6%94%AF.txt",
+      "gitBlob": "028fae66ba44f70716951edd9fae51420780cea0",
+      "gbkBytes": 44283,
+      "gbkSha256": "24c1f4c75185a3aef07aac7f493400bb778f2f071bf4fd8ef3d905457d43d617",
+      "utf8Bytes": 46993,
+      "utf8Sha256": "825c1ff948e122fb15da6baa92c95d978b5ccd664cb0e32a1ff72d70c53a7e7b",
+      "fullListing": {
+        "start": "00590490",
+        "endExclusive": "00590C23",
+        "instructions": 572,
+        "bytes": 1939,
+        "sha256": "e65552b27524fcce9e95e2b3a48a9117a185cd27ad3362cfe0e47dbb9c9ee88b"
+      },
+      "slice": {
+        "start": "00590A83",
+        "endExclusive": "00590B83",
+        "instructions": 71,
+        "bytes": 256,
+        "sha256": "0269b7298f452d1cebd6c22f8a15eca5606b99d51709ee7120974828b9f3f3fb"
+      }
+    },
+    "license": {
+      "name": "Apache-2.0",
+      "snapshot": "docs/sources/production-time-LICENSE.txt",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+    }
+  },
+  "kernelEvidence": {
+    "level": "source-listing-control-flow-with-provisional-arithmetic",
+    "controlFlow": "source-listing-reconstruction",
+    "arithmetic": "documented-replaceable-assumptions",
+    "profile": "monthly-specialty-production-observed-v1",
+    "arithmeticProfile": "comment-f32-rne-trunc-v1",
+    "source": "docs/sources/monthly-specialty-production.json",
+    "projectTarget": "PC-PK1.1",
+    "sourceEditionClaim": "PK",
+    "exactSourceVersionVerified": false,
+    "runtimeSourceRehashPerformed": false,
+    "nativeExecutableExecuted": false,
+    "nativeHelpersReconstructed": false,
+    "converterBodyKnown": false,
+    "memoryConstantBytesRecovered": false,
+    "stockOriginalVerified": false,
+    "vanillaVerified": false,
+    "abiVerified": false,
+    "fullCallerExecuted": false,
+    "stateWriterIntegrated": false,
+    "ownerForceIntegrated": false,
+    "schedulerIntegrated": false,
+    "rngIntegrated": false
+  },
+  "sourceLocalClaims": [
+    "Existing monthly kernel control flow retains the specialty gate, thirty ordered facility observations, corresponding-completed helper captures and governor politics capture.",
+    "Each called item retains full input, full result.observations, every captured return, arithmetic, quantity request and all twenty-two evidence fields.",
+    "Count one uses binary32 factor 1 / bits1065353216; count two uses 1.5 / bits1069547520. For selected governor politics p=0..100, term=floor(p/2)+60 and scaled=term*factor*3; truncation gives requested quantity 180..495. The full source kernel still performs its original arithmetic.",
+    "The memory constants and converter remain documented replaceable assumptions; the external listing does not certify exact PC-PK1.1 source version, native helper bodies or complete monthly caller.",
+    "Shared construction rate and ordinary production preserve complete prior audits and source uncertainty, including construction work versus HP and the unresolved original ordinary quantity reward-attribute conflict."
+  ],
+  "suppliedFacts": [
+    "Fixed city, force, corps, positions, ownership, initial ledger, four equipment inventory quantities and capacities, complete production prices and construction catalog",
+    "One to eight officers with stable U8 abilities and supplied initial progress; only the selected fixed governor is limited to politics 0..100",
+    "One or two supplied lots, exactly one initially empty; zero or one initial complete Lv1 forge; at most two current forges and one ever-created development job",
+    "Thirty explicit lot slots, each supplied lot present exactly once and every other slot null, including the currently empty lot",
+    "Fixed domestic difficulty/controller/pressure/unlock/specialty facts and complete separate hostile-force/field-unit facts",
+    "Initial finite ten-day date/turn and one-to-twelve advances; no implicit creation-time monthly settlement"
+  ],
+  "provisionalPolicies": [
+    {
+      "id": "bounded-forge-monthly-production-v1",
+      "mapping": "Independent profile, tags, save format, 84 public DTO aliases, seven APIs and one policy constant. Old root keeps its 71 aliases, seven APIs and 512 trace domain."
+    },
+    {
+      "id": "after-core-completion-at-month-start-v1",
+      "mapping": "One AdvanceSharedFacilityTurn advances the sole clock once, applies AP recovery and complete construction effects, then performs monthly specialty if the new day is 1. Completion that day may participate immediately; this order is a simulation policy."
+    },
+    {
+      "id": "explicit-lot-slots-from-current-v1",
+      "mapping": "Derive each slot from the post-completion current.ledger.facilities and fixed lot mapping. Empty is validity0; developing is validity1/completed0; complete is validity1/completed1. Do not count levels or stale genesis facility snapshots."
+    },
+    {
+      "id": "fixed-officer-current-politics-0-to-100-v1",
+      "mapping": "Resolve the same supplied governor ID from current officers. Null governor yields complete no-governor items. Availability, acted and construction reservation do not block this monthly role; politics remains equal to genesis."
+    },
+    {
+      "id": "no-create-catchup-v1",
+      "mapping": "Creation never credits a month or assumes earlier payroll. Each accepted month-start receipt identifies exactly its city/year/month; history fold rejects duplicate settlement."
+    },
+    {
+      "id": "comment-f32-rne-trunc-v1",
+      "mapping": "Retain full source arithmetic policy. In the bounded two-facility domain, factorValue may be 1.5 and scaledValue may be an exact half integer. No other DTO field gains fractional domain."
+    },
+    {
+      "id": "saturating-positive-credit-v1",
+      "mapping": "Call delivered single-equipment phases once in order 1,2,3 using frozen owned facts and a separate owned quantity/capacity stock. Verify complete response and exact stock after before copying only quantity to the same current.ledger.inventory[k] used by ordinary Produce. accepted=min(requested,capacity-before), discarded=requested-accepted; full stock still emits a complete write."
+    },
+    {
+      "id": "one-command-all-or-nothing-v1",
+      "mapping": "Core completion and all three monthly items share a single owned candidate. Any late failure discards every change. Monthly phase never changes AP/gold/TP, personnel progress/acted/reservation, facility usedTurn, equipment4, jobs, clock or history."
+    }
+  ],
+  "digestBoundary": {
+    "jobStartSnapshot": "SHA-256 of the complete old policy.base at core start time",
+    "outerReceipt": "SHA-256 of the complete new five-key policy",
+    "catalogs": "Complete construction and production catalogs",
+    "trust": "Digests are audit aids only; full source values, receipts and state are retained and compared."
+  },
+  "supportDomain": {
+    "acceptedCommands": 64,
+    "reachableAcceptedCommands": 36,
+    "traceAttempts": 128,
+    "maxJobs": 1,
+    "maxAdvances": 12,
+    "maxOfficers": 8,
+    "maxLots": 2,
+    "maxFacilities": 2,
+    "maxFieldUnits": 16,
+    "maxHostileForces": 16,
+    "maxIdAsciiBytes": 64,
+    "maxUtf8Bytes": 8388608,
+    "maxNodes": 250000,
+    "maxDepth": 48,
+    "maxArray": 4096,
+    "maxObjectKeys": 128
+  },
+  "staticBudgetContract": {
+    "classification": "conditional-conservative-paper-bound-not-measured-output",
+    "scope": "All reachable prefixes, all accepted active-job completion tails, every retained old receipt duplicate wrapper, raw/escaped save and complete 128-attempt replay/expected trace packages; aliases count at every occurrence.",
+    "maxMonthlySettlements": 4,
+    "maxStateNodes": 16000,
+    "maxStateUtf8Bytes": 2240000,
+    "maxEscapedSaveResultUtf8Bytes": 4480587,
+    "maxReplayNodes": 223747,
+    "maxReplayUtf8Bytes": 7440000,
+    "maxTraceNodes": 226411,
+    "maxTraceUtf8Bytes": 7660000,
+    "maxDepth": 20,
+    "maxArrayLength": 128,
+    "maxObjectFields": 32,
+    "scopeCaveat": "Separate API packages, not simultaneous process memory. Requires exact closed DTOs, immutable supplied facts and no additional AP source. Fields, domain sizes, order or output copies cannot change without a new proof. A 512-attempt three-equipment monthly receipt stream is not covered."
+  },
+  "nonGoals": [
+    "Payroll, office roster, income, food or full finance settlement; settled labels only this monthly specialty stage",
+    "Ordinary native technique points, native stat growth or resolution of original reward-attribute uncertainty",
+    "Other facility kinds, stable production/equipment4, absorption, upgrade, cancel, refund, demolition, HP or repair",
+    "Additional jobs, clocks, independent monthly commands, external active jobs, ownership changes, mutable supplied external facts or catch-up",
+    "Merchant, piece production, batch, legal query, CLI, UI or general world simulation",
+    "Native helper/writer/scheduler/caller recovery, native ABI/version certification, executable equivalence, stock PK or Vanilla verification, RNG",
+    "P078 and every dependency"
+  ],
+  "notEstablished": [
+    "Any test, compiler, typecheck, schema-validator or runtime success",
+    "Any measured product-output, performance or peak-memory bound",
+    "Any new native evidence obtained by this engineering composition"
+  ],
+  "syntheticExample": {
+    "path": "data/scenarios/bounded-forge-monthly-production-example-v1.json",
+    "classification": "static-supplied-scenario-only-not-executed",
+    "commonFactsSourceCommit": "9a9305cf2458487a07baed11e1b09c24c9130308",
+    "commonFactsSourceGitBlob": "cb1074764e4be75736fb0425d1f22aea7565b61d",
+    "changes": [
+      "New profile and episodeId forge-monthly-example",
+      "Complete new policy including unchanged full base",
+      "specialtyEquipmentTypes [1,2,3]",
+      "Fixed governor builder with existing politics100",
+      "Thirty lot slots: existing-lot, new-lot, then twenty-eight explicit nulls"
+    ],
+    "containsGeneratedReceipts": false,
+    "containsExpectedTrace": false
+  },
+  "publicDocumentation": [
+    "docs/engine/bounded-forge-monthly-production.md",
+    "docs/rules/bounded-forge-monthly-production.md"
+  ],
+  "policyReplacementBoundary": "All policies are full fixed constants. Future rules require a separately identified version/profile and new complete source/domain/budget review; a matching ID, digest or imported callback is insufficient.",
+  "implementationBoundaries": [
+    {
+      "subject": "independent-safe-half-JSON",
+      "mapping": "Separate structural JSON gate retains safe integers and exact halves whose doubled value is a safe integer, rejects negative zero and all other unsupported data, and preserves old structural safety and fixed budgets. Domain readers and full fold restrict the only noninteger positions to monthly arithmetic factorValue/scaledValue. This is a documented implementation boundary, not an extra configurable policy field."
+    },
+    {
+      "subject": "complete-fold-and-128-trace-domain",
+      "mapping": "Full ordered fold, every accepted/rebuilt prefix, all retained old-ID duplicate wrappers, raw and escaped save and complete trace expected values are budgeted. New outer traceAttempts=128; complete base.budgets.traceAttempts=512 is preserved provenance and does not override the new bound. This is a documented fixed support domain, not another policy object."
+    }
+  ]
+}
