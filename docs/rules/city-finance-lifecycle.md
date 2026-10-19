@@ -309,6 +309,21 @@ E. 特产：工资成功后，按1→2→3→4处理，见§6。失败也不保�
 
 本次不发AP/金成本、行动完成标记、XP、功绩或技巧点。特产不触发其他服务的普通生产任务或完成奖励。
 
+### 6.3 兼容私有抽取
+
+月特产的单兵种处理提取为[私有阶段](../engine/monthly-specialty-phases.md)。这只复用本服务已经存在的月产规则，不新增动态forge月产接合、公开命令、场景字段或政策版本；设备4的stable路径完整保留。
+
+财政owner仍从新日期判断是否月初，从按ID排序的完整同城同势力工资名单解析太守，并使用genesis场景固定的30设施槽。工资成功后仍按1→2→3→4逐设备调用；每个设备先调用核、检查数量、写当前分离候选库存，再按原序追加writes和specialty，才处理下一个设备。日期、RNG和事件仍在原owner位置结算，不先计算四个核再批量写入。
+
+- 非月初先返回not-due，即使太守为null也不变；月初无太守返回no-governor，两者均不调用核或读取库存数量
+- 有太守但非特产仍调用原核一次，仅含profile、arithmeticProfile、equipmentType、specialtyEaxU32四字段，不附slots/politics
+- 特产输入按索引0..29逐一映射全部槽，不补空、不截短、不重排。非空但未完成或不匹配仍为validity1/completion0；映射全部槽后才以原匹配完成谓词计数
+- count=0不读取政治且不附politics；count>0只取同一已解析太守的0..100 politics原值。等级、施工XP、人员行动、预留或普通Produce条件不参与计数
+- 生产请求按顺序检查signed数量为安全整数、非负、非负零，再要求与U32相等且≤1500；credit入口再次检查安全整数/非负/非负零。之后计算accepted=min(requested,capacity-before)，要求accepted为安全整数且≥0
+- 只有该设备全部检查成功才写stock.quantity=before+accepted。before/capacity来自此时的真实候选库存；满仓和capacity0仍调用核，保留原请求、accepted0及discarded=requested，不把实际入库数覆盖核请求
+
+该阶段只接收一个库存target，唯一可写字段为quantity，不持有整张state、clock、history或公开callback。较后设备失败时，先前设备、收入、工资、治安和RNG仍只存在于被丢弃的整旬候选中，不部分提交。private返回包装不进入对外receipt或保存；旧错误类别、首错顺序及全输出预算不因抽取改变。
+
 ## 7. 有序writer与资金恒等式
 
 所有正向资源写入使用 `saturating-positive-credit-v1`：
@@ -344,6 +359,8 @@ state顶层为tag=`city-finance-state-v1`、schemaVersion1、profile、scope=`in
 
 核未执行时记录 `{status:"not-due",reason}`，不伪造成功值0。治安未走的adminRoll/lossRoll明确null；非季初charm为null；无太守季降采用C0。salary在非月初仍列完整名单/目录总和，但status=not-due、paid0、availableBeforeSalary=null。四兵种明确区分not-due、no-governor、not-specialty、no-completed-facilities与production。
 
+私有抽取后，每项specialty仍仅含equipmentType、eligibility、count、arithmeticProfile、kernelQuantityRequest、kernel、write七字段，顺序和null分支不变。called包装保留完整原input和整个原result，包括observations的条件性30槽、capturedReturns原序、完整arithmetic、quantityRequest和evidence；合法factorValue/scaledValue小数不做整数化。production的write与全局writes中对应行是同一对象，包含resource、reason、before、requested、accepted、actualDelta、after、cap、discarded、writerPolicyId全部字段。原核evidence全部false标志不因外层库存写入而升级，adapterObservationKind仍为derived-adapter-observations。
+
 事件只有finance-turn-settled、finance-month-settled、finance-quarter-settled及settlementKey。不是native完成通知，不产生迁移、归属、释放或任务事件。
 
 ### 8.3 每个公共入口都重建
@@ -356,6 +373,8 @@ save输出canonical JSON。load使用有界JSON parser，按解码后的对象�
 
 preview和execute复用同一个resolver与完整execute输出预算。preview committed=false，只返回receipt与projectedSnapshot；没有可被信任导入的最终state凭据，调用者仍需执行并接收新state。重复相同ID+完整envelope返回旧receipt且不受当前revision/limit耗尽影响；相同ID更改expectedRevision也属冲突。
 
+月特产私有抽取保留所有公共函数及公开unknown边界、原schema/profile/tag、政策/目录和digest、完整history与保存字段；无存档迁移或新save格式。初态不变、单步逐字段对应、接受历史逐项重算、重复返回旧receipt的关系维持原合同。此处为源码静态兼容说明，未运行save/load、preview/execute或trace验收。
+
 ### 8.4 trace与失败尝试
 
 trace tag=`city-finance-trace-v1`，包含scenario、attempts、expectedFinalSnapshot。每个attempt有envelope和expectedOutcome（允许null）；最多1080项。期望成功值为 `{ok:true,duplicate,receipt}`，期望失败值为 `{ok:false,reason}`。expectedFinalSnapshot允许null。
@@ -367,6 +386,8 @@ trace tag=`city-finance-trace-v1`，包含scenario、attempts、expectedFinalSna
 容量政策：canonical JSON上限64MiB；每次数据遍历最多4,000,000节点，深度48，数组最长1080，单对象最多128键；tape720、成功历史≤360且≤advanceLimit，trace尝试≤1080。所有生成结果也受预算约束，超限拒绝，不截短历史或自动判游戏结束。primitive整数字段均各自限制，特殊核收据的有限派生小数单独保留。没有Node专属API或依赖Node的TS参数属性语法。
 
 失败形状为 `{ok:false,committed:false,reason,index,proposal}`，index为重放历史/trace分歧位置或null；proposal仅不足薪资时为数字说明，其他为null。失败没有写回部分state，不修改调用者对象。
+
+私有月特产阶段返回的失败仅为specialty-kernel:invalid-input/unexpected-field/unsupported-profile/stage-mismatch、unsupported-kernel-return或invalid-resource-boundary，仍在原owner位置交给原Invalid/fail适配。非预期异常不在阶段内捕获或改类，仍由公共边界映射invalid-data；历史index和薪资proposal包装不变。重建初态、每步完整CommandResult、最终state、preview/execute共用结果、save与trace各步及最终完整结果的预算检查全部保留；不因新增内部包装而减少receipt字段或截断历史。
 
 | 失败类别 | 代表reason / 处理 |
 |---|---|
