@@ -1,3 +1,7 @@
+# 金收入与完整工资的兼容复用
+
+[财政规则正文](city-finance-lifecycle.md)补充现有金收入适配、分离时序、足额发薪、完整空名单零额发薪及不足拒绝的具体政策；[私有阶段说明](../engine/finance-money-payroll-phases.md)列出强类型接缝和兼容证明。原财政公开协议与保存保持；新市场动态收入、工资保留金不由本次抽取接入。未运行测试、编译或构建。
+
 # 动态锻冶建设与每月特产
 
 [详细规则正文](bounded-forge-monthly-production.md)记录同账本建设、普通生产、固定太守、动态30槽、完工后月产、三兵种完整核审计和库存饱和规则。区分原核证据与本 profile 的可替换调度政策；不声称原作整链恢复。[API及有界保存合同](../engine/bounded-forge-monthly-production.md)另列完整128尝试域，旧profile的512域不变。本次未运行测试、编译或构建。

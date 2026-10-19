@@ -6,6 +6,14 @@
 
 2026-10-19补充：[月特产私有阶段](monthly-specialty-phases.md)将工资后的单兵种处理作兼容抽取，原owner仍掌握工资成功后的1→2→3→4顺序及整旬事务。公共API及unknown输入/核收据边界、schema/profile/tag、政策/目录、save/history和完整结果预算均不变；没有新的公开阶段API或存档迁移，也未接合动态forge月产。此改动仅作源码与规则静态交付，未运行验收。
 
+## 金收入与完整工资的兼容阶段
+
+[金收入与完整工资私有阶段](finance-money-payroll-phases.md)保留原公共6 API、15类型、5常量及unknown输入/完整核收据边界。固定30槽按原设施表映射：普通market只有complete或level>1时附adjacentMint，六个金产值row完整保留；normal省略cityPlayerPredicate，super附真实player判定，治安仍用季降前值。非月初且无征税不适配或调用金核；due即使返回0，也保留完整called input/result/evidence与零额credit。base与富豪bonus各自按容量clip，bonus基于base请求。
+
+每旬先复制名单按ID代码单元排序并完整查薪，再选择harvest及检查缺项；harvestCurrent先于money更新，money→food（含harvest→levy）→季降/RNG→salary→特产1..4保持原位。月初工资读取这些步骤后的实际gold，足额全扣，相等可归零；真实0人名单sum0仍paid且保留+0的零debit。非月初保留原not-due工资对象及完整items/sum、availableBeforeSalary=null。不足仍给required/available/shortfall提案并丢弃整旬候选，没有工资保留金或部分支付。
+
+两个阶段只写同一个分离候选city的gold；所有receipt映射、唯一Invalid错误品牌、重建、history、save/schema/policy及原预算位置不变。save仍只budget(state)后输出canonical(state)，未新增escaped SaveResult预算门。private包装不落盘；新市场建设/动态收入仍未接合。本次仅作源码与规则静态交付，未运行产品、测试、typecheck、编译、build、validator或输出测量。
+
 ## 注册快照
 
 - `CITY_FINANCE_POLICIES_V1`：完整注册政策及所有参数，包含specialty binary32假设和预算
