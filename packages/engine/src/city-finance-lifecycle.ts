@@ -2,8 +2,8 @@
 import namedOffices from '../../../data/catalogs/named-offices-v1.json' with { type: 'json' };
 import facilityData from '../../../data/catalogs/city-finance-facilities-v1.json' with { type: 'json' };
 import policyData from '../../../data/catalogs/city-finance-policies-v1.json' with { type: 'json' };
-import { calculateCityMoneyIncomeProjection } from './city-money-income-projection.ts';
-import type { CityMoneyIncomeProjectionInput, CityMoneyIncomeSlot } from './city-money-income-projection.ts';
+import { compareFinanceOfficerIds, resolveFinancePayroll } from './internal/finance-money-payroll-leaves.ts';
+import { applyFinanceMoneyPhase, applyFinanceFullSalaryPhase } from './internal/finance-money-payroll-phases.ts';
 import { calculateCityFoodIncomeProjection } from './city-food-income-projection.ts';
 import type { CityFoodIncomeProjectionInput, CityFoodIncomeSlot } from './city-food-income-projection.ts';
 import { calculateMonthlyCityFoodBaseArgument } from './monthly-city-food-base-argument.ts';
@@ -261,13 +261,6 @@ function initialState(s: Scenario): State {
 }
 function adjacent(f: Facility, kind: 'mint' | 'granary', s: Scenario): boolean { return s.facilities.some(other => { if (other === null || !other.complete || other.kind !== kind) return false; const dq = f.position.q - other.position.q, dr = f.position.r - other.position.r; return Math.max(Math.abs(dq), Math.abs(dr), Math.abs(dq + dr)) === 1; }); }
 function typeWord(f: Facility): number { const row = CATALOGS.facilities.rows.find(r => r.kind === f.kind && r.level === f.level); if (!row) fail('unsupported-facility'); return row.typeWord; }
-function moneyInput(s: Scenario, security: number): CityMoneyIncomeProjectionInput {
-  const slots: CityMoneyIncomeSlot[] = s.facilities.map(f => f === null ? null : { facilityTypeWord: typeWord(f), constructionWord: f.complete ? 1 : 0,
-    ...(f.kind === 'market' && (f.complete || f.level > 1) ? { adjacentMint: adjacent(f, 'mint', s) } : {}) });
-  return { profile: 'city-money-income-stable-resolved-i32-safe-v1', baseMoneyWord: s.baseProduction.baseMoneyWord, slots,
-    resolvedTypeRows: { 31: { valid: true, moneyYieldWord: 100 }, 50: { valid: true, moneyYieldWord: 120 }, 51: { valid: true, moneyYieldWord: 150 }, 46: { valid: true, moneyYieldWord: 300 }, 47: { valid: true, moneyYieldWord: 200 }, 48: { valid: true, moneyYieldWord: 80 } },
-    difficultyWord: s.difficulty === 'normal' ? 1 : 2, ...(s.difficulty === 'super' ? { cityPlayerPredicate: s.controller === 'player' } : {}), securityByte: security };
-}
 function foodInput(s: Scenario, security: number): CityFoodIncomeProjectionInput {
   const slots: CityFoodIncomeSlot[] = s.facilities.map(f => f === null ? null : { facilityTypeWord: typeWord(f), constructionWord: f.complete ? 1 : 0,
     ...(f.kind === 'farm' && (f.complete || f.level > 1) ? { adjacentGranary: adjacent(f, 'granary', s) } : {}) });
@@ -288,10 +281,11 @@ function resolve(s: Scenario, before: Snapshot, command: Envelope): { snapshot: 
   if (before.advancedCount >= s.advanceLimit) fail('advance-limit');
   if (before.turn >= Number.MAX_SAFE_INTEGER) fail('turn-overflow');
   const after = clone(before), newDate = nextDate(before.date), monthly = newDate.day === 1, quarterly = monthly && [1, 4, 7, 10].includes(newDate.month);
-  const ordered = [...before.officers].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+  const ordered = [...before.officers].sort(compareFinanceOfficerIds);
   const effects = Object.fromEntries(SKILLS.map(skill => { const holderIds = ordered.filter(o => o.incomeSkills.includes(skill)).map(o => o.id); return [skill, { active: holderIds.length > 0, holderIds }]; })) as Receipt['incomeEffects'];
-  const payroll = ordered.map((o): SalaryItem => { const row = CATALOGS.offices.offices.find(r => r.officeId === o.officeId); if (!row) fail('unsupported-payroll-identity'); return { officerId: o.id, officeId: o.officeId, officeName: row.name, catalogSalary: row.monthlySalary }; });
-  const salarySum = payroll.reduce((sum, p) => sum + p.catalogSalary, 0);
+  const payrollResult = resolveFinancePayroll(ordered);
+  if (!payrollResult.ok) fail(payrollResult.reason);
+  const payroll = payrollResult.payroll.items, salarySum = payrollResult.payroll.sum;
   const governor = ordered.find(o => o.id === before.city.governorOfficerId) ?? null;
   const harvest = monthly ? s.monthlyHarvestInputs.find(h => h.year === newDate.year && h.month === newDate.month) : null;
   if (monthly && !harvest) fail('missing-harvest-input');
@@ -314,13 +308,20 @@ function resolve(s: Scenario, before: Snapshot, command: Envelope): { snapshot: 
     receipt.drawsConsumed.push({ index: after.rngCursor, bound, value: d.value, purpose }); after.rngCursor++; return d.value;
   }
   if (harvest) after.harvestCurrent = clone(harvest);
-  if (monthly || effects.taxation.active) {
-    const input = moneyInput(s, before.city.security), result = calculateCityMoneyIncomeProjection(input);
-    if (!result.supported) fail(`money-kernel:${result.reason}`);
-    const m = positiveRequest(result.returnedIncome), h = effects.taxation.active ? Math.floor(m / 2) : m;
-    receipt.moneyKernel = called('calculateCityMoneyIncomeProjection', input, result); addCredit('gold', 'money-base', h);
-    if (monthly && effects.wealthy.active) addCredit('gold', 'wealthy-bonus', Math.floor(h / 2));
-  }
+  const moneyPhase = applyFinanceMoneyPhase({
+    facilities: s.facilities,
+    baseMoneyWord: s.baseProduction.baseMoneyWord,
+    difficulty: s.difficulty,
+    controller: s.controller,
+    securityBeforeIncome: before.city.security,
+    monthStart: monthly,
+    taxationActive: effects.taxation.active,
+    wealthyActive: effects.wealthy.active,
+    goldTarget: after.city,
+  });
+  if (!moneyPhase.ok) fail(moneyPhase.reason);
+  receipt.moneyKernel = moneyPhase.kernel;
+  for (const write of moneyPhase.writes) receipt.writes.push(write);
   if (monthly && (quarterly || effects.levy.active)) {
     const input = foodInput(s, before.city.security), result = calculateCityFoodIncomeProjection(input);
     if (!result.supported) fail(`food-kernel:${result.reason}`);
@@ -344,12 +345,11 @@ function resolve(s: Scenario, before: Snapshot, command: Envelope): { snapshot: 
       receipt.writes.push({ resource: 'security', reason: 'seasonal-security', before: before.city.security, requested: loss, accepted: actual, actualDelta: actual === 0 ? 0 : -actual, after: after.city.security, cap: 100, discarded: loss - actual, writerPolicyId: POLICIES.security.id });
     }
   }
-  if (monthly) {
-    const available = after.city.gold;
-    if (salarySum > available) fail('unsupported-salary-shortfall', null, { required: salarySum, available, shortfall: salarySum - available });
-    after.city.gold -= salarySum;
-    receipt.salary = { status: 'paid', items: payroll, sum: salarySum, availableBeforeSalary: available, paid: salarySum, shortfall: 0, payerPolicyId: POLICIES.payroll.id };
-    receipt.writes.push({ resource: 'gold', reason: 'salary', before: available, requested: salarySum, accepted: salarySum, actualDelta: salarySum === 0 ? 0 : -salarySum, after: after.city.gold, cap: after.city.goldCapacity, discarded: 0, writerPolicyId: POLICIES.debit.id });
+  const salaryPhase = applyFinanceFullSalaryPhase({ monthStart: monthly, payroll: payrollResult.payroll, goldTarget: after.city });
+  if (!salaryPhase.ok) fail(salaryPhase.reason, null, salaryPhase.proposal);
+  if (salaryPhase.write !== null) {
+    receipt.salary = salaryPhase.salary;
+    receipt.writes.push(salaryPhase.write);
   }
   for (const equipmentType of EQUIPMENT) {
     const phase = applyMonthlySpecialtyEquipmentPhase({

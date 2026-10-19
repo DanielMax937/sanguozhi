@@ -94,6 +94,8 @@ forge/stable的0不声称原生类型编号，只保证金粮核走忽略分支�
 
 政策 `supplied-axial-complete-support-v1`：六角距离为 `max(|dq|,|dr|,|dq+dr|)`；距1且complete的mint给普通市场支持，granary给普通农场支持，多座仅取boolean存在。满足普通市场/农场消费路径时才附邻接字段，包括未完工L2/L3回退；未完工L1、忽略类型、特殊市场、军屯都不附未消费字段。军屯只有完成时给粮核 `cityTroopsWord`。这只是给定地图的政策，不恢复原地图/查表/邻接helper。
 
+金输入现由[私有适配叶](../engine/finance-money-payroll-phases.md#3-金核输入的完整映射)生成，固定s.facilities与全部18行映射保持不变，不在snapshot增加动态设施。每个非空先查kind/level，再生成完成字和条件邻接；仅market且complete或level>1时附adjacentMint（false也明确保留），其他路径完全省略该键。resolvedTypeRows始终含六行valid=true：31=100、50=120、51=150、46=300、47=200、48=80，不删未消费行。normal不附cityPlayerPredicate，super才附真实player boolean；securityByte取本旬季降前治安，不追加新clamp。
+
 ### 2.1 金钱核在此域的具体计算
 
 1. 从baseMoneyWord开始累加所有有效设施贡献；普通市场有mint时贡献 `floor(3Y/2)`，否则Y；大型/鱼/黑市不吃mint
@@ -156,6 +158,14 @@ D. 足额工资：用所有已cap的真实gold判断；工资总和≤余额才�
 E. 特产：工资成功后，按1→2→3→4处理，见§6。失败也不保留前面任何兵种的部分入库。
 
 技能表：wealthy=富豪，rice-way=米道，taxation=征税，levy=征收。四者由固定同城同势力名单的incomeSkills存在性得出，无调用者最终加成参数。
+
+### 3.4 金／工资抽取仍按原时点结算
+
+每旬都先复制并按ID代码单元排序完整名单，在技能effects之后解析完整工资items/sum，再找太守、选择harvest并检查缺项。查薪不是只有月初才做，也不延到发薪位置。harvestCurrent更新在金阶段之前；只有粮阶段里的harvest乘数、粮写入和季降/RNG位于金阶段与工资之间。
+
+金阶段无due时先返回，不读设施成员、不查表、不调用核、不读gold/capacity；富豪单独不能触发非月初收入。due且M=0则仍真实调用金核，保留完整input/result/evidence与money-base零credit。月初有富豪时，bonus请求或accepted为0也保留该笔write。money、food、季降/RNG、工资、特产1→4的原位分离确保missing-harvest-input早于金错误，RNG缺项/错bound早于工资不足，工资不足早于任一特产核或库存错误。
+
+两个私有阶段均写owner clone后的同一个真实candidate city.gold；不是副本钱包或提前算好的可支出余额。完整公开收据只接回原kernel、salary及逐笔write，不存private阶段包装。详细接口、写域与静态同值说明见[金收入与完整工资阶段](../engine/finance-money-payroll-phases.md)。这只提供兼容复用准备，没有接合动态市场建设或月收入。
 
 ## 4. 季初治安与随机带
 
@@ -272,7 +282,9 @@ E. 特产：工资成功后，按1→2→3→4处理，见§6。失败也不保�
 
 ### 5.2 发薪与不足
 
-每月按稳定ID排序逐行查表，`salarySum=Σ monthlySalary`。先完成当月收入credit和容量弃置，再取 `availableBeforeSalary=gold`。salarySum≤available时全额扣除；总和0也记录paid/零额debit，不产生人员现金钱包。
+每旬按稳定ID代码单元顺序逐行查表，在harvest选择/缺项检查之前生成完整items；全部行完成后才以+0为初值reduce得 `salarySum=Σ monthlySalary`。resolver不再次排序、不筛掉人员、不改目录名称字形，首个缺行仍拒绝。80项唯一官职全取时精确总额为2620；4800只是80×60的保守上界。
+
+发薪阶段与查表分离。非月初仍有完整items和sum，status=not-due、availableBeforeSalary=null、paid/shortfall=0，无debit，也不读取余额作affordability判断。月初先完成当月收入credit、容量弃置与季降/RNG，再取 `availableBeforeSalary=gold`。salarySum≤available时全额扣除，相等合法精确归零。真实空名单items=[]、sum=+0仍记录paid和完整零debit，actualDelta显式+0，不跳过、不产生人员现金钱包。没有新增非空名单下限、工资保留金、W>0门或部分工资。
 
 若不足，返回 `unsupported-salary-shortfall`，只附只读 `{required,available,shortfall}` 提案；原state一字不改。不使用部分支付、clamp到0或自动补款。
 
@@ -334,6 +346,8 @@ E. 特产：工资成功后，按1→2→3→4处理，见§6。失败也不保�
 
 请求必须非负，空cap或满cap仍保留该次请求、accepted0与完整discarded。月金base和富豪、月粮base和米道分别写，不合并丢弃记录。bonus总以base请求计算，即使base已被cap全丢弃也不改bonus请求。
 
+金阶段先base成功写gold，再从同一当前gold独立计算bonus的容量；工资读取两笔clip后的实际gold。不能先把收入减工资得到净额后一次clip，也不能以accepted代替富豪的requested基数。每笔credit完整保留resource/reason/before/requested/accepted/actualDelta/after/cap/discarded/writerPolicyId及原次序；请求0或accepted0仍保留，不产生-0。
+
 发薪使用 `exact-affordable-salary-debit-v1`，accepted=requested=sum，actualDelta=−sum，discarded=0。季降的requested是损失幅度，accepted为实际损失、actualDelta为负；底限未接受部分以discarded记录，cap100与floor0同时由政策界定。零损失/零薪的actualDelta为规范+0。
 
 城市金：`afterGold=beforeGold+ΣacceptedMoneyCredits−salaryPaid`。每条credit有 `requested=accepted+discarded`。粮/各兵装同理且本批无消耗debit。收入是明示的新资源来源，不称无中生有的“守恒”；容量弃置是独立sink。工资是从城市流出，不自动转入人员钱包。
@@ -361,6 +375,8 @@ state顶层为tag=`city-finance-state-v1`、schemaVersion1、profile、scope=`in
 
 私有抽取后，每项specialty仍仅含equipmentType、eligibility、count、arithmeticProfile、kernelQuantityRequest、kernel、write七字段，顺序和null分支不变。called包装保留完整原input和整个原result，包括observations的条件性30槽、capturedReturns原序、完整arithmetic、quantityRequest和evidence；合法factorValue/scaledValue小数不做整数化。production的write与全局writes中对应行是同一对象，包含resource、reason、before、requested、accepted、actualDelta、after、cap、discarded、writerPolicyId全部字段。原核evidence全部false标志不因外层库存写入而升级，adapterObservationKind仍为derived-adapter-observations。
 
+金阶段的called仍保留status/api/profile/adapterObservationKind/input/result六字段，input为实际完整核输入，result为同一原返回对象。30槽每项index/facilityTypeWord/effectiveType/status/moneyYieldWord/mintApplied/contribution、五项intermediates（normal difficultyProduct=null）、returnedIncome与全部19项evidence均不删减。salary逐人四字段、全部政策/目录与digest原样；private ok/failure、facts和target不进入receipt/state/save。外层gold写入不升级金核incomeWriterIntegrated或其他原false证据。
+
 事件只有finance-turn-settled、finance-month-settled、finance-quarter-settled及settlementKey。不是native完成通知，不产生迁移、归属、释放或任务事件。
 
 ### 8.3 每个公共入口都重建
@@ -375,6 +391,10 @@ preview和execute复用同一个resolver与完整execute输出预算。preview c
 
 月特产私有抽取保留所有公共函数及公开unknown边界、原schema/profile/tag、政策/目录和digest、完整history与保存字段；无存档迁移或新save格式。初态不变、单步逐字段对应、接受历史逐项重算、重复返回旧receipt的关系维持原合同。此处为源码静态兼容说明，未运行save/load、preview/execute或trace验收。
 
+金收入与完整工资兼容抽取同样保留6 API、15公开类型、5常量、unknown输入和原Frozen输出。静态归纳从未变初态开始：逐槽适配、排序/查薪、分支和writer同值，未改粮/季降/特产读取同值候选，因此每个接受prefix完整snapshot/receipt及最旧/最新duplicate返回均保持。旧预算收到相同JSON值，canonical UTF-8、节点、深度、数组与键数随之同值；这是源码论证，未执行序列化或测量。
+
+save原本仅在重建后budget(state)，再输出canonical(state)，没有额外budget({ok:true,json})的escaped SaveResult门；本次不暗加该门。原字符串与再次转义后的内容同值，不等于旧实现已限制所有外层逃逸包络。新市场owner的完整预算须另行建立，不能借用此兼容说明。
+
 ### 8.4 trace与失败尝试
 
 trace tag=`city-finance-trace-v1`，包含scenario、attempts、expectedFinalSnapshot。每个attempt有envelope和expectedOutcome（允许null）；最多1080项。期望成功值为 `{ok:true,duplicate,receipt}`，期望失败值为 `{ok:false,reason}`。expectedFinalSnapshot允许null。
@@ -388,6 +408,10 @@ trace tag=`city-finance-trace-v1`，包含scenario、attempts、expectedFinalSna
 失败形状为 `{ok:false,committed:false,reason,index,proposal}`，index为重放历史/trace分歧位置或null；proposal仅不足薪资时为数字说明，其他为null。失败没有写回部分state，不修改调用者对象。
 
 私有月特产阶段返回的失败仅为specialty-kernel:invalid-input/unexpected-field/unsupported-profile/stage-mismatch、unsupported-kernel-return或invalid-resource-boundary，仍在原owner位置交给原Invalid/fail适配。非预期异常不在阶段内捕获或改类，仍由公共边界映射invalid-data；历史index和薪资proposal包装不变。重建初态、每步完整CommandResult、最终state、preview/execute共用结果、save与trace各步及最终完整结果的预算检查全部保留；不因新增内部包装而减少receipt字段或截断历史。
+
+金／工资private失败仍交给owner原唯一Invalid/fail/failure。unsupported-facility、money-kernel的六个原reason、unsupported-kernel-return、invalid-resource-boundary、unsupported-payroll-identity均fail(reason)且proposal=null；工资不足用fail(reason,null,proposal)保留required/available/shortfall。非预期异常不catch为业务失败，仍在公共边界成为invalid-data。reconstruct附原历史index并保留proposal；trace失败ExpectedOutcome只存reason，结构/期望分歧再附外层index，不新增trace proposal。
+
+所有既有预算位置和上限不变：重建初态、每步完整CommandResult后才比receipt、最终snapshot/state、preview/execute共享完整结果、save的state、trace各步完整execution与最终完整ReplayResult。接受历史、数组和审计字段不删减；合法派生小数仍保留，负零、重复JSON键及伪造政策/目录/receipt/snapshot继续由原解析和全fold拒绝。
 
 | 失败类别 | 代表reason / 处理 |
 |---|---|
@@ -454,3 +478,5 @@ trace tag=`city-finance-trace-v1`，包含scenario、attempts、expectedFinalSna
 - 00590536/558/576金；005905D0/609/635粮；00590652季降；005909A3..D3工资；00590A2C..BA7特产。顺序证据和新服务的stable观测/写回政策分栏
 
 仍开放：真实city/owner/人员getter及0049F2A0内部、未知工资身份、native cap/writer返回、技能驻点筛选、原邻接、特产0049CFB0内部、浮点常量/00707A74、丰作生成与scheduled/current转换、原PRNG/调度、stock EXE/原版/跨平台。明确排除港关、俘虏维护/逃亡、欠薪后果、死亡/势力灭亡、native capture/ownership/return/mission以及P078及其依赖。旧原核、旧实验与历史审计不在本批修改范围。
+
+金收入／完整工资的私有抽取没有新增原生证据，原source/stock/native/ABI、43组主题及45份快照边界继续开放。固定财政仍使用原30槽、0..80名册、无工资保留金及原推进范围；新市场建设/动态收入未接合，已有独立forge月产不受影响。此处不能将复用接缝称为新的市场玩法交付，也不关闭P078及其依赖。
