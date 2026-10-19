@@ -1,0 +1,232 @@
+{
+  "id": "bounded-market-income-payroll-v1",
+  "version": 1,
+  "clock": "root-completion-income-payroll-v1",
+  "ownership": "fixed-supplied-city-corps-force-v1",
+  "transaction": "one-command-all-or-nothing-v1",
+  "reservation": "root-bidirectional-market-lock-v1",
+  "externalFacts": "fixed-for-entire-bounded-episode-v1",
+  "security": "fixed-no-seasonal-loss-v1",
+  "incomeSkills": "none",
+  "food": "not-modeled",
+  "payrollIdentity": "complete-fixed-ordinary-roster-v1",
+  "reserve": {
+    "id": "remaining-window-salary-reserve-v1",
+    "count": "floor((dayOffset+remainingAdvances)/3)",
+    "requirement": "gold>=monthStarts*monthlySalary",
+    "start": "gold-200>=required",
+    "borrowFutureIncome": false,
+    "prepaid": false,
+    "separateWallet": false,
+    "nativeRuleVerified": false
+  },
+  "construction": {
+    "version": "facility-construction-policies-v1",
+    "calendar": {
+      "id": "finite-facility-ten-day-calendar-v1",
+      "version": 1,
+      "days": [
+        1,
+        11,
+        21
+      ],
+      "minYear": 1,
+      "maxYear": 9999,
+      "maxAdvanceLimit": 360
+    },
+    "development": {
+      "id": "standard-nine-development-v1",
+      "version": 1,
+      "actionPoints": 20,
+      "minActors": 1,
+      "maxActors": 3,
+      "level": 1,
+      "rateProfile": "domestic-construction-rate-stable-v1",
+      "politicsMinimum": 0,
+      "politicsMaximum": 255
+    },
+    "absorption": {
+      "id": "same-kind-adjacent-lv1-absorption-v1",
+      "version": 1,
+      "actionPoints": 10,
+      "goldCost": 100,
+      "actors": 1,
+      "donorLevel": 1,
+      "receiverLevels": [
+        1,
+        2
+      ],
+      "adjacencyDistance": 1,
+      "fastPoliticsThreshold": 70,
+      "fastTurns": 1,
+      "slowTurns": 2,
+      "completionTechniquePoints": 10,
+      "timingEvidence": "empirical-guide"
+    },
+    "hostility": {
+      "id": "facility-start-only-pressure-gate-v1",
+      "version": 1,
+      "completeFieldUnitsRequired": true,
+      "explicitHostileForceIds": true,
+      "distance": "max(abs(dq),abs(dr),abs(dq+dr))",
+      "cityCenteredBlockingDistanceInclusive": 2,
+      "blockAdvance": false,
+      "coordinateMin": -1000000,
+      "coordinateMax": 1000000
+    },
+    "ownership": {
+      "id": "fixed-owned-city-supplied-lots-v1",
+      "version": 1,
+      "ownershipChanges": false,
+      "lotAtCityAllowed": false,
+      "externalActiveJobsSupported": false,
+      "usedFacilityIdReuse": false
+    },
+    "scheduler": {
+      "id": "next-boundary-capped-work-v1",
+      "version": 1,
+      "startProgressAdvances": 0,
+      "firstProgress": "next-boundary",
+      "order": [
+        "calendar",
+        "ap-recovery",
+        "jobs-in-ASCII-id-order",
+        "completion-rewards-release"
+      ],
+      "rateSnapshot": "start",
+      "workProgressCap": "required-work",
+      "forcedTenTurnCompletion": false,
+      "requireCompletionWithinHorizon": true,
+      "nativeSchedulerRecovered": false
+    },
+    "writer": {
+      "id": "facility-exact-debit-saturating-reward-v1",
+      "version": 1,
+      "actionPointCap": 255,
+      "techniquePointCap": 10000,
+      "rewardCap": 1000000000,
+      "goldMaximum": 1000000000,
+      "partialDebits": false,
+      "overflowCredit": "clip-and-record-discarded"
+    },
+    "effects": {
+      "id": "facility-active-level-kernel-view-v1",
+      "version": 1,
+      "developmentEffectiveLevel": 0,
+      "absorptionEffectiveLevel": "target-minus-one",
+      "completedEffectiveLevel": "target",
+      "income": "existing-kernel-read-only-projection",
+      "supportAdjacencyDistance": 1,
+      "supportMultiplierStacks": false,
+      "combatHpModeled": false,
+      "repairsModeled": false,
+      "automaticPoliticsGrowth": false
+    },
+    "budget": {
+      "id": "facility-bounded-json-v1",
+      "version": 1,
+      "maxLots": 30,
+      "maxOfficers": 128,
+      "maxFieldUnits": 128,
+      "maxHostileForces": 128,
+      "maxJobs": 512,
+      "maxAcceptedCommands": 872,
+      "maxTraceAttempts": 2616,
+      "maxCanonicalUtf8Bytes": 67108864,
+      "maxInputNodes": 4000000,
+      "maxInputDepth": 48,
+      "maxArrayLength": 4096,
+      "maxObjectKeys": 128,
+      "maxIdLength": 64
+    },
+    "persistence": {
+      "id": "facility-canonical-recompute-v1",
+      "version": 1,
+      "schemaVersion": 1,
+      "comparison": "full-policy-catalog-genesis-receipts-snapshot",
+      "digest": "sha256-canonical-json",
+      "duplicateJsonKeys": "reject",
+      "inputObjectKeyOrder": "irrelevant",
+      "inputArrayOrder": "preserved",
+      "executeOutputBudgetAtEveryAcceptedStep": true
+    },
+    "apRecovery": {
+      "id": "facility-ap20-cap255-v1",
+      "version": 1,
+      "perAdvance": 20,
+      "cap": 255,
+      "nativeFormulaRecovered": false
+    },
+    "initialWork": {
+      "id": "facility-work-quarter-floor-v1",
+      "version": 1,
+      "mode": "quarter-floor",
+      "divisor": 4,
+      "nativeInitialWriterRecovered": false
+    },
+    "rewards": {
+      "id": "facility-community-rewards-v1",
+      "version": 1,
+      "ordinaryDevelopmentPoliticsXp": 3,
+      "supportDevelopmentPoliticsXp": 4,
+      "absorptionPoliticsXp": 2,
+      "mintDevelopmentMerit": 100,
+      "otherMerit": 100,
+      "allocation": "full-per-selected-at-completion",
+      "nativeRewardWriterRecovered": false
+    },
+    "completionActors": {
+      "id": "facility-completion-actors-acted-v1",
+      "version": 1,
+      "actedOnCompletion": true,
+      "nativeMarkerRecovered": false
+    }
+  },
+  "finance": {
+    "payroll": {
+      "id": "complete-named-office-payroll-v1",
+      "catalogVersion": "named-offices-v1",
+      "officeRange": [
+        0,
+        79
+      ],
+      "maxOfficers": 80,
+      "role": "ordinary-officer",
+      "uniqueOffice": true,
+      "completeResidentRoster": true,
+      "prisonerCount": 0,
+      "order": "ascending-code-unit-id",
+      "payer": "fixed-city"
+    },
+    "credit": {
+      "id": "saturating-positive-credit-v1",
+      "accepted": "min(requested,capacity-before)",
+      "discarded": "requested-accepted",
+      "bonusBasis": "requested-base",
+      "caps": "explicit-scenario-not-native"
+    },
+    "debit": {
+      "id": "exact-affordable-salary-debit-v1",
+      "amount": "sum-of-catalog-monthlySalary",
+      "affordability": "after-income-caps",
+      "partialPayment": false,
+      "personCashWallet": false
+    }
+  },
+  "budgets": {
+    "acceptedCommands": 13,
+    "traceAttempts": 32,
+    "maxJobs": 1,
+    "maxAdvances": 12,
+    "maxOfficers": 8,
+    "maxLots": 2,
+    "maxFacilities": 2,
+    "maxFieldUnits": 16,
+    "maxHostileForces": 16,
+    "maxUtf8Bytes": 8388608,
+    "maxNodes": 250000,
+    "maxDepth": 48,
+    "maxArray": 4096,
+    "maxObjectKeys": 128
+  }
+}
