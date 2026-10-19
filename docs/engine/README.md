@@ -1,3 +1,9 @@
+## 有限单城共享时钟与工房任务（2026-10-18，静态）
+
+[八API／完整历史／保存与分页合同](bounded-city-piece-clock.md) · [具体规则](../rules/bounded-city-piece-clock.md)
+
+独立profile复用既有私有即时归约器与件数数学，以唯一根持有clock、AP恢复、预约、完成和完整历史。只支持固定facts的5号单工房有限会话；不改旧API，不新增CLI，不执行产品或测试。下方私有抽取与固定旬服务的范围是各自历史边界，不能据此误读新root已覆盖全世界。
+
 ## 件数生产私有计划器兼容抽取（2026-10-18，静态）
 
 [计算／开工准备／收费／无时钟完成计划](piece-command-planners.md) · [具体规则与兼容边界](../rules/city-command-lifecycle.md)

@@ -1,0 +1,352 @@
+{
+  "schemaVersion": 1,
+  "profile": "bounded-city-economy-piece-clock-v1",
+  "classification": "provisional-bounded-shared-clock-simulation",
+  "nativeIntegration": false,
+  "nativeExecutionVerified": false,
+  "stockVerified": false,
+  "validationStatus": "static-text-review-only-not-run",
+  "validationBoundary": "No tests, examples, typecheck, compile, build, runtime, checker or schema validator executed for this profile; static contract bounds are not execution or performance results.",
+  "implementationBase": {
+    "commit": "578629372e45062265ae994bd4228ca2f81ff6ab",
+    "tree": "904af33cfe0142e8919b5e1672de5a9cc02feb09",
+    "role": "merged legacy piece-planner baseline"
+  },
+  "sharedEconomyBaseline": {
+    "commit": "661c24f0fe07071d7311c7834a5f6922c6f03954",
+    "tree": "fefa9da151853a26d8c3db29a3053c017b4d8fec",
+    "role": "fixed-one-xun root and closed instantaneous audit definitions"
+  },
+  "instantReducerBaseline": {
+    "commit": "aab86f1482ce0951fcd229f8f163d5b072e87104",
+    "tree": "03502a5ddcdc3fcae4795721cce412709dd6458f",
+    "sourceManifest": "data/sources/bounded-city-economy-v1.json",
+    "role": "original private instantaneous reducer extraction; not relabeled as a new native finding"
+  },
+  "historicalServiceBaseline": {
+    "commit": "0c5ad00667d40960e72f2d8b14c9c20f7eec30fc",
+    "tree": "a88a940c92a37c85ac8a827f1f8988ae18401aea",
+    "sourceManifest": "data/sources/bounded-city-economy-v1.json",
+    "role": "historical service behavior and supplied observation catalogs; not native equivalence"
+  },
+  "sourceFiles": [
+    {
+      "path": "packages/engine/src/bounded-city-economy.ts",
+      "commit": "661c24f0fe07071d7311c7834a5f6922c6f03954",
+      "gitBlob": "304544e7a850835d5e5f3f80e87b235544ddc2e5",
+      "bytes": 71306,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/661c24f0fe07071d7311c7834a5f6922c6f03954/packages/engine/src/bounded-city-economy.ts",
+      "role": "fixed-one-xun shared-root source; its old profile and save protocol remain unchanged",
+      "sha256": "4162849621547c7cb037897178f377ab92896a0419670a6a3ab056aa3074d2f4"
+    },
+    {
+      "path": "data/policies/bounded-city-economy-v1.json",
+      "commit": "661c24f0fe07071d7311c7834a5f6922c6f03954",
+      "gitBlob": "ce688dea591803fcd293d41cb2faea45793e865d",
+      "bytes": 4736,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/661c24f0fe07071d7311c7834a5f6922c6f03954/data/policies/bounded-city-economy-v1.json",
+      "role": "fixed-one-xun shared-root source; its old profile and save protocol remain unchanged",
+      "sha256": "869854ec96dee7ba9cb2ebb55cf1c287f7eca7e4239470a916ea22273c2c28bf"
+    },
+    {
+      "path": "docs/rules/bounded-city-economy.md",
+      "commit": "661c24f0fe07071d7311c7834a5f6922c6f03954",
+      "gitBlob": "3fb3c0c91cb9714983d3e618c7cc600d29b182f9",
+      "bytes": 20461,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/661c24f0fe07071d7311c7834a5f6922c6f03954/docs/rules/bounded-city-economy.md",
+      "role": "fixed-one-xun shared-root source; its old profile and save protocol remain unchanged",
+      "sha256": "c710f58742769d25af46966eba17ded03e25ee13add00c3e97542c99d8e2766a"
+    },
+    {
+      "path": "docs/engine/bounded-city-economy.md",
+      "commit": "661c24f0fe07071d7311c7834a5f6922c6f03954",
+      "gitBlob": "736d1260bf67b97b7ebb4f555543fe0fa6586533",
+      "bytes": 24224,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/661c24f0fe07071d7311c7834a5f6922c6f03954/docs/engine/bounded-city-economy.md",
+      "role": "fixed-one-xun shared-root source; its old profile and save protocol remain unchanged",
+      "sha256": "5b7aa4a4753eb0c746c4f30310ac35c25adbfe1fe89ce07d9c5ff51f4369a38a"
+    },
+    {
+      "path": "data/sources/bounded-city-economy-v1.json",
+      "commit": "661c24f0fe07071d7311c7834a5f6922c6f03954",
+      "gitBlob": "4a0c83342b00fa8fa7c57b962ecffa2db338f9d7",
+      "bytes": 9945,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/661c24f0fe07071d7311c7834a5f6922c6f03954/data/sources/bounded-city-economy-v1.json",
+      "role": "fixed-one-xun shared-root source; its old profile and save protocol remain unchanged",
+      "sha256": "bf94abfab5e11be89dc22a6c0a8710a4bcd36213eeb7e54f629b08d3c2d28065"
+    },
+    {
+      "path": "packages/engine/src/internal/city-piece-types.ts",
+      "commit": "578629372e45062265ae994bd4228ca2f81ff6ab",
+      "gitBlob": "df64e9bb018b4e5e9504e23c71719d8e7de0f748",
+      "bytes": 6602,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/578629372e45062265ae994bd4228ca2f81ff6ab/packages/engine/src/internal/city-piece-types.ts",
+      "role": "piece planner and legacy-owner behavior source; not native execution or broad shared-clock certification",
+      "sha256": "7cab97fafc1f36ee123d50dcf6383272d08f277860a08c7c0e3f4ebfd92d1020"
+    },
+    {
+      "path": "packages/engine/src/internal/city-piece-calculation.ts",
+      "commit": "578629372e45062265ae994bd4228ca2f81ff6ab",
+      "gitBlob": "a5b6b4ebdd3b3f3d48fe46d547cf3d5e7003c400",
+      "bytes": 2685,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/578629372e45062265ae994bd4228ca2f81ff6ab/packages/engine/src/internal/city-piece-calculation.ts",
+      "role": "piece planner and legacy-owner behavior source; not native execution or broad shared-clock certification",
+      "sha256": "e223daecbd227f26271c3e1059e9b57126e5b35e6d13e8685bf9e91958ed8792"
+    },
+    {
+      "path": "packages/engine/src/internal/city-piece-start-reducer.ts",
+      "commit": "578629372e45062265ae994bd4228ca2f81ff6ab",
+      "gitBlob": "8224b00cf0692c141eaac7c2f60842e1f5954bf0",
+      "bytes": 4594,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/578629372e45062265ae994bd4228ca2f81ff6ab/packages/engine/src/internal/city-piece-start-reducer.ts",
+      "role": "piece planner and legacy-owner behavior source; not native execution or broad shared-clock certification",
+      "sha256": "2539e32ab0c53d9fd848f3eadca2932c66a5a305869bae355e6846fa2bcc8797"
+    },
+    {
+      "path": "packages/engine/src/internal/city-piece-completion-reducer.ts",
+      "commit": "578629372e45062265ae994bd4228ca2f81ff6ab",
+      "gitBlob": "e368ee2b3493a7b1b29beca37f44e471f5ebc730",
+      "bytes": 1394,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/578629372e45062265ae994bd4228ca2f81ff6ab/packages/engine/src/internal/city-piece-completion-reducer.ts",
+      "role": "piece planner and legacy-owner behavior source; not native execution or broad shared-clock certification",
+      "sha256": "200f2593c98a899316a79fa335becfa1b344129ec303423c971e46e73b654cfa"
+    },
+    {
+      "path": "docs/engine/piece-command-planners.md",
+      "commit": "578629372e45062265ae994bd4228ca2f81ff6ab",
+      "gitBlob": "96c9ffa8bf1321466a22dc221a2d4caa54d30484",
+      "bytes": 14843,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/578629372e45062265ae994bd4228ca2f81ff6ab/docs/engine/piece-command-planners.md",
+      "role": "piece planner and legacy-owner behavior source; not native execution or broad shared-clock certification",
+      "sha256": "fbf2e9bd092c31c0a3e1c6b4deb90eee1e49cd4aba8bcb3c802b4bad12ed6e81"
+    },
+    {
+      "path": "docs/rules/city-command-lifecycle.md",
+      "commit": "578629372e45062265ae994bd4228ca2f81ff6ab",
+      "gitBlob": "02b142a5c0a95d1b261bcfbf3a0dccb8ebc46568",
+      "bytes": 32646,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/578629372e45062265ae994bd4228ca2f81ff6ab/docs/rules/city-command-lifecycle.md",
+      "role": "piece planner and legacy-owner behavior source; not native execution or broad shared-clock certification",
+      "sha256": "84c1538879daeacb25afcab426b171ddc2cbc1dd68c1a160f1f545c0bc591c7f"
+    },
+    {
+      "path": "packages/engine/src/production-price.ts",
+      "commit": "578629372e45062265ae994bd4228ca2f81ff6ab",
+      "gitBlob": "29d7759df388c2c4bcbe4da576139dc42543b920",
+      "bytes": 3972,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/578629372e45062265ae994bd4228ca2f81ff6ab/packages/engine/src/production-price.ts",
+      "role": "unchanged inherited source at the implementation base; original acquisition and evidence limits remain in the topical source manifest"
+    },
+    {
+      "path": "packages/engine/src/production-quantity.ts",
+      "commit": "578629372e45062265ae994bd4228ca2f81ff6ab",
+      "gitBlob": "510f8c7cfb268d6cb9182741bffdc6cff30596c5",
+      "bytes": 9724,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/578629372e45062265ae994bd4228ca2f81ff6ab/packages/engine/src/production-quantity.ts",
+      "role": "unchanged inherited source at the implementation base; original acquisition and evidence limits remain in the topical source manifest"
+    },
+    {
+      "path": "packages/engine/src/production-time.ts",
+      "commit": "578629372e45062265ae994bd4228ca2f81ff6ab",
+      "gitBlob": "2e56101e9eb7bf72982b7d228524a9c88730a923",
+      "bytes": 8276,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/578629372e45062265ae994bd4228ca2f81ff6ab/packages/engine/src/production-time.ts",
+      "role": "unchanged inherited source at the implementation base; original acquisition and evidence limits remain in the topical source manifest"
+    },
+    {
+      "path": "data/catalogs/city-merchant-politics-v1.json",
+      "commit": "578629372e45062265ae994bd4228ca2f81ff6ab",
+      "gitBlob": "522c9366af95ec1f1b7379180b2969f299ee32e8",
+      "bytes": 1202,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/578629372e45062265ae994bd4228ca2f81ff6ab/data/catalogs/city-merchant-politics-v1.json",
+      "role": "unchanged inherited source at the implementation base; original acquisition and evidence limits remain in the topical source manifest"
+    },
+    {
+      "path": "docs/sources/city-command-lifecycle.json",
+      "commit": "578629372e45062265ae994bd4228ca2f81ff6ab",
+      "gitBlob": "ba86ef4a853a15414d2384eda3914753f8885a8d",
+      "bytes": 10748,
+      "url": "https://github.com/DanielMax937/sanguozhi/blob/578629372e45062265ae994bd4228ca2f81ff6ab/docs/sources/city-command-lifecycle.json",
+      "role": "unchanged inherited source at the implementation base; original acquisition and evidence limits remain in the topical source manifest"
+    }
+  ],
+  "scalarRuleReferences": [
+    {
+      "rule": "production-price",
+      "documentation": "docs/rules/production-price.md",
+      "sourceManifest": "docs/sources/production-price.json",
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/Func-内政10-计算生产价格.txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政10-计算生产价格.txt",
+      "gitBlob": "928b34bd8b9f06057dd44e9639db92dacc364c85",
+      "originalSha256": "6fbca37bcd8eaa8d1ac9c919100d3fa9ee33c49e49cc15786de06db4e86fe013",
+      "snapshot": "docs/sources/production-price-original.txt",
+      "snapshotSha256": "698a166f45fc1454349a5a88aeb9cd08c2e0093233ab6dc9604a20ade780f67c",
+      "evidenceClass": "source-local-listing-reconstruction",
+      "stockVerified": false,
+      "nativeExecutionVerified": false
+    },
+    {
+      "rule": "production-quantity",
+      "documentation": "docs/rules/production-quantity.md",
+      "sourceManifest": "docs/sources/production-quantity.json",
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/Func-内政11-计算生产数量.txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政11-计算生产数量.txt",
+      "gitBlob": "e8c0c22e68e8557b202088290d52101abb02ca3a",
+      "originalSha256": "cadf90aa55d43b69f407620abebccf6fb4307ed7dcb5511f434779f38b722285",
+      "snapshot": "docs/sources/production-quantity-original.txt",
+      "snapshotSha256": "65be4259fef8c741dee5d3df32a3f8fd6b00214427536daa624c0e6c8da00c53",
+      "evidenceClass": "source-local-listing-reconstruction",
+      "stockVerified": false,
+      "nativeExecutionVerified": false
+    },
+    {
+      "rule": "production-time",
+      "documentation": "docs/rules/production-time.md",
+      "sourceManifest": "docs/sources/production-time.json",
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/Func-内政13-计算生产耗时.txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政13-计算生产耗时.txt",
+      "gitBlob": "a42599657262ed157c1911d939c3828048e01e1e",
+      "originalSha256": "b6beaf54ca6a279bf9b999a499358d0986cab703767bdc2432f874624d80db13",
+      "snapshot": "docs/sources/production-time-original.txt",
+      "snapshotSha256": "27aeb37b6821a720946cb980721bae9ff599be3a66928693451405738afb902c",
+      "evidenceClass": "source-local-listing-reconstruction",
+      "stockVerified": false,
+      "nativeExecutionVerified": false
+    }
+  ],
+  "otherScalarReferences": [
+    {
+      "rule": "patrol-security-gain",
+      "documentation": "docs/rules/patrol-security-gain.md",
+      "sourceManifest": "docs/sources/patrol-security-gain.json"
+    },
+    {
+      "rule": "recruitment-quantity",
+      "documentation": "docs/rules/recruitment-quantity.md",
+      "sourceManifest": "docs/sources/recruitment-quantity.json"
+    },
+    {
+      "rule": "recruitment-security-argument",
+      "documentation": "docs/rules/recruitment-security-argument.md",
+      "sourceManifest": "docs/sources/recruitment-security-argument.json"
+    }
+  ],
+  "sourceLocalClaims": [
+    {
+      "claim": "Production price reads supplied uint16 base price and uses the specialty-result low byte; nonzero specialty yields floor(base*8/10), including zero.",
+      "scope": "public listing numerical projection only; no recovered stock price table"
+    },
+    {
+      "claim": "Type 5 quantity returns one without resolved quantity slots, facility factor or difficulty inputs.",
+      "scope": "public listing quantity branch only; actual inventory write remains a separate service policy"
+    },
+    {
+      "claim": "Type 5 time scans three slots, queries skill 82, computes trunc(max(24,maxAL+sumAL-200)/24), uses 10-q, and halves toward zero last when skilled.",
+      "scope": "public listing caller projection under explicit normal callee observations; no native trace reachability or ABI certification"
+    },
+    {
+      "claim": "The original time body has no universal minimum-one clamp; raw zero and negative returns remain in audit.",
+      "scope": "minimum-one scheduling is this profile policy; appended MOD is not overlaid"
+    },
+    {
+      "claim": "Existing production callers request start AP 20 and piece completion output 1, intelligence XP 4 and merit 100.",
+      "scope": "caller requests only; not actual native writer delta, growth, scheduling or reward certification"
+    },
+    {
+      "claim": "The quantity-production listing retains an unresolved bytes/mnemonic/comment reward-attribute conflict.",
+      "scope": "this profile explicitly selects the existing intelligence compatibility policy; it does not resolve the original conflict"
+    }
+  ],
+  "suppliedFacts": [
+    "one immutable city, owner force and corps identity",
+    "complete ordered officer facts including availability, resolved attributes and skills 79/80/81/82",
+    "complete ordered facility facts with exactly one complete level-1 workshop",
+    "initial resources, all five inventory quantities and capacities, XP, merit and markers",
+    "five complete uint16 production prices plus explicit unlock and specialty sets",
+    "independent pressure, difficulty and controller facts",
+    "complete hostile-force and field-unit facts, merchant presence and UI trade price",
+    "complete fixed 12-anchor merchant catalog, not a digest or native recovered price helper",
+    "finite advanceLimit and initial clock with a fully representable horizon"
+  ],
+  "provisionalSimulationPolicies": [
+    "one authoritative shared Current, ledger, root clock and accepted history",
+    "ordered per-officer root eligibility with reservation before acted, followed by service-specific once gates",
+    "one to four instantaneous actions per atomic root command",
+    "at most one active type-5 workshop job with bidirectional participant/facility locks and one inventory capacity reservation",
+    "single start payment of computed price and effective AP20; zero price is legal",
+    "raw-turns-min1-v1 maps signed kernel time to 1..9 synthetic xun boundaries",
+    "root alone advances date/turn and applies one AP20 recovery capped at255 before completion",
+    "completion uses current inventory and current ordered participant XP/merit; rewards saturate at1e9",
+    "completion releases locks, marks participants acted in the new turn and preserves facility.usedTurn and all older markers",
+    "fixed supplied external facts persist across the entire bounded episode",
+    "start requires horizon and reserved completion-history slots before acceptance",
+    "closed DTOs, full genesis and history recomputation, strict safety copying and true UTF-8 budgets",
+    "full-state-bound stateless contiguous legal pages and comparison-only replay expectations"
+  ],
+  "policyReplacementBoundary": "These choices are provisional and replaceable only through another explicitly defined version/profile. This v1 requires its entire constant policy and catalog; ID-only or edited parameters are not accepted.",
+  "merchantEvidence": {
+    "sourceManifest": "data/sources/bounded-city-economy-v1.json",
+    "officialManual": "https://cdn.akamai.steamstatic.com/steam/apps/628070/manuals/32sangokushi11wpk_manual.pdf",
+    "observations": [
+      "https://www.gamersky.com/handbook/200712/89446.shtml",
+      "https://w.atwiki.jp/sangokushi11/pages/74.html",
+      "https://w.atwiki.jp/sangokushi11/pages/79.html"
+    ],
+    "catalogStatus": "selected-approximate-observations-not-native-exact",
+    "nativeHelpersStillOpen": [
+      "0070A330",
+      "0070A280",
+      "005CA5B0"
+    ],
+    "crossXunFacts": "fixed supplied episode policy; not original merchant appearance, price changes or moving-enemy simulation",
+    "merit": "not-modeled-preserve-existing; audit zero placeholders do not establish native zero reward"
+  },
+  "staticBudgetContract": {
+    "documentation": "docs/engine/bounded-city-piece-clock.md#静态容量与完成尾证明",
+    "classification": "conditional-conservative-mathematical-bound-not-runtime-measurement",
+    "scope": "all reachable prefixes and each accepted active job completion tail, only under the exact closed DTOs and fixed policy",
+    "maxSuccessfulNonTickSteps": 24,
+    "maxTicks": 12,
+    "maxReachableAcceptedCommands": 36,
+    "maxStateNodes": 19354,
+    "maxExecuteNodes": 21990,
+    "maxRawSaveUtf8Bytes": 2709840,
+    "maxEscapedSaveResultUtf8Bytes": 5419707,
+    "maxGuaranteedWrapperDepth": 17,
+    "includes": "full genesis, all complete audits, completed job growth, repeated envelopes/actions/snapshots/completions and every retained old-receipt duplicate wrapper",
+    "excludes": "arbitrary legal/trace aggregate success, malformed or unreachable inputs, machine throughput, native scheduling",
+    "changeBoundary": "Any DTO, string-domain, AP-source, policy, entity-limit or wrapper change requires a new proof; numerical margin does not authorize expansion."
+  },
+  "syntheticExamples": {
+    "scenario": "data/scenarios/bounded-city-piece-clock-example-v1.json",
+    "startRequest": "data/scenarios/bounded-city-piece-clock-actions-v1.json",
+    "legalRequest": "data/scenarios/bounded-city-piece-clock-legal-v1.json",
+    "trace": "data/scenarios/bounded-city-piece-clock-trace-v1.json",
+    "status": "unexecuted-synthetic-inputs-only",
+    "traceExpectations": "Every attempt expected is null; expectedFinalState is null. Requests illustrate intended checks, not observed success/rejection outcomes."
+  },
+  "notEstablished": [
+    "clean-stock executable identity, native helpers, ABI or mutable native-object semantics",
+    "native price/cap/facility tables or exact original merchant pricing and rounding",
+    "native resource writers, automatic ability growth, merchant merit or loyalty",
+    "real production time units, native phase scheduling or cross-version equality",
+    "complete force technique-points accounting or income/wages/food/season integration",
+    "facility construction/HP integration, multiple workshops or parallel piece jobs",
+    "native personnel task set/clear/cancel/finalizer, migration, deployment, travel or return",
+    "capture, death, inheritance or ownership transactions",
+    "cancellation, refund, forced completion or import/repair of old saves",
+    "complete playable world or successful runtime/performance verification"
+  ],
+  "existingEvidenceScope": {
+    "topicCount": 43,
+    "snapshotCount": 45,
+    "effect": "Existing evidence denominators and unresolved items are not cleared or reclassified by this composition."
+  },
+  "cli": "not-provided-for-this-profile"
+}

@@ -1,3 +1,11 @@
+## 新增：单城共享时钟与单工房生产预约（2026-10-18，静态）
+
+[具体规则](docs/rules/bounded-city-piece-clock.md) · [八API与完整保存合同](docs/engine/bounded-city-piece-clock.md) · [固定政策](data/policies/bounded-city-piece-clock-v1.json) · [来源边界](data/sources/bounded-city-piece-clock-v1.json) · [完整DTO schema](data/schemas/bounded-city-piece-clock-v1.schema.json) · [合成输入](data/scenarios/bounded-city-piece-clock-example-v1.json)
+
+独立 `bounded-city-economy-piece-clock-v1` 将普通内政、商人和5号件数生产接到同一资源／行动／预约账本。根只推进一次日期与旬号、恢复一次AP，唯一工房任务到期再写库存与当前人物奖励；任务锁不能用过期行动标记绕过。1–4步即时批次仍有序原子，开始与推进是独立命令。
+
+支持域限定单城、最多8人／8设施、恰一个完整Lv1工房、最多12旬，全部外部事实固定；完整历史重算、双向预约、容量与完成尾预算约束保持。没有本profile CLI、旧state导入、取消／回程、世界调度或原生人员任务集成。仅静态代码与文档审查，未运行测试、编译、build、示例或validator。下方早期固定旬／私有抽取说明保留其当时范围，不表示这个新profile替换旧接口。
+
 ## 当前新增：固定单城内政／商人共享账本（2026-10-18，静态）
 
 [具体规则](docs/rules/bounded-city-economy.md) · [八个API与独立CLI](docs/engine/bounded-city-economy.md) · [固定政策](data/policies/bounded-city-economy-v1.json) · [来源身份](data/sources/bounded-city-economy-v1.json) · [完整DTO schema](data/schemas/bounded-city-economy-v1.schema.json) · [合成场景](data/scenarios/bounded-city-economy-example-v1.json)
