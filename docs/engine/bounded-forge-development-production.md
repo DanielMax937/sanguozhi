@@ -6,6 +6,8 @@
 
 实现入口为 [bounded-forge-development-production.ts](../../packages/engine/src/bounded-forge-development-production.ts)，仅七个行为函数经 package index 导出；私有施工/生产 helper 不从公共入口导出。调用者采用 execute 返回的新 state 才保存自己的会话；没有后台推进、全局可变 world store、外部 resolver 或 trusted-state 绕行。
 
+现有三命令业务已按原文搬入[私有 forge core](bounded-forge-core.md)，仅共享旧错误品牌、owned-data 叶和两个内部类型视图。公共边界仍是同一个根；Scenario/Envelope/Command 读取、完整 genesis fold、history、所有不变量与 fitRoot 继续留在此 owner。core 不成为第二个可独立运行的 owner，也不扩大现有 v1 policy 或输入域。
+
 验证范围：静态实现与文本审阅、字段和整数代数证明。未运行测试、示例、typecheck、编译、build、runtime、checker、schema validator 或产品尺寸测量。本页不是运行通过、性能/峰值内存、发布或 native 等价认证。新根组合、日历/AP、work、完成时点、writer、成长分配和 acted 行为属于 provisional 模拟政策；局部 source-listing 算术不会把这些政策提升为原作世界行为。
 
 运行环境边界：实现通过 `process.getBuiltinModule` 取得 `node:util` 的 `types.isProxy` 和 `node:crypto` 的 SHA-256。安全复制在反射对象前识别并拒绝 Proxy；缺少所需 intrinsic 时拒绝对象输入或摘要操作，不降级为不安全复制。本接口不承诺浏览器或缺少这些能力的旧 Node 环境可运行；本次没有进行任何运行环境验证。
@@ -384,7 +386,7 @@ stage=tick：horizon门→新turn/date/advancedCount各推进一次→Constructi
 
 root完成门顺序：当前facility存在、jobId相等且status非complete，否则facility-reservation-mismatch；remaining0、当前turn/dueTurn、date/dueDate相等，否则completion-timing-mismatch；work.current===required，否则incomplete-work；再从完整catalog查询forge completionTP30。接下来恰调用一次 completeConstructionPhase。
 
-接合采用既有 construction phase 的原内部接口：input.job=current.jobs[0]真实引用；input.facility=current.ledger.facilities对应真实引用；input.force=current.ledger.force真实引用；currentTurn=已推进clock.turn；requestedTechniquePoints=目录30；policies仅从完整已核Policy.construction投影writer/rewards/completionActors/scheduler。services由新root自己定义：
+接合采用既有 construction phase 的原内部接口：input.job=current.jobs[0]真实引用；input.facility=current.ledger.facilities对应真实引用；input.force=current.ledger.force真实引用；currentTurn=已推进clock.turn；requestedTechniquePoints=目录30；policies仅从完整已核Policy.construction投影writer/rewards/completionActors/scheduler。services由该root的私有core直接定义：
 
 - write(before,delta,cap,policyId)：调用calculateConstructionWrite，失败映射root insufficient-balance；成功返回完整ConstructionWrite（再严格检查policyId有限集及形状）
 - requireReservedOfficer(officerId)：从候选当前ledger按id取**同一OfficerRow对象**，missing或reservation≠本job.id报officer-reservation-mismatch；调用位置仍为phase内每次逐人成长之前，不提前遍历批验
@@ -420,6 +422,8 @@ load只接正确save tag，安全parse后完整rebuild；失败不部分恢复�
 replay先detach整个trace及顶层exact tag；parse scenario、attempts长度、每attempt外层exact键，然后initialState。逐attempt按相同envelope/transition产生成功或Failure outcome，failed/duplicate不增history；失败可以继续下一attempt。expected非null时全文比较；mismatch报comparison/trace-outcome-mismatch，index为该attempt、state=null。每次增加outcome后检查整个{ok,state,outcomes}；聚合预算失败报budget-exceeded/index=null/state=null，绝不伪装某一业务失败或返回半份成功state。最终expectedFinalState非null时全文比较，失败index=null；最终成功仍完整预算。任意恶意大input可先安全预算拒绝。
 
 本文§9分别给出可达核心包和合法512 outcomes全聚合的纸面上界。Trace input若携带任意假的expected可被安全预算/比较拒绝；合法且完整expected的输入包装亦纳入证明，不能把输入allow512错误等同任意内容都有效。Trace输入和ReplayResult输出是两个各自受同一上限约束的API数据包，没有任何API返回 `{trace,result}` 或将它们合成一个包；因此各包独立证明，绝不既遗漏expected输入，也不凭空把两包的nodes/bytes相加成一个未承诺DTO。内存占用/性能不在本纸面JSON预算结论内。
+
+私有 `ForgeCoreFacts` / `ForgeCoreStartContext` 只存在内部调用栈，既不进入保存对象，也不成为可传入的 trusted-state 身份。开工上下文只带原已验证 genesis 引用与 revision；全部旧 receipt、双 completion、history entry.envelope 与 receipt.envelope 仍各自完整保留，任何旧 ID 的 duplicate 仍返回原 receipt 加最新 state/current。load、inspect、save、preview 与 replay 不绕过安全读取或完整 fold，canonical 保存字节与逐包预算合同不变。
 
 ## 9. 全域静态预算证明
 
@@ -533,3 +537,21 @@ ReplayOutcome≤368 nodes/12050 bytes：
 原公开 listing 与 MOD 排除、getter/设施表稳定假设见[规则来源一节](../rules/bounded-forge-development-production.md#9-政策与证据边界)。普通生产经验属性仍采用既有 intelligence 兼容政策，[命令来源](../sources/city-command-lifecycle.json)的 `quantityXpConflict` 没有因此解决。其他原生 writer、库存 cap、人员任务、AP 与成长、完整 TP、原生调度或 clean-stock/跨平台等价仍未建立。
 
 800是目录文献耐久输入与独立 construction work 上限，不是战斗 HP。不存在 HP、repair、income、merchant、piece、取消、升级、吸收、ownership 变化、全世界任务或 RNG；不接受任何旧根 state/save，不以重置 genesis 迁移其余额和历史。普通 TP 明确未建模，receipt 中 `nativeIntegration=false` 不得省略。
+
+
+### 10.1 兼容私有抽取
+
+本次抽取的固定源是[PR96 root，提交 9a9305cf2458487a07baed11e1b09c24c9130308](https://github.com/DanielMax937/sanguozhi/blob/9a9305cf2458487a07baed11e1b09c24c9130308/packages/engine/src/bounded-forge-development-production.ts)。这与上文原数值核/leaf 的来源身份分开记录，不改 source manifest 的 implementationBase。
+
+- `internal/bounded-forge-core-errors.ts`：唯一旧 WeakMap 品牌，owner/core/data 共用 stop/caught；未知异常仍 invalid-data，有限 reason/stage 与四个 nullable context 保留
+- `internal/bounded-forge-core-data.ts`：旧 owned canonical clone、全文等值、SHA-256、primitive readers 与旬历；不是新 parser 或可信 State 构造器
+- `internal/bounded-forge-core-types.ts`：12字段 `Pick<Scenario,...>` 与仅 genesis/revision 的 StartContext；policy 仍是完整精确旧 Policy，结构型视图不认证任意对象，也不剥除实际 genesis 的额外字段
+- `internal/bounded-forge-core.ts`：旧240–488的完整 rate/write/audit、Start、Produce、Advance/Completion；恰六个私有 exports，没有可替换 services/callback、Mode、factory 或新 owner
+
+现有 JSON/registry/DTO、index 和 package exports 不变。Node crypto lookup 只从旧 root 移至 data，仍恰一次；root 先载入 core，core 先载入原 phases/reducer，再载入 errors/data，使原依赖仍先于 lookup。JSON 的 node:util Proxy 门与缺 intrinsic fail-closed 规则不变；缺 crypto 仍在实际 digest 点拒绝，没有提前摘要、WebCrypto 或随机 fallback。policy 常量仍只冻结 owned clone。
+
+唯一业务调用包装在原 construction 闭包内传 `{genesis:state.genesis,revision:state.revision}`。revision 读取时机前移的等价范围仅为 full fold 构造的内部 owned plain State，其值不变、无 getter/Proxy 或用户 callback；不声称任意外部代理对象的逐读取时机等价。完整 policy/catalog digest、首错、真实 candidate 引用、字段写序、clone 次数及最后失败丢弃候选均保持。
+
+71个 public readonly类型、七个行为入口、全部 tag/policy/save、`BoundedForgeDevelopmentProductionDateV1` 日期名、完整512 trace/replay、所有旧 receipt 与§9各包预算不变。没有新月产、半整数 JSON、太守、30槽、财政/工资、HP或P078依赖接入；普通TP未建模与provisional/native未证实结论保持。
+
+[私有 core 完整说明](bounded-forge-core.md)列出精确内部类型/签名、固定源段、单WeakMap、真实引用与allowlist、完整fold和预算的静态兼容论证。本次只做静态实现和文本审阅；未执行测试、示例、typecheck、compile、build、runtime、checker、validator、场景序列或产品尺寸测量，不把源码搬移视为运行验证。

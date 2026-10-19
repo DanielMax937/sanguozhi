@@ -1,3 +1,9 @@
+## 锻冶三命令内部复用的兼容规则（2026-10-19，静态）
+
+[规则正文](bounded-forge-development-production.md)保留同一设施ID从开工到普通生产的费用／当前成长／TP／预约／唯一旬时钟规则，补明内部抽取不改变这些行为；[私有core说明](../engine/bounded-forge-core.md)说明精确事实视图、开工revision上下文及原owner的验证职责。
+
+本次只抽现有三命令业务，原v1的七API、512trace与完整保存预算不变；没有动态月产或新数值域，不能据此宣称月产已经集成。原source-local／provisional和未知边界保留，P078及依赖排除。未运行测试、编译、构建、产品或validator。
+
 ## 月特产单兵种阶段的兼容规则（2026-10-19，静态）
 
 [财政规则正文](city-finance-lifecycle.md)补明月界／太守／特产／30槽计数、完整旧核证据与合法小数、请求整数检查及饱和库存写入；[私有阶段说明](../engine/monthly-specialty-phases.md)记录原owner仍负责的工资后1→4调度和完整事务。
