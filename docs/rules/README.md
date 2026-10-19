@@ -1,3 +1,9 @@
+## 建设阶段的完整兼容规则（2026-10-19，静态）
+
+[建设生命周期正文](facility-construction-lifecycle.md)补充九类新建、五类吸收、16种具名政策组合、开始首错、逐旬进度、当前TP／XP写入及完成者标记；[包内阶段说明](../engine/facility-construction-phases.md)记录无独立时钟的复用接口和原owner职责。
+
+这是旧服务内部兼容抽取，未新增建设→普通生产共享profile，既有只读设施效果仍不自动接生产或收入。source-local／empirical／provisional边界不变，P078及依赖仍排除。未运行任何测试、编译、build、产品或validator，静态审阅不证明运行等价。
+
 ## 单工房共享时钟的具体规则（2026-10-18，静态）
 
 - [完整正文](bounded-city-piece-clock.md)：同账本即时动作、根资格与锁顺序、开工20AP／三核审计、到期容量／成长、一次旬推进与AP恢复、完成尾保证的有限条件

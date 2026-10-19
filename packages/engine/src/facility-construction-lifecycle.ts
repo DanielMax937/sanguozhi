@@ -1,7 +1,8 @@
 /** Bounded independent facility development and absorption; no native task or combat integration. */
 import policyData from '../../../data/catalogs/facility-construction-policies-v1.json' with { type: 'json' };
 import catalogData from '../../../data/catalogs/facility-construction-catalog-v1.json' with { type: 'json' };
-import { calculateDomesticConstructionRate } from './domestic-construction-rate.ts';
+import { calculateConstructionDevelopment, calculateConstructionWrite } from './internal/facility-construction-leaves.ts';
+import { advanceConstructionWork, completeConstructionPhase } from './internal/facility-construction-phases.ts';
 import { calculateCityMoneyIncomeProjection } from './city-money-income-projection.ts';
 import type { CityMoneyIncomeProjectionInput, CityMoneyIncomeProjectionReceipt, CityMoneyIncomeSlot } from './city-money-income-projection.ts';
 import { calculateCityFoodIncomeProjection } from './city-food-income-projection.ts';
@@ -257,9 +258,9 @@ function initialState(s: Scenario): State {
     genesis: { scenario: s, snapshot: clone(snapshot) }, snapshot, acceptedCommands: [] };
 }
 function write(before: number, delta: number, cap: number, policyId: string): Write {
-  if (delta < 0 && before < -delta) fail('insufficient-balance');
-  const actualDelta = delta < 0 ? delta : Math.min(delta, cap - before);
-  return { before, requestedDelta: delta, actualDelta, after: before + actualDelta, cap, discarded: delta - actualDelta, policyId };
+  const result = calculateConstructionWrite(before, delta, cap, policyId);
+  if (!result.ok) fail(result.reason);
+  return result.write;
 }
 function unitChecks(s: Scenario, before: Snapshot): UnitCheck[] {
   return before.fieldUnits.map(u => { const d = distance(u.position, before.city.position), hostile = s.hostileForceIds.includes(u.forceId);
@@ -284,18 +285,16 @@ function complete(s: Scenario, after: Snapshot, job: Job): Completion {
   if (job.remainingTurns !== 0 || after.turn !== job.dueTurn || !same(after.date, job.dueDate)) fail('completion-timing-mismatch');
   if (job.work !== null && job.work.current !== job.work.required) fail('incomplete-work');
   const requestedTp = job.kind === 'development' ? row(job.facilityKind).completionTechniquePoints : p.absorption.completionTechniquePoints;
-  const techniquePoints = write(after.force.techniquePoints, requestedTp, p.writer.techniquePointCap, p.writer.id); after.force.techniquePoints = techniquePoints.after;
-  const rewards: Reward[] = job.officerIds.map(officerId => {
-    const o = after.officers.find(x => x.id === officerId); if (!o || o.reservationJobId !== job.id) fail('officer-reservation-mismatch');
-    const xp = job.kind === 'absorption' ? p.rewards.absorptionPoliticsXp : (job.facilityKind === 'mint' || job.facilityKind === 'granary' ? p.rewards.supportDevelopmentPoliticsXp : p.rewards.ordinaryDevelopmentPoliticsXp);
-    const requestedMerit = job.kind === 'development' && job.facilityKind === 'mint' ? p.rewards.mintDevelopmentMerit : p.rewards.otherMerit;
-    const politicsXp = write(o.politicsXp, xp, p.writer.rewardCap, p.rewards.id);
-    const merit = write(o.merit, requestedMerit, p.writer.rewardCap, p.rewards.id);
-    o.politicsXp = politicsXp.after; o.merit = merit.after; o.reservationJobId = null; o.actedTurn = p.completionActors.actedOnCompletion ? after.turn : null;
-    return { officerId, politicsXp, merit, politicsBefore: o.politics, politicsAfter: o.politics };
+  return completeConstructionPhase({
+    job, facility, force: after.force, currentTurn: after.turn,
+    requestedTechniquePoints: requestedTp, policies: p,
+  }, {
+    write,
+    requireReservedOfficer(officerId) {
+      const o = after.officers.find(x => x.id === officerId); if (!o || o.reservationJobId !== job.id) fail('officer-reservation-mismatch');
+      return o;
+    },
   });
-  facility.status = 'complete'; facility.effectiveLevel = job.targetLevel; facility.jobId = null; job.completedTurn = after.turn;
-  return { jobId: job.id, facilityId: facility.id, typeId: facility.typeId, level: job.targetLevel, effectiveLevel: job.targetLevel, techniquePoints, rewards, releasedOfficerIds: [...job.officerIds], policyId: p.scheduler.id };
 }
 function resolve(s: Scenario, before: Snapshot, env: Envelope): { snapshot: Snapshot; receipt: Receipt } {
   const after = clone(before), p = s.policies;
@@ -312,9 +311,7 @@ function resolve(s: Scenario, before: Snapshot, env: Envelope): { snapshot: Snap
     const progress: NonNullable<Receipt['advance']>['progress'] = [], completions: Completion[] = [];
     for (const job of [...after.jobs].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0)) {
       if (job.completedTurn !== null) continue;
-      const remainingBefore = job.remainingTurns, workBefore = job.work?.current ?? null; job.remainingTurns--;
-      if (job.work !== null) job.work.current = Math.min(job.work.required, job.work.current + job.work.perAdvance);
-      progress.push({ jobId: job.id, remainingBefore, remainingAfter: job.remainingTurns, workBefore, workAfter: job.work?.current ?? null });
+      progress.push(advanceConstructionWork(job));
       if (job.remainingTurns === 0) completions.push(complete(s, after, job));
     }
     receipt.advance = { inputIndex: before.advancedCount, origin: 'fixed-external-scenario', input: clone(input), progress, completions };
@@ -333,10 +330,11 @@ function resolve(s: Scenario, before: Snapshot, env: Envelope): { snapshot: Snap
       const lot = s.lots.find(l => l.id === c.lotId); if (!lot) fail('unknown-lot');
       if (before.facilities.some(f => f.lotId === lot.id)) fail('occupied-lot');
       if (before.usedFacilityIds.includes(c.facilityId)) fail('facility-id-reused');
-      const reference = levelRow(c.facilityKind, 1), required = reference.maxDurability, initial = p.initialWork.mode === 'quarter-floor' ? Math.floor(required / p.initialWork.divisor) : 0;
-      const rate = calculateDomesticConstructionRate({ profile: 'domestic-construction-rate-stable-v1', politics: people.map(o => o.politics), facilityDurability: required });
-      if (!rate.supported) fail('unsupported-construction-rate'); if (rate.rate <= 0) fail('nonpositive-construction-rate');
-      const durationTurns = Math.ceil((required - initial) / rate.rate), dueDate = due(s, before, durationTurns);
+      const reference = levelRow(c.facilityKind, 1);
+      const calculation = calculateConstructionDevelopment({ required: reference.maxDurability, politics: people.map(o => o.politics), initialWork: p.initialWork });
+      if (!calculation.ok) fail(calculation.reason);
+      const { required, initial, rate, durationTurns } = calculation;
+      const dueDate = due(s, before, durationTurns);
       job = { id: env.id, kind: 'development', facilityId: c.facilityId, facilityKind: c.facilityKind, fromLevel: 0, targetLevel: 1, officerIds: [...ids], politics: people.map(o => o.politics),
         startTurn: before.turn, dueTurn: before.turn + durationTurns, dueDate, durationTurns, remainingTurns: durationTurns,
         work: { initial, current: initial, required, perAdvance: rate.rate, rate: clone(rate) }, completedTurn: null };
