@@ -1,3 +1,9 @@
+## 单锻冶厂建设与生产的共享根（2026-10-19，静态）
+
+[七API／完整DTO／保存重建与预算](bounded-forge-development-production.md) · [具体规则](../rules/bounded-forge-development-production.md)
+
+新profile把一次锻冶厂建设和普通兵装1–3生产接到同一ledger与唯一旬时钟；复用已抽出的construction阶段及普通即时生产核。原建设服务与既有共享根保持其原接口和保存格式。无CLI、批次、legal分页或旧存档迁移；只做静态审阅，未运行测试、编译、构建或产品。下方“私有抽取未整合”的说明是原批次范围，不表示本新profile不存在。
+
 ## 建设施工的私有工作量与完成阶段（2026-10-19，静态）
 
 [私有phase与owner边界](facility-construction-phases.md) · [九类新建／五类吸收具体规则](../rules/facility-construction-lifecycle.md)

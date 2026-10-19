@@ -1,3 +1,9 @@
+## 2026-10-19：单锻冶厂建设与普通生产同账本
+
+[规则](bounded-forge-development-production.md)与[七API](../engine/bounded-forge-development-production.md)新增独立有限profile：单城唯一空地块建设、同一设施ID完成后普通生产、一次根clock/AP恢复、真实资源与当前人物／TP写入、预约和完整历史重算。原服务不迁移或替换； construction私有阶段仅提供复用数学与写序。
+
+本范围是可替换工程整合，未执行测试、typecheck、编译、build、产品或validator。施工工作量不是HP；没有完整世界调度、其他建筑及任务、取消、季节财政、普通生产TP或原生人员任务恢复。静态预算覆盖全部合法完成尾及512次完整trace/expected，不能解释为内存峰值或性能结果。原43主题／45快照边界保持；下方旧说明保留历史范围。
+
 ## 2026-10-18：有限单工房共享时钟
 
 [规则正文](bounded-city-piece-clock.md)和[八API](../engine/bounded-city-piece-clock.md)新增独立单城账本、一次根clock／AP恢复、5号工房任务与双向预约、到期成长和完整历史重建。开始前约束可完成日期、容量及历史槽；静态全域预算计入未来完成审计、所有旧duplicate和转义保存包装。

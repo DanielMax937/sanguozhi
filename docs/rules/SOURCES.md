@@ -1,3 +1,11 @@
+## 2026-10-19：单锻冶厂建设→生产来源与政策边界
+
+[完整来源记录](../../data/sources/bounded-forge-development-production-v1.json) · [具体规则](bounded-forge-development-production.md) · [完整政策](../../data/policies/bounded-forge-development-production-v1.json)
+
+建设率与普通生产价格／数量复用已记录source-local纯核；施工目录与开始／完成奖励沿现有显式政策。新根的单任务、固定外部事实、共享旬时钟、AP恢复、预约、保存与预算是可替换工程政策，不声称重新恢复原生scheduler、资源writer、成长或TP全账。
+
+原quantity奖励属性冲突未被本次兼容选项解决，生产审计保留原facilityApplied字段值并通过数量核保留实际倍率证据。施工工作量不充当战斗HP。未运行测试、编译、构建、产品或validator；来源版本与下方旧记录完整保留。
+
 ## 2026-10-18：有限共享时钟与件数生产来源
 
 [完整来源记录](../../data/sources/bounded-city-piece-clock-v1.json) · [具体规则](bounded-city-piece-clock.md) · [固定政策](../../data/policies/bounded-city-piece-clock-v1.json)
