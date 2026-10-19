@@ -1,3 +1,11 @@
+## 2026-10-18：有限共享时钟与件数生产来源
+
+[完整来源记录](../../data/sources/bounded-city-piece-clock-v1.json) · [具体规则](bounded-city-piece-clock.md) · [固定政策](../../data/policies/bounded-city-piece-clock-v1.json)
+
+生产价格、单件数量和工期来自既有纯核及其source-local观测；PR93私有计划器仅保存旧数学／审计语义。新根只复用三核与收费／完成数学，不伪造其他五类piece库存以调用旧宽域开始包装。统一逐人资格、双向锁、单工房时钟／AP恢复、完整历史与预算属于明确可替换工程政策，固定supplied人物／技能／敌情／商人事实不能冒充原生getter和world scheduler。
+
+完整世界、native任务／回程／取消、全部TP与RNG等证据缺口仍在。只进行了静态代码／文档审查，未运行任何测试或产品；下面原记录保留来源版本和历史范围。
+
 ## 2026-10-18：共享单城即时动作来源边界
 
 [来源身份与固定文件](../../data/sources/bounded-city-economy-v1.json) · [固定政策](../../data/policies/bounded-city-economy-v1.json)

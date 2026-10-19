@@ -1,3 +1,11 @@
+## 单工房共享时钟的具体规则（2026-10-18，静态）
+
+- [完整正文](bounded-city-piece-clock.md)：同账本即时动作、根资格与锁顺序、开工20AP／三核审计、到期容量／成长、一次旬推进与AP恢复、完成尾保证的有限条件
+- [八API、完整保存重建与分页](../engine/bounded-city-piece-clock.md)
+- [固定政策](../../data/policies/bounded-city-piece-clock-v1.json)与[来源边界](../../data/sources/bounded-city-piece-clock-v1.json)
+
+仅独立单城／单工房／类型5／最多12旬工程域，未运行测试、编译或产品。supplied外部事实不是原版世界证据，原43主题／45快照不清空；下方旧阶段“未整合时钟／任务”限定各自旧profile，旧接口保持。
+
 ## 件数生产的内部兼容边界（2026-10-18，静态）
 
 [城内指令具体规则](city-command-lifecycle.md)补充旧六类件数生产的计算／开工／费用／完成兼容约束；[内部计划器说明](../engine/piece-command-planners.md)列出owner保留的时钟、预约写入、快照和错误顺序。公开profile与全部既有政策不变，本次不新增世界时钟或生产任务整合。未运行测试／编译／构建或产品；原证据缺口保留。

@@ -1,0 +1,202 @@
+{
+  "id": "bounded-city-economy-piece-clock-v1",
+  "version": 1,
+  "clock": "root-xun-ap-then-piece-completion-v1",
+  "ownership": "fixed-supplied-city-corps-force-v1",
+  "ordering": "caller-action-order-no-reordering-v1",
+  "transaction": "all-or-nothing-batch-v1",
+  "legalOrdering": "facility-trade-piece-advance-order-v1",
+  "legalPaging": "stateless-contiguous-prefix-full-state-bound-v1",
+  "rewardScope": "shared-xp-merit-partial-no-tp-v1",
+  "pressureBinding": "independent-supplied-domestic-helper-v1",
+  "domestic": {
+    "attributes": {
+      "id": "stable-effective-attributes-v1",
+      "version": 1,
+      "parameters": {
+        "snapshot": "command-start",
+        "xpChangesEffectiveAbility": false
+      }
+    },
+    "facilityMultiplier": {
+      "id": "guide-levels-f32-v1",
+      "version": 1,
+      "parameters": {
+        "levelBits": [
+          "3F800000",
+          "3F99999A",
+          "3FC00000"
+        ]
+      }
+    },
+    "writer": {
+      "id": "clip-and-return-actual-v1",
+      "version": 1,
+      "parameters": {
+        "overflow": "clip",
+        "returned": "actual-delta"
+      }
+    },
+    "morale": {
+      "id": "weighted-floor-presecurity-min20-v1",
+      "version": 1,
+      "parameters": {
+        "rounding": "floor",
+        "security": "before-write",
+        "minimum": 20
+      }
+    },
+    "productionAp": {
+      "id": "production-request20-effective20-v1",
+      "version": 1,
+      "parameters": {
+        "quantity": 20,
+        "piece": 20
+      }
+    },
+    "rewards": {
+      "id": "source-reward-compat-intelligence-v1",
+      "version": 1,
+      "parameters": {
+        "patrol": "leadership",
+        "recruit": "charm",
+        "quantity": "intelligence",
+        "piece": "intelligence",
+        "instantXp": 2,
+        "instantMerit": 50,
+        "completionXp": 4,
+        "completionMerit": 100,
+        "cap": 1000000000
+      }
+    },
+    "zeroYield": {
+      "id": "pay-zero-yield-instant-v1",
+      "version": 1,
+      "parameters": {
+        "zero": "pay-and-reward"
+      }
+    },
+    "presentation": {
+      "id": "no-presentation-rng-no-tp-v1",
+      "version": 1,
+      "parameters": {
+        "rngDraws": 0,
+        "techniquePoints": "not-modeled"
+      }
+    }
+  },
+  "merchant": {
+    "ownership": {
+      "id": "merchant-fixed-owned-city-v1",
+      "cityKind": "city",
+      "activeOwnerCorpsMustMatch": true,
+      "ownershipChanges": false
+    },
+    "eligibility": {
+      "id": "merchant-once-city-actor-turn-v1",
+      "cityTradesPerTurn": 1,
+      "actorsPerTrade": 1,
+      "actorMustBeAvailable": true,
+      "actorMustMatchCityAndForce": true,
+      "actionPointsCost": 20,
+      "fixedGoldFee": 0,
+      "minFoodAmount": 1,
+      "maxFoodAmount": 1000000000
+    },
+    "hostility": {
+      "id": "supplied-axial-distance-v1",
+      "completeFieldUnitsRequired": true,
+      "hostileForceIdsExplicit": true,
+      "differentForceImpliesHostile": false,
+      "distance": "max(abs(dq),abs(dr),abs(dq+dr))",
+      "blockingDistanceInclusive": 2,
+      "coordinateMin": -1000000,
+      "coordinateMax": 1000000,
+      "nativeGeometryRecovered": false
+    },
+    "pricing": {
+      "id": "merchant-ui-rational-rounding-v1",
+      "priceScale": "ui-food-per-gold",
+      "uiTradePrices": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "rawTradePriceAccepted": false,
+      "requestUnit": "food",
+      "buyGold": "ceil(Q*D/(uiPrice*N))",
+      "sellGold": "floor(Q*N*4/(uiPrice*D*5))",
+      "buyFactor": {
+        "numerator": 1,
+        "denominator": 1
+      },
+      "sellFactor": {
+        "numerator": 4,
+        "denominator": 5
+      },
+      "interpolation": "exact-unreduced-rational-v1",
+      "goldFraction": "unreduced-nonnegative-decimal-strings-v1",
+      "nativeRoundingRecovered": false
+    },
+    "zeroSale": {
+      "id": "reject-zero-value-sale-v1",
+      "minimumGoldCredit": 1
+    },
+    "capacity": {
+      "id": "merchant-full-fill-cap-reject-v1",
+      "maxBalanceAndCapacity": 1000000000,
+      "partialFill": false,
+      "discarded": 0,
+      "failure": "atomic-reject"
+    },
+    "rewards": {
+      "id": "merchant-politics-xp5-no-growth-v1",
+      "politicsXpRequested": 5,
+      "politicsXpCap": 1000000000,
+      "automaticPoliticsGrowth": false,
+      "meritDelta": 0,
+      "techniquePointsDelta": 0,
+      "loyaltyDelta": 0,
+      "meritApplication": "not-integrated-profile-zero",
+      "nativeMeritRewardRecovered": false
+    }
+  },
+  "budgets": {
+    "acceptedCommands": 64,
+    "actionsPerCommand": 4,
+    "traceAttempts": 512,
+    "legalCandidates": 32,
+    "legalPageSize": 4,
+    "maxJobs": 12,
+    "maxAdvances": 12,
+    "maxOfficers": 8,
+    "maxFacilities": 8,
+    "maxFieldUnits": 16,
+    "maxHostileForces": 16,
+    "maxUtf8Bytes": 8388608,
+    "maxNodes": 250000,
+    "maxDepth": 48,
+    "maxArray": 4096,
+    "maxObjectKeys": 128
+  },
+  "pieceTime": {
+    "id": "raw-turns-min1-v1",
+    "version": 1,
+    "parameters": {
+      "nonpositive": "minimum-one",
+      "unit": "service-turn"
+    }
+  },
+  "apRecovery": {
+    "id": "fixed20-cap255-ap-recovery-v1",
+    "version": 1,
+    "parameters": {
+      "increment": 20,
+      "cap": 255
+    }
+  },
+  "reservation": "root-bidirectional-piece-lock-v1",
+  "externalFacts": "fixed-for-entire-bounded-episode-v1"
+}
