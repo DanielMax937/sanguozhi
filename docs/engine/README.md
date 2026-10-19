@@ -1,3 +1,9 @@
+## 有限锻冶根的私有三命令 core（2026-10-19，静态）
+
+[私有core职责](bounded-forge-core.md) · [原七API与完整保存合同](bounded-forge-development-production.md) · [建设到生产具体规则](../rules/bounded-forge-development-production.md)
+
+原有开工、普通生产、一次旬推进三命令业务和必要数据／错误叶抽到包内；公开owner仍负责安全输入、全部重建、不变量、预算、事务和七API。原v1全部DTO、512次trace、整数JSON及保存格式保持，未增加月产、开放hooks或trusted-state入口。仅静态审阅，未运行产品、测试、编译、构建或validator。
+
 ## 月特产的单兵种私有阶段（2026-10-19，静态）
 
 [无独立时钟的月特产阶段](monthly-specialty-phases.md) · [完整财政服务合同](city-finance-lifecycle.md) · [月特产具体规则](../rules/city-finance-lifecycle.md)

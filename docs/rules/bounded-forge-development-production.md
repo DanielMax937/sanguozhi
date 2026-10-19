@@ -162,6 +162,21 @@ preview 走相同资格和算术，但不提交。replay 从自己的 scenario �
 - 生产价格：[固定提交的公开 listing](https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政10-计算生产价格.txt)、[本仓库来源记录](../sources/production-price.json)、[价格规则](production-price.md)。自定义折扣 MOD 排除，不把展示的补丁常数当原字节
 - 生产数量：[固定提交的公开 listing](https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-内政11-计算生产数量.txt)、[本仓库来源记录](../sources/production-quantity.json)、[数量规则](production-quantity.md)。替换政治和特产产量 MOD 均排除
 - 建设资格、社区设施值及奖励冲突：[标准设施建设规则](facility-construction-lifecycle.md)。目录/社区数据不提升为 clean-stock 原始表字节；逐人全额奖励与发放时点依旧是政策
-- 原行为复用：[建设私有阶段](../engine/facility-construction-phases.md)；具体普通生产审计和核字段见[本根 engine 合同](../engine/bounded-forge-development-production.md)
+- 原行为复用：[建设私有阶段](../engine/facility-construction-phases.md)；具体普通生产审计和核字段见[本根 engine 合同](../engine/bounded-forge-development-production.md)；[私有 forge core](../engine/bounded-forge-core.md)记录相同三命令业务的兼容抽取、固定源码映射与完整 owner 边界
 
 没有 batch、legal 枚举、CLI、UI、商人、piece 生产、收入入账、HP、维修、吸收、升级、取消、拆除、退款、所有权变化、全地图单位移动、RNG、原生 scheduler 或旧 save 迁移。新根不通过重置 genesis“导入”旧余额和历史。公开 listing 的局部数值重建，不认证 clean-stock、跨版本/平台等价、原生库存 writer、原生人物任务、原生 AP/成长或完整世界循环。
+
+
+## 10. 私有复用不改变v1规则
+
+现有 StartForgeDevelopment、Produce 与 AdvanceSharedFacilityTurn 的业务实现归入[私有 forge core](../engine/bounded-forge-core.md)。仍只有一个 clock、一份 AP/金钱/库存账、一套人物成长与 acted/reservation、一份真实当前设施生命周期和最多一个永久 job；没有第二个可独立推进、恢复 AP 或重复发奖的 owner。
+
+开工继续按完整敌情/首阻挡、选人顺序逐人资格、AP后gold、地块/设施、核计算及工期/历史槽门处理。生产继续先资格、price/quantity、库存/奖励，之后才足额费用门；只回写目标库存、参与者 intelligenceXp/merit/acted、gold/AP 与目标 usedTurn。共享推进仍恰一次时钟/AP恢复/work推进，到期按真实 force/人物/设施/job 引用完成；逐人预约检查不提前成批，也不把施工政治XP或其他锁覆盖掉。首错、错误 context、完整 audit/receipt、字段和数组顺序保持；任意最后失败都丢弃全部候选。
+
+公共根仍负责安全输入、完整 genesis/history 重建、不变量、提交和每个返回包预算。私有事实视图和开工上下文不是可信状态凭证，不进入保存或收据；相同旧命令仍返回旧完整 receipt 加最新 state/current，保存 tag、canonical save、完整 policy、71个公开 readonly类型和七个行为 API 保持，日期类型仍名为 `BoundedForgeDevelopmentProductionDateV1`。
+
+完整512次 trace/replay 和全部合法 expected/finalState 仍保留；每包8,388,608 bytes、250,000 nodes、depth48、array4096、object128限制不变。原完成尾及旧最大 Start receipt 的 duplicate 预算不删减，不以缩短 trace、删 audit 或省略双 completion 换空间。
+
+本次没有新增月产、finance、工资、HP、P078及其依赖，也没有新policy、半整数JSON、太守或30槽。普通TP仍为not-modeled，不能解释为原作普通TP=0；原provisional模拟政策、奖励属性冲突、nativeIntegration=false和clean-stock/原生调度未证实的边界不变。未来新profile需要自己的精确政策接缝、完整owner与预算，不能由私有复用推导出已经支持。
+
+本次结论限静态实现与文本审阅、逐源比较及既有字段/整数证明；未运行测试、示例、typecheck、compile、build、runtime、checker、validator、场景序列或产品尺寸测量，不是原生行为或运行通过认证。
