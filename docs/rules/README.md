@@ -1,3 +1,7 @@
+# 动态锻冶建设与每月特产
+
+[详细规则正文](bounded-forge-monthly-production.md)记录同账本建设、普通生产、固定太守、动态30槽、完工后月产、三兵种完整核审计和库存饱和规则。区分原核证据与本 profile 的可替换调度政策；不声称原作整链恢复。[API及有界保存合同](../engine/bounded-forge-monthly-production.md)另列完整128尝试域，旧profile的512域不变。本次未运行测试、编译或构建。
+
 ## 锻冶三命令内部复用的兼容规则（2026-10-19，静态）
 
 [规则正文](bounded-forge-development-production.md)保留同一设施ID从开工到普通生产的费用／当前成长／TP／预约／唯一旬时钟规则，补明内部抽取不改变这些行为；[私有core说明](../engine/bounded-forge-core.md)说明精确事实视图、开工revision上下文及原owner的验证职责。

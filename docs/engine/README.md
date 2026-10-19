@@ -1,3 +1,7 @@
+# 动态锻冶与月特产同账本
+
+[完整 API 与保存合同](bounded-forge-monthly-production.md)与[具体规则、来源及推测边界](../rules/bounded-forge-monthly-production.md)：独立有界 profile 将锻冶建设完成、普通生产和每月特产写入同一库存。唯一时钟；完整三兵种审计；新 profile 完整128尝试域，原v1完整512域不变。完工先于当月特产是明确可替换的工程顺序，未接入工资或完整财政；本次仅静态代码和文档工作，未运行验证。
+
 ## 有限锻冶根的私有三命令 core（2026-10-19，静态）
 
 [私有core职责](bounded-forge-core.md) · [原七API与完整保存合同](bounded-forge-development-production.md) · [建设到生产具体规则](../rules/bounded-forge-development-production.md)
