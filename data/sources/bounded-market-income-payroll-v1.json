@@ -1,0 +1,2816 @@
+{
+  "profile": "bounded-market-income-payroll-v1",
+  "version": 1,
+  "researchBaseline": {
+    "commit": "ebd6d7e695a44ecf1c753ec8045718c8cb27d4b0",
+    "tree": "f97eae627ffbc11e813fbde1be4be1657041ed50"
+  },
+  "bindings": {
+    "constructionPolicy": {
+      "path": "data/catalogs/facility-construction-policies-v1.json",
+      "gitBlobSha1": "08976970d8c27b24d21791c8ec1d1d8fafbf72f7",
+      "sha256": "a13564ab37cc6e38fbaad6cd6a6396f8c8692f62b944a44ecadb3be8a6f45a29"
+    },
+    "constructionCatalog": {
+      "path": "data/catalogs/facility-construction-catalog-v1.json",
+      "gitBlobSha1": "95435bf6d512aab24143e3fd04dac4420bba402a",
+      "sha256": "366fb875751367758606fb3fffb291682231a10606a8773bffa040ccd9fa4f43"
+    },
+    "offices": {
+      "path": "data/catalogs/named-offices-v1.json",
+      "gitBlobSha1": "c1ed4746545d4be5349a8a923afa03f8253081ce",
+      "sha256": "949e956340414969224406315ce93d141e97379ca8a5403923bb9714bb8aa7c1"
+    },
+    "financePolicy": {
+      "path": "data/catalogs/city-finance-policies-v1.json",
+      "gitBlobSha1": "bd44cb42416b34f450cc6c43e94788b82b1c950b",
+      "sha256": "10db1115a29d1e9b8ea294defd21b9ed170bb20032b25d00ce50f0bf5463d118"
+    },
+    "financeFacilities": {
+      "path": "data/catalogs/city-finance-facilities-v1.json",
+      "gitBlobSha1": "4224d534b90bc2f42d1a6bf325153d03e7bf1101",
+      "sha256": "b7317c35bfc614a426f235a38fb32b124d808c9dbdf65ce483de17e2f2baa0d8"
+    },
+    "moneySource": {
+      "path": "docs/sources/city-money-income-projection.json",
+      "gitBlobSha1": "502c0f0d7712c8dd23aed36b61bb60815f9a2f37",
+      "sha256": "cf7ff7276747b793d293e20ec53681e36a3b5232e16ce93677f595a0b33a65fd"
+    },
+    "rateSource": {
+      "path": "docs/sources/domestic-construction-rate.json",
+      "gitBlobSha1": "0c9045377d7e9df5bd1d605d2e34c76d9a0cdeeb",
+      "sha256": "2a9839d373396ead062c277a8767a79c18d0d61de848236acd522cd108722bd8"
+    }
+  },
+  "constructionRateSource": {
+    "profileId": "domestic-construction-rate-stable-v1",
+    "scope": "standalone-resolved-stable-input-numerical-rate-only",
+    "level": "source-listing-reconstruction",
+    "stockOriginalVerified": false,
+    "originalExecutableExecuted": false,
+    "source": {
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/函数[计算内政建设速度].txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/%E5%86%85%E5%AD%98%E8%B5%84%E6%96%99/%E5%87%BD%E6%95%B0%5B%E8%AE%A1%E7%AE%97%E5%86%85%E6%94%BF%E5%BB%BA%E8%AE%BE%E9%80%9F%E5%BA%A6%5D.txt",
+      "gitBlobSha1": "76b1f9591a9f94830bcf4e5a67764d2911e19fd4",
+      "originalEncoding": "GBK",
+      "originalBytes": 5936,
+      "originalSha256": "cabc5cb11e62dee04fda39aadce804284d272ca20e98ece202fd16cedfbe9216",
+      "snapshot": "docs/sources/domestic-construction-rate-original.txt",
+      "snapshotEncoding": "UTF-8",
+      "snapshotSha256": "f092b0a16ab99ca74106c967e4dfb320211c2b4d2a066f0ca36b4be84272b132",
+      "byteAuthority": "public disassembly listing only; not a verified stock executable"
+    },
+    "domain": {
+      "politicsSlots": 3,
+      "politics": [
+        0,
+        255
+      ],
+      "emptySlot": null,
+      "missingTrailingSlots": "empty",
+      "facilityDurability": [
+        0,
+        65535
+      ],
+      "getterAssumption": "004890A0 returns the same resolved uint8 for every call on each supplied person",
+      "facilityAssumption": "00490B90 and all reached facility+0xC2 reads yield the same resolved uint16 durability",
+      "validation": "engineering input checks, not recovered command eligibility"
+    },
+    "constants": {
+      "politicsDivisor": 2,
+      "durabilityQuarterDivisor": 4,
+      "durabilityRemainderDivisor": 9,
+      "signedDivisionMagic": "0x38E38E39"
+    },
+    "arithmetic": "max(maxPolitics + floor(sumPolitics / 2), floor((D - floor(D / 4)) / 9))",
+    "originalListing": {
+      "start": "005BB1D0",
+      "endInclusive": "005BB2AA",
+      "endExclusive": "005BB2AB",
+      "instructionCount": 84,
+      "byteLength": 219,
+      "sha256": "8529878a0dca1cd080dfa805b5112ff940eba58631f31c5c5c83025400c7106c"
+    },
+    "excludedMod": {
+      "marker": "*",
+      "replacementSite": "005BB263",
+      "target": "008A9DE8",
+      "instructionCount": 9,
+      "listedByteLength": 31,
+      "listedBytesSha256": "6067cd400b4750217191e66a2e133f6327281261ebd033dd7e686c7ab98f4e03",
+      "executed": false
+    },
+    "evidence": {
+      "slotsAndStablePolitics": [
+        "005BB1E0..005BB213"
+      ],
+      "politicsHalfAndAdd": [
+        "005BB23E..005BB247"
+      ],
+      "stableFacilityReads": [
+        "005BB223",
+        "005BB22A",
+        "005BB237",
+        "005BB249",
+        "005BB26C",
+        "005BB279",
+        "005BB27E"
+      ],
+      "durabilityMinimum": [
+        "005BB249..005BB266",
+        "005BB26C..005BB29E"
+      ],
+      "selectAndReturn": [
+        "005BB268..005BB2AA"
+      ],
+      "excludedMod": [
+        "*005BB263..*008A9DFD"
+      ]
+    },
+    "remainingOpen": [
+      "004890A0 politics getter implementation and mutable getter behavior",
+      "00490B90 facility resolver implementation and mutable table behavior",
+      "initial durability writer; D>>2 here proves lower-bound arithmetic only",
+      "construction command eligibility, costs, participants and task writes",
+      "complete duration, per-turn progress, completion dispatch and scheduler",
+      "Train/EndTurn, mission, save and replay integration",
+      "clean-stock PC-PK1.1, Vanilla, console and cross-version equivalence"
+    ],
+    "counterexamples": [
+      {
+        "politics": [
+          75,
+          1,
+          0
+        ],
+        "facilityDurability": 450,
+        "sourceRate": 113,
+        "oldWikiReconstruction": 112
+      },
+      {
+        "politics": [
+          29,
+          1,
+          0
+        ],
+        "facilityDurability": 500,
+        "sourceRate": 44,
+        "oldWikiReconstruction": 43
+      },
+      {
+        "politics": [
+          0,
+          0,
+          0
+        ],
+        "facilityDurability": 500,
+        "sourceRate": 41,
+        "oldWikiReconstruction": 0
+      },
+      {
+        "politics": [
+          100,
+          100,
+          100
+        ],
+        "facilityDurability": 500,
+        "sourceRate": 250,
+        "oldWikiReconstruction": 250,
+        "role": "shared-anchor-not-domain-proof"
+      }
+    ]
+  },
+  "moneyIncomeSource": {
+    "profileId": "city-money-income-stable-resolved-i32-safe-v1",
+    "scope": "Local city-income calculator return value under stable resolved observations and safe signed32 products; not income posting or a monthly scheduler",
+    "evidence": {
+      "level": "source-listing-reconstruction",
+      "profile": "city-money-income-stable-resolved-i32-safe-v1",
+      "source": "docs/sources/city-money-income-projection.json",
+      "originalRange": "0049E590 <= PC < 0049E745",
+      "fullCallerBytesVerified": true,
+      "entryGatesIntegrated": false,
+      "stableResolvedInputsRequired": true,
+      "stockOriginalVerified": false,
+      "originalExecutableExecuted": false,
+      "nativeHelpersReconstructed": false,
+      "abiVerified": false,
+      "realTraceReachabilityVerified": false,
+      "typeTableStockVerified": false,
+      "adjacencyHelperRecovered": false,
+      "rngRecovered": false,
+      "monthlySchedulerIntegrated": false,
+      "incomeWriterIntegrated": false,
+      "commandIntegrated": false,
+      "modBehaviorIncluded": false
+    },
+    "source": {
+      "repository": "sjn4048/311MemoryResearch",
+      "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+      "path": "内存资料/整理/Func-收支04-计算城市收钱.txt",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/整理/Func-收支04-计算城市收钱.txt",
+      "gitBlobSha1": "0f2c2d72a174d563427230bf207d65b6a639247c",
+      "snapshot": "docs/sources/city-money-income-projection-original.gbk",
+      "snapshotEncoding": "GBK",
+      "snapshotBytes": 13630,
+      "snapshotSha256": "38b0ac07ba1d67e47add98460a013337d9ed4a97191e7371461ad1d4d89e1e7a",
+      "utf8Snapshot": "docs/sources/city-money-income-projection-original.txt",
+      "utf8Bytes": 14553,
+      "utf8Sha256": "d1780c1a16fb50a06af16a0ac7acbad06c396bf31ed1ef09432077b91a5d833a",
+      "acquisition": "Copied the fixed audit snapshot locally, checked both encodings and pinned Git blob; the audit retained connector-decoded text and reversibly reconstructed GBK. No new download or independent executable extraction."
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "snapshot": "docs/sources/production-price-LICENSE.txt",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/LICENSE",
+      "attribution": "sjn4048/311MemoryResearch"
+    },
+    "originalListing": {
+      "start": "0049E590",
+      "endExclusive": "0049E745",
+      "instructionCount": 150,
+      "byteLength": 437,
+      "sha256": "30a5160008a77ce78b8602819a7041f71015fffcb30d2b09221f5abee37a37f1",
+      "bytesHex": "83ec0c538b5c241453894c2410e88ec0fdff83c40485c00f848f0100008b038bcbff504085c00f8c8001000083f82e0f8f77010000550fb76b7e568d8bf400000057894c2410c74424141e0000008bff8b5424108b3a57e844c0fdff83c40485c00f84a00000008b77088d46e183f8140f87910000000fb68058e74900ff248548e749008b471485c0747c83feff747756b958192007e86525ffff8bd853e8fdbffdff83c40485c0745983fe1f0fb79bc0000000740a83fe32740583fe3375418b178bcfff523c8b008b4c24186a2650e89bfeffff85c074288d045b992bc2d1f803e8eb1e8b471485c0759fbe1f000000eb9d8b471485c07591be32000000eb8f03eb8b5c24208b4c24108b44241483c10848894c2410894424140f852fffffffa1781920076bed6483e8008bf5742883e80275398b138bcbff524885c0b81f85eb5174186bf64bf7eec1fa058bcac1e91f03ca8bf1eb16b81f85eb516bf67df7eec1fa058bc2c1e81f03c28bf08a83850000003c327302b0320fb6c80fafceb81f85eb51f7e9c1fa058bcac1e91f03cab81f85eb51f7e95fc1fa055e8bc2c1e81f5d03c25b83c40cc2040033c05b83c40cc20400",
+      "implementedEntry": "0049E5C5",
+      "entryGatesImplemented": false,
+      "externalCallsExecuted": false
+    },
+    "unlistedGap": {
+      "start": "0049E745",
+      "endExclusive": "0049E748",
+      "byteLength": 3,
+      "bytesKnown": false,
+      "paddingInserted": false
+    },
+    "tables": {
+      "jump": {
+        "start": "0049E748",
+        "endExclusive": "0049E758",
+        "byteLength": 16,
+        "sha256": "a4fc0cc532310bcc58d0328fa8095f0de204564e2909b82328f7ff7ea3a6dfa7",
+        "bytesHex": "14e6490075e6490083e6490097e64900"
+      },
+      "dispatch": {
+        "start": "0049E758",
+        "endExclusive": "0049E76D",
+        "byteLength": 21,
+        "sha256": "e5183f0c1c7ff8eb709ff8d3eea5673e1ff7171a078b2e9edf51bccd235c5672",
+        "bytesHex": "000303030303030303030303030303000000030102"
+      },
+      "handlers": {
+        "31": "0049E614",
+        "46": "0049E614",
+        "47": "0049E614",
+        "48": "0049E614",
+        "50": "0049E675",
+        "51": "0049E683",
+        "other": "0049E697"
+      }
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "baseMoneyWord",
+        "slots",
+        "resolvedTypeRows",
+        "difficultyWord",
+        "securityByte"
+      ],
+      "properties": {
+        "profile": {
+          "type": "string",
+          "const": "city-money-income-stable-resolved-i32-safe-v1"
+        },
+        "baseMoneyWord": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "slots": {
+          "type": "array",
+          "minItems": 30,
+          "maxItems": 30,
+          "items": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "facilityTypeWord",
+                  "constructionWord"
+                ],
+                "properties": {
+                  "facilityTypeWord": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 4294967295
+                  },
+                  "constructionWord": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 4294967295
+                  },
+                  "adjacentMint": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "resolvedTypeRows": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [],
+          "properties": {
+            "31": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "valid",
+                    "moneyYieldWord"
+                  ],
+                  "properties": {
+                    "valid": {
+                      "const": true
+                    },
+                    "moneyYieldWord": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 65535
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "valid"
+                  ],
+                  "properties": {
+                    "valid": {
+                      "const": false
+                    }
+                  }
+                }
+              ]
+            },
+            "46": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "valid",
+                    "moneyYieldWord"
+                  ],
+                  "properties": {
+                    "valid": {
+                      "const": true
+                    },
+                    "moneyYieldWord": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 65535
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "valid"
+                  ],
+                  "properties": {
+                    "valid": {
+                      "const": false
+                    }
+                  }
+                }
+              ]
+            },
+            "47": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "valid",
+                    "moneyYieldWord"
+                  ],
+                  "properties": {
+                    "valid": {
+                      "const": true
+                    },
+                    "moneyYieldWord": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 65535
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "valid"
+                  ],
+                  "properties": {
+                    "valid": {
+                      "const": false
+                    }
+                  }
+                }
+              ]
+            },
+            "48": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "valid",
+                    "moneyYieldWord"
+                  ],
+                  "properties": {
+                    "valid": {
+                      "const": true
+                    },
+                    "moneyYieldWord": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 65535
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "valid"
+                  ],
+                  "properties": {
+                    "valid": {
+                      "const": false
+                    }
+                  }
+                }
+              ]
+            },
+            "50": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "valid",
+                    "moneyYieldWord"
+                  ],
+                  "properties": {
+                    "valid": {
+                      "const": true
+                    },
+                    "moneyYieldWord": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 65535
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "valid"
+                  ],
+                  "properties": {
+                    "valid": {
+                      "const": false
+                    }
+                  }
+                }
+              ]
+            },
+            "51": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "valid",
+                    "moneyYieldWord"
+                  ],
+                  "properties": {
+                    "valid": {
+                      "const": true
+                    },
+                    "moneyYieldWord": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 65535
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "valid"
+                  ],
+                  "properties": {
+                    "valid": {
+                      "const": false
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "difficultyWord": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "cityPlayerPredicate": {
+          "type": "boolean"
+        },
+        "securityByte": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "difficultyWord": {
+                "const": 2
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "cityPlayerPredicate"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "cityPlayerPredicate"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "slots": {
+                "contains": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "facilityTypeWord",
+                        "constructionWord"
+                      ],
+                      "properties": {
+                        "facilityTypeWord": {
+                          "const": 31
+                        },
+                        "constructionWord": {
+                          "not": {
+                            "const": 0
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "facilityTypeWord",
+                        "constructionWord"
+                      ],
+                      "properties": {
+                        "facilityTypeWord": {
+                          "const": 50
+                        },
+                        "constructionWord": {
+                          "const": 0
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resolvedTypeRows": {
+                "required": [
+                  "31"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "slots": {
+                "contains": {
+                  "type": "object",
+                  "required": [
+                    "facilityTypeWord",
+                    "constructionWord"
+                  ],
+                  "properties": {
+                    "facilityTypeWord": {
+                      "const": 46
+                    },
+                    "constructionWord": {
+                      "not": {
+                        "const": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resolvedTypeRows": {
+                "required": [
+                  "46"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "slots": {
+                "contains": {
+                  "type": "object",
+                  "required": [
+                    "facilityTypeWord",
+                    "constructionWord"
+                  ],
+                  "properties": {
+                    "facilityTypeWord": {
+                      "const": 47
+                    },
+                    "constructionWord": {
+                      "not": {
+                        "const": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resolvedTypeRows": {
+                "required": [
+                  "47"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "slots": {
+                "contains": {
+                  "type": "object",
+                  "required": [
+                    "facilityTypeWord",
+                    "constructionWord"
+                  ],
+                  "properties": {
+                    "facilityTypeWord": {
+                      "const": 48
+                    },
+                    "constructionWord": {
+                      "not": {
+                        "const": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resolvedTypeRows": {
+                "required": [
+                  "48"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "slots": {
+                "contains": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "facilityTypeWord",
+                        "constructionWord"
+                      ],
+                      "properties": {
+                        "facilityTypeWord": {
+                          "const": 50
+                        },
+                        "constructionWord": {
+                          "not": {
+                            "const": 0
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "facilityTypeWord",
+                        "constructionWord"
+                      ],
+                      "properties": {
+                        "facilityTypeWord": {
+                          "const": 51
+                        },
+                        "constructionWord": {
+                          "const": 0
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resolvedTypeRows": {
+                "required": [
+                  "50"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "slots": {
+                "contains": {
+                  "type": "object",
+                  "required": [
+                    "facilityTypeWord",
+                    "constructionWord"
+                  ],
+                  "properties": {
+                    "facilityTypeWord": {
+                      "const": 51
+                    },
+                    "constructionWord": {
+                      "not": {
+                        "const": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resolvedTypeRows": {
+                "required": [
+                  "51"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "slots": {
+              "items": {
+                "if": {
+                  "type": "object",
+                  "not": {
+                    "anyOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "required": [
+                              "facilityTypeWord",
+                              "constructionWord"
+                            ],
+                            "properties": {
+                              "facilityTypeWord": {
+                                "const": 31
+                              },
+                              "constructionWord": {
+                                "not": {
+                                  "const": 0
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "facilityTypeWord",
+                              "constructionWord"
+                            ],
+                            "properties": {
+                              "facilityTypeWord": {
+                                "const": 50
+                              },
+                              "constructionWord": {
+                                "const": 0
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "required": [
+                              "facilityTypeWord",
+                              "constructionWord"
+                            ],
+                            "properties": {
+                              "facilityTypeWord": {
+                                "const": 50
+                              },
+                              "constructionWord": {
+                                "not": {
+                                  "const": 0
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "facilityTypeWord",
+                              "constructionWord"
+                            ],
+                            "properties": {
+                              "facilityTypeWord": {
+                                "const": 51
+                              },
+                              "constructionWord": {
+                                "const": 0
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "facilityTypeWord",
+                          "constructionWord"
+                        ],
+                        "properties": {
+                          "facilityTypeWord": {
+                            "const": 51
+                          },
+                          "constructionWord": {
+                            "not": {
+                              "const": 0
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "then": {
+                  "not": {
+                    "required": [
+                      "adjacentMint"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "resolvedTypeRows": {
+                "required": [
+                  "31"
+                ],
+                "properties": {
+                  "31": {
+                    "required": [
+                      "valid"
+                    ],
+                    "properties": {
+                      "valid": {
+                        "const": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "slots": {
+                "items": {
+                  "if": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "facilityTypeWord",
+                          "constructionWord"
+                        ],
+                        "properties": {
+                          "facilityTypeWord": {
+                            "const": 31
+                          },
+                          "constructionWord": {
+                            "not": {
+                              "const": 0
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "facilityTypeWord",
+                          "constructionWord"
+                        ],
+                        "properties": {
+                          "facilityTypeWord": {
+                            "const": 50
+                          },
+                          "constructionWord": {
+                            "const": 0
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "adjacentMint"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "slots": {
+                "items": {
+                  "if": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "facilityTypeWord",
+                          "constructionWord"
+                        ],
+                        "properties": {
+                          "facilityTypeWord": {
+                            "const": 31
+                          },
+                          "constructionWord": {
+                            "not": {
+                              "const": 0
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "facilityTypeWord",
+                          "constructionWord"
+                        ],
+                        "properties": {
+                          "facilityTypeWord": {
+                            "const": 50
+                          },
+                          "constructionWord": {
+                            "const": 0
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "then": {
+                    "not": {
+                      "required": [
+                        "adjacentMint"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "resolvedTypeRows": {
+                "required": [
+                  "50"
+                ],
+                "properties": {
+                  "50": {
+                    "required": [
+                      "valid"
+                    ],
+                    "properties": {
+                      "valid": {
+                        "const": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "slots": {
+                "items": {
+                  "if": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "facilityTypeWord",
+                          "constructionWord"
+                        ],
+                        "properties": {
+                          "facilityTypeWord": {
+                            "const": 50
+                          },
+                          "constructionWord": {
+                            "not": {
+                              "const": 0
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "facilityTypeWord",
+                          "constructionWord"
+                        ],
+                        "properties": {
+                          "facilityTypeWord": {
+                            "const": 51
+                          },
+                          "constructionWord": {
+                            "const": 0
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "adjacentMint"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "slots": {
+                "items": {
+                  "if": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "facilityTypeWord",
+                          "constructionWord"
+                        ],
+                        "properties": {
+                          "facilityTypeWord": {
+                            "const": 50
+                          },
+                          "constructionWord": {
+                            "not": {
+                              "const": 0
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "facilityTypeWord",
+                          "constructionWord"
+                        ],
+                        "properties": {
+                          "facilityTypeWord": {
+                            "const": 51
+                          },
+                          "constructionWord": {
+                            "const": 0
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "then": {
+                    "not": {
+                      "required": [
+                        "adjacentMint"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "resolvedTypeRows": {
+                "required": [
+                  "51"
+                ],
+                "properties": {
+                  "51": {
+                    "required": [
+                      "valid"
+                    ],
+                    "properties": {
+                      "valid": {
+                        "const": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "slots": {
+                "items": {
+                  "if": {
+                    "type": "object",
+                    "required": [
+                      "facilityTypeWord",
+                      "constructionWord"
+                    ],
+                    "properties": {
+                      "facilityTypeWord": {
+                        "const": 51
+                      },
+                      "constructionWord": {
+                        "not": {
+                          "const": 0
+                        }
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "adjacentMint"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "slots": {
+                "items": {
+                  "if": {
+                    "type": "object",
+                    "required": [
+                      "facilityTypeWord",
+                      "constructionWord"
+                    ],
+                    "properties": {
+                      "facilityTypeWord": {
+                        "const": 51
+                      },
+                      "constructionWord": {
+                        "not": {
+                          "const": 0
+                        }
+                      }
+                    }
+                  },
+                  "then": {
+                    "not": {
+                      "required": [
+                        "adjacentMint"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "resultSchema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "supported",
+            "profile",
+            "baseMoneyWord",
+            "difficultyWord",
+            "securityByte",
+            "slots",
+            "rawMoney",
+            "difficultyPercent",
+            "effectiveSecurity",
+            "intermediates",
+            "returnedIncome",
+            "evidence"
+          ],
+          "properties": {
+            "supported": {
+              "const": true
+            },
+            "profile": {
+              "const": "city-money-income-stable-resolved-i32-safe-v1"
+            },
+            "baseMoneyWord": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            },
+            "difficultyWord": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "securityByte": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            },
+            "slots": {
+              "type": "array",
+              "minItems": 30,
+              "maxItems": 30,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "index",
+                  "facilityTypeWord",
+                  "effectiveType",
+                  "status",
+                  "moneyYieldWord",
+                  "mintApplied",
+                  "contribution"
+                ],
+                "properties": {
+                  "index": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 29
+                  },
+                  "facilityTypeWord": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 4294967295
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "effectiveType": {
+                    "enum": [
+                      null,
+                      31,
+                      46,
+                      47,
+                      48,
+                      50,
+                      51
+                    ]
+                  },
+                  "status": {
+                    "enum": [
+                      "invalid-slot",
+                      "ignored-type",
+                      "unfinished",
+                      "invalid-type-row",
+                      "yield"
+                    ]
+                  },
+                  "moneyYieldWord": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 65535
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "mintApplied": {
+                    "type": "boolean"
+                  },
+                  "contribution": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 98302
+                  }
+                }
+              }
+            },
+            "rawMoney": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3014595
+            },
+            "difficultyPercent": {
+              "enum": [
+                75,
+                100,
+                125
+              ]
+            },
+            "effectiveSecurity": {
+              "type": "integer",
+              "minimum": 50,
+              "maximum": 255
+            },
+            "intermediates": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "scaledRaw",
+                "difficultyProduct",
+                "difficultyAdjusted",
+                "securityProduct",
+                "securityAdjusted"
+              ],
+              "properties": {
+                "scaledRaw": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "difficultyProduct": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2147483647
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "difficultyAdjusted": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "securityProduct": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "securityAdjusted": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                }
+              }
+            },
+            "returnedIncome": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 214748
+            },
+            "evidence": {
+              "const": {
+                "level": "source-listing-reconstruction",
+                "profile": "city-money-income-stable-resolved-i32-safe-v1",
+                "source": "docs/sources/city-money-income-projection.json",
+                "originalRange": "0049E590 <= PC < 0049E745",
+                "fullCallerBytesVerified": true,
+                "entryGatesIntegrated": false,
+                "stableResolvedInputsRequired": true,
+                "stockOriginalVerified": false,
+                "originalExecutableExecuted": false,
+                "nativeHelpersReconstructed": false,
+                "abiVerified": false,
+                "realTraceReachabilityVerified": false,
+                "typeTableStockVerified": false,
+                "adjacencyHelperRecovered": false,
+                "rngRecovered": false,
+                "monthlySchedulerIntegrated": false,
+                "incomeWriterIntegrated": false,
+                "commandIntegrated": false,
+                "modBehaviorIncluded": false
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "supported",
+            "reason",
+            "evidence"
+          ],
+          "properties": {
+            "supported": {
+              "const": false
+            },
+            "reason": {
+              "enum": [
+                "invalid-input",
+                "unexpected-field",
+                "unsupported-profile",
+                "missing-type-row",
+                "missing-adjacent-mint",
+                "unsupported-arithmetic-domain"
+              ]
+            },
+            "evidence": {
+              "const": {
+                "level": "source-listing-reconstruction",
+                "profile": "city-money-income-stable-resolved-i32-safe-v1",
+                "source": "docs/sources/city-money-income-projection.json",
+                "originalRange": "0049E590 <= PC < 0049E745",
+                "fullCallerBytesVerified": true,
+                "entryGatesIntegrated": false,
+                "stableResolvedInputsRequired": true,
+                "stockOriginalVerified": false,
+                "originalExecutableExecuted": false,
+                "nativeHelpersReconstructed": false,
+                "abiVerified": false,
+                "realTraceReachabilityVerified": false,
+                "typeTableStockVerified": false,
+                "adjacencyHelperRecovered": false,
+                "rngRecovered": false,
+                "monthlySchedulerIntegrated": false,
+                "incomeWriterIntegrated": false,
+                "commandIntegrated": false,
+                "modBehaviorIncluded": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    "inputProvenance": {
+      "precondition": "City pointer validation at 0049E59D passed and virtual40 owner result at 0049E5B1 is 0..46; helpers return normally preserving the nonvolatile-register and stack contract. These conditions are requirements, not callee certifications.",
+      "baseMoneyWord": "MOVZX U16 [city+0x7E] at 0049E5C6",
+      "slots": "Exactly 30 observations; null is a resolved zero result of pointer validator 0047A630 at 0049E5E7, never missing data",
+      "facilityTypeWord": "U32 [facility+8] at 0049E5F7; dispatch uses (word-31) modulo 2^32 and an unsigned comparison to 20",
+      "constructionWord": "U32 [facility+0x14] at the selected branch; every nonzero bit pattern means complete",
+      "resolvedTypeRows": "One stable row per effective type; lookup 00490B90 and validator 0047A630 resolved externally; valid moneyYieldWord is U16 [row+0xC0] at 0049E63D",
+      "adjacentMint": "Boolean of zero/nonzero return from 0049E500 at 0049E660 for this facility coordinate and type 0x26, consumed only after valid effective type 31/50/51; geometry and helper filters are not reconstructed",
+      "difficultyWord": "U32 [07201978] at 0049E6B1; exactly 0 and 2 are special, all other word patterns use 100 percent",
+      "cityPlayerPredicate": "Boolean of city virtual48 return at 0049E6C9, consumed only for difficultyWord equal to 2",
+      "securityByte": "Late U8 [city+0x85] read at 0049E6FE, lower clamp 50 and no upper clamp 100"
+    },
+    "arithmetic": {
+      "rawMoney": "baseMoneyWord + sum(30 locally calculated slot contributions)",
+      "maximumRawMoneyFromInputWidths": 3014595,
+      "mintContribution": "floor(3*moneyYieldWord/2) only for effective type 31/50/51 with adjacentMint true",
+      "difficultyPercent": "0 -> 125; 2 with player true -> 75; 2 with player false -> 125; every other U32 -> 100",
+      "effectiveSecurity": "max(50,securityByte)",
+      "operationOrder": [
+        "scaledRaw = rawMoney*100",
+        "difficultyProduct = scaledRaw*difficultyPercent only for difficultyWord 0 or 2; otherwise null",
+        "difficultyAdjusted = difficultyProduct/100 truncated toward zero if present; otherwise scaledRaw",
+        "securityProduct = difficultyAdjusted*effectiveSecurity",
+        "securityAdjusted = securityProduct/100 truncated toward zero",
+        "returnedIncome = securityAdjusted/100 truncated toward zero"
+      ],
+      "safeDomain": "Every actual scaledRaw, difficultyProduct (when present) and securityProduct must be <= 2147483647; inputs and products are nonnegative. Do not test a nonexistent rawMoney*100*100 product on ordinary difficulty.",
+      "closedFormOnlyInSafeDomain": "floor(rawMoney*difficultyPercent*effectiveSecurity/10000)",
+      "overflowBehavior": "unsupported-arithmetic-domain, no wrap, no saturation and no unbounded substitute result",
+      "securityClippedTo100": false,
+      "magicMultiplierHex": "51EB851F",
+      "decodedShift": "SAR EDX,5",
+      "originalMnemonicTypos": [
+        "c1 fa 05 decodes SAR EDX,5, not the listed SAR DL,5",
+        "83 fe ff decodes CMP ESI,-1, not a comparison to 255"
+      ]
+    },
+    "runtimeContract": {
+      "closedLayers": [
+        "input",
+        "slots",
+        "each non-null slot",
+        "resolvedTypeRows",
+        "each row",
+        "all receipt containers"
+      ],
+      "conditionalObservationValidation": "The schema encodes referenced-row presence, difficulty predicate and cross-row adjacentMint consumption. The runtime additionally validates arithmetic support and JavaScript data descriptors/prototypes without invoking accessors.",
+      "numericSemantics": "Finite integral JSON numbers in the stated widths; booleans and strings are not numbers; no coercion or truncation; negative zero normalizes to zero.",
+      "typeScriptOutput": "Deeply frozen scalar receipts; no mutable input references",
+      "pythonOutput": "Fresh plain JSON dictionaries/lists and scalar integers; no mutable input references, but Python receipts are not frozen",
+      "rejectionOrder": "top closed fields, profile, numeric widths, difficulty predicate, complete type-row structure, dense 30-slot array, each slot and its consumed observations in index order, arithmetic domain"
+    },
+    "nonGoals": [
+      "No city/owner gate implementation or mutable helper effects",
+      "No stock type-yield certification, lookup or adjacency helper reconstruction",
+      "No income writer, rich-man/tax special abilities, month/turn scheduler, port/gate fraction or food expenses",
+      "No game state, person, force, captive, native, RNG or P0-78 integration",
+      "No MOD suggestions from the listing, original executable execution, stock or cross-version certification",
+      "The known-rule engineering gap is additional coverage and does not subtract one from the existing 43 unresolved evidence topics"
+    ]
+  },
+  "ranksSource": {
+    "path": "docs/sources/ranks.json",
+    "gitBlobSha1": "ca897357854eae1ce9ac939213965cd111a3f110",
+    "sha256": "9b8c836e1d0b0c13dddf37d78393c323dfc86ffe98b897be1e79dfe823da4752",
+    "body": {
+      "source": "https://w.atwiki.jp/sangokushi11/pages/111.html",
+      "count": 80,
+      "notes": [
+        "主表改以日文Wiki《爵位・官职》为直接表源，并与旧瑜云表、PC-PK1.1 struct_office/内存地址交叉核对。",
+        "原PC-PK1.1为 struct_office[81]；本文件只录入80个有名官职，第81项内部/空位语义暂不命名。",
+        "功绩门槛由原EXE的×4000阶梯直接支持；人物功绩上限为60000。",
+        "无爵位表项原先写 citiesRequired=0，现按原表“1都市のみ”修正为1。",
+        "空白格按原表的 rowspan 向下填充。同一爵位下，俸禄和功绩常常盖住文官、武官两段；指挥兵力和能力上升只盖住四格，下一段会另起。",
+        "末段采用日文Wiki/瑜云一致值：左仆射、右仆射、典农校尉、议郎为指挥5000、政治+1、俸禄10、功绩0；奋威、长水、破贼、武卫校尉为指挥6000、俸禄10、功绩0。"
+      ],
+      "offices": [
+        {
+          "rulerTitle": "皇帝",
+          "rulerCommand": 15000,
+          "citiesRequired": 24,
+          "office": "丞相",
+          "command": 15000,
+          "bonus": "政治+5",
+          "salary": 60,
+          "merit": 36000
+        },
+        {
+          "rulerTitle": "皇帝",
+          "rulerCommand": 15000,
+          "citiesRequired": 24,
+          "office": "司空",
+          "command": 15000,
+          "bonus": "政治+5",
+          "salary": 60,
+          "merit": 36000
+        },
+        {
+          "rulerTitle": "皇帝",
+          "rulerCommand": 15000,
+          "citiesRequired": 24,
+          "office": "太尉",
+          "command": 15000,
+          "bonus": "政治+5",
+          "salary": 60,
+          "merit": 36000
+        },
+        {
+          "rulerTitle": "皇帝",
+          "rulerCommand": 15000,
+          "citiesRequired": 24,
+          "office": "司徒",
+          "command": 15000,
+          "bonus": "政治+5",
+          "salary": 60,
+          "merit": 36000
+        },
+        {
+          "rulerTitle": "皇帝",
+          "rulerCommand": 15000,
+          "citiesRequired": 24,
+          "office": "大都督",
+          "command": 15000,
+          "bonus": "統率+2",
+          "salary": 55,
+          "merit": 36000
+        },
+        {
+          "rulerTitle": "皇帝",
+          "rulerCommand": 15000,
+          "citiesRequired": 24,
+          "office": "衛將軍",
+          "command": 15000,
+          "bonus": "統率+2",
+          "salary": 55,
+          "merit": 36000
+        },
+        {
+          "rulerTitle": "皇帝",
+          "rulerCommand": 15000,
+          "citiesRequired": 24,
+          "office": "驃騎將軍",
+          "command": 15000,
+          "bonus": "統率+2",
+          "salary": 55,
+          "merit": 36000
+        },
+        {
+          "rulerTitle": "皇帝",
+          "rulerCommand": 15000,
+          "citiesRequired": 24,
+          "office": "車騎將軍",
+          "command": 15000,
+          "bonus": "統率+2",
+          "salary": 55,
+          "merit": 36000
+        },
+        {
+          "rulerTitle": "王",
+          "rulerCommand": 14000,
+          "citiesRequired": 20,
+          "office": "光祿勳",
+          "command": 9000,
+          "bonus": "政治+5",
+          "salary": 50,
+          "merit": 32000
+        },
+        {
+          "rulerTitle": "王",
+          "rulerCommand": 14000,
+          "citiesRequired": 20,
+          "office": "大司農",
+          "command": 9000,
+          "bonus": "政治+5",
+          "salary": 50,
+          "merit": 32000
+        },
+        {
+          "rulerTitle": "王",
+          "rulerCommand": 14000,
+          "citiesRequired": 20,
+          "office": "廷尉",
+          "command": 9000,
+          "bonus": "政治+5",
+          "salary": 50,
+          "merit": 32000
+        },
+        {
+          "rulerTitle": "王",
+          "rulerCommand": 14000,
+          "citiesRequired": 20,
+          "office": "衛尉",
+          "command": 9000,
+          "bonus": "政治+5",
+          "salary": 50,
+          "merit": 32000
+        },
+        {
+          "rulerTitle": "王",
+          "rulerCommand": 14000,
+          "citiesRequired": 20,
+          "office": "征東將軍",
+          "command": 14000,
+          "bonus": "統率+1",
+          "salary": 50,
+          "merit": 32000
+        },
+        {
+          "rulerTitle": "王",
+          "rulerCommand": 14000,
+          "citiesRequired": 20,
+          "office": "征南將軍",
+          "command": 14000,
+          "bonus": "統率+1",
+          "salary": 50,
+          "merit": 32000
+        },
+        {
+          "rulerTitle": "王",
+          "rulerCommand": 14000,
+          "citiesRequired": 20,
+          "office": "征西將軍",
+          "command": 14000,
+          "bonus": "統率+1",
+          "salary": 50,
+          "merit": 32000
+        },
+        {
+          "rulerTitle": "王",
+          "rulerCommand": 14000,
+          "citiesRequired": 20,
+          "office": "征北將軍",
+          "command": 14000,
+          "bonus": "統率+1",
+          "salary": 50,
+          "merit": 32000
+        },
+        {
+          "rulerTitle": "公",
+          "rulerCommand": 14000,
+          "citiesRequired": 18,
+          "office": "尚書令",
+          "command": 9000,
+          "bonus": "政治+4",
+          "salary": 45,
+          "merit": 28000
+        },
+        {
+          "rulerTitle": "公",
+          "rulerCommand": 14000,
+          "citiesRequired": 18,
+          "office": "太僕",
+          "command": 9000,
+          "bonus": "政治+4",
+          "salary": 45,
+          "merit": 28000
+        },
+        {
+          "rulerTitle": "公",
+          "rulerCommand": 14000,
+          "citiesRequired": 18,
+          "office": "太常",
+          "command": 9000,
+          "bonus": "政治+4",
+          "salary": 45,
+          "merit": 28000
+        },
+        {
+          "rulerTitle": "公",
+          "rulerCommand": 14000,
+          "citiesRequired": 18,
+          "office": "大鴻臚",
+          "command": 9000,
+          "bonus": "政治+4",
+          "salary": 45,
+          "merit": 28000
+        },
+        {
+          "rulerTitle": "公",
+          "rulerCommand": 14000,
+          "citiesRequired": 18,
+          "office": "鎮東將軍",
+          "command": 13000,
+          "bonus": "統率+1",
+          "salary": 45,
+          "merit": 28000
+        },
+        {
+          "rulerTitle": "公",
+          "rulerCommand": 14000,
+          "citiesRequired": 18,
+          "office": "鎮南將軍",
+          "command": 13000,
+          "bonus": "統率+1",
+          "salary": 45,
+          "merit": 28000
+        },
+        {
+          "rulerTitle": "公",
+          "rulerCommand": 14000,
+          "citiesRequired": 18,
+          "office": "鎮西將軍",
+          "command": 13000,
+          "bonus": "統率+1",
+          "salary": 45,
+          "merit": 28000
+        },
+        {
+          "rulerTitle": "公",
+          "rulerCommand": 14000,
+          "citiesRequired": 18,
+          "office": "鎮北將軍",
+          "command": 13000,
+          "bonus": "統率+1",
+          "salary": 45,
+          "merit": 28000
+        },
+        {
+          "rulerTitle": "大司馬",
+          "rulerCommand": 13000,
+          "citiesRequired": 14,
+          "office": "中書令",
+          "command": 8000,
+          "bonus": "政治+4",
+          "salary": 40,
+          "merit": 24000
+        },
+        {
+          "rulerTitle": "大司馬",
+          "rulerCommand": 13000,
+          "citiesRequired": 14,
+          "office": "御史中丞",
+          "command": 8000,
+          "bonus": "政治+4",
+          "salary": 40,
+          "merit": 24000
+        },
+        {
+          "rulerTitle": "大司馬",
+          "rulerCommand": 13000,
+          "citiesRequired": 14,
+          "office": "執金吾",
+          "command": 8000,
+          "bonus": "政治+4",
+          "salary": 40,
+          "merit": 24000
+        },
+        {
+          "rulerTitle": "大司馬",
+          "rulerCommand": 13000,
+          "citiesRequired": 14,
+          "office": "少府",
+          "command": 8000,
+          "bonus": "政治+4",
+          "salary": 40,
+          "merit": 24000
+        },
+        {
+          "rulerTitle": "大司馬",
+          "rulerCommand": 13000,
+          "citiesRequired": 14,
+          "office": "安東將軍",
+          "command": 12000,
+          "bonus": null,
+          "salary": 40,
+          "merit": 24000
+        },
+        {
+          "rulerTitle": "大司馬",
+          "rulerCommand": 13000,
+          "citiesRequired": 14,
+          "office": "安南將軍",
+          "command": 12000,
+          "bonus": null,
+          "salary": 40,
+          "merit": 24000
+        },
+        {
+          "rulerTitle": "大司馬",
+          "rulerCommand": 13000,
+          "citiesRequired": 14,
+          "office": "安西將軍",
+          "command": 12000,
+          "bonus": null,
+          "salary": 40,
+          "merit": 24000
+        },
+        {
+          "rulerTitle": "大司馬",
+          "rulerCommand": 13000,
+          "citiesRequired": 14,
+          "office": "安北將軍",
+          "command": 12000,
+          "bonus": null,
+          "salary": 40,
+          "merit": 24000
+        },
+        {
+          "rulerTitle": "大將軍",
+          "rulerCommand": 13000,
+          "citiesRequired": 12,
+          "office": "秘書令",
+          "command": 8000,
+          "bonus": "政治+3",
+          "salary": 35,
+          "merit": 20000
+        },
+        {
+          "rulerTitle": "大將軍",
+          "rulerCommand": 13000,
+          "citiesRequired": 12,
+          "office": "侍中",
+          "command": 8000,
+          "bonus": "政治+3",
+          "salary": 35,
+          "merit": 20000
+        },
+        {
+          "rulerTitle": "大將軍",
+          "rulerCommand": 13000,
+          "citiesRequired": 12,
+          "office": "留府長史",
+          "command": 8000,
+          "bonus": "政治+3",
+          "salary": 35,
+          "merit": 20000
+        },
+        {
+          "rulerTitle": "大將軍",
+          "rulerCommand": 13000,
+          "citiesRequired": 12,
+          "office": "太学博士",
+          "command": 8000,
+          "bonus": "政治+3",
+          "salary": 35,
+          "merit": 20000
+        },
+        {
+          "rulerTitle": "大將軍",
+          "rulerCommand": 13000,
+          "citiesRequired": 12,
+          "office": "左將軍",
+          "command": 11000,
+          "bonus": null,
+          "salary": 35,
+          "merit": 20000
+        },
+        {
+          "rulerTitle": "大將軍",
+          "rulerCommand": 13000,
+          "citiesRequired": 12,
+          "office": "右將軍",
+          "command": 11000,
+          "bonus": null,
+          "salary": 35,
+          "merit": 20000
+        },
+        {
+          "rulerTitle": "大將軍",
+          "rulerCommand": 13000,
+          "citiesRequired": 12,
+          "office": "前將軍",
+          "command": 11000,
+          "bonus": null,
+          "salary": 35,
+          "merit": 20000
+        },
+        {
+          "rulerTitle": "大將軍",
+          "rulerCommand": 13000,
+          "citiesRequired": 12,
+          "office": "後將軍",
+          "command": 11000,
+          "bonus": null,
+          "salary": 35,
+          "merit": 20000
+        },
+        {
+          "rulerTitle": "五官中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 8,
+          "office": "謁者僕射",
+          "command": 7000,
+          "bonus": "政治+3",
+          "salary": 30,
+          "merit": 16000
+        },
+        {
+          "rulerTitle": "五官中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 8,
+          "office": "都尉",
+          "command": 7000,
+          "bonus": "政治+3",
+          "salary": 30,
+          "merit": 16000
+        },
+        {
+          "rulerTitle": "五官中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 8,
+          "office": "黄門侍郎",
+          "command": 7000,
+          "bonus": "政治+3",
+          "salary": 30,
+          "merit": 16000
+        },
+        {
+          "rulerTitle": "五官中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 8,
+          "office": "太史令",
+          "command": 7000,
+          "bonus": "政治+3",
+          "salary": 30,
+          "merit": 16000
+        },
+        {
+          "rulerTitle": "五官中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 8,
+          "office": "軍師將軍",
+          "command": 10000,
+          "bonus": null,
+          "salary": 30,
+          "merit": 16000
+        },
+        {
+          "rulerTitle": "五官中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 8,
+          "office": "安国將軍",
+          "command": 10000,
+          "bonus": null,
+          "salary": 30,
+          "merit": 16000
+        },
+        {
+          "rulerTitle": "五官中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 8,
+          "office": "破虜將軍",
+          "command": 10000,
+          "bonus": null,
+          "salary": 30,
+          "merit": 16000
+        },
+        {
+          "rulerTitle": "五官中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 8,
+          "office": "討逆將軍",
+          "command": 10000,
+          "bonus": null,
+          "salary": 30,
+          "merit": 16000
+        },
+        {
+          "rulerTitle": "羽林中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 6,
+          "office": "郎中",
+          "command": 7000,
+          "bonus": "政治+2",
+          "salary": 25,
+          "merit": 12000
+        },
+        {
+          "rulerTitle": "羽林中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 6,
+          "office": "從事中郎",
+          "command": 7000,
+          "bonus": "政治+2",
+          "salary": 25,
+          "merit": 12000
+        },
+        {
+          "rulerTitle": "羽林中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 6,
+          "office": "長史",
+          "command": 7000,
+          "bonus": "政治+2",
+          "salary": 25,
+          "merit": 12000
+        },
+        {
+          "rulerTitle": "羽林中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 6,
+          "office": "司馬",
+          "command": 7000,
+          "bonus": "政治+2",
+          "salary": 25,
+          "merit": 12000
+        },
+        {
+          "rulerTitle": "羽林中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 6,
+          "office": "平東將軍",
+          "command": 9000,
+          "bonus": null,
+          "salary": 25,
+          "merit": 12000
+        },
+        {
+          "rulerTitle": "羽林中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 6,
+          "office": "平南將軍",
+          "command": 9000,
+          "bonus": null,
+          "salary": 25,
+          "merit": 12000
+        },
+        {
+          "rulerTitle": "羽林中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 6,
+          "office": "平西將軍",
+          "command": 9000,
+          "bonus": null,
+          "salary": 25,
+          "merit": 12000
+        },
+        {
+          "rulerTitle": "羽林中郎將",
+          "rulerCommand": 12000,
+          "citiesRequired": 6,
+          "office": "平北將軍",
+          "command": 9000,
+          "bonus": null,
+          "salary": 25,
+          "merit": 12000
+        },
+        {
+          "rulerTitle": "州牧",
+          "rulerCommand": 11000,
+          "citiesRequired": 4,
+          "office": "太楽令",
+          "command": 6000,
+          "bonus": "政治+2",
+          "salary": 20,
+          "merit": 8000
+        },
+        {
+          "rulerTitle": "州牧",
+          "rulerCommand": 11000,
+          "citiesRequired": 4,
+          "office": "大倉令",
+          "command": 6000,
+          "bonus": "政治+2",
+          "salary": 20,
+          "merit": 8000
+        },
+        {
+          "rulerTitle": "州牧",
+          "rulerCommand": 11000,
+          "citiesRequired": 4,
+          "office": "武庫令",
+          "command": 6000,
+          "bonus": "政治+2",
+          "salary": 20,
+          "merit": 8000
+        },
+        {
+          "rulerTitle": "州牧",
+          "rulerCommand": 11000,
+          "citiesRequired": 4,
+          "office": "衛士令",
+          "command": 6000,
+          "bonus": "政治+2",
+          "salary": 20,
+          "merit": 8000
+        },
+        {
+          "rulerTitle": "州牧",
+          "rulerCommand": 11000,
+          "citiesRequired": 4,
+          "office": "牙門將軍",
+          "command": 8000,
+          "bonus": null,
+          "salary": 20,
+          "merit": 8000
+        },
+        {
+          "rulerTitle": "州牧",
+          "rulerCommand": 11000,
+          "citiesRequired": 4,
+          "office": "護軍",
+          "command": 8000,
+          "bonus": null,
+          "salary": 20,
+          "merit": 8000
+        },
+        {
+          "rulerTitle": "州牧",
+          "rulerCommand": 11000,
+          "citiesRequired": 4,
+          "office": "偏將軍",
+          "command": 8000,
+          "bonus": null,
+          "salary": 20,
+          "merit": 8000
+        },
+        {
+          "rulerTitle": "州牧",
+          "rulerCommand": 11000,
+          "citiesRequired": 4,
+          "office": "裨將軍",
+          "command": 8000,
+          "bonus": null,
+          "salary": 20,
+          "merit": 8000
+        },
+        {
+          "rulerTitle": "州刺史",
+          "rulerCommand": 11000,
+          "citiesRequired": 2,
+          "office": "主簿",
+          "command": 6000,
+          "bonus": "政治+1",
+          "salary": 15,
+          "merit": 4000
+        },
+        {
+          "rulerTitle": "州刺史",
+          "rulerCommand": 11000,
+          "citiesRequired": 2,
+          "office": "諫議大夫",
+          "command": 6000,
+          "bonus": "政治+1",
+          "salary": 15,
+          "merit": 4000
+        },
+        {
+          "rulerTitle": "州刺史",
+          "rulerCommand": 11000,
+          "citiesRequired": 2,
+          "office": "侍郎",
+          "command": 6000,
+          "bonus": "政治+1",
+          "salary": 15,
+          "merit": 4000
+        },
+        {
+          "rulerTitle": "州刺史",
+          "rulerCommand": 11000,
+          "citiesRequired": 2,
+          "office": "中郎",
+          "command": 6000,
+          "bonus": "政治+1",
+          "salary": 15,
+          "merit": 4000
+        },
+        {
+          "rulerTitle": "州刺史",
+          "rulerCommand": 11000,
+          "citiesRequired": 2,
+          "office": "忠義校尉",
+          "command": 7000,
+          "bonus": null,
+          "salary": 15,
+          "merit": 4000
+        },
+        {
+          "rulerTitle": "州刺史",
+          "rulerCommand": 11000,
+          "citiesRequired": 2,
+          "office": "昭信校尉",
+          "command": 7000,
+          "bonus": null,
+          "salary": 15,
+          "merit": 4000
+        },
+        {
+          "rulerTitle": "州刺史",
+          "rulerCommand": 11000,
+          "citiesRequired": 2,
+          "office": "儒林校尉",
+          "command": 7000,
+          "bonus": null,
+          "salary": 15,
+          "merit": 4000
+        },
+        {
+          "rulerTitle": "州刺史",
+          "rulerCommand": 11000,
+          "citiesRequired": 2,
+          "office": "建議校尉",
+          "command": 7000,
+          "bonus": null,
+          "salary": 15,
+          "merit": 4000
+        },
+        {
+          "rulerTitle": "無",
+          "rulerCommand": 10000,
+          "citiesRequired": 1,
+          "office": "左僕射",
+          "command": 5000,
+          "bonus": "政治+1",
+          "salary": 10,
+          "merit": 0
+        },
+        {
+          "rulerTitle": "無",
+          "rulerCommand": 10000,
+          "citiesRequired": 1,
+          "office": "右僕射",
+          "command": 5000,
+          "bonus": "政治+1",
+          "salary": 10,
+          "merit": 0
+        },
+        {
+          "rulerTitle": "無",
+          "rulerCommand": 10000,
+          "citiesRequired": 1,
+          "office": "典農校尉",
+          "command": 5000,
+          "bonus": "政治+1",
+          "salary": 10,
+          "merit": 0
+        },
+        {
+          "rulerTitle": "無",
+          "rulerCommand": 10000,
+          "citiesRequired": 1,
+          "office": "議郎",
+          "command": 5000,
+          "bonus": "政治+1",
+          "salary": 10,
+          "merit": 0
+        },
+        {
+          "rulerTitle": "無",
+          "rulerCommand": 10000,
+          "citiesRequired": 1,
+          "office": "奮威校尉",
+          "command": 6000,
+          "bonus": null,
+          "salary": 10,
+          "merit": 0
+        },
+        {
+          "rulerTitle": "無",
+          "rulerCommand": 10000,
+          "citiesRequired": 1,
+          "office": "長水校尉",
+          "command": 6000,
+          "bonus": null,
+          "salary": 10,
+          "merit": 0
+        },
+        {
+          "rulerTitle": "無",
+          "rulerCommand": 10000,
+          "citiesRequired": 1,
+          "office": "破賊校尉",
+          "command": 6000,
+          "bonus": null,
+          "salary": 10,
+          "merit": 0
+        },
+        {
+          "rulerTitle": "無",
+          "rulerCommand": 10000,
+          "citiesRequired": 1,
+          "office": "武衛校尉",
+          "command": 6000,
+          "bonus": null,
+          "salary": 10,
+          "merit": 0
+        }
+      ],
+      "crossSources": [
+        "https://vincecarter0315.pixnet.net/blog/posts/14205896702",
+        "https://github.com/sean2077/311SireCustomizedPackageDev",
+        "https://github.com/sjn4048/311MemoryResearch"
+      ]
+    }
+  },
+  "financeFacilitiesSource": {
+    "binding": {
+      "path": "data/catalogs/city-finance-facilities-v1.json",
+      "gitBlobSha1": "4224d534b90bc2f42d1a6bf325153d03e7bf1101",
+      "sha256": "b7317c35bfc614a426f235a38fb32b124d808c9dbdf65ce483de17e2f2baa0d8"
+    },
+    "body": {
+      "version": "documented-income-facility-table-v1",
+      "source": "docs/rules/02-economy.md",
+      "adapterEvidence": "provisional-engine-rule",
+      "rows": [
+        {
+          "kind": "market",
+          "level": 1,
+          "typeWord": 31,
+          "moneyYieldWord": 100,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "market",
+          "level": 2,
+          "typeWord": 50,
+          "moneyYieldWord": 120,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "market",
+          "level": 3,
+          "typeWord": 51,
+          "moneyYieldWord": 150,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "farm",
+          "level": 1,
+          "typeWord": 32,
+          "moneyYieldWord": 0,
+          "foodYieldWord": 1500
+        },
+        {
+          "kind": "farm",
+          "level": 2,
+          "typeWord": 52,
+          "moneyYieldWord": 0,
+          "foodYieldWord": 1800
+        },
+        {
+          "kind": "farm",
+          "level": 3,
+          "typeWord": 53,
+          "moneyYieldWord": 0,
+          "foodYieldWord": 2250
+        },
+        {
+          "kind": "mint",
+          "level": 1,
+          "typeWord": 38,
+          "moneyYieldWord": 0,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "granary",
+          "level": 1,
+          "typeWord": 39,
+          "moneyYieldWord": 0,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "large-market",
+          "level": 1,
+          "typeWord": 46,
+          "moneyYieldWord": 300,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "fish-market",
+          "level": 1,
+          "typeWord": 47,
+          "moneyYieldWord": 200,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "black-market",
+          "level": 1,
+          "typeWord": 48,
+          "moneyYieldWord": 80,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "military-farm",
+          "level": 1,
+          "typeWord": 49,
+          "moneyYieldWord": 0,
+          "foodYieldWord": 1500
+        },
+        {
+          "kind": "forge",
+          "level": 1,
+          "typeWord": 0,
+          "moneyYieldWord": 0,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "forge",
+          "level": 2,
+          "typeWord": 0,
+          "moneyYieldWord": 0,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "forge",
+          "level": 3,
+          "typeWord": 0,
+          "moneyYieldWord": 0,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "stable",
+          "level": 1,
+          "typeWord": 0,
+          "moneyYieldWord": 0,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "stable",
+          "level": 2,
+          "typeWord": 0,
+          "moneyYieldWord": 0,
+          "foodYieldWord": 0
+        },
+        {
+          "kind": "stable",
+          "level": 3,
+          "typeWord": 0,
+          "moneyYieldWord": 0,
+          "foodYieldWord": 0
+        }
+      ],
+      "ignoredTypeWord": 0,
+      "ignoredTypeWordIsAdapterSentinel": true,
+      "constructionCompleteWord": 1,
+      "constructionIncompleteWord": 0
+    }
+  },
+  "boundary": {
+    "level": "source-kernels-with-provisional-owner",
+    "adapterObservationKind": "derived-adapter-observations",
+    "ownership": "provisional-engine-rule",
+    "scheduling": "provisional-engine-rule",
+    "writers": "provisional-engine-rule",
+    "reserve": "provisional-engine-rule",
+    "nativeExecution": false,
+    "stockVerified": false,
+    "nativeFullFinance": false,
+    "nativePayrollConsequences": false,
+    "nativeScheduler": false,
+    "nativeHp": false
+  },
+  "policy": {
+    "id": "bounded-market-income-payroll-v1",
+    "version": 1,
+    "clock": "root-completion-income-payroll-v1",
+    "ownership": "fixed-supplied-city-corps-force-v1",
+    "transaction": "one-command-all-or-nothing-v1",
+    "reservation": "root-bidirectional-market-lock-v1",
+    "externalFacts": "fixed-for-entire-bounded-episode-v1",
+    "security": "fixed-no-seasonal-loss-v1",
+    "incomeSkills": "none",
+    "food": "not-modeled",
+    "payrollIdentity": "complete-fixed-ordinary-roster-v1",
+    "reserve": {
+      "id": "remaining-window-salary-reserve-v1",
+      "count": "floor((dayOffset+remainingAdvances)/3)",
+      "requirement": "gold>=monthStarts*monthlySalary",
+      "start": "gold-200>=required",
+      "borrowFutureIncome": false,
+      "prepaid": false,
+      "separateWallet": false,
+      "nativeRuleVerified": false
+    },
+    "construction": {
+      "version": "facility-construction-policies-v1",
+      "calendar": {
+        "id": "finite-facility-ten-day-calendar-v1",
+        "version": 1,
+        "days": [
+          1,
+          11,
+          21
+        ],
+        "minYear": 1,
+        "maxYear": 9999,
+        "maxAdvanceLimit": 360
+      },
+      "development": {
+        "id": "standard-nine-development-v1",
+        "version": 1,
+        "actionPoints": 20,
+        "minActors": 1,
+        "maxActors": 3,
+        "level": 1,
+        "rateProfile": "domestic-construction-rate-stable-v1",
+        "politicsMinimum": 0,
+        "politicsMaximum": 255
+      },
+      "absorption": {
+        "id": "same-kind-adjacent-lv1-absorption-v1",
+        "version": 1,
+        "actionPoints": 10,
+        "goldCost": 100,
+        "actors": 1,
+        "donorLevel": 1,
+        "receiverLevels": [
+          1,
+          2
+        ],
+        "adjacencyDistance": 1,
+        "fastPoliticsThreshold": 70,
+        "fastTurns": 1,
+        "slowTurns": 2,
+        "completionTechniquePoints": 10,
+        "timingEvidence": "empirical-guide"
+      },
+      "hostility": {
+        "id": "facility-start-only-pressure-gate-v1",
+        "version": 1,
+        "completeFieldUnitsRequired": true,
+        "explicitHostileForceIds": true,
+        "distance": "max(abs(dq),abs(dr),abs(dq+dr))",
+        "cityCenteredBlockingDistanceInclusive": 2,
+        "blockAdvance": false,
+        "coordinateMin": -1000000,
+        "coordinateMax": 1000000
+      },
+      "ownership": {
+        "id": "fixed-owned-city-supplied-lots-v1",
+        "version": 1,
+        "ownershipChanges": false,
+        "lotAtCityAllowed": false,
+        "externalActiveJobsSupported": false,
+        "usedFacilityIdReuse": false
+      },
+      "scheduler": {
+        "id": "next-boundary-capped-work-v1",
+        "version": 1,
+        "startProgressAdvances": 0,
+        "firstProgress": "next-boundary",
+        "order": [
+          "calendar",
+          "ap-recovery",
+          "jobs-in-ASCII-id-order",
+          "completion-rewards-release"
+        ],
+        "rateSnapshot": "start",
+        "workProgressCap": "required-work",
+        "forcedTenTurnCompletion": false,
+        "requireCompletionWithinHorizon": true,
+        "nativeSchedulerRecovered": false
+      },
+      "writer": {
+        "id": "facility-exact-debit-saturating-reward-v1",
+        "version": 1,
+        "actionPointCap": 255,
+        "techniquePointCap": 10000,
+        "rewardCap": 1000000000,
+        "goldMaximum": 1000000000,
+        "partialDebits": false,
+        "overflowCredit": "clip-and-record-discarded"
+      },
+      "effects": {
+        "id": "facility-active-level-kernel-view-v1",
+        "version": 1,
+        "developmentEffectiveLevel": 0,
+        "absorptionEffectiveLevel": "target-minus-one",
+        "completedEffectiveLevel": "target",
+        "income": "existing-kernel-read-only-projection",
+        "supportAdjacencyDistance": 1,
+        "supportMultiplierStacks": false,
+        "combatHpModeled": false,
+        "repairsModeled": false,
+        "automaticPoliticsGrowth": false
+      },
+      "budget": {
+        "id": "facility-bounded-json-v1",
+        "version": 1,
+        "maxLots": 30,
+        "maxOfficers": 128,
+        "maxFieldUnits": 128,
+        "maxHostileForces": 128,
+        "maxJobs": 512,
+        "maxAcceptedCommands": 872,
+        "maxTraceAttempts": 2616,
+        "maxCanonicalUtf8Bytes": 67108864,
+        "maxInputNodes": 4000000,
+        "maxInputDepth": 48,
+        "maxArrayLength": 4096,
+        "maxObjectKeys": 128,
+        "maxIdLength": 64
+      },
+      "persistence": {
+        "id": "facility-canonical-recompute-v1",
+        "version": 1,
+        "schemaVersion": 1,
+        "comparison": "full-policy-catalog-genesis-receipts-snapshot",
+        "digest": "sha256-canonical-json",
+        "duplicateJsonKeys": "reject",
+        "inputObjectKeyOrder": "irrelevant",
+        "inputArrayOrder": "preserved",
+        "executeOutputBudgetAtEveryAcceptedStep": true
+      },
+      "apRecovery": {
+        "id": "facility-ap20-cap255-v1",
+        "version": 1,
+        "perAdvance": 20,
+        "cap": 255,
+        "nativeFormulaRecovered": false
+      },
+      "initialWork": {
+        "id": "facility-work-quarter-floor-v1",
+        "version": 1,
+        "mode": "quarter-floor",
+        "divisor": 4,
+        "nativeInitialWriterRecovered": false
+      },
+      "rewards": {
+        "id": "facility-community-rewards-v1",
+        "version": 1,
+        "ordinaryDevelopmentPoliticsXp": 3,
+        "supportDevelopmentPoliticsXp": 4,
+        "absorptionPoliticsXp": 2,
+        "mintDevelopmentMerit": 100,
+        "otherMerit": 100,
+        "allocation": "full-per-selected-at-completion",
+        "nativeRewardWriterRecovered": false
+      },
+      "completionActors": {
+        "id": "facility-completion-actors-acted-v1",
+        "version": 1,
+        "actedOnCompletion": true,
+        "nativeMarkerRecovered": false
+      }
+    },
+    "finance": {
+      "payroll": {
+        "id": "complete-named-office-payroll-v1",
+        "catalogVersion": "named-offices-v1",
+        "officeRange": [
+          0,
+          79
+        ],
+        "maxOfficers": 80,
+        "role": "ordinary-officer",
+        "uniqueOffice": true,
+        "completeResidentRoster": true,
+        "prisonerCount": 0,
+        "order": "ascending-code-unit-id",
+        "payer": "fixed-city"
+      },
+      "credit": {
+        "id": "saturating-positive-credit-v1",
+        "accepted": "min(requested,capacity-before)",
+        "discarded": "requested-accepted",
+        "bonusBasis": "requested-base",
+        "caps": "explicit-scenario-not-native"
+      },
+      "debit": {
+        "id": "exact-affordable-salary-debit-v1",
+        "amount": "sum-of-catalog-monthlySalary",
+        "affordability": "after-income-caps",
+        "partialPayment": false,
+        "personCashWallet": false
+      }
+    },
+    "budgets": {
+      "acceptedCommands": 13,
+      "traceAttempts": 32,
+      "maxJobs": 1,
+      "maxAdvances": 12,
+      "maxOfficers": 8,
+      "maxLots": 2,
+      "maxFacilities": 2,
+      "maxFieldUnits": 16,
+      "maxHostileForces": 16,
+      "maxUtf8Bytes": 8388608,
+      "maxNodes": 250000,
+      "maxDepth": 48,
+      "maxArray": 4096,
+      "maxObjectKeys": 128
+    }
+  },
+  "integrationPrerequisite": {
+    "actualMain": "51276c329075c936e32de2ee9dadb3b9f0f47e64",
+    "actualTree": "9419afce86dd23fc6e5655ba63637cd7eb606404",
+    "typesBlob": "27ffdcdfff1c17a4a0440ea2f789c6b8643e9125",
+    "leavesBlob": "1f65dbc7e7adfc269d69fda2a3f574792f8a6ab0",
+    "phasesBlob": "31f9f59e23f7088a5a9872455fdfbb9ea579974c"
+  },
+  "nonClaims": [
+    "native-execution",
+    "stock-data",
+    "full-finance",
+    "native-monthly-order",
+    "native-payroll-consequences",
+    "native-construction-writer",
+    "native-hp",
+    "P078-and-dependencies",
+    "runtime-validation",
+    "evidence-debt-reduction"
+  ]
+}
