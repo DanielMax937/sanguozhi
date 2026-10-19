@@ -1,3 +1,9 @@
+## 建设施工的私有工作量与完成阶段（2026-10-19，静态）
+
+[私有phase与owner边界](facility-construction-phases.md) · [九类新建／五类吸收具体规则](../rules/facility-construction-lifecycle.md)
+
+现有construction服务的工作量计算、精确Write、单任务进度与完成写入抽到包内；开始资格、日期／AP、全部政策、逐人错误顺序、多任务调度和完整保存重建仍由旧owner控制。没有新公共入口或建设到生产的共享根，HP／原生任务等边界保持。只做静态审阅，未运行产品、测试、编译、构建或validator。
+
 ## 有限单城共享时钟与工房任务（2026-10-18，静态）
 
 [八API／完整历史／保存与分页合同](bounded-city-piece-clock.md) · [具体规则](../rules/bounded-city-piece-clock.md)
