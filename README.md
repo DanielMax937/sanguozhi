@@ -1,3 +1,11 @@
+## 新增：单锻冶厂建设与普通兵装生产同账本（2026-10-19，静态）
+
+[具体规则](docs/rules/bounded-forge-development-production.md) · [七API与保存合同](docs/engine/bounded-forge-development-production.md) · [完整政策](data/policies/bounded-forge-development-production-v1.json) · [来源边界](data/sources/bounded-forge-development-production-v1.json) · [闭合DTO schema](data/schemas/bounded-forge-development-production-v1.schema.json) · [未运行合成输入](data/scenarios/bounded-forge-development-production-example-v1.json)
+
+独立 `bounded-forge-development-production-v1` 将恰一个空地块的新建锻冶厂、唯一旬时钟与1–3号普通兵装生产接到真实共享的金、AP、人物成长、行动与预约账本。设施从同一个ID的施工状态转为完整Lv1后才提供生产资格；完成时写入当前TP与参建者奖励，其他未行动者可在同旬使用已完成设施。
+
+这是单城、最多8人、一个永久施工任务、最多12旬及固定外部事实的可替换工程政策。普通生产TP仍未建模；无HP、吸收、维修、商人／件数任务／季节财政接合或完整世界调度。完整保存重建与静态全域预算包括合法完成尾及512次完整重放；不代表运行认证。未运行测试、编译、构建、产品或validator。下方各旧profile及当时范围保留，不被本根替换。
+
 ## 新增：单城共享时钟与单工房生产预约（2026-10-18，静态）
 
 [具体规则](docs/rules/bounded-city-piece-clock.md) · [八API与完整保存合同](docs/engine/bounded-city-piece-clock.md) · [固定政策](data/policies/bounded-city-piece-clock-v1.json) · [来源边界](data/sources/bounded-city-piece-clock-v1.json) · [完整DTO schema](data/schemas/bounded-city-piece-clock-v1.schema.json) · [合成输入](data/scenarios/bounded-city-piece-clock-example-v1.json)
