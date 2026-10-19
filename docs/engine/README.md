@@ -1,3 +1,9 @@
+## 月特产的单兵种私有阶段（2026-10-19，静态）
+
+[无独立时钟的月特产阶段](monthly-specialty-phases.md) · [完整财政服务合同](city-finance-lifecycle.md) · [月特产具体规则](../rules/city-finance-lifecycle.md)
+
+旧finance的单兵种月特产输入、完整核receipt、返回检查与库存饱和credit抽到包内；旧owner仍掌握工资后1→4顺序、月界、太守、完整月事务与保存重建。全部四兵种和原政策域保持。没有新增动态设施月产、第二clock或新公共API；只做静态审阅，未运行测试、编译、构建、产品或validator。
+
 ## 单锻冶厂建设与生产的共享根（2026-10-19，静态）
 
 [七API／完整DTO／保存重建与预算](bounded-forge-development-production.md) · [具体规则](../rules/bounded-forge-development-production.md)

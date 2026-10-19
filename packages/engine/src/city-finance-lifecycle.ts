@@ -8,8 +8,7 @@ import { calculateCityFoodIncomeProjection } from './city-food-income-projection
 import type { CityFoodIncomeProjectionInput, CityFoodIncomeSlot } from './city-food-income-projection.ts';
 import { calculateMonthlyCityFoodBaseArgument } from './monthly-city-food-base-argument.ts';
 import type { MonthlyCityFoodBaseArgumentInput } from './monthly-city-food-base-argument.ts';
-import { calculateMonthlySpecialtyProduction } from './monthly-specialty-production.ts';
-import type { MonthlySpecialtyProductionInput, MonthlySpecialtyProductionSlot, MonthlySpecialtyProductionSlots } from './monthly-specialty-production.ts';
+import { applyMonthlySpecialtyEquipmentPhase } from './internal/monthly-specialty-phases.ts';
 
 type Frozen<T> = T extends object ? { readonly [K in keyof T]: Frozen<T[K]> } : T;
 const PROFILE = 'standalone-city-finance-v1' as const;
@@ -353,26 +352,17 @@ function resolve(s: Scenario, before: Snapshot, command: Envelope): { snapshot: 
     receipt.writes.push({ resource: 'gold', reason: 'salary', before: available, requested: salarySum, accepted: salarySum, actualDelta: salarySum === 0 ? 0 : -salarySum, after: after.city.gold, cap: after.city.goldCapacity, discarded: 0, writerPolicyId: POLICIES.debit.id });
   }
   for (const equipmentType of EQUIPMENT) {
-    const item: SpecialtyReceipt = { equipmentType, eligibility: !monthly ? 'not-due' : !governor ? 'no-governor' : 'not-specialty', count: null, arithmeticProfile: 'comment-f32-rne-trunc-v1', kernelQuantityRequest: null, kernel: notDue(!monthly ? 'not-month-start' : 'no-governor'), write: null };
-    if (monthly && governor) {
-      const specialty = before.city.specialtyEquipmentTypes.includes(equipmentType);
-      const common = { profile: 'monthly-specialty-production-observed-v1' as const, arithmeticProfile: 'comment-f32-rne-trunc-v1' as const, equipmentType, specialtyEaxU32: specialty ? 1 : 0 };
-      let input: MonthlySpecialtyProductionInput = common;
-      if (specialty) {
-        const kind = equipmentType === 4 ? 'stable' : 'forge';
-        const slots: MonthlySpecialtyProductionSlot[] = s.facilities.map((f): MonthlySpecialtyProductionSlot => f === null ? { validityEaxU32: 0 } : { validityEaxU32: 1, correspondingCompletedEaxU32: f.kind === kind && f.complete ? 1 : 0 });
-        const count = s.facilities.filter(f => f !== null && f.kind === kind && f.complete).length;
-        const fixedSlots = slots as unknown as MonthlySpecialtyProductionSlots;
-        input = count > 0 ? { ...common, slots: fixedSlots, governorPoliticsEaxU32: governor.politics } : { ...common, slots: fixedSlots };
-      }
-      const result = calculateMonthlySpecialtyProduction(input); if (!result.supported) fail(`specialty-kernel:${result.reason}`);
-      item.eligibility = result.path; item.count = result.completedFacilityCount; item.kernel = called('calculateMonthlySpecialtyProduction', input, result);
-      if (result.quantityRequest) {
-        const requested = positiveRequest(result.quantityRequest.quantitySigned32); if (requested !== result.quantityRequest.quantityU32 || requested > 1500) fail('unsupported-kernel-return');
-        const stock = after.city.inventory[equipmentType], row = credit(`equipment-${equipmentType}`, 'specialty', stock.quantity, stock.capacity, requested);
-        stock.quantity = row.after; receipt.writes.push(row); item.kernelQuantityRequest = requested; item.write = row;
-      }
-    }
+    const phase = applyMonthlySpecialtyEquipmentPhase({
+      equipmentType,
+      monthStart: monthly,
+      facilities: s.facilities,
+      governor,
+      specialtyEquipmentTypes: before.city.specialtyEquipmentTypes,
+      stock: after.city.inventory[equipmentType],
+    });
+    if (!phase.ok) fail(phase.reason);
+    const item: SpecialtyReceipt = phase.receipt;
+    if (item.write !== null) receipt.writes.push(item.write);
     receipt.specialty.push(item);
   }
   after.date = newDate; after.lastSettledDate = clone(newDate); after.turn++; after.revision++; after.advancedCount++;

@@ -4,6 +4,8 @@
 
 本次新增代码、JSON场景、schema与文档只作静态交付，没有运行测试、typecheck、编译、build、checker、诊断、产品入口或示例。下列调用是接口描述，不是执行记录。
 
+2026-10-19补充：[月特产私有阶段](monthly-specialty-phases.md)将工资后的单兵种处理作兼容抽取，原owner仍掌握工资成功后的1→2→3→4顺序及整旬事务。公共API及unknown输入/核收据边界、schema/profile/tag、政策/目录、save/history和完整结果预算均不变；没有新的公开阶段API或存档迁移，也未接合动态forge月产。此改动仅作源码与规则静态交付，未运行验收。
+
 ## 注册快照
 
 - `CITY_FINANCE_POLICIES_V1`：完整注册政策及所有参数，包含specialty binary32假设和预算
