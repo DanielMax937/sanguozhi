@@ -1,0 +1,883 @@
+{
+  "schemaVersion": 1,
+  "id": "sophistry-debate-example-v1",
+  "validation": "paper-design-not-run",
+  "usage": "Only scenario and commands are success-path API inputs. paperExpected is manually designed summary, not full receipts or a saved session. rejectedNextCommand is a separate eighth proposal against revision7 and is not an accepted entry.",
+  "scenario": {
+    "schemaVersion": 1,
+    "profile": "debate-topic-shout-ignore-compose-agitate-sophistry-reference-v1",
+    "genericOnly": true,
+    "difficulty": "source-normal",
+    "policies": {
+      "id": "sophistry-debate-standalone-policy-v1",
+      "profile": "debate-topic-shout-ignore-compose-agitate-sophistry-reference-v1",
+      "tutorial": false,
+      "tutorialPolicy": "non-tutorial-only",
+      "cards": {
+        "id": "topic-shout-ignore-compose-agitate-and-sophistry-only-v1",
+        "kinds": [
+          "topic",
+          "shout",
+          "ignore",
+          "compose",
+          "agitate",
+          "sophistry"
+        ],
+        "topics": [
+          "story",
+          "logic",
+          "trend"
+        ],
+        "levels": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "topicPower": "1+levelIndex+10-if-current-topic",
+        "topicLevelCoefficients": [
+          10,
+          15,
+          20
+        ],
+        "topicStressCoefficients": [
+          10,
+          15,
+          20
+        ],
+        "drawStressEach": 15
+      },
+      "shout": {
+        "id": "source-no-anger-shout-v1",
+        "power": 110,
+        "levelCoefficient": 15,
+        "topicCoefficient": 12,
+        "stressCoefficient": 15,
+        "availability": "angerTimer-zero-only",
+        "additionalEffect": "none"
+      },
+      "ignore": {
+        "id": "source-no-anger-ignore-v1",
+        "power": 120,
+        "stressDamage": 30,
+        "hpDamage": 0,
+        "damageJitter": false,
+        "availability": "angerTimer-zero-only",
+        "additionalEffect": "none",
+        "suppressOpponentAdditionalEffect": true,
+        "suppressionScope": "loser-effect-including-compose-and-agitate",
+        "suppressSophistryTopicReroll": true
+      },
+      "compose": {
+        "id": "source-no-anger-compose-reflection-v1",
+        "power": 0,
+        "hpDamage": 0,
+        "damageJitter": false,
+        "availability": "angerTimer-zero-only",
+        "target": "opponent-unless-reflected-then-self",
+        "requestBasis": "opponent-current-stress-regardless-of-reflection",
+        "requestedStress": "-max(trunc(opponent-current-stress/2),30)",
+        "minimumRequestedReduction": 30,
+        "reflection": "opponent-played-sophistry",
+        "attack": "never-wins-in-admitted-card-set",
+        "angerCounter": "excluded"
+      },
+      "agitate": {
+        "id": "source-no-anger-agitate-reflection-v1",
+        "power": 0,
+        "hpDamage": 0,
+        "damageJitter": false,
+        "availability": "angerTimer-zero-only",
+        "target": "self-unless-reflected-then-opponent",
+        "requestedStress": 40,
+        "reflection": "opponent-played-sophistry",
+        "attack": "never-wins-in-admitted-card-set",
+        "angerCounter": "excluded"
+      },
+      "sophistry": {
+        "id": "source-no-anger-sophistry-v1",
+        "power": 20,
+        "availability": "angerTimer-zero-only",
+        "attack": "reflect-loser-topic-only",
+        "damageCalculator": "sophistry-winner-attack",
+        "coefficientCard": "loser-topic-and-level",
+        "damageTopic": "round-start",
+        "writer": "loser-topic-card-reflected-true",
+        "writerGuard": "calculated-hp-damage-positive",
+        "nonTopicAttack": "no-hp-stress-or-jitter",
+        "additionalEffect": "none"
+      },
+      "identities": {
+        "id": "generic-identity-debate-hooks-v1",
+        "realPersonMapping": false,
+        "allPersonHooks": "identity-or-disabled",
+        "attackHook": "identity",
+        "hpDamageHook": "identity",
+        "difficulty": "source-normal",
+        "items": false,
+        "personality": false
+      },
+      "initialTopic": {
+        "id": "provided-initial-topic-v1",
+        "generated": false
+      },
+      "deal": {
+        "id": "provided-ordered-card-tapes-v1",
+        "shuffle": false,
+        "nativeDistribution": false,
+        "token": "participantId:tapeIndex",
+        "order": "tape-order-stable-retained-hand",
+        "sourceDisplaySort": false
+      },
+      "hand": {
+        "id": "source-reserved-rethink-slot-v1",
+        "intelligenceThresholds": [
+          70,
+          80,
+          90
+        ],
+        "sourceSlotCounts": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "playableCapacities": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "reservedRethinkSlots": 1,
+        "rethinkPlayable": false
+      },
+      "round": {
+        "id": "paired-choice-atomic-round-v1",
+        "action": "ResolveSophistryDebateRound",
+        "choicesOrder": "scenario-participant-order",
+        "resolutionOrder": "attack-then-winner-effect-then-loser-effect",
+        "orderedIdsMeaning": "first-then-other-recorded-play-order-only",
+        "firstDamageBonus": false,
+        "damageCalculationDrawCount": 1,
+        "equalPowerAttackDrawCount": 0,
+        "ignoreAttackDrawCount": 0,
+        "sophistryNonTopicAttackDrawCount": 0,
+        "attackNoDrawReasons": [
+          "equal-card-power",
+          "ignore-no-hp-damage",
+          "sophistry-opponent-not-topic"
+        ]
+      },
+      "effects": {
+        "id": "source-winner-then-loser-reflectable-effects-v1",
+        "timing": "after-attack-before-hp-terminal",
+        "auditOrder": "winner-then-loser-audit-slots",
+        "tie": "no-invocations-and-empty-audit",
+        "ignore": "winner-invoked-loser-suppressed",
+        "noAdditionalEffect": "invoked-no-writer-request-zero",
+        "suppressedRequest": "null-not-evaluated",
+        "nonWriterAuditTarget": "null",
+        "nonWriterAuditReflection": "null",
+        "composeRequestBasis": "opponent-current-stress-before-write-not-writer-target",
+        "nonComposeRequestBasis": "null",
+        "stressWriter": "clamp-each-invoked-compose-or-agitate-write",
+        "effectTarget": "compose-opponent-agitate-self-inverted-by-sophistry",
+        "changeRequestedStress": "sum-of-evaluated-attack-and-effect-requests-by-target",
+        "stageActualDelta": "after-minus-before"
+      },
+      "topic": {
+        "id": "source-non-tutorial-sophistry-topic-reroll-v1",
+        "damageTopic": "round-start",
+        "nonterminalWinnerSets": [
+          "firstId"
+        ],
+        "nonterminalTopicWinnerSets": [
+          "currentTopic"
+        ],
+        "rhetoricWithoutRerollKeeps": [
+          "currentTopic"
+        ],
+        "drawKeeps": [
+          "firstId",
+          "currentTopic"
+        ],
+        "rerollCondition": "nonterminal-valid-attacker-either-played-sophistry-opponent-not-ignore",
+        "losingSophistryAgainstShoutRerolls": true,
+        "sameTopicAllowed": true,
+        "drawRole": "sophistry-topic-reroll",
+        "drawBound": 3,
+        "valueToTopic": [
+          "story",
+          "logic",
+          "trend"
+        ],
+        "enumSource": "pinned-modern-DebateEnum.cs-Topic",
+        "phase": "after-hp-closing-anger-boundary-and-crumble-before-refill",
+        "terminalReroll": false
+      },
+      "randomness": {
+        "id": "provided-phased-debate-draws-v1",
+        "maxDrawsPerRound": 2,
+        "order": [
+          "psychological-damage-jitter",
+          "sophistry-topic-reroll"
+        ],
+        "consumeAtPhase": true,
+        "missingWrongOrExtra": "whole-round-atomic-rejection",
+        "externalRngConsumed": 0,
+        "nativePrng": false
+      },
+      "arithmetic": {
+        "id": "source-normal-integer-topic-shout-sophistry-damage-v1",
+        "attack": "100+trunc(40*(myINT-opponentINT)/(131-myINT))",
+        "hpDamage": "trunc((attack+jitter)*10*levelCoef*topicCoef/1000)",
+        "division": "toward-zero",
+        "intermediate": "exact-bigint",
+        "matchingTopicCoefficient": 10,
+        "nonmatchingTopicCoefficient": 6,
+        "angerCoefficient": 10,
+        "jitterBound": 5,
+        "nativePrng": false
+      },
+      "writer": {
+        "id": "source-hp-minus100-to1000-stress0-to100-v1",
+        "hpMin": -100,
+        "hpMax": 1000,
+        "stressMin": 0,
+        "stressMax": 100
+      },
+      "anger": {
+        "id": "reject-nonterminal-anger-trigger-v1",
+        "triggerStress": 100,
+        "evaluation": "after-attack-and-additional-effects-and-hp-terminal-check-before-topic-reroll",
+        "rejection": "whole-round-atomic",
+        "automaticCounterCards": "excluded",
+        "cap99": false,
+        "reset": false,
+        "skip": false
+      },
+      "closing": {
+        "id": "session-result-only-closing-v1",
+        "defeatHp": 0,
+        "priority": [
+          "attack",
+          "additional-effects",
+          "hp-defeat",
+          "unsupported-anger-trigger",
+          "crumble",
+          "topic-and-first",
+          "refill"
+        ],
+        "terminalEffects": true,
+        "terminalRefill": false,
+        "terminalTopicChange": false,
+        "terminalTopicDraw": false,
+        "terminalFirstChange": false,
+        "campaignWrite": false
+      },
+      "opening": {
+        "id": "no-opening-instant-win-v1",
+        "initialHp": 1000,
+        "initialStress": 0,
+        "initialAngerTimer": 0
+      },
+      "rethink": {
+        "id": "no-rethink-v1",
+        "crumbleStep": 250,
+        "crumbleMax": 3,
+        "exposedAvailableAction": false
+      },
+      "refill": {
+        "id": "fill-next-round-from-tape-v1",
+        "fillOnlyVacancies": true,
+        "terminalRefill": false,
+        "insufficientTape": "whole-round-atomic-rejection"
+      },
+      "capacity": {
+        "id": "bounded-session-reject-v1",
+        "maxEntries": 4096,
+        "maxTapePerParticipant": 512,
+        "maxCanonicalUtf8Bytes": 16777216,
+        "maxInputNodes": 1000000,
+        "maxInputDepth": 32,
+        "exhaustion": "rejection-not-game-draw"
+      },
+      "persistence": {
+        "id": "full-policy-genesis-recompute-v1",
+        "policyComparison": "all-fields",
+        "genesisSnapshot": "recompute",
+        "receipts": "compare-all-fields",
+        "snapshot": "compare-all-fields"
+      }
+    },
+    "challengerId": "beta",
+    "initialTopic": "story",
+    "participants": [
+      {
+        "id": "alpha",
+        "resolvedIntelligence": 60,
+        "hp": 1000,
+        "stress": 0,
+        "angerTimer": 0,
+        "cardTape": [
+          {
+            "kind": "agitate"
+          },
+          {
+            "kind": "sophistry"
+          },
+          {
+            "kind": "sophistry"
+          },
+          {
+            "kind": "topic",
+            "topic": "trend",
+            "level": "small"
+          },
+          {
+            "kind": "sophistry"
+          },
+          {
+            "kind": "sophistry"
+          },
+          {
+            "kind": "sophistry"
+          },
+          {
+            "kind": "sophistry"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          }
+        ]
+      },
+      {
+        "id": "beta",
+        "resolvedIntelligence": 60,
+        "hp": 1000,
+        "stress": 0,
+        "angerTimer": 0,
+        "cardTape": [
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          },
+          {
+            "kind": "compose"
+          },
+          {
+            "kind": "agitate"
+          },
+          {
+            "kind": "compose"
+          },
+          {
+            "kind": "shout"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "large"
+          },
+          {
+            "kind": "ignore"
+          },
+          {
+            "kind": "agitate"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          }
+        ]
+      }
+    ]
+  },
+  "commands": [
+    {
+      "type": "ResolveSophistryDebateRound",
+      "expectedRevision": 0,
+      "expectedRoundIndex": 0,
+      "expectedFirstId": "beta",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:0"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:0"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "psychological-damage-jitter",
+          "bound": 5,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveSophistryDebateRound",
+      "expectedRevision": 1,
+      "expectedRoundIndex": 1,
+      "expectedFirstId": "beta",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:1"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:1"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "sophistry-topic-reroll",
+          "bound": 3,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "type": "ResolveSophistryDebateRound",
+      "expectedRevision": 2,
+      "expectedRoundIndex": 2,
+      "expectedFirstId": "alpha",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:2"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:2"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "sophistry-topic-reroll",
+          "bound": 3,
+          "value": 2
+        }
+      ]
+    },
+    {
+      "type": "ResolveSophistryDebateRound",
+      "expectedRevision": 3,
+      "expectedRoundIndex": 3,
+      "expectedFirstId": "alpha",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:3"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:3"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "psychological-damage-jitter",
+          "bound": 5,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveSophistryDebateRound",
+      "expectedRevision": 4,
+      "expectedRoundIndex": 4,
+      "expectedFirstId": "alpha",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:4"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:4"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "psychological-damage-jitter",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "role": "sophistry-topic-reroll",
+          "bound": 3,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveSophistryDebateRound",
+      "expectedRevision": 5,
+      "expectedRoundIndex": 5,
+      "expectedFirstId": "beta",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:5"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:5"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "psychological-damage-jitter",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "role": "sophistry-topic-reroll",
+          "bound": 3,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveSophistryDebateRound",
+      "expectedRevision": 6,
+      "expectedRoundIndex": 6,
+      "expectedFirstId": "alpha",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:6"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:6"
+        }
+      ],
+      "rawDraws": []
+    }
+  ],
+  "paperExpected": [
+    {
+      "afterRevision": 1,
+      "roundWinnerId": "beta",
+      "powers": [
+        0,
+        11
+      ],
+      "afterHp": [
+        900,
+        1000
+      ],
+      "afterStress": [
+        50,
+        0
+      ],
+      "afterFirstId": "beta",
+      "afterTopic": "story",
+      "attackDrawCount": 1,
+      "attackNoDrawReason": null,
+      "drawCount": 1,
+      "requestedHpDamage": 100,
+      "topicRerollStatus": "skipped",
+      "topicRerollReason": "no-sophistry",
+      "paperEffect": "alpha Agitate is unreflected: self stress0->10 from attack, then request40->50.",
+      "result": "winner",
+      "damageIsNull": false,
+      "afterDeckCursors": [
+        4,
+        4
+      ],
+      "terminal": false
+    },
+    {
+      "afterRevision": 2,
+      "roundWinnerId": "alpha",
+      "powers": [
+        20,
+        0
+      ],
+      "afterHp": [
+        900,
+        1000
+      ],
+      "afterStress": [
+        50,
+        0
+      ],
+      "afterFirstId": "alpha",
+      "afterTopic": "logic",
+      "attackDrawCount": 0,
+      "attackNoDrawReason": "sophistry-opponent-not-topic",
+      "drawCount": 1,
+      "requestedHpDamage": 0,
+      "topicRerollStatus": "applied",
+      "topicRawValue": 1,
+      "topicDrawIndex": 0,
+      "paperEffect": "beta Compose is reflected. Request basis alpha50 gives -30, but writer target beta0 remains0; actual delta0. No Attack damage/jitter.",
+      "result": "winner",
+      "damageIsNull": true,
+      "afterDeckCursors": [
+        5,
+        5
+      ],
+      "terminal": false
+    },
+    {
+      "afterRevision": 3,
+      "roundWinnerId": "alpha",
+      "powers": [
+        20,
+        0
+      ],
+      "afterHp": [
+        900,
+        1000
+      ],
+      "afterStress": [
+        90,
+        0
+      ],
+      "afterFirstId": "alpha",
+      "afterTopic": "trend",
+      "attackDrawCount": 0,
+      "attackNoDrawReason": "sophistry-opponent-not-topic",
+      "drawCount": 1,
+      "requestedHpDamage": 0,
+      "topicRerollStatus": "applied",
+      "topicRawValue": 2,
+      "topicDrawIndex": 0,
+      "paperEffect": "beta Agitate is reflected to alpha: alpha50+40->90. Fixed40 has no request-basis stress; no Attack damage/jitter.",
+      "result": "winner",
+      "damageIsNull": true,
+      "afterDeckCursors": [
+        6,
+        6
+      ],
+      "terminal": false
+    },
+    {
+      "afterRevision": 4,
+      "roundWinnerId": "alpha",
+      "powers": [
+        11,
+        0
+      ],
+      "afterHp": [
+        900,
+        900
+      ],
+      "afterStress": [
+        45,
+        10
+      ],
+      "afterFirstId": "alpha",
+      "afterTopic": "trend",
+      "attackDrawCount": 1,
+      "attackNoDrawReason": null,
+      "drawCount": 1,
+      "requestedHpDamage": 100,
+      "topicRerollStatus": "skipped",
+      "topicRerollReason": "no-sophistry",
+      "paperEffect": "beta Compose is unreflected: request basis and target alpha90; -max(trunc(90/2),30)=-45; alpha90->45. beta takes10 attack stress.",
+      "result": "winner",
+      "damageIsNull": false,
+      "afterDeckCursors": [
+        7,
+        7
+      ],
+      "terminal": false
+    },
+    {
+      "afterRevision": 5,
+      "roundWinnerId": "beta",
+      "powers": [
+        20,
+        110
+      ],
+      "afterHp": [
+        720,
+        900
+      ],
+      "afterStress": [
+        60,
+        10
+      ],
+      "afterFirstId": "beta",
+      "afterTopic": "story",
+      "attackDrawCount": 1,
+      "attackNoDrawReason": null,
+      "drawCount": 2,
+      "requestedHpDamage": 180,
+      "topicRerollStatus": "applied",
+      "topicRawValue": 0,
+      "topicDrawIndex": 1,
+      "paperEffect": "Shout is not reflected; beta calculates and owns damage card, alpha takes180 HP and15 stress. Losing alpha Sophistry still triggers a late topic reroll.",
+      "result": "winner",
+      "damageIsNull": false,
+      "afterDeckCursors": [
+        8,
+        8
+      ],
+      "terminal": false
+    },
+    {
+      "afterRevision": 6,
+      "roundWinnerId": "alpha",
+      "powers": [
+        20,
+        13
+      ],
+      "afterHp": [
+        720,
+        700
+      ],
+      "afterStress": [
+        60,
+        30
+      ],
+      "afterFirstId": "alpha",
+      "afterTopic": "story",
+      "attackDrawCount": 1,
+      "attackNoDrawReason": null,
+      "drawCount": 2,
+      "requestedHpDamage": 200,
+      "topicRerollStatus": "applied",
+      "topicRawValue": 0,
+      "topicDrawIndex": 1,
+      "paperEffect": "alpha Sophistry calculates reflected damage with alpha attack100 and beta story-large coefficients20/10. beta owns the coefficient card and takes damage/stress20. Topic draw0 retains story but is still consumed.",
+      "result": "winner",
+      "damageIsNull": false,
+      "afterDeckCursors": [
+        9,
+        9
+      ],
+      "terminal": false
+    },
+    {
+      "afterRevision": 7,
+      "roundWinnerId": "beta",
+      "powers": [
+        20,
+        120
+      ],
+      "afterHp": [
+        720,
+        700
+      ],
+      "afterStress": [
+        90,
+        30
+      ],
+      "afterFirstId": "beta",
+      "afterTopic": "story",
+      "attackDrawCount": 0,
+      "attackNoDrawReason": "ignore-no-hp-damage",
+      "drawCount": 0,
+      "requestedHpDamage": 0,
+      "topicRerollStatus": "skipped",
+      "topicRerollReason": "opponent-ignore",
+      "paperEffect": "Ignore adds30 alpha stress; alpha Sophistry loser Effect is suppressed and no topic draw occurs.",
+      "result": "winner",
+      "damageIsNull": true,
+      "afterDeckCursors": [
+        10,
+        10
+      ],
+      "terminal": false
+    }
+  ],
+  "rejectedNextCommand": {
+    "type": "ResolveSophistryDebateRound",
+    "expectedRevision": 7,
+    "expectedRoundIndex": 7,
+    "expectedFirstId": "beta",
+    "choices": [
+      {
+        "participantId": "alpha",
+        "cardToken": "alpha:7"
+      },
+      {
+        "participantId": "beta",
+        "cardToken": "beta:7"
+      }
+    ],
+    "rawDraws": []
+  },
+  "paperRejectedNext": {
+    "failure": {
+      "ok": false,
+      "reason": "unsupported-anger-trigger",
+      "index": null
+    },
+    "hypotheticalAlphaAttackStress": {
+      "beforeStress": 90,
+      "requestedStress": 0,
+      "afterStress": 90,
+      "actualStressDelta": 0
+    },
+    "hypotheticalAlphaEffectStress": {
+      "beforeStress": 90,
+      "requestedStress": 40,
+      "afterStress": 100,
+      "actualStressDelta": 10
+    },
+    "retainedRevision": 7,
+    "retainedRoundIndex": 7,
+    "retainedFirstId": "beta",
+    "retainedTopic": "story",
+    "retainedHp": [
+      720,
+      700
+    ],
+    "retainedStress": [
+      90,
+      30
+    ],
+    "retainedDeckCursors": [
+      10,
+      10
+    ],
+    "retainedHandTokens": [
+      [
+        "alpha:7",
+        "alpha:8",
+        "alpha:9"
+      ],
+      [
+        "beta:7",
+        "beta:8",
+        "beta:9"
+      ]
+    ],
+    "noReceiptOrPartialSession": true,
+    "note": "Reflected beta Agitate raises alpha90 to100. No HP defeat; unsupported anger rejection occurs BEFORE needing a topic draw, so syntactically valid rawDraws=[] reports this boundary, not missing-topic draw-shape. Replay with the appended eighth command fails index7 rather than standalone execute index null."
+  },
+  "paperArithmetic": [
+    "R1 matching-small damage100; alpha stress0->10->50.",
+    "R2 reflected Compose request basis alpha50; -max(trunc(50/2),30)=-30, writer beta0->0.",
+    "R3 reflected Agitate writes alpha50->90; no damage jitter.",
+    "R4 unreflected Compose alpha90->45; betaHP1000->900 stress0->10.",
+    "R5 Shout damage=trunc(100*10*15*12/1000)=180; topic reroll follows despite Sophistry losing.",
+    "R6 reflected matching-large damage=trunc(100*10*20*10/1000)=200; topic draw0 may equal current story.",
+    "R7 Ignore excludes both damage jitter and Sophistry topic draw.",
+    "RejectedR8 reflection raises alpha90->100 before topic draw; full proposed round rejected."
+  ],
+  "boundaries": "Modern translated, non-tutorial generic no-anger reference only. No rethink, personality/anger counters, native deal/global RNG, campaign/P078 or native PK/Vanilla equivalence. No tests/compiler/validators/replay/project or scenarios executed."
+}
