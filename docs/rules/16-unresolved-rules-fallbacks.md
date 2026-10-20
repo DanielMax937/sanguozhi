@@ -1,3 +1,11 @@
+## 2026-10-20：镇静附加效果的独立会话（静态）
+
+在[PR106](https://github.com/DanielMax937/sanguozhi/pull/106)已交付普通＋大喝＋无视之外，新增[普通＋大喝＋无视＋镇静会话](compose-debate-session-v1.md)及[完整API与阶段收据](../engine/compose-debate-session-v1.md)。参考源码正常态镇静power0，输给普通或大喝后降低对方（本轮胜者）当前stress：−max(trunc(stress/2),30)，再裁剪；并非给自己镇静。无视胜会阻断败方镇静，双镇静平局没有附加效果，仍双方stress+15。
+
+新独立profile保留攻击→附加效果→HP终局→非终局愤激边界的明确顺序，收据保留攻击和附加效果分阶段请求／实际写入以及被抑制状态。旧三个profile、源码和存档不改，不隐式迁移。下方各旧批次的“尚未覆盖镇静”只适用其原profile／时点，不应据此重复交付；当前仍不支持诡辩／激昂、四性格愤激／再考、原发牌／全局RNG、人物书籍、开场／追击／留情或campaign结果。
+
+只扩展固定现代转录参考下的通用正常态子集，不把工程政策或现代源码升级为原生PK／Vanilla／主机证据，不减少原43主题／45历史快照。P078及全部依赖排除。仅静态代码／文档与审查，未运行测试、typecheck、编译、构建、validator、诊断、示例、replay或产品；纸面例子不是运行结果。
+
 ## 2026-10-20：大喝已交付登记与无视独立会话（静态）
 
 [PR105](https://github.com/DanielMax937/sanguozhi/pull/105)已交付[普通＋大喝会话](shout-debate-session-v1.md)；本批补齐该版本的公共包入口和全局索引，不重交付其既有行为。另新增[普通＋大喝＋无视会话](ignore-debate-session-v1.md)及[完整API](../engine/ignore-debate-session-v1.md)：无视power120、败方stress+30、零HP伤害／零jitter，胜方非终局更新先手但保留话题；双无视仍为双方stress+15的平局。无视胜与平局的receipt明确区分，非终局stress100与牌带不足仍整轮拒绝。
