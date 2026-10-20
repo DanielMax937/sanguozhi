@@ -1,0 +1,766 @@
+{
+  "schemaVersion": 1,
+  "id": "agitate-debate-example-v1",
+  "validation": "paper-design-not-run",
+  "usage": "Only scenario and commands are success-path API inputs. paperExpected is a manually designed summary, not full runtime receipts or saved session. rejectedNextCommand is a separate proposed sixth round against the revision5 session, never an accepted entry.",
+  "scenario": {
+    "schemaVersion": 1,
+    "profile": "debate-topic-shout-ignore-compose-agitate-reference-v1",
+    "genericOnly": true,
+    "difficulty": "source-normal",
+    "policies": {
+      "id": "agitate-debate-standalone-policy-v1",
+      "profile": "debate-topic-shout-ignore-compose-agitate-reference-v1",
+      "cards": {
+        "id": "topic-shout-ignore-compose-and-agitate-only-v1",
+        "kinds": [
+          "topic",
+          "shout",
+          "ignore",
+          "compose",
+          "agitate"
+        ],
+        "topics": [
+          "story",
+          "logic",
+          "trend"
+        ],
+        "levels": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "topicPower": "1+levelIndex+10-if-current-topic",
+        "topicLevelCoefficients": [
+          10,
+          15,
+          20
+        ],
+        "topicStressCoefficients": [
+          10,
+          15,
+          20
+        ],
+        "drawStressEach": 15
+      },
+      "identities": {
+        "id": "generic-identity-debate-hooks-v1",
+        "realPersonMapping": false,
+        "allPersonHooks": "identity-or-disabled",
+        "attackHook": "identity",
+        "hpDamageHook": "identity",
+        "difficulty": "source-normal",
+        "items": false,
+        "personality": false
+      },
+      "initialTopic": {
+        "id": "provided-initial-topic-v1",
+        "generated": false
+      },
+      "deal": {
+        "id": "provided-ordered-card-tapes-v1",
+        "shuffle": false,
+        "nativeDistribution": false,
+        "token": "participantId:tapeIndex",
+        "order": "tape-order-stable-retained-hand",
+        "sourceDisplaySort": false
+      },
+      "hand": {
+        "id": "source-reserved-rethink-slot-v1",
+        "intelligenceThresholds": [
+          70,
+          80,
+          90
+        ],
+        "sourceSlotCounts": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "reservedRethinkSlots": 1,
+        "rethinkPlayable": false,
+        "playableCapacities": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "round": {
+        "id": "paired-choice-atomic-round-v1",
+        "action": "ResolveAgitateDebateRound",
+        "choicesOrder": "scenario-participant-order",
+        "resolutionOrder": "attack-then-winner-effect-then-loser-effect",
+        "firstDamageBonus": false,
+        "hpDamageWinnerDrawCount": 1,
+        "equalPowerDrawCount": 0,
+        "ignoreWinnerDrawCount": 0,
+        "noDrawReasons": [
+          "equal-card-power",
+          "ignore-no-hp-damage"
+        ],
+        "orderedIdsMeaning": "first-then-other-recorded-play-order-only"
+      },
+      "topic": {
+        "id": "source-topic-shout-or-ignore-winner-follow-v1",
+        "damageTopic": "round-start",
+        "nonterminalTopicWinnerSets": [
+          "firstId",
+          "currentTopic"
+        ],
+        "nonterminalShoutWinnerSets": [
+          "firstId"
+        ],
+        "nonterminalShoutKeeps": [
+          "currentTopic"
+        ],
+        "drawKeeps": [
+          "firstId",
+          "currentTopic"
+        ],
+        "nonterminalIgnoreWinnerSets": [
+          "firstId"
+        ],
+        "nonterminalIgnoreKeeps": [
+          "currentTopic"
+        ]
+      },
+      "arithmetic": {
+        "id": "source-normal-integer-topic-shout-damage-v1",
+        "attack": "100+trunc(40*(myINT-opponentINT)/(131-myINT))",
+        "hpDamage": "trunc((attack+jitter)*10*levelCoef*topicCoef/1000)",
+        "division": "toward-zero",
+        "intermediate": "exact-bigint",
+        "matchingTopicCoefficient": 10,
+        "nonmatchingTopicCoefficient": 6,
+        "angerCoefficient": 10,
+        "jitterBound": 5,
+        "nativePrng": false
+      },
+      "writer": {
+        "id": "source-hp-minus100-to1000-stress0-to100-v1",
+        "hpMin": -100,
+        "hpMax": 1000,
+        "stressMin": 0,
+        "stressMax": 100
+      },
+      "anger": {
+        "id": "reject-nonterminal-anger-trigger-v1",
+        "triggerStress": 100,
+        "rejection": "whole-round-atomic",
+        "cap99": false,
+        "reset": false,
+        "skip": false,
+        "evaluation": "after-attack-and-additional-effects-and-hp-terminal-check",
+        "automaticCounterCards": "excluded"
+      },
+      "closing": {
+        "id": "session-result-only-closing-v1",
+        "defeatHp": 0,
+        "priority": [
+          "attack",
+          "additional-effects",
+          "hp-defeat",
+          "unsupported-anger-trigger",
+          "crumble",
+          "topic-and-first",
+          "refill"
+        ],
+        "terminalRefill": false,
+        "terminalTopicChange": false,
+        "campaignWrite": false,
+        "terminalFirstChange": false,
+        "terminalEffects": true
+      },
+      "opening": {
+        "id": "no-opening-instant-win-v1",
+        "initialHp": 1000,
+        "initialStress": 0,
+        "initialAngerTimer": 0
+      },
+      "rethink": {
+        "id": "no-rethink-v1",
+        "crumbleStep": 250,
+        "crumbleMax": 3,
+        "exposedAvailableAction": false
+      },
+      "refill": {
+        "id": "fill-next-round-from-tape-v1",
+        "fillOnlyVacancies": true,
+        "terminalRefill": false,
+        "insufficientTape": "whole-round-atomic-rejection"
+      },
+      "capacity": {
+        "id": "bounded-session-reject-v1",
+        "maxEntries": 4096,
+        "maxTapePerParticipant": 512,
+        "maxCanonicalUtf8Bytes": 16777216,
+        "maxInputNodes": 1000000,
+        "maxInputDepth": 32,
+        "exhaustion": "rejection-not-game-draw"
+      },
+      "persistence": {
+        "id": "full-policy-genesis-recompute-v1",
+        "policyComparison": "all-fields",
+        "genesisSnapshot": "recompute",
+        "receipts": "compare-all-fields",
+        "snapshot": "compare-all-fields"
+      },
+      "shout": {
+        "id": "source-no-anger-shout-v1",
+        "power": 110,
+        "levelCoefficient": 15,
+        "topicCoefficient": 12,
+        "stressCoefficient": 15,
+        "availability": "angerTimer-zero-only",
+        "additionalEffect": "none"
+      },
+      "ignore": {
+        "id": "source-no-anger-ignore-v1",
+        "power": 120,
+        "stressDamage": 30,
+        "hpDamage": 0,
+        "damageJitter": false,
+        "availability": "angerTimer-zero-only",
+        "additionalEffect": "none",
+        "suppressOpponentAdditionalEffect": true,
+        "suppressionScope": "loser-effect-including-compose-and-agitate"
+      },
+      "compose": {
+        "id": "source-no-anger-compose-v1",
+        "power": 0,
+        "hpDamage": 0,
+        "damageJitter": false,
+        "availability": "angerTimer-zero-only",
+        "target": "opponent",
+        "requestedStress": "-max(trunc(target-current-stress/2),30)",
+        "minimumRequestedReduction": 30,
+        "reflection": false,
+        "attack": "never-wins-in-admitted-card-set",
+        "angerCounter": "excluded"
+      },
+      "agitate": {
+        "id": "source-no-anger-agitate-v1",
+        "power": 0,
+        "hpDamage": 0,
+        "damageJitter": false,
+        "availability": "angerTimer-zero-only",
+        "target": "self",
+        "requestedStress": 40,
+        "reflection": false,
+        "attack": "never-wins-in-admitted-card-set",
+        "angerCounter": "excluded"
+      },
+      "effects": {
+        "id": "source-winner-then-loser-additional-effects-v1",
+        "timing": "after-attack-before-hp-terminal",
+        "auditOrder": "winner-then-loser-audit-slots",
+        "tie": "no-invocations-and-empty-audit",
+        "ignore": "winner-invoked-loser-suppressed",
+        "noAdditionalEffect": "invoked-no-writer-request-zero",
+        "suppressedRequest": "null-not-evaluated",
+        "stressWriter": "clamp-each-invoked-compose-or-agitate-write",
+        "effectTarget": "compose-opponent-agitate-self-otherwise-opponent",
+        "changeRequestedStress": "sum-of-evaluated-attack-and-effect-requests-by-target",
+        "stageActualDelta": "after-minus-before"
+      }
+    },
+    "challengerId": "beta",
+    "initialTopic": "story",
+    "participants": [
+      {
+        "id": "alpha",
+        "resolvedIntelligence": 60,
+        "hp": 1000,
+        "stress": 0,
+        "angerTimer": 0,
+        "cardTape": [
+          {
+            "kind": "agitate"
+          },
+          {
+            "kind": "ignore"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          },
+          {
+            "kind": "agitate"
+          },
+          {
+            "kind": "agitate"
+          },
+          {
+            "kind": "agitate"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          }
+        ]
+      },
+      {
+        "id": "beta",
+        "resolvedIntelligence": 60,
+        "hp": 1000,
+        "stress": 0,
+        "angerTimer": 0,
+        "cardTape": [
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          },
+          {
+            "kind": "compose"
+          },
+          {
+            "kind": "compose"
+          },
+          {
+            "kind": "agitate"
+          },
+          {
+            "kind": "ignore"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          }
+        ]
+      }
+    ]
+  },
+  "commands": [
+    {
+      "type": "ResolveAgitateDebateRound",
+      "expectedRevision": 0,
+      "expectedRoundIndex": 0,
+      "expectedFirstId": "beta",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:0"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:0"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "psychological-damage-jitter",
+          "bound": 5,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveAgitateDebateRound",
+      "expectedRevision": 1,
+      "expectedRoundIndex": 1,
+      "expectedFirstId": "beta",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:1"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:1"
+        }
+      ],
+      "rawDraws": []
+    },
+    {
+      "type": "ResolveAgitateDebateRound",
+      "expectedRevision": 2,
+      "expectedRoundIndex": 2,
+      "expectedFirstId": "alpha",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:2"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:2"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "psychological-damage-jitter",
+          "bound": 5,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveAgitateDebateRound",
+      "expectedRevision": 3,
+      "expectedRoundIndex": 3,
+      "expectedFirstId": "alpha",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:3"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:3"
+        }
+      ],
+      "rawDraws": []
+    },
+    {
+      "type": "ResolveAgitateDebateRound",
+      "expectedRevision": 4,
+      "expectedRoundIndex": 4,
+      "expectedFirstId": "alpha",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:4"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:4"
+        }
+      ],
+      "rawDraws": []
+    }
+  ],
+  "paperExpected": [
+    {
+      "afterRevision": 1,
+      "roundWinnerId": "beta",
+      "result": "winner",
+      "powers": [
+        0,
+        11
+      ],
+      "afterHp": [
+        900,
+        1000
+      ],
+      "afterStress": [
+        50,
+        0
+      ],
+      "afterFirstId": "beta",
+      "requestedHpDamage": 100,
+      "drawCount": 1,
+      "noDrawReason": null,
+      "effectSkipReason": null,
+      "effectStatusesInAuditOrder": [
+        "no-additional-effect",
+        "applied"
+      ],
+      "loserEffectPaper": {
+        "sequence": 1,
+        "actorId": "alpha",
+        "targetId": "alpha",
+        "cardKind": "agitate",
+        "beforeStress": 10,
+        "afterStress": 50,
+        "actualStressDelta": 40,
+        "status": "applied",
+        "invoked": true,
+        "requestedStress": 40
+      },
+      "alphaAttackStressPaper": {
+        "beforeStress": 0,
+        "requestedStress": 10,
+        "afterStress": 10,
+        "actualStressDelta": 10
+      },
+      "alphaEffectStressPaper": {
+        "beforeStress": 10,
+        "requestedStress": 40,
+        "afterStress": 50,
+        "actualStressDelta": 40
+      },
+      "alphaRequestedStress": 50,
+      "afterTopic": "story",
+      "damageIsNull": false,
+      "effectOrder": "winner-then-loser-audit-slots",
+      "afterDeckCursors": [
+        4,
+        4
+      ],
+      "terminal": false
+    },
+    {
+      "afterRevision": 2,
+      "roundWinnerId": "alpha",
+      "result": "winner",
+      "powers": [
+        120,
+        0
+      ],
+      "afterHp": [
+        900,
+        1000
+      ],
+      "afterStress": [
+        50,
+        30
+      ],
+      "afterFirstId": "alpha",
+      "requestedHpDamage": 0,
+      "drawCount": 0,
+      "noDrawReason": "ignore-no-hp-damage",
+      "effectSkipReason": "ignore-suppresses-loser-effect",
+      "effectStatusesInAuditOrder": [
+        "no-additional-effect",
+        "suppressed-by-ignore"
+      ],
+      "loserEffectPaper": {
+        "sequence": 1,
+        "actorId": "beta",
+        "targetId": "alpha",
+        "cardKind": "compose",
+        "beforeStress": 50,
+        "afterStress": 50,
+        "actualStressDelta": 0,
+        "status": "suppressed-by-ignore",
+        "invoked": false,
+        "requestedStress": null
+      },
+      "afterTopic": "story",
+      "damageIsNull": true,
+      "effectOrder": "winner-then-loser-audit-slots",
+      "afterDeckCursors": [
+        5,
+        5
+      ],
+      "terminal": false
+    },
+    {
+      "afterRevision": 3,
+      "roundWinnerId": "alpha",
+      "result": "winner",
+      "powers": [
+        11,
+        0
+      ],
+      "afterHp": [
+        900,
+        900
+      ],
+      "afterStress": [
+        20,
+        40
+      ],
+      "afterFirstId": "alpha",
+      "requestedHpDamage": 100,
+      "drawCount": 1,
+      "noDrawReason": null,
+      "effectSkipReason": null,
+      "effectStatusesInAuditOrder": [
+        "no-additional-effect",
+        "applied"
+      ],
+      "loserEffectPaper": {
+        "sequence": 1,
+        "actorId": "beta",
+        "targetId": "alpha",
+        "cardKind": "compose",
+        "beforeStress": 50,
+        "afterStress": 20,
+        "actualStressDelta": -30,
+        "status": "applied",
+        "invoked": true,
+        "requestedStress": -30
+      },
+      "afterTopic": "story",
+      "damageIsNull": false,
+      "effectOrder": "winner-then-loser-audit-slots",
+      "afterDeckCursors": [
+        6,
+        6
+      ],
+      "terminal": false
+    },
+    {
+      "afterRevision": 4,
+      "roundWinnerId": null,
+      "result": "draw",
+      "powers": [
+        0,
+        0
+      ],
+      "afterHp": [
+        900,
+        900
+      ],
+      "afterStress": [
+        35,
+        55
+      ],
+      "afterFirstId": "alpha",
+      "requestedHpDamage": 0,
+      "drawCount": 0,
+      "noDrawReason": "equal-card-power",
+      "effectSkipReason": "equal-card-power",
+      "effectStatusesInAuditOrder": [],
+      "effectsPaper": [],
+      "afterTopic": "story",
+      "damageIsNull": true,
+      "effectOrder": "none-equal-card-power",
+      "afterDeckCursors": [
+        7,
+        7
+      ],
+      "terminal": false
+    },
+    {
+      "afterRevision": 5,
+      "roundWinnerId": "beta",
+      "result": "winner",
+      "powers": [
+        0,
+        120
+      ],
+      "afterHp": [
+        900,
+        900
+      ],
+      "afterStress": [
+        65,
+        55
+      ],
+      "afterFirstId": "beta",
+      "requestedHpDamage": 0,
+      "drawCount": 0,
+      "noDrawReason": "ignore-no-hp-damage",
+      "effectSkipReason": "ignore-suppresses-loser-effect",
+      "effectStatusesInAuditOrder": [
+        "no-additional-effect",
+        "suppressed-by-ignore"
+      ],
+      "loserEffectPaper": {
+        "sequence": 1,
+        "actorId": "alpha",
+        "targetId": "alpha",
+        "cardKind": "agitate",
+        "beforeStress": 65,
+        "afterStress": 65,
+        "actualStressDelta": 0,
+        "status": "suppressed-by-ignore",
+        "invoked": false,
+        "requestedStress": null
+      },
+      "afterTopic": "story",
+      "damageIsNull": true,
+      "effectOrder": "winner-then-loser-audit-slots",
+      "afterDeckCursors": [
+        8,
+        8
+      ],
+      "terminal": false
+    }
+  ],
+  "rejectedNextCommand": {
+    "type": "ResolveAgitateDebateRound",
+    "expectedRevision": 5,
+    "expectedRoundIndex": 5,
+    "expectedFirstId": "beta",
+    "choices": [
+      {
+        "participantId": "alpha",
+        "cardToken": "alpha:5"
+      },
+      {
+        "participantId": "beta",
+        "cardToken": "beta:5"
+      }
+    ],
+    "rawDraws": [
+      {
+        "role": "psychological-damage-jitter",
+        "bound": 5,
+        "value": 0
+      }
+    ]
+  },
+  "paperRejectedNext": {
+    "failure": {
+      "ok": false,
+      "reason": "unsupported-anger-trigger",
+      "index": null
+    },
+    "hypotheticalAlphaHp": 800,
+    "hypotheticalAlphaAttackStress": {
+      "beforeStress": 65,
+      "requestedStress": 10,
+      "afterStress": 75,
+      "actualStressDelta": 10
+    },
+    "hypotheticalAlphaEffectStress": {
+      "beforeStress": 75,
+      "requestedStress": 40,
+      "afterStress": 100,
+      "actualStressDelta": 25
+    },
+    "hypotheticalAlphaRequestedStress": 50,
+    "hypotheticalAlphaActualStressDelta": 35,
+    "retainedRevision": 5,
+    "retainedRoundIndex": 5,
+    "retainedFirstId": "beta",
+    "retainedHp": [
+      900,
+      900
+    ],
+    "retainedStress": [
+      65,
+      55
+    ],
+    "retainedDeckCursors": [
+      8,
+      8
+    ],
+    "retainedHandTokens": [
+      [
+        "alpha:5",
+        "alpha:6",
+        "alpha:7"
+      ],
+      [
+        "beta:5",
+        "beta:6",
+        "beta:7"
+      ]
+    ],
+    "noReceiptOrPartialSession": true,
+    "note": "Failure occurs at unsupported anger before refill. Hypothetical stage numbers are paper analysis only, not an emitted failed-round receipt. Replay of six commands would report index5, rather than the standalone execute index null."
+  },
+  "paperArithmetic": [
+    "R1 matching small HP=trunc((100+0)*10*10*10/1000)=100; alpha stress0->10 then self+40->50.",
+    "R3 beta Compose targets opponent alpha: -max(trunc(50/2),30)=-30; alpha50->20.",
+    "R4 doubleAgitate has equal power0: stress+15 each, effects=[], no self+40.",
+    "R5 Ignore suppresses Agitate: self-target alpha65->65, request null, not a fabricated40.",
+    "Rejected R6 alpha65->75 then request40 clamped100; HP800 is nonterminal, so entire round rejected with no partial mutation."
+  ],
+  "boundaries": "No Sophistry/reflection, anger counters/personality/rethink, native RNG/deal/campaign/P078 or native PK/Vanilla equivalence. No tests/compiler/validators/project or scenarios executed."
+}
