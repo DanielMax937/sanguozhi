@@ -1,3 +1,13 @@
+## 2026-10-20：激昂自增压力的独立正常态会话（静态）
+
+在[PR107](https://github.com/DanielMax937/sanguozhi/pull/107)镇静版本之外，新增[普通＋大喝＋无视＋镇静＋激昂会话](docs/rules/agitate-debate-session-v1.md)与[完整API及阶段收据](docs/engine/agitate-debate-session-v1.md)。固定现代参考中激昂power0，不会赢过本子集任何牌；输给普通／大喝时先承受攻击，再为使用者自己请求stress+40并裁剪。无视胜会抑制败方激昂；双激昂或激昂对镇静是平局，只双方stress+15，不调用附加效果。
+
+攻击→附加效果→HP终局→非终局愤激边界顺序不变：HP败退仍先记录激昂效果；非终局效果后stress100则整轮拒绝，不产生半轮保存、也不假装已实现愤激。收据的激昂targetId为使用者本人，被抑制请求为null而非假算+40；镇静仍以对方为目标。旧四个profile、源码和存档保持不变，无隐式迁移。
+
+历史段落中“激昂未覆盖”只属原profile／时点；当前仍缺诡辩反弹及条件话题随机、四性格愤激／自动反制／再考、原发牌／全局RNG、人物书籍、开场／追击／留情及campaign结果。本次只扩大固定现代转录源码的正常态通用子集，不升级原生PK／Vanilla／主机证据，不减少原43主题／45历史快照。P078及全部依赖继续排除。
+
+仅静态文本与独立审查；未运行测试、typecheck、编译、构建、validator、诊断、示例、replay或产品。五轮成功及第六轮拒绝的纸面例子不是运行结果。
+
 ## 2026-10-20：镇静附加效果的独立会话（静态）
 
 在[PR106](https://github.com/DanielMax937/sanguozhi/pull/106)已交付普通＋大喝＋无视之外，新增[普通＋大喝＋无视＋镇静会话](docs/rules/compose-debate-session-v1.md)及[完整API与阶段收据](docs/engine/compose-debate-session-v1.md)。参考源码正常态镇静power0，输给普通或大喝后降低对方（本轮胜者）当前stress：−max(trunc(stress/2),30)，再裁剪；并非给自己镇静。无视胜会阻断败方镇静，双镇静平局没有附加效果，仍双方stress+15。
