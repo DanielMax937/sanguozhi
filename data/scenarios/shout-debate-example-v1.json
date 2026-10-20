@@ -1,0 +1,421 @@
+{
+  "schemaVersion": 1,
+  "id": "shout-debate-example-v1",
+  "validation": "paper-design-not-run",
+  "usage": "Pass scenario to createShoutDebate and scenario plus commands to replayShoutDebate; wrapper and paperExpected are not API input or recorded receipts. No code, tests, compiler, validators or scenarios were run.",
+  "scenario": {
+    "schemaVersion": 1,
+    "profile": "debate-topic-shout-reference-v1",
+    "genericOnly": true,
+    "difficulty": "source-normal",
+    "policies": {
+      "id": "shout-debate-standalone-policy-v1",
+      "profile": "debate-topic-shout-reference-v1",
+      "cards": {
+        "id": "topic-and-shout-only-v1",
+        "kinds": [
+          "topic",
+          "shout"
+        ],
+        "topics": [
+          "story",
+          "logic",
+          "trend"
+        ],
+        "levels": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "topicPower": "1+levelIndex+10-if-current-topic",
+        "topicLevelCoefficients": [
+          10,
+          15,
+          20
+        ],
+        "topicStressCoefficients": [
+          10,
+          15,
+          20
+        ],
+        "drawStressEach": 15
+      },
+      "identities": {
+        "id": "generic-identity-debate-hooks-v1",
+        "realPersonMapping": false,
+        "allPersonHooks": "identity-or-disabled",
+        "attackHook": "identity",
+        "hpDamageHook": "identity",
+        "difficulty": "source-normal",
+        "items": false,
+        "personality": false
+      },
+      "initialTopic": {
+        "id": "provided-initial-topic-v1",
+        "generated": false
+      },
+      "deal": {
+        "id": "provided-ordered-card-tapes-v1",
+        "shuffle": false,
+        "nativeDistribution": false,
+        "token": "participantId:tapeIndex",
+        "order": "tape-order-stable-retained-hand",
+        "sourceDisplaySort": false
+      },
+      "hand": {
+        "id": "source-reserved-rethink-slot-v1",
+        "intelligenceThresholds": [
+          70,
+          80,
+          90
+        ],
+        "sourceSlotCounts": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "reservedRethinkSlots": 1,
+        "rethinkPlayable": false,
+        "playableCapacities": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "round": {
+        "id": "paired-choice-atomic-round-v1",
+        "action": "ResolveShoutDebateRound",
+        "choicesOrder": "scenario-participant-order",
+        "resolutionOrder": "first-then-other-recorded-only",
+        "firstDamageBonus": false
+      },
+      "topic": {
+        "id": "source-topic-or-shout-winner-follow-v1",
+        "damageTopic": "round-start",
+        "nonterminalTopicWinnerSets": [
+          "firstId",
+          "currentTopic"
+        ],
+        "nonterminalShoutWinnerSets": [
+          "firstId"
+        ],
+        "nonterminalShoutKeeps": [
+          "currentTopic"
+        ],
+        "drawKeeps": [
+          "firstId",
+          "currentTopic"
+        ]
+      },
+      "arithmetic": {
+        "id": "source-normal-integer-topic-shout-damage-v1",
+        "attack": "100+trunc(40*(myINT-opponentINT)/(131-myINT))",
+        "hpDamage": "trunc((attack+jitter)*10*levelCoef*topicCoef/1000)",
+        "division": "toward-zero",
+        "intermediate": "exact-bigint",
+        "matchingTopicCoefficient": 10,
+        "nonmatchingTopicCoefficient": 6,
+        "angerCoefficient": 10,
+        "jitterBound": 5,
+        "nativePrng": false
+      },
+      "writer": {
+        "id": "source-hp-minus100-to1000-stress0-to100-v1",
+        "hpMin": -100,
+        "hpMax": 1000,
+        "stressMin": 0,
+        "stressMax": 100
+      },
+      "anger": {
+        "id": "reject-nonterminal-anger-trigger-v1",
+        "triggerStress": 100,
+        "rejection": "whole-round-atomic",
+        "cap99": false,
+        "reset": false,
+        "skip": false
+      },
+      "closing": {
+        "id": "session-result-only-closing-v1",
+        "defeatHp": 0,
+        "priority": [
+          "hp-defeat",
+          "unsupported-anger-trigger",
+          "crumble",
+          "topic-and-first",
+          "refill"
+        ],
+        "terminalRefill": false,
+        "terminalTopicChange": false,
+        "campaignWrite": false,
+        "terminalFirstChange": false
+      },
+      "opening": {
+        "id": "no-opening-instant-win-v1",
+        "initialHp": 1000,
+        "initialStress": 0,
+        "initialAngerTimer": 0
+      },
+      "rethink": {
+        "id": "no-rethink-v1",
+        "crumbleStep": 250,
+        "crumbleMax": 3,
+        "exposedAvailableAction": false
+      },
+      "refill": {
+        "id": "fill-next-round-from-tape-v1",
+        "fillOnlyVacancies": true,
+        "terminalRefill": false,
+        "insufficientTape": "whole-round-atomic-rejection"
+      },
+      "capacity": {
+        "id": "bounded-session-reject-v1",
+        "maxEntries": 4096,
+        "maxTapePerParticipant": 512,
+        "maxCanonicalUtf8Bytes": 16777216,
+        "maxInputNodes": 1000000,
+        "maxInputDepth": 32,
+        "exhaustion": "rejection-not-game-draw"
+      },
+      "persistence": {
+        "id": "full-policy-genesis-recompute-v1",
+        "policyComparison": "all-fields",
+        "genesisSnapshot": "recompute",
+        "receipts": "compare-all-fields",
+        "snapshot": "compare-all-fields"
+      },
+      "shout": {
+        "id": "source-no-anger-shout-v1",
+        "power": 110,
+        "levelCoefficient": 15,
+        "topicCoefficient": 12,
+        "stressCoefficient": 15,
+        "availability": "angerTimer-zero-only",
+        "additionalEffect": "none",
+        "otherRhetoric": false
+      }
+    },
+    "challengerId": "alpha",
+    "initialTopic": "story",
+    "participants": [
+      {
+        "id": "alpha",
+        "resolvedIntelligence": 60,
+        "hp": 1000,
+        "stress": 0,
+        "angerTimer": 0,
+        "cardTape": [
+          {
+            "kind": "topic",
+            "topic": "logic",
+            "level": "large"
+          },
+          {
+            "kind": "shout"
+          },
+          {
+            "kind": "topic",
+            "topic": "trend",
+            "level": "large"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          }
+        ]
+      },
+      {
+        "id": "beta",
+        "resolvedIntelligence": 60,
+        "hp": 1000,
+        "stress": 0,
+        "angerTimer": 0,
+        "cardTape": [
+          {
+            "kind": "shout"
+          },
+          {
+            "kind": "shout"
+          },
+          {
+            "kind": "topic",
+            "topic": "logic",
+            "level": "small"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          },
+          {
+            "kind": "topic",
+            "topic": "story",
+            "level": "small"
+          }
+        ]
+      }
+    ]
+  },
+  "commands": [
+    {
+      "type": "ResolveShoutDebateRound",
+      "expectedRevision": 0,
+      "expectedRoundIndex": 0,
+      "expectedFirstId": "alpha",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:0"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:0"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "psychological-damage-jitter",
+          "bound": 5,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "type": "ResolveShoutDebateRound",
+      "expectedRevision": 1,
+      "expectedRoundIndex": 1,
+      "expectedFirstId": "beta",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:1"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:1"
+        }
+      ],
+      "rawDraws": []
+    },
+    {
+      "type": "ResolveShoutDebateRound",
+      "expectedRevision": 2,
+      "expectedRoundIndex": 2,
+      "expectedFirstId": "beta",
+      "choices": [
+        {
+          "participantId": "alpha",
+          "cardToken": "alpha:2"
+        },
+        {
+          "participantId": "beta",
+          "cardToken": "beta:2"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "psychological-damage-jitter",
+          "bound": 5,
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "paperExpected": [
+    {
+      "afterRevision": 1,
+      "roundWinnerId": "beta",
+      "powers": [
+        3,
+        110
+      ],
+      "requestedHpDamage": 180,
+      "formula": "trunc((100+0)*10*15*12/1000)=180",
+      "afterHp": [
+        820,
+        1000
+      ],
+      "afterStress": [
+        15,
+        0
+      ],
+      "afterFirstId": "beta",
+      "afterTopic": "story",
+      "drawCount": 1,
+      "afterDeckCursors": [
+        4,
+        4
+      ],
+      "terminal": false
+    },
+    {
+      "afterRevision": 2,
+      "roundWinnerId": null,
+      "powers": [
+        110,
+        110
+      ],
+      "requestedHpDamage": 0,
+      "afterHp": [
+        820,
+        1000
+      ],
+      "afterStress": [
+        30,
+        15
+      ],
+      "afterFirstId": "beta",
+      "afterTopic": "story",
+      "drawCount": 0,
+      "afterDeckCursors": [
+        5,
+        5
+      ],
+      "terminal": false
+    },
+    {
+      "afterRevision": 3,
+      "roundWinnerId": "alpha",
+      "powers": [
+        3,
+        1
+      ],
+      "requestedHpDamage": 120,
+      "formula": "trunc((100+0)*10*20*6/1000)=120; old topic story, then new topic trend",
+      "afterHp": [
+        820,
+        880
+      ],
+      "afterStress": [
+        30,
+        35
+      ],
+      "afterFirstId": "alpha",
+      "afterTopic": "trend",
+      "drawCount": 1,
+      "afterDeckCursors": [
+        6,
+        6
+      ],
+      "terminal": false
+    }
+  ],
+  "boundaries": "No proof of native dealing, rhetoric beyond Shout, anger, real-person hooks, PK/Vanilla equivalence, campaign closing or P078. No generated runtime session."
+}
