@@ -558,3 +558,7 @@ P0-58以[93-legion-role-reconciliation.md](93-legion-role-reconciliation.md)为�
 ## 独立官职分配服务（2026-10-16）
 
 [完整规则正文](office-assignment-service.md)记录全部80个一般官职、10个分离爵位元数据、六分支评分、资格/爵位门、稳定调度、即时移出、fill/rebuild及原子状态保存重放。[来源manifest](../sources/office-assignment-service.json)区分4000功绩表证据与005FA4D0 body-open；[API](../engine/office-assignment-service.md)提供真实可提交接口。此工程服务不关闭64/65/66的原生证据债。本次只做静态代码/文档，不执行测试或编译类检查。
+
+## 巡察内部兼容抽取
+
+[城市命令规则的巡察兼容说明](city-command-lifecycle.md#private-patrol-compatibility-extraction)与[工程合同](../engine/city-patrol-phase.md)记录原100金/20AP、原奖励/零收益政策、supplied压力及完整审计的私有抽取。旧政策域、公共保存和预算不变；仅静态分析，原生helper/writer/调度与stock证据边界继续保留。

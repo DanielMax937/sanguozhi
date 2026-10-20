@@ -154,3 +154,7 @@
 ## 独立内政设施自动修复
 
 [Domestic repair lifecycle v1](domestic-repair-lifecycle.md)：完成设施的太守政治整式、工兵独立取整、设施中心两格供应敌军门槛、正 signed16 HP 自写封顶与本域 hp-full 事件，带 create/preview/execute/save/load/replay 完整重算合同。只读[具体规则与证据边界](../rules/domestic-repair-lifecycle.md)；不自动共享建设 work、生产 state 或全局调度。本批仅静态审阅，未运行代码、schema 或验证流程。
+
+## 私有巡察兼容阶段
+
+[巡察窄阶段](city-patrol-phase.md)：旧即时 reducer 的 Patrol 候选抽取，真实窄 view、严格错误/写入顺序、完整 audit、失败丢弃与旧 root 深冻结。公共 API、政策、owner、保存和限额不变；仅静态分析，未新增运行验证或原生等价证明。

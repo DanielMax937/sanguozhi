@@ -94,3 +94,9 @@ AdvanceMerchantTurn继续由旧owner检查advance-limit、turn-overflow、missin
 两个服务继续各自的create/preview/execute/save/load/replay协议。城市create返回State或Failure，商人create返回包含state的成功对象或Failure；城市preview仍有baseRevision，商人仍有projectedSnapshot和committed:false；save仍分别使用serialized与json。旧tags、canonical排序、数组顺序、重试语义与失败时是否携带前缀state均由旧接口决定。
 
 council仍只调用原城市公共preview/execute/save，不直接调用这些内部归约器。原普通TP未建模和完成奖投影不变。旧CLI、示例、季节服务与入口exports也未为此次抽取改变。共用内部函数并不表示城市与商人已经共用AP、gold、人物经验、行动标记、clock或save协议。
+
+## 巡察窄阶段
+
+[私有巡察候选阶段](city-patrol-phase.md)说明 `city-patrol-phase-types.ts` 与 `applyPatrolPhase`。旧 reduceDomesticInstant 先保持全宽 frame/action/context 的 copyOwned 和全新 emptyCalculation，再仅将 Patrol 分流；Recruit/Produce 的原资格、设施、算术、奖励与费用尾继续保留。公共入口、保存与预算不新增字段。
+
+阶段只接真实身份/leadership/五维XP/merit/标记、city gold/security/巡察标记、AP、supplied pressure 和三族原政策，不需要无关宽字段。阶段直接修改 owner 独占候选，不自行 clone/freeze；失败须丢弃整个候选。旧 root 成功仍深冻全宽 candidate 与完整原 audit，失败仍为 mutable reason。城→巡察标记→原选择序人物六门→核/writer→标记/奖励→零收益→金/AP门→两费用writer→acted 顺序不变；完整核审计仍过滤 evidence，所有 null/false、八字段 Write、事件完整ID和原政策语义保留。该抽取仅静态分析，未测试或执行，未关闭原生来源证据缺口。
