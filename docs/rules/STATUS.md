@@ -1,3 +1,11 @@
+## 2026-10-20：巡察／市场共享账本接入季度治安下降（静态）
+
+[具体规则](bounded-seasonal-patrol-market.md)与[完整API及保存合同](../engine/bounded-seasonal-patrol-market.md)增加独立版本化后继profile：固定太守／整备政令、有限完整随机带，季初先按旧治安计月收入，再写实际季降和足额工资；此后巡察及下月收入读取同一治安账本。复用原财政季降phase，不重复声称恢复旧公式。旧巡察市场v1与旧保存格式不变，无隐式迁移。
+
+PR99的动态锻冶月产、PR101的市场收入工资、PR103的巡察收入反馈已分别有具体规则；本页下方旧“未集成”仅属当时或原profile范围，不能据此重新交付已补部分。当前仍未覆盖完整财政／粮／灾害、通用scheduler、多施工／升级／维修／取消、原RNG／writer／stock／Vanilla等价。P078及全部依赖继续排除；原43证据主题／45快照不减。完整窗口随机带预核只是工程完成尾政策，不是原生随机机制证据。
+
+本批仅文本编辑和静态阅读，未运行测试、typecheck、编译、构建、validator、诊断、示例或产品。预算是纸面上界，不是运行测量；历史通过数字不验证本批。
+
 ## 2026-10-19：单锻冶厂建设与普通生产同账本
 
 [规则](bounded-forge-development-production.md)与[七API](../engine/bounded-forge-development-production.md)新增独立有限profile：单城唯一空地块建设、同一设施ID完成后普通生产、一次根clock/AP恢复、真实资源与当前人物／TP写入、预约和完整历史重算。原服务不迁移或替换； construction私有阶段仅提供复用数学与写序。
@@ -487,3 +495,4 @@ A1–A5、B1–B9、C1–C11、D1–D10、E1–E20 共55个主审计点已经完
 [具体规则、80行表及手算示例](office-assignment-service.md) · [API](../engine/office-assignment-service.md) · [来源](../sources/office-assignment-service.json)
 
 仍open：005FA4D0/005FA650 body、entry80、原caller候选顺序和mode映射、多职writer、stock/Vanilla/console等价。4000真实资料阶梯保留，但不把其他helper opcode当成005FA4D0 body证据。本次未执行测试、typecheck、build、编译、checker、产品/诊断，旧测试不增删；不复用历史通过状态。未连接P0-78/native军团太守/归属/capture/return/mission依赖。
+

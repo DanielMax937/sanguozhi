@@ -1,3 +1,11 @@
+## 2026-10-20：巡察／市场共享账本接入季度治安下降（静态）
+
+[具体规则](docs/rules/bounded-seasonal-patrol-market.md)与[完整API及保存合同](docs/engine/bounded-seasonal-patrol-market.md)增加独立版本化后继profile：固定太守／整备政令、有限完整随机带，季初先按旧治安计月收入，再写实际季降和足额工资；此后巡察及下月收入读取同一治安账本。复用原财政季降phase，不重复声称恢复旧公式。旧巡察市场v1与旧保存格式不变，无隐式迁移。
+
+PR99的动态锻冶月产、PR101的市场收入工资、PR103的巡察收入反馈已分别有具体规则；本页下方旧“未集成”仅属当时或原profile范围，不能据此重新交付已补部分。当前仍未覆盖完整财政／粮／灾害、通用scheduler、多施工／升级／维修／取消、原RNG／writer／stock／Vanilla等价。P078及全部依赖继续排除；原43证据主题／45快照不减。完整窗口随机带预核只是工程完成尾政策，不是原生随机机制证据。
+
+本批仅文本编辑和静态阅读，未运行测试、typecheck、编译、构建、validator、诊断、示例或产品。预算是纸面上界，不是运行测量；历史通过数字不验证本批。
+
 ## 2026-10-19 单锻冶厂建设→普通生产：限定同账本整合
 
 [规则正文](docs/rules/bounded-forge-development-production.md)与[七API](docs/engine/bounded-forge-development-production.md)覆盖唯一新建锻冶厂从空地块、施工、完成到1–3号普通兵装生产；同一资源／人物／设施账本与唯一clock，完整开工证据、双向锁、真实当前TP／成长和全历史重建均保留。候选只用静态审阅，不运行测试、编译、构建或产品验证。
@@ -891,3 +899,4 @@ A smaller exact core is preferable to a larger invented ruleset.
 ## 2026-10-11 生产耗时独立caller投影
 
 已新增本地候选 `calculateProductionTimeProjection` / `production-time-observations-v1`（说明：docs/rules/production-time.md）。仅固定listing与逐调用观测驱动的整数/trace；全无效返回9、type9跳扫描、重复validity/设施解析独立、允许负数和零、技能向零减半。真实helpers/ABI/对象可变读取/命令/库存writer/完成调度/实际日数/stock仍open；未覆盖P0-78及依赖。新树验收和发布状态外部收据单列，不复用PR #55历史通过。
+
