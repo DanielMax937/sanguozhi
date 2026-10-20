@@ -4,6 +4,8 @@ import facilityData from '../../../data/catalogs/city-finance-facilities-v1.json
 import policyData from '../../../data/catalogs/city-finance-policies-v1.json' with { type: 'json' };
 import { compareFinanceOfficerIds, resolveFinancePayroll } from './internal/finance-money-payroll-leaves.ts';
 import { applyFinanceMoneyPhase, applyFinanceFullSalaryPhase } from './internal/finance-money-payroll-phases.ts';
+import { applyFinanceSeasonalSecurityPhase } from './internal/finance-seasonal-security-phases.ts';
+import type { FinanceSeasonalSecurityReceipt } from './internal/finance-seasonal-security-phases.ts';
 import { calculateCityFoodIncomeProjection } from './city-food-income-projection.ts';
 import type { CityFoodIncomeProjectionInput, CityFoodIncomeSlot } from './city-food-income-projection.ts';
 import { calculateMonthlyCityFoodBaseArgument } from './monthly-city-food-base-argument.ts';
@@ -42,7 +44,7 @@ type CatalogDigests = { offices: string; facilities: string };
 type Write = { resource: 'gold' | 'food' | 'security' | 'equipment-1' | 'equipment-2' | 'equipment-3' | 'equipment-4'; reason: 'money-base' | 'wealthy-bonus' | 'food-base' | 'rice-way-bonus' | 'salary' | 'specialty' | 'seasonal-security'; before: number; requested: number; accepted: number; actualDelta: number; after: number; cap: number; discarded: number; writerPolicyId: string };
 type KernelCall = { status: 'called'; api: string; profile: string; adapterObservationKind: 'derived-adapter-observations'; input: unknown; result: unknown } | { status: 'not-due'; reason: string };
 type SalaryItem = { officerId: string; officeId: number; officeName: string; catalogSalary: number };
-type SecurityReceipt = { status: 'not-due' | 'applied' | 'administrative-reform-skip'; governorId: string | null; charm: number | null; adminRoll: number | null; lossRoll: number | null; requestedLoss: number; actualLoss: number; before: number; after: number };
+type SecurityReceipt = FinanceSeasonalSecurityReceipt;
 type SpecialtyReceipt = { equipmentType: Equipment; eligibility: 'not-due' | 'no-governor' | 'not-specialty' | 'no-completed-facilities' | 'production'; count: number | null; arithmeticProfile: 'comment-f32-rne-trunc-v1'; kernelQuantityRequest: number | null; kernel: KernelCall; write: Write | null };
 const BOUNDARY = {
   sourceLevel: 'source-listing-kernels-with-provisional-service-policies', nativeExecution: false, stockVerified: false,
@@ -334,17 +336,12 @@ function resolve(s: Scenario, before: Snapshot, command: Envelope): { snapshot: 
     receipt.monthlyFoodKernel = called('calculateMonthlyCityFoodBaseArgument', monthlyInput, monthlyResult); addCredit('food', 'food-base', j);
     if (quarterly && effects['rice-way'].active) addCredit('food', 'rice-way-bonus', Math.floor(j / 2));
   }
-  if (quarterly) {
-    const charm = governor?.charm ?? 0, adminRoll = s.hasAdministrativeReform ? draw(100, 'administrative-reform') : null;
-    receipt.security.charm = charm; receipt.security.adminRoll = adminRoll;
-    if (adminRoll !== null && adminRoll < 50) receipt.security.status = 'administrative-reform-skip';
-    else {
-      const roll = draw(3, 'seasonal-loss'), loss = Math.min(5, Math.floor(Math.max(1, 90 - charm) / 10) + roll), actual = Math.min(before.city.security, loss);
-      after.city.security -= actual;
-      receipt.security = { status: 'applied', governorId: governor?.id ?? null, charm, adminRoll, lossRoll: roll, requestedLoss: loss, actualLoss: actual, before: before.city.security, after: after.city.security };
-      receipt.writes.push({ resource: 'security', reason: 'seasonal-security', before: before.city.security, requested: loss, accepted: actual, actualDelta: actual === 0 ? 0 : -actual, after: after.city.security, cap: 100, discarded: loss - actual, writerPolicyId: POLICIES.security.id });
-    }
-  }
+  const securityPhase = applyFinanceSeasonalSecurityPhase({
+    quarterStart: quarterly, governor, hasAdministrativeReform: s.hasAdministrativeReform,
+    securityTarget: after.city, writerPolicyId: POLICIES.security.id, draw,
+  });
+  receipt.security = securityPhase.security;
+  if (securityPhase.write !== null) receipt.writes.push(securityPhase.write);
   const salaryPhase = applyFinanceFullSalaryPhase({ monthStart: monthly, payroll: payrollResult.payroll, goldTarget: after.city });
   if (!salaryPhase.ok) fail(salaryPhase.reason, null, salaryPhase.proposal);
   if (salaryPhase.write !== null) {
@@ -455,3 +452,4 @@ export function replayCityFinanceCommands(input: unknown): CityFinanceReplayResu
     const result: ReplayResult = { ok: true, state, outcomes }; budget(result); return freeze(result);
   } catch (e) { return freeze(failure(e)); }
 }
+

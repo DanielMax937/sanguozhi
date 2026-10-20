@@ -1,3 +1,11 @@
+## 2026-10-20：巡察／市场共享账本接入季度治安下降（静态）
+
+[具体规则](bounded-seasonal-patrol-market.md)与[完整API及保存合同](../engine/bounded-seasonal-patrol-market.md)增加独立版本化后继profile：固定太守／整备政令、有限完整随机带，季初先按旧治安计月收入，再写实际季降和足额工资；此后巡察及下月收入读取同一治安账本。复用原财政季降phase，不重复声称恢复旧公式。旧巡察市场v1与旧保存格式不变，无隐式迁移。
+
+PR99的动态锻冶月产、PR101的市场收入工资、PR103的巡察收入反馈已分别有具体规则；本页下方旧“未集成”仅属当时或原profile范围，不能据此重新交付已补部分。当前仍未覆盖完整财政／粮／灾害、通用scheduler、多施工／升级／维修／取消、原RNG／writer／stock／Vanilla等价。P078及全部依赖继续排除；原43证据主题／45快照不减。完整窗口随机带预核只是工程完成尾政策，不是原生随机机制证据。
+
+本批仅文本编辑和静态阅读，未运行测试、typecheck、编译、构建、validator、诊断、示例或产品。预算是纸面上界，不是运行测量；历史通过数字不验证本批。
+
 # 巡察治安影响市场月收入
 
 [详细规则正文](bounded-patrol-market-income-payroll.md)列出普通巡察 100 金/20 AP、治安与成长写入、人物施工锁、动态月收入、完整普通官薪与工资保留金。新独立 profile 最多 12 旬、25 条接受历史与 32 次完整重放；巡察不能占掉已接受施工所需的完成尾。压力是显式独立观测，顺序和集成政策保持可替换推测，不代表原版财政全部恢复。[API 与保存说明](../engine/bounded-patrol-market-income-payroll.md)给出完整闭合合同；未运行测试、编译或构建。
@@ -566,3 +574,4 @@ P0-58以[93-legion-role-reconciliation.md](93-legion-role-reconciliation.md)为�
 ## 巡察内部兼容抽取
 
 [城市命令规则的巡察兼容说明](city-command-lifecycle.md#private-patrol-compatibility-extraction)与[工程合同](../engine/city-patrol-phase.md)记录原100金/20AP、原奖励/零收益政策、supplied压力及完整审计的私有抽取。旧政策域、公共保存和预算不变；仅静态分析，原生helper/writer/调度与stock证据边界继续保留。
+
