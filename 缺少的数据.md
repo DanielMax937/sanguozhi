@@ -1,3 +1,13 @@
+## 2026-10-20：舌战当前牌组补牌／话题修补独立核（静态）
+
+[PR110](https://github.com/DanielMax937/sanguozhi/pull/110)已交付正常态再考会话。本批另外新增[独立补牌规则核](docs/rules/debate-hand-fill-v1.md)及[完整API／来源审计](docs/engine/debate-hand-fill-v1.md)：只接收给定的18张当前牌组、游标、3至6个可出手槽与必要的九选一修补原始输入，不再复制一套完整会话。
+
+按固定现代 CharacterFillCards 顺序，先恢复保留再考槽0，再在原物理槽1起依次补空位；只有填后无普通话题牌且本次确实补过空槽，才把最后新补槽改为1+RandInt(9)对应牌，再按现代枚举数值排序。完整无空位的全话术手牌不会被无条件修补。修补覆盖的牌组项仍算已消费，不另推进游标；同值牌的可追踪排序仅采用显式工程审计规则，不声称固定了原排序的对象身份顺序。
+
+跨越18张当前牌组边界明确返回 unsupported-deck-regeneration；不实现牌组生成、洗牌、概率、全局PRNG、人物书籍或愤激覆写。本核没有HP／stress／canRethink／回合／campaign写入，也没有会话存档。旧七个profile与存档保持不变，**尚未接入新核**；PR110的 unsupported-topic-repair 与各旧版原发牌边界仍然存在，不能把此底层核交付说成完整发牌或完整舌战已经完成。
+
+证据限定固定现代C#转录及枚举，不升级为原生PK／Vanilla／主机认证；原43证据主题／45历史快照不减，P078及全部依赖排除。本批仅静态代码／文档审查，未运行测试、typecheck、编译、构建、validator、诊断、示例或项目代码；独立纸面输入与预期不作运行通过结论。
+
 ## 2026-10-20：再考重抽与崩坏恢复的独立正常态会话（静态）
 
 在[PR109](https://github.com/DanielMax937/sanguozhi/pull/109)诡辩版本之外，新增[正常态再考参考会话](docs/rules/rethink-debate-session-v1.md)与[完整API及重抽收据](docs/engine/rethink-debate-session-v1.md)。再考不是第七种攻击牌：在出牌阶段按先手可选重抽→先手最终选牌→后手可选重抽→后手最终选牌处理，再进入既有六种战斗牌结算。整个过程被工程API打包成一个原子回合，不声称实现交互式阶段存档。

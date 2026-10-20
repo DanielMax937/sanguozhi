@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-hand-fill-v1",
+  "scope": "Independent pure CharacterFillCards kernel over one caller-provided current 18-card deck, with conditional supplied bound-9 topic repair and numeric sorting; pinned modern-reference subset only",
+  "implementation": "packages/engine/src/debate-hand-fill.ts",
+  "ruleDocument": "docs/rules/debate-hand-fill-v1.md",
+  "apiDocument": "docs/engine/debate-hand-fill-v1.md",
+  "paperExample": "data/scenarios/debate-hand-fill-example-v1.json",
+  "exports": {
+    "evaluate": "evaluateDebateHandFill",
+    "policy": "DEBATE_HAND_FILL_POLICY_V1",
+    "evidence": "DEBATE_HAND_FILL_EVIDENCE_V1",
+    "typeFamily": "DebateHandFill*V1"
+  },
+  "evidence": {
+    "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "debatePath": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+    "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+    "debateEnumPath": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+    "debateEnumBlob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+    "sourceDeckTableSizeLine": 54,
+    "sourceSortLines": [406, 409],
+    "sourceFillLines": [412, 438],
+    "sourceCardEnumLines": [33, 61],
+    "fillEvidence": "pinned-modern-translated-reference-only",
+    "deckEvidence": "caller-provided-current-deck-engine-boundary",
+    "topicRepairEvidence": "source-TopicFirst-plus-RandInt9-last-new-slot-only",
+    "sortEvidence": "source-Array.Sort-numeric-codes-including-reserved-zero",
+    "equalCodeAuditEvidence": "engine-preSortSlot-tie-policy-not-native-identity-order",
+    "inputSafetyAndBudgets": "engine-policy",
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "completeDebate": false,
+    "originalUnresolvedGroups": 43,
+    "originalHistoricalSnapshots": 45,
+    "nativeWholeChain": "open",
+    "p078": "excluded",
+    "nativeDeckRegeneration": "excluded",
+    "nativeRngStream": "excluded",
+    "legacySessionIntegration": "excluded"
+  },
+  "policies": {
+    "id": "debate-hand-fill-current-deck-policy-v1",
+    "profile": "debate-hand-fill-reference-v1",
+    "cards": {
+      "representation": "pinned-modern-enum-numeric-code",
+      "rethink": 0,
+      "topicFirst": 1,
+      "topicLast": 9,
+      "rhetoricFirst": 10,
+      "rhetoricLast": 14,
+      "playableMin": 1,
+      "playableMax": 14
+    },
+    "slots": {
+      "input": "playable-only-original-source-order",
+      "vacancy": null,
+      "sourceSlotOffset": 1,
+      "playableCounts": [3, 4, 5, 6],
+      "reservedSlot": 0,
+      "reservedCard": 0,
+      "reservedHandling": "restore-before-fill"
+    },
+    "deck": {
+      "id": "provided-current-deck-18-v1",
+      "sourceDeckTableSize": 18,
+      "providedEntries": 18,
+      "fillOrder": "ascending-vacant-original-source-slot",
+      "consume": "advance-one-per-filled-slot",
+      "exhaustion": "unsupported-deck-regeneration",
+      "regeneration": "excluded",
+      "nativeDistribution": false
+    },
+    "repair": {
+      "condition": "post-fill-topic-count-zero-and-new-slot-exists",
+      "target": "last-new-original-source-slot",
+      "drawRole": "debate-fill-topic-repair",
+      "drawBound": 9,
+      "cardMapping": "1+raw-value",
+      "noNewSlot": "skip-even-with-no-topic"
+    },
+    "sort": {
+      "key": "numeric-card-code-ascending",
+      "scope": "all-source-slots-including-reserved-zero",
+      "equalCodeAuditTie": "preSortSlot-ascending-engine-policy",
+      "nativeEqualCodeIdentityOrder": false
+    },
+    "randomness": {
+      "source": "caller-supplied-draws",
+      "validation": "syntax-before-fill-semantic-at-repair",
+      "count": "one-only-if-repair-applies",
+      "extra": "atomic-rejection",
+      "externalRngConsumed": 0,
+      "nativePrng": false
+    },
+    "capacity": {
+      "maxInputNodes": 1024,
+      "maxInputDepth": 12,
+      "maxInputArrayLength": 32,
+      "maxCanonicalUtf8Bytes": 16384
+    },
+    "boundary": {
+      "kind": "independent-character-fill-kernel",
+      "sessionIntegration": false,
+      "persistence": false,
+      "legacyProfilesChanged": false
+    }
+  },
+  "sources": [
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "blob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+      "sha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+      "bytes": 71288,
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "evidenceLevel": "pinned-modern-translated-reference",
+      "sourceClaim": "Modern C# translation, not authenticated native or stock-original code",
+      "identityRecord": "Inherited from docs/sources/rethink-debate-session-v1.json; not newly downloaded or rehashed in this batch",
+      "readback": "Existing fixed-reference text statically read for the selected fill, sort, deck-size and capacity lines; source never executed"
+    },
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "blob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+      "sha256": "cd71efed5059fb4ca876091b1e39bd34636fb978c8ec9bfbf924d6a443070bc1",
+      "bytes": 8447,
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "evidenceLevel": "pinned-modern-translated-enum-reference",
+      "sourceClaim": "Modern enum file describes translation and some inferred enums; not independent authentication of original headers or native binaries",
+      "identityRecord": "Inherited from docs/sources/rethink-debate-session-v1.json; not newly downloaded or rehashed in this batch",
+      "readback": "Existing fixed-reference text statically read for card codes and translation disclosure; source never executed"
+    }
+  ],
+  "lineAttribution": [
+    {
+      "file": "Debate.cs",
+      "startLine": 53,
+      "endLine": 57,
+      "supports": "DeckTableSize is 18 and MaxCardCount is 7; the kernel admits one provided current deck, not an arbitrary-length future stream",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L53-L57"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 306,
+      "endLine": 340,
+      "supports": "Exclusion context only: source DeckGenerate includes card-generation choices, rhetoric handling and shuffling; none of those algorithms or distributions is implemented",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L306-L340"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 343,
+      "endLine": 354,
+      "supports": "Normal living-person total capacities 4,5,6,7 give the admitted playable lengths 3,4,5,6 after the reserved slot; the kernel does not perform person, intelligence or alive-state lookup",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L343-L354"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 406,
+      "endLine": 410,
+      "supports": "CharacterSortCards applies Array.Sort over the complete numeric slot prefix including reserved slot zero; no equal-code identity-order guarantee is inferred",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L406-L410"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 413,
+      "endLine": 420,
+      "supports": "Restore Rethink in source slot0, initialize last=-1, then visit original playable slots ascending and skip non-vacant values; null is an engine mapping of source -1",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L413-L420"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 421,
+      "endLine": 427,
+      "supports": "Source regenerates when a needed read reaches DeckTableSize, resets cursor, assigns the next deck value, advances cursor and saves the filled original slot; regeneration is an explicit atomic-rejection boundary here",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L421-L427"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 429,
+      "endLine": 435,
+      "supports": "Count all ordinary topic cards after completing fill, including retained cards; the reserved slot is excluded from this count",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L429-L435"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 436,
+      "endLine": 437,
+      "supports": "Repair is the conjunction topicCardCount==0 and last>=0; overwrite the last newly filled original slot with TopicFirst+RandInt(9), not another deck draw; a full all-rhetoric hand has no new slot and does not repair",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L436-L437"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 438,
+      "endLine": 438,
+      "supports": "Sort only after filling and optional topic repair; sorting first would change the repair target",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L438"
+    },
+    {
+      "file": "DebateEnum.cs",
+      "startLine": 1,
+      "endLine": 20,
+      "supports": "Modern translation and inferred-enum disclosure, not original-header or native-binary authentication",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs#L1-L20"
+    },
+    {
+      "file": "DebateEnum.cs",
+      "startLine": 33,
+      "endLine": 61,
+      "supports": "Rethink0; Story1..3, Logic4..6, Trend7..9; Shout10, Sophistry11, Ignore12, Compose13, Agitate14; TopicFirst1 and TopicLast9 establish the repair mapping 1+draw and bound9",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs#L33-L61"
+    }
+  ],
+  "contract": {
+    "schemaVersion": 1,
+    "profile": "debate-hand-fill-reference-v1",
+    "inputKeys": ["schemaVersion", "profile", "policies", "playableSlots", "cardTape", "deckCursor", "rawDraws"],
+    "policyComparison": "all-fields-canonical-structure-not-id-only",
+    "playableSlots": "dense array of 3..6 entries, each null or integer1..14; input index0 maps to original source slot1",
+    "cardTape": "dense array of exactly18 integer1..14 entries; validate all entries, including unconsumed prefix and suffix",
+    "deckCursor": "integer0..18, indexing the next provided current-deck item",
+    "rawDraws": "required dense array; exactly one role=debate-fill-topic-repair,bound=9,value=0..8 iff repair applies, otherwise empty",
+    "sourceOrder": ["restore-reserved-slot0", "fill-vacancies-in-original-slot-order", "count-post-fill-topics", "conditionally-repair-last-new-original-slot", "numeric-sort-all-slots"],
+    "successKeys": ["ok", "hand", "deckCursor", "receipt"],
+    "failureKeys": ["ok", "reason"],
+    "atomicFailure": "no partial hand, cursor, receipt or caller mutation",
+    "fullAllRhetoric": "accepted without repair when no slot was filled, with rawDraws=[]; sort still runs",
+    "cursor18NoVacancy": "accepted without reading or regenerating deck",
+    "cursorReaches18Exactly": "accepted when all vacancies were filled before another read would be needed",
+    "receiptPolicyField": "policy",
+    "receiptEvidenceField": "evidence",
+    "receiptSnapshotStages": {
+      "before": "original playable slots and input deck cursor",
+      "filled": "new draws in ascending original source-slot order, preserving original tape index and card before repair",
+      "postFillHand": "all original source slots, including reserved0, after fill and before repair",
+      "preSortHand": "all original source slots after optional repair and before sorting",
+      "after": "complete sorted hand and final deck cursor"
+    },
+    "repairAppliedKeys": ["status", "preSortSlot", "beforeCard", "afterCard", "drawIndex", "rawValue"],
+    "repairSkippedReasons": ["topic-present", "no-new-slot"],
+    "sortedProvenanceKeys": ["sortedIndex", "preSortSlot", "origin", "tapeIndex", "originalCard", "card", "topicRepairApplied"],
+    "sortedProvenanceOrigins": ["reserved-rethink", "retained", "tape"],
+    "originalCardMeaning": "pre-repair card code; a repaired tape-origin item retains the consumed tape index",
+    "failureReasons": [
+      "unsupported-runtime",
+      "input-limit",
+      "malformed-data",
+      "unknown-field",
+      "unsupported-profile",
+      "unsupported-policy",
+      "invalid-playable-slots",
+      "unsupported-card-code",
+      "invalid-card-tape",
+      "invalid-deck-cursor",
+      "unsupported-deck-regeneration",
+      "missing-raw-draw",
+      "unexpected-raw-draw",
+      "invalid-raw-draw"
+    ],
+    "drawErrorOrdering": "strict data and raw-draw syntax checks precede fill; valid-syntax draw count/role/bound/range semantics are checked only after successful fill reaches repair or skip",
+    "inputSafety": "Reject proxies, accessors, custom prototypes, symbol or hidden fields, cycles, sparse or decorated arrays, non-safe-integer numbers, negative zero and executable values; unavailable Node proxy detection fails closed",
+    "returnedData": "recursively frozen and detached from caller inputs",
+    "sessionMutation": false
+  },
+  "boundaries": {
+    "modernSourceCertifiesNative": false,
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "consoleEquivalent": false,
+    "completeDebate": false,
+    "originalUnresolvedGroups": 43,
+    "originalHistoricalSnapshots": 45,
+    "originalEvidenceAccounting": "Original43 evidence themes and45 historical snapshots remain open and unchanged; this modern-reference kernel closes no original/native evidence group",
+    "formulaEvidenceScope": "Existing E15 generic ordinary-core evidence is not expanded to fill, topic repair, sorting, deck generation, native randomness or complete debate",
+    "sourceEdition": "Pinned modern C# reference only, not PC-PK/PK1.1, Vanilla or console binary equivalence",
+    "deckBoundary": "One exact18 current deck is supplied; a needed read after index17 rejects unsupported-deck-regeneration rather than generating, concatenating or wrapping",
+    "deckReachability": "Input accepts local card states but does not certify source DeckGenerate distribution or reachability from a complete session",
+    "repair": "Conditional 1+supplied-bound9-value mapping only; no source PRNG implementation, uniformity certification or external RNG consumption",
+    "topicGuarantee": "Only a fill with at least one new slot repairs a topic-less result; a full all-rhetoric hand is not forced to contain a topic",
+    "sort": "Numeric ascending over every source slot including reserved0; equal-code provenance uses preSortSlot ascending solely as an engine audit convention",
+    "identity": "Local provenance is not native physical-card identity, a persistent token or a legacy session occurrence",
+    "reservedRethink": "Restored numeric slot0 does not grant canRethink availability or perform a Rethink action",
+    "legacySessions": "All seven existing session profiles remain unchanged, with no integration, implicit upgrade, adapter or save migration",
+    "legacyRethinkTopicRepair": "Existing Rethink session unsupported-topic-repair remains unchanged; standalone supplied-draw repair does not lift that session boundary",
+    "stateWrites": "None to HP, stress, angerTimer, canRethink, crumble, topic, first, round, history, session or campaign",
+    "campaignIntegration": false,
+    "p078": "excluded",
+    "excluded": [
+      "DeckGenerate, shuffle, rhetoric inventory and native deck distribution",
+      "native PRNG and global random stream",
+      "tutorial mode and tutorial control flow",
+      "four-personality anger and automatic counter cards",
+      "additional consumption, chain attacks and excited timers",
+      "calm-anger Rethink reset and large-topic overwrite",
+      "Rethink availability or full-hand redraw orchestration",
+      "attack, reflection, additional effects and HP or stress writers",
+      "opening instant win and critical pursuit, mercy or injury",
+      "real person, book, item or MOD exceptions",
+      "complete debate sessions, replay, persistence or save migration",
+      "P078/native personnel tasks and dependencies",
+      "capture, execution, ownership, return or mission",
+      "diplomacy automatic settlement and campaign writes"
+    ],
+    "engineeringPolicies": [
+      "strict numeric DTO with null playable vacancies",
+      "caller-supplied playable length rather than person or intelligence lookup",
+      "one supplied current 18-card deck and explicit regeneration rejection",
+      "required rawDraws array with conditional supplied repair draw",
+      "atomic pure result and no partial failure receipt",
+      "deterministic equal-code audit order by original source slot",
+      "explicit provenance and before/fill/repair/sort stages",
+      "strict detached data, runtime guard and resource budgets",
+      "complete policy comparison and no session integration"
+    ]
+  },
+  "publicMechanismCrosscheck": [],
+  "validation": {
+    "mode": "static-source-and-document-review-only",
+    "tests": "not-run",
+    "typecheck": "not-run",
+    "compiler": "not-run",
+    "build": "not-run",
+    "validators": "not-run",
+    "diagnostics": "not-run",
+    "product": "not-run",
+    "candidateExecution": "not-run",
+    "replay": "not-run",
+    "examples": "paper-design-not-run",
+    "sourceExecution": "not-run",
+    "sourceIdentityHashes": "Inherited recorded identities, not newly computed or execution evidence",
+    "literalTranscription": "Policy and evidence were manually text-transcribed from implementation constants; PROFILE, DECK_SIZE and numeric capacity constants were expanded without importing, loading, evaluating or executing the candidate module",
+    "baseline": "PR110 main 5c4913c3d747f76be431e8c460c0bf50fa61b51c",
+    "remoteWrites": "not-performed"
+  }
+}
