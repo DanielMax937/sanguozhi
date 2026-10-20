@@ -2,7 +2,7 @@
 
 [规则、公式与执行顺序](../rules/shout-debate-session-v1.md) · [完整政策/证据/固定来源](../sources/shout-debate-session-v1.json) · [三轮纸面场景，未运行](../../data/scenarios/shout-debate-example-v1.json)。
 
-直接从 [packages/engine/src/shout-debate.ts](../../packages/engine/src/shout-debate.ts) 导入。本批没有修改 package index，不要假定原 engine barrel 已重新导出这些符号。新 profile 为 `debate-topic-shout-reference-v1`，tag 为 `shout-debate-session-v1`；旧普通牌存档/API 不自动迁移。
+可直接从 [packages/engine/src/shout-debate.ts](../../packages/engine/src/shout-debate.ts) 或公共 [engine index](../../packages/engine/src/index.ts) 导入。PR105初版仅新增独立文件；2026-10-20后续登记批次补齐公共导出，不改变本模块行为或保存合同。新 profile 为 `debate-topic-shout-reference-v1`，tag 为 `shout-debate-session-v1`；旧普通牌存档/API 不自动迁移。
 
 ## 1. 全部公开函数与常量
 

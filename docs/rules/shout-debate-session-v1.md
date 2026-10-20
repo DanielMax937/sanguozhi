@@ -2,7 +2,7 @@
 
 日期：2026-10-20。直接实现入口：[shout-debate.ts](../../packages/engine/src/shout-debate.ts)。[完整 API 与 DTO](../engine/shout-debate-session-v1.md) · [全部政策与来源记录](../sources/shout-debate-session-v1.json) · [三轮纸面场景，未运行](../../data/scenarios/shout-debate-example-v1.json)。
 
-这是新的、独立、有界子集，不是给旧 `topic-debate-session-v1` 存档换名，也不是完整舌战或原生三国志 11 的等价实现。本批仅新增文件，不改旧入口、旧索引、旧存档合同或经济批次。
+这是新的、独立、有界子集，不是给旧 `topic-debate-session-v1` 存档换名，也不是完整舌战或原生三国志 11 的等价实现。PR105初版仅新增文件，不改当时旧入口、旧索引、旧存档合同或经济批次。2026-10-20后续登记批次补齐公共包导出与全局索引，不改变本profile行为；普通＋大喝＋无视另见[独立规则](ignore-debate-session-v1.md)，没有隐式升级本存档。
 
 ## 1. 支持域与明确排除
 
