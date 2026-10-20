@@ -722,3 +722,29 @@ export {
   loadRethinkDebate,
   replayRethinkDebate,
 } from './rethink-debate.ts';
+
+// Independent current-deck hand-fill kernel; no existing session integration.
+export type {
+  DebateHandFillCardCodeV1,
+  DebateHandFillTopicCardCodeV1,
+  DebateHandFillSourceCardCodeV1,
+  DebateHandFillHandV1,
+  DebateHandFillRawDrawV1,
+  DebateHandFillInputV1,
+  DebateHandFillBeforeV1,
+  DebateHandFillAfterV1,
+  DebateHandFillFilledCardV1,
+  DebateHandFillRepairV1,
+  DebateHandFillSortedProvenanceV1,
+  DebateHandFillReceiptV1,
+  DebateHandFillFailureReasonV1,
+  DebateHandFillFailureV1,
+  DebateHandFillResultV1,
+  DebateHandFillPolicyV1,
+  DebateHandFillEvidenceV1,
+} from './debate-hand-fill.ts';
+export {
+  DEBATE_HAND_FILL_POLICY_V1,
+  DEBATE_HAND_FILL_EVIDENCE_V1,
+  evaluateDebateHandFill,
+} from './debate-hand-fill.ts';

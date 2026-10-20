@@ -1,0 +1,1239 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-hand-fill-example-v1",
+  "validation": "paper-design-not-run",
+  "usage": "Each cases/rejections entry is an INDEPENDENT input for evaluateDebateHandFill; paperExpected is a manually authored projection summary, not a full generated receipt, session or test result. No case executes or feeds another case.",
+  "cases": [
+    {
+      "id": "sparse-repair",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-hand-fill-reference-v1",
+        "policies": {
+          "id": "debate-hand-fill-current-deck-policy-v1",
+          "profile": "debate-hand-fill-reference-v1",
+          "cards": {
+            "representation": "pinned-modern-enum-numeric-code",
+            "rethink": 0,
+            "topicFirst": 1,
+            "topicLast": 9,
+            "rhetoricFirst": 10,
+            "rhetoricLast": 14,
+            "playableMin": 1,
+            "playableMax": 14
+          },
+          "slots": {
+            "input": "playable-only-original-source-order",
+            "vacancy": null,
+            "sourceSlotOffset": 1,
+            "playableCounts": [
+              3,
+              4,
+              5,
+              6
+            ],
+            "reservedSlot": 0,
+            "reservedCard": 0,
+            "reservedHandling": "restore-before-fill"
+          },
+          "deck": {
+            "id": "provided-current-deck-18-v1",
+            "sourceDeckTableSize": 18,
+            "providedEntries": 18,
+            "fillOrder": "ascending-vacant-original-source-slot",
+            "consume": "advance-one-per-filled-slot",
+            "exhaustion": "unsupported-deck-regeneration",
+            "regeneration": "excluded",
+            "nativeDistribution": false
+          },
+          "repair": {
+            "condition": "post-fill-topic-count-zero-and-new-slot-exists",
+            "target": "last-new-original-source-slot",
+            "drawRole": "debate-fill-topic-repair",
+            "drawBound": 9,
+            "cardMapping": "1+raw-value",
+            "noNewSlot": "skip-even-with-no-topic"
+          },
+          "sort": {
+            "key": "numeric-card-code-ascending",
+            "scope": "all-source-slots-including-reserved-zero",
+            "equalCodeAuditTie": "preSortSlot-ascending-engine-policy",
+            "nativeEqualCodeIdentityOrder": false
+          },
+          "randomness": {
+            "source": "caller-supplied-draws",
+            "validation": "syntax-before-fill-semantic-at-repair",
+            "count": "one-only-if-repair-applies",
+            "extra": "atomic-rejection",
+            "externalRngConsumed": 0,
+            "nativePrng": false
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384
+          },
+          "boundary": {
+            "kind": "independent-character-fill-kernel",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "playableSlots": [
+          12,
+          null,
+          14
+        ],
+        "cardTape": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          10,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deckCursor": 5,
+        "rawDraws": [
+          {
+            "role": "debate-fill-topic-repair",
+            "bound": 9,
+            "value": 4
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "hand": [
+          0,
+          5,
+          12,
+          14
+        ],
+        "deckCursor": 6,
+        "filled": [
+          {
+            "preSortSlot": 2,
+            "tapeIndex": 5,
+            "card": 10
+          }
+        ],
+        "postFillHand": [
+          0,
+          12,
+          10,
+          14
+        ],
+        "preSortHand": [
+          0,
+          12,
+          5,
+          14
+        ],
+        "topicCardCountAfterFill": 0,
+        "lastNewSlot": 2,
+        "repair": {
+          "status": "applied",
+          "preSortSlot": 2,
+          "beforeCard": 10,
+          "afterCard": 5,
+          "drawIndex": 0,
+          "rawValue": 4
+        },
+        "drawCount": 1,
+        "sortedProvenancePreSortSlots": [
+          0,
+          2,
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "multiple-vacancies",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-hand-fill-reference-v1",
+        "policies": {
+          "id": "debate-hand-fill-current-deck-policy-v1",
+          "profile": "debate-hand-fill-reference-v1",
+          "cards": {
+            "representation": "pinned-modern-enum-numeric-code",
+            "rethink": 0,
+            "topicFirst": 1,
+            "topicLast": 9,
+            "rhetoricFirst": 10,
+            "rhetoricLast": 14,
+            "playableMin": 1,
+            "playableMax": 14
+          },
+          "slots": {
+            "input": "playable-only-original-source-order",
+            "vacancy": null,
+            "sourceSlotOffset": 1,
+            "playableCounts": [
+              3,
+              4,
+              5,
+              6
+            ],
+            "reservedSlot": 0,
+            "reservedCard": 0,
+            "reservedHandling": "restore-before-fill"
+          },
+          "deck": {
+            "id": "provided-current-deck-18-v1",
+            "sourceDeckTableSize": 18,
+            "providedEntries": 18,
+            "fillOrder": "ascending-vacant-original-source-slot",
+            "consume": "advance-one-per-filled-slot",
+            "exhaustion": "unsupported-deck-regeneration",
+            "regeneration": "excluded",
+            "nativeDistribution": false
+          },
+          "repair": {
+            "condition": "post-fill-topic-count-zero-and-new-slot-exists",
+            "target": "last-new-original-source-slot",
+            "drawRole": "debate-fill-topic-repair",
+            "drawBound": 9,
+            "cardMapping": "1+raw-value",
+            "noNewSlot": "skip-even-with-no-topic"
+          },
+          "sort": {
+            "key": "numeric-card-code-ascending",
+            "scope": "all-source-slots-including-reserved-zero",
+            "equalCodeAuditTie": "preSortSlot-ascending-engine-policy",
+            "nativeEqualCodeIdentityOrder": false
+          },
+          "randomness": {
+            "source": "caller-supplied-draws",
+            "validation": "syntax-before-fill-semantic-at-repair",
+            "count": "one-only-if-repair-applies",
+            "extra": "atomic-rejection",
+            "externalRngConsumed": 0,
+            "nativePrng": false
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384
+          },
+          "boundary": {
+            "kind": "independent-character-fill-kernel",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "playableSlots": [
+          null,
+          11,
+          null,
+          13
+        ],
+        "cardTape": [
+          14,
+          10,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deckCursor": 0,
+        "rawDraws": [
+          {
+            "role": "debate-fill-topic-repair",
+            "bound": 9,
+            "value": 8
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "hand": [
+          0,
+          9,
+          11,
+          13,
+          14
+        ],
+        "deckCursor": 2,
+        "filled": [
+          {
+            "preSortSlot": 1,
+            "tapeIndex": 0,
+            "card": 14
+          },
+          {
+            "preSortSlot": 3,
+            "tapeIndex": 1,
+            "card": 10
+          }
+        ],
+        "postFillHand": [
+          0,
+          14,
+          11,
+          10,
+          13
+        ],
+        "preSortHand": [
+          0,
+          14,
+          11,
+          9,
+          13
+        ],
+        "topicCardCountAfterFill": 0,
+        "lastNewSlot": 3,
+        "repair": {
+          "status": "applied",
+          "preSortSlot": 3,
+          "beforeCard": 10,
+          "afterCard": 9,
+          "drawIndex": 0,
+          "rawValue": 8
+        },
+        "drawCount": 1,
+        "sortedProvenancePreSortSlots": [
+          0,
+          3,
+          2,
+          4,
+          1
+        ]
+      }
+    },
+    {
+      "id": "retained-topic",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-hand-fill-reference-v1",
+        "policies": {
+          "id": "debate-hand-fill-current-deck-policy-v1",
+          "profile": "debate-hand-fill-reference-v1",
+          "cards": {
+            "representation": "pinned-modern-enum-numeric-code",
+            "rethink": 0,
+            "topicFirst": 1,
+            "topicLast": 9,
+            "rhetoricFirst": 10,
+            "rhetoricLast": 14,
+            "playableMin": 1,
+            "playableMax": 14
+          },
+          "slots": {
+            "input": "playable-only-original-source-order",
+            "vacancy": null,
+            "sourceSlotOffset": 1,
+            "playableCounts": [
+              3,
+              4,
+              5,
+              6
+            ],
+            "reservedSlot": 0,
+            "reservedCard": 0,
+            "reservedHandling": "restore-before-fill"
+          },
+          "deck": {
+            "id": "provided-current-deck-18-v1",
+            "sourceDeckTableSize": 18,
+            "providedEntries": 18,
+            "fillOrder": "ascending-vacant-original-source-slot",
+            "consume": "advance-one-per-filled-slot",
+            "exhaustion": "unsupported-deck-regeneration",
+            "regeneration": "excluded",
+            "nativeDistribution": false
+          },
+          "repair": {
+            "condition": "post-fill-topic-count-zero-and-new-slot-exists",
+            "target": "last-new-original-source-slot",
+            "drawRole": "debate-fill-topic-repair",
+            "drawBound": 9,
+            "cardMapping": "1+raw-value",
+            "noNewSlot": "skip-even-with-no-topic"
+          },
+          "sort": {
+            "key": "numeric-card-code-ascending",
+            "scope": "all-source-slots-including-reserved-zero",
+            "equalCodeAuditTie": "preSortSlot-ascending-engine-policy",
+            "nativeEqualCodeIdentityOrder": false
+          },
+          "randomness": {
+            "source": "caller-supplied-draws",
+            "validation": "syntax-before-fill-semantic-at-repair",
+            "count": "one-only-if-repair-applies",
+            "extra": "atomic-rejection",
+            "externalRngConsumed": 0,
+            "nativePrng": false
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384
+          },
+          "boundary": {
+            "kind": "independent-character-fill-kernel",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "playableSlots": [
+          9,
+          null,
+          10
+        ],
+        "cardTape": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          12
+        ],
+        "deckCursor": 17,
+        "rawDraws": []
+      },
+      "paperExpected": {
+        "ok": true,
+        "hand": [
+          0,
+          9,
+          10,
+          12
+        ],
+        "deckCursor": 18,
+        "filled": [
+          {
+            "preSortSlot": 2,
+            "tapeIndex": 17,
+            "card": 12
+          }
+        ],
+        "postFillHand": [
+          0,
+          9,
+          12,
+          10
+        ],
+        "preSortHand": [
+          0,
+          9,
+          12,
+          10
+        ],
+        "topicCardCountAfterFill": 1,
+        "lastNewSlot": 2,
+        "repair": {
+          "status": "skipped",
+          "reason": "topic-present"
+        },
+        "drawCount": 0,
+        "sortedProvenancePreSortSlots": [
+          0,
+          1,
+          3,
+          2
+        ]
+      }
+    },
+    {
+      "id": "full-rhetoric",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-hand-fill-reference-v1",
+        "policies": {
+          "id": "debate-hand-fill-current-deck-policy-v1",
+          "profile": "debate-hand-fill-reference-v1",
+          "cards": {
+            "representation": "pinned-modern-enum-numeric-code",
+            "rethink": 0,
+            "topicFirst": 1,
+            "topicLast": 9,
+            "rhetoricFirst": 10,
+            "rhetoricLast": 14,
+            "playableMin": 1,
+            "playableMax": 14
+          },
+          "slots": {
+            "input": "playable-only-original-source-order",
+            "vacancy": null,
+            "sourceSlotOffset": 1,
+            "playableCounts": [
+              3,
+              4,
+              5,
+              6
+            ],
+            "reservedSlot": 0,
+            "reservedCard": 0,
+            "reservedHandling": "restore-before-fill"
+          },
+          "deck": {
+            "id": "provided-current-deck-18-v1",
+            "sourceDeckTableSize": 18,
+            "providedEntries": 18,
+            "fillOrder": "ascending-vacant-original-source-slot",
+            "consume": "advance-one-per-filled-slot",
+            "exhaustion": "unsupported-deck-regeneration",
+            "regeneration": "excluded",
+            "nativeDistribution": false
+          },
+          "repair": {
+            "condition": "post-fill-topic-count-zero-and-new-slot-exists",
+            "target": "last-new-original-source-slot",
+            "drawRole": "debate-fill-topic-repair",
+            "drawBound": 9,
+            "cardMapping": "1+raw-value",
+            "noNewSlot": "skip-even-with-no-topic"
+          },
+          "sort": {
+            "key": "numeric-card-code-ascending",
+            "scope": "all-source-slots-including-reserved-zero",
+            "equalCodeAuditTie": "preSortSlot-ascending-engine-policy",
+            "nativeEqualCodeIdentityOrder": false
+          },
+          "randomness": {
+            "source": "caller-supplied-draws",
+            "validation": "syntax-before-fill-semantic-at-repair",
+            "count": "one-only-if-repair-applies",
+            "extra": "atomic-rejection",
+            "externalRngConsumed": 0,
+            "nativePrng": false
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384
+          },
+          "boundary": {
+            "kind": "independent-character-fill-kernel",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "playableSlots": [
+          14,
+          10,
+          12
+        ],
+        "cardTape": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deckCursor": 18,
+        "rawDraws": []
+      },
+      "paperExpected": {
+        "ok": true,
+        "hand": [
+          0,
+          10,
+          12,
+          14
+        ],
+        "deckCursor": 18,
+        "filled": [],
+        "postFillHand": [
+          0,
+          14,
+          10,
+          12
+        ],
+        "preSortHand": [
+          0,
+          14,
+          10,
+          12
+        ],
+        "topicCardCountAfterFill": 0,
+        "lastNewSlot": null,
+        "repair": {
+          "status": "skipped",
+          "reason": "no-new-slot"
+        },
+        "drawCount": 0,
+        "sortedProvenancePreSortSlots": [
+          0,
+          2,
+          3,
+          1
+        ]
+      }
+    },
+    {
+      "id": "duplicate-codes",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-hand-fill-reference-v1",
+        "policies": {
+          "id": "debate-hand-fill-current-deck-policy-v1",
+          "profile": "debate-hand-fill-reference-v1",
+          "cards": {
+            "representation": "pinned-modern-enum-numeric-code",
+            "rethink": 0,
+            "topicFirst": 1,
+            "topicLast": 9,
+            "rhetoricFirst": 10,
+            "rhetoricLast": 14,
+            "playableMin": 1,
+            "playableMax": 14
+          },
+          "slots": {
+            "input": "playable-only-original-source-order",
+            "vacancy": null,
+            "sourceSlotOffset": 1,
+            "playableCounts": [
+              3,
+              4,
+              5,
+              6
+            ],
+            "reservedSlot": 0,
+            "reservedCard": 0,
+            "reservedHandling": "restore-before-fill"
+          },
+          "deck": {
+            "id": "provided-current-deck-18-v1",
+            "sourceDeckTableSize": 18,
+            "providedEntries": 18,
+            "fillOrder": "ascending-vacant-original-source-slot",
+            "consume": "advance-one-per-filled-slot",
+            "exhaustion": "unsupported-deck-regeneration",
+            "regeneration": "excluded",
+            "nativeDistribution": false
+          },
+          "repair": {
+            "condition": "post-fill-topic-count-zero-and-new-slot-exists",
+            "target": "last-new-original-source-slot",
+            "drawRole": "debate-fill-topic-repair",
+            "drawBound": 9,
+            "cardMapping": "1+raw-value",
+            "noNewSlot": "skip-even-with-no-topic"
+          },
+          "sort": {
+            "key": "numeric-card-code-ascending",
+            "scope": "all-source-slots-including-reserved-zero",
+            "equalCodeAuditTie": "preSortSlot-ascending-engine-policy",
+            "nativeEqualCodeIdentityOrder": false
+          },
+          "randomness": {
+            "source": "caller-supplied-draws",
+            "validation": "syntax-before-fill-semantic-at-repair",
+            "count": "one-only-if-repair-applies",
+            "extra": "atomic-rejection",
+            "externalRngConsumed": 0,
+            "nativePrng": false
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384
+          },
+          "boundary": {
+            "kind": "independent-character-fill-kernel",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "playableSlots": [
+          null,
+          10,
+          10
+        ],
+        "cardTape": [
+          10,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deckCursor": 0,
+        "rawDraws": [
+          {
+            "role": "debate-fill-topic-repair",
+            "bound": 9,
+            "value": 0
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "hand": [
+          0,
+          1,
+          10,
+          10
+        ],
+        "deckCursor": 1,
+        "filled": [
+          {
+            "preSortSlot": 1,
+            "tapeIndex": 0,
+            "card": 10
+          }
+        ],
+        "postFillHand": [
+          0,
+          10,
+          10,
+          10
+        ],
+        "preSortHand": [
+          0,
+          1,
+          10,
+          10
+        ],
+        "topicCardCountAfterFill": 0,
+        "lastNewSlot": 1,
+        "repair": {
+          "status": "applied",
+          "preSortSlot": 1,
+          "beforeCard": 10,
+          "afterCard": 1,
+          "drawIndex": 0,
+          "rawValue": 0
+        },
+        "drawCount": 1,
+        "sortedProvenancePreSortSlots": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    }
+  ],
+  "rejections": [
+    {
+      "id": "missing-repair-draw",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-hand-fill-reference-v1",
+        "policies": {
+          "id": "debate-hand-fill-current-deck-policy-v1",
+          "profile": "debate-hand-fill-reference-v1",
+          "cards": {
+            "representation": "pinned-modern-enum-numeric-code",
+            "rethink": 0,
+            "topicFirst": 1,
+            "topicLast": 9,
+            "rhetoricFirst": 10,
+            "rhetoricLast": 14,
+            "playableMin": 1,
+            "playableMax": 14
+          },
+          "slots": {
+            "input": "playable-only-original-source-order",
+            "vacancy": null,
+            "sourceSlotOffset": 1,
+            "playableCounts": [
+              3,
+              4,
+              5,
+              6
+            ],
+            "reservedSlot": 0,
+            "reservedCard": 0,
+            "reservedHandling": "restore-before-fill"
+          },
+          "deck": {
+            "id": "provided-current-deck-18-v1",
+            "sourceDeckTableSize": 18,
+            "providedEntries": 18,
+            "fillOrder": "ascending-vacant-original-source-slot",
+            "consume": "advance-one-per-filled-slot",
+            "exhaustion": "unsupported-deck-regeneration",
+            "regeneration": "excluded",
+            "nativeDistribution": false
+          },
+          "repair": {
+            "condition": "post-fill-topic-count-zero-and-new-slot-exists",
+            "target": "last-new-original-source-slot",
+            "drawRole": "debate-fill-topic-repair",
+            "drawBound": 9,
+            "cardMapping": "1+raw-value",
+            "noNewSlot": "skip-even-with-no-topic"
+          },
+          "sort": {
+            "key": "numeric-card-code-ascending",
+            "scope": "all-source-slots-including-reserved-zero",
+            "equalCodeAuditTie": "preSortSlot-ascending-engine-policy",
+            "nativeEqualCodeIdentityOrder": false
+          },
+          "randomness": {
+            "source": "caller-supplied-draws",
+            "validation": "syntax-before-fill-semantic-at-repair",
+            "count": "one-only-if-repair-applies",
+            "extra": "atomic-rejection",
+            "externalRngConsumed": 0,
+            "nativePrng": false
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384
+          },
+          "boundary": {
+            "kind": "independent-character-fill-kernel",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "playableSlots": [
+          12,
+          null,
+          14
+        ],
+        "cardTape": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          10,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deckCursor": 5,
+        "rawDraws": []
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "missing-raw-draw"
+      }
+    },
+    {
+      "id": "extra-draw-full-hand",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-hand-fill-reference-v1",
+        "policies": {
+          "id": "debate-hand-fill-current-deck-policy-v1",
+          "profile": "debate-hand-fill-reference-v1",
+          "cards": {
+            "representation": "pinned-modern-enum-numeric-code",
+            "rethink": 0,
+            "topicFirst": 1,
+            "topicLast": 9,
+            "rhetoricFirst": 10,
+            "rhetoricLast": 14,
+            "playableMin": 1,
+            "playableMax": 14
+          },
+          "slots": {
+            "input": "playable-only-original-source-order",
+            "vacancy": null,
+            "sourceSlotOffset": 1,
+            "playableCounts": [
+              3,
+              4,
+              5,
+              6
+            ],
+            "reservedSlot": 0,
+            "reservedCard": 0,
+            "reservedHandling": "restore-before-fill"
+          },
+          "deck": {
+            "id": "provided-current-deck-18-v1",
+            "sourceDeckTableSize": 18,
+            "providedEntries": 18,
+            "fillOrder": "ascending-vacant-original-source-slot",
+            "consume": "advance-one-per-filled-slot",
+            "exhaustion": "unsupported-deck-regeneration",
+            "regeneration": "excluded",
+            "nativeDistribution": false
+          },
+          "repair": {
+            "condition": "post-fill-topic-count-zero-and-new-slot-exists",
+            "target": "last-new-original-source-slot",
+            "drawRole": "debate-fill-topic-repair",
+            "drawBound": 9,
+            "cardMapping": "1+raw-value",
+            "noNewSlot": "skip-even-with-no-topic"
+          },
+          "sort": {
+            "key": "numeric-card-code-ascending",
+            "scope": "all-source-slots-including-reserved-zero",
+            "equalCodeAuditTie": "preSortSlot-ascending-engine-policy",
+            "nativeEqualCodeIdentityOrder": false
+          },
+          "randomness": {
+            "source": "caller-supplied-draws",
+            "validation": "syntax-before-fill-semantic-at-repair",
+            "count": "one-only-if-repair-applies",
+            "extra": "atomic-rejection",
+            "externalRngConsumed": 0,
+            "nativePrng": false
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384
+          },
+          "boundary": {
+            "kind": "independent-character-fill-kernel",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "playableSlots": [
+          14,
+          10,
+          12
+        ],
+        "cardTape": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deckCursor": 18,
+        "rawDraws": [
+          {
+            "role": "debate-fill-topic-repair",
+            "bound": 9,
+            "value": 0
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "unexpected-raw-draw"
+      }
+    },
+    {
+      "id": "cross-current-deck-boundary",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-hand-fill-reference-v1",
+        "policies": {
+          "id": "debate-hand-fill-current-deck-policy-v1",
+          "profile": "debate-hand-fill-reference-v1",
+          "cards": {
+            "representation": "pinned-modern-enum-numeric-code",
+            "rethink": 0,
+            "topicFirst": 1,
+            "topicLast": 9,
+            "rhetoricFirst": 10,
+            "rhetoricLast": 14,
+            "playableMin": 1,
+            "playableMax": 14
+          },
+          "slots": {
+            "input": "playable-only-original-source-order",
+            "vacancy": null,
+            "sourceSlotOffset": 1,
+            "playableCounts": [
+              3,
+              4,
+              5,
+              6
+            ],
+            "reservedSlot": 0,
+            "reservedCard": 0,
+            "reservedHandling": "restore-before-fill"
+          },
+          "deck": {
+            "id": "provided-current-deck-18-v1",
+            "sourceDeckTableSize": 18,
+            "providedEntries": 18,
+            "fillOrder": "ascending-vacant-original-source-slot",
+            "consume": "advance-one-per-filled-slot",
+            "exhaustion": "unsupported-deck-regeneration",
+            "regeneration": "excluded",
+            "nativeDistribution": false
+          },
+          "repair": {
+            "condition": "post-fill-topic-count-zero-and-new-slot-exists",
+            "target": "last-new-original-source-slot",
+            "drawRole": "debate-fill-topic-repair",
+            "drawBound": 9,
+            "cardMapping": "1+raw-value",
+            "noNewSlot": "skip-even-with-no-topic"
+          },
+          "sort": {
+            "key": "numeric-card-code-ascending",
+            "scope": "all-source-slots-including-reserved-zero",
+            "equalCodeAuditTie": "preSortSlot-ascending-engine-policy",
+            "nativeEqualCodeIdentityOrder": false
+          },
+          "randomness": {
+            "source": "caller-supplied-draws",
+            "validation": "syntax-before-fill-semantic-at-repair",
+            "count": "one-only-if-repair-applies",
+            "extra": "atomic-rejection",
+            "externalRngConsumed": 0,
+            "nativePrng": false
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384
+          },
+          "boundary": {
+            "kind": "independent-character-fill-kernel",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "playableSlots": [
+          null,
+          9,
+          null
+        ],
+        "cardTape": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          12
+        ],
+        "deckCursor": 17,
+        "rawDraws": []
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "unsupported-deck-regeneration"
+      }
+    },
+    {
+      "id": "invalid-deck-length",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-hand-fill-reference-v1",
+        "policies": {
+          "id": "debate-hand-fill-current-deck-policy-v1",
+          "profile": "debate-hand-fill-reference-v1",
+          "cards": {
+            "representation": "pinned-modern-enum-numeric-code",
+            "rethink": 0,
+            "topicFirst": 1,
+            "topicLast": 9,
+            "rhetoricFirst": 10,
+            "rhetoricLast": 14,
+            "playableMin": 1,
+            "playableMax": 14
+          },
+          "slots": {
+            "input": "playable-only-original-source-order",
+            "vacancy": null,
+            "sourceSlotOffset": 1,
+            "playableCounts": [
+              3,
+              4,
+              5,
+              6
+            ],
+            "reservedSlot": 0,
+            "reservedCard": 0,
+            "reservedHandling": "restore-before-fill"
+          },
+          "deck": {
+            "id": "provided-current-deck-18-v1",
+            "sourceDeckTableSize": 18,
+            "providedEntries": 18,
+            "fillOrder": "ascending-vacant-original-source-slot",
+            "consume": "advance-one-per-filled-slot",
+            "exhaustion": "unsupported-deck-regeneration",
+            "regeneration": "excluded",
+            "nativeDistribution": false
+          },
+          "repair": {
+            "condition": "post-fill-topic-count-zero-and-new-slot-exists",
+            "target": "last-new-original-source-slot",
+            "drawRole": "debate-fill-topic-repair",
+            "drawBound": 9,
+            "cardMapping": "1+raw-value",
+            "noNewSlot": "skip-even-with-no-topic"
+          },
+          "sort": {
+            "key": "numeric-card-code-ascending",
+            "scope": "all-source-slots-including-reserved-zero",
+            "equalCodeAuditTie": "preSortSlot-ascending-engine-policy",
+            "nativeEqualCodeIdentityOrder": false
+          },
+          "randomness": {
+            "source": "caller-supplied-draws",
+            "validation": "syntax-before-fill-semantic-at-repair",
+            "count": "one-only-if-repair-applies",
+            "extra": "atomic-rejection",
+            "externalRngConsumed": 0,
+            "nativePrng": false
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384
+          },
+          "boundary": {
+            "kind": "independent-character-fill-kernel",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "playableSlots": [
+          1,
+          2,
+          3
+        ],
+        "cardTape": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deckCursor": 0,
+        "rawDraws": []
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-card-tape"
+      }
+    }
+  ],
+  "paperNotes": [
+    "Unspecified current-deck entries are supplied code1 merely to complete EXACT18 entries; no generator or distribution is inferred.",
+    "sparse-repair consumes tape index5 code10 then replaces physical slot2 with code5 from raw4. It does not consume another deck entry; repair physical slot2 later sorts to index1.",
+    "multiple-vacancies fills original slots1 and3, repairs only lastnewslot3; direct1+8=9 is Trend-large, not DeckGenerate interleaved mapping.",
+    "retained-topic uses the last current-deck entry successfully and does not request a repair draw.",
+    "full-rhetoric at cursor18 has no vacancy and lastNewSlot null, so no regeneration check or unconditional repair. It sorts and succeeds despite containing no ordinary topic.",
+    "duplicate-codes equal code10 provenance preSortSlot2 then3 is canonical ENGINE audit only. The source integer sort does not establish equal-occurrence identity ordering.",
+    "cross-current-deck-boundary needs2 entries but only1 remains. Atomic rejection returns no partial hand/cursor/repair receipt."
+  ],
+  "boundaries": "Standalone fixed modern reference kernel only; seven existing sessions unchanged and not integrated. No native deck regeneration/distribution/global PRNG, session persistence, availability/anger/HP/campaign/P078. No runtime, tests, compiler, typecheck, build or validators executed; no native PK/Vanilla equivalence."
+}
