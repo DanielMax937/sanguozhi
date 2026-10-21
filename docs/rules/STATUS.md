@@ -1,3 +1,13 @@
+## 2026-10-21：现代参考胆小待连击执行核（静态）
+
+[PR115](https://github.com/DanielMax937/sanguozhi/pull/115)已交付单次愤怒入场，其胆小分支仅产生待连击标记。本批补充[独立胆小连打执行核](debate-timid-combo-v1.md)与[完整API合同](../engine/debate-timid-combo-v1.md)，仅接纳胆小timer=1、combo.active=true且counter=0的显式待处理检查点，不把它伪装为完整愤怒阶段或会话接入。
+
+核按来源从0至有效容量末槽遍历当前物理手牌；只有当下读取到普通话题牌才消费一次bound5 jitter并攻击。每次伤害按给定attack与胆小兴奋系数计算，先写HP再写按请求伤害除15所得压力，随后删除本槽、清空七物理槽并稳定压紧有效前缀、增加计数。循环下标仍继续递增，因此刚移入当前槽的牌会被跳过，不能改成遍历初始牌清单或消耗所有普通牌。途中HP≤0不终止；整圈完成后清combo.active，零次攻击也清，保留attacker并按实际次数返回counter。
+
+容量4..7使实际命中最多4次；每次仅用其对应显式jitter，缺失／多余／错形抽样整条拒绝。给定resolvedAttack=70..227及genericOnly限定是工程支持域，人物attack解析和非恒等伤害hook均未实现。完整扫描、伤害请求／实际写入、删除压紧与抽样记录返回；没有补牌、牌组再生成、计时递减、胜负判定或第二次愤怒入场。
+
+旧九会话及PR115入场核、已有存档和政策均不修改；调用者可显式转交兼容角色与待办数据，但没有自动编排。完整双次愤怒阶段、愤怒中普通出牌／其他性格系数、冷静再考／刚胆耗牌、全回合随机与身份预算仍开放。固定现代C#参考不是原生PK／Vanilla／主机证明，43证据主题／45历史快照不减。P078及全部依赖、人物／书籍、开场／追击／留情与campaign排除。仅静态文本、独立审阅、纸面推导和字节身份核对，未运行测试、编译、typecheck、build、validator、checker、诊断、候选、来源、场景或replay。下方旧段保留历史profile边界。
+
 ## 2026-10-21：现代参考单次愤怒入场核（静态）
 
 [PR114](https://github.com/DanielMax937/sanguozhi/pull/114)已交付按需牌组再生成会话。本批新增[独立愤怒入场规则核](debate-anger-entry-v1.md)与[完整API合同](../engine/debate-anger-entry-v1.md)，只覆盖一次 CalcAngering(canReflect) 后的 Anger，不伪装成会话已经支持完整愤怒阶段。
