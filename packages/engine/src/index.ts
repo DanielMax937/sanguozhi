@@ -963,3 +963,29 @@ export {
   DEBATE_CARD_AVAILABILITY_EVIDENCE_V1,
   evaluateDebateCardAvailability,
 } from './debate-card-availability.ts';
+
+export type {
+  DebateHpDamagePersonalityV1,
+  DebateHpDamageTopicV1,
+  DebateHpDamageCardTopicV1,
+  DebateHpDamageCardLevelV1,
+  DebateHpDamageRawDrawV1,
+  DebateHpDamageInputV1,
+  DebateHpDamageTopicReasonV1,
+  DebateHpDamageLevelReasonV1,
+  DebateHpDamageAngerReasonV1,
+  DebateHpDamageArithmeticV1,
+  DebateHpDamageDrawAuditV1,
+  DebateHpDamageAuditV1,
+  DebateHpDamageSuccessV1,
+  DebateHpDamageFailureReasonV1,
+  DebateHpDamageFailureV1,
+  DebateHpDamageResultV1,
+  DebateHpDamagePolicyV1,
+  DebateHpDamageEvidenceV1,
+} from './debate-hp-damage.ts';
+export {
+  DEBATE_HP_DAMAGE_POLICY_V1,
+  DEBATE_HP_DAMAGE_EVIDENCE_V1,
+  evaluateDebateHpDamage,
+} from './debate-hp-damage.ts';
