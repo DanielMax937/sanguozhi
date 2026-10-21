@@ -938,3 +938,28 @@ export {
   DEBATE_TIMID_COMBO_EVIDENCE_V1,
   evaluateDebateTimidCombo,
 } from './debate-timid-combo.ts';
+
+export type {
+  DebateCardAvailabilityTeamV1,
+  DebateCardAvailabilityPersonalityV1,
+  DebateCardAvailabilityCharacterV1,
+  DebateCardAvailabilityInputV1,
+  DebateCardAvailabilityAngerReasonV1,
+  DebateCardAvailabilityEligibilityV1,
+  DebateCardAvailabilityCardClassV1,
+  DebateCardAvailabilityCheckRuleV1,
+  DebateCardAvailabilityCheckV1,
+  DebateCardAvailabilityAuditV1,
+  DebateCardAvailabilityAvailabilityReasonV1,
+  DebateCardAvailabilitySuccessV1,
+  DebateCardAvailabilityFailureReasonV1,
+  DebateCardAvailabilityFailureV1,
+  DebateCardAvailabilityResultV1,
+  DebateCardAvailabilityPolicyV1,
+  DebateCardAvailabilityEvidenceV1,
+} from './debate-card-availability.ts';
+export {
+  DEBATE_CARD_AVAILABILITY_POLICY_V1,
+  DEBATE_CARD_AVAILABILITY_EVIDENCE_V1,
+  evaluateDebateCardAvailability,
+} from './debate-card-availability.ts';

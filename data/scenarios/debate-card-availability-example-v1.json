@@ -1,0 +1,2334 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-card-availability-example-v1",
+  "status": "paper-only-not-executed",
+  "method": "Explicit input checkpoints and manually reasoned selected expected fields; no evaluator or source execution",
+  "expectedFields": "paperExpected is a selected outcome summary, not a complete success/audit receipt; all case inputs include the complete exact policy literal",
+  "successCases": [
+    {
+      "id": "ordinary-topic-with-both-restricted",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "bold",
+            "angerTimer": 4,
+            "canRethink": false
+          },
+          {
+            "personality": "calm",
+            "angerTimer": 4,
+            "canRethink": true
+          }
+        ],
+        "card": 1
+      },
+      "paperExpected": {
+        "available": true,
+        "reason": "topic-card-available"
+      }
+    },
+    {
+      "id": "bold-rethink-block-before-disabled-quota",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "bold",
+            "angerTimer": 1,
+            "canRethink": false
+          },
+          {
+            "personality": "calm",
+            "angerTimer": 1,
+            "canRethink": true
+          }
+        ],
+        "card": 0
+      },
+      "paperExpected": {
+        "available": false,
+        "reason": "self-angry-bold"
+      }
+    },
+    {
+      "id": "calm-rethink-not-suppressed-by-calm-opponent",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "calm",
+            "angerTimer": 4,
+            "canRethink": true
+          },
+          {
+            "personality": "calm",
+            "angerTimer": 4,
+            "canRethink": true
+          }
+        ],
+        "card": 0
+      },
+      "paperExpected": {
+        "available": true,
+        "reason": "rethink-enabled"
+      }
+    },
+    {
+      "id": "timid-rethink-reads-disabled-quota",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 1,
+            "canRethink": false
+          },
+          {
+            "personality": "calm",
+            "angerTimer": 4,
+            "canRethink": true
+          }
+        ],
+        "card": 0
+      },
+      "paperExpected": {
+        "available": false,
+        "reason": "rethink-disabled"
+      }
+    },
+    {
+      "id": "calm-shout-against-bold",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "calm",
+            "angerTimer": 4,
+            "canRethink": true
+          },
+          {
+            "personality": "bold",
+            "angerTimer": 4,
+            "canRethink": true
+          }
+        ],
+        "card": 10
+      },
+      "paperExpected": {
+        "available": true,
+        "reason": "rhetoric-available"
+      }
+    },
+    {
+      "id": "bold-sophistry-block-before-calm-opponent",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "bold",
+            "angerTimer": 4,
+            "canRethink": true
+          },
+          {
+            "personality": "calm",
+            "angerTimer": 4,
+            "canRethink": true
+          }
+        ],
+        "card": 11
+      },
+      "paperExpected": {
+        "available": false,
+        "reason": "self-angry-bold"
+      }
+    },
+    {
+      "id": "calm-opponent-suppresses-ignore",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 1,
+            "canRethink": true
+          },
+          {
+            "personality": "calm",
+            "angerTimer": 1,
+            "canRethink": true
+          }
+        ],
+        "card": 12
+      },
+      "paperExpected": {
+        "available": false,
+        "reason": "opponent-angry-calm"
+      }
+    },
+    {
+      "id": "calm-compose-self-block-before-opponent",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "calm",
+            "angerTimer": 1,
+            "canRethink": true
+          },
+          {
+            "personality": "calm",
+            "angerTimer": 1,
+            "canRethink": true
+          }
+        ],
+        "card": 13
+      },
+      "paperExpected": {
+        "available": false,
+        "reason": "self-angered"
+      }
+    },
+    {
+      "id": "bold-agitate-self-block",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "bold",
+            "angerTimer": 1,
+            "canRethink": true
+          },
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 14
+      },
+      "paperExpected": {
+        "available": false,
+        "reason": "self-angered"
+      }
+    },
+    {
+      "id": "reckless-agitate-vs-zero-timer-calm",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "reckless",
+            "angerTimer": 1,
+            "canRethink": true
+          },
+          {
+            "personality": "calm",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 14
+      },
+      "paperExpected": {
+        "available": true,
+        "reason": "rhetoric-available"
+      }
+    },
+    {
+      "id": "timid-compose-vs-angry-bold",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 1,
+            "canRethink": true
+          },
+          {
+            "personality": "bold",
+            "angerTimer": 4,
+            "canRethink": true
+          }
+        ],
+        "card": 13
+      },
+      "paperExpected": {
+        "available": true,
+        "reason": "rhetoric-available"
+      }
+    },
+    {
+      "id": "positive-reckless-timers-do-not-restrict",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "reckless",
+            "angerTimer": 1,
+            "canRethink": true
+          },
+          {
+            "personality": "reckless",
+            "angerTimer": 1,
+            "canRethink": true
+          }
+        ],
+        "card": 10
+      },
+      "paperExpected": {
+        "available": true,
+        "reason": "rhetoric-available"
+      }
+    },
+    {
+      "id": "zero-timer-bold-not-restricted",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "bold",
+            "angerTimer": 0,
+            "canRethink": true
+          },
+          {
+            "personality": "calm",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 10
+      },
+      "paperExpected": {
+        "available": true,
+        "reason": "rhetoric-available"
+      }
+    },
+    {
+      "id": "team-one-query-sees-team-zero-calm",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 1,
+        "characters": [
+          {
+            "personality": "calm",
+            "angerTimer": 4,
+            "canRethink": true
+          },
+          {
+            "personality": "reckless",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 12
+      },
+      "paperExpected": {
+        "available": false,
+        "reason": "opponent-angry-calm"
+      }
+    },
+    {
+      "id": "calm-opponent-suppresses-agitate",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          },
+          {
+            "personality": "calm",
+            "angerTimer": 4,
+            "canRethink": true
+          }
+        ],
+        "card": 14
+      },
+      "paperExpected": {
+        "available": false,
+        "reason": "opponent-angry-calm"
+      }
+    },
+    {
+      "id": "empty-slot-code-unavailable",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          },
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": -1
+      },
+      "paperExpected": {
+        "available": false,
+        "reason": "card-out-of-range"
+      }
+    },
+    {
+      "id": "code-fifteen-unavailable",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          },
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 15
+      },
+      "paperExpected": {
+        "available": false,
+        "reason": "card-out-of-range"
+      }
+    },
+    {
+      "id": "minimum-signed32-unavailable",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          },
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": -2147483648
+      },
+      "paperExpected": {
+        "available": false,
+        "reason": "card-out-of-range"
+      }
+    },
+    {
+      "id": "maximum-signed32-unavailable",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          },
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 2147483647
+      },
+      "paperExpected": {
+        "available": false,
+        "reason": "card-out-of-range"
+      }
+    }
+  ],
+  "rejectionCases": [
+    {
+      "id": "noninteger-card",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          },
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 1.5
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "malformed-data"
+      }
+    },
+    {
+      "id": "beyond-signed32-card",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          },
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 2147483648
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-card"
+      }
+    },
+    {
+      "id": "invalid-team",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 2,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          },
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 1
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-team"
+      }
+    },
+    {
+      "id": "timer-beyond-checkpoint-domain",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 5,
+            "canRethink": true
+          },
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 1
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-anger-timer"
+      }
+    },
+    {
+      "id": "nonboolean-quota",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": 1
+          },
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 1
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-can-rethink"
+      }
+    },
+    {
+      "id": "unresolved-personality",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "unknown",
+            "angerTimer": 0,
+            "canRethink": true
+          },
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 1
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-personality"
+      }
+    },
+    {
+      "id": "unexpected-hand-field",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-card-availability-reference-v1",
+        "policies": {
+          "id": "debate-card-availability-policy-v1",
+          "profile": "debate-card-availability-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "teams": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "canRethink": "caller-supplied-boolean-per-character",
+            "card": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "availability": {
+            "angered": "positive-timer-and-calm-or-bold-only",
+            "cardRange": [
+              0,
+              14
+            ],
+            "outOfRange": "successful-unavailable-query",
+            "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+            "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+            "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+            "topic": "always-available-for-codes-one-through-nine",
+            "rethinkOpponentSuppression": false,
+            "shortCircuit": true
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "queries": 1,
+            "maxChecks": 3,
+            "randomDraws": 0,
+            "stateWrites": 0
+          },
+          "boundary": {
+            "kind": "single-team-single-card-availability-query",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "canRethinkDerivation": "caller-supplied-not-evaluated",
+            "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "team": 0,
+        "characters": [
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          },
+          {
+            "personality": "timid",
+            "angerTimer": 0,
+            "canRethink": true
+          }
+        ],
+        "card": 1,
+        "hand": [
+          1
+        ]
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "unknown-field"
+      }
+    }
+  ],
+  "exclusions": [
+    "No hand ownership, HP, turn or play-phase legality is asserted",
+    "No old session integration",
+    "No tests/compiler/typecheck/build/validator/candidate/source/scenario execution",
+    "P078 and dependencies excluded"
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-card-availability-v1",
+  "scope": "Standalone card-code availability predicate at an explicit personality/timer/rethink checkpoint; not session or turn legality",
+  "implementation": "packages/engine/src/debate-card-availability.ts",
+  "ruleDocument": "docs/rules/debate-card-availability-v1.md",
+  "apiDocument": "docs/engine/debate-card-availability-v1.md",
+  "paperExample": "data/scenarios/debate-card-availability-example-v1.json",
+  "evidence": {
+    "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+    "repository": "https://github.com/tankyc/sango_infinity",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "debatePath": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+    "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+    "debateSha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+    "debateEnumPath": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+    "debateEnumBlob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+    "sourceResolvedPersonalityLines": [
+      369,
+      375
+    ],
+    "sourceAvailabilityLines": [
+      934,
+      987
+    ],
+    "sourceCardEnumLines": [
+      33,
+      61
+    ],
+    "sourcePersonalityEnumLines": [
+      116,
+      124
+    ],
+    "sourceBehavior": "two-restricted-anger-flags-then-range-then-ordered-card-branches",
+    "personalityBoundary": "CharacterGetPersonality-result-supplied-by-caller-no-person-fallback-run",
+    "canRethinkBoundary": "source-team-array-entry-supplied-with-matching-character",
+    "boundsSafetyBudgetsAuditAndReasonNames": "engine-policy",
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "completeDebate": false,
+    "p078": "excluded",
+    "nativeWholeChain": "open",
+    "nativeDeckRegenerationIntegration": "excluded",
+    "nativeRngStream": "excluded",
+    "legacySessionIntegration": "excluded"
+  },
+  "policies": {
+    "id": "debate-card-availability-policy-v1",
+    "profile": "debate-card-availability-reference-v1",
+    "checkpoint": {
+      "characters": 2,
+      "teams": [
+        0,
+        1
+      ],
+      "personality": "caller-resolved-timid-calm-bold-or-reckless",
+      "angerTimer": {
+        "minimum": 0,
+        "maximum": 4
+      },
+      "canRethink": "caller-supplied-boolean-per-character",
+      "card": {
+        "minimum": -2147483648,
+        "maximum": 2147483647
+      },
+      "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+    },
+    "availability": {
+      "angered": "positive-timer-and-calm-or-bold-only",
+      "cardRange": [
+        0,
+        14
+      ],
+      "outOfRange": "successful-unavailable-query",
+      "rethink": "reject-self-angry-bold-then-return-self-canRethink",
+      "shoutSophistryIgnore": "reject-self-angry-bold-then-reject-opponent-angry-calm",
+      "composeAgitate": "reject-self-angered-then-reject-opponent-angry-calm",
+      "topic": "always-available-for-codes-one-through-nine",
+      "rethinkOpponentSuppression": false,
+      "shortCircuit": true
+    },
+    "safety": {
+      "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+      "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+      "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+      "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+      "result": "recursively-frozen-and-detached-from-input",
+      "failure": "typed-code-only-no-partial-audit"
+    },
+    "capacity": {
+      "maxInputNodes": 1024,
+      "maxInputDepth": 10,
+      "maxInputArrayLength": 32,
+      "maxCanonicalUtf8Bytes": 16384,
+      "queries": 1,
+      "maxChecks": 3,
+      "randomDraws": 0,
+      "stateWrites": 0
+    },
+    "boundary": {
+      "kind": "single-team-single-card-availability-query",
+      "personalityResolution": "caller-supplied-not-evaluated",
+      "canRethinkDerivation": "caller-supplied-not-evaluated",
+      "handOwnershipHpTurnCurrentTopicAndGameplay": "not-checked-not-applied",
+      "rng": "no-implementation-no-external-consumption",
+      "sessionIntegration": false,
+      "persistence": false,
+      "legacyProfilesChanged": false
+    }
+  },
+  "sourceRules": [
+    "Restricted anger means positive timer and effective calm or bold personality, independently for each side",
+    "Range 0..14 checked before card branch; ordinary topic cards fall through true",
+    "Rethink rejects self restricted bold before reading own canRethink; no opponent predicate on this branch",
+    "Shout/Sophistry/Ignore reject self restricted bold before opponent restricted calm",
+    "Compose/Agitate reject any self restricted anger before opponent restricted calm",
+    "Positive timid or reckless timer alone causes no restriction in this predicate"
+  ],
+  "engineeringPolicies": [
+    "Caller supplies already-resolved personality; no person lookup or override resolution performed",
+    "Timers limited to 0..4 as explicit supported checkpoint domain, not source universal input restriction",
+    "Signed32 integer card preserves C# int domain; card outside 0..14 yields an unavailable success query; malformed card rejected",
+    "Versioned exact policy, defensive parsing, reason names, short-circuit checks and frozen audit are engine contracts; reference returns only boolean",
+    "No hand, HP, turn order, topic, draw, mutation, session, persistence or replay integration"
+  ],
+  "remaining": [
+    "Whole two-pass anger phase with winner/crumble/timer transitions",
+    "Other angry-personality attack and damage branches",
+    "Calm rethink / bold exhaustion",
+    "Session integration and full draw/identity budget",
+    "Native PK/Vanilla equivalence remains unproven; existing43 evidence topics and45 historical snapshots unchanged"
+  ],
+  "excluded": [
+    "P078 and all dependencies",
+    "person/book initialization",
+    "critical/mercy/campaign finalizers"
+  ],
+  "validation": "Static reading and independent review, manual paper reasoning and byte hashes only; no tests, compilation, typecheck, build, validator, checker, diagnostics, candidate, source, scenario or replay execution"
+}
