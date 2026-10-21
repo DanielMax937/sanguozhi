@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-hp-damage-v1",
+  "scope": "Standalone generic requested-HP-damage arithmetic at an explicit personality, timer, attack, topic and card checkpoint; not an attack or a complete debate turn",
+  "implementation": "packages/engine/src/debate-hp-damage.ts",
+  "ruleDocument": "docs/rules/debate-hp-damage-v1.md",
+  "apiDocument": "docs/engine/debate-hp-damage-v1.md",
+  "paperExample": "data/scenarios/debate-hp-damage-example-v1.json",
+  "evidence": {
+    "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+    "repository": "https://github.com/tankyc/sango_infinity",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "debatePath": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+    "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+    "debateSha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+    "sourceCardTopicLines": [
+      853,
+      873
+    ],
+    "sourceCardLevelLines": [
+      875,
+      893
+    ],
+    "sourceHpDamageLines": [
+      1145,
+      1196
+    ],
+    "sourceTopicCoefficientLines": [
+      1148,
+      1165
+    ],
+    "sourceLevelCoefficientLines": [
+      1167,
+      1180
+    ],
+    "sourceAngerCoefficientLines": [
+      1182,
+      1184
+    ],
+    "sourceArithmeticLines": [
+      1186,
+      1190
+    ],
+    "sourcePersonHookLines": [
+      1192,
+      1195
+    ],
+    "sourceBehavior": "topic-then-level-then-anger-then-one-jitter-and-integer-formula-before-person-hook",
+    "personalityBoundary": "CharacterGetPersonality-result-supplied-by-caller-no-person-fallback-run",
+    "attackBoundary": "character-attack-supplied-by-caller-no-attack-derivation-run",
+    "hookBoundary": "genericOnly-requires-identity-result-no-actual-person-verification-or-hook-invocation",
+    "boundsSafetyBudgetsAuditAndReasonNames": "engine-policy",
+    "sourceComment693": "comment-preserved-as-evidence-not-an-accepted-domain-bound",
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "completeDebate": false,
+    "p078": "excluded",
+    "nativeWholeChain": "open",
+    "nativeDeckRegenerationIntegration": "excluded",
+    "nativeRngStream": "excluded",
+    "legacySessionIntegration": "excluded"
+  },
+  "policies": {
+    "id": "debate-hp-damage-policy-v1",
+    "profile": "debate-hp-damage-reference-v1",
+    "checkpoint": {
+      "genericOnly": true,
+      "personality": "caller-resolved-timid-calm-bold-or-reckless",
+      "angerTimer": {
+        "minimum": 0,
+        "maximum": 4
+      },
+      "resolvedAttack": {
+        "minimum": 70,
+        "maximum": 227
+      },
+      "currentTopic": {
+        "minimum": 0,
+        "maximum": 2
+      },
+      "card": {
+        "minimum": -1,
+        "maximum": 14
+      },
+      "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+    },
+    "cards": {
+      "none": -1,
+      "rethink": 0,
+      "story": [
+        1,
+        2,
+        3
+      ],
+      "logic": [
+        4,
+        5,
+        6
+      ],
+      "trend": [
+        7,
+        8,
+        9
+      ],
+      "shout": 10,
+      "sophistry": 11,
+      "ignore": 12,
+      "compose": 13,
+      "agitate": 14,
+      "topicCodes": [
+        0,
+        1,
+        2
+      ],
+      "ordinaryLevelCodes": [
+        0,
+        1,
+        2
+      ],
+      "otherCardTopicAndLevel": -1
+    },
+    "coefficients": {
+      "topicDefault": 6,
+      "positiveTimerTimidOrBold": 10,
+      "positiveTimerCalmOrReckless": 6,
+      "zeroTimerShout": 12,
+      "zeroTimerMatchingOrdinaryTopic": 10,
+      "positiveTimerSkipsShoutAndMatchingTopicBranches": true,
+      "shoutLevel": 15,
+      "ordinaryLevels": [
+        10,
+        15,
+        20
+      ],
+      "otherCardLevel": 0,
+      "angerDefault": 10,
+      "positiveTimerCalmAnger": 15
+    },
+    "arithmetic": {
+      "order": [
+        "attack-plus-jitter",
+        "multiply-anger",
+        "multiply-level",
+        "multiply-topic",
+        "divide-1000"
+      ],
+      "division": "truncate-toward-zero-once-after-all-multiplications",
+      "intermediate": "exact-safe-integer-within-accepted-domain",
+      "divisor": 1000,
+      "minimumRequestedHpDamage": 0,
+      "maximumRequestedHpDamage": 462,
+      "maximumNumerator": 462000,
+      "sourceComment693": "not-used-as-a-bound-for-this-domain",
+      "modifyHpDamage": "identity-only-not-invoked"
+    },
+    "draw": {
+      "role": "debate-hp-damage-jitter",
+      "bound": 5,
+      "minimum": 0,
+      "maximum": 4,
+      "count": 1,
+      "zeroLevelStillConsumes": true,
+      "origin": "caller-provided-not-generated"
+    },
+    "safety": {
+      "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+      "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+      "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+      "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+      "result": "recursively-frozen-and-detached-from-input",
+      "failure": "typed-code-only-no-partial-audit"
+    },
+    "capacity": {
+      "maxInputNodes": 1024,
+      "maxInputDepth": 10,
+      "maxInputArrayLength": 32,
+      "maxCanonicalUtf8Bytes": 16384,
+      "evaluations": 1,
+      "providedRandomDraws": 1,
+      "externalRandomDraws": 0,
+      "stateWrites": 0
+    },
+    "boundary": {
+      "kind": "single-generic-requested-hp-damage-calculation",
+      "personalityResolution": "caller-supplied-not-evaluated",
+      "attackDerivation": "caller-supplied-not-evaluated",
+      "genericOnly": "identity-hook-contract-not-actual-person-verification",
+      "personSpecificModifyHpDamage": "excluded",
+      "teamPersonHpAndState": "not-required-not-read-not-written",
+      "availabilityOwnershipWinnerAndCalcAttacker": "not-checked-not-applied",
+      "stressDamageAndHpClamping": "excluded",
+      "rng": "no-implementation-no-external-consumption",
+      "sessionIntegration": false,
+      "persistence": false,
+      "legacyProfilesChanged": false
+    }
+  },
+  "literalProvenance": "The evidence and policies objects are statically extracted JSON-compatible literals from the implementation text; the implementation was not imported or executed.",
+  "sourceRules": [
+    "GetCardTopic maps Story cards 1..3 to topic 0, Logic cards 4..6 to topic 1 and Trend cards 7..9 to topic 2; every other supported card has helper topic -1.",
+    "GetCardLevel maps ordinary small, medium and large cards to helper levels 0, 1 and 2; all other supported cards, including Shout, have helper level -1.",
+    "Topic coefficient starts at 6. A positive anger timer takes the first outer branch: timid or bold changes it to 10, while calm or reckless leaves it at 6. This branch skips both the Shout and matching-topic promotions.",
+    "Only when the anger timer is zero does Shout set topic coefficient 12; otherwise matching an ordinary card topic sets 10 and an off-topic card retains 6.",
+    "Shout has level coefficient 15 despite helper level -1. Ordinary helper levels 0, 1 and 2 select 10, 15 and 20. Other supported cards use level coefficient 0.",
+    "Anger coefficient is 15 only for positive-timer calm, otherwise 10.",
+    "The source unconditionally requests one RandInt(5), even when level coefficient is zero. It adds that jitter to attack, multiplies anger, then level, then topic, and performs one integer division by 1000 after all multiplications.",
+    "The source then calls the person-specific ModifyHpDamage hook. This independent generic kernel stops at the identity-hook contract and neither resolves a person nor invokes a hook."
+  ],
+  "engineeringPolicies": [
+    "Caller supplies already-resolved personality and attack. The kernel does not run CharacterGetPersonality, attack initialization, person lookup, or person-specific overrides.",
+    "genericOnly must be exactly true. It is an explicit identity-hook restriction, not evidence that a real character has an identity hook.",
+    "Integer angerTimer 0..4, resolvedAttack 70..227, currentTopic 0..2 and card -1..14 are the supported engineering checkpoint domain, not a universal source reachability claim.",
+    "Card -1, Rethink 0 and non-Shout rhetoric 11..14 are accepted zero-level arithmetic queries. Successful arithmetic does not establish card availability, ownership, a legal attack, or whether gameplay would call CalcHpDamage on that card.",
+    "The single raw draw is caller-provided with exact role debate-hp-damage-jitter, bound 5 and integer value 0..4. Consumed means used from that supplied record; no external RNG or native random stream is consumed.",
+    "Versioned exact policy comparison, closed input schema, defensive detached parsing, safe-integer constraints, runtime proxy detection, capacity budgets, reason names, diagnostic helper results and frozen audit receipts are engine contracts, not outputs asserted to exist in the reference source.",
+    "cardTopic and cardLevel are diagnostic helper classifications. Audit flags separately distinguish whether the corresponding source branch was used; a diagnostic value does not prove the source evaluated that helper on that branch.",
+    "Only requested HP damage is returned. There is no HP clamp or write, stress calculation, winner selection, CalcAttacker, card consumption, availability query, timer transition, session orchestration, persistence, replay integration, or state mutation."
+  ],
+  "manualSupportedDomainBound": {
+    "method": "Paper derivation from mutually exclusive coefficient branches, not source or implementation execution",
+    "maximumAttackWithJitter": 231,
+    "maximumNumerator": 462000,
+    "maximumRequestedHpDamage": 462,
+    "attainingExample": "227 + 4 = 231; a matching ordinary large card with timer 0 uses 231 * 10 * 20 * 10 = 462000; division by 1000 gives 462. Positive timid or bold with an ordinary large card also attains this value.",
+    "positiveCalmLarge": "231 * 15 * 20 * 6 = 415800; truncation gives 415, with remainder 800.",
+    "normalShout": "231 * 10 * 15 * 12 = 415800; truncation gives 415, with remainder 800.",
+    "positiveCalmShout": "231 * 15 * 15 * 6 = 311850; truncation gives 311, with remainder 850.",
+    "positiveTimidOrBoldShout": "231 * 10 * 15 * 10 = 346500; truncation gives 346, with remainder 500.",
+    "positiveRecklessShout": "231 * 10 * 15 * 6 = 207900; truncation gives 207, with remainder 900.",
+    "sourceComment693": "The source line comment mentions 693. It is retained as source evidence, not treated as a reachable bound for this supported generic domain. Coefficient maxima cannot be combined across mutually exclusive branches."
+  },
+  "remaining": [
+    "Whole two-pass anger-phase orchestration, winner/crumble/timer transitions and complete angry-turn gameplay",
+    "Calm rethink and bold exhaustion behavior, including their full card and draw effects",
+    "Composition with availability, HP/stress writers, attack selection and existing anger-entry or timid-combo kernels",
+    "Caller personality and attack resolution, person-specific ModifyHpDamage behavior, initialization and book effects",
+    "Native RNG, global draw and identity budgets, native deck regeneration and complete session integration",
+    "Native PK, Vanilla and stock-original equivalence remain unproven; the 43 evidence topics and 45 historical snapshots remain open and unchanged"
+  ],
+  "excluded": [
+    "P078 and all dependencies",
+    "Person/book initialization and person-specific hooks",
+    "Tutorial, opening, critical, pursuit, mercy and campaign finalizers",
+    "Mutation or migration of the nine legacy session profiles, their policies, APIs or saves"
+  ],
+  "legacyBoundary": {
+    "legacySessionProfilesUnchanged": 9,
+    "sessionIntegration": false,
+    "nativeEvidenceTopicsStillOpen": 43,
+    "historicalSnapshotsUnchanged": 45
+  },
+  "validation": "Static source and implementation text reading, manual paper arithmetic, JSON artifact authoring and byte hashes only. No tests, compiler, typecheck, build, validator, checker, diagnostics, candidate, source, scenario, replay or project execution. The paper cases are not runtime-pass evidence.",
+  "supportingEvidence": {
+    "purpose": "Fixed modern enum mappings support numeric card, topic and personality names; this does not change the implementation EVIDENCE literal or establish native equivalence.",
+    "repository": "https://github.com/tankyc/sango_infinity",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "path": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+    "blob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+    "sha256": "cd71efed5059fb4ca876091b1e39bd34636fb978c8ec9bfbf924d6a443070bc1",
+    "sourceCardEnumLines": [
+      33,
+      61
+    ],
+    "sourceTopicEnumLines": [
+      96,
+      103
+    ],
+    "sourcePersonalityEnumLines": [
+      116,
+      124
+    ],
+    "identityReadback": "The fixed local reference was read as text and its SHA-256 was read with sha256sum; no source or project execution occurred.",
+    "nativeEquivalent": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false
+  }
+}
