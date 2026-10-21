@@ -1,0 +1,746 @@
+{
+  "schemaVersion": 1,
+  "id": "filled-debate-session-v1",
+  "scope": "New bounded normal, non-tutorial, generic-identity debate session integrating the existing CharacterFillCards kernel at genesis, precombat Rethink replacement and nonterminal refill over supplied current 18-card decks; not native or complete debate",
+  "implementation": "packages/engine/src/filled-debate.ts",
+  "sharedCombatImplementation": "packages/engine/src/debate-normal-round.ts",
+  "kernelImplementation": "packages/engine/src/debate-hand-fill.ts",
+  "ruleDocument": "docs/rules/filled-debate-session-v1.md",
+  "apiDocument": "docs/engine/filled-debate-session-v1.md",
+  "paperExample": "data/scenarios/filled-debate-example-v1.json",
+  "profile": "debate-filled-current-deck-reference-v1",
+  "tag": "filled-debate-session-v1",
+  "command": "ResolveFilledDebateRound",
+  "exports": {
+    "policy": "FILLED_DEBATE_POLICY_V1",
+    "evidence": "FILLED_DEBATE_EVIDENCE_V1",
+    "functions": [
+      "createFilledDebate",
+      "inspectFilledDebate",
+      "previewFilledDebateRound",
+      "executeFilledDebateRound",
+      "saveFilledDebate",
+      "loadFilledDebate",
+      "replayFilledDebate"
+    ],
+    "typeFamily": "FilledDebate*V1"
+  },
+  "fixedDependencies": {
+    "fill": {
+      "evaluate": "evaluateDebateHandFill",
+      "policyConstant": "DEBATE_HAND_FILL_POLICY_V1",
+      "evidenceConstant": "DEBATE_HAND_FILL_EVIDENCE_V1",
+      "policyId": "debate-hand-fill-current-deck-policy-v1",
+      "profile": "debate-hand-fill-reference-v1",
+      "sourceLedger": "docs/sources/debate-hand-fill-v1.json",
+      "unchanged": true,
+      "usage": "Each admitted fill is performed by the existing kernel, not by a copied fill algorithm; its full receipt and constants remain part of the audit"
+    },
+    "combat": {
+      "sourceProfile": "debate-topic-shout-ignore-compose-agitate-sophistry-rethink-reference-v1",
+      "policyConstant": "RETHINK_DEBATE_POLICY_V1",
+      "evidenceConstant": "RETHINK_DEBATE_EVIDENCE_V1",
+      "sourceLedger": "docs/sources/rethink-debate-session-v1.json",
+      "function": "resolveNormalDebateRound",
+      "publicSession": false,
+      "usage": "Private normal six-kind combat stage shared with the old Rethink owner; ownership of input parsing, card stores, fill, rethinks, trailing draws, persistence and budgets remains in each session"
+    }
+  },
+  "policies": {
+    "id": "filled-debate-current-deck-policy-v1",
+    "profile": "debate-filled-current-deck-reference-v1",
+    "tutorial": false,
+    "difficulty": "source-normal",
+    "combat": {
+      "cards": {
+        "id": "topic-shout-ignore-compose-agitate-and-sophistry-only-v1",
+        "kinds": [
+          "topic",
+          "shout",
+          "ignore",
+          "compose",
+          "agitate",
+          "sophistry"
+        ],
+        "topics": [
+          "story",
+          "logic",
+          "trend"
+        ],
+        "levels": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "topicPower": "1+levelIndex+10-if-current-topic",
+        "topicLevelCoefficients": [
+          10,
+          15,
+          20
+        ],
+        "topicStressCoefficients": [
+          10,
+          15,
+          20
+        ],
+        "drawStressEach": 15
+      },
+      "shout": {
+        "id": "source-no-anger-shout-v1",
+        "power": 110,
+        "levelCoefficient": 15,
+        "topicCoefficient": 12,
+        "stressCoefficient": 15,
+        "availability": "angerTimer-zero-only",
+        "additionalEffect": "none"
+      },
+      "ignore": {
+        "id": "source-no-anger-ignore-v1",
+        "power": 120,
+        "stressDamage": 30,
+        "hpDamage": 0,
+        "damageJitter": false,
+        "availability": "angerTimer-zero-only",
+        "additionalEffect": "none",
+        "suppressOpponentAdditionalEffect": true,
+        "suppressionScope": "loser-effect-including-compose-and-agitate",
+        "suppressSophistryTopicReroll": true
+      },
+      "compose": {
+        "id": "source-no-anger-compose-reflection-v1",
+        "power": 0,
+        "hpDamage": 0,
+        "damageJitter": false,
+        "availability": "angerTimer-zero-only",
+        "target": "opponent-unless-reflected-then-self",
+        "requestBasis": "opponent-current-stress-regardless-of-reflection",
+        "requestedStress": "-max(trunc(opponent-current-stress/2),30)",
+        "minimumRequestedReduction": 30,
+        "reflection": "opponent-played-sophistry",
+        "attack": "never-wins-in-admitted-card-set",
+        "angerCounter": "excluded"
+      },
+      "agitate": {
+        "id": "source-no-anger-agitate-reflection-v1",
+        "power": 0,
+        "hpDamage": 0,
+        "damageJitter": false,
+        "availability": "angerTimer-zero-only",
+        "target": "self-unless-reflected-then-opponent",
+        "requestedStress": 40,
+        "reflection": "opponent-played-sophistry",
+        "attack": "never-wins-in-admitted-card-set",
+        "angerCounter": "excluded"
+      },
+      "sophistry": {
+        "id": "source-no-anger-sophistry-v1",
+        "power": 20,
+        "availability": "angerTimer-zero-only",
+        "attack": "reflect-loser-topic-only",
+        "damageCalculator": "sophistry-winner-attack",
+        "coefficientCard": "loser-topic-and-level",
+        "damageTopic": "round-start",
+        "writer": "loser-topic-card-reflected-true",
+        "writerGuard": "calculated-hp-damage-positive",
+        "nonTopicAttack": "no-hp-stress-or-jitter",
+        "additionalEffect": "none"
+      },
+      "effects": {
+        "id": "source-winner-then-loser-reflectable-effects-v1",
+        "timing": "after-attack-before-hp-terminal",
+        "auditOrder": "winner-then-loser-audit-slots",
+        "tie": "no-invocations-and-empty-audit",
+        "ignore": "winner-invoked-loser-suppressed",
+        "noAdditionalEffect": "invoked-no-writer-request-zero",
+        "suppressedRequest": "null-not-evaluated",
+        "nonWriterAuditTarget": "null",
+        "nonWriterAuditReflection": "null",
+        "composeRequestBasis": "opponent-current-stress-before-write-not-writer-target",
+        "nonComposeRequestBasis": "null",
+        "stressWriter": "clamp-each-invoked-compose-or-agitate-write",
+        "effectTarget": "compose-opponent-agitate-self-inverted-by-sophistry",
+        "changeRequestedStress": "sum-of-evaluated-attack-and-effect-requests-by-target",
+        "stageActualDelta": "after-minus-before"
+      },
+      "topic": {
+        "id": "source-non-tutorial-sophistry-topic-reroll-v1",
+        "damageTopic": "round-start",
+        "nonterminalWinnerSets": [
+          "firstId"
+        ],
+        "nonterminalTopicWinnerSets": [
+          "currentTopic"
+        ],
+        "rhetoricWithoutRerollKeeps": [
+          "currentTopic"
+        ],
+        "drawKeeps": [
+          "firstId",
+          "currentTopic"
+        ],
+        "rerollCondition": "nonterminal-valid-attacker-either-played-sophistry-opponent-not-ignore",
+        "losingSophistryAgainstShoutRerolls": true,
+        "sameTopicAllowed": true,
+        "drawRole": "sophistry-topic-reroll",
+        "drawBound": 3,
+        "valueToTopic": [
+          "story",
+          "logic",
+          "trend"
+        ],
+        "enumSource": "pinned-modern-DebateEnum.cs-Topic",
+        "phase": "after-hp-closing-anger-boundary-and-crumble-before-refill",
+        "terminalReroll": false
+      },
+      "arithmetic": {
+        "id": "source-normal-integer-topic-shout-sophistry-damage-v1",
+        "attack": "100+trunc(40*(myINT-opponentINT)/(131-myINT))",
+        "hpDamage": "trunc((attack+jitter)*10*levelCoef*topicCoef/1000)",
+        "division": "toward-zero",
+        "intermediate": "exact-bigint",
+        "matchingTopicCoefficient": 10,
+        "nonmatchingTopicCoefficient": 6,
+        "angerCoefficient": 10,
+        "jitterBound": 5,
+        "nativePrng": false
+      },
+      "writer": {
+        "id": "source-hp-minus100-to1000-stress0-to100-v1",
+        "hpMin": -100,
+        "hpMax": 1000,
+        "stressMin": 0,
+        "stressMax": 100
+      },
+      "anger": {
+        "id": "reject-nonterminal-anger-trigger-v1",
+        "triggerStress": 100,
+        "evaluation": "after-attack-and-additional-effects-and-hp-terminal-check-before-topic-reroll",
+        "rejection": "whole-round-atomic",
+        "automaticCounterCards": "excluded",
+        "cap99": false,
+        "reset": false,
+        "skip": false
+      }
+    },
+    "identities": {
+      "id": "generic-identity-debate-hooks-v1",
+      "realPersonMapping": false,
+      "allPersonHooks": "identity-or-disabled",
+      "attackHook": "identity",
+      "hpDamageHook": "identity",
+      "difficulty": "source-normal",
+      "items": false,
+      "personality": false
+    },
+    "initialTopic": {
+      "id": "provided-initial-topic-v1",
+      "generated": false
+    },
+    "deal": {
+      "id": "provided-current-deck18-source-fill-v1",
+      "entriesPerParticipant": 18,
+      "initialCursor": 0,
+      "numericCards": [
+        1,
+        14
+      ],
+      "token": "participantId:tapeIndex",
+      "repairPreservesToken": true,
+      "shuffle": false,
+      "nativeDistribution": false,
+      "deckRegeneration": "unsupported-deck-regeneration",
+      "kernel": "debate-hand-fill-reference-v1"
+    },
+    "hand": {
+      "id": "source-numeric-sort-and-compacting-removal-v1",
+      "intelligenceThresholds": [
+        70,
+        80,
+        90
+      ],
+      "sourceSlotCounts": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "playableCapacities": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "reservedRethinkSlot": 0,
+      "snapshotHand": "playable-occurrences-only-source-slot-index-plus-one",
+      "selectionRemoval": "compact-retained-in-source-order-then-trailing-vacancies",
+      "sort": "numeric-card-code-ascending",
+      "equalCodeTie": "preSortSlot-engine-policy-not-native-identity",
+      "repairTarget": "last-new-original-source-slot"
+    },
+    "round": {
+      "id": "paired-choice-filled-precombat-atomic-round-v1",
+      "action": "ResolveFilledDebateRound",
+      "choicesOrder": "scenario-participant-order",
+      "precombatOrder": "first-rethink-selection-then-other-rethink-selection",
+      "resolutionOrder": "attack-winner-effect-loser-effect-hp-anger-crumble-topic-refill",
+      "interactivePhasePersistence": false
+    },
+    "rethink": {
+      "id": "current-deck-rethink-with-fill-repair-v1",
+      "maxRequestsPerRound": 2,
+      "initiallyAvailable": true,
+      "availabilityAfterUse": false,
+      "availabilityCheck": "all-requested-before-any-replacement",
+      "discard": "entire-playable-hand",
+      "auditOrder": "source-first-then-other-among-requested",
+      "finalSelection": "replacement-token-for-requester-current-token-otherwise",
+      "reenable": "nonterminal-crumble-level-change-at-folded-TurnStart",
+      "ordinaryRoundReset": false,
+      "terminalReset": false
+    },
+    "fill": {
+      "id": "shipped-kernel-integrated-at-three-phases-v1",
+      "phases": [
+        "genesis",
+        "rethink",
+        "refill"
+      ],
+      "genesisOrder": "scenario-participant-order",
+      "refillOrder": "scenario-participant-order",
+      "kernelReceipt": "complete-unchanged-recomputed",
+      "retainedIdentity": "beforeCards-by-preSortSlot",
+      "newIdentity": "participantId-and-consumed-tapeIndex",
+      "repairChanges": "card-face-only-no-extra-tape-consumption"
+    },
+    "randomness": {
+      "id": "provided-participant-phased-draws-v1",
+      "maxGenesisDraws": 2,
+      "maxDrawsPerRound": 6,
+      "countBound": "conservative-sum-of-phase-maxima",
+      "order": [
+        "first-rethink-repair",
+        "other-rethink-repair",
+        "psychological-damage-jitter",
+        "sophistry-topic-reroll",
+        "participant0-refill-repair",
+        "participant1-refill-repair"
+      ],
+      "repairRole": "debate-fill-topic-repair",
+      "repairBound": 9,
+      "repairIdentity": [
+        "participantId",
+        "phase"
+      ],
+      "validation": "safe-syntax-first-semantics-at-consumption-phase",
+      "extra": "whole-operation-atomic-rejection-after-last-reached-phase",
+      "externalRngConsumed": 0,
+      "nativePrng": false
+    },
+    "closing": {
+      "id": "filled-session-hp-only-closing-v1",
+      "terminalEffects": true,
+      "terminalRefill": false,
+      "terminalTopicChange": false,
+      "terminalFirstChange": false,
+      "terminalRethinkReset": false,
+      "campaignWrite": false
+    },
+    "opening": {
+      "initialHp": 1000,
+      "initialStress": 0,
+      "initialAngerTimer": 0,
+      "instantWin": "excluded"
+    },
+    "capacity": {
+      "id": "bounded-filled-session-reject-v1",
+      "maxEntries": 64,
+      "deckEntriesPerParticipant": 18,
+      "maxCanonicalUtf8Bytes": 16777216,
+      "maxInputNodes": 1000000,
+      "maxInputDepth": 32,
+      "maxInputArrayLength": 4096,
+      "exhaustion": "rejection-not-game-draw"
+    },
+    "persistence": {
+      "id": "full-filled-genesis-and-history-recompute-v1",
+      "policyComparison": "all-fields",
+      "genesis": "scenario-snapshot-fills-consumedDraws-recompute",
+      "receipts": "compare-all-fields",
+      "snapshot": "compare-all-fields",
+      "legacyMigration": false
+    }
+  },
+  "evidence": {
+    "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+    "debatePhaseBlob": "6aa98f855a5d4d172cde7e8ffc18a141b8a7b587",
+    "debateEnumBlob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+    "formulaEvidence": "existing-E15-generic-ordinary-core-only",
+    "combatEvidence": "shared-PR110-normal-non-tutorial-generic-six-kind-core",
+    "fillEvidence": "PR111-shipped-CharacterFillCards-kernel",
+    "fillIntegration": "genesis-rethink-nonterminal-next-turn-fill",
+    "removalEvidence": "Debate.cs-453-465-compact-retained-source-order",
+    "initializationOrder": "Debate.cs-1549-1552-team0-then-team1",
+    "rethinkOrder": "DebatePhase.cs-174-246-first-then-other",
+    "refillOrder": "Debate.cs-1046-1079-team0-then-team1",
+    "repairTokenIdentity": "engine-audit-policy-preserves-consumed-tape-token",
+    "equalCardIdentityOrder": "engine-preSortSlot-policy-not-source-Array.Sort-identity",
+    "rawDrawStream": "provided-in-source-phase-order-not-native-PRNG",
+    "rethinkAvailability": "modern-controlled-UI-admission-not-native-unconditional-guard",
+    "legacyProfiles": "all-seven-behavior-and-saves-unchanged-rethink-core-extraction-only",
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "completeDebate": false,
+    "originalUnresolvedGroups": 43,
+    "originalHistoricalSnapshots": 45,
+    "nativeWholeChain": "open",
+    "deckRegeneration": "excluded",
+    "initialTopicGeneration": "excluded",
+    "angerPersonality": "excluded",
+    "tutorial": "excluded",
+    "realPersonsAndItems": "excluded",
+    "closingConsequences": "excluded",
+    "p078": "excluded"
+  },
+  "sources": [
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "blob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+      "sha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+      "bytes": 71288,
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "evidenceLevel": "pinned-modern-translated-reference",
+      "sourceClaim": "Modern C# translation of named C++ headers and implementation; does not authenticate stock original or native binaries",
+      "identityRecord": "Inherited from the existing hand-fill and debate-session source ledgers; not newly downloaded or rehashed in this batch",
+      "readback": "Existing fixed-reference text statically read for fill, compaction, Rethink, normal combat and phase boundaries; never executed"
+    },
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+      "blob": "6aa98f855a5d4d172cde7e8ffc18a141b8a7b587",
+      "sha256": "5b47f7b6a89d6123a23e7c14f22168e59c9edd549e98d9bc0258d8a55bb9cbf3",
+      "bytes": 14048,
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+      "evidenceLevel": "pinned-modern-translated-reference",
+      "sourceClaim": "Modern C# phase-machine translation, not original binary authentication",
+      "identityRecord": "Inherited from existing debate-session ledgers; not newly downloaded or rehashed in this batch",
+      "readback": "Existing fixed-reference text statically read for Play rechoose order, TurnStart, TurnEnd and Attack/Effect/HP-closing order; never executed"
+    },
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "blob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+      "sha256": "cd71efed5059fb4ca876091b1e39bd34636fb978c8ec9bfbf924d6a443070bc1",
+      "bytes": 8447,
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "evidenceLevel": "pinned-modern-translated-reference",
+      "sourceClaim": "Modern translation whose header says some enums are inferred from implementation; not an authenticated original header",
+      "identityRecord": "Inherited from docs/sources/debate-hand-fill-v1.json; not newly downloaded or rehashed in this batch",
+      "readback": "Existing fixed-reference text statically read for source identity, cards0..14 and Story0/Logic1/Trend2; never executed"
+    }
+  ],
+  "lineAttribution": [
+    {
+      "file": "Debate.cs",
+      "startLine": 1,
+      "endLine": 25,
+      "supports": "Source describes itself as a modern C# translation with interface stubs and renamed symbols, not authenticated native code",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1-L25"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 53,
+      "endLine": 57,
+      "supports": "Current deck size18 and maximum source hand slots7; exact supplied numeric decks are the new profile's admission boundary, not proof of native distribution",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L53-L57"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 306,
+      "endLine": 340,
+      "supports": "Exclusion boundary: DeckGenerate, native deck distribution, rhetoric inventory and repeated random shuffles are not implemented",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L306-L340"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 343,
+      "endLine": 354,
+      "supports": "Living source character total slot counts4/5/6/7 at INT70/80/90; new generic profile maps this to playable capacities3/4/5/6 plus reserved0",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L343-L354"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 406,
+      "endLine": 438,
+      "supports": "Restore reserved0, fill ascending original vacant slots, advance current deck cursor, conditionally overwrite only last newly filled slot with TopicFirst+RandInt9, then numeric sort all source slots",
+      "doesNotEstablish": "New profile does not follow the DeckGenerate branch at421..424; equal-code identity order is explicit engineering policy",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L406-L438"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 453,
+      "endLine": 465,
+      "supports": "Selected source slot is cleared and surviving cards are compacted in original order; later fill receives this compacted layout with trailing vacancies, not an interior vacancy",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L453-L465"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 490,
+      "endLine": 509,
+      "supports": "Rethink clears all slots, invokes CharacterFillCards, then sorts; calm-anger probability and large-topic overwrite are excluded",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L490-L509"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 513,
+      "endLine": 534,
+      "supports": "HP writer clamps to-100..1000 and stress writer clamps to0..100; applied deltas differ from requested changes",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L513-L534"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 554,
+      "endLine": 580,
+      "supports": "INT attack formula, initial stress0/anger0, initialization clears slots then fills; real person attack hooks and DeckInit/DeckGenerate are excluded or identity-restricted",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L554-L580"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 908,
+      "endLine": 988,
+      "supports": "Ignore120/Shout110/Sophistry20/topic1+levelIndex+matching10/other0 power; source Rethink availability and anger-dependent card restrictions delimit no-anger admission",
+      "doesNotEstablish": "Direct Rethink itself is not an unconditional native permission guard; engine request admission is explicit",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L908-L988"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 991,
+      "endLine": 999,
+      "supports": "PlayCard records selected card then invokes CharacterRemoveCard, linking selection to source compaction",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L991-L999"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1046,
+      "endLine": 1079,
+      "supports": "TurnStart iterates team0 then1, restores Rethink on crumble change and fills non-tutorial hands; calm and bold anger branches remain excluded",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1046-L1079"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1083,
+      "endLine": 1126,
+      "supports": "Valid attacker becomes first, ordinary winner sets topic, non-tutorial Sophistry not facing Ignore triggers bound3 reroll even when losing to Shout; timer evolution is excluded",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1083-L1126"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1129,
+      "endLine": 1208,
+      "supports": "Higher power attacker, normal INT attack damage with bound5 jitter, ordinary and Shout coefficients and stress; anger and real person hooks are excluded",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1129-L1208"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1216,
+      "endLine": 1251,
+      "supports": "Equal-power stress15 each, Shout opponent writes and ordinary/reflected-topic target selection",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1216-L1251"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1253,
+      "endLine": 1297,
+      "supports": "Rethink fills then marks canRethink false; Ignore writes opponent stress; Compose and Agitate normal/reflected targets are distinct",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1253-L1297"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1380,
+      "endLine": 1395,
+      "supports": "HP<=0 defeat closes supported sessions; critical pursuit/mercy and campaign consequences are not part of the new session",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1380-L1395"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1423,
+      "endLine": 1480,
+      "supports": "Attack dispatch, Ignore30, Sophistry winner attack with opponent ordinary coefficients and positive-HP guard; Compose opponent-current-stress request and Agitate40 with Sophistry reflection",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1423-L1480"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1482,
+      "endLine": 1531,
+      "supports": "Source anger boundary and crumble calculation; new session rejects nonterminal stress100 instead of implementing anger/counter branches",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1482-L1531"
+    },
+    {
+      "file": "Debate.cs",
+      "startLine": 1535,
+      "endLine": 1580,
+      "supports": "Character initialization team0 then1, initial Rethink true, challenger first; effects attacker then opponent unless Ignore; initial random topic is replaced by provided topic",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1535-L1580"
+    },
+    {
+      "file": "DebatePhase.cs",
+      "startLine": 164,
+      "endLine": 253,
+      "supports": "TurnStart precedes Play; first participant's optional Rethink and final reselection complete before other participant's optional Rethink and final reselection",
+      "doesNotEstablish": "Atomic paired command and phase-specific draw DTOs are engineering orchestration, not original interactive phase persistence",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs#L164-L253"
+    },
+    {
+      "file": "DebatePhase.cs",
+      "startLine": 261,
+      "endLine": 275,
+      "supports": "TurnEnd then next TurnStart, placing topic reroll before next-turn refill",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs#L261-L275"
+    },
+    {
+      "file": "DebatePhase.cs",
+      "startLine": 394,
+      "endLine": 420,
+      "supports": "Attack then Effect then HP winner, with terminal path before anger; preserves loser's effects before defeat closure",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs#L394-L420"
+    },
+    {
+      "file": "DebateEnum.cs",
+      "startLine": 1,
+      "endLine": 20,
+      "supports": "Translation identity and explicit warning that some enums were inferred from implementation",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs#L1-L20"
+    },
+    {
+      "file": "DebateEnum.cs",
+      "startLine": 33,
+      "endLine": 61,
+      "supports": "Rethink0, ordinary cards1..9 and five rhetoric cards10..14; source topic-repair base1 and bound9",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs#L33-L61"
+    },
+    {
+      "file": "DebateEnum.cs",
+      "startLine": 96,
+      "endLine": 103,
+      "supports": "Story0/Logic1/Trend2/Max3 for supplied Sophistry topic reroll; not native enum authentication",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs#L96-L103"
+    }
+  ],
+  "integrationSemantics": {
+    "phases": ["genesis", "rethink", "refill"],
+    "kernelReuse": "Actual evaluateDebateHandFill calls in all three phases; full kernel policy, evidence and receipt retained",
+    "repairAdmission": "Pure empty-draw kernel call determines need; only missing-raw-draw permits a one-item phase/participant-bound retry through the same kernel; no outer copy of the repair condition",
+    "deck": "Exactly18 numeric entries1..14 per participant, initial cursor0; no wrap, concatenation or generation",
+    "sourceCompaction": "PlayCard->CharacterRemoveCard compacts surviving cards in previous order; fill inputs pad trailing nulls to playable capacity",
+    "reservedZero": "Restored only by kernel, included in its full numeric sort and receipt; excluded from combat occurrences and choices",
+    "repair": "Only if post-fill topic count is zero and a new slot exists; overwrite last new original slot with1+bound9 value",
+    "identity": "A repaired occurrence retains participantId:tapeIndex token and consumed tapeIndex while cardCode changes; retained/new mapping follows kernel sortedProvenance",
+    "equalCodeOrder": "Kernel preSortSlot tie-break is engineering audit policy, not native identity stability",
+    "genesisDraws": "scenario.genesisRawDraws, conditional team0 then team1 repair",
+    "roundDraws": "One command.rawDraws stream: first optional Rethink repair, other optional Rethink repair, optional attack jitter, optional Sophistry topic reroll, optional team0 refill repair, optional team1 refill repair",
+    "repairDrawBinding": "role debate-fill-topic-repair, bound9, value0..8, exact participantId and phase; no slot for a skipped operation",
+    "drawIndex": "Kernel-local repair index remains0; outer fill audit preserves index in its genesis or round stream; applied Sophistry index is lifted to the whole round stream",
+    "atomicity": "All failures reject the entire candidate initialization or round; no returned partial state or partial successful fill may be committed",
+    "persistence": "Recompute genesis fills, every command and receipt, and final snapshot from original supplied decks and draws; compare complete fixed policy/evidence and all fields",
+    "externalRngConsumed": 0,
+    "nativePrng": false
+  },
+  "paperDeckBoundary": {
+    "artifactSection": "independentDeckBoundaryChain",
+    "acceptedRounds": 12,
+    "afterAcceptedRoundsDeckCursor": [18, 18],
+    "nextProposedRound": 13,
+    "expectedReason": "unsupported-deck-regeneration",
+    "interpretation": "After consuming deck index 17, another nonterminal refill requires a nineteenth item; a later failure rejects all proposed combat and state changes",
+    "status": "manual-paper-expectation-not-executed"
+  },
+  "compatibility": {
+    "newProfileOnly": true,
+    "legacyProfileCount": 7,
+    "legacyModules": ["topic-debate.ts", "shout-debate.ts", "ignore-debate.ts", "compose-debate.ts", "agitate-debate.ts", "sophistry-debate.ts", "rethink-debate.ts"],
+    "legacyPublicApis": "unchanged",
+    "legacyPoliciesEvidenceAndSaveTags": "unchanged",
+    "legacyRethinkChange": "Internal normal combat extraction only; no new fill-kernel call, numeric deck acceptance, sorting policy or topic repair",
+    "legacyRethinkTopicRepair": "unsupported-topic-repair remains an admission boundary",
+    "legacyRethinkDeck": "Existing provided object-card tapes, max512, remain separate from new exact18 numeric current decks",
+    "legacyRethinkDraws": "Existing at-most-two combat/topic draw protocol remains unchanged",
+    "kernelPublicApi": "unchanged",
+    "implicitMigration": false,
+    "runtimeEquivalenceCertified": false
+  },
+  "boundaries": {
+    "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+    "modernSourceCertifiesNative": false,
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "consoleEquivalent": false,
+    "completeDebate": false,
+    "originalUnresolvedGroups": 43,
+    "originalHistoricalSnapshots": 45,
+    "originalEvidenceAccounting": "Original43 evidence themes and45 historical snapshots remain open and unchanged; this bounded integration closes no original/native evidence group",
+    "formulaEvidenceScope": "Existing E15 generic ordinary-core evidence does not extend to fill, sorting, repair, current-deck identity, native randomness or complete debate",
+    "sourceEdition": "Pinned modern reference only; no PC-PK/PK1.1, Vanilla or console binary equivalence",
+    "deckReachability": "Supplied current decks do not certify DeckGenerate distribution, rhetoric inventory or reachability in a complete game",
+    "rethinkAvailability": "Engine admits requested Rethink only when available; no claim native direct Rethink function enforces that guard itself",
+    "nonterminalAnger": "Whole-round rejection at stress100 after Attack/Effect and HP-closing check, before topic reroll and refill; no cap99/reset/skip",
+    "terminal": "No topic/first update, crumble, Rethink restoration or next-turn refill after HP defeat",
+    "campaignIntegration": false,
+    "p078": "excluded",
+    "excluded": [
+      "DeckGenerate, shuffle, native distribution and rhetoric inventory",
+      "Native PRNG and global RNG coupling",
+      "Tutorial and interactive subphase persistence",
+      "Four-personality anger, automatic counters, chains and timers",
+      "Calm-anger Rethink reset and large-topic overwrite",
+      "Real persons, books, items and MOD hooks",
+      "Opening instant win, critical pursuit, mercy and injury",
+      "Complete campaign outcome and event override writes",
+      "P078/native personnel tasks and all dependencies",
+      "Capture, execution, ownership, return and mission",
+      "Diplomacy automatic settlement",
+      "Legacy save migration or profile upgrade"
+    ],
+    "engineeringPolicies": [
+      "Strict detached numeric DTOs and generic resolved identities",
+      "Exactly18 supplied current cards and explicit regeneration rejection",
+      "Persistent tape-index occurrence identity across numeric repair",
+      "Kernel-derived deterministic equal-code provenance",
+      "Paired atomic command with first/other precombat ordering",
+      "Phase- and participant-bound supplied draw stream",
+      "Full fill, combat and save-envelope audit with recomputation",
+      "Input safety and fixed resource budgets"
+    ]
+  },
+  "publicMechanismCrosscheck": [],
+  "validation": {
+    "mode": "static-source-and-document-review-only",
+    "tests": "not-run",
+    "typecheck": "not-run",
+    "compiler": "not-run",
+    "build": "not-run",
+    "validators": "not-run",
+    "checkers": "not-run",
+    "diagnostics": "not-run",
+    "product": "not-run",
+    "candidateExecution": "not-run",
+    "replay": "not-run",
+    "examples": "paper-design-not-run",
+    "sourceExecution": "not-run",
+    "sourceIdentityHashes": "Inherited recorded identities, not newly computed or execution evidence",
+    "literalTranscription": "New policies and evidence copied as text from implementation worker-authored literal JSON, matching source constants; no module importing, evaluating, compiling or executing",
+    "oldTests": "unchanged; no historical pass count is evidence for this batch",
+    "baselinePullRequest": 111,
+    "baselineMain": "29a84012609b779249da349fa4590755f7c3d757",
+    "baselineTree": "a57979a60ab913f18a1d43f1ffcd16e66c96a4d2",
+    "remoteWrites": "not-performed-by-documentation-worker"
+  }
+}
