@@ -1,0 +1,2553 @@
+{
+  "artifactVersion": 1,
+  "kind": "unexecuted-paper-input-and-selected-expectations",
+  "validation": "Static manual arithmetic and text review only. Never imported, replayed, tested, compiled or executed. paperExpected entries are selected summaries, not full runtime receipt fixtures.",
+  "evidenceBoundary": "Pinned modern C# translated reference plus explicit engineering policies, not native PK/Vanilla or complete debate. Existing seven profile saves remain separate. No P078 dependencies.",
+  "scenario": {
+    "schemaVersion": 1,
+    "profile": "debate-filled-current-deck-reference-v1",
+    "genericOnly": true,
+    "difficulty": "source-normal",
+    "policies": {
+      "id": "filled-debate-current-deck-policy-v1",
+      "profile": "debate-filled-current-deck-reference-v1",
+      "tutorial": false,
+      "difficulty": "source-normal",
+      "combat": {
+        "cards": {
+          "id": "topic-shout-ignore-compose-agitate-and-sophistry-only-v1",
+          "kinds": [
+            "topic",
+            "shout",
+            "ignore",
+            "compose",
+            "agitate",
+            "sophistry"
+          ],
+          "topics": [
+            "story",
+            "logic",
+            "trend"
+          ],
+          "levels": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "topicPower": "1+levelIndex+10-if-current-topic",
+          "topicLevelCoefficients": [
+            10,
+            15,
+            20
+          ],
+          "topicStressCoefficients": [
+            10,
+            15,
+            20
+          ],
+          "drawStressEach": 15
+        },
+        "shout": {
+          "id": "source-no-anger-shout-v1",
+          "power": 110,
+          "levelCoefficient": 15,
+          "topicCoefficient": 12,
+          "stressCoefficient": 15,
+          "availability": "angerTimer-zero-only",
+          "additionalEffect": "none"
+        },
+        "ignore": {
+          "id": "source-no-anger-ignore-v1",
+          "power": 120,
+          "stressDamage": 30,
+          "hpDamage": 0,
+          "damageJitter": false,
+          "availability": "angerTimer-zero-only",
+          "additionalEffect": "none",
+          "suppressOpponentAdditionalEffect": true,
+          "suppressionScope": "loser-effect-including-compose-and-agitate",
+          "suppressSophistryTopicReroll": true
+        },
+        "compose": {
+          "id": "source-no-anger-compose-reflection-v1",
+          "power": 0,
+          "hpDamage": 0,
+          "damageJitter": false,
+          "availability": "angerTimer-zero-only",
+          "target": "opponent-unless-reflected-then-self",
+          "requestBasis": "opponent-current-stress-regardless-of-reflection",
+          "requestedStress": "-max(trunc(opponent-current-stress/2),30)",
+          "minimumRequestedReduction": 30,
+          "reflection": "opponent-played-sophistry",
+          "attack": "never-wins-in-admitted-card-set",
+          "angerCounter": "excluded"
+        },
+        "agitate": {
+          "id": "source-no-anger-agitate-reflection-v1",
+          "power": 0,
+          "hpDamage": 0,
+          "damageJitter": false,
+          "availability": "angerTimer-zero-only",
+          "target": "self-unless-reflected-then-opponent",
+          "requestedStress": 40,
+          "reflection": "opponent-played-sophistry",
+          "attack": "never-wins-in-admitted-card-set",
+          "angerCounter": "excluded"
+        },
+        "sophistry": {
+          "id": "source-no-anger-sophistry-v1",
+          "power": 20,
+          "availability": "angerTimer-zero-only",
+          "attack": "reflect-loser-topic-only",
+          "damageCalculator": "sophistry-winner-attack",
+          "coefficientCard": "loser-topic-and-level",
+          "damageTopic": "round-start",
+          "writer": "loser-topic-card-reflected-true",
+          "writerGuard": "calculated-hp-damage-positive",
+          "nonTopicAttack": "no-hp-stress-or-jitter",
+          "additionalEffect": "none"
+        },
+        "effects": {
+          "id": "source-winner-then-loser-reflectable-effects-v1",
+          "timing": "after-attack-before-hp-terminal",
+          "auditOrder": "winner-then-loser-audit-slots",
+          "tie": "no-invocations-and-empty-audit",
+          "ignore": "winner-invoked-loser-suppressed",
+          "noAdditionalEffect": "invoked-no-writer-request-zero",
+          "suppressedRequest": "null-not-evaluated",
+          "nonWriterAuditTarget": "null",
+          "nonWriterAuditReflection": "null",
+          "composeRequestBasis": "opponent-current-stress-before-write-not-writer-target",
+          "nonComposeRequestBasis": "null",
+          "stressWriter": "clamp-each-invoked-compose-or-agitate-write",
+          "effectTarget": "compose-opponent-agitate-self-inverted-by-sophistry",
+          "changeRequestedStress": "sum-of-evaluated-attack-and-effect-requests-by-target",
+          "stageActualDelta": "after-minus-before"
+        },
+        "topic": {
+          "id": "source-non-tutorial-sophistry-topic-reroll-v1",
+          "damageTopic": "round-start",
+          "nonterminalWinnerSets": [
+            "firstId"
+          ],
+          "nonterminalTopicWinnerSets": [
+            "currentTopic"
+          ],
+          "rhetoricWithoutRerollKeeps": [
+            "currentTopic"
+          ],
+          "drawKeeps": [
+            "firstId",
+            "currentTopic"
+          ],
+          "rerollCondition": "nonterminal-valid-attacker-either-played-sophistry-opponent-not-ignore",
+          "losingSophistryAgainstShoutRerolls": true,
+          "sameTopicAllowed": true,
+          "drawRole": "sophistry-topic-reroll",
+          "drawBound": 3,
+          "valueToTopic": [
+            "story",
+            "logic",
+            "trend"
+          ],
+          "enumSource": "pinned-modern-DebateEnum.cs-Topic",
+          "phase": "after-hp-closing-anger-boundary-and-crumble-before-refill",
+          "terminalReroll": false
+        },
+        "arithmetic": {
+          "id": "source-normal-integer-topic-shout-sophistry-damage-v1",
+          "attack": "100+trunc(40*(myINT-opponentINT)/(131-myINT))",
+          "hpDamage": "trunc((attack+jitter)*10*levelCoef*topicCoef/1000)",
+          "division": "toward-zero",
+          "intermediate": "exact-bigint",
+          "matchingTopicCoefficient": 10,
+          "nonmatchingTopicCoefficient": 6,
+          "angerCoefficient": 10,
+          "jitterBound": 5,
+          "nativePrng": false
+        },
+        "writer": {
+          "id": "source-hp-minus100-to1000-stress0-to100-v1",
+          "hpMin": -100,
+          "hpMax": 1000,
+          "stressMin": 0,
+          "stressMax": 100
+        },
+        "anger": {
+          "id": "reject-nonterminal-anger-trigger-v1",
+          "triggerStress": 100,
+          "evaluation": "after-attack-and-additional-effects-and-hp-terminal-check-before-topic-reroll",
+          "rejection": "whole-round-atomic",
+          "automaticCounterCards": "excluded",
+          "cap99": false,
+          "reset": false,
+          "skip": false
+        }
+      },
+      "identities": {
+        "id": "generic-identity-debate-hooks-v1",
+        "realPersonMapping": false,
+        "allPersonHooks": "identity-or-disabled",
+        "attackHook": "identity",
+        "hpDamageHook": "identity",
+        "difficulty": "source-normal",
+        "items": false,
+        "personality": false
+      },
+      "initialTopic": {
+        "id": "provided-initial-topic-v1",
+        "generated": false
+      },
+      "deal": {
+        "id": "provided-current-deck18-source-fill-v1",
+        "entriesPerParticipant": 18,
+        "initialCursor": 0,
+        "numericCards": [
+          1,
+          14
+        ],
+        "token": "participantId:tapeIndex",
+        "repairPreservesToken": true,
+        "shuffle": false,
+        "nativeDistribution": false,
+        "deckRegeneration": "unsupported-deck-regeneration",
+        "kernel": "debate-hand-fill-reference-v1"
+      },
+      "hand": {
+        "id": "source-numeric-sort-and-compacting-removal-v1",
+        "intelligenceThresholds": [
+          70,
+          80,
+          90
+        ],
+        "sourceSlotCounts": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "playableCapacities": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "reservedRethinkSlot": 0,
+        "snapshotHand": "playable-occurrences-only-source-slot-index-plus-one",
+        "selectionRemoval": "compact-retained-in-source-order-then-trailing-vacancies",
+        "sort": "numeric-card-code-ascending",
+        "equalCodeTie": "preSortSlot-engine-policy-not-native-identity",
+        "repairTarget": "last-new-original-source-slot"
+      },
+      "round": {
+        "id": "paired-choice-filled-precombat-atomic-round-v1",
+        "action": "ResolveFilledDebateRound",
+        "choicesOrder": "scenario-participant-order",
+        "precombatOrder": "first-rethink-selection-then-other-rethink-selection",
+        "resolutionOrder": "attack-winner-effect-loser-effect-hp-anger-crumble-topic-refill",
+        "interactivePhasePersistence": false
+      },
+      "rethink": {
+        "id": "current-deck-rethink-with-fill-repair-v1",
+        "maxRequestsPerRound": 2,
+        "initiallyAvailable": true,
+        "availabilityAfterUse": false,
+        "availabilityCheck": "all-requested-before-any-replacement",
+        "discard": "entire-playable-hand",
+        "auditOrder": "source-first-then-other-among-requested",
+        "finalSelection": "replacement-token-for-requester-current-token-otherwise",
+        "reenable": "nonterminal-crumble-level-change-at-folded-TurnStart",
+        "ordinaryRoundReset": false,
+        "terminalReset": false
+      },
+      "fill": {
+        "id": "shipped-kernel-integrated-at-three-phases-v1",
+        "phases": [
+          "genesis",
+          "rethink",
+          "refill"
+        ],
+        "genesisOrder": "scenario-participant-order",
+        "refillOrder": "scenario-participant-order",
+        "kernelReceipt": "complete-unchanged-recomputed",
+        "retainedIdentity": "beforeCards-by-preSortSlot",
+        "newIdentity": "participantId-and-consumed-tapeIndex",
+        "repairChanges": "card-face-only-no-extra-tape-consumption"
+      },
+      "randomness": {
+        "id": "provided-participant-phased-draws-v1",
+        "maxGenesisDraws": 2,
+        "maxDrawsPerRound": 6,
+        "countBound": "conservative-sum-of-phase-maxima",
+        "order": [
+          "first-rethink-repair",
+          "other-rethink-repair",
+          "psychological-damage-jitter",
+          "sophistry-topic-reroll",
+          "participant0-refill-repair",
+          "participant1-refill-repair"
+        ],
+        "repairRole": "debate-fill-topic-repair",
+        "repairBound": 9,
+        "repairIdentity": [
+          "participantId",
+          "phase"
+        ],
+        "validation": "safe-syntax-first-semantics-at-consumption-phase",
+        "extra": "whole-operation-atomic-rejection-after-last-reached-phase",
+        "externalRngConsumed": 0,
+        "nativePrng": false
+      },
+      "closing": {
+        "id": "filled-session-hp-only-closing-v1",
+        "terminalEffects": true,
+        "terminalRefill": false,
+        "terminalTopicChange": false,
+        "terminalFirstChange": false,
+        "terminalRethinkReset": false,
+        "campaignWrite": false
+      },
+      "opening": {
+        "initialHp": 1000,
+        "initialStress": 0,
+        "initialAngerTimer": 0,
+        "instantWin": "excluded"
+      },
+      "capacity": {
+        "id": "bounded-filled-session-reject-v1",
+        "maxEntries": 64,
+        "deckEntriesPerParticipant": 18,
+        "maxCanonicalUtf8Bytes": 16777216,
+        "maxInputNodes": 1000000,
+        "maxInputDepth": 32,
+        "maxInputArrayLength": 4096,
+        "exhaustion": "rejection-not-game-draw"
+      },
+      "persistence": {
+        "id": "full-filled-genesis-and-history-recompute-v1",
+        "policyComparison": "all-fields",
+        "genesis": "scenario-snapshot-fills-consumedDraws-recompute",
+        "receipts": "compare-all-fields",
+        "snapshot": "compare-all-fields",
+        "legacyMigration": false
+      }
+    },
+    "challengerId": "A",
+    "initialTopic": "story",
+    "participants": [
+      {
+        "id": "A",
+        "resolvedIntelligence": 60,
+        "hp": 1000,
+        "stress": 0,
+        "angerTimer": 0,
+        "cardTape": [
+          10,
+          12,
+          14,
+          10,
+          11,
+          13,
+          14,
+          12,
+          10,
+          11,
+          13,
+          14,
+          12,
+          10,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "id": "B",
+        "resolvedIntelligence": 60,
+        "hp": 1000,
+        "stress": 0,
+        "angerTimer": 0,
+        "cardTape": [
+          10,
+          11,
+          13,
+          12,
+          13,
+          14,
+          10,
+          14,
+          4,
+          14,
+          11,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    ],
+    "genesisRawDraws": [
+      {
+        "role": "debate-fill-topic-repair",
+        "bound": 9,
+        "value": 0,
+        "participantId": "A",
+        "phase": "genesis"
+      },
+      {
+        "role": "debate-fill-topic-repair",
+        "bound": 9,
+        "value": 3,
+        "participantId": "B",
+        "phase": "genesis"
+      }
+    ]
+  },
+  "paperGenesisExpected": {
+    "deckCursor": [
+      3,
+      3
+    ],
+    "hands": [
+      [
+        {
+          "cardCode": 1,
+          "token": "A:2",
+          "tapeIndex": 2
+        },
+        {
+          "cardCode": 10,
+          "token": "A:0",
+          "tapeIndex": 0
+        },
+        {
+          "cardCode": 12,
+          "token": "A:1",
+          "tapeIndex": 1
+        }
+      ],
+      [
+        {
+          "cardCode": 4,
+          "token": "B:2",
+          "tapeIndex": 2
+        },
+        {
+          "cardCode": 10,
+          "token": "B:0",
+          "tapeIndex": 0
+        },
+        {
+          "cardCode": 11,
+          "token": "B:1",
+          "tapeIndex": 1
+        }
+      ]
+    ],
+    "repairGlobalDrawIndices": [
+      0,
+      1
+    ]
+  },
+  "commands": [
+    {
+      "type": "ResolveFilledDebateRound",
+      "expectedRevision": 0,
+      "expectedRoundIndex": 0,
+      "expectedFirstId": "A",
+      "rethinks": [
+        "B",
+        "A"
+      ],
+      "choices": [
+        {
+          "participantId": "A",
+          "cardToken": "A:4"
+        },
+        {
+          "participantId": "B",
+          "cardToken": "B:5"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "debate-fill-topic-repair",
+          "bound": 9,
+          "value": 8,
+          "participantId": "A",
+          "phase": "rethink"
+        },
+        {
+          "role": "debate-fill-topic-repair",
+          "bound": 9,
+          "value": 0,
+          "participantId": "B",
+          "phase": "rethink"
+        },
+        {
+          "role": "psychological-damage-jitter",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "role": "sophistry-topic-reroll",
+          "bound": 3,
+          "value": 1
+        },
+        {
+          "role": "debate-fill-topic-repair",
+          "bound": 9,
+          "value": 4,
+          "participantId": "B",
+          "phase": "refill"
+        }
+      ]
+    },
+    {
+      "type": "ResolveFilledDebateRound",
+      "expectedRevision": 1,
+      "expectedRoundIndex": 1,
+      "expectedFirstId": "A",
+      "rethinks": [],
+      "choices": [
+        {
+          "participantId": "A",
+          "cardToken": "A:5"
+        },
+        {
+          "participantId": "B",
+          "cardToken": "B:6"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "psychological-damage-jitter",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "role": "debate-fill-topic-repair",
+          "bound": 9,
+          "value": 6,
+          "participantId": "A",
+          "phase": "refill"
+        },
+        {
+          "role": "debate-fill-topic-repair",
+          "bound": 9,
+          "value": 2,
+          "participantId": "B",
+          "phase": "refill"
+        }
+      ]
+    },
+    {
+      "type": "ResolveFilledDebateRound",
+      "expectedRevision": 2,
+      "expectedRoundIndex": 2,
+      "expectedFirstId": "B",
+      "rethinks": [],
+      "choices": [
+        {
+          "participantId": "A",
+          "cardToken": "A:7"
+        },
+        {
+          "participantId": "B",
+          "cardToken": "B:7"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "psychological-damage-jitter",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "role": "debate-fill-topic-repair",
+          "bound": 9,
+          "value": 0,
+          "participantId": "A",
+          "phase": "refill"
+        }
+      ]
+    },
+    {
+      "type": "ResolveFilledDebateRound",
+      "expectedRevision": 3,
+      "expectedRoundIndex": 3,
+      "expectedFirstId": "B",
+      "rethinks": [
+        "A"
+      ],
+      "choices": [
+        {
+          "participantId": "A",
+          "cardToken": "A:9"
+        },
+        {
+          "participantId": "B",
+          "cardToken": "B:3"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "debate-fill-topic-repair",
+          "bound": 9,
+          "value": 5,
+          "participantId": "A",
+          "phase": "rethink"
+        }
+      ]
+    },
+    {
+      "type": "ResolveFilledDebateRound",
+      "expectedRevision": 4,
+      "expectedRoundIndex": 4,
+      "expectedFirstId": "B",
+      "rethinks": [],
+      "choices": [
+        {
+          "participantId": "A",
+          "cardToken": "A:11"
+        },
+        {
+          "participantId": "B",
+          "cardToken": "B:8"
+        }
+      ],
+      "rawDraws": [
+        {
+          "role": "psychological-damage-jitter",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "role": "debate-fill-topic-repair",
+          "bound": 9,
+          "value": 8,
+          "participantId": "A",
+          "phase": "refill"
+        },
+        {
+          "role": "debate-fill-topic-repair",
+          "bound": 9,
+          "value": 0,
+          "participantId": "B",
+          "phase": "refill"
+        }
+      ]
+    }
+  ],
+  "paperExpectedAfterCommands": [
+    {
+      "hp": [
+        1000,
+        900
+      ],
+      "stress": [
+        0,
+        10
+      ],
+      "canRethink": [
+        false,
+        false
+      ],
+      "crumbledLevel": [
+        0,
+        0
+      ],
+      "deckCursor": [
+        7,
+        7
+      ],
+      "currentTopic": "logic",
+      "firstId": "A",
+      "drawCount": 5,
+      "attackDrawCount": 1,
+      "topicDrawCount": 1,
+      "topicGlobalDrawIndex": 3,
+      "repairGlobalDrawIndices": [
+        0,
+        1,
+        4
+      ],
+      "hands": [
+        [
+          {
+            "cardCode": 9,
+            "token": "A:5",
+            "tapeIndex": 5
+          },
+          {
+            "cardCode": 10,
+            "token": "A:3",
+            "tapeIndex": 3
+          },
+          {
+            "cardCode": 14,
+            "token": "A:6",
+            "tapeIndex": 6
+          }
+        ],
+        [
+          {
+            "cardCode": 5,
+            "token": "B:6",
+            "tapeIndex": 6
+          },
+          {
+            "cardCode": 12,
+            "token": "B:3",
+            "tapeIndex": 3
+          },
+          {
+            "cardCode": 13,
+            "token": "B:4",
+            "tapeIndex": 4
+          }
+        ]
+      ]
+    },
+    {
+      "hp": [
+        850,
+        900
+      ],
+      "stress": [
+        15,
+        10
+      ],
+      "canRethink": [
+        false,
+        false
+      ],
+      "crumbledLevel": [
+        0,
+        0
+      ],
+      "deckCursor": [
+        8,
+        8
+      ],
+      "currentTopic": "logic",
+      "firstId": "B",
+      "drawCount": 3,
+      "attackDrawCount": 1,
+      "topicDrawCount": 0,
+      "repairGlobalDrawIndices": [
+        1,
+        2
+      ],
+      "hands": [
+        [
+          {
+            "cardCode": 7,
+            "token": "A:7",
+            "tapeIndex": 7
+          },
+          {
+            "cardCode": 10,
+            "token": "A:3",
+            "tapeIndex": 3
+          },
+          {
+            "cardCode": 14,
+            "token": "A:6",
+            "tapeIndex": 6
+          }
+        ],
+        [
+          {
+            "cardCode": 3,
+            "token": "B:7",
+            "tapeIndex": 7
+          },
+          {
+            "cardCode": 12,
+            "token": "B:3",
+            "tapeIndex": 3
+          },
+          {
+            "cardCode": 13,
+            "token": "B:4",
+            "tapeIndex": 4
+          }
+        ]
+      ]
+    },
+    {
+      "hp": [
+        730,
+        900
+      ],
+      "stress": [
+        35,
+        10
+      ],
+      "canRethink": [
+        true,
+        false
+      ],
+      "crumbledLevel": [
+        1,
+        0
+      ],
+      "deckCursor": [
+        9,
+        9
+      ],
+      "currentTopic": "story",
+      "firstId": "B",
+      "drawCount": 2,
+      "attackDrawCount": 1,
+      "topicDrawCount": 0,
+      "repairGlobalDrawIndices": [
+        1
+      ],
+      "hands": [
+        [
+          {
+            "cardCode": 1,
+            "token": "A:8",
+            "tapeIndex": 8
+          },
+          {
+            "cardCode": 10,
+            "token": "A:3",
+            "tapeIndex": 3
+          },
+          {
+            "cardCode": 14,
+            "token": "A:6",
+            "tapeIndex": 6
+          }
+        ],
+        [
+          {
+            "cardCode": 4,
+            "token": "B:8",
+            "tapeIndex": 8
+          },
+          {
+            "cardCode": 12,
+            "token": "B:3",
+            "tapeIndex": 3
+          },
+          {
+            "cardCode": 13,
+            "token": "B:4",
+            "tapeIndex": 4
+          }
+        ]
+      ]
+    },
+    {
+      "hp": [
+        730,
+        900
+      ],
+      "stress": [
+        65,
+        10
+      ],
+      "canRethink": [
+        false,
+        false
+      ],
+      "crumbledLevel": [
+        1,
+        0
+      ],
+      "deckCursor": [
+        13,
+        10
+      ],
+      "currentTopic": "story",
+      "firstId": "B",
+      "drawCount": 1,
+      "attackDrawCount": 0,
+      "topicDrawCount": 0,
+      "topicSkipReason": "opponent-ignore",
+      "repairGlobalDrawIndices": [
+        0
+      ],
+      "hands": [
+        [
+          {
+            "cardCode": 6,
+            "token": "A:11",
+            "tapeIndex": 11
+          },
+          {
+            "cardCode": 12,
+            "token": "A:12",
+            "tapeIndex": 12
+          },
+          {
+            "cardCode": 13,
+            "token": "A:10",
+            "tapeIndex": 10
+          }
+        ],
+        [
+          {
+            "cardCode": 4,
+            "token": "B:8",
+            "tapeIndex": 8
+          },
+          {
+            "cardCode": 13,
+            "token": "B:4",
+            "tapeIndex": 4
+          },
+          {
+            "cardCode": 14,
+            "token": "B:9",
+            "tapeIndex": 9
+          }
+        ]
+      ]
+    },
+    {
+      "hp": [
+        730,
+        780
+      ],
+      "stress": [
+        65,
+        30
+      ],
+      "canRethink": [
+        false,
+        false
+      ],
+      "crumbledLevel": [
+        1,
+        0
+      ],
+      "deckCursor": [
+        14,
+        11
+      ],
+      "currentTopic": "logic",
+      "firstId": "A",
+      "drawCount": 3,
+      "attackDrawCount": 1,
+      "topicDrawCount": 0,
+      "repairGlobalDrawIndices": [
+        1,
+        2
+      ],
+      "hands": [
+        [
+          {
+            "cardCode": 9,
+            "token": "A:13",
+            "tapeIndex": 13
+          },
+          {
+            "cardCode": 12,
+            "token": "A:12",
+            "tapeIndex": 12
+          },
+          {
+            "cardCode": 13,
+            "token": "A:10",
+            "tapeIndex": 10
+          }
+        ],
+        [
+          {
+            "cardCode": 1,
+            "token": "B:10",
+            "tapeIndex": 10
+          },
+          {
+            "cardCode": 13,
+            "token": "B:4",
+            "tapeIndex": 4
+          },
+          {
+            "cardCode": 14,
+            "token": "B:9",
+            "tapeIndex": 9
+          }
+        ]
+      ]
+    }
+  ],
+  "paperNotes": [
+    "R1 request list deliberately B,A; actual precombat processing and repair consumption still A then B.",
+    "R1 repairs consume global indices 0 and 1 before shared combat; its local Sophistry topic index 1 becomes global index 3, not 1.",
+    "Every repair keeps the consumed tape token and tapeIndex even when cardCode changes; retained repaired cards are not reconstructed from the original deck face.",
+    "After each play, source removal compacts surviving cards; fill receives trailing null slots, then sorts by numeric card code.",
+    "R3 crumble makes A rethink available only for the next command. R4 processes B selection before the only A rethink and Ignore prevents Sophistry topic random."
+  ],
+  "independentTerminalChain": {
+    "scenario": {
+      "schemaVersion": 1,
+      "profile": "debate-filled-current-deck-reference-v1",
+      "genericOnly": true,
+      "difficulty": "source-normal",
+      "policies": {
+        "id": "filled-debate-current-deck-policy-v1",
+        "profile": "debate-filled-current-deck-reference-v1",
+        "tutorial": false,
+        "difficulty": "source-normal",
+        "combat": {
+          "cards": {
+            "id": "topic-shout-ignore-compose-agitate-and-sophistry-only-v1",
+            "kinds": [
+              "topic",
+              "shout",
+              "ignore",
+              "compose",
+              "agitate",
+              "sophistry"
+            ],
+            "topics": [
+              "story",
+              "logic",
+              "trend"
+            ],
+            "levels": [
+              "small",
+              "medium",
+              "large"
+            ],
+            "topicPower": "1+levelIndex+10-if-current-topic",
+            "topicLevelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "topicStressCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "drawStressEach": 15
+          },
+          "shout": {
+            "id": "source-no-anger-shout-v1",
+            "power": 110,
+            "levelCoefficient": 15,
+            "topicCoefficient": 12,
+            "stressCoefficient": 15,
+            "availability": "angerTimer-zero-only",
+            "additionalEffect": "none"
+          },
+          "ignore": {
+            "id": "source-no-anger-ignore-v1",
+            "power": 120,
+            "stressDamage": 30,
+            "hpDamage": 0,
+            "damageJitter": false,
+            "availability": "angerTimer-zero-only",
+            "additionalEffect": "none",
+            "suppressOpponentAdditionalEffect": true,
+            "suppressionScope": "loser-effect-including-compose-and-agitate",
+            "suppressSophistryTopicReroll": true
+          },
+          "compose": {
+            "id": "source-no-anger-compose-reflection-v1",
+            "power": 0,
+            "hpDamage": 0,
+            "damageJitter": false,
+            "availability": "angerTimer-zero-only",
+            "target": "opponent-unless-reflected-then-self",
+            "requestBasis": "opponent-current-stress-regardless-of-reflection",
+            "requestedStress": "-max(trunc(opponent-current-stress/2),30)",
+            "minimumRequestedReduction": 30,
+            "reflection": "opponent-played-sophistry",
+            "attack": "never-wins-in-admitted-card-set",
+            "angerCounter": "excluded"
+          },
+          "agitate": {
+            "id": "source-no-anger-agitate-reflection-v1",
+            "power": 0,
+            "hpDamage": 0,
+            "damageJitter": false,
+            "availability": "angerTimer-zero-only",
+            "target": "self-unless-reflected-then-opponent",
+            "requestedStress": 40,
+            "reflection": "opponent-played-sophistry",
+            "attack": "never-wins-in-admitted-card-set",
+            "angerCounter": "excluded"
+          },
+          "sophistry": {
+            "id": "source-no-anger-sophistry-v1",
+            "power": 20,
+            "availability": "angerTimer-zero-only",
+            "attack": "reflect-loser-topic-only",
+            "damageCalculator": "sophistry-winner-attack",
+            "coefficientCard": "loser-topic-and-level",
+            "damageTopic": "round-start",
+            "writer": "loser-topic-card-reflected-true",
+            "writerGuard": "calculated-hp-damage-positive",
+            "nonTopicAttack": "no-hp-stress-or-jitter",
+            "additionalEffect": "none"
+          },
+          "effects": {
+            "id": "source-winner-then-loser-reflectable-effects-v1",
+            "timing": "after-attack-before-hp-terminal",
+            "auditOrder": "winner-then-loser-audit-slots",
+            "tie": "no-invocations-and-empty-audit",
+            "ignore": "winner-invoked-loser-suppressed",
+            "noAdditionalEffect": "invoked-no-writer-request-zero",
+            "suppressedRequest": "null-not-evaluated",
+            "nonWriterAuditTarget": "null",
+            "nonWriterAuditReflection": "null",
+            "composeRequestBasis": "opponent-current-stress-before-write-not-writer-target",
+            "nonComposeRequestBasis": "null",
+            "stressWriter": "clamp-each-invoked-compose-or-agitate-write",
+            "effectTarget": "compose-opponent-agitate-self-inverted-by-sophistry",
+            "changeRequestedStress": "sum-of-evaluated-attack-and-effect-requests-by-target",
+            "stageActualDelta": "after-minus-before"
+          },
+          "topic": {
+            "id": "source-non-tutorial-sophistry-topic-reroll-v1",
+            "damageTopic": "round-start",
+            "nonterminalWinnerSets": [
+              "firstId"
+            ],
+            "nonterminalTopicWinnerSets": [
+              "currentTopic"
+            ],
+            "rhetoricWithoutRerollKeeps": [
+              "currentTopic"
+            ],
+            "drawKeeps": [
+              "firstId",
+              "currentTopic"
+            ],
+            "rerollCondition": "nonterminal-valid-attacker-either-played-sophistry-opponent-not-ignore",
+            "losingSophistryAgainstShoutRerolls": true,
+            "sameTopicAllowed": true,
+            "drawRole": "sophistry-topic-reroll",
+            "drawBound": 3,
+            "valueToTopic": [
+              "story",
+              "logic",
+              "trend"
+            ],
+            "enumSource": "pinned-modern-DebateEnum.cs-Topic",
+            "phase": "after-hp-closing-anger-boundary-and-crumble-before-refill",
+            "terminalReroll": false
+          },
+          "arithmetic": {
+            "id": "source-normal-integer-topic-shout-sophistry-damage-v1",
+            "attack": "100+trunc(40*(myINT-opponentINT)/(131-myINT))",
+            "hpDamage": "trunc((attack+jitter)*10*levelCoef*topicCoef/1000)",
+            "division": "toward-zero",
+            "intermediate": "exact-bigint",
+            "matchingTopicCoefficient": 10,
+            "nonmatchingTopicCoefficient": 6,
+            "angerCoefficient": 10,
+            "jitterBound": 5,
+            "nativePrng": false
+          },
+          "writer": {
+            "id": "source-hp-minus100-to1000-stress0-to100-v1",
+            "hpMin": -100,
+            "hpMax": 1000,
+            "stressMin": 0,
+            "stressMax": 100
+          },
+          "anger": {
+            "id": "reject-nonterminal-anger-trigger-v1",
+            "triggerStress": 100,
+            "evaluation": "after-attack-and-additional-effects-and-hp-terminal-check-before-topic-reroll",
+            "rejection": "whole-round-atomic",
+            "automaticCounterCards": "excluded",
+            "cap99": false,
+            "reset": false,
+            "skip": false
+          }
+        },
+        "identities": {
+          "id": "generic-identity-debate-hooks-v1",
+          "realPersonMapping": false,
+          "allPersonHooks": "identity-or-disabled",
+          "attackHook": "identity",
+          "hpDamageHook": "identity",
+          "difficulty": "source-normal",
+          "items": false,
+          "personality": false
+        },
+        "initialTopic": {
+          "id": "provided-initial-topic-v1",
+          "generated": false
+        },
+        "deal": {
+          "id": "provided-current-deck18-source-fill-v1",
+          "entriesPerParticipant": 18,
+          "initialCursor": 0,
+          "numericCards": [
+            1,
+            14
+          ],
+          "token": "participantId:tapeIndex",
+          "repairPreservesToken": true,
+          "shuffle": false,
+          "nativeDistribution": false,
+          "deckRegeneration": "unsupported-deck-regeneration",
+          "kernel": "debate-hand-fill-reference-v1"
+        },
+        "hand": {
+          "id": "source-numeric-sort-and-compacting-removal-v1",
+          "intelligenceThresholds": [
+            70,
+            80,
+            90
+          ],
+          "sourceSlotCounts": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "playableCapacities": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "reservedRethinkSlot": 0,
+          "snapshotHand": "playable-occurrences-only-source-slot-index-plus-one",
+          "selectionRemoval": "compact-retained-in-source-order-then-trailing-vacancies",
+          "sort": "numeric-card-code-ascending",
+          "equalCodeTie": "preSortSlot-engine-policy-not-native-identity",
+          "repairTarget": "last-new-original-source-slot"
+        },
+        "round": {
+          "id": "paired-choice-filled-precombat-atomic-round-v1",
+          "action": "ResolveFilledDebateRound",
+          "choicesOrder": "scenario-participant-order",
+          "precombatOrder": "first-rethink-selection-then-other-rethink-selection",
+          "resolutionOrder": "attack-winner-effect-loser-effect-hp-anger-crumble-topic-refill",
+          "interactivePhasePersistence": false
+        },
+        "rethink": {
+          "id": "current-deck-rethink-with-fill-repair-v1",
+          "maxRequestsPerRound": 2,
+          "initiallyAvailable": true,
+          "availabilityAfterUse": false,
+          "availabilityCheck": "all-requested-before-any-replacement",
+          "discard": "entire-playable-hand",
+          "auditOrder": "source-first-then-other-among-requested",
+          "finalSelection": "replacement-token-for-requester-current-token-otherwise",
+          "reenable": "nonterminal-crumble-level-change-at-folded-TurnStart",
+          "ordinaryRoundReset": false,
+          "terminalReset": false
+        },
+        "fill": {
+          "id": "shipped-kernel-integrated-at-three-phases-v1",
+          "phases": [
+            "genesis",
+            "rethink",
+            "refill"
+          ],
+          "genesisOrder": "scenario-participant-order",
+          "refillOrder": "scenario-participant-order",
+          "kernelReceipt": "complete-unchanged-recomputed",
+          "retainedIdentity": "beforeCards-by-preSortSlot",
+          "newIdentity": "participantId-and-consumed-tapeIndex",
+          "repairChanges": "card-face-only-no-extra-tape-consumption"
+        },
+        "randomness": {
+          "id": "provided-participant-phased-draws-v1",
+          "maxGenesisDraws": 2,
+          "maxDrawsPerRound": 6,
+          "countBound": "conservative-sum-of-phase-maxima",
+          "order": [
+            "first-rethink-repair",
+            "other-rethink-repair",
+            "psychological-damage-jitter",
+            "sophistry-topic-reroll",
+            "participant0-refill-repair",
+            "participant1-refill-repair"
+          ],
+          "repairRole": "debate-fill-topic-repair",
+          "repairBound": 9,
+          "repairIdentity": [
+            "participantId",
+            "phase"
+          ],
+          "validation": "safe-syntax-first-semantics-at-consumption-phase",
+          "extra": "whole-operation-atomic-rejection-after-last-reached-phase",
+          "externalRngConsumed": 0,
+          "nativePrng": false
+        },
+        "closing": {
+          "id": "filled-session-hp-only-closing-v1",
+          "terminalEffects": true,
+          "terminalRefill": false,
+          "terminalTopicChange": false,
+          "terminalFirstChange": false,
+          "terminalRethinkReset": false,
+          "campaignWrite": false
+        },
+        "opening": {
+          "initialHp": 1000,
+          "initialStress": 0,
+          "initialAngerTimer": 0,
+          "instantWin": "excluded"
+        },
+        "capacity": {
+          "id": "bounded-filled-session-reject-v1",
+          "maxEntries": 64,
+          "deckEntriesPerParticipant": 18,
+          "maxCanonicalUtf8Bytes": 16777216,
+          "maxInputNodes": 1000000,
+          "maxInputDepth": 32,
+          "maxInputArrayLength": 4096,
+          "exhaustion": "rejection-not-game-draw"
+        },
+        "persistence": {
+          "id": "full-filled-genesis-and-history-recompute-v1",
+          "policyComparison": "all-fields",
+          "genesis": "scenario-snapshot-fills-consumedDraws-recompute",
+          "receipts": "compare-all-fields",
+          "snapshot": "compare-all-fields",
+          "legacyMigration": false
+        }
+      },
+      "challengerId": "A",
+      "initialTopic": "story",
+      "participants": [
+        {
+          "id": "A",
+          "resolvedIntelligence": 100,
+          "hp": 1000,
+          "stress": 0,
+          "angerTimer": 0,
+          "cardTape": [
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "id": "B",
+          "resolvedIntelligence": 1,
+          "hp": 1000,
+          "stress": 0,
+          "angerTimer": 0,
+          "cardTape": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "genesisRawDraws": []
+    },
+    "commands": [
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 0,
+        "expectedRoundIndex": 0,
+        "expectedFirstId": "A",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:0"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:0"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 1,
+        "expectedRoundIndex": 1,
+        "expectedFirstId": "A",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:1"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:1"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 2,
+        "expectedRoundIndex": 2,
+        "expectedFirstId": "A",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:2"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:2"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      }
+    ],
+    "paperExpectedAfterCommands": [
+      {
+        "hp": [
+          1000,
+          546
+        ],
+        "stress": [
+          0,
+          20
+        ],
+        "deckCursor": [
+          7,
+          4
+        ],
+        "status": "active"
+      },
+      {
+        "hp": [
+          1000,
+          92
+        ],
+        "stress": [
+          0,
+          40
+        ],
+        "deckCursor": [
+          8,
+          5
+        ],
+        "status": "active"
+      },
+      {
+        "hp": [
+          1000,
+          -100
+        ],
+        "stress": [
+          0,
+          60
+        ],
+        "deckCursor": [
+          8,
+          5
+        ],
+        "status": "finished",
+        "outcome": {
+          "kind": "hp-defeat",
+          "winnerId": "A",
+          "loserId": "B"
+        },
+        "refillApplied": false,
+        "topicDrawCount": 0,
+        "fillDrawCount": 0,
+        "drawCount": 1,
+        "hands": [
+          [
+            {
+              "cardCode": 3,
+              "token": "A:3",
+              "tapeIndex": 3
+            },
+            {
+              "cardCode": 3,
+              "token": "A:4",
+              "tapeIndex": 4
+            },
+            {
+              "cardCode": 3,
+              "token": "A:5",
+              "tapeIndex": 5
+            },
+            {
+              "cardCode": 3,
+              "token": "A:6",
+              "tapeIndex": 6
+            },
+            {
+              "cardCode": 3,
+              "token": "A:7",
+              "tapeIndex": 7
+            }
+          ],
+          [
+            {
+              "cardCode": 1,
+              "token": "B:3",
+              "tapeIndex": 3
+            },
+            {
+              "cardCode": 1,
+              "token": "B:4",
+              "tapeIndex": 4
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  "independentRejectedCommands": [
+    {
+      "afterMainCommands": 1,
+      "command": {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 1,
+        "expectedRoundIndex": 1,
+        "expectedFirstId": "A",
+        "rethinks": [
+          "A"
+        ],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:3"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:6"
+          }
+        ],
+        "rawDraws": []
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "rethink-unavailable"
+      },
+      "note": "Does not advance state or consume a caller-owned random source."
+    },
+    {
+      "afterMainCommands": 0,
+      "command": {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 0,
+        "expectedRoundIndex": 0,
+        "expectedFirstId": "A",
+        "rethinks": [
+          "A",
+          "B"
+        ],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:4"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:5"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "debate-fill-topic-repair",
+            "bound": 9,
+            "value": 0,
+            "participantId": "B",
+            "phase": "rethink"
+          },
+          {
+            "role": "debate-fill-topic-repair",
+            "bound": 9,
+            "value": 8,
+            "participantId": "A",
+            "phase": "rethink"
+          },
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "sophistry-topic-reroll",
+            "bound": 3,
+            "value": 1
+          },
+          {
+            "role": "debate-fill-topic-repair",
+            "bound": 9,
+            "value": 4,
+            "participantId": "B",
+            "phase": "refill"
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "draw-shape"
+      },
+      "note": "Both repairs have bound9, but participant identity and phase must match the source-ordered request."
+    },
+    {
+      "afterMainCommands": 0,
+      "command": {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 0,
+        "expectedRoundIndex": 0,
+        "expectedFirstId": "A",
+        "rethinks": [
+          "A",
+          "B"
+        ],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:4"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:5"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "debate-fill-topic-repair",
+            "bound": 9,
+            "value": 8,
+            "participantId": "A",
+            "phase": "rethink"
+          },
+          {
+            "role": "debate-fill-topic-repair",
+            "bound": 9,
+            "value": 0,
+            "participantId": "B",
+            "phase": "rethink"
+          },
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "sophistry-topic-reroll",
+            "bound": 3,
+            "value": 1
+          },
+          {
+            "role": "debate-fill-topic-repair",
+            "bound": 9,
+            "value": 4,
+            "participantId": "B",
+            "phase": "refill"
+          },
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "unexpected-raw-draw"
+      },
+      "note": "Surplus final draw rejects the entire proposed round, including both rethinks and all repairs."
+    },
+    {
+      "afterTerminalChainCommands": 2,
+      "command": {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 2,
+        "expectedRoundIndex": 2,
+        "expectedFirstId": "A",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:2"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:2"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-fill-topic-repair",
+            "bound": 9,
+            "value": 0,
+            "participantId": "A",
+            "phase": "refill"
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "unexpected-raw-draw"
+      },
+      "note": "HP terminal skips refill; trailing repair input is not consumed and makes the whole command invalid."
+    }
+  ],
+  "independentDeckBoundaryChain": {
+    "scenario": {
+      "schemaVersion": 1,
+      "profile": "debate-filled-current-deck-reference-v1",
+      "genericOnly": true,
+      "difficulty": "source-normal",
+      "policies": {
+        "id": "filled-debate-current-deck-policy-v1",
+        "profile": "debate-filled-current-deck-reference-v1",
+        "tutorial": false,
+        "difficulty": "source-normal",
+        "combat": {
+          "cards": {
+            "id": "topic-shout-ignore-compose-agitate-and-sophistry-only-v1",
+            "kinds": [
+              "topic",
+              "shout",
+              "ignore",
+              "compose",
+              "agitate",
+              "sophistry"
+            ],
+            "topics": [
+              "story",
+              "logic",
+              "trend"
+            ],
+            "levels": [
+              "small",
+              "medium",
+              "large"
+            ],
+            "topicPower": "1+levelIndex+10-if-current-topic",
+            "topicLevelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "topicStressCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "drawStressEach": 15
+          },
+          "shout": {
+            "id": "source-no-anger-shout-v1",
+            "power": 110,
+            "levelCoefficient": 15,
+            "topicCoefficient": 12,
+            "stressCoefficient": 15,
+            "availability": "angerTimer-zero-only",
+            "additionalEffect": "none"
+          },
+          "ignore": {
+            "id": "source-no-anger-ignore-v1",
+            "power": 120,
+            "stressDamage": 30,
+            "hpDamage": 0,
+            "damageJitter": false,
+            "availability": "angerTimer-zero-only",
+            "additionalEffect": "none",
+            "suppressOpponentAdditionalEffect": true,
+            "suppressionScope": "loser-effect-including-compose-and-agitate",
+            "suppressSophistryTopicReroll": true
+          },
+          "compose": {
+            "id": "source-no-anger-compose-reflection-v1",
+            "power": 0,
+            "hpDamage": 0,
+            "damageJitter": false,
+            "availability": "angerTimer-zero-only",
+            "target": "opponent-unless-reflected-then-self",
+            "requestBasis": "opponent-current-stress-regardless-of-reflection",
+            "requestedStress": "-max(trunc(opponent-current-stress/2),30)",
+            "minimumRequestedReduction": 30,
+            "reflection": "opponent-played-sophistry",
+            "attack": "never-wins-in-admitted-card-set",
+            "angerCounter": "excluded"
+          },
+          "agitate": {
+            "id": "source-no-anger-agitate-reflection-v1",
+            "power": 0,
+            "hpDamage": 0,
+            "damageJitter": false,
+            "availability": "angerTimer-zero-only",
+            "target": "self-unless-reflected-then-opponent",
+            "requestedStress": 40,
+            "reflection": "opponent-played-sophistry",
+            "attack": "never-wins-in-admitted-card-set",
+            "angerCounter": "excluded"
+          },
+          "sophistry": {
+            "id": "source-no-anger-sophistry-v1",
+            "power": 20,
+            "availability": "angerTimer-zero-only",
+            "attack": "reflect-loser-topic-only",
+            "damageCalculator": "sophistry-winner-attack",
+            "coefficientCard": "loser-topic-and-level",
+            "damageTopic": "round-start",
+            "writer": "loser-topic-card-reflected-true",
+            "writerGuard": "calculated-hp-damage-positive",
+            "nonTopicAttack": "no-hp-stress-or-jitter",
+            "additionalEffect": "none"
+          },
+          "effects": {
+            "id": "source-winner-then-loser-reflectable-effects-v1",
+            "timing": "after-attack-before-hp-terminal",
+            "auditOrder": "winner-then-loser-audit-slots",
+            "tie": "no-invocations-and-empty-audit",
+            "ignore": "winner-invoked-loser-suppressed",
+            "noAdditionalEffect": "invoked-no-writer-request-zero",
+            "suppressedRequest": "null-not-evaluated",
+            "nonWriterAuditTarget": "null",
+            "nonWriterAuditReflection": "null",
+            "composeRequestBasis": "opponent-current-stress-before-write-not-writer-target",
+            "nonComposeRequestBasis": "null",
+            "stressWriter": "clamp-each-invoked-compose-or-agitate-write",
+            "effectTarget": "compose-opponent-agitate-self-inverted-by-sophistry",
+            "changeRequestedStress": "sum-of-evaluated-attack-and-effect-requests-by-target",
+            "stageActualDelta": "after-minus-before"
+          },
+          "topic": {
+            "id": "source-non-tutorial-sophistry-topic-reroll-v1",
+            "damageTopic": "round-start",
+            "nonterminalWinnerSets": [
+              "firstId"
+            ],
+            "nonterminalTopicWinnerSets": [
+              "currentTopic"
+            ],
+            "rhetoricWithoutRerollKeeps": [
+              "currentTopic"
+            ],
+            "drawKeeps": [
+              "firstId",
+              "currentTopic"
+            ],
+            "rerollCondition": "nonterminal-valid-attacker-either-played-sophistry-opponent-not-ignore",
+            "losingSophistryAgainstShoutRerolls": true,
+            "sameTopicAllowed": true,
+            "drawRole": "sophistry-topic-reroll",
+            "drawBound": 3,
+            "valueToTopic": [
+              "story",
+              "logic",
+              "trend"
+            ],
+            "enumSource": "pinned-modern-DebateEnum.cs-Topic",
+            "phase": "after-hp-closing-anger-boundary-and-crumble-before-refill",
+            "terminalReroll": false
+          },
+          "arithmetic": {
+            "id": "source-normal-integer-topic-shout-sophistry-damage-v1",
+            "attack": "100+trunc(40*(myINT-opponentINT)/(131-myINT))",
+            "hpDamage": "trunc((attack+jitter)*10*levelCoef*topicCoef/1000)",
+            "division": "toward-zero",
+            "intermediate": "exact-bigint",
+            "matchingTopicCoefficient": 10,
+            "nonmatchingTopicCoefficient": 6,
+            "angerCoefficient": 10,
+            "jitterBound": 5,
+            "nativePrng": false
+          },
+          "writer": {
+            "id": "source-hp-minus100-to1000-stress0-to100-v1",
+            "hpMin": -100,
+            "hpMax": 1000,
+            "stressMin": 0,
+            "stressMax": 100
+          },
+          "anger": {
+            "id": "reject-nonterminal-anger-trigger-v1",
+            "triggerStress": 100,
+            "evaluation": "after-attack-and-additional-effects-and-hp-terminal-check-before-topic-reroll",
+            "rejection": "whole-round-atomic",
+            "automaticCounterCards": "excluded",
+            "cap99": false,
+            "reset": false,
+            "skip": false
+          }
+        },
+        "identities": {
+          "id": "generic-identity-debate-hooks-v1",
+          "realPersonMapping": false,
+          "allPersonHooks": "identity-or-disabled",
+          "attackHook": "identity",
+          "hpDamageHook": "identity",
+          "difficulty": "source-normal",
+          "items": false,
+          "personality": false
+        },
+        "initialTopic": {
+          "id": "provided-initial-topic-v1",
+          "generated": false
+        },
+        "deal": {
+          "id": "provided-current-deck18-source-fill-v1",
+          "entriesPerParticipant": 18,
+          "initialCursor": 0,
+          "numericCards": [
+            1,
+            14
+          ],
+          "token": "participantId:tapeIndex",
+          "repairPreservesToken": true,
+          "shuffle": false,
+          "nativeDistribution": false,
+          "deckRegeneration": "unsupported-deck-regeneration",
+          "kernel": "debate-hand-fill-reference-v1"
+        },
+        "hand": {
+          "id": "source-numeric-sort-and-compacting-removal-v1",
+          "intelligenceThresholds": [
+            70,
+            80,
+            90
+          ],
+          "sourceSlotCounts": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "playableCapacities": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "reservedRethinkSlot": 0,
+          "snapshotHand": "playable-occurrences-only-source-slot-index-plus-one",
+          "selectionRemoval": "compact-retained-in-source-order-then-trailing-vacancies",
+          "sort": "numeric-card-code-ascending",
+          "equalCodeTie": "preSortSlot-engine-policy-not-native-identity",
+          "repairTarget": "last-new-original-source-slot"
+        },
+        "round": {
+          "id": "paired-choice-filled-precombat-atomic-round-v1",
+          "action": "ResolveFilledDebateRound",
+          "choicesOrder": "scenario-participant-order",
+          "precombatOrder": "first-rethink-selection-then-other-rethink-selection",
+          "resolutionOrder": "attack-winner-effect-loser-effect-hp-anger-crumble-topic-refill",
+          "interactivePhasePersistence": false
+        },
+        "rethink": {
+          "id": "current-deck-rethink-with-fill-repair-v1",
+          "maxRequestsPerRound": 2,
+          "initiallyAvailable": true,
+          "availabilityAfterUse": false,
+          "availabilityCheck": "all-requested-before-any-replacement",
+          "discard": "entire-playable-hand",
+          "auditOrder": "source-first-then-other-among-requested",
+          "finalSelection": "replacement-token-for-requester-current-token-otherwise",
+          "reenable": "nonterminal-crumble-level-change-at-folded-TurnStart",
+          "ordinaryRoundReset": false,
+          "terminalReset": false
+        },
+        "fill": {
+          "id": "shipped-kernel-integrated-at-three-phases-v1",
+          "phases": [
+            "genesis",
+            "rethink",
+            "refill"
+          ],
+          "genesisOrder": "scenario-participant-order",
+          "refillOrder": "scenario-participant-order",
+          "kernelReceipt": "complete-unchanged-recomputed",
+          "retainedIdentity": "beforeCards-by-preSortSlot",
+          "newIdentity": "participantId-and-consumed-tapeIndex",
+          "repairChanges": "card-face-only-no-extra-tape-consumption"
+        },
+        "randomness": {
+          "id": "provided-participant-phased-draws-v1",
+          "maxGenesisDraws": 2,
+          "maxDrawsPerRound": 6,
+          "countBound": "conservative-sum-of-phase-maxima",
+          "order": [
+            "first-rethink-repair",
+            "other-rethink-repair",
+            "psychological-damage-jitter",
+            "sophistry-topic-reroll",
+            "participant0-refill-repair",
+            "participant1-refill-repair"
+          ],
+          "repairRole": "debate-fill-topic-repair",
+          "repairBound": 9,
+          "repairIdentity": [
+            "participantId",
+            "phase"
+          ],
+          "validation": "safe-syntax-first-semantics-at-consumption-phase",
+          "extra": "whole-operation-atomic-rejection-after-last-reached-phase",
+          "externalRngConsumed": 0,
+          "nativePrng": false
+        },
+        "closing": {
+          "id": "filled-session-hp-only-closing-v1",
+          "terminalEffects": true,
+          "terminalRefill": false,
+          "terminalTopicChange": false,
+          "terminalFirstChange": false,
+          "terminalRethinkReset": false,
+          "campaignWrite": false
+        },
+        "opening": {
+          "initialHp": 1000,
+          "initialStress": 0,
+          "initialAngerTimer": 0,
+          "instantWin": "excluded"
+        },
+        "capacity": {
+          "id": "bounded-filled-session-reject-v1",
+          "maxEntries": 64,
+          "deckEntriesPerParticipant": 18,
+          "maxCanonicalUtf8Bytes": 16777216,
+          "maxInputNodes": 1000000,
+          "maxInputDepth": 32,
+          "maxInputArrayLength": 4096,
+          "exhaustion": "rejection-not-game-draw"
+        },
+        "persistence": {
+          "id": "full-filled-genesis-and-history-recompute-v1",
+          "policyComparison": "all-fields",
+          "genesis": "scenario-snapshot-fills-consumedDraws-recompute",
+          "receipts": "compare-all-fields",
+          "snapshot": "compare-all-fields",
+          "legacyMigration": false
+        }
+      },
+      "challengerId": "A",
+      "initialTopic": "trend",
+      "participants": [
+        {
+          "id": "A",
+          "resolvedIntelligence": 100,
+          "hp": 1000,
+          "stress": 0,
+          "angerTimer": 0,
+          "cardTape": [
+            1,
+            13,
+            13,
+            13,
+            13,
+            13,
+            1,
+            13,
+            1,
+            13,
+            1,
+            13,
+            1,
+            13,
+            1,
+            13,
+            1,
+            13
+          ]
+        },
+        {
+          "id": "B",
+          "resolvedIntelligence": 100,
+          "hp": 1000,
+          "stress": 0,
+          "angerTimer": 0,
+          "cardTape": [
+            4,
+            13,
+            13,
+            13,
+            13,
+            13,
+            13,
+            4,
+            13,
+            4,
+            13,
+            4,
+            13,
+            4,
+            13,
+            4,
+            13,
+            4
+          ]
+        }
+      ],
+      "genesisRawDraws": []
+    },
+    "commands": [
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 0,
+        "expectedRoundIndex": 0,
+        "expectedFirstId": "A",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:0"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:1"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 1,
+        "expectedRoundIndex": 1,
+        "expectedFirstId": "A",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:1"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:0"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 2,
+        "expectedRoundIndex": 2,
+        "expectedFirstId": "B",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:6"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:2"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 3,
+        "expectedRoundIndex": 3,
+        "expectedFirstId": "A",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:2"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:7"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 4,
+        "expectedRoundIndex": 4,
+        "expectedFirstId": "B",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:8"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:3"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 5,
+        "expectedRoundIndex": 5,
+        "expectedFirstId": "A",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:3"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:9"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 6,
+        "expectedRoundIndex": 6,
+        "expectedFirstId": "B",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:10"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:4"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 7,
+        "expectedRoundIndex": 7,
+        "expectedFirstId": "A",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:4"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:11"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 8,
+        "expectedRoundIndex": 8,
+        "expectedFirstId": "B",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:12"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:5"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 9,
+        "expectedRoundIndex": 9,
+        "expectedFirstId": "A",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:5"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:13"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 10,
+        "expectedRoundIndex": 10,
+        "expectedFirstId": "B",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:14"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:6"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 11,
+        "expectedRoundIndex": 11,
+        "expectedFirstId": "A",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:7"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:15"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      }
+    ],
+    "paperArithmetic": "Each round is one off-topic small card versus Compose: attack100, jitter0, damage60, target stress+10, then loser Compose reduces the winner stress by at least30 to0. Alternating winners keep nonterminal stress below100. Six hits per person leave HP640 after12 commands.",
+    "paperExpectedAfter12": {
+      "hp": [
+        640,
+        640
+      ],
+      "stress": [
+        10,
+        0
+      ],
+      "crumbledLevel": [
+        1,
+        1
+      ],
+      "canRethink": [
+        true,
+        true
+      ],
+      "deckCursor": [
+        18,
+        18
+      ],
+      "currentTopic": "logic",
+      "firstId": "B",
+      "status": "active",
+      "hands": [
+        [
+          {
+            "cardCode": 1,
+            "token": "A:16",
+            "tapeIndex": 16
+          },
+          {
+            "cardCode": 13,
+            "token": "A:9",
+            "tapeIndex": 9
+          },
+          {
+            "cardCode": 13,
+            "token": "A:11",
+            "tapeIndex": 11
+          },
+          {
+            "cardCode": 13,
+            "token": "A:13",
+            "tapeIndex": 13
+          },
+          {
+            "cardCode": 13,
+            "token": "A:15",
+            "tapeIndex": 15
+          },
+          {
+            "cardCode": 13,
+            "token": "A:17",
+            "tapeIndex": 17
+          }
+        ],
+        [
+          {
+            "cardCode": 4,
+            "token": "B:17",
+            "tapeIndex": 17
+          },
+          {
+            "cardCode": 13,
+            "token": "B:8",
+            "tapeIndex": 8
+          },
+          {
+            "cardCode": 13,
+            "token": "B:10",
+            "tapeIndex": 10
+          },
+          {
+            "cardCode": 13,
+            "token": "B:12",
+            "tapeIndex": 12
+          },
+          {
+            "cardCode": 13,
+            "token": "B:14",
+            "tapeIndex": 14
+          },
+          {
+            "cardCode": 13,
+            "token": "B:16",
+            "tapeIndex": 16
+          }
+        ]
+      ]
+    },
+    "independentRejectedNextCommand": {
+      "command": {
+        "type": "ResolveFilledDebateRound",
+        "expectedRevision": 12,
+        "expectedRoundIndex": 12,
+        "expectedFirstId": "B",
+        "rethinks": [],
+        "choices": [
+          {
+            "participantId": "A",
+            "cardToken": "A:16"
+          },
+          {
+            "participantId": "B",
+            "cardToken": "B:8"
+          }
+        ],
+        "rawDraws": [
+          {
+            "role": "psychological-damage-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "unsupported-deck-regeneration"
+      },
+      "note": "Both retained hands and legal selections exist. The proposed attack would damage B, but A nonterminal refill first needs a nineteenth deck item; the entire round is rejected with no committed HP/stress/hand/cursor/revision change."
+    }
+  }
+}
