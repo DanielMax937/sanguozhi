@@ -989,3 +989,35 @@ export {
   DEBATE_HP_DAMAGE_EVIDENCE_V1,
   evaluateDebateHpDamage,
 } from './debate-hp-damage.ts';
+
+// Independent modern-reference attacker query; no state or legacy integration.
+export type {
+  DebateAttackerSelectionTeamV1,
+  DebateAttackerSelectionAttackerV1,
+  DebateAttackerSelectionPersonalityV1,
+  DebateAttackerSelectionTopicV1,
+  DebateAttackerSelectionCardTopicV1,
+  DebateAttackerSelectionCardLevelV1,
+  DebateAttackerSelectionCharacterV1,
+  DebateAttackerSelectionInputV1,
+  DebateAttackerSelectionCardClassV1,
+  DebateAttackerSelectionBaseReasonV1,
+  DebateAttackerSelectionBaseCalculationV1,
+  DebateAttackerSelectionOverrideReasonV1,
+  DebateAttackerSelectionOverrideAuditV1,
+  DebateAttackerSelectionTeamAuditV1,
+  DebateAttackerSelectionComparisonRelationV1,
+  DebateAttackerSelectionComparisonV1,
+  DebateAttackerSelectionAuditV1,
+  DebateAttackerSelectionSuccessV1,
+  DebateAttackerSelectionFailureReasonV1,
+  DebateAttackerSelectionFailureV1,
+  DebateAttackerSelectionResultV1,
+  DebateAttackerSelectionPolicyV1,
+  DebateAttackerSelectionEvidenceV1,
+} from './debate-attacker-selection.ts';
+export {
+  DEBATE_ATTACKER_SELECTION_POLICY_V1,
+  DEBATE_ATTACKER_SELECTION_EVIDENCE_V1,
+  evaluateDebateAttackerSelection,
+} from './debate-attacker-selection.ts';

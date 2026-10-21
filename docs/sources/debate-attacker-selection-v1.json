@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-attacker-selection-v1",
+  "scope": "Standalone two-team base-power and positive-timer bold attacker-selection query; not card play, an attack, a winner calculation, or a complete debate turn",
+  "implementation": "packages/engine/src/debate-attacker-selection.ts",
+  "ruleDocument": "docs/rules/debate-attacker-selection-v1.md",
+  "apiDocument": "docs/engine/debate-attacker-selection-v1.md",
+  "paperExample": "data/scenarios/debate-attacker-selection-example-v1.json",
+  "evidence": {
+    "sourceIdentity": "modern-CSharp-translation-not-native-or-PK-or-Vanilla",
+    "repository": "https://github.com/tankyc/sango_infinity",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "debatePath": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+    "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+    "debateSha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+    "debateEnumPath": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+    "debateEnumBlob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+    "sourceResolvedPersonalityLines": [
+      369,
+      375
+    ],
+    "sourceCardTopicLines": [
+      853,
+      873
+    ],
+    "sourceCardLevelLines": [
+      875,
+      893
+    ],
+    "sourceCardPowerLines": [
+      906,
+      929
+    ],
+    "sourceAttackerSelectionLines": [
+      1128,
+      1142
+    ],
+    "sourceCardEnumLines": [
+      33,
+      61
+    ],
+    "sourcePersonalityEnumLines": [
+      116,
+      124
+    ],
+    "sourceBehavior": "both-base-powers-then-unconditional-positive-timer-bold-overrides-then-strict-comparison",
+    "personalityBoundary": "CharacterGetPersonality-result-supplied-by-caller-no-person-fallback-run",
+    "stateBoundary": "source-attacker-field-assignment-returned-as-data-not-applied",
+    "boundsSafetyBudgetsAuditAndReasonNames": "engine-policy",
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "completeDebate": false,
+    "p078": "excluded",
+    "nativeWholeChain": "open",
+    "nativeDeckRegenerationIntegration": "excluded",
+    "nativeRngStream": "excluded",
+    "legacySessionIntegration": "excluded"
+  },
+  "policies": {
+    "id": "debate-attacker-selection-policy-v1",
+    "profile": "debate-attacker-selection-reference-v1",
+    "checkpoint": {
+      "characters": 2,
+      "teams": [
+        0,
+        1
+      ],
+      "personality": "caller-resolved-timid-calm-bold-or-reckless",
+      "angerTimer": {
+        "minimum": 0,
+        "maximum": 4
+      },
+      "currentTopic": {
+        "minimum": -2147483648,
+        "maximum": 2147483647
+      },
+      "playedCards": {
+        "length": 2,
+        "minimum": -2147483648,
+        "maximum": 2147483647
+      },
+      "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+    },
+    "cards": {
+      "rethink": 0,
+      "story": [
+        1,
+        2,
+        3
+      ],
+      "logic": [
+        4,
+        5,
+        6
+      ],
+      "trend": [
+        7,
+        8,
+        9
+      ],
+      "shout": 10,
+      "sophistry": 11,
+      "ignore": 12,
+      "compose": 13,
+      "agitate": 14,
+      "topicCodes": [
+        0,
+        1,
+        2
+      ],
+      "ordinaryLevelCodes": [
+        0,
+        1,
+        2
+      ],
+      "otherCardTopicAndLevel": -1
+    },
+    "basePower": {
+      "ignore": 120,
+      "shout": 110,
+      "sophistry": 20,
+      "topic": "one-plus-zero-based-level-plus-valid-matching-topic-bonus",
+      "matchingTopicBonus": 10,
+      "invalidCurrentTopic": "accepted-with-no-topic-bonus",
+      "otherCards": 0,
+      "outOfRangeCard": "accepted-with-zero-base-power"
+    },
+    "override": {
+      "condition": "positive-timer-and-bold-only",
+      "assignedPower": 100,
+      "operation": "unconditional-assignment-not-maximum-or-addition",
+      "appliesToEverySigned32Card": true,
+      "canLowerIgnoreAndShout": true
+    },
+    "selection": {
+      "order": [
+        "team-0-base-power",
+        "team-1-base-power",
+        "team-0-bold-override",
+        "team-1-bold-override",
+        "strict-power-comparison"
+      ],
+      "comparison": "strict-greater-than",
+      "team0Greater": 0,
+      "team1Greater": 1,
+      "equal": -1
+    },
+    "safety": {
+      "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+      "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+      "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+      "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+      "result": "recursively-frozen-and-detached-from-input",
+      "failure": "typed-code-only-no-partial-audit"
+    },
+    "capacity": {
+      "maxInputNodes": 1024,
+      "maxInputDepth": 10,
+      "maxInputArrayLength": 32,
+      "maxCanonicalUtf8Bytes": 16384,
+      "evaluations": 1,
+      "basePowerCalculations": 2,
+      "overrideChecks": 2,
+      "randomDraws": 0,
+      "stateWrites": 0
+    },
+    "boundary": {
+      "kind": "two-team-pure-attacker-selection-query",
+      "personalityResolution": "caller-supplied-not-evaluated",
+      "availabilityOwnershipHpAndTurnLegality": "not-checked-not-applied",
+      "sourceAttackerAssignment": "returned-not-written-to-state",
+      "winnerAndDamage": "not-evaluated",
+      "rng": "no-implementation-no-external-consumption",
+      "sessionIntegration": false,
+      "persistence": false,
+      "legacyProfilesChanged": false
+    }
+  },
+  "literalProvenance": "The evidence and policies objects are extracted from the implementation text as JSON-compatible constant literals. The implementation was not imported, evaluated or executed.",
+  "sourceRules": [
+    "GetCardTopic maps Story cards 1..3 to topic 0, Logic cards 4..6 to topic 1, and Trend cards 7..9 to topic 2. Every other card has helper topic -1.",
+    "GetCardLevel maps each ordinary small, medium and large card to zero-based level 0, 1 or 2; every other card has helper level -1.",
+    "GetCardPower checks Ignore 12 first and returns 120, Shout 10 returns 110, and Sophistry 11 returns 20.",
+    "Only ordinary cards 1..9 use one plus the zero-based level. A current topic within 0..2 that matches the card topic adds 10. An unmatched or out-of-range current topic adds nothing.",
+    "All other integral card codes use base power 0, including Rethink 0, Compose 13, Agitate 14, negative codes and codes above 14. This query behavior is not card availability or ownership.",
+    "CalcAttacker obtains both base powers before checking either bold override. Each side independently overwrites its power with exactly 100 when its angerTimer is positive and its resolved personality is bold.",
+    "The override is assignment, not addition and not a maximum. It lowers Ignore 120 or Shout 110 to 100 and also raises zero-power or out-of-range cards to 100.",
+    "The attacker is initialized to -1. Strictly greater side-0 power returns 0, strictly greater side-1 power returns 1, and equal final powers retain -1. There is no first-player, personality, or intelligence tie-break.",
+    "The reference writes an attacker field and returns it. This pure kernel returns that selection as detached data and does not mutate a source-style state object."
+  ],
+  "engineeringPolicies": [
+    "The caller supplies two already-resolved personalities. The kernel does not evaluate CharacterGetPersonality, its PersonalityId fallback, a person lookup, or person-specific behavior.",
+    "Integer angerTimer 0..4, signed-32-bit currentTopic, and two signed-32-bit playedCards form an explicit supported checkpoint domain. This is not a universal claim about source reachability or legal gameplay.",
+    "Current topics outside 0..2 and card codes outside the enum remain accepted integral queries. They must not be confused with malformed data or numbers outside the supported signed-32-bit domain.",
+    "A positive-timer bold checkpoint may contain Ignore, Shout, Rethink or an unknown card even when a separate availability rule would forbid play. This kernel deliberately does not invoke availability or legal-turn checks.",
+    "Exact full-policy comparison, the closed input schema, safe detached parsing, trusted Node proxy detection, capacity limits, typed refusal names, diagnostic classifications and recursively frozen audit receipts are engine policy, not reference-source return fields.",
+    "The audit records base and final powers, branch reasons, override reasons and strict comparison. Diagnostic card classes and helper values are explanatory data, not proof that the source called each helper on every fixed-power branch.",
+    "The required trusted proxy detector must be available before field-level validation. Runtime availability and safe-detachment behavior have been read statically, not demonstrated by execution.",
+    "There are no random inputs or draws, HP/stress updates, damage application, state writes, card consumption, timer changes, winner/crumble decisions, persistence, replay or automatic session integration."
+  ],
+  "manualSupportedDomainBounds": {
+    "method": "Paper inspection of exclusive source branches only; no formula script or candidate execution",
+    "minimumBasePower": 0,
+    "maximumBasePower": 120,
+    "minimumFinalPower": 0,
+    "maximumFinalPower": 120,
+    "ordinaryUnmatchedPowers": [
+      1,
+      2,
+      3
+    ],
+    "ordinaryMatchedPowers": [
+      11,
+      12,
+      13
+    ],
+    "positiveBoldAssignedPower": 100,
+    "attackerValues": [
+      -1,
+      0,
+      1
+    ],
+    "note": "The positive bold assignment cannot be treated as a lower bound. Normal Ignore 120 and Shout 110 can both beat a positive bold final power of 100."
+  },
+  "sourceSlices": [
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "lines": [
+        369,
+        375
+      ],
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L369-L375",
+      "supports": "Resolved-personality source context; the supplied-personality boundary excludes executing the fallback."
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "lines": [
+        853,
+        893
+      ],
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L853-L893",
+      "supports": "Ordinary card topic and zero-based level helpers."
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "lines": [
+        906,
+        929
+      ],
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L906-L929",
+      "supports": "Ignore, Shout, Sophistry, ordinary-card and default-zero base-power branches."
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "lines": [
+        1128,
+        1142
+      ],
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1128-L1142",
+      "supports": "Both base powers, independent unconditional bold overrides, and strict comparison."
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "lines": [
+        33,
+        61
+      ],
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs#L33-L61",
+      "supports": "Card codes 0..14 and ordinary range 1..9."
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "lines": [
+        96,
+        103
+      ],
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs#L96-L103",
+      "supports": "Topic codes 0, 1 and 2 with Topic_Max 3."
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "lines": [
+        116,
+        124
+      ],
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs#L116-L124",
+      "supports": "Timid, calm, bold and reckless personality names."
+    }
+  ],
+  "supportingEvidence": {
+    "repository": "https://github.com/tankyc/sango_infinity",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "debateUrl": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+    "enumUrl": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+    "enumSha256": "cd71efed5059fb4ca876091b1e39bd34636fb978c8ec9bfbf924d6a443070bc1",
+    "identityReadback": "The fixed-reference Debate.cs and DebateEnum.cs texts were read and their SHA-256 values were checked with byte-hash tooling. Neither source nor project was executed.",
+    "sourceIdentity": "Pinned modern C# translation only; not native, PK, Vanilla, stock-original or console authentication."
+  },
+  "remaining": [
+    "Composition of availability, attacker selection, generic HP damage, HP/stress writers and the existing anger-entry/timid-combo kernels",
+    "Complete two-pass anger-phase orchestration, winner/crumble/turn-end ordering, timer transitions and full angry-turn gameplay",
+    "Calm rethink and bold exhaustion behavior, including their card and draw effects",
+    "Resolved-personality derivation, real-person and book behavior, nonidentity hooks and whole-turn random/identity budgets",
+    "Native RNG, native deck/regeneration behavior and complete session integration",
+    "Native PK, Vanilla and stock-original equivalence remain unproven; 43 evidence topics and 45 historical snapshots remain unchanged"
+  ],
+  "excluded": [
+    "P078 and all dependencies",
+    "Person/book initialization, person-specific hooks, opening, critical, pursuit, mercy and campaign finalizers",
+    "Mutation or migration of the nine legacy session profiles, policies, APIs or saves"
+  ],
+  "legacyBoundary": {
+    "legacySessionProfilesUnchanged": 9,
+    "sessionIntegration": false,
+    "nativeEvidenceTopicsStillOpen": 43,
+    "historicalSnapshotsUnchanged": 45
+  },
+  "validation": "Static source and implementation text reading, manually specified paper examples, JSON text authoring and byte hashes only. No tests, compiler, typecheck, build, validator, checker, diagnostics, candidate, source, scenario, replay or project execution. The paper cases are not runtime-pass evidence."
+}
