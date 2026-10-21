@@ -1,0 +1,357 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-timid-combo-v1",
+  "scope": "Independent fresh pending Timid ComboAttack with supplied generic resolved attack and source-ordered jitter; no phase/session orchestration",
+  "implementation": "packages/engine/src/debate-timid-combo.ts",
+  "ruleDocument": "docs/rules/debate-timid-combo-v1.md",
+  "apiDocument": "docs/engine/debate-timid-combo-v1.md",
+  "paperExample": "data/scenarios/debate-timid-combo-example-v1.json",
+  "evidence": {
+    "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "debatePath": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+    "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+    "debateEnumPath": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+    "debateEnumBlob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+    "sourceBoundsLines": [
+      42,
+      57
+    ],
+    "sourceCharacterLines": [
+      122,
+      150
+    ],
+    "sourceComboFieldsLines": [
+      212,
+      217
+    ],
+    "sourceActiveCapacityLines": [
+      343,
+      355
+    ],
+    "sourceResolvedPersonalityLines": [
+      369,
+      375
+    ],
+    "sourceSetAngerTimerLines": [
+      377,
+      391
+    ],
+    "sourceRemoveCardLines": [
+      453,
+      466
+    ],
+    "sourceHpStressWritersLines": [
+      512,
+      534
+    ],
+    "sourceOpponentLines": [
+      845,
+      851
+    ],
+    "sourceCardLevelLines": [
+      875,
+      893
+    ],
+    "sourceHpDamageLines": [
+      1145,
+      1196
+    ],
+    "sourceDamageHookLines": [
+      1192,
+      1196
+    ],
+    "sourceExcludedAngerEntryLines": [
+      1328,
+      1354
+    ],
+    "sourceComboAttackLines": [
+      1356,
+      1377
+    ],
+    "sourceCardEnumLines": [
+      33,
+      61
+    ],
+    "sourcePersonalityEnumLines": [
+      116,
+      124
+    ],
+    "comboEvidence": "pinned-modern-translated-ComboAttack-with-increasing-current-physical-slot",
+    "compactionEvidence": "each-hit-removes-current-slot-clears-seven-and-compacts-active-nonempty-survivors",
+    "damageEvidence": "angry-timid-topicCoef-ten-angerCoef-ten-topic-level-coefficient-and-one-bound-five-draw",
+    "hookEvidence": "CalcHpDamage-invokes-ModifyHpDamage-after-formula-generic-identity-is-explicit-caller-assertion",
+    "stressEvidence": "requested-post-identity-hook-hp-damage-divided-by-fifteen-not-clamped-hp-loss",
+    "terminalEvidence": "no-hp-stop-in-loop-combo-cleared-after-entire-scan",
+    "freshPendingAndAttackAdmission": "explicit-engine-policy-not-universal-source-state-reachability",
+    "hitBound": "derived-from-bounded-forward-scan-and-source-stable-compaction-not-a-source-counter-clamp",
+    "inputSafetyBudgetsAndAudit": "engine-policy",
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "completeDebate": false,
+    "originalUnresolvedGroups": 43,
+    "originalHistoricalSnapshots": 45,
+    "nativeWholeChain": "open",
+    "p078": "excluded",
+    "nativeDeckRegenerationIntegration": "excluded",
+    "nativeRngStream": "excluded",
+    "legacySessionIntegration": "excluded"
+  },
+  "policies": {
+    "id": "debate-timid-combo-fresh-pending-policy-v1",
+    "profile": "debate-timid-combo-reference-v1",
+    "checkpoint": {
+      "characters": 2,
+      "personality": "caller-resolved-timid-calm-bold-or-reckless",
+      "strength": {
+        "minimum": 1,
+        "maximum": 100,
+        "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+      },
+      "hp": {
+        "minimum": -100,
+        "maximum": 1000
+      },
+      "stress": {
+        "minimum": 0,
+        "maximum": 100
+      },
+      "angerTimer": {
+        "minimum": 0,
+        "maximum": 4
+      },
+      "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+      "attackerPersonality": "timid",
+      "attackerAngerTimer": 1,
+      "hpTerminalGuard": false
+    },
+    "combo": {
+      "input": "fresh-pending-checkpoint-only",
+      "active": true,
+      "attacker": [
+        0,
+        1
+      ],
+      "counter": 0,
+      "afterEachHit": "increment-counter-after-current-slot-removal",
+      "afterScan": "set-active-false-even-with-zero-hits",
+      "attackerPreserved": true,
+      "timerPreserved": true,
+      "angerEntryEvaluated": false
+    },
+    "hand": {
+      "physicalLength": 7,
+      "minimumActiveCapacity": 4,
+      "maximumActiveCapacity": 7,
+      "cardMinimum": -1,
+      "cardMaximum": 14,
+      "empty": -1,
+      "reservedRethinkCode": 0,
+      "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+      "holesAndDuplicates": "preserved-until-a-source-removal",
+      "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+      "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+      "inactiveOnRemoval": "discarded-not-compacted"
+    },
+    "scan": {
+      "startPhysicalSlot": 0,
+      "stopBefore": "attacker-maxCardCount",
+      "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+      "topicCardMinimum": 1,
+      "topicCardMaximum": 9,
+      "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+      "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+      "shiftedCardAtRemovedSlot": "not-revisited",
+      "zeroHpBreak": false
+    },
+    "damage": {
+      "resolvedAttack": {
+        "minimum": 70,
+        "maximum": 227,
+        "source": "caller-supplied-not-derived-or-verified"
+      },
+      "jitter": {
+        "role": "debate-timid-combo-jitter",
+        "bound": 5,
+        "minimum": 0,
+        "maximum": 4
+      },
+      "topicCoef": 10,
+      "angerCoef": 10,
+      "cardLevels": {
+        "levelZero": [
+          1,
+          4,
+          7
+        ],
+        "levelOne": [
+          2,
+          5,
+          8
+        ],
+        "levelTwo": [
+          3,
+          6,
+          9
+        ]
+      },
+      "levelCoefficients": [
+        10,
+        15,
+        20
+      ],
+      "multiplyOrder": [
+        "resolvedAttack-plus-jitter",
+        "angerCoef",
+        "levelCoef",
+        "topicCoef"
+      ],
+      "divisor": 1000,
+      "arithmetic": "exact-safe-integer-with-toward-zero-division",
+      "genericOnly": true,
+      "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+      "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+      "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+      "writeOrder": [
+        "hp",
+        "stress",
+        "remove-current-slot",
+        "increment-combo-counter"
+      ],
+      "hpClamp": [
+        -100,
+        1000
+      ],
+      "stressClamp": [
+        0,
+        100
+      ],
+      "stopsAtZeroHp": false
+    },
+    "draws": {
+      "input": "caller-supplied-labeled-raw-draws-only",
+      "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+      "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+      "missing": "atomic-failure",
+      "extra": "atomic-failure-after-resolution-on-detached-state",
+      "malformedEvenIfUnused": "atomic-failure-before-resolution",
+      "rngImplementation": "none",
+      "nativeStreamClaim": false
+    },
+    "audit": {
+      "snapshots": "detached-before-and-after-characters-and-combo",
+      "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+      "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+      "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+      "draws": "complete-consumed-transcript-and-supplied-count",
+      "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+      "combo": "before-after-completed-and-hit-count"
+    },
+    "safety": {
+      "input": "closed-schema-detached-safe-JSON-data",
+      "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+      "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+      "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+      "result": "recursively-frozen-and-detached-from-input",
+      "failure": "atomic-no-partial-state-or-receipt"
+    },
+    "capacity": {
+      "maxInputNodes": 2048,
+      "maxInputDepth": 12,
+      "maxInputArrayLength": 64,
+      "maxCanonicalUtf8Bytes": 32768,
+      "maxScannedSlots": 7,
+      "maxHits": 4,
+      "maxConsumedDraws": 4,
+      "maxHpTransitions": 4,
+      "maxStressTransitions": 4,
+      "maxRemovedCards": 4,
+      "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+    },
+    "boundary": {
+      "kind": "single-fresh-pending-timid-combo-kernel",
+      "angerEntry": "excluded",
+      "secondCalcAngering": "excluded",
+      "winnerAndCrumble": "excluded",
+      "phaseExecution": "excluded",
+      "timerDecay": "excluded",
+      "handRefillAndDeckRegeneration": "excluded",
+      "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+      "attackDerivation": "caller-supplied-not-evaluated",
+      "characterSpecificDamageHook": "excluded-generic-identity-only",
+      "rng": "no-implementation-no-external-consumption",
+      "sessionIntegration": false,
+      "persistence": false,
+      "legacyProfilesChanged": false
+    }
+  },
+  "sourceFiles": [
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "gitBlobSha1": "0137498d10773cd4596d497083ccdf6a26b3a261",
+      "sha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+      "identityBasis": "retained pinned source, previously recorded byte and blob identities",
+      "lineRanges": {
+        "physicalRemoval": [
+          453,
+          466
+        ],
+        "hpStressWriters": [
+          512,
+          534
+        ],
+        "excludedAttackDerivation": [
+          554,
+          565
+        ],
+        "cardLevel": [
+          874,
+          894
+        ],
+        "genericDamageBeforeExcludedHook": [
+          1145,
+          1196
+        ],
+        "pendingTimidEntry": [
+          1328,
+          1354
+        ],
+        "comboAttack": [
+          1356,
+          1377
+        ]
+      }
+    },
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+      "gitBlobSha1": "6aa98f855a5d4d172cde7e8ffc18a141b8a7b587",
+      "sha256": "5b47f7b6a89d6123a23e7c14f22168e59c9edd549e98d9bc0258d8a55bb9cbf3",
+      "identityBasis": "retained pinned source, previously recorded byte and blob identities",
+      "lineRanges": {
+        "excludedFullPhase": [
+          333,
+          390
+        ]
+      }
+    }
+  ],
+  "boundsAndExclusions": {
+    "oldSessionProfilesUnchanged": 9,
+    "angerEntryKernelUnchanged": true,
+    "automaticIntegration": false,
+    "sourceLoopNotInitialCardEnumeration": true,
+    "maxActualHits": 4,
+    "genericHookIdentityDeclarationNotPersonProof": true,
+    "nativePkVanillaStockEquivalent": false,
+    "evidenceTopicsStillOpen": 43,
+    "historicalSnapshots": 45,
+    "p078AndDependencies": "excluded"
+  },
+  "validation": "Static text and manual arithmetic only; no tests/compiler/typecheck/build/validators/checkers/diagnostics/project/candidate/source/scenario/replay execution"
+}

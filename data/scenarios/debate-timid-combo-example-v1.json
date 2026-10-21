@@ -1,0 +1,3614 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-timid-combo-paper-examples-v1",
+  "status": "paper-only-not-executed",
+  "method": "Manual fixed-source loop tracing and integer arithmetic, not observed runtime output",
+  "expectedFields": "Selected conceptual observations, not complete receipt DTO; only input subobjects are API inputs",
+  "successCases": [
+    {
+      "id": "seven-topics-four-dynamic-hits",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": true,
+        "characters": [
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 7,
+            "hand": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 0,
+          "counter": 0
+        },
+        "resolvedAttack": 100,
+        "rawDraws": [
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      "paperExpected": {
+        "hitCount": 4,
+        "scanCards": [
+          1,
+          3,
+          5,
+          7,
+          -1,
+          -1,
+          -1
+        ],
+        "hitOriginalSlots": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "requestedHpDamage": [
+          100,
+          200,
+          150,
+          100
+        ],
+        "requestedStressDamage": [
+          6,
+          13,
+          10,
+          6
+        ],
+        "attackerAfterHand": [
+          2,
+          4,
+          6,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "targetAfterHp": 450,
+        "targetAfterStress": 35,
+        "combo": {
+          "active": false,
+          "attacker": 0,
+          "counter": 4
+        }
+      }
+    },
+    {
+      "id": "reserved-zero-and-inactive-tail-clear",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": true,
+        "characters": [
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              14,
+              13,
+              9
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 0,
+          "counter": 0
+        },
+        "resolvedAttack": 100,
+        "rawDraws": [
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 4
+          }
+        ]
+      },
+      "paperExpected": {
+        "hitCount": 2,
+        "scanCards": [
+          0,
+          1,
+          3,
+          -1
+        ],
+        "hitOriginalSlots": [
+          1,
+          3
+        ],
+        "requestedHpDamage": [
+          100,
+          208
+        ],
+        "requestedStressDamage": [
+          6,
+          13
+        ],
+        "attackerAfterHand": [
+          0,
+          2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "targetAfterHp": 692,
+        "targetAfterStress": 19,
+        "discardedInactiveOnFirstRemoval": [
+          {
+            "physicalSlot": 4,
+            "card": 14
+          },
+          {
+            "physicalSlot": 5,
+            "card": 13
+          },
+          {
+            "physicalSlot": 6,
+            "card": 9
+          }
+        ],
+        "combo": {
+          "active": false,
+          "attacker": 0,
+          "counter": 2
+        }
+      }
+    },
+    {
+      "id": "holes-compaction-skips-moved-topics",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": true,
+        "characters": [
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 7,
+            "hand": [
+              -1,
+              1,
+              -1,
+              2,
+              3,
+              -1,
+              14
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 0,
+          "counter": 0
+        },
+        "resolvedAttack": 70,
+        "rawDraws": [
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 4
+          }
+        ]
+      },
+      "paperExpected": {
+        "hitCount": 1,
+        "scanCards": [
+          -1,
+          1,
+          14,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "hitOriginalSlots": [
+          1
+        ],
+        "requestedHpDamage": [
+          74
+        ],
+        "requestedStressDamage": [
+          4
+        ],
+        "attackerAfterHand": [
+          2,
+          3,
+          14,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "targetAfterHp": 926,
+        "targetAfterStress": 4,
+        "combo": {
+          "active": false,
+          "attacker": 0,
+          "counter": 1
+        }
+      }
+    },
+    {
+      "id": "no-topics-preserves-inactive-tail-but-finishes",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": true,
+        "characters": [
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              10,
+              13,
+              14,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 0,
+          "counter": 0
+        },
+        "resolvedAttack": 100,
+        "rawDraws": []
+      },
+      "paperExpected": {
+        "hitCount": 0,
+        "scanCards": [
+          0,
+          10,
+          13,
+          14
+        ],
+        "attackerAfterHand": [
+          0,
+          10,
+          13,
+          14,
+          1,
+          2,
+          3
+        ],
+        "targetAfterHp": 1000,
+        "targetAfterStress": 0,
+        "combo": {
+          "active": false,
+          "attacker": 0,
+          "counter": 0
+        }
+      }
+    },
+    {
+      "id": "team-one-medium-integer-truncation",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": true,
+        "characters": [
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              2,
+              8,
+              5,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 1,
+          "counter": 0
+        },
+        "resolvedAttack": 227,
+        "rawDraws": [
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 4
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 3
+          }
+        ]
+      },
+      "paperExpected": {
+        "hitCount": 2,
+        "scanCards": [
+          0,
+          2,
+          5,
+          -1
+        ],
+        "hitOriginalSlots": [
+          1,
+          3
+        ],
+        "requestedHpDamage": [
+          346,
+          345
+        ],
+        "requestedStressDamage": [
+          23,
+          23
+        ],
+        "attackerAfterHand": [
+          0,
+          8,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "targetAfterHp": 309,
+        "targetAfterStress": 46,
+        "combo": {
+          "active": false,
+          "attacker": 1,
+          "counter": 2
+        }
+      }
+    },
+    {
+      "id": "four-large-hits-continue-after-hp-clamp",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": true,
+        "characters": [
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 7,
+            "hand": [
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 0,
+          "counter": 0
+        },
+        "resolvedAttack": 227,
+        "rawDraws": [
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 4
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 4
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 4
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 4
+          }
+        ]
+      },
+      "paperExpected": {
+        "hitCount": 4,
+        "requestedHpDamage": [
+          462,
+          462,
+          462,
+          462
+        ],
+        "requestedStressDamage": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "targetHpAfterEach": [
+          538,
+          76,
+          -100,
+          -100
+        ],
+        "targetActualHpDelta": [
+          -462,
+          -462,
+          -176,
+          0
+        ],
+        "targetStressAfterEach": [
+          30,
+          60,
+          90,
+          100
+        ],
+        "targetActualStressDelta": [
+          30,
+          30,
+          30,
+          10
+        ],
+        "attackerAfterHand": [
+          9,
+          9,
+          9,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "combo": {
+          "active": false,
+          "attacker": 0,
+          "counter": 4
+        }
+      }
+    },
+    {
+      "id": "already-dead-target-still-gets-pressure",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": true,
+        "characters": [
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              7,
+              10,
+              14,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": -100,
+            "stress": 99,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 0,
+          "counter": 0
+        },
+        "resolvedAttack": 70,
+        "rawDraws": [
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      "paperExpected": {
+        "hitCount": 1,
+        "scanCards": [
+          0,
+          7,
+          14,
+          -1
+        ],
+        "requestedHpDamage": [
+          70
+        ],
+        "requestedStressDamage": [
+          4
+        ],
+        "targetActualHpDelta": [
+          0
+        ],
+        "targetAfterHp": -100,
+        "targetAfterStress": 100,
+        "attackerAfterHand": [
+          0,
+          10,
+          14,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "combo": {
+          "active": false,
+          "attacker": 0,
+          "counter": 1
+        }
+      }
+    }
+  ],
+  "rejectionCases": [
+    {
+      "id": "missing-fourth-hit-jitter",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": true,
+        "characters": [
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 7,
+            "hand": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 0,
+          "counter": 0
+        },
+        "resolvedAttack": 100,
+        "rawDraws": [
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "missing-raw-draw"
+      }
+    },
+    {
+      "id": "extra-jitter-with-no-hits",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": true,
+        "characters": [
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              10,
+              13,
+              14,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 0,
+          "counter": 0
+        },
+        "resolvedAttack": 100,
+        "rawDraws": [
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "extra-raw-draws"
+      }
+    },
+    {
+      "id": "not-pending-combo",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": true,
+        "characters": [
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 7,
+            "hand": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": false,
+          "attacker": 0,
+          "counter": 0
+        },
+        "resolvedAttack": 100,
+        "rawDraws": [
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-combo"
+      }
+    },
+    {
+      "id": "not-timid-attacker",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": true,
+        "characters": [
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 7,
+            "hand": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 0,
+          "counter": 0
+        },
+        "resolvedAttack": 100,
+        "rawDraws": [
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-attacker-checkpoint"
+      }
+    },
+    {
+      "id": "wrong-jitter-bound",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": true,
+        "characters": [
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 7,
+            "hand": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 0,
+          "counter": 0
+        },
+        "resolvedAttack": 100,
+        "rawDraws": [
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 6,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-raw-draw"
+      }
+    },
+    {
+      "id": "non-generic-hook-request",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-timid-combo-reference-v1",
+        "policies": {
+          "id": "debate-timid-combo-fresh-pending-policy-v1",
+          "profile": "debate-timid-combo-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength-preserved-not-used"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "attackerPersonality": "timid",
+            "attackerAngerTimer": 1,
+            "hpTerminalGuard": false
+          },
+          "combo": {
+            "input": "fresh-pending-checkpoint-only",
+            "active": true,
+            "attacker": [
+              0,
+              1
+            ],
+            "counter": 0,
+            "afterEachHit": "increment-counter-after-current-slot-removal",
+            "afterScan": "set-active-false-even-with-zero-hits",
+            "attackerPreserved": true,
+            "timerPreserved": true,
+            "angerEntryEvaluated": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "removal": "remove-current-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "scan": {
+            "startPhysicalSlot": 0,
+            "stopBefore": "attacker-maxCardCount",
+            "cardRead": "current-mutated-physical-slot-not-an-original-hand-snapshot",
+            "topicCardMinimum": 1,
+            "topicCardMaximum": 9,
+            "nonTopicCard": "skip-without-draw-damage-removal-or-counter-increment",
+            "nextPhysicalSlot": "increment-by-one-even-after-removal-compaction",
+            "shiftedCardAtRemovedSlot": "not-revisited",
+            "zeroHpBreak": false
+          },
+          "damage": {
+            "resolvedAttack": {
+              "minimum": 70,
+              "maximum": 227,
+              "source": "caller-supplied-not-derived-or-verified"
+            },
+            "jitter": {
+              "role": "debate-timid-combo-jitter",
+              "bound": 5,
+              "minimum": 0,
+              "maximum": 4
+            },
+            "topicCoef": 10,
+            "angerCoef": 10,
+            "cardLevels": {
+              "levelZero": [
+                1,
+                4,
+                7
+              ],
+              "levelOne": [
+                2,
+                5,
+                8
+              ],
+              "levelTwo": [
+                3,
+                6,
+                9
+              ]
+            },
+            "levelCoefficients": [
+              10,
+              15,
+              20
+            ],
+            "multiplyOrder": [
+              "resolvedAttack-plus-jitter",
+              "angerCoef",
+              "levelCoef",
+              "topicCoef"
+            ],
+            "divisor": 1000,
+            "arithmetic": "exact-safe-integer-with-toward-zero-division",
+            "genericOnly": true,
+            "damageHook": "caller-asserted-generic-identity-no-person-pair-or-card-override-evaluated",
+            "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+            "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+            "writeOrder": [
+              "hp",
+              "stress",
+              "remove-current-slot",
+              "increment-combo-counter"
+            ],
+            "hpClamp": [
+              -100,
+              1000
+            ],
+            "stressClamp": [
+              0,
+              100
+            ],
+            "stopsAtZeroHp": false
+          },
+          "draws": {
+            "input": "caller-supplied-labeled-raw-draws-only",
+            "parse": "validate-entire-transcript-before-attacker-cross-field-check-and-resolution",
+            "consumption": "exactly-one-draw-per-actual-topic-hit-in-scan-order",
+            "missing": "atomic-failure",
+            "extra": "atomic-failure-after-resolution-on-detached-state",
+            "malformedEvenIfUnused": "atomic-failure-before-resolution",
+            "rngImplementation": "none",
+            "nativeStreamClaim": false
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "scan": "every-active-physical-slot-including-skips-with-current-card-and-original-slot",
+            "hits": "draw-index-coefficients-requested-damage-ordered-writes-removal-counter-before-after",
+            "removal": "full-hands-survivor-mapping-original-slot-provenance-and-inactive-discard",
+            "draws": "complete-consumed-transcript-and-supplied-count",
+            "writerSequence": "zero-based-hp-then-stress-across-all-hits",
+            "combo": "before-after-completed-and-hit-count"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxScannedSlots": 7,
+            "maxHits": 4,
+            "maxConsumedDraws": 4,
+            "maxHpTransitions": 4,
+            "maxStressTransitions": 4,
+            "maxRemovedCards": 4,
+            "hitBound": "ceil-active-capacity-divided-by-two-from-forward-scan-with-stable-compaction"
+          },
+          "boundary": {
+            "kind": "single-fresh-pending-timid-combo-kernel",
+            "angerEntry": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "attackDerivation": "caller-supplied-not-evaluated",
+            "characterSpecificDamageHook": "excluded-generic-identity-only",
+            "rng": "no-implementation-no-external-consumption",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "genericOnly": false,
+        "characters": [
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "maxCardCount": 7,
+            "hand": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 7,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 0,
+          "counter": 0
+        },
+        "resolvedAttack": 100,
+        "rawDraws": [
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          },
+          {
+            "role": "debate-timid-combo-jitter",
+            "bound": 5,
+            "value": 0
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-generic-only"
+      }
+    }
+  ],
+  "exclusions": [
+    "session integration",
+    "full anger phase",
+    "person damage hooks",
+    "native equivalence",
+    "P078 and dependencies"
+  ]
+}

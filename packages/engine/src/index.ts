@@ -908,3 +908,33 @@ export {
   DEBATE_ANGER_ENTRY_EVIDENCE_V1,
   evaluateDebateAngerEntry,
 } from './debate-anger-entry.ts';
+
+export type {
+  DebateTimidComboTeamV1,
+  DebateTimidComboPersonalityV1,
+  DebateTimidComboCardCodeV1,
+  DebateTimidComboHandV1,
+  DebateTimidComboCharacterV1,
+  DebateTimidComboComboV1,
+  DebateTimidComboPendingComboV1,
+  DebateTimidComboRawDrawV1,
+  DebateTimidComboInputV1,
+  DebateTimidComboSnapshotV1,
+  DebateTimidComboScanV1,
+  DebateTimidComboRemovalV1,
+  DebateTimidComboHpTransitionV1,
+  DebateTimidComboStressTransitionV1,
+  DebateTimidComboHitV1,
+  DebateTimidComboComboTransitionV1,
+  DebateTimidComboReceiptV1,
+  DebateTimidComboFailureReasonV1,
+  DebateTimidComboFailureV1,
+  DebateTimidComboResultV1,
+  DebateTimidComboPolicyV1,
+  DebateTimidComboEvidenceV1,
+} from './debate-timid-combo.ts';
+export {
+  DEBATE_TIMID_COMBO_POLICY_V1,
+  DEBATE_TIMID_COMBO_EVIDENCE_V1,
+  evaluateDebateTimidCombo,
+} from './debate-timid-combo.ts';
