@@ -7,6 +7,7 @@
  * session integration and native/original/PK/Vanilla equivalence are excluded.
  * Existing debate session profiles and their topic-repair rejection stay intact.
  */
+import { completeDebateHandFill } from './debate-hand-fill-completion.ts';
 type Frozen<T> = T extends object ? { readonly [K in keyof T]: Frozen<T[K]> } : T;
 type CardCode = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14;
 type TopicCardCode = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
@@ -399,31 +400,13 @@ function resolve(input: ParsedInput): Result {
     lastNewSlot = preSortSlot;
   }
 
-  const postFillHand = slots.map(slot => slot.card) as Hand;
-  const topicCardCountAfterFill = slots.slice(1).filter(slot => slot.card >= 1 && slot.card <= 9).length;
-  const consumedDraws: RawDraw[] = [];
-  let repair: Repair;
-  if (topicCardCountAfterFill === 0 && lastNewSlot !== null) {
-    const draw = repairDraw(input.rawDraws);
-    const target = slots[lastNewSlot]!;
-    const beforeCard = target.card as CardCode;
-    const afterCard = (1 + draw.value) as TopicCardCode;
-    target.card = afterCard;
-    target.topicRepairApplied = true;
-    consumedDraws.push(draw);
-    repair = { status: 'applied', preSortSlot: lastNewSlot, beforeCard, afterCard, drawIndex: 0, rawValue: draw.value };
-  } else {
-    // A full all-rhetoric hand has no new slot: source performs no repair.
-    if (input.rawDraws.length !== 0) fail('unexpected-raw-draw');
-    repair = { status: 'skipped', reason: topicCardCountAfterFill > 0 ? 'topic-present' : 'no-new-slot' };
-  }
-
-  const preSortHand = slots.map(slot => slot.card) as Hand;
-  const sortedProvenance: SortedProvenance[] = slots
-    .slice()
-    .sort((left, right) => left.card - right.card || left.preSortSlot - right.preSortSlot)
-    .map((slot, sortedIndex) => ({ sortedIndex, ...slot }));
-  const hand = sortedProvenance.map(slot => slot.card) as Hand;
+  const { hand, postFillHand, preSortHand, topicCardCountAfterFill, repair, consumedDraws, sortedProvenance } = completeDebateHandFill(slots, lastNewSlot, {
+    consumeRepairDraw: () => repairDraw(input.rawDraws),
+    skipRepair: () => {
+      // A full all-rhetoric hand has no new slot: source performs no repair.
+      if (input.rawDraws.length !== 0) fail('unexpected-raw-draw');
+    },
+  });
   const receipt: Receipt = {
     schemaVersion: 1,
     profile: PROFILE,
