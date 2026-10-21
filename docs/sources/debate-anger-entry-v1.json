@@ -1,0 +1,357 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-anger-entry-v1",
+  "scope": "One deterministic CalcAngering(canReflect) then Anger; no full AngerPhase, combo execution, winner, timer decrement or session integration",
+  "implementation": "packages/engine/src/debate-anger-entry.ts",
+  "ruleDocument": "docs/rules/debate-anger-entry-v1.md",
+  "apiDocument": "docs/engine/debate-anger-entry-v1.md",
+  "paperExample": "data/scenarios/debate-anger-entry-example-v1.json",
+  "evidence": {
+    "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "debatePath": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+    "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+    "debateEnumPath": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+    "debateEnumBlob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+    "sourceBoundsLines": [
+      42,
+      57
+    ],
+    "sourceCharacterLines": [
+      122,
+      150
+    ],
+    "sourceComboFieldsLines": [
+      212,
+      217
+    ],
+    "sourceActiveCapacityLines": [
+      343,
+      355
+    ],
+    "sourceResolvedStrengthLines": [
+      363,
+      367
+    ],
+    "sourceResolvedPersonalityLines": [
+      369,
+      375
+    ],
+    "sourceSetAngerTimerLines": [
+      377,
+      391
+    ],
+    "sourceRemoveCardLines": [
+      453,
+      466
+    ],
+    "sourceFindCardLines": [
+      468,
+      477
+    ],
+    "sourceHpStressWritersLines": [
+      512,
+      534
+    ],
+    "sourceOpponentLines": [
+      845,
+      851
+    ],
+    "sourceAngerTriggerLines": [
+      1300,
+      1325
+    ],
+    "sourceAngerLines": [
+      1328,
+      1354
+    ],
+    "sourceExcludedComboAttackLines": [
+      1356,
+      1377
+    ],
+    "sourceCalcAngeringLines": [
+      1483,
+      1517
+    ],
+    "sourceCardEnumLines": [
+      33,
+      61
+    ],
+    "sourcePersonalityEnumLines": [
+      116,
+      124
+    ],
+    "angerEntryEvidence": "pinned-modern-translated-CalcAngering-then-one-Anger-only",
+    "counterEvidence": "first-active-match-index-greater-than-zero-not-card-anywhere-after-zero",
+    "physicalHandEvidence": "seven-backing-slots-with-active-maxCardCount-prefix",
+    "comboEvidence": "carry-checkpoint-through-except-timid-sets-active-attacker-and-zero-counter",
+    "recklessEvidence": "200-plus-entered-strength-and-requested-damage-divided-by-fifteen-no-attack-hook",
+    "strengthTimerAndComboAdmissionBounds": "explicit-engine-policy-not-complete-source-state-reachability",
+    "inputSafetyBudgetsAndAudit": "engine-policy",
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "completeDebate": false,
+    "originalUnresolvedGroups": 43,
+    "originalHistoricalSnapshots": 45,
+    "nativeWholeChain": "open",
+    "p078": "excluded",
+    "nativeDeckRegenerationIntegration": "excluded",
+    "nativeRngStream": "excluded",
+    "legacySessionIntegration": "excluded"
+  },
+  "policies": {
+    "id": "debate-anger-entry-single-pass-policy-v1",
+    "profile": "debate-anger-entry-reference-v1",
+    "checkpoint": {
+      "characters": 2,
+      "firstTeam": [
+        0,
+        1
+      ],
+      "personality": "caller-resolved-timid-calm-bold-or-reckless",
+      "strength": {
+        "minimum": 1,
+        "maximum": 100,
+        "source": "caller-resolved-CharacterGetStrength"
+      },
+      "hp": {
+        "minimum": -100,
+        "maximum": 1000
+      },
+      "stress": {
+        "minimum": 0,
+        "maximum": 100
+      },
+      "angerTimer": {
+        "minimum": 0,
+        "maximum": 4
+      },
+      "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+      "hpTerminalGuard": false
+    },
+    "hand": {
+      "physicalLength": 7,
+      "minimumActiveCapacity": 4,
+      "maximumActiveCapacity": 7,
+      "cardMinimum": -1,
+      "cardMaximum": 14,
+      "empty": -1,
+      "reservedRethinkCode": 0,
+      "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+      "holesAndDuplicates": "preserved-until-a-source-removal",
+      "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+      "lookup": "first-match-in-active-prefix-from-zero",
+      "removal": "remove-selected-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+      "inactiveOnRemoval": "discarded-not-compacted"
+    },
+    "selection": {
+      "order": "firstTeam-then-opponent",
+      "condition": "angerTimer-zero-and-stress-one-hundred",
+      "passes": 1,
+      "resetAngeringBeforeSelection": true,
+      "noCandidate": "no-trigger-no-entry-and-no-state-change"
+    },
+    "counter": {
+      "defendingTeam": "opponent-of-selected-team",
+      "gate": "defending-team-angerTimer-zero",
+      "priority": [
+        "agitate-if-canReflect",
+        "compose"
+      ],
+      "agitateCode": 14,
+      "composeCode": 13,
+      "condition": "first-matching-active-physical-index-strictly-greater-than-zero",
+      "slotZeroDuplicate": "first-match-zero-shadows-later-duplicates-of-that-card",
+      "canReflectFalse": "skip-agitate-search-but-still-search-compose",
+      "composeAfterAgitate": "not-searched-when-agitate-eligible",
+      "removalTiming": "after-trigger-stress-before-entered-team-redirect-and-Anger"
+    },
+    "trigger": {
+      "none": {
+        "selectedRequestedStress": -100
+      },
+      "compose": {
+        "selectedRequestedStress": -50,
+        "entry": "suppressed"
+      },
+      "agitate": {
+        "firstWrite": "defending-team-minus-one-hundred",
+        "secondWrite": "selected-team-minus-fifty",
+        "entry": "redirect-to-defending-team-without-rechecking-threshold"
+      },
+      "writer": "clamp-each-stress-write-to-zero-through-one-hundred"
+    },
+    "entry": {
+      "personality": "entered-team-resolved-personality-after-any-redirect",
+      "timers": {
+        "timid": 1,
+        "calm": 4,
+        "bold": 4,
+        "reckless": 1
+      },
+      "timerDecrement": false,
+      "timid": "set-combo-active-set-attacker-entered-team-reset-counter-zero-only",
+      "calm": "timer-only",
+      "bold": "timer-only",
+      "reckless": {
+        "target": "opponent-of-entered-team",
+        "requestedHpDamage": "200-plus-entered-team-strength",
+        "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+        "arithmetic": "exact-safe-integer-with-toward-zero-division",
+        "writeOrder": [
+          "hp",
+          "stress"
+        ],
+        "hpClamp": [
+          -100,
+          1000
+        ],
+        "stressClamp": [
+          0,
+          100
+        ],
+        "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+        "ordinaryAttackOrDamageHooks": false,
+        "stopsAtZeroHp": false
+      }
+    },
+    "combo": {
+      "input": "explicit-checkpoint",
+      "active": "boolean",
+      "attacker": [
+        -1,
+        0,
+        1
+      ],
+      "minimumCounter": 0,
+      "maximumCounter": 7,
+      "counterBound": "engine-admission-policy-not-a-source-clamp",
+      "crossFieldConstraints": "none-bounded-existing-checkpoint-is-preserved",
+      "preservation": "all-fields-unchanged-unless-entered-personality-is-timid",
+      "pendingMeaning": "after-combo-active-flag-not-executed"
+    },
+    "audit": {
+      "snapshots": "detached-before-and-after-characters-and-combo",
+      "selection": "priority-order-and-eligibility-by-team",
+      "counters": "only-actually-evaluated-lookups-in-short-circuit-order",
+      "removal": "physical-slot-full-hands-survivor-mapping-and-nonempty-inactive-discard",
+      "stress": "each-write-in-source-order-with-requested-and-actual-signed-deltas",
+      "reckless": "requested-damage-hp-writer-and-stress-writer",
+      "timer": "entered-team-transition-or-null",
+      "combo": "before-after-timid-activation-and-pending-flag"
+    },
+    "safety": {
+      "input": "closed-schema-detached-safe-JSON-data",
+      "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+      "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+      "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+      "result": "recursively-frozen-and-detached-from-input",
+      "failure": "atomic-no-partial-state-or-receipt"
+    },
+    "capacity": {
+      "maxInputNodes": 2048,
+      "maxInputDepth": 12,
+      "maxInputArrayLength": 64,
+      "maxCanonicalUtf8Bytes": 32768,
+      "maxCounterSearches": 2,
+      "maxStressTransitions": 3,
+      "maxRemovedCards": 1
+    },
+    "boundary": {
+      "kind": "single-anger-entry-kernel",
+      "comboAttack": "excluded",
+      "secondCalcAngering": "excluded",
+      "winnerAndCrumble": "excluded",
+      "phaseExecution": "excluded",
+      "timerDecay": "excluded",
+      "handRefillAndDeckRegeneration": "excluded",
+      "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+      "rng": "none",
+      "sessionIntegration": false,
+      "persistence": false,
+      "legacyProfilesChanged": false
+    }
+  },
+  "sourceFiles": [
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "gitBlobSha1": "0137498d10773cd4596d497083ccdf6a26b3a261",
+      "sha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+      "identityBasis": "retained pinned source, previously recorded blob and byte identity",
+      "lineRanges": {
+        "constants": [
+          42,
+          57
+        ],
+        "personalityResolutionBoundary": [
+          369,
+          375
+        ],
+        "timers": [
+          377,
+          404
+        ],
+        "removeAndFind": [
+          453,
+          477
+        ],
+        "hpStressClamps": [
+          512,
+          535
+        ],
+        "angerTriggerAndEntry": [
+          1300,
+          1354
+        ],
+        "comboExecutionExcluded": [
+          1356,
+          1377
+        ],
+        "selection": [
+          1482,
+          1517
+        ]
+      }
+    },
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+      "gitBlobSha1": "6aa98f855a5d4d172cde7e8ffc18a141b8a7b587",
+      "sha256": "5b47f7b6a89d6123a23e7c14f22168e59c9edd549e98d9bc0258d8a55bb9cbf3",
+      "identityBasis": "retained pinned source, previously recorded blob and byte identity",
+      "lineRanges": {
+        "fullPhaseBoundary": [
+          333,
+          390
+        ],
+        "damageWinnerBeforeAnger": [
+          395,
+          420
+        ]
+      }
+    }
+  ],
+  "boundaries": {
+    "existingSessionProfilesUnchanged": 9,
+    "componentNotIntegrated": true,
+    "notNativePkVanillaOrStock": true,
+    "originalUnresolvedGroups": 43,
+    "originalHistoricalSnapshots": 45,
+    "p078AndDependencies": "excluded",
+    "notExecuted": [
+      "tests",
+      "compilation",
+      "typecheck",
+      "build",
+      "validator",
+      "candidate",
+      "examples",
+      "replay"
+    ]
+  }
+}
