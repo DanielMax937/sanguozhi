@@ -1,0 +1,2702 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-anger-entry-paper-examples-v1",
+  "status": "paper-only-not-executed",
+  "method": "Manual fixed-source branch and integer arithmetic derivation, not runtime verification",
+  "expectedFields": "Selected observations and conceptual write descriptions; not complete Receipt DTOs and not accepted input recipes unless under input",
+  "successCases": [
+    {
+      "id": "both-full-first-team-one-calm",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-entry-reference-v1",
+        "policies": {
+          "id": "debate-anger-entry-single-pass-policy-v1",
+          "profile": "debate-anger-entry-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "firstTeam": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "hpTerminalGuard": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "lookup": "first-match-in-active-prefix-from-zero",
+            "removal": "remove-selected-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "selection": {
+            "order": "firstTeam-then-opponent",
+            "condition": "angerTimer-zero-and-stress-one-hundred",
+            "passes": 1,
+            "resetAngeringBeforeSelection": true,
+            "noCandidate": "no-trigger-no-entry-and-no-state-change"
+          },
+          "counter": {
+            "defendingTeam": "opponent-of-selected-team",
+            "gate": "defending-team-angerTimer-zero",
+            "priority": [
+              "agitate-if-canReflect",
+              "compose"
+            ],
+            "agitateCode": 14,
+            "composeCode": 13,
+            "condition": "first-matching-active-physical-index-strictly-greater-than-zero",
+            "slotZeroDuplicate": "first-match-zero-shadows-later-duplicates-of-that-card",
+            "canReflectFalse": "skip-agitate-search-but-still-search-compose",
+            "composeAfterAgitate": "not-searched-when-agitate-eligible",
+            "removalTiming": "after-trigger-stress-before-entered-team-redirect-and-Anger"
+          },
+          "trigger": {
+            "none": {
+              "selectedRequestedStress": -100
+            },
+            "compose": {
+              "selectedRequestedStress": -50,
+              "entry": "suppressed"
+            },
+            "agitate": {
+              "firstWrite": "defending-team-minus-one-hundred",
+              "secondWrite": "selected-team-minus-fifty",
+              "entry": "redirect-to-defending-team-without-rechecking-threshold"
+            },
+            "writer": "clamp-each-stress-write-to-zero-through-one-hundred"
+          },
+          "entry": {
+            "personality": "entered-team-resolved-personality-after-any-redirect",
+            "timers": {
+              "timid": 1,
+              "calm": 4,
+              "bold": 4,
+              "reckless": 1
+            },
+            "timerDecrement": false,
+            "timid": "set-combo-active-set-attacker-entered-team-reset-counter-zero-only",
+            "calm": "timer-only",
+            "bold": "timer-only",
+            "reckless": {
+              "target": "opponent-of-entered-team",
+              "requestedHpDamage": "200-plus-entered-team-strength",
+              "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+              "arithmetic": "exact-safe-integer-with-toward-zero-division",
+              "writeOrder": [
+                "hp",
+                "stress"
+              ],
+              "hpClamp": [
+                -100,
+                1000
+              ],
+              "stressClamp": [
+                0,
+                100
+              ],
+              "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+              "ordinaryAttackOrDamageHooks": false,
+              "stopsAtZeroHp": false
+            }
+          },
+          "combo": {
+            "input": "explicit-checkpoint",
+            "active": "boolean",
+            "attacker": [
+              -1,
+              0,
+              1
+            ],
+            "minimumCounter": 0,
+            "maximumCounter": 7,
+            "counterBound": "engine-admission-policy-not-a-source-clamp",
+            "crossFieldConstraints": "none-bounded-existing-checkpoint-is-preserved",
+            "preservation": "all-fields-unchanged-unless-entered-personality-is-timid",
+            "pendingMeaning": "after-combo-active-flag-not-executed"
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "selection": "priority-order-and-eligibility-by-team",
+            "counters": "only-actually-evaluated-lookups-in-short-circuit-order",
+            "removal": "physical-slot-full-hands-survivor-mapping-and-nonempty-inactive-discard",
+            "stress": "each-write-in-source-order-with-requested-and-actual-signed-deltas",
+            "reckless": "requested-damage-hp-writer-and-stress-writer",
+            "timer": "entered-team-transition-or-null",
+            "combo": "before-after-timid-activation-and-pending-flag"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxCounterSearches": 2,
+            "maxStressTransitions": 3,
+            "maxRemovedCards": 1
+          },
+          "boundary": {
+            "kind": "single-anger-entry-kernel",
+            "comboAttack": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "rng": "none",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "firstTeam": 1,
+        "canReflect": true,
+        "characters": [
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 100,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 100,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": false,
+          "attacker": -1,
+          "counter": 0
+        }
+      },
+      "paperExpected": {
+        "selectedTeam": 1,
+        "enteredTeam": 1,
+        "characters": [
+          {
+            "stress": 100,
+            "angerTimer": 0
+          },
+          {
+            "stress": 0,
+            "angerTimer": 4
+          }
+        ],
+        "combo": {
+          "active": false,
+          "attacker": -1,
+          "counter": 0
+        },
+        "note": "One pass only. Team zero remains eligible, not automatically entered."
+      }
+    },
+    {
+      "id": "agitate-redirect-reckless-clamped-kill",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-entry-reference-v1",
+        "policies": {
+          "id": "debate-anger-entry-single-pass-policy-v1",
+          "profile": "debate-anger-entry-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "firstTeam": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "hpTerminalGuard": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "lookup": "first-match-in-active-prefix-from-zero",
+            "removal": "remove-selected-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "selection": {
+            "order": "firstTeam-then-opponent",
+            "condition": "angerTimer-zero-and-stress-one-hundred",
+            "passes": 1,
+            "resetAngeringBeforeSelection": true,
+            "noCandidate": "no-trigger-no-entry-and-no-state-change"
+          },
+          "counter": {
+            "defendingTeam": "opponent-of-selected-team",
+            "gate": "defending-team-angerTimer-zero",
+            "priority": [
+              "agitate-if-canReflect",
+              "compose"
+            ],
+            "agitateCode": 14,
+            "composeCode": 13,
+            "condition": "first-matching-active-physical-index-strictly-greater-than-zero",
+            "slotZeroDuplicate": "first-match-zero-shadows-later-duplicates-of-that-card",
+            "canReflectFalse": "skip-agitate-search-but-still-search-compose",
+            "composeAfterAgitate": "not-searched-when-agitate-eligible",
+            "removalTiming": "after-trigger-stress-before-entered-team-redirect-and-Anger"
+          },
+          "trigger": {
+            "none": {
+              "selectedRequestedStress": -100
+            },
+            "compose": {
+              "selectedRequestedStress": -50,
+              "entry": "suppressed"
+            },
+            "agitate": {
+              "firstWrite": "defending-team-minus-one-hundred",
+              "secondWrite": "selected-team-minus-fifty",
+              "entry": "redirect-to-defending-team-without-rechecking-threshold"
+            },
+            "writer": "clamp-each-stress-write-to-zero-through-one-hundred"
+          },
+          "entry": {
+            "personality": "entered-team-resolved-personality-after-any-redirect",
+            "timers": {
+              "timid": 1,
+              "calm": 4,
+              "bold": 4,
+              "reckless": 1
+            },
+            "timerDecrement": false,
+            "timid": "set-combo-active-set-attacker-entered-team-reset-counter-zero-only",
+            "calm": "timer-only",
+            "bold": "timer-only",
+            "reckless": {
+              "target": "opponent-of-entered-team",
+              "requestedHpDamage": "200-plus-entered-team-strength",
+              "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+              "arithmetic": "exact-safe-integer-with-toward-zero-division",
+              "writeOrder": [
+                "hp",
+                "stress"
+              ],
+              "hpClamp": [
+                -100,
+                1000
+              ],
+              "stressClamp": [
+                0,
+                100
+              ],
+              "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+              "ordinaryAttackOrDamageHooks": false,
+              "stopsAtZeroHp": false
+            }
+          },
+          "combo": {
+            "input": "explicit-checkpoint",
+            "active": "boolean",
+            "attacker": [
+              -1,
+              0,
+              1
+            ],
+            "minimumCounter": 0,
+            "maximumCounter": 7,
+            "counterBound": "engine-admission-policy-not-a-source-clamp",
+            "crossFieldConstraints": "none-bounded-existing-checkpoint-is-preserved",
+            "preservation": "all-fields-unchanged-unless-entered-personality-is-timid",
+            "pendingMeaning": "after-combo-active-flag-not-executed"
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "selection": "priority-order-and-eligibility-by-team",
+            "counters": "only-actually-evaluated-lookups-in-short-circuit-order",
+            "removal": "physical-slot-full-hands-survivor-mapping-and-nonempty-inactive-discard",
+            "stress": "each-write-in-source-order-with-requested-and-actual-signed-deltas",
+            "reckless": "requested-damage-hp-writer-and-stress-writer",
+            "timer": "entered-team-transition-or-null",
+            "combo": "before-after-timid-activation-and-pending-flag"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxCounterSearches": 2,
+            "maxStressTransitions": 3,
+            "maxRemovedCards": 1
+          },
+          "boundary": {
+            "kind": "single-anger-entry-kernel",
+            "comboAttack": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "rng": "none",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "firstTeam": 0,
+        "canReflect": true,
+        "characters": [
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 150,
+            "stress": 100,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "reckless",
+            "strength": 100,
+            "hp": 1000,
+            "stress": 80,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              14,
+              3,
+              2,
+              12,
+              11,
+              10
+            ]
+          }
+        ],
+        "combo": {
+          "active": false,
+          "attacker": -1,
+          "counter": 0
+        }
+      },
+      "paperExpected": {
+        "selectedTeam": 0,
+        "enteredTeam": 1,
+        "counterCard": 14,
+        "removedSlot": 1,
+        "characters": [
+          {
+            "hp": -100,
+            "stress": 70,
+            "angerTimer": 0
+          },
+          {
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 1,
+            "hand": [
+              0,
+              3,
+              2,
+              -1,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "orderedWrites": [
+          {
+            "team": 1,
+            "field": "stress",
+            "before": 80,
+            "requestedDelta": -100,
+            "after": 0,
+            "actualDelta": -80
+          },
+          {
+            "team": 0,
+            "field": "stress",
+            "before": 100,
+            "requestedDelta": -50,
+            "after": 50,
+            "actualDelta": -50
+          },
+          {
+            "team": 0,
+            "field": "hp",
+            "before": 150,
+            "requestedDelta": -300,
+            "after": -100,
+            "actualDelta": -250
+          },
+          {
+            "team": 0,
+            "field": "stress",
+            "before": 50,
+            "requestedDelta": 20,
+            "after": 70,
+            "actualDelta": 20
+          }
+        ],
+        "note": "Conceptual ordered writes, not exact receipt DTO; stress still applies after HP reaches negative clamp; inactive slots 4..6 cleared."
+      }
+    },
+    {
+      "id": "reflect-disabled-compose-fallback",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-entry-reference-v1",
+        "policies": {
+          "id": "debate-anger-entry-single-pass-policy-v1",
+          "profile": "debate-anger-entry-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "firstTeam": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "hpTerminalGuard": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "lookup": "first-match-in-active-prefix-from-zero",
+            "removal": "remove-selected-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "selection": {
+            "order": "firstTeam-then-opponent",
+            "condition": "angerTimer-zero-and-stress-one-hundred",
+            "passes": 1,
+            "resetAngeringBeforeSelection": true,
+            "noCandidate": "no-trigger-no-entry-and-no-state-change"
+          },
+          "counter": {
+            "defendingTeam": "opponent-of-selected-team",
+            "gate": "defending-team-angerTimer-zero",
+            "priority": [
+              "agitate-if-canReflect",
+              "compose"
+            ],
+            "agitateCode": 14,
+            "composeCode": 13,
+            "condition": "first-matching-active-physical-index-strictly-greater-than-zero",
+            "slotZeroDuplicate": "first-match-zero-shadows-later-duplicates-of-that-card",
+            "canReflectFalse": "skip-agitate-search-but-still-search-compose",
+            "composeAfterAgitate": "not-searched-when-agitate-eligible",
+            "removalTiming": "after-trigger-stress-before-entered-team-redirect-and-Anger"
+          },
+          "trigger": {
+            "none": {
+              "selectedRequestedStress": -100
+            },
+            "compose": {
+              "selectedRequestedStress": -50,
+              "entry": "suppressed"
+            },
+            "agitate": {
+              "firstWrite": "defending-team-minus-one-hundred",
+              "secondWrite": "selected-team-minus-fifty",
+              "entry": "redirect-to-defending-team-without-rechecking-threshold"
+            },
+            "writer": "clamp-each-stress-write-to-zero-through-one-hundred"
+          },
+          "entry": {
+            "personality": "entered-team-resolved-personality-after-any-redirect",
+            "timers": {
+              "timid": 1,
+              "calm": 4,
+              "bold": 4,
+              "reckless": 1
+            },
+            "timerDecrement": false,
+            "timid": "set-combo-active-set-attacker-entered-team-reset-counter-zero-only",
+            "calm": "timer-only",
+            "bold": "timer-only",
+            "reckless": {
+              "target": "opponent-of-entered-team",
+              "requestedHpDamage": "200-plus-entered-team-strength",
+              "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+              "arithmetic": "exact-safe-integer-with-toward-zero-division",
+              "writeOrder": [
+                "hp",
+                "stress"
+              ],
+              "hpClamp": [
+                -100,
+                1000
+              ],
+              "stressClamp": [
+                0,
+                100
+              ],
+              "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+              "ordinaryAttackOrDamageHooks": false,
+              "stopsAtZeroHp": false
+            }
+          },
+          "combo": {
+            "input": "explicit-checkpoint",
+            "active": "boolean",
+            "attacker": [
+              -1,
+              0,
+              1
+            ],
+            "minimumCounter": 0,
+            "maximumCounter": 7,
+            "counterBound": "engine-admission-policy-not-a-source-clamp",
+            "crossFieldConstraints": "none-bounded-existing-checkpoint-is-preserved",
+            "preservation": "all-fields-unchanged-unless-entered-personality-is-timid",
+            "pendingMeaning": "after-combo-active-flag-not-executed"
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "selection": "priority-order-and-eligibility-by-team",
+            "counters": "only-actually-evaluated-lookups-in-short-circuit-order",
+            "removal": "physical-slot-full-hands-survivor-mapping-and-nonempty-inactive-discard",
+            "stress": "each-write-in-source-order-with-requested-and-actual-signed-deltas",
+            "reckless": "requested-damage-hp-writer-and-stress-writer",
+            "timer": "entered-team-transition-or-null",
+            "combo": "before-after-timid-activation-and-pending-flag"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxCounterSearches": 2,
+            "maxStressTransitions": 3,
+            "maxRemovedCards": 1
+          },
+          "boundary": {
+            "kind": "single-anger-entry-kernel",
+            "comboAttack": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "rng": "none",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "firstTeam": 0,
+        "canReflect": false,
+        "characters": [
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 100,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 30,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              14,
+              13,
+              9,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": false,
+          "attacker": -1,
+          "counter": 0
+        }
+      },
+      "paperExpected": {
+        "selectedTeam": 0,
+        "enteredTeam": -1,
+        "counterCard": 13,
+        "removedSlot": 2,
+        "characters": [
+          {
+            "stress": 50,
+            "angerTimer": 0
+          },
+          {
+            "stress": 30,
+            "angerTimer": 0,
+            "hand": [
+              0,
+              14,
+              9,
+              -1,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "first-agitate-at-zero-shadows-positive-duplicate",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-entry-reference-v1",
+        "policies": {
+          "id": "debate-anger-entry-single-pass-policy-v1",
+          "profile": "debate-anger-entry-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "firstTeam": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "hpTerminalGuard": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "lookup": "first-match-in-active-prefix-from-zero",
+            "removal": "remove-selected-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "selection": {
+            "order": "firstTeam-then-opponent",
+            "condition": "angerTimer-zero-and-stress-one-hundred",
+            "passes": 1,
+            "resetAngeringBeforeSelection": true,
+            "noCandidate": "no-trigger-no-entry-and-no-state-change"
+          },
+          "counter": {
+            "defendingTeam": "opponent-of-selected-team",
+            "gate": "defending-team-angerTimer-zero",
+            "priority": [
+              "agitate-if-canReflect",
+              "compose"
+            ],
+            "agitateCode": 14,
+            "composeCode": 13,
+            "condition": "first-matching-active-physical-index-strictly-greater-than-zero",
+            "slotZeroDuplicate": "first-match-zero-shadows-later-duplicates-of-that-card",
+            "canReflectFalse": "skip-agitate-search-but-still-search-compose",
+            "composeAfterAgitate": "not-searched-when-agitate-eligible",
+            "removalTiming": "after-trigger-stress-before-entered-team-redirect-and-Anger"
+          },
+          "trigger": {
+            "none": {
+              "selectedRequestedStress": -100
+            },
+            "compose": {
+              "selectedRequestedStress": -50,
+              "entry": "suppressed"
+            },
+            "agitate": {
+              "firstWrite": "defending-team-minus-one-hundred",
+              "secondWrite": "selected-team-minus-fifty",
+              "entry": "redirect-to-defending-team-without-rechecking-threshold"
+            },
+            "writer": "clamp-each-stress-write-to-zero-through-one-hundred"
+          },
+          "entry": {
+            "personality": "entered-team-resolved-personality-after-any-redirect",
+            "timers": {
+              "timid": 1,
+              "calm": 4,
+              "bold": 4,
+              "reckless": 1
+            },
+            "timerDecrement": false,
+            "timid": "set-combo-active-set-attacker-entered-team-reset-counter-zero-only",
+            "calm": "timer-only",
+            "bold": "timer-only",
+            "reckless": {
+              "target": "opponent-of-entered-team",
+              "requestedHpDamage": "200-plus-entered-team-strength",
+              "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+              "arithmetic": "exact-safe-integer-with-toward-zero-division",
+              "writeOrder": [
+                "hp",
+                "stress"
+              ],
+              "hpClamp": [
+                -100,
+                1000
+              ],
+              "stressClamp": [
+                0,
+                100
+              ],
+              "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+              "ordinaryAttackOrDamageHooks": false,
+              "stopsAtZeroHp": false
+            }
+          },
+          "combo": {
+            "input": "explicit-checkpoint",
+            "active": "boolean",
+            "attacker": [
+              -1,
+              0,
+              1
+            ],
+            "minimumCounter": 0,
+            "maximumCounter": 7,
+            "counterBound": "engine-admission-policy-not-a-source-clamp",
+            "crossFieldConstraints": "none-bounded-existing-checkpoint-is-preserved",
+            "preservation": "all-fields-unchanged-unless-entered-personality-is-timid",
+            "pendingMeaning": "after-combo-active-flag-not-executed"
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "selection": "priority-order-and-eligibility-by-team",
+            "counters": "only-actually-evaluated-lookups-in-short-circuit-order",
+            "removal": "physical-slot-full-hands-survivor-mapping-and-nonempty-inactive-discard",
+            "stress": "each-write-in-source-order-with-requested-and-actual-signed-deltas",
+            "reckless": "requested-damage-hp-writer-and-stress-writer",
+            "timer": "entered-team-transition-or-null",
+            "combo": "before-after-timid-activation-and-pending-flag"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxCounterSearches": 2,
+            "maxStressTransitions": 3,
+            "maxRemovedCards": 1
+          },
+          "boundary": {
+            "kind": "single-anger-entry-kernel",
+            "comboAttack": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "rng": "none",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "firstTeam": 0,
+        "canReflect": true,
+        "characters": [
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 100,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              14,
+              1,
+              14,
+              13,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": false,
+          "attacker": -1,
+          "counter": 0
+        }
+      },
+      "paperExpected": {
+        "selectedTeam": 0,
+        "enteredTeam": -1,
+        "counterCard": 13,
+        "removedSlot": 3,
+        "characters": [
+          {
+            "stress": 50,
+            "angerTimer": 0
+          },
+          {
+            "hand": [
+              14,
+              1,
+              14,
+              -1,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "note": "Agitate first match is zero, so it does not qualify; no second-match search."
+      }
+    },
+    {
+      "id": "no-eligible-preserves-existing-combo",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-entry-reference-v1",
+        "policies": {
+          "id": "debate-anger-entry-single-pass-policy-v1",
+          "profile": "debate-anger-entry-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "firstTeam": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "hpTerminalGuard": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "lookup": "first-match-in-active-prefix-from-zero",
+            "removal": "remove-selected-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "selection": {
+            "order": "firstTeam-then-opponent",
+            "condition": "angerTimer-zero-and-stress-one-hundred",
+            "passes": 1,
+            "resetAngeringBeforeSelection": true,
+            "noCandidate": "no-trigger-no-entry-and-no-state-change"
+          },
+          "counter": {
+            "defendingTeam": "opponent-of-selected-team",
+            "gate": "defending-team-angerTimer-zero",
+            "priority": [
+              "agitate-if-canReflect",
+              "compose"
+            ],
+            "agitateCode": 14,
+            "composeCode": 13,
+            "condition": "first-matching-active-physical-index-strictly-greater-than-zero",
+            "slotZeroDuplicate": "first-match-zero-shadows-later-duplicates-of-that-card",
+            "canReflectFalse": "skip-agitate-search-but-still-search-compose",
+            "composeAfterAgitate": "not-searched-when-agitate-eligible",
+            "removalTiming": "after-trigger-stress-before-entered-team-redirect-and-Anger"
+          },
+          "trigger": {
+            "none": {
+              "selectedRequestedStress": -100
+            },
+            "compose": {
+              "selectedRequestedStress": -50,
+              "entry": "suppressed"
+            },
+            "agitate": {
+              "firstWrite": "defending-team-minus-one-hundred",
+              "secondWrite": "selected-team-minus-fifty",
+              "entry": "redirect-to-defending-team-without-rechecking-threshold"
+            },
+            "writer": "clamp-each-stress-write-to-zero-through-one-hundred"
+          },
+          "entry": {
+            "personality": "entered-team-resolved-personality-after-any-redirect",
+            "timers": {
+              "timid": 1,
+              "calm": 4,
+              "bold": 4,
+              "reckless": 1
+            },
+            "timerDecrement": false,
+            "timid": "set-combo-active-set-attacker-entered-team-reset-counter-zero-only",
+            "calm": "timer-only",
+            "bold": "timer-only",
+            "reckless": {
+              "target": "opponent-of-entered-team",
+              "requestedHpDamage": "200-plus-entered-team-strength",
+              "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+              "arithmetic": "exact-safe-integer-with-toward-zero-division",
+              "writeOrder": [
+                "hp",
+                "stress"
+              ],
+              "hpClamp": [
+                -100,
+                1000
+              ],
+              "stressClamp": [
+                0,
+                100
+              ],
+              "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+              "ordinaryAttackOrDamageHooks": false,
+              "stopsAtZeroHp": false
+            }
+          },
+          "combo": {
+            "input": "explicit-checkpoint",
+            "active": "boolean",
+            "attacker": [
+              -1,
+              0,
+              1
+            ],
+            "minimumCounter": 0,
+            "maximumCounter": 7,
+            "counterBound": "engine-admission-policy-not-a-source-clamp",
+            "crossFieldConstraints": "none-bounded-existing-checkpoint-is-preserved",
+            "preservation": "all-fields-unchanged-unless-entered-personality-is-timid",
+            "pendingMeaning": "after-combo-active-flag-not-executed"
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "selection": "priority-order-and-eligibility-by-team",
+            "counters": "only-actually-evaluated-lookups-in-short-circuit-order",
+            "removal": "physical-slot-full-hands-survivor-mapping-and-nonempty-inactive-discard",
+            "stress": "each-write-in-source-order-with-requested-and-actual-signed-deltas",
+            "reckless": "requested-damage-hp-writer-and-stress-writer",
+            "timer": "entered-team-transition-or-null",
+            "combo": "before-after-timid-activation-and-pending-flag"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxCounterSearches": 2,
+            "maxStressTransitions": 3,
+            "maxRemovedCards": 1
+          },
+          "boundary": {
+            "kind": "single-anger-entry-kernel",
+            "comboAttack": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "rng": "none",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "firstTeam": 0,
+        "canReflect": true,
+        "characters": [
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 99,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 100,
+            "angerTimer": 1,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 1,
+          "counter": 3
+        }
+      },
+      "paperExpected": {
+        "selectedTeam": -1,
+        "enteredTeam": -1,
+        "charactersUnchanged": true,
+        "combo": {
+          "active": true,
+          "attacker": 1,
+          "counter": 3
+        }
+      }
+    },
+    {
+      "id": "angry-opponent-cannot-counter-bold-entry",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-entry-reference-v1",
+        "policies": {
+          "id": "debate-anger-entry-single-pass-policy-v1",
+          "profile": "debate-anger-entry-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "firstTeam": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "hpTerminalGuard": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "lookup": "first-match-in-active-prefix-from-zero",
+            "removal": "remove-selected-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "selection": {
+            "order": "firstTeam-then-opponent",
+            "condition": "angerTimer-zero-and-stress-one-hundred",
+            "passes": 1,
+            "resetAngeringBeforeSelection": true,
+            "noCandidate": "no-trigger-no-entry-and-no-state-change"
+          },
+          "counter": {
+            "defendingTeam": "opponent-of-selected-team",
+            "gate": "defending-team-angerTimer-zero",
+            "priority": [
+              "agitate-if-canReflect",
+              "compose"
+            ],
+            "agitateCode": 14,
+            "composeCode": 13,
+            "condition": "first-matching-active-physical-index-strictly-greater-than-zero",
+            "slotZeroDuplicate": "first-match-zero-shadows-later-duplicates-of-that-card",
+            "canReflectFalse": "skip-agitate-search-but-still-search-compose",
+            "composeAfterAgitate": "not-searched-when-agitate-eligible",
+            "removalTiming": "after-trigger-stress-before-entered-team-redirect-and-Anger"
+          },
+          "trigger": {
+            "none": {
+              "selectedRequestedStress": -100
+            },
+            "compose": {
+              "selectedRequestedStress": -50,
+              "entry": "suppressed"
+            },
+            "agitate": {
+              "firstWrite": "defending-team-minus-one-hundred",
+              "secondWrite": "selected-team-minus-fifty",
+              "entry": "redirect-to-defending-team-without-rechecking-threshold"
+            },
+            "writer": "clamp-each-stress-write-to-zero-through-one-hundred"
+          },
+          "entry": {
+            "personality": "entered-team-resolved-personality-after-any-redirect",
+            "timers": {
+              "timid": 1,
+              "calm": 4,
+              "bold": 4,
+              "reckless": 1
+            },
+            "timerDecrement": false,
+            "timid": "set-combo-active-set-attacker-entered-team-reset-counter-zero-only",
+            "calm": "timer-only",
+            "bold": "timer-only",
+            "reckless": {
+              "target": "opponent-of-entered-team",
+              "requestedHpDamage": "200-plus-entered-team-strength",
+              "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+              "arithmetic": "exact-safe-integer-with-toward-zero-division",
+              "writeOrder": [
+                "hp",
+                "stress"
+              ],
+              "hpClamp": [
+                -100,
+                1000
+              ],
+              "stressClamp": [
+                0,
+                100
+              ],
+              "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+              "ordinaryAttackOrDamageHooks": false,
+              "stopsAtZeroHp": false
+            }
+          },
+          "combo": {
+            "input": "explicit-checkpoint",
+            "active": "boolean",
+            "attacker": [
+              -1,
+              0,
+              1
+            ],
+            "minimumCounter": 0,
+            "maximumCounter": 7,
+            "counterBound": "engine-admission-policy-not-a-source-clamp",
+            "crossFieldConstraints": "none-bounded-existing-checkpoint-is-preserved",
+            "preservation": "all-fields-unchanged-unless-entered-personality-is-timid",
+            "pendingMeaning": "after-combo-active-flag-not-executed"
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "selection": "priority-order-and-eligibility-by-team",
+            "counters": "only-actually-evaluated-lookups-in-short-circuit-order",
+            "removal": "physical-slot-full-hands-survivor-mapping-and-nonempty-inactive-discard",
+            "stress": "each-write-in-source-order-with-requested-and-actual-signed-deltas",
+            "reckless": "requested-damage-hp-writer-and-stress-writer",
+            "timer": "entered-team-transition-or-null",
+            "combo": "before-after-timid-activation-and-pending-flag"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxCounterSearches": 2,
+            "maxStressTransitions": 3,
+            "maxRemovedCards": 1
+          },
+          "boundary": {
+            "kind": "single-anger-entry-kernel",
+            "comboAttack": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "rng": "none",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "firstTeam": 0,
+        "canReflect": true,
+        "characters": [
+          {
+            "personality": "bold",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 100,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 100,
+            "angerTimer": 1,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              14,
+              13,
+              4,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 1,
+          "counter": 2
+        }
+      },
+      "paperExpected": {
+        "selectedTeam": 0,
+        "enteredTeam": 0,
+        "counterCard": -1,
+        "characters": [
+          {
+            "stress": 0,
+            "angerTimer": 4
+          },
+          {
+            "stress": 100,
+            "angerTimer": 1,
+            "hand": [
+              0,
+              14,
+              13,
+              4,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 1,
+          "counter": 2
+        }
+      }
+    },
+    {
+      "id": "timid-arms-but-does-not-execute-combo",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-entry-reference-v1",
+        "policies": {
+          "id": "debate-anger-entry-single-pass-policy-v1",
+          "profile": "debate-anger-entry-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "firstTeam": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "hpTerminalGuard": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "lookup": "first-match-in-active-prefix-from-zero",
+            "removal": "remove-selected-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "selection": {
+            "order": "firstTeam-then-opponent",
+            "condition": "angerTimer-zero-and-stress-one-hundred",
+            "passes": 1,
+            "resetAngeringBeforeSelection": true,
+            "noCandidate": "no-trigger-no-entry-and-no-state-change"
+          },
+          "counter": {
+            "defendingTeam": "opponent-of-selected-team",
+            "gate": "defending-team-angerTimer-zero",
+            "priority": [
+              "agitate-if-canReflect",
+              "compose"
+            ],
+            "agitateCode": 14,
+            "composeCode": 13,
+            "condition": "first-matching-active-physical-index-strictly-greater-than-zero",
+            "slotZeroDuplicate": "first-match-zero-shadows-later-duplicates-of-that-card",
+            "canReflectFalse": "skip-agitate-search-but-still-search-compose",
+            "composeAfterAgitate": "not-searched-when-agitate-eligible",
+            "removalTiming": "after-trigger-stress-before-entered-team-redirect-and-Anger"
+          },
+          "trigger": {
+            "none": {
+              "selectedRequestedStress": -100
+            },
+            "compose": {
+              "selectedRequestedStress": -50,
+              "entry": "suppressed"
+            },
+            "agitate": {
+              "firstWrite": "defending-team-minus-one-hundred",
+              "secondWrite": "selected-team-minus-fifty",
+              "entry": "redirect-to-defending-team-without-rechecking-threshold"
+            },
+            "writer": "clamp-each-stress-write-to-zero-through-one-hundred"
+          },
+          "entry": {
+            "personality": "entered-team-resolved-personality-after-any-redirect",
+            "timers": {
+              "timid": 1,
+              "calm": 4,
+              "bold": 4,
+              "reckless": 1
+            },
+            "timerDecrement": false,
+            "timid": "set-combo-active-set-attacker-entered-team-reset-counter-zero-only",
+            "calm": "timer-only",
+            "bold": "timer-only",
+            "reckless": {
+              "target": "opponent-of-entered-team",
+              "requestedHpDamage": "200-plus-entered-team-strength",
+              "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+              "arithmetic": "exact-safe-integer-with-toward-zero-division",
+              "writeOrder": [
+                "hp",
+                "stress"
+              ],
+              "hpClamp": [
+                -100,
+                1000
+              ],
+              "stressClamp": [
+                0,
+                100
+              ],
+              "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+              "ordinaryAttackOrDamageHooks": false,
+              "stopsAtZeroHp": false
+            }
+          },
+          "combo": {
+            "input": "explicit-checkpoint",
+            "active": "boolean",
+            "attacker": [
+              -1,
+              0,
+              1
+            ],
+            "minimumCounter": 0,
+            "maximumCounter": 7,
+            "counterBound": "engine-admission-policy-not-a-source-clamp",
+            "crossFieldConstraints": "none-bounded-existing-checkpoint-is-preserved",
+            "preservation": "all-fields-unchanged-unless-entered-personality-is-timid",
+            "pendingMeaning": "after-combo-active-flag-not-executed"
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "selection": "priority-order-and-eligibility-by-team",
+            "counters": "only-actually-evaluated-lookups-in-short-circuit-order",
+            "removal": "physical-slot-full-hands-survivor-mapping-and-nonempty-inactive-discard",
+            "stress": "each-write-in-source-order-with-requested-and-actual-signed-deltas",
+            "reckless": "requested-damage-hp-writer-and-stress-writer",
+            "timer": "entered-team-transition-or-null",
+            "combo": "before-after-timid-activation-and-pending-flag"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxCounterSearches": 2,
+            "maxStressTransitions": 3,
+            "maxRemovedCards": 1
+          },
+          "boundary": {
+            "kind": "single-anger-entry-kernel",
+            "comboAttack": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "rng": "none",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "firstTeam": 0,
+        "canReflect": true,
+        "characters": [
+          {
+            "personality": "timid",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 100,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              7,
+              8,
+              9,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": false,
+          "attacker": 1,
+          "counter": 5
+        }
+      },
+      "paperExpected": {
+        "selectedTeam": 0,
+        "enteredTeam": 0,
+        "characters": [
+          {
+            "stress": 0,
+            "angerTimer": 1,
+            "hand": [
+              0,
+              7,
+              8,
+              9,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "hp": 1000,
+            "stress": 0
+          }
+        ],
+        "combo": {
+          "active": true,
+          "attacker": 0,
+          "counter": 0
+        },
+        "note": "No cards consumed and no HP damage from pending combo."
+      }
+    },
+    {
+      "id": "dead-target-still-receives-reckless-stress-clamp",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-entry-reference-v1",
+        "policies": {
+          "id": "debate-anger-entry-single-pass-policy-v1",
+          "profile": "debate-anger-entry-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "firstTeam": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "hpTerminalGuard": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "lookup": "first-match-in-active-prefix-from-zero",
+            "removal": "remove-selected-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "selection": {
+            "order": "firstTeam-then-opponent",
+            "condition": "angerTimer-zero-and-stress-one-hundred",
+            "passes": 1,
+            "resetAngeringBeforeSelection": true,
+            "noCandidate": "no-trigger-no-entry-and-no-state-change"
+          },
+          "counter": {
+            "defendingTeam": "opponent-of-selected-team",
+            "gate": "defending-team-angerTimer-zero",
+            "priority": [
+              "agitate-if-canReflect",
+              "compose"
+            ],
+            "agitateCode": 14,
+            "composeCode": 13,
+            "condition": "first-matching-active-physical-index-strictly-greater-than-zero",
+            "slotZeroDuplicate": "first-match-zero-shadows-later-duplicates-of-that-card",
+            "canReflectFalse": "skip-agitate-search-but-still-search-compose",
+            "composeAfterAgitate": "not-searched-when-agitate-eligible",
+            "removalTiming": "after-trigger-stress-before-entered-team-redirect-and-Anger"
+          },
+          "trigger": {
+            "none": {
+              "selectedRequestedStress": -100
+            },
+            "compose": {
+              "selectedRequestedStress": -50,
+              "entry": "suppressed"
+            },
+            "agitate": {
+              "firstWrite": "defending-team-minus-one-hundred",
+              "secondWrite": "selected-team-minus-fifty",
+              "entry": "redirect-to-defending-team-without-rechecking-threshold"
+            },
+            "writer": "clamp-each-stress-write-to-zero-through-one-hundred"
+          },
+          "entry": {
+            "personality": "entered-team-resolved-personality-after-any-redirect",
+            "timers": {
+              "timid": 1,
+              "calm": 4,
+              "bold": 4,
+              "reckless": 1
+            },
+            "timerDecrement": false,
+            "timid": "set-combo-active-set-attacker-entered-team-reset-counter-zero-only",
+            "calm": "timer-only",
+            "bold": "timer-only",
+            "reckless": {
+              "target": "opponent-of-entered-team",
+              "requestedHpDamage": "200-plus-entered-team-strength",
+              "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+              "arithmetic": "exact-safe-integer-with-toward-zero-division",
+              "writeOrder": [
+                "hp",
+                "stress"
+              ],
+              "hpClamp": [
+                -100,
+                1000
+              ],
+              "stressClamp": [
+                0,
+                100
+              ],
+              "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+              "ordinaryAttackOrDamageHooks": false,
+              "stopsAtZeroHp": false
+            }
+          },
+          "combo": {
+            "input": "explicit-checkpoint",
+            "active": "boolean",
+            "attacker": [
+              -1,
+              0,
+              1
+            ],
+            "minimumCounter": 0,
+            "maximumCounter": 7,
+            "counterBound": "engine-admission-policy-not-a-source-clamp",
+            "crossFieldConstraints": "none-bounded-existing-checkpoint-is-preserved",
+            "preservation": "all-fields-unchanged-unless-entered-personality-is-timid",
+            "pendingMeaning": "after-combo-active-flag-not-executed"
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "selection": "priority-order-and-eligibility-by-team",
+            "counters": "only-actually-evaluated-lookups-in-short-circuit-order",
+            "removal": "physical-slot-full-hands-survivor-mapping-and-nonempty-inactive-discard",
+            "stress": "each-write-in-source-order-with-requested-and-actual-signed-deltas",
+            "reckless": "requested-damage-hp-writer-and-stress-writer",
+            "timer": "entered-team-transition-or-null",
+            "combo": "before-after-timid-activation-and-pending-flag"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxCounterSearches": 2,
+            "maxStressTransitions": 3,
+            "maxRemovedCards": 1
+          },
+          "boundary": {
+            "kind": "single-anger-entry-kernel",
+            "comboAttack": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "rng": "none",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "firstTeam": 0,
+        "canReflect": true,
+        "characters": [
+          {
+            "personality": "reckless",
+            "strength": 1,
+            "hp": 1000,
+            "stress": 100,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": -100,
+            "stress": 95,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": false,
+          "attacker": -1,
+          "counter": 0
+        }
+      },
+      "paperExpected": {
+        "selectedTeam": 0,
+        "enteredTeam": 0,
+        "characters": [
+          {
+            "stress": 0,
+            "angerTimer": 1
+          },
+          {
+            "hp": -100,
+            "stress": 100
+          }
+        ],
+        "recklessRequestedHpDamage": 201,
+        "recklessRequestedStressDamage": 13,
+        "recklessActualHpDelta": 0,
+        "recklessActualStressDelta": 5,
+        "note": "Kernel has no winner/HP precheck; 201/15 truncates to13. Caller phase routing remains separate."
+      }
+    }
+  ],
+  "rejectionCases": [
+    {
+      "id": "extra-rng-field",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-entry-reference-v1",
+        "policies": {
+          "id": "debate-anger-entry-single-pass-policy-v1",
+          "profile": "debate-anger-entry-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "firstTeam": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "hpTerminalGuard": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "lookup": "first-match-in-active-prefix-from-zero",
+            "removal": "remove-selected-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "selection": {
+            "order": "firstTeam-then-opponent",
+            "condition": "angerTimer-zero-and-stress-one-hundred",
+            "passes": 1,
+            "resetAngeringBeforeSelection": true,
+            "noCandidate": "no-trigger-no-entry-and-no-state-change"
+          },
+          "counter": {
+            "defendingTeam": "opponent-of-selected-team",
+            "gate": "defending-team-angerTimer-zero",
+            "priority": [
+              "agitate-if-canReflect",
+              "compose"
+            ],
+            "agitateCode": 14,
+            "composeCode": 13,
+            "condition": "first-matching-active-physical-index-strictly-greater-than-zero",
+            "slotZeroDuplicate": "first-match-zero-shadows-later-duplicates-of-that-card",
+            "canReflectFalse": "skip-agitate-search-but-still-search-compose",
+            "composeAfterAgitate": "not-searched-when-agitate-eligible",
+            "removalTiming": "after-trigger-stress-before-entered-team-redirect-and-Anger"
+          },
+          "trigger": {
+            "none": {
+              "selectedRequestedStress": -100
+            },
+            "compose": {
+              "selectedRequestedStress": -50,
+              "entry": "suppressed"
+            },
+            "agitate": {
+              "firstWrite": "defending-team-minus-one-hundred",
+              "secondWrite": "selected-team-minus-fifty",
+              "entry": "redirect-to-defending-team-without-rechecking-threshold"
+            },
+            "writer": "clamp-each-stress-write-to-zero-through-one-hundred"
+          },
+          "entry": {
+            "personality": "entered-team-resolved-personality-after-any-redirect",
+            "timers": {
+              "timid": 1,
+              "calm": 4,
+              "bold": 4,
+              "reckless": 1
+            },
+            "timerDecrement": false,
+            "timid": "set-combo-active-set-attacker-entered-team-reset-counter-zero-only",
+            "calm": "timer-only",
+            "bold": "timer-only",
+            "reckless": {
+              "target": "opponent-of-entered-team",
+              "requestedHpDamage": "200-plus-entered-team-strength",
+              "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+              "arithmetic": "exact-safe-integer-with-toward-zero-division",
+              "writeOrder": [
+                "hp",
+                "stress"
+              ],
+              "hpClamp": [
+                -100,
+                1000
+              ],
+              "stressClamp": [
+                0,
+                100
+              ],
+              "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+              "ordinaryAttackOrDamageHooks": false,
+              "stopsAtZeroHp": false
+            }
+          },
+          "combo": {
+            "input": "explicit-checkpoint",
+            "active": "boolean",
+            "attacker": [
+              -1,
+              0,
+              1
+            ],
+            "minimumCounter": 0,
+            "maximumCounter": 7,
+            "counterBound": "engine-admission-policy-not-a-source-clamp",
+            "crossFieldConstraints": "none-bounded-existing-checkpoint-is-preserved",
+            "preservation": "all-fields-unchanged-unless-entered-personality-is-timid",
+            "pendingMeaning": "after-combo-active-flag-not-executed"
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "selection": "priority-order-and-eligibility-by-team",
+            "counters": "only-actually-evaluated-lookups-in-short-circuit-order",
+            "removal": "physical-slot-full-hands-survivor-mapping-and-nonempty-inactive-discard",
+            "stress": "each-write-in-source-order-with-requested-and-actual-signed-deltas",
+            "reckless": "requested-damage-hp-writer-and-stress-writer",
+            "timer": "entered-team-transition-or-null",
+            "combo": "before-after-timid-activation-and-pending-flag"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxCounterSearches": 2,
+            "maxStressTransitions": 3,
+            "maxRemovedCards": 1
+          },
+          "boundary": {
+            "kind": "single-anger-entry-kernel",
+            "comboAttack": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "rng": "none",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "firstTeam": 0,
+        "canReflect": true,
+        "characters": [
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": false,
+          "attacker": -1,
+          "counter": 0
+        },
+        "rawDraws": []
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "unknown-field"
+      }
+    },
+    {
+      "id": "anger-timer-outside-api-domain",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-entry-reference-v1",
+        "policies": {
+          "id": "debate-anger-entry-single-pass-policy-v1",
+          "profile": "debate-anger-entry-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "firstTeam": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "hpTerminalGuard": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "lookup": "first-match-in-active-prefix-from-zero",
+            "removal": "remove-selected-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "selection": {
+            "order": "firstTeam-then-opponent",
+            "condition": "angerTimer-zero-and-stress-one-hundred",
+            "passes": 1,
+            "resetAngeringBeforeSelection": true,
+            "noCandidate": "no-trigger-no-entry-and-no-state-change"
+          },
+          "counter": {
+            "defendingTeam": "opponent-of-selected-team",
+            "gate": "defending-team-angerTimer-zero",
+            "priority": [
+              "agitate-if-canReflect",
+              "compose"
+            ],
+            "agitateCode": 14,
+            "composeCode": 13,
+            "condition": "first-matching-active-physical-index-strictly-greater-than-zero",
+            "slotZeroDuplicate": "first-match-zero-shadows-later-duplicates-of-that-card",
+            "canReflectFalse": "skip-agitate-search-but-still-search-compose",
+            "composeAfterAgitate": "not-searched-when-agitate-eligible",
+            "removalTiming": "after-trigger-stress-before-entered-team-redirect-and-Anger"
+          },
+          "trigger": {
+            "none": {
+              "selectedRequestedStress": -100
+            },
+            "compose": {
+              "selectedRequestedStress": -50,
+              "entry": "suppressed"
+            },
+            "agitate": {
+              "firstWrite": "defending-team-minus-one-hundred",
+              "secondWrite": "selected-team-minus-fifty",
+              "entry": "redirect-to-defending-team-without-rechecking-threshold"
+            },
+            "writer": "clamp-each-stress-write-to-zero-through-one-hundred"
+          },
+          "entry": {
+            "personality": "entered-team-resolved-personality-after-any-redirect",
+            "timers": {
+              "timid": 1,
+              "calm": 4,
+              "bold": 4,
+              "reckless": 1
+            },
+            "timerDecrement": false,
+            "timid": "set-combo-active-set-attacker-entered-team-reset-counter-zero-only",
+            "calm": "timer-only",
+            "bold": "timer-only",
+            "reckless": {
+              "target": "opponent-of-entered-team",
+              "requestedHpDamage": "200-plus-entered-team-strength",
+              "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+              "arithmetic": "exact-safe-integer-with-toward-zero-division",
+              "writeOrder": [
+                "hp",
+                "stress"
+              ],
+              "hpClamp": [
+                -100,
+                1000
+              ],
+              "stressClamp": [
+                0,
+                100
+              ],
+              "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+              "ordinaryAttackOrDamageHooks": false,
+              "stopsAtZeroHp": false
+            }
+          },
+          "combo": {
+            "input": "explicit-checkpoint",
+            "active": "boolean",
+            "attacker": [
+              -1,
+              0,
+              1
+            ],
+            "minimumCounter": 0,
+            "maximumCounter": 7,
+            "counterBound": "engine-admission-policy-not-a-source-clamp",
+            "crossFieldConstraints": "none-bounded-existing-checkpoint-is-preserved",
+            "preservation": "all-fields-unchanged-unless-entered-personality-is-timid",
+            "pendingMeaning": "after-combo-active-flag-not-executed"
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "selection": "priority-order-and-eligibility-by-team",
+            "counters": "only-actually-evaluated-lookups-in-short-circuit-order",
+            "removal": "physical-slot-full-hands-survivor-mapping-and-nonempty-inactive-discard",
+            "stress": "each-write-in-source-order-with-requested-and-actual-signed-deltas",
+            "reckless": "requested-damage-hp-writer-and-stress-writer",
+            "timer": "entered-team-transition-or-null",
+            "combo": "before-after-timid-activation-and-pending-flag"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxCounterSearches": 2,
+            "maxStressTransitions": 3,
+            "maxRemovedCards": 1
+          },
+          "boundary": {
+            "kind": "single-anger-entry-kernel",
+            "comboAttack": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "rng": "none",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "firstTeam": 0,
+        "canReflect": true,
+        "characters": [
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 5,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": false,
+          "attacker": -1,
+          "counter": 0
+        }
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-anger-timer"
+      }
+    },
+    {
+      "id": "wrong-profile",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "regenerated-debate-reference-v1",
+        "policies": {
+          "id": "debate-anger-entry-single-pass-policy-v1",
+          "profile": "debate-anger-entry-reference-v1",
+          "checkpoint": {
+            "characters": 2,
+            "firstTeam": [
+              0,
+              1
+            ],
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "strength": {
+              "minimum": 1,
+              "maximum": 100,
+              "source": "caller-resolved-CharacterGetStrength"
+            },
+            "hp": {
+              "minimum": -100,
+              "maximum": 1000
+            },
+            "stress": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "admittedBounds": "explicit-engine-checkpoint-domain-not-universal-source-stat-limits",
+            "hpTerminalGuard": false
+          },
+          "hand": {
+            "physicalLength": 7,
+            "minimumActiveCapacity": 4,
+            "maximumActiveCapacity": 7,
+            "cardMinimum": -1,
+            "cardMaximum": 14,
+            "empty": -1,
+            "reservedRethinkCode": 0,
+            "slotZero": "ordinary-physical-slot-not-normalized-or-replaced",
+            "holesAndDuplicates": "preserved-until-a-source-removal",
+            "inactivePhysicalSlots": "accepted-and-preserved-unless-removal-clears-all-seven",
+            "lookup": "first-match-in-active-prefix-from-zero",
+            "removal": "remove-selected-slot-clear-all-seven-compact-active-nonempty-survivors-stably",
+            "inactiveOnRemoval": "discarded-not-compacted"
+          },
+          "selection": {
+            "order": "firstTeam-then-opponent",
+            "condition": "angerTimer-zero-and-stress-one-hundred",
+            "passes": 1,
+            "resetAngeringBeforeSelection": true,
+            "noCandidate": "no-trigger-no-entry-and-no-state-change"
+          },
+          "counter": {
+            "defendingTeam": "opponent-of-selected-team",
+            "gate": "defending-team-angerTimer-zero",
+            "priority": [
+              "agitate-if-canReflect",
+              "compose"
+            ],
+            "agitateCode": 14,
+            "composeCode": 13,
+            "condition": "first-matching-active-physical-index-strictly-greater-than-zero",
+            "slotZeroDuplicate": "first-match-zero-shadows-later-duplicates-of-that-card",
+            "canReflectFalse": "skip-agitate-search-but-still-search-compose",
+            "composeAfterAgitate": "not-searched-when-agitate-eligible",
+            "removalTiming": "after-trigger-stress-before-entered-team-redirect-and-Anger"
+          },
+          "trigger": {
+            "none": {
+              "selectedRequestedStress": -100
+            },
+            "compose": {
+              "selectedRequestedStress": -50,
+              "entry": "suppressed"
+            },
+            "agitate": {
+              "firstWrite": "defending-team-minus-one-hundred",
+              "secondWrite": "selected-team-minus-fifty",
+              "entry": "redirect-to-defending-team-without-rechecking-threshold"
+            },
+            "writer": "clamp-each-stress-write-to-zero-through-one-hundred"
+          },
+          "entry": {
+            "personality": "entered-team-resolved-personality-after-any-redirect",
+            "timers": {
+              "timid": 1,
+              "calm": 4,
+              "bold": 4,
+              "reckless": 1
+            },
+            "timerDecrement": false,
+            "timid": "set-combo-active-set-attacker-entered-team-reset-counter-zero-only",
+            "calm": "timer-only",
+            "bold": "timer-only",
+            "reckless": {
+              "target": "opponent-of-entered-team",
+              "requestedHpDamage": "200-plus-entered-team-strength",
+              "requestedStressDamage": "truncate-requestedHpDamage-divided-by-fifteen",
+              "arithmetic": "exact-safe-integer-with-toward-zero-division",
+              "writeOrder": [
+                "hp",
+                "stress"
+              ],
+              "hpClamp": [
+                -100,
+                1000
+              ],
+              "stressClamp": [
+                0,
+                100
+              ],
+              "stressBasis": "requested-hp-damage-not-actual-clamped-hp-loss",
+              "ordinaryAttackOrDamageHooks": false,
+              "stopsAtZeroHp": false
+            }
+          },
+          "combo": {
+            "input": "explicit-checkpoint",
+            "active": "boolean",
+            "attacker": [
+              -1,
+              0,
+              1
+            ],
+            "minimumCounter": 0,
+            "maximumCounter": 7,
+            "counterBound": "engine-admission-policy-not-a-source-clamp",
+            "crossFieldConstraints": "none-bounded-existing-checkpoint-is-preserved",
+            "preservation": "all-fields-unchanged-unless-entered-personality-is-timid",
+            "pendingMeaning": "after-combo-active-flag-not-executed"
+          },
+          "audit": {
+            "snapshots": "detached-before-and-after-characters-and-combo",
+            "selection": "priority-order-and-eligibility-by-team",
+            "counters": "only-actually-evaluated-lookups-in-short-circuit-order",
+            "removal": "physical-slot-full-hands-survivor-mapping-and-nonempty-inactive-discard",
+            "stress": "each-write-in-source-order-with-requested-and-actual-signed-deltas",
+            "reckless": "requested-damage-hp-writer-and-stress-writer",
+            "timer": "entered-team-transition-or-null",
+            "combo": "before-after-timid-activation-and-pending-flag"
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "atomic-no-partial-state-or-receipt"
+          },
+          "capacity": {
+            "maxInputNodes": 2048,
+            "maxInputDepth": 12,
+            "maxInputArrayLength": 64,
+            "maxCanonicalUtf8Bytes": 32768,
+            "maxCounterSearches": 2,
+            "maxStressTransitions": 3,
+            "maxRemovedCards": 1
+          },
+          "boundary": {
+            "kind": "single-anger-entry-kernel",
+            "comboAttack": "excluded",
+            "secondCalcAngering": "excluded",
+            "winnerAndCrumble": "excluded",
+            "phaseExecution": "excluded",
+            "timerDecay": "excluded",
+            "handRefillAndDeckRegeneration": "excluded",
+            "personAndPersonalityResolution": "caller-supplied-not-evaluated",
+            "rng": "none",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "firstTeam": 0,
+        "canReflect": true,
+        "characters": [
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          },
+          {
+            "personality": "calm",
+            "strength": 50,
+            "hp": 1000,
+            "stress": 0,
+            "angerTimer": 0,
+            "maxCardCount": 4,
+            "hand": [
+              0,
+              1,
+              2,
+              3,
+              -1,
+              -1,
+              -1
+            ]
+          }
+        ],
+        "combo": {
+          "active": false,
+          "attacker": -1,
+          "counter": 0
+        }
+      },
+      "paperExpected": {
+        "ok": false,
+        "reason": "unsupported-profile"
+      }
+    }
+  ],
+  "excluded": [
+    "full AngerPhase",
+    "session integration",
+    "ComboAttack execution",
+    "P078 and dependencies",
+    "native equivalence"
+  ]
+}

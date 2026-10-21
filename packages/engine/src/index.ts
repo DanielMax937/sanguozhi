@@ -877,3 +877,34 @@ export {
   loadRegeneratedDebate,
   replayRegeneratedDebate,
 } from './regenerated-debate.ts';
+
+export type {
+  DebateAngerEntryTeamV1,
+  DebateAngerEntryMaybeTeamV1,
+  DebateAngerEntryPersonalityV1,
+  DebateAngerEntryCardCodeV1,
+  DebateAngerEntryHandV1,
+  DebateAngerEntryCharacterV1,
+  DebateAngerEntryComboV1,
+  DebateAngerEntryInputV1,
+  DebateAngerEntrySnapshotV1,
+  DebateAngerEntryCounterSearchV1,
+  DebateAngerEntryCounterAuditV1,
+  DebateAngerEntryRemovalV1,
+  DebateAngerEntryStressTransitionV1,
+  DebateAngerEntryHpTransitionV1,
+  DebateAngerEntryRecklessV1,
+  DebateAngerEntryTimerTransitionV1,
+  DebateAngerEntryComboTransitionV1,
+  DebateAngerEntryReceiptV1,
+  DebateAngerEntryFailureReasonV1,
+  DebateAngerEntryFailureV1,
+  DebateAngerEntryResultV1,
+  DebateAngerEntryPolicyV1,
+  DebateAngerEntryEvidenceV1,
+} from './debate-anger-entry.ts';
+export {
+  DEBATE_ANGER_ENTRY_POLICY_V1,
+  DEBATE_ANGER_ENTRY_EVIDENCE_V1,
+  evaluateDebateAngerEntry,
+} from './debate-anger-entry.ts';
