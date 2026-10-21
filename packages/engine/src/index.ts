@@ -796,3 +796,29 @@ export {
   loadFilledDebate,
   replayFilledDebate,
 } from './filled-debate.ts';
+
+export type {
+  DebateDeckGenerateCardCodeV1,
+  DebateDeckGenerateTopicCardCodeV1,
+  DebateDeckGenerateRhetoricCardCodeV1,
+  DebateDeckGenerateDeckV1,
+  DebateDeckGenerateRawDrawV1,
+  DebateDeckGenerateInputV1,
+  DebateDeckGenerateBeforeV1,
+  DebateDeckGenerateAfterV1,
+  DebateDeckGenerateTopicPlacementV1,
+  DebateDeckGenerateTailPlacementV1,
+  DebateDeckGenerateSwapV1,
+  DebateDeckGenerateDrawCountsV1,
+  DebateDeckGenerateReceiptV1,
+  DebateDeckGenerateFailureReasonV1,
+  DebateDeckGenerateFailureV1,
+  DebateDeckGenerateResultV1,
+  DebateDeckGeneratePolicyV1,
+  DebateDeckGenerateEvidenceV1,
+} from './debate-deck-generate.ts';
+export {
+  DEBATE_DECK_GENERATE_POLICY_V1,
+  DEBATE_DECK_GENERATE_EVIDENCE_V1,
+  evaluateDebateDeckGenerate,
+} from './debate-deck-generate.ts';
