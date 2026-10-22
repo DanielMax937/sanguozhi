@@ -1117,3 +1117,32 @@ export type {
   DebateTurnStartEvidenceV1,
 } from './debate-turn-start.ts';
 export { evaluateDebateTurnStart, DEBATE_TURN_START_POLICY_V1, DEBATE_TURN_START_EVIDENCE_V1 } from './debate-turn-start.ts';
+
+export type {
+  DebateRethinkActionPersonalityV1,
+  DebateRethinkActionCardCodeV1,
+  DebateRethinkActionSourceCardV1,
+  DebateRethinkActionPhysicalCardV1,
+  DebateRethinkActionPhysicalHandV1,
+  DebateRethinkActionRawDrawV1,
+  DebateRethinkActionRawResultV1,
+  DebateRethinkActionCharacterCheckpointV1,
+  DebateRethinkActionInputV1,
+  DebateRethinkActionStateV1,
+  DebateRethinkActionClearedSlotV1,
+  DebateRethinkActionDiscardedCardV1,
+  DebateRethinkActionClearAuditV1,
+  DebateRethinkActionQuotaWriteV1,
+  DebateRethinkActionPlayedCardAuditV1,
+  DebateRethinkActionRandomEventV1,
+  DebateRethinkActionAppliedRepairV1,
+  DebateRethinkActionFinalProvenanceV1,
+  DebateRethinkActionReceiptV1,
+  DebateRethinkActionSuccessV1,
+  DebateRethinkActionFailureReasonV1,
+  DebateRethinkActionFailureV1,
+  DebateRethinkActionResultV1,
+  DebateRethinkActionPolicyV1,
+  DebateRethinkActionEvidenceV1,
+} from './debate-rethink-action.ts';
+export { evaluateDebateRethinkAction, DEBATE_RETHINK_ACTION_POLICY_V1, DEBATE_RETHINK_ACTION_EVIDENCE_V1 } from './debate-rethink-action.ts';
