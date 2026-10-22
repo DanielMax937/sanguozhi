@@ -1090,3 +1090,30 @@ export {
   DEBATE_CALM_RETHINK_EVIDENCE_V1,
   evaluateDebateCalmRethink,
 } from './debate-calm-rethink.ts';
+
+export type {
+  DebateTurnStartTeamIndexV1,
+  DebateTurnStartPersonalityV1,
+  DebateTurnStartCardCodeV1,
+  DebateTurnStartPhysicalCardV1,
+  DebateTurnStartPhysicalHandV1,
+  DebateTurnStartRawDrawV1,
+  DebateTurnStartCharacterCheckpointV1,
+  DebateTurnStartCharacterInputV1,
+  DebateTurnStartInputV1,
+  DebateTurnStartStateV1,
+  DebateTurnStartRethinkQuotaReasonV1,
+  DebateTurnStartRethinkQuotaV1,
+  DebateTurnStartBoldReasonV1,
+  DebateTurnStartBoldAuditV1,
+  DebateTurnStartTeamReceiptV1,
+  DebateTurnStartConsumedDrawV1,
+  DebateTurnStartReceiptV1,
+  DebateTurnStartSuccessV1,
+  DebateTurnStartFailureReasonV1,
+  DebateTurnStartFailureV1,
+  DebateTurnStartResultV1,
+  DebateTurnStartPolicyV1,
+  DebateTurnStartEvidenceV1,
+} from './debate-turn-start.ts';
+export { evaluateDebateTurnStart, DEBATE_TURN_START_POLICY_V1, DEBATE_TURN_START_EVIDENCE_V1 } from './debate-turn-start.ts';

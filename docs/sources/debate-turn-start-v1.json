@@ -1,0 +1,370 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-turn-start-v1",
+  "scope": "Atomic two-team non-tutorial TurnStart on bounded caller-supplied current-deck checkpoints, reusing unchanged hand-fill; not a whole session",
+  "implementation": "packages/engine/src/debate-turn-start.ts",
+  "ruleDocument": "docs/rules/debate-turn-start-v1.md",
+  "apiDocument": "docs/engine/debate-turn-start-v1.md",
+  "paperExample": "data/scenarios/debate-turn-start-example-v1.json",
+  "exports": {
+    "evaluate": "evaluateDebateTurnStart",
+    "policy": "DEBATE_TURN_START_POLICY_V1",
+    "evidence": "DEBATE_TURN_START_EVIDENCE_V1",
+    "typeFamily": "DebateTurnStart*V1"
+  },
+  "policies": {
+    "id": "debate-turn-start-bounded-current-deck-policy-v1",
+    "profile": "debate-turn-start-reference-v1",
+    "mode": {
+      "kind": "bounded-current-deck",
+      "isTutorial": false,
+      "tutorialHandling": "explicit-false-required-true-rejected-not-skipped-fill",
+      "teamCount": 2,
+      "teamOrder": [
+        0,
+        1
+      ],
+      "sequence": [
+        "reset-played-card",
+        "grant-rethink-if-crumbled",
+        "grant-rethink-if-positive-timer-calm",
+        "evaluate-unchanged-current-deck-hand-fill",
+        "reset-positive-bold-timer-if-final-active-topic-count-zero",
+        "clear-crumbled"
+      ],
+      "ordering": "entire-team-zero-sequence-before-entire-team-one-sequence"
+    },
+    "checkpoint": {
+      "personality": "caller-resolved-timid-calm-bold-or-reckless",
+      "angerTimer": {
+        "minimum": 0,
+        "maximum": 4
+      },
+      "maxCardCount": {
+        "minimum": 4,
+        "maximum": 7
+      },
+      "physicalHandLength": 7,
+      "physicalCardRange": [
+        -1,
+        14
+      ],
+      "activePlayableSlots": "one-through-maxCardCount-minus-one",
+      "activePlayableCards": "minus-one-vacancy-or-one-through-fourteen-no-zero",
+      "slotZeroInput": "any-minus-one-through-fourteen-restored-to-zero-by-fill",
+      "inactiveTail": "any-minus-one-through-fourteen-preserved-without-fill-or-sort",
+      "playedCardRange": [
+        -1,
+        14
+      ],
+      "booleans": "canRethink-and-crumbled-required",
+      "cardTapeLength": 18,
+      "cardTapeRange": [
+        1,
+        14
+      ],
+      "deckCursor": {
+        "minimum": 0,
+        "maximum": 18
+      },
+      "domain": "explicit-engineering-checkpoint-domain",
+      "reachability": "not-a-proof-of-universal-or-source-reachable-state"
+    },
+    "rethinkQuota": {
+      "operation": "set-true-if-crumbled-or-positive-timer-calm-otherwise-preserve",
+      "falseAssignment": "never",
+      "calmBonusAndRandomness": "not-part-of-TurnStart"
+    },
+    "fill": {
+      "implementation": "unchanged-evaluateDebateHandFill",
+      "policy": {
+        "id": "debate-hand-fill-current-deck-policy-v1",
+        "profile": "debate-hand-fill-reference-v1",
+        "cards": {
+          "representation": "pinned-modern-enum-numeric-code",
+          "rethink": 0,
+          "topicFirst": 1,
+          "topicLast": 9,
+          "rhetoricFirst": 10,
+          "rhetoricLast": 14,
+          "playableMin": 1,
+          "playableMax": 14
+        },
+        "slots": {
+          "input": "playable-only-original-source-order",
+          "vacancy": null,
+          "sourceSlotOffset": 1,
+          "playableCounts": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "reservedSlot": 0,
+          "reservedCard": 0,
+          "reservedHandling": "restore-before-fill"
+        },
+        "deck": {
+          "id": "provided-current-deck-18-v1",
+          "sourceDeckTableSize": 18,
+          "providedEntries": 18,
+          "fillOrder": "ascending-vacant-original-source-slot",
+          "consume": "advance-one-per-filled-slot",
+          "exhaustion": "unsupported-deck-regeneration",
+          "regeneration": "excluded",
+          "nativeDistribution": false
+        },
+        "repair": {
+          "condition": "post-fill-topic-count-zero-and-new-slot-exists",
+          "target": "last-new-original-source-slot",
+          "drawRole": "debate-fill-topic-repair",
+          "drawBound": 9,
+          "cardMapping": "1+raw-value",
+          "noNewSlot": "skip-even-with-no-topic"
+        },
+        "sort": {
+          "key": "numeric-card-code-ascending",
+          "scope": "all-source-slots-including-reserved-zero",
+          "equalCodeAuditTie": "preSortSlot-ascending-engine-policy",
+          "nativeEqualCodeIdentityOrder": false
+        },
+        "randomness": {
+          "source": "caller-supplied-draws",
+          "validation": "syntax-before-fill-semantic-at-repair",
+          "count": "one-only-if-repair-applies",
+          "extra": "atomic-rejection",
+          "externalRngConsumed": 0,
+          "nativePrng": false
+        },
+        "capacity": {
+          "maxInputNodes": 1024,
+          "maxInputDepth": 12,
+          "maxInputArrayLength": 32,
+          "maxCanonicalUtf8Bytes": 16384
+        },
+        "boundary": {
+          "kind": "independent-character-fill-kernel",
+          "sessionIntegration": false,
+          "persistence": false,
+          "legacyProfilesChanged": false
+        }
+      },
+      "mapping": "active-minus-one-to-null-only",
+      "output": "sorted-active-prefix-over-original-seven-slot-backing-tail",
+      "currentDeckOnly": true,
+      "cursorAtEighteen": "accepted-with-no-vacancies-otherwise-unsupported-deck-regeneration",
+      "failure": "propagate-typed-reason-and-discard-whole-two-team-result",
+      "nestedReceipt": "preserve-unchanged-including-local-drawIndex-zero"
+    },
+    "bold": {
+      "gate": "positive-anger-timer-and-bold-personality",
+      "countSource": "final-post-repair-active-prefix",
+      "countSlots": "zero-through-maxCardCount-minus-one",
+      "topicCardRange": [
+        1,
+        9
+      ],
+      "zeroCount": "reset-anger-timer-to-zero",
+      "nonzeroCount": "preserve-anger-timer",
+      "preRepairCount": "never-use-nested-topicCardCountAfterFill-for-Bold"
+    },
+    "randomness": {
+      "rawDrawsPerTeam": "zero-or-one-existing-hand-fill-repair-draw",
+      "role": "debate-fill-topic-repair",
+      "bound": 9,
+      "values": [
+        0,
+        8
+      ],
+      "parsing": "both-complete-checkpoints-and-draw-syntax-and-domain-before-evaluation",
+      "requiredOrUnusedDraw": "unchanged-kernel-repair-phase-validation",
+      "flatAudit": "team-order-with-separate-flatDrawIndex-and-localDrawIndex",
+      "externalRngConsumed": 0,
+      "callerCallbacks": "excluded"
+    },
+    "safety": {
+      "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+      "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+      "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+      "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+      "output": "recursively-frozen-and-detached-from-caller",
+      "failure": "typed-code-only-no-state-or-partial-receipt"
+    },
+    "capacity": {
+      "maxInputNodes": 2048,
+      "maxInputDepth": 12,
+      "maxInputArrayLength": 32,
+      "maxCanonicalUtf8Bytes": 32768,
+      "handFillCalls": 2,
+      "maxRepairDraws": 2,
+      "maxFilledSlots": 12
+    },
+    "boundary": {
+      "kind": "standalone-two-team-non-tutorial-turn-start-composition",
+      "personalityResolution": "caller-supplied-no-person-lookup-or-fallback",
+      "tutorialBranch": "excluded",
+      "deckGenerate": "excluded-not-duplicated",
+      "turnEndAndTimerDecrement": "excluded",
+      "attackAndRethinkAction": "excluded",
+      "fullSessionAndPersistence": "excluded",
+      "p078": "excluded",
+      "legacyProfilesChanged": false
+    }
+  },
+  "evidence": {
+    "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+    "repository": "https://github.com/tankyc/sango_infinity",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "debatePath": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+    "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+    "debateSha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+    "debateEnumPath": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+    "debateEnumBlob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+    "sourceTurnStartLines": [
+      1046,
+      1079
+    ],
+    "sourceTimerResetLines": [
+      401,
+      404
+    ],
+    "sourceSortLines": [
+      406,
+      409
+    ],
+    "sourceFillLines": [
+      412,
+      438
+    ],
+    "sourceCardEnumLines": [
+      33,
+      61
+    ],
+    "sourceBehavior": "team-local-reset-quota-fill-final-Bold-scan-clear-before-next-team",
+    "handFill": {
+      "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+      "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "debatePath": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+      "debateEnumPath": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "debateEnumBlob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+      "sourceDeckTableSizeLine": 54,
+      "sourceSortLines": [
+        406,
+        409
+      ],
+      "sourceFillLines": [
+        412,
+        438
+      ],
+      "sourceCardEnumLines": [
+        33,
+        61
+      ],
+      "fillEvidence": "pinned-modern-translated-reference-only",
+      "deckEvidence": "caller-provided-current-deck-engine-boundary",
+      "topicRepairEvidence": "source-TopicFirst-plus-RandInt9-last-new-slot-only",
+      "sortEvidence": "source-Array.Sort-numeric-codes-including-reserved-zero",
+      "equalCodeAuditEvidence": "engine-preSortSlot-tie-policy-not-native-identity-order",
+      "inputSafetyAndBudgets": "engine-policy",
+      "nativeEquivalent": false,
+      "stockOriginalVerified": false,
+      "pkEquivalent": false,
+      "vanillaEquivalent": false,
+      "completeDebate": false,
+      "originalUnresolvedGroups": 43,
+      "originalHistoricalSnapshots": 45,
+      "nativeWholeChain": "open",
+      "p078": "excluded",
+      "nativeDeckRegeneration": "excluded",
+      "nativeRngStream": "excluded",
+      "legacySessionIntegration": "excluded"
+    },
+    "personalityBoundary": "caller-supplied-CharacterGetPersonality-result",
+    "domainBoundsSafetyBudgetsAuditAndReasonNames": "engine-policy-not-source-reachability-proof",
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "completeDebate": false,
+    "p078": "excluded",
+    "nativeWholeChain": "open",
+    "nativeDeckRegeneration": "excluded",
+    "nativeRngStream": "excluded",
+    "legacySessionIntegration": "excluded"
+  },
+  "constantExtraction": "Data-only transcription of TypeScript object literals with explicit identifier substitutions; no TypeScript, candidate, source or example execution. Nested hand-fill policy/evidence preserved exactly.",
+  "sourceAnchors": [
+    {
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1046-L1079",
+      "rule": "Entire team0 then team1: playedCard reset, crumble and Calm quota restoration, non-tutorial fill, post-fill Bold scan, crumble clear."
+    },
+    {
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L401-L438",
+      "rule": "Timer reset zero; fill restores slot0, fills physical holes, optionally repairs last new slot, sorts only active prefix."
+    },
+    {
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L369-L374",
+      "rule": "Personality getter exists in source; this checkpoint requires its resolved result and does not call person lookup."
+    },
+    {
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1082-L1097",
+      "rule": "TurnEnd and timer decrement are explicitly excluded, not simulated by this adapter."
+    }
+  ],
+  "dependency": {
+    "implementation": "packages/engine/src/debate-hand-fill.ts",
+    "completion": "packages/engine/src/debate-hand-fill-completion.ts",
+    "reuse": "Call existing public evaluateDebateHandFill without modifying its code, DTO, policy, evidence or local draw receipt. Current-deck exhaustion stays rejected.",
+    "baseCommit": "7e5b25af5a101a436a996289f1377b624514cbbd",
+    "fileIdentities": [
+      {
+        "path": "packages/engine/src/debate-hand-fill.ts",
+        "size": 18005,
+        "sha256": "d869b72bafc2051c95b09460109a54f92f53bb3ff67f9b373c1b37f9e28499af",
+        "gitBlobSha1": "da9ab2e544574c58ae7e85768ff7ec4d335c4d0f"
+      },
+      {
+        "path": "packages/engine/src/debate-hand-fill-completion.ts",
+        "size": 4067,
+        "sha256": "68e6ad25490c535ba65d0cd05c7a3617f1f384afb021a542efe511bf4f66e904",
+        "gitBlobSha1": "8d6f194552c72c311ed8e0b592b39ca3029703f5"
+      }
+    ]
+  },
+  "engineeringDecisions": [
+    "Closed JSON-safe checkpoint schema and exact-policy admission, safe detachment, proxy/accessor rejection and bounded resource budget.",
+    "Require explicit isTutorial:false; any other value is unsupported-tutorial.",
+    "Timer0..4, capacity4..7, physical seven slots, current18-card deck and cursor0..18 are bounded domain, not universal source reachability.",
+    "Slot0 accepts -1..14 then fill restores0; active playable zero is rejected; inactive tail accepts -1..14 and is preserved.",
+    "Parse both complete checkpoint/draw domains before evaluating team0; no source-equivalence claim for malformed-data priority.",
+    "If either fill fails, return only typed failure, no committed first-team state, partial receipt or external RNG consumption.",
+    "Final Bold topic count is computed only for positive Bold; otherwise audit count is null, not inferred from pre-repair receipt.",
+    "Global draw audit wraps unchanged local fill draws in team order; no native RNG seed/stream/distribution proof.",
+    "Equal-code audit identity uses existing kernel preSortSlot convention, not source Array.Sort object-identity proof."
+  ],
+  "criticalDistinctions": [
+    "Full all-rhetoric active hand with no vacancy has no repair and cancels active Bold.",
+    "Vacancy filled by rhetoric may trigger repair to an ordinary card; final Bold scan must retain timer despite nested topicCardCountAfterFill=0.",
+    "Inactive ordinary tail and overwritten slot0 do not keep Bold active.",
+    "Cursor18 is not itself exhaustion failure: only an actual next-card request fails.",
+    "This is a useful quota/fill/Bold/crumble transaction, not integration into the nine existing sessions."
+  ],
+  "excluded": [
+    "tutorial branch",
+    "deck regeneration and DeckInit",
+    "TurnEnd and timer decrement",
+    "full rethink action and post-fill Calm bonus",
+    "anger entry/attack/combo/HP resolution",
+    "native person or book resolution",
+    "old nine session integration and persistence",
+    "P078 and all dependencies",
+    "native PK/Vanilla/stock equality",
+    "runtime or original RNG equivalence"
+  ],
+  "openEvidence": {
+    "unresolvedTopicGroups": 43,
+    "historicalSnapshots": 45
+  },
+  "validation": "Static source comparison, independent text review, manually authored paper cases and byte identity only. No tests, compiler, typecheck, build, validator, candidate, source, scenario or replay execution."
+}
