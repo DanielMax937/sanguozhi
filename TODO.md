@@ -1,3 +1,15 @@
+## 2026-10-21：现代参考双次愤怒结算组合核（静态）
+
+[PR119](https://github.com/DanielMax937/sanguozhi/pull/119)已交付独立攻击方判定。本批补充[有界双次愤怒结算事务](docs/rules/debate-anger-phase-v1.md)与[完整API合同](docs/engine/debate-anger-phase-v1.md)，直接复用PR115入场与PR116胆小连打公开核，不另复制反制、连打伤害或压紧算法。它整合已有组件，但仍不是旧九会话集成，也不是完整AngerPhase路由与回合执行。
+
+从winner=−1、双方HP为正且combo未激活的显式检查点开始，先可反射入场、完整执行新激活的胆小连打，再判胜负。若首次已终局，立即结束，不做第二次入场或崩坏。否则第二次以canReflect=false入场（只禁激昂反射，仍可镇静反制）、完整连打，先计算崩坏再判胜负。最多两次，不因第二次新加压力循环到稳定；连打自身不在途中HP归零时停止。
+
+两次抽样分别明确提供，每次最多4个既有bound5 jitter；全部输入预先安全分离校验，无连打或被跳过的第二次不能携带多余抽样。组合层保留各组件完整收据及局部抽样记录，另记阶段顺序与全局偏移；失败不返回部分状态。胜负按原firstTeam的对手HP优先检查；崩坏按HP每250一档且限制0..3，等级任意改变（含下降）置标记，等级不变保留原标记。
+
+结果仅为“待终局分类”或“待回合结束”：不调用CanCritical，不执行Critical／Closing／TurnEnd、计时递减、先手／话题更新、补牌或牌组生成。给定性格、武力与两方attack是调用方检查点，genericOnly仅声明恒等人物伤害hook，不认证真实人物解析。旧九会话、各依赖核、政策和存档保持原样；完整愤怒会话、冷静再考／刚胆耗牌、全回合随机与身份预算继续开放。
+
+人物／书籍、非恒等hook、开场／追击／留情与campaign排除；固定现代C#不是原生PK／Vanilla证明，43证据主题／45历史快照保持；P078及全部依赖排除。仅静态文本、独立审阅、纸面推导和字节身份核对，未运行测试、编译、typecheck、build、validator、checker、诊断、候选、来源、场景或replay。下方历史段落保留各批交付时的边界。
+
 ## 2026-10-21：现代参考兴奋刚胆攻击方判定核（静态）
 
 [PR118](https://github.com/DanielMax937/sanguozhi/pull/118)已交付四性格通用体力伤害公式。本批补充[独立攻击方判定](docs/rules/debate-attacker-selection-v1.md)与[完整API合同](docs/engine/debate-attacker-selection-v1.md)，只计算固定现代参考 GetCardPower 与 CalcAttacker 的牌力和胜出方，不把判定结果等同于完整出牌或攻击执行。
