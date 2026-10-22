@@ -1,0 +1,471 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-calm-rethink-v1",
+  "scope": "Standalone post-fill Calm rethink bonus and final numeric sort over one already-filled, already-sorted active hand; not CharacterRethink clearing/refill or a debate session",
+  "implementation": "packages/engine/src/debate-calm-rethink.ts",
+  "ruleDocument": "docs/rules/debate-calm-rethink-v1.md",
+  "apiDocument": "docs/engine/debate-calm-rethink-v1.md",
+  "paperExample": "data/scenarios/debate-calm-rethink-example-v1.json",
+  "exports": {
+    "evaluate": "evaluateDebateCalmRethink",
+    "policy": "DEBATE_CALM_RETHINK_POLICY_V1",
+    "evidence": "DEBATE_CALM_RETHINK_EVIDENCE_V1",
+    "typeFamily": "DebateCalmRethink*V1"
+  },
+  "evidence": {
+    "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+    "repository": "https://github.com/tankyc/sango_infinity",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "debatePath": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+    "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+    "debateSha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+    "debateEnumPath": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+    "debateEnumBlob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+    "sourceRethinkLines": [
+      491,
+      509
+    ],
+    "excludedClearingAndRefillLines": [
+      493,
+      495
+    ],
+    "sourceBonusLines": [
+      496,
+      507
+    ],
+    "sourceFinalSortLine": 509,
+    "sourceSortHelperLines": [
+      407,
+      409
+    ],
+    "sourceCardEnumLines": [
+      33,
+      61
+    ],
+    "sourceBehavior": "positive-timer-then-calm-then-RandBool-40-then-topic-range-then-slot-one-overwrite-then-sort",
+    "personalityBoundary": "CharacterGetPersonality-result-supplied-by-caller-no-person-fallback-run",
+    "randomBoundary": "caller-supplied-boolean-result-only-not-bound-100-draw-or-probability-proof",
+    "sortBoundary": "source-numeric-order-equal-code-audit-identity-is-engine-policy-only",
+    "boundsSafetyBudgetsAuditAndReasonNames": "engine-policy",
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "completeDebate": false,
+    "p078": "excluded",
+    "nativeWholeChain": "open",
+    "nativeDeckRegenerationIntegration": "excluded",
+    "nativeRngStream": "excluded",
+    "legacySessionIntegration": "excluded"
+  },
+  "policies": {
+    "id": "debate-calm-rethink-policy-v1",
+    "profile": "debate-calm-rethink-reference-v1",
+    "checkpoint": {
+      "kind": "post-fill-already-numerically-sorted-active-hand",
+      "personality": "caller-resolved-timid-calm-bold-or-reckless",
+      "angerTimer": {
+        "minimum": 0,
+        "maximum": 4
+      },
+      "currentTopic": {
+        "minimum": -2147483648,
+        "maximum": 2147483647
+      },
+      "activeHandLength": {
+        "minimum": 4,
+        "maximum": 7
+      },
+      "firstSlot": 0,
+      "remainingCardRange": [
+        1,
+        14
+      ],
+      "minimumOrdinaryCards": 1,
+      "ordinaryCardRange": [
+        1,
+        9
+      ],
+      "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+    },
+    "bonus": {
+      "gate": "positive-anger-timer-and-calm-personality",
+      "rawResultRole": "debate-calm-rethink-rand-bool",
+      "percentArgument": 40,
+      "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+      "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+      "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+      "topicCards": [
+        3,
+        6,
+        9
+      ],
+      "physicalSourceSlot": 1,
+      "sameFaceOverwrite": "applied-even-when-before-equals-after",
+      "integerRngMappingOrProbabilityProof": "not-provided"
+    },
+    "sorting": {
+      "when": "always-after-optional-physical-slot-overwrite",
+      "order": "numeric-card-code-ascending",
+      "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+      "equalCardTieBreak": "source-slot-ascending-engine-policy",
+      "nativeEqualCardIdentityGuarantee": false
+    },
+    "safety": {
+      "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+      "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+      "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+      "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+      "result": "recursively-frozen-and-detached-from-input",
+      "failure": "typed-code-only-no-partial-audit"
+    },
+    "capacity": {
+      "maxInputNodes": 1024,
+      "maxInputDepth": 10,
+      "maxInputArrayLength": 32,
+      "maxCanonicalUtf8Bytes": 16384,
+      "maxBooleanResults": 1,
+      "maxLocalSlotOverwrites": 1,
+      "finalSorts": 1,
+      "externalRandomDraws": 0
+    },
+    "boundary": {
+      "kind": "standalone-post-fill-calm-rethink-bonus",
+      "personalityResolution": "caller-supplied-not-evaluated",
+      "handClearingRefillAndDeckGeneration": "excluded",
+      "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+      "canRethink": "not-read-not-changed",
+      "turnEnd": "excluded",
+      "sessionIntegration": false,
+      "persistence": false,
+      "legacyProfilesChanged": false
+    }
+  },
+  "constantCopyMethod": "POLICY and EVIDENCE were extracted as JSON text literals from the local TypeScript source. Neither TypeScript nor any candidate, source, scenario, checker or validator was executed.",
+  "sourceFiles": [
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "gitBlobSha1": "0137498d10773cd4596d497083ccdf6a26b3a261",
+      "sha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+      "bytes": 71288,
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "identityBasis": "Retained pinned source; SHA-256 and byte length read in this authoring pass, Git blob identity inherited from the pinned reference ledger.",
+      "sourceClaim": "Modern C# translation, not authenticated native, stock-original, PK or Vanilla code."
+    },
+    {
+      "repository": "tankyc/sango_infinity",
+      "commit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "gitBlobSha1": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+      "sha256": "cd71efed5059fb4ca876091b1e39bd34636fb978c8ec9bfbf924d6a443070bc1",
+      "bytes": 8447,
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "identityBasis": "Retained pinned enum reference; SHA-256 and byte length read in this authoring pass, Git blob identity inherited from the pinned reference ledger.",
+      "sourceClaim": "Modern translated enums, including explicitly inferred enum groups; not independent native-header authentication."
+    }
+  ],
+  "lineAttribution": [
+    {
+      "file": "Debate.cs",
+      "lines": [
+        1,
+        25
+      ],
+      "supports": "The file describes a modern C# translation and naming/interface substitutions, not original-binary equivalence.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L1-L25"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        53,
+        57
+      ],
+      "supports": "The source deck size is 18 and backing hand limit is 7. This kernel does not accept or consume a deck.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L53-L57"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        343,
+        355
+      ],
+      "supports": "Living-person capacity outcomes 4,5,6,7 motivate the bounded active-hand checkpoint. The caller resolves person, alive state and capacity; these are not executed here.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L343-L355"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        369,
+        375
+      ],
+      "supports": "CharacterGetPersonality may resolve an override or person fallback. The kernel takes the resolved personality string and runs neither lookup.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L369-L375"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        377,
+        404
+      ],
+      "supports": "Timer-setting, decrement and reset are source context only. The admitted integer range 0..4 is an explicit engine checkpoint policy, not a claim that all possible source states are reachable or bounded this way.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L377-L404"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        406,
+        445
+      ],
+      "supports": "Surrounding helper context: CharacterSortCards sorts the active numeric prefix; CharacterFillCards restores reserved 0, fills, conditionally repairs a topic, then sorts. CharacterSetCard is outside this kernel. No helper in this range is invoked.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L406-L445"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        407,
+        409
+      ],
+      "supports": "Numeric Array.Sort over active slots supports final card-face order, not equal-card physical identity ordering.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L407-L409"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        413,
+        438
+      ],
+      "supports": "Checkpoint provenance only: fill sets slot 0 to Rethink, fills remaining slots, ensures a topic when a new slot exists, then sorts. This standalone component requires the resulting checkpoint but does not clear, fill, regenerate, consume deck data or repair.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L413-L438"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        491,
+        509
+      ],
+      "supports": "CharacterRethink source context contains excluded clearing/refill followed by the selected bonus and final sort.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L491-L509"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        493,
+        495
+      ],
+      "supports": "Excluded prefix: clear each active slot and call CharacterFillCards. The input is after this prefix and its internal sort.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L493-L495"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        496,
+        499
+      ],
+      "supports": "Positive anger timer is checked before personality; only Calm reaches RandBool(40). Exactly one supplied boolean call result is required iff these gates pass.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L496-L499"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        499,
+        506
+      ],
+      "supports": "RandBool(40) precedes topic range checking. Both true and false supplied results are consumed for any signed-32 topic when the timer/personality gate passes; no integer-to-bool mapping or probability proof is established.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L499-L506"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        502,
+        506
+      ],
+      "supports": "True plus topic 0,1,2 assigns Story3,Logic3,Trend3 respectively to physical slot 1, even when the card face is unchanged. It does not search for a preferred topic or overwrite a final sorted position.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L502-L506"
+    },
+    {
+      "file": "Debate.cs",
+      "lines": [
+        509,
+        509
+      ],
+      "supports": "Final sorting is unconditional, including zero timer, non-Calm, false result, invalid topic and same-face overwrite.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/Debate.cs#L509"
+    },
+    {
+      "file": "DebateEnum.cs",
+      "lines": [
+        1,
+        20
+      ],
+      "supports": "Translation and inferred-enum disclosure limits the evidence level.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs#L1-L20"
+    },
+    {
+      "file": "DebateEnum.cs",
+      "lines": [
+        33,
+        61
+      ],
+      "supports": "Rethink=0; topic cards=1..9; Story3=3,Logic3=6,Trend3=9; rhetoric cards=10..14.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs#L33-L61"
+    },
+    {
+      "file": "DebateEnum.cs",
+      "lines": [
+        96,
+        103
+      ],
+      "supports": "Topic Story,Logic,Trend map to 0,1,2; Topic_Max=3. This enum group is described as inferred from implementation.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs#L96-L103"
+    },
+    {
+      "file": "DebateEnum.cs",
+      "lines": [
+        116,
+        124
+      ],
+      "supports": "The four personality faces are Timid,Calm,Bold,Reckless; only Calm takes the selected bonus branch.",
+      "url": "https://github.com/tankyc/sango_infinity/blob/a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef/Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs#L116-L124"
+    }
+  ],
+  "contract": {
+    "schemaVersion": 1,
+    "profile": "debate-calm-rethink-reference-v1",
+    "inputKeys": [
+      "schemaVersion",
+      "profile",
+      "policies",
+      "personality",
+      "angerTimer",
+      "currentTopic",
+      "hand",
+      "rawResults"
+    ],
+    "policyComparison": "Exact complete canonical policy structure, not id-only matching.",
+    "checkpoint": "Already-filled and numerically sorted active hand of length 4..7; first card exactly 0, remaining cards integer 1..14, at least one ordinary topic card 1..9. No empty slot or second reserved 0 is admitted.",
+    "personality": [
+      "timid",
+      "calm",
+      "bold",
+      "reckless"
+    ],
+    "angerTimer": "Integer 0..4, explicit engine admission range.",
+    "currentTopic": "Signed 32-bit integer. Out-of-game-range integers outside 0..2 are admitted no-replacement topics, not invalid input.",
+    "rawResults": "Required dense array containing exactly one closed object {role: debate-calm-rethink-rand-bool, percent: 40, value: boolean} iff angerTimer > 0 and personality is calm; otherwise empty. The value is an already-resolved call result, never a numeric RNG draw.",
+    "inputParsingOrder": [
+      "detached-safe-JSON-data-and-resource-budgets",
+      "closed-top-level-shape",
+      "schema-and-profile",
+      "exact-policy",
+      "personality",
+      "anger-timer",
+      "signed-32-current-topic",
+      "post-fill-hand-checkpoint",
+      "raw-results-array-and-maximum-length-one",
+      "closed-raw-result-shape-role-percent-and-boolean",
+      "gate-dependent-result-count"
+    ],
+    "sourceOperationOrder": [
+      "timer-gate",
+      "resolved-personality-gate",
+      "consume-supplied-boolean-if-gated",
+      "if-true-check-topic-range",
+      "if-valid-overwrite-physical-slot-one",
+      "unconditional-final-numeric-sort"
+    ],
+    "successKeys": [
+      "ok",
+      "schemaVersion",
+      "profile",
+      "policy",
+      "evidence",
+      "hand",
+      "reason",
+      "audit"
+    ],
+    "successReasons": [
+      "timer-zero",
+      "personality-not-calm",
+      "boolean-result-false",
+      "topic-out-of-range",
+      "replacement-applied"
+    ],
+    "failureKeys": [
+      "ok",
+      "reason"
+    ],
+    "failureReasons": [
+      "unsupported-runtime",
+      "input-limit",
+      "malformed-data",
+      "unknown-field",
+      "unsupported-profile",
+      "unsupported-policy",
+      "invalid-personality",
+      "invalid-anger-timer",
+      "invalid-current-topic",
+      "invalid-hand",
+      "invalid-raw-results",
+      "invalid-raw-result",
+      "raw-result-count-mismatch"
+    ],
+    "failureSemantics": "Atomic typed failure with no partial hand, policy, evidence or audit; the input is neither mutated nor frozen.",
+    "fractionalNumbers": "Rejected as malformed-data during safe detachment, before individual field ranges are parsed.",
+    "auditInputHand": "The original supplied already-sorted checkpoint before optional overwrite.",
+    "auditBooleanResult": "Null when gated off; otherwise index 0 plus the exact role, percent and boolean, including invalid-topic cases.",
+    "auditReplacement": "Null unless assignment occurs; sourceSlot always 1, before is the original slot-1 face, after is 3/6/9. Same-face assignment remains replacement-applied with changed=false.",
+    "auditSortBefore": "After any replacement, immediately before the unconditional final sort; this is not the original inputHand when an actual face change occurs.",
+    "auditSortAfter": "The returned final hand.",
+    "auditSourceIndices": "At each final output position, the corresponding physical slot in audit.sort.before. This is not final-position-to-original-card-identity provenance through refill.",
+    "equalCardIdentity": "Equal faces use pre-final-sort physical slot ascending only for deterministic engine audit. No native Array.Sort equal-card identity guarantee is claimed.",
+    "externalRngConsumed": 0
+  },
+  "engineeringLimits": {
+    "admissionNotSourceReachability": [
+      "timer 0..4",
+      "active hand length 4..7",
+      "sorted and complete hand with exactly one reserved 0 and at least one ordinary topic",
+      "signed-32 topic integer"
+    ],
+    "runtime": "Requires the trusted Node node:util types.isProxy detector through process.getBuiltinModule; unavailable detector fails closed before input inspection.",
+    "safeData": "Closed schema, no proxies/getters/executable values, dense JSON arrays, safe integral finite numbers, no negative zero, budgets and recursively frozen detached outputs.",
+    "auditAndReasonNames": "Engine policy, not fields emitted by the source game.",
+    "manualExamples": "Paper expectations only; no runtime results, tests, validators or equivalence proof."
+  },
+  "boundaries": {
+    "fullRethink": "excluded",
+    "clearing": "excluded",
+    "fillAndTopicRepair": "excluded",
+    "deckRegeneration": "excluded",
+    "rngImplementationAndStream": "excluded",
+    "bound100MappingOrProbabilityProof": "not-established",
+    "turnEnd": "excluded",
+    "canRethink": "not-read-not-changed",
+    "personalityFallback": "excluded",
+    "sessionIntegration": false,
+    "existingSessionProfilesUnchanged": 9,
+    "dependenciesChanged": false,
+    "persistence": false,
+    "p078AndDependencies": "excluded",
+    "nativePkVanillaOrStockOriginalEquivalent": false,
+    "completeDebate": false,
+    "nativeWholeChain": "open",
+    "originalUnresolvedGroups": 43,
+    "originalHistoricalSnapshots": 45,
+    "notExecuted": [
+      "tests",
+      "compilation",
+      "typecheck",
+      "build",
+      "validators",
+      "checkers",
+      "project",
+      "candidate",
+      "source",
+      "scenario",
+      "replay"
+    ]
+  }
+}

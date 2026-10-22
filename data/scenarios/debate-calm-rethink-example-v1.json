@@ -1,0 +1,2984 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-calm-rethink-example-v1",
+  "status": "paper-only-not-executed",
+  "method": "Manually authored source-branch, card-face, and physical-slot expectations. Formatting inserts the full POLICY JSON literal into every success input; it does not execute TypeScript or calculate expected outcomes.",
+  "scope": "Standalone post-fill bonus and final numeric sort only; no clearing, refill, full rethink, TurnEnd, RNG stream or old-session execution.",
+  "runtimeAssumption": "Success and input-refusal expectations assume the required trusted proxy detector is available. Otherwise unsupported-runtime takes precedence before inspecting the input.",
+  "expectedFields": "paperExpected is a selected output projection including the complete audit, not a runtime-generated receipt or complete Success DTO. Exact policy and evidence on a success are the corresponding exported constants; no execution or runtime validation is claimed.",
+  "inputPolicy": "Each success input carries the full exact policy. Cases are independent; no case feeds another case.",
+  "refusalRecipeMeaning": "Every refusal is explicitly notDirectInput. To understand its conceptual input, copy the full input of baseSuccessCase and apply the listed replacement descriptions from left to right. Empty path means replace the entire input. Recipes are paper descriptions only and were not applied or executed.",
+  "identityMeaning": "audit.inputHand is the original checkpoint. audit.sort.before is after optional physical-slot-1 replacement. sourceIndices maps final output positions to that pre-final-sort physical-slot array, not pre-refill card identities. Equal-card ties are engine policy only.",
+  "randomnessMeaning": "rawResults contains supplied RandBool(40) boolean call results, never numeric random draws. Exactly one is consumed for positive-timer Calm even for an invalid game topic. externalRngConsumed is zero; no bound-100 mapping, probability or native-stream assertion is made.",
+  "successCases": [
+    {
+      "id": "timer-zero-timid",
+      "purpose": "Timer zero gates off before personality and consumes no result.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "timid",
+        "angerTimer": 0,
+        "currentTopic": 0,
+        "hand": [
+          0,
+          1,
+          4,
+          10
+        ],
+        "rawResults": []
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          1,
+          4,
+          10
+        ],
+        "reason": "timer-zero",
+        "audit": {
+          "inputHand": [
+            0,
+            1,
+            4,
+            10
+          ],
+          "gate": {
+            "personality": "timid",
+            "angerTimer": 0,
+            "eligible": false,
+            "reason": "timer-zero"
+          },
+          "rawResultsConsumed": 0,
+          "booleanResult": null,
+          "replacement": null,
+          "sort": {
+            "before": [
+              0,
+              1,
+              4,
+              10
+            ],
+            "after": [
+              0,
+              1,
+              4,
+              10
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "timer-zero-calm",
+      "purpose": "Calm alone is insufficient: timer zero consumes no result.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "calm",
+        "angerTimer": 0,
+        "currentTopic": 1,
+        "hand": [
+          0,
+          2,
+          5,
+          14
+        ],
+        "rawResults": []
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          2,
+          5,
+          14
+        ],
+        "reason": "timer-zero",
+        "audit": {
+          "inputHand": [
+            0,
+            2,
+            5,
+            14
+          ],
+          "gate": {
+            "personality": "calm",
+            "angerTimer": 0,
+            "eligible": false,
+            "reason": "timer-zero"
+          },
+          "rawResultsConsumed": 0,
+          "booleanResult": null,
+          "replacement": null,
+          "sort": {
+            "before": [
+              0,
+              2,
+              5,
+              14
+            ],
+            "after": [
+              0,
+              2,
+              5,
+              14
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "timer-zero-bold",
+      "purpose": "Timer-zero branch is shared by Bold; final sort is still present.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "bold",
+        "angerTimer": 0,
+        "currentTopic": 2,
+        "hand": [
+          0,
+          3,
+          6,
+          13
+        ],
+        "rawResults": []
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          3,
+          6,
+          13
+        ],
+        "reason": "timer-zero",
+        "audit": {
+          "inputHand": [
+            0,
+            3,
+            6,
+            13
+          ],
+          "gate": {
+            "personality": "bold",
+            "angerTimer": 0,
+            "eligible": false,
+            "reason": "timer-zero"
+          },
+          "rawResultsConsumed": 0,
+          "booleanResult": null,
+          "replacement": null,
+          "sort": {
+            "before": [
+              0,
+              3,
+              6,
+              13
+            ],
+            "after": [
+              0,
+              3,
+              6,
+              13
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "timer-zero-reckless-signed-min-topic",
+      "purpose": "Minimum signed-32 topic is admitted even when the timer gate prevents any boolean use.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "reckless",
+        "angerTimer": 0,
+        "currentTopic": -2147483648,
+        "hand": [
+          0,
+          4,
+          7,
+          11
+        ],
+        "rawResults": []
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          4,
+          7,
+          11
+        ],
+        "reason": "timer-zero",
+        "audit": {
+          "inputHand": [
+            0,
+            4,
+            7,
+            11
+          ],
+          "gate": {
+            "personality": "reckless",
+            "angerTimer": 0,
+            "eligible": false,
+            "reason": "timer-zero"
+          },
+          "rawResultsConsumed": 0,
+          "booleanResult": null,
+          "replacement": null,
+          "sort": {
+            "before": [
+              0,
+              4,
+              7,
+              11
+            ],
+            "after": [
+              0,
+              4,
+              7,
+              11
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "positive-timer-timid",
+      "purpose": "Positive timer does not consume a result for Timid.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "timid",
+        "angerTimer": 1,
+        "currentTopic": 0,
+        "hand": [
+          0,
+          1,
+          3,
+          12
+        ],
+        "rawResults": []
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          1,
+          3,
+          12
+        ],
+        "reason": "personality-not-calm",
+        "audit": {
+          "inputHand": [
+            0,
+            1,
+            3,
+            12
+          ],
+          "gate": {
+            "personality": "timid",
+            "angerTimer": 1,
+            "eligible": false,
+            "reason": "personality-not-calm"
+          },
+          "rawResultsConsumed": 0,
+          "booleanResult": null,
+          "replacement": null,
+          "sort": {
+            "before": [
+              0,
+              1,
+              3,
+              12
+            ],
+            "after": [
+              0,
+              1,
+              3,
+              12
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "positive-timer-bold",
+      "purpose": "Positive timer does not consume a result for Bold.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "bold",
+        "angerTimer": 4,
+        "currentTopic": 1,
+        "hand": [
+          0,
+          2,
+          7,
+          14
+        ],
+        "rawResults": []
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          2,
+          7,
+          14
+        ],
+        "reason": "personality-not-calm",
+        "audit": {
+          "inputHand": [
+            0,
+            2,
+            7,
+            14
+          ],
+          "gate": {
+            "personality": "bold",
+            "angerTimer": 4,
+            "eligible": false,
+            "reason": "personality-not-calm"
+          },
+          "rawResultsConsumed": 0,
+          "booleanResult": null,
+          "replacement": null,
+          "sort": {
+            "before": [
+              0,
+              2,
+              7,
+              14
+            ],
+            "after": [
+              0,
+              2,
+              7,
+              14
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "positive-timer-reckless",
+      "purpose": "Positive timer does not consume a result for Reckless.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "reckless",
+        "angerTimer": 1,
+        "currentTopic": 2,
+        "hand": [
+          0,
+          5,
+          6,
+          10
+        ],
+        "rawResults": []
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          5,
+          6,
+          10
+        ],
+        "reason": "personality-not-calm",
+        "audit": {
+          "inputHand": [
+            0,
+            5,
+            6,
+            10
+          ],
+          "gate": {
+            "personality": "reckless",
+            "angerTimer": 1,
+            "eligible": false,
+            "reason": "personality-not-calm"
+          },
+          "rawResultsConsumed": 0,
+          "booleanResult": null,
+          "replacement": null,
+          "sort": {
+            "before": [
+              0,
+              5,
+              6,
+              10
+            ],
+            "after": [
+              0,
+              5,
+              6,
+              10
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "positive-calm-false-topic-zero",
+      "purpose": "Topic 0 with false consumes one supplied boolean and never assigns slot 1.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "calm",
+        "angerTimer": 4,
+        "currentTopic": 0,
+        "hand": [
+          0,
+          1,
+          4,
+          10
+        ],
+        "rawResults": [
+          {
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": false
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          1,
+          4,
+          10
+        ],
+        "reason": "boolean-result-false",
+        "audit": {
+          "inputHand": [
+            0,
+            1,
+            4,
+            10
+          ],
+          "gate": {
+            "personality": "calm",
+            "angerTimer": 4,
+            "eligible": true,
+            "reason": "positive-timer-calm"
+          },
+          "rawResultsConsumed": 1,
+          "booleanResult": {
+            "index": 0,
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": false
+          },
+          "replacement": null,
+          "sort": {
+            "before": [
+              0,
+              1,
+              4,
+              10
+            ],
+            "after": [
+              0,
+              1,
+              4,
+              10
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "positive-calm-false-topic-one",
+      "purpose": "Topic 1 with false consumes one supplied boolean and preserves the checkpoint.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "calm",
+        "angerTimer": 1,
+        "currentTopic": 1,
+        "hand": [
+          0,
+          2,
+          5,
+          11
+        ],
+        "rawResults": [
+          {
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": false
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          2,
+          5,
+          11
+        ],
+        "reason": "boolean-result-false",
+        "audit": {
+          "inputHand": [
+            0,
+            2,
+            5,
+            11
+          ],
+          "gate": {
+            "personality": "calm",
+            "angerTimer": 1,
+            "eligible": true,
+            "reason": "positive-timer-calm"
+          },
+          "rawResultsConsumed": 1,
+          "booleanResult": {
+            "index": 0,
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": false
+          },
+          "replacement": null,
+          "sort": {
+            "before": [
+              0,
+              2,
+              5,
+              11
+            ],
+            "after": [
+              0,
+              2,
+              5,
+              11
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "positive-calm-false-topic-two-seven-slots",
+      "purpose": "Topic 2 false also covers maximum admitted hand length and intermediate positive timer 2.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "calm",
+        "angerTimer": 2,
+        "currentTopic": 2,
+        "hand": [
+          0,
+          1,
+          2,
+          6,
+          7,
+          11,
+          14
+        ],
+        "rawResults": [
+          {
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": false
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          1,
+          2,
+          6,
+          7,
+          11,
+          14
+        ],
+        "reason": "boolean-result-false",
+        "audit": {
+          "inputHand": [
+            0,
+            1,
+            2,
+            6,
+            7,
+            11,
+            14
+          ],
+          "gate": {
+            "personality": "calm",
+            "angerTimer": 2,
+            "eligible": true,
+            "reason": "positive-timer-calm"
+          },
+          "rawResultsConsumed": 1,
+          "booleanResult": {
+            "index": 0,
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": false
+          },
+          "replacement": null,
+          "sort": {
+            "before": [
+              0,
+              1,
+              2,
+              6,
+              7,
+              11,
+              14
+            ],
+            "after": [
+              0,
+              1,
+              2,
+              6,
+              7,
+              11,
+              14
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "positive-calm-true-topic-zero-same-face",
+      "purpose": "Assignment still applies when slot 1 already holds Story3: replacement is nonnull and changed is false.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "calm",
+        "angerTimer": 3,
+        "currentTopic": 0,
+        "hand": [
+          0,
+          3,
+          6,
+          14
+        ],
+        "rawResults": [
+          {
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": true
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          3,
+          6,
+          14
+        ],
+        "reason": "replacement-applied",
+        "audit": {
+          "inputHand": [
+            0,
+            3,
+            6,
+            14
+          ],
+          "gate": {
+            "personality": "calm",
+            "angerTimer": 3,
+            "eligible": true,
+            "reason": "positive-timer-calm"
+          },
+          "rawResultsConsumed": 1,
+          "booleanResult": {
+            "index": 0,
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": true
+          },
+          "replacement": {
+            "sourceSlot": 1,
+            "before": 3,
+            "after": 3,
+            "changed": false
+          },
+          "sort": {
+            "before": [
+              0,
+              3,
+              6,
+              14
+            ],
+            "after": [
+              0,
+              3,
+              6,
+              14
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "positive-calm-true-topic-one-moves-slot",
+      "purpose": "Physical input slot 1 becomes Logic3 before sorting; original slot 2 moves ahead of it.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "calm",
+        "angerTimer": 4,
+        "currentTopic": 1,
+        "hand": [
+          0,
+          1,
+          4,
+          7
+        ],
+        "rawResults": [
+          {
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": true
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          4,
+          6,
+          7
+        ],
+        "reason": "replacement-applied",
+        "audit": {
+          "inputHand": [
+            0,
+            1,
+            4,
+            7
+          ],
+          "gate": {
+            "personality": "calm",
+            "angerTimer": 4,
+            "eligible": true,
+            "reason": "positive-timer-calm"
+          },
+          "rawResultsConsumed": 1,
+          "booleanResult": {
+            "index": 0,
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": true
+          },
+          "replacement": {
+            "sourceSlot": 1,
+            "before": 1,
+            "after": 6,
+            "changed": true
+          },
+          "sort": {
+            "before": [
+              0,
+              6,
+              4,
+              7
+            ],
+            "after": [
+              0,
+              4,
+              6,
+              7
+            ],
+            "sourceIndices": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "positive-calm-true-topic-two-duplicate-seven",
+      "purpose": "Duplicate 3 and 9 faces keep deterministic pre-final-sort source-slot identity; the overwritten slot 1 precedes equal 9 faces from slots 5 and 6.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "calm",
+        "angerTimer": 1,
+        "currentTopic": 2,
+        "hand": [
+          0,
+          1,
+          3,
+          3,
+          6,
+          9,
+          9
+        ],
+        "rawResults": [
+          {
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": true
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          3,
+          3,
+          6,
+          9,
+          9,
+          9
+        ],
+        "reason": "replacement-applied",
+        "audit": {
+          "inputHand": [
+            0,
+            1,
+            3,
+            3,
+            6,
+            9,
+            9
+          ],
+          "gate": {
+            "personality": "calm",
+            "angerTimer": 1,
+            "eligible": true,
+            "reason": "positive-timer-calm"
+          },
+          "rawResultsConsumed": 1,
+          "booleanResult": {
+            "index": 0,
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": true
+          },
+          "replacement": {
+            "sourceSlot": 1,
+            "before": 1,
+            "after": 9,
+            "changed": true
+          },
+          "sort": {
+            "before": [
+              0,
+              9,
+              3,
+              3,
+              6,
+              9,
+              9
+            ],
+            "after": [
+              0,
+              3,
+              3,
+              6,
+              9,
+              9,
+              9
+            ],
+            "sourceIndices": [
+              0,
+              2,
+              3,
+              4,
+              1,
+              5,
+              6
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "positive-calm-true-signed-min-topic",
+      "purpose": "An invalid game topic still consumes true; range rejection occurs only after the supplied boolean was consumed.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "calm",
+        "angerTimer": 4,
+        "currentTopic": -2147483648,
+        "hand": [
+          0,
+          1,
+          4,
+          10
+        ],
+        "rawResults": [
+          {
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": true
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          1,
+          4,
+          10
+        ],
+        "reason": "topic-out-of-range",
+        "audit": {
+          "inputHand": [
+            0,
+            1,
+            4,
+            10
+          ],
+          "gate": {
+            "personality": "calm",
+            "angerTimer": 4,
+            "eligible": true,
+            "reason": "positive-timer-calm"
+          },
+          "rawResultsConsumed": 1,
+          "booleanResult": {
+            "index": 0,
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": true
+          },
+          "replacement": null,
+          "sort": {
+            "before": [
+              0,
+              1,
+              4,
+              10
+            ],
+            "after": [
+              0,
+              1,
+              4,
+              10
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "positive-calm-false-signed-max-topic",
+      "purpose": "An invalid game topic still consumes false; false short-circuits the topic-range outcome, so the reason is boolean-result-false.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "calm",
+        "angerTimer": 4,
+        "currentTopic": 2147483647,
+        "hand": [
+          0,
+          2,
+          6,
+          13
+        ],
+        "rawResults": [
+          {
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": false
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          2,
+          6,
+          13
+        ],
+        "reason": "boolean-result-false",
+        "audit": {
+          "inputHand": [
+            0,
+            2,
+            6,
+            13
+          ],
+          "gate": {
+            "personality": "calm",
+            "angerTimer": 4,
+            "eligible": true,
+            "reason": "positive-timer-calm"
+          },
+          "rawResultsConsumed": 1,
+          "booleanResult": {
+            "index": 0,
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": false
+          },
+          "replacement": null,
+          "sort": {
+            "before": [
+              0,
+              2,
+              6,
+              13
+            ],
+            "after": [
+              0,
+              2,
+              6,
+              13
+            ],
+            "sourceIndices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    },
+    {
+      "id": "positive-calm-true-topic-zero-duplicate-result",
+      "purpose": "After a changed Story3 overwrite, physical slot 2 moves earlier and the new 3 from slot 1 wins the engine-only equal-face tie over slot 3.",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "policies": {
+          "id": "debate-calm-rethink-policy-v1",
+          "profile": "debate-calm-rethink-reference-v1",
+          "checkpoint": {
+            "kind": "post-fill-already-numerically-sorted-active-hand",
+            "personality": "caller-resolved-timid-calm-bold-or-reckless",
+            "angerTimer": {
+              "minimum": 0,
+              "maximum": 4
+            },
+            "currentTopic": {
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "activeHandLength": {
+              "minimum": 4,
+              "maximum": 7
+            },
+            "firstSlot": 0,
+            "remainingCardRange": [
+              1,
+              14
+            ],
+            "minimumOrdinaryCards": 1,
+            "ordinaryCardRange": [
+              1,
+              9
+            ],
+            "bounds": "explicit-engine-checkpoint-domain-not-universal-source-reachability"
+          },
+          "bonus": {
+            "gate": "positive-anger-timer-and-calm-personality",
+            "rawResultRole": "debate-calm-rethink-rand-bool",
+            "percentArgument": 40,
+            "rawResultMeaning": "explicit-boolean-call-result-not-integer-RNG-draw",
+            "requiredResultCount": "one-iff-gate-true-even-when-topic-out-of-range-otherwise-zero",
+            "replacementGate": "required-boolean-result-true-and-topic-zero-through-two",
+            "topicCards": [
+              3,
+              6,
+              9
+            ],
+            "physicalSourceSlot": 1,
+            "sameFaceOverwrite": "applied-even-when-before-equals-after",
+            "integerRngMappingOrProbabilityProof": "not-provided"
+          },
+          "sorting": {
+            "when": "always-after-optional-physical-slot-overwrite",
+            "order": "numeric-card-code-ascending",
+            "sourceIndices": "final-position-to-pre-final-sort-physical-slot",
+            "equalCardTieBreak": "source-slot-ascending-engine-policy",
+            "nativeEqualCardIdentityGuarantee": false
+          },
+          "safety": {
+            "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+            "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+            "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+            "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+            "result": "recursively-frozen-and-detached-from-input",
+            "failure": "typed-code-only-no-partial-audit"
+          },
+          "capacity": {
+            "maxInputNodes": 1024,
+            "maxInputDepth": 10,
+            "maxInputArrayLength": 32,
+            "maxCanonicalUtf8Bytes": 16384,
+            "maxBooleanResults": 1,
+            "maxLocalSlotOverwrites": 1,
+            "finalSorts": 1,
+            "externalRandomDraws": 0
+          },
+          "boundary": {
+            "kind": "standalone-post-fill-calm-rethink-bonus",
+            "personalityResolution": "caller-supplied-not-evaluated",
+            "handClearingRefillAndDeckGeneration": "excluded",
+            "rng": "no-implementation-no-external-consumption-no-bound-100-mapping",
+            "canRethink": "not-read-not-changed",
+            "turnEnd": "excluded",
+            "sessionIntegration": false,
+            "persistence": false,
+            "legacyProfilesChanged": false
+          }
+        },
+        "personality": "calm",
+        "angerTimer": 4,
+        "currentTopic": 0,
+        "hand": [
+          0,
+          1,
+          2,
+          3,
+          6,
+          10,
+          14
+        ],
+        "rawResults": [
+          {
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": true
+          }
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "schemaVersion": 1,
+        "profile": "debate-calm-rethink-reference-v1",
+        "hand": [
+          0,
+          2,
+          3,
+          3,
+          6,
+          10,
+          14
+        ],
+        "reason": "replacement-applied",
+        "audit": {
+          "inputHand": [
+            0,
+            1,
+            2,
+            3,
+            6,
+            10,
+            14
+          ],
+          "gate": {
+            "personality": "calm",
+            "angerTimer": 4,
+            "eligible": true,
+            "reason": "positive-timer-calm"
+          },
+          "rawResultsConsumed": 1,
+          "booleanResult": {
+            "index": 0,
+            "role": "debate-calm-rethink-rand-bool",
+            "percent": 40,
+            "value": true
+          },
+          "replacement": {
+            "sourceSlot": 1,
+            "before": 1,
+            "after": 3,
+            "changed": true
+          },
+          "sort": {
+            "before": [
+              0,
+              3,
+              2,
+              3,
+              6,
+              10,
+              14
+            ],
+            "after": [
+              0,
+              2,
+              3,
+              3,
+              6,
+              10,
+              14
+            ],
+            "sourceIndices": [
+              0,
+              2,
+              1,
+              3,
+              4,
+              5,
+              6
+            ],
+            "equalCardTieBreak": "source-slot-ascending-engine-policy"
+          },
+          "externalRngConsumed": 0
+        }
+      }
+    }
+  ],
+  "refusalCases": [
+    {
+      "id": "missing-gated-result",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/rawResults",
+          "value": []
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "raw-result-count-mismatch"
+      },
+      "explanation": "Positive-timer Calm requires one result even when no replacement would ultimately be made."
+    },
+    {
+      "id": "extra-second-gated-result",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/rawResults",
+          "value": [
+            {
+              "role": "debate-calm-rethink-rand-bool",
+              "percent": 40,
+              "value": false
+            },
+            {
+              "role": "debate-calm-rethink-rand-bool",
+              "percent": 40,
+              "value": true
+            }
+          ]
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-raw-results"
+      },
+      "explanation": "Array length greater than one is rejected before gate-dependent count comparison."
+    },
+    {
+      "id": "non-calm-extra-result",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-timer-bold",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/rawResults",
+          "value": [
+            {
+              "role": "debate-calm-rethink-rand-bool",
+              "percent": 40,
+              "value": false
+            }
+          ]
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "raw-result-count-mismatch"
+      },
+      "explanation": "A well-shaped boolean is still unexpected for positive-timer non-Calm."
+    },
+    {
+      "id": "numeric-value-is-not-boolean",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/rawResults",
+          "value": [
+            {
+              "role": "debate-calm-rethink-rand-bool",
+              "percent": 40,
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-raw-result"
+      },
+      "explanation": "The supplied value must be boolean; integer 1 is neither a boolean nor a supported RNG mapping."
+    },
+    {
+      "id": "policy-same-id-but-changed-percent",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/policies/bonus/percentArgument",
+          "value": 41
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "unsupported-policy"
+      },
+      "explanation": "Matching policy id does not authorize any structural policy change."
+    },
+    {
+      "id": "unsorted-checkpoint",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/hand",
+          "value": [
+            0,
+            4,
+            1,
+            10
+          ]
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-hand"
+      },
+      "explanation": "Input must already be sorted; the final sort does not repair an invalid entry checkpoint."
+    },
+    {
+      "id": "missing-reserved-zero",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/hand",
+          "value": [
+            1,
+            2,
+            4,
+            10
+          ]
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-hand"
+      },
+      "explanation": "First slot must be the reserved Rethink code 0."
+    },
+    {
+      "id": "duplicate-reserved-zero",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/hand",
+          "value": [
+            0,
+            0,
+            4,
+            10
+          ]
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-hand"
+      },
+      "explanation": "Only the first slot may contain reserved code 0."
+    },
+    {
+      "id": "empty-source-minus-one",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/hand",
+          "value": [
+            0,
+            -1,
+            4,
+            10
+          ]
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-hand"
+      },
+      "explanation": "The source empty-slot sentinel is not an admitted post-fill card."
+    },
+    {
+      "id": "topicless-post-fill-checkpoint",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/hand",
+          "value": [
+            0,
+            10,
+            11,
+            14
+          ]
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-hand"
+      },
+      "explanation": "The admitted rethink checkpoint must contain at least one ordinary topic card 1..9."
+    },
+    {
+      "id": "hand-too-short",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/hand",
+          "value": [
+            0,
+            1,
+            4
+          ]
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-hand"
+      },
+      "explanation": "Three total active slots are outside the explicit 4..7 checkpoint domain."
+    },
+    {
+      "id": "unsupported-card-code",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/hand",
+          "value": [
+            0,
+            1,
+            4,
+            15
+          ]
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-hand"
+      },
+      "explanation": "Code 15 is outside the admitted 1..14 nonreserved card range."
+    },
+    {
+      "id": "timer-above-checkpoint-range",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/angerTimer",
+          "value": 5
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-anger-timer"
+      },
+      "explanation": "The timer admission range is integer 0..4, an engine boundary rather than a source clamp."
+    },
+    {
+      "id": "fractional-topic",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/currentTopic",
+          "value": 0.5
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "malformed-data"
+      },
+      "explanation": "Safe data detachment rejects every fractional number before field-specific signed-32 validation."
+    },
+    {
+      "id": "topic-above-signed32-range",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "/currentTopic",
+          "value": 2147483648
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "invalid-current-topic"
+      },
+      "explanation": "A safe integer outside signed 32-bit range is not an admitted topic checkpoint."
+    },
+    {
+      "id": "top-level-array-shape",
+      "notDirectInput": true,
+      "baseSuccessCase": "positive-calm-false-topic-zero",
+      "inputPatchRecipe": [
+        {
+          "operation": "replace",
+          "path": "",
+          "value": []
+        }
+      ],
+      "paperExpected": {
+        "ok": false,
+        "reason": "malformed-data"
+      },
+      "explanation": "The input root must be the closed object contract, not an array."
+    }
+  ],
+  "nonSerializedSafetyBoundaries": [
+    "Proxies, getters, executable values, symbols, sparse arrays, cycles, negative zero and nonplain objects are not represented as executable fixtures in this JSON.",
+    "Input budgets and unsupported-runtime behavior are documented engine limits; no checker, validator or runtime probe was run."
+  ],
+  "excluded": [
+    "full-CharacterRethink",
+    "hand-clearing",
+    "CharacterFillCards",
+    "topic-repair",
+    "DeckGenerate",
+    "native-RNG-stream",
+    "bound-100-mapping",
+    "canRethink",
+    "TurnEnd",
+    "session-integration",
+    "existing-nine-profiles",
+    "persistence",
+    "P078-and-dependencies",
+    "native-stock-original-PK-Vanilla-equivalence"
+  ],
+  "notExecuted": [
+    "tests",
+    "compilation",
+    "typecheck",
+    "build",
+    "validators",
+    "checkers",
+    "project",
+    "candidate",
+    "source",
+    "scenario",
+    "replay"
+  ]
+}
