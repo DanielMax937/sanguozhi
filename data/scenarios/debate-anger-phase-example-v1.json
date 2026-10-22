@@ -1,0 +1,2058 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-anger-phase-paper-examples-v1",
+  "status": "paper-only-not-executed",
+  "method": "Manual reading of the pinned source and hand-assigned integer arithmetic; no evaluator, formula, source, scenario, validator, compiler or replay was run",
+  "runtimePrecondition": "Every success and non-runtime refusal below presupposes availability of the trusted node:util.types.isProxy detector through process.getBuiltinModule; without it, unsupported-runtime takes precedence",
+  "expectedFields": "paperExpected contains selected actual result fields, including selected nested receipt fields; it is not a complete Result DTO. Array order is significant. reasoning is explanatory prose outside the result projection",
+  "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+  "sourceIdentity": "Modern C# translation only, not verified native, original, stock, PK or Vanilla behavior",
+  "refusalRecipeConvention": "Each refusal starts from the named success case input and replaces only the listed field paths. replaceFields and environmentCondition are paper notation, not evaluator input properties. Every expected failure omits state and receipts",
+  "successCases": [
+    {
+      "id": "no-entry-preserves-stale-inactive-combo",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-phase-reference-v1",
+        "policies": {
+  "id": "debate-anger-phase-bounded-two-pass-policy-v1",
+  "profile": "debate-anger-phase-reference-v1",
+  "dependencies": {
+    "entryProfile": "debate-anger-entry-reference-v1",
+    "entryPolicyId": "debate-anger-entry-single-pass-policy-v1",
+    "comboProfile": "debate-timid-combo-reference-v1",
+    "comboPolicyId": "debate-timid-combo-fresh-pending-policy-v1",
+    "composition": "invoke-existing-public-evaluators-with-their-complete-exported-policies",
+    "nestedReceipts": "preserve-full-existing-entry-and-combo-receipts"
+  },
+  "checkpoint": {
+    "characters": 2,
+    "firstTeam": [0, 1],
+    "winner": -1,
+    "initialHp": { "minimum": 1, "maximum": 1000 },
+    "intermediateHp": { "minimum": -100, "maximum": 1000 },
+    "characterFields": "anger-entry-character-fields-personality-strength-hp-stress-angerTimer-maxCardCount-hand",
+    "personality": "caller-resolved-timid-calm-bold-or-reckless",
+    "strength": { "minimum": 1, "maximum": 100 },
+    "stress": { "minimum": 0, "maximum": 100 },
+    "angerTimer": { "minimum": 0, "maximum": 4 },
+    "activeHandCapacity": { "minimum": 4, "maximum": 7 },
+    "physicalHandLength": 7,
+    "cardCode": { "minimum": -1, "maximum": 14 },
+    "combo": { "active": false, "attacker": [-1, 0, 1], "minimumCounter": 0, "maximumCounter": 7 },
+    "inactiveComboFields": "preserved-unless-timid-entry-resets-attacker-and-counter",
+    "crumbledLevels": { "length": 2, "minimum": 0, "maximum": 3 },
+    "crumbled": "two-boolean-latched-flags-not-normalized-at-entry",
+    "resolvedAttacks": { "length": 2, "index": "team", "minimum": 70, "maximum": 227 },
+    "genericOnly": true,
+    "admittedBounds": "engine-admission-policy-not-universal-source-reachability"
+  },
+  "ordering": {
+    "firstPass": ["entry-canReflect-true", "whole-pending-combo-if-active", "winner-check"],
+    "firstTerminal": "return-before-second-pass-and-before-crumble",
+    "secondPass": ["entry-canReflect-false", "whole-pending-combo-if-active", "crumble", "winner-check"],
+    "maximumPasses": 2,
+    "noCandidate": "still-check-winner-and-continue-source-sequence",
+    "comboZeroHpBreak": false,
+    "thirdPass": false,
+    "stabilizationLoop": false
+  },
+  "winner": {
+    "initialWinner": -1,
+    "order": "opponent-of-firstTeam-then-firstTeam-with-short-circuit",
+    "threshold": "hp-less-than-or-equal-to-zero",
+    "opponentTerminal": "firstTeam-wins",
+    "firstTerminalOnly": "opponent-wins",
+    "simultaneousTerminal": "firstTeam-wins",
+    "classification": "not-evaluated"
+  },
+  "crumble": {
+    "when": "only-after-second-whole-combo-and-before-second-winner-check",
+    "teamOrder": [0, 1],
+    "formula": "clamp-truncate-toward-zero-of-1000-minus-hp-divided-by-250-to-zero-through-three",
+    "changedLevel": "write-computed-level-and-set-flag-true-including-downward-change",
+    "sameLevel": "preserve-existing-flag",
+    "result": "after-flag-zero-or-after-flag-one",
+    "firstTerminal": "not-evaluated-null-receipt-preserve-input-levels-and-flags"
+  },
+  "draws": {
+    "input": "two-pass-keyed-arrays-of-caller-supplied-labeled-raw-draws",
+    "role": "debate-timid-combo-jitter",
+    "bound": 5,
+    "minimum": 0,
+    "maximum": 4,
+    "maximumPerPass": 4,
+    "validation": "detach-and-validate-both-arrays-before-any-gameplay",
+    "consumption": "delegate-exact-consumption-to-each-whole-combo-kernel",
+    "noCombo": "require-empty-corresponding-pass-array",
+    "unusedSecondPass": "require-empty-second-array-on-first-pass-terminal",
+    "offsets": "zero-based-global-consumed-index-plus-pass-and-local-draw-index",
+    "missingOrExtra": "whole-composition-atomic-failure",
+    "rngImplementation": "none",
+    "nativeStreamClaim": false
+  },
+  "audit": {
+    "snapshots": "detached-initial-final-and-each-executed-pass-before-after",
+    "passes": "one-or-two-completed-passes-with-full-entry-and-optional-combo-receipts",
+    "winnerChecks": "evaluated-hp-tests-in-short-circuit-order",
+    "crumble": "before-after-levels-flags-and-per-team-computation-or-null",
+    "draws": "pass-offsets-and-flat-consumed-transcript-with-original-pass-local-indices"
+  },
+  "safety": {
+    "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+    "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+    "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+    "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+    "result": "recursively-frozen-and-detached-from-input",
+    "failure": "typed-validation-or-pass-qualified-kernel-code-no-partial-state-or-receipt"
+  },
+  "capacity": {
+    "maxInputNodes": 4096,
+    "maxInputDepth": 16,
+    "maxInputArrayLength": 64,
+    "maxCanonicalUtf8Bytes": 65536,
+    "maxEntryCalls": 2,
+    "maxComboCalls": 2,
+    "maxWinnerChecks": 2,
+    "maxCrumbleCalls": 1,
+    "maxConsumedDraws": 8
+  },
+  "boundary": {
+    "kind": "bounded-two-pass-modern-reference-anger-phase-composition",
+    "terminalOutcome": "terminal-pending-classification",
+    "nonterminalOutcome": "turn-end-pending",
+    "canCriticalAndCriticalClosing": "excluded",
+    "turnEndAndTimerDecay": "excluded",
+    "phaseObjectDeltaStepAndView": "excluded",
+    "handRefillAndDeckRegeneration": "excluded",
+    "personResolutionAndAttackDerivation": "caller-supplied-not-evaluated",
+    "characterSpecificDamageHook": "excluded-generic-identity-assertion-only",
+    "rng": "no-implementation-no-external-consumption",
+    "campaign": false,
+    "sessionIntegration": false,
+    "persistence": false,
+    "legacyProfilesChanged": false
+  }
+},
+        "genericOnly": true,
+        "firstTeam": 0,
+        "winner": -1,
+        "characters": [
+          { "personality": "calm", "strength": 50, "hp": 1000, "stress": 99, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 1, 2, 3, 13, 14, 9] },
+          { "personality": "bold", "strength": 50, "hp": 1000, "stress": 100, "angerTimer": 2, "maxCardCount": 4, "hand": [0, 1, 2, 3, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": 1, "counter": 6 },
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "resolvedAttacks": [70, 227],
+        "passDraws": [[], []]
+      },
+      "paperExpected": {
+        "ok": true,
+        "characters": [
+          { "hp": 1000, "stress": 99, "angerTimer": 0, "hand": [0, 1, 2, 3, 13, 14, 9] },
+          { "hp": 1000, "stress": 100, "angerTimer": 2, "hand": [0, 1, 2, 3, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": 1, "counter": 6 },
+        "winner": -1,
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "outcome": "turn-end-pending",
+        "receipt": {
+          "passes": [
+            { "pass": 1, "canReflect": true, "entryReceipt": { "selectedTeam": -1, "enteredTeam": -1 }, "comboReceipt": null },
+            { "pass": 2, "canReflect": false, "entryReceipt": { "selectedTeam": -1, "enteredTeam": -1 }, "comboReceipt": null }
+          ],
+          "externalRngConsumed": 0
+        }
+      },
+      "reasoning": "Stress 99 is below threshold; full stress with timer 2 is ineligible. Neither pass removes cards, so nonempty inactive backing slots survive. Inactive attacker and counter are not normalized; no TurnEnd timer decrement occurs."
+    },
+    {
+      "id": "first-reckless-kill-skips-second-pass-and-crumble",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-phase-reference-v1",
+        "policies": {
+  "id": "debate-anger-phase-bounded-two-pass-policy-v1",
+  "profile": "debate-anger-phase-reference-v1",
+  "dependencies": {
+    "entryProfile": "debate-anger-entry-reference-v1",
+    "entryPolicyId": "debate-anger-entry-single-pass-policy-v1",
+    "comboProfile": "debate-timid-combo-reference-v1",
+    "comboPolicyId": "debate-timid-combo-fresh-pending-policy-v1",
+    "composition": "invoke-existing-public-evaluators-with-their-complete-exported-policies",
+    "nestedReceipts": "preserve-full-existing-entry-and-combo-receipts"
+  },
+  "checkpoint": {
+    "characters": 2,
+    "firstTeam": [0, 1],
+    "winner": -1,
+    "initialHp": { "minimum": 1, "maximum": 1000 },
+    "intermediateHp": { "minimum": -100, "maximum": 1000 },
+    "characterFields": "anger-entry-character-fields-personality-strength-hp-stress-angerTimer-maxCardCount-hand",
+    "personality": "caller-resolved-timid-calm-bold-or-reckless",
+    "strength": { "minimum": 1, "maximum": 100 },
+    "stress": { "minimum": 0, "maximum": 100 },
+    "angerTimer": { "minimum": 0, "maximum": 4 },
+    "activeHandCapacity": { "minimum": 4, "maximum": 7 },
+    "physicalHandLength": 7,
+    "cardCode": { "minimum": -1, "maximum": 14 },
+    "combo": { "active": false, "attacker": [-1, 0, 1], "minimumCounter": 0, "maximumCounter": 7 },
+    "inactiveComboFields": "preserved-unless-timid-entry-resets-attacker-and-counter",
+    "crumbledLevels": { "length": 2, "minimum": 0, "maximum": 3 },
+    "crumbled": "two-boolean-latched-flags-not-normalized-at-entry",
+    "resolvedAttacks": { "length": 2, "index": "team", "minimum": 70, "maximum": 227 },
+    "genericOnly": true,
+    "admittedBounds": "engine-admission-policy-not-universal-source-reachability"
+  },
+  "ordering": {
+    "firstPass": ["entry-canReflect-true", "whole-pending-combo-if-active", "winner-check"],
+    "firstTerminal": "return-before-second-pass-and-before-crumble",
+    "secondPass": ["entry-canReflect-false", "whole-pending-combo-if-active", "crumble", "winner-check"],
+    "maximumPasses": 2,
+    "noCandidate": "still-check-winner-and-continue-source-sequence",
+    "comboZeroHpBreak": false,
+    "thirdPass": false,
+    "stabilizationLoop": false
+  },
+  "winner": {
+    "initialWinner": -1,
+    "order": "opponent-of-firstTeam-then-firstTeam-with-short-circuit",
+    "threshold": "hp-less-than-or-equal-to-zero",
+    "opponentTerminal": "firstTeam-wins",
+    "firstTerminalOnly": "opponent-wins",
+    "simultaneousTerminal": "firstTeam-wins",
+    "classification": "not-evaluated"
+  },
+  "crumble": {
+    "when": "only-after-second-whole-combo-and-before-second-winner-check",
+    "teamOrder": [0, 1],
+    "formula": "clamp-truncate-toward-zero-of-1000-minus-hp-divided-by-250-to-zero-through-three",
+    "changedLevel": "write-computed-level-and-set-flag-true-including-downward-change",
+    "sameLevel": "preserve-existing-flag",
+    "result": "after-flag-zero-or-after-flag-one",
+    "firstTerminal": "not-evaluated-null-receipt-preserve-input-levels-and-flags"
+  },
+  "draws": {
+    "input": "two-pass-keyed-arrays-of-caller-supplied-labeled-raw-draws",
+    "role": "debate-timid-combo-jitter",
+    "bound": 5,
+    "minimum": 0,
+    "maximum": 4,
+    "maximumPerPass": 4,
+    "validation": "detach-and-validate-both-arrays-before-any-gameplay",
+    "consumption": "delegate-exact-consumption-to-each-whole-combo-kernel",
+    "noCombo": "require-empty-corresponding-pass-array",
+    "unusedSecondPass": "require-empty-second-array-on-first-pass-terminal",
+    "offsets": "zero-based-global-consumed-index-plus-pass-and-local-draw-index",
+    "missingOrExtra": "whole-composition-atomic-failure",
+    "rngImplementation": "none",
+    "nativeStreamClaim": false
+  },
+  "audit": {
+    "snapshots": "detached-initial-final-and-each-executed-pass-before-after",
+    "passes": "one-or-two-completed-passes-with-full-entry-and-optional-combo-receipts",
+    "winnerChecks": "evaluated-hp-tests-in-short-circuit-order",
+    "crumble": "before-after-levels-flags-and-per-team-computation-or-null",
+    "draws": "pass-offsets-and-flat-consumed-transcript-with-original-pass-local-indices"
+  },
+  "safety": {
+    "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+    "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+    "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+    "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+    "result": "recursively-frozen-and-detached-from-input",
+    "failure": "typed-validation-or-pass-qualified-kernel-code-no-partial-state-or-receipt"
+  },
+  "capacity": {
+    "maxInputNodes": 4096,
+    "maxInputDepth": 16,
+    "maxInputArrayLength": 64,
+    "maxCanonicalUtf8Bytes": 65536,
+    "maxEntryCalls": 2,
+    "maxComboCalls": 2,
+    "maxWinnerChecks": 2,
+    "maxCrumbleCalls": 1,
+    "maxConsumedDraws": 8
+  },
+  "boundary": {
+    "kind": "bounded-two-pass-modern-reference-anger-phase-composition",
+    "terminalOutcome": "terminal-pending-classification",
+    "nonterminalOutcome": "turn-end-pending",
+    "canCriticalAndCriticalClosing": "excluded",
+    "turnEndAndTimerDecay": "excluded",
+    "phaseObjectDeltaStepAndView": "excluded",
+    "handRefillAndDeckRegeneration": "excluded",
+    "personResolutionAndAttackDerivation": "caller-supplied-not-evaluated",
+    "characterSpecificDamageHook": "excluded-generic-identity-assertion-only",
+    "rng": "no-implementation-no-external-consumption",
+    "campaign": false,
+    "sessionIntegration": false,
+    "persistence": false,
+    "legacyProfilesChanged": false
+  }
+},
+        "genericOnly": true,
+        "firstTeam": 0,
+        "winner": -1,
+        "characters": [
+          { "personality": "reckless", "strength": 100, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 1, 2, 3, -1, -1, -1] },
+          { "personality": "reckless", "strength": 100, "hp": 200, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 1, 2, 3, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": -1, "counter": 5 },
+        "crumbledLevels": [2, 0],
+        "crumbled": [false, false],
+        "resolvedAttacks": [100, 100],
+        "passDraws": [[], []]
+      },
+      "paperExpected": {
+        "ok": true,
+        "characters": [ { "hp": 1000, "stress": 0, "angerTimer": 1 }, { "hp": -100, "stress": 100, "angerTimer": 0 } ],
+        "combo": { "active": false, "attacker": -1, "counter": 5 },
+        "winner": 0,
+        "crumbledLevels": [2, 0],
+        "crumbled": [false, false],
+        "outcome": "terminal-pending-classification",
+        "receipt": {
+          "passes": [ { "pass": 1, "canReflect": true, "entryReceipt": { "selectedTeam": 0, "enteredTeam": 0, "reckless": { "requestedHpDamage": 300, "requestedStressDamage": 20 } }, "comboReceipt": null } ],
+          "crumbleResult": null,
+          "winnerChecks": [ { "pass": 1, "order": [1, 0], "hp": [1000, -100], "beforeWinner": -1, "afterWinner": 0, "tests": [ { "team": 1, "hp": -100, "terminal": true } ], "reason": "opponent-hp-nonpositive", "terminal": true } ],
+          "drawAudit": { "suppliedCounts": [0, 0], "executedPasses": 1, "consumedCount": 0, "consumed": [] },
+          "externalRngConsumed": 0
+        }
+      },
+      "reasoning": "The first entry deals 200 + 100 = 300 HP damage and 20 requested stress; team 1 reaches -100. The first winner check stops before its still-eligible second entry and before any crumble update. Even the intentionally stale level 2 for healthy team 0 remains unchanged."
+    },
+    {
+      "id": "second-reckless-kill-crumble-precedes-winner",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-phase-reference-v1",
+        "policies": {
+  "id": "debate-anger-phase-bounded-two-pass-policy-v1",
+  "profile": "debate-anger-phase-reference-v1",
+  "dependencies": {
+    "entryProfile": "debate-anger-entry-reference-v1",
+    "entryPolicyId": "debate-anger-entry-single-pass-policy-v1",
+    "comboProfile": "debate-timid-combo-reference-v1",
+    "comboPolicyId": "debate-timid-combo-fresh-pending-policy-v1",
+    "composition": "invoke-existing-public-evaluators-with-their-complete-exported-policies",
+    "nestedReceipts": "preserve-full-existing-entry-and-combo-receipts"
+  },
+  "checkpoint": {
+    "characters": 2,
+    "firstTeam": [0, 1],
+    "winner": -1,
+    "initialHp": { "minimum": 1, "maximum": 1000 },
+    "intermediateHp": { "minimum": -100, "maximum": 1000 },
+    "characterFields": "anger-entry-character-fields-personality-strength-hp-stress-angerTimer-maxCardCount-hand",
+    "personality": "caller-resolved-timid-calm-bold-or-reckless",
+    "strength": { "minimum": 1, "maximum": 100 },
+    "stress": { "minimum": 0, "maximum": 100 },
+    "angerTimer": { "minimum": 0, "maximum": 4 },
+    "activeHandCapacity": { "minimum": 4, "maximum": 7 },
+    "physicalHandLength": 7,
+    "cardCode": { "minimum": -1, "maximum": 14 },
+    "combo": { "active": false, "attacker": [-1, 0, 1], "minimumCounter": 0, "maximumCounter": 7 },
+    "inactiveComboFields": "preserved-unless-timid-entry-resets-attacker-and-counter",
+    "crumbledLevels": { "length": 2, "minimum": 0, "maximum": 3 },
+    "crumbled": "two-boolean-latched-flags-not-normalized-at-entry",
+    "resolvedAttacks": { "length": 2, "index": "team", "minimum": 70, "maximum": 227 },
+    "genericOnly": true,
+    "admittedBounds": "engine-admission-policy-not-universal-source-reachability"
+  },
+  "ordering": {
+    "firstPass": ["entry-canReflect-true", "whole-pending-combo-if-active", "winner-check"],
+    "firstTerminal": "return-before-second-pass-and-before-crumble",
+    "secondPass": ["entry-canReflect-false", "whole-pending-combo-if-active", "crumble", "winner-check"],
+    "maximumPasses": 2,
+    "noCandidate": "still-check-winner-and-continue-source-sequence",
+    "comboZeroHpBreak": false,
+    "thirdPass": false,
+    "stabilizationLoop": false
+  },
+  "winner": {
+    "initialWinner": -1,
+    "order": "opponent-of-firstTeam-then-firstTeam-with-short-circuit",
+    "threshold": "hp-less-than-or-equal-to-zero",
+    "opponentTerminal": "firstTeam-wins",
+    "firstTerminalOnly": "opponent-wins",
+    "simultaneousTerminal": "firstTeam-wins",
+    "classification": "not-evaluated"
+  },
+  "crumble": {
+    "when": "only-after-second-whole-combo-and-before-second-winner-check",
+    "teamOrder": [0, 1],
+    "formula": "clamp-truncate-toward-zero-of-1000-minus-hp-divided-by-250-to-zero-through-three",
+    "changedLevel": "write-computed-level-and-set-flag-true-including-downward-change",
+    "sameLevel": "preserve-existing-flag",
+    "result": "after-flag-zero-or-after-flag-one",
+    "firstTerminal": "not-evaluated-null-receipt-preserve-input-levels-and-flags"
+  },
+  "draws": {
+    "input": "two-pass-keyed-arrays-of-caller-supplied-labeled-raw-draws",
+    "role": "debate-timid-combo-jitter",
+    "bound": 5,
+    "minimum": 0,
+    "maximum": 4,
+    "maximumPerPass": 4,
+    "validation": "detach-and-validate-both-arrays-before-any-gameplay",
+    "consumption": "delegate-exact-consumption-to-each-whole-combo-kernel",
+    "noCombo": "require-empty-corresponding-pass-array",
+    "unusedSecondPass": "require-empty-second-array-on-first-pass-terminal",
+    "offsets": "zero-based-global-consumed-index-plus-pass-and-local-draw-index",
+    "missingOrExtra": "whole-composition-atomic-failure",
+    "rngImplementation": "none",
+    "nativeStreamClaim": false
+  },
+  "audit": {
+    "snapshots": "detached-initial-final-and-each-executed-pass-before-after",
+    "passes": "one-or-two-completed-passes-with-full-entry-and-optional-combo-receipts",
+    "winnerChecks": "evaluated-hp-tests-in-short-circuit-order",
+    "crumble": "before-after-levels-flags-and-per-team-computation-or-null",
+    "draws": "pass-offsets-and-flat-consumed-transcript-with-original-pass-local-indices"
+  },
+  "safety": {
+    "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+    "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+    "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+    "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+    "result": "recursively-frozen-and-detached-from-input",
+    "failure": "typed-validation-or-pass-qualified-kernel-code-no-partial-state-or-receipt"
+  },
+  "capacity": {
+    "maxInputNodes": 4096,
+    "maxInputDepth": 16,
+    "maxInputArrayLength": 64,
+    "maxCanonicalUtf8Bytes": 65536,
+    "maxEntryCalls": 2,
+    "maxComboCalls": 2,
+    "maxWinnerChecks": 2,
+    "maxCrumbleCalls": 1,
+    "maxConsumedDraws": 8
+  },
+  "boundary": {
+    "kind": "bounded-two-pass-modern-reference-anger-phase-composition",
+    "terminalOutcome": "terminal-pending-classification",
+    "nonterminalOutcome": "turn-end-pending",
+    "canCriticalAndCriticalClosing": "excluded",
+    "turnEndAndTimerDecay": "excluded",
+    "phaseObjectDeltaStepAndView": "excluded",
+    "handRefillAndDeckRegeneration": "excluded",
+    "personResolutionAndAttackDerivation": "caller-supplied-not-evaluated",
+    "characterSpecificDamageHook": "excluded-generic-identity-assertion-only",
+    "rng": "no-implementation-no-external-consumption",
+    "campaign": false,
+    "sessionIntegration": false,
+    "persistence": false,
+    "legacyProfilesChanged": false
+  }
+},
+        "genericOnly": true,
+        "firstTeam": 0,
+        "winner": -1,
+        "characters": [
+          { "personality": "calm", "strength": 50, "hp": 200, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 1, 2, 3, -1, -1, -1] },
+          { "personality": "reckless", "strength": 100, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 1, 2, 3, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": -1, "counter": 0 },
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "resolvedAttacks": [100, 100],
+        "passDraws": [[], []]
+      },
+      "paperExpected": {
+        "ok": true,
+        "characters": [ { "hp": -100, "stress": 20, "angerTimer": 4 }, { "hp": 1000, "stress": 0, "angerTimer": 1 } ],
+        "combo": { "active": false, "attacker": -1, "counter": 0 },
+        "winner": 1,
+        "crumbledLevels": [3, 0],
+        "crumbled": [true, false],
+        "outcome": "terminal-pending-classification",
+        "receipt": {
+          "passes": [
+            { "pass": 1, "canReflect": true, "entryReceipt": { "selectedTeam": 0, "enteredTeam": 0 }, "comboReceipt": null },
+            { "pass": 2, "canReflect": false, "entryReceipt": { "selectedTeam": 1, "enteredTeam": 1, "reckless": { "requestedHpDamage": 300, "requestedStressDamage": 20 } }, "comboReceipt": null }
+          ],
+          "winnerChecks": [
+            { "pass": 1, "afterWinner": -1, "terminal": false },
+            { "pass": 2, "order": [1, 0], "hp": [-100, 1000], "beforeWinner": -1, "afterWinner": 1, "tests": [ { "team": 1, "hp": 1000, "terminal": false }, { "team": 0, "hp": -100, "terminal": true } ], "reason": "first-hp-nonpositive", "terminal": true }
+          ],
+          "crumbleResult": { "beforeLevels": [0, 0], "beforeFlags": [false, false], "afterLevels": [3, 0], "afterFlags": [true, false], "teams": [ { "team": 0, "hp": -100, "unboundedLevel": 4, "computedLevel": 3, "previousLevel": 0, "changed": true, "previousFlag": false, "afterFlag": true }, { "team": 1, "hp": 1000, "unboundedLevel": 0, "computedLevel": 0, "previousLevel": 0, "changed": false, "previousFlag": false, "afterFlag": false } ], "anyCrumbled": true },
+          "externalRngConsumed": 0
+        }
+      },
+      "reasoning": "Calm team 0 enters first without damage. Team 1 remains eligible and enters second, reducing team 0 from 200 to -100 and adding 20 stress. Crumble is calculated before the second winner check: 1100 / 250 truncates to 4, clamped to level 3. Timer 4 remains unchanged because TurnEnd is outside scope."
+    },
+    {
+      "id": "two-successful-entries-preserve-original-first-team",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-phase-reference-v1",
+        "policies": {
+  "id": "debate-anger-phase-bounded-two-pass-policy-v1",
+  "profile": "debate-anger-phase-reference-v1",
+  "dependencies": {
+    "entryProfile": "debate-anger-entry-reference-v1",
+    "entryPolicyId": "debate-anger-entry-single-pass-policy-v1",
+    "comboProfile": "debate-timid-combo-reference-v1",
+    "comboPolicyId": "debate-timid-combo-fresh-pending-policy-v1",
+    "composition": "invoke-existing-public-evaluators-with-their-complete-exported-policies",
+    "nestedReceipts": "preserve-full-existing-entry-and-combo-receipts"
+  },
+  "checkpoint": {
+    "characters": 2,
+    "firstTeam": [0, 1],
+    "winner": -1,
+    "initialHp": { "minimum": 1, "maximum": 1000 },
+    "intermediateHp": { "minimum": -100, "maximum": 1000 },
+    "characterFields": "anger-entry-character-fields-personality-strength-hp-stress-angerTimer-maxCardCount-hand",
+    "personality": "caller-resolved-timid-calm-bold-or-reckless",
+    "strength": { "minimum": 1, "maximum": 100 },
+    "stress": { "minimum": 0, "maximum": 100 },
+    "angerTimer": { "minimum": 0, "maximum": 4 },
+    "activeHandCapacity": { "minimum": 4, "maximum": 7 },
+    "physicalHandLength": 7,
+    "cardCode": { "minimum": -1, "maximum": 14 },
+    "combo": { "active": false, "attacker": [-1, 0, 1], "minimumCounter": 0, "maximumCounter": 7 },
+    "inactiveComboFields": "preserved-unless-timid-entry-resets-attacker-and-counter",
+    "crumbledLevels": { "length": 2, "minimum": 0, "maximum": 3 },
+    "crumbled": "two-boolean-latched-flags-not-normalized-at-entry",
+    "resolvedAttacks": { "length": 2, "index": "team", "minimum": 70, "maximum": 227 },
+    "genericOnly": true,
+    "admittedBounds": "engine-admission-policy-not-universal-source-reachability"
+  },
+  "ordering": {
+    "firstPass": ["entry-canReflect-true", "whole-pending-combo-if-active", "winner-check"],
+    "firstTerminal": "return-before-second-pass-and-before-crumble",
+    "secondPass": ["entry-canReflect-false", "whole-pending-combo-if-active", "crumble", "winner-check"],
+    "maximumPasses": 2,
+    "noCandidate": "still-check-winner-and-continue-source-sequence",
+    "comboZeroHpBreak": false,
+    "thirdPass": false,
+    "stabilizationLoop": false
+  },
+  "winner": {
+    "initialWinner": -1,
+    "order": "opponent-of-firstTeam-then-firstTeam-with-short-circuit",
+    "threshold": "hp-less-than-or-equal-to-zero",
+    "opponentTerminal": "firstTeam-wins",
+    "firstTerminalOnly": "opponent-wins",
+    "simultaneousTerminal": "firstTeam-wins",
+    "classification": "not-evaluated"
+  },
+  "crumble": {
+    "when": "only-after-second-whole-combo-and-before-second-winner-check",
+    "teamOrder": [0, 1],
+    "formula": "clamp-truncate-toward-zero-of-1000-minus-hp-divided-by-250-to-zero-through-three",
+    "changedLevel": "write-computed-level-and-set-flag-true-including-downward-change",
+    "sameLevel": "preserve-existing-flag",
+    "result": "after-flag-zero-or-after-flag-one",
+    "firstTerminal": "not-evaluated-null-receipt-preserve-input-levels-and-flags"
+  },
+  "draws": {
+    "input": "two-pass-keyed-arrays-of-caller-supplied-labeled-raw-draws",
+    "role": "debate-timid-combo-jitter",
+    "bound": 5,
+    "minimum": 0,
+    "maximum": 4,
+    "maximumPerPass": 4,
+    "validation": "detach-and-validate-both-arrays-before-any-gameplay",
+    "consumption": "delegate-exact-consumption-to-each-whole-combo-kernel",
+    "noCombo": "require-empty-corresponding-pass-array",
+    "unusedSecondPass": "require-empty-second-array-on-first-pass-terminal",
+    "offsets": "zero-based-global-consumed-index-plus-pass-and-local-draw-index",
+    "missingOrExtra": "whole-composition-atomic-failure",
+    "rngImplementation": "none",
+    "nativeStreamClaim": false
+  },
+  "audit": {
+    "snapshots": "detached-initial-final-and-each-executed-pass-before-after",
+    "passes": "one-or-two-completed-passes-with-full-entry-and-optional-combo-receipts",
+    "winnerChecks": "evaluated-hp-tests-in-short-circuit-order",
+    "crumble": "before-after-levels-flags-and-per-team-computation-or-null",
+    "draws": "pass-offsets-and-flat-consumed-transcript-with-original-pass-local-indices"
+  },
+  "safety": {
+    "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+    "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+    "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+    "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+    "result": "recursively-frozen-and-detached-from-input",
+    "failure": "typed-validation-or-pass-qualified-kernel-code-no-partial-state-or-receipt"
+  },
+  "capacity": {
+    "maxInputNodes": 4096,
+    "maxInputDepth": 16,
+    "maxInputArrayLength": 64,
+    "maxCanonicalUtf8Bytes": 65536,
+    "maxEntryCalls": 2,
+    "maxComboCalls": 2,
+    "maxWinnerChecks": 2,
+    "maxCrumbleCalls": 1,
+    "maxConsumedDraws": 8
+  },
+  "boundary": {
+    "kind": "bounded-two-pass-modern-reference-anger-phase-composition",
+    "terminalOutcome": "terminal-pending-classification",
+    "nonterminalOutcome": "turn-end-pending",
+    "canCriticalAndCriticalClosing": "excluded",
+    "turnEndAndTimerDecay": "excluded",
+    "phaseObjectDeltaStepAndView": "excluded",
+    "handRefillAndDeckRegeneration": "excluded",
+    "personResolutionAndAttackDerivation": "caller-supplied-not-evaluated",
+    "characterSpecificDamageHook": "excluded-generic-identity-assertion-only",
+    "rng": "no-implementation-no-external-consumption",
+    "campaign": false,
+    "sessionIntegration": false,
+    "persistence": false,
+    "legacyProfilesChanged": false
+  }
+},
+        "genericOnly": true,
+        "firstTeam": 1,
+        "winner": -1,
+        "characters": [
+          { "personality": "calm", "strength": 50, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 1, 2, 3, -1, -1, -1] },
+          { "personality": "bold", "strength": 50, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 1, 2, 3, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": 0, "counter": 7 },
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "resolvedAttacks": [100, 100],
+        "passDraws": [[], []]
+      },
+      "paperExpected": {
+        "ok": true,
+        "characters": [ { "hp": 1000, "stress": 0, "angerTimer": 4 }, { "hp": 1000, "stress": 0, "angerTimer": 4 } ],
+        "combo": { "active": false, "attacker": 0, "counter": 7 },
+        "winner": -1,
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "outcome": "turn-end-pending",
+        "receipt": {
+          "firstTeam": 1,
+          "passes": [
+            { "pass": 1, "canReflect": true, "entryReceipt": { "selectedTeam": 1, "enteredTeam": 1, "selection": { "order": [1, 0] } }, "comboReceipt": null },
+            { "pass": 2, "canReflect": false, "entryReceipt": { "selectedTeam": 0, "enteredTeam": 0, "selection": { "order": [1, 0] } }, "comboReceipt": null }
+          ],
+          "externalRngConsumed": 0
+        }
+      },
+      "reasoning": "Both start eligible, so the first pass picks team 1. Its timer then prevents reselection; the second pass still uses priority [1, 0] and picks team 0. Neither calm nor bold changes the inactive combo checkpoint."
+    },
+    {
+      "id": "first-compose-leaves-other-team-eligible",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-phase-reference-v1",
+        "policies": {
+  "id": "debate-anger-phase-bounded-two-pass-policy-v1",
+  "profile": "debate-anger-phase-reference-v1",
+  "dependencies": {
+    "entryProfile": "debate-anger-entry-reference-v1",
+    "entryPolicyId": "debate-anger-entry-single-pass-policy-v1",
+    "comboProfile": "debate-timid-combo-reference-v1",
+    "comboPolicyId": "debate-timid-combo-fresh-pending-policy-v1",
+    "composition": "invoke-existing-public-evaluators-with-their-complete-exported-policies",
+    "nestedReceipts": "preserve-full-existing-entry-and-combo-receipts"
+  },
+  "checkpoint": {
+    "characters": 2,
+    "firstTeam": [0, 1],
+    "winner": -1,
+    "initialHp": { "minimum": 1, "maximum": 1000 },
+    "intermediateHp": { "minimum": -100, "maximum": 1000 },
+    "characterFields": "anger-entry-character-fields-personality-strength-hp-stress-angerTimer-maxCardCount-hand",
+    "personality": "caller-resolved-timid-calm-bold-or-reckless",
+    "strength": { "minimum": 1, "maximum": 100 },
+    "stress": { "minimum": 0, "maximum": 100 },
+    "angerTimer": { "minimum": 0, "maximum": 4 },
+    "activeHandCapacity": { "minimum": 4, "maximum": 7 },
+    "physicalHandLength": 7,
+    "cardCode": { "minimum": -1, "maximum": 14 },
+    "combo": { "active": false, "attacker": [-1, 0, 1], "minimumCounter": 0, "maximumCounter": 7 },
+    "inactiveComboFields": "preserved-unless-timid-entry-resets-attacker-and-counter",
+    "crumbledLevels": { "length": 2, "minimum": 0, "maximum": 3 },
+    "crumbled": "two-boolean-latched-flags-not-normalized-at-entry",
+    "resolvedAttacks": { "length": 2, "index": "team", "minimum": 70, "maximum": 227 },
+    "genericOnly": true,
+    "admittedBounds": "engine-admission-policy-not-universal-source-reachability"
+  },
+  "ordering": {
+    "firstPass": ["entry-canReflect-true", "whole-pending-combo-if-active", "winner-check"],
+    "firstTerminal": "return-before-second-pass-and-before-crumble",
+    "secondPass": ["entry-canReflect-false", "whole-pending-combo-if-active", "crumble", "winner-check"],
+    "maximumPasses": 2,
+    "noCandidate": "still-check-winner-and-continue-source-sequence",
+    "comboZeroHpBreak": false,
+    "thirdPass": false,
+    "stabilizationLoop": false
+  },
+  "winner": {
+    "initialWinner": -1,
+    "order": "opponent-of-firstTeam-then-firstTeam-with-short-circuit",
+    "threshold": "hp-less-than-or-equal-to-zero",
+    "opponentTerminal": "firstTeam-wins",
+    "firstTerminalOnly": "opponent-wins",
+    "simultaneousTerminal": "firstTeam-wins",
+    "classification": "not-evaluated"
+  },
+  "crumble": {
+    "when": "only-after-second-whole-combo-and-before-second-winner-check",
+    "teamOrder": [0, 1],
+    "formula": "clamp-truncate-toward-zero-of-1000-minus-hp-divided-by-250-to-zero-through-three",
+    "changedLevel": "write-computed-level-and-set-flag-true-including-downward-change",
+    "sameLevel": "preserve-existing-flag",
+    "result": "after-flag-zero-or-after-flag-one",
+    "firstTerminal": "not-evaluated-null-receipt-preserve-input-levels-and-flags"
+  },
+  "draws": {
+    "input": "two-pass-keyed-arrays-of-caller-supplied-labeled-raw-draws",
+    "role": "debate-timid-combo-jitter",
+    "bound": 5,
+    "minimum": 0,
+    "maximum": 4,
+    "maximumPerPass": 4,
+    "validation": "detach-and-validate-both-arrays-before-any-gameplay",
+    "consumption": "delegate-exact-consumption-to-each-whole-combo-kernel",
+    "noCombo": "require-empty-corresponding-pass-array",
+    "unusedSecondPass": "require-empty-second-array-on-first-pass-terminal",
+    "offsets": "zero-based-global-consumed-index-plus-pass-and-local-draw-index",
+    "missingOrExtra": "whole-composition-atomic-failure",
+    "rngImplementation": "none",
+    "nativeStreamClaim": false
+  },
+  "audit": {
+    "snapshots": "detached-initial-final-and-each-executed-pass-before-after",
+    "passes": "one-or-two-completed-passes-with-full-entry-and-optional-combo-receipts",
+    "winnerChecks": "evaluated-hp-tests-in-short-circuit-order",
+    "crumble": "before-after-levels-flags-and-per-team-computation-or-null",
+    "draws": "pass-offsets-and-flat-consumed-transcript-with-original-pass-local-indices"
+  },
+  "safety": {
+    "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+    "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+    "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+    "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+    "result": "recursively-frozen-and-detached-from-input",
+    "failure": "typed-validation-or-pass-qualified-kernel-code-no-partial-state-or-receipt"
+  },
+  "capacity": {
+    "maxInputNodes": 4096,
+    "maxInputDepth": 16,
+    "maxInputArrayLength": 64,
+    "maxCanonicalUtf8Bytes": 65536,
+    "maxEntryCalls": 2,
+    "maxComboCalls": 2,
+    "maxWinnerChecks": 2,
+    "maxCrumbleCalls": 1,
+    "maxConsumedDraws": 8
+  },
+  "boundary": {
+    "kind": "bounded-two-pass-modern-reference-anger-phase-composition",
+    "terminalOutcome": "terminal-pending-classification",
+    "nonterminalOutcome": "turn-end-pending",
+    "canCriticalAndCriticalClosing": "excluded",
+    "turnEndAndTimerDecay": "excluded",
+    "phaseObjectDeltaStepAndView": "excluded",
+    "handRefillAndDeckRegeneration": "excluded",
+    "personResolutionAndAttackDerivation": "caller-supplied-not-evaluated",
+    "characterSpecificDamageHook": "excluded-generic-identity-assertion-only",
+    "rng": "no-implementation-no-external-consumption",
+    "campaign": false,
+    "sessionIntegration": false,
+    "persistence": false,
+    "legacyProfilesChanged": false
+  }
+},
+        "genericOnly": true,
+        "firstTeam": 0,
+        "winner": -1,
+        "characters": [
+          { "personality": "reckless", "strength": 100, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 1, 2, 3, -1, -1, -1] },
+          { "personality": "calm", "strength": 50, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 13, 2, 3, 9, 14, -1] }
+        ],
+        "combo": { "active": false, "attacker": -1, "counter": 0 },
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "resolvedAttacks": [100, 100],
+        "passDraws": [[], []]
+      },
+      "paperExpected": {
+        "ok": true,
+        "characters": [
+          { "hp": 1000, "stress": 50, "angerTimer": 0, "hand": [0, 1, 2, 3, -1, -1, -1] },
+          { "hp": 1000, "stress": 0, "angerTimer": 4, "hand": [0, 2, 3, -1, -1, -1, -1] }
+        ],
+        "winner": -1,
+        "outcome": "turn-end-pending",
+        "receipt": {
+          "passes": [
+            { "pass": 1, "canReflect": true, "entryReceipt": { "selectedTeam": 0, "enteredTeam": -1, "counter": { "card": 13, "status": "compose" } }, "comboReceipt": null },
+            { "pass": 2, "canReflect": false, "entryReceipt": { "selectedTeam": 1, "enteredTeam": 1, "counter": { "card": -1, "status": "no-eligible-counter" } }, "comboReceipt": null }
+          ],
+          "externalRngConsumed": 0
+        }
+      },
+      "reasoning": "Compose at active slot 1 reduces selected team 0 to stress 50 and suppresses its Reckless damage. Removing the counter clears nonempty inactive slots as well. Team 1 retains stress 100 and timer 0, so it is selected and enters calmly on pass two."
+    },
+    {
+      "id": "second-pass-skips-agitate-search-but-allows-compose",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-phase-reference-v1",
+        "policies": {
+  "id": "debate-anger-phase-bounded-two-pass-policy-v1",
+  "profile": "debate-anger-phase-reference-v1",
+  "dependencies": {
+    "entryProfile": "debate-anger-entry-reference-v1",
+    "entryPolicyId": "debate-anger-entry-single-pass-policy-v1",
+    "comboProfile": "debate-timid-combo-reference-v1",
+    "comboPolicyId": "debate-timid-combo-fresh-pending-policy-v1",
+    "composition": "invoke-existing-public-evaluators-with-their-complete-exported-policies",
+    "nestedReceipts": "preserve-full-existing-entry-and-combo-receipts"
+  },
+  "checkpoint": {
+    "characters": 2,
+    "firstTeam": [0, 1],
+    "winner": -1,
+    "initialHp": { "minimum": 1, "maximum": 1000 },
+    "intermediateHp": { "minimum": -100, "maximum": 1000 },
+    "characterFields": "anger-entry-character-fields-personality-strength-hp-stress-angerTimer-maxCardCount-hand",
+    "personality": "caller-resolved-timid-calm-bold-or-reckless",
+    "strength": { "minimum": 1, "maximum": 100 },
+    "stress": { "minimum": 0, "maximum": 100 },
+    "angerTimer": { "minimum": 0, "maximum": 4 },
+    "activeHandCapacity": { "minimum": 4, "maximum": 7 },
+    "physicalHandLength": 7,
+    "cardCode": { "minimum": -1, "maximum": 14 },
+    "combo": { "active": false, "attacker": [-1, 0, 1], "minimumCounter": 0, "maximumCounter": 7 },
+    "inactiveComboFields": "preserved-unless-timid-entry-resets-attacker-and-counter",
+    "crumbledLevels": { "length": 2, "minimum": 0, "maximum": 3 },
+    "crumbled": "two-boolean-latched-flags-not-normalized-at-entry",
+    "resolvedAttacks": { "length": 2, "index": "team", "minimum": 70, "maximum": 227 },
+    "genericOnly": true,
+    "admittedBounds": "engine-admission-policy-not-universal-source-reachability"
+  },
+  "ordering": {
+    "firstPass": ["entry-canReflect-true", "whole-pending-combo-if-active", "winner-check"],
+    "firstTerminal": "return-before-second-pass-and-before-crumble",
+    "secondPass": ["entry-canReflect-false", "whole-pending-combo-if-active", "crumble", "winner-check"],
+    "maximumPasses": 2,
+    "noCandidate": "still-check-winner-and-continue-source-sequence",
+    "comboZeroHpBreak": false,
+    "thirdPass": false,
+    "stabilizationLoop": false
+  },
+  "winner": {
+    "initialWinner": -1,
+    "order": "opponent-of-firstTeam-then-firstTeam-with-short-circuit",
+    "threshold": "hp-less-than-or-equal-to-zero",
+    "opponentTerminal": "firstTeam-wins",
+    "firstTerminalOnly": "opponent-wins",
+    "simultaneousTerminal": "firstTeam-wins",
+    "classification": "not-evaluated"
+  },
+  "crumble": {
+    "when": "only-after-second-whole-combo-and-before-second-winner-check",
+    "teamOrder": [0, 1],
+    "formula": "clamp-truncate-toward-zero-of-1000-minus-hp-divided-by-250-to-zero-through-three",
+    "changedLevel": "write-computed-level-and-set-flag-true-including-downward-change",
+    "sameLevel": "preserve-existing-flag",
+    "result": "after-flag-zero-or-after-flag-one",
+    "firstTerminal": "not-evaluated-null-receipt-preserve-input-levels-and-flags"
+  },
+  "draws": {
+    "input": "two-pass-keyed-arrays-of-caller-supplied-labeled-raw-draws",
+    "role": "debate-timid-combo-jitter",
+    "bound": 5,
+    "minimum": 0,
+    "maximum": 4,
+    "maximumPerPass": 4,
+    "validation": "detach-and-validate-both-arrays-before-any-gameplay",
+    "consumption": "delegate-exact-consumption-to-each-whole-combo-kernel",
+    "noCombo": "require-empty-corresponding-pass-array",
+    "unusedSecondPass": "require-empty-second-array-on-first-pass-terminal",
+    "offsets": "zero-based-global-consumed-index-plus-pass-and-local-draw-index",
+    "missingOrExtra": "whole-composition-atomic-failure",
+    "rngImplementation": "none",
+    "nativeStreamClaim": false
+  },
+  "audit": {
+    "snapshots": "detached-initial-final-and-each-executed-pass-before-after",
+    "passes": "one-or-two-completed-passes-with-full-entry-and-optional-combo-receipts",
+    "winnerChecks": "evaluated-hp-tests-in-short-circuit-order",
+    "crumble": "before-after-levels-flags-and-per-team-computation-or-null",
+    "draws": "pass-offsets-and-flat-consumed-transcript-with-original-pass-local-indices"
+  },
+  "safety": {
+    "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+    "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+    "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+    "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+    "result": "recursively-frozen-and-detached-from-input",
+    "failure": "typed-validation-or-pass-qualified-kernel-code-no-partial-state-or-receipt"
+  },
+  "capacity": {
+    "maxInputNodes": 4096,
+    "maxInputDepth": 16,
+    "maxInputArrayLength": 64,
+    "maxCanonicalUtf8Bytes": 65536,
+    "maxEntryCalls": 2,
+    "maxComboCalls": 2,
+    "maxWinnerChecks": 2,
+    "maxCrumbleCalls": 1,
+    "maxConsumedDraws": 8
+  },
+  "boundary": {
+    "kind": "bounded-two-pass-modern-reference-anger-phase-composition",
+    "terminalOutcome": "terminal-pending-classification",
+    "nonterminalOutcome": "turn-end-pending",
+    "canCriticalAndCriticalClosing": "excluded",
+    "turnEndAndTimerDecay": "excluded",
+    "phaseObjectDeltaStepAndView": "excluded",
+    "handRefillAndDeckRegeneration": "excluded",
+    "personResolutionAndAttackDerivation": "caller-supplied-not-evaluated",
+    "characterSpecificDamageHook": "excluded-generic-identity-assertion-only",
+    "rng": "no-implementation-no-external-consumption",
+    "campaign": false,
+    "sessionIntegration": false,
+    "persistence": false,
+    "legacyProfilesChanged": false
+  }
+},
+        "genericOnly": true,
+        "firstTeam": 0,
+        "winner": -1,
+        "characters": [
+          { "personality": "reckless", "strength": 100, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 14, 13, -1, -1, -1, -1] },
+          { "personality": "reckless", "strength": 100, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 13, 1, 2, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": 1, "counter": 3 },
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "resolvedAttacks": [100, 100],
+        "passDraws": [[], []]
+      },
+      "paperExpected": {
+        "ok": true,
+        "characters": [
+          { "hp": 1000, "stress": 50, "angerTimer": 0, "hand": [0, 14, -1, -1, -1, -1, -1] },
+          { "hp": 1000, "stress": 50, "angerTimer": 0, "hand": [0, 1, 2, -1, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": 1, "counter": 3 },
+        "winner": -1,
+        "outcome": "turn-end-pending",
+        "receipt": {
+          "passes": [
+            { "pass": 1, "canReflect": true, "entryReceipt": { "selectedTeam": 0, "enteredTeam": -1, "counter": { "card": 13, "status": "compose" } }, "comboReceipt": null },
+            { "pass": 2, "canReflect": false, "entryReceipt": { "selectedTeam": 1, "enteredTeam": -1, "counter": { "card": 13, "status": "compose", "searches": [ { "card": 13, "firstIndex": 2, "eligible": true } ] } }, "comboReceipt": null }
+          ],
+          "externalRngConsumed": 0
+        }
+      },
+      "reasoning": "The first Compose leaves team 1 eligible. In the second pass team 0 has both active Agitate at slot 1 and Compose at slot 2, but canReflect is false, so only Compose is searched and removed. No redirect, Reckless damage, timer update or third pass occurs."
+    },
+    {
+      "id": "timid-whole-mutating-scan-before-nonterminal-second-pass",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-phase-reference-v1",
+        "policies": {
+  "id": "debate-anger-phase-bounded-two-pass-policy-v1",
+  "profile": "debate-anger-phase-reference-v1",
+  "dependencies": {
+    "entryProfile": "debate-anger-entry-reference-v1",
+    "entryPolicyId": "debate-anger-entry-single-pass-policy-v1",
+    "comboProfile": "debate-timid-combo-reference-v1",
+    "comboPolicyId": "debate-timid-combo-fresh-pending-policy-v1",
+    "composition": "invoke-existing-public-evaluators-with-their-complete-exported-policies",
+    "nestedReceipts": "preserve-full-existing-entry-and-combo-receipts"
+  },
+  "checkpoint": {
+    "characters": 2,
+    "firstTeam": [0, 1],
+    "winner": -1,
+    "initialHp": { "minimum": 1, "maximum": 1000 },
+    "intermediateHp": { "minimum": -100, "maximum": 1000 },
+    "characterFields": "anger-entry-character-fields-personality-strength-hp-stress-angerTimer-maxCardCount-hand",
+    "personality": "caller-resolved-timid-calm-bold-or-reckless",
+    "strength": { "minimum": 1, "maximum": 100 },
+    "stress": { "minimum": 0, "maximum": 100 },
+    "angerTimer": { "minimum": 0, "maximum": 4 },
+    "activeHandCapacity": { "minimum": 4, "maximum": 7 },
+    "physicalHandLength": 7,
+    "cardCode": { "minimum": -1, "maximum": 14 },
+    "combo": { "active": false, "attacker": [-1, 0, 1], "minimumCounter": 0, "maximumCounter": 7 },
+    "inactiveComboFields": "preserved-unless-timid-entry-resets-attacker-and-counter",
+    "crumbledLevels": { "length": 2, "minimum": 0, "maximum": 3 },
+    "crumbled": "two-boolean-latched-flags-not-normalized-at-entry",
+    "resolvedAttacks": { "length": 2, "index": "team", "minimum": 70, "maximum": 227 },
+    "genericOnly": true,
+    "admittedBounds": "engine-admission-policy-not-universal-source-reachability"
+  },
+  "ordering": {
+    "firstPass": ["entry-canReflect-true", "whole-pending-combo-if-active", "winner-check"],
+    "firstTerminal": "return-before-second-pass-and-before-crumble",
+    "secondPass": ["entry-canReflect-false", "whole-pending-combo-if-active", "crumble", "winner-check"],
+    "maximumPasses": 2,
+    "noCandidate": "still-check-winner-and-continue-source-sequence",
+    "comboZeroHpBreak": false,
+    "thirdPass": false,
+    "stabilizationLoop": false
+  },
+  "winner": {
+    "initialWinner": -1,
+    "order": "opponent-of-firstTeam-then-firstTeam-with-short-circuit",
+    "threshold": "hp-less-than-or-equal-to-zero",
+    "opponentTerminal": "firstTeam-wins",
+    "firstTerminalOnly": "opponent-wins",
+    "simultaneousTerminal": "firstTeam-wins",
+    "classification": "not-evaluated"
+  },
+  "crumble": {
+    "when": "only-after-second-whole-combo-and-before-second-winner-check",
+    "teamOrder": [0, 1],
+    "formula": "clamp-truncate-toward-zero-of-1000-minus-hp-divided-by-250-to-zero-through-three",
+    "changedLevel": "write-computed-level-and-set-flag-true-including-downward-change",
+    "sameLevel": "preserve-existing-flag",
+    "result": "after-flag-zero-or-after-flag-one",
+    "firstTerminal": "not-evaluated-null-receipt-preserve-input-levels-and-flags"
+  },
+  "draws": {
+    "input": "two-pass-keyed-arrays-of-caller-supplied-labeled-raw-draws",
+    "role": "debate-timid-combo-jitter",
+    "bound": 5,
+    "minimum": 0,
+    "maximum": 4,
+    "maximumPerPass": 4,
+    "validation": "detach-and-validate-both-arrays-before-any-gameplay",
+    "consumption": "delegate-exact-consumption-to-each-whole-combo-kernel",
+    "noCombo": "require-empty-corresponding-pass-array",
+    "unusedSecondPass": "require-empty-second-array-on-first-pass-terminal",
+    "offsets": "zero-based-global-consumed-index-plus-pass-and-local-draw-index",
+    "missingOrExtra": "whole-composition-atomic-failure",
+    "rngImplementation": "none",
+    "nativeStreamClaim": false
+  },
+  "audit": {
+    "snapshots": "detached-initial-final-and-each-executed-pass-before-after",
+    "passes": "one-or-two-completed-passes-with-full-entry-and-optional-combo-receipts",
+    "winnerChecks": "evaluated-hp-tests-in-short-circuit-order",
+    "crumble": "before-after-levels-flags-and-per-team-computation-or-null",
+    "draws": "pass-offsets-and-flat-consumed-transcript-with-original-pass-local-indices"
+  },
+  "safety": {
+    "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+    "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+    "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+    "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+    "result": "recursively-frozen-and-detached-from-input",
+    "failure": "typed-validation-or-pass-qualified-kernel-code-no-partial-state-or-receipt"
+  },
+  "capacity": {
+    "maxInputNodes": 4096,
+    "maxInputDepth": 16,
+    "maxInputArrayLength": 64,
+    "maxCanonicalUtf8Bytes": 65536,
+    "maxEntryCalls": 2,
+    "maxComboCalls": 2,
+    "maxWinnerChecks": 2,
+    "maxCrumbleCalls": 1,
+    "maxConsumedDraws": 8
+  },
+  "boundary": {
+    "kind": "bounded-two-pass-modern-reference-anger-phase-composition",
+    "terminalOutcome": "terminal-pending-classification",
+    "nonterminalOutcome": "turn-end-pending",
+    "canCriticalAndCriticalClosing": "excluded",
+    "turnEndAndTimerDecay": "excluded",
+    "phaseObjectDeltaStepAndView": "excluded",
+    "handRefillAndDeckRegeneration": "excluded",
+    "personResolutionAndAttackDerivation": "caller-supplied-not-evaluated",
+    "characterSpecificDamageHook": "excluded-generic-identity-assertion-only",
+    "rng": "no-implementation-no-external-consumption",
+    "campaign": false,
+    "sessionIntegration": false,
+    "persistence": false,
+    "legacyProfilesChanged": false
+  }
+},
+        "genericOnly": true,
+        "firstTeam": 0,
+        "winner": -1,
+        "characters": [
+          { "personality": "timid", "strength": 50, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 7, "hand": [1, 2, 3, 4, 5, 6, 7] },
+          { "personality": "calm", "strength": 50, "hp": 1000, "stress": 0, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 1, 2, 3, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": 1, "counter": 7 },
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "resolvedAttacks": [100, 70],
+        "passDraws": [
+          [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 } ],
+          []
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "characters": [
+          { "hp": 1000, "stress": 0, "angerTimer": 1, "hand": [2, 4, 6, -1, -1, -1, -1] },
+          { "hp": 450, "stress": 35, "angerTimer": 0 }
+        ],
+        "combo": { "active": false, "attacker": 0, "counter": 4 },
+        "winner": -1,
+        "crumbledLevels": [0, 2],
+        "crumbled": [false, true],
+        "outcome": "turn-end-pending",
+        "receipt": {
+          "passes": [
+            { "pass": 1, "canReflect": true, "entryReceipt": { "selectedTeam": 0, "enteredTeam": 0 }, "comboReceipt": { "attackerTeam": 0, "resolvedAttack": 100, "hits": [
+              { "physicalSlot": 0, "originalSlot": 0, "card": 1, "drawIndex": 0, "requestedHpDamage": 100, "requestedStressDamage": 6 },
+              { "physicalSlot": 1, "originalSlot": 2, "card": 3, "drawIndex": 1, "requestedHpDamage": 200, "requestedStressDamage": 13 },
+              { "physicalSlot": 2, "originalSlot": 4, "card": 5, "drawIndex": 2, "requestedHpDamage": 150, "requestedStressDamage": 10 },
+              { "physicalSlot": 3, "originalSlot": 6, "card": 7, "drawIndex": 3, "requestedHpDamage": 100, "requestedStressDamage": 6 }
+            ], "comboTransition": { "completed": true, "hitCount": 4 } } },
+            { "pass": 2, "canReflect": false, "entryReceipt": { "selectedTeam": -1, "enteredTeam": -1 }, "comboReceipt": null }
+          ],
+          "externalRngConsumed": 0
+        }
+      },
+      "reasoning": "Reading the current hand at increasing slots hits original slots 0, 2, 4 and 6. The four manually assigned damages are 100, 200, 150 and 100; stress increments are 6, 13, 10 and 6. Total damage 550 leaves HP 450 and stress 35. Only after all four hits does the winner check allow the second no-entry pass and crumble to level 2."
+    },
+    {
+      "id": "lethal-timid-completes-all-hits-before-first-winner",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-phase-reference-v1",
+        "policies": {
+  "id": "debate-anger-phase-bounded-two-pass-policy-v1",
+  "profile": "debate-anger-phase-reference-v1",
+  "dependencies": {
+    "entryProfile": "debate-anger-entry-reference-v1",
+    "entryPolicyId": "debate-anger-entry-single-pass-policy-v1",
+    "comboProfile": "debate-timid-combo-reference-v1",
+    "comboPolicyId": "debate-timid-combo-fresh-pending-policy-v1",
+    "composition": "invoke-existing-public-evaluators-with-their-complete-exported-policies",
+    "nestedReceipts": "preserve-full-existing-entry-and-combo-receipts"
+  },
+  "checkpoint": {
+    "characters": 2,
+    "firstTeam": [0, 1],
+    "winner": -1,
+    "initialHp": { "minimum": 1, "maximum": 1000 },
+    "intermediateHp": { "minimum": -100, "maximum": 1000 },
+    "characterFields": "anger-entry-character-fields-personality-strength-hp-stress-angerTimer-maxCardCount-hand",
+    "personality": "caller-resolved-timid-calm-bold-or-reckless",
+    "strength": { "minimum": 1, "maximum": 100 },
+    "stress": { "minimum": 0, "maximum": 100 },
+    "angerTimer": { "minimum": 0, "maximum": 4 },
+    "activeHandCapacity": { "minimum": 4, "maximum": 7 },
+    "physicalHandLength": 7,
+    "cardCode": { "minimum": -1, "maximum": 14 },
+    "combo": { "active": false, "attacker": [-1, 0, 1], "minimumCounter": 0, "maximumCounter": 7 },
+    "inactiveComboFields": "preserved-unless-timid-entry-resets-attacker-and-counter",
+    "crumbledLevels": { "length": 2, "minimum": 0, "maximum": 3 },
+    "crumbled": "two-boolean-latched-flags-not-normalized-at-entry",
+    "resolvedAttacks": { "length": 2, "index": "team", "minimum": 70, "maximum": 227 },
+    "genericOnly": true,
+    "admittedBounds": "engine-admission-policy-not-universal-source-reachability"
+  },
+  "ordering": {
+    "firstPass": ["entry-canReflect-true", "whole-pending-combo-if-active", "winner-check"],
+    "firstTerminal": "return-before-second-pass-and-before-crumble",
+    "secondPass": ["entry-canReflect-false", "whole-pending-combo-if-active", "crumble", "winner-check"],
+    "maximumPasses": 2,
+    "noCandidate": "still-check-winner-and-continue-source-sequence",
+    "comboZeroHpBreak": false,
+    "thirdPass": false,
+    "stabilizationLoop": false
+  },
+  "winner": {
+    "initialWinner": -1,
+    "order": "opponent-of-firstTeam-then-firstTeam-with-short-circuit",
+    "threshold": "hp-less-than-or-equal-to-zero",
+    "opponentTerminal": "firstTeam-wins",
+    "firstTerminalOnly": "opponent-wins",
+    "simultaneousTerminal": "firstTeam-wins",
+    "classification": "not-evaluated"
+  },
+  "crumble": {
+    "when": "only-after-second-whole-combo-and-before-second-winner-check",
+    "teamOrder": [0, 1],
+    "formula": "clamp-truncate-toward-zero-of-1000-minus-hp-divided-by-250-to-zero-through-three",
+    "changedLevel": "write-computed-level-and-set-flag-true-including-downward-change",
+    "sameLevel": "preserve-existing-flag",
+    "result": "after-flag-zero-or-after-flag-one",
+    "firstTerminal": "not-evaluated-null-receipt-preserve-input-levels-and-flags"
+  },
+  "draws": {
+    "input": "two-pass-keyed-arrays-of-caller-supplied-labeled-raw-draws",
+    "role": "debate-timid-combo-jitter",
+    "bound": 5,
+    "minimum": 0,
+    "maximum": 4,
+    "maximumPerPass": 4,
+    "validation": "detach-and-validate-both-arrays-before-any-gameplay",
+    "consumption": "delegate-exact-consumption-to-each-whole-combo-kernel",
+    "noCombo": "require-empty-corresponding-pass-array",
+    "unusedSecondPass": "require-empty-second-array-on-first-pass-terminal",
+    "offsets": "zero-based-global-consumed-index-plus-pass-and-local-draw-index",
+    "missingOrExtra": "whole-composition-atomic-failure",
+    "rngImplementation": "none",
+    "nativeStreamClaim": false
+  },
+  "audit": {
+    "snapshots": "detached-initial-final-and-each-executed-pass-before-after",
+    "passes": "one-or-two-completed-passes-with-full-entry-and-optional-combo-receipts",
+    "winnerChecks": "evaluated-hp-tests-in-short-circuit-order",
+    "crumble": "before-after-levels-flags-and-per-team-computation-or-null",
+    "draws": "pass-offsets-and-flat-consumed-transcript-with-original-pass-local-indices"
+  },
+  "safety": {
+    "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+    "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+    "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+    "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+    "result": "recursively-frozen-and-detached-from-input",
+    "failure": "typed-validation-or-pass-qualified-kernel-code-no-partial-state-or-receipt"
+  },
+  "capacity": {
+    "maxInputNodes": 4096,
+    "maxInputDepth": 16,
+    "maxInputArrayLength": 64,
+    "maxCanonicalUtf8Bytes": 65536,
+    "maxEntryCalls": 2,
+    "maxComboCalls": 2,
+    "maxWinnerChecks": 2,
+    "maxCrumbleCalls": 1,
+    "maxConsumedDraws": 8
+  },
+  "boundary": {
+    "kind": "bounded-two-pass-modern-reference-anger-phase-composition",
+    "terminalOutcome": "terminal-pending-classification",
+    "nonterminalOutcome": "turn-end-pending",
+    "canCriticalAndCriticalClosing": "excluded",
+    "turnEndAndTimerDecay": "excluded",
+    "phaseObjectDeltaStepAndView": "excluded",
+    "handRefillAndDeckRegeneration": "excluded",
+    "personResolutionAndAttackDerivation": "caller-supplied-not-evaluated",
+    "characterSpecificDamageHook": "excluded-generic-identity-assertion-only",
+    "rng": "no-implementation-no-external-consumption",
+    "campaign": false,
+    "sessionIntegration": false,
+    "persistence": false,
+    "legacyProfilesChanged": false
+  }
+},
+        "genericOnly": true,
+        "firstTeam": 0,
+        "winner": -1,
+        "characters": [
+          { "personality": "timid", "strength": 50, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 7, "hand": [1, 2, 3, 4, 5, 6, 7] },
+          { "personality": "calm", "strength": 50, "hp": 250, "stress": 0, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 1, 2, 3, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": -1, "counter": 0 },
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "resolvedAttacks": [100, 70],
+        "passDraws": [
+          [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 } ],
+          []
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "characters": [
+          { "hp": 1000, "stress": 0, "angerTimer": 1, "hand": [2, 4, 6, -1, -1, -1, -1] },
+          { "hp": -100, "stress": 35, "angerTimer": 0 }
+        ],
+        "combo": { "active": false, "attacker": 0, "counter": 4 },
+        "winner": 0,
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "outcome": "terminal-pending-classification",
+        "receipt": {
+          "passes": [ { "pass": 1, "canReflect": true, "comboReceipt": { "hits": [
+            { "requestedHpDamage": 100, "hp": { "beforeHp": 250, "afterHp": 150, "actualHpDelta": -100 } },
+            { "requestedHpDamage": 200, "hp": { "beforeHp": 150, "afterHp": -50, "actualHpDelta": -200 } },
+            { "requestedHpDamage": 150, "hp": { "beforeHp": -50, "afterHp": -100, "actualHpDelta": -50 } },
+            { "requestedHpDamage": 100, "hp": { "beforeHp": -100, "afterHp": -100, "actualHpDelta": 0 } }
+          ], "comboTransition": { "completed": true, "hitCount": 4 } } } ],
+          "crumbleResult": null,
+          "externalRngConsumed": 0
+        }
+      },
+      "reasoning": "The second hit is lethal, but the whole source loop still takes the third and fourth draws, removes their cards and reaches counter 4. Stress uses each requested damage even when the HP floor reduces actual loss. First-pass victory then skips pass two and all crumble updates."
+    },
+    {
+      "id": "two-timid-passes-keep-team-attacks-and-draw-order-distinct",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-phase-reference-v1",
+        "policies": {
+  "id": "debate-anger-phase-bounded-two-pass-policy-v1",
+  "profile": "debate-anger-phase-reference-v1",
+  "dependencies": {
+    "entryProfile": "debate-anger-entry-reference-v1",
+    "entryPolicyId": "debate-anger-entry-single-pass-policy-v1",
+    "comboProfile": "debate-timid-combo-reference-v1",
+    "comboPolicyId": "debate-timid-combo-fresh-pending-policy-v1",
+    "composition": "invoke-existing-public-evaluators-with-their-complete-exported-policies",
+    "nestedReceipts": "preserve-full-existing-entry-and-combo-receipts"
+  },
+  "checkpoint": {
+    "characters": 2,
+    "firstTeam": [0, 1],
+    "winner": -1,
+    "initialHp": { "minimum": 1, "maximum": 1000 },
+    "intermediateHp": { "minimum": -100, "maximum": 1000 },
+    "characterFields": "anger-entry-character-fields-personality-strength-hp-stress-angerTimer-maxCardCount-hand",
+    "personality": "caller-resolved-timid-calm-bold-or-reckless",
+    "strength": { "minimum": 1, "maximum": 100 },
+    "stress": { "minimum": 0, "maximum": 100 },
+    "angerTimer": { "minimum": 0, "maximum": 4 },
+    "activeHandCapacity": { "minimum": 4, "maximum": 7 },
+    "physicalHandLength": 7,
+    "cardCode": { "minimum": -1, "maximum": 14 },
+    "combo": { "active": false, "attacker": [-1, 0, 1], "minimumCounter": 0, "maximumCounter": 7 },
+    "inactiveComboFields": "preserved-unless-timid-entry-resets-attacker-and-counter",
+    "crumbledLevels": { "length": 2, "minimum": 0, "maximum": 3 },
+    "crumbled": "two-boolean-latched-flags-not-normalized-at-entry",
+    "resolvedAttacks": { "length": 2, "index": "team", "minimum": 70, "maximum": 227 },
+    "genericOnly": true,
+    "admittedBounds": "engine-admission-policy-not-universal-source-reachability"
+  },
+  "ordering": {
+    "firstPass": ["entry-canReflect-true", "whole-pending-combo-if-active", "winner-check"],
+    "firstTerminal": "return-before-second-pass-and-before-crumble",
+    "secondPass": ["entry-canReflect-false", "whole-pending-combo-if-active", "crumble", "winner-check"],
+    "maximumPasses": 2,
+    "noCandidate": "still-check-winner-and-continue-source-sequence",
+    "comboZeroHpBreak": false,
+    "thirdPass": false,
+    "stabilizationLoop": false
+  },
+  "winner": {
+    "initialWinner": -1,
+    "order": "opponent-of-firstTeam-then-firstTeam-with-short-circuit",
+    "threshold": "hp-less-than-or-equal-to-zero",
+    "opponentTerminal": "firstTeam-wins",
+    "firstTerminalOnly": "opponent-wins",
+    "simultaneousTerminal": "firstTeam-wins",
+    "classification": "not-evaluated"
+  },
+  "crumble": {
+    "when": "only-after-second-whole-combo-and-before-second-winner-check",
+    "teamOrder": [0, 1],
+    "formula": "clamp-truncate-toward-zero-of-1000-minus-hp-divided-by-250-to-zero-through-three",
+    "changedLevel": "write-computed-level-and-set-flag-true-including-downward-change",
+    "sameLevel": "preserve-existing-flag",
+    "result": "after-flag-zero-or-after-flag-one",
+    "firstTerminal": "not-evaluated-null-receipt-preserve-input-levels-and-flags"
+  },
+  "draws": {
+    "input": "two-pass-keyed-arrays-of-caller-supplied-labeled-raw-draws",
+    "role": "debate-timid-combo-jitter",
+    "bound": 5,
+    "minimum": 0,
+    "maximum": 4,
+    "maximumPerPass": 4,
+    "validation": "detach-and-validate-both-arrays-before-any-gameplay",
+    "consumption": "delegate-exact-consumption-to-each-whole-combo-kernel",
+    "noCombo": "require-empty-corresponding-pass-array",
+    "unusedSecondPass": "require-empty-second-array-on-first-pass-terminal",
+    "offsets": "zero-based-global-consumed-index-plus-pass-and-local-draw-index",
+    "missingOrExtra": "whole-composition-atomic-failure",
+    "rngImplementation": "none",
+    "nativeStreamClaim": false
+  },
+  "audit": {
+    "snapshots": "detached-initial-final-and-each-executed-pass-before-after",
+    "passes": "one-or-two-completed-passes-with-full-entry-and-optional-combo-receipts",
+    "winnerChecks": "evaluated-hp-tests-in-short-circuit-order",
+    "crumble": "before-after-levels-flags-and-per-team-computation-or-null",
+    "draws": "pass-offsets-and-flat-consumed-transcript-with-original-pass-local-indices"
+  },
+  "safety": {
+    "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+    "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+    "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+    "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+    "result": "recursively-frozen-and-detached-from-input",
+    "failure": "typed-validation-or-pass-qualified-kernel-code-no-partial-state-or-receipt"
+  },
+  "capacity": {
+    "maxInputNodes": 4096,
+    "maxInputDepth": 16,
+    "maxInputArrayLength": 64,
+    "maxCanonicalUtf8Bytes": 65536,
+    "maxEntryCalls": 2,
+    "maxComboCalls": 2,
+    "maxWinnerChecks": 2,
+    "maxCrumbleCalls": 1,
+    "maxConsumedDraws": 8
+  },
+  "boundary": {
+    "kind": "bounded-two-pass-modern-reference-anger-phase-composition",
+    "terminalOutcome": "terminal-pending-classification",
+    "nonterminalOutcome": "turn-end-pending",
+    "canCriticalAndCriticalClosing": "excluded",
+    "turnEndAndTimerDecay": "excluded",
+    "phaseObjectDeltaStepAndView": "excluded",
+    "handRefillAndDeckRegeneration": "excluded",
+    "personResolutionAndAttackDerivation": "caller-supplied-not-evaluated",
+    "characterSpecificDamageHook": "excluded-generic-identity-assertion-only",
+    "rng": "no-implementation-no-external-consumption",
+    "campaign": false,
+    "sessionIntegration": false,
+    "persistence": false,
+    "legacyProfilesChanged": false
+  }
+},
+        "genericOnly": true,
+        "firstTeam": 0,
+        "winner": -1,
+        "characters": [
+          { "personality": "timid", "strength": 50, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [1, 2, 3, 4, -1, -1, -1] },
+          { "personality": "timid", "strength": 50, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [1, 2, 3, 4, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": -1, "counter": 0 },
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "resolvedAttacks": [100, 70],
+        "passDraws": [
+          [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 1 } ],
+          [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 2 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 3 } ]
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "characters": [
+          { "hp": 782, "stress": 13, "angerTimer": 1, "hand": [2, 4, -1, -1, -1, -1, -1] },
+          { "hp": 698, "stress": 0, "angerTimer": 1, "hand": [2, 4, -1, -1, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": 1, "counter": 2 },
+        "winner": -1,
+        "crumbledLevels": [0, 1],
+        "crumbled": [false, true],
+        "outcome": "turn-end-pending",
+        "receipt": {
+          "passes": [
+            { "pass": 1, "canReflect": true, "drawAudit": { "pass": 1, "globalStartIndex": 0, "globalEndIndexExclusive": 2, "suppliedCount": 2, "consumedCount": 2 }, "comboReceipt": { "attackerTeam": 0, "resolvedAttack": 100, "hits": [ { "drawIndex": 0, "requestedHpDamage": 100, "requestedStressDamage": 6 }, { "drawIndex": 1, "requestedHpDamage": 202, "requestedStressDamage": 13 } ] } },
+            { "pass": 2, "canReflect": false, "drawAudit": { "pass": 2, "globalStartIndex": 2, "globalEndIndexExclusive": 4, "suppliedCount": 2, "consumedCount": 2 }, "comboReceipt": { "attackerTeam": 1, "resolvedAttack": 70, "hits": [ { "drawIndex": 0, "requestedHpDamage": 72, "requestedStressDamage": 4 }, { "drawIndex": 1, "requestedHpDamage": 146, "requestedStressDamage": 9 } ] } }
+          ],
+          "drawAudit": { "suppliedCounts": [2, 2], "executedPasses": 2, "consumedCount": 4, "consumed": [
+            { "globalIndex": 0, "pass": 1, "passDrawIndex": 0, "draw": { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 } },
+            { "globalIndex": 1, "pass": 1, "passDrawIndex": 1, "draw": { "role": "debate-timid-combo-jitter", "bound": 5, "value": 1 } },
+            { "globalIndex": 2, "pass": 2, "passDrawIndex": 0, "draw": { "role": "debate-timid-combo-jitter", "bound": 5, "value": 2 } },
+            { "globalIndex": 3, "pass": 2, "passDrawIndex": 1, "draw": { "role": "debate-timid-combo-jitter", "bound": 5, "value": 3 } }
+          ] },
+          "externalRngConsumed": 0
+        }
+      },
+      "reasoning": "Pass one hits cards 1 and 3 with attack 100 and jitter 0, 1, totaling 302; team 1 stays at full stress until its own entry resets it. Pass two uses team 1 attack 70 and its own jitter 2, 3, totaling 218 and adding 4 + 9 stress to team 0. Nested draw indexes stay local at 0, 1 in each component receipt. The outer offsets are recorded separately."
+    },
+    {
+      "id": "two-timid-passes-reach-eight-draw-bound",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-phase-reference-v1",
+        "policies": {
+  "id": "debate-anger-phase-bounded-two-pass-policy-v1",
+  "profile": "debate-anger-phase-reference-v1",
+  "dependencies": {
+    "entryProfile": "debate-anger-entry-reference-v1",
+    "entryPolicyId": "debate-anger-entry-single-pass-policy-v1",
+    "comboProfile": "debate-timid-combo-reference-v1",
+    "comboPolicyId": "debate-timid-combo-fresh-pending-policy-v1",
+    "composition": "invoke-existing-public-evaluators-with-their-complete-exported-policies",
+    "nestedReceipts": "preserve-full-existing-entry-and-combo-receipts"
+  },
+  "checkpoint": {
+    "characters": 2,
+    "firstTeam": [0, 1],
+    "winner": -1,
+    "initialHp": { "minimum": 1, "maximum": 1000 },
+    "intermediateHp": { "minimum": -100, "maximum": 1000 },
+    "characterFields": "anger-entry-character-fields-personality-strength-hp-stress-angerTimer-maxCardCount-hand",
+    "personality": "caller-resolved-timid-calm-bold-or-reckless",
+    "strength": { "minimum": 1, "maximum": 100 },
+    "stress": { "minimum": 0, "maximum": 100 },
+    "angerTimer": { "minimum": 0, "maximum": 4 },
+    "activeHandCapacity": { "minimum": 4, "maximum": 7 },
+    "physicalHandLength": 7,
+    "cardCode": { "minimum": -1, "maximum": 14 },
+    "combo": { "active": false, "attacker": [-1, 0, 1], "minimumCounter": 0, "maximumCounter": 7 },
+    "inactiveComboFields": "preserved-unless-timid-entry-resets-attacker-and-counter",
+    "crumbledLevels": { "length": 2, "minimum": 0, "maximum": 3 },
+    "crumbled": "two-boolean-latched-flags-not-normalized-at-entry",
+    "resolvedAttacks": { "length": 2, "index": "team", "minimum": 70, "maximum": 227 },
+    "genericOnly": true,
+    "admittedBounds": "engine-admission-policy-not-universal-source-reachability"
+  },
+  "ordering": {
+    "firstPass": ["entry-canReflect-true", "whole-pending-combo-if-active", "winner-check"],
+    "firstTerminal": "return-before-second-pass-and-before-crumble",
+    "secondPass": ["entry-canReflect-false", "whole-pending-combo-if-active", "crumble", "winner-check"],
+    "maximumPasses": 2,
+    "noCandidate": "still-check-winner-and-continue-source-sequence",
+    "comboZeroHpBreak": false,
+    "thirdPass": false,
+    "stabilizationLoop": false
+  },
+  "winner": {
+    "initialWinner": -1,
+    "order": "opponent-of-firstTeam-then-firstTeam-with-short-circuit",
+    "threshold": "hp-less-than-or-equal-to-zero",
+    "opponentTerminal": "firstTeam-wins",
+    "firstTerminalOnly": "opponent-wins",
+    "simultaneousTerminal": "firstTeam-wins",
+    "classification": "not-evaluated"
+  },
+  "crumble": {
+    "when": "only-after-second-whole-combo-and-before-second-winner-check",
+    "teamOrder": [0, 1],
+    "formula": "clamp-truncate-toward-zero-of-1000-minus-hp-divided-by-250-to-zero-through-three",
+    "changedLevel": "write-computed-level-and-set-flag-true-including-downward-change",
+    "sameLevel": "preserve-existing-flag",
+    "result": "after-flag-zero-or-after-flag-one",
+    "firstTerminal": "not-evaluated-null-receipt-preserve-input-levels-and-flags"
+  },
+  "draws": {
+    "input": "two-pass-keyed-arrays-of-caller-supplied-labeled-raw-draws",
+    "role": "debate-timid-combo-jitter",
+    "bound": 5,
+    "minimum": 0,
+    "maximum": 4,
+    "maximumPerPass": 4,
+    "validation": "detach-and-validate-both-arrays-before-any-gameplay",
+    "consumption": "delegate-exact-consumption-to-each-whole-combo-kernel",
+    "noCombo": "require-empty-corresponding-pass-array",
+    "unusedSecondPass": "require-empty-second-array-on-first-pass-terminal",
+    "offsets": "zero-based-global-consumed-index-plus-pass-and-local-draw-index",
+    "missingOrExtra": "whole-composition-atomic-failure",
+    "rngImplementation": "none",
+    "nativeStreamClaim": false
+  },
+  "audit": {
+    "snapshots": "detached-initial-final-and-each-executed-pass-before-after",
+    "passes": "one-or-two-completed-passes-with-full-entry-and-optional-combo-receipts",
+    "winnerChecks": "evaluated-hp-tests-in-short-circuit-order",
+    "crumble": "before-after-levels-flags-and-per-team-computation-or-null",
+    "draws": "pass-offsets-and-flat-consumed-transcript-with-original-pass-local-indices"
+  },
+  "safety": {
+    "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+    "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+    "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+    "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+    "result": "recursively-frozen-and-detached-from-input",
+    "failure": "typed-validation-or-pass-qualified-kernel-code-no-partial-state-or-receipt"
+  },
+  "capacity": {
+    "maxInputNodes": 4096,
+    "maxInputDepth": 16,
+    "maxInputArrayLength": 64,
+    "maxCanonicalUtf8Bytes": 65536,
+    "maxEntryCalls": 2,
+    "maxComboCalls": 2,
+    "maxWinnerChecks": 2,
+    "maxCrumbleCalls": 1,
+    "maxConsumedDraws": 8
+  },
+  "boundary": {
+    "kind": "bounded-two-pass-modern-reference-anger-phase-composition",
+    "terminalOutcome": "terminal-pending-classification",
+    "nonterminalOutcome": "turn-end-pending",
+    "canCriticalAndCriticalClosing": "excluded",
+    "turnEndAndTimerDecay": "excluded",
+    "phaseObjectDeltaStepAndView": "excluded",
+    "handRefillAndDeckRegeneration": "excluded",
+    "personResolutionAndAttackDerivation": "caller-supplied-not-evaluated",
+    "characterSpecificDamageHook": "excluded-generic-identity-assertion-only",
+    "rng": "no-implementation-no-external-consumption",
+    "campaign": false,
+    "sessionIntegration": false,
+    "persistence": false,
+    "legacyProfilesChanged": false
+  }
+},
+        "genericOnly": true,
+        "firstTeam": 0,
+        "winner": -1,
+        "characters": [
+          { "personality": "timid", "strength": 50, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 7, "hand": [1, 1, 1, 1, 1, 1, 1] },
+          { "personality": "timid", "strength": 50, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 7, "hand": [1, 1, 1, 1, 1, 1, 1] }
+        ],
+        "combo": { "active": false, "attacker": -1, "counter": 0 },
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "resolvedAttacks": [70, 70],
+        "passDraws": [
+          [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 } ],
+          [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 } ]
+        ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "characters": [
+          { "hp": 720, "stress": 16, "angerTimer": 1, "hand": [1, 1, 1, -1, -1, -1, -1] },
+          { "hp": 720, "stress": 0, "angerTimer": 1, "hand": [1, 1, 1, -1, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": 1, "counter": 4 },
+        "winner": -1,
+        "crumbledLevels": [1, 1],
+        "crumbled": [true, true],
+        "outcome": "turn-end-pending",
+        "receipt": {
+          "passes": [
+            { "pass": 1, "canReflect": true, "drawAudit": { "pass": 1, "globalStartIndex": 0, "globalEndIndexExclusive": 4, "suppliedCount": 4, "consumedCount": 4 }, "comboReceipt": { "attackerTeam": 0, "comboTransition": { "completed": true, "hitCount": 4 }, "suppliedRawDrawCount": 4 } },
+            { "pass": 2, "canReflect": false, "drawAudit": { "pass": 2, "globalStartIndex": 4, "globalEndIndexExclusive": 8, "suppliedCount": 4, "consumedCount": 4 }, "comboReceipt": { "attackerTeam": 1, "comboTransition": { "completed": true, "hitCount": 4 }, "suppliedRawDrawCount": 4 } }
+          ],
+          "drawAudit": { "suppliedCounts": [4, 4], "executedPasses": 2, "consumedCount": 8 },
+          "externalRngConsumed": 0
+        }
+      },
+      "reasoning": "Each forward scan attacks original slots 0, 2, 4 and 6, leaving three topic cards. Each hit deals 70 HP and 4 stress, so each target loses 280 HP. Team 1's full stress is clamped during pass one then reset at its own entry; team 0 receives 16 stress during pass two. Both levels become 1. Four draws per pass reaches the eight-draw outer admission bound."
+    },
+    {
+      "id": "agitate-redirect-selects-entered-team-attack-and-first-pass-draw",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-phase-reference-v1",
+        "policies": {
+  "id": "debate-anger-phase-bounded-two-pass-policy-v1",
+  "profile": "debate-anger-phase-reference-v1",
+  "dependencies": {
+    "entryProfile": "debate-anger-entry-reference-v1",
+    "entryPolicyId": "debate-anger-entry-single-pass-policy-v1",
+    "comboProfile": "debate-timid-combo-reference-v1",
+    "comboPolicyId": "debate-timid-combo-fresh-pending-policy-v1",
+    "composition": "invoke-existing-public-evaluators-with-their-complete-exported-policies",
+    "nestedReceipts": "preserve-full-existing-entry-and-combo-receipts"
+  },
+  "checkpoint": {
+    "characters": 2,
+    "firstTeam": [0, 1],
+    "winner": -1,
+    "initialHp": { "minimum": 1, "maximum": 1000 },
+    "intermediateHp": { "minimum": -100, "maximum": 1000 },
+    "characterFields": "anger-entry-character-fields-personality-strength-hp-stress-angerTimer-maxCardCount-hand",
+    "personality": "caller-resolved-timid-calm-bold-or-reckless",
+    "strength": { "minimum": 1, "maximum": 100 },
+    "stress": { "minimum": 0, "maximum": 100 },
+    "angerTimer": { "minimum": 0, "maximum": 4 },
+    "activeHandCapacity": { "minimum": 4, "maximum": 7 },
+    "physicalHandLength": 7,
+    "cardCode": { "minimum": -1, "maximum": 14 },
+    "combo": { "active": false, "attacker": [-1, 0, 1], "minimumCounter": 0, "maximumCounter": 7 },
+    "inactiveComboFields": "preserved-unless-timid-entry-resets-attacker-and-counter",
+    "crumbledLevels": { "length": 2, "minimum": 0, "maximum": 3 },
+    "crumbled": "two-boolean-latched-flags-not-normalized-at-entry",
+    "resolvedAttacks": { "length": 2, "index": "team", "minimum": 70, "maximum": 227 },
+    "genericOnly": true,
+    "admittedBounds": "engine-admission-policy-not-universal-source-reachability"
+  },
+  "ordering": {
+    "firstPass": ["entry-canReflect-true", "whole-pending-combo-if-active", "winner-check"],
+    "firstTerminal": "return-before-second-pass-and-before-crumble",
+    "secondPass": ["entry-canReflect-false", "whole-pending-combo-if-active", "crumble", "winner-check"],
+    "maximumPasses": 2,
+    "noCandidate": "still-check-winner-and-continue-source-sequence",
+    "comboZeroHpBreak": false,
+    "thirdPass": false,
+    "stabilizationLoop": false
+  },
+  "winner": {
+    "initialWinner": -1,
+    "order": "opponent-of-firstTeam-then-firstTeam-with-short-circuit",
+    "threshold": "hp-less-than-or-equal-to-zero",
+    "opponentTerminal": "firstTeam-wins",
+    "firstTerminalOnly": "opponent-wins",
+    "simultaneousTerminal": "firstTeam-wins",
+    "classification": "not-evaluated"
+  },
+  "crumble": {
+    "when": "only-after-second-whole-combo-and-before-second-winner-check",
+    "teamOrder": [0, 1],
+    "formula": "clamp-truncate-toward-zero-of-1000-minus-hp-divided-by-250-to-zero-through-three",
+    "changedLevel": "write-computed-level-and-set-flag-true-including-downward-change",
+    "sameLevel": "preserve-existing-flag",
+    "result": "after-flag-zero-or-after-flag-one",
+    "firstTerminal": "not-evaluated-null-receipt-preserve-input-levels-and-flags"
+  },
+  "draws": {
+    "input": "two-pass-keyed-arrays-of-caller-supplied-labeled-raw-draws",
+    "role": "debate-timid-combo-jitter",
+    "bound": 5,
+    "minimum": 0,
+    "maximum": 4,
+    "maximumPerPass": 4,
+    "validation": "detach-and-validate-both-arrays-before-any-gameplay",
+    "consumption": "delegate-exact-consumption-to-each-whole-combo-kernel",
+    "noCombo": "require-empty-corresponding-pass-array",
+    "unusedSecondPass": "require-empty-second-array-on-first-pass-terminal",
+    "offsets": "zero-based-global-consumed-index-plus-pass-and-local-draw-index",
+    "missingOrExtra": "whole-composition-atomic-failure",
+    "rngImplementation": "none",
+    "nativeStreamClaim": false
+  },
+  "audit": {
+    "snapshots": "detached-initial-final-and-each-executed-pass-before-after",
+    "passes": "one-or-two-completed-passes-with-full-entry-and-optional-combo-receipts",
+    "winnerChecks": "evaluated-hp-tests-in-short-circuit-order",
+    "crumble": "before-after-levels-flags-and-per-team-computation-or-null",
+    "draws": "pass-offsets-and-flat-consumed-transcript-with-original-pass-local-indices"
+  },
+  "safety": {
+    "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+    "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+    "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+    "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+    "result": "recursively-frozen-and-detached-from-input",
+    "failure": "typed-validation-or-pass-qualified-kernel-code-no-partial-state-or-receipt"
+  },
+  "capacity": {
+    "maxInputNodes": 4096,
+    "maxInputDepth": 16,
+    "maxInputArrayLength": 64,
+    "maxCanonicalUtf8Bytes": 65536,
+    "maxEntryCalls": 2,
+    "maxComboCalls": 2,
+    "maxWinnerChecks": 2,
+    "maxCrumbleCalls": 1,
+    "maxConsumedDraws": 8
+  },
+  "boundary": {
+    "kind": "bounded-two-pass-modern-reference-anger-phase-composition",
+    "terminalOutcome": "terminal-pending-classification",
+    "nonterminalOutcome": "turn-end-pending",
+    "canCriticalAndCriticalClosing": "excluded",
+    "turnEndAndTimerDecay": "excluded",
+    "phaseObjectDeltaStepAndView": "excluded",
+    "handRefillAndDeckRegeneration": "excluded",
+    "personResolutionAndAttackDerivation": "caller-supplied-not-evaluated",
+    "characterSpecificDamageHook": "excluded-generic-identity-assertion-only",
+    "rng": "no-implementation-no-external-consumption",
+    "campaign": false,
+    "sessionIntegration": false,
+    "persistence": false,
+    "legacyProfilesChanged": false
+  }
+},
+        "genericOnly": true,
+        "firstTeam": 0,
+        "winner": -1,
+        "characters": [
+          { "personality": "calm", "strength": 50, "hp": 1000, "stress": 100, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 1, 2, 3, -1, -1, -1] },
+          { "personality": "timid", "strength": 50, "hp": 1000, "stress": 0, "angerTimer": 0, "maxCardCount": 4, "hand": [0, 14, 1, 3, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": -1, "counter": 0 },
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "resolvedAttacks": [227, 70],
+        "passDraws": [ [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 2 } ], [] ]
+      },
+      "paperExpected": {
+        "ok": true,
+        "characters": [
+          { "hp": 928, "stress": 54, "angerTimer": 0, "hand": [0, 1, 2, 3, -1, -1, -1] },
+          { "hp": 1000, "stress": 0, "angerTimer": 1, "hand": [0, 3, -1, -1, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": 1, "counter": 1 },
+        "winner": -1,
+        "crumbledLevels": [0, 0],
+        "crumbled": [false, false],
+        "outcome": "turn-end-pending",
+        "receipt": {
+          "passes": [
+            {
+              "pass": 1,
+              "canReflect": true,
+              "entryReceipt": { "selectedTeam": 0, "enteredTeam": 1, "counter": { "card": 14, "status": "agitate" } },
+              "comboReceipt": { "attackerTeam": 1, "resolvedAttack": 70, "hits": [ { "physicalSlot": 1, "originalSlot": 1, "card": 1, "drawIndex": 0, "requestedHpDamage": 72, "requestedStressDamage": 4 } ], "comboTransition": { "completed": true, "hitCount": 1 } },
+              "drawAudit": { "pass": 1, "globalStartIndex": 0, "globalEndIndexExclusive": 1, "suppliedCount": 1, "consumedCount": 1 }
+            },
+            { "pass": 2, "canReflect": false, "entryReceipt": { "selectedTeam": -1, "enteredTeam": -1 }, "comboReceipt": null, "drawAudit": { "pass": 2, "globalStartIndex": 1, "globalEndIndexExclusive": 1, "suppliedCount": 0, "consumedCount": 0 } }
+          ],
+          "drawAudit": { "suppliedCounts": [1, 0], "executedPasses": 2, "consumedCount": 1, "consumed": [ { "globalIndex": 0, "pass": 1, "passDrawIndex": 0, "draw": { "role": "debate-timid-combo-jitter", "bound": 5, "value": 2 } } ] },
+          "externalRngConsumed": 0
+        }
+      },
+      "reasoning": "Agitate redirects entry from team 0 to team 1 without rechecking team 1's zero stress. Removing Agitate first compacts the Timid hand to [0, 1, 3, -1, -1, -1, -1]. The combo hits card 1 at current slot 1 and skips card 3 after it shifts into that already-visited slot. Its component-local originalSlot is 1 because provenance begins at the post-entry combo input. The sole hit uses entered team 1's attack 70 plus pass-one jitter 2, not team 0's attack 227. Team 0 ends at HP 928 and stress 50 + 4 = 54."
+    },
+    {
+      "id": "crumble-downward-change-and-unchanged-sticky-flag",
+      "input": {
+        "schemaVersion": 1,
+        "profile": "debate-anger-phase-reference-v1",
+        "policies": {
+  "id": "debate-anger-phase-bounded-two-pass-policy-v1",
+  "profile": "debate-anger-phase-reference-v1",
+  "dependencies": {
+    "entryProfile": "debate-anger-entry-reference-v1",
+    "entryPolicyId": "debate-anger-entry-single-pass-policy-v1",
+    "comboProfile": "debate-timid-combo-reference-v1",
+    "comboPolicyId": "debate-timid-combo-fresh-pending-policy-v1",
+    "composition": "invoke-existing-public-evaluators-with-their-complete-exported-policies",
+    "nestedReceipts": "preserve-full-existing-entry-and-combo-receipts"
+  },
+  "checkpoint": {
+    "characters": 2,
+    "firstTeam": [0, 1],
+    "winner": -1,
+    "initialHp": { "minimum": 1, "maximum": 1000 },
+    "intermediateHp": { "minimum": -100, "maximum": 1000 },
+    "characterFields": "anger-entry-character-fields-personality-strength-hp-stress-angerTimer-maxCardCount-hand",
+    "personality": "caller-resolved-timid-calm-bold-or-reckless",
+    "strength": { "minimum": 1, "maximum": 100 },
+    "stress": { "minimum": 0, "maximum": 100 },
+    "angerTimer": { "minimum": 0, "maximum": 4 },
+    "activeHandCapacity": { "minimum": 4, "maximum": 7 },
+    "physicalHandLength": 7,
+    "cardCode": { "minimum": -1, "maximum": 14 },
+    "combo": { "active": false, "attacker": [-1, 0, 1], "minimumCounter": 0, "maximumCounter": 7 },
+    "inactiveComboFields": "preserved-unless-timid-entry-resets-attacker-and-counter",
+    "crumbledLevels": { "length": 2, "minimum": 0, "maximum": 3 },
+    "crumbled": "two-boolean-latched-flags-not-normalized-at-entry",
+    "resolvedAttacks": { "length": 2, "index": "team", "minimum": 70, "maximum": 227 },
+    "genericOnly": true,
+    "admittedBounds": "engine-admission-policy-not-universal-source-reachability"
+  },
+  "ordering": {
+    "firstPass": ["entry-canReflect-true", "whole-pending-combo-if-active", "winner-check"],
+    "firstTerminal": "return-before-second-pass-and-before-crumble",
+    "secondPass": ["entry-canReflect-false", "whole-pending-combo-if-active", "crumble", "winner-check"],
+    "maximumPasses": 2,
+    "noCandidate": "still-check-winner-and-continue-source-sequence",
+    "comboZeroHpBreak": false,
+    "thirdPass": false,
+    "stabilizationLoop": false
+  },
+  "winner": {
+    "initialWinner": -1,
+    "order": "opponent-of-firstTeam-then-firstTeam-with-short-circuit",
+    "threshold": "hp-less-than-or-equal-to-zero",
+    "opponentTerminal": "firstTeam-wins",
+    "firstTerminalOnly": "opponent-wins",
+    "simultaneousTerminal": "firstTeam-wins",
+    "classification": "not-evaluated"
+  },
+  "crumble": {
+    "when": "only-after-second-whole-combo-and-before-second-winner-check",
+    "teamOrder": [0, 1],
+    "formula": "clamp-truncate-toward-zero-of-1000-minus-hp-divided-by-250-to-zero-through-three",
+    "changedLevel": "write-computed-level-and-set-flag-true-including-downward-change",
+    "sameLevel": "preserve-existing-flag",
+    "result": "after-flag-zero-or-after-flag-one",
+    "firstTerminal": "not-evaluated-null-receipt-preserve-input-levels-and-flags"
+  },
+  "draws": {
+    "input": "two-pass-keyed-arrays-of-caller-supplied-labeled-raw-draws",
+    "role": "debate-timid-combo-jitter",
+    "bound": 5,
+    "minimum": 0,
+    "maximum": 4,
+    "maximumPerPass": 4,
+    "validation": "detach-and-validate-both-arrays-before-any-gameplay",
+    "consumption": "delegate-exact-consumption-to-each-whole-combo-kernel",
+    "noCombo": "require-empty-corresponding-pass-array",
+    "unusedSecondPass": "require-empty-second-array-on-first-pass-terminal",
+    "offsets": "zero-based-global-consumed-index-plus-pass-and-local-draw-index",
+    "missingOrExtra": "whole-composition-atomic-failure",
+    "rngImplementation": "none",
+    "nativeStreamClaim": false
+  },
+  "audit": {
+    "snapshots": "detached-initial-final-and-each-executed-pass-before-after",
+    "passes": "one-or-two-completed-passes-with-full-entry-and-optional-combo-receipts",
+    "winnerChecks": "evaluated-hp-tests-in-short-circuit-order",
+    "crumble": "before-after-levels-flags-and-per-team-computation-or-null",
+    "draws": "pass-offsets-and-flat-consumed-transcript-with-original-pass-local-indices"
+  },
+  "safety": {
+    "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+    "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+    "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+    "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+    "result": "recursively-frozen-and-detached-from-input",
+    "failure": "typed-validation-or-pass-qualified-kernel-code-no-partial-state-or-receipt"
+  },
+  "capacity": {
+    "maxInputNodes": 4096,
+    "maxInputDepth": 16,
+    "maxInputArrayLength": 64,
+    "maxCanonicalUtf8Bytes": 65536,
+    "maxEntryCalls": 2,
+    "maxComboCalls": 2,
+    "maxWinnerChecks": 2,
+    "maxCrumbleCalls": 1,
+    "maxConsumedDraws": 8
+  },
+  "boundary": {
+    "kind": "bounded-two-pass-modern-reference-anger-phase-composition",
+    "terminalOutcome": "terminal-pending-classification",
+    "nonterminalOutcome": "turn-end-pending",
+    "canCriticalAndCriticalClosing": "excluded",
+    "turnEndAndTimerDecay": "excluded",
+    "phaseObjectDeltaStepAndView": "excluded",
+    "handRefillAndDeckRegeneration": "excluded",
+    "personResolutionAndAttackDerivation": "caller-supplied-not-evaluated",
+    "characterSpecificDamageHook": "excluded-generic-identity-assertion-only",
+    "rng": "no-implementation-no-external-consumption",
+    "campaign": false,
+    "sessionIntegration": false,
+    "persistence": false,
+    "legacyProfilesChanged": false
+  }
+},
+        "genericOnly": true,
+        "firstTeam": 0,
+        "winner": -1,
+        "characters": [
+          { "personality": "calm", "strength": 50, "hp": 1000, "stress": 0, "angerTimer": 0, "maxCardCount": 4, "hand": [0, -1, -1, -1, -1, -1, -1] },
+          { "personality": "bold", "strength": 50, "hp": 750, "stress": 0, "angerTimer": 0, "maxCardCount": 4, "hand": [0, -1, -1, -1, -1, -1, -1] }
+        ],
+        "combo": { "active": false, "attacker": -1, "counter": 0 },
+        "crumbledLevels": [3, 1],
+        "crumbled": [false, true],
+        "resolvedAttacks": [100, 100],
+        "passDraws": [[], []]
+      },
+      "paperExpected": {
+        "ok": true,
+        "characters": [ { "hp": 1000, "stress": 0, "angerTimer": 0 }, { "hp": 750, "stress": 0, "angerTimer": 0 } ],
+        "winner": -1,
+        "crumbledLevels": [0, 1],
+        "crumbled": [true, true],
+        "outcome": "turn-end-pending",
+        "receipt": {
+          "crumbleResult": { "beforeLevels": [3, 1], "beforeFlags": [false, true], "afterLevels": [0, 1], "afterFlags": [true, true], "teams": [ { "team": 0, "hp": 1000, "unboundedLevel": 0, "computedLevel": 0, "previousLevel": 3, "changed": true, "previousFlag": false, "afterFlag": true }, { "team": 1, "hp": 750, "unboundedLevel": 1, "computedLevel": 1, "previousLevel": 1, "changed": false, "previousFlag": true, "afterFlag": true } ], "anyCrumbled": true },
+          "externalRngConsumed": 0
+        }
+      },
+      "reasoning": "Neither pass enters anger. Crumble is nevertheless run after the second pass: healthy team 0 changes downward from stored level 3 to 0 and sets its flag true; team 1's computed level remains 1 and preserves its already-true flag. No flag reset or monotonic-only level rule is introduced."
+    }
+  ],
+  "refusalCases": [
+    {
+      "id": "stale-active-combo-is-not-a-fresh-phase",
+      "baseSuccessCaseId": "no-entry-preserves-stale-inactive-combo",
+      "replaceFields": { "combo": { "active": true, "attacker": 1, "counter": 6 } },
+      "paperExpected": { "ok": false, "reason": "invalid-combo" },
+      "reasoning": "The outer composition admits only inactive combos; it must not attempt to reinterpret an active stale checkpoint as a newly entered Timid combo."
+    },
+    {
+      "id": "initial-terminal-hp-rejected",
+      "baseSuccessCaseId": "no-entry-preserves-stale-inactive-combo",
+      "replaceFields": { "characters[0].hp": 0 },
+      "paperExpected": { "ok": false, "reason": "invalid-hp" },
+      "reasoning": "External entry HP is 1 through 1000 even though internal kernel results may reach zero or -100."
+    },
+    {
+      "id": "already-set-winner-rejected",
+      "baseSuccessCaseId": "no-entry-preserves-stale-inactive-combo",
+      "replaceFields": { "winner": 0 },
+      "paperExpected": { "ok": false, "reason": "invalid-winner" },
+      "reasoning": "Fresh composition entry requires winner -1."
+    },
+    {
+      "id": "bad-unused-team-attack-rejected-before-gameplay",
+      "baseSuccessCaseId": "first-reckless-kill-skips-second-pass-and-crumble",
+      "replaceFields": { "resolvedAttacks": [100, 228] },
+      "paperExpected": { "ok": false, "reason": "invalid-resolved-attack" },
+      "reasoning": "Both team-indexed attacks are validated up front, including the attack that would never be used in this drawless first-pass kill."
+    },
+    {
+      "id": "missing-first-combo-draw-rejects-whole-composition",
+      "baseSuccessCaseId": "timid-whole-mutating-scan-before-nonterminal-second-pass",
+      "replaceFields": { "passDraws[0]": [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 } ] },
+      "paperExpected": { "ok": false, "reason": "combo-kernel-failure", "pass": 1, "kernelReason": "missing-raw-draw" },
+      "reasoning": "The delegated whole mutable-hand scan requires four draws. No partial entry, three-hit state or receipt is returned."
+    },
+    {
+      "id": "extra-first-combo-draw-rejected-by-component",
+      "baseSuccessCaseId": "two-timid-passes-keep-team-attacks-and-draw-order-distinct",
+      "replaceFields": { "passDraws[0]": [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 1 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 4 } ] },
+      "paperExpected": { "ok": false, "reason": "combo-kernel-failure", "pass": 1, "kernelReason": "extra-raw-draws" },
+      "reasoning": "Three well-formed draws fit the outer four-draw limit, but the whole first combo consumes exactly two. The component, not a duplicate outer hand scan, detects the unused draw."
+    },
+    {
+      "id": "draw-without-combo-rejected",
+      "baseSuccessCaseId": "no-entry-preserves-stale-inactive-combo",
+      "replaceFields": { "passDraws[0]": [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 } ] },
+      "paperExpected": { "ok": false, "reason": "draws-without-combo" },
+      "reasoning": "A pass that does not activate a combo must have an empty draw array."
+    },
+    {
+      "id": "unused-second-pass-draw-after-first-kill-rejected",
+      "baseSuccessCaseId": "first-reckless-kill-skips-second-pass-and-crumble",
+      "replaceFields": { "passDraws[1]": [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 } ] },
+      "paperExpected": { "ok": false, "reason": "unused-second-pass-draws" },
+      "reasoning": "A well-formed but unused draw in the skipped second pass is not silently accepted; the local first-pass result is discarded."
+    },
+    {
+      "id": "malformed-second-pass-draw-precedes-first-kill",
+      "baseSuccessCaseId": "first-reckless-kill-skips-second-pass-and-crumble",
+      "replaceFields": { "passDraws[1]": [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 5 } ] },
+      "paperExpected": { "ok": false, "reason": "invalid-raw-draw" },
+      "reasoning": "Both pass arrays are parsed before either kernel is called. Value 5 is invalid for a bound-5 draw, so this fails before first-pass damage rather than reaching unused-second-pass-draws."
+    },
+    {
+      "id": "missing-second-combo-draw-discards-successful-first-pass",
+      "baseSuccessCaseId": "two-timid-passes-keep-team-attacks-and-draw-order-distinct",
+      "replaceFields": { "passDraws[1]": [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 2 } ] },
+      "paperExpected": { "ok": false, "reason": "combo-kernel-failure", "pass": 2, "kernelReason": "missing-raw-draw" },
+      "reasoning": "Pass one's detached work does not weaken atomicity: failure during the second combo returns no first-pass state, nested receipt or draw audit."
+    },
+    {
+      "id": "five-draws-in-one-pass-rejected-by-admission",
+      "baseSuccessCaseId": "timid-whole-mutating-scan-before-nonterminal-second-pass",
+      "replaceFields": { "passDraws[0]": [ { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 }, { "role": "debate-timid-combo-jitter", "bound": 5, "value": 0 } ] },
+      "paperExpected": { "ok": false, "reason": "invalid-pass-draws" },
+      "reasoning": "The outer pass-local admission limit is four draws, irrespective of their individual validity."
+    },
+    {
+      "id": "generic-hook-assertion-required-even-with-no-combo",
+      "baseSuccessCaseId": "no-entry-preserves-stale-inactive-combo",
+      "replaceFields": { "genericOnly": false },
+      "paperExpected": { "ok": false, "reason": "invalid-generic-only" },
+      "reasoning": "The whole composition's admitted profile always requires the explicit generic identity-hook assertion."
+    },
+    {
+      "id": "non-admitted-crumble-level-rejected",
+      "baseSuccessCaseId": "no-entry-preserves-stale-inactive-combo",
+      "replaceFields": { "crumbledLevels": [0, 4] },
+      "paperExpected": { "ok": false, "reason": "invalid-crumbled-levels" },
+      "reasoning": "Stored levels are explicitly bounded 0 through 3; the outer parser does not normalize them."
+    },
+    {
+      "id": "policy-drift-is-not-a-supported-variant",
+      "baseSuccessCaseId": "no-entry-preserves-stale-inactive-combo",
+      "replaceFields": { "policies.ordering.maximumPasses": 3 },
+      "paperExpected": { "ok": false, "reason": "unsupported-policy" },
+      "reasoning": "The complete policy must equal the exported policy, not merely share its identifier."
+    },
+    {
+      "id": "runtime-without-trusted-proxy-detector-fails-closed",
+      "baseSuccessCaseId": "no-entry-preserves-stale-inactive-combo",
+      "environmentCondition": "Trusted node:util.types.isProxy cannot be obtained through process.getBuiltinModule",
+      "replaceFields": {},
+      "paperExpected": { "ok": false, "reason": "unsupported-runtime" },
+      "reasoning": "This is an environment precondition, not a JSON input property; it takes precedence before candidate input inspection. No such environment or candidate was executed."
+    }
+  ],
+  "boundaries": {
+    "paperOnly": true,
+    "notNativePkVanillaOrStock": true,
+    "existingSessionProfilesUnchanged": 9,
+    "originalUnresolvedGroups": 43,
+    "originalHistoricalSnapshots": 45,
+    "p078AndDependencies": "excluded",
+    "stopBefore": ["CanCritical", "Critical or Closing routing", "TurnEnd", "session integration"],
+    "notExecuted": ["tests", "compilation", "typecheck", "build", "validator", "checker", "diagnostics", "candidate", "source", "scenario", "examples", "replay"]
+  }
+}
