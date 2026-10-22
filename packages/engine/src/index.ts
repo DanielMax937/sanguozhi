@@ -1063,3 +1063,30 @@ export {
   DEBATE_ANGER_PHASE_EVIDENCE_V1,
   evaluateDebateAngerPhase,
 } from './debate-anger-phase.ts';
+
+// Modern-reference post-fill Calm rethink bonus; no full rethink or session integration.
+export type {
+  DebateCalmRethinkPersonalityV1,
+  DebateCalmRethinkCardV1,
+  DebateCalmRethinkBonusCardV1,
+  DebateCalmRethinkRawResultV1,
+  DebateCalmRethinkInputV1,
+  DebateCalmRethinkGateReasonV1,
+  DebateCalmRethinkGateV1,
+  DebateCalmRethinkConsumedResultV1,
+  DebateCalmRethinkReplacementV1,
+  DebateCalmRethinkSortAuditV1,
+  DebateCalmRethinkAuditV1,
+  DebateCalmRethinkReasonV1,
+  DebateCalmRethinkSuccessV1,
+  DebateCalmRethinkFailureReasonV1,
+  DebateCalmRethinkFailureV1,
+  DebateCalmRethinkResultV1,
+  DebateCalmRethinkPolicyV1,
+  DebateCalmRethinkEvidenceV1,
+} from './debate-calm-rethink.ts';
+export {
+  DEBATE_CALM_RETHINK_POLICY_V1,
+  DEBATE_CALM_RETHINK_EVIDENCE_V1,
+  evaluateDebateCalmRethink,
+} from './debate-calm-rethink.ts';
