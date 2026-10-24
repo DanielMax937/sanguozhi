@@ -1,0 +1,621 @@
+{
+  "schemaVersion": 1,
+  "id": "debate-round-transition-v1",
+  "baseCommit": "ac53b1fcf7b8f124be732b8310bbfec59cc72bf9",
+  "scope": "Atomic bounded nonterminal non-tutorial TurnEnd then unchanged TurnStart, ending at a ready-for-play data checkpoint; not a whole turn/session or native equivalence",
+  "implementation": "packages/engine/src/debate-round-transition.ts",
+  "ruleDocument": "docs/rules/debate-round-transition-v1.md",
+  "apiDocument": "docs/engine/debate-round-transition-v1.md",
+  "paperExample": "data/scenarios/debate-round-transition-example-v1.json",
+  "exports": {
+    "evaluate": "evaluateDebateRoundTransition",
+    "policy": "DEBATE_ROUND_TRANSITION_POLICY_V1",
+    "evidence": "DEBATE_ROUND_TRANSITION_EVIDENCE_V1",
+    "typeFamily": "DebateRoundTransition*V1"
+  },
+  "policies": {
+    "id": "debate-round-transition-bounded-current-deck-policy-v1",
+    "profile": "debate-round-transition-reference-v1",
+    "mode": {
+      "kind": "bounded-current-deck-round-transition",
+      "isTutorial": false,
+      "winner": -1,
+      "teamCount": 2,
+      "timerOrder": [
+        0,
+        1
+      ],
+      "sequence": [
+        "decrement-team-zero-positive-anger-timer",
+        "decrement-team-one-positive-anger-timer",
+        "if-original-attacker-valid-set-first-team",
+        "if-original-attacker-topic-card-set-topic",
+        "if-original-attacker-valid-and-any-unopposed-sophistry-reroll-topic-once",
+        "evaluate-unchanged-public-TurnStart-once"
+      ],
+      "nextCheckpoint": "ready-for-play",
+      "checkpointLabel": "engineering-result-not-source-phase-state-or-phase-loop",
+      "terminalMarker": "winner-minus-one-engineering-route-precondition-not-source-TurnEnd-guard"
+    },
+    "checkpoint": {
+      "firstTeam": [
+        0,
+        1
+      ],
+      "attacker": [
+        -1,
+        0,
+        1
+      ],
+      "currentTopic": {
+        "minimum": -2147483648,
+        "maximum": 2147483647
+      },
+      "characters": "exact-pair-of-existing-TurnStart-character-inputs-including-rawDraws",
+      "personality": "caller-resolved-timid-calm-bold-or-reckless",
+      "angerTimer": {
+        "minimum": 0,
+        "maximum": 4
+      },
+      "maxCardCount": {
+        "minimum": 4,
+        "maximum": 7
+      },
+      "physicalHandLength": 7,
+      "physicalCardRange": [
+        -1,
+        14
+      ],
+      "activePlayableSlots": "one-through-maxCardCount-minus-one",
+      "activePlayableCards": "minus-one-vacancy-or-one-through-fourteen-no-zero",
+      "slotZeroAndInactiveTail": "minus-one-through-fourteen-with-unchanged-TurnStart-treatment",
+      "playedCardRange": [
+        -1,
+        14
+      ],
+      "booleans": "canRethink-and-crumbled-required",
+      "cardTapeLength": 18,
+      "cardTapeRange": [
+        1,
+        14
+      ],
+      "deckCursor": {
+        "minimum": 0,
+        "maximum": 18
+      },
+      "domain": "explicit-engineering-domain-not-reachability-proof"
+    },
+    "timers": {
+      "positive": "subtract-one-on-each-team-before-any-first-or-topic-work",
+      "zero": "preserve-zero",
+      "expiration": "audit-only-one-to-zero-during-TurnEnd-not-later-Bold-reset",
+      "attacker": "never-recompute-after-decrement"
+    },
+    "firstAndTopic": {
+      "gate": "original-attacker-zero-or-one",
+      "noAttacker": "skip-entire-first-ordinary-topic-and-Sophistry-block",
+      "firstTeam": "set-to-original-attacker",
+      "ordinaryTopic": "attacker-played-card-one-through-nine-maps-groups-of-three-to-zero-through-two",
+      "sophistry": "any-team-played-eleven-and-opponent-played-not-twelve",
+      "sophistryDraws": "one-if-any-qualifies-even-if-both-qualify",
+      "ordering": "ordinary-topic-update-then-Sophistry-overwrite-including-same-topic",
+      "playedCards": "original-values-retained-until-TurnStart-resets-them",
+      "attackerIdentity": "debate-attacker-not-combo-attacker"
+    },
+    "turnStart": {
+      "implementation": "unchanged-evaluateDebateTurnStart",
+      "calls": 1,
+      "policy": {
+        "id": "debate-turn-start-bounded-current-deck-policy-v1",
+        "profile": "debate-turn-start-reference-v1",
+        "mode": {
+          "kind": "bounded-current-deck",
+          "isTutorial": false,
+          "tutorialHandling": "explicit-false-required-true-rejected-not-skipped-fill",
+          "teamCount": 2,
+          "teamOrder": [
+            0,
+            1
+          ],
+          "sequence": [
+            "reset-played-card",
+            "grant-rethink-if-crumbled",
+            "grant-rethink-if-positive-timer-calm",
+            "evaluate-unchanged-current-deck-hand-fill",
+            "reset-positive-bold-timer-if-final-active-topic-count-zero",
+            "clear-crumbled"
+          ],
+          "ordering": "entire-team-zero-sequence-before-entire-team-one-sequence"
+        },
+        "checkpoint": {
+          "personality": "caller-resolved-timid-calm-bold-or-reckless",
+          "angerTimer": {
+            "minimum": 0,
+            "maximum": 4
+          },
+          "maxCardCount": {
+            "minimum": 4,
+            "maximum": 7
+          },
+          "physicalHandLength": 7,
+          "physicalCardRange": [
+            -1,
+            14
+          ],
+          "activePlayableSlots": "one-through-maxCardCount-minus-one",
+          "activePlayableCards": "minus-one-vacancy-or-one-through-fourteen-no-zero",
+          "slotZeroInput": "any-minus-one-through-fourteen-restored-to-zero-by-fill",
+          "inactiveTail": "any-minus-one-through-fourteen-preserved-without-fill-or-sort",
+          "playedCardRange": [
+            -1,
+            14
+          ],
+          "booleans": "canRethink-and-crumbled-required",
+          "cardTapeLength": 18,
+          "cardTapeRange": [
+            1,
+            14
+          ],
+          "deckCursor": {
+            "minimum": 0,
+            "maximum": 18
+          },
+          "domain": "explicit-engineering-checkpoint-domain",
+          "reachability": "not-a-proof-of-universal-or-source-reachable-state"
+        },
+        "rethinkQuota": {
+          "operation": "set-true-if-crumbled-or-positive-timer-calm-otherwise-preserve",
+          "falseAssignment": "never",
+          "calmBonusAndRandomness": "not-part-of-TurnStart"
+        },
+        "fill": {
+          "implementation": "unchanged-evaluateDebateHandFill",
+          "policy": {
+            "id": "debate-hand-fill-current-deck-policy-v1",
+            "profile": "debate-hand-fill-reference-v1",
+            "cards": {
+              "representation": "pinned-modern-enum-numeric-code",
+              "rethink": 0,
+              "topicFirst": 1,
+              "topicLast": 9,
+              "rhetoricFirst": 10,
+              "rhetoricLast": 14,
+              "playableMin": 1,
+              "playableMax": 14
+            },
+            "slots": {
+              "input": "playable-only-original-source-order",
+              "vacancy": null,
+              "sourceSlotOffset": 1,
+              "playableCounts": [
+                3,
+                4,
+                5,
+                6
+              ],
+              "reservedSlot": 0,
+              "reservedCard": 0,
+              "reservedHandling": "restore-before-fill"
+            },
+            "deck": {
+              "id": "provided-current-deck-18-v1",
+              "sourceDeckTableSize": 18,
+              "providedEntries": 18,
+              "fillOrder": "ascending-vacant-original-source-slot",
+              "consume": "advance-one-per-filled-slot",
+              "exhaustion": "unsupported-deck-regeneration",
+              "regeneration": "excluded",
+              "nativeDistribution": false
+            },
+            "repair": {
+              "condition": "post-fill-topic-count-zero-and-new-slot-exists",
+              "target": "last-new-original-source-slot",
+              "drawRole": "debate-fill-topic-repair",
+              "drawBound": 9,
+              "cardMapping": "1+raw-value",
+              "noNewSlot": "skip-even-with-no-topic"
+            },
+            "sort": {
+              "key": "numeric-card-code-ascending",
+              "scope": "all-source-slots-including-reserved-zero",
+              "equalCodeAuditTie": "preSortSlot-ascending-engine-policy",
+              "nativeEqualCodeIdentityOrder": false
+            },
+            "randomness": {
+              "source": "caller-supplied-draws",
+              "validation": "syntax-before-fill-semantic-at-repair",
+              "count": "one-only-if-repair-applies",
+              "extra": "atomic-rejection",
+              "externalRngConsumed": 0,
+              "nativePrng": false
+            },
+            "capacity": {
+              "maxInputNodes": 1024,
+              "maxInputDepth": 12,
+              "maxInputArrayLength": 32,
+              "maxCanonicalUtf8Bytes": 16384
+            },
+            "boundary": {
+              "kind": "independent-character-fill-kernel",
+              "sessionIntegration": false,
+              "persistence": false,
+              "legacyProfilesChanged": false
+            }
+          },
+          "mapping": "active-minus-one-to-null-only",
+          "output": "sorted-active-prefix-over-original-seven-slot-backing-tail",
+          "currentDeckOnly": true,
+          "cursorAtEighteen": "accepted-with-no-vacancies-otherwise-unsupported-deck-regeneration",
+          "failure": "propagate-typed-reason-and-discard-whole-two-team-result",
+          "nestedReceipt": "preserve-unchanged-including-local-drawIndex-zero"
+        },
+        "bold": {
+          "gate": "positive-anger-timer-and-bold-personality",
+          "countSource": "final-post-repair-active-prefix",
+          "countSlots": "zero-through-maxCardCount-minus-one",
+          "topicCardRange": [
+            1,
+            9
+          ],
+          "zeroCount": "reset-anger-timer-to-zero",
+          "nonzeroCount": "preserve-anger-timer",
+          "preRepairCount": "never-use-nested-topicCardCountAfterFill-for-Bold"
+        },
+        "randomness": {
+          "rawDrawsPerTeam": "zero-or-one-existing-hand-fill-repair-draw",
+          "role": "debate-fill-topic-repair",
+          "bound": 9,
+          "values": [
+            0,
+            8
+          ],
+          "parsing": "both-complete-checkpoints-and-draw-syntax-and-domain-before-evaluation",
+          "requiredOrUnusedDraw": "unchanged-kernel-repair-phase-validation",
+          "flatAudit": "team-order-with-separate-flatDrawIndex-and-localDrawIndex",
+          "externalRngConsumed": 0,
+          "callerCallbacks": "excluded"
+        },
+        "safety": {
+          "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+          "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+          "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+          "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+          "output": "recursively-frozen-and-detached-from-caller",
+          "failure": "typed-code-only-no-state-or-partial-receipt"
+        },
+        "capacity": {
+          "maxInputNodes": 2048,
+          "maxInputDepth": 12,
+          "maxInputArrayLength": 32,
+          "maxCanonicalUtf8Bytes": 32768,
+          "handFillCalls": 2,
+          "maxRepairDraws": 2,
+          "maxFilledSlots": 12
+        },
+        "boundary": {
+          "kind": "standalone-two-team-non-tutorial-turn-start-composition",
+          "personalityResolution": "caller-supplied-no-person-lookup-or-fallback",
+          "tutorialBranch": "excluded",
+          "deckGenerate": "excluded-not-duplicated",
+          "turnEndAndTimerDecrement": "excluded",
+          "attackAndRethinkAction": "excluded",
+          "fullSessionAndPersistence": "excluded",
+          "p078": "excluded",
+          "legacyProfilesChanged": false
+        }
+      },
+      "input": "decremented-timers-still-original-playedCards-and-all-other-character-fields",
+      "validation": "complete-safe-outer-parse-before-single-dependency-call-no-probe-call",
+      "failure": "propagate-typed-reason-and-discard-entire-transition",
+      "receipt": "preserve-full-unchanged-receipt-and-all-nested-draw-indices",
+      "algorithms": "no-copied-fill-Bold-quota-or-deck-generation"
+    },
+    "randomness": {
+      "topicRawDraws": "zero-or-one",
+      "topicRole": "debate-turn-end-topic-reroll",
+      "topicBound": 3,
+      "topicValues": [
+        0,
+        2
+      ],
+      "fillRawDraws": "existing-zero-or-one-per-team-TurnStart-input",
+      "parsing": "both-complete-characters-and-all-topic-and-fill-draw-syntax-before-evaluation",
+      "demand": "TurnEnd-topic-demand-before-TurnStart-team-zero-then-team-one-fill-demand",
+      "auditOrder": [
+        "turn-end-topic",
+        "turn-start-team-zero-fill",
+        "turn-start-team-one-fill"
+      ],
+      "wrapperIndices": "flatDrawIndex-with-separate-turnStartFlatDrawIndex-and-localDrawIndex",
+      "nestedIndices": "unchanged",
+      "externalRngConsumed": 0,
+      "callerCallbacks": "excluded"
+    },
+    "safety": {
+      "input": "closed-schema-detached-safe-JSON-data-with-exact-policy",
+      "requiredRuntime": "trusted-node-util-types-isProxy-via-process-getBuiltinModule",
+      "unavailableProxyDetector": "fail-closed-before-inspecting-input",
+      "proxiesAccessorsAndExecutableValues": "rejected-without-invocation",
+      "output": "recursively-frozen-and-detached-from-caller",
+      "failure": "typed-code-only-no-partial-timers-first-topic-or-fill-state"
+    },
+    "capacity": {
+      "maxInputNodes": 4096,
+      "maxInputDepth": 16,
+      "maxInputArrayLength": 32,
+      "maxCanonicalUtf8Bytes": 65536,
+      "turnStartCalls": 1,
+      "nestedHandFillCalls": 2,
+      "maxTopicDraws": 1,
+      "maxFillRepairDraws": 2,
+      "maxTotalDraws": 3
+    },
+    "boundary": {
+      "kind": "standalone-nonterminal-non-tutorial-round-transition",
+      "winnerAndHitPoints": "not-calculated-or-reclassified",
+      "attackerCalculation": "excluded",
+      "damageAndAngerAction": "excluded",
+      "comboAttacker": "not-input-not-substituted-for-debate-attacker",
+      "tutorialBranch": "excluded",
+      "deckGenerate": "excluded-current-eighteen-card-tape-only",
+      "sourceLogsViewAndEngineCallbacks": "not-executed",
+      "phaseSchedulingAndFullSession": "excluded",
+      "persistence": "excluded",
+      "p078": "excluded",
+      "legacyProfilesChanged": false
+    }
+  },
+  "evidence": {
+    "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+    "repository": "https://github.com/tankyc/sango_infinity",
+    "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+    "debatePath": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+    "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+    "debateSha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+    "debatePhasePath": "Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+    "debatePhaseBlob": "6aa98f855a5d4d172cde7e8ffc18a141b8a7b587",
+    "debateEnumPath": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+    "debateEnumBlob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+    "sourceTurnEndLines": [
+      1083,
+      1126
+    ],
+    "sourceTimerDecrementLines": [
+      394,
+      398
+    ],
+    "sourceGetCardTopicLines": [
+      854,
+      872
+    ],
+    "sourceTurnEndPhaseLines": [
+      261,
+      274
+    ],
+    "sourceTurnStartPhaseLines": [
+      163,
+      168
+    ],
+    "sourceBehavior": "both-timers-before-original-attacker-first-ordinary-topic-single-Sophistry-reroll",
+    "composition": "source-phase-order-TurnEnd-then-TurnStart-without-executing-phase-engine",
+    "turnStart": {
+      "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+      "repository": "https://github.com/tankyc/sango_infinity",
+      "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+      "debatePath": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+      "debateSha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+      "debateEnumPath": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "debateEnumBlob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+      "sourceTurnStartLines": [
+        1046,
+        1079
+      ],
+      "sourceTimerResetLines": [
+        401,
+        404
+      ],
+      "sourceSortLines": [
+        406,
+        409
+      ],
+      "sourceFillLines": [
+        412,
+        438
+      ],
+      "sourceCardEnumLines": [
+        33,
+        61
+      ],
+      "sourceBehavior": "team-local-reset-quota-fill-final-Bold-scan-clear-before-next-team",
+      "handFill": {
+        "sourceIdentity": "modern-CSharp-translation-not-native-or-Vanilla",
+        "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+        "debatePath": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+        "debateBlob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+        "debateEnumPath": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+        "debateEnumBlob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+        "sourceDeckTableSizeLine": 54,
+        "sourceSortLines": [
+          406,
+          409
+        ],
+        "sourceFillLines": [
+          412,
+          438
+        ],
+        "sourceCardEnumLines": [
+          33,
+          61
+        ],
+        "fillEvidence": "pinned-modern-translated-reference-only",
+        "deckEvidence": "caller-provided-current-deck-engine-boundary",
+        "topicRepairEvidence": "source-TopicFirst-plus-RandInt9-last-new-slot-only",
+        "sortEvidence": "source-Array.Sort-numeric-codes-including-reserved-zero",
+        "equalCodeAuditEvidence": "engine-preSortSlot-tie-policy-not-native-identity-order",
+        "inputSafetyAndBudgets": "engine-policy",
+        "nativeEquivalent": false,
+        "stockOriginalVerified": false,
+        "pkEquivalent": false,
+        "vanillaEquivalent": false,
+        "completeDebate": false,
+        "originalUnresolvedGroups": 43,
+        "originalHistoricalSnapshots": 45,
+        "nativeWholeChain": "open",
+        "p078": "excluded",
+        "nativeDeckRegeneration": "excluded",
+        "nativeRngStream": "excluded",
+        "legacySessionIntegration": "excluded"
+      },
+      "personalityBoundary": "caller-supplied-CharacterGetPersonality-result",
+      "domainBoundsSafetyBudgetsAuditAndReasonNames": "engine-policy-not-source-reachability-proof",
+      "nativeEquivalent": false,
+      "stockOriginalVerified": false,
+      "pkEquivalent": false,
+      "vanillaEquivalent": false,
+      "completeDebate": false,
+      "p078": "excluded",
+      "nativeWholeChain": "open",
+      "nativeDeckRegeneration": "excluded",
+      "nativeRngStream": "excluded",
+      "legacySessionIntegration": "excluded"
+    },
+    "terminalMarker": "winner-minus-one-is-engineering-route-precondition-not-source-TurnEnd-guard",
+    "attackerIdentity": "source-debate-attacker-distinct-from-combo-attacker",
+    "domainBoundsSafetyBudgetsAuditAndReasonNames": "engineering-policy-not-native-reachability-proof",
+    "nativeEquivalent": false,
+    "stockOriginalVerified": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "completeDebate": false,
+    "p078": "excluded",
+    "nativeWholeChain": "open",
+    "nativeDeckRegeneration": "excluded",
+    "nativeRngStream": "excluded",
+    "legacySessionIntegration": "excluded"
+  },
+  "sourceClaims": [
+    {
+      "lines": [
+        1083,
+        1097
+      ],
+      "claim": "Both positive anger timers decrement in team order before any first/topic work; expiration is oldpositive/newzero. No view/log callbacks executed here."
+    },
+    {
+      "lines": [
+        1099,
+        1108
+      ],
+      "claim": "Only original normal attacker0/1 updates first and optionally ordinary played-card topic. No attack re-evaluation after decrement."
+    },
+    {
+      "lines": [
+        1110,
+        1126
+      ],
+      "claim": "In non-tutorial mode, any Sophistry not faced by Ignore enables exactly one RandInt3; no attacker skips this entire block. Same result still draws/sets."
+    },
+    {
+      "lines": [
+        394,
+        398
+      ],
+      "claim": "CharacterDecAngerTimer decrements positive timer only."
+    },
+    {
+      "lines": [
+        854,
+        872
+      ],
+      "claim": "GetCardTopic maps1..3→0,4..6→1,7..9→2; this branch is called only for1..9."
+    },
+    {
+      "lines": [
+        197,
+        213
+      ],
+      "claim": "attacker and comboAttacker are distinct declared fields; they are not interchangeable state identities."
+    },
+    {
+      "lines": [
+        1046,
+        1079
+      ],
+      "claim": "Unchanged existing TurnStart resets played card, restores eligible quota, fills currentdeck, scans final Bold hand, clears crumble perteam."
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+      "lines": [
+        261,
+        274
+      ],
+      "claim": "TurnEndPhase advances to TurnStartPhase; no winner gate is inferred from TurnEnd."
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+      "lines": [
+        163,
+        168
+      ],
+      "claim": "TurnStartPhase advances to PlayPhase; ready-for-play result is only a data checkpoint, not execution of Play."
+    }
+  ],
+  "engineeringPolicies": [
+    "winner=-1 explicit nonterminal route admission, not source TurnEnd guard or HP/previousphase proof",
+    "Caller-supplied original normal attacker, first, topic, original played cards and resolved personalities; no PR120 combo adapter",
+    "Exact inherited TurnStart current18/sevenphysicalslots/capacity4..7/activezero exclusion; no generation",
+    "Exact input policy, detached closed safe JSON, frozen success/failure, typed failure without partial state",
+    "Separate flat stage indices versus unchanged TurnStart and fill indices; no callbacks or claim of external RNG rollback",
+    "Whole transaction only for this admitted currentdeck checkpoint, not all source-reachable states"
+  ],
+  "staticAcceptance": {
+    "successPaperCases": 22,
+    "refusalPaperCases": 18,
+    "method": "Static text, independent manual source/code/artifact review and byte hashes only",
+    "notRun": [
+      "tests",
+      "compiler",
+      "typecheck",
+      "build",
+      "validator",
+      "checker",
+      "diagnostics",
+      "candidate",
+      "source",
+      "scenario",
+      "replay"
+    ]
+  },
+  "unchangedDependencies": [
+    {
+      "path": "packages/engine/src/debate-turn-start.ts",
+      "gitBlobSha1": "4fd6273bd97dd60df3343677888614776973b126",
+      "sha256": "9ac0020af29dbeeb8d42a896665b798e38865cbae2c21dbf60ba79a8120875d6",
+      "integration": "one public evaluateDebateTurnStart call after both timer updates and first/topic work; full nested receipt unchanged"
+    },
+    {
+      "path": "packages/engine/src/debate-hand-fill.ts",
+      "integration": "indirect unchanged dependency; never duplicate fill algorithm"
+    },
+    {
+      "path": "packages/engine/src/debate-hand-fill-completion.ts",
+      "integration": "indirect unchanged final sorting helper"
+    }
+  ],
+  "remaining": [
+    "P078 and all dependencies excluded",
+    "nine legacy profiles and save tags unchanged",
+    "deck regeneration",
+    "tutorial",
+    "terminal/pursuit/mercy/Closing",
+    "full PlayPhase, normal attack and anger session orchestration",
+    "person/book/nonidentity hooks",
+    "native PRNG stream/distribution and global occurrence identity",
+    "campaign outcomes",
+    "43 evidence topics and45 historical snapshots retained"
+  ],
+  "nativeEquivalent": false,
+  "pkEquivalent": false,
+  "vanillaEquivalent": false
+}
