@@ -1146,3 +1146,37 @@ export type {
   DebateRethinkActionEvidenceV1,
 } from './debate-rethink-action.ts';
 export { evaluateDebateRethinkAction, DEBATE_RETHINK_ACTION_POLICY_V1, DEBATE_RETHINK_ACTION_EVIDENCE_V1 } from './debate-rethink-action.ts';
+
+// Bounded nonterminal TurnEnd → unchanged TurnStart; independent of legacy sessions.
+export {
+  evaluateDebateRoundTransition,
+  DEBATE_ROUND_TRANSITION_POLICY_V1,
+  DEBATE_ROUND_TRANSITION_EVIDENCE_V1,
+  type DebateRoundTransitionTeamIndexV1,
+  type DebateRoundTransitionAttackerV1,
+  type DebateRoundTransitionPersonalityV1,
+  type DebateRoundTransitionCardCodeV1,
+  type DebateRoundTransitionPhysicalCardV1,
+  type DebateRoundTransitionPhysicalHandV1,
+  type DebateRoundTransitionRawDrawV1,
+  type DebateRoundTransitionTopicRawDrawV1,
+  type DebateRoundTransitionCharacterCheckpointV1,
+  type DebateRoundTransitionCharacterInputV1,
+  type DebateRoundTransitionInputV1,
+  type DebateRoundTransitionStateV1,
+  type DebateRoundTransitionTimerAuditV1,
+  type DebateRoundTransitionFirstTeamAuditV1,
+  type DebateRoundTransitionOrdinaryTopicAuditV1,
+  type DebateRoundTransitionSophistryTeamCheckV1,
+  type DebateRoundTransitionSophistryAuditV1,
+  type DebateRoundTransitionTopicConsumedDrawV1,
+  type DebateRoundTransitionFillConsumedDrawV1,
+  type DebateRoundTransitionConsumedDrawV1,
+  type DebateRoundTransitionReceiptV1,
+  type DebateRoundTransitionSuccessV1,
+  type DebateRoundTransitionFailureReasonV1,
+  type DebateRoundTransitionFailureV1,
+  type DebateRoundTransitionResultV1,
+  type DebateRoundTransitionPolicyV1,
+  type DebateRoundTransitionEvidenceV1,
+} from './debate-round-transition.ts';
