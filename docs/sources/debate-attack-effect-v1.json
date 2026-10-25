@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "profile": "debate-attack-effect-reference-v1",
+  "implementation": "packages/engine/src/debate-attack-effect.ts",
+  "rules": "docs/rules/debate-attack-effect-v1.md",
+  "api": "docs/engine/debate-attack-effect-v1.md",
+  "paperCases": "data/scenarios/debate-attack-effect-paper-v1.json",
+  "sourceIdentity": "Modern C# reference, not original PK or Vanilla equivalence",
+  "repository": "https://github.com/tankyc/sango_infinity",
+  "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+  "sourceFiles": [
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "blob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+      "sha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28"
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+      "blob": "6aa98f855a5d4d172cde7e8ffc18a141b8a7b587",
+      "sha256": "5b47f7b6a89d6123a23e7c14f22168e59c9edd549e98d9bc0258d8a55bb9cbf3"
+    }
+  ],
+  "mapping": [
+    { "source": "DebatePhase.cs", "lines": [394, 417], "implementation": "resolve stage order, winner and nextCheckpoint", "claim": "Attack, then Effect even when lethal, then CalcWinner; nonterminal anger route" },
+    { "source": "Debate.cs", "lines": [1423, 1456], "implementation": "needsHp and attackBranch", "claim": "Branch-dependent zero or one HP-kernel call, Sophistry actor uses opposing ordinary card" },
+    { "source": "Debate.cs", "lines": [1145, 1196], "implementation": "unchanged evaluateDebateHpDamage public call", "claim": "Generic identity-hook formula with supplied bounded jitter; not copied" },
+    { "source": "Debate.cs", "lines": [1199, 1210], "implementation": "stressDamage", "claim": "Ordinary levels 10/15/20, Shout 15, others 0" },
+    { "source": "Debate.cs", "lines": [1216, 1249], "implementation": "draw, shout and topic write events", "claim": "Draw both +15; direct/reflected target selection" },
+    { "source": "Debate.cs", "lines": [1267, 1297], "implementation": "ignore write and effect", "claim": "Ignore opponent +30; Compose/Agitate reflection targets" },
+    { "source": "Debate.cs", "lines": [1458, 1480], "implementation": "effect", "claim": "Compose magnitude from current opponent stress, Agitate +40; final Rethink excluded by admission" },
+    { "source": "Debate.cs", "lines": [1568, 1579], "implementation": "ordered effect visits", "claim": "Attacker then opponent, no effects on tie, Ignore suppresses opponent" },
+    { "source": "Debate.cs", "lines": [512, 534], "implementation": "write", "claim": "HP clamp -100..1000 and stress clamp 0..100, no timer gating" },
+    { "source": "Debate.cs", "lines": [1380, 1395], "implementation": "winnerCheck", "claim": "First-team opponent HP checked before own HP" }
+  ],
+  "dependency": {
+    "path": "packages/engine/src/debate-hp-damage.ts",
+    "mainCommit": "70fb63e370eecd95004f18a3f9fe4aab6e9024c6",
+    "blob": "7624940d87c75b1fffd32b32520aae925a282969",
+    "modified": false,
+    "policy": "DEBATE_HP_DAMAGE_POLICY_V1",
+    "retainedResult": "Full success policy, evidence, arithmetic, audit and consumed jitter in receipt.hpDamage; typed dependency failure only on failure"
+  },
+  "engineeringRules": [
+    "Closed detached finite JSON envelope with exact full policy, proxy detector fail-closed, recursively frozen outputs",
+    "Initial HP positive, final playedCard 1..14, winner -1, non-tutorial, generic identity hook",
+    "Current topic explicitly 0..2; reject wider PR125 signed32 values without normalization",
+    "Attacker already resolved by caller; no re-selection, authenticity or source reachability proof",
+    "Raw draw count exactly 0 or 1 by source call demand, including zero-damage default calls",
+    "External hand/deck/quota/strength/combo/crumble metadata not accepted or synthesized; downstream anger requires explicit projection and full existing admission",
+    "Safety budgets and audit events are engineering conventions, not native source features"
+  ],
+  "boundaries": {
+    "nativeEquivalent": false,
+    "pkEquivalent": false,
+    "vanillaEquivalent": false,
+    "nativeGapTopics": 43,
+    "historicalSnapshots": 45,
+    "p078AndDependencies": "excluded",
+    "legacyNineSessions": "unchanged",
+    "fullDebate": false,
+    "angerAndTurnTransition": "route only, not invoked",
+    "criticalClosingRewards": "excluded",
+    "tutorialDeckRegenerationPersonHooks": "excluded"
+  },
+  "verification": "Static text reading, manual paper reasoning and byte identity only; no tests/compiler/typecheck/build/validator/checker/candidate/source/scenario/replay execution. Paper expectations are not observed results."
+}
