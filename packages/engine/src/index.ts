@@ -1256,3 +1256,20 @@ export {
   type DebateAngerTransitionPolicyV1,
   type DebateAngerTransitionEvidenceV1,
 } from './debate-anger-transition.ts';
+
+export {
+  evaluateDebateAttackEffect,
+  DEBATE_ATTACK_EFFECT_POLICY_V1,
+  DEBATE_ATTACK_EFFECT_EVIDENCE_V1,
+  type DebateAttackEffectCharacterV1,
+  type DebateAttackEffectInputV1,
+  type DebateAttackEffectStateV1,
+  type DebateAttackEffectWriteV1,
+  type DebateAttackEffectReceiptV1,
+  type DebateAttackEffectSuccessV1,
+  type DebateAttackEffectFailureV1,
+  type DebateAttackEffectFailureReasonV1,
+  type DebateAttackEffectResultV1,
+  type DebateAttackEffectPolicyV1,
+  type DebateAttackEffectEvidenceV1,
+} from './debate-attack-effect.ts';

@@ -1,3 +1,13 @@
+## 2026-10-25：现代参考有界普通攻击、效果与判胜（静态）
+
+本批新增[Attack → Effect → CalcWinner](debate-attack-effect-v1.md)及[API合同](../engine/debate-attack-effect-v1.md)，从已出牌且攻击方已解析的显式检查点出发，复用原 `evaluateDebateHpDamage`，写入 HP／压力并在全部效果之后判胜。非终局返回 `ready-for-anger`，终局停在 `terminal-pending-classification`，不执行愤怒、崩坏、回合衔接或 Critical／Closing。
+
+PR125 的 firstTeam、attacker、最终 playedCard、personality、angerTimer 与 currentTopic 可作显式投影来源；必须另提供两队正 HP、压力、已解析攻击力及本次精确0或1项 HP jitter。PR125 话题是 signed32，本 API 仅接受0..2，越界整笔拒绝，不钳制／取模，也不声称任意 PR125 输出均可接入。attacker 是已解析事实，不重新选择或认证。手牌、容量、额度、18牌组、游标、strength、combo 与崩坏数据仍由外层保留，不在本 API 中伪造默认值；进入 PR126 还须明确补齐其完整输入与收窄条件，不是自动整链事务。
+
+平局双方压力+15且不执行 Effect；无视使对手压力+30且抑制对手效果；诡辩只对对方普通牌调用 HP 核，用诡辩方属性计算后反射到对手。大喝及默认分支恰调用一次 HP 核，包括镇静／激昂的零级伤害。先攻击再按攻击方、对手顺序处理效果，致死也不提前跳过效果；镇静反射仍以对手当前压力定量，激昂按反射目标写入。压力始终钳制0..100，兴奋 timer 不抑制压力写入；HP 钳制−100..1000。完整嵌套 HP 收据、逐项写入及两阶段快照可人工追踪。所有载荷先完整分离和解析，缺少／多余随机项均拒绝，失败无部分状态。
+
+新增规则、API、固定来源映射与人工纸面场景逐一对应。现代固定 C# 不是原生 PK／Vanilla 等价证明；43证据主题／45历史快照不减。P078及全部依赖、九个旧会话、既有公开核／政策／存档均不改。完整阶段机／会话、教程、牌组再生成、人物／书籍／hook、全场随机、永久牌身份、终局奖励和 campaign 仍未接入。仅静态文本阅读、手工推导及字节核对；未运行测试、编译、typecheck、build、validator、checker、候选、来源、场景或 replay。下方历史记录保留当时边界。
+
 ## 2026-10-24：现代参考有界愤怒结算至条件回合衔接（静态）
 
 [PR125](https://github.com/DanielMax937/sanguozhi/pull/125)已交付受检双队出牌至伤害入口。本批补充[有界愤怒后衔接事务](debate-anger-transition-v1.md)与[API合同](../engine/debate-anger-transition-v1.md)，复用既有双次愤怒核和回合衔接核，闭合给定愤怒前检查点至非终局下一次出牌前或终局待分类的小流程，不复制反制、连打、计时、话题和补牌算法。它不是从PR125检查点自动执行Attack，更不是全回合或完整会话。
