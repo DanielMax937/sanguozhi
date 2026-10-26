@@ -1,0 +1,409 @@
+{
+  "schemaVersion": 1,
+  "kind": "manual-static-scenarios-not-executable-inputs",
+  "verification": "Not executed; expected values manually derived from source and candidate text, not observed results.",
+  "notation": "Changes apply to conceptual baseline; complete exported policy, schemaVersion=1 and profile required. notation entries describe representation changes, not API keys. All success cases preserve supplied winner/hp, externalRngConsumed=0, closingExecuted=false, nextCheckpoint=closing-pending; all rejection cases have no state/receipt.",
+  "baseline": {
+    "winner": 0,
+    "hp": [
+      1000,
+      -100
+    ],
+    "criticalDisabled": false,
+    "initialCritical": -1,
+    "initialWinType": 0,
+    "choice": 0,
+    "genericOnly": true,
+    "isTutorial": false
+  },
+  "successCases": [
+    {
+      "id": "push-zero",
+      "changes": {},
+      "expected": {
+        "canCritical": true,
+        "critical": 0,
+        "winType": 1,
+        "classification": "PushOn",
+        "calcWinTypeApplied": true
+      },
+      "reason": "choice0必须映射winType1"
+    },
+    {
+      "id": "mercy-one",
+      "changes": {
+        "choice": 1
+      },
+      "expected": {
+        "canCritical": true,
+        "critical": 1,
+        "winType": 2,
+        "classification": "HaveMercy",
+        "calcWinTypeApplied": true
+      },
+      "reason": "choice1必须映射winType2"
+    },
+    {
+      "id": "team-one",
+      "changes": {
+        "winner": 1,
+        "hp": [
+          -100,
+          1000
+        ],
+        "choice": 1
+      },
+      "expected": {
+        "canCritical": true,
+        "critical": 1,
+        "winType": 2,
+        "classification": "HaveMercy",
+        "calcWinTypeApplied": true
+      },
+      "reason": "对手是team0"
+    },
+    {
+      "id": "threshold-minus99",
+      "changes": {
+        "hp": [
+          1000,
+          -99
+        ],
+        "choice": null
+      },
+      "expected": {
+        "canCritical": false,
+        "critical": -1,
+        "winType": 0,
+        "classification": "Normal",
+        "calcWinTypeApplied": false
+      },
+      "reason": "−99高于阈值"
+    },
+    {
+      "id": "terminal-zero",
+      "changes": {
+        "hp": [
+          1000,
+          0
+        ],
+        "choice": null
+      },
+      "expected": {
+        "canCritical": false,
+        "critical": -1,
+        "winType": 0,
+        "classification": "Normal",
+        "calcWinTypeApplied": false
+      },
+      "reason": "0已终局但非会心"
+    },
+    {
+      "id": "disabled-at-threshold",
+      "changes": {
+        "criticalDisabled": true,
+        "choice": null
+      },
+      "expected": {
+        "canCritical": false,
+        "critical": -1,
+        "winType": 0,
+        "classification": "Normal",
+        "calcWinTypeApplied": false
+      },
+      "reason": "禁用优先"
+    },
+    {
+      "id": "disabled-team-one",
+      "changes": {
+        "winner": 1,
+        "hp": [
+          -100,
+          1000
+        ],
+        "criticalDisabled": true,
+        "choice": null
+      },
+      "expected": {
+        "canCritical": false,
+        "critical": -1,
+        "winType": 0,
+        "classification": "Normal",
+        "calcWinTypeApplied": false
+      },
+      "reason": "换边后禁用仍保留Normal"
+    },
+    {
+      "id": "winner-low-loser-normal",
+      "changes": {
+        "hp": [
+          -100,
+          -1
+        ],
+        "choice": null
+      },
+      "expected": {
+        "canCritical": false,
+        "critical": -1,
+        "winType": 0,
+        "classification": "Normal",
+        "calcWinTypeApplied": false
+      },
+      "reason": "看败者HP，不看胜者−100"
+    },
+    {
+      "id": "both-nonpositive",
+      "changes": {
+        "hp": [
+          0,
+          -100
+        ]
+      },
+      "expected": {
+        "canCritical": true,
+        "critical": 0,
+        "winType": 1,
+        "classification": "PushOn",
+        "calcWinTypeApplied": true
+      },
+      "reason": "尊重供应winner，不重判胜"
+    },
+    {
+      "id": "hp-lower-bound-both",
+      "changes": {
+        "hp": [
+          -100,
+          -100
+        ],
+        "choice": 1
+      },
+      "expected": {
+        "canCritical": true,
+        "critical": 1,
+        "winType": 2,
+        "classification": "HaveMercy",
+        "calcWinTypeApplied": true
+      },
+      "reason": "允许两队−100的有界供应投影"
+    },
+    {
+      "id": "reordered-policy",
+      "changes": {
+        "notation": "policy键顺序改变但内容相同"
+      },
+      "expected": {
+        "canCritical": true,
+        "critical": 0,
+        "winType": 1,
+        "classification": "PushOn",
+        "calcWinTypeApplied": true
+      },
+      "reason": "canonical按键排序"
+    },
+    {
+      "id": "null-prototype-record",
+      "changes": {
+        "notation": "普通JSON域改用null原型record"
+      },
+      "expected": {
+        "canCritical": true,
+        "critical": 0,
+        "winType": 1,
+        "classification": "PushOn",
+        "calcWinTypeApplied": true
+      },
+      "reason": "安全分离允许null原型record"
+    }
+  ],
+  "rejectionCases": [
+    {
+      "id": "missing-choice",
+      "changes": {
+        "choice": null
+      },
+      "expectedReason": "choice-required"
+    },
+    {
+      "id": "extra-choice",
+      "changes": {
+        "hp": [
+          1000,
+          -99
+        ]
+      },
+      "expectedReason": "choice-forbidden"
+    },
+    {
+      "id": "disabled-choice",
+      "changes": {
+        "criticalDisabled": true
+      },
+      "expectedReason": "choice-forbidden"
+    },
+    {
+      "id": "output-enum-as-choice",
+      "changes": {
+        "choice": 2
+      },
+      "expectedReason": "invalid-choice"
+    },
+    {
+      "id": "choice-minus-one",
+      "changes": {
+        "choice": -1
+      },
+      "expectedReason": "invalid-choice"
+    },
+    {
+      "id": "choice-string",
+      "changes": {
+        "choice": "PushOn"
+      },
+      "expectedReason": "invalid-choice"
+    },
+    {
+      "id": "winner-unresolved",
+      "changes": {
+        "winner": -1
+      },
+      "expectedReason": "invalid-checkpoint"
+    },
+    {
+      "id": "loser-positive",
+      "changes": {
+        "hp": [
+          1000,
+          1
+        ]
+      },
+      "expectedReason": "invalid-checkpoint"
+    },
+    {
+      "id": "hp-unclamped",
+      "changes": {
+        "hp": [
+          1000,
+          -101
+        ]
+      },
+      "expectedReason": "invalid-checkpoint"
+    },
+    {
+      "id": "winner-hp-overflow",
+      "changes": {
+        "hp": [
+          1001,
+          -100
+        ]
+      },
+      "expectedReason": "invalid-checkpoint"
+    },
+    {
+      "id": "hp-wrong-length",
+      "changes": {
+        "hp": [
+          1000
+        ]
+      },
+      "expectedReason": "invalid-checkpoint"
+    },
+    {
+      "id": "tutorial",
+      "changes": {
+        "isTutorial": true
+      },
+      "expectedReason": "invalid-checkpoint"
+    },
+    {
+      "id": "non-generic",
+      "changes": {
+        "genericOnly": false
+      },
+      "expectedReason": "invalid-checkpoint"
+    },
+    {
+      "id": "noninitial-winType",
+      "changes": {
+        "initialWinType": 1
+      },
+      "expectedReason": "invalid-checkpoint"
+    },
+    {
+      "id": "noninitial-critical",
+      "changes": {
+        "initialCritical": 0
+      },
+      "expectedReason": "invalid-checkpoint"
+    },
+    {
+      "id": "switch-not-boolean",
+      "changes": {
+        "criticalDisabled": 0
+      },
+      "expectedReason": "invalid-checkpoint"
+    },
+    {
+      "id": "extra-rng",
+      "changes": {
+        "rawDraws": []
+      },
+      "expectedReason": "unknown-field"
+    },
+    {
+      "id": "missing-field",
+      "changes": {
+        "notation": "删choice属性"
+      },
+      "expectedReason": "malformed-data"
+    },
+    {
+      "id": "policy-patch",
+      "changes": {
+        "notation": "只提供policy.id或修改normalPolicy"
+      },
+      "expectedReason": "unsupported-policy"
+    },
+    {
+      "id": "wrong-profile",
+      "changes": {
+        "profile": "other"
+      },
+      "expectedReason": "unsupported-profile"
+    },
+    {
+      "id": "unsafe-numeric",
+      "changes": {
+        "notation": "hp内NaN/Infinity/小数/负零/unsafe integer"
+      },
+      "expectedReason": "malformed-data"
+    },
+    {
+      "id": "executable-input",
+      "changes": {
+        "notation": "getter/函数/Proxy/cycle/symbol/类实例"
+      },
+      "expectedReason": "malformed-data"
+    },
+    {
+      "id": "sparse-array",
+      "changes": {
+        "notation": "hp含空洞或额外属性"
+      },
+      "expectedReason": "malformed-data"
+    },
+    {
+      "id": "budget",
+      "changes": {
+        "notation": "任意输入超过节点/深度/数组/UTF-8预算"
+      },
+      "expectedReason": "input-limit"
+    },
+    {
+      "id": "runtime",
+      "changes": {
+        "notation": "可信proxy检测器不可用"
+      },
+      "expectedReason": "unsupported-runtime"
+    }
+  ]
+}

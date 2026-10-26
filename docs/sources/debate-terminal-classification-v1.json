@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "profile": "debate-terminal-classification-reference-v1",
+  "repository": "https://github.com/tankyc/sango_infinity",
+  "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+  "sourceIdentity": "Modern C# reference only, not native PK or Vanilla equivalence",
+  "sourceFiles": [
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "blob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+      "sha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28"
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+      "blob": "6aa98f855a5d4d172cde7e8ffc18a141b8a7b587",
+      "sha256": "5b47f7b6a89d6123a23e7c14f22168e59c9edd549e98d9bc0258d8a55bb9cbf3"
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "blob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+      "sha256": "cd71efed5059fb4ca876091b1e39bd34636fb978c8ec9bfbf924d6a443070bc1"
+    }
+  ],
+  "mapping": [
+    {
+      "source": "Debate.cs",
+      "lines": [
+        1399,
+        1419
+      ],
+      "implementation": "parseInput eligibility and resolve distinct choice/winType mapping"
+    },
+    {
+      "source": "Debate.cs",
+      "lines": [
+        1540,
+        1542
+      ],
+      "implementation": "explicit initialCritical=-1 and initialWinType=0 admission"
+    },
+    {
+      "source": "DebateEnum.cs",
+      "lines": [
+        80,
+        93
+      ],
+      "implementation": "choice0/1 -> output1/2, Normal0"
+    },
+    {
+      "source": "DebatePhase.cs",
+      "lines": [
+        278,
+        300
+      ],
+      "implementation": "explicit valid choice before classification; stops before Closing"
+    },
+    {
+      "source": "DebatePhase.cs",
+      "lines": [
+        354,
+        356,
+        382,
+        384,
+        412,
+        414
+      ],
+      "implementation": "terminal gate in anger and ordinary damage routes"
+    },
+    {
+      "source": "Debate.cs",
+      "lines": [
+        45,
+        48,
+        512,
+        517
+      ],
+      "implementation": "admit already-clamped HP -100..1000 without mutation"
+    }
+  ],
+  "mainBaseline": "0d2b2175b3cd36151b5827de098693d49569566a",
+  "existingKernelsChanged": false,
+  "engineeringRules": [
+    "closed detached frozen exact policy",
+    "non-tutorial generic resolved winner, loserHP<=0",
+    "caller supplied projection, no authenticity or reachability proof",
+    "no automatic winner recomputation or AI default",
+    "qualified choice required; unqualified choice forbidden",
+    "explicit initial classification only; no replay/persistence",
+    "zero RNG; no Closing or rewards"
+  ],
+  "verification": "仅静态文本阅读、人工纸面推导和字节核对；未运行测试、编译、typecheck、build、validator、checker、候选、来源、场景或 replay。静态审阅不证明运行正确或原生 PK／Vanilla 等价。43证据主题／45历史快照不减；P078及全部依赖保持排除。",
+  "paperCases": {
+    "success": 12,
+    "rejection": 25,
+    "executed": false
+  },
+  "boundaries": {
+    "p078AndDependencies": "excluded",
+    "nativeGapTopics": 43,
+    "historicalSnapshots": 45,
+    "oldNineSessions": "unchanged",
+    "Closing": "excluded"
+  }
+}
