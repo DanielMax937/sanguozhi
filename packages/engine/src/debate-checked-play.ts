@@ -17,6 +17,7 @@ import {
   DEBATE_RETHINK_ACTION_POLICY_V1,
   DEBATE_RETHINK_ACTION_EVIDENCE_V1,
   type DebateRethinkActionPersonalityV1,
+  type DebateRethinkActionInputV1,
   type DebateRethinkActionCardCodeV1,
   type DebateRethinkActionRawDrawV1,
   type DebateRethinkActionRawResultV1,
@@ -409,9 +410,27 @@ export type DebateCheckedPlayResultV1 = Frozen<Result>;
 export type DebateCheckedPlayPolicyV1 = Frozen<Policy>;
 export type DebateCheckedPlayEvidenceV1 = Frozen<Evidence>;
 
+/** @internal Trusted composition contracts; not public input or barrel exports. */
+export type DebateCheckedPlayRethinkInternal = {
+  character: DebateRethinkActionSuccessV1['character'];
+  receipt: { randomEvents: DebateRethinkActionSuccessV1['receipt']['randomEvents'] };
+};
+export type DebateCheckedPlayBodyInternal<R extends DebateCheckedPlayRethinkInternal> = {
+  ok: true;
+  attacker: Attacker;
+  checkpoint: ReadyCheckpoint;
+  receipt: Omit<Receipt, 'schemaVersion' | 'profile' | 'policy' | 'evidence' | 'selections'> & {
+    selections: (Omit<SelectionAudit, 'rethink'> & { rethink: R | null })[];
+  };
+};
+
 class Invalid extends Error {
   readonly reason: FailureReason;
   constructor(reason: FailureReason) { super(reason); this.reason = reason; }
+}
+/** @internal Recognizes only this kernel's own typed failures, not callback errors. */
+export function getDebateCheckedPlayFailureInternal(error: unknown): DebateCheckedPlayFailureV1 | null {
+  return error instanceof Invalid ? { ok: false, reason: error.reason } : null;
 }
 function fail(reason: FailureReason): never { throw new Invalid(reason); }
 function failure(error: unknown): Failure {
@@ -650,7 +669,7 @@ function removeCard(character: CharacterState, selectedIndex: number, selectedCa
     allBackingSlotsCleared: true, numericSortPerformed: false,
   };
 }
-function appendRandomEvents(events: RandomEvent[], rethink: DebateRethinkActionSuccessV1, team: Team, selectionIndex: number): void {
+function appendRandomEvents(events: RandomEvent[], rethink: DebateCheckedPlayRethinkInternal, team: Team, selectionIndex: number): void {
   for (const event of rethink.receipt.randomEvents) {
     const context: EventContext = {
       eventIndex: events.length, team, selectionIndex,
@@ -663,12 +682,16 @@ function appendRandomEvents(events: RandomEvent[], rethink: DebateRethinkActionS
     }
   }
 }
-function resolve(input: Input): Success {
+/** @internal Called with parsed data and engine-owned closures only. */
+export function resolveDebateCheckedPlayInternal<R extends DebateCheckedPlayRethinkInternal>(
+  input: Input,
+  rethinkAction: (input: DebateRethinkActionInputV1, team: Team, selectionIndex: number) => R,
+): DebateCheckedPlayBodyInternal<R> {
   const before = copyState(input);
   const state = copyState(input);
   const opponentTeam: Team = input.firstTeam === 0 ? 1 : 0;
   const actorOrder: Pair<Team> = [input.firstTeam, opponentTeam];
-  const selections: SelectionAudit[] = [];
+  const selections: (Omit<SelectionAudit, 'rethink'> & { rethink: R | null })[] = [];
   const randomEvents: RandomEvent[] = [];
   let rethinkCount = 0;
 
@@ -702,20 +725,19 @@ function resolve(input: Input): Success {
       const playedCardWrite: PlayedCardWrite = { before: -1, after: card, beforeRemoval: true };
       character.playedCard = card;
       const removal = removeCard(character, selectedIndex, card);
-      let rethink: DebateRethinkActionSuccessV1 | null = null;
+      let rethink: R | null = null;
       let reset: ResetAudit | null = null;
 
       if (card === 0) {
-        const action = evaluateDebateRethinkAction({
+        const action = rethinkAction({
           schemaVersion: 1,
           profile: 'debate-rethink-action-reference-v1',
           policies: DEBATE_RETHINK_ACTION_POLICY_V1,
           currentTopic: state.currentTopic,
-          character,
+          character: { ...character, playedCard: 0 },
           rawDraws: selection.rawDraws,
           rawResults: selection.rawResults,
-        });
-        if (!action.ok) fail(action.reason);
+        }, team, selectionIndex);
         rethink = action;
         rethinkCount++;
         appendRandomEvents(randomEvents, action, team, selectionIndex);
@@ -759,17 +781,9 @@ function resolve(input: Input): Success {
   };
   return {
     ok: true,
-    schemaVersion: 1,
-    profile: PROFILE,
-    policy: POLICY,
-    evidence: EVIDENCE,
     attacker: attackerSelection.attacker,
     checkpoint,
     receipt: {
-      schemaVersion: 1,
-      profile: PROFILE,
-      policy: POLICY,
-      evidence: EVIDENCE,
       before,
       after: checkpoint,
       actorOrder,
@@ -782,6 +796,23 @@ function resolve(input: Input): Success {
       randomEventCount: randomEvents.length as 0 | 1 | 2 | 3 | 4,
       externalRngConsumed: 0,
     },
+  };
+}
+
+/** @internal Safe original-shape admission, with unchanged v1 policy checking. */
+export function parseDebateCheckedPlayInternal(input: unknown): Input {
+  return parseInput(detach(input));
+}
+function resolve(input: Input): Success {
+  const body = resolveDebateCheckedPlayInternal(input, actionInput => {
+    const action = evaluateDebateRethinkAction(actionInput);
+    if (!action.ok) fail(action.reason);
+    return action;
+  });
+  return {
+    ok: true, schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE,
+    attacker: body.attacker, checkpoint: body.checkpoint,
+    receipt: { schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE, ...body.receipt },
   };
 }
 

@@ -7,6 +7,7 @@ import {
   evaluateDebateTurnStart,
   DEBATE_TURN_START_POLICY_V1,
   DEBATE_TURN_START_EVIDENCE_V1,
+  type DebateTurnStartInputV1,
   type DebateTurnStartPersonalityV1,
   type DebateTurnStartCardCodeV1,
   type DebateTurnStartPhysicalCardV1,
@@ -356,6 +357,17 @@ export type DebateRoundTransitionResultV1 = Frozen<Result>;
 export type DebateRoundTransitionPolicyV1 = Frozen<Policy>;
 export type DebateRoundTransitionEvidenceV1 = Frozen<Evidence>;
 
+/** @internal Trusted metadata-free TurnStart dependency, never public input. */
+export type DebateRoundTransitionTurnReceiptInternal = Pick<DebateTurnStartReceiptV1, 'consumedDraws'>;
+export type DebateRoundTransitionTurnInternal<R extends DebateRoundTransitionTurnReceiptInternal> =
+  (input: DebateTurnStartInputV1) => {
+    characters: readonly [CharacterCheckpoint, CharacterCheckpoint]; receipt: R;
+  };
+export type DebateRoundTransitionBodyInternal<R extends DebateRoundTransitionTurnReceiptInternal> =
+  Omit<Success, 'schemaVersion' | 'profile' | 'policy' | 'evidence' | 'receipt'> & {
+    receipt: Omit<Receipt, 'schemaVersion' | 'profile' | 'policy' | 'evidence' | 'turnStart'> & { turnStart: R };
+  };
+
 class Invalid extends Error {
   readonly reason: FailureReason;
   constructor(reason: FailureReason) { super(reason); this.reason = reason; }
@@ -581,7 +593,7 @@ function checkSophistry(characters: [MutableCharacter, MutableCharacter], teamIn
   const blockedByIgnore = isSophistry && opponentPlayedCard === 12;
   return { teamIndex, playedCard, opponentPlayedCard, isSophistry, blockedByIgnore, qualifies: isSophistry && !blockedByIgnore };
 }
-function resolve(input: Input): Success {
+function resolveBody<R extends DebateRoundTransitionTurnReceiptInternal>(input: Input, runTurnStart: DebateRoundTransitionTurnInternal<R>): DebateRoundTransitionBodyInternal<R> {
   const before = snapshot(input, input.firstTeam, input.currentTopic, input.characters);
   const characters: [MutableCharacter, MutableCharacter] = [
     copyCharacter(input.characters[0]), copyCharacter(input.characters[1]),
@@ -637,9 +649,9 @@ function resolve(input: Input): Success {
     drawCount: topicConsumedDraws.length as 0 | 1,
   };
   const afterTurnEnd = snapshot(input, firstTeam, currentTopic, characters);
-  // Exactly one public dependency call, with decremented timers and original
-  // playedCards. No validation probe and no copied fill/quota/Bold algorithm.
-  const turnStart = evaluateDebateTurnStart({
+  // Exactly one trusted dependency call, with decremented timers and original
+  // playedCards. The v1 adapter still uses the original public evaluator.
+  const turnStart = runTurnStart({
     schemaVersion: 1,
     profile: 'debate-turn-start-reference-v1',
     policies: DEBATE_TURN_START_POLICY_V1,
@@ -649,7 +661,6 @@ function resolve(input: Input): Success {
       { ...characters[1], rawDraws: input.characters[1].rawDraws },
     ],
   });
-  if (!turnStart.ok) fail(turnStart.reason);
   const after = snapshot(input, firstTeam, currentTopic, turnStart.characters);
   const consumedDraws: ConsumedDraw[] = [];
   for (const draw of topicConsumedDraws) {
@@ -667,16 +678,37 @@ function resolve(input: Input): Success {
     });
   }
   return {
-    ok: true, schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE,
+    ok: true,
     state: after, characters: after.characters, nextCheckpoint: 'ready-for-play',
     receipt: {
-      schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE,
       before, afterTurnEnd, after, timerOrder: [0, 1], timers,
       firstTeam: firstTeamAudit, ordinaryTopic, sophistry,
       turnStart: turnStart.receipt, turnStartDrawOffset, consumedDraws,
       drawCount: consumedDraws.length as 0 | 1 | 2 | 3,
       externalRngConsumed: 0,
     },
+  };
+}
+
+/** Internal body over the unchanged v1-shaped safe admission. */
+export function resolveDebateRoundTransitionInternal<R extends DebateRoundTransitionTurnReceiptInternal>(
+  input: unknown, runTurnStart: DebateRoundTransitionTurnInternal<R>,
+): DebateRoundTransitionBodyInternal<R> {
+  return resolveBody(parseInput(detach(input)), runTurnStart);
+}
+export function debateRoundTransitionFailureInternal(error: unknown): DebateRoundTransitionFailureV1 | null {
+  return error instanceof Invalid ? freeze(failure(error)) : null;
+}
+function resolve(input: Input): Success {
+  const body = resolveBody(input, (turnInput) => {
+    const result = evaluateDebateTurnStart(turnInput);
+    if (!result.ok) fail(result.reason);
+    return result;
+  });
+  return {
+    ok: true, schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE,
+    state: body.state, characters: body.characters, nextCheckpoint: body.nextCheckpoint,
+    receipt: { schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE, ...body.receipt },
   };
 }
 

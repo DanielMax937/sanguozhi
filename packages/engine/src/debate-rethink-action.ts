@@ -9,6 +9,8 @@ import {
   DEBATE_HAND_FILL_POLICY_V1,
   DEBATE_HAND_FILL_EVIDENCE_V1,
   type DebateHandFillCardCodeV1,
+  type DebateHandFillInputV1,
+  type DebateHandFillHandV1,
   type DebateHandFillRawDrawV1,
   type DebateHandFillReceiptV1,
   type DebateHandFillRepairV1,
@@ -354,9 +356,29 @@ export type DebateRethinkActionResultV1 = Frozen<Result>;
 export type DebateRethinkActionPolicyV1 = Frozen<Policy>;
 export type DebateRethinkActionEvidenceV1 = Frozen<Evidence>;
 
+/** @internal Trusted composition contracts; never accepted as public input. */
+export type DebateRethinkFillAuditInternal = Pick<DebateHandFillReceiptV1,
+  'consumedDraws' | 'sortedProvenance' | 'repair'>;
+export type DebateRethinkFillInternal<F extends DebateRethinkFillAuditInternal> = {
+  hand: DebateHandFillHandV1;
+  deckCursor: number;
+  cardTape: readonly CardCode[];
+  receipt: F;
+};
+export type DebateRethinkBodyInternal<F extends DebateRethinkFillAuditInternal> = {
+  ok: true;
+  currentTopic: number;
+  character: CharacterCheckpoint;
+  receipt: Omit<Receipt, 'schemaVersion' | 'profile' | 'policy' | 'evidence' | 'fill'> & { fill: F };
+};
+
 class Invalid extends Error {
   readonly reason: FailureReason;
   constructor(reason: FailureReason) { super(reason); this.reason = reason; }
+}
+/** @internal Recognizes only this kernel's own typed failures, not callback errors. */
+export function getDebateRethinkActionFailureInternal(error: unknown): DebateRethinkActionFailureV1 | null {
+  return error instanceof Invalid ? { ok: false, reason: error.reason } : null;
 }
 function fail(reason: FailureReason): never { throw new Invalid(reason); }
 function failure(error: unknown): Failure {
@@ -541,7 +563,7 @@ function copyCharacter(character: CharacterCheckpoint): CharacterCheckpoint {
     deckCursor: character.deckCursor,
   };
 }
-function composeProvenance(fill: DebateHandFillReceiptV1, calm: DebateCalmRethinkSuccessV1): FinalProvenance[] {
+function composeProvenance(fill: DebateRethinkFillAuditInternal, calm: DebateCalmRethinkSuccessV1): FinalProvenance[] {
   return calm.audit.sort.sourceIndices.map((fillSortedIndex, finalIndex) => {
     const origin = fill.sortedProvenance[fillSortedIndex]!;
     const topicRepair = fill.repair.status === 'applied' && fill.repair.preSortSlot === origin.preSortSlot
@@ -564,7 +586,11 @@ function composeProvenance(fill: DebateHandFillReceiptV1, calm: DebateCalmRethin
     };
   });
 }
-function resolve(input: Input): Success {
+/** @internal Caller supplies only a trusted engine closure; input has been parsed. */
+export function resolveDebateRethinkActionInternal<F extends DebateRethinkFillAuditInternal>(
+  input: Input,
+  fillHand: (input: DebateHandFillInputV1) => DebateRethinkFillInternal<F>,
+): DebateRethinkBodyInternal<F> {
   const before: State = { currentTopic: input.currentTopic, character: copyCharacter(input.character) };
   const after: State = { currentTopic: input.currentTopic, character: copyCharacter(input.character) };
   const character = after.character;
@@ -587,7 +613,7 @@ function resolve(input: Input): Success {
   };
 
   // Every call consumes cap-1 cards, regardless of the original hand contents.
-  const fill = evaluateDebateHandFill({
+  const fill = fillHand({
     schemaVersion: 1,
     profile: 'debate-hand-fill-reference-v1',
     policies: DEBATE_HAND_FILL_POLICY_V1,
@@ -596,7 +622,6 @@ function resolve(input: Input): Success {
     deckCursor: character.deckCursor,
     rawDraws: input.rawDraws,
   });
-  if (!fill.ok) fail(fill.reason);
 
   // Fresh fill has at least one ordinary card, naturally or by last-new repair.
   // Pass its actual sorted active hand, not an old hand or a reconstructed one.
@@ -616,6 +641,7 @@ function resolve(input: Input): Success {
   // prefix, preserve the backing tail, and perform the source quota assignment.
   for (let slot = 0; slot < character.maxCardCount; slot++) character.hand[slot] = calm.hand[slot]!;
   character.deckCursor = fill.deckCursor;
+  character.cardTape = fill.cardTape.slice();
   character.canRethink = false;
   // playedCard remains zero; the later caller PlayPhase step owns its reset.
 
@@ -632,17 +658,9 @@ function resolve(input: Input): Success {
 
   return {
     ok: true,
-    schemaVersion: 1,
-    profile: PROFILE,
-    policy: POLICY,
-    evidence: EVIDENCE,
     currentTopic: after.currentTopic,
     character,
     receipt: {
-      schemaVersion: 1,
-      profile: PROFILE,
-      policy: POLICY,
-      evidence: EVIDENCE,
       before,
       after,
       clear,
@@ -660,6 +678,23 @@ function resolve(input: Input): Success {
       finalProvenance: composeProvenance(fill.receipt, calm),
       externalRngConsumed: 0,
     },
+  };
+}
+
+/** @internal Safe original-shape admission, not a callback-bearing public API. */
+export function parseDebateRethinkActionInternal(input: unknown): Input {
+  return parseInput(detach(input));
+}
+function resolve(input: Input): Success {
+  const body = resolveDebateRethinkActionInternal(input, fillInput => {
+    const fill = evaluateDebateHandFill(fillInput);
+    if (!fill.ok) fail(fill.reason);
+    return { hand: fill.hand, deckCursor: fill.deckCursor, cardTape: fillInput.cardTape, receipt: fill.receipt };
+  });
+  return {
+    ok: true, schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE,
+    currentTopic: body.currentTopic, character: body.character,
+    receipt: { schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE, ...body.receipt },
   };
 }
 

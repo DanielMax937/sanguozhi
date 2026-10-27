@@ -31,6 +31,7 @@ import {
   type DebateRoundTransitionPhysicalCardV1,
   type DebateRoundTransitionRawDrawV1,
   type DebateRoundTransitionTopicRawDrawV1,
+  type DebateRoundTransitionInputV1,
   type DebateRoundTransitionCharacterInputV1,
   type DebateRoundTransitionCharacterCheckpointV1,
   type DebateRoundTransitionTopicConsumedDrawV1,
@@ -395,6 +396,17 @@ export type DebateAngerTransitionResultV1 = Frozen<Result>;
 export type DebateAngerTransitionPolicyV1 = Frozen<Policy>;
 export type DebateAngerTransitionEvidenceV1 = Frozen<Evidence>;
 
+/** @internal Trusted dependency body, not a user callback or a v1 receipt. */
+export type DebateAngerTransitionRoundSuccessInternal = Pick<DebateRoundTransitionSuccessV1, 'state' | 'characters'> & {
+  receipt: Pick<DebateRoundTransitionSuccessV1['receipt'], 'consumedDraws'>;
+};
+export type DebateAngerTransitionRoundInternal<R extends DebateAngerTransitionRoundSuccessInternal> =
+  (input: DebateRoundTransitionInputV1) => R;
+export type DebateAngerTransitionBodyInternal<R extends DebateAngerTransitionRoundSuccessInternal> =
+  Omit<Success, 'schemaVersion' | 'profile' | 'policy' | 'evidence' | 'receipt'> & {
+    receipt: Omit<Receipt, 'schemaVersion' | 'profile' | 'policy' | 'evidence' | 'transition'> & { transition: R | null };
+  };
+
 class Invalid extends Error {
   readonly failure: Failure;
   constructor(failure: Failure) { super(failure.reason); this.failure = failure; }
@@ -645,7 +657,7 @@ function overlayRoundCharacter(before: Character, after: DebateRoundTransitionCh
     deckCursor: after.deckCursor,
   };
 }
-function resolve(input: ParsedInput): Success {
+function resolveBody<R extends DebateAngerTransitionRoundSuccessInternal>(input: ParsedInput, runRound: DebateAngerTransitionRoundInternal<R>): DebateAngerTransitionBodyInternal<R> {
   const anger = evaluateDebateAngerPhase(input.anger);
   if (!anger.ok) abort({ ok: false, reason: 'anger-phase-failure', dependencyFailure: anger });
   const before = joinState(anger.receipt.before, anger.receipt.firstTeam, input.transition);
@@ -666,7 +678,7 @@ function resolve(input: ParsedInput): Success {
     }
   }
   let after = copyState(afterAnger);
-  let transition: DebateRoundTransitionSuccessV1 | null = null;
+  let transition: R | null = null;
   let transitionDrawOffset: number | null = null;
   let nextCheckpoint: NextCheckpoint;
   // Source winner route is tested before any TurnEnd work. Never send a
@@ -677,7 +689,7 @@ function resolve(input: ParsedInput): Success {
     }
     nextCheckpoint = 'terminal-pending-classification';
   } else {
-    const result = evaluateDebateRoundTransition({
+    const result = runRound({
       schemaVersion: 1,
       profile: 'debate-round-transition-reference-v1',
       policies: DEBATE_ROUND_TRANSITION_POLICY_V1,
@@ -692,7 +704,6 @@ function resolve(input: ParsedInput): Success {
       ],
       topicRawDraws: input.transition.topicRawDraws,
     });
-    if (!result.ok) abort({ ok: false, reason: 'round-transition-failure', dependencyFailure: result });
     transition = result;
     transitionDrawOffset = consumedDraws.length;
     for (const use of result.receipt.consumedDraws) {
@@ -714,14 +725,35 @@ function resolve(input: ParsedInput): Success {
     nextCheckpoint = 'ready-for-play';
   }
   return {
-    ok: true, schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE,
+    ok: true,
     state: copyState(after), nextCheckpoint,
     receipt: {
-      schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE,
       before, afterAnger, after, anger, transition, transitionDrawOffset,
       consumedDraws, drawCount: consumedDraws.length, nextCheckpoint,
       externalRngConsumed: 0,
     },
+  };
+}
+
+/** Internal core keeps the unchanged anger evaluator and terminal gating. */
+export function resolveDebateAngerTransitionInternal<R extends DebateAngerTransitionRoundSuccessInternal>(
+  input: unknown, runRound: DebateAngerTransitionRoundInternal<R>,
+): DebateAngerTransitionBodyInternal<R> {
+  return resolveBody(parseInput(detach(input)), runRound);
+}
+export function debateAngerTransitionFailureInternal(error: unknown): DebateAngerTransitionFailureV1 | null {
+  return error instanceof Invalid ? freeze(failure(error)) : null;
+}
+function resolve(input: ParsedInput): Success {
+  const body = resolveBody(input, (roundInput) => {
+    const result = evaluateDebateRoundTransition(roundInput);
+    if (!result.ok) abort({ ok: false, reason: 'round-transition-failure', dependencyFailure: result });
+    return result;
+  });
+  return {
+    ok: true, schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE,
+    state: body.state, nextCheckpoint: body.nextCheckpoint,
+    receipt: { schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE, ...body.receipt },
   };
 }
 

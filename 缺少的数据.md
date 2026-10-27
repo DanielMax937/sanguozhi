@@ -1,3 +1,11 @@
+## 2026-10-27：支持按需再生成的独立单回合 v2（仅静态审阅）
+
+新增 `evaluateDebateRegeneratedRound`：空槽遇 cursor=18 才调用原 DeckGenerate，保留完整旧新牌堆／有序话术池／交换审计；全部空槽填完只调用一次原修补排序 completion。复用六个非会话核的受信内部无版本元数据主体，旧公开 v1 包装仍使用原依赖及政策；这是内部重构，不能称所有核源码未变或运行兼容已验证。每队单回合最多一次生成，全轮最多两次；终局不补牌、不生成，后期失败无部分可提交状态。
+
+- 规则：`docs/rules/debate-regenerated-round-v2.md`；工程合同：`docs/engine/debate-regenerated-round-v2.md`；来源：`docs/sources/debate-regenerated-round-v2.json`；纸面场景：`data/scenarios/debate-regenerated-round-paper-v2.json`。
+- 未运行测试、编译、typecheck、build、validator、候选或重放。纸面推导不是执行结果；运行正确性／兼容仍未验证。
+- 旧九会话源码／存档不变；Closing、P078 及其依赖、人物书籍/hook、全局 RNG、教程和长会话排除；原生证据仍 **43 主题／45 快照**，不冒称 PK/Vanilla 等价。
+
 ## 2026-10-27：现代参考有界单回合组合事务（静态）
 
 新增[受检出牌→攻击效果→愤怒衔接／终局分类](docs/rules/debate-round-transaction-v1.md)，复用PR125、PR127、PR126、PR128现有公开核，从明确非教程generic两队正HP、满ready-hand、inactive combo检查点，到下轮ready-for-play或closing-pending。外层保存手牌/额度/牌堆游标/strength/combo；Attack输出HP/stress为权威，普通attacker和playedCard不能用combo替换；保留各阶段完整收据，任一下游失败不提交半轮状态。终局不补牌、不递减timer、不消费未用抽样，牌堆不足仍整笔拒绝而非再生成。

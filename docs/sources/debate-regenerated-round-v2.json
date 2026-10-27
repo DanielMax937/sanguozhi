@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 2,
+  "profile": "debate-regenerated-round-reference-v2",
+  "status": "Static implementation/source mapping; runtime correctness and compatibility remain unverified",
+  "api": "docs/engine/debate-regenerated-round-v2.md",
+  "rules": "docs/rules/debate-regenerated-round-v2.md",
+  "baseMain": "6cad8e8e7db7eab89e995654c4ad3291d0993e85",
+  "sourceRepository": "https://github.com/tankyc/sango_infinity",
+  "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+  "sourceIdentity": "Pinned modern C# translation plus explicit bounded engineering composition; not native PK or Vanilla equivalence",
+  "sources": [
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/Debate.cs",
+      "blob": "0137498d10773cd4596d497083ccdf6a26b3a261",
+      "sha256": "622789ca8b8b6799a321526dcfb513d6622adf5b5d54025175c2a7795ef7da28",
+      "ranges": {
+        "deckGenerate": [
+          306,
+          340
+        ],
+        "rhetoricSwap": [
+          323,
+          328
+        ],
+        "tailFill": [
+          329,
+          336
+        ],
+        "tableSwap": [
+          337,
+          339
+        ],
+        "sort": [
+          406,
+          409
+        ],
+        "characterFill": [
+          412,
+          438
+        ],
+        "characterRethink": [
+          491,
+          509
+        ],
+        "turnStart": [
+          1046,
+          1079
+        ],
+        "rethinkAction": [
+          1254,
+          1260
+        ]
+      }
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+      "blob": "6aa98f855a5d4d172cde7e8ffc18a141b8a7b587",
+      "sha256": "5b47f7b6a89d6123a23e7c14f22168e59c9edd549e98d9bc0258d8a55bb9cbf3",
+      "ranges": {
+        "firstRethinkAndReset": [
+          199,
+          209
+        ],
+        "secondRethinkAndReset": [
+          235,
+          245
+        ],
+        "damageAndWinnerGate": [
+          397,
+          420
+        ]
+      }
+    },
+    {
+      "path": "Project/Assets/Sango/Scripts/Game/Debate/DebateEnum.cs",
+      "blob": "5b46a8ac87613193eb9f4b99a25e489ba6f5e483",
+      "sha256": "cd71efed5059fb4ca876091b1e39bd34636fb978c8ec9bfbf924d6a443070bc1",
+      "ranges": {
+        "cards": [
+          33,
+          61
+        ]
+      }
+    }
+  ],
+  "implementationMapping": [
+    {
+      "rule": "RG2-01",
+      "path": "packages/engine/src/debate-regenerated-fill-internal.ts",
+      "meaning": "Real vacant original slot plus cursor18 triggers direct unchanged generation; never pre-generate or discard old remainder"
+    },
+    {
+      "rule": "RG2-02",
+      "path": "packages/engine/src/debate-deck-generate.ts",
+      "meaning": "Unchanged evaluator supplies complete actual deck and ordered rhetoric pool; fill owner resets index only after success"
+    },
+    {
+      "rule": "RG2-03",
+      "path": "packages/engine/src/debate-regenerated-fill-internal.ts",
+      "meaning": "Preserve complete generator receipt, full old/new pool and deck, including rhetoric entries not copied to tail"
+    },
+    {
+      "rule": "RG2-04",
+      "path": "packages/engine/src/debate-hand-fill-completion.ts",
+      "meaning": "Single unchanged completion only after every vacancy, including across boundary"
+    },
+    {
+      "rule": "RG2-05",
+      "paths": [
+        "packages/engine/src/debate-rethink-action.ts",
+        "packages/engine/src/debate-checked-play.ts"
+      ],
+      "meaning": "Shared metadata-free logic; truthful v1 and v2 wrappers, no duplicated resolver"
+    },
+    {
+      "rule": "RG2-06",
+      "path": "packages/engine/src/debate-round-transaction.ts",
+      "meaning": "Shared ordinary play/Attack/anger/terminal routing, authoritative projections preserved"
+    },
+    {
+      "rule": "RG2-07",
+      "paths": [
+        "packages/engine/src/debate-anger-transition.ts",
+        "packages/engine/src/debate-round-transition.ts"
+      ],
+      "meaning": "Terminal gate precedes transition; ordinary attacker retained independently of combo"
+    },
+    {
+      "rule": "RG2-08",
+      "path": "packages/engine/src/debate-turn-start.ts",
+      "meaning": "Team0 whole local reset/quota/fill/Bold/clear before team1; actual tape carried"
+    },
+    {
+      "rule": "RG2-09",
+      "meaning": "Public v2 complete syntax admission and whole-round atomicity; unused stage packets rejected",
+      "path": "packages/engine/src/debate-regenerated-round.ts"
+    },
+    {
+      "rule": "RG2-10",
+      "meaning": "Bounded twelve draws per team implies at most one generation per team; conservative8050 event bound",
+      "path": "packages/engine/src/debate-regenerated-round.ts"
+    },
+    {
+      "rule": "RG2-11",
+      "meaning": "v1 public policy/input/output/rejection preservation is a static target, not runtime compatibility evidence",
+      "path": "packages/engine/src/debate-regenerated-round.ts"
+    },
+    {
+      "rule": "RG2-12",
+      "path": "packages/engine/src/debate-terminal-classification.ts",
+      "meaning": "Unchanged terminal classification stops before Closing"
+    }
+  ],
+  "engineeringPolicies": {
+    "outerSchema": "version2 exact six-field envelope; round excludes v1 version metadata",
+    "pool": "Per-team ordered unique0..5 supplied rhetoric codes10..14; no person/book eligibility lookup",
+    "packets": "Per-team rethink or TurnStart packet, at most one non-null across stages, max4017 draws each; complete syntax before work and semantic demand checked locally",
+    "drawOrder": [
+      "first-actor-rethink",
+      "second-actor-rethink",
+      "ordinary-attack",
+      "two-anger-passes",
+      "turn-end-topic",
+      "team0-fill",
+      "team1-fill"
+    ],
+    "failure": "No partial state, successful receipt, generated deck or committable result on late failure",
+    "internalClosures": "Trusted code only; never public caller callbacks",
+    "provenance": "Local source deck and tape index, not permanent native card identity"
+  },
+  "bounds": {
+    "maxDrawnCardsPerTeam": 12,
+    "maxGenerationsPerTeam": 1,
+    "maxGenerationsPerRound": 2,
+    "maxGeneratorDrawsEach": 4017,
+    "maxNonGenerationEvents": 16,
+    "maxTotalEvents": 8050,
+    "simultaneousAttainabilityClaimed": false,
+    "input": {
+      "nodes": 100000,
+      "depth": 64,
+      "arrayLength": 4017,
+      "canonicalUtf8Bytes": 2097152
+    },
+    "output": {
+      "nodes": 4000000,
+      "depth": 128,
+      "canonicalUtf8Bytes": 67108864,
+      "repeatedReferences": "count each expanded occurrence",
+      "excess": "atomic output-limit; never truncate audits"
+    },
+    "staticConservativeAccounting": {
+      "measured": false,
+      "exactReachableMaximum": false,
+      "inputNodes": "8034*4 + at most32768 original round-domain nodes + under1000 wrapper/policy nodes <100000",
+      "inputBytes": "8034*96 +262144 + under16KiB new policy <2MiB",
+      "outputRows": "8000 swap rows +3*8034 draw/audit occurrences",
+      "outputMainNodes": 513632,
+      "outputMainBytes": 16436224,
+      "outputOtherNodeAllowance": 1048576,
+      "outputOtherByteAllowance": 33554432,
+      "outputTotal": "1562208 nodes /49990656 bytes; below4000000 /64MiB",
+      "drawCopies": [
+        "generator consumedDraws",
+        "fill randomEvents",
+        "top-level events"
+      ],
+      "swapCopies": "one complete generator receipt",
+      "guard": "enforceOutputBudget remains before public success",
+      "outputTotalNodes": 1562208,
+      "outputTotalBytes": 49990656,
+      "fixedGroupAllowance": "At most128 groups,8192 nodes/256KiB each, excluding already counted large arrays",
+      "fixedLeafBounds": {
+        "availability": 4,
+        "calm": 2,
+        "attacker": 1,
+        "attack": 1,
+        "attackHp": 1,
+        "anger": 1,
+        "angerEntry": 2,
+        "angerCombo": 2,
+        "terminal": 1,
+        "generator": 2
+      },
+      "boundedFixedData": "No caller-free long text: seven hand slots,eighteen deck cards,four selections,two anger passes,sixteen non-generation events plus fixed policy/evidence"
+    }
+  },
+  "boundaries": {
+    "existingNonSessionKernelSourceRefactored": true,
+    "v1PublicContracts": "Preservation target; runtime compatibility unverified",
+    "oldNineSessionSourceStateAndSaveFormats": "unchanged",
+    "nativeGapTopics": 43,
+    "historicalSnapshots": 45,
+    "P078AndDependencies": "excluded",
+    "ClosingRewardsInjuriesWorldWrites": "excluded",
+    "personBookHooksGlobalRngTutorialLongSession": "excluded",
+    "existingNonSessionFilesRefactored": 6
+  },
+  "verification": "Static text inspection and paper reasoning only. No tests, compilation, typecheck, build, validator, checker, candidate/source program, scenario or replay execution. Static contract preservation and budget reasoning are not runtime compatibility or correctness validation.",
+  "implementation": "packages/engine/src/debate-regenerated-round.ts",
+  "paperCases": "data/scenarios/debate-regenerated-round-paper-v2.json",
+  "paperVerification": {
+    "successCases": 13,
+    "rejectionCases": 19,
+    "includesHelperOnlyCases": 4,
+    "executed": false,
+    "executablePublicFixtures": false,
+    "sha256": "b7859fed54aa6c320723736a294a61ff128909509bbf94e85e4b40705dc5660a",
+    "nonSelfSwapPoolPropagation": "Explicit first rhetoric swap0↔1 changes[14,10]to[10,14]; expected final pool carries actual order, paper-only"
+  }
+}
