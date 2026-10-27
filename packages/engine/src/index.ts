@@ -1304,3 +1304,7 @@ export {
   type DebateRoundTransactionPolicyV1,
   type DebateRoundTransactionEvidenceV1,
 } from './debate-round-transaction.ts';
+
+// Independent regenerated-round v2; internal trusted composition points are not barrel exports.
+export { evaluateDebateRegeneratedRound, DEBATE_REGENERATED_ROUND_POLICY_V2, DEBATE_REGENERATED_ROUND_EVIDENCE_V2 } from './debate-regenerated-round.ts';
+export type { DebateRegeneratedRoundInputV2, DebateRegeneratedRoundSuccessV2, DebateRegeneratedRoundFailureV2, DebateRegeneratedRoundResultV2 } from './debate-regenerated-round.ts';

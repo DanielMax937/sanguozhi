@@ -304,14 +304,35 @@ function playCharacter(c: InitialCharacter) {
   return { personality: c.personality, angerTimer: c.angerTimer, maxCardCount: c.maxCardCount, hand: c.hand,
     playedCard: -1 as const, canRethink: c.canRethink, cardTape: c.cardTape, deckCursor: c.deckCursor };
 }
-function resolve(input: Input): Success {
+type InternalPlay = Pick<DebateCheckedPlaySuccessV1, 'attacker' | 'checkpoint'> & {
+  receipt: Pick<DebateCheckedPlaySuccessV1['receipt'], 'randomEvents'>;
+};
+type InternalAngerTransition = Pick<DebateAngerTransitionSuccessV1, 'state'> & {
+  receipt: Pick<DebateAngerTransitionSuccessV1['receipt'], 'consumedDraws'>;
+};
+export type DebateRoundTransactionBodyInternal<P extends InternalPlay, A extends InternalAngerTransition> = {
+  ok: true; state: State; nextCheckpoint: 'ready-for-play' | 'closing-pending';
+  receipt: Omit<Receipt, 'play' | 'angerTransition'> & { play: P; angerTransition: A | null };
+};
+/** Safe original v1-shaped admission; no domain work. Not a public profile. */
+export function parseDebateRoundTransactionInternal(input: unknown): Input {
+  return parseInput(detach(input));
+}
+/** Returns null for foreign errors so enclosing trusted composition can preserve them. */
+export function debateRoundTransactionFailureInternal(error: unknown): Failure | null {
+  return error instanceof Invalid ? error.result : null;
+}
+/** Trusted engine dependencies only; never supplied from public JSON input. */
+export function resolveDebateRoundTransactionInternal<P extends InternalPlay, A extends InternalAngerTransition>(
+  input: Input,
+  dependencies: { play: (value: unknown) => P; angerTransition: (value: unknown) => A },
+): DebateRoundTransactionBodyInternal<P, A> {
   const before: State = { genericOnly: true, isTutorial: false, winner: -1, firstTeam: input.firstTeam, attacker: -1,
     currentTopic: input.currentTopic, characters: [copyCharacter(input.characters[0]), copyCharacter(input.characters[1])], combo: { ...input.combo },
     crumbledLevels: [...input.crumbledLevels], critical: -1, winType: 0 };
-  const play = evaluateDebateCheckedPlay({ schemaVersion: 1, profile: 'debate-checked-play-reference-v1', policies: DEBATE_CHECKED_PLAY_POLICY_V1,
+  const play = dependencies.play({ schemaVersion: 1, profile: 'debate-checked-play-reference-v1', policies: DEBATE_CHECKED_PLAY_POLICY_V1,
     isTutorial: false, winner: -1, firstTeam: input.firstTeam, currentTopic: input.currentTopic,
     characters: [playCharacter(input.characters[0]), playCharacter(input.characters[1])], plans: input.plans });
-  if (!play.ok) abort({ ok: false, reason: 'play-failure', dependencyFailure: play });
   const afterPlay = copyState(before);
   afterPlay.attacker = play.attacker;
   for (const team of [0, 1] as const) {
@@ -329,13 +350,13 @@ function resolve(input: Input): Success {
     afterAttack.characters[team].stress = attack.state.characters[team].stress;
   }
   let after = copyState(afterAttack);
-  let angerTransition: DebateAngerTransitionSuccessV1 | null = null;
+  let angerTransition: A | null = null;
   let terminal: DebateTerminalClassificationSuccessV1 | null = null;
   let terminalAfter: Receipt['terminalAfter'] = after.winner !== -1 ? 'attack' : null;
   if (after.winner !== -1) {
     if (input.angerPassDraws.some(a => a.length !== 0) || input.topicRawDraws.length !== 0 || input.fillRawDraws.some(a => a.length !== 0)) fail('unused-after-attack-draws');
   } else {
-    const result = evaluateDebateAngerTransition({ schemaVersion: 1, profile: 'debate-anger-transition-reference-v1', policies: DEBATE_ANGER_TRANSITION_POLICY_V1,
+    const result = dependencies.angerTransition({ schemaVersion: 1, profile: 'debate-anger-transition-reference-v1', policies: DEBATE_ANGER_TRANSITION_POLICY_V1,
       anger: { schemaVersion: 1, profile: 'debate-anger-phase-reference-v1', policies: DEBATE_ANGER_PHASE_POLICY_V1,
         genericOnly: true, winner: -1, firstTeam: after.firstTeam,
         characters: after.characters.map(c => ({ personality: c.personality, strength: c.strength, hp: c.hp, stress: c.stress, angerTimer: c.angerTimer, maxCardCount: c.maxCardCount, hand: c.hand })),
@@ -343,7 +364,6 @@ function resolve(input: Input): Success {
         resolvedAttacks: after.characters.map(c => c.resolvedAttack), passDraws: input.angerPassDraws },
       transition: { isTutorial: false, attacker: play.attacker, currentTopic: input.currentTopic,
         characters: after.characters.map((c, i) => ({ playedCard: c.playedCard, canRethink: c.canRethink, cardTape: c.cardTape, deckCursor: c.deckCursor, rawDraws: input.fillRawDraws[i] })), topicRawDraws: input.topicRawDraws } });
-    if (!result.ok) abort({ ok: false, reason: 'anger-transition-failure', dependencyFailure: result });
     angerTransition = result;
     after = { ...result.state, characters: [
       { ...result.state.characters[0], hand: [...result.state.characters[0].hand], cardTape: result.state.characters[0].cardTape.slice(), resolvedAttack: input.characters[0].resolvedAttack },
@@ -363,9 +383,25 @@ function resolve(input: Input): Success {
   for (const event of play.receipt.randomEvents) events.push({ index: events.length, stage: 'play', localIndex: event.eventIndex, event });
   if (attack.receipt.consumedDraws === 1) events.push({ index: events.length, stage: 'attack', localIndex: 0, draw: { ...input.attackRawDraws[0]! } });
   if (angerTransition) for (const event of angerTransition.receipt.consumedDraws) events.push({ index: events.length, stage: 'anger-transition', localIndex: event.flatDrawIndex, event });
-  return { ok: true, schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE, state: copyState(after),
+  return { ok: true, state: copyState(after),
     nextCheckpoint: terminal === null ? 'ready-for-play' : 'closing-pending',
     receipt: { before, afterPlay, afterAttack, after: copyState(after), play, attack, angerTransition, terminal, terminalAfter, events, eventCount: events.length, externalRngConsumed: 0 } };
+}
+function resolve(input: Input): Success {
+  const body = resolveDebateRoundTransactionInternal(input, {
+    play: value => {
+      const result = evaluateDebateCheckedPlay(value);
+      if (!result.ok) abort({ ok: false, reason: 'play-failure', dependencyFailure: result });
+      return result;
+    },
+    angerTransition: value => {
+      const result = evaluateDebateAngerTransition(value);
+      if (!result.ok) abort({ ok: false, reason: 'anger-transition-failure', dependencyFailure: result });
+      return result;
+    },
+  });
+  return { ok: true, schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE,
+    state: body.state, nextCheckpoint: body.nextCheckpoint, receipt: body.receipt };
 }
 export const DEBATE_ROUND_TRANSACTION_POLICY_V1: DebateRoundTransactionPolicyV1 = freeze(POLICY);
 export const DEBATE_ROUND_TRANSACTION_EVIDENCE_V1: DebateRoundTransactionEvidenceV1 = freeze(EVIDENCE);

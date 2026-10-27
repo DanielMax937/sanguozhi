@@ -8,6 +8,8 @@ import {
   evaluateDebateHandFill,
   DEBATE_HAND_FILL_POLICY_V1,
   DEBATE_HAND_FILL_EVIDENCE_V1,
+  type DebateHandFillInputV1,
+  type DebateHandFillHandV1,
   type DebateHandFillCardCodeV1,
   type DebateHandFillRawDrawV1,
   type DebateHandFillReceiptV1,
@@ -285,6 +287,20 @@ export type DebateTurnStartResultV1 = Frozen<Result>;
 export type DebateTurnStartPolicyV1 = Frozen<Policy>;
 export type DebateTurnStartEvidenceV1 = Frozen<Evidence>;
 
+/** @internal Trusted engine composition only; never accepted from public input. */
+export type DebateTurnStartFillReceiptInternal = Pick<DebateHandFillReceiptV1, 'consumedDraws' | 'drawCount'>;
+export type DebateTurnStartFillInternal<F extends DebateTurnStartFillReceiptInternal> =
+  (input: DebateHandFillInputV1, team: TeamIndex) => {
+    hand: DebateHandFillHandV1; deckCursor: number; cardTape: readonly CardCode[]; receipt: F;
+  };
+export type DebateTurnStartTeamReceiptInternal<F extends DebateTurnStartFillReceiptInternal> = Omit<TeamReceipt, 'fill'> & { fill: F };
+export type DebateTurnStartBodyInternal<F extends DebateTurnStartFillReceiptInternal> = {
+  ok: true; characters: [CharacterCheckpoint, CharacterCheckpoint];
+  receipt: Omit<Receipt, 'schemaVersion' | 'profile' | 'policy' | 'evidence' | 'teams'> & {
+    teams: [DebateTurnStartTeamReceiptInternal<F>, DebateTurnStartTeamReceiptInternal<F>];
+  };
+};
+
 class Invalid extends Error {
   readonly reason: FailureReason;
   constructor(reason: FailureReason) { super(reason); this.reason = reason; }
@@ -474,7 +490,7 @@ function copyCharacter(character: CharacterCheckpoint): CharacterCheckpoint {
     deckCursor: character.deckCursor,
   };
 }
-function resolveTeam(input: CharacterInput, teamIndex: TeamIndex): TeamReceipt {
+function resolveTeam<F extends DebateTurnStartFillReceiptInternal>(input: CharacterInput, teamIndex: TeamIndex, fillCards: DebateTurnStartFillInternal<F>): DebateTurnStartTeamReceiptInternal<F> {
   const before = copyCharacter(input);
   const after = copyCharacter(input);
 
@@ -489,19 +505,23 @@ function resolveTeam(input: CharacterInput, teamIndex: TeamIndex): TeamReceipt {
     ? (calmApplied ? 'crumbled-and-positive-calm' : 'crumbled')
     : (calmApplied ? 'positive-calm' : 'preserved');
 
-  const fill = evaluateDebateHandFill({
+  const fill = fillCards({
     schemaVersion: 1,
     profile: 'debate-hand-fill-reference-v1',
     policies: DEBATE_HAND_FILL_POLICY_V1,
-    playableSlots: after.hand.slice(1, after.maxCardCount).map(card => card === -1 ? null : card),
+    playableSlots: after.hand.slice(1, after.maxCardCount).map(card => {
+      // parseHand already excludes active zero; preserve that typed invariant.
+      if (card === 0) fail('invalid-hand');
+      return card === -1 ? null : card;
+    }),
     cardTape: after.cardTape,
     deckCursor: after.deckCursor,
     rawDraws: input.rawDraws,
-  });
-  if (!fill.ok) fail(fill.reason);
+  }, teamIndex);
   // Overlay only the active prefix. Never sort, erase, or refill the old tail.
   for (let slot = 0; slot < after.maxCardCount; slot++) after.hand[slot] = fill.hand[slot]!;
   after.deckCursor = fill.deckCursor;
+  after.cardTape = fill.cardTape.slice();
 
   const angerTimerBefore = after.angerTimer;
   const eligible = angerTimerBefore > 0 && after.personality === 'bold';
@@ -547,12 +567,12 @@ function resolveTeam(input: CharacterInput, teamIndex: TeamIndex): TeamReceipt {
     drawCount: fill.receipt.drawCount,
   };
 }
-function resolve(input: Input): Success {
+function resolveBody<F extends DebateTurnStartFillReceiptInternal>(input: Input, fillCards: DebateTurnStartFillInternal<F>): DebateTurnStartBodyInternal<F> {
   // A team failure throws before this function can publish state or receipts.
   // Each call completes ALL phases before the next team starts evaluating.
-  const teamZero = resolveTeam(input.characters[0], 0);
-  const teamOne = resolveTeam(input.characters[1], 1);
-  const teams: [TeamReceipt, TeamReceipt] = [teamZero, teamOne];
+  const teamZero = resolveTeam(input.characters[0], 0, fillCards);
+  const teamOne = resolveTeam(input.characters[1], 1, fillCards);
+  const teams: [DebateTurnStartTeamReceiptInternal<F>, DebateTurnStartTeamReceiptInternal<F>] = [teamZero, teamOne];
   const consumedDraws: ConsumedDraw[] = [];
   for (const team of teams) {
     for (const draw of team.consumedDraws) {
@@ -563,17 +583,35 @@ function resolve(input: Input): Success {
   const after: State = { isTutorial: false, characters: [teamZero.after, teamOne.after] };
   return {
     ok: true,
-    schemaVersion: 1,
-    profile: PROFILE,
-    policy: POLICY,
-    evidence: EVIDENCE,
     characters: after.characters,
     receipt: {
-      schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE,
       before, after, teamOrder: [0, 1], teams, consumedDraws,
       drawCount: consumedDraws.length as 0 | 1 | 2,
       externalRngConsumed: 0,
     },
+  };
+}
+
+/** Metadata-free internal body; admission remains the original safe parser. */
+export function resolveDebateTurnStartInternal<F extends DebateTurnStartFillReceiptInternal>(
+  input: unknown, fillCards: DebateTurnStartFillInternal<F>,
+): DebateTurnStartBodyInternal<F> {
+  return resolveBody(parseInput(detach(input)), fillCards);
+}
+/** Recognize only this module's own validation errors, not callback failures. */
+export function debateTurnStartFailureInternal(error: unknown): DebateTurnStartFailureV1 | null {
+  return error instanceof Invalid ? freeze(failure(error)) : null;
+}
+function resolve(input: Input): Success {
+  const body = resolveBody(input, (fillInput) => {
+    const result = evaluateDebateHandFill(fillInput);
+    if (!result.ok) fail(result.reason);
+    return { ...result, cardTape: fillInput.cardTape };
+  });
+  return {
+    ok: true, schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE,
+    characters: body.characters,
+    receipt: { schemaVersion: 1, profile: PROFILE, policy: POLICY, evidence: EVIDENCE, ...body.receipt },
   };
 }
 

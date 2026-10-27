@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 2,
+  "kind": "manual-paper-specification-not-executable-fixtures",
+  "verification": "Manual source and code reasoning only. No candidate, generator, scenario, test, compiler, typecheck or replay was executed. Expectations are not observed runtime results.",
+  "notation": "B is the accepted v1 ordinary-ready baseline below plus two empty ordered rhetoric pools and absent generation packets at every stage. Described changes are paper setups, not executable public API payloads. Named generation packet templates describe every draw without materializing thousands of entries. Semantic expectations distinguish helper-only examples from whole-round admission.",
+  "publicEnvelope": "schemaVersion2,profile debate-regenerated-round-reference-v2,full exported policies; round contains v1 input fields except its schemaVersion/profile/policies metadata; rhetoricCards is the team-indexed pair of ordered pools; generationPackets={rethink:[null|draws,null|draws],turnStart:[null|draws,null|draws]}. Complete parsing rejects more than one non-null generation packet per team with generation-limit, before business stages.",
+  "baseline": {
+    "source": "data/scenarios/debate-round-transaction-paper-v1.json / ordinary-ready",
+    "initial": "firstTeam0,currentTopic0,winner-1,genericOnlytrue,isTutorialfalse; both bold,strength50,hp1000,stress0,timer0,capacity4,hand[0,1,2,3,-1,-1,-1],playedCard-1,canRethinktrue,crumbledfalse,tape eighteen1s,cursor0,attack70; inactive combo attacker-1 counter0; crumbledLevels[0,0]",
+    "plans": "team0 index3/card3; team1 index1/card1; all selection repair/calm payloads empty",
+    "draws": "one ordinary hp jitter0; both anger-pass arrays empty, topic empty, both turn-start repair arrays empty; no generation packet at either rethink or either turn-start stage",
+    "terminal": "criticalDisabledfalse,initialCritical-1,initialWinType0,choice null",
+    "expected": "attacker0,damage140,HP[1000,860],stress[0,20],winner-1,ready-for-play,firstTeam0,topic0,cursors[1,1],hands[0,1,1,2,-1,-1,-1]/[0,1,2,3,-1,-1,-1],playedCards[-1,-1],one non-generation random event"
+  },
+  "generationPacketTemplates": {
+    "S(n)": {
+      "pool": "An explicitly ordered unique subset of10..14 with n entries; n0..5. No default, sorting or eligibility inference.",
+      "drawsInOrder": [
+        "8 debate-deck-small-topic draws bound3,value1",
+        "4 debate-deck-medium-topic draws bound3,value1",
+        "2 debate-deck-large-topic draws bound3,value1",
+        "If n>0,2000 debate-deck-rhetoric-swap draws bound n,value iteration%n; if n=0,no such draws",
+        "4-min(4,n) debate-deck-tail-fallback draws bound9,value0",
+        "2000 debate-deck-table-swap draws bound18,value iteration%18"
+      ],
+      "paperDerivation": "Every swap is a recorded self-swap. Topic table offsets map value1 to cards1,2,3; fallback value0 maps to4. Final deck is eight1s,four2s,two3s,then first min(4,n) pool cards and enough4s to fill four tail slots. Pool order is unchanged by these explicit self-swaps, not reset by the wrapper.",
+      "drawCountsByPoolCount": [2018,4017,4016,4015,4014,4014],
+      "audit": "All2000 table swaps and,when nonempty,all2000 rhetoric swaps including no-ops remain in the unchanged generator receipt. This is a specified draw sequence, not a randomness or uniformity claim."
+    }
+  },
+  "successCases": [
+    {
+      "id": "v2-no-regeneration-baseline",
+      "changes": "B unchanged",
+      "expected": "Same domain state and one non-generation event as B; zero generation receipts and unchanged empty pools.",
+      "paperReason": "Each of two played cards creates one vacancy while current decks have cards. This is a static compatibility expectation, not an executed equivalence test."
+    },
+    {
+      "id": "last-card-does-not-generate",
+      "changes": "B both cursor17; all generation packets absent",
+      "expected": "Same B state except cursors[18,18]; no generation.",
+      "paperReason": "Consume index17 once. Becoming exhausted after the last needed draw is not a request to generate."
+    },
+    {
+      "id": "empty-pool-generation-at-turn-start",
+      "changes": "B team0 cursor18; supply S(0) only for team0 turn-start",
+      "expected": "Team0 uses generated index0/card1; final cursor1,actual tape becomes S(0) deck,pool stays[]; final hands/HP as B. One generation receipt with2018 consumed draws and2000 table swaps; total random events2019.",
+      "paperReason": "A real empty slot at index18 triggers generation before draw, not before Attack."
+    },
+    {
+      "id": "singleton-maximum-generation-packet",
+      "changes": "B team0 cursor18,pool[14]; supply S(1) only for team0 turn-start",
+      "expected": "Final team0 tape is eight1s,four2s,two3s,14,4,4,4; pool[14],cursor1.4017 generation draws including2000 bound1 rhetoric self-swaps and3 fallback draws; total events4018.",
+      "paperReason": "Singleton does not skip rhetoric shuffle draws. This is the maximum draw count per generation."
+    },
+    {
+      "id": "nontrivial-rhetoric-reorder-propagates",
+      "changes": "B team0 cursor18,pool[14,10];supply team0 turn-start S(2) except rhetoric-swap iteration0 value1 instead of0;all later rhetoric and table swaps remain self-swaps",
+      "expected": "Rhetoric iteration0 changes[14,10] to[10,14];generation.before.rhetoricCards remains[14,10],generation.after and final state character0 rhetoricCards are[10,14].Generated deck tail is[10,14,4,4],first card1;final cursor1 and ordinary B hand/HP remain.4016 generation events plus1 ordinary event=4017.",
+      "paperReason": "Source rhetoric swap leftIndex=iteration%2. Iteration0 swaps left0 with right1; every later self-swap preserves the reordered pool. Tail copy uses that mutated order and the wrapper must carry it into final character state rather than restore caller input."
+    },
+    {
+      "id": "five-entry-pool-keeps-fifth-entry",
+      "changes": "B team0 cursor18,pool[14,10,13,11,12]; supply S(5) only for team0 turn-start",
+      "expected": "Generated tail[14,10,13,11],but returned active pool still[14,10,13,11,12]; cursor1.4014 generation draws,zero fallbacks,4000 swap receipts; total events4015.",
+      "paperReason": "Only four tail slots exist; the fifth pool entry is not discarded from active rhetoric state."
+    },
+    {
+      "id": "both-teams-generate-in-turn-start-order",
+      "changes": "B both cursor18,pools[14] and[10]; supply each team turn-start S(1),no rethink packets",
+      "expected": "Both cursors1 and actual tapes replaced. Generation audits occur team0 then team1 after ordinary hp event.8034 generation events plus1 non-generation event=8035,not8050.",
+      "paperReason": "The8050 bound is a conservative sum; this concrete ordinary path consumes only one other event."
+    },
+    {
+      "id": "rethink-crosses-old-last-and-new-first",
+      "changes": "B team0 cursor17,selections index0 then index1; supply S(0) only for team0 rethink; ordinary hp draws empty because resulting final cards tie",
+      "expected": "Rethink fills three slots from old index17,new index0,new index1; returned generated cursor2 before final selection. Turn-start fills one more from new index2,final team0 cursor3,hand[0,1,1,1,-1,-1,-1],canRethinkfalse. Team1 cursor1; HP unchanged,stress[15,15]; exactly2018 generation events.",
+      "paperReason": "No synthetic concatenated deck and no second generation at turn-start. Repair and sort happen once after all three rethink vacancies."
+    },
+    {
+      "id": "timid-two-holes-cross-17-boundary",
+      "changes": "B firstTeam1; team1 timid,stress80,cursor17; first anger pass exactly one jitter0,second empty; team1 turn-start S(0),all other generation packets absent",
+      "expected": "HP[895,860],stress[7,0],ordinary attacker0,combo inactive attacker1 counter1. Team1 two vacancies use old17/card1 then generated0/card1; final team1 cursor1,hand[0,1,1,3,-1,-1,-1].Team0cursor1,hand[0,1,1,2,-1,-1,-1]; events2018 generation+2 other=2020.",
+      "paperReason": "The existing timid paper case establishes two holes: play removes1,combo removes2; physically shifted3 is skipped. One completion after both draws preserves final sorting/provenance."
+    },
+    {
+      "id": "attack-terminal-does-not-generate-at18",
+      "changes": "B team1 hp100,both cursor18; all generation packets absent",
+      "expected": "HP[1000,-40],winner0,Normal0,closing-pending,cursors[18,18],unchanged tapes/pools,playedCards[3,1],one ordinary event; no anger,turn-start,generation or timer decay.",
+      "paperReason": "Exhausted decks alone are not demand; terminal branch never reaches fill."
+    },
+    {
+      "id": "anger-terminal-does-not-generate-at18",
+      "changes": "B team0 hp200;team1 reckless,strength100,stress80;both cursor18;terminal.choice1; all generation packets absent",
+      "expected": "After attack team1HP860/stress100; reckless damage200+100=300 sends team0 to-100,winner1,winType2,closing-pending;team1timer1 retained,cursors[18,18],no transition or generation.",
+      "paperReason": "Same confirmed paper formula as v1; generation extension must not move terminal routing."
+    },
+    {
+      "id": "cross-boundary-repair-only-after-complete-fill",
+      "scope": "Trusted fill helper fixture only,not a full public ready-round input",
+      "changes": "playableSlots[12,null,null],cursor17,current tape index17=11,pool[10];use S(1) except first table-swap at iteration0 has value14 instead of0;all later table-swap draws remain self-swaps;repair draw role debate-fill-topic-repair,bound9,value0",
+      "expected": "Slot1 retains12;slot2 consumes current index17/card11;slot3 consumes generated index0/card10. All slots first form[0,12,11,10]. A single final completion repairs only last new slot3 from10 to1,then sorts to[0,1,11,12];final generated cursor1,pool[10].4017 generation draws plus1 repair=4018. Provenance keeps slot3 originalCard10 and generated tapeIndex0 despite repaired face1.",
+      "paperReason": "Pinned generator first places pool10 at tail slot14. Table iteration0 swaps left0 (card1) with right14 (card10); every later self-swap preserves generated index0=10. Retained12,old11,new10 have no topic card,so completion repairs slot3 exactly once,not after the old-deck prefix."
+    },
+    {
+      "id": "internal-full-hand-at18-no-packet",
+      "scope": "Trusted fill helper fixture only,not a full public ready-round input",
+      "changes": "playableSlots[10,11,12],cursor18,current18-card tape,pool[],generation packet null,repair[]",
+      "expected": "hand[0,10,11,12],cursor18,tape/pool unchanged;generation null,repair skipped no-new-slot,zero draws.",
+      "paperReason": "No vacancy means no generation and no repair even when no topic card exists."
+    }
+  ],
+  "rejectionCases": [
+    {"id":"missing-turn-start-generation","changes":"empty-pool-generation-at-turn-start with packet absent","expected":"Atomic rejection at exhausted vacancy; no prior Attack HP or receipts published."},
+    {"id":"unused-packet-before-exhaustion","changes":"B cursor0 but team0 turn-start S(0) provided","expected":"Atomic unused-generation-packet rejection; must not preemptively replace usable current deck."},
+    {"id":"unused-packet-after-exact-last","changes":"last-card-does-not-generate plus team0 turn-start S(0)","expected":"Atomic unused packet rejection even though final cursor equals18."},
+    {"id":"full-hand-at18-extra-packet","scope":"Trusted fill helper fixture only","changes":"internal-full-hand-at18-no-packet plus S(0)","expected":"unused-generation-packet; no new deck,repair or partial receipt."},
+    {"id":"packet-in-wrong-stage","changes":"rethink-crosses-old-last-and-new-first but packet only in team0 turn-start","expected":"Reject at rethink exhaustion; later-stage packet cannot satisfy earlier demand."},
+    {"id":"second-team-late-missing-packet","changes":"both teams cursor18;only team0 turn-start S(0)","expected":"Team1 fails after team0 private generation; entire round rejects with neither team0 new tape/pool nor prior HP/receipts exposed."},
+    {"id":"second-team-late-invalid-packet","changes":"both teams cursor18;team0 S(0);team1 same-length S(0) with one table-swap role replaced by small-topic role","expected":"Wrong phase packet rejects atomically; if outer parser rejects earlier,still no partial state. Do not assert a runtime failure stage without executing."},
+    {"id":"missing-singleton-self-swap","changes":"singleton-maximum-generation-packet omit one of2000 rhetoric draws","expected":"Generator semantic mismatch or missing draw rejection; bound1 self-swaps remain mandatory."},
+    {"id":"extra-generation-draw","changes":"S(0) with extra legal table-swap draw at end","expected":"Generator unexpected-raw-draw; no reset/partial generated deck published."},
+    {"id":"wrong-rhetoric-bound","changes":"pool[14,10],S(2) but rhetoric-swap bound1 instead of2","expected":"Generator invalid-raw-draw; supplied pool cardinality drives exact phase bound."},
+    {"id":"duplicate-pool-entry","changes":"Any actor pool[10,10]","expected":"Outer complete syntax/domain rejection before any business stage; no implicit deduplication."},
+    {"id":"non-rhetoric-pool-entry","changes":"Any actor pool contains9 or15","expected":"Outer domain rejection; no eligibility inference or card coercion."},
+    {"id":"terminal-unused-generation","changes":"attack-terminal-does-not-generate-at18 plus any turn-start generation packet","expected":"Atomic unused terminal payload rejection,not silent discard and not speculative generation."},
+    {"id":"anger-terminal-unused-generation","changes":"anger-terminal-does-not-generate-at18 plus team1 turn-start S(0)","expected":"Atomic unused terminal payload rejection; no TurnEnd or timer decrement to consume it."},
+    {"id":"malformed-unused-generation","changes":"Attack-terminal setup with malformed later generation draw role/bound/value","expected":"Full-input parsing rejects before business evaluation; terminal routing does not excuse malformed unused data."},
+    {"id":"unused-second-generation-for-same-team","changes":"rethink-crosses-old-last-and-new-first plus a further team0 turn-start S(0)","expected":"Complete parse rejects generation-limit because two generation packets for the same team are non-null. This is not a late unused-packet failure; no rethink or Attack starts."},
+    {"id":"cross-boundary-required-repair-missing","scope":"Trusted fill helper fixture only","changes":"cross-boundary-repair-only-after-complete-fill except repair array empty","expected":"missing-raw-draw from the single completion after private complete fill; no partial generated tape,pool,cursor,filled hand or receipt escapes."},
+    {"id":"v1-exhaustion-contract-unchanged","scope":"Existing public v1 API only","changes":"Original v1 B with cursor18 and no new fields","expected":"Existing late-deck-exhaustion rejection remains; v2 support does not widen v1 acceptance."},
+    {"id":"v1-new-fields-still-unknown","scope":"Existing public v1 API only","changes":"Add rhetoric pools or generation-stage payload to v1 input","expected":"Existing closed-schema unknown-field rejection remains; no v1 generation path is enabled."}
+  ],
+  "budgetPaperProof": {
+    "perTeamDrawnCards": "At most6 cards from one rethink plus at most6 vacancies in subsequent turn-start=12. This is a conservative structural bound,not a claim all12 are simultaneously attainable.",
+    "generationCount": "Starting cursor0..18 and at most12 demanded cards,an18-card newly generated deck cannot exhaust again within this round; at most1generation per team,2total.",
+    "generationEvents": "At most4017 each (pool size1),2*4017=8034. Full placement and every swap receipt retained.",
+    "nonGenerationEvents": "Existing conservative v1 component bound16 retained.",
+    "totalEventUpperBound": 8050,
+    "notAResult": "8050 is not an observed event count or exact maximum reachable trace. Input-node/byte/depth and repeated nested-output budgets require separate final-structure accounting; this event bound does not establish those budgets."
+  },
+  "limitations": [
+    "These13success and19rejection paper descriptions are not executable input fixtures and were not run.",
+    "The publicEnvelope records the selected v2 API shape; this document still uses descriptive changes and packet templates instead of claiming executable fixture validation. Exact dependency failure wrappers are described semantically unless a stable rejection code is stated.",
+    "No native PK/Vanilla equivalence;43native topic gaps and45historical snapshot gaps unchanged.",
+    "No P078 dependencies,Closing,rewards,injury/world writes,persons/books,hooks,global RNG,tutorial or persistent-session expansion."
+  ]
+}
