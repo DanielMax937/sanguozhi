@@ -1288,3 +1288,19 @@ export {
   type DebateTerminalClassificationPolicyV1,
   type DebateTerminalClassificationEvidenceV1,
 } from './debate-terminal-classification.ts';
+
+export {
+  evaluateDebateRoundTransaction,
+  DEBATE_ROUND_TRANSACTION_POLICY_V1,
+  DEBATE_ROUND_TRANSACTION_EVIDENCE_V1,
+  type DebateRoundTransactionInputV1,
+  type DebateRoundTransactionCharacterV1,
+  type DebateRoundTransactionStateV1,
+  type DebateRoundTransactionEventV1,
+  type DebateRoundTransactionReceiptV1,
+  type DebateRoundTransactionSuccessV1,
+  type DebateRoundTransactionFailureV1,
+  type DebateRoundTransactionResultV1,
+  type DebateRoundTransactionPolicyV1,
+  type DebateRoundTransactionEvidenceV1,
+} from './debate-round-transaction.ts';

@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 1,
+  "kind": "manual-static-scenarios-not-executable-inputs",
+  "verification": "All expected values are manual source/text reasoning, not observed results. No scenario/candidate/source/test/compiler execution.",
+  "notation": "B denotes baseline; every case assumes complete exported policy and correct schema/profile. Changes are descriptions, not API patches. Failure returns no state, prior successful receipt or outer events.",
+  "baseline": {
+    "firstTeam": 0,
+    "currentTopic": 0,
+    "winner": -1,
+    "genericOnly": true,
+    "isTutorial": false,
+    "characters": "Both: bold, strength50, hp1000, stress0, angerTimer0, maxCardCount4, hand[0,1,2,3,-1,-1,-1], playedCard-1, canRethink=true, crumbled=false, cardTape eighteen 1s, deckCursor0, resolvedAttack70",
+    "combo": {
+      "active": false,
+      "attacker": -1,
+      "counter": 0
+    },
+    "crumbledLevels": [
+      0,
+      0
+    ],
+    "plans": "team0 selects index3; team1 index1; every selection rawDraws/rawResults empty",
+    "attackRawDraws": [
+      {
+        "role": "debate-hp-damage-jitter",
+        "bound": 5,
+        "value": 0
+      }
+    ],
+    "angerPassDraws": [
+      [],
+      []
+    ],
+    "topicRawDraws": [],
+    "fillRawDraws": [
+      [],
+      []
+    ],
+    "terminal": {
+      "criticalDisabled": false,
+      "initialCritical": -1,
+      "initialWinType": 0,
+      "choice": null
+    }
+  },
+  "successCases": [
+    {
+      "id": "ordinary-ready",
+      "changes": "none",
+      "expected": "attacker0 (power13>11), damage140; afterAttack HP[1000,860],stress[0,20]; final ready-for-play,winner-1,firstTeam0,topic0,cursors[1,1], hands[0,1,1,2,-1,-1,-1]/[0,1,2,3,-1,-1,-1], playedCards[-1,-1],eventCount1",
+      "reason": "70*10*20*10/1000=140; each play creates one hole; no anger candidate"
+    },
+    {
+      "id": "exact-last-deck-item",
+      "changes": "both deckCursor17",
+      "expected": "same ordinary-ready except final cursors[18,18]",
+      "reason": "exact last item available, no regeneration"
+    },
+    {
+      "id": "opposite-first-not-attacker",
+      "changes": "firstTeam1",
+      "expected": "ordinary attacker remains0, next firstTeam0; play order[1,0]; same damage and final hands as baseline",
+      "reason": "play actor order differs from strict power comparison"
+    },
+    {
+      "id": "tail-cleared-by-play",
+      "changes": "both inactive hand slots4..6=[10,11,12]",
+      "expected": "same as ordinary-ready, inactive tail cleared to-1",
+      "reason": "PR125 physical removal clears full backing slots; wrapper uses returned hand"
+    },
+    {
+      "id": "tie-no-hp-call",
+      "changes": "both select index1, firstTeam1, attackRawDraws=[]",
+      "expected": "attacker-1,HP[1000,1000],stress[15,15],ready-for-play,firstTeam1,topic0,cursors[1,1],hands both[0,1,2,3,-1,-1,-1],eventCount0",
+      "reason": "equal power skips HP/effects; draw pressure, transition still fills"
+    },
+    {
+      "id": "rethink-then-tie",
+      "changes": "team0 selections index0 then index1; each raw empty; attackRawDraws=[]",
+      "expected": "team0 plays1 after rebuilding three1s; tie; team0 canRethink=false, final cursor4 and hand[0,1,1,1,-1,-1,-1]; team1 cursor1,HP unchanged,stress[15,15],ready-for-play,eventCount0",
+      "reason": "three rebuild draws from cardTape, then final play creates one additional fill hole; no jitter when tie"
+    },
+    {
+      "id": "attack-normal-terminal",
+      "changes": "team1 initial hp100",
+      "expected": "HP[1000,-40],winner0,Normal0,critical-1,terminalAfter=attack,angerTransition=null,closing-pending,cursors[0,0],playedCards[3,1],no fill or timer decay,eventCount1",
+      "reason": "damage140 and final HP>-100; explicit null choice allowed"
+    },
+    {
+      "id": "attack-push",
+      "changes": "team1 hp1, team0 resolvedAttack227,terminal.choice0",
+      "expected": "damage454,HP[1000,-100],winner0,critical0,winType1,terminalAfter=attack,closing-pending,cursors[0,0]",
+      "reason": "HP clamps-453 to-100; choice0 is not winType0"
+    },
+    {
+      "id": "attack-mercy",
+      "changes": "same as attack-push except terminal.choice1",
+      "expected": "critical1,winType2; all other attack-push state same",
+      "reason": "choice1 distinct from output1"
+    },
+    {
+      "id": "disabled-critical-normal",
+      "changes": "same lethal454 case,criticalDisabled=true,choice=null",
+      "expected": "critical-1,winType0,closing-pending,angerTransition=null",
+      "reason": "feature gate blocks critical even at-100"
+    },
+    {
+      "id": "reckless-first-pass-terminal",
+      "changes": "team0 hp200; team1 reckless,strength100,stress80;terminal.choice1",
+      "expected": "afterAttack team1 HP860/stress100; first anger pass team1 timer1/stress0,hit team0 300 to-100,team0 stress20;winner1,winType2,terminalAfter=anger,closing-pending,cursors[0,0],ordinary attacker0,timer1 retained,levels[0,0],no second pass/crumble/transition",
+      "reason": "reckless source formula 200+strength: 200+100=300; remaining hands contain no Compose/Agitate counter cards"
+    },
+    {
+      "id": "timid-combo-not-ordinary-attacker",
+      "changes": "firstTeam1;team1 timid,stress80;angerPassDraws first pass exactly one jitter0, second empty",
+      "expected": "afterAttack HP[1000,860]; timid attacker1 hits card2 once for105,HP[895,860],stress[7,0],combo inactive attacker1 counter1;next firstTeam0,ordinary attacker0,timer0,cursors[1,2],hands[0,1,1,2,-1,-1,-1]/[0,1,1,3,-1,-1,-1],ready-for-play,eventCount2",
+      "reason": "physical remove compacts remaining card3 to slot1, scanner next slot2 is empty; TurnEnd uses ordinary attacker0 not combo1"
+    }
+  ],
+  "rejectionCases": [
+    {
+      "id": "nonterminal-choice",
+      "changes": "B terminal.choice0",
+      "expectedReason": "unused-terminal-choice",
+      "reason": "no partial success after completed ordinary route"
+    },
+    {
+      "id": "terminal-choice-missing",
+      "changes": "attack-push setup but choice=null",
+      "expectedReason": "terminal-failure / choice-required",
+      "reason": "no partial lethal state"
+    },
+    {
+      "id": "terminal-choice-forbidden",
+      "changes": "attack-normal-terminal with choice0",
+      "expectedReason": "terminal-failure / choice-forbidden",
+      "reason": "noncritical terminal disallows choice"
+    },
+    {
+      "id": "unused-anger-after-attack",
+      "changes": "attack-normal-terminal plus one legal angerPassDraw",
+      "expectedReason": "unused-after-attack-draws",
+      "reason": "must not invoke anger"
+    },
+    {
+      "id": "unused-topic-after-attack",
+      "changes": "attack-normal-terminal plus one legal topic draw",
+      "expectedReason": "unused-after-attack-draws",
+      "reason": "must not perform TurnEnd"
+    },
+    {
+      "id": "unused-fill-after-attack",
+      "changes": "attack-normal-terminal plus legal fill draw for either team",
+      "expectedReason": "unused-after-attack-draws",
+      "reason": "must not fill"
+    },
+    {
+      "id": "malformed-unused-draw",
+      "changes": "attack terminal but later draw bad role/bound/value",
+      "expectedReason": "invalid-draws",
+      "reason": "complete parse before any domain evaluator"
+    },
+    {
+      "id": "unused-transition-after-anger",
+      "changes": "reckless-first-pass-terminal plus legal topic/fill draw",
+      "expectedReason": "anger-transition-failure / unused-transition-draws",
+      "reason": "terminal skips transition and rejects extra input"
+    },
+    {
+      "id": "late-deck-exhaustion",
+      "changes": "B both cursor18",
+      "expectedReason": "anger-transition-failure / round-transition-failure",
+      "reason": "Play and Attack may succeed privately; no HP860 or partial receipt escapes"
+    },
+    {
+      "id": "second-team-rethink-exhaustion",
+      "changes": "B team1 cursor16, selections index0 then index1, raw empty",
+      "expectedReason": "play-failure",
+      "reason": "capacity4 needs3 new cards but only2 remain, team0 removal not published"
+    },
+    {
+      "id": "missing-ordinary-jitter",
+      "changes": "B attackRawDraws=[]",
+      "expectedReason": "attack-failure / draw-count-mismatch",
+      "reason": "not supplied by global RNG"
+    },
+    {
+      "id": "extra-tie-jitter",
+      "changes": "tie-no-hp-call with one ordinary jitter",
+      "expectedReason": "attack-failure / draw-count-mismatch",
+      "reason": "no silently discarded draw"
+    },
+    {
+      "id": "timid-missing-or-extra",
+      "changes": "timid-combo-not-ordinary-attacker with0 or2 first-pass jitter instead of1",
+      "expectedReason": "anger-transition-failure",
+      "reason": "dependency preserves exact draw requirement"
+    },
+    {
+      "id": "topic-outside-intersection",
+      "changes": "currentTopic3",
+      "expectedReason": "invalid-checkpoint",
+      "reason": "PR125 wider signed32 does not widen wrapper"
+    },
+    {
+      "id": "initial-terminal",
+      "changes": "either initial hp0",
+      "expectedReason": "invalid-character",
+      "reason": "input domain strictly positive"
+    },
+    {
+      "id": "active-combo",
+      "changes": "combo.active=true",
+      "expectedReason": "invalid-combo",
+      "reason": "requires fresh inactive entry"
+    },
+    {
+      "id": "bad-ready-hand",
+      "changes": "slot0!=0 or active slot1 empty-1",
+      "expectedReason": "invalid-character",
+      "reason": "ready-hand intersection, not late-turn partial hand"
+    },
+    {
+      "id": "invalid-terminal-initial",
+      "changes": "terminal.initialWinType1 or initialCritical0",
+      "expectedReason": "invalid-terminal",
+      "reason": "no prior classification defaults"
+    },
+    {
+      "id": "plan-extra-selection",
+      "changes": "team0 nonzero first choice followed by second selection",
+      "expectedReason": "play-failure",
+      "reason": "finite plan must match actual consumption"
+    },
+    {
+      "id": "policy-patch",
+      "changes": "full policies replaced with only id or one nested value changed",
+      "expectedReason": "unsupported-policy",
+      "reason": "exact policy required"
+    },
+    {
+      "id": "unknown-world-state",
+      "changes": "add rewards/world/P078 fields",
+      "expectedReason": "unknown-field",
+      "reason": "closed schema, no unauthorized world mutation"
+    },
+    {
+      "id": "non-json-or-negative-zero",
+      "changes": "getter/proxy/function/cycle/symbol/sparse arrays or numeric-0",
+      "expectedReason": "malformed-data",
+      "reason": "safe-detach failure before domain"
+    },
+    {
+      "id": "budget-excess",
+      "changes": "exceed nodes32768/depth48/array64/canonical262144",
+      "expectedReason": "input-limit",
+      "reason": "no arbitrary history"
+    },
+    {
+      "id": "missing-runtime-detector",
+      "changes": "trusted isProxy detector unavailable",
+      "expectedReason": "unsupported-runtime",
+      "reason": "fail closed before reflecting caller input"
+    }
+  ]
+}
