@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "profile": "debate-round-transaction-reference-v1",
+  "implementation": "packages/engine/src/debate-round-transaction.ts",
+  "api": "docs/engine/debate-round-transaction-v1.md",
+  "rules": "docs/rules/debate-round-transaction-v1.md",
+  "paperCases": "data/scenarios/debate-round-transaction-paper-v1.json",
+  "baseMain": "fe8796ad1d2a2254ac0861cc06b9d8b5aee8358f",
+  "sourceRepository": "https://github.com/tankyc/sango_infinity",
+  "sourceCommit": "a0d8a4f17ec9143c610346b38e523ff2f6eaf6ef",
+  "sourceIdentity": "Modern C# reference and explicit engineering composition, not native PK/Vanilla equivalence",
+  "source": {
+    "path": "Project/Assets/Sango/Scripts/Game/Debate/DebatePhase.cs",
+    "blob": "6aa98f855a5d4d172cde7e8ffc18a141b8a7b587",
+    "sha256": "5b47f7b6a89d6123a23e7c14f22168e59c9edd549e98d9bc0258d8a55bb9cbf3",
+    "lines": [
+      397,
+      420
+    ],
+    "mapping": "Attack -> Effect -> CalcWinner; terminal gate else Anger"
+  },
+  "dependencies": {
+    "packages/engine/src/debate-checked-play.ts": "40cd72b5fe4fb1037386a563d928cca3f28be090",
+    "packages/engine/src/debate-attack-effect.ts": "6c87786942babc0efcd53b48ad3d4de63be175e4",
+    "packages/engine/src/debate-anger-transition.ts": "72d3b9bb670efc0f5da4fb193aee9aab951f2591",
+    "packages/engine/src/debate-terminal-classification.ts": "617761534d023df39111a32e5f08c1e3d75b5126",
+    "packages/engine/src/debate-anger-phase.ts": "995da3e535a1b146867579f0df2342a45c8a5933"
+  },
+  "allExistingKernelsUnchanged": true,
+  "mapping": [
+    "PR125 complete checked-play checkpoint -> carry hands/decks/quota/current physical cards",
+    "PR127 final HP/stress -> authoritative anger input",
+    "PR126 full state -> final nonterminal or terminal snapshot; no stale overwrite",
+    "PR128 only terminal critical/winType -> preserve all other final state",
+    "ordinary attacker never replaced by combo attacker",
+    "no unused downstream draw consumption; failure exposes no partial success"
+  ],
+  "engineeringPolicies": [
+    "closed generic non-tutorial positive-HP winner=-1 inactive-combo intersection",
+    "topic0..2 capacity4..7 slot0zero active-other-full current18-card tapes",
+    "caller-supplied effective attributes and finite choice plan",
+    "complete policies exact equality; whole-input safe detach and parse",
+    "atomic result plus unchanged nested success/failure receipts",
+    "conservative16 event budget; no global RNG or simultaneous-bound claim"
+  ],
+  "boundaries": {
+    "nativeGapTopics": 43,
+    "historicalSnapshots": 45,
+    "P078AndDependencies": "excluded",
+    "ClosingWorldWrites": "excluded",
+    "oldNineSessions": "unchanged",
+    "fullSession": "excluded"
+  },
+  "verification": "仅静态文本阅读、人工纸面推导及字节身份核对；未运行测试、编译、typecheck、build、validator、checker、候选、来源、场景或replay。代码存在及静态审阅不证明运行正确。现代C#参考及显式工程组合不是原生PK／Vanilla等价，43证据主题／45历史快照不减。P078及全部依赖、Closing奖励受伤世界写入均排除。"
+}

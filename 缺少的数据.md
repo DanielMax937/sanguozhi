@@ -1,3 +1,9 @@
+## 2026-10-27：现代参考有界单回合组合事务（静态）
+
+新增[受检出牌→攻击效果→愤怒衔接／终局分类](docs/rules/debate-round-transaction-v1.md)，复用PR125、PR127、PR126、PR128现有公开核，从明确非教程generic两队正HP、满ready-hand、inactive combo检查点，到下轮ready-for-play或closing-pending。外层保存手牌/额度/牌堆游标/strength/combo；Attack输出HP/stress为权威，普通attacker和playedCard不能用combo替换；保留各阶段完整收据，任一下游失败不提交半轮状态。终局不补牌、不递减timer、不消费未用抽样，牌堆不足仍整笔拒绝而非再生成。
+
+仅静态文本阅读、人工纸面推导及字节身份核对；未运行测试、编译、typecheck、build、validator、checker、候选、来源、场景或replay。代码存在及静态审阅不证明运行正确。现代C#参考及显式工程组合不是原生PK／Vanilla等价，43证据主题／45历史快照不减。P078及全部依赖、Closing奖励受伤世界写入均排除。 这是本地候选的静态实现覆盖，不是完整会话或全部独立缺口完成；下方历史记录保留各批交付时边界。
+
 ## 2026-10-26：现代参考有界终局分类（静态）
 
 新增[CanCritical → 显式选择 → winType](docs/rules/debate-terminal-classification-v1.md)，从已解析终局winner和两队当前HP投影判断败者−100及功能开关，显式映射选择PushOn0／HaveMercy1到winType1／2；非会心仅接受null并保留明确初始Normal0。符合门槛却未给选择整笔拒绝，不默认AI选择；不重新判胜、重算HP或自动连接旧核。输出止于closing-pending，不执行Closing、奖励、受伤或世界写入。既有PR126／PR127及九个旧会话不改；下方历史段落保留各批当时边界，不代表本新增仍缺实现。
