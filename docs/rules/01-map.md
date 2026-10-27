@@ -75,6 +75,10 @@ ruins
 
 这组静态字段与运行时 `struct_map_grid` 的 bit-packed 结构不是同一层表示。尤其 `flood` 说明水攻覆盖范围在地图数据中有预标记，不能只靠运行时高度临时 flood-fill 猜测。
 
+### 三城开发地的定性攻略补充（2026-10-27）
+
+[三城专页证据 v1](city-development-guide-v1.md)补充北海／建業的攻略聚集描述；会稽是否同片仍 unknown。仅社区攻略观察，不证明精确连通、逐格坐标或六邻接，不能把总地块数作为单片数组。`cities.json` 三项 `developmentPatches: null` 与全部地图数据保持不变；原生布局缺口不勾销。
+
 ## 2. 地形战法可用性
 
 ### 底层机制

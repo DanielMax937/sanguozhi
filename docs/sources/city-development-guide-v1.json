@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "recordVersion": "city-development-guide-v1",
+  "evidenceLevel": "community-guide-observation",
+  "observedAt": "2026-10-27T13:48:31Z",
+  "observedAtBeijing": "2026-10-27T21:48:31+08:00",
+  "baselineCommit": "ff9d136d7d690f64ada8ca76e0a2016823145ac8",
+  "baselineCitiesBlob": "8bec0818a48d95809ea3dd56e63d4e5fba40de37",
+  "purpose": "Supplement city-specific qualitative guide evidence, not native development topology or implementation.",
+  "existingAggregateSource": "https://w.atwiki.jp/sangokushi11/pages/77.html",
+  "newCitySpecificObservations": [
+    {
+      "city": "北海",
+      "wikiTitle": "北海",
+      "excerpt": "開発地がひとまとまり",
+      "interpretation": "攻略文字称开发地集中为一处；不是精确连通分量或邻接证明。",
+      "aggregationObservation": "guide-describes-grouped",
+      "image": "https://img.atwiki.jp/sangokushi11/attach/157/111/hokkai.PNG",
+      "imageSha256": "b962f19ef6ca8d891a868a5348cf118631d3ec03ffa36ac14f3c5ae24916236f",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/157.html",
+      "section": "基本情報",
+      "pageLastUpdatedDisplayed": "2012-06-30 03:50",
+      "pageLastUpdatedTimezone": "not stated in extracted text",
+      "excerptSha256": "a21300a90dc4829b9375f77521b2e9724cf3629b091d96cd5122df7eeb9cac00",
+      "developmentPatches": null,
+      "exactConnectedComponents": "unknown",
+      "nativeCoordinates": "unknown",
+      "sixNeighborEdges": "unknown",
+      "gamePlatformEditionPatch": "unknown for this observation"
+    },
+    {
+      "city": "建業",
+      "wikiTitle": "建業",
+      "excerpt": "全開発地がまとまって",
+      "interpretation": "攻略文字称全部开发地聚集；不确定逐格边界、片数或六方向邻接。",
+      "aggregationObservation": "guide-describes-grouped",
+      "image": "https://img.atwiki.jp/sangokushi11/attach/171/126/kengyo.png",
+      "imageSha256": "d89ac5db847a61ab162705f0d6f8153896135308a2f28190ebbf4e11042ee2c2",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/171.html",
+      "section": "基本情報",
+      "pageLastUpdatedDisplayed": "2018-11-26 20:35",
+      "pageLastUpdatedTimezone": "not stated in extracted text",
+      "excerptSha256": "bf2838ece924ed4b11ba8ae0dfe326f4c4761c5fc9bca32014ceba70e036671b",
+      "developmentPatches": null,
+      "exactConnectedComponents": "unknown",
+      "nativeCoordinates": "unknown",
+      "sixNeighborEdges": "unknown",
+      "gamePlatformEditionPatch": "unknown for this observation"
+    },
+    {
+      "city": "會稽",
+      "wikiTitle": "会稽",
+      "excerpt": "開発地の数・配置ともに良好",
+      "interpretation": "只有数量和配置良好的定性评价；不能推出所有地块同片。",
+      "aggregationObservation": "unknown",
+      "image": "https://img.atwiki.jp/sangokushi11/attach/173/128/kaikei.png",
+      "imageSha256": "48395792709048a195eb22cd4a9e8730fc2dc19d1e8827657805cdd8ba174eed",
+      "url": "https://w.atwiki.jp/sangokushi11/pages/173.html",
+      "section": "基本情報",
+      "pageLastUpdatedDisplayed": "2012-07-01 14:55",
+      "pageLastUpdatedTimezone": "not stated in extracted text",
+      "excerptSha256": "c8488224f61cb169a92cfeaceb21efc8b38866102f1f34bf0a017c412ccb3d1f",
+      "developmentPatches": null,
+      "exactConnectedComponents": "unknown",
+      "nativeCoordinates": "unknown",
+      "sixNeighborEdges": "unknown",
+      "gamePlatformEditionPatch": "unknown for this observation"
+    }
+  ],
+  "legendContext": {
+    "url": "https://w.atwiki.jp/sangokushi11/pages/149.html",
+    "section": "地形効果",
+    "role": "Geography index and development-land terrain legend only; not a coordinate transform or original map dump.",
+    "imageCountingPerformed": false
+  },
+  "identityPolicy": {
+    "excerptSha256": "SHA-256 of exact UTF-8 excerpt string, no trailing newline; NOT whole webpage hash.",
+    "imageSha256": "SHA-256 of fetched original image bytes; NOT game build identity or historical page revision.",
+    "fullHtmlSnapshotHash": null,
+    "imageInspection": "Three linked community schematic images visually inspected; not used to count cells, infer adjacency or identify native coordinates."
+  },
+  "hardLimits": [
+    "Do not change the three null developmentPatches in cities.json.",
+    "Grouped prose is not a numeric patch count, graph connectivity, all-pairs adjacency or six-direction edge evidence.",
+    "Do not derive all 15 Kuaiji cells from a cropped right-edge schematic.",
+    "No PC-PK1.1, Vanilla or console equivalence is established.",
+    "No code, map data, tests or native source programs executed or changed.",
+    "Native evidence gaps 43 topics /45 historical snapshots unchanged."
+  ]
+}
