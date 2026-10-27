@@ -1273,3 +1273,18 @@ export {
   type DebateAttackEffectPolicyV1,
   type DebateAttackEffectEvidenceV1,
 } from './debate-attack-effect.ts';
+
+export {
+  evaluateDebateTerminalClassification,
+  DEBATE_TERMINAL_CLASSIFICATION_POLICY_V1,
+  DEBATE_TERMINAL_CLASSIFICATION_EVIDENCE_V1,
+  type DebateTerminalClassificationInputV1,
+  type DebateTerminalClassificationStateV1,
+  type DebateTerminalClassificationReceiptV1,
+  type DebateTerminalClassificationSuccessV1,
+  type DebateTerminalClassificationFailureV1,
+  type DebateTerminalClassificationFailureReasonV1,
+  type DebateTerminalClassificationResultV1,
+  type DebateTerminalClassificationPolicyV1,
+  type DebateTerminalClassificationEvidenceV1,
+} from './debate-terminal-classification.ts';

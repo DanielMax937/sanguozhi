@@ -1,3 +1,9 @@
+## 2026-10-26：现代参考有界终局分类（静态）
+
+新增[CanCritical → 显式选择 → winType](docs/rules/debate-terminal-classification-v1.md)，从已解析终局winner和两队当前HP投影判断败者−100及功能开关，显式映射选择PushOn0／HaveMercy1到winType1／2；非会心仅接受null并保留明确初始Normal0。符合门槛却未给选择整笔拒绝，不默认AI选择；不重新判胜、重算HP或自动连接旧核。输出止于closing-pending，不执行Closing、奖励、受伤或世界写入。既有PR126／PR127及九个旧会话不改；下方历史段落保留各批当时边界，不代表本新增仍缺实现。
+
+仅静态文本阅读、人工纸面推导和字节核对；未运行测试、编译、typecheck、build、validator、checker、候选、来源、场景或 replay。静态审阅不证明运行正确或原生 PK／Vanilla 等价。43证据主题／45历史快照不减；P078及全部依赖保持排除。 12成功／25拒绝项仅纸面设计，不是运行通过。独立缺口未全部清空。
+
 ## 2026-10-25：现代参考有界普通攻击、效果与判胜（静态）
 
 本批新增[Attack → Effect → CalcWinner](docs/rules/debate-attack-effect-v1.md)及[API合同](docs/engine/debate-attack-effect-v1.md)，从已出牌且攻击方已解析的显式检查点出发，复用原 `evaluateDebateHpDamage`，写入 HP／压力并在全部效果之后判胜。非终局返回 `ready-for-anger`，终局停在 `terminal-pending-classification`，不执行愤怒、崩坏、回合衔接或 Critical／Closing。
