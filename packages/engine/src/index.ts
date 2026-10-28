@@ -1313,4 +1313,4 @@ export type { DebateRegeneratedRoundInputV2, DebateRegeneratedRoundSuccessV2, De
 export { projectInferredStarvation, selectInferredHiddenResearch, inferCityDevelopmentPartition, projectInferredOfficerTravel } from './inferred-rule-requests.ts';
 export { decideInferredStrategyHit, projectInferredStandingFire, projectInferredRockfall, projectInferredGovernorCounterattack, projectInferredGatePortRepair, projectInferredInitialLoyalty, decideInferredRaidRequest, projectInferredFoodRaid } from './inferred-combat-requests.ts';
 export { createInferredSandboxBlueprint, createInferredCityCommandScenario, planInferredNarrativeNotice } from './inferred-blueprints.ts';
-export { projectInferredSalaryShortfall } from './inferred-salary-request.ts';
+export { projectInferredSalaryShortfallV2 } from './inferred-salary-request.ts';

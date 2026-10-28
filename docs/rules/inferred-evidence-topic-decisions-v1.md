@@ -45,7 +45,7 @@
 | T23 [采用现有policy] 训练 | 现有训练核/奖励；reset先后按现有独立profile，任务可再次置acted。不把两份MOD关联IDB当stock。 | [calculations.ts](../../packages/engine/src/calculations.ts)/engine.ts及training-runtime-policy；全局scheduler未知。 |
 | T24 [受限排除] 技巧P额外奖惩 | 已知上限10000保留；受伤/灾害/释放/攻城奖励各保留来源归属，不凭总奖数拆成虚构子奖。 | 已有独立policy覆盖部分；Closing、释放、占领world写入排除。 |
 | T25 [采用现有policy] 功绩 | 训练/征兵每名50、到达200、野补100沿已核；研究采用当前Wiki500/1000/2000/3000候选、每参与人全额，保留旧冲突表可选。 | [technique-research-lifecycle.ts](../../packages/engine/src/technique-research-lifecycle.ts)及各既有核；同盟/空城奖不新增受限结算。 |
-| T26 [追加policy/纯请求] 欠薪 | 薪俸按月先算；资金不足的旧有限财务推进仍拒绝；新增独立单人预算请求paid=min(到期,分配)、减忠诚请求ceil(5*欠额/到期)，明确新设计。 | [city-finance-lifecycle.ts](../../packages/engine/src/city-finance-lifecycle.ts)；inferred-salary-request.ts仅规划；实际工资/忠诚后果未接，原作规则未证。 |
+| T26 [追加policy/纯请求] 欠薪 | 薪俸按月先算；资金不足的旧有限财务推进仍拒绝；已知设施总工资足额整笔扣/不足整笔不扣；v1部分支付撤回。v2按该设施门返回个人支付0或全额，唯一推断为欠薪且个人应领>0时减忠诚请求5。 | [city-finance-lifecycle.ts](../../packages/engine/src/city-finance-lifecycle.ts)；inferred-salary-request.ts仅规划；实际工资/忠诚后果未接；支付门已证，具体欠薪名单及减量仍未证。 |
 | T27 [采用现有policy] 官职 | 80有名职+爵位目录，单职selector同分先到者；候选按显式名单而非暗加人名优先。 | [office-assignment.ts](../../packages/engine/src/office-assignment.ts)；原资格/第81项/真实人员职务与统兵联动未知。 |
 | T28 [采用现有policy] 忠诚 | 保留三条件候选与已知算术；现金褒赏沿synthetic每100金、5AP、均匀5..9，不装作魅力/义理已建模。 | [personnel-loyalty-lifecycle.ts](../../packages/engine/src/personnel-loyalty-lifecycle.ts)；原getter/RNG/宝物/归属变更未证。 |
 | T29 [采用现有policy] 商人 | 沿显式有理price输入、整数买卖、供应政治字段及固定有限费用，不从UI相场猜原raw价尺度。 | [city-merchant-lifecycle.ts](../../packages/engine/src/city-merchant-lifecycle.ts)；原三helper和商人/价格生成未知。 |
