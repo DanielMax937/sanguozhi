@@ -26,7 +26,7 @@ type Envelope = { id: string; expectedRevision: number; command: Command };
 type Write = { before: number; requested: number; actualDelta: number; after: number; cap: number; discarded: number; policyId: string };
 type Credit = Write & { credited: number };
 type Fees = { gold: Write; actionPoints: Write; techniquePoints: Write; guidanceParticipantIds: string[]; discountApplied: boolean };
-type Timing = { relatedAbility: Stat; relatedAbilitySum: number; difficulty: Scenario['difficulty']; abilityDependentTimingModeled: false; difficultyDependentTimingModeled: false; timeFamily: CatalogRow['timeFamily']; baseTurns: number; talentOfficeApplied: boolean; talentOfficeReduction: number; durationTurns: number; dueTurn: number; dueDate: DateV1; policyId: string; evidence: 'compatibility-guide-fallback' };
+type Timing = { relatedAbility: Stat; relatedAbilitySum: number; difficulty: Scenario['difficulty']; abilityDependentTimingModeled: boolean; difficultyDependentTimingModeled: false; timeFamily: CatalogRow['timeFamily']; baseTurns: number; talentOfficeApplied: boolean; talentOfficeReduction: number; durationTurns: number; dueTurn: number; dueDate: DateV1; policyId: string; evidence: 'compatibility-guide-fallback' | 'explicit-inference-not-native' };
 type Reward = { officerId: string; attribute: Stat; xp: Credit; merit: Credit; xpPolicyId: string; meritPolicyId: string; allocationPolicyId: string };
 type Completion = { jobId: string; techniqueId: number; turn: number; date: DateV1; unlockedBefore: number[]; unlockedAfter: number[]; rewards: Reward[]; releasedOfficerIds: string[]; actedTurn: number; turnPolicyId: string };
 type Snapshot = { turn: number; date: DateV1; city: Scenario['city']; difficulty: Scenario['difficulty']; officers: Officer[]; catalogRow: CatalogRow; policies: Policies };
@@ -125,7 +125,8 @@ const REGISTRY: Record<keyof Policies, Policy[]> = {
   parallelism: [policy('single-active-force-project-v1', { maximumActive: 1 })],
   fees: [policy('catalog-exact-participating-guidance-v1', { actionPoints: 50, guidanceGoldDivisor: 2, guidanceStacks: false })],
   attributes: [policy('start-effective-attributes-snapshot-v1', { xpChangesEffectiveAbility: false })],
-  time: [policy('guide-two-family-fallback-v1', { militaryTrainingTurns: [3, 4, 6, 9], otherTurns: [4, 5, 7, 10], abilityDependent: false, difficultyDependent: false })],
+  time: [policy('guide-two-family-fallback-v1', { militaryTrainingTurns: [3, 4, 6, 9], otherTurns: [4, 5, 7, 10], abilityDependent: false, difficultyDependent: false }),
+    policy('inferred-two-family-seventy-point-bands-v1', { militaryTrainingTurns: [3, 4, 6, 9], otherTurns: [4, 5, 7, 10], abilityDependent: true, difficultyDependent: false, bandWidth: 70, maximumBand: 4, anchorBand: 3, minimumBaseTurns: 1 })],
   talentOffice: [policy('complete-local-talent-office-minus2-min1-v1', { reduction: 2, minimum: 1 })],
   merit: [policy('current-wiki-merit-candidate-v1', { byLevel: [500, 1000, 2000, 3000], provisional: true }), policy('early-guide-merit-candidate-v1', { byLevel: [500, 1000, 1500, 2500], provisional: true })],
   allocation: [policy('each-selected-full-reward-v1', { recipients: 'all-selected-in-command-order', provisional: true })],
@@ -199,13 +200,21 @@ function debit(before: number, cost: number, cap: number, policyId: string): Wri
 function credit(before: number, requested: number, cap: number, policyId: string): Credit { const credited = Math.min(requested, cap - before); return { before, requested, actualDelta: credited, credited, after: before + credited, cap, discarded: requested - credited, policyId }; }
 function timing(s: State, row: CatalogRow, people: Officer[]): Timing {
   const params = s.policies.time.parameters, turns = params[row.timeFamily === 'military-training' ? 'militaryTrainingTurns' : 'otherTurns'] as number[];
-  const baseTurns = turns[row.level - 1]!, applied = s.city.talentOffice === 'complete';
+  const relatedAbilitySum = people.reduce((n, o) => n + o.effectiveAttributes[row.relatedAbility], 0);
+  const inferred = s.policies.time.id === 'inferred-two-family-seventy-point-bands-v1';
+  // Explicitly opted-in engineering interpolation, not a recovered PC/PK matrix.
+  // Preserve the original fixed-table policy and receipts byte-for-byte in its branch.
+  const band = inferred ? Math.min(params.maximumBand as number, Math.floor(relatedAbilitySum / (params.bandWidth as number))) : 0;
+  const baseTurns = inferred
+    ? Math.max(params.minimumBaseTurns as number, turns[row.level - 1]! + (params.anchorBand as number) - band)
+    : turns[row.level - 1]!;
+  const applied = s.city.talentOffice === 'complete';
   const durationTurns = Math.max(s.policies.talentOffice.parameters.minimum as number, baseTurns - (applied ? s.policies.talentOffice.parameters.reduction as number : 0));
   if (!Number.isSafeInteger(s.turn + durationTurns)) fail('turn-overflow');
   let dueDate = copy(s.date); for (let i = 0; i < durationTurns; i++) dueDate = nextDate(dueDate);
-  return { relatedAbility: row.relatedAbility, relatedAbilitySum: people.reduce((n, o) => n + o.effectiveAttributes[row.relatedAbility], 0), difficulty: s.difficulty,
-    abilityDependentTimingModeled: false, difficultyDependentTimingModeled: false, timeFamily: row.timeFamily, baseTurns, talentOfficeApplied: applied, talentOfficeReduction: baseTurns - durationTurns,
-    durationTurns, dueTurn: s.turn + durationTurns, dueDate, policyId: s.policies.time.id, evidence: 'compatibility-guide-fallback' };
+  return { relatedAbility: row.relatedAbility, relatedAbilitySum, difficulty: s.difficulty,
+    abilityDependentTimingModeled: inferred, difficultyDependentTimingModeled: false, timeFamily: row.timeFamily, baseTurns, talentOfficeApplied: applied, talentOfficeReduction: baseTurns - durationTurns,
+    durationTurns, dueTurn: s.turn + durationTurns, dueDate, policyId: s.policies.time.id, evidence: inferred ? 'explicit-inference-not-native' : 'compatibility-guide-fallback' };
 }
 function fork(s: State): State { return { ...s, date: copy(s.date), force: copy(s.force), corps: copy(s.corps), city: copy(s.city), officers: copy(s.officers), researchJobs: s.researchJobs.map(j => ({ ...j })), appliedCommands: [...s.appliedCommands] }; }
 function complete(s: State, job: Job): Completion {
@@ -333,3 +342,4 @@ export function replayTechniqueResearch(trace: TechniqueResearchTraceV1): Techni
     freezeState(state); return freeze({ ok: true, state, outcomes });
   } catch (e) { if (state) freezeState(state); return freeze({ ok: false, reason: error(e, 'invalid-trace').reason, index, state }); }
 }
+

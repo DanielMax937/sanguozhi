@@ -1,6 +1,6 @@
 # 独立技巧研究生命周期 v1
 
-更新：2026-10-16。本文是具体工程规则；[API合同](../engine/technique-research-lifecycle.md)、[36项版本目录](../sources/technique-research-lifecycle-catalog.json)、[来源与限制](../sources/technique-research-lifecycle.json)分别提供调用入口、固定身份和证据登记。
+更新：2026-10-28（新增显式推断时间政策；原默认不变）。本文是具体工程规则；[API合同](../engine/technique-research-lifecycle.md)、[36项版本目录](../sources/technique-research-lifecycle-catalog.json)、[来源与限制](../sources/technique-research-lifecycle.json)分别提供调用入口、固定身份和证据登记。
 
 ## 1. 支持范围与证据等级
 
@@ -13,7 +13,7 @@
 | 36项身份、系、等级、费用、相关能力 | 既有混合结构化资料；每行保留原 `originalTechniqueRowEvidence`，不代表生命周期全链精确 |
 | 最多3人、AP50、参与指导折扣、两格敌军开始gate | 官方日文合订手册的搜索索引文本；不是繁中PC-PK1.1二进制认证 |
 | 人才府减2旬、最低1 | 既有地址级逆向记录；本服务直接使用显式本城完工事实，未恢复设施resolver |
-| 两组基础时间 | `compatibility-guide-fallback`；未建模能力、难度矩阵 |
+| 两组基础时间 | 原默认 `compatibility-guide-fallback` 不随能力变化；新增可选 `explicit-inference-not-native` 按70点能力档变化。两者均无原生难度矩阵证明 |
 | 功绩两表 | 文献候选且高等级冲突；不能分别命名Vanilla表/PK表 |
 | 单active、逐人全额、原子完成、释放、本旬行动、容量保护 | 独立服务政策，不是native caller结论 |
 
@@ -102,7 +102,7 @@
 | parallelism | `single-active-force-project-v1`：maximumActive=1 |
 | fees | `catalog-exact-participating-guidance-v1`：actionPoints=50、guidanceGoldDivisor=2、guidanceStacks=false |
 | attributes | `start-effective-attributes-snapshot-v1`：xpChangesEffectiveAbility=false |
-| time | `guide-two-family-fallback-v1`：militaryTrainingTurns=[3,4,6,9]、otherTurns=[4,5,7,10]、abilityDependent=false、difficultyDependent=false |
+| time | `guide-two-family-fallback-v1`：militaryTrainingTurns=[3,4,6,9]、otherTurns=[4,5,7,10]、abilityDependent=false、difficultyDependent=false；新增可选`inferred-two-family-seventy-point-bands-v1`参数与公式见文末，不能只更换id |
 | talentOffice | `complete-local-talent-office-minus2-min1-v1`：reduction=2、minimum=1 |
 | merit | 默认`current-wiki-merit-candidate-v1`：[500,1000,2000,3000]；替代`early-guide-merit-candidate-v1`：[500,1000,1500,2500]；参数为byLevel及provisional=true |
 | allocation | `each-selected-full-reward-v1`：recipients=all-selected-in-command-order、provisional=true |
@@ -112,7 +112,7 @@
 | apRecovery | 默认`no-ap-recovery-v1`：increment=0、cap=255；替代`fixed20-cap255-v1`：increment=20、cap=255 |
 | presentation | `no-presentation-rng-v1`：rngDraws=0 |
 
-只开放两种功绩候选和两种AP恢复政策，共四种组合；没有“任意自定义日数/奖励”入口。所谓两组时间是一个明确fallback政策下按技巧系选择A/B，并非两套伪精确难度公式。
+现在开放两种时间、两种功绩候选和两种AP恢复政策，共八种组合；没有“任意自定义日数/奖励”入口。所谓两组时间是一个明确fallback政策下按技巧系选择A/B，并非两套伪精确难度公式。
 
 ## 5. 一次性费用与完成奖励
 
@@ -145,9 +145,9 @@
 | A / military-training | 枪、戟、弩、骑、练兵 | 3 / 4 / 6 / 9 | 1 / 2 / 4 / 7 |
 | B / invention-defense-fire-domestic | 发明、防卫、火攻、内政 | 4 / 5 / 7 / 10 | 2 / 3 / 5 / 8 |
 
-`duration=max(1,baseTurns-(talentOffice==='complete'?2:0))`。building与none均不减；没有乘法叠加或能力加速。人才府尾修正有既有地址证据，但套用的基础值仍是fallback。
+`duration=max(1,baseTurns-(talentOffice==='complete'?2:0))`。building与none均不减；原默认没有乘法叠加或能力加速；新增政策见下。人才府尾修正有既有地址证据，但套用的基础值仍是fallback。
 
-`relatedAbilitySum=sum(selected.effectiveAttributes[row.relatedAbility])`保存为开始观察；时间收据同时保存difficulty及 `abilityDependentTimingModeled:false,difficultyDependentTimingModeled:false`。哪怕两次能力和分别0与765、难度不同，所选fallback仍同长，不能把结果描述成已实现原作难度矩阵。
+以下为原默认政策的历史兼容行为：`relatedAbilitySum=sum(selected.effectiveAttributes[row.relatedAbility])`保存为开始观察；时间收据同时保存difficulty及 `abilityDependentTimingModeled:false,difficultyDependentTimingModeled:false`。哪怕两次能力和分别0与765、难度不同，所选fallback仍同长，不能把结果描述成已实现原作难度矩阵。
 
 日历每次只推进1旬：月内1→11→21→下月1，十二月21→下一年一月1。`dueTurn=startTurn+duration`，开始时逐旬预算 `dueDate`；跨9999年或turn不再安全即整次拒绝。这个完结性gate避免先收费后无法完成，不是原作边界结论。
 
@@ -242,3 +242,16 @@ job保存身份、状态、参与者、start/duration/remaining/dueTurn、timing
 两套功绩、原生完成人员分配、完整时长矩阵、Basic/Actual读取、完成writer及原生执行顺序均保持open。相关旧文见[时间](26-technique-research-time.md)、[时间边界](49-technique-research-time-exactness.md)、[功绩](27-technique-research-merit.md)、[完成writer边界](73-technique-research-completion-writer-boundary.md)。
 
 本次仅修改代码、静态示例及规则文档；没有运行测试、typecheck、构建、checker、诊断、游戏或demo。不能写本树通过或沿用历史验收证明它。旧默认全套food文件失败仍未解决。P0-78及其依赖、原生任务/归属/迁移/返回/取消/退款、真实人员死亡俘虏与势力灭亡、资源跨服务共享和36项世界效果应用全部排除。
+
+
+## 2026-10-28 显式推断时间政策（可选，非原生认证）
+
+用户允许证据不足时采用合理推断。本次不改变 `TECHNIQUE_RESEARCH_DEFAULT_POLICIES_V1`；新场景可从 `TECHNIQUE_RESEARCH_POLICY_REGISTRY_V1.time` 选择 `inferred-two-family-seventy-point-bands-v1` 并提交整份政策，其他13族不变。原政策和历史存档不得暗中迁移。完整选择理由、矩阵及失效条件见[独立推断文档](inferred-technique-time-v1.md)。
+
+新政策参数：`militaryTrainingTurns=[3,4,6,9]`、`otherTurns=[4,5,7,10]`、`abilityDependent=true`、`difficultyDependent=false`、`bandWidth=70`、`maximumBand=4`、`anchorBand=3`、`minimumBaseTurns=1`。仍须与注册快照精确相等，不接受任意参数。
+
+计算：先取开始时所选1–3人相关能力和（每人0..255，和0..765），`band=min(4,floor(sum/70))`；`base=max(1,table[level-1]+3-band)`；再人才府完工减2旬、最低1旬。能力和达到280后不再加速；难度仅记录，无证据而不另加难度倍率。
+
+新政策收据 `abilityDependentTimingModeled=true`、`difficultyDependentTimingModeled=false`、`evidence=explicit-inference-not-native`。实际计算结果进入任务duration/dueTurn/dueDate及已有逐旬完成流程。没有新增费用/奖励/世界或人员写入口。旧政策仍返回原字段和值。`sideEffectsNotModeled` 中的完整能力难度矩阵指原生矩阵；新增插值不证明它已恢复。
+
+本批只静态审阅；未运行测试、编译、typecheck、build或候选，运行正确性未验证。
