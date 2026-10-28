@@ -1320,3 +1320,8 @@ export { projectInferredTreasureLoyalty, projectDamRecoveryRequest, projectInfer
 export { createInferredTravelWorld, executeInferredTravelWorld, saveInferredTravelWorld, loadInferredTravelWorld } from './inferred-travel-world.ts';
 export type { InferredTravelWorldStateV1, InferredTravelWorldScenarioV1, InferredTravelWorldCommandV1, InferredTravelWorldResultV1 } from './inferred-travel-world.ts';
 
+// Read-only compatibility file decoder. No native-data authenticity or world writes.
+export { importShexMapV1, readShexMapCellV1 } from './shex-map-import.ts';
+export type { ShexMapCellV1, ShexMapV1, ShexMapImportResultV1, ShexMapCellResultV1 } from './shex-map-import.ts';
+
+
