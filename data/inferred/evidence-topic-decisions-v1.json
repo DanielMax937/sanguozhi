@@ -1,0 +1,487 @@
+{
+  "id": "evidence-topic-decisions-v1",
+  "asOf": "2026-10-28",
+  "snapshotCommit": "81e5012419d7421d1759dcc6b226f616cd904b0f",
+  "snapshotPath": "缺少的数据.md",
+  "snapshotRows": 45,
+  "historicalReportedCount": 43,
+  "historicalCountMapping": "not-reliably-reconstructed",
+  "allNativeEvidenceClosed": false,
+  "allGameplayImplemented": false,
+  "entries": [
+    {
+      "id": "T01",
+      "snapshotOrdinal": 1,
+      "classification": "采用现有policy",
+      "originalText": "已交付：[普通攻击/战法最终部队伤害实测逆向式](docs/rules/05-combat.md#4-最终战斗伤害逆向公式)，包含兵力、攻防及主要倍率，等级仅PC-PK `empirical-high`。仍缺：clean-stock原函数的取整/随机/caller与版本等价证明。下一证据：原始函数体及逐路径对照，不把实测式升级为opcode-exact。",
+      "originalLinks": [
+        "docs/rules/05-combat.md#4-最终战斗伤害逆向公式"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T02",
+      "snapshotOrdinal": 2,
+      "classification": "追加policy/纯请求",
+      "originalText": "已交付：[伪报、扰乱、落雷的可复算命中式](docs/rules/06-strategy.md)，等级为PC-PK中心 `empirical-high`。仍缺：火计、伏兵、同讨/内讧、妖术普通成功率，以及原函数取整/距离等完整调用边界。下一证据：对应原函数与版本回归；不恢复旧统一基础概率。",
+      "originalLinks": [
+        "docs/rules/06-strategy.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T03",
+      "snapshotOrdinal": 3,
+      "classification": "采用现有policy",
+      "originalText": "已有来源事实：[计略府流言参数10→12](docs/rules/02-economy.md#515-计略府流言提升不是固定-20-个百分点)，不等于最终成功率固定加20个百分点，也不证明完整原概率已知。原helper/角色/最终比较、参数贡献和忠诚/治安分布继续E；[O12-B](docs/rules/rumor-scalar-lifecycle.md)仅以明确synthetic政策补有限标量软件行为。原被捕风险未知且行程/失败外交未模拟，完整原动作仍X，不沿相关事务追读。",
+      "originalLinks": [
+        "docs/rules/02-economy.md#515-计略府流言提升不是固定-20-个百分点",
+        "docs/rules/rumor-scalar-lifecycle.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T04",
+      "snapshotOrdinal": 4,
+      "classification": "采用现有policy",
+      "originalText": "伪报的基础持续旬数。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T05",
+      "snapshotOrdinal": 5,
+      "classification": "追加policy/纯请求",
+      "originalText": "E5 已核战斗/输送/驻屯耗粮、屯田、阵系减粮和着火额外烧粮；粮尽后每旬掉多少兵仍缺原函数和闭式；旧0.76仅为来源未核实的legacy兼容常量，严格fidelity不启用（见[耗粮证据更正](docs/rules/20-food-consumption.md#82-旧-076-证据降级)与[P0-12](docs/rules/47-food-overlap-starvation-exactness.md#10-旧-076-必须降级)）。",
+      "originalLinks": [
+        "docs/rules/20-food-consumption.md#82-旧-076-证据降级",
+        "docs/rules/47-food-overlap-starvation-exactness.md#10-旧-076-必须降级"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T06",
+      "snapshotOrdinal": 6,
+      "classification": "追加policy/纯请求",
+      "originalText": "地表着火持续几旬，停留在火里每旬掉多少兵。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T07",
+      "snapshotOrdinal": 7,
+      "classification": "受限排除",
+      "originalText": "一次普攻或兵器战法扣多少城耐久。耐久归零和城兵归零各自怎么结算。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T08",
+      "snapshotOrdinal": 8,
+      "classification": "采用现有policy",
+      "originalText": "已整理：[E14单挑固定现代转录参考](docs/rules/29-duel-continuous-formulas.md)（`translated-source-reference`）：duelScore/actionRatio、结果/伤害与斗志算术；已纠正Defense/Spirit dodge和独立无敌分支。仍缺：原生PC-PK/PK1.1全链等价、stock/patch身份、原始C++来源链、人物硬编码及Vanilla/主机差异。下一证据：完整可归属原函数与原生回归；参考测试不减少原43组。",
+      "originalLinks": [
+        "docs/rules/29-duel-continuous-formulas.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T09",
+      "snapshotOrdinal": 9,
+      "classification": "采用现有policy",
+      "originalText": "已交付：[支援关系率](docs/rules/03-personnel.md#44-支援攻击pc-pk11-参数已经逆出)（`reverse-engineered-parameters`）：夫妻/义兄弟50%、亲爱/辅佐30%、血缘20%，限定双方主将与关系方向。仍缺：更广血缘范围及跨版本精确边界。下一证据：关系判定完整caller与分平台对照；不再把夫妻/义兄弟基础率列作未知。",
+      "originalLinks": [
+        "docs/rules/03-personnel.md#44-支援攻击pc-pk11-参数已经逆出"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T10",
+      "snapshotOrdinal": 10,
+      "classification": "采用现有policy",
+      "originalText": "已交付：[E15舌战通用心理伤害](docs/rules/30-debate-psychological-damage.md)及牌数边界；智力70有4张可出牌，内部5槽含“再考”。仍缺：特定人物隐藏补正、追击/留情等结束结算及Vanilla/主机差异。下一证据：专用分支/结算caller和逐版本函数。",
+      "originalLinks": [
+        "docs/rules/30-debate-psychological-damage.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T11",
+      "snapshotOrdinal": 11,
+      "classification": "受限排除",
+      "originalText": "已交付：[E16来源分流伤亡核](docs/rules/31-non-cavalry-casualty-sources.md)，普通击破不额外加通用负伤/战死roll。仍缺：`005971F0`多候选选择、`005963E0`伤病等级、`00596480`比较档阈值原指令、猛者候选/等级及跨平台差异；下一证据是这些专用函数。PC-PK1.1野战/据点击破的俘虏主公式已恢复，不再缺“普通俘虏率”；剩余只缺捕获前置`004A0590`语义、context 3/4的×1.5业务名、血路城陷边界。单挑俘虏率仍按单挑章节的平台规则。",
+      "originalLinks": [
+        "docs/rules/31-non-cavalry-casualty-sources.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T12",
+      "snapshotOrdinal": 12,
+      "classification": "追加policy/纯请求",
+      "originalText": "已交付：[E17地形伤害](docs/rules/32-terrain-hazard-damage.md)：栈道每格100..299、毒泉200..399及免伤；落石专用部队/建筑参数与踏破×0.1。仍缺：落石共通base50是否再参与及取整、多目标/强制位移caller顺序、跨平台常量。下一证据：完整trap finalizer与相关caller。",
+      "originalLinks": [
+        "docs/rules/32-terrain-hazard-damage.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T13",
+      "snapshotOrdinal": 13,
+      "classification": "采用现有policy",
+      "originalText": "PR #49已交付：[巡查治安增量限定数值核](docs/rules/patrol-security-gain.md)已按完整公开005CBA10..005CBADB原文恢复稳定输入投影，原79条/204字节与MOD7条/21字节分开。先floor(已解析统率AL和/28)+2、helper完整EAX非零半减、严格>100上clip；完整uint8治安域保留负增量，首槽null不支持。已不缺公开数值函数正文和该稳定域的整数顺序；仍缺00489070 getter、004B99B0 helper内部及2/3格归属、validator/resolver、完整资格/费用/治安writer/技巧点writer/调度、clean-stock及跨版本。技巧点不实现、不串接returnedDelta。下一证据：这些callee/caller/writer的可归属字节和独立原版样本，不能由注释或纯函数测试替代。",
+      "originalLinks": [
+        "docs/rules/patrol-security-gain.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T14",
+      "snapshotOrdinal": 14,
+      "classification": "采用现有policy",
+      "originalText": "PR #48已交付：[内政建设速度限定数值核](docs/rules/domestic-construction-rate.md)已按公开005BB1D0..2AA非星号正文恢复，稳定已解析uint8政治与uint16设施耐久取 `max(最高政治+floor(总和/2),floor((D-floor(D/4))/9))`；旧Wiki重建不等价。仍缺完整工期、初始耐久writer、每旬进度、完成调度、政治/设施getter本体及可变行为、clean-stock与跨版本证明。下一证据：独立原版字节与这些caller/writer/getter，不能由D>>2推定初始写入。",
+      "originalLinks": [
+        "docs/rules/domestic-construction-rate.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T15",
+      "snapshotOrdinal": 15,
+      "classification": "采用现有policy",
+      "originalText": "已交付：[军团AP恢复四参数闭式与PK符节台项](docs/rules/02-economy.md#92-每旬恢复的核心公式)，等级为实测精确公式/数据结构与PK存档交叉。仍缺：PC-PK1.1完整恢复原函数、跨军团港关驻将极端计数及base/affected属性getter。下一证据：原函数体和对应边界回归，不标opcode-exact。",
+      "originalLinks": [
+        "docs/rules/02-economy.md#92-每旬恢复的核心公式"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T16",
+      "snapshotOrdinal": 16,
+      "classification": "采用现有policy",
+      "originalText": "每条指令消耗多少行动力仍未全集核完；训练已确认20AP、军事府城市10AP，研究技巧50AP已确认。其余府类继续逐项核。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T17",
+      "snapshotOrdinal": 17,
+      "classification": "采用现有policy",
+      "originalText": "已交付：[金收入](docs/rules/02-economy.md#17-治安修正)/[粮收入](docs/rules/02-economy.md#27-治安修正)在难度修正后乘 `max(security,50)/100`，保留各自整数顺序，证据为PC-PK1.1公开逆向。仍缺：独立clean-stock及跨版本等价。下一证据：可追溯原作样本逐函数对照，不再将治安乘数列为未知。",
+      "originalLinks": [
+        "docs/rules/02-economy.md#17-治安修正",
+        "docs/rules/02-economy.md#27-治安修正"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T18",
+      "snapshotOrdinal": 18,
+      "classification": "采用现有policy",
+      "originalText": "本批新增[征兵数量显式ST0 caller投影](docs/rules/recruitment-quantity.md)，不再把其受限算术整体列作未知；原治安损失/300金/20AP/每人功绩+50为独立公开资料，完整执行连接未实现。仍缺征兵设施选择/stock常量、converter/helper/ABI/实际writer、兵临边界2/3格与跨版本。PR #51已交付生产数量，转见[显式binary32限定核](docs/rules/production-quantity.md)，原88条/254字节及两套MOD隔离，类型gate、三槽AL/skill EAX、先技能后倍率向零再超级倍增在显式支持域恢复；不再把该限定算术整体列作未知。仍缺完整getter/skill/validator、设施选择与常量bytes/实际ST0、city virtual、完整命令/004B4040库存writer及实际裁剪、stock/跨版本；全无效槽和任意浮点域仍不支持，返回量无9000cap不等于入库无cap。",
+      "originalLinks": [
+        "docs/rules/recruitment-quantity.md",
+        "docs/rules/production-quantity.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T19",
+      "snapshotOrdinal": 19,
+      "classification": "采用现有policy",
+      "originalText": "PR #50已交付：[生产价格捕获输入整数核](docs/rules/production-price.md)按公开45条/113字节恢复uint16已保存原价与特产helper EAX的限定计算，仅AL非零八折，EAX256不折、257折；原MOD6条/14字节隔离。已不缺该域价格算术；仍缺validator/指针转ID/类别/特产helper原体，价格表/stock ID映射、完整命令资格、实际扣钱/库存writer/调度、clean-stock与跨版本。下一证据：上述原始表、callee/writer字节和独立原版样本。",
+      "originalLinks": [
+        "docs/rules/production-price.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T20",
+      "snapshotOrdinal": 20,
+      "classification": "采用现有policy",
+      "originalText": "E1/E6 已核部队/输送容量、PC补给交互、枪戟弩马补兵的匹配兵装约束和气力加权；仍缺输送队12类兵装逐类型容量、野外补给/输送到据点完整 finalizer、超限货物处理、自动补给逐资源优先级，以及攻具/高级舰船精确扣还 caller。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T21",
+      "snapshotOrdinal": 21,
+      "classification": "追加policy/纯请求",
+      "originalText": "E7 已核36技巧ID/费用/核心效果；技巧研究时间已由E11收窄：超级阈值70/140/210/280、210锚点及人才府-20/最低10已核；仍缺完整PC函数、Super全矩阵、初级/上级、属性getter层。工兵育成PC-PK倍率已由E8闭合为内政设施×2、城市港关×2.5；仍缺兵粮袭击RNG/资源边界和技巧研究功绩逐地址。应射主行为已由E10核定，只缺完整caller、内部类型值、水战profile和PC连战链序。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T22",
+      "snapshotOrdinal": 22,
+      "classification": "采用现有policy",
+      "originalText": "E8 版本差异仍缺 Vanilla 1.0/1.1/1.2 EXE技巧地址diff、戟弩骑Lv1早期倍率、Vanilla1.0工兵内部双支路、爆药BUG地区版官方状态和主机版逐项常量。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T23",
+      "snapshotOrdinal": 23,
+      "classification": "采用现有policy",
+      "originalText": "已交付：训练公式/奖励与[82 source-profile gate/reset](docs/rules/82-training-lifecycle-source-profile.md)，含 `005C4100`、全局训练/acted reset及野外气力tail-jump链。仍缺：独立clean-stock、完整任务资格/属性合成、AP与完整scheduler位置、Vanilla/主机同值验证。下一证据：原作独立hash/bytes与完整调用链；两份MOD关联IDB不认证stock，任务处理可在reset后重新置acted。",
+      "originalLinks": [
+        "docs/rules/82-training-lifecycle-source-profile.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T24",
+      "snapshotOrdinal": 24,
+      "classification": "受限排除",
+      "originalText": "技巧P上限10000已由E7源码确认；仍缺受伤/受灾扣多少、释放俘虏加多少、攻陷港口与“攻城成功+250”的拆分。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T25",
+      "snapshotOrdinal": 25,
+      "classification": "采用现有policy",
+      "originalText": "已交付：训练和征兵每名执行者功绩+50（[训练](docs/rules/82-training-lifecycle-source-profile.md)、[征兵](docs/rules/04-military.md#1-征兵)）；输送到达+200、野外补给+100有既有证据。仍缺：同盟、攻陷空白城市，以及技巧研究Lv3/Lv4冲突表的PC裁决与参与者分配。下一证据：各自功绩writer/caller；[技巧研究候选表](docs/rules/27-technique-research-merit.md)仍unresolved。",
+      "originalLinks": [
+        "docs/rules/82-training-lifecycle-source-profile.md",
+        "docs/rules/04-military.md#1-征兵",
+        "docs/rules/27-technique-research-merit.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T26",
+      "snapshotOrdinal": 26,
+      "classification": "追加policy/纯请求",
+      "originalText": "俸禄已确认按月从据点资金结算，且先于欠薪忠诚处理；仍缺欠薪时具体哪些武将掉多少、是否存在更细的部分支付语义。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T27",
+      "snapshotOrdinal": 27,
+      "classification": "采用现有policy",
+      "originalText": "已交付：官职表/功绩阶梯与[单官职selector核心](docs/rules/43-auto-office-selector-exactness.md)。`005FA650`是office→type分类器，不是候选排序器；同分保留caller列表先到者。仍缺：`005FA4D0`完整资格、分类器完整opcode/第81项、候选列表构造顺序、评分mode的caller业务语义及多官职scheduler。下一证据：分类器/资格函数体及caller/xref。",
+      "originalLinks": [
+        "docs/rules/43-auto-office-selector-exactness.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T28",
+      "snapshotOrdinal": 28,
+      "classification": "采用现有policy",
+      "originalText": "忠诚：[自然候选静态纠错](docs/rules/natural-loyalty-candidate-boundary.md)绑定 `0058E510` caller，普通前置豁免后为相性差>25（unsigned AL）、低义理+高野望、或 `004889E0` 非零三选一；俘虏跳过这组三条，换季/月度分支保留。`00489F80`教程37条助记符已支持双uint8[独立数值投影](docs/rules/affinity-distance.md)，不再整体列为无函数体；仍缺原opcode bytes、教程到此caller及S1的同源证明、native pointer/ID解析。`004889E0`完整callee、`004A6CF0`最终writer、RNG/降量端到端与stock/runtime仍缺；2/3依赖既有均匀随机约定。符节台与君主附加caller算术不关闭整个忠诚系统；非自然路径、褒赏精确RNG/魅力/义理闭式与宝物价值→忠诚增量也仍缺。",
+      "originalLinks": [
+        "docs/rules/natural-loyalty-candidate-boundary.md",
+        "docs/rules/affinity-distance.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T29",
+      "snapshotOrdinal": 29,
+      "classification": "采用现有policy",
+      "originalText": "商人：公开 `005CA620..005CA76A` 原段135条/331 bytes已存在，见[商人证据边界](docs/rules/02-economy.md#811-已有函数体与仍未闭合的精确合同)。仍缺 `0070A330`/`0070A280`/`005CA5B0` 完整算术合同、原始TradePrice与UI相场尺度映射、取整/溢出及writer端到端；本批只纠正文档，不实现交易。",
+      "originalLinks": [
+        "docs/rules/02-economy.md#811-已有函数体与仍未闭合的精确合同"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T30",
+      "snapshotOrdinal": 30,
+      "classification": "采用现有policy",
+      "originalText": "探索发现人才的[已过滤候选基准数值核](docs/rules/search-talent-baseline.md)已有本地source-listing-reconstruction候选：count0先返回0，完整眼力EAX非零100，否则floor((3*min(count,5)+7)*政治AL*(同州11/异州10)/300)，最高205不clip。仍缺005D1720过滤/其他helper内部、选人、005B8140最终概率与RNG、native/完整探索集成及clean-stock认证；搜金、搜宝物基础率仍缺。亲善一次送多少金、友好加多少。同盟和停战的成功率与持续旬数。",
+      "originalLinks": [
+        "docs/rules/search-talent-baseline.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T31",
+      "snapshotOrdinal": 31,
+      "classification": "采用现有policy",
+      "originalText": "登用成功的判定。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T32",
+      "snapshotOrdinal": 32,
+      "classification": "追加policy/纯请求",
+      "originalText": "已交付：[魅力和/治安进入征兵量](docs/rules/04-military.md#1-征兵)与[换季治安下降及政令整备免降](docs/rules/02-economy.md#10-治安)的既有逆向规则。仍缺：初始忠诚、太守武力对据点反击、太守政治对堤防/港关耐久恢复的精确系数，以及已核规则的跨版本等价。下一证据：各专用原函数/调用边界。",
+      "originalLinks": [
+        "docs/rules/04-military.md#1-征兵",
+        "docs/rules/02-economy.md#10-治安"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T33",
+      "snapshotOrdinal": 33,
+      "classification": "追加policy/纯请求",
+      "originalText": "贼兵和异族的概率、兵种、兵力。蝗灾、疫病、丰收的发生概率。蝗灾的效果本身已经有了：拆 1 级农场，扣 30 技巧点，3 级不拆。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T34",
+      "snapshotOrdinal": 34,
+      "classification": "采用现有policy",
+      "originalText": "本批补齐：[S1特技培育限定资格核](docs/rules/pk-skill-training-s1.md)，仅已进入类别2后的native signed32查询；有效同技能拒绝、不同技能不阻挡、越界目标保留helper零/caller一。完整命令/特技完成writer/费用/调度仍缺；适性还需同S1的00494FF0、00495010、00488D40完整callee，不据调用点补猜",
+      "originalLinks": [
+        "docs/rules/pk-skill-training-s1.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T35",
+      "snapshotOrdinal": 35,
+      "classification": "采用现有policy",
+      "originalText": "PR #45已交付：[S1五维培育限定数值核](docs/rules/pk-stat-training-s1.md)，资格与完成分层、共用累计XP、顶3000及明确负差拒绝。仅普通无年龄域或调用者已解析getter；完整资格/命令、AP/时长/使用次数、原生98表映射、隐藏RNG、scheduler与clean-stock仍缺，下一证据为相应原生表/caller和独立版本样本",
+      "originalLinks": [
+        "docs/rules/pk-stat-training-s1.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T36",
+      "snapshotOrdinal": 36,
+      "classification": "追加policy/纯请求",
+      "originalText": "已交付：[PK能力研究攻略树](docs/rules/15-pk-ability-research.md)的48基础节点、52基础箭头、4起点箭头与10位置/50隐藏候选。仍缺：原数据等价、隐藏选择算法/权重/RNG、完整研究/培育执行；下一证据是原生表与相关caller。静态 `documented-guide` 数据不支持Vanilla，也不证明运行时研究系统完成。",
+      "originalLinks": [
+        "docs/rules/15-pk-ability-research.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T37",
+      "snapshotOrdinal": 37,
+      "classification": "只读推断/资料",
+      "originalText": "已交付：`cities.json`的城际邻接。仍缺：40,000格地图中的坐标、地形、高度、逐格邻接与原作定位。下一证据：带来源/版本的原始地图数据；静态城际邻接不能替代六角格地图。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T38",
+      "snapshotOrdinal": 38,
+      "classification": "追加policy/纯请求",
+      "originalText": "北海、建业、会稽开发地分片仍缺，现有null不补猜测值。新增[三城攻略专页证据 v1](docs/rules/city-development-guide-v1.md)：北海／建業仅有社区攻略聚集描述，会稽是否同片仍 unknown；不同于既有城市总表，不证明精确连通、坐标或六邻接，不是三城实现完成。下一证据仍是可归属版本、可定位到三城的原作完整开发地布局。",
+      "originalLinks": [
+        "docs/rules/city-development-guide-v1.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T39",
+      "snapshotOrdinal": 39,
+      "classification": "只读推断/资料",
+      "originalText": "港、关名称及所属城市已补齐：[45 条静态所属关系](docs/sources/subordinate-bases.json)包含 10 关、35 港，与既有 `cities.json` 的全部 42 城数量逐项一致。来源和边界见[静态数据说明](docs/rules/static-subordinate-bases.md)；原作数值据点 ID、剧本初始状态和运行时归属仍不能由此推定。",
+      "originalLinks": [
+        "docs/sources/subordinate-bases.json",
+        "docs/rules/static-subordinate-bases.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T40",
+      "snapshotOrdinal": 40,
+      "classification": "只读推断/资料",
+      "originalText": "各剧本原作开局的势力、城池、武将、金粮兵仍缺；下一证据是分版本原始scenario数据，不由攻略树、史实事件观测或训练fixture生成。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T41",
+      "snapshotOrdinal": 41,
+      "classification": "只读推断/资料",
+      "originalText": "已转录：[所选通用事件攻略](docs/rules/generic-event-source-data.md)的33条观测/31新资料ID，保留10项未决问题；Wiki31标题中21项仅标题，2项仅条件、1项未验证轶闻、1项定性结果，另6项较实质。旧史实105/66/41不变。仍缺：空标题细节、未决条件/结果、原生ID/flag/概率、完整原作目录及执行；下一证据是版本可归属的补充来源和原生事件表/caller，资料录入不等于整项清零。",
+      "originalLinks": [
+        "docs/rules/generic-event-source-data.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T42",
+      "snapshotOrdinal": 42,
+      "classification": "只读推断/资料",
+      "originalText": "已转录：[所选PS2史实攻略](docs/rules/ps2-historical-event-source-data.md)64标题/64独立观测ID，59项条件与结果（含2仅接续）、4项仅条件、1项外链参照。仍缺：24来源限制、外链与缺述内容、蓝字丢失的PK归属、原生ID/flag、完整原作目录及分版本等价/执行；下一证据是版本可归属补充来源与原生表/caller，不以PS2观测覆盖PC",
+      "originalLinks": [
+        "docs/rules/ps2-historical-event-source-data.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T43",
+      "snapshotOrdinal": 43,
+      "classification": "只读推断/资料",
+      "originalText": "已交付：[所选史实攻略](docs/rules/historical-event-source-data.md)的105条观测/66个资料事件ID/41项来源差异，含条件与结果，等级仅 `public-guide-transcription`。仍缺：未声明flag、未决差异/缺失条件或结果、完整原作目录及求值/执行。下一证据：补充平台来源与原生flag/caller/结果链，不把资料ID当原生ID。",
+      "originalLinks": [
+        "docs/rules/historical-event-source-data.md"
+      ],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T44",
+      "snapshotOrdinal": 44,
+      "classification": "受限排除",
+      "originalText": "俘虏资金不足释放时`0058C320`的排序规则、主动释放后的默认禁仕月数、释放增加多少技巧点。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    },
+    {
+      "id": "T45",
+      "snapshotOrdinal": 45,
+      "classification": "追加policy/纯请求",
+      "originalText": "武将不带部队时，城与城之间要走几天。",
+      "originalLinks": [],
+      "nativeEvidenceClosed": false,
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+    }
+  ]
+}
