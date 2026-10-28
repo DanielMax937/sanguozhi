@@ -1324,4 +1324,9 @@ export type { InferredTravelWorldStateV1, InferredTravelWorldScenarioV1, Inferre
 export { importShexMapV1, readShexMapCellV1 } from './shex-map-import.ts';
 export type { ShexMapCellV1, ShexMapV1, ShexMapImportResultV1, ShexMapCellResultV1 } from './shex-map-import.ts';
 
+// Explicit priority plans consumed atomically by the existing detached supply ledger.
+export { executeInferredAutomaticSupply } from './inferred-automatic-supply.ts';
+export type { InferredAutomaticSupplyBatchV1, InferredAutomaticSupplyResultV1 } from './inferred-automatic-supply.ts';
+
+
 
