@@ -1,0 +1,38 @@
+{
+  "id": "shex0008-modern-compatibility-v1",
+  "checkedAt": "2026-10-28T15:18:00Z",
+  "classification": "modern-compatibility-source-not-native-authentication",
+  "sourceRepository": "tankyc/sango_infinity",
+  "commit": "ba3839939cf30b1ef4ab3d575563e1b530d818f1",
+  "files": [
+    {
+      "path": "Project/Assets/Sango/Scripts/Map/Render/Map/MapGrid.cs",
+      "blob": "aebebbdfb8f44303011a6413aa58ad00aff31b7c",
+      "read": true
+    },
+    {
+      "path": "README.md",
+      "read": true
+    },
+    {
+      "path": "Build/Content/Map/DefaultMap.bin",
+      "blob": "26b850a6d0fef8c654b3a461dc67241733c0fdc0",
+      "bytes": 3740851,
+      "read": false
+    },
+    {
+      "path": "Build/Content/Scenario/Scenario.json",
+      "blob": "ed04d4321d2e0b6cf4d111bd314f8643f2fa05f8",
+      "bytes": 1651391,
+      "read": false,
+      "limitation": "Connector returned empty content; raw request rejected as too large or unsupported."
+    }
+  ],
+  "implementationDecisions": [
+    "Strict ASCII header comparison and exact length are engineering safeguards, not claimed native validations.",
+    "Preserve all eleven uint8 fields without remake offsets, boolean conversion, area mapping or world effects."
+  ],
+  "nativeDataRecovered": false,
+  "sourceProgramsExecuted": false,
+  "candidateExecuted": false
+}
