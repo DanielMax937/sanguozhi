@@ -221,7 +221,14 @@
       "originalText": "E1/E6 已核部队/输送容量、PC补给交互、枪戟弩马补兵的匹配兵装约束和气力加权；仍缺输送队12类兵装逐类型容量、野外补给/输送到据点完整 finalizer、超限货物处理、自动补给逐资源优先级，以及攻具/高级舰船精确扣还 caller。",
       "originalLinks": [],
       "nativeEvidenceClosed": false,
-      "scope": "Explicit independent planning documented in inferred-independent-planning-v1.md; no world execution. Supplied food-horizon priority, shared source budgets, matched equipment constraints, revalidate every consumer command."
+      "scope": "Explicit independent planning documented in inferred-independent-planning-v1.md; no world execution. Supplied food-horizon priority, shared source budgets, matched equipment constraints, revalidate every consumer command.",
+      "consumerFollowup": {
+        "policyId": "inferred-priority-existing-ledger-batch-v1",
+        "code": "packages/engine/src/inferred-automatic-supply.ts",
+        "rules": "docs/rules/inferred-automatic-supply-v1.md",
+        "scope": "Actual atomic consumption in existing detached food supply accounts; not native AI/global GameState/unit finalizer.",
+        "runtimeVerified": false
+      }
     },
     {
       "id": "T21",
@@ -509,4 +516,3 @@
     }
   ]
 }
-
