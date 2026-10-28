@@ -12,9 +12,9 @@
 
 ## 当前交付层次
 
-45项均有明确处理决定，**并非45项都完整实现**：24项主要沿已有policy，11项追加具名推断或纯请求，6项只读资料/抽象替代，4项主要受限排除。每项仍以第三列子边界为准；分类不是native证据通过数。源函数身份、完整原地图、原剧本和原事件结果仍未知，不能计成已核实。零值捕获、人物归属、Closing等不因标注推断而解禁。
+45项均有明确处理决定，**并非45项都完整实现**：21项主要沿已有policy，14项追加具名推断或纯请求，6项只读资料/抽象替代，4项主要受限排除。每项仍以第三列子边界为准；分类不是native证据通过数。源函数身份、完整原地图、原剧本和原事件结果仍未知，不能计成已核实。零值捕获、人物归属、Closing等不因标注推断而解禁。
 
-新增推断细则：[研究时间](inferred-technique-time-v1.md)、[饥饿/隐藏研究/开发分片/旅行](inferred-rule-requests-v1.md)、[计略/火石/太守/袭击](inferred-combat-requests-v1.md)、[地图/场景/叙事蓝图](inferred-blueprints-v1.md)、[欠薪请求](inferred-salary-request-v1.md)。每页均有具体公式/数据、理由、实际入口、限制及替换条件。
+新增推断细则：[研究时间](inferred-technique-time-v1.md)、[饥饿/隐藏研究/开发分片/旅行](inferred-rule-requests-v1.md)、[计略/火石/太守/袭击](inferred-combat-requests-v1.md)、[地图/场景/叙事蓝图](inferred-blueprints-v1.md)、[欠薪请求](inferred-salary-request-v1.md)、[AP/补给/宝物/堤坝规划](inferred-independent-planning-v1.md)。每页均有具体公式/数据、理由、实际入口、限制及替换条件。
 
 ## 每项决定、理由及边界
 
@@ -35,11 +35,11 @@
 | T13 [采用现有policy] 巡查 | 既有floor(统率AL和/28)+2、非零helper半减、治安>100裁剪的核，不改负增量支持域；完整服务使用既有供应属性映射。 | [patrol-security-gain.ts](../../packages/engine/src/patrol-security-gain.ts)/city-command-lifecycle.ts；stock/getter原体未知。 |
 | T14 [采用现有policy] 建设速度 | 采用公开整数核max(最高政治+floor(和/2),floor((D-floor(D/4))/9))，不以现代经验替换已恢复顺序。 | [domestic-construction-rate.ts](../../packages/engine/src/domestic-construction-rate.ts)/facility-construction-lifecycle.ts；原writer身份仍未知。 |
 | T15 [采用现有policy] AP恢复 | 采用已记录四参数恢复式及PK符节台；各独立服务的无恢复/固定20等选择仍显式，不叠加两个时钟。 | [calculations.ts](../../packages/engine/src/calculations.ts)及各服务policy；原全局调度未模拟。 |
-| T16 [采用现有policy] 指令AP | 各已支持服务采用自身确定费用；训练20/军事府10、研究50、探索20/人才府10。没有支持入口的指令拒绝而非默认免费。 | 各service/catalog；不能声称全指令AP全集已证。 |
+| T16 [追加policy/纯请求] 指令AP | 保留各服务费用（研究50等）；新增19键有限AP请求表，已知四府门严格分开，部署/输送基数20、没收10及人工类别20明确推断，未知字符串拒绝。 | [独立规划](inferred-independent-planning-v1.md#t16-有限城市命令ap映射)；只成本请求不启用原命令，不能声称全指令AP全集已证。 |
 | T17 [采用现有policy] 金粮收入 | 采用各原核已有整数顺序与max(security,50)/100；财政收入、工资、特产顺序沿已交付具名政策。 | [city-finance-lifecycle.ts](../../packages/engine/src/city-finance-lifecycle.ts)及收入投影；原版本认证仍未知。 |
 | T18 [采用现有policy] 征兵/生产量 | 复用ST0逐调用/explicit binary32核，不把请求量等同实际入库；现有城市服务负担/容量/费用事务不重造。 | [recruitment-quantity.ts](../../packages/engine/src/recruitment-quantity.ts)/production-quantity.ts/city-command-lifecycle.ts；getter/原writer未知。 |
 | T19 [采用现有policy] 生产价格 | 原价uint16、特产EAX低AL非零才八折；不把EAX256等价true。 | [production-price.ts](../../packages/engine/src/production-price.ts)及城市服务；原价格表ID身份仍未知。 |
-| T20 [采用现有policy] 补给/运输 | 手动accepted=min请求、源库存、目标余量，余货留源；匹配兵装同步；合并气力默认floor。自动补给未证优先级不伪称已执行。 | [food-supply-lifecycle.ts](../../packages/engine/src/food-supply-lifecycle.ts)；12类容量供应输入，finalizer受限。 |
+| T20 [追加policy/纯请求] 补给/运输 | 手动accepted=min请求、源库存、目标余量，余货留源；匹配兵装同步；合并气力默认floor。新增供粮期限/ID顺序的独立自动规划，三资源逐目标共享源余额且匹配兵装受限。 | [food-supply-lifecycle.ts](../../packages/engine/src/food-supply-lifecycle.ts)及[独立规划](inferred-independent-planning-v1.md#t20-自动补给的纯优先级规划)；调用方核资格，输出仅草案，每步需新消费者验证，finalizer受限。 |
 | T21 [追加policy/纯请求] 技巧系统/时间 | 沿36项目录；新增按70点档每档减1旬推断，210档两系基准3/4/6/9与4/5/7/10，人才府−2最低1；难度无附加倍率。 | [technique-research-lifecycle.ts](../../packages/engine/src/technique-research-lifecycle.ts)新opt-in；详inferred-technique-time-v1.md，非原矩阵恢复；兵粮袭击另有十分位倍率+守恒转移请求，应射沿已有至多一次主反应非递归政策，原caller链仍未证。 |
 | T22 [采用现有policy] 技巧版本 | 默认仅采用现有PC-PK兼容值，Vanilla/主机没有差异证据时标unknown，不将社区修复当官方补丁。 | 各catalog原version限制不改；无证据不能补二进制地址或官方身份。 |
 | T23 [采用现有policy] 训练 | 现有训练核/奖励；reset先后按现有独立profile，任务可再次置acted。不把两份MOD关联IDB当stock。 | [calculations.ts](../../packages/engine/src/calculations.ts)/engine.ts及training-runtime-policy；全局scheduler未知。 |
@@ -47,11 +47,11 @@
 | T25 [采用现有policy] 功绩 | 训练/征兵每名50、到达200、野补100沿已核；研究采用当前Wiki500/1000/2000/3000候选、每参与人全额，保留旧冲突表可选。 | [technique-research-lifecycle.ts](../../packages/engine/src/technique-research-lifecycle.ts)及各既有核；同盟/空城奖不新增受限结算。 |
 | T26 [追加policy/纯请求] 欠薪 | 薪俸按月先算；资金不足的旧有限财务推进仍拒绝；已知设施总工资足额整笔扣/不足整笔不扣；v1部分支付撤回。v2按该设施门返回个人支付0或全额，唯一推断为欠薪且个人应领>0时减忠诚请求5。 | [city-finance-lifecycle.ts](../../packages/engine/src/city-finance-lifecycle.ts)；inferred-salary-request.ts仅规划；实际工资/忠诚后果未接；支付门已证，具体欠薪名单及减量仍未证。 |
 | T27 [采用现有policy] 官职 | 80有名职+爵位目录，单职selector同分先到者；候选按显式名单而非暗加人名优先。 | [office-assignment.ts](../../packages/engine/src/office-assignment.ts)；原资格/第81项/真实人员职务与统兵联动未知。 |
-| T28 [采用现有policy] 忠诚 | 保留三条件候选与已知算术；现金褒赏沿synthetic每100金、5AP、均匀5..9，不装作魅力/义理已建模。 | [personnel-loyalty-lifecycle.ts](../../packages/engine/src/personnel-loyalty-lifecycle.ts)；原getter/RNG/宝物/归属变更未证。 |
+| T28 [追加policy/纯请求] 忠诚 | 现金沿synthetic每100金、5AP、均匀5..9；新增普通宝物授予gain=value经验候选，真忠诚byte255截顶不截100，10AP/0金。 | [personnel-loyalty-lifecycle.ts](../../packages/engine/src/personnel-loyalty-lifecycle.ts)及[独立规划](inferred-independent-planning-v1.md#t28-宝物价值忠诚请求)；原getter/RNG未闭；宝物转授/没收损失和人物归属变更不执行。 |
 | T29 [采用现有policy] 商人 | 沿显式有理price输入、整数买卖、供应政治字段及固定有限费用，不从UI相场猜原raw价尺度。 | [city-merchant-lifecycle.ts](../../packages/engine/src/city-merchant-lifecycle.ts)；原三helper和商人/价格生成未知。 |
 | T30 [采用现有policy] 探索/外交 | 人才→宝物→金既有顺序，候选稳定ID序；探索AP20/府10，发现不等于登用。普通外交采用既有经验率与具名退款/期限政策。 | [city-search-lifecycle.ts](../../packages/engine/src/city-search-lifecycle.ts)/ordinary-diplomacy.ts；危险捕获失败拒绝，原筛选/写序未知。 |
 | T31 [采用现有policy] 登用 | 采用现有九门顺序与有理fallback率；FNV七u32模100作可重放决策，标合成RNG。 | [ordinary-recruitment-policy.ts](../../packages/engine/src/ordinary-recruitment-policy.ts)；仅决策，不写效忠/人员归属。 |
-| T32 [追加policy/纯请求] 属性系数/治安 | 已核征兵魅力、季初治安按已有公式；未有太守武力反击/政治据点修复不能冒用普通设施核等同原生。 | city-command与修复服务；[inferred-combat-requests.ts](../../packages/engine/src/inferred-combat-requests.ts)新增太守W>65每点1%反击、港关修复外推、初忠诚80的纯请求；堤坝/原生归属链不扩。 |
+| T32 [追加policy/纯请求] 属性系数/治安 | 征兵魅力、季初治安沿已知；太守反击/港关修复/初忠诚80为具名推断。新增堤坝已知listing纯请求type0x18且state0时floor(uint16最大耐久/10)，不套政治系数。 | [inferred-combat-requests.ts](../../packages/engine/src/inferred-combat-requests.ts)与[独立规划](inferred-independent-planning-v1.md#t32-堤坝耐久恢复请求已有listing不另猜政治系数)；堤坝实际writer/完工/归属写入继续排除。 |
 | T33 [追加policy/纯请求] 灾害/异族 | 单城已有月率疫8/1000、蝗13/1000、丰21/1000，祈愿42/1000且不叠；延迟下月，明确仿真常数。 | [city-season-lifecycle.ts](../../packages/engine/src/city-season-lifecycle.ts)；新根城威胁纯请求保留治安>=80安全门，低于80贼兵(100-security)/1000、异族1%，1支3000；不创建根城/部队、不模拟已存根城刷新；兵种/位置需具体场景，伤病新写入不扩。 |
 | T34 [采用现有policy] PK特技培育 | 同技能拒绝、不同技能覆盖而不叠加；适性仅C→B、B→A，S不开放；1类别1任务、3旬。 | [pk-ability-lifecycle.ts](../../packages/engine/src/pk-ability-lifecycle.ts)/pk-skill-training.ts；原98表/完整native技能writer未证。 |
 | T35 [采用现有policy] PK五维培育 | 沿S1普通无年龄域、共用XP顶3000；目标低70中80高95，按现有核处理，不假定训练XP立即提升所有服务属性。 | [pk-stat-training.ts](../../packages/engine/src/pk-stat-training.ts)/pk-ability-lifecycle.ts；年龄/原生ID与跨服务成长未证。 |
