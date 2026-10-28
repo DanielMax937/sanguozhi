@@ -7,7 +7,7 @@
 | 导出 | 合同 |
 |---|---|
 | `TECHNIQUE_RESEARCH_CATALOG_V1` | 深冻结 `{id:'technique-research-36-compat-v1',version:1,entries:[36行]}` |
-| `TECHNIQUE_RESEARCH_POLICY_REGISTRY_V1` | 14个政策族及完整可选快照；merit/AP恢复各两项，其余各一项 |
+| `TECHNIQUE_RESEARCH_POLICY_REGISTRY_V1` | 14个政策族及完整可选快照；time/merit/AP恢复各两项，其余各一项 |
 | `TECHNIQUE_RESEARCH_DEFAULT_POLICIES_V1` | 具名默认完整快照；不是隐式场景默认值 |
 | `createTechniqueResearchState(scenario)` | primitive场景→深冻结revision0状态，或 `{ok:false,reason}`；成功State没有ok字段 |
 | `previewTechniqueResearchCommand(state,envelope)` | `{ok:true,receipt,duplicate,baseRevision}`或Failure，不交付新状态 |
@@ -39,12 +39,12 @@ Start自行选择目录费用、检查所有参与者和资金、求时长、扣
 
 完整primitive字段参见[字段表](../rules/technique-research-lifecycle.md#2-场景字段与合法域)，[静态示例JSON](../../data/scenarios/technique-research-example-v1.json)逐个列出必填字段和默认政策。示例没有历史、研究记录或reservation；这些只能由服务派生。create成功时对已完成ID排序，其他数组保持输入顺序。
 
-默认不恢复AP；若选择`fixed20-cap255-v1`，须在新建场景前从registry复制该政策完整快照，而不是只更改id。功绩候选切换同理。未知policy/id/参数与strict-original profile直接拒绝，不能以compat偷偷接替。
+默认不恢复AP；若选择`fixed20-cap255-v1`，须在新建场景前从registry复制该政策完整快照，而不是只更改id。功绩候选切换同理。时间政策可显式选`inferred-two-family-seventy-point-bands-v1`：相关能力和70点分档、210档两系基准、每档−1旬；具体矩阵与推断边界见[独立推断文档](../rules/inferred-technique-time-v1.md)。默认仍为旧固定表，既有存档不迁移。未知policy/id/参数与strict-original profile直接拒绝，不能以compat偷偷接替。
 
 ## 收据和job
 
 - Receipt：commandId/revision/turn/date/kind、可空newJobId/timing/fees/boundary、completions数组、可空apRecovery、rngDraws=0及sideEffectsNotModeled
-- timing：相关能力与合计、difficulty、两个“未建模”flags、A/B timeFamily、baseTurns、人才府是否生效与实际减旬、duration/dueTurn/dueDate、政策ID与fallback证据
+- timing：相关能力与合计、difficulty、abilityDependentTimingModeled（旧固定表false，新推断政策true）及difficultyDependentTimingModeled（两者false）、A/B timeFamily、baseTurns、人才府是否生效与实际减旬、duration/dueTurn/dueDate、政策ID与证据（旧compatibility-guide-fallback，新explicit-inference-not-native）
 - fees：三种有符号扣写收据、guidanceParticipantIds及discountApplied
 - boundary：旧/新turn和date、可空jobId与旧/新remaining；无active仍可以推进
 - completion：唯一job/technique、完成turn/date、解锁前后集合、逐人XP/功绩请求与实际入账/丢弃、释放名单、actedTurn和政策ID
@@ -77,3 +77,4 @@ Trace为闭合对象：
 步骤失败、期望匹配时可以继续；期望不符则停止于该步前状态。index=-1表示步骤前校验失败，完成全部步骤后末摘要不符时index等于steps.length。摘要基于按对象key排序、保留数组序的规范JSON，UTF-8 SHA-256；无密钥认证。完整catalog与政策快照同tag不能静默迁移。
 
 所有输入都必须是有限plain-data；额外字段和重复JSON key拒绝。详细预算、Proxy限制、错误枚举及本次未运行验证见[规则§9–12](../rules/technique-research-lifecycle.md#9-派生状态与持久化实质)。
+
