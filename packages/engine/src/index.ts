@@ -1311,3 +1311,4 @@ export type { DebateRegeneratedRoundInputV2, DebateRegeneratedRoundSuccessV2, De
 
 // Explicit inferred requests/data, not native execution or world mutation.
 export { projectInferredStarvation, selectInferredHiddenResearch, inferCityDevelopmentPartition, projectInferredOfficerTravel } from './inferred-rule-requests.ts';
+export { decideInferredStrategyHit, projectInferredStandingFire, projectInferredRockfall, projectInferredGovernorCounterattack, projectInferredGatePortRepair, projectInferredInitialLoyalty, decideInferredRaidRequest, projectInferredFoodRaid } from './inferred-combat-requests.ts';
