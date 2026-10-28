@@ -1,0 +1,10 @@
+{
+  "description": "Unexecuted synthetic travel-only paper example; not an original scenario.",
+  "scenario": { "version": 1, "startYear": 200, "travelers": [{ "id": "traveler-demo", "city": "襄平" }] },
+  "commands": [
+    { "commandId": "depart-1", "expectedRevision": 0, "action": { "kind": "StartTravel", "travelerId": "traveler-demo", "destination": "北平" } },
+    { "commandId": "tick-1", "expectedRevision": 1, "action": { "kind": "AdvanceTravelTurn" } }
+  ],
+  "paperExpected": { "revision": 2, "turn": 1, "date": { "year": 200, "month": 1, "day": 11 }, "city": "北平", "journey": null },
+  "executed": false
+}

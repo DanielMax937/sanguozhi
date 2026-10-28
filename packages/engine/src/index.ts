@@ -1315,3 +1315,8 @@ export { decideInferredStrategyHit, projectInferredStandingFire, projectInferred
 export { createInferredSandboxBlueprint, createInferredCityCommandScenario, planInferredNarrativeNotice } from './inferred-blueprints.ts';
 export { projectInferredSalaryShortfallV2 } from './inferred-salary-request.ts';
 export { projectInferredTreasureLoyalty, projectDamRecoveryRequest, projectInferredCommandAP, planInferredAutomaticSupply } from './inferred-independent-planning.ts';
+
+// Actual state transitions for a synthetic travel-only world, not native people/tasks.
+export { createInferredTravelWorld, executeInferredTravelWorld, saveInferredTravelWorld, loadInferredTravelWorld } from './inferred-travel-world.ts';
+export type { InferredTravelWorldStateV1, InferredTravelWorldScenarioV1, InferredTravelWorldCommandV1, InferredTravelWorldResultV1 } from './inferred-travel-world.ts';
+
