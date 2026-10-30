@@ -257,3 +257,23 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T40 统一21旬世界新增合成actor旅行角色锁，保留跨作业资源唯一owner（2026-10-30）
 
 [规则](inferred-unified-bound-travel-v1.md)：PK/正值普通战斗/field粮等待接项仍独立列出；有限剧情与32/64日志不等完整无限战役。P078/Closing及真实人物终结仍排除；运行未验收。 历史确认与证据原文保留。
+
+## T34 显式PK研究培养接统一费用、时钟、预约与真实完成（2026-10-30）
+
+[规则](inferred-unified-pk-owner-v1.md)：21旬有限合成局；新局talent/XP映射为具名兼容推断，非原生全树及全特技效果 历史确认与证据原文保留。
+
+## T35 PK属性培养共享XP且当前属性实际供城务研究与field智力使用（2026-10-30）
+
+[规则](inferred-unified-pk-owner-v1.md)：普通无年龄getter；旧job工期保持真实startSnapshot，原版人物/年龄健康不接 历史确认与证据原文保留。
+
+## T36 PK适性特技实际完成并保留唯一元数据（2026-10-30）
+
+[规则](inferred-unified-pk-owner-v1.md)：未知原生被动映射仍未实现；不继承旧numeric skillIds，不改变真实归属 历史确认与证据原文保留。
+
+## T15 PK成长使用同一XP/行动/预约且每WorldTick一次（2026-10-30）
+
+[规则](inferred-unified-pk-owner-v1.md)：不增第二AP或独立人物账本；零值与Closing仍排除 历史确认与证据原文保留。
+
+## T40 统一world实际路由PK与每outer一步currentfacts同步（2026-10-30）
+
+[规则](inferred-unified-pk-owner-v1.md)：旧默认不变；静态未运行，密集记录仍受完整历史容量限制 历史确认与证据原文保留。
