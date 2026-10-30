@@ -1366,3 +1366,5 @@ export { createInferredSharedWorldClock, readInferredSharedWorldClock, executeIn
 export { createInferredStrategyCasterTransaction, readInferredStrategyCasterTransaction, executeInferredStrategyCasterTransaction, saveInferredStrategyCasterTransaction, loadInferredStrategyCasterTransaction } from './inferred-strategy-caster-transaction.ts';
 
 export { createInferredFireLifecycle, readInferredFireLifecycle, executeInferredFireLifecycle, saveInferredFireLifecycle, loadInferredFireLifecycle } from './inferred-fire-lifecycle.ts';
+
+export { createInferredCapacityTransfer, readInferredCapacityTransfer, executeInferredCapacityTransfer, saveInferredCapacityTransfer, loadInferredCapacityTransfer } from './inferred-capacity-transfer.ts';
