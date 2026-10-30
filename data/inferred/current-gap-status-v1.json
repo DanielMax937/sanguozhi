@@ -235,8 +235,8 @@
     {
       "id": "T20",
       "implementationCategory": "implemented-with-explicit-inference",
-      "currentSummary": "PR141已合并，范围部分",
-      "remainingBoundary": "自动补给计划进入旧库存/匹配装备/气力账本；12类容量、输送到据点finalizer与超限细节仍未闭合。",
+      "currentSummary": "自动补给实际消费及合成容量双边转运",
+      "remainingBoundary": "保留PR141自动补给；新增同owner合成transport与depot之间15坐标整单守恒转移、容量检查、正兵约束和重放。12槽容量为显式可替换推断输入，不伪称原生getter；不删除实体、不入城finalizer、不复刻溢出丢弃。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
