@@ -347,6 +347,13 @@
         "record": "data/inferred/current-gap-status-v1.json",
         "id": "T14",
         "historicalFieldsUnchanged": true
+      },
+      "unified_forge_food_followup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-forge-food-v1.md",
+        "scope": "固定一个未完成forge槽；不新增双建设或任意设施/吸收。保留生产历史与实际完成奖励；运行未验收。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -469,6 +476,13 @@
         "rule": "docs/rules/inferred-unified-resource-world-v1.md",
         "scope": " 统一资源World现接typed城市与transport转账，城市quantity与reserved分离保留，后7装备槽不映城市槽并拒非零请求，不能绕预约或静默丢货。",
         "nativeEvidenceClosed": false
+      },
+      "unified_forge_food_followup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-forge-food-v1.md",
+        "scope": "food0允许且缺粮仅报告不损兵；field粮owner/供给尚未接。火与覆盖效果未建模，非观测无火；运行未验收。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {

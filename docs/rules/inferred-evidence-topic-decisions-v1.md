@@ -221,3 +221,11 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T28 唯一当前宝物持有+成长后属性生成即时五维只读派生（2026-10-30）
 
 [统一Train与当前属性](inferred-unified-training-progress-v1.md)：不另建AP/忠诚/属性余额；有效加成尚未进入Train/field公式，不伪造base通过旧校验；运行未验收。 历史确认与证据原文保留。
+
+## T14 单锻冶StartForge接真实共享锁、WorldTick完成与生产设施视图（2026-10-30）
+
+[规则](inferred-unified-forge-food-v1.md)：固定一个未完成forge槽；不新增双建设或任意设施/吸收。保留生产历史与实际完成奖励；运行未验收。 历史确认与证据原文保留。
+
+## T20 城市/运输账户转运与逐旬中性耗粮接唯一资源owner（2026-10-30）
+
+[规则](inferred-unified-forge-food-v1.md)：food0允许且缺粮仅报告不损兵；field粮owner/供给尚未接。火与覆盖效果未建模，非观测无火；运行未验收。 历史确认与证据原文保留。
