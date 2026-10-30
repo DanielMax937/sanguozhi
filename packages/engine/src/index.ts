@@ -1340,3 +1340,5 @@ export { createInferredSeededPkAbilityLifecycle } from './inferred-pk-research-l
 export { createInferredPositiveHazardLedger, readInferredPositiveHazardLedger, executeInferredPositiveHazard, saveInferredPositiveHazardLedger, loadInferredPositiveHazardLedger } from './inferred-positive-hazard-ledger.ts';
 
 export { createInferredSalaryLedger, readInferredSalaryLedger, executeInferredSalaryPeriod, saveInferredSalaryLedger, loadInferredSalaryLedger } from './inferred-salary-ledger.ts';
+
+export { createInferredTreasureLedger, readInferredTreasureLedger, executeInferredTreasureGrant, saveInferredTreasureLedger, loadInferredTreasureLedger } from './inferred-treasure-ledger.ts';
