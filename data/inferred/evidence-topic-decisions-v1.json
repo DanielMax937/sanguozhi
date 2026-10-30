@@ -507,7 +507,20 @@
         "docs/rules/city-development-guide-v1.md"
       ],
       "nativeEvidenceClosed": false,
-      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied."
+      "scope": "See corresponding row and detailed inferred policy documents; no world-writing authority implied.",
+      "consumerFollowup": {
+        "status": "implemented-opt-in-inferred-development-layout-runtime-unverified",
+        "module": "packages/engine/src/inferred-development-layout.ts",
+        "rule": "docs/rules/inferred-development-layout-v1.md",
+        "actualConsumers": [
+          "createFacilityConstructionState",
+          "moveOnSuppliedMap"
+        ],
+        "nativeDevelopmentPatchesUnchanged": true,
+        "nativeEvidenceClosed": false,
+        "autoMapFacilitySync": false,
+        "sharedClock": false
+      }
     },
     {
       "id": "T39",
