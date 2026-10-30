@@ -1364,3 +1364,5 @@ export { createInferredSafeCompositeLedger, readInferredSafeCompositeLedger, exe
 export { createInferredSharedWorldClock, readInferredSharedWorldClock, executeInferredSharedWorldClock, saveInferredSharedWorldClock, loadInferredSharedWorldClock } from './inferred-shared-world-clock.ts';
 
 export { createInferredStrategyCasterTransaction, readInferredStrategyCasterTransaction, executeInferredStrategyCasterTransaction, saveInferredStrategyCasterTransaction, loadInferredStrategyCasterTransaction } from './inferred-strategy-caster-transaction.ts';
+
+export { createInferredFireLifecycle, readInferredFireLifecycle, executeInferredFireLifecycle, saveInferredFireLifecycle, loadInferredFireLifecycle } from './inferred-fire-lifecycle.ts';
