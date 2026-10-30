@@ -164,6 +164,13 @@
         "record": "data/inferred/current-gap-status-v1.json",
         "id": "T06",
         "historicalFieldsUnchanged": true
+      },
+      "inferred_fire_lifecycle_followup": {
+        "module": "packages/engine/src/inferred-fire-lifecycle.ts",
+        "rule": "docs/rules/inferred-fire-lifecycle-v1.md",
+        "scope": "生成/移动/手动灭火与整Tick驻留正值损耗、寿命递减/熄灭已消费，复用旧寿命policy与300加抽样火伤；70/30仍fallback，先伤后减为具名推断。自然蔓延/火罠链/真实世界调度及归零终结仍排除。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
