@@ -349,7 +349,20 @@
         "docs/rules/affinity-distance.md"
       ],
       "nativeEvidenceClosed": false,
-      "scope": "Explicit independent planning documented in inferred-independent-planning-v1.md; no world execution. Ordinary treasure value gain empirical candidate only; no confiscation/transfer effects."
+      "scope": "Explicit independent planning documented in inferred-independent-planning-v1.md; no world execution. Ordinary treasure value gain empirical candidate only; no confiscation/transfer effects.",
+      "consumerFollowup": {
+        "status": "implemented-opt-in-synthetic-treasury-grant-runtime-unverified",
+        "module": "packages/engine/src/inferred-treasure-ledger.ts",
+        "rule": "docs/rules/inferred-treasure-ledger-v1.md",
+        "nativeEvidenceClosed": false,
+        "campaignWorldWritten": false,
+        "atomicWrites": [
+          "one-treasury-item-holder",
+          "recipient-loyalty",
+          "synthetic-ap-once"
+        ],
+        "confiscationImplemented": false
+      }
     },
     {
       "id": "T29",
