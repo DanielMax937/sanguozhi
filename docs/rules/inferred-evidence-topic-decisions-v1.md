@@ -155,3 +155,8 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## 正值片段原子分派
 
 新增 [安全组合账本](inferred-safe-composite-ledger-v1.md)：损耗与粮食/港关资源子命令全部验证后一起提交，保存全重放、双层revision与批ID；任何拒零/资格失败整批失败。没有自动身份配对、回合资格或全局时钟，不接受限finalizer。
+
+
+## 当前总状态与历史剩余项的区别（2026-10-30）
+
+[当前45主题索引](current-gap-status-v1.md) 汇总所有后续消费者。早期followup中的remaining是当批历史，不覆盖之后新增的合成实现；同样，后续合成实现不会证明原生算法或全局调度。历史originalText及全部逐批字段保留，不改写旧共识。
