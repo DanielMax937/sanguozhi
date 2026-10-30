@@ -213,3 +213,11 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T37 推断小图typed Move接唯一actor位置、行动与共享旬时钟（2026-10-30）
 
 [推断小图typed Move接唯一actor位置、行动与共享旬时钟](inferred-mobile-field-v3.md)：复用实际supplied移动核；200x200练习图可抽取<=16格矩形接统一Move，非全图/跨片联动。原生地图/高度/城市定位仍待证；设施攻陷/入城终结排除，运行未验收。 历史原文保留，运行未验收。
+
+## T23 Train接唯一城市资源与TP/WAR成长记录，真实复用既有Train（2026-10-30）
+
+[统一Train与当前属性](inferred-unified-training-progress-v1.md)：旧v3无配置兼容；显式progressConfig启用，基础WAR参与Train；宝物加成尚未用于Train/field公式，技术horizon仍有限，运行未验收。 历史确认与证据原文保留。
+
+## T28 唯一当前宝物持有+成长后属性生成即时五维只读派生（2026-10-30）
+
+[统一Train与当前属性](inferred-unified-training-progress-v1.md)：不另建AP/忠诚/属性余额；有效加成尚未进入Train/field公式，不伪造base通过旧校验；运行未验收。 历史确认与证据原文保留。
