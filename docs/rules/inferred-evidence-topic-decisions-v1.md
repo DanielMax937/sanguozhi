@@ -237,3 +237,15 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T33 安全财政/丰收叶已接统一日期与资源，健康季节支路仍排除（2026-10-30）
 
 [规则](inferred-unified-income-owner-v1.md)：不调用whole season或whole finance；瘟疫health/事件人物/归属不执行。蝗灾/其他安全叶尚需明确接入，不将本批视为全季节完成；运行未验收。 历史确认与证据原文保留。
+
+## T21 技巧研究Start/完成已接唯一TP与当前属性，保留其他原有支路（2026-10-30）
+
+[规则](inferred-unified-technique-owner-v1.md)：研究timing实际读取live宝物五维；技巧被解锁不等全部被动效果执行。袭粮/其他field资源支路仍待统一，原生阈值与功绩版本证据仍待核；运行未验收。 历史确认与证据原文保留。
+
+## T28 当前宝物五维已被研究timing真实消费，持有与成长同owner（2026-10-30）
+
+[规则](inferred-unified-technique-owner-v1.md)：Train/field其他公式尚未全部消费有效加成，不能伪造base或夹值。与现Grant/Confiscate/自然忠诚保持单一持有关系；运行未验收。 历史确认与证据原文保留。
+
+## T40 统一世界新增有界21旬研究profile与跨作业共享锁（2026-10-30）
+
+[规则](inferred-unified-technique-owner-v1.md)：旧12旬默认保留；21为单最长研究+培养预留，不等从空走完整前置树。PK/旅行角色等后续尚待接入，32/64历史与正值约束仍有效；运行未验收。 历史确认与证据原文保留。
