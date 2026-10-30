@@ -160,3 +160,8 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## 当前总状态与历史剩余项的区别（2026-10-30）
 
 [当前45主题索引](current-gap-status-v1.md) 汇总所有后续消费者。早期followup中的remaining是当批历史，不覆盖之后新增的合成实现；同样，后续合成实现不会证明原生算法或全局调度。历史originalText及全部逐批字段保留，不改写旧共识。
+
+
+## T40 / T45：明确合成城市与旅行共享旬钟
+
+新增 [共享时钟外壳](inferred-shared-world-clock-v1.md)，复用已有城市piece-clock与旅行world，创世同年1/1并原子Tick，禁止单片段时间推进；完整genesis重放、预留生产完成历史槽、容量门。它真正绑定两者时钟但不共享travelers/城市武将身份或野外资源，不宣称全局/原生scheduler。

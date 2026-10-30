@@ -464,8 +464,8 @@
     {
       "id": "T40",
       "implementationCategory": "implemented-with-explicit-inference",
-      "currentSummary": "#142中性可加载剧本，非历史剧本",
-      "remainingBoundary": "旧城市blueprint→实际cityState+移动map；不含原开局武将/旗标、真实势力/资源证据，双时钟不假融合。",
+      "currentSummary": "中性场景与显式合成城市/旅行共享旬钟已实现，运行未验收",
+      "remainingBoundary": "共享Tick实际原子推进既有城市生产/日历与旅行日历，保持同date/turn；不共享真实武将/野外资源，不代表原历史剧本或全局scheduler。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
@@ -520,8 +520,8 @@
     {
       "id": "T45",
       "implementationCategory": "implemented-with-explicit-inference",
-      "currentSummary": "PR139已合并",
-      "remainingBoundary": "已知城市邻接→十天/边推断→合成traveler实际位置/旅程/日期与保存；真实武将资格/迁移未执行。",
+      "currentSummary": "旅行实际状态及显式合成共享旬钟已实现，运行未验收",
+      "remainingBoundary": "十天/边仍明确推断；共享城市旬钟不把traveler映射为城市武将，真实人物迁移/资格与原生路程未核。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
