@@ -444,6 +444,14 @@
         "campaignWorldWritten": false,
         "scope": "existing-gate-port-positive-repair-only",
         "terminalOrOwnershipResults": false
+      },
+      "counterattackConsumerFollowup": {
+        "status": "implemented-opt-in-local-runtime-unverified",
+        "module": "packages/engine/src/inferred-counterattack-ledger.ts",
+        "rule": "docs/rules/inferred-counterattack-ledger-v1.md",
+        "nativeEvidenceClosed": false,
+        "campaignWorldWritten": false,
+        "scope": "正值合成反击延续账本：旧太守倍率请求实际扣正值兵力，保留原始损耗journal，归零拒绝，不重复扣基数，不触战斗终结。"
       }
     },
     {
