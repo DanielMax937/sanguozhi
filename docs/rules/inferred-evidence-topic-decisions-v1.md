@@ -120,3 +120,8 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T38：可加载的三城推断开发区
 
 新增 [三城练习开发区](inferred-development-layout-v1.md)，真实总地块数配原创3列轴坐标布局，接既有设施建设state和odd-q移动map并提供明确对应。原生developmentPatches:null不改；不宣称原图、共享时钟或后续设施地图自动同步；不扩大双建设模式。
+
+
+## T02：限定空格火计效果消费者
+
+新增 [命中到旧空格点火](inferred-empty-cell-fire-v1.md)：成功实际进入旧hazard igniteCell，失手不变；不接完整施计尝试/AP/人物资格，伏兵内讧妖术效果不擅自写成混乱。只说明已连接的效果层，非全计略/全局调度完成。
