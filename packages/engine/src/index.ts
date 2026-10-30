@@ -1372,3 +1372,6 @@ export { createInferredCapacityTransfer, readInferredCapacityTransfer, executeIn
 export { createInferredFalseReportRetreat, readInferredFalseReportRetreat, executeInferredFalseReportRetreat, saveInferredFalseReportRetreat, loadInferredFalseReportRetreat } from './inferred-false-report-retreat.ts';
 
 export { createInferredMultiRockfall, readInferredMultiRockfall, executeInferredMultiRockfall, saveInferredMultiRockfall, loadInferredMultiRockfall } from './inferred-multi-rockfall.ts';
+
+export { createInferredTreasureTurnSession, readInferredTreasureTurnSession, advanceInferredTreasureTurn, saveInferredTreasureTurnSession, loadInferredTreasureTurnSession } from './inferred-treasure-turn-projection.ts';
+export { createInferredUnifiedTreasureSession, readInferredUnifiedTreasureSession, executeInferredUnifiedTreasureCommand, saveInferredUnifiedTreasureSession, loadInferredUnifiedTreasureSession } from './inferred-treasure-unified-session.ts';
