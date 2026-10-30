@@ -1379,3 +1379,10 @@ export { createInferredUnifiedTreasureSession, readInferredUnifiedTreasureSessio
 export { createInferredUnifiedField, readInferredUnifiedField, executeInferredUnifiedField, saveInferredUnifiedField, loadInferredUnifiedField } from './inferred-unified-field.ts';
 
 export { createInferredUnifiedSafeWorld, readInferredUnifiedSafeWorld, executeInferredUnifiedSafeWorld, saveInferredUnifiedSafeWorld, loadInferredUnifiedSafeWorld } from './inferred-unified-safe-world.ts';
+
+export { readBoundedSyntheticResourceTimeline, createBoundedSyntheticResourceTimeline, executeBoundedSyntheticResourceTimeline } from './bounded-city-piece-clock.ts';
+export { createInferredUnifiedResourceWorld, readInferredUnifiedResourceWorld, executeInferredUnifiedResourceWorld, saveInferredUnifiedResourceWorld, loadInferredUnifiedResourceWorld } from './inferred-unified-resource-world.ts';
+
+export { readBoundedSyntheticDynamicTimeline, createBoundedSyntheticDynamicTimeline, executeBoundedSyntheticDynamicTimeline } from './bounded-city-piece-clock.ts';
+export { createInferredDynamicField, readInferredDynamicField, executeInferredDynamicField, saveInferredDynamicField, loadInferredDynamicField } from './inferred-dynamic-field.ts';
+export { createInferredDynamicResourceWorld, readInferredDynamicResourceWorld, executeInferredDynamicResourceWorld, saveInferredDynamicResourceWorld, loadInferredDynamicResourceWorld } from './inferred-dynamic-resource-world.ts';

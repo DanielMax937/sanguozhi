@@ -242,7 +242,7 @@
       "id": "T20",
       "implementationCategory": "implemented-with-explicit-inference",
       "currentSummary": "自动补给实际消费及合成容量双边转运",
-      "remainingBoundary": "保留PR141自动补给；新增同owner合成transport与depot之间15坐标整单守恒转移、容量检查、正兵约束和重放。12槽容量为显式可替换推断输入，不伪称原生getter；不删除实体、不入城finalizer、不复刻溢出丢弃。",
+      "remainingBoundary": "保留PR141自动补给；新增同owner合成transport与depot之间15坐标整单守恒转移、容量检查、正兵约束和重放。12槽容量为显式可替换推断输入，不伪称原生getter；不删除实体、不入城finalizer、不复刻溢出丢弃。 统一资源World现接typed城市与transport转账，城市quantity与reserved分离保留，后7装备槽不映城市槽并拒非零请求，不能绕预约或静默丢货。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
@@ -307,8 +307,8 @@
     {
       "id": "T26",
       "implementationCategory": "implemented-with-explicit-inference",
-      "currentSummary": "本地消费者静态PASS",
-      "remainingBoundary": "合成固定名单整笔工资一次支付或全不付，推断减忠诚5，归零整期拒绝；旧finance足额合同不改。",
+      "currentSummary": "月薪与自然忠诚接入城市唯一余额及WorldTick",
+      "remainingBoundary": "新synthetic资源timeline完整重演普通城务与工资/宝物/转运桥，保留生产jobs预约历史；城市current.ledger唯一金粮AP兵装备。WorldTick月薪一次后自然忠诚，所有域成功才提交；不足全不支付及减忠诚为具名政策，归零整笔拒绝。旧默认schema/load不变，v1固定部署，v2已接具名合成动态角色；无真人或Closing/P078。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
@@ -336,7 +336,7 @@
       "id": "T28",
       "implementationCategory": "implemented-with-explicit-inference",
       "currentSummary": "合成宝物授予没收自然忠诚与装备派生统一会话",
-      "remainingBoundary": "保留固定快照适配，新增唯一outer genesis+journal交错授予/没收/自然旬推进，AP持有忠诚日期RNG连续推导，复用旧单笔事务和季度自然核；装备按当前持有派生，不写基础属性。五维bonus为显式推断而非value换算。零忠诚/真人归属/战役全局仍排除；非旧存档静默升级。",
+      "remainingBoundary": "保留固定快照适配，新增唯一outer genesis+journal交错授予/没收/自然旬推进，AP持有忠诚日期RNG连续推导，复用旧单笔事务和季度自然核；装备按当前持有派生，不写基础属性。五维bonus为显式推断而非value换算。零忠诚/真人归属/战役全局仍排除；非旧存档静默升级。 已进一步接入统一资源World：授予/没收/自然忠诚共享城市现AP/gold与唯一metadata，部署/预约/同旬门由owner校验，不再额外保留可花城市余额。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
@@ -488,8 +488,8 @@
     {
       "id": "T40",
       "implementationCategory": "implemented-with-explicit-inference",
-      "currentSummary": "合成城市旅行战场固定部署与统一原子世界旬",
-      "remainingBoundary": "复用可加载中性剧本，新增同ID固定city-officer与field-actor智力绑定，部署者禁止所有城市动作/生产参与并每步反核；field是其唯一兵力气力行动状态。初始城市兵与场上兵显式分配，WorldTick原子同旬推进城市/旅行/火场四策略，禁止子域私自加时。旅行者不冒充人物迁移，无动态部署返城/真人/全战役原生声明；仍受旧12旬窗口。",
+      "currentSummary": "动态合成部署返城与统一城市资源世界旬",
+      "remainingBoundary": "单一synthetic timeline重演城市/field/工资宝物转运，Deploy从当前城扣正兵并继承气力，Return全额返正兵按兵数加权气力并改角色；不写零兵、不删身份，不是真人迁移。居民无野战兵气副本，部署者不能城市双行动，生产预约/固定入口/火占位/容量门全成功才提交。WorldTick唯一同步城市旅行field与月薪自然忠诚，保留旧生产历史；原生全战役证据及12旬边界仍未闭合。 Deploy复用已有T16基础AP20（当前无军事府），Return为具名无新增AP政策而非原作免费结论。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
@@ -573,6 +573,6 @@
       "historical scenario flags/officer setup",
       "native helper/caller/version equivalence"
     ],
-    "sharedWorldLimit": "Fixed synthetic deployed city-officer/field-actor same-ID and intelligence binding, one authoritative field roster, explicit city/field troop allocation and atomic city/travel/field WorldTick implemented. No dynamic deployments/returns or traveler-person migration; existing12-xun city limit; not a native complete campaign."
+    "sharedWorldLimit": "Dynamic synthetic Deploy/Return with one city/field resource owner, role-exclusive actions, shared salary/treasure/transport metadata and atomic city/travel/field WorldTick implemented; no real-person migration, traveler-person mapping or native complete campaign claim. Existing12-xun city horizon remains."
   }
 }

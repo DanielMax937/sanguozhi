@@ -1,3 +1,7 @@
+import { projectInferredCommandAP } from './inferred-independent-planning.ts';
+import { createInferredDynamicField, executeInferredDynamicField } from './inferred-dynamic-field.ts';
+import { createSyntheticResourceMetadata, applySyntheticResourceBridge } from './internal/synthetic-city-resource-bridge.ts';
+import { createSyntheticCityTransports, planSyntheticCityTransferBridge } from './internal/synthetic-city-transfer-bridge.ts';
 /** Bounded single-city owner: one shared xun clock, ledger and type-5 workshop reservation.
  * Full genesis folding is the only trust boundary. No native scheduler or legacy public delegation. */
 import policyData from '../../../data/policies/bounded-city-piece-clock-v1.json' with { type: 'json' };
@@ -949,4 +953,268 @@ export function replayBoundedCityPieceClockV1(input: BoundedCityPieceClockTraceV
     if (trace.expectedFinalState !== null && !same(trace.expectedFinalState, state)) stop('trace-final-mismatch', 'comparison');
     const result = { ok: true, state, outcomes } as const; budget(result); return freeze(result);
   } catch (e) { return freeze({ ...caught(e), index, state: null } as const); }
+}
+
+
+/** Explicit synthetic resource-owner timeline. Old public commands and old saves stay unchanged.
+ * Only this full outer replay may carry bridge writes between private city transitions. */
+export function readBoundedSyntheticResourceTimeline(input: unknown) {
+  try {
+    const raw = object(detach(input), ['schema', 'cityScenario', 'resourceConfig', 'transportInitial', 'commands']);
+    literal(raw.schema, 'bounded-synthetic-resource-timeline-v1');
+    const g = scenario(raw.cityScenario);
+    const synthetic = (v: string) => /^synthetic-[a-z0-9-]{1,48}$/.test(v);
+    if (![g.episodeId, g.activeForceId, g.corps.id, g.corps.forceId, g.city.id, g.city.ownerForceId,
+      ...g.officers.flatMap(o => [o.id, o.forceId, o.cityId]), ...g.facilities.flatMap(f => [f.id, f.cityId]),
+      ...g.merchant.hostileForceIds, ...g.merchant.fieldUnits.flatMap(u => [u.id, u.forceId])].every(synthetic)) stop('invalid-data');
+    let city = initialState(g);
+    const context = () => ({ cityId: g.city.id, forceId: g.activeForceId, officerIds: g.officers.map(o => o.id),
+      date: city.current.clock.date, actionPoints: city.current.ledger.actionPoints, gold: city.current.ledger.gold });
+    const transferContext = () => ({ cityId: g.city.id, forceId: g.activeForceId, gold: city.current.ledger.gold,
+      food: city.current.ledger.food, troops: city.current.ledger.troops, morale: city.current.ledger.morale,
+      goldCapacity: g.city.goldCapacity, foodCapacity: g.city.foodCapacity, troopCapacity: g.city.troopCapacity,
+      inventory: Object.fromEntries(([1, 2, 3, 4, 5] as const).map(e => [e, { quantity: city.current.ledger.inventory[e].quantity,
+        reserved: city.current.ledger.inventory[e].reserved, capacity: g.city.inventory[e].capacity }])) });
+    const metaCreated = createSyntheticResourceMetadata(raw.resourceConfig, context());
+    if (!metaCreated.ok) return metaCreated;
+    let metadata = metaCreated.metadata;
+    const cargoCreated = createSyntheticCityTransports(raw.transportInitial, transferContext());
+    if (!cargoCreated.ok) return cargoCreated;
+    let transports = cargoCreated.transports;
+    if (transports.some(t => [g.episodeId, g.activeForceId, g.corps.id, g.city.id, ...g.officers.map(o => o.id), ...g.facilities.map(f => f.id)].includes(t.id))) stop('duplicate-entity-id');
+    if (metadata.items.some(item => [g.episodeId, g.activeForceId, g.corps.id, g.city.id, ...g.officers.map(o => o.id), ...g.facilities.map(f => f.id), ...transports.map(t => t.id)].includes(item.id))) stop('duplicate-entity-id');
+    const commands: { id: string; expectedRevision: number; action: Record<string, unknown> }[] = [], receipts: unknown[] = [], ids = new Set<string>();
+    const root = () => ({ schema: 'bounded-synthetic-resource-timeline-v1' as const, cityScenario: g,
+      resourceConfig: raw.resourceConfig, transportInitial: raw.transportInitial, commands: [...commands] });
+    const fit = () => { budget(root()); budget({ state: root(), current: city.current, metadata, transports, receipts }); };
+    fit();
+    for (const entry of array(raw.commands, 32)) {
+      const c = object(entry, ['id', 'expectedRevision', 'action']), commandId = id(c.id);
+      if (!synthetic(commandId) || integer(c.expectedRevision, 31) !== commands.length || ids.has(commandId)) stop('invalid-data');
+      if (c.action === null || typeof c.action !== 'object' || Array.isArray(c.action)) stop('invalid-data');
+      const a = c.action as Record<string, unknown>;
+      let detail: unknown;
+      if (a.kind === 'City' || a.kind === 'Tick') {
+        if (a.kind === 'City') {
+          object(a, ['kind', 'command']);
+          if (a.command === null || typeof a.command !== 'object' || Array.isArray(a.command)) stop('invalid-data');
+          const cc = a.command as Record<string, unknown>;
+          if (cc.type !== 'ExecuteCityActions' && cc.type !== 'StartPieceProduction') stop('unsupported-command');
+        } else object(a, ['kind']);
+        const e = envelope({ id: `synthetic-resource-city-${commands.length}`, expectedRevision: city.revision,
+          command: a.kind === 'Tick' ? { type: 'AdvanceSharedCityTurn' } : a.command });
+        const transitioned = transitionValidatedRoot(city, e);
+        if (transitioned.duplicate) stop('duplicate-accepted-entry');
+        city = transitioned.state;
+        detail = transitioned.receipt;
+        if (a.kind === 'Tick') {
+          const settled = applySyntheticResourceBridge(metadata, context(), { kind: 'WorldTick' });
+          if (!settled.ok) return settled;
+          city.current.ledger.gold = settled.ledgerPatch.gold;
+          city.current.ledger.actionPoints = settled.ledgerPatch.actionPoints;
+          metadata = settled.metadata;
+          detail = { city: transitioned.receipt, monthlyAndNatural: settled.receipt };
+        }
+      } else if (a.kind === 'Grant' || a.kind === 'Confiscate') {
+        const recipientId = a.kind === 'Grant' ? a.officerId : metadata.items.find(item => item.id === a.itemId)?.holder;
+        const facts = g.officers.find(o => o.id === recipientId), actor = city.current.ledger.officers.find(o => o.id === recipientId);
+        if (!facts || !facts.available || !actor || actor.reservationJobId !== null || actor.actedTurn === city.current.clock.turn) stop('officer-unavailable');
+        const changed = applySyntheticResourceBridge(metadata, context(), a);
+        if (!changed.ok) return changed;
+        city.current.ledger.gold = changed.ledgerPatch.gold;
+        city.current.ledger.actionPoints = changed.ledgerPatch.actionPoints;
+        metadata = changed.metadata; detail = changed.receipt;
+      } else if (a.kind === 'Transfer') {
+        const moved = planSyntheticCityTransferBridge(transferContext(), transports, a);
+        if (!moved.ok) return moved;
+        const p = moved.cityPatch;
+        city.current.ledger.gold = p.gold; city.current.ledger.food = p.food;
+        city.current.ledger.troops = p.troops; city.current.ledger.morale = p.morale;
+        for (const e of [1, 2, 3, 4, 5] as const) city.current.ledger.inventory[e].quantity = p.inventory[e].quantity;
+        transports = moved.transports; detail = moved.receipt;
+      } else stop('unsupported-command');
+      currentInvariant(g, city.current);
+      // Existing private history and jobs are retained intact; outer history proves bridge writes.
+      if (32 - commands.length - 1 < reservedCompletionSlots(city.current)) stop('completion-history-slots');
+      commands.push({ id: commandId, expectedRevision: commands.length, action: clone(a) }); ids.add(commandId);
+      receipts.push({ commandId, clock: clone(city.current.clock), detail }); fit();
+    }
+    // No legacy State/tag is exposed: it is not a default save with a patched balance.
+    const result = { ok: true as const, state: root(), genesis: g, current: city.current, metadata, transports,
+      receipts, revision: commands.length, scope: 'synthetic-resource-owner-timeline-v1' as const };
+    budget(result); return freeze(result);
+  } catch (error) { return freeze(caught(error)); }
+}
+export function createBoundedSyntheticResourceTimeline(cityScenario: unknown, resourceConfig: unknown, transportInitial: unknown) {
+  return readBoundedSyntheticResourceTimeline({ schema: 'bounded-synthetic-resource-timeline-v1', cityScenario, resourceConfig, transportInitial, commands: [] });
+}
+export function executeBoundedSyntheticResourceTimeline(input: unknown, command: unknown) {
+  const current = readBoundedSyntheticResourceTimeline(input);
+  if (!current.ok) return current;
+  try {
+    const c = object(detach(command), ['id', 'expectedRevision', 'action']);
+    if (c.expectedRevision !== current.revision || current.revision >= 32) stop('stale-revision');
+    return readBoundedSyntheticResourceTimeline({ ...current.state, commands: [...current.state.commands, c] });
+  } catch (error) { return freeze(caught(error)); }
+}
+
+/** Explicit synthetic resource-owner timeline. Old public commands and old saves stay unchanged.
+ * Only this full outer replay may carry bridge writes between private city transitions. */
+export function readBoundedSyntheticDynamicTimeline(input: unknown) {
+  try {
+    const raw = object(detach(input), ['schema', 'cityScenario', 'resourceConfig', 'transportInitial', 'fieldCells', 'fieldTemplates', 'commands']);
+    literal(raw.schema, 'bounded-synthetic-dynamic-timeline-v2');
+    const g = scenario(raw.cityScenario);
+    const synthetic = (v: string) => /^synthetic-[a-z0-9-]{1,48}$/.test(v);
+    if (![g.episodeId, g.activeForceId, g.corps.id, g.corps.forceId, g.city.id, g.city.ownerForceId,
+      ...g.officers.flatMap(o => [o.id, o.forceId, o.cityId]), ...g.facilities.flatMap(f => [f.id, f.cityId]),
+      ...g.merchant.hostileForceIds, ...g.merchant.fieldUnits.flatMap(u => [u.id, u.forceId])].every(synthetic)) stop('invalid-data');
+    let city = initialState(g);
+    if (g.clock.turn !== 0 || g.merchant.fieldUnits.length || g.merchant.hostileForceIds.length) stop('invalid-data');
+    const fieldCreated = createInferredDynamicField(raw.fieldCells, raw.fieldTemplates);
+    if (!fieldCreated.ok) return fieldCreated;
+    let field = fieldCreated;
+    const nonOfficerIds = [g.episodeId, g.activeForceId, g.corps.id, g.city.id, ...g.facilities.map(f => f.id)];
+    if (g.officers.some(officer => nonOfficerIds.includes(officer.id))) stop('duplicate-entity-id');
+    for (const template of field.state.templates) {
+      const officer = g.officers.find(o => o.id === template.id);
+      if (!officer || officer.intelligence !== template.intelligence || officer.available !== template.available) stop('invalid-data');
+    }
+    const deployed = (actorId: unknown) => field.roster.some(o => o.id === actorId && o.role === 'deployed');
+    const context = () => ({ cityId: g.city.id, forceId: g.activeForceId, officerIds: g.officers.map(o => o.id),
+      date: city.current.clock.date, actionPoints: city.current.ledger.actionPoints, gold: city.current.ledger.gold });
+    const transferContext = () => ({ cityId: g.city.id, forceId: g.activeForceId, gold: city.current.ledger.gold,
+      food: city.current.ledger.food, troops: city.current.ledger.troops, morale: city.current.ledger.morale,
+      goldCapacity: g.city.goldCapacity, foodCapacity: g.city.foodCapacity, troopCapacity: g.city.troopCapacity,
+      inventory: Object.fromEntries(([1, 2, 3, 4, 5] as const).map(e => [e, { quantity: city.current.ledger.inventory[e].quantity,
+        reserved: city.current.ledger.inventory[e].reserved, capacity: g.city.inventory[e].capacity }])) });
+    const metaCreated = createSyntheticResourceMetadata(raw.resourceConfig, context());
+    if (!metaCreated.ok) return metaCreated;
+    let metadata = metaCreated.metadata;
+    const cargoCreated = createSyntheticCityTransports(raw.transportInitial, transferContext());
+    if (!cargoCreated.ok) return cargoCreated;
+    let transports = cargoCreated.transports;
+    if (transports.some(t => [g.episodeId, g.activeForceId, g.corps.id, g.city.id, ...g.officers.map(o => o.id), ...g.facilities.map(f => f.id)].includes(t.id))) stop('duplicate-entity-id');
+    if (metadata.items.some(item => [g.episodeId, g.activeForceId, g.corps.id, g.city.id, ...g.officers.map(o => o.id), ...g.facilities.map(f => f.id), ...transports.map(t => t.id)].includes(item.id))) stop('duplicate-entity-id');
+    if (field.state.cells.some(cell => [g.episodeId,g.activeForceId,g.corps.id,g.city.id,...g.officers.map(o=>o.id),...g.facilities.map(f=>f.id),...transports.map(t=>t.id),...metadata.items.map(i=>i.id)].includes(cell))) stop('duplicate-entity-id');
+    const commands: { id: string; expectedRevision: number; action: Record<string, unknown> }[] = [], receipts: unknown[] = [], ids = new Set<string>();
+    const root = () => ({ schema: 'bounded-synthetic-dynamic-timeline-v2' as const, cityScenario: g,
+      resourceConfig: raw.resourceConfig, transportInitial: raw.transportInitial, fieldCells: fieldCreated.state.cells, fieldTemplates: fieldCreated.state.templates, commands: [...commands] });
+    const fit = () => { budget(root()); budget({ state: root(), current: city.current, metadata, transports, field, receipts }); };
+    fit();
+    for (const entry of array(raw.commands, 32)) {
+      const c = object(entry, ['id', 'expectedRevision', 'action']), commandId = id(c.id);
+      if (!synthetic(commandId) || integer(c.expectedRevision, 31) !== commands.length || ids.has(commandId)) stop('invalid-data');
+      if (c.action === null || typeof c.action !== 'object' || Array.isArray(c.action)) stop('invalid-data');
+      const a = c.action as Record<string, unknown>;
+      let detail: unknown;
+      if (a.kind === 'City' || a.kind === 'Tick') {
+        if (a.kind === 'City') {
+          object(a, ['kind', 'command']);
+          if (a.command === null || typeof a.command !== 'object' || Array.isArray(a.command)) stop('invalid-data');
+          const cc = a.command as Record<string, unknown>;
+          if (cc.type !== 'ExecuteCityActions' && cc.type !== 'StartPieceProduction') stop('unsupported-command');
+          const cityCommand = envelope({ id: 'synthetic-validate-city', expectedRevision: city.revision, command: cc }).command;
+          const actors = cityCommand.type === 'StartPieceProduction' ? cityCommand.officerIds : cityCommand.type === 'ExecuteCityActions'
+            ? cityCommand.actions.flatMap(action => action.type === 'BuyFood' || action.type === 'SellFood' ? [action.officerId] : action.officerIds) : [];
+          if (actors.some(deployed)) stop('officer-unavailable');
+        } else object(a, ['kind', 'draws']);
+        const e = envelope({ id: `synthetic-resource-city-${commands.length}`, expectedRevision: city.revision,
+          command: a.kind === 'Tick' ? { type: 'AdvanceSharedCityTurn' } : a.command });
+        const transitioned = transitionValidatedRoot(city, e);
+        if (transitioned.duplicate) stop('duplicate-accepted-entry');
+        city = transitioned.state;
+        detail = transitioned.receipt;
+        if (a.kind === 'Tick') {
+          const settled = applySyntheticResourceBridge(metadata, context(), { kind: 'WorldTick' });
+          if (!settled.ok) return settled;
+          city.current.ledger.gold = settled.ledgerPatch.gold;
+          city.current.ledger.actionPoints = settled.ledgerPatch.actionPoints;
+          metadata = settled.metadata;
+          const advancedField = executeInferredDynamicField(field.state, { id: `synthetic-dynamic-${commands.length}`, expectedRevision: field.revision, action: { kind: 'FieldTick', draws: a.draws } });
+          if (!advancedField.ok) return advancedField;
+          field = advancedField;
+          detail = { city: transitioned.receipt, monthlyAndNatural: settled.receipt };
+        }
+      } else if (a.kind === 'Grant' || a.kind === 'Confiscate') {
+        const recipientId = a.kind === 'Grant' ? a.officerId : metadata.items.find(item => item.id === a.itemId)?.holder;
+        const facts = g.officers.find(o => o.id === recipientId), actor = city.current.ledger.officers.find(o => o.id === recipientId);
+        if (deployed(recipientId) || !facts || !facts.available || !actor || actor.reservationJobId !== null || actor.actedTurn === city.current.clock.turn) stop('officer-unavailable');
+        const changed = applySyntheticResourceBridge(metadata, context(), a);
+        if (!changed.ok) return changed;
+        city.current.ledger.gold = changed.ledgerPatch.gold;
+        city.current.ledger.actionPoints = changed.ledgerPatch.actionPoints;
+        metadata = changed.metadata; detail = changed.receipt;
+      } else if (a.kind === 'Deploy' || a.kind === 'Return') {
+        object(a, a.kind === 'Deploy' ? ['kind','actorId','troops'] : ['kind','actorId']);
+        const actorId = id(a.actorId), officer = city.current.ledger.officers.find(o => o.id === actorId), facts = g.officers.find(o => o.id === actorId);
+        const role = field.roster.find(o => o.id === actorId), template = field.state.templates.find(o => o.id === actorId);
+        if (!officer || !facts || !facts.available || !role || !template || officer.reservationJobId !== null || officer.actedTurn === city.current.clock.turn) stop('officer-unavailable');
+        const beforeTroops = city.current.ledger.troops, beforeMorale = city.current.ledger.morale;
+        const apBefore = city.current.ledger.actionPoints;
+        let apCost = 0, apPlan: unknown = null;
+        let quantity: number, nextTroops: number, nextMorale = beforeMorale;
+        if (a.kind === 'Deploy') {
+          const planned = projectInferredCommandAP('deploy', false);
+          if (!planned.ok) return planned;
+          if (apBefore < planned.requestedAP) stop('insufficient-action-points');
+          apCost = planned.requestedAP; apPlan = planned;
+          quantity = integer(a.troops, 60000, 1);
+          if (role.role !== 'resident' || beforeTroops <= quantity || beforeMorale > 100
+            || field.fires.some(f => f.cellId === template.entryCellId)
+            || field.roster.some(o => o.role === 'deployed' && o.cellId === template.entryCellId)) stop('invalid-data');
+          nextTroops = beforeTroops - quantity;
+        } else {
+          if (role.role !== 'deployed' || role.acted || role.confusedTurns !== 0 || role.cellId !== template.entryCellId) stop('officer-unavailable');
+          quantity = role.troops; nextTroops = beforeTroops + quantity;
+          if (!Number.isSafeInteger(nextTroops) || nextTroops > g.city.troopCapacity) stop('invalid-data');
+          nextMorale = Number((BigInt(beforeTroops) * BigInt(beforeMorale) + BigInt(quantity) * BigInt(role.energy)) / BigInt(nextTroops));
+        }
+        const changedField = executeInferredDynamicField(field.state, { id: `synthetic-dynamic-${commands.length}`, expectedRevision: field.revision,
+          action: a.kind === 'Deploy' ? {kind:'Deploy',actorId,troops:quantity,energy:beforeMorale} : {kind:'Return',actorId} });
+        if (!changedField.ok) return changedField;
+        field = changedField; city.current.ledger.actionPoints = apBefore - apCost; city.current.ledger.troops = nextTroops; city.current.ledger.morale = nextMorale; officer.actedTurn = city.current.clock.turn;
+        detail = {kind:a.kind,actorId,quantity,apBefore,apAfter:city.current.ledger.actionPoints,apCost,apPlan,officePolicy:'no-military-office-profile-v2',cityTroopsBefore:beforeTroops,cityTroopsAfter:nextTroops,cityMoraleBefore:beforeMorale,cityMoraleAfter:nextMorale,field:field.receipts[field.receipts.length-1],policy:'inferred-fixed-entry-weighted-floor-deployment-v2'};
+      } else if (a.kind === 'Field') {
+        object(a,['kind','command']);
+        if (a.command === null || typeof a.command !== 'object' || Array.isArray(a.command)) stop('invalid-data');
+        const command = a.command as Record<string,unknown>;
+        if (command.kind !== 'Cast' && command.kind !== 'FireCast') stop('unsupported-command');
+        const changedField = executeInferredDynamicField(field.state,{id:`synthetic-dynamic-${commands.length}`,expectedRevision:field.revision,action:command});
+        if (!changedField.ok) return changedField;
+        field = changedField; detail = field.receipts[field.receipts.length-1];
+      } else if (a.kind === 'Transfer') {
+        const moved = planSyntheticCityTransferBridge(transferContext(), transports, a);
+        if (!moved.ok) return moved;
+        const p = moved.cityPatch;
+        city.current.ledger.gold = p.gold; city.current.ledger.food = p.food;
+        city.current.ledger.troops = p.troops; city.current.ledger.morale = p.morale;
+        for (const e of [1, 2, 3, 4, 5] as const) city.current.ledger.inventory[e].quantity = p.inventory[e].quantity;
+        transports = moved.transports; detail = moved.receipt;
+      } else stop('unsupported-command');
+      currentInvariant(g, city.current);
+      if (city.current.clock.turn !== field.turn) stop('invariant-mismatch');
+      if (32 - field.revision < reservedCompletionSlots(city.current)) stop('completion-history-slots');
+      // Existing private history and jobs are retained intact; outer history proves bridge writes.
+      if (32 - commands.length - 1 < reservedCompletionSlots(city.current)) stop('completion-history-slots');
+      commands.push({ id: commandId, expectedRevision: commands.length, action: clone(a) }); ids.add(commandId);
+      receipts.push({ commandId, clock: clone(city.current.clock), detail }); fit();
+    }
+    // No legacy State/tag is exposed: it is not a default save with a patched balance.
+    const result = { ok: true as const, state: root(), genesis: g, current: city.current, metadata, transports, field,
+      receipts, revision: commands.length, scope: 'synthetic-dynamic-resource-owner-timeline-v2' as const };
+    budget(result); return freeze(result);
+  } catch (error) { return freeze(caught(error)); }
+}
+export function createBoundedSyntheticDynamicTimeline(cityScenario: unknown, resourceConfig: unknown, transportInitial: unknown, fieldCells: unknown, fieldTemplates: unknown) {
+  return readBoundedSyntheticDynamicTimeline({ schema: 'bounded-synthetic-dynamic-timeline-v2', cityScenario, resourceConfig, transportInitial, fieldCells, fieldTemplates, commands: [] });
+}
+export function executeBoundedSyntheticDynamicTimeline(input: unknown, command: unknown) {
+  const current = readBoundedSyntheticDynamicTimeline(input);
+  if (!current.ok) return current;
+  try {
+    const c = object(detach(command), ['id', 'expectedRevision', 'action']);
+    if (c.expectedRevision !== current.revision || current.revision >= 32) stop('stale-revision');
+    return readBoundedSyntheticDynamicTimeline({ ...current.state, commands: [...current.state.commands, c] });
+  } catch (error) { return freeze(caught(error)); }
 }
