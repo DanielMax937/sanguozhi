@@ -1356,3 +1356,5 @@ export { createInferredCounterattackLedger, readInferredCounterattackLedger, exe
 export { runInferredRecruitmentExercise } from './inferred-recruitment-exercise.ts';
 
 export { createInferredStrategyEffects, readInferredStrategyEffects, executeInferredStrategyEffects, saveInferredStrategyEffects, loadInferredStrategyEffects } from './inferred-strategy-effects.ts';
+
+export { projectInferredDevelopmentMarkers } from './inferred-development-markers.ts';
