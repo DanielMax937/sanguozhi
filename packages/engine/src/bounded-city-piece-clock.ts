@@ -1,3 +1,8 @@
+import { planSyntheticTrainingBridge } from './internal/synthetic-training-bridge.ts';
+import { projectSyntheticTreasureAttributes } from './internal/synthetic-treasure-attributes.ts';
+import { RULESET as TRAINING_RULESET } from './rules.ts';
+import { DEFAULT_ADAPTERS as TRAINING_ADAPTERS } from './engine.ts';
+import { derivedWar as trainingDerivedWar } from './calculations.ts';
 import { createInferredMobileField, executeInferredMobileField } from './inferred-mobile-field.ts';
 import { projectInferredCommandAP } from './inferred-independent-planning.ts';
 import { createInferredDynamicField, executeInferredDynamicField } from './inferred-dynamic-field.ts';
@@ -1224,7 +1229,9 @@ export function executeBoundedSyntheticDynamicTimeline(input: unknown, command: 
  * Only this full outer replay may carry bridge writes between private city transitions. */
 export function readBoundedSyntheticMobileTimeline(input: unknown) {
   try {
-    const raw = object(detach(input), ['schema', 'cityScenario', 'resourceConfig', 'transportInitial', 'fieldCells', 'fieldTemplates', 'movementMap', 'movementProfiles', 'commands']);
+    const detached = detach(input);
+    const enabled = detached !== null && typeof detached === 'object' && !Array.isArray(detached) && Object.hasOwn(detached,'progressConfig');
+    const raw = object(detached, ['schema', 'cityScenario', 'resourceConfig', 'transportInitial', 'fieldCells', 'fieldTemplates', 'movementMap', 'movementProfiles', 'commands', ...(enabled ? ['progressConfig'] : [])]);
     literal(raw.schema, 'bounded-synthetic-mobile-timeline-v3');
     const g = scenario(raw.cityScenario);
     const synthetic = (v: string) => /^synthetic-[a-z0-9-]{1,48}$/.test(v);
@@ -1259,10 +1266,28 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
     if (transports.some(t => [g.episodeId, g.activeForceId, g.corps.id, g.city.id, ...g.officers.map(o => o.id), ...g.facilities.map(f => f.id)].includes(t.id))) stop('duplicate-entity-id');
     if (metadata.items.some(item => [g.episodeId, g.activeForceId, g.corps.id, g.city.id, ...g.officers.map(o => o.id), ...g.facilities.map(f => f.id), ...transports.map(t => t.id)].includes(item.id))) stop('duplicate-entity-id');
     if (field.state.cells.some(cell => [g.episodeId,g.activeForceId,g.corps.id,g.city.id,...g.officers.map(o=>o.id),...g.facilities.map(f=>f.id),...transports.map(t=>t.id),...metadata.items.map(i=>i.id)].includes(cell))) stop('duplicate-entity-id');
+    let progress: { techniquePoints: number; trainingUsedTurn: number | null; drillGround: 'none'|'building'|'complete'; officers: {id:string;warBase:number;warXp:number}[]; equipment: unknown } | null = null;
+    if (enabled) {
+      const config = object(raw.progressConfig,['policyId','techniquePoints','techniqueIds','drillGround','officers','equipment']);
+      literal(config.policyId,'inferred-unified-training-progress-v1');
+      if (array(config.techniqueIds,0).length !== 0 || g.officers.length > 32 || !g.officers.some(o=>o.id===metadata.personnelFacts.ruler.id)) stop('invalid-data');
+      const rows = array(config.officers,32,1).map(row=>{const p=object(row,['id','warBase','warXp']);return {id:id(p.id),warBase:integer(p.warBase,100),warXp:integer(p.warXp,TRAINING_RULESET.progressionConfig.experienceCap)};});
+      if(rows.length!==g.officers.length||rows.some((r,i)=>r.id!==g.officers[i]!.id))stop('invalid-data');
+      progress={techniquePoints:integer(config.techniquePoints,10000),trainingUsedTurn:null,
+        drillGround:choice(config.drillGround,['none','building','complete'] as const),officers:rows,equipment:config.equipment};
+    }
+    const effective = () => {
+      if (!progress) return null;
+      const projection=projectSyntheticTreasureAttributes(metadata.items,g.officers.map(o=>{const row=progress!.officers.find(p=>p.id===o.id)!;return {
+        id:o.id,leadership:o.leadership,charm:o.charm,intelligence:o.intelligence,politics:o.politics,war:trainingDerivedWar(row.warBase,row.warXp,TRAINING_RULESET.progressionConfig)};}),{equipment:progress.equipment});
+      if(!projection.ok)stop('invalid-data');
+      return projection;
+    };
+    effective();
     const commands: { id: string; expectedRevision: number; action: Record<string, unknown> }[] = [], receipts: unknown[] = [], ids = new Set<string>();
     const root = () => ({ schema: 'bounded-synthetic-mobile-timeline-v3' as const, cityScenario: g,
-      resourceConfig: raw.resourceConfig, transportInitial: raw.transportInitial, fieldCells: fieldCreated.state.cells, fieldTemplates: fieldCreated.state.templates, movementMap: fieldCreated.state.movementMap, movementProfiles: fieldCreated.state.movementProfiles, commands: [...commands] });
-    const fit = () => { budget(root()); budget({ state: root(), current: city.current, metadata, transports, field, receipts }); };
+      resourceConfig: raw.resourceConfig, transportInitial: raw.transportInitial, fieldCells: fieldCreated.state.cells, fieldTemplates: fieldCreated.state.templates, movementMap: fieldCreated.state.movementMap, movementProfiles: fieldCreated.state.movementProfiles, ...(enabled ? {progressConfig:raw.progressConfig} : {}), commands: [...commands] });
+    const fit = () => { budget(root()); budget({ state: root(), current: city.current, metadata, transports, field, receipts, ...(enabled ? {progress,effectiveAttributes:effective()} : {}) }); };
     fit();
     for (const entry of array(raw.commands, 32)) {
       const c = object(entry, ['id', 'expectedRevision', 'action']), commandId = id(c.id);
@@ -1337,6 +1362,34 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
         if (!changedField.ok) return changedField;
         field = changedField; city.current.ledger.actionPoints = apBefore - apCost; city.current.ledger.troops = nextTroops; city.current.ledger.morale = nextMorale; officer.actedTurn = city.current.clock.turn;
         detail = {kind:a.kind,actorId,quantity,apBefore,apAfter:city.current.ledger.actionPoints,apCost,apPlan,officePolicy:'no-military-office-profile-v2',cityTroopsBefore:beforeTroops,cityTroopsAfter:nextTroops,cityMoraleBefore:beforeMorale,cityMoraleAfter:nextMorale,field:field.receipts[field.receipts.length-1],policy:'inferred-fixed-entry-weighted-floor-deployment-v2'};
+      } else if (a.kind === 'Train') {
+        object(a,['kind','officerIds']);
+        if(!progress)stop('unsupported-command');
+        const rulerId=metadata.personnelFacts.ruler.id;
+        const gameState={schemaVersion:2 as const,scope:'synthetic-training-sandbox' as const,originProfile:'native-v2' as const,
+          ruleset:clone(TRAINING_RULESET),date:clone(city.current.clock.date),turn:city.current.clock.turn,revision:commands.length,
+          force:{id:g.activeForceId,rulerId,adviserId:null,techniqueIds:[],techniquePoints:progress.techniquePoints},
+          corps:{id:g.corps.id,forceId:g.activeForceId,isFirst:true as const,actionPoints:city.current.ledger.actionPoints},
+          bases:[{id:g.city.id,name:g.city.id,kind:'city' as const,ownerForceId:g.activeForceId,corpsId:g.corps.id,parentCityId:null,
+            troops:city.current.ledger.troops,morale:city.current.ledger.morale,gold:city.current.ledger.gold,
+            trainingCompleted:progress.trainingUsedTurn===city.current.clock.turn,
+            facilities:{drillGround:progress.drillGround,militaryOffice:'none' as const,completedTalismanPlatforms:0}}],
+          officers:g.officers.map(o=>{const row=progress!.officers.find(p=>p.id===o.id)!, current=city.current.ledger.officers.find(p=>p.id===o.id)!;
+            return {id:o.id,name:o.id,forceId:g.activeForceId,baseId:g.city.id,warBase:row.warBase,warXp:row.warXp,
+              war:trainingDerivedWar(row.warBase,row.warXp,TRAINING_RULESET.progressionConfig),leadership:o.leadership,charisma:o.charm,intelligence:o.intelligence,
+              merit:current.merit,acted:current.actedTurn===city.current.clock.turn,identity:o.id===rulerId?0:3,
+              location:deployed(o.id)?'unit':'base',onMission:!o.available||current.reservationJobId!==null};}),
+          rng:{algorithm:TRAINING_ADAPTERS.random.id,seed:1,draws:0}};
+        const bindings={cityId:g.city.id,forceId:g.activeForceId,turn:city.current.clock.turn,trainingUsedTurn:progress.trainingUsedTurn,
+          officers:city.current.ledger.officers.map(o=>({id:o.id,role:deployed(o.id)?'deployed':'resident',reservationJobId:o.reservationJobId,actedTurn:o.actedTurn}))};
+        const trained=planSyntheticTrainingBridge(gameState,bindings,a);
+        if(!trained.ok)return trained;
+        city.current.ledger.morale=trained.patch.morale;city.current.ledger.actionPoints=trained.patch.actionPoints;
+        progress.techniquePoints=trained.patch.techniquePoints;progress.trainingUsedTurn=trained.patch.trainingUsedTurn;
+        for(const patch of trained.patch.officers){const row=progress.officers.find(o=>o.id===patch.id)!,actor=city.current.ledger.officers.find(o=>o.id===patch.id)!;
+          row.warXp=patch.warXp;if(trainingDerivedWar(row.warBase,row.warXp,TRAINING_RULESET.progressionConfig)!==patch.war)stop('invariant-mismatch');
+          actor.merit=patch.merit;actor.actedTurn=patch.actedTurn;}
+        detail=trained.receipt;
       } else if (a.kind === 'Move') {
         object(a,['kind','actorId','path']);
         const movedField = executeInferredMobileField(field.state,{id:`synthetic-mobile-${commands.length}`,expectedRevision:field.revision,action:a});
@@ -1369,12 +1422,12 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
     }
     // No legacy State/tag is exposed: it is not a default save with a patched balance.
     const result = { ok: true as const, state: root(), genesis: g, current: city.current, metadata, transports, field,
-      receipts, revision: commands.length, scope: 'synthetic-mobile-resource-owner-timeline-v3' as const };
+      receipts, revision: commands.length, ...(enabled ? {progress,effectiveAttributes:effective()} : {}), scope: 'synthetic-mobile-resource-owner-timeline-v3' as const };
     budget(result); return freeze(result);
   } catch (error) { return freeze(caught(error)); }
 }
-export function createBoundedSyntheticMobileTimeline(cityScenario: unknown, resourceConfig: unknown, transportInitial: unknown, fieldCells: unknown, fieldTemplates: unknown, movementMap: unknown, movementProfiles: unknown) {
-  return readBoundedSyntheticMobileTimeline({ schema: 'bounded-synthetic-mobile-timeline-v3', cityScenario, resourceConfig, transportInitial, fieldCells, fieldTemplates, movementMap, movementProfiles, commands: [] });
+export function createBoundedSyntheticMobileTimeline(cityScenario: unknown, resourceConfig: unknown, transportInitial: unknown, fieldCells: unknown, fieldTemplates: unknown, movementMap: unknown, movementProfiles: unknown, progressConfig?: unknown) {
+  return readBoundedSyntheticMobileTimeline({ schema: 'bounded-synthetic-mobile-timeline-v3', cityScenario, resourceConfig, transportInitial, fieldCells, fieldTemplates, movementMap, movementProfiles, ...(progressConfig === undefined ? {} : {progressConfig}), commands: [] });
 }
 export function executeBoundedSyntheticMobileTimeline(input: unknown, command: unknown) {
   const current = readBoundedSyntheticMobileTimeline(input);

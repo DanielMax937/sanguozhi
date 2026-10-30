@@ -530,6 +530,13 @@
         "record": "data/inferred/current-gap-status-v1.json",
         "id": "T23",
         "historicalFieldsUnchanged": true
+      },
+      "unified_training_progress_followup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-training-progress-v1.md",
+        "scope": "旧v3无配置兼容；显式progressConfig启用，基础WAR参与Train；宝物加成尚未用于Train/field公式，技术horizon仍有限，运行未验收。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -669,6 +676,13 @@
         "rule": "docs/rules/inferred-unified-resource-world-v1.md",
         "scope": " 已进一步接入统一资源World：授予/没收/自然忠诚共享城市现AP/gold与唯一metadata，部署/预约/同旬门由owner校验，不再额外保留可花城市余额。",
         "nativeEvidenceClosed": false
+      },
+      "unified_training_progress_followup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-training-progress-v1.md",
+        "scope": "不另建AP/忠诚/属性余额；有效加成尚未进入Train/field公式，不伪造base通过旧校验；运行未验收。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
