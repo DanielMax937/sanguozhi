@@ -1358,3 +1358,5 @@ export { runInferredRecruitmentExercise } from './inferred-recruitment-exercise.
 export { createInferredStrategyEffects, readInferredStrategyEffects, executeInferredStrategyEffects, saveInferredStrategyEffects, loadInferredStrategyEffects } from './inferred-strategy-effects.ts';
 
 export { projectInferredDevelopmentMarkers } from './inferred-development-markers.ts';
+
+export { createInferredSafeCompositeLedger, readInferredSafeCompositeLedger, executeInferredSafeComposite, saveInferredSafeCompositeLedger, loadInferredSafeCompositeLedger } from './inferred-safe-composite-ledger.ts';

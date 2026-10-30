@@ -150,3 +150,8 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T38：追加限定消费者
 
 [inferred-development-markers-v1](inferred-development-markers-v1.md)：只读marker投影：建设保存全重放并绑定固定三城layout genesis，核地图输入，按当前设施生成新视图；不执行命令、不写回、无自动时钟/碰撞融合。
+
+
+## 正值片段原子分派
+
+新增 [安全组合账本](inferred-safe-composite-ledger-v1.md)：损耗与粮食/港关资源子命令全部验证后一起提交，保存全重放、双层revision与批ID；任何拒零/资格失败整批失败。没有自动身份配对、回合资格或全局时钟，不接受限finalizer。
