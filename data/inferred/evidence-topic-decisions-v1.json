@@ -413,6 +413,13 @@
         "scope": "Synthetic travel-only world; actual route/position/xun transitions and replay, not original hex map, historical scenario, native officer or task writer.",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "practiceLoaderFollowup": {
+        "policyId": "inferred-neutral-practice-scenario-v1",
+        "code": "packages/engine/src/inferred-practice-map.ts",
+        "rules": "docs/rules/inferred-practice-map-v1.md",
+        "scope": "Original synthetic 200x200 exercise map plus real initialization of existing city and supplied movement inputs; independent resources/clocks, not native geography/history.",
+        "runtimeVerified": false
       }
     },
     {
@@ -452,6 +459,13 @@
         "rules": "docs/rules/inferred-travel-world-v1.md",
         "scope": "Synthetic travel-only world; actual route/position/xun transitions and replay, not original hex map, historical scenario, native officer or task writer.",
         "nativeEvidenceClosed": false,
+        "runtimeVerified": false
+      },
+      "practiceLoaderFollowup": {
+        "policyId": "inferred-neutral-practice-scenario-v1",
+        "code": "packages/engine/src/inferred-practice-map.ts",
+        "rules": "docs/rules/inferred-practice-map-v1.md",
+        "scope": "Original synthetic 200x200 exercise map plus real initialization of existing city and supplied movement inputs; independent resources/clocks, not native geography/history.",
         "runtimeVerified": false
       }
     },

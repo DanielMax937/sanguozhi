@@ -1328,5 +1328,8 @@ export type { ShexMapCellV1, ShexMapV1, ShexMapImportResultV1, ShexMapCellResult
 export { executeInferredAutomaticSupply } from './inferred-automatic-supply.ts';
 export type { InferredAutomaticSupplyBatchV1, InferredAutomaticSupplyResultV1 } from './inferred-automatic-supply.ts';
 
+export { createInferredPracticeMovementRequest, createInferredPracticeScenario } from './inferred-practice-map.ts';
+
+
 
 
