@@ -229,3 +229,11 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T20 城市/运输账户转运与逐旬中性耗粮接唯一资源owner（2026-10-30）
 
 [规则](inferred-unified-forge-food-v1.md)：food0允许且缺粮仅报告不损兵；field粮owner/供给尚未接。火与覆盖效果未建模，非观测无火；运行未验收。 历史确认与证据原文保留。
+
+## T17 真实财政与丰收中性叶接同一WorldTick金粮owner（2026-10-30）
+
+[规则](inferred-unified-income-owner-v1.md)：30槽现有forge/stable引用当前设施，原主题economicFacilities为明确推断初值；不冒名barracks/workshop、不新增建设模式、不重复工资，运行未验收。 历史确认与证据原文保留。
+
+## T33 安全财政/丰收叶已接统一日期与资源，健康季节支路仍排除（2026-10-30）
+
+[规则](inferred-unified-income-owner-v1.md)：不调用whole season或whole finance；瘟疫health/事件人物/归属不执行。蝗灾/其他安全叶尚需明确接入，不将本批视为全季节完成；运行未验收。 历史确认与证据原文保留。

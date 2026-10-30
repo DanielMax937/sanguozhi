@@ -401,6 +401,13 @@
         "record": "data/inferred/current-gap-status-v1.json",
         "id": "T17",
         "historicalFieldsUnchanged": true
+      },
+      "unified_safe_income_followup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-income-owner-v1.md",
+        "scope": "30槽现有forge/stable引用当前设施，原主题economicFacilities为明确推断初值；不冒名barracks/workshop、不新增建设模式、不重复工资，运行未验收。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -813,6 +820,13 @@
         "codeBlobSha": "115793b3319c9925ffcaf3ee2608ae9e03cce939",
         "docBlobSha": "9e9cdf953cb872588ba4bce24d3ea1db38279aa4",
         "staticOnlyNoInvocation": true
+      },
+      "unified_safe_income_followup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-income-owner-v1.md",
+        "scope": "不调用whole season或whole finance；瘟疫health/事件人物/归属不执行。蝗灾/其他安全叶尚需明确接入，不将本批视为全季节完成；运行未验收。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
