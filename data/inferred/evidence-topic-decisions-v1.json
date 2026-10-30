@@ -1047,6 +1047,13 @@
         "scope": "旧12旬默认保留；21为单最长研究+培养预留，不等从空走完整前置树。PK/旅行角色等后续尚待接入，32/64历史与正值约束仍有效；运行未验收。",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "unified_bound_travel_followup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-bound-travel-v1.md",
+        "scope": "PK/正值普通战斗/field粮等待接项仍独立列出；有限剧情与32/64日志不等完整无限战役。P078/Closing及真实人物终结仍排除；运行未验收。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -1141,6 +1148,13 @@
         "sharedFieldResourceLedger": false,
         "nativeSchedulerVerified": false,
         "originalCampaignWritten": false
+      },
+      "unified_bound_travel_followup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-bound-travel-v1.md",
+        "scope": "私有同timeline旅行单次推进，不改变真实归属/兵数/新增费用；away仅按实际有向路线返home，完整往返槽预留。原生地图/旅行时间证据仍待核；运行未验收。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     }
   ]

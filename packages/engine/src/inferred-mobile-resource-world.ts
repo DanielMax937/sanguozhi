@@ -90,36 +90,39 @@ function cityActors(command: unknown): string[] | undefined {
 }
 
 function replay(input: unknown) {
-  const enabled=record(input)&&Object.hasOwn(input,'progressConfig'),forgeEnabled=record(input)&&Object.hasOwn(input,'forgeConfig'),foodEnabled=record(input)&&Object.hasOwn(input,'foodConfig'),incomeEnabled=record(input)&&Object.hasOwn(input,'incomeConfig'),researchEnabled=record(input)&&Object.hasOwn(input,'researchConfig');
-  if (!record(input) || !exact(input,['schema','cityName','cityScenario','travelScenario','fieldCells','fieldTemplates','movementMap','movementProfiles','troopsBudget','resourceConfig','transportInitial','commands',...(enabled?['progressConfig']:[]),...(forgeEnabled?['forgeConfig']:[]),...(foodEnabled?['foodConfig']:[]),...(incomeEnabled?['incomeConfig']:[]),...(researchEnabled?['researchConfig']:[])])
+  const enabled=record(input)&&Object.hasOwn(input,'progressConfig'),forgeEnabled=record(input)&&Object.hasOwn(input,'forgeConfig'),foodEnabled=record(input)&&Object.hasOwn(input,'foodConfig'),incomeEnabled=record(input)&&Object.hasOwn(input,'incomeConfig'),researchEnabled=record(input)&&Object.hasOwn(input,'researchConfig'),travelEnabled=record(input)&&Object.hasOwn(input,'travelBindingConfig');
+  if (!record(input) || !exact(input,['schema','cityName','cityScenario','travelScenario','fieldCells','fieldTemplates','movementMap','movementProfiles','troopsBudget','resourceConfig','transportInitial','commands',...(enabled?['progressConfig']:[]),...(forgeEnabled?['forgeConfig']:[]),...(foodEnabled?['foodConfig']:[]),...(incomeEnabled?['incomeConfig']:[]),...(researchEnabled?['researchConfig']:[]),...(travelEnabled?['travelBindingConfig']:[])])
     || input.schema !== 'inferred-mobile-resource-world-v3' || typeof input.cityName !== 'string'
     || !uint(input.troopsBudget,Number.MAX_SAFE_INTEGER) || !Array.isArray(input.commands) || input.commands.length > MAX_COMMANDS) return fail('invalid-dynamic-world');
   const shared = createInferredSharedWorldClock(input.cityName,input.cityScenario,input.travelScenario);
   if (!shared.ok) return fail(`shared-genesis:${shared.reason}`);
-  const created = createBoundedSyntheticMobileTimeline(shared.state.cityScenario,input.resourceConfig,input.transportInitial,input.fieldCells,input.fieldTemplates,input.movementMap,input.movementProfiles,enabled?input.progressConfig:undefined,forgeEnabled?input.forgeConfig:undefined,foodEnabled?input.foodConfig:undefined,incomeEnabled?input.incomeConfig:undefined,researchEnabled?input.researchConfig:undefined);
+  if(travelEnabled&&(!record(input.travelBindingConfig)||!exact(input.travelBindingConfig,['profile','bindings'])||input.travelBindingConfig.profile!=='same-actor-bound-travel-v1'))return fail('invalid-travel-binding-config');
+  const binding=input.travelBindingConfig as Record<string,unknown>|undefined;
+  const created = createBoundedSyntheticMobileTimeline(shared.state.cityScenario,input.resourceConfig,input.transportInitial,input.fieldCells,input.fieldTemplates,input.movementMap,input.movementProfiles,enabled?input.progressConfig:undefined,forgeEnabled?input.forgeConfig:undefined,foodEnabled?input.foodConfig:undefined,incomeEnabled?input.incomeConfig:undefined,researchEnabled?input.researchConfig:undefined,travelEnabled?{profile:'same-actor-bound-travel-v1',homeCity:input.cityName,travelScenario:input.travelScenario,bindings:binding!.bindings}:undefined);
   if (!created.ok) return fail(`dynamic-genesis:${created.reason}`);
   const g = created.genesis;
-  if (shared.travel.genesis.travelers.some(t => g.officers.some(o => t.id === `traveler-${o.id}`))) return fail('traveler-officer-alias-excluded');
+  if (!travelEnabled&&shared.travel.genesis.travelers.some(t => g.officers.some(o => t.id === `traveler-${o.id}`))) return fail('traveler-officer-alias-excluded');
   if (created.current.ledger.troops + created.transports.reduce((n,t)=>n+t.stock.troops,0) !== input.troopsBudget) return fail('initial-troops-allocation-mismatch');
-  let city = created, travel = shared.travel;
+  let city = created, travel = travelEnabled&&'boundTravel' in created&&created.boundTravel?created.boundTravel.state:shared.travel;
   const commands:Command[]=[],seen=new Set<string>(),receipts:unknown[]=[];
   const root=()=>({schema:'inferred-mobile-resource-world-v3' as const,cityName:input.cityName as string,cityScenario:g,travelScenario:shared.state.travelScenario,
     fieldCells:created.field.state.cells,fieldTemplates:created.field.state.templates,movementMap:created.field.state.movementMap,movementProfiles:created.field.state.movementProfiles,troopsBudget:input.troopsBudget as number,
-    resourceConfig:input.resourceConfig,transportInitial:input.transportInitial,...(enabled?{progressConfig:input.progressConfig}:{}),...(forgeEnabled?{forgeConfig:input.forgeConfig}:{}),...(foodEnabled?{foodConfig:input.foodConfig}:{}),...(incomeEnabled?{incomeConfig:input.incomeConfig}:{}),...(researchEnabled?{researchConfig:input.researchConfig}:{}),commands:[...commands]});
+    resourceConfig:input.resourceConfig,transportInitial:input.transportInitial,...(enabled?{progressConfig:input.progressConfig}:{}),...(forgeEnabled?{forgeConfig:input.forgeConfig}:{}),...(foodEnabled?{foodConfig:input.foodConfig}:{}),...(incomeEnabled?{incomeConfig:input.incomeConfig}:{}),...(researchEnabled?{researchConfig:input.researchConfig}:{}),...(travelEnabled?{travelBindingConfig:input.travelBindingConfig}:{}),commands:[...commands]});
   const fits=()=>{detach(root());return JSON.stringify({state:root(),city,travel,receipts}).length<=MAX_JSON-8192;};
   if(!fits())return fail('world-output-budget');
   for(const raw of input.commands){
     const c=commandFrom(raw);if(!c||c.expectedRevision!==commands.length||seen.has(c.id))return fail('invalid-or-duplicate-world-command');
     const a=c.action,innerId=`synthetic-world-${commands.length}`;
     let nextCity=city,nextTravel=travel;
-    if(a.kind!=='StartTravel'){
+    if(a.kind!=='StartTravel'||travelEnabled){
       if(a.kind==='City'&&!cityActors(a.command))return fail('invalid-city-action');
       const action=a.kind==='WorldTick'?{kind:'Tick',draws:a.draws}:a.kind==='Resource'?a.command:a;
       const moved=executeBoundedSyntheticMobileTimeline(city.state,{id:innerId,expectedRevision:city.revision,action});
       if(!moved.ok)return fail(`dynamic-step:${moved.reason}`);
       nextCity=moved;
     }
-    if(a.kind==='StartTravel'||a.kind==='WorldTick'){
+    if(travelEnabled){if(!('boundTravel' in nextCity)||!nextCity.boundTravel)return fail('missing-bound-travel');nextTravel=nextCity.boundTravel.state;}
+    else if(a.kind==='StartTravel'||a.kind==='WorldTick'){
       const moved=executeInferredTravelWorld(travel,{commandId:innerId,expectedRevision:travel.revision,
         action:a.kind==='WorldTick'?{kind:'AdvanceTravelTurn'}:{kind:'StartTravel',travelerId:a.travelerId,destination:a.destination}});
       if(!moved.ok)return fail(`travel-step:${moved.reason}`);if(moved.duplicate)return fail('unexpected-travel-duplicate');
@@ -128,7 +131,8 @@ function replay(input: unknown) {
     const clock=nextCity.current.clock;
     if(clock.turn!==nextTravel.turn||clock.turn!==nextCity.field.turn||clock.date.year!==nextTravel.date.year||clock.date.month!==nextTravel.date.month||clock.date.day!==nextTravel.date.day)return fail('world-clock-divergence');
     const remaining=Math.max(0,'completionTicksRequired' in nextCity?nextCity.completionTicksRequired??0:0,...nextCity.current.jobs.filter(j=>j.status==='active').map(j=>j.remainingTurns));
-    if(MAX_COMMANDS-commands.length-1<remaining||MAX_COMMANDS-nextCity.revision<remaining||MAX_COMMANDS-nextCity.field.revision<remaining)return fail('reserve-shared-completion-slots');
+    const futureStarts='futureTravelStartsRequired' in nextCity?nextCity.futureTravelStartsRequired??0:0;
+    if(MAX_COMMANDS-commands.length-1<remaining+futureStarts||MAX_COMMANDS-nextCity.revision<remaining||MAX_COMMANDS-nextCity.field.revision<remaining)return fail('reserve-shared-completion-slots');
     receipts.push({commandId:c.id,kind:a.kind,turnBefore:city.current.clock.turn,turnAfter:clock.turn,cityRevisionBefore:city.revision,cityRevisionAfter:nextCity.revision,
       fieldRevisionBefore:city.field.revision,fieldRevisionAfter:nextCity.field.revision});
     city=nextCity;travel=nextTravel;commands.push(c);seen.add(c.id);if(!fits())return fail('world-output-budget');
@@ -139,8 +143,8 @@ function replay(input: unknown) {
     dynamicDeploymentSupported:true as const,movementSupported:true as const,realPeopleWritten:false as const,nativeCampaignEquivalent:false as const});
 }
 export function readInferredMobileResourceWorld(input:unknown){try{return replay(detach(input));}catch{return fail('invalid-world-data');}}
-export function createInferredMobileResourceWorld(cityName:string,cityScenario:unknown,travelScenario:unknown,fieldCells:unknown,fieldTemplates:unknown,movementMap:unknown,movementProfiles:unknown,troopsBudget:number,resourceConfig:unknown,transportInitial:unknown,progressConfig?:unknown,forgeConfig?:unknown,foodConfig?:unknown,incomeConfig?:unknown,researchConfig?:unknown){
-  return readInferredMobileResourceWorld({schema:'inferred-mobile-resource-world-v3',cityName,cityScenario,travelScenario,fieldCells,fieldTemplates,movementMap,movementProfiles,troopsBudget,resourceConfig,transportInitial,...(progressConfig===undefined?{}:{progressConfig}),...(forgeConfig===undefined?{}:{forgeConfig}),...(foodConfig===undefined?{}:{foodConfig}),...(incomeConfig===undefined?{}:{incomeConfig}),...(researchConfig===undefined?{}:{researchConfig}),commands:[]});
+export function createInferredMobileResourceWorld(cityName:string,cityScenario:unknown,travelScenario:unknown,fieldCells:unknown,fieldTemplates:unknown,movementMap:unknown,movementProfiles:unknown,troopsBudget:number,resourceConfig:unknown,transportInitial:unknown,progressConfig?:unknown,forgeConfig?:unknown,foodConfig?:unknown,incomeConfig?:unknown,researchConfig?:unknown,travelBindingConfig?:unknown){
+  return readInferredMobileResourceWorld({schema:'inferred-mobile-resource-world-v3',cityName,cityScenario,travelScenario,fieldCells,fieldTemplates,movementMap,movementProfiles,troopsBudget,resourceConfig,transportInitial,...(progressConfig===undefined?{}:{progressConfig}),...(forgeConfig===undefined?{}:{forgeConfig}),...(foodConfig===undefined?{}:{foodConfig}),...(incomeConfig===undefined?{}:{incomeConfig}),...(researchConfig===undefined?{}:{researchConfig}),...(travelBindingConfig===undefined?{}:{travelBindingConfig}),commands:[]});
 }
 export function executeInferredMobileResourceWorld(input:unknown,rawCommand:unknown){
   const current=readInferredMobileResourceWorld(input);if(!current.ok)return current;
