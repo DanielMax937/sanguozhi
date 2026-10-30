@@ -1360,3 +1360,5 @@ export { createInferredStrategyEffects, readInferredStrategyEffects, executeInfe
 export { projectInferredDevelopmentMarkers } from './inferred-development-markers.ts';
 
 export { createInferredSafeCompositeLedger, readInferredSafeCompositeLedger, executeInferredSafeComposite, saveInferredSafeCompositeLedger, loadInferredSafeCompositeLedger } from './inferred-safe-composite-ledger.ts';
+
+export { createInferredSharedWorldClock, readInferredSharedWorldClock, executeInferredSharedWorldClock, saveInferredSharedWorldClock, loadInferredSharedWorldClock } from './inferred-shared-world-clock.ts';
