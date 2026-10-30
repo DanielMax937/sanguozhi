@@ -316,7 +316,17 @@
       "originalText": "俸禄已确认按月从据点资金结算，且先于欠薪忠诚处理；仍缺欠薪时具体哪些武将掉多少、是否存在更细的部分支付语义。",
       "originalLinks": [],
       "nativeEvidenceClosed": false,
-      "scope": "Payment gate established: facility-wide sufficient funds deduct all, insufficient deduct none. PR136 proportional v1 withdrawn; v2 infers only five-point loss for caller-qualified unpaid salaried officer. No money/loyalty/finalizer writes."
+      "scope": "Payment gate established: facility-wide sufficient funds deduct all, insufficient deduct none. PR136 proportional v1 withdrawn; v2 infers only five-point loss for caller-qualified unpaid salaried officer. No money/loyalty/finalizer writes.",
+      "consumerFollowup": {
+        "status": "implemented-opt-in-synthetic-payroll-ledger-runtime-unverified",
+        "module": "packages/engine/src/inferred-salary-ledger.ts",
+        "rule": "docs/rules/inferred-salary-ledger-v1.md",
+        "nativeEvidenceClosed": false,
+        "campaignWorldWritten": false,
+        "oldFinancePolicy": "unchanged-full-salary-or-reject",
+        "payment": "facility-all-or-nothing-once",
+        "loyaltyZeroOrAllegianceResult": "rejected-atomically"
+      }
     },
     {
       "id": "T27",
