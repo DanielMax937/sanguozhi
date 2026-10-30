@@ -1362,3 +1362,5 @@ export { projectInferredDevelopmentMarkers } from './inferred-development-marker
 export { createInferredSafeCompositeLedger, readInferredSafeCompositeLedger, executeInferredSafeComposite, saveInferredSafeCompositeLedger, loadInferredSafeCompositeLedger } from './inferred-safe-composite-ledger.ts';
 
 export { createInferredSharedWorldClock, readInferredSharedWorldClock, executeInferredSharedWorldClock, saveInferredSharedWorldClock, loadInferredSharedWorldClock } from './inferred-shared-world-clock.ts';
+
+export { createInferredStrategyCasterTransaction, readInferredStrategyCasterTransaction, executeInferredStrategyCasterTransaction, saveInferredStrategyCasterTransaction, loadInferredStrategyCasterTransaction } from './inferred-strategy-caster-transaction.ts';
