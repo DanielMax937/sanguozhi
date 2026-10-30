@@ -488,8 +488,8 @@
     {
       "id": "T40",
       "implementationCategory": "implemented-with-explicit-inference",
-      "currentSummary": "中性场景与显式合成城市/旅行共享旬钟已实现，运行未验收",
-      "remainingBoundary": "共享Tick实际原子推进既有城市生产/日历与旅行日历，保持同date/turn；不共享真实武将/野外资源，不代表原历史剧本或全局scheduler。",
+      "currentSummary": "合成城市旅行战场固定部署与统一原子世界旬",
+      "remainingBoundary": "复用可加载中性剧本，新增同ID固定city-officer与field-actor智力绑定，部署者禁止所有城市动作/生产参与并每步反核；field是其唯一兵力气力行动状态。初始城市兵与场上兵显式分配，WorldTick原子同旬推进城市/旅行/火场四策略，禁止子域私自加时。旅行者不冒充人物迁移，无动态部署返城/真人/全战役原生声明；仍受旧12旬窗口。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
@@ -545,7 +545,7 @@
       "id": "T45",
       "implementationCategory": "implemented-with-explicit-inference",
       "currentSummary": "旅行实际状态及显式合成共享旬钟已实现，运行未验收",
-      "remainingBoundary": "十天/边仍明确推断；共享城市旬钟不把traveler映射为城市武将，真实人物迁移/资格与原生路程未核。",
+      "remainingBoundary": "十天/边仍明确推断；共享城市旬钟不把traveler映射为城市武将，真实人物迁移/资格与原生路程未核。 新统一safe world已与固定部署战场同一WorldTick原子推进，旅客仍独立命名空间，不冒充武将迁移。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
@@ -573,6 +573,6 @@
       "historical scenario flags/officer setup",
       "native helper/caller/version equivalence"
     ],
-    "sharedWorldLimit": "City/travel clock is bounded and synthetic. Independent field/personnel domains are not silently mapped into one campaign identity or shared account."
+    "sharedWorldLimit": "Fixed synthetic deployed city-officer/field-actor same-ID and intelligence binding, one authoritative field roster, explicit city/field troop allocation and atomic city/travel/field WorldTick implemented. No dynamic deployments/returns or traveler-person migration; existing12-xun city limit; not a native complete campaign."
   }
 }
