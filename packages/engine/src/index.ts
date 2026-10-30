@@ -1344,3 +1344,5 @@ export { createInferredSalaryLedger, readInferredSalaryLedger, executeInferredSa
 export { createInferredTreasureLedger, readInferredTreasureLedger, executeInferredTreasureGrant, saveInferredTreasureLedger, loadInferredTreasureLedger } from './inferred-treasure-ledger.ts';
 
 export { createInferredPositiveResourceLedger, readInferredPositiveResourceLedger, executeInferredPositiveResource, saveInferredPositiveResourceLedger, loadInferredPositiveResourceLedger } from './inferred-positive-resource-ledger.ts';
+
+export { createInferredDevelopmentScenario } from './inferred-development-layout.ts';
