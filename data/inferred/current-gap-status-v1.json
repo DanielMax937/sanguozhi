@@ -169,8 +169,8 @@
     {
       "id": "T14",
       "implementationCategory": "existing-policy-or-source-record-retained",
-      "currentSummary": "既有限定建设核保留",
-      "remainingBoundary": "本轮不新增双建设模式、不改既有设施状态机。",
+      "currentSummary": "单锻冶StartForge接真实共享锁、WorldTick完成与生产设施视图",
+      "remainingBoundary": "固定一个未完成forge槽；不新增双建设或任意设施/吸收。保留生产历史与实际完成奖励；运行未验收。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
@@ -241,8 +241,8 @@
     {
       "id": "T20",
       "implementationCategory": "implemented-with-explicit-inference",
-      "currentSummary": "自动补给实际消费及合成容量双边转运",
-      "remainingBoundary": "保留PR141自动补给；新增同owner合成transport与depot之间15坐标整单守恒转移、容量检查、正兵约束和重放。12槽容量为显式可替换推断输入，不伪称原生getter；不删除实体、不入城finalizer、不复刻溢出丢弃。 统一资源World现接typed城市与transport转账，城市quantity与reserved分离保留，后7装备槽不映城市槽并拒非零请求，不能绕预约或静默丢货。",
+      "currentSummary": "城市/运输账户转运与逐旬中性耗粮接唯一资源owner",
+      "remainingBoundary": "food0允许且缺粮仅报告不损兵；field粮owner/供给尚未接。火与覆盖效果未建模，非观测无火；运行未验收。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
