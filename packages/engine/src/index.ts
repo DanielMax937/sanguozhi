@@ -1346,3 +1346,5 @@ export { createInferredTreasureLedger, readInferredTreasureLedger, executeInferr
 export { createInferredPositiveResourceLedger, readInferredPositiveResourceLedger, executeInferredPositiveResource, saveInferredPositiveResourceLedger, loadInferredPositiveResourceLedger } from './inferred-positive-resource-ledger.ts';
 
 export { createInferredDevelopmentScenario } from './inferred-development-layout.ts';
+
+export { executeInferredEmptyCellFire } from './inferred-empty-cell-fire.ts';
