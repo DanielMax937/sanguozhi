@@ -1336,3 +1336,5 @@ export { createInferredSeededPkAbilityLifecycle } from './inferred-pk-research-l
 
 
 
+
+export { createInferredPositiveHazardLedger, readInferredPositiveHazardLedger, executeInferredPositiveHazard, saveInferredPositiveHazardLedger, loadInferredPositiveHazardLedger } from './inferred-positive-hazard-ledger.ts';
