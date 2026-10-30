@@ -1368,3 +1368,5 @@ export { createInferredStrategyCasterTransaction, readInferredStrategyCasterTran
 export { createInferredFireLifecycle, readInferredFireLifecycle, executeInferredFireLifecycle, saveInferredFireLifecycle, loadInferredFireLifecycle } from './inferred-fire-lifecycle.ts';
 
 export { createInferredCapacityTransfer, readInferredCapacityTransfer, executeInferredCapacityTransfer, saveInferredCapacityTransfer, loadInferredCapacityTransfer } from './inferred-capacity-transfer.ts';
+
+export { createInferredFalseReportRetreat, readInferredFalseReportRetreat, executeInferredFalseReportRetreat, saveInferredFalseReportRetreat, loadInferredFalseReportRetreat } from './inferred-false-report-retreat.ts';
