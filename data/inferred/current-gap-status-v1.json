@@ -307,8 +307,8 @@
     {
       "id": "T26",
       "implementationCategory": "implemented-with-explicit-inference",
-      "currentSummary": "月薪与自然忠诚接入城市唯一余额及WorldTick",
-      "remainingBoundary": "新synthetic资源timeline完整重演普通城务与工资/宝物/转运桥，保留生产jobs预约历史；城市current.ledger唯一金粮AP兵装备。WorldTick月薪一次后自然忠诚，所有域成功才提交；不足全不支付及减忠诚为具名政策，归零整笔拒绝。旧默认schema/load不变，v1固定部署，v2已接具名合成动态角色；无真人或Closing/P078。",
+      "currentSummary": "官职变化原子更新同一salary并由后续月薪消费",
+      "remainingBoundary": "不立即重发工资/重置日期；缺资原逻辑和正值门保留",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
@@ -317,8 +317,8 @@
     {
       "id": "T27",
       "implementationCategory": "existing-service-statically-confirmed",
-      "currentSummary": "既有独立官职选择、计划及原子任官关系提交",
-      "remainingBoundary": "office-assignment.ts 已有selector、plan→apply重算验证、assignments原子替换及保存/请求重放，不仅评分。原生资格helper、caller排序/调度与人物writer仍未证；不新增真实人物官职/归属写入，不把classifier当排序器，官职效果元数据不等于已发工资/改能力。",
+      "currentSummary": "具名官职分配接统一office、工资与真实Deploy统率容量",
+      "remainingBoundary": "仅合成fill-vacancies；君主真实角色排除，无官容量显式推断，不实现任免归属/所有被动",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
@@ -488,8 +488,8 @@
     {
       "id": "T40",
       "implementationCategory": "implemented-with-explicit-inference",
-      "currentSummary": "统一world实际路由PK与每outer一步currentfacts同步",
-      "remainingBoundary": "旧默认不变；静态未运行，密集记录仍受完整历史容量限制",
+      "currentSummary": "统一world实际路由AssignOffices与Deploy容量校验",
+      "remainingBoundary": "旧默认不变，无第二工资账本；静态未运行，title固定场景事实",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
