@@ -1377,3 +1377,5 @@ export { createInferredTreasureTurnSession, readInferredTreasureTurnSession, adv
 export { createInferredUnifiedTreasureSession, readInferredUnifiedTreasureSession, executeInferredUnifiedTreasureCommand, saveInferredUnifiedTreasureSession, loadInferredUnifiedTreasureSession } from './inferred-treasure-unified-session.ts';
 
 export { createInferredUnifiedField, readInferredUnifiedField, executeInferredUnifiedField, saveInferredUnifiedField, loadInferredUnifiedField } from './inferred-unified-field.ts';
+
+export { createInferredUnifiedSafeWorld, readInferredUnifiedSafeWorld, executeInferredUnifiedSafeWorld, saveInferredUnifiedSafeWorld, loadInferredUnifiedSafeWorld } from './inferred-unified-safe-world.ts';

@@ -942,6 +942,13 @@
         "sharedFieldResourceLedger": false,
         "nativeSchedulerVerified": false,
         "originalCampaignWritten": false
+      },
+      "inferred_unified_safe_world_followup": {
+        "module": "packages/engine/src/inferred-unified-safe-world.ts",
+        "rule": "docs/rules/inferred-unified-safe-world-v1.md",
+        "scope": "复用可加载中性剧本，新增同ID固定city-officer与field-actor智力绑定，部署者禁止所有城市动作/生产参与并每步反核；field是其唯一兵力气力行动状态。初始城市兵与场上兵显式分配，WorldTick原子同旬推进城市/旅行/火场四策略，禁止子域私自加时。旅行者不冒充人物迁移，无动态部署返城/真人/全战役原生声明；仍受旧12旬窗口。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
