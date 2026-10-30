@@ -289,6 +289,13 @@
         "record": "data/inferred/current-gap-status-v1.json",
         "id": "T12",
         "historicalFieldsUnchanged": true
+      },
+      "inferred_multi_rockfall_followup": {
+        "module": "packages/engine/src/inferred-multi-rockfall.ts",
+        "rule": "docs/rules/inferred-multi-rockfall-v1.md",
+        "scope": "复用旧单目标落石与正值损耗，新增唯一升序目标集合和逐目标抽样，全部目标成功才统一提交outerjournal；归零/非法/容量失败整批拒绝。顺序抽样分配为具名推断，强制位移/击破/人物伤亡/奖励及原生caller等价未闭合。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
