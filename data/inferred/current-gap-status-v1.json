@@ -34,16 +34,22 @@
     },
     {
       "id": "T03",
-      "implementationCategory": "existing-policy-or-source-record-retained",
-      "currentSummary": "既有参数/边界保留",
-      "remainingBoundary": "10→12不是最终固定概率加20；完整helper与忠诚治安分布未证。",
+      "implementationCategory": "existing-service-statically-confirmed",
+      "currentSummary": "既有独立两城流言标量服务已执行费用与效果",
+      "remainingBoundary": "rumor-scalar-lifecycle.ts 已有 AttemptRumorScalar/AdvanceRumorTurn、200金/30AP扣费、actor机会、内部概率与治安/忠诚标量写入及完整保存重放；不是原世界Rumor。10→12不是最终固定概率加20，原helper/效果分布/捕获外交/归属及世界后果仍未闭合。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
       "historicalSourceLinks": [
         "docs/rules/02-economy.md#515-计略府流言提升不是固定-20-个百分点",
         "docs/rules/rumor-scalar-lifecycle.md"
-      ]
+      ],
+      "verifiedServiceReferences": {
+        "code": "packages/engine/src/rumor-scalar-lifecycle.ts",
+        "doc": "docs/engine/rumor-scalar-lifecycle.md",
+        "codeBlobSha": "56b581f8fe091298d07e6dc8d1bad11ddbf9ca7c",
+        "docBlobSha": "86a1911e677c6e2cb510a74f29b3642f363e5b5f"
+      }
     },
     {
       "id": "T04",
@@ -310,15 +316,21 @@
     },
     {
       "id": "T27",
-      "implementationCategory": "existing-policy-or-source-record-retained",
-      "currentSummary": "既有官职selector保留",
-      "remainingBoundary": "不新增真实人物官职/归属写入，不把classifier当排序器。",
+      "implementationCategory": "existing-service-statically-confirmed",
+      "currentSummary": "既有独立官职选择、计划及原子任官关系提交",
+      "remainingBoundary": "office-assignment.ts 已有selector、plan→apply重算验证、assignments原子替换及保存/请求重放，不仅评分。原生资格helper、caller排序/调度与人物writer仍未证；不新增真实人物官职/归属写入，不把classifier当排序器，官职效果元数据不等于已发工资/改能力。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
       "historicalSourceLinks": [
         "docs/rules/43-auto-office-selector-exactness.md"
-      ]
+      ],
+      "verifiedServiceReferences": {
+        "code": "packages/engine/src/office-assignment.ts",
+        "doc": "docs/engine/office-assignment-service.md",
+        "codeBlobSha": "a5c912a6dc565ff700eb6760e9bd4221113ed7e2",
+        "docBlobSha": "17941518c36abb1a8baecff108d1b34a58771bbf"
+      }
     },
     {
       "id": "T28",
@@ -335,15 +347,21 @@
     },
     {
       "id": "T29",
-      "implementationCategory": "existing-policy-or-source-record-retained",
-      "currentSummary": "既有商人资料/策略保留",
-      "remainingBoundary": "缺getter完整算术合同，不修改原生TradePrice或伪造新来源。",
+      "implementationCategory": "existing-service-statically-confirmed",
+      "currentSummary": "既有独立单城商人金粮交易与重放已实现",
+      "remainingBoundary": "city-merchant-lifecycle.ts 已有BuyFood/SellFood，复用internal/city-merchant-trade-reducer.ts实际写金粮/AP/行动marker/政治XP，含独立旬推进与全重放；价格锚点、舍入和writer为明确服务政策。原TradePrice getter完整合同、原生执行及全财政/跨服务融合仍未证；不伪造原生来源。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
       "historicalSourceLinks": [
         "docs/rules/02-economy.md#811-已有函数体与仍未闭合的精确合同"
-      ]
+      ],
+      "verifiedServiceReferences": {
+        "code": "packages/engine/src/city-merchant-lifecycle.ts",
+        "doc": "docs/engine/city-merchant-lifecycle.md",
+        "codeBlobSha": "627729d689961c4ec119bb4f3b5fb7cf89d4f13c",
+        "docBlobSha": "827b731a534420427c8822e3e6bd49949c6467b8"
+      }
     },
     {
       "id": "T30",
@@ -382,13 +400,19 @@
     },
     {
       "id": "T33",
-      "implementationCategory": "existing-policy-or-source-record-retained",
-      "currentSummary": "概率/合成请求保留，实体事件未完成",
-      "remainingBoundary": "实际世界生成异族/根城和灾害效果未接；蝗灾扣TP/设施等不凭标题新写，涉及受限结果保持排除，纯资格提示可读。",
+      "implementationCategory": "existing-service-statically-confirmed",
+      "currentSummary": "既有独立单城季节事件消费者存在；受限健康支路仅静态记录",
+      "remainingBoundary": "city-season-lifecycle.ts 已实现月推进、灾害/丰收pending激活与生成、兵粮损耗、蝗灾农场移除/TP及季度粮核入账，不应再称只有概率请求；其中plague含officer.health写入，本次不调用该服务任何执行/预览/加载重放入口、不据其存在扩权。异族/根城新实体、原生发生率/最终writer及全世界调度仍未闭合。",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
-      "historicalSourceLinks": []
+      "historicalSourceLinks": [],
+      "verifiedServiceReferences": {
+        "code": "packages/engine/src/city-season-lifecycle.ts",
+        "doc": "docs/engine/city-season-lifecycle.md",
+        "codeBlobSha": "115793b3319c9925ffcaf3ee2608ae9e03cce939",
+        "docBlobSha": "9e9cdf953cb872588ba4bce24d3ea1db38279aa4"
+      }
     },
     {
       "id": "T34",
@@ -527,5 +551,28 @@
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
       "historicalSourceLinks": []
     }
-  ]
+  ],
+  "finiteSafeFollowupSet20261030": {
+    "topics": [
+      "T02",
+      "T04",
+      "T06",
+      "T12",
+      "T20",
+      "T28"
+    ],
+    "meaning": "Named synthetic consumers implemented in separate additive modules; publication requires fixed-PR/main records and runtime remains unverified. This is not closure of original-game evidence or a universal world scheduler.",
+    "excluded": [
+      "P078 and dependencies",
+      "Closing reward/injury/world writes",
+      "real-person allegiance/casualty",
+      "zero/terminal finalizers"
+    ],
+    "remainingEvidence": [
+      "native maps/heights/city positions",
+      "historical scenario flags/officer setup",
+      "native helper/caller/version equivalence"
+    ],
+    "sharedWorldLimit": "City/travel clock is bounded and synthetic. Independent field/personnel domains are not silently mapped into one campaign identity or shared account."
+  }
 }
