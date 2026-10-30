@@ -1342,3 +1342,5 @@ export { createInferredPositiveHazardLedger, readInferredPositiveHazardLedger, e
 export { createInferredSalaryLedger, readInferredSalaryLedger, executeInferredSalaryPeriod, saveInferredSalaryLedger, loadInferredSalaryLedger } from './inferred-salary-ledger.ts';
 
 export { createInferredTreasureLedger, readInferredTreasureLedger, executeInferredTreasureGrant, saveInferredTreasureLedger, loadInferredTreasureLedger } from './inferred-treasure-ledger.ts';
+
+export { createInferredPositiveResourceLedger, readInferredPositiveResourceLedger, executeInferredPositiveResource, saveInferredPositiveResourceLedger, loadInferredPositiveResourceLedger } from './inferred-positive-resource-ledger.ts';
