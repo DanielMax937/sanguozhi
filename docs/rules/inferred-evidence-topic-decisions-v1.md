@@ -135,3 +135,8 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T32：追加限定消费者
 
 [inferred-counterattack-ledger-v1](inferred-counterattack-ledger-v1.md)：正值合成反击延续账本：旧太守倍率请求实际扣正值兵力，保留原始损耗journal，归零拒绝，不重复扣基数，不触战斗终结。
+
+
+## T18：追加限定消费者
+
+[inferred-recruitment-exercise-v1](inferred-recruitment-exercise-v1.md)：实读旧Recruit已有完整独立事务，纠正历史“执行未实现”的过时工程状态但保留历史原文；新增合成练习实际复用旧数量/金AP/库存/治安/气力及普通命令回执，不重复造核。

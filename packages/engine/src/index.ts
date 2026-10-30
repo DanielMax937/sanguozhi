@@ -1352,3 +1352,5 @@ export { executeInferredEmptyCellFire } from './inferred-empty-cell-fire.ts';
 export { createInferredConfiscationLedger, readInferredConfiscationLedger, executeInferredConfiscation, saveInferredConfiscationLedger, loadInferredConfiscationLedger } from './inferred-confiscation-ledger.ts';
 
 export { createInferredCounterattackLedger, readInferredCounterattackLedger, executeInferredCounterattack, saveInferredCounterattackLedger, loadInferredCounterattackLedger } from './inferred-counterattack-ledger.ts';
+
+export { runInferredRecruitmentExercise } from './inferred-recruitment-exercise.ts';
