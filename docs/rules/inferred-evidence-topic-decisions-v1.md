@@ -130,3 +130,8 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T28：合成没收延续事务
 
 新增 [没收延续账本](inferred-confiscation-ledger-v1.md)，保留已验证授予初始历史，独立记录物品回库、推断扣value忠诚、AP10原子事务；归零拒绝，不将对称惩罚冒充原生，不改真实人事或旧保存。
+
+
+## T32：追加限定消费者
+
+[inferred-counterattack-ledger-v1](inferred-counterattack-ledger-v1.md)：正值合成反击延续账本：旧太守倍率请求实际扣正值兵力，保留原始损耗journal，归零拒绝，不重复扣基数，不触战斗终结。
