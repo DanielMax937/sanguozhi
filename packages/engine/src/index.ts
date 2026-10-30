@@ -1375,3 +1375,5 @@ export { createInferredMultiRockfall, readInferredMultiRockfall, executeInferred
 
 export { createInferredTreasureTurnSession, readInferredTreasureTurnSession, advanceInferredTreasureTurn, saveInferredTreasureTurnSession, loadInferredTreasureTurnSession } from './inferred-treasure-turn-projection.ts';
 export { createInferredUnifiedTreasureSession, readInferredUnifiedTreasureSession, executeInferredUnifiedTreasureCommand, saveInferredUnifiedTreasureSession, loadInferredUnifiedTreasureSession } from './inferred-treasure-unified-session.ts';
+
+export { createInferredUnifiedField, readInferredUnifiedField, executeInferredUnifiedField, saveInferredUnifiedField, loadInferredUnifiedField } from './inferred-unified-field.ts';

@@ -67,6 +67,13 @@
         "scope": "Fixed synthetic caster eligibility and energy, hit/miss cost and acted atomically, no original people or campaign writing",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "inferred_unified_field_followup": {
+        "module": "packages/engine/src/inferred-unified-field.ts",
+        "rule": "docs/rules/inferred-unified-field-v1.md",
+        "scope": "FireCast资格/智力/气力10/行动从唯一roster读取，命中实际生成火、miss同样扣费；原三策略复用同兵力/气力/acted/混乱。FieldTick原子推进驻留火伤、寿命及行动混乱恢复，原始抽样由outerhistory保留；临时旧消费者仅投影，不保存双份兵力。固定战术格与部署，不含移动/真人/零终结/原生全资格。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -185,6 +192,11 @@
         "scope": "生成/移动/手动灭火与整Tick驻留正值损耗、寿命递减/熄灭已消费，复用旧寿命policy与300加抽样火伤；70/30仍fallback，先伤后减为具名推断。自然蔓延/火罠链/真实世界调度及归零终结仍排除。",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "unifiedFieldFollowup": {
+        "module": "packages/engine/src/inferred-unified-field.ts",
+        "scope": "Shared synthetic roster/FireCast/FieldTick with T02; no duplicate authoritative troop state",
+        "nativeEvidenceClosed": false
       }
     },
     {
