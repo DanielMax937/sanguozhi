@@ -1386,3 +1386,9 @@ export { createInferredUnifiedResourceWorld, readInferredUnifiedResourceWorld, e
 export { readBoundedSyntheticDynamicTimeline, createBoundedSyntheticDynamicTimeline, executeBoundedSyntheticDynamicTimeline } from './bounded-city-piece-clock.ts';
 export { createInferredDynamicField, readInferredDynamicField, executeInferredDynamicField, saveInferredDynamicField, loadInferredDynamicField } from './inferred-dynamic-field.ts';
 export { createInferredDynamicResourceWorld, readInferredDynamicResourceWorld, executeInferredDynamicResourceWorld, saveInferredDynamicResourceWorld, loadInferredDynamicResourceWorld } from './inferred-dynamic-resource-world.ts';
+
+export { readBoundedSyntheticMobileTimeline, createBoundedSyntheticMobileTimeline, executeBoundedSyntheticMobileTimeline } from './bounded-city-piece-clock.ts';
+export { readInferredMobileResourceWorld, createInferredMobileResourceWorld, executeInferredMobileResourceWorld, saveInferredMobileResourceWorld, loadInferredMobileResourceWorld } from './inferred-mobile-resource-world.ts';
+export { readInferredMobileField, createInferredMobileField, executeInferredMobileField, saveInferredMobileField, loadInferredMobileField } from './inferred-mobile-field.ts';
+
+export { createInferredPracticeMobileSlice } from './inferred-practice-mobile-slice.ts';
