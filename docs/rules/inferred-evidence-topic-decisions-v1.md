@@ -145,3 +145,8 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T02：追加限定消费者
 
 [inferred-strategy-effects-v1](inferred-strategy-effects-v1.md)：明确推断伏兵单目标300、内讧双目标各150、妖术至多3目标一回合混乱；正值拒零、miss记命令、行动门与恢复、完整重放。非原作数值/真实人物/全局费用。
+
+
+## T38：追加限定消费者
+
+[inferred-development-markers-v1](inferred-development-markers-v1.md)：只读marker投影：建设保存全重放并绑定固定三城layout genesis，核地图输入，按当前设施生成新视图；不执行命令、不写回、无自动时钟/碰撞融合。
