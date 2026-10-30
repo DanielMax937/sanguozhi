@@ -1354,3 +1354,5 @@ export { createInferredConfiscationLedger, readInferredConfiscationLedger, execu
 export { createInferredCounterattackLedger, readInferredCounterattackLedger, executeInferredCounterattack, saveInferredCounterattackLedger, loadInferredCounterattackLedger } from './inferred-counterattack-ledger.ts';
 
 export { runInferredRecruitmentExercise } from './inferred-recruitment-exercise.ts';
+
+export { createInferredStrategyEffects, readInferredStrategyEffects, executeInferredStrategyEffects, saveInferredStrategyEffects, loadInferredStrategyEffects } from './inferred-strategy-effects.ts';
