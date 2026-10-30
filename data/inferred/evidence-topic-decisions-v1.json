@@ -615,6 +615,14 @@
         "record": "data/inferred/current-gap-status-v1.json",
         "id": "T28",
         "historicalFieldsUnchanged": true
+      },
+      "inferred_treasure_unified_session_followup": {
+        "module": "packages/engine/src/inferred-treasure-unified-session.ts",
+        "rule": "docs/rules/inferred-treasure-unified-session-v2.md",
+        "scope": "保留固定快照适配，新增唯一outer genesis+journal交错授予/没收/自然旬推进，AP持有忠诚日期RNG连续推导，复用旧单笔事务和季度自然核；装备按当前持有派生，不写基础属性。五维bonus为显式推断而非value换算。零忠诚/真人归属/战役全局仍排除；非旧存档静默升级。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false,
+        "prerequisiteModule": "packages/engine/src/inferred-treasure-turn-projection.ts"
       }
     },
     {
