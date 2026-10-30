@@ -1330,6 +1330,9 @@ export type { InferredAutomaticSupplyBatchV1, InferredAutomaticSupplyResultV1 } 
 
 export { createInferredPracticeMovementRequest, createInferredPracticeScenario } from './inferred-practice-map.ts';
 
+export { createInferredSeededPkAbilityLifecycle } from './inferred-pk-research-loader.ts';
+
+
 
 
 
