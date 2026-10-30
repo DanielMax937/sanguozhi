@@ -1370,3 +1370,5 @@ export { createInferredFireLifecycle, readInferredFireLifecycle, executeInferred
 export { createInferredCapacityTransfer, readInferredCapacityTransfer, executeInferredCapacityTransfer, saveInferredCapacityTransfer, loadInferredCapacityTransfer } from './inferred-capacity-transfer.ts';
 
 export { createInferredFalseReportRetreat, readInferredFalseReportRetreat, executeInferredFalseReportRetreat, saveInferredFalseReportRetreat, loadInferredFalseReportRetreat } from './inferred-false-report-retreat.ts';
+
+export { createInferredMultiRockfall, readInferredMultiRockfall, executeInferredMultiRockfall, saveInferredMultiRockfall, loadInferredMultiRockfall } from './inferred-multi-rockfall.ts';
