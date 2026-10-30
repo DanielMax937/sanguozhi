@@ -636,6 +636,13 @@
         "nativeEvidenceClosed": false,
         "runtimeVerified": false,
         "timelineModule": "packages/engine/src/bounded-city-piece-clock.ts"
+      },
+      "unifiedOfficeOwnerFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-office-owner-v1.md",
+        "scope": "不立即重发工资/重置日期；缺资原逻辑和正值门保留",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -659,6 +666,13 @@
         "codeBlobSha": "a5c912a6dc565ff700eb6760e9bd4221113ed7e2",
         "docBlobSha": "17941518c36abb1a8baecff108d1b34a58771bbf",
         "staticOnlyNoInvocation": true
+      },
+      "unifiedOfficeOwnerFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-office-owner-v1.md",
+        "scope": "仅合成fill-vacancies；君主真实角色排除，无官容量显式推断，不实现任免归属/所有被动",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -1087,6 +1101,13 @@
         "module": "packages/engine/src/inferred-mobile-resource-world.ts",
         "rule": "docs/rules/inferred-unified-pk-owner-v1.md",
         "scope": "旧默认不变；静态未运行，密集记录仍受完整历史容量限制",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
+      },
+      "unifiedOfficeOwnerFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-office-owner-v1.md",
+        "scope": "旧默认不变，无第二工资账本；静态未运行，title固定场景事实",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
       }

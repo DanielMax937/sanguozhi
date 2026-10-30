@@ -277,3 +277,15 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T40 统一world实际路由PK与每outer一步currentfacts同步（2026-10-30）
 
 [规则](inferred-unified-pk-owner-v1.md)：旧默认不变；静态未运行，密集记录仍受完整历史容量限制 历史确认与证据原文保留。
+
+## T27 具名官职分配接统一office、工资与真实Deploy统率容量（2026-10-30）
+
+[规则](inferred-unified-office-owner-v1.md)：仅合成fill-vacancies；君主真实角色排除，无官容量显式推断，不实现任免归属/所有被动 历史确认与证据原文保留。
+
+## T26 官职变化原子更新同一salary并由后续月薪消费（2026-10-30）
+
+[规则](inferred-unified-office-owner-v1.md)：不立即重发工资/重置日期；缺资原逻辑和正值门保留 历史确认与证据原文保留。
+
+## T40 统一world实际路由AssignOffices与Deploy容量校验（2026-10-30）
+
+[规则](inferred-unified-office-owner-v1.md)：旧默认不变，无第二工资账本；静态未运行，title固定场景事实 历史确认与证据原文保留。

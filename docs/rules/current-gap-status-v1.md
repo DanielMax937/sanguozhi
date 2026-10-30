@@ -33,8 +33,8 @@
 |T23|Train接唯一城市资源与TP/WAR成长记录，真实复用既有Train|旧v3无配置兼容；显式progressConfig启用，基础WAR参与Train；宝物加成尚未用于Train/field公式，技术horizon仍有限，运行未验收。|
 |T24|受限继续排除|受伤/灾害/释放/攻陷奖励涉及明确排除结果。|
 |T25|已知奖励证据保留|不同奖励不混用；Closing/攻陷/释放奖励禁止，不借普通消费者补入。|
-|T26|月薪与自然忠诚接入城市唯一余额及WorldTick|新synthetic资源timeline完整重演普通城务与工资/宝物/转运桥，保留生产jobs预约历史；城市current.ledger唯一金粮AP兵装备。WorldTick月薪一次后自然忠诚，所有域成功才提交；不足全不支付及减忠诚为具名政策，归零整笔拒绝。旧默认schema/load不变，v1固定部署，v2已接具名合成动态角色；无真人或Closing/P078。|
-|T27|既有独立官职选择、计划及原子任官关系提交|office-assignment.ts 已有selector、plan→apply重算验证、assignments原子替换及保存/请求重放，不仅评分。原生资格helper、caller排序/调度与人物writer仍未证；不新增真实人物官职/归属写入，不把classifier当排序器，官职效果元数据不等于已发工资/改能力。|
+|T26|官职变化原子更新同一salary并由后续月薪消费|不立即重发工资/重置日期；缺资原逻辑和正值门保留|
+|T27|具名官职分配接统一office、工资与真实Deploy统率容量|仅合成fill-vacancies；君主真实角色排除，无官容量显式推断，不实现任免归属/所有被动|
 |T28|当前宝物五维已被研究timing真实消费，持有与成长同owner|Train/field其他公式尚未全部消费有效加成，不能伪造base或夹值。与现Grant/Confiscate/自然忠诚保持单一持有关系；运行未验收。|
 |T29|既有独立单城商人金粮交易与重放已实现|city-merchant-lifecycle.ts 已有BuyFood/SellFood，复用internal/city-merchant-trade-reducer.ts实际写金粮/AP/行动marker/政治XP，含独立旬推进与全重放；价格锚点、舍入和writer为明确服务政策。原TradePrice getter完整合同、原生执行及全财政/跨服务融合仍未证；不伪造原生来源。|
 |T30|既有探索数值核保留|限定已过滤候选，不把人才加入/真实人物迁移包装为普通算术。|
@@ -47,7 +47,7 @@
 |T37|推断小图typed Move接唯一actor位置、行动与共享旬时钟|复用实际supplied移动核；200x200练习图可抽取<=16格矩形接统一Move，非全图/跨片联动。原生地图/高度/城市定位仍待证；设施攻陷/入城终结排除，运行未验收。|
 |T38|可加载三城开发区+只读marker静态PASS|12/18/15真实总数配原创布局，接旧construction/movement；marker投影绑定完整genesis与原布局，按当前设施重建只读视图。原生null不改；不会自动写回或融合时钟。|
 |T39|既有45静态港关关系保留|只读名称/所属，不变造成原生数值ID/运行时归属。|
-|T40|统一world实际路由PK与每outer一步currentfacts同步|旧默认不变；静态未运行，密集记录仍受完整历史容量限制|
+|T40|统一world实际路由AssignOffices与Deploy容量校验|旧默认不变，无第二工资账本；静态未运行，title固定场景事实|
 |T41|通用资料+合成提示保留，原执行未完成|已转录观测不等于原生flag/概率/目录；不得将提示改真实人物/世界结算。|
 |T42|PS2资料+合成提示保留，原执行未完成|PS2来源不覆盖PC，未查来源不能填原flag或施加人物结果。|
 |T43|史实资料+合成提示保留，原执行未完成|资料事件ID不冒充原生ID；实际事件人物/归属/奖励结果保持排除。|
