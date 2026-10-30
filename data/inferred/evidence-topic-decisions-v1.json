@@ -463,6 +463,12 @@
         "scope": "保留PR141自动补给；新增同owner合成transport与depot之间15坐标整单守恒转移、容量检查、正兵约束和重放。12槽容量为显式可替换推断输入，不伪称原生getter；不删除实体、不入城finalizer、不复刻溢出丢弃。",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "unifiedResourceOwnerFollowup": {
+        "module": "packages/engine/src/inferred-unified-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-resource-world-v1.md",
+        "scope": " 统一资源World现接typed城市与transport转账，城市quantity与reserved分离保留，后7装备槽不映城市槽并拒非零请求，不能绕预约或静默丢货。",
+        "nativeEvidenceClosed": false
       }
     },
     {
@@ -580,6 +586,14 @@
         "record": "data/inferred/current-gap-status-v1.json",
         "id": "T26",
         "historicalFieldsUnchanged": true
+      },
+      "unifiedResourceWorldFollowup": {
+        "module": "packages/engine/src/inferred-unified-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-resource-world-v1.md",
+        "scope": "新synthetic资源timeline完整重演普通城务与工资/宝物/转运桥，保留生产jobs预约历史；城市current.ledger唯一金粮AP兵装备。WorldTick月薪一次后自然忠诚，所有域成功才提交；不足全不支付及减忠诚为具名政策，归零整笔拒绝。旧默认schema/load不变，固定部署，无真人或Closing/P078。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false,
+        "timelineModule": "packages/engine/src/bounded-city-piece-clock.ts"
       }
     },
     {
@@ -649,6 +663,12 @@
         "nativeEvidenceClosed": false,
         "runtimeVerified": false,
         "prerequisiteModule": "packages/engine/src/inferred-treasure-turn-projection.ts"
+      },
+      "unifiedResourceOwnerFollowup": {
+        "module": "packages/engine/src/inferred-unified-resource-world.ts",
+        "rule": "docs/rules/inferred-unified-resource-world-v1.md",
+        "scope": " 已进一步接入统一资源World：授予/没收/自然忠诚共享城市现AP/gold与唯一metadata，部署/预约/同旬门由owner校验，不再额外保留可花城市余额。",
+        "nativeEvidenceClosed": false
       }
     },
     {
@@ -947,6 +967,14 @@
         "module": "packages/engine/src/inferred-unified-safe-world.ts",
         "rule": "docs/rules/inferred-unified-safe-world-v1.md",
         "scope": "复用可加载中性剧本，新增同ID固定city-officer与field-actor智力绑定，部署者禁止所有城市动作/生产参与并每步反核；field是其唯一兵力气力行动状态。初始城市兵与场上兵显式分配，WorldTick原子同旬推进城市/旅行/火场四策略，禁止子域私自加时。旅行者不冒充人物迁移，无动态部署返城/真人/全战役原生声明；仍受旧12旬窗口。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
+      },
+      "dynamicResourceWorldFollowup": {
+        "module": "packages/engine/src/inferred-dynamic-resource-world.ts",
+        "timelineModule": "packages/engine/src/bounded-city-piece-clock.ts",
+        "rule": "docs/rules/inferred-dynamic-resource-world-v2.md",
+        "scope": "单一synthetic timeline重演城市/field/工资宝物转运，Deploy从当前城扣正兵并继承气力，Return全额返正兵按兵数加权气力并改角色；不写零兵、不删身份，不是真人迁移。居民无野战兵气副本，部署者不能城市双行动，生产预约/固定入口/火占位/容量门全成功才提交。WorldTick唯一同步城市旅行field与月薪自然忠诚，保留旧生产历史；原生全战役证据及12旬边界仍未闭合。",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
       }
