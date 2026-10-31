@@ -160,7 +160,8 @@ function tacticAction(action: Action): boolean { return action === 'spiral-thrus
 function finite(n: number): number { if (!Number.isFinite(n) || Math.abs(n) > Number.MAX_SAFE_INTEGER) fail('arithmetic-domain'); return n === 0 ? 0 : n; }
 function boundedRate(n: number): number { return Math.max(0, Math.min(100, Math.floor(finite(n)))); }
 function numericWrite(before: number, after: number, requestedAfter = after): NumericWrite { return { before, requestedAfter, requestedDelta: requestedAfter - before, actualDelta: after - before, after }; }
-function resolve(s: Scenario, before: Snapshot, cmd: Command): { snapshot: Snapshot; receipt: Receipt } {
+type SingleSupport = { profile:'inferred-single-support-reaction-core-v1'; supporterId:string; relationCase:'spouse'|'sworn'|'supporter-likes-attacker'|'parent-child'|'siblings' };
+function resolve(s: Scenario, before: Snapshot, cmd: Command, support?:SingleSupport): { snapshot: Snapshot; receipt: Receipt } {
   const snapshot = clone(before), steps: Step[] = [], draws: Draw[] = [], coverage: Coverage[] = [];
   const unit = (id: string): Unit => { const facts = s.units.find(u => u.id === id), now = snapshot.units.find(u => u.id === id); if (!facts || !now) fail('unknown-unit'); return { ...facts, ...now }; };
   const startUnit = (id: string): Unit => { const facts = s.units.find(u => u.id === id), now = before.units.find(u => u.id === id); if (!facts || !now) fail('unknown-unit'); return { ...facts, ...now }; };
@@ -169,7 +170,7 @@ function resolve(s: Scenario, before: Snapshot, cmd: Command): { snapshot: Snaps
   const actor = startUnit(cmd.actorId), target = startUnit(cmd.targetId), from = cell(actor.cellId), to = cell(target.cellId), range = distance(from, to);
   const strategy = strategyAction(cmd.action), tactic = tacticAction(cmd.action);
   const step = (stage: string, sourceKey: SourceKey, policyId: string, a: Unit, b: Unit, reason: string, decision: boolean | null = null, numbers: Record<string, number> = {}, labels: Record<string, string> = {}): void => {
-    const evidenceGrade = sourceKey === 'field-damage' && stage.startsWith('reaction.') ? 'explicit-simulation-policy' : sourceKey === 'strategy-critical' ? 'source-listing-reconstruction' : sourceKey === 'field-damage' || sourceKey === 'tactic-table' || sourceKey === 'strategy-success' ? 'empirical-high' : 'explicit-simulation-policy';
+    const evidenceGrade = sourceKey === 'field-damage' && (stage.startsWith('reaction.') || stage.startsWith('support.')) ? 'explicit-simulation-policy' : sourceKey === 'strategy-critical' ? 'source-listing-reconstruction' : sourceKey === 'field-damage' || sourceKey === 'tactic-table' || sourceKey === 'strategy-success' ? 'empirical-high' : 'explicit-simulation-policy';
     steps.push({ stage, sourceKey, evidenceGrade, policyId, actorId: a.id, targetId: b.id, decision, reason, numbers: Object.entries(numbers).map(([name, value]) => ({ name, value: finite(value) })), labels: Object.entries(labels).map(([name, value]) => ({ name, value })) });
   };
   const draw = (stage: string, bound: 2 | 100): number => { const index = snapshot.rngCursor, d = s.rng.tape[index]; if (!d) fail('rng-exhausted'); if (d.stage !== stage) fail('rng-stage-mismatch'); if (d.bound !== bound) fail('rng-bound-mismatch'); snapshot.rngCursor++; draws.push({ index, stage, bound, value: d.value }); return d.value; };
@@ -201,7 +202,18 @@ function resolve(s: Scenario, before: Snapshot, cmd: Command): { snapshot: Snaps
     for (const item of coverage) if (item.occupantId !== null && targetIds.includes(item.occupantId)) item.order = targetIds.indexOf(item.occupantId);
     coverage.sort((a, b) => (a.order ?? 100) - (b.order ?? 100) || order(a.cellId, b.cellId));
   } else coverage.push({ cellId: target.cellId, occupantId: target.id, side: target.side, disposition: 'primary', order: 0 });
-  const participants = [actor, ...targetIds.map(startUnit)];
+  // Optional proposal-only support: preflight all participants before any main-attack RNG.
+  const supporter = support ? startUnit(support.supporterId) : undefined;
+  if (support && supporter) {
+    if (cmd.action !== 'normal-melee' || supporter.id === actor.id || supporter.id === target.id
+      || supporter.side !== actor.side || supporter.status !== 'normal' || supporter.acted
+      || distance(cell(supporter.cellId),to) !== 1) fail('illegal-support-context');
+    if (![actor,target,supporter].every(u => /^synthetic-[a-z0-9-]{1,48}$/.test(u.id)
+      && u.members.every(m => /^synthetic-[a-z0-9-]{1,48}$/.test(m.id)))) fail('non-synthetic-support-members');
+    // Do not silently discard actual side techniques or invent a second tech1 raid.
+    if (supporter.weapon === 'spear' && supporter.techniques.includes(1)) fail('unsupported-support-food-raid');
+  }
+  const participants = [actor, ...targetIds.map(startUnit), ...(supporter?[supporter]:[])];
   const excludedSkills = strategy ? POLICY.unsupportedStrategySkills : POLICY.unsupportedPhysicalSkills;
   for (const participant of participants) if (participant.members.some(m => m.skills.some(k => excludedSkills.includes(k)))) fail('unsupported-skill-context');
   if (!strategy && s.units.some(u => has(u, '辅佐'))) fail('unsupported-cross-unit-support');
@@ -227,11 +239,11 @@ function resolve(s: Scenario, before: Snapshot, cmd: Command): { snapshot: Snaps
     const raw = guaranteed ? 100 : martialBase + aptitudeBonus + relationshipBonus;
     return roll(stageName, raw, a, b, isTactic ? 'tactic-table' : 'field-policy', isTactic ? 'tactic-critical-05-v1' : POLICY.normalCritical, guaranteed ? 'matching-unconditional-tactic-skill' : 'natural-rate', { martialBase, aptitudeBonus, relationshipBonus }, { skillStacking: 'one-critical-only' });
   };
-  const physical = (a: Unit, b: Unit, isTactic: boolean, coefficient: number, reaction: boolean, arrow: boolean, index: number, scaleNumerator: number, scaleDenominator: number): void => {
-    const prefix = reaction ? 'reaction' : 'attack.' + index, ordinary = !isTactic;
+  const physical = (a: Unit, b: Unit, isTactic: boolean, coefficient: number, reaction: boolean, arrow: boolean, index: number, scaleNumerator: number, scaleDenominator: number, supportPrefix?:string): void => {
+    const prefix = supportPrefix ?? (reaction ? 'reaction' : 'attack.' + index), ordinary = !isTactic;
     touched.add(b.id);
     const shield = ordinary && b.weapon === 'halberd' && (b.techniques.includes(6) || (b.techniques.includes(5) && a.weapon === 'crossbow'));
-    if (shield && roll(prefix + '.shield', POLICY.shieldRate, a, b, 'technique-facts', POLICY.shield, b.techniques.includes(6) ? 'large-shield-overrides-arrow-shield' : 'arrow-shield', {}, { sourceWeapon: a.weapon, shieldSourcePolicy: POLICY.shieldSource })) { step(prefix + '.damage', 'field-policy', POLICY.shield, a, b, 'blocked-zero-loss-critical-and-damage-skipped', false, { damage: 0 }, { response: 'primary-may-still-respond' }); return; }
+    if (shield && roll(prefix + '.shield', POLICY.shieldRate, a, b, 'technique-facts', POLICY.shield, b.techniques.includes(6) ? 'large-shield-overrides-arrow-shield' : 'arrow-shield', {}, { sourceWeapon: a.weapon, shieldSourcePolicy: POLICY.shieldSource })) { step(prefix + '.damage', 'field-policy', POLICY.shield, a, b, 'blocked-zero-loss-critical-and-damage-skipped', false, { damage: 0 }, { response: supportPrefix ? 'support-never-responded-to' : 'primary-may-still-respond' }); return; }
     if (!shield) step(prefix + '.shield', 'technique-facts', POLICY.shield, a, b, 'inapplicable-no-draw', false);
     const critical = physicalCritical(a, b, isTactic, prefix + '.critical');
     const ap = usedPanel(a), dp = usedPanel(b), n = a.troops, m = b.troops, aa = ap.attack, dd = dp.defense;
@@ -246,7 +258,7 @@ function resolve(s: Scenario, before: Snapshot, cmd: Command): { snapshot: Snaps
     const beforeModifiers = base * 10 * ratio * troopRoot * 0.000476190455 * POLICY.drum + fixedTroops;
     const modified = finite(beforeModifiers * criticalMultiplier * matchup * tech * difficulty), coreDamage = Math.floor(modified), damage = Math.floor(coreDamage * scaleNumerator / scaleDenominator);
     finite(damage); if (!Number.isSafeInteger(damage) || damage < 0) fail('arithmetic-domain');
-    step(prefix + '.damage', 'field-damage', POLICY.arithmetic, a, b, reaction ? 'post-hit-reverse-core-then-reaction-scale' : 'action-start-snapshot-core', true, { attack: aa, defense: dd, attackerTroops: n, defenderTroops: m, coefficient, nHundred, mHundred, u, v, ratioInput, ratio, coefficientTerm, defenseFloor, panelAdvantage, troopAdvantage, base, troopRoot, fixedTroops, drum: POLICY.drum, beforeModifiers, criticalMultiplier, matchup, tech, difficulty, modified, coreDamage, trainingId, eliteId, reactionScaleNumerator: scaleNumerator, reactionScaleDenominator: scaleDenominator, damage }, { attackerPanel: panelName(a), defenderPanel: panelName(b), panelLayers: 'supplied-tech-and-status-already-included', damageTech: tech === 1.15 ? 'elite-overrides-training' : tech === 1.1 ? 'training' : 'none', difficultyOwner: a.id, damageRole: reaction ? arrow ? 'response-fire' : 'counterattack' : 'active', matchupMeaning: 'weapon-advantage-not-counterattack', reactionPolicy: POLICY.reaction, criticalSource: isTactic ? 'tactic-table' : POLICY.normalCritical, matchupSource: '05-combat-weapon-matchup', techSource: 'technique-facts', difficultySource: '05-combat-difficulty', drumSource: 'fixed-no-facilities' });
+    step(prefix + '.damage', 'field-damage', POLICY.arithmetic, a, b, supportPrefix ? 'post-main-response-support-core-then-inferred-half' : reaction ? 'post-hit-reverse-core-then-reaction-scale' : 'action-start-snapshot-core', true, { attack: aa, defense: dd, attackerTroops: n, defenderTroops: m, coefficient, nHundred, mHundred, u, v, ratioInput, ratio, coefficientTerm, defenseFloor, panelAdvantage, troopAdvantage, base, troopRoot, fixedTroops, drum: POLICY.drum, beforeModifiers, criticalMultiplier, matchup, tech, difficulty, modified, coreDamage, trainingId, eliteId, reactionScaleNumerator: scaleNumerator, reactionScaleDenominator: scaleDenominator, damage }, { attackerPanel: panelName(a), defenderPanel: panelName(b), panelLayers: 'supplied-tech-and-status-already-included', damageTech: tech === 1.15 ? 'elite-overrides-training' : tech === 1.1 ? 'training' : 'none', difficultyOwner: a.id, damageRole: supportPrefix ? 'single-support' : reaction ? arrow ? 'response-fire' : 'counterattack' : 'active', matchupMeaning: 'weapon-advantage-not-counterattack', reactionPolicy: POLICY.reaction, criticalSource: isTactic ? 'tactic-table' : POLICY.normalCritical, matchupSource: '05-combat-weapon-matchup', techSource: 'technique-facts', difficultySource: '05-combat-difficulty', drumSource: 'fixed-no-facilities' });
     if (reaction) step('reaction.scale', 'field-policy', POLICY.reaction, a, b, 'explicit-simulation-scale-after-complete-core-floor', true, { coreDamage, numerator: scaleNumerator, denominator: scaleDenominator, damage });
     const receiving = mutable(b.id); if (damage >= receiving.troops) fail('unsupported-terminal-effect'); receiving.troops -= damage;
     if (isTactic && cmd.action === 'spiral-thrust') {
@@ -303,11 +315,23 @@ function resolve(s: Scenario, before: Snapshot, cmd: Command): { snapshot: Snaps
       if (!avoided) physical(responder, receiving, false, responseArrow ? 0 : 10, true, responseArrow, 0, tacticHit ? POLICY.reactionScale.successfulTacticNumerator : POLICY.reactionScale.ordinaryNumerator, tacticHit ? POLICY.reactionScale.successfulTacticDenominator : POLICY.reactionScale.ordinaryDenominator);
     }
   }
+  // Capture main-hit qualification BEFORE support; support may not create a main tech1 request.
+  const mainPrimaryLoss = mutable(target.id).troops < target.troops;
+  if (support && supporter) {
+    const rates = {spouse:50,sworn:50,'supporter-likes-attacker':30,'parent-child':20,siblings:20};
+    mutable(supporter.id).acted = true; touched.add(supporter.id);
+    const hit = roll('support.0.relation',rates[support.relationCase],supporter,actor,'field-policy',
+      support.profile,'fixed-synthetic-leader-relation-rate',{}, {relationCase:support.relationCase,
+        phase:'after-main-and-counterattack',failedAttempt:'consumes-supporter-acted'});
+    if(hit) physical(unit(supporter.id),unit(target.id),false,10,false,false,0,1,2,'support.0');
+    step('support.0.policy','field-policy',support.profile,supporter,target,'one-support-no-recursive-reaction',hit,
+      {damageNumerator:1,damageDenominator:2},{halfDamage:'explicit-inference-not-native-rate',extraFoodRaid:'none'});
+  }
   for (const u of snapshot.units) if (u.troops <= 0) fail('unsupported-terminal-effect');
   snapshot.revision++;
   const effects: Effect[] = [...touched].sort(order).map(id => { const old = before.units.find(u => u.id === id)!, now = mutable(id), facts = s.units.find(u => u.id === id)!; return { unitId: id, side: facts.side, cellBefore: old.cellId, cellAfter: now.cellId, troops: numericWrite(old.troops, now.troops), energy: numericWrite(old.energy, now.energy), acted: { before: old.acted, requestedAfter: now.acted, after: now.acted }, status: { before: old.status, requestedKind: requestedKinds.get(id) ?? now.status, after: now.status, remaining: numericWrite(old.remaining, now.remaining, requestedCounts.get(id) ?? now.remaining) } }; });
   // This is only a typed obligation. No food snapshot is accepted or written in the combat kernel.
-  const foodRaidRequest:FoodRaidRequest|undefined=deferredFoodRaid && mutable(target.id).troops < target.troops?{eventId:cmd.commandId,actorId:actor.id,targetId:target.id,
+  const foodRaidRequest:FoodRaidRequest|undefined=deferredFoodRaid && mainPrimaryLoss?{eventId:cmd.commandId,actorId:actor.id,targetId:target.id,
     attackPanel:usedPanel(actor).attack,weapon:'spear',techniques:[...actor.techniques],action:'normal-melee'}:undefined;
   const receipt: Receipt = { schemaVersion: 1, profile: PROFILE, policyId: POLICY.id, policyHash: contentHash(POLICY), sourceBoundary: clone(BOUNDARY), command: clone(cmd), episodeId: s.episodeId, round: s.round, revisionBefore: before.revision, revisionAfter: snapshot.revision, stateHashBefore: contentHash(before), stateHashAfter: contentHash(snapshot), actorSide: actor.side, targetSide: target.side, actionStartCellId: actor.cellId, activationCellId: actor.cellId, range, coverage, outcome, steps, draws, rngBefore: before.rngCursor, rngAfter: snapshot.rngCursor, effects, ...(foodRaidRequest?{foodRaidRequest,requiresExternalFoodSettlement:true as const}:{}) };
   return { snapshot, receipt };
@@ -376,3 +400,21 @@ export function replayFieldCombatV1(input: unknown): FieldCombatReplayResultV1 {
   } catch (e) { return freeze(failure(e)); }
 }
 
+
+/** One proposal, not a standalone save/second Attack. The outer owner proves current facts,
+ * fixed leader relation, availability/role, and atomically adopts every effect and food obligation. */
+export function projectFieldCombatSingleSupportV1(rawScenario:unknown,rawCommand:unknown,rawSupport:unknown) {
+  try {
+    const s=scenario(detach(rawScenario)),cmd=command(detach(rawCommand));
+    const r=object(detach(rawSupport),['profile','supporterId','relationCase']);
+    if(r.profile!=='inferred-single-support-reaction-core-v1'||cmd.expectedRevision!==0)fail('invalid-support-proposal');
+    const support:SingleSupport={profile:r.profile,supporterId:id(r.supporterId),
+      relationCase:oneOf(r.relationCase,['spouse','sworn','supporter-likes-attacker','parent-child','siblings'] as const)};
+    const initial=initialState(s),next=resolve(s,initial.snapshot,cmd,support);
+    if(next.snapshot.rngCursor!==s.rng.tape.length)fail('unused-support-tape');
+    const result={ok:true as const,committed:false as const,receipt:next.receipt,projectedSnapshot:next.snapshot,
+      support:{...support,halfDamagePolicy:'inferred-half-support-damage-v1' as const,
+        relationIsSyntheticScenarioFact:true as const,nativeEquivalent:false as const}};
+    budget(result);return freeze(result);
+  } catch(e) { return freeze(failure(e,null,safeCommandId(rawCommand))); }
+}
