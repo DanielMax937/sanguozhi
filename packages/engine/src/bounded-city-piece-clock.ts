@@ -1,3 +1,4 @@
+import { projectSyntheticMerchantPricePolitics } from './internal/synthetic-merchant-price-view.ts';
 import { validateSyntheticGatePortRepairContext, projectSyntheticGatePortRepairs, type SyntheticGatePortSite } from './internal/synthetic-gate-port-repair.ts';
 import { planSyntheticEffectiveTraining } from './internal/synthetic-effective-training-bridge.ts';
 import { planSyntheticEffectivePoliticsFieldFoodTick } from './internal/synthetic-effective-politics-food.ts';
@@ -172,7 +173,7 @@ type Change =
   | { target: 'officer'; officerId: string; field: Stat | 'merit'; before: number; after: number }
   | { target: 'officer'; officerId: string; field: 'actedTurn'; before: Marker; after: Marker }
   | { target: 'facility'; facilityId: string; field: 'usedTurn'; before: Marker; after: Marker };
-type StepReceipt = { index: number; action: Action; ledgerDigestBefore: string; ledgerDigestAfter: string; changes: Change[]; audit: { kind: 'domestic'; detail: DomesticAudit } | { kind: 'merchant'; detail: MerchantAudit } };
+type StepReceipt = { index: number; action: Action; ledgerDigestBefore: string; ledgerDigestAfter: string; changes: Change[]; audit: { kind: 'domestic'; detail: DomesticAudit } | { kind: 'merchant'; detail: MerchantAudit; pricingView?: MerchantPricingReceipt } };
 type PieceTimeCapture =
   | { callAddress: '005C6CF8' | '005C6D25'; slotIndex: 0 | 1 | 2; eax: 0 | 1 }
   | { callAddress: '005C6D06'; slotIndex: 0 | 1 | 2; eax: number };
@@ -464,10 +465,16 @@ function domesticFrame(s: Scenario, l: Ledger): DomesticInstantFrame {
     pressureActive: s.domestic.pressureActive, difficulty: s.domestic.difficulty, controller: s.domestic.controller,
     unlockedEquipmentTypes: [...s.domestic.unlockedEquipmentTypes], specialtyEquipmentTypes: [...s.domestic.specialtyEquipmentTypes], productionPrices: { 1: clone(s.productionCatalog.entries[1]), 2: clone(s.productionCatalog.entries[2]), 3: clone(s.productionCatalog.entries[3]), 4: clone(s.productionCatalog.entries[4]) }, policies: clone(s.policy.domestic) };
 }
-function merchantFrame(s: Scenario, l: Ledger): MerchantTradeFrame {
+type MerchantPricingReceipt = Extract<ReturnType<typeof projectSyntheticMerchantPricePolitics>,{ok:true}>['receipt'];
+function merchantPriceView(officerId:string,effectivePolitics:number) {
+  const result=projectSyntheticMerchantPricePolitics({officerId,effectivePolitics});
+  if(!result.ok)stop('unsupported-politics');
+  return result;
+}
+function merchantFrame(s: Scenario, l: Ledger, pricingView=false): MerchantTradeFrame {
   return { activeForceId: s.activeForceId, hostileForceIds: [...s.merchant.hostileForceIds], corps: { id: s.corps.id, forceId: s.corps.forceId, actionPoints: l.actionPoints },
     city: { id: s.city.id, kind: 'city', ownerForceId: s.city.ownerForceId, position: clone(s.city.position), gold: l.gold, goldCapacity: MAX, food: l.food, foodCapacity: s.city.foodCapacity, merchantPresent: s.merchant.present, uiTradePrice: s.merchant.uiTradePrice, merchantUsedTurn: l.merchantUsedTurn },
-    officers: s.officers.map((o, i) => ({ id: o.id, forceId: o.forceId, cityId: o.cityId, available: o.available, politics: o.politics, politicsXp: l.officers[i]!.xp.politics, actedTurn: l.officers[i]!.actedTurn })),
+    officers: s.officers.map((o, i) => ({ id: o.id, forceId: o.forceId, cityId: o.cityId, available: o.available, politics: pricingView?merchantPriceView(o.id,o.politics).pricePolitics:o.politics, politicsXp: l.officers[i]!.xp.politics, actedTurn: l.officers[i]!.actedTurn })),
     completeFieldUnits: true, fieldUnits: clone(s.merchant.fieldUnits), policies: clone(s.policy.merchant), catalog: clone(s.merchantCatalog) };
 }
 function reducerReason(reason: string): ReasonCode {
@@ -589,11 +596,11 @@ function changes(before: Ledger, after: Ledger): Change[] {
   return result;
 }
 function isTradeAction(action: Action): action is TradeAction { return action.type === 'BuyFood' || action.type === 'SellFood'; }
-function reduceStep(s: Scenario, clock: Clock, before: Ledger, action: Action, commandId: string, index: number): { ledger: Ledger; receipt: StepReceipt } {
+function reduceStep(s: Scenario, clock: Clock, before: Ledger, action: Action, commandId: string, index: number, merchantPricingView=false): { ledger: Ledger; receipt: StepReceipt } {
   ledgerInvariant(s, clock, before); rootGuard(s, clock, before, action, index); const next = clone(before); let audit: StepReceipt['audit'];
   const context = { commandId, turn: clock.turn };
   if (isTradeAction(action)) {
-    const frame = merchantFrame(s, before), result = reduceMerchantTrade(context, frame, action);
+    const frame = merchantFrame(s, before, merchantPricingView), result = reduceMerchantTrade(context, frame, action);
     if (!result.ok) stop(reducerReason(result.reason), 'merchant', index, result.blockingUnitId);
     try {
       const candidate = result.candidate; next.gold = candidate.city.gold; next.food = candidate.city.food; next.actionPoints = candidate.corps.actionPoints; next.merchantUsedTurn = candidate.city.merchantUsedTurn;
@@ -602,8 +609,8 @@ function reduceStep(s: Scenario, clock: Clock, before: Ledger, action: Action, c
       ledgerInvariant(s, clock, next);
       // Reproject only the whitelist. Full equality rejects changed facts, identity,
       // unrelated actors, order, caps, or any unrecognized candidate property.
-      if (!same(candidate, merchantFrame(s, next))) stop('unexpected-reducer-effect');
-      audit = { kind: 'merchant', detail: merchantAudit(result.audit, s, clock, action) };
+      if (!same(candidate, merchantFrame(s, next, merchantPricingView))) stop('unexpected-reducer-effect');
+      audit = { kind: 'merchant', detail: merchantAudit(result.audit, s, clock, action), ...(merchantPricingView?{pricingView:merchantPriceView(s.officers[actor]!.id,s.officers[actor]!.politics).receipt}:{}) };
     } catch (_) { stop('unexpected-reducer-effect', 'invariant', index); }
   } else {
     const frame = domesticFrame(s, before), result = reduceDomesticInstant(context, frame, action);
@@ -699,7 +706,7 @@ function effectiveSyntheticScenario(s:Scenario,extension?:SyntheticForgeExtensio
   const city=research?.currentMoraleCap!==undefined?{...s.city,moraleCap:research.currentMoraleCap}:s.city;
   return extension||readFacts||research?.currentMoraleCap!==undefined?{...s,facilities,officers,city}:s;
 }
-type SyntheticResearchExtension={currentMoraleCap?:100|120;maxAdvances:21;activeJobId:string|null;officerIds:readonly string[];
+type SyntheticResearchExtension={merchantPricingView?:true;currentMoraleCap?:100|120;maxAdvances:21;activeJobId:string|null;officerIds:readonly string[];
  pkLocks?:readonly {actorId:string;jobId:string}[];effectiveFacts?:readonly {id:string;leadership:number;charisma:number;intelligence:number;politics:number}[];pkFacts?:readonly {id:string;leadership:number;charisma:number;intelligence:number;politics:number}[]};
 function historicalPieceScenario(s:Scenario,job:Job,research?:SyntheticResearchExtension):Scenario{
   if(!research?.pkFacts)return s;
@@ -870,7 +877,7 @@ function transitionValidatedRoot(s: State, e: Envelope, extension?:SyntheticForg
   if (e.command.type === 'ExecuteCityActions') {
     const steps: StepReceipt[] = [];
     for (let index = 0; index < e.command.actions.length; index++) {
-      const step = reduceStep(effectiveSyntheticScenario(s.genesis,extension,research), current.clock, current.ledger, e.command.actions[index]!, e.id, index); current.ledger = step.ledger; steps.push(step.receipt);
+      const step = reduceStep(effectiveSyntheticScenario(s.genesis,extension,research), current.clock, current.ledger, e.command.actions[index]!, e.id, index, research?.merchantPricingView===true); current.ledger = step.ledger; steps.push(step.receipt);
     }
     branch = { kind: 'instant', detail: { steps } };
   } else if (e.command.type === 'StartPieceProduction') branch = { kind: 'piece-start', detail: startPiece(s, current, e, e.command,research) };
@@ -1300,6 +1307,7 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
     const seasonEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'seasonConfig');
     const rumorEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'rumorConfig');
     const energyEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'energyConfig');
+    const merchantPricingEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'merchantPricingConfig');
     const effectiveEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'effectiveConfig');
     const repairEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'repairConfig');
     const starvationEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'starvationConfig');
@@ -1310,10 +1318,11 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
     const travelEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'travelBindingConfig');
     const researchEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'researchConfig');
     const incomeEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'incomeConfig');
-    const raw = object(detached, ['schema', 'cityScenario', 'resourceConfig', 'transportInitial', 'fieldCells', 'fieldTemplates', 'movementMap', 'movementProfiles', 'commands', ...(enabled ? ['progressConfig'] : []),...(forgeEnabled?['forgeConfig']:[]),...(foodEnabled?['foodConfig']:[]),...(incomeEnabled?['incomeConfig']:[]),...(researchEnabled?['researchConfig']:[]),...(travelEnabled?['travelBindingConfig']:[]),...(pkEnabled?['pkConfig']:[]),...(officeEnabled?['officeConfig']:[]),...(encounterEnabled?['encounterConfig']:[]),...(fieldFoodEnabled?['fieldFoodConfig']:[]),...(hazardEnabled?['hazardConfig']:[]),...(seasonEnabled?['seasonConfig']:[]),...(rumorEnabled?['rumorConfig']:[]),...(energyEnabled?['energyConfig']:[]),...(effectiveEnabled?['effectiveConfig']:[]),...(repairEnabled?['repairConfig']:[]),...(starvationEnabled?['starvationConfig']:[])]);
+    const raw = object(detached, ['schema', 'cityScenario', 'resourceConfig', 'transportInitial', 'fieldCells', 'fieldTemplates', 'movementMap', 'movementProfiles', 'commands', ...(enabled ? ['progressConfig'] : []),...(forgeEnabled?['forgeConfig']:[]),...(foodEnabled?['foodConfig']:[]),...(incomeEnabled?['incomeConfig']:[]),...(researchEnabled?['researchConfig']:[]),...(travelEnabled?['travelBindingConfig']:[]),...(pkEnabled?['pkConfig']:[]),...(officeEnabled?['officeConfig']:[]),...(encounterEnabled?['encounterConfig']:[]),...(fieldFoodEnabled?['fieldFoodConfig']:[]),...(hazardEnabled?['hazardConfig']:[]),...(seasonEnabled?['seasonConfig']:[]),...(rumorEnabled?['rumorConfig']:[]),...(energyEnabled?['energyConfig']:[]),...(effectiveEnabled?['effectiveConfig']:[]),...(repairEnabled?['repairConfig']:[]),...(starvationEnabled?['starvationConfig']:[]),...(merchantPricingEnabled?['merchantPricingConfig']:[])]);
     literal(raw.schema, 'bounded-synthetic-mobile-timeline-v3');
     const g = scenario(raw.cityScenario);
     if(starvationEnabled){const config=object(raw.starvationConfig,['profile']);literal(config.profile,'inferred-whole-zero-food-tick-retain76-positive-v1');if(!fieldFoodEnabled||!pkEnabled)stop('invalid-data');}
+    if(merchantPricingEnabled){const config=object(raw.merchantPricingConfig,['profile']);literal(config.profile,'inferred-merchant-politics-endpoint-saturation-v1');if(!effectiveEnabled||!researchEnabled)stop('invalid-data');}
     if(effectiveEnabled){const config=object(raw.effectiveConfig,['profile']);literal(config.profile,'live-equipment-effective255-v1');if(!pkEnabled||!enabled)stop('invalid-data');}
     if(energyEnabled){const config=object(raw.energyConfig,['profile']);literal(config.profile,'researched-morale120-v1');if(!researchEnabled||!pkEnabled||!enabled||g.city.moraleCap!==100)stop('invalid-data');}
     const synthetic = (v: string) => /^synthetic-[a-z0-9-]{1,48}$/.test(v);
@@ -1437,7 +1446,7 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
       research={talentOffice:choice(config.talentOffice,['none','building','complete'] as const),difficulty:choice(config.difficulty,['beginner','advanced','super'] as const),policies:config.policies,guidanceOfficerIds,completedTechniqueIds:[],job:null};
     }
     const horizon=research?21:g.advanceLimit;
-    const researchExtension=():SyntheticResearchExtension|undefined=>research?{...(effectiveEnabled?{effectiveFacts:effective()!.projections.map(p=>({id:p.officerId,leadership:p.effective.leadership,charisma:p.effective.charisma,intelligence:p.effective.intelligence,politics:p.effective.politics}))}:{}),...(energyEnabled?{currentMoraleCap:research.completedTechniqueIds.includes(16)?120 as const:100 as const}:{}),maxAdvances:21,activeJobId:research.job?.source.status==='active'?research.job.source.id:null,officerIds:research.job?.source.status==='active'?research.job.source.officerIds:[],...(pkPeople?{pkFacts:pkCurrentFacts(),pkLocks:pkMetadata?.cultivationJobs.filter(j=>j.status==='active').map(j=>({actorId:j.officerId!,jobId:j.id}))??[]}: {})}:undefined;
+    const researchExtension=():SyntheticResearchExtension|undefined=>research?{...(merchantPricingEnabled?{merchantPricingView:true as const}:{}),...(effectiveEnabled?{effectiveFacts:effective()!.projections.map(p=>({id:p.officerId,leadership:p.effective.leadership,charisma:p.effective.charisma,intelligence:p.effective.intelligence,politics:p.effective.politics}))}:{}),...(energyEnabled?{currentMoraleCap:research.completedTechniqueIds.includes(16)?120 as const:100 as const}:{}),maxAdvances:21,activeJobId:research.job?.source.status==='active'?research.job.source.id:null,officerIds:research.job?.source.status==='active'?research.job.source.officerIds:[],...(pkPeople?{pkFacts:pkCurrentFacts(),pkLocks:pkMetadata?.cultivationJobs.filter(j=>j.status==='active').map(j=>({actorId:j.officerId!,jobId:j.id}))??[]}: {})}:undefined;
     const extension=():SyntheticForgeExtension|undefined=>forge?{facilityId:forge.facilityId,complete:forge.complete,
       activeJobId:forge.job?.completedTurn===null?forge.job.id:null,officerIds:forge.job?.completedTurn===null?forge.job.officerIds:[]}:undefined;
     const remainingCompletion=()=>Math.max(reservedCompletionSlots(city.current),forge?.job?.completedTurn===null?forge.job.remainingTurns:0,research?.job?.source.status==='active'?research.job.source.remainingTurns:0,travelTail().ticks,...(pkMetadata?[...pkMetadata.researchJobs,...pkMetadata.cultivationJobs].filter(j=>j.status==='active').map(j=>j.remainingTurns):[]));
@@ -1608,7 +1617,7 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
       return executeInferredMobileField(field.state,{id:`synthetic-${legacyKind}-${commands.length}`,expectedRevision:field.revision,action});
     };
     const root = () => ({ schema: 'bounded-synthetic-mobile-timeline-v3' as const, cityScenario: g,
-      resourceConfig: raw.resourceConfig, transportInitial: raw.transportInitial, fieldCells: fieldCreated.state.cells, fieldTemplates: fieldCreated.state.templates, movementMap: fieldCreated.state.movementMap, movementProfiles: fieldCreated.state.movementProfiles, ...(enabled ? {progressConfig:raw.progressConfig} : {}),...(forgeEnabled?{forgeConfig:raw.forgeConfig}:{}),...(foodEnabled?{foodConfig:raw.foodConfig}:{}),...(incomeEnabled?{incomeConfig:raw.incomeConfig}:{}),...(researchEnabled?{researchConfig:raw.researchConfig}:{}),...(travelEnabled?{travelBindingConfig:raw.travelBindingConfig}:{}),...(pkEnabled?{pkConfig:raw.pkConfig}:{}),...(officeEnabled?{officeConfig:raw.officeConfig}:{}),...(encounterEnabled?{encounterConfig:raw.encounterConfig}:{}),...(fieldFoodEnabled?{fieldFoodConfig:raw.fieldFoodConfig}:{}),...(hazardEnabled?{hazardConfig:raw.hazardConfig}:{}),...(seasonEnabled?{seasonConfig:raw.seasonConfig}:{}),...(rumorEnabled?{rumorConfig:raw.rumorConfig}:{}),...(energyEnabled?{energyConfig:raw.energyConfig}:{}),...(effectiveEnabled?{effectiveConfig:raw.effectiveConfig}:{}),...(repairEnabled?{repairConfig:raw.repairConfig}:{}),...(starvationEnabled?{starvationConfig:raw.starvationConfig}:{}), commands: [...commands] });
+      resourceConfig: raw.resourceConfig, transportInitial: raw.transportInitial, fieldCells: fieldCreated.state.cells, fieldTemplates: fieldCreated.state.templates, movementMap: fieldCreated.state.movementMap, movementProfiles: fieldCreated.state.movementProfiles, ...(enabled ? {progressConfig:raw.progressConfig} : {}),...(forgeEnabled?{forgeConfig:raw.forgeConfig}:{}),...(foodEnabled?{foodConfig:raw.foodConfig}:{}),...(incomeEnabled?{incomeConfig:raw.incomeConfig}:{}),...(researchEnabled?{researchConfig:raw.researchConfig}:{}),...(travelEnabled?{travelBindingConfig:raw.travelBindingConfig}:{}),...(pkEnabled?{pkConfig:raw.pkConfig}:{}),...(officeEnabled?{officeConfig:raw.officeConfig}:{}),...(encounterEnabled?{encounterConfig:raw.encounterConfig}:{}),...(fieldFoodEnabled?{fieldFoodConfig:raw.fieldFoodConfig}:{}),...(hazardEnabled?{hazardConfig:raw.hazardConfig}:{}),...(seasonEnabled?{seasonConfig:raw.seasonConfig}:{}),...(rumorEnabled?{rumorConfig:raw.rumorConfig}:{}),...(energyEnabled?{energyConfig:raw.energyConfig}:{}),...(effectiveEnabled?{effectiveConfig:raw.effectiveConfig}:{}),...(repairEnabled?{repairConfig:raw.repairConfig}:{}),...(starvationEnabled?{starvationConfig:raw.starvationConfig}:{}),...(merchantPricingEnabled?{merchantPricingConfig:raw.merchantPricingConfig}:{}), commands: [...commands] });
     const fit = () => { budget({repairs,starvationBoundary}); budget(root()); budget({ state: root(), current: city.current, metadata, transports, field, receipts, ...(enabled ? {progress,effectiveAttributes:effective()} : {}),...(forgeEnabled?{forge,completionTicksRequired:remainingCompletion()}: {}),...(researchEnabled?{research,completionTicksRequired:remainingCompletion()}: {}),...(travelEnabled?{boundTravel}: {}),...(pkEnabled?{pkMetadata,pkPeople}: {}),...(officeEnabled?{offices}: {}),...(fieldFoodEnabled?{fieldFood}: {}),...(seasonEnabled?{season}: {}),...(rumorEnabled?{rumor}: {}),...(repairEnabled?{repairs}:{}),...(starvationEnabled?{starvationBoundary}:{}),...(energyEnabled?{energyContext:{ownerId:g.activeForceId,techniqueIds:research!.completedTechniqueIds,cap:research!.completedTechniqueIds.includes(16)?120:100}}:{}) }); };
     fit();
     for (const entry of array(raw.commands, 32)) {
@@ -1842,8 +1851,8 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
     budget(result); return freeze(result);
   } catch (error) { return freeze(caught(error)); }
 }
-export function createBoundedSyntheticMobileTimeline(cityScenario: unknown, resourceConfig: unknown, transportInitial: unknown, fieldCells: unknown, fieldTemplates: unknown, movementMap: unknown, movementProfiles: unknown, progressConfig?: unknown,forgeConfig?:unknown,foodConfig?:unknown,incomeConfig?:unknown,researchConfig?:unknown,travelBindingConfig?:unknown,pkConfig?:unknown,officeConfig?:unknown,encounterConfig?:unknown,fieldFoodConfig?:unknown,hazardConfig?:unknown,seasonConfig?:unknown,rumorConfig?:unknown,energyConfig?:unknown,effectiveConfig?:unknown,repairConfig?:unknown,starvationConfig?:unknown) {
-  return readBoundedSyntheticMobileTimeline({ schema: 'bounded-synthetic-mobile-timeline-v3', cityScenario, resourceConfig, transportInitial, fieldCells, fieldTemplates, movementMap, movementProfiles, ...(progressConfig === undefined ? {} : {progressConfig}),...(forgeConfig===undefined?{}:{forgeConfig}),...(foodConfig===undefined?{}:{foodConfig}),...(incomeConfig===undefined?{}:{incomeConfig}),...(researchConfig===undefined?{}:{researchConfig}),...(travelBindingConfig===undefined?{}:{travelBindingConfig}),...(pkConfig===undefined?{}:{pkConfig}),...(officeConfig===undefined?{}:{officeConfig}),...(encounterConfig===undefined?{}:{encounterConfig}),...(fieldFoodConfig===undefined?{}:{fieldFoodConfig}),...(hazardConfig===undefined?{}:{hazardConfig}),...(seasonConfig===undefined?{}:{seasonConfig}),...(rumorConfig===undefined?{}:{rumorConfig}),...(energyConfig===undefined?{}:{energyConfig}),...(effectiveConfig===undefined?{}:{effectiveConfig}),...(repairConfig===undefined?{}:{repairConfig}),...(starvationConfig===undefined?{}:{starvationConfig}), commands: [] });
+export function createBoundedSyntheticMobileTimeline(cityScenario: unknown, resourceConfig: unknown, transportInitial: unknown, fieldCells: unknown, fieldTemplates: unknown, movementMap: unknown, movementProfiles: unknown, progressConfig?: unknown,forgeConfig?:unknown,foodConfig?:unknown,incomeConfig?:unknown,researchConfig?:unknown,travelBindingConfig?:unknown,pkConfig?:unknown,officeConfig?:unknown,encounterConfig?:unknown,fieldFoodConfig?:unknown,hazardConfig?:unknown,seasonConfig?:unknown,rumorConfig?:unknown,energyConfig?:unknown,effectiveConfig?:unknown,repairConfig?:unknown,starvationConfig?:unknown,merchantPricingConfig?:unknown) {
+  return readBoundedSyntheticMobileTimeline({ schema: 'bounded-synthetic-mobile-timeline-v3', cityScenario, resourceConfig, transportInitial, fieldCells, fieldTemplates, movementMap, movementProfiles, ...(progressConfig === undefined ? {} : {progressConfig}),...(forgeConfig===undefined?{}:{forgeConfig}),...(foodConfig===undefined?{}:{foodConfig}),...(incomeConfig===undefined?{}:{incomeConfig}),...(researchConfig===undefined?{}:{researchConfig}),...(travelBindingConfig===undefined?{}:{travelBindingConfig}),...(pkConfig===undefined?{}:{pkConfig}),...(officeConfig===undefined?{}:{officeConfig}),...(encounterConfig===undefined?{}:{encounterConfig}),...(fieldFoodConfig===undefined?{}:{fieldFoodConfig}),...(hazardConfig===undefined?{}:{hazardConfig}),...(seasonConfig===undefined?{}:{seasonConfig}),...(rumorConfig===undefined?{}:{rumorConfig}),...(energyConfig===undefined?{}:{energyConfig}),...(effectiveConfig===undefined?{}:{effectiveConfig}),...(repairConfig===undefined?{}:{repairConfig}),...(starvationConfig===undefined?{}:{starvationConfig}),...(merchantPricingConfig===undefined?{}:{merchantPricingConfig}), commands: [] });
 }
 export function executeBoundedSyntheticMobileTimeline(input: unknown, command: unknown) {
   const current = readBoundedSyntheticMobileTimeline(input);
