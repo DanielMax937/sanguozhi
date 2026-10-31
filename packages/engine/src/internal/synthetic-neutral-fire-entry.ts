@@ -1,3 +1,4 @@
+import { readSyntheticEnergyCaps, type SyntheticEnergyCaps } from './synthetic-energy-cap-context.ts';
 /** Explicit inferred neutral per-visit fire entry; never a native caller claim. */
 const fail = (reason: string) => Object.freeze({ ok: false as const, reason });
 const uint = (v: unknown, max: number): v is number => typeof v === 'number' && Number.isSafeInteger(v) && !Object.is(v, -0) && v >= 0 && v <= max;
@@ -50,7 +51,7 @@ function detach(input: unknown): unknown {
 type Unit = { id: string; cellId: string; troops: number; energy: number; acted: boolean; status: 'normal' | 'confused' | 'false-report'; remaining: number };
 type Cell = { id: string; terrainInfoU32: number; adjacent: string[]; blocked: boolean; unsupportedContext: boolean; facilityPresent: boolean };
 type Context = { map: { id: string; cells: Cell[] }; roster: Unit[]; activeFireCellIds: string[] };
-function context(v: Record<string, unknown>): Context | undefined {
+function context(v: Record<string, unknown>, energyCaps?: SyntheticEnergyCaps): Context | undefined {
   if (!record(v.map) || !keys(v.map, ['id', 'cells']) || !id(v.map.id) || !Array.isArray(v.map.cells) || v.map.cells.length < 1 || v.map.cells.length > 16
     || !Array.isArray(v.roster) || v.roster.length < 1 || v.roster.length > 8 || !Array.isArray(v.activeFireCellIds)
     || v.activeFireCellIds.length > 16 || !v.activeFireCellIds.every(id) || new Set(v.activeFireCellIds).size !== v.activeFireCellIds.length) return undefined;
@@ -66,14 +67,15 @@ function context(v: Record<string, unknown>): Context | undefined {
   for (const u of v.roster) {
     if (!record(u) || !keys(u, ['id', 'cellId', 'troops', 'energy', 'acted', 'status', 'remaining']) || !id(u.id) || !id(u.cellId)
       || roster.some(x => x.id === u.id || x.cellId === u.cellId) || !cells.some(c => c.id === u.cellId && !c.blocked && !c.unsupportedContext && !c.facilityPresent)
-      || !uint(u.troops, 1000000) || u.troops === 0 || !uint(u.energy, 100) || typeof u.acted !== 'boolean'
+      || !uint(u.troops, 1000000) || u.troops === 0 || !uint(u.energy, energyCaps?.get(u.id as string) ?? 100) || typeof u.acted !== 'boolean'
       || !['normal', 'confused', 'false-report'].includes(u.status as string) || !uint(u.remaining, 3)
       || ((u.status === 'normal') !== (u.remaining === 0))) return undefined;
     roster.push({ id: u.id, cellId: u.cellId, troops: u.troops, energy: u.energy, acted: u.acted, status: u.status as Unit['status'], remaining: u.remaining });
   }
+  if (energyCaps && (energyCaps.size !== roster.length || roster.some(u => !energyCaps.has(u.id)))) return undefined;
   return { map: { id: v.map.id, cells }, roster, activeFireCellIds: [...v.activeFireCellIds] };
 }
-function project(input: unknown) {
+function project(input: unknown, energyCaps?: SyntheticEnergyCaps) {
   if (!record(input) || !keys(input, ['map', 'roster', 'fires', 'actorId', 'path', 'draws', 'eventsUsed', 'modifiers'])
     || !id(input.actorId) || !Array.isArray(input.fires) || input.fires.length > 16 || !Array.isArray(input.path)
     || input.path.length < 1 || input.path.length > 16 || !input.path.every(id) || !Array.isArray(input.draws)
@@ -86,7 +88,7 @@ function project(input: unknown) {
       || !uint(f.remainingTicks, 3) || f.remainingTicks === 0 || fires.some(x => x.id === f.id || x.cellId === f.cellId)) return fail('invalid-current-fires');
     fires.push({ id: f.id, cellId: f.cellId, remainingTicks: f.remainingTicks });
   }
-  const c = context({ map: input.map, roster: input.roster, activeFireCellIds: fires.map(f => f.cellId) });
+  const c = context({ map: input.map, roster: input.roster, activeFireCellIds: fires.map(f => f.cellId) }, energyCaps);
   if (!c) return fail('invalid-roster-context');
   const actor = c.roster.find(u => u.id === input.actorId);
   if (!actor || actor.acted || actor.status !== 'normal') return fail('fire-entry-actor-unavailable');
@@ -117,3 +119,5 @@ function project(input: unknown) {
     policyId: 'inferred-neutral-fire-entry-per-visit-v1' as const, nativeCallerVerified: false as const });
 }
 export function projectNeutralFireEntry(input: unknown) { try { return project(detach(input)); } catch { return fail('invalid-data-input'); } }
+
+export function projectNeutralFireEntryWithEnergyCaps(input: unknown, rawCaps: unknown) { try { const caps=readSyntheticEnergyCaps(detach(rawCaps)); return caps ? project(detach(input), caps) : fail('invalid-derived-energy-caps'); } catch { return fail('invalid-data-input'); } }

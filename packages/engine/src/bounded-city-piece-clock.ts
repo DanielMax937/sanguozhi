@@ -13,7 +13,7 @@ import { planSyntheticIncomeLeaves } from './internal/synthetic-safe-income-leav
 import { planSyntheticForgeStart, advanceSyntheticForge } from './internal/synthetic-forge-bridge.ts';
 import type { SyntheticForgeJob } from './internal/synthetic-forge-bridge.ts';
 import { planSyntheticNeutralFoodTick } from './internal/synthetic-neutral-food-leaf.ts';
-import { planSyntheticTrainingBridge } from './internal/synthetic-training-bridge.ts';
+import { planSyntheticTrainingBridge, planSyntheticTrainingBridge120 } from './internal/synthetic-training-bridge.ts';
 import { projectSyntheticTreasureAttributes } from './internal/synthetic-treasure-attributes.ts';
 import { RULESET as TRAINING_RULESET } from './rules.ts';
 import { DEFAULT_ADAPTERS as TRAINING_ADAPTERS } from './engine.ts';
@@ -22,7 +22,7 @@ import { createInferredMobileField, executeInferredMobileField } from './inferre
 import { projectInferredCommandAP } from './inferred-independent-planning.ts';
 import { createInferredDynamicField, executeInferredDynamicField } from './inferred-dynamic-field.ts';
 import { createSyntheticResourceMetadata, applySyntheticResourceBridge } from './internal/synthetic-city-resource-bridge.ts';
-import { createSyntheticCityTransports, planSyntheticCityTransferBridge } from './internal/synthetic-city-transfer-bridge.ts';
+import { createSyntheticCityTransports, planSyntheticCityTransferBridge, createSyntheticCityTransports120, planSyntheticCityTransferBridge120 } from './internal/synthetic-city-transfer-bridge.ts';
 /** Bounded single-city owner: one shared xun clock, ledger and type-5 workshop reservation.
  * Full genesis folding is the only trust boundary. No native scheduler or legacy public delegation. */
 import policyData from '../../../data/policies/bounded-city-piece-clock-v1.json' with { type: 'json' };
@@ -692,9 +692,10 @@ type SyntheticForgeExtension = { facilityId:string; complete:boolean; activeJobI
 function effectiveSyntheticScenario(s:Scenario,extension?:SyntheticForgeExtension,research?:SyntheticResearchExtension):Scenario {
   const facilities=extension?s.facilities.map(f=>f.id===extension.facilityId?{...f,complete:extension.complete}:f):s.facilities;
   const officers=research?.pkFacts?s.officers.map(o=>{const f=research.pkFacts!.find(f=>f.id===o.id);if(!f)stop('invariant-mismatch');return{...o,leadership:f.leadership,charm:f.charisma,intelligence:f.intelligence,politics:f.politics};}):s.officers;
-  return extension||research?.pkFacts?{...s,facilities,officers}:s;
+  const city=research?.currentMoraleCap!==undefined?{...s.city,moraleCap:research.currentMoraleCap}:s.city;
+  return extension||research?.pkFacts||research?.currentMoraleCap!==undefined?{...s,facilities,officers,city}:s;
 }
-type SyntheticResearchExtension={maxAdvances:21;activeJobId:string|null;officerIds:readonly string[];
+type SyntheticResearchExtension={currentMoraleCap?:100|120;maxAdvances:21;activeJobId:string|null;officerIds:readonly string[];
  pkLocks?:readonly {actorId:string;jobId:string}[];pkFacts?:readonly {id:string;leadership:number;charisma:number;intelligence:number;politics:number}[]};
 function historicalPieceScenario(s:Scenario,job:Job,research?:SyntheticResearchExtension):Scenario{
   if(!research?.pkFacts)return s;
@@ -707,7 +708,7 @@ function currentInvariant(s: Scenario, c: Current, extension?:SyntheticForgeExte
   object(c, ['clock', 'ledger', 'jobs']); const clock = object(c.clock, ['date', 'turn', 'advancedCount']); date(clock.date);
   integer(clock.advancedCount, research?.maxAdvances??s.advanceLimit); integer(clock.turn);
   if (clock.turn !== s.clock.turn + c.clock.advancedCount || !same(clock.date, advanceDate(s.clock.date, c.clock.advancedCount))) stop('invariant-mismatch', 'invariant');
-  ledgerInvariant(s, c.clock, c.ledger); array(c.jobs, 12); unique(c.jobs.map(j => j.id)); let active: Job | null = null;
+  ledgerInvariant(effectiveSyntheticScenario(s,extension,research), c.clock, c.ledger); array(c.jobs, 12); unique(c.jobs.map(j => j.id)); let active: Job | null = null;
   for (const job of c.jobs) {
     object(job, ['id', 'status', 'cityId', 'equipmentType', 'facilityId', 'officerIds', 'startTurn', 'startDate', 'durationTurns', 'dueTurn', 'dueDate', 'remainingTurns', 'reservedQuantity', 'startSnapshot', 'calculation', 'fees', 'completedTurn', 'completion']);
     jobId(job.id); choice(job.status, ['active', 'completed']); literal(job.cityId, s.city.id); literal(job.equipmentType, 5); literal(job.reservedQuantity, 1);
@@ -1294,6 +1295,7 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
     const hazardEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'hazardConfig');
     const seasonEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'seasonConfig');
     const rumorEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'rumorConfig');
+    const energyEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'energyConfig');
     const encounterEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'encounterConfig');
     const fieldFoodEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'fieldFoodConfig');
     const officeEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'officeConfig');
@@ -1301,9 +1303,10 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
     const travelEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'travelBindingConfig');
     const researchEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'researchConfig');
     const incomeEnabled=detached!==null&&typeof detached==='object'&&!Array.isArray(detached)&&Object.hasOwn(detached,'incomeConfig');
-    const raw = object(detached, ['schema', 'cityScenario', 'resourceConfig', 'transportInitial', 'fieldCells', 'fieldTemplates', 'movementMap', 'movementProfiles', 'commands', ...(enabled ? ['progressConfig'] : []),...(forgeEnabled?['forgeConfig']:[]),...(foodEnabled?['foodConfig']:[]),...(incomeEnabled?['incomeConfig']:[]),...(researchEnabled?['researchConfig']:[]),...(travelEnabled?['travelBindingConfig']:[]),...(pkEnabled?['pkConfig']:[]),...(officeEnabled?['officeConfig']:[]),...(encounterEnabled?['encounterConfig']:[]),...(fieldFoodEnabled?['fieldFoodConfig']:[]),...(hazardEnabled?['hazardConfig']:[]),...(seasonEnabled?['seasonConfig']:[]),...(rumorEnabled?['rumorConfig']:[])]);
+    const raw = object(detached, ['schema', 'cityScenario', 'resourceConfig', 'transportInitial', 'fieldCells', 'fieldTemplates', 'movementMap', 'movementProfiles', 'commands', ...(enabled ? ['progressConfig'] : []),...(forgeEnabled?['forgeConfig']:[]),...(foodEnabled?['foodConfig']:[]),...(incomeEnabled?['incomeConfig']:[]),...(researchEnabled?['researchConfig']:[]),...(travelEnabled?['travelBindingConfig']:[]),...(pkEnabled?['pkConfig']:[]),...(officeEnabled?['officeConfig']:[]),...(encounterEnabled?['encounterConfig']:[]),...(fieldFoodEnabled?['fieldFoodConfig']:[]),...(hazardEnabled?['hazardConfig']:[]),...(seasonEnabled?['seasonConfig']:[]),...(rumorEnabled?['rumorConfig']:[]),...(energyEnabled?['energyConfig']:[])]);
     literal(raw.schema, 'bounded-synthetic-mobile-timeline-v3');
     const g = scenario(raw.cityScenario);
+    if(energyEnabled){const config=object(raw.energyConfig,['profile']);literal(config.profile,'researched-morale120-v1');if(!researchEnabled||!pkEnabled||!enabled||g.city.moraleCap!==100)stop('invalid-data');}
     const synthetic = (v: string) => /^synthetic-[a-z0-9-]{1,48}$/.test(v);
     if (![g.episodeId, g.activeForceId, g.corps.id, g.corps.forceId, g.city.id, g.city.ownerForceId,
       ...g.officers.flatMap(o => [o.id, o.forceId, o.cityId]), ...g.facilities.flatMap(f => [f.id, f.cityId]),
@@ -1330,7 +1333,7 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
     const metaCreated = createSyntheticResourceMetadata(raw.resourceConfig, context());
     if (!metaCreated.ok) return metaCreated;
     let metadata = metaCreated.metadata;
-    const cargoCreated = createSyntheticCityTransports(raw.transportInitial, transferContext());
+    const cargoCreated = energyEnabled?createSyntheticCityTransports120(raw.transportInitial,transferContext(),{ownerId:g.activeForceId,techniqueIds:[]}):createSyntheticCityTransports(raw.transportInitial, transferContext());
     if (!cargoCreated.ok) return cargoCreated;
     let transports = cargoCreated.transports;
     if (transports.some(t => [g.episodeId, g.activeForceId, g.corps.id, g.city.id, ...g.officers.map(o => o.id), ...g.facilities.map(f => f.id)].includes(t.id))) stop('duplicate-entity-id');
@@ -1425,7 +1428,7 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
       research={talentOffice:choice(config.talentOffice,['none','building','complete'] as const),difficulty:choice(config.difficulty,['beginner','advanced','super'] as const),policies:config.policies,guidanceOfficerIds,completedTechniqueIds:[],job:null};
     }
     const horizon=research?21:g.advanceLimit;
-    const researchExtension=():SyntheticResearchExtension|undefined=>research?{maxAdvances:21,activeJobId:research.job?.source.status==='active'?research.job.source.id:null,officerIds:research.job?.source.status==='active'?research.job.source.officerIds:[],...(pkPeople?{pkFacts:pkCurrentFacts(),pkLocks:pkMetadata?.cultivationJobs.filter(j=>j.status==='active').map(j=>({actorId:j.officerId!,jobId:j.id}))??[]}: {})}:undefined;
+    const researchExtension=():SyntheticResearchExtension|undefined=>research?{...(energyEnabled?{currentMoraleCap:research.completedTechniqueIds.includes(16)?120 as const:100 as const}:{}),maxAdvances:21,activeJobId:research.job?.source.status==='active'?research.job.source.id:null,officerIds:research.job?.source.status==='active'?research.job.source.officerIds:[],...(pkPeople?{pkFacts:pkCurrentFacts(),pkLocks:pkMetadata?.cultivationJobs.filter(j=>j.status==='active').map(j=>({actorId:j.officerId!,jobId:j.id}))??[]}: {})}:undefined;
     const extension=():SyntheticForgeExtension|undefined=>forge?{facilityId:forge.facilityId,complete:forge.complete,
       activeJobId:forge.job?.completedTurn===null?forge.job.id:null,officerIds:forge.job?.completedTurn===null?forge.job.officerIds:[]}:undefined;
     const remainingCompletion=()=>Math.max(reservedCompletionSlots(city.current),forge?.job?.completedTurn===null?forge.job.remainingTurns:0,research?.job?.source.status==='active'?research.job.source.remainingTurns:0,travelTail().ticks,...(pkMetadata?[...pkMetadata.researchJobs,...pkMetadata.cultivationJobs].filter(j=>j.status==='active').map(j=>j.remainingTurns):[]));
@@ -1514,7 +1517,7 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
     const fieldFacts=()=>field.state.templates.map(template=>{const current=pkCurrentFacts().find(f=>f.id===template.id)!,extra=pkPeople!.find(p=>p.id===template.id)!;
       return{actorId:template.id,stats:{leadership:current.leadership,war:current.war,intelligence:current.intelligence,politics:current.politics,charisma:current.charisma},aptitudes:extra.aptitudes,skillKey:extra.skillKey};});
     if((encounterEnabled||fieldFoodEnabled||hazardEnabled)&&!pkPeople)stop('invalid-data');
-    if(pkPeople){const created=createInferredCultivatedMobileField(raw.fieldCells,raw.fieldTemplates,raw.movementMap,raw.movementProfiles,fieldFacts(),encounterEnabled?raw.encounterConfig:undefined,hazardEnabled?raw.hazardConfig:undefined);if(!created.ok)return created;field=created;}
+    if(pkPeople){const created=createInferredCultivatedMobileField(raw.fieldCells,raw.fieldTemplates,raw.movementMap,raw.movementProfiles,fieldFacts(),encounterEnabled?raw.encounterConfig:undefined,hazardEnabled?raw.hazardConfig:undefined,energyEnabled?{profile:'researched-morale120-v1',homeOwnerId:g.activeForceId,homeTechniqueIds:[],enemyTechniqueIds:encounterEnabled&&raw.encounterConfig!==null&&typeof raw.encounterConfig==='object'&&!Array.isArray(raw.encounterConfig)&&Object.hasOwn(raw.encounterConfig,'enemyTechniqueIds')?(raw.encounterConfig as Record<string,unknown>).enemyTechniqueIds:[]}:undefined);if(!created.ok)return created;field=created;}
     if(encounterEnabled){
       if(!('enemyActorIds' in field)||!field.state.encounterConfig||field.state.encounterConfig.homeOwnerId!==g.activeForceId)stop('invalid-data');
       const occupied=[g.episodeId,g.activeForceId,g.corps.id,g.city.id,...g.officers.map(o=>o.id),...g.facilities.map(f=>f.id),...field.state.cells,field.state.movementMap.id,...transports.map(t=>t.id),...metadata.items.map(i=>i.id),...(boundTravel?boundTravel.state.travelers.map(t=>t.id):[]),...(income?income.economicFacilities.map(f=>f.id):[])];
@@ -1577,13 +1580,13 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
         const combatAction=action!==null&&typeof action==='object'&&!Array.isArray(action)&&['Attack','FalseReport'].includes((action as {kind:string}).kind);
         const encounter=field.state.encounterConfig;
         const combatTechniquesByOwner=combatAction&&encounter?[{ownerId:g.activeForceId,techniques:[...(research?.completedTechniqueIds??[])]},{ownerId:encounter.enemyOwnerId,techniques:[...(encounter.enemyTechniqueIds??[])]}]:null;
-        return executeInferredCultivatedMobileFieldOuterStep(field.state,{id:fieldSourceId,expectedRevision:field.revision,action:{kind:'OuterStep',sourceOuterCommandId:fieldSourceId,fieldAction:action,factsUpdates:updates,completionJobs:pkFieldCompletions,...(combatTechniquesByOwner?{combatTechniquesByOwner}:{})}});
+        return executeInferredCultivatedMobileFieldOuterStep(field.state,{id:fieldSourceId,expectedRevision:field.revision,action:{kind:'OuterStep',sourceOuterCommandId:fieldSourceId,fieldAction:action,factsUpdates:updates,completionJobs:pkFieldCompletions,...(combatTechniquesByOwner?{combatTechniquesByOwner}:{}),...(energyEnabled?{energyHomeTechniquesAfter:[...(research?.completedTechniqueIds??[])]}:{})}});
       }
       return executeInferredMobileField(field.state,{id:`synthetic-${legacyKind}-${commands.length}`,expectedRevision:field.revision,action});
     };
     const root = () => ({ schema: 'bounded-synthetic-mobile-timeline-v3' as const, cityScenario: g,
-      resourceConfig: raw.resourceConfig, transportInitial: raw.transportInitial, fieldCells: fieldCreated.state.cells, fieldTemplates: fieldCreated.state.templates, movementMap: fieldCreated.state.movementMap, movementProfiles: fieldCreated.state.movementProfiles, ...(enabled ? {progressConfig:raw.progressConfig} : {}),...(forgeEnabled?{forgeConfig:raw.forgeConfig}:{}),...(foodEnabled?{foodConfig:raw.foodConfig}:{}),...(incomeEnabled?{incomeConfig:raw.incomeConfig}:{}),...(researchEnabled?{researchConfig:raw.researchConfig}:{}),...(travelEnabled?{travelBindingConfig:raw.travelBindingConfig}:{}),...(pkEnabled?{pkConfig:raw.pkConfig}:{}),...(officeEnabled?{officeConfig:raw.officeConfig}:{}),...(encounterEnabled?{encounterConfig:raw.encounterConfig}:{}),...(fieldFoodEnabled?{fieldFoodConfig:raw.fieldFoodConfig}:{}),...(hazardEnabled?{hazardConfig:raw.hazardConfig}:{}),...(seasonEnabled?{seasonConfig:raw.seasonConfig}:{}),...(rumorEnabled?{rumorConfig:raw.rumorConfig}:{}), commands: [...commands] });
-    const fit = () => { budget(root()); budget({ state: root(), current: city.current, metadata, transports, field, receipts, ...(enabled ? {progress,effectiveAttributes:effective()} : {}),...(forgeEnabled?{forge,completionTicksRequired:remainingCompletion()}: {}),...(researchEnabled?{research,completionTicksRequired:remainingCompletion()}: {}),...(travelEnabled?{boundTravel}: {}),...(pkEnabled?{pkMetadata,pkPeople}: {}),...(officeEnabled?{offices}: {}),...(fieldFoodEnabled?{fieldFood}: {}),...(seasonEnabled?{season}: {}),...(rumorEnabled?{rumor}: {}) }); };
+      resourceConfig: raw.resourceConfig, transportInitial: raw.transportInitial, fieldCells: fieldCreated.state.cells, fieldTemplates: fieldCreated.state.templates, movementMap: fieldCreated.state.movementMap, movementProfiles: fieldCreated.state.movementProfiles, ...(enabled ? {progressConfig:raw.progressConfig} : {}),...(forgeEnabled?{forgeConfig:raw.forgeConfig}:{}),...(foodEnabled?{foodConfig:raw.foodConfig}:{}),...(incomeEnabled?{incomeConfig:raw.incomeConfig}:{}),...(researchEnabled?{researchConfig:raw.researchConfig}:{}),...(travelEnabled?{travelBindingConfig:raw.travelBindingConfig}:{}),...(pkEnabled?{pkConfig:raw.pkConfig}:{}),...(officeEnabled?{officeConfig:raw.officeConfig}:{}),...(encounterEnabled?{encounterConfig:raw.encounterConfig}:{}),...(fieldFoodEnabled?{fieldFoodConfig:raw.fieldFoodConfig}:{}),...(hazardEnabled?{hazardConfig:raw.hazardConfig}:{}),...(seasonEnabled?{seasonConfig:raw.seasonConfig}:{}),...(rumorEnabled?{rumorConfig:raw.rumorConfig}:{}),...(energyEnabled?{energyConfig:raw.energyConfig}:{}), commands: [...commands] });
+    const fit = () => { budget(root()); budget({ state: root(), current: city.current, metadata, transports, field, receipts, ...(enabled ? {progress,effectiveAttributes:effective()} : {}),...(forgeEnabled?{forge,completionTicksRequired:remainingCompletion()}: {}),...(researchEnabled?{research,completionTicksRequired:remainingCompletion()}: {}),...(travelEnabled?{boundTravel}: {}),...(pkEnabled?{pkMetadata,pkPeople}: {}),...(officeEnabled?{offices}: {}),...(fieldFoodEnabled?{fieldFood}: {}),...(seasonEnabled?{season}: {}),...(rumorEnabled?{rumor}: {}),...(energyEnabled?{energyContext:{ownerId:g.activeForceId,techniqueIds:research!.completedTechniqueIds,cap:research!.completedTechniqueIds.includes(16)?120:100}}:{}) }); };
     fit();
     for (const entry of array(raw.commands, 32)) {
       const c = object(entry, ['id', 'expectedRevision', 'action']), commandId = id(c.id);
@@ -1708,7 +1711,7 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
           if (apBefore < planned.requestedAP) stop('insufficient-action-points');
           apCost = planned.requestedAP; apPlan = planned;
           quantity = integer(a.troops, 60000, 1);if(quantity>commandCapacity(actorId))stop('office-command-capacity');
-          if (role.role !== 'resident' || beforeTroops <= quantity || beforeMorale > 100
+          if (role.role !== 'resident' || beforeTroops <= quantity || beforeMorale > (energyEnabled&&research?.completedTechniqueIds.includes(16)?120:100)
             || field.fires.some(f => f.cellId === template.entryCellId)
             || field.roster.some(o => o.role === 'deployed' && o.cellId === template.entryCellId)) stop('invalid-data');
           nextTroops = beforeTroops - quantity;
@@ -1750,7 +1753,7 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
           rng:{algorithm:TRAINING_ADAPTERS.random.id,seed:1,draws:0}};
         const bindings={cityId:g.city.id,forceId:g.activeForceId,turn:city.current.clock.turn,trainingUsedTurn:progress.trainingUsedTurn,
           officers:city.current.ledger.officers.map(o=>({id:o.id,role:deployed(o.id)?'deployed':'resident',reservationJobId:o.reservationJobId,actedTurn:o.actedTurn}))};
-        const trained=planSyntheticTrainingBridge(gameState,bindings,a);
+        const trained=energyEnabled?planSyntheticTrainingBridge120(gameState,bindings,a):planSyntheticTrainingBridge(gameState,bindings,a);
         if(!trained.ok)return trained;
         city.current.ledger.morale=trained.patch.morale;city.current.ledger.actionPoints=trained.patch.actionPoints;
         progress.techniquePoints=trained.patch.techniquePoints;progress.trainingUsedTurn=trained.patch.trainingUsedTurn;
@@ -1786,7 +1789,7 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
         }else if(hasRaidDraw)stop('unexpected-food-raid-draw');
         field = changedField; detail = {field:field.receipts[field.receipts.length-1],...(foodRaidReceipt?{foodRaid:foodRaidReceipt,settledRequest:request}:{})};
       } else if (a.kind === 'Transfer') {
-        const moved = planSyntheticCityTransferBridge(transferContext(), transports, a);
+        const moved = energyEnabled?planSyntheticCityTransferBridge120(transferContext(),transports,a,{ownerId:g.activeForceId,techniqueIds:research?.completedTechniqueIds??[]}):planSyntheticCityTransferBridge(transferContext(), transports, a);
         if (!moved.ok) return moved;
         const p = moved.cityPatch;
         city.current.ledger.gold = p.gold; city.current.ledger.food = p.food;
@@ -1809,12 +1812,12 @@ export function readBoundedSyntheticMobileTimeline(input: unknown) {
     }
     // No legacy State/tag is exposed: it is not a default save with a patched balance.
     const result = { ok: true as const, state: root(), genesis: g, current: city.current, metadata, transports, field,
-      receipts, revision: commands.length, ...(enabled ? {progress,effectiveAttributes:effective()} : {}),...(forgeEnabled?{forge,completionTicksRequired:remainingCompletion(),effectiveFacilities:effectiveSyntheticScenario(g,extension()).facilities}:{}),...(incomeEnabled?{incomeFacilities:incomeFacilities()}:{}),...(researchEnabled?{research,completionTicksRequired:remainingCompletion(),maxAdvances:horizon}:{}),...(travelEnabled?{boundTravel,completionTicksRequired:remainingCompletion(),futureTravelStartsRequired:travelTail().starts}:{}),...(pkEnabled?{pkMetadata,pkPeople,pkCurrentFacts:pkCurrentFacts(),completionTicksRequired:remainingCompletion()}:{}),...(officeEnabled?{offices,commandCapacities:offices!.officers.map(o=>({actorId:o.id,capacity:commandCapacity(o.id)}))}:{}),...(fieldFoodEnabled?{fieldFood}:{}),...(seasonEnabled?{season}:{}),...(rumorEnabled?{rumor}:{}), scope: 'synthetic-mobile-resource-owner-timeline-v3' as const };
+      receipts, revision: commands.length, ...(enabled ? {progress,effectiveAttributes:effective()} : {}),...(forgeEnabled?{forge,completionTicksRequired:remainingCompletion(),effectiveFacilities:effectiveSyntheticScenario(g,extension()).facilities}:{}),...(incomeEnabled?{incomeFacilities:incomeFacilities()}:{}),...(researchEnabled?{research,completionTicksRequired:remainingCompletion(),maxAdvances:horizon}:{}),...(travelEnabled?{boundTravel,completionTicksRequired:remainingCompletion(),futureTravelStartsRequired:travelTail().starts}:{}),...(pkEnabled?{pkMetadata,pkPeople,pkCurrentFacts:pkCurrentFacts(),completionTicksRequired:remainingCompletion()}:{}),...(officeEnabled?{offices,commandCapacities:offices!.officers.map(o=>({actorId:o.id,capacity:commandCapacity(o.id)}))}:{}),...(fieldFoodEnabled?{fieldFood}:{}),...(seasonEnabled?{season}:{}),...(rumorEnabled?{rumor}:{}),...(energyEnabled?{energyContext:{ownerId:g.activeForceId,techniqueIds:research!.completedTechniqueIds,cap:research!.completedTechniqueIds.includes(16)?120:100}}:{}), scope: 'synthetic-mobile-resource-owner-timeline-v3' as const };
     budget(result); return freeze(result);
   } catch (error) { return freeze(caught(error)); }
 }
-export function createBoundedSyntheticMobileTimeline(cityScenario: unknown, resourceConfig: unknown, transportInitial: unknown, fieldCells: unknown, fieldTemplates: unknown, movementMap: unknown, movementProfiles: unknown, progressConfig?: unknown,forgeConfig?:unknown,foodConfig?:unknown,incomeConfig?:unknown,researchConfig?:unknown,travelBindingConfig?:unknown,pkConfig?:unknown,officeConfig?:unknown,encounterConfig?:unknown,fieldFoodConfig?:unknown,hazardConfig?:unknown,seasonConfig?:unknown,rumorConfig?:unknown) {
-  return readBoundedSyntheticMobileTimeline({ schema: 'bounded-synthetic-mobile-timeline-v3', cityScenario, resourceConfig, transportInitial, fieldCells, fieldTemplates, movementMap, movementProfiles, ...(progressConfig === undefined ? {} : {progressConfig}),...(forgeConfig===undefined?{}:{forgeConfig}),...(foodConfig===undefined?{}:{foodConfig}),...(incomeConfig===undefined?{}:{incomeConfig}),...(researchConfig===undefined?{}:{researchConfig}),...(travelBindingConfig===undefined?{}:{travelBindingConfig}),...(pkConfig===undefined?{}:{pkConfig}),...(officeConfig===undefined?{}:{officeConfig}),...(encounterConfig===undefined?{}:{encounterConfig}),...(fieldFoodConfig===undefined?{}:{fieldFoodConfig}),...(hazardConfig===undefined?{}:{hazardConfig}),...(seasonConfig===undefined?{}:{seasonConfig}),...(rumorConfig===undefined?{}:{rumorConfig}), commands: [] });
+export function createBoundedSyntheticMobileTimeline(cityScenario: unknown, resourceConfig: unknown, transportInitial: unknown, fieldCells: unknown, fieldTemplates: unknown, movementMap: unknown, movementProfiles: unknown, progressConfig?: unknown,forgeConfig?:unknown,foodConfig?:unknown,incomeConfig?:unknown,researchConfig?:unknown,travelBindingConfig?:unknown,pkConfig?:unknown,officeConfig?:unknown,encounterConfig?:unknown,fieldFoodConfig?:unknown,hazardConfig?:unknown,seasonConfig?:unknown,rumorConfig?:unknown,energyConfig?:unknown) {
+  return readBoundedSyntheticMobileTimeline({ schema: 'bounded-synthetic-mobile-timeline-v3', cityScenario, resourceConfig, transportInitial, fieldCells, fieldTemplates, movementMap, movementProfiles, ...(progressConfig === undefined ? {} : {progressConfig}),...(forgeConfig===undefined?{}:{forgeConfig}),...(foodConfig===undefined?{}:{foodConfig}),...(incomeConfig===undefined?{}:{incomeConfig}),...(researchConfig===undefined?{}:{researchConfig}),...(travelBindingConfig===undefined?{}:{travelBindingConfig}),...(pkConfig===undefined?{}:{pkConfig}),...(officeConfig===undefined?{}:{officeConfig}),...(encounterConfig===undefined?{}:{encounterConfig}),...(fieldFoodConfig===undefined?{}:{fieldFoodConfig}),...(hazardConfig===undefined?{}:{hazardConfig}),...(seasonConfig===undefined?{}:{seasonConfig}),...(rumorConfig===undefined?{}:{rumorConfig}),...(energyConfig===undefined?{}:{energyConfig}), commands: [] });
 }
 export function executeBoundedSyntheticMobileTimeline(input: unknown, command: unknown) {
   const current = readBoundedSyntheticMobileTimeline(input);

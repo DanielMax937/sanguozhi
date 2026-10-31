@@ -560,6 +560,13 @@
         "scope": "敌粮为独立显式创世预算；transport固定位置推断，不含兵金装备补给",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "unifiedEnergy120Followup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-researched-morale120-v3.md",
+        "scope": "不造独立120账本，reserved库存和实际容量照旧",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -640,6 +647,13 @@
         "module": "packages/engine/src/inferred-mobile-resource-world.ts",
         "rule": "docs/rules/inferred-unified-training-progress-v1.md",
         "scope": "旧v3无配置兼容；显式progressConfig启用，基础WAR参与Train；宝物加成尚未用于Train/field公式，技术horizon仍有限，运行未验收。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
+      },
+      "unifiedEnergy120Followup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-researched-morale120-v3.md",
+        "scope": "显式profile由唯一研究成果派生cap；学习不发气力，旧100默认不变",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
       }
@@ -969,6 +983,13 @@
         "scope": "21旬有限合成局；新局talent/XP映射为具名兼容推断，非原生全树及全特技效果",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "unifiedEnergy120Followup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-researched-morale120-v3.md",
+        "scope": "不清空技巧绕过原核，不扩255/未证被动；full history保留",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -1220,6 +1241,13 @@
         "module": "packages/engine/src/inferred-mobile-resource-world.ts",
         "rule": "docs/rules/unified-fixed-enemy-city-rumor-v3.md",
         "scope": "完整outer重放/同actor角色锁及容量；源概率为明确模拟，非原生全局流言",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
+      },
+      "unifiedEnergy120Followup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-researched-morale120-v3.md",
+        "scope": "原公式费用行动与加权回城不重置，旧default保持；静态未运行",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
       }

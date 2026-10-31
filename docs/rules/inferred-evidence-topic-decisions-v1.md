@@ -353,3 +353,19 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T40 统一world路由AttemptRumor且无第二home账本/额外Tick（2026-10-30）
 
 [规则](unified-fixed-enemy-city-rumor-v3.md)：完整outer重放/同actor角色锁及容量；源概率为明确模拟，非原生全局流言 历史确认与证据原文保留。
+
+## T23 真实技巧16后的Train可达120并贯通同城/转运/部署返城/field（2026-10-30）
+
+[规则](unified-researched-morale120-v3.md)：显式profile由唯一研究成果派生cap；学习不发气力，旧100默认不变 历史确认与证据原文保留。
+
+## T34 研究16完成只扩真实准入上限且下游共享实际tech（2026-10-30）
+
+[规则](unified-researched-morale120-v3.md)：不清空技巧绕过原核，不扩255/未证被动；full history保留 历史确认与证据原文保留。
+
+## T20 同owner城transport加权转运支持真实已研究120域（2026-10-30）
+
+[规则](unified-researched-morale120-v3.md)：不造独立120账本，reserved库存和实际容量照旧 历史确认与证据原文保留。
+
+## T40 唯一morale/field energy完整120消费者链（2026-10-30）
+
+[规则](unified-researched-morale120-v3.md)：原公式费用行动与加权回城不重置，旧default保持；静态未运行 历史确认与证据原文保留。
