@@ -427,3 +427,7 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T09 显式单个同owner合成主将关系支援已接同一field/world原子事务（本地未发布）（2026-10-30）
 
 [规则](unified-single-support-owner-v3.md)：只单有向固定关系case及来源50/30/20关系率；主反击后半伤/失败耗支持acted为具名推断非原生伤害式；实际技术技能门不清空，支持不递归/不额外粮袭，所有零终结整单拒；复合关系/辅佐/完整原生caller仍未核，未发布未运行 历史确认与证据原文保留。
+
+## T15 显式单城第一合成军团已由当前人物事实调用真实calculateApRecovery替换唯一WorldTick恢复（本地未发布）（2026-10-30）
+
+[规则](unified-source-ap-recovery-owner-v3.md)：旧默认每Tick20不变；新profile采用basePK统魅/军师智力和当前home驻城数，未确认符节台固定0不伪造，治安不入式；presence/无年龄getter映射具名，非全军团/跨版本原生等价；cap255实际增量唯一入账，未运行未发布 历史确认与证据原文保留。
