@@ -345,3 +345,11 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T40 统一季节两phase与当前PK居民技能/同粮TP owner（2026-10-30）
 
 [规则](unified-safe-season-owner-v3.md)：父内容链完整审与远端一致性为发布前提；静态不等运行验收 历史确认与证据原文保留。
+
+## T03 固定独立敌城scalar Rumor实际消费home费用行动与目标治安忠诚RNG（2026-10-30）
+
+[规则](unified-fixed-enemy-city-rumor-v3.md)：绑定显式敌owner但非field敌人同实体；成功失败均真实扣费，零忠诚归属终结拒 历史确认与证据原文保留。
+
+## T40 统一world路由AttemptRumor且无第二home账本/额外Tick（2026-10-30）
+
+[规则](unified-fixed-enemy-city-rumor-v3.md)：完整outer重放/同actor角色锁及容量；源概率为明确模拟，非原生全局流言 历史确认与证据原文保留。

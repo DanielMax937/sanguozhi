@@ -105,6 +105,13 @@
         "codeBlobSha": "56b581f8fe091298d07e6dc8d1bad11ddbf9ca7c",
         "docBlobSha": "86a1911e677c6e2cb510a74f29b3642f363e5b5f",
         "staticOnlyNoInvocation": true
+      },
+      "unifiedRumorOwnerFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-fixed-enemy-city-rumor-v3.md",
+        "scope": "绑定显式敌owner但非field敌人同实体；成功失败均真实扣费，零忠诚归属终结拒",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -1206,6 +1213,13 @@
         "module": "packages/engine/src/inferred-mobile-resource-world.ts",
         "rule": "docs/rules/unified-safe-season-owner-v3.md",
         "scope": "父内容链完整审与远端一致性为发布前提；静态不等运行验收",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
+      },
+      "unifiedRumorOwnerFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-fixed-enemy-city-rumor-v3.md",
+        "scope": "完整outer重放/同actor角色锁及容量；源概率为明确模拟，非原生全局流言",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
       }
