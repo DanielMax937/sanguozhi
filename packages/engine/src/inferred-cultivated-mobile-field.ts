@@ -1,6 +1,6 @@
 import { projectSyntheticSiteAttack } from './internal/synthetic-site-strike.ts';
 import { projectSyntheticStarvationBoundary } from './internal/synthetic-starvation-boundary.ts';
-import { projectNeutralFieldAction, projectNeutralFieldActionWithResearchedEnergy, projectNeutralFieldActionWithEffectiveAttributes } from './internal/synthetic-neutral-field-action.ts';
+import { projectNeutralFieldSingleSupport, projectNeutralFieldAction, projectNeutralFieldActionWithResearchedEnergy, projectNeutralFieldActionWithEffectiveAttributes } from './internal/synthetic-neutral-field-action.ts';
 import { projectRosterTerrainEntry, projectRosterRockfall, projectRosterTerrainEntryWithEnergyCaps, projectRosterRockfallWithEnergyCaps } from './internal/synthetic-roster-hazard-leaves.ts';
 import { projectNeutralFireEntry, projectNeutralFireEntryWithEnergyCaps } from './internal/synthetic-neutral-fire-entry.ts';
 import { projectRosterRecoveryAfterFire, projectRosterRecoveryAfterFireWithEnergyCaps, projectRosterRecoveryAfterFireAndStarvation } from './internal/synthetic-roster-recovery-after-fire.ts';
@@ -44,7 +44,8 @@ type EffectiveFacts = Readonly<{actorId:string;stats:Readonly<Record<Stat,number
 type EffectiveProfile = Readonly<{profile:'live-equipment-effective255-v1';effectiveBaseline:readonly EffectiveFacts[]}>;
 type EnergyProfile = Readonly<{profile:'researched-morale120-v1';homeOwnerId:string;homeTechniqueIds:readonly number[];enemyTechniqueIds:readonly number[]}>;
 type SiteStrike=Readonly<{actorId:string;siteId:string;context:Readonly<Record<string,unknown>>}>;
-type OwnerStep = Readonly<{ kind: 'OuterStep'; sourceOuterCommandId: string; fieldAction: NormalAction | null; factsUpdates: readonly { before: Facts; after: Facts }[]; completionJobs: readonly { jobId: string; actorId: string }[];siteStrike?:SiteStrike;starvationBoundary?:StarvationBoundary;effectiveFactsUpdates?:readonly {before:EffectiveFacts;after:EffectiveFacts}[];energyHomeTechniquesAfter?:readonly number[];combatTechniquesByOwner?:readonly {ownerId:string;techniques:readonly number[]}[] }>;
+type SingleSupport=Readonly<{profile:'inferred-single-support-reaction-core-v1';supporterId:string;relationCase:'spouse'|'sworn'|'supporter-likes-attacker'|'parent-child'|'siblings'}>;
+type OwnerStep = Readonly<{ kind: 'OuterStep'; sourceOuterCommandId: string; fieldAction: NormalAction | null; factsUpdates: readonly { before: Facts; after: Facts }[]; completionJobs: readonly { jobId: string; actorId: string }[];singleSupport?:SingleSupport;siteStrike?:SiteStrike;starvationBoundary?:StarvationBoundary;effectiveFactsUpdates?:readonly {before:EffectiveFacts;after:EffectiveFacts}[];energyHomeTechniquesAfter?:readonly number[];combatTechniquesByOwner?:readonly {ownerId:string;techniques:readonly number[]}[] }>;
 type Action = NormalAction | OwnerStep;
 type Command = Readonly<{ id: string; expectedRevision: number; action: Action }>;
 type State = Readonly<{ schema: 'inferred-cultivated-mobile-field-v4'; cells: readonly string[]; templates: readonly Template[]; movementMap: MovementMap; movementProfiles: readonly MovementProfile[]; cultivationBaseline: readonly Facts[]; encounterConfig?: Encounter | null; hazardConfig?:HazardConfig|null; energyProfile?:EnergyProfile; effectiveProfile?:EffectiveProfile; starvationProfile?:StarvationProfile; commands: readonly Command[] }>;
@@ -211,7 +212,7 @@ export function resolveSyntheticCultivationFacts(input: unknown) {
 function commandFrom(v: unknown): Command | undefined {
   if (!record(v) || !keys(v, ['id', 'expectedRevision', 'action']) || !id(v.id) || !uint(v.expectedRevision, 31) || !record(v.action)) return undefined;
   const a = v.action; let action: Action;
-  if (a.kind === 'OuterStep' && keys(a, ['kind','sourceOuterCommandId','fieldAction','factsUpdates','completionJobs',...(Object.hasOwn(a,'combatTechniquesByOwner')?['combatTechniquesByOwner']:[]),...(Object.hasOwn(a,'energyHomeTechniquesAfter')?['energyHomeTechniquesAfter']:[]),...(Object.hasOwn(a,'effectiveFactsUpdates')?['effectiveFactsUpdates']:[]),...(Object.hasOwn(a,'starvationBoundary')?['starvationBoundary']:[]),...(Object.hasOwn(a,'siteStrike')?['siteStrike']:[])])
+  if (a.kind === 'OuterStep' && keys(a, ['kind','sourceOuterCommandId','fieldAction','factsUpdates','completionJobs',...(Object.hasOwn(a,'combatTechniquesByOwner')?['combatTechniquesByOwner']:[]),...(Object.hasOwn(a,'energyHomeTechniquesAfter')?['energyHomeTechniquesAfter']:[]),...(Object.hasOwn(a,'effectiveFactsUpdates')?['effectiveFactsUpdates']:[]),...(Object.hasOwn(a,'starvationBoundary')?['starvationBoundary']:[]),...(Object.hasOwn(a,'siteStrike')?['siteStrike']:[]),...(Object.hasOwn(a,'singleSupport')?['singleSupport']:[])])
     && a.sourceOuterCommandId === v.id && Array.isArray(a.factsUpdates) && a.factsUpdates.length <= 8
     && Array.isArray(a.completionJobs) && a.completionJobs.length <= 8) {
     let fieldAction: NormalAction | null = null;
@@ -243,6 +244,12 @@ function commandFrom(v: unknown): Command | undefined {
         ||!Array.isArray(t.techniques)||t.techniques.length>36||!t.techniques.every(x=>uint(x,35))||new Set(t.techniques).size!==t.techniques.length)return undefined;
         combatTechniquesByOwner.push({ownerId:t.ownerId,techniques:[...t.techniques] as number[]});}
     }
+    let singleSupport:SingleSupport|undefined;
+    if(Object.hasOwn(a,'singleSupport')){
+      const proof=a.singleSupport;
+      if(!fieldAction||fieldAction.kind!=='Attack'||fieldAction.attackKind!=='normal-melee'||!record(proof)||!keys(proof,['profile','supporterId','relationCase'])||proof.profile!=='inferred-single-support-reaction-core-v1'||!id(proof.supporterId)||!['spouse','sworn','supporter-likes-attacker','parent-child','siblings'].includes(proof.relationCase as string))return undefined;
+      singleSupport={profile:proof.profile,supporterId:proof.supporterId,relationCase:proof.relationCase as SingleSupport['relationCase']};
+    }
     let siteStrike:SiteStrike|undefined;
     if(Object.hasOwn(a,'siteStrike')){
       const strike=a.siteStrike;
@@ -273,7 +280,7 @@ function commandFrom(v: unknown): Command | undefined {
     }
     const energyHomeTechniquesAfter=Object.hasOwn(a,'energyHomeTechniquesAfter')?techniqueIds(a.energyHomeTechniquesAfter):undefined;
     if(Object.hasOwn(a,'energyHomeTechniquesAfter')&&!energyHomeTechniquesAfter)return undefined;
-    action = {kind: a.kind, ...(siteStrike?{siteStrike}:{}), ...(starvationBoundary?{starvationBoundary}:{}), ...(Object.hasOwn(a,'effectiveFactsUpdates')?{effectiveFactsUpdates}:{}), ...(energyHomeTechniquesAfter?{energyHomeTechniquesAfter}:{}), ...(Object.hasOwn(a,'combatTechniquesByOwner')?{combatTechniquesByOwner}:{}), sourceOuterCommandId: a.sourceOuterCommandId as string, fieldAction, factsUpdates, completionJobs};
+    action = {kind: a.kind, ...(singleSupport?{singleSupport}:{}), ...(siteStrike?{siteStrike}:{}), ...(starvationBoundary?{starvationBoundary}:{}), ...(Object.hasOwn(a,'effectiveFactsUpdates')?{effectiveFactsUpdates}:{}), ...(energyHomeTechniquesAfter?{energyHomeTechniquesAfter}:{}), ...(Object.hasOwn(a,'combatTechniquesByOwner')?{combatTechniquesByOwner}:{}), sourceOuterCommandId: a.sourceOuterCommandId as string, fieldAction, factsUpdates, completionJobs};
   } else if (a.kind === 'FalseReport' && keys(a,['kind','actorId','targetId','draws']) && id(a.actorId)&&id(a.targetId)&&a.actorId!==a.targetId
     && Array.isArray(a.draws)&&a.draws.length<=3) {
     const draws:StageDraw[]=[];
@@ -287,7 +294,7 @@ function commandFrom(v: unknown): Command | undefined {
     && a.actorId !== a.targetId && (a.attackKind === 'normal-melee' || a.attackKind === 'normal-arrow')) {
     const draws:StageDraw[]=[];
     if(Object.hasOwn(a,'draws')){if(!Array.isArray(a.draws)||a.draws.length>8)return undefined;
-      for(const d of a.draws){if(!record(d)||!keys(d,['stage','bound','value'])||typeof d.stage!=='string'||!/^(attack\.[0-7]\.(shield|critical)|reaction\.(shield|critical|avoid))$/.test(d.stage)||d.bound!==100||!uint(d.value,99))return undefined;draws.push({stage:d.stage,bound:100,value:d.value});}}
+      for(const d of a.draws){if(!record(d)||!keys(d,['stage','bound','value'])||typeof d.stage!=='string'||!/^(attack\.[0-7]\.(shield|critical)|reaction\.(shield|critical|avoid)|support\.0\.(relation|shield|critical))$/.test(d.stage)||d.bound!==100||!uint(d.value,99))return undefined;draws.push({stage:d.stage,bound:100,value:d.value});}}
     action = {kind:a.kind,actorId:a.actorId,targetId:a.targetId,attackKind:a.attackKind,...(Object.hasOwn(a,'draws')?{draws}:{})};
   } else if (a.kind === 'FieldTick' && keys(a, ['kind', 'draws']) && Array.isArray(a.draws) && a.draws.length <= 8) {
     const draws: { targetId: string; draw: number }[] = [];
@@ -552,7 +559,13 @@ function replay(input: unknown) {
       if(!encounterConfig.foodRaidMode&&step?.combatTechniquesByOwner?.some(t=>t.techniques.length))return fail('actual-techniques-require-explicit-profile');
       if(energyProfile && (!sameTechniques(ownerTechniques.find(t=>t.ownerId===encounterConfig.homeOwnerId)!.techniques,homeEnergyTechniques)
         ||!sameTechniques(ownerTechniques.find(t=>t.ownerId===encounterConfig.enemyOwnerId)!.techniques,energyProfile.enemyTechniqueIds)))return fail('combat-energy-techniques-mismatch');
-      const projected = combatWithCaps({ encounter: {id:encounterConfig.id,
+      const singleSupport=step?.singleSupport;
+      if(singleSupport){
+        const supporter=roster.find(u=>u.id===singleSupport.supporterId),attacker=roster.find(u=>u.id===a.actorId);
+        if(a.kind!=='Attack'||a.attackKind!=='normal-melee'||!supporter||!attacker||supporter.id===attacker.id||supporter.id===a.targetId||supporter.acted||supporter.condition.kind!=='normal'||!templates.find(t=>t.id===supporter.id)?.available||homeIds.has(supporter.id)!==homeIds.has(attacker.id))return fail('supporter-not-eligible');
+      }
+      const projectAction=(input:unknown)=>singleSupport?projectNeutralFieldSingleSupport(input,singleSupport,Boolean(energyProfile),Boolean(effectiveProfile)):combatWithCaps(input);
+      const projected = projectAction({ encounter: {id:encounterConfig.id,
         ownerIds:[encounterConfig.homeOwnerId,encounterConfig.enemyOwnerId],map:encounterConfig.combatMap,actors:encounterConfig.combatActors},
         roster:roster.map(u=>({id:u.id,cellId:u.cellId,troops:u.troops,energy:u.energy,acted:u.acted,status:u.condition.kind,remaining:u.condition.remaining,
           ownerId:homeIds.has(u.id)?encounterConfig.homeOwnerId:encounterConfig.enemyOwnerId,
@@ -560,7 +573,7 @@ function replay(input: unknown) {
         round:turn,command:{id:command.id,actorId:a.actorId,targetId:a.targetId,kind:a.kind==='Attack'?a.attackKind:'false-report-status'},draws:a.kind==='Attack'?(a.draws??[]):a.draws,ownerTechniques,foodRaidMode:encounterConfig.foodRaidMode??null });
       if (!projected.ok) return projected;
       roles = roles.map(u=>{if(u.role==='resident')return u;const patch=projected.patches.find(p=>p.id===u.id)!;return {...u,troops:patch.troops,energy:patch.energy,acted:patch.acted,condition:condition(patch.status,patch.remaining)};});
-      receipts.push({commandId:command.id,kind:a.kind,turn,before,after:roles.map(u=>({...u})),combatReceipt:projected.receipt,...(projected.receipt.foodRaidRequest?{pendingFoodRaidRequest:projected.receipt.foodRaidRequest,requiresExternalFoodSettlement:true as const}:{})});
+      receipts.push({commandId:command.id,kind:a.kind,turn,before,after:roles.map(u=>({...u})),combatReceipt:projected.receipt,...(singleSupport?{singleSupport}:{}),...(projected.receipt.foodRaidRequest?{pendingFoodRaidRequest:projected.receipt.foodRaidRequest,requiresExternalFoodSettlement:true as const}:{})});
     } else if (a.kind === 'Rockfall') {
       const h=hazardConfig?.rockfalls.find(h=>h.id===a.hazardId);
       if(!h||usedRockfalls.has(h.id))return fail('rockfall-not-enabled-or-consumed');

@@ -1,5 +1,5 @@
 /** Private projection only: no actor creation, owner reassignment or persistent balance. */
-import { createFieldCombatStateV1, executeFieldCombatV1, FIELD_COMBAT_DEFAULT_POLICY_V1 } from '../field-combat-lifecycle.ts';
+import { createFieldCombatStateV1, executeFieldCombatV1, projectFieldCombatSingleSupportV1, FIELD_COMBAT_DEFAULT_POLICY_V1 } from '../field-combat-lifecycle.ts';
 const fail = (reason: string) => Object.freeze({ ok: false as const, reason });
 const uint = (v: unknown, max: number): v is number => typeof v === 'number' && Number.isSafeInteger(v) && !Object.is(v, -0) && v >= 0 && v <= max;
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -54,7 +54,8 @@ type Current = { id: string; ownerId: string; cellId: string; troops: number; en
 function panel(value: unknown): value is Panel {
   return record(value) && keys(value, ['attack', 'defense']) && uint(value.attack, 255) && uint(value.defense, 255);
 }
-function project(input: unknown, researchedEnergy = false, effectiveAttributes = false) {
+type SingleSupport={profile:'inferred-single-support-reaction-core-v1';supporterId:string;relationCase:'spouse'|'sworn'|'supporter-likes-attacker'|'parent-child'|'siblings'};
+function project(input: unknown, researchedEnergy = false, effectiveAttributes = false, support?:SingleSupport) {
   if (!record(input) || !keys(input, ['encounter', 'roster', 'round', 'command', 'draws', 'ownerTechniques', 'foodRaidMode']) || !record(input.encounter)
     || !keys(input.encounter, ['id', 'ownerIds', 'map', 'actors']) || !id(input.encounter.id)
     || !Array.isArray(input.encounter.ownerIds) || input.encounter.ownerIds.length !== 2 || !input.encounter.ownerIds.every(id)
@@ -65,7 +66,8 @@ function project(input: unknown, researchedEnergy = false, effectiveAttributes =
     || !keys(input.command, ['id', 'actorId', 'targetId', 'kind']) || !id(input.command.id) || !id(input.command.actorId)
     || !id(input.command.targetId) || (input.command.kind !== 'normal-melee' && input.command.kind !== 'normal-arrow' && input.command.kind !== 'false-report-status')) return fail('invalid-neutral-combat-request');
   if(!Array.isArray(input.draws)||input.draws.length>8)return fail('invalid-stage-tape');
-  for(const d of input.draws)if(!record(d)||!keys(d,['stage','bound','value'])||(typeof d.stage!=='string'||!/^(strategy\.(hit|critical|duration)|attack\.[0-7]\.(shield|critical)|reaction\.(shield|critical|avoid))$/.test(d.stage))||d.bound!==100||!uint(d.value,99))return fail('invalid-stage-tape');
+  for(const d of input.draws)if(!record(d)||!keys(d,['stage','bound','value'])||(typeof d.stage!=='string'||!/^(strategy\.(hit|critical|duration)|attack\.[0-7]\.(shield|critical)|reaction\.(shield|critical|avoid)|support\.0\.(relation|shield|critical))$/.test(d.stage))||d.bound!==100||!uint(d.value,99))return fail('invalid-stage-tape');
+  if(!support && input.draws.some(d=>(d as {stage:string}).stage.startsWith('support.')))return fail('support-proof-required');
   if(!(input.foodRaidMode===null||input.foodRaidMode==='external-positive-proposal-v1')||!Array.isArray(input.ownerTechniques)||input.ownerTechniques.length!==2)return fail('invalid-technique-profile');
   const ownerTechniques:{ownerId:string;techniques:number[]}[]=[];
   for(const row of input.ownerTechniques){if(!record(row)||!keys(row,['ownerId','techniques'])||!id(row.ownerId)||ownerTechniques.some(t=>t.ownerId===row.ownerId)
@@ -117,15 +119,19 @@ function project(input: unknown, researchedEnergy = false, effectiveAttributes =
     }), rng: { kind: 'stage-bounded-tape-v1', tape: input.draws }, policy: FIELD_COMBAT_DEFAULT_POLICY_V1 });
   if (!created.ok) return fail(`combat-genesis:${created.reason}`);
   // Current acted/status is carried unchanged; a fresh projection does not reset action eligibility.
-  const resolved = executeFieldCombatV1(created.state, { commandId: cmd.id, expectedRevision: 0,
-    actorId: cmd.actorId, targetId: cmd.targetId, action: cmd.kind });
-  if (!resolved.ok) return fail(`combat-step:${resolved.reason}`);
-  if (resolved.duplicate || !resolved.committed || resolved.receipt.draws.length !== input.draws.length) return fail('unexpected-neutral-combat-outcome');
+  const command = { commandId: cmd.id, expectedRevision: 0, actorId: cmd.actorId, targetId: cmd.targetId, action: cmd.kind };
+  const proposed = support ? projectFieldCombatSingleSupportV1(created.state.genesis.scenario, command, support) : undefined;
+  if(proposed && !proposed.ok)return fail(`combat-support:${proposed.reason}`);
+  const ordinary = support ? undefined : executeFieldCombatV1(created.state, command);
+  if(ordinary && !ordinary.ok)return fail(`combat-step:${ordinary.reason}`);
+  if(ordinary && ordinary.ok && (ordinary.duplicate || !ordinary.committed))return fail('unexpected-neutral-combat-outcome');
+  const resolved = proposed?.ok ? {snapshot:proposed.projectedSnapshot,receipt:proposed.receipt} : ordinary?.ok ? {snapshot:ordinary.state.snapshot,receipt:ordinary.receipt} : undefined;
+  if(!resolved || resolved.receipt.draws.length!==input.draws.length)return fail('unexpected-neutral-combat-outcome');
   const patches: { id: string; troops: number; energy: number; acted: boolean; status:Current['status'];remaining:number }[] = [];
   for (const current of roster) {
-    const next = resolved.state.snapshot.units.find(u => u.id === current.id);
+    const next = resolved.snapshot.units.find(u => u.id === current.id);
     if (!next || next.cellId !== current.cellId || next.troops <= 0 || next.troops > current.troops
-      || next.acted !== (current.id === cmd.actorId ? true : current.acted)) return fail('unexpected-combat-write-set');
+      || next.acted !== (current.id === cmd.actorId || current.id === support?.supporterId ? true : current.acted)) return fail('unexpected-combat-write-set');
     if(cmd.kind==='false-report-status'){
       if(next.troops!==current.troops||next.energy!==(current.id===cmd.actorId?current.energy-15:current.energy)
         ||(current.id!==cmd.targetId&&(next.status!==current.status||next.remaining!==current.remaining))
@@ -147,3 +153,10 @@ export function projectNeutralFieldActionWithResearchedEnergy(input: unknown) { 
 
 /** Private owner-derived live effective attributes, not a public equipment delta. */
 export function projectNeutralFieldActionWithEffectiveAttributes(input:unknown, researchedEnergy=false) { try { if(typeof researchedEnergy!=='boolean')return fail('invalid-energy-profile'); return project(detach(input),researchedEnergy,true); } catch { return fail('invalid-data-input'); } }
+
+/** Owner-only support proof; fixed relation is certified by the complete world journal. */
+export function projectNeutralFieldSingleSupport(input:unknown,rawSupport:unknown,researchedEnergy=false,effectiveAttributes=false){
+ try{const support=detach(rawSupport);if(typeof researchedEnergy!=='boolean'||typeof effectiveAttributes!=='boolean'||!record(support)||!keys(support,['profile','supporterId','relationCase'])||support.profile!=='inferred-single-support-reaction-core-v1'||!id(support.supporterId)||!['spouse','sworn','supporter-likes-attacker','parent-child','siblings'].includes(support.relationCase as string))return fail('invalid-single-support-proof');
+ return project(detach(input),researchedEnergy,effectiveAttributes,support as SingleSupport);
+ }catch{return fail('invalid-data-input');}
+}
