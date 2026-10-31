@@ -1,3 +1,4 @@
+import { projectSyntheticSiteAttack } from './internal/synthetic-site-strike.ts';
 import { projectSyntheticStarvationBoundary } from './internal/synthetic-starvation-boundary.ts';
 import { projectNeutralFieldAction, projectNeutralFieldActionWithResearchedEnergy, projectNeutralFieldActionWithEffectiveAttributes } from './internal/synthetic-neutral-field-action.ts';
 import { projectRosterTerrainEntry, projectRosterRockfall, projectRosterTerrainEntryWithEnergyCaps, projectRosterRockfallWithEnergyCaps } from './internal/synthetic-roster-hazard-leaves.ts';
@@ -42,7 +43,8 @@ type StarvationBoundary=Readonly<{turnBefore:number;eligibleActorIds:readonly st
 type EffectiveFacts = Readonly<{actorId:string;stats:Readonly<Record<Stat,number>>}>;
 type EffectiveProfile = Readonly<{profile:'live-equipment-effective255-v1';effectiveBaseline:readonly EffectiveFacts[]}>;
 type EnergyProfile = Readonly<{profile:'researched-morale120-v1';homeOwnerId:string;homeTechniqueIds:readonly number[];enemyTechniqueIds:readonly number[]}>;
-type OwnerStep = Readonly<{ kind: 'OuterStep'; sourceOuterCommandId: string; fieldAction: NormalAction | null; factsUpdates: readonly { before: Facts; after: Facts }[]; completionJobs: readonly { jobId: string; actorId: string }[];starvationBoundary?:StarvationBoundary;effectiveFactsUpdates?:readonly {before:EffectiveFacts;after:EffectiveFacts}[];energyHomeTechniquesAfter?:readonly number[];combatTechniquesByOwner?:readonly {ownerId:string;techniques:readonly number[]}[] }>;
+type SiteStrike=Readonly<{actorId:string;siteId:string;context:Readonly<Record<string,unknown>>}>;
+type OwnerStep = Readonly<{ kind: 'OuterStep'; sourceOuterCommandId: string; fieldAction: NormalAction | null; factsUpdates: readonly { before: Facts; after: Facts }[]; completionJobs: readonly { jobId: string; actorId: string }[];siteStrike?:SiteStrike;starvationBoundary?:StarvationBoundary;effectiveFactsUpdates?:readonly {before:EffectiveFacts;after:EffectiveFacts}[];energyHomeTechniquesAfter?:readonly number[];combatTechniquesByOwner?:readonly {ownerId:string;techniques:readonly number[]}[] }>;
 type Action = NormalAction | OwnerStep;
 type Command = Readonly<{ id: string; expectedRevision: number; action: Action }>;
 type State = Readonly<{ schema: 'inferred-cultivated-mobile-field-v4'; cells: readonly string[]; templates: readonly Template[]; movementMap: MovementMap; movementProfiles: readonly MovementProfile[]; cultivationBaseline: readonly Facts[]; encounterConfig?: Encounter | null; hazardConfig?:HazardConfig|null; energyProfile?:EnergyProfile; effectiveProfile?:EffectiveProfile; starvationProfile?:StarvationProfile; commands: readonly Command[] }>;
@@ -209,7 +211,7 @@ export function resolveSyntheticCultivationFacts(input: unknown) {
 function commandFrom(v: unknown): Command | undefined {
   if (!record(v) || !keys(v, ['id', 'expectedRevision', 'action']) || !id(v.id) || !uint(v.expectedRevision, 31) || !record(v.action)) return undefined;
   const a = v.action; let action: Action;
-  if (a.kind === 'OuterStep' && keys(a, ['kind','sourceOuterCommandId','fieldAction','factsUpdates','completionJobs',...(Object.hasOwn(a,'combatTechniquesByOwner')?['combatTechniquesByOwner']:[]),...(Object.hasOwn(a,'energyHomeTechniquesAfter')?['energyHomeTechniquesAfter']:[]),...(Object.hasOwn(a,'effectiveFactsUpdates')?['effectiveFactsUpdates']:[]),...(Object.hasOwn(a,'starvationBoundary')?['starvationBoundary']:[])])
+  if (a.kind === 'OuterStep' && keys(a, ['kind','sourceOuterCommandId','fieldAction','factsUpdates','completionJobs',...(Object.hasOwn(a,'combatTechniquesByOwner')?['combatTechniquesByOwner']:[]),...(Object.hasOwn(a,'energyHomeTechniquesAfter')?['energyHomeTechniquesAfter']:[]),...(Object.hasOwn(a,'effectiveFactsUpdates')?['effectiveFactsUpdates']:[]),...(Object.hasOwn(a,'starvationBoundary')?['starvationBoundary']:[]),...(Object.hasOwn(a,'siteStrike')?['siteStrike']:[])])
     && a.sourceOuterCommandId === v.id && Array.isArray(a.factsUpdates) && a.factsUpdates.length <= 8
     && Array.isArray(a.completionJobs) && a.completionJobs.length <= 8) {
     let fieldAction: NormalAction | null = null;
@@ -241,6 +243,14 @@ function commandFrom(v: unknown): Command | undefined {
         ||!Array.isArray(t.techniques)||t.techniques.length>36||!t.techniques.every(x=>uint(x,35))||new Set(t.techniques).size!==t.techniques.length)return undefined;
         combatTechniquesByOwner.push({ownerId:t.ownerId,techniques:[...t.techniques] as number[]});}
     }
+    let siteStrike:SiteStrike|undefined;
+    if(Object.hasOwn(a,'siteStrike')){
+      const strike=a.siteStrike;
+      if(fieldAction!==null||!record(strike)||!keys(strike,['actorId','siteId','context'])||!id(strike.actorId)||!id(strike.siteId)
+        ||!record(strike.context)||!keys(strike.context,['homeOwnerId','homeCellId','site','governor','response'])
+        ||!record(strike.context.site)||strike.context.site.id!==strike.siteId)return undefined;
+      siteStrike={actorId:strike.actorId,siteId:strike.siteId,context:strike.context};
+    }
     let starvationBoundary:StarvationBoundary|undefined;
     if(Object.hasOwn(a,'starvationBoundary')){
       const b=a.starvationBoundary;
@@ -263,7 +273,7 @@ function commandFrom(v: unknown): Command | undefined {
     }
     const energyHomeTechniquesAfter=Object.hasOwn(a,'energyHomeTechniquesAfter')?techniqueIds(a.energyHomeTechniquesAfter):undefined;
     if(Object.hasOwn(a,'energyHomeTechniquesAfter')&&!energyHomeTechniquesAfter)return undefined;
-    action = {kind: a.kind, ...(starvationBoundary?{starvationBoundary}:{}), ...(Object.hasOwn(a,'effectiveFactsUpdates')?{effectiveFactsUpdates}:{}), ...(energyHomeTechniquesAfter?{energyHomeTechniquesAfter}:{}), ...(Object.hasOwn(a,'combatTechniquesByOwner')?{combatTechniquesByOwner}:{}), sourceOuterCommandId: a.sourceOuterCommandId as string, fieldAction, factsUpdates, completionJobs};
+    action = {kind: a.kind, ...(siteStrike?{siteStrike}:{}), ...(starvationBoundary?{starvationBoundary}:{}), ...(Object.hasOwn(a,'effectiveFactsUpdates')?{effectiveFactsUpdates}:{}), ...(energyHomeTechniquesAfter?{energyHomeTechniquesAfter}:{}), ...(Object.hasOwn(a,'combatTechniquesByOwner')?{combatTechniquesByOwner}:{}), sourceOuterCommandId: a.sourceOuterCommandId as string, fieldAction, factsUpdates, completionJobs};
   } else if (a.kind === 'FalseReport' && keys(a,['kind','actorId','targetId','draws']) && id(a.actorId)&&id(a.targetId)&&a.actorId!==a.targetId
     && Array.isArray(a.draws)&&a.draws.length<=3) {
     const draws:StageDraw[]=[];
@@ -484,7 +494,33 @@ function replay(input: unknown) {
     }
     let roster: Unit[] = roles.filter((u): u is Role & Unit => u.role === 'deployed').map(u =>
       ({ id: u.id, cellId: u.cellId, troops: u.troops, energy: u.energy, acted: u.acted, condition:{...u.condition}, movementBudget: u.movementBudget }));
-    if (a === null) {
+    if(step?.siteStrike){
+      const strike=step.siteStrike,context=strike.context;
+      if(!encounterConfig||context.homeOwnerId!==encounterConfig.homeOwnerId)return fail('site-strike-needs-fixed-encounter-owner');
+      const current=roster.find(u=>u.id===strike.actorId),template=templates.find(t=>t.id===strike.actorId),combatActor=encounterConfig.combatActors.find(u=>u.id===strike.actorId);
+      if(!current||!template||!combatActor||homeIds.has(current.id)||combatActor.ownerId!==encounterConfig.enemyOwnerId)return fail('invalid-enemy-site-attacker');
+      const lists=step.combatTechniquesByOwner;
+      if(!lists||lists.length!==2||!lists.some(x=>x.ownerId===encounterConfig.homeOwnerId)||!lists.some(x=>x.ownerId===encounterConfig.enemyOwnerId))return fail('site-strike-actual-techniques-required');
+      const enemyTechniques=lists.find(x=>x.ownerId===encounterConfig.enemyOwnerId)!.techniques;
+      if(!sameTechniques(enemyTechniques,encounterConfig.enemyTechniqueIds??[]))return fail('site-strike-enemy-techniques-mismatch');
+      if(energyProfile&&!sameTechniques(lists.find(x=>x.ownerId===encounterConfig.homeOwnerId)!.techniques,homeEnergyTechniques))return fail('site-strike-home-techniques-mismatch');
+      const governor=context.governor;
+      if(context.response!==null && (!record(governor)||!id(governor.id)||!homeIds.has(governor.id)||governor.role!==roles.find(u=>u.id===governor.id)!.role
+        ||governor.war!==currentFacts.find(f=>f.actorId===governor.id)!.stats.war))return fail('site-strike-governor-current-facts-mismatch');
+      const fact=currentFacts.find(f=>f.actorId===current.id)!;
+      const result=projectSyntheticSiteAttack({profile:'inferred-fixed-home-site-positive-strike-v1',turn,
+        homeOwnerId:context.homeOwnerId,homeCellId:context.homeCellId,
+        map:{cells:encounterConfig.combatMap.cells.map(c=>({id:c.id,q:c.q,r:c.r,blocked:c.blocked}))},
+        actor:{id:current.id,ownerId:combatActor.ownerId,cellId:current.cellId,role:'deployed',troops:current.troops,energy:current.energy,acted:current.acted,
+          status:current.condition.kind,available:template.available,weapon:combatActor.weapon,attackPanel:combatActor.panels.normal.attack,
+          techniqueIds:enemyTechniques,skillKeys:fact.skillKey===null?[]:[fact.skillKey],difficulty:'normal'},
+        site:context.site,governor,response:context.response});
+      if(!result.ok)return result;
+      if(result.sitePatch.id!==strike.siteId||result.actorPatch.id!==current.id||result.actorPatch.troopsBefore!==current.troops)return fail('site-strike-proposal-mismatch');
+      roles=roles.map(u=>u.id===current.id&&u.role==='deployed'?{...u,troops:result.actorPatch.troopsAfter,acted:result.actorPatch.actedAfter}:u);
+      receipts.push({commandId:command.id,kind:'AttackSite',turn,sitePatch:result.sitePatch,actorPatch:result.actorPatch,siteAttackReceipt:result.receipt,
+        requiresExternalSiteSettlement:true as const,before,after:roles.map(u=>({...u}))});
+    } else if (a === null) {
       receipts.push({commandId: command.id, kind: 'OwnerFactsOnly', turn});
     } else if (a.kind === 'Deploy' || a.kind === 'Return') {
       const index = templates.findIndex(t => t.id === a.actorId), config = templates[index], current = roles[index];
@@ -677,7 +713,9 @@ function replay(input: unknown) {
       }
       receipts.push({commandId: command.id, kind: 'OuterStep', sourceOuterCommandId: step.sourceOuterCommandId,
         factsBefore, factsAfter: [...currentFacts], ...(effectiveProfile?{effectiveBefore,effectiveAfter:[...currentEffectiveFacts]}:{}), completionJobs: step.completionJobs,
-        consumedAttributes: encounterConfig ? ['intelligence', 'charisma'] : ['intelligence'], metadataOnlyAttributes: encounterConfig ? ['leadership', 'war', 'politics', 'aptitudes', 'skillKey'] : ['leadership', 'war', 'politics', 'charisma', 'aptitudes', 'skillKey'],
+        consumedAttributes: step.siteStrike && step.siteStrike.context.response!==null ? ['intelligence','charisma','war'] : encounterConfig ? ['intelligence', 'charisma'] : ['intelligence'],
+        metadataOnlyAttributes: step.siteStrike && step.siteStrike.context.response!==null ? ['leadership','politics','aptitudes','skillKey'] : encounterConfig ? ['leadership', 'war', 'politics', 'aptitudes', 'skillKey'] : ['leadership', 'war', 'politics', 'charisma', 'aptitudes', 'skillKey'],
+        ...(step.siteStrike && step.siteStrike.context.response!==null ? {warAttributeView:'permanent-base-pk' as const} : {}),
         after: roles.map(r => ({...r}))});
     }
     if(energyProfile && step)homeEnergyTechniques=[...step.energyHomeTechniquesAfter!];
