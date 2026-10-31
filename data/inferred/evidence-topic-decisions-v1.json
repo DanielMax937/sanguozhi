@@ -457,6 +457,13 @@
         "scope": "30槽现有forge/stable引用当前设施，原主题economicFacilities为明确推断初值；不冒名barracks/workshop、不新增建设模式、不重复工资，运行未验收。",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "unifiedSafeSeasonOwnerFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-safe-season-owner-v3.md",
+        "scope": "同30slot当前设施无第二账本；无重建玩法/第二次收入，完整失败回滚",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -925,6 +932,13 @@
         "scope": "不调用whole season或whole finance；瘟疫health/事件人物/归属不执行。蝗灾/其他安全叶尚需明确接入，不将本批视为全季节完成；运行未验收。",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "unifiedSafeSeasonOwnerFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-safe-season-owner-v3.md",
+        "scope": "只安全子集，模拟率/RNG具名非原生；whole season/plague/health全部排除",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -1185,6 +1199,13 @@
         "module": "packages/engine/src/inferred-mobile-resource-world.ts",
         "rule": "docs/rules/unified-field-composition-v3.md",
         "scope": "旧默认保留；所有下游失败含粮兵行动原子拒，静态未运行",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
+      },
+      "unifiedSafeSeasonOwnerFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-safe-season-owner-v3.md",
+        "scope": "父内容链完整审与远端一致性为发布前提；静态不等运行验收",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
       }
