@@ -1,3 +1,4 @@
+import { readSyntheticEnergyCaps, type SyntheticEnergyCaps } from './synthetic-energy-cap-context.ts';
 /** Stateless positive roster projections; the enclosing world owns all history and commits. */
 import { createHazardState, executeHazardCommand, DETACHED_HAZARD_POLICY } from '../terrain-hazard-lifecycle.ts';
 import { createInferredMultiRockfall, executeInferredMultiRockfall } from '../inferred-multi-rockfall.ts';
@@ -52,7 +53,7 @@ function detach(input: unknown): unknown {
 type Unit = { id: string; cellId: string; troops: number; energy: number; acted: boolean; status: 'normal' | 'confused' | 'false-report'; remaining: number };
 type Cell = { id: string; terrainInfoU32: number; adjacent: string[]; blocked: boolean; unsupportedContext: boolean; facilityPresent: boolean };
 type Context = { map: { id: string; cells: Cell[] }; roster: Unit[]; activeFireCellIds: string[] };
-function context(v: Record<string, unknown>): Context | undefined {
+function context(v: Record<string, unknown>, energyCaps?: SyntheticEnergyCaps): Context | undefined {
   if (!record(v.map) || !keys(v.map, ['id', 'cells']) || !id(v.map.id) || !Array.isArray(v.map.cells) || v.map.cells.length < 1 || v.map.cells.length > 16
     || !Array.isArray(v.roster) || v.roster.length < 1 || v.roster.length > 8 || !Array.isArray(v.activeFireCellIds)
     || v.activeFireCellIds.length > 16 || !v.activeFireCellIds.every(id) || new Set(v.activeFireCellIds).size !== v.activeFireCellIds.length) return undefined;
@@ -68,11 +69,12 @@ function context(v: Record<string, unknown>): Context | undefined {
   for (const u of v.roster) {
     if (!record(u) || !keys(u, ['id', 'cellId', 'troops', 'energy', 'acted', 'status', 'remaining']) || !id(u.id) || !id(u.cellId)
       || roster.some(x => x.id === u.id || x.cellId === u.cellId) || !cells.some(c => c.id === u.cellId && !c.blocked && !c.unsupportedContext && !c.facilityPresent)
-      || !uint(u.troops, 1000000) || u.troops === 0 || !uint(u.energy, 100) || typeof u.acted !== 'boolean'
+      || !uint(u.troops, 1000000) || u.troops === 0 || !uint(u.energy, energyCaps?.get(u.id as string) ?? 100) || typeof u.acted !== 'boolean'
       || !['normal', 'confused', 'false-report'].includes(u.status as string) || !uint(u.remaining, 3)
       || ((u.status === 'normal') !== (u.remaining === 0))) return undefined;
     roster.push({ id: u.id, cellId: u.cellId, troops: u.troops, energy: u.energy, acted: u.acted, status: u.status as Unit['status'], remaining: u.remaining });
   }
+  if (energyCaps && (energyCaps.size !== roster.length || roster.some(u => !energyCaps.has(u.id)))) return undefined;
   return { map: { id: v.map.id, cells }, roster, activeFireCellIds: [...v.activeFireCellIds] };
 }
 function hazard(c: Context, u: Unit, traits: { traverse: boolean; antidote: boolean; difficultMarch: boolean }, draws: { bound: 100 | 200; value: number }[], turn = 0) {
@@ -82,13 +84,13 @@ function hazard(c: Context, u: Unit, traits: { traverse: boolean; antidote: bool
     traits, defenseTier: 3, auras: [], fires: [], rng: { kind: 'bounded-tape-v1', draws, cursor: 0 }, policy: DETACHED_HAZARD_POLICY });
 }
 const noTraits = { traverse: false, antidote: false, difficultMarch: false };
-function terrain(input: unknown) {
+function terrain(input: unknown, energyCaps?: SyntheticEnergyCaps) {
   if (!record(input) || !keys(input, ['map', 'roster', 'activeFireCellIds', 'actorId', 'traits', 'path', 'draws']) || !id(input.actorId)
     || !record(input.traits) || !keys(input.traits, ['traverse', 'antidote', 'difficultMarch'])
     || typeof input.traits.traverse !== 'boolean' || typeof input.traits.antidote !== 'boolean' || typeof input.traits.difficultMarch !== 'boolean'
     || !Array.isArray(input.path) || input.path.length < 1 || input.path.length > 16 || !input.path.every(id)
     || !Array.isArray(input.draws) || input.draws.length > 16 || !input.draws.every(d => uint(d, 199))) return fail('invalid-terrain-proposal');
-  const c = context(input); if (!c) return fail('invalid-roster-context');
+  const c = context(input, energyCaps); if (!c) return fail('invalid-roster-context');
   const u = c.roster.find(x => x.id === input.actorId); if (!u || u.acted || u.status !== 'normal') return fail('terrain-actor-unavailable');
   const visited = [u.cellId, ...input.path];
   if (visited.some(cell => c.activeFireCellIds.includes(cell))) return fail('unsupported-fire-entry');
@@ -102,12 +104,12 @@ function terrain(input: unknown) {
   return frozen({ ok: true as const, patch: { id: u.id, cellId: result.after.unit.cellId, troops: result.after.unit.troops, energy: result.after.unit.energy, acted: true },
     receipt: result, proposalOnly: true as const, nativeWorldVerified: false as const });
 }
-function rockfall(input: unknown) {
+function rockfall(input: unknown, energyCaps?: SyntheticEnergyCaps) {
   if (!record(input) || !keys(input, ['map', 'roster', 'activeFireCellIds', 'footprint', 'traits', 'draws', 'eventsUsed'])
     || !Array.isArray(input.footprint) || input.footprint.length < 1 || input.footprint.length > 16 || !input.footprint.every(id)
     || new Set(input.footprint).size !== input.footprint.length || !Array.isArray(input.traits) || !Array.isArray(input.draws)
     || !uint(input.eventsUsed, 256)) return fail('invalid-rockfall-proposal');
-  const c = context(input); if (!c) return fail('invalid-roster-context');
+  const c = context(input, energyCaps); if (!c) return fail('invalid-roster-context');
   if (input.footprint.some(cell => !c.map.cells.some(x => x.id === cell && !x.blocked && !x.unsupportedContext && !x.facilityPresent))) return fail('invalid-footprint');
   const traits = new Map<string, boolean>();
   for (const t of input.traits) {
@@ -185,3 +187,7 @@ export function projectRosterTerrainEntry(input: unknown) { try { return terrain
 export function projectRosterRockfall(input: unknown) { try { return rockfall(detach(input)); } catch { return fail('invalid-data-input'); } }
 export function projectRosterRetreatTick(input: unknown) { try { return retreat(detach(input)); } catch { return fail('invalid-data-input'); } }
 export function projectRosterFalseReportApply(input: unknown) { try { return applyFalseReport(detach(input)); } catch { return fail('invalid-data-input'); } }
+
+export function projectRosterTerrainEntryWithEnergyCaps(input: unknown, rawCaps: unknown) { try { const caps=readSyntheticEnergyCaps(detach(rawCaps)); return caps ? terrain(detach(input), caps) : fail('invalid-derived-energy-caps'); } catch { return fail('invalid-data-input'); } }
+
+export function projectRosterRockfallWithEnergyCaps(input: unknown, rawCaps: unknown) { try { const caps=readSyntheticEnergyCaps(detach(rawCaps)); return caps ? rockfall(detach(input), caps) : fail('invalid-derived-energy-caps'); } catch { return fail('invalid-data-input'); } }

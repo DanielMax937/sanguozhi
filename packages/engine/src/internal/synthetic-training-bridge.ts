@@ -20,7 +20,7 @@ function freeze<T>(value: T): Readonly<T> {
   if (value !== null && typeof value === 'object') { for (const child of Object.values(value)) freeze(child); Object.freeze(value); }
   return value;
 }
-function plan(rawState: unknown, rawBindings: unknown, rawAction: unknown) {
+function plan(rawState: unknown, rawBindings: unknown, rawAction: unknown, expanded = false) {
   if (validateState(rawState, DEFAULT_ADAPTERS).length) return fail('invalid-training-projection');
   const state = rawState as GameState;
   if (state.bases.length !== 1 || state.officers.length > 32 || state.bases[0]!.kind !== 'city'
@@ -29,7 +29,7 @@ function plan(rawState: unknown, rawBindings: unknown, rawAction: unknown) {
   if (new Set(identities).size !== identities.length) return fail('training-identity-collision');
   const base = state.bases[0]!;
   // Deliberately reject incompatible domains; never clamp an existing balance or silently drop a technique.
-  if (base.morale > 100 || moraleCap(state) > 100 || state.officers.some(o => o.merit > 60000)) return fail('incompatible-training-domain');
+  if (base.morale > (expanded ? moraleCap(state) : 100) || moraleCap(state) > (expanded ? 120 : 100) || state.officers.some(o => o.merit > 60000)) return fail('incompatible-training-domain');
   if (!record(rawBindings) || !exact(rawBindings, ['cityId', 'forceId', 'turn', 'trainingUsedTurn', 'officers'])
     || rawBindings.cityId !== base.id || rawBindings.forceId !== state.force.id || rawBindings.turn !== state.turn
     || !marker(rawBindings.trainingUsedTurn, state.turn) || !Array.isArray(rawBindings.officers)
@@ -57,7 +57,7 @@ function plan(rawState: unknown, rawBindings: unknown, rawAction: unknown) {
   const result = executeCommand(state, { type: 'Train', baseId: base.id, officerIds }, DEFAULT_ADAPTERS);
   if (!result.ok) return freeze({ ok: false as const, reason: 'training-command-rejected', reasons: result.reasons });
   const next = result.state;
-  return freeze({ ok: true as const, policyId: 'synthetic-owner-train-domain100-v1' as const,
+  return freeze({ ok: true as const, policyId: expanded ? 'synthetic-owner-train-tech16-domain120-v1' as const : 'synthetic-owner-train-domain100-v1' as const,
     patch: { morale: next.bases[0]!.morale, actionPoints: next.corps.actionPoints, techniquePoints: next.force.techniquePoints,
       trainingUsedTurn: state.turn,
       officers: officerIds.map(id => { const officer = next.officers.find(o => o.id === id)!;
@@ -70,5 +70,15 @@ export function planSyntheticTrainingBridge(rawGameState: unknown, rawBindings: 
     const detached = detachBoundedCityData([rawGameState, rawBindings, rawAction]);
     if (!detached.ok || !Array.isArray(detached.value)) return fail('invalid-training-data');
     return plan(detached.value[0], detached.value[1], detached.value[2]);
+  } catch { return fail('invalid-training-data'); }
+}
+
+
+/** Private owner projection; actual GameState technique16 determines 100/120. No cap credit. */
+export function planSyntheticTrainingBridge120(rawGameState: unknown, rawBindings: unknown, rawAction: unknown) {
+  try {
+    const detached = detachBoundedCityData([rawGameState, rawBindings, rawAction]);
+    if (!detached.ok || !Array.isArray(detached.value)) return fail('invalid-training-data');
+    return plan(detached.value[0], detached.value[1], detached.value[2], true);
   } catch { return fail('invalid-training-data'); }
 }

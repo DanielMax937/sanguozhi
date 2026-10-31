@@ -62,10 +62,10 @@ function within(stock: Stock, capacity: Stock) {
   return stock.troops <= capacity.troops && stock.money <= capacity.money && stock.food <= capacity.food
     && stock.equipment.every((amount, index) => amount <= capacity.equipment[index]!);
 }
-function accountFrom(input: unknown): Account | undefined {
+function accountFrom(input: unknown, moraleCap = 100): Account | undefined {
   if (!record(input) || !keys(input, ['id', 'ownerId', 'kind', 'morale', 'stock', 'capacity', 'equipmentCapacityPolicy'])
     || !id(input.id) || !id(input.ownerId) || (input.kind !== 'transport' && input.kind !== 'depot')
-    || !uint(input.morale, 100) || input.equipmentCapacityPolicy !== 'inferred-per-slot-input-v1') return undefined;
+    || !uint(input.morale, moraleCap) || input.equipmentCapacityPolicy !== 'inferred-per-slot-input-v1') return undefined;
   const stock = stockFrom(input.stock), capacity = stockFrom(input.capacity);
   if (!stock || !capacity || stock.troops === 0 || !within(stock, capacity)) return undefined;
   if (input.kind === 'transport' && (capacity.troops !== 60000 || capacity.money !== 100000 || capacity.food !== 500000)) return undefined;
@@ -152,4 +152,46 @@ export function saveInferredCapacityTransfer(input: unknown) {
 export function loadInferredCapacityTransfer(json: unknown) {
   if (typeof json !== 'string' || json.length > 100000) return fail('invalid-save');
   try { return readInferredCapacityTransfer(JSON.parse(json)); } catch { return fail('invalid-save'); }
+}
+
+
+/** Internal owner-only projection context. Not a standalone campaign credential/save. */
+export type SyntheticTransferEnergyContext = Readonly<{ ownerId: string; techniqueIds: readonly number[] }>;
+function ownerAccounts(initial: unknown, context: unknown) {
+  if (!record(context) || !keys(context, ['ownerId', 'techniqueIds']) || !id(context.ownerId)
+    || !Array.isArray(context.techniqueIds)
+    || context.techniqueIds.length > 36 || !context.techniqueIds.every(v => uint(v, 35))
+    || new Set(context.techniqueIds).size !== context.techniqueIds.length
+    || !Array.isArray(initial) || initial.length < 2 || initial.length > 32) return fail('invalid-owner-energy-context');
+  const moraleCap = context.techniqueIds.includes(16) ? 120 : 100;
+  const accounts: Account[] = [];
+  for (const raw of initial) {
+    const row = accountFrom(raw, moraleCap);
+    if (!row || row.ownerId !== context.ownerId || accounts.some(a => a.id === row.id)) return fail('invalid-owner-energy-account');
+    accounts.push(row);
+  }
+  return {ok: true as const, accounts, moraleCap};
+}
+/** Genesis validation only; no fictitious transfer, no 120-domain independent ledger. */
+export function validateOwnerCapacityAccounts120(initial: unknown, context: unknown) {
+  try {
+    const input = detach([initial, context]) as unknown[];
+    const current = ownerAccounts(input[0], input[1]);
+    return current.ok ? frozen({ok: true as const, accounts: current.accounts, moraleCap: current.moraleCap}) : current;
+  } catch { return fail('invalid-owner-energy-data'); }
+}
+/** One finite all-or-nothing transfer derived from current owner accounts. Outer root owns history. */
+export function planOwnerCapacityTransfer120(initial: unknown, rawCommand: unknown, context: unknown) {
+  try {
+    const input = detach([initial, rawCommand, context]) as unknown[];
+    const current = ownerAccounts(input[0], input[2]);
+    if (!current.ok) return current;
+    const command = commandFrom(input[1]);
+    if (!command || command.expectedRevision !== 0) return fail('invalid-owner-transfer-command');
+    const result = apply(current.accounts, command);
+    if (!result.ok) return result;
+    return frozen({ok: true as const, accounts: current.accounts,
+      receipt: {commandId: command.id, ...result}, moraleCap: current.moraleCap,
+      energyPolicy: 'owner-technique16-cap100-or120-v1' as const});
+  } catch { return fail('invalid-owner-energy-data'); }
 }

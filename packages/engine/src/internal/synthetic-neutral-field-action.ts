@@ -54,7 +54,7 @@ type Current = { id: string; ownerId: string; cellId: string; troops: number; en
 function panel(value: unknown): value is Panel {
   return record(value) && keys(value, ['attack', 'defense']) && uint(value.attack, 255) && uint(value.defense, 255);
 }
-function project(input: unknown) {
+function project(input: unknown, researchedEnergy = false) {
   if (!record(input) || !keys(input, ['encounter', 'roster', 'round', 'command', 'draws', 'ownerTechniques', 'foodRaidMode']) || !record(input.encounter)
     || !keys(input.encounter, ['id', 'ownerIds', 'map', 'actors']) || !id(input.encounter.id)
     || !Array.isArray(input.encounter.ownerIds) || input.encounter.ownerIds.length !== 2 || !input.encounter.ownerIds.every(id)
@@ -85,7 +85,7 @@ function project(input: unknown) {
   for (const raw of input.roster) {
     if (!record(raw) || !keys(raw, ['id', 'ownerId', 'cellId', 'troops', 'energy', 'acted', 'status', 'remaining', 'intelligence', 'charisma'])
       || !id(raw.id) || !id(raw.cellId) || !id(raw.ownerId) || roster.some(u => u.id === raw.id || u.cellId === raw.cellId)
-      || !uint(raw.troops, 1000000) || raw.troops === 0 || !uint(raw.energy, 100) || typeof raw.acted !== 'boolean'
+      || !uint(raw.troops, 1000000) || raw.troops === 0 || !uint(raw.energy, researchedEnergy && ownerTechniques.find(t=>t.ownerId===raw.ownerId)?.techniques.includes(16) ? 120 : 100) || typeof raw.acted !== 'boolean'
       || !['normal','confused','false-report'].includes(raw.status as string) || !uint(raw.remaining,3) || ((raw.status==='normal') !== (raw.remaining===0)) || !uint(raw.intelligence, 100) || !uint(raw.charisma,100)) return fail('invalid-current-combat-roster');
     const config = actors.find(a => a.id === raw.id);
     if (!config || config.ownerId !== raw.ownerId) return fail('combat-owner-mismatch');
@@ -110,7 +110,7 @@ function project(input: unknown) {
     units: roster.map(u => { const config = actors.find(a => a.id === u.id)!;
       return { id: u.id, cellId: u.cellId, troops: u.troops, energy: u.energy, acted: u.acted,
         status: u.status, remaining: u.remaining,
-        side: u.ownerId, weapon: config.weapon, aptitude: 'C', energyCap: 100, difficulty: 'normal',
+        side: u.ownerId, weapon: config.weapon, aptitude: 'C', energyCap: researchedEnergy && ownerTechniques.find(t=>t.ownerId===u.ownerId)!.techniques.includes(16) ? 120 : 100, difficulty: 'normal',
         intelligence: u.intelligence, charm: u.charisma, martial: 0, temperament: 'calm',
         panels: { kind: 'resolved-state-panels-v1', techAndStatusIncluded: true, ...config.panels },
         members: [{ id: u.id, intelligence: u.intelligence, sex: 'male', skills: [], relationshipToLeader: 'leader' }], techniques: ownerTechniques.find(t=>t.ownerId===u.ownerId)!.techniques };
@@ -141,3 +141,6 @@ function project(input: unknown) {
 export function projectNeutralFieldAction(input: unknown) {
   try { return project(detach(input)); } catch { return fail('invalid-data-input'); }
 }
+
+/** Private caller must supply actual owner techniques from root replay. */
+export function projectNeutralFieldActionWithResearchedEnergy(input: unknown) { try { return project(detach(input), true); } catch { return fail('invalid-data-input'); } }
