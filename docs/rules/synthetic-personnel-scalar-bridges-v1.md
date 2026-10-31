@@ -22,7 +22,7 @@ Output originPatch updates gold/AP and actor acted=true; targetPatch updates onl
 
 ## Readiness and bounded boundary
 
-Strict plain descriptor cloning:10000 nodes/depth12/100000 string characters, arrays<=256. Full scenario validation delegated to the actual registered services, not bypassed. Helpers are proposal-only, do not authenticate provenance, and do not complete world integration. The office function is now consumed by inferred-unified-office-owner-v1; the rumor function remains a proposal pending its separately bound target owner. Helper shape checks alone do not prove either integration. No additional personnel scope is added here.
+Strict plain descriptor cloning:10000 nodes/depth12/100000 string characters, arrays<=256. Full scenario validation delegated to the actual registered services, not bypassed. Helpers are proposal-only, do not authenticate provenance, and do not complete world integration. The office function is now consumed by inferred-unified-office-owner-v1; the rumor function is consumed by unified-fixed-enemy-city-rumor-v1 with its separately bound target owner. Helper shape checks alone do not prove either integration. No additional personnel scope is added here.
 
 ## Ruler binding correction
 Office input requires `rulerId` distinct from `ownerId`, derived by the owner from its actual synthetic force. Every officer requires `role: ruler|ordinary-officer`; exactly the matching rulerId is permitted ruler role and cannot be relabeled ordinary. The actual source receives that role, preserving ruler exclusion and rejecting a ruler holding a named office. The roster need not include the ruler, but the caller cannot override its ID through a public action. Previous blanket ordinary-officer projection is withdrawn.
