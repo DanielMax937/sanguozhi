@@ -17,7 +17,7 @@ type Member = { id: string; intelligence: number; sex: 'male' | 'female'; skills
 type UnitState = { id: string; cellId: string; troops: number; energy: number; acted: boolean; status: Status; remaining: number };
 type Unit = UnitState & { side: string; weapon: Weapon; aptitude: 'C' | 'B' | 'A' | 'S'; energyCap: number; difficulty: 'normal' | 'super-player'; intelligence: number; charm: number; martial: number; temperament: Temperament; panels: { kind: 'resolved-state-panels-v1'; techAndStatusIncluded: true; normal: Panel; confused: Panel }; members: Member[]; techniques: number[] };
 type TapeEntry = { stage: string; bound: 2 | 100; value: number };
-type Scenario = { schemaVersion: 1; profile: typeof PROFILE; episodeId: string; round: number; context: { kind: 'detached-ground-only'; allMembersAndSkillsComplete: true; allTechniquesComplete: true; crossUnitRelations: []; unsupportedEntities: [] }; map: { qMin: number; qMax: number; rMin: number; rMax: number; cells: Cell[] }; units: Unit[]; rng: { kind: 'stage-bounded-tape-v1'; tape: TapeEntry[] }; policy: Policy };
+type Scenario = { schemaVersion: 1; profile: typeof PROFILE; episodeId: string; round: number; context: { kind: 'detached-ground-only'; allMembersAndSkillsComplete: true; allTechniquesComplete: true; crossUnitRelations: []; unsupportedEntities: []; foodRaidMode?: 'external-positive-proposal-v1' }; map: { qMin: number; qMax: number; rMin: number; rMax: number; cells: Cell[] }; units: Unit[]; rng: { kind: 'stage-bounded-tape-v1'; tape: TapeEntry[] }; policy: Policy };
 type Snapshot = { revision: number; episodeId: string; round: number; units: UnitState[]; rngCursor: number };
 type Command = { commandId: string; expectedRevision: number; actorId: string; targetId: string; action: Action };
 type SourceKey = 'field-damage' | 'tactic-table' | 'strategy-success' | 'strategy-critical' | 'response-fire' | 'skill-facts' | 'technique-facts' | 'o01-status' | 'field-policy';
@@ -27,7 +27,8 @@ type NumericWrite = { before: number; requestedAfter: number; requestedDelta: nu
 type Effect = { unitId: string; side: string; cellBefore: string; cellAfter: string; troops: NumericWrite; energy: NumericWrite; acted: { before: boolean; requestedAfter: boolean; after: boolean }; status: { before: Status; requestedKind: Status; after: Status; remaining: NumericWrite } };
 type Coverage = { cellId: string; occupantId: string | null; side: string | null; disposition: 'primary' | 'secondary' | 'friendly-skipped' | 'empty' | 'outside-map'; order: number | null };
 const BOUNDARY = { nativeEquivalent: false, stockVerified: false, originalRandomEquivalent: false, rewards: 'not-modeled', nativeActionPoints: 'not-modeled', lifecycle: 'fixed-episode-no-turn-reset', falseReport: 'status-only-no-retreat', original43GroupsReduced: false, original45SnapshotReduced: false, stateHashAuthenticatesProvenance: false } as const;
-type Receipt = { schemaVersion: 1; profile: typeof PROFILE; policyId: string; policyHash: string; sourceBoundary: typeof BOUNDARY; command: Command; episodeId: string; round: number; revisionBefore: number; revisionAfter: number; stateHashBefore: string; stateHashAfter: string; actorSide: string; targetSide: string; actionStartCellId: string; activationCellId: string; range: number; coverage: Coverage[]; outcome: 'physical' | 'tactic-fallback' | 'strategy-succeeded' | 'strategy-failed'; steps: Step[]; draws: Draw[]; rngBefore: number; rngAfter: number; effects: Effect[] };
+type FoodRaidRequest = {eventId:string;actorId:string;targetId:string;attackPanel:number;weapon:'spear';techniques:number[];action:'normal-melee'};
+type Receipt = { schemaVersion: 1; profile: typeof PROFILE; policyId: string; policyHash: string; sourceBoundary: typeof BOUNDARY; command: Command; episodeId: string; round: number; revisionBefore: number; revisionAfter: number; stateHashBefore: string; stateHashAfter: string; actorSide: string; targetSide: string; actionStartCellId: string; activationCellId: string; range: number; coverage: Coverage[]; outcome: 'physical' | 'tactic-fallback' | 'strategy-succeeded' | 'strategy-failed'; steps: Step[]; draws: Draw[]; rngBefore: number; rngAfter: number; effects: Effect[]; foodRaidRequest?: FoodRaidRequest; requiresExternalFoodSettlement?: true };
 type State = { tag: typeof TAG; schemaVersion: 1; profile: typeof PROFILE; policy: Policy; sourceBoundary: typeof BOUNDARY; genesis: { scenario: Scenario; snapshot: Snapshot }; snapshot: Snapshot; acceptedCommands: { command: Command; receipt: Receipt }[] };
 type Failure = { ok: false; committed: false; reason: string; commandId: string | null; index: number | null; before: Snapshot | null; after: Snapshot | null; effects: [] };
 type StateResult = { ok: true; state: State } | Failure;
@@ -117,7 +118,10 @@ function panel(v: unknown): Panel { const r = object(v, ['attack', 'defense']); 
 function unitState(v: Record<string, unknown>): UnitState { const status = oneOf(v.status, ['normal', 'confused', 'false-report'] as const), remaining = uint(v.remaining, 255); if ((status === 'normal') !== (remaining === 0)) fail('inconsistent-status'); return { id: id(v.id), cellId: id(v.cellId), troops: uint(v.troops, 1_000_000, 1), energy: uint(v.energy, 120), acted: bool(v.acted), status, remaining }; }
 function scenario(v: unknown): Scenario {
   const s = object(v, ['schemaVersion', 'profile', 'episodeId', 'round', 'context', 'map', 'units', 'rng', 'policy']); if (s.schemaVersion !== 1 || s.profile !== PROFILE) fail('unsupported-profile'); if (!same(s.policy, POLICY)) fail('policy-mismatch');
-  const context = object(s.context, ['kind', 'allMembersAndSkillsComplete', 'allTechniquesComplete', 'crossUnitRelations', 'unsupportedEntities']);
+  const rawContext=s.context as Record<string,unknown>;
+  const hasFoodRaidMode=rawContext!==null&&typeof rawContext==='object'&&Object.hasOwn(rawContext,'foodRaidMode');
+  const context = object(s.context, ['kind', 'allMembersAndSkillsComplete', 'allTechniquesComplete', 'crossUnitRelations', 'unsupportedEntities',...(hasFoodRaidMode?['foodRaidMode']:[])]);
+  if(hasFoodRaidMode&&context.foodRaidMode!=='external-positive-proposal-v1')fail('unsupported-food-raid-mode');
   if (context.kind !== 'detached-ground-only' || context.allMembersAndSkillsComplete !== true || context.allTechniquesComplete !== true || list(context.crossUnitRelations, 0).length || list(context.unsupportedEntities, 0).length) fail('unsupported-context');
   const m = object(s.map, ['qMin', 'qMax', 'rMin', 'rMax', 'cells']); const qMin = uint(m.qMin, 255, -255), qMax = uint(m.qMax, 255, qMin), rMin = uint(m.rMin, 255, -255), rMax = uint(m.rMax, 255, rMin);
   const area = (qMax - qMin + 1) * (rMax - rMin + 1); if (area > 256) fail('map-limit');
@@ -138,7 +142,7 @@ function scenario(v: unknown): Scenario {
   for (const u of units) { const cell = cells.find(c => c.id === u.cellId); if (!cell || cell.blocked) fail('unsupported-unit-position'); for (const other of units) if (other.side === u.side && !same(other.techniques, u.techniques)) fail('inconsistent-side-techniques'); }
   const r = object(s.rng, ['kind', 'tape']); if (r.kind !== 'stage-bounded-tape-v1') fail('unsupported-rng');
   const tape: TapeEntry[] = list(r.tape, 4096).map(v => { const d = object(v, ['stage', 'bound', 'value']); if (d.bound !== 2 && d.bound !== 100) fail('rng-bound'); return { stage: id(d.stage), bound: d.bound, value: uint(d.value, d.bound - 1) }; });
-  return { schemaVersion: 1, profile: PROFILE, episodeId: id(s.episodeId), round: uint(s.round, 1_000_000), context: { kind: 'detached-ground-only', allMembersAndSkillsComplete: true, allTechniquesComplete: true, crossUnitRelations: [], unsupportedEntities: [] }, map: { qMin, qMax, rMin, rMax, cells }, units, rng: { kind: 'stage-bounded-tape-v1', tape }, policy: clone(POLICY) };
+  return { schemaVersion: 1, profile: PROFILE, episodeId: id(s.episodeId), round: uint(s.round, 1_000_000), context: { kind: 'detached-ground-only', allMembersAndSkillsComplete: true, allTechniquesComplete: true, crossUnitRelations: [], unsupportedEntities: [],...(hasFoodRaidMode?{foodRaidMode:'external-positive-proposal-v1' as const}:{}) }, map: { qMin, qMax, rMin, rMax, cells }, units, rng: { kind: 'stage-bounded-tape-v1', tape }, policy: clone(POLICY) };
 }
 function command(v: unknown): Command { const r = object(v, ['commandId', 'expectedRevision', 'actorId', 'targetId', 'action']); return { commandId: id(r.commandId), expectedRevision: uint(r.expectedRevision, MAX_HISTORY), actorId: id(r.actorId), targetId: id(r.targetId), action: oneOf(r.action, ACTIONS) }; }
 function initialState(s: Scenario): State { const snapshot: Snapshot = { revision: 0, episodeId: s.episodeId, round: s.round, units: s.units.map(u => ({ id: u.id, cellId: u.cellId, troops: u.troops, energy: u.energy, acted: u.acted, status: u.status, remaining: u.remaining })), rngCursor: 0 }; return { tag: TAG, schemaVersion: 1, profile: PROFILE, policy: clone(POLICY), sourceBoundary: clone(BOUNDARY), genesis: { scenario: clone(s), snapshot: clone(snapshot) }, snapshot, acceptedCommands: [] }; }
@@ -199,7 +203,8 @@ function resolve(s: Scenario, before: Snapshot, cmd: Command): { snapshot: Snaps
   const excludedSkills = strategy ? POLICY.unsupportedStrategySkills : POLICY.unsupportedPhysicalSkills;
   for (const participant of participants) if (participant.members.some(m => m.skills.some(k => excludedSkills.includes(k)))) fail('unsupported-skill-context');
   if (!strategy && s.units.some(u => has(u, '辅佐'))) fail('unsupported-cross-unit-support');
-  if (!strategy && actor.weapon === 'spear' && actor.techniques.includes(1)) fail('unsupported-food-raid');
+  const deferredFoodRaid = !strategy && actor.weapon === 'spear' && actor.techniques.includes(1);
+  if(deferredFoodRaid && !(s.context.foodRaidMode==='external-positive-proposal-v1' && cmd.action==='normal-melee' && actor.techniques.includes(0))) fail('unsupported-food-raid');
   if (strategy && actor.intelligence === 0 && target.intelligence === 0) fail('strategy-zero-denominator');
   // Structural unsupported status replacements are rejected before a possibly lucky miss.
   const requestedStatus: Status = cmd.action === 'false-report-status' ? 'false-report' : 'confused';
@@ -299,7 +304,10 @@ function resolve(s: Scenario, before: Snapshot, cmd: Command): { snapshot: Snaps
   for (const u of snapshot.units) if (u.troops <= 0) fail('unsupported-terminal-effect');
   snapshot.revision++;
   const effects: Effect[] = [...touched].sort(order).map(id => { const old = before.units.find(u => u.id === id)!, now = mutable(id), facts = s.units.find(u => u.id === id)!; return { unitId: id, side: facts.side, cellBefore: old.cellId, cellAfter: now.cellId, troops: numericWrite(old.troops, now.troops), energy: numericWrite(old.energy, now.energy), acted: { before: old.acted, requestedAfter: now.acted, after: now.acted }, status: { before: old.status, requestedKind: requestedKinds.get(id) ?? now.status, after: now.status, remaining: numericWrite(old.remaining, now.remaining, requestedCounts.get(id) ?? now.remaining) } }; });
-  const receipt: Receipt = { schemaVersion: 1, profile: PROFILE, policyId: POLICY.id, policyHash: contentHash(POLICY), sourceBoundary: clone(BOUNDARY), command: clone(cmd), episodeId: s.episodeId, round: s.round, revisionBefore: before.revision, revisionAfter: snapshot.revision, stateHashBefore: contentHash(before), stateHashAfter: contentHash(snapshot), actorSide: actor.side, targetSide: target.side, actionStartCellId: actor.cellId, activationCellId: actor.cellId, range, coverage, outcome, steps, draws, rngBefore: before.rngCursor, rngAfter: snapshot.rngCursor, effects };
+  // This is only a typed obligation. No food snapshot is accepted or written in the combat kernel.
+  const foodRaidRequest:FoodRaidRequest|undefined=deferredFoodRaid && mutable(target.id).troops < target.troops?{eventId:cmd.commandId,actorId:actor.id,targetId:target.id,
+    attackPanel:usedPanel(actor).attack,weapon:'spear',techniques:[...actor.techniques],action:'normal-melee'}:undefined;
+  const receipt: Receipt = { schemaVersion: 1, profile: PROFILE, policyId: POLICY.id, policyHash: contentHash(POLICY), sourceBoundary: clone(BOUNDARY), command: clone(cmd), episodeId: s.episodeId, round: s.round, revisionBefore: before.revision, revisionAfter: snapshot.revision, stateHashBefore: contentHash(before), stateHashAfter: contentHash(snapshot), actorSide: actor.side, targetSide: target.side, actionStartCellId: actor.cellId, activationCellId: actor.cellId, range, coverage, outcome, steps, draws, rngBefore: before.rngCursor, rngAfter: snapshot.rngCursor, effects, ...(foodRaidRequest?{foodRaidRequest,requiresExternalFoodSettlement:true as const}:{}) };
   return { snapshot, receipt };
 }
 
@@ -365,3 +373,4 @@ export function replayFieldCombatV1(input: unknown): FieldCombatReplayResultV1 {
     const result: ReplayResult = { ok: true, state, outcomes }; budget(result); budgetSave(state); budgetAllRetries(state); return freeze(result);
   } catch (e) { return freeze(failure(e)); }
 }
+
