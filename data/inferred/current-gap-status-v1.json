@@ -203,8 +203,8 @@
     {
       "id": "T17",
       "implementationCategory": "existing-policy-or-source-record-retained",
-      "currentSummary": "真实财政与丰收中性叶接同一WorldTick金粮owner",
-      "remainingBoundary": "30槽现有forge/stable引用当前设施，原主题economicFacilities为明确推断初值；不冒名barracks/workshop、不新增建设模式、不重复工资，运行未验收。",
+      "currentSummary": "当月蝗粮TP/农场tombstone后由既有income唯一结算丰收",
+      "remainingBoundary": "同30slot当前设施无第二账本；无重建玩法/第二次收入，完整失败回滚",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
@@ -401,8 +401,8 @@
     {
       "id": "T33",
       "implementationCategory": "existing-service-statically-confirmed",
-      "currentSummary": "安全财政/丰收叶已接统一日期与资源，健康季节支路仍排除",
-      "remainingBoundary": "不调用whole season或whole finance；瘟疫health/事件人物/归属不执行。蝗灾/其他安全叶尚需明确接入，不将本批视为全季节完成；运行未验收。",
+      "currentSummary": "安全locust/harvest叶实际接同WorldTick与唯一income",
+      "remainingBoundary": "只安全子集，模拟率/RNG具名非原生；whole season/plague/health全部排除",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",
@@ -488,8 +488,8 @@
     {
       "id": "T40",
       "implementationCategory": "implemented-with-explicit-inference",
-      "currentSummary": "F/H/G同唯一field owner与WorldTick组合",
-      "remainingBoundary": "旧默认保留；所有下游失败含粮兵行动原子拒，静态未运行",
+      "currentSummary": "统一季节两phase与当前PK居民技能/同粮TP owner",
+      "remainingBoundary": "父内容链完整审与远端一致性为发布前提；静态不等运行验收",
       "nativeEvidence": "not-fully-verified",
       "runtimeValidation": "not-run-by-instruction",
       "publication": "see-stage-records-not-equivalent-to-local-PASS",

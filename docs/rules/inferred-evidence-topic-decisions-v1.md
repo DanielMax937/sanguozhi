@@ -333,3 +333,15 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T40 F/H/G同唯一field owner与WorldTick组合（2026-10-30）
 
 [规则](unified-field-composition-v3.md)：旧默认保留；所有下游失败含粮兵行动原子拒，静态未运行 历史确认与证据原文保留。
+
+## T33 安全locust/harvest叶实际接同WorldTick与唯一income（2026-10-30）
+
+[规则](unified-safe-season-owner-v3.md)：只安全子集，模拟率/RNG具名非原生；whole season/plague/health全部排除 历史确认与证据原文保留。
+
+## T17 当月蝗粮TP/农场tombstone后由既有income唯一结算丰收（2026-10-30）
+
+[规则](unified-safe-season-owner-v3.md)：同30slot当前设施无第二账本；无重建玩法/第二次收入，完整失败回滚 历史确认与证据原文保留。
+
+## T40 统一季节两phase与当前PK居民技能/同粮TP owner（2026-10-30）
+
+[规则](unified-safe-season-owner-v3.md)：父内容链完整审与远端一致性为发布前提；静态不等运行验收 历史确认与证据原文保留。
