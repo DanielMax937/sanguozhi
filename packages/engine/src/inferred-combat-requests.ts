@@ -5,18 +5,20 @@ const fail = (reason: string) => Object.freeze({ ok: false as const, reason });
 const uint = (v: unknown, max: number): v is number => typeof v === 'number' && Number.isSafeInteger(v) && !Object.is(v, -0) && v >= 0 && v <= max;
 const boolean = (v: unknown): v is boolean => typeof v === 'boolean';
 
-export function decideInferredStrategyHit(kind: 'fire' | 'ambush' | 'discord' | 'sorcery', intelligence: number, targetIntelligence: number, roll100: number, eligibilityConfirmed: boolean, immune: boolean, guaranteed: boolean, beautyBonus: boolean) {
-  if (!['fire', 'ambush', 'discord', 'sorcery'].includes(kind) || !uint(intelligence, 100) || !uint(targetIntelligence, 100) || !uint(roll100, 99)
+function strategyHit(kind: 'fire' | 'ambush' | 'discord' | 'sorcery', intelligence: number, targetIntelligence: number, roll100: number, eligibilityConfirmed: boolean, immune: boolean, guaranteed: boolean, beautyBonus: boolean, maxIntelligence:100|255) {
+  if (!['fire', 'ambush', 'discord', 'sorcery'].includes(kind) || !uint(intelligence, maxIntelligence) || !uint(targetIntelligence, maxIntelligence) || !uint(roll100, 99)
     || ![eligibilityConfirmed, immune, guaranteed, beautyBonus].every(boolean)) return fail('invalid-input');
   if (!eligibilityConfirmed) return fail('eligibility-not-established');
   const base = kind === 'fire' ? 70 : kind === 'ambush' ? 60 : kind === 'discord' ? 40 : 30;
   const beforeSkill = Math.min(95, Math.max(5, base + Math.floor((intelligence - targetIntelligence) / 2)));
   const ordinaryRate = Math.min(95, beforeSkill * (beautyBonus && kind !== 'sorcery' ? 2 : 1));
   const rate = immune ? 0 : guaranteed ? 100 : ordinaryRate;
-  return Object.freeze({ ok: true as const, policyId: 'inferred-strategy-intelligence-linear-v1', evidence, worldEffectsApplied,
+  return Object.freeze({ ok: true as const, policyId: maxIntelligence===100?'inferred-strategy-intelligence-linear-v1':'inferred-strategy-intelligence-linear255-v1', evidence, worldEffectsApplied,
     kind, base, beforeSkill, ordinaryRate, rate, roll100, hit: roll100 < rate,
     resolvedBranch: immune ? 'immunity' as const : guaranteed ? 'guaranteed' as const : 'ordinary-roll' as const });
 }
+export function decideInferredStrategyHit(kind: 'fire' | 'ambush' | 'discord' | 'sorcery', intelligence: number, targetIntelligence: number, roll100: number, eligibilityConfirmed: boolean, immune: boolean, guaranteed: boolean, beautyBonus: boolean) { return strategyHit(kind,intelligence,targetIntelligence,roll100,eligibilityConfirmed,immune,guaranteed,beautyBonus,100); }
+export function decideInferredStrategyHitEffective255(kind: 'fire' | 'ambush' | 'discord' | 'sorcery', intelligence: number, targetIntelligence: number, roll100: number, eligibilityConfirmed: boolean, immune: boolean, guaranteed: boolean, beautyBonus: boolean) { return strategyHit(kind,intelligence,targetIntelligence,roll100,eligibilityConfirmed,immune,guaranteed,beautyBonus,255); }
 
 export function projectInferredStandingFire(draw201: number, ordinaryNoModifiers: boolean) {
   if (!uint(draw201, 200) || !boolean(ordinaryNoModifiers)) return fail('invalid-input');
@@ -81,3 +83,4 @@ export function projectInferredFoodRaid(attackPanel: number, ownTroops: number, 
     proposedTransfer: Number(transfer), untransferredRequest: Number(requested - transfer),
     targetDebitRequest: Number(transfer), receiverCreditRequest: Number(transfer), nativeFinalizerEstablished: false as const });
 }
+

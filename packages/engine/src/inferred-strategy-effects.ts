@@ -1,5 +1,5 @@
 /** Named synthetic effects, never original strategy/casualty finalizers. */
-import { decideInferredStrategyHit } from './inferred-combat-requests.ts';
+import { decideInferredStrategyHit, decideInferredStrategyHitEffective255 } from './inferred-combat-requests.ts';
 type Unit = Readonly<{ id: string; troops: number; confusedTurns: number; acted: boolean }>;
 type Cast = Readonly<{ kind: 'cast'; id: string; expectedRevision: number; strategy: 'ambush' | 'discord' | 'sorcery';
   targets: readonly string[]; intelligence: number; targetIntelligence: number; roll: number;
@@ -7,7 +7,7 @@ type Cast = Readonly<{ kind: 'cast'; id: string; expectedRevision: number; strat
 type Simple = Readonly<{ kind: 'advance'; id: string; expectedRevision: number }>
   | Readonly<{ kind: 'act'; id: string; expectedRevision: number; targetId: string }>;
 type Command = Cast | Simple;
-type State = Readonly<{ schema: 'inferred-synthetic-strategy-effects-v1'; initial: readonly Unit[]; commands: readonly Command[] }>;
+type State = Readonly<{ schema: 'inferred-synthetic-strategy-effects-v1'; initial: readonly Unit[]; commands: readonly Command[]; intelligenceProfile?:'same-formula-intelligence255-v1' }>;
 const fail = (reason: string) => Object.freeze({ ok: false as const, reason });
 const uint = (v: unknown, max: number): v is number => typeof v === 'number' && Number.isSafeInteger(v) && !Object.is(v, -0) && v >= 0 && v <= max;
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -54,7 +54,7 @@ function detach(input: unknown): unknown {
 
 
 
-function commandFrom(v: unknown): Command | undefined {
+function commandFrom(v: unknown, maxIntelligence:100|255=100): Command | undefined {
   if (!record(v) || !id(v.id) || !uint(v.expectedRevision, 255)) return undefined;
   if (v.kind === 'advance' && keys(v, ['kind', 'id', 'expectedRevision'])) return { kind: v.kind, id: v.id, expectedRevision: v.expectedRevision };
   if (v.kind === 'act' && keys(v, ['kind', 'id', 'expectedRevision', 'targetId']) && id(v.targetId)) return { kind: v.kind, id: v.id, expectedRevision: v.expectedRevision, targetId: v.targetId };
@@ -62,12 +62,12 @@ function commandFrom(v: unknown): Command | undefined {
     || (v.strategy !== 'ambush' && v.strategy !== 'discord' && v.strategy !== 'sorcery') || !Array.isArray(v.targets)
     || v.targets.length < 1 || v.targets.length > 3 || !v.targets.every(id) || new Set(v.targets).size !== v.targets.length
     || (v.strategy === 'ambush' && v.targets.length !== 1) || (v.strategy === 'discord' && v.targets.length !== 2)
-    || !uint(v.intelligence, 100) || !uint(v.targetIntelligence, 100) || !uint(v.roll, 99)
+    || !uint(v.intelligence, maxIntelligence) || !uint(v.targetIntelligence, maxIntelligence) || !uint(v.roll, 99)
     || typeof v.immune !== 'boolean' || typeof v.guaranteed !== 'boolean' || typeof v.beautyBonus !== 'boolean' || v.eligibilityConfirmed !== true) return undefined;
   return { kind: 'cast', id: v.id, expectedRevision: v.expectedRevision, strategy: v.strategy, targets: [...v.targets], intelligence: v.intelligence,
     targetIntelligence: v.targetIntelligence, roll: v.roll, immune: v.immune, guaranteed: v.guaranteed, beautyBonus: v.beautyBonus, eligibilityConfirmed: true };
 }
-function apply(units: Unit[], command: Command) {
+function apply(units: Unit[], command: Command, extendedIntelligence=false) {
   if (command.kind === 'advance') {
     for (let i = 0; i < units.length; i++) units[i] = { ...units[i]!, confusedTurns: Math.max(0, units[i]!.confusedTurns - 1), acted: false };
     return { ok: true as const, kind: command.kind };
@@ -79,7 +79,7 @@ function apply(units: Unit[], command: Command) {
   }
   const selected = command.targets.map(target => units.findIndex(unit => unit.id === target));
   if (selected.some(index => index < 0)) return fail('unknown-synthetic-target');
-  const decision = decideInferredStrategyHit(command.strategy, command.intelligence, command.targetIntelligence, command.roll, true,
+  const decision = (extendedIntelligence?decideInferredStrategyHitEffective255:decideInferredStrategyHit)(command.strategy, command.intelligence, command.targetIntelligence, command.roll, true,
     command.immune, command.guaranteed, command.beautyBonus);
   if (!decision.ok) return decision;
   if (!decision.hit) return { ok: true as const, kind: command.kind, decision, effect: 'miss' as const };
@@ -92,7 +92,9 @@ function apply(units: Unit[], command: Command) {
   return { ok: true as const, kind: command.kind, decision, effect: command.strategy, damagePerTarget: damage };
 }
 function replay(input: unknown) {
-  if (!record(input) || !keys(input, ['schema', 'initial', 'commands']) || input.schema !== 'inferred-synthetic-strategy-effects-v1'
+  const hasProfile=record(input)&&Object.hasOwn(input,'intelligenceProfile');
+  if(hasProfile&&record(input)&&input.intelligenceProfile!=='same-formula-intelligence255-v1')return fail('invalid-intelligence-profile');
+  if (!record(input) || !keys(input, ['schema', 'initial', 'commands',...(hasProfile?['intelligenceProfile']:[])]) || input.schema !== 'inferred-synthetic-strategy-effects-v1'
     || !Array.isArray(input.initial) || input.initial.length < 1 || input.initial.length > 64
     || !Array.isArray(input.commands) || input.commands.length > 256) return fail('invalid-ledger');
   const initial: Unit[] = [], names = new Set<string>();
@@ -104,25 +106,25 @@ function replay(input: unknown) {
   const units = initial.map(unit => ({ ...unit })), commands: Command[] = [], receipts = [], commandIds = new Set<string>();
   let turn = 0;
   for (const raw of input.commands) {
-    const command = commandFrom(raw);
+    const command = commandFrom(raw,hasProfile?255:100);
     if (!command || command.expectedRevision !== commands.length || commandIds.has(command.id)) return fail('invalid-command-history');
     const before = units.map(unit => ({ ...unit }));
-    const result = apply(units, command);
+    const result = apply(units, command,hasProfile);
     if (!result.ok) return result;
     if (command.kind === 'advance') turn++;
     receipts.push({ commandId: command.id, turn, before, after: units.map(unit => ({ ...unit })), result });
     commands.push(command); commandIds.add(command.id);
   }
-  const state: State = { schema: 'inferred-synthetic-strategy-effects-v1', initial, commands };
+  const state: State = { schema: 'inferred-synthetic-strategy-effects-v1', initial, commands, ...(hasProfile?{intelligenceProfile:'same-formula-intelligence255-v1' as const}:{}) };
   return frozen({ ok: true as const, state, units, receipts, turn, revision: commands.length, campaignWorldWritten: false as const,
     nativeEffectsVerified: false as const, casterCostsApplied: false as const });
 }
 export function readInferredStrategyEffects(input: unknown) { try { return replay(detach(input)); } catch { return fail('invalid-data-input'); } }
-export function createInferredStrategyEffects(initial: unknown) { return readInferredStrategyEffects({ schema: 'inferred-synthetic-strategy-effects-v1', initial, commands: [] }); }
+export function createInferredStrategyEffects(initial: unknown, intelligenceProfile?:'same-formula-intelligence255-v1') { return readInferredStrategyEffects({ schema: 'inferred-synthetic-strategy-effects-v1', initial, commands: [], ...(intelligenceProfile===undefined?{}:{intelligenceProfile}) }); }
 export function executeInferredStrategyEffects(input: unknown, rawCommand: unknown) {
   const current = readInferredStrategyEffects(input); if (!current.ok) return current;
   let detached: unknown; try { detached = detach(rawCommand); } catch { return fail('invalid-data-command'); }
-  const command = commandFrom(detached);
+  const command = commandFrom(detached,current.state.intelligenceProfile?255:100);
   if (!command || command.expectedRevision !== current.revision || current.revision >= 256) return fail('invalid-command-or-capacity');
   if (current.state.commands.some(entry => entry.id === command.id)) return fail('duplicate-command');
   return readInferredStrategyEffects({ ...current.state, commands: [...current.state.commands, command] });
@@ -136,3 +138,4 @@ export function loadInferredStrategyEffects(json: unknown) {
   if (typeof json !== 'string' || json.length > 1000000) return fail('invalid-save');
   try { return readInferredStrategyEffects(JSON.parse(json)); } catch { return fail('invalid-save'); }
 }
+
