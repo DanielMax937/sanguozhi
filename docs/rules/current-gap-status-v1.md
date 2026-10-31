@@ -12,7 +12,7 @@
 |T02|当前effective智魅接实际/既有推断策略核且完整上下游扩域|旧100默认与原样本费用保留；高防御负fraction按原clip，不冒称全原生单调公式|
 |T03|固定独立敌城scalar Rumor实际消费home费用行动与目标治安忠诚RNG|绑定显式敌owner但非field敌人同实体；成功失败均真实扣费，零忠诚归属终结拒|
 |T04|真实FalseReport caller与唯一condition/逐Tick退却接入|完整stage tape、失败费用行动；退却入场plain支持域前置，非真实入城finalizer|
-|T05|野战唯一粮分配随部署返城与逐Tick消费|粮0仅报告不写兵损；不冒称原生饥饿伤亡|
+|T05|野战唯一粮分配随部署返城与逐Tick消费；完整零粮边界认证接火后正值76%饥饿及单次恢复（本地未发布）|旧无starvationConfig模式粮0仅报告不写兵损；显式启用完整零粮边界profile才按具名推断火后保留76%且要求正兵数；任意正粮入账清证，新Deploy首Tick不资格，归零整Tick拒绝，不接死亡伤病；非原生证据闭合，运行未验收|
 |T06|同路径火入格与驻留/状态恢复组合|火入格per-visit为具名中性推断；混合地形火路径明确拒，非原生caller证明|
 |T07|受限继续排除|零城耐久/零城兵的毁坏夺取finalizer不触及。|
 |T08|既有数值参考保留|现代转录不是原版本闭合；Closing奖励/伤病结果明确排除。|
@@ -39,7 +39,7 @@
 |T29|既有独立单城商人金粮交易与重放已实现|city-merchant-lifecycle.ts 已有BuyFood/SellFood，复用internal/city-merchant-trade-reducer.ts实际写金粮/AP/行动marker/政治XP，含独立旬推进与全重放；价格锚点、舍入和writer为明确服务政策。原TradePrice getter完整合同、原生执行及全财政/跨服务融合仍未证；不伪造原生来源。|
 |T30|既有探索数值核保留|限定已过滤候选，不把人才加入/真实人物迁移包装为普通算术。|
 |T31|既有登用策略保留|不把纯成功判定自动接真实归属变更。|
-|T32|普通Attack真实反击与同状态火后恢复|仅正值战斗；耐久实体维修未作为兵气替代|
+|T32|普通Attack真实反击与同状态火后恢复；固定同home港关正值耐久修复已接唯一WorldTick（本地未发布）|仅正值战斗；耐久实体维修未作为兵气替代；治理者只读basePK政治；固定site不建造迁移，耐久零/攻陷终结排除；静态待整批独审，非原生证据闭合|
 |T33|安全locust/harvest叶实际接同WorldTick与唯一income|只安全子集，模拟率/RNG具名非原生；whole season/plague/health全部排除|
 |T34|研究16完成只扩真实准入上限且下游共享实际tech|不清空技巧绕过原核，不扩255/未证被动；full history保留；PK空树21旬不保证全先决树完成，未知全特技被动不声称支持|
 |T35|PK属性培养共享XP且当前属性实际供城务研究与field智力使用|普通无年龄getter；旧job工期保持真实startSnapshot，原版人物/年龄健康不接|

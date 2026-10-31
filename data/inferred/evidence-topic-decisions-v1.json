@@ -189,6 +189,13 @@
         "scope": "粮0仅报告不写兵损；不冒称原生饥饿伤亡",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "unifiedRepairStarvationOwnerFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-repair-starvation-owner-v3.md",
+        "scope": "旧无starvationConfig模式粮0仅报告不写兵损；显式启用完整零粮边界profile才按具名推断火后保留76%且要求正兵数；任意正粮入账清证，新Deploy首Tick不资格，归零整Tick拒绝，不接死亡伤病；非原生证据闭合，运行未验收",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -951,6 +958,13 @@
         "module": "packages/engine/src/inferred-mobile-resource-world.ts",
         "rule": "docs/rules/unified-field-composition-v3.md",
         "scope": "仅正值战斗；耐久实体维修未作为兵气替代",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
+      },
+      "unifiedRepairStarvationOwnerFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-repair-starvation-owner-v3.md",
+        "scope": "仅正值战斗；耐久实体维修未作为兵气替代；治理者只读basePK政治；固定site不建造迁移，耐久零/攻陷终结排除；静态待整批独审，非原生证据闭合",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
       }

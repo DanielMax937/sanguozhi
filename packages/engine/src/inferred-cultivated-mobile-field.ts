@@ -1,7 +1,8 @@
+import { projectSyntheticStarvationBoundary } from './internal/synthetic-starvation-boundary.ts';
 import { projectNeutralFieldAction, projectNeutralFieldActionWithResearchedEnergy, projectNeutralFieldActionWithEffectiveAttributes } from './internal/synthetic-neutral-field-action.ts';
 import { projectRosterTerrainEntry, projectRosterRockfall, projectRosterTerrainEntryWithEnergyCaps, projectRosterRockfallWithEnergyCaps } from './internal/synthetic-roster-hazard-leaves.ts';
 import { projectNeutralFireEntry, projectNeutralFireEntryWithEnergyCaps } from './internal/synthetic-neutral-fire-entry.ts';
-import { projectRosterRecoveryAfterFire, projectRosterRecoveryAfterFireWithEnergyCaps } from './internal/synthetic-roster-recovery-after-fire.ts';
+import { projectRosterRecoveryAfterFire, projectRosterRecoveryAfterFireWithEnergyCaps, projectRosterRecoveryAfterFireAndStarvation } from './internal/synthetic-roster-recovery-after-fire.ts';
 /** Opt-in cultivated roster. Full history replay; owner-only PK completion proposals. */
 import { qualifyPkStatTraining } from './pk-stat-training.ts';
 import { createInferredFireLifecycle, executeInferredFireLifecycle } from './inferred-fire-lifecycle.ts';
@@ -36,13 +37,15 @@ type NormalAction = Readonly<{kind:'FalseReport';actorId:string;targetId:string;
   | Readonly<{ kind: 'Return'; actorId: string }>
   | Readonly<{ kind: 'Cast'; casterId: string; strategy: Exclude<Strategy, 'fire'>; targets: readonly string[]; roll: number }>
   | Readonly<{ kind: 'FireCast'; casterId: string; cellId: string; fireId: string; roll: number; durationDraw: number }>;
+type StarvationProfile=Readonly<{profile:'inferred-whole-zero-food-tick-retain76-positive-v1';homeOwnerId:string;enemyOwnerId:string|null}>;
+type StarvationBoundary=Readonly<{turnBefore:number;eligibleActorIds:readonly string[];foodAllocations:readonly {actorId:string;food:number}[]}>;
 type EffectiveFacts = Readonly<{actorId:string;stats:Readonly<Record<Stat,number>>}>;
 type EffectiveProfile = Readonly<{profile:'live-equipment-effective255-v1';effectiveBaseline:readonly EffectiveFacts[]}>;
 type EnergyProfile = Readonly<{profile:'researched-morale120-v1';homeOwnerId:string;homeTechniqueIds:readonly number[];enemyTechniqueIds:readonly number[]}>;
-type OwnerStep = Readonly<{ kind: 'OuterStep'; sourceOuterCommandId: string; fieldAction: NormalAction | null; factsUpdates: readonly { before: Facts; after: Facts }[]; completionJobs: readonly { jobId: string; actorId: string }[];effectiveFactsUpdates?:readonly {before:EffectiveFacts;after:EffectiveFacts}[];energyHomeTechniquesAfter?:readonly number[];combatTechniquesByOwner?:readonly {ownerId:string;techniques:readonly number[]}[] }>;
+type OwnerStep = Readonly<{ kind: 'OuterStep'; sourceOuterCommandId: string; fieldAction: NormalAction | null; factsUpdates: readonly { before: Facts; after: Facts }[]; completionJobs: readonly { jobId: string; actorId: string }[];starvationBoundary?:StarvationBoundary;effectiveFactsUpdates?:readonly {before:EffectiveFacts;after:EffectiveFacts}[];energyHomeTechniquesAfter?:readonly number[];combatTechniquesByOwner?:readonly {ownerId:string;techniques:readonly number[]}[] }>;
 type Action = NormalAction | OwnerStep;
 type Command = Readonly<{ id: string; expectedRevision: number; action: Action }>;
-type State = Readonly<{ schema: 'inferred-cultivated-mobile-field-v4'; cells: readonly string[]; templates: readonly Template[]; movementMap: MovementMap; movementProfiles: readonly MovementProfile[]; cultivationBaseline: readonly Facts[]; encounterConfig?: Encounter | null; hazardConfig?:HazardConfig|null; energyProfile?:EnergyProfile; effectiveProfile?:EffectiveProfile; commands: readonly Command[] }>;
+type State = Readonly<{ schema: 'inferred-cultivated-mobile-field-v4'; cells: readonly string[]; templates: readonly Template[]; movementMap: MovementMap; movementProfiles: readonly MovementProfile[]; cultivationBaseline: readonly Facts[]; encounterConfig?: Encounter | null; hazardConfig?:HazardConfig|null; energyProfile?:EnergyProfile; effectiveProfile?:EffectiveProfile; starvationProfile?:StarvationProfile; commands: readonly Command[] }>;
 const COST = Object.freeze({ fire: 10, ambush: 10, discord: 20, sorcery: 30 });
 const fail = (reason: string) => Object.freeze({ ok: false as const, reason });
 const uint = (v: unknown, max: number): v is number => typeof v === 'number' && Number.isSafeInteger(v) && !Object.is(v, -0) && v >= 0 && v <= max;
@@ -206,7 +209,7 @@ export function resolveSyntheticCultivationFacts(input: unknown) {
 function commandFrom(v: unknown): Command | undefined {
   if (!record(v) || !keys(v, ['id', 'expectedRevision', 'action']) || !id(v.id) || !uint(v.expectedRevision, 31) || !record(v.action)) return undefined;
   const a = v.action; let action: Action;
-  if (a.kind === 'OuterStep' && keys(a, ['kind','sourceOuterCommandId','fieldAction','factsUpdates','completionJobs',...(Object.hasOwn(a,'combatTechniquesByOwner')?['combatTechniquesByOwner']:[]),...(Object.hasOwn(a,'energyHomeTechniquesAfter')?['energyHomeTechniquesAfter']:[]),...(Object.hasOwn(a,'effectiveFactsUpdates')?['effectiveFactsUpdates']:[])])
+  if (a.kind === 'OuterStep' && keys(a, ['kind','sourceOuterCommandId','fieldAction','factsUpdates','completionJobs',...(Object.hasOwn(a,'combatTechniquesByOwner')?['combatTechniquesByOwner']:[]),...(Object.hasOwn(a,'energyHomeTechniquesAfter')?['energyHomeTechniquesAfter']:[]),...(Object.hasOwn(a,'effectiveFactsUpdates')?['effectiveFactsUpdates']:[]),...(Object.hasOwn(a,'starvationBoundary')?['starvationBoundary']:[])])
     && a.sourceOuterCommandId === v.id && Array.isArray(a.factsUpdates) && a.factsUpdates.length <= 8
     && Array.isArray(a.completionJobs) && a.completionJobs.length <= 8) {
     let fieldAction: NormalAction | null = null;
@@ -238,6 +241,16 @@ function commandFrom(v: unknown): Command | undefined {
         ||!Array.isArray(t.techniques)||t.techniques.length>36||!t.techniques.every(x=>uint(x,35))||new Set(t.techniques).size!==t.techniques.length)return undefined;
         combatTechniquesByOwner.push({ownerId:t.ownerId,techniques:[...t.techniques] as number[]});}
     }
+    let starvationBoundary:StarvationBoundary|undefined;
+    if(Object.hasOwn(a,'starvationBoundary')){
+      const b=a.starvationBoundary;
+      if(!record(b)||!keys(b,['turnBefore','eligibleActorIds','foodAllocations'])||!uint(b.turnBefore,32)
+        ||!Array.isArray(b.eligibleActorIds)||b.eligibleActorIds.length>8||!b.eligibleActorIds.every(id)||new Set(b.eligibleActorIds).size!==b.eligibleActorIds.length
+        ||!Array.isArray(b.foodAllocations)||b.foodAllocations.length>8)return undefined;
+      const foodAllocations:{actorId:string;food:number}[]=[];
+      for(const f of b.foodAllocations){if(!record(f)||!keys(f,['actorId','food'])||!id(f.actorId)||!uint(f.food,50000)||foodAllocations.some(x=>x.actorId===f.actorId))return undefined;foodAllocations.push({actorId:f.actorId,food:f.food});}
+      starvationBoundary={turnBefore:b.turnBefore,eligibleActorIds:[...b.eligibleActorIds] as string[],foodAllocations};
+    }
     const effectiveFactsUpdates:{before:EffectiveFacts;after:EffectiveFacts}[]=[];
     if(Object.hasOwn(a,'effectiveFactsUpdates')){
       if(!Array.isArray(a.effectiveFactsUpdates)||a.effectiveFactsUpdates.length>8)return undefined;
@@ -250,7 +263,7 @@ function commandFrom(v: unknown): Command | undefined {
     }
     const energyHomeTechniquesAfter=Object.hasOwn(a,'energyHomeTechniquesAfter')?techniqueIds(a.energyHomeTechniquesAfter):undefined;
     if(Object.hasOwn(a,'energyHomeTechniquesAfter')&&!energyHomeTechniquesAfter)return undefined;
-    action = {kind: a.kind, ...(Object.hasOwn(a,'effectiveFactsUpdates')?{effectiveFactsUpdates}:{}), ...(energyHomeTechniquesAfter?{energyHomeTechniquesAfter}:{}), ...(Object.hasOwn(a,'combatTechniquesByOwner')?{combatTechniquesByOwner}:{}), sourceOuterCommandId: a.sourceOuterCommandId as string, fieldAction, factsUpdates, completionJobs};
+    action = {kind: a.kind, ...(starvationBoundary?{starvationBoundary}:{}), ...(Object.hasOwn(a,'effectiveFactsUpdates')?{effectiveFactsUpdates}:{}), ...(energyHomeTechniquesAfter?{energyHomeTechniquesAfter}:{}), ...(Object.hasOwn(a,'combatTechniquesByOwner')?{combatTechniquesByOwner}:{}), sourceOuterCommandId: a.sourceOuterCommandId as string, fieldAction, factsUpdates, completionJobs};
   } else if (a.kind === 'FalseReport' && keys(a,['kind','actorId','targetId','draws']) && id(a.actorId)&&id(a.targetId)&&a.actorId!==a.targetId
     && Array.isArray(a.draws)&&a.draws.length<=3) {
     const draws:StageDraw[]=[];
@@ -316,6 +329,7 @@ function hazardRoster(roster:readonly Unit[]) {return roster.map(u=>({id:u.id,ce
 function condition(status:'normal'|'confused'|'false-report',remaining:number):Condition{return status==='normal'?{kind:'normal',remaining:0}:{kind:status,remaining};}
 /** Proposal replay only: city inventory/actor eligibility is a mandatory outer-world check. */
 function replay(input: unknown) {
+  const hasStarvation=record(input)&&Object.hasOwn(input,'starvationProfile');
   const hasEffective=record(input)&&Object.hasOwn(input,'effectiveProfile');
   const hasEnergy=record(input)&&Object.hasOwn(input,'energyProfile');
   const energyProfile=hasEnergy&&record(input)?energyProfileFrom(input.energyProfile):undefined;
@@ -323,7 +337,7 @@ function replay(input: unknown) {
   const hadEncounter=record(input)&&Object.hasOwn(input,'encounterConfig'),hadHazard=record(input)&&Object.hasOwn(input,'hazardConfig');
   if (record(input) && !Object.hasOwn(input, 'encounterConfig')) input = {...input, encounterConfig:null};
   if (record(input) && !Object.hasOwn(input, 'hazardConfig')) input = {...input,hazardConfig:null};
-  if (!record(input) || !keys(input, ['schema', 'cells', 'templates', 'movementMap', 'movementProfiles', 'cultivationBaseline', 'encounterConfig', 'hazardConfig', 'commands',...(hasEnergy?['energyProfile']:[]),...(hasEffective?['effectiveProfile']:[])]) || input.schema !== 'inferred-cultivated-mobile-field-v4'
+  if (!record(input) || !keys(input, ['schema', 'cells', 'templates', 'movementMap', 'movementProfiles', 'cultivationBaseline', 'encounterConfig', 'hazardConfig', 'commands',...(hasEnergy?['energyProfile']:[]),...(hasEffective?['effectiveProfile']:[]),...(hasStarvation?['starvationProfile']:[])]) || input.schema !== 'inferred-cultivated-mobile-field-v4'
     || !Array.isArray(input.cells) || input.cells.length < 1 || input.cells.length > 16 || !input.cells.every(id) || new Set(input.cells).size !== input.cells.length
     || !Array.isArray(input.templates) || input.templates.length < 1 || input.templates.length > 8 || !Array.isArray(input.commands) || input.commands.length > 32) return fail('invalid-field');
   const cells: string[] = [...input.cells], templates: Template[] = [], ids = new Set<string>();
@@ -372,6 +386,15 @@ function replay(input: unknown) {
   if(energyProfile && (cells.includes(energyProfile.homeOwnerId)||templates.some(t=>t.id===energyProfile.homeOwnerId)
     || (encounterConfig ? energyProfile.homeOwnerId!==encounterConfig.homeOwnerId
       || !sameTechniques(energyProfile.enemyTechniqueIds,encounterConfig.enemyTechniqueIds??[]) : energyProfile.enemyTechniqueIds.length!==0)))return fail('energy-owner-or-enemy-genesis-mismatch');
+  let starvationProfile:StarvationProfile|undefined;
+  if(hasStarvation){
+    const sp=input.starvationProfile;
+    if(!record(sp)||!keys(sp,['profile','homeOwnerId','enemyOwnerId'])||sp.profile!=='inferred-whole-zero-food-tick-retain76-positive-v1'||!id(sp.homeOwnerId)
+      ||(sp.enemyOwnerId!==null&&!id(sp.enemyOwnerId))||cells.includes(sp.homeOwnerId)||templates.some(t=>t.id===sp.homeOwnerId)
+      ||(encounterConfig?(sp.homeOwnerId!==encounterConfig.homeOwnerId||sp.enemyOwnerId!==encounterConfig.enemyOwnerId||encounterConfig.enemyActors.some(e=>e.troops>60000)):sp.enemyOwnerId!==null)
+      ||(energyProfile&&sp.homeOwnerId!==energyProfile.homeOwnerId))return fail('invalid-starvation-profile-or-roster-domain');
+    starvationProfile={profile:sp.profile,homeOwnerId:sp.homeOwnerId,enemyOwnerId:sp.enemyOwnerId};
+  }
   let effectiveProfile:EffectiveProfile|undefined;
   if(hasEffective){
     const ep=input.effectiveProfile;
@@ -418,7 +441,7 @@ function replay(input: unknown) {
   const terrainWithCaps=(v:unknown)=>energyProfile?projectRosterTerrainEntryWithEnergyCaps(v,energyCaps()):projectRosterTerrainEntry(v);
   const rockfallWithCaps=(v:unknown)=>energyProfile?projectRosterRockfallWithEnergyCaps(v,energyCaps()):projectRosterRockfall(v);
   const fireEntryWithCaps=(v:unknown)=>energyProfile?projectNeutralFireEntryWithEnergyCaps(v,energyCaps()):projectNeutralFireEntry(v);
-  const recoveryWithCaps=(v:unknown)=>energyProfile?projectRosterRecoveryAfterFireWithEnergyCaps(v,energyCaps()):projectRosterRecoveryAfterFire(v);
+  const recoveryWithCaps=(v:unknown)=>starvationProfile?projectRosterRecoveryAfterFireAndStarvation(v,energyProfile?energyCaps():undefined):energyProfile?projectRosterRecoveryAfterFireWithEnergyCaps(v,energyCaps()):projectRosterRecoveryAfterFire(v);
   const combatWithCaps=(v:unknown)=>effectiveProfile?projectNeutralFieldActionWithEffectiveAttributes(v,Boolean(energyProfile)):energyProfile?projectNeutralFieldActionWithResearchedEnergy(v):projectNeutralFieldAction(v);
   let fires: Fire[] = [], turn = 0, fireDamageEvents = 0;
   const commands: Command[] = [], usedCommands = new Set<string>(), usedFires = new Set<string>(), receipts = [];
@@ -426,6 +449,12 @@ function replay(input: unknown) {
     const command = commandFrom(raw);
     if (!command || command.expectedRevision !== commands.length || usedCommands.has(command.id)) return fail('invalid-command-history');
     const step = command.action.kind === 'OuterStep' ? command.action : null;
+    if(starvationProfile){
+      if(!step)return fail('starvation-requires-owner-step');
+      if(step.fieldAction?.kind==='FieldTick'){
+        if(!step.starvationBoundary||step.starvationBoundary.turnBefore!==turn)return fail('starvation-boundary-required');
+      }else if(step.starvationBoundary)return fail('starvation-boundary-only-on-tick');
+    }else if(step?.starvationBoundary)return fail('starvation-profile-not-enabled');
     if(effectiveProfile){
       if(!step?.effectiveFactsUpdates)return fail('effective-owner-step-required');
       for(const update of step.effectiveFactsUpdates){
@@ -461,6 +490,7 @@ function replay(input: unknown) {
       const index = templates.findIndex(t => t.id === a.actorId), config = templates[index], current = roles[index];
       if (!homeIds.has(a.actorId) || !config || !current || current.acted) return fail('role-change-not-eligible');
       if (a.kind === 'Deploy') {
+        if(starvationProfile&&a.troops>60000)return fail('starvation-positive-troop-domain');
         if(!uint(a.energy,capFor(a.actorId)))return fail('deploy-energy-exceeds-current-cap');
         if (current.role !== 'resident' || !config.available || roster.some(u => u.cellId === config.entryCellId) || fires.some(f => f.cellId === config.entryCellId)) return fail('actor-not-deployable');
         roles[index] = { role: 'deployed', id: current.id, cellId: config.entryCellId, troops: a.troops,
@@ -540,10 +570,27 @@ function replay(input: unknown) {
       receipts.push({ commandId: command.id, kind: a.kind, turn, before, after: roles.map(u => ({ ...u })),
         movementReceipt: moved, entryReceipt, firesBefore, firesAfter: fires });
     } else if (a.kind === 'FieldTick') {
+      let settledStarvationPatches:{actorId:string;troopsBefore:number;troopsAfter:number}[]=[];
+      const settleStarvation=(proposed:Unit[])=>{
+        if(!starvationProfile||!step?.starvationBoundary)return {ok:true as const,roster:proposed};
+        const boundary=step.starvationBoundary;
+        if(fireDamageEvents+boundary.eligibleActorIds.length>256)return fail('cumulative-hazard-budget');
+        const projected=projectSyntheticStarvationBoundary({turn,eligibleActorIds:boundary.eligibleActorIds,
+          currentRoster:roles.map(r=>({id:r.id,ownerId:homeIds.has(r.id)?starvationProfile.homeOwnerId:starvationProfile.enemyOwnerId!,role:r.role,
+            troops:r.role==='resident'?0:proposed.find(u=>u.id===r.id)!.troops})),foodAllocations:boundary.foodAllocations},
+          {profile:starvationProfile.profile});
+        if(!projected.ok)return projected;
+        const next=proposed.map(u=>{const patch=projected.troopPatches.find(p=>p.actorId===u.id);return patch?{...u,troops:patch.troopsAfter}:u;});
+        settledStarvationPatches=projected.troopPatches.map(p=>({actorId:p.actorId,troopsBefore:p.troopsBefore,troopsAfter:p.troopsAfter}));
+        fireDamageEvents+=projected.troopPatches.length;
+        receipts.push({commandId:command.id,kind:'StarvationBoundary',turn,starvation:projected});
+        return {ok:true as const,roster:next};
+      }
       if (roster.length === 0) {
         if (a.draws.length !== 0) return fail('empty-field-requires-empty-draws');
         // No fake target and no new duration draw: exact remaining-life transition only.
         fires = fires.filter(f => f.remainingTicks > 1).map(f => ({ ...f, remainingTicks: f.remainingTicks - 1 }));
+        const starvation=settleStarvation(roster);if(!starvation.ok)return starvation;roster=starvation.roster;
       } else {
         const session = fireProjection(cells, roster, fires); if (!session.ok) return session;
         const affected = roster.filter(u => fires.some(f => f.cellId === u.cellId)).length;
@@ -551,11 +598,14 @@ function replay(input: unknown) {
         const burned = executeInferredFireLifecycle(session.state, { id: 'synthetic-field-tick', expectedRevision: session.revision,
           action: { kind: 'Tick', draws: a.draws } });
         if (!burned.ok) return burned;
-        const proposed = roster.map(u => ({ ...u, troops: burned.targets.find(t => t.id === u.id)!.value }));
+        let proposed = roster.map(u => ({ ...u, troops: burned.targets.find(t => t.id === u.id)!.value }));
+        fireDamageEvents+=affected;
+        const starvation=settleStarvation(proposed);if(!starvation.ok)return starvation;proposed=starvation.roster;
         if(hazardConfig){
           const recovery=recoveryWithCaps({map:movementMap,roster:hazardRoster(proposed),activeFireCellIds:burned.fires.map(f=>f.cellId),
             goals:proposed.map(u=>({actorId:u.id,cellId:templates.find(t=>t.id===u.id)!.entryCellId})),turn,
-            settledFirePhase:{turn,actorIds:proposed.map(u=>u.id),actorTroops:proposed.map(u=>({id:u.id,troops:u.troops})),remainingFireCellIds:burned.fires.map(f=>f.cellId)}});
+            settledFirePhase:{turn,actorIds:proposed.map(u=>u.id),actorTroops:roster.map(u=>({id:u.id,troops:burned.targets.find(t=>t.id===u.id)!.value})),remainingFireCellIds:burned.fires.map(f=>f.cellId)},
+            ...(starvationProfile?{settledStarvationPhase:{turn,troopPatches:settledStarvationPatches}}:{})});
           if(!recovery.ok)return recovery;
           roster=proposed.map(u=>{const v=recovery.roster.find(v=>v.id===u.id)!;return {...u,cellId:v.cellId,acted:v.acted,condition:condition(v.status,v.remaining),movementBudget:movementProfiles.find(p=>p.actorId===u.id)!.turnBudget};});
           receipts.push({commandId:command.id,kind:'AfterFireRecovery',turn,recovery});
@@ -566,7 +616,7 @@ function replay(input: unknown) {
           roster = proposed.map(u => { const v = advanced.units.find(t => t.id === u.id)!;
             return { ...u, troops: v.troops, acted: v.acted, condition:condition(v.confusedTurns>0?'confused':'normal',v.confusedTurns), movementBudget: movementProfiles.find(p => p.actorId === u.id)!.turnBudget }; });
         }
-        fires = burned.fires; fireDamageEvents += affected;
+        fires = burned.fires;
       }
       roles = roles.map(u => { if (u.role === 'resident') return { ...u, acted: false };
         return { role: 'deployed', ...roster.find(t => t.id === u.id)! }; });
@@ -634,14 +684,14 @@ function replay(input: unknown) {
     if(roles.some(u=>u.role==='deployed'&&!uint(u.energy,capFor(u.id))))return fail('result-energy-exceeds-researched-cap');
     commands.push(command); usedCommands.add(command.id);
   }
-  const state: State = { schema: 'inferred-cultivated-mobile-field-v4', cells, templates:homeTemplates, movementMap, movementProfiles:homeProfiles, cultivationBaseline:homeFacts, ...(hadEncounter?{encounterConfig}:{}), ...(hadHazard?{hazardConfig}:{}), ...(energyProfile?{energyProfile}:{}), ...(effectiveProfile?{effectiveProfile}:{}), commands };
+  const state: State = { schema: 'inferred-cultivated-mobile-field-v4', cells, templates:homeTemplates, movementMap, movementProfiles:homeProfiles, cultivationBaseline:homeFacts, ...(hadEncounter?{encounterConfig}:{}), ...(hadHazard?{hazardConfig}:{}), ...(energyProfile?{energyProfile}:{}), ...(effectiveProfile?{effectiveProfile}:{}), ...(starvationProfile?{starvationProfile}:{}), commands };
   if (JSON.stringify(state).length > 100000) return fail('save-budget');
   return frozen({ ok: true as const, state, revision: commands.length, turn, roster: roles.map(u=>u.role==='resident'?u:{...u,confusedTurns:u.condition.kind==='confused'?u.condition.remaining:0}), currentFacts, ...(effectiveProfile?{currentEffectiveFacts}:{}), homeActorIds:[...homeIds], enemyActorIds:encounterConfig?.enemyActors.map(e=>e.template.id) ?? [], enemyInitialTroopBudget:encounterConfig?.enemyTroopBudget ?? 0, fires, fireDamageEvents, hazardEvents:fireDamageEvents, consumedRockfallIds:[...usedRockfalls], receipts, ...(energyProfile?{currentEnergyTechniquesByOwner:[{ownerId:energyProfile.homeOwnerId,techniques:[...homeEnergyTechniques]},...(encounterConfig?[{ownerId:encounterConfig.enemyOwnerId,techniques:[...energyProfile.enemyTechniqueIds]}]:[])],energyCapsByActor:templates.map(t=>({actorId:t.id,cap:capFor(t.id)}))}:{}),
     policyId: 'inferred-cultivated-mobile-field-proposal-v4' as const, proposalOnly: true as const,
     cityConservationVerified: false as const, campaignWorldWritten: false as const, nativeWorldVerified: false as const });
 }
 export function readInferredCultivatedMobileField(input: unknown) { try { return replay(detach(input)); } catch { return fail('invalid-data-input'); } }
-export function createInferredCultivatedMobileField(cells: unknown, templates: unknown, movementMap: unknown, movementProfiles: unknown, cultivationBaseline: unknown, encounterConfig?: unknown, hazardConfig?:unknown, energyProfile?:unknown, effectiveProfile?:unknown) { return readInferredCultivatedMobileField({ schema: 'inferred-cultivated-mobile-field-v4', cells, templates, movementMap, movementProfiles, cultivationBaseline, ...(encounterConfig===undefined?{}:{encounterConfig}), ...(hazardConfig===undefined?{}:{hazardConfig}), ...(energyProfile===undefined?{}:{energyProfile}), ...(effectiveProfile===undefined?{}:{effectiveProfile}), commands: [] }); }
+export function createInferredCultivatedMobileField(cells: unknown, templates: unknown, movementMap: unknown, movementProfiles: unknown, cultivationBaseline: unknown, encounterConfig?: unknown, hazardConfig?:unknown, energyProfile?:unknown, effectiveProfile?:unknown, starvationProfile?:unknown) { return readInferredCultivatedMobileField({ schema: 'inferred-cultivated-mobile-field-v4', cells, templates, movementMap, movementProfiles, cultivationBaseline, ...(encounterConfig===undefined?{}:{encounterConfig}), ...(hazardConfig===undefined?{}:{hazardConfig}), ...(energyProfile===undefined?{}:{energyProfile}), ...(effectiveProfile===undefined?{}:{effectiveProfile}), ...(starvationProfile===undefined?{}:{starvationProfile}), commands: [] }); }
 export function executeInferredCultivatedMobileField(input: unknown, rawCommand: unknown) {
   const current = readInferredCultivatedMobileField(input); if (!current.ok) return current;
   let clean: unknown; try { clean = detach(rawCommand); } catch { return fail('invalid-data-command'); }

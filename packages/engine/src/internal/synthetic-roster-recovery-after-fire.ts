@@ -83,13 +83,27 @@ function hazard(c: Context, u: Unit, traits: { traverse: boolean; antidote: bool
     traits, defenseTier: 3, auras: [], fires: [], rng: { kind: 'bounded-tape-v1', draws, cursor: 0 }, policy: DETACHED_HAZARD_POLICY });
 }
 const noTraits = { traverse: false, antidote: false, difficultMarch: false };
-function retreat(input: unknown, energyCaps?: SyntheticEnergyCaps) {
-  if (!record(input) || !keys(input, ['map', 'roster', 'activeFireCellIds', 'goals', 'turn', 'settledFirePhase']) || !Array.isArray(input.goals)
+function retreat(input: unknown, energyCaps?: SyntheticEnergyCaps, afterStarvation=false) {
+  if (!record(input) || !keys(input, ['map', 'roster', 'activeFireCellIds', 'goals', 'turn', 'settledFirePhase',...(afterStarvation?['settledStarvationPhase']:[])]) || !Array.isArray(input.goals)
     || !uint(input.turn, 1000000)) return fail('invalid-retreat-proposal');
   if(!record(input.settledFirePhase)||!keys(input.settledFirePhase,['turn','actorIds','actorTroops','remainingFireCellIds'])
     ||!Array.isArray(input.settledFirePhase.actorTroops)||input.settledFirePhase.turn!==input.turn||!Array.isArray(input.settledFirePhase.actorIds)||!Array.isArray(input.settledFirePhase.remainingFireCellIds))return fail('missing-settled-fire-phase');
   const c = context(input, energyCaps); if (!c) return fail('invalid-roster-context');
-  if(JSON.stringify(input.settledFirePhase.actorTroops)!==JSON.stringify(c.roster.map(u=>({id:u.id,troops:u.troops})))
+  let expectedTroops=c.roster.map(u=>({id:u.id,troops:u.troops}));
+  if(afterStarvation){
+    const phase=input.settledStarvationPhase;
+    if(!record(phase)||!keys(phase,['turn','troopPatches'])||phase.turn!==input.turn||!Array.isArray(phase.troopPatches)||phase.troopPatches.length>c.roster.length)return fail('missing-starvation-phase');
+    const seen=new Set<string>();
+    for(const patch of phase.troopPatches){
+      if(!record(patch)||!keys(patch,['actorId','troopsBefore','troopsAfter'])||!id(patch.actorId)||seen.has(patch.actorId)
+        ||!uint(patch.troopsBefore,60000)||patch.troopsBefore===0||!uint(patch.troopsAfter,60000)||patch.troopsAfter===0
+        ||Number(BigInt(patch.troopsBefore)*76n/100n)!==patch.troopsAfter)return fail('invalid-settled-starvation-patch');
+      const index=expectedTroops.findIndex(u=>u.id===patch.actorId);
+      if(index<0||expectedTroops[index]!.troops!==patch.troopsAfter)return fail('starvation-current-troops-mismatch');
+      expectedTroops[index]={id:patch.actorId,troops:patch.troopsBefore};seen.add(patch.actorId);
+    }
+  }
+  if(JSON.stringify(input.settledFirePhase.actorTroops)!==JSON.stringify(expectedTroops)
     ||JSON.stringify(input.settledFirePhase.actorIds)!==JSON.stringify(c.roster.map(u=>u.id))
     ||JSON.stringify(input.settledFirePhase.remainingFireCellIds)!==JSON.stringify(c.activeFireCellIds))return fail('settled-fire-phase-mismatch');
   const goals = new Map<string, string>();
@@ -132,3 +146,12 @@ function retreat(input: unknown, energyCaps?: SyntheticEnergyCaps) {
 export function projectRosterRecoveryAfterFire(input: unknown) { try { return retreat(detach(input)); } catch { return fail('invalid-data-input'); } }
 
 export function projectRosterRecoveryAfterFireWithEnergyCaps(input: unknown, rawCaps: unknown) { try { const caps=readSyntheticEnergyCaps(detach(rawCaps)); return caps ? retreat(detach(input), caps) : fail('invalid-derived-energy-caps'); } catch { return fail('invalid-data-input'); } }
+
+/** Internal ordered phase composition, never an independently authenticated food boundary. */
+export function projectRosterRecoveryAfterFireAndStarvation(input:unknown,rawCaps?:unknown){
+  try {
+    const caps=rawCaps===undefined?undefined:readSyntheticEnergyCaps(detach(rawCaps));
+    if(rawCaps!==undefined&&!caps)return fail('invalid-derived-energy-caps');
+    return retreat(detach(input),caps,true);
+  }catch{return fail('invalid-data-input');}
+}

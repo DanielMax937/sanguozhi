@@ -389,3 +389,11 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T40 统一owner每命令同步装备读视图且不改历史job参数（2026-10-30）
 
 [规则](unified-live-equipment-effective-v3.md)：完整action/资源/物品/有效视图同事务；旧默认保留，运行未验/原生资料仍待证 历史确认与证据原文保留。
+
+## T32 普通Attack真实反击与同状态火后恢复；固定同home港关正值耐久修复已接唯一WorldTick（本地未发布）（2026-10-30）
+
+[规则](unified-repair-starvation-owner-v3.md)：仅正值战斗；耐久实体维修未作为兵气替代；治理者只读basePK政治；固定site不建造迁移，耐久零/攻陷终结排除；静态待整批独审，非原生证据闭合 历史确认与证据原文保留。
+
+## T05 野战唯一粮分配随部署返城与逐Tick消费；完整零粮边界认证接火后正值76%饥饿及单次恢复（本地未发布）（2026-10-30）
+
+[规则](unified-repair-starvation-owner-v3.md)：旧无starvationConfig模式粮0仅报告不写兵损；显式启用完整零粮边界profile才按具名推断火后保留76%且要求正兵数；任意正粮入账清证，新Deploy首Tick不资格，归零整Tick拒绝，不接死亡伤病；非原生证据闭合，运行未验收 历史确认与证据原文保留。
