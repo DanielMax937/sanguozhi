@@ -1,3 +1,7 @@
+import { projectNeutralFieldAction } from './internal/synthetic-neutral-field-action.ts';
+import { projectRosterTerrainEntry, projectRosterRockfall } from './internal/synthetic-roster-hazard-leaves.ts';
+import { projectNeutralFireEntry } from './internal/synthetic-neutral-fire-entry.ts';
+import { projectRosterRecoveryAfterFire } from './internal/synthetic-roster-recovery-after-fire.ts';
 /** Opt-in cultivated roster. Full history replay; owner-only PK completion proposals. */
 import { qualifyPkStatTraining } from './pk-stat-training.ts';
 import { createInferredFireLifecycle, executeInferredFireLifecycle } from './inferred-fire-lifecycle.ts';
@@ -7,7 +11,8 @@ import { decideInferredStrategyHit } from './inferred-combat-requests.ts';
 type Strategy = 'fire' | 'ambush' | 'discord' | 'sorcery';
 type Template = Readonly<{ id: string; entryCellId: string; intelligence: number; strategies: readonly Strategy[];
   available: boolean; immune: boolean; guaranteed: boolean; beautyBonus: boolean }>;
-type Unit = { id: string; cellId: string; troops: number; energy: number; acted: boolean; confusedTurns: number; movementBudget: number };
+type Condition = {kind:'normal';remaining:0} | {kind:'confused'|'false-report';remaining:number};
+type Unit = { id: string; cellId: string; troops: number; energy: number; acted: boolean; condition:Condition; movementBudget: number };
 type Role = ({ role: 'deployed' } & Unit) | { role: 'resident'; id: string; acted: boolean };
 type Fire = Readonly<{ id: string; cellId: string; remainingTicks: number }>;
 type MovementCell = Readonly<{ id: string; terrainInfoU32: number; adjacent: readonly string[]; blocked: boolean; unsupportedContext: boolean; facilityPresent: boolean }>;
@@ -17,16 +22,24 @@ type Stat = 'leadership' | 'war' | 'intelligence' | 'politics' | 'charisma';
 type Aptitude = 'spear' | 'halberd' | 'crossbow' | 'cavalry' | 'siege' | 'navy';
 type Grade = 'C' | 'B' | 'A' | 'S';
 type Facts = Readonly<{ actorId: string; stats: Readonly<Record<Stat, number>>; aptitudes: Readonly<Record<Aptitude, Grade>>; skillKey: string | null }>;
-type NormalAction = Readonly<{ kind: 'FieldTick'; draws: readonly { targetId: string; draw: number }[] }>
-  | Readonly<{ kind: 'Move'; actorId: string; path: readonly string[] }>
+type CombatPanel = Readonly<{attack:number;defense:number}>;
+type CombatActor = Readonly<{id:string;ownerId:string;weapon:'sword'|'spear'|'halberd'|'crossbow'|'cavalry';panels:{normal:CombatPanel;confused:CombatPanel}}>;
+type CombatMap = Readonly<{qMin:number;qMax:number;rMin:number;rMax:number;cells:readonly {id:string;q:number;r:number;terrain:'plain'|'grass'|'sand'|'forest'|'wasteland'|'wetland'|'road';height:number;blocked:boolean}[]}>;
+type Enemy = Readonly<{template:Template;movementProfile:MovementProfile;facts:Facts;troops:number;energy:number}>;
+type Encounter = Readonly<{id:string;homeOwnerId:string;enemyOwnerId:string;enemyTroopBudget:number;enemyActors:readonly Enemy[];combatMap:CombatMap;combatActors:readonly CombatActor[];foodRaidMode?:'external-positive-proposal-v1';enemyTechniqueIds?:readonly number[]}>;
+type HazardConfig = Readonly<{rockfalls:readonly {id:string;footprint:readonly string[]}[]}>;
+type StageDraw = {stage:string;bound:100;value:number};
+type FireVisitDraw = {pathIndex:number;cellId:string;fireId:string;draw:number};
+type NormalAction = Readonly<{kind:'FalseReport';actorId:string;targetId:string;draws:readonly StageDraw[]}> | Readonly<{kind:'Rockfall';hazardId:string;draws:readonly {targetId:string;draw:number}[]}> | Readonly<{kind:'Attack';actorId:string;targetId:string;attackKind:'normal-melee'|'normal-arrow';draws?:readonly StageDraw[]}> | Readonly<{ kind: 'FieldTick'; draws: readonly { targetId: string; draw: number }[] }>
+  | Readonly<{ kind: 'Move'; actorId: string; path: readonly string[]; terrainDraws?:readonly number[]; fireDraws?:readonly FireVisitDraw[] }>
   | Readonly<{ kind: 'Deploy'; actorId: string; troops: number; energy: number }>
   | Readonly<{ kind: 'Return'; actorId: string }>
   | Readonly<{ kind: 'Cast'; casterId: string; strategy: Exclude<Strategy, 'fire'>; targets: readonly string[]; roll: number }>
   | Readonly<{ kind: 'FireCast'; casterId: string; cellId: string; fireId: string; roll: number; durationDraw: number }>;
-type OwnerStep = Readonly<{ kind: 'OuterStep'; sourceOuterCommandId: string; fieldAction: NormalAction | null; factsUpdates: readonly { before: Facts; after: Facts }[]; completionJobs: readonly { jobId: string; actorId: string }[] }>;
+type OwnerStep = Readonly<{ kind: 'OuterStep'; sourceOuterCommandId: string; fieldAction: NormalAction | null; factsUpdates: readonly { before: Facts; after: Facts }[]; completionJobs: readonly { jobId: string; actorId: string }[];combatTechniquesByOwner?:readonly {ownerId:string;techniques:readonly number[]}[] }>;
 type Action = NormalAction | OwnerStep;
 type Command = Readonly<{ id: string; expectedRevision: number; action: Action }>;
-type State = Readonly<{ schema: 'inferred-cultivated-mobile-field-v4'; cells: readonly string[]; templates: readonly Template[]; movementMap: MovementMap; movementProfiles: readonly MovementProfile[]; cultivationBaseline: readonly Facts[]; commands: readonly Command[] }>;
+type State = Readonly<{ schema: 'inferred-cultivated-mobile-field-v4'; cells: readonly string[]; templates: readonly Template[]; movementMap: MovementMap; movementProfiles: readonly MovementProfile[]; cultivationBaseline: readonly Facts[]; encounterConfig?: Encounter | null; hazardConfig?:HazardConfig|null; commands: readonly Command[] }>;
 const COST = Object.freeze({ fire: 10, ambush: 10, discord: 20, sorcery: 30 });
 const fail = (reason: string) => Object.freeze({ ok: false as const, reason });
 const uint = (v: unknown, max: number): v is number => typeof v === 'number' && Number.isSafeInteger(v) && !Object.is(v, -0) && v >= 0 && v <= max;
@@ -90,6 +103,69 @@ function factsFrom(v: unknown): Facts | undefined {
   return { actorId: v.actorId, stats: Object.fromEntries(STATS.map(k => [k, stats[k]])) as Record<Stat, number>,
     aptitudes: Object.fromEntries(APTITUDES.map(k => [k, aptitudes[k]])) as Record<Aptitude, Grade>, skillKey: v.skillKey };
 }
+function encounterFrom(input: unknown, cells: readonly string[], home: readonly Template[], profiles: readonly MovementProfile[], map: MovementMap): Encounter | null | undefined {
+  if (input === null) return null;
+  if (!record(input) || !(keys(input,['id','homeOwnerId','enemyOwnerId','enemyTroopBudget','enemyActors','combatMap','combatActors'])||keys(input,['id','homeOwnerId','enemyOwnerId','enemyTroopBudget','enemyActors','combatMap','combatActors','foodRaidMode','enemyTechniqueIds']))
+    || !id(input.id) || !id(input.homeOwnerId) || !id(input.enemyOwnerId) || input.homeOwnerId===input.enemyOwnerId
+    || !uint(input.enemyTroopBudget,8000000) || input.enemyTroopBudget===0 || !Array.isArray(input.enemyActors)
+    || input.enemyActors.length<1 || home.length+input.enemyActors.length>8 || !Array.isArray(input.combatActors)) return undefined;
+  if(Object.hasOwn(input,'foodRaidMode')&&(input.foodRaidMode!=='external-positive-proposal-v1'||!Array.isArray(input.enemyTechniqueIds)||input.enemyTechniqueIds.length>36||!input.enemyTechniqueIds.every(t=>uint(t,35))||new Set(input.enemyTechniqueIds).size!==input.enemyTechniqueIds.length))return undefined;
+  const owners=[input.homeOwnerId,input.enemyOwnerId], enemyActors:Enemy[]=[], allIds=home.map(t=>t.id), positions=new Set<string>();
+  if (owners.some(o=>cells.includes(o)||allIds.includes(o)) || owners.includes(input.id)) return undefined;
+  for (const raw of input.enemyActors) {
+    if (!record(raw)||!keys(raw,['template','movementProfile','facts','troops','energy'])||!record(raw.template)||!record(raw.movementProfile)
+      ||!uint(raw.troops,1000000)||raw.troops===0||!uint(raw.energy,100)) return undefined;
+    const t=raw.template,p=raw.movementProfile,f=factsFrom(raw.facts);
+    if (!keys(t,['id','entryCellId','intelligence','strategies','available','immune','guaranteed','beautyBonus'])||!id(t.id)||allIds.includes(t.id)
+      ||owners.includes(t.id)||cells.includes(t.id)||!id(t.entryCellId)||positions.has(t.entryCellId)||!uint(t.intelligence,100)
+      ||!Array.isArray(t.strategies)||t.strategies.length>4||!t.strategies.every(strategy)||new Set(t.strategies).size!==t.strategies.length
+      ||typeof t.available!=='boolean'||typeof t.immune!=='boolean'||typeof t.guaranteed!=='boolean'||typeof t.beautyBonus!=='boolean'
+      ||!f||f.actorId!==t.id||!keys(p,['actorId','landEquipmentId','navalEquipmentId','turnBudget'])||p.actorId!==t.id
+      ||!uint(p.landEquipmentId,8)||!uint(p.navalEquipmentId,11)||p.navalEquipmentId<9||!uint(p.turnBudget,255)||p.turnBudget===0) return undefined;
+    const entry=map.cells.find(c=>c.id===t.entryCellId);
+    if (!entry||entry.blocked||entry.unsupportedContext||entry.facilityPresent) return undefined;
+    allIds.push(t.id);positions.add(t.entryCellId);
+    enemyActors.push({template:{id:t.id,entryCellId:t.entryCellId,intelligence:t.intelligence,strategies:[...t.strategies] as Strategy[],
+      available:t.available,immune:t.immune,guaranteed:t.guaranteed,beautyBonus:t.beautyBonus},
+      movementProfile:{actorId:t.id,landEquipmentId:p.landEquipmentId,navalEquipmentId:p.navalEquipmentId,turnBudget:p.turnBudget},facts:f,troops:raw.troops,energy:raw.energy});
+  }
+  if (enemyActors.reduce((n,e)=>n+e.troops,0)!==input.enemyTroopBudget) return undefined;
+  const m=input.combatMap;
+  if(!record(m)||!keys(m,['qMin','qMax','rMin','rMax','cells'])||!uint(m.qMin,15)||!uint(m.qMax,15)||m.qMax<m.qMin
+    ||!uint(m.rMin,15)||!uint(m.rMax,15)||m.rMax<m.rMin||!Array.isArray(m.cells)||m.cells.length!==cells.length
+    ||(m.qMax-m.qMin+1)*(m.rMax-m.rMin+1)!==cells.length) return undefined;
+  const combatCells:CombatMap['cells'][number][]=[],coords=new Set<string>();
+  for(const raw of m.cells){
+    if(!record(raw)||!keys(raw,['id','q','r','terrain','height','blocked'])||!id(raw.id)||!cells.includes(raw.id)||allIds.includes(raw.id)
+      ||combatCells.some(c=>c.id===raw.id)||!uint(raw.q,m.qMax)||raw.q<m.qMin||!uint(raw.r,m.rMax)||raw.r<m.rMin
+      ||coords.has(`${raw.q},${raw.r}`)||!['plain','grass','sand','forest','wasteland','wetland','road'].includes(raw.terrain as string)
+      ||!uint(raw.height,255)||typeof raw.blocked!=='boolean'||raw.blocked!==map.cells.find(c=>c.id===raw.id)!.blocked) return undefined;
+    coords.add(`${raw.q},${raw.r}`);combatCells.push({id:raw.id,q:raw.q,r:raw.r,terrain:raw.terrain as CombatMap['cells'][number]['terrain'],height:raw.height,blocked:raw.blocked});
+  }
+  // Explicit neutral-ground bridge: one cell identity and geometry across movement and attack.
+  if(map.cells.some(c=>c.terrainInfoU32!==0||c.unsupportedContext||c.facilityPresent)||combatCells.some(c=>c.terrain!=='plain'))return undefined;
+  for(const c of map.cells){
+    const from=combatCells.find(x=>x.id===c.id)!;
+    for(const next of c.adjacent){const to=combatCells.find(x=>x.id===next)!;const q=from.q-to.q,r=from.r-to.r;
+      if(Math.max(Math.abs(q),Math.abs(r),Math.abs(q+r))!==1)return undefined;}
+  }
+  const combatActors:CombatActor[]=[];
+  for(const raw of input.combatActors){
+    if(!record(raw)||!keys(raw,['id','ownerId','weapon','panels'])||!id(raw.id)||!allIds.includes(raw.id)||combatActors.some(a=>a.id===raw.id)
+      ||raw.ownerId!==(home.some(t=>t.id===raw.id)?input.homeOwnerId:input.enemyOwnerId)
+      ||!['sword','spear','halberd','crossbow','cavalry'].includes(raw.weapon as string)||!record(raw.panels)||!keys(raw.panels,['normal','confused'])) return undefined;
+    const normal=raw.panels.normal,confused=raw.panels.confused;
+    if(!record(normal)||!keys(normal,['attack','defense'])||!uint(normal.attack,255)||!uint(normal.defense,255)
+      ||!record(confused)||!keys(confused,['attack','defense'])||!uint(confused.attack,255)||!uint(confused.defense,255))return undefined;
+    const movement=profiles.find(p=>p.actorId===raw.id) ?? enemyActors.find(e=>e.template.id===raw.id)?.movementProfile;
+    if(!movement || ['sword','spear','halberd','crossbow','cavalry'][movement.landEquipmentId]!==raw.weapon)return undefined;
+    combatActors.push({id:raw.id,ownerId:raw.ownerId as string,weapon:raw.weapon as CombatActor['weapon'],
+      panels:{normal:{attack:normal.attack,defense:normal.defense},confused:{attack:confused.attack,defense:confused.defense}}});
+  }
+  if(combatActors.length!==allIds.length)return undefined;
+  return {id:input.id,homeOwnerId:input.homeOwnerId,enemyOwnerId:input.enemyOwnerId,enemyTroopBudget:input.enemyTroopBudget,enemyActors,
+    combatMap:{qMin:m.qMin,qMax:m.qMax,rMin:m.rMin,rMax:m.rMax,cells:combatCells},combatActors,...(Object.hasOwn(input,'foodRaidMode')?{foodRaidMode:'external-positive-proposal-v1' as const,enemyTechniqueIds:[...(input.enemyTechniqueIds as number[])]}:{})};
+}
 const sameFacts = (a: Facts, b: Facts) => JSON.stringify(a) === JSON.stringify(b);
 /** Uses the existing ordinary-no-age getter domain, not talent alone or a new growth formula. */
 export function resolveSyntheticCultivationFacts(input: unknown) {
@@ -111,7 +187,7 @@ export function resolveSyntheticCultivationFacts(input: unknown) {
 function commandFrom(v: unknown): Command | undefined {
   if (!record(v) || !keys(v, ['id', 'expectedRevision', 'action']) || !id(v.id) || !uint(v.expectedRevision, 31) || !record(v.action)) return undefined;
   const a = v.action; let action: Action;
-  if (a.kind === 'OuterStep' && keys(a, ['kind', 'sourceOuterCommandId', 'fieldAction', 'factsUpdates', 'completionJobs'])
+  if (a.kind === 'OuterStep' && (keys(a, ['kind', 'sourceOuterCommandId', 'fieldAction', 'factsUpdates', 'completionJobs'])||keys(a,['kind','sourceOuterCommandId','fieldAction','factsUpdates','completionJobs','combatTechniquesByOwner']))
     && a.sourceOuterCommandId === v.id && Array.isArray(a.factsUpdates) && a.factsUpdates.length <= 8
     && Array.isArray(a.completionJobs) && a.completionJobs.length <= 8) {
     let fieldAction: NormalAction | null = null;
@@ -136,7 +212,29 @@ function commandFrom(v: unknown): Command | undefined {
         || completionJobs.some(x => x.jobId === raw.jobId || x.actorId === raw.actorId)) return undefined;
       completionJobs.push({jobId: raw.jobId, actorId: raw.actorId});
     }
-    action = {kind: a.kind, sourceOuterCommandId: a.sourceOuterCommandId as string, fieldAction, factsUpdates, completionJobs};
+    const combatTechniquesByOwner:{ownerId:string;techniques:number[]}[]=[];
+    if(Object.hasOwn(a,'combatTechniquesByOwner')){
+      if(!Array.isArray(a.combatTechniquesByOwner)||a.combatTechniquesByOwner.length!==2)return undefined;
+      for(const t of a.combatTechniquesByOwner){if(!record(t)||!keys(t,['ownerId','techniques'])||!id(t.ownerId)||combatTechniquesByOwner.some(x=>x.ownerId===t.ownerId)
+        ||!Array.isArray(t.techniques)||t.techniques.length>36||!t.techniques.every(x=>uint(x,35))||new Set(t.techniques).size!==t.techniques.length)return undefined;
+        combatTechniquesByOwner.push({ownerId:t.ownerId,techniques:[...t.techniques] as number[]});}
+    }
+    action = {kind: a.kind, ...(Object.hasOwn(a,'combatTechniquesByOwner')?{combatTechniquesByOwner}:{}), sourceOuterCommandId: a.sourceOuterCommandId as string, fieldAction, factsUpdates, completionJobs};
+  } else if (a.kind === 'FalseReport' && keys(a,['kind','actorId','targetId','draws']) && id(a.actorId)&&id(a.targetId)&&a.actorId!==a.targetId
+    && Array.isArray(a.draws)&&a.draws.length<=3) {
+    const draws:StageDraw[]=[];
+    for(const d of a.draws){if(!record(d)||!keys(d,['stage','bound','value'])||!['strategy.hit','strategy.critical','strategy.duration'].includes(d.stage as string)||d.bound!==100||!uint(d.value,99))return undefined;draws.push({stage:d.stage as string,bound:100,value:d.value});}
+    action={kind:a.kind,actorId:a.actorId,targetId:a.targetId,draws};
+  } else if (a.kind === 'Rockfall' && keys(a,['kind','hazardId','draws'])&&id(a.hazardId)&&Array.isArray(a.draws)&&a.draws.length<=8){
+    const draws:{targetId:string;draw:number}[]=[];
+    for(const d of a.draws){if(!record(d)||!keys(d,['targetId','draw'])||!id(d.targetId)||!uint(d.draw,999))return undefined;draws.push({targetId:d.targetId,draw:d.draw});}
+    action={kind:a.kind,hazardId:a.hazardId,draws};
+  } else if (a.kind === 'Attack' && (keys(a, ['kind','actorId','targetId','attackKind'])||keys(a,['kind','actorId','targetId','attackKind','draws'])) && id(a.actorId) && id(a.targetId)
+    && a.actorId !== a.targetId && (a.attackKind === 'normal-melee' || a.attackKind === 'normal-arrow')) {
+    const draws:StageDraw[]=[];
+    if(Object.hasOwn(a,'draws')){if(!Array.isArray(a.draws)||a.draws.length>8)return undefined;
+      for(const d of a.draws){if(!record(d)||!keys(d,['stage','bound','value'])||typeof d.stage!=='string'||!/^(attack\.[0-7]\.(shield|critical)|reaction\.(shield|critical|avoid))$/.test(d.stage)||d.bound!==100||!uint(d.value,99))return undefined;draws.push({stage:d.stage,bound:100,value:d.value});}}
+    action = {kind:a.kind,actorId:a.actorId,targetId:a.targetId,attackKind:a.attackKind,...(Object.hasOwn(a,'draws')?{draws}:{})};
   } else if (a.kind === 'FieldTick' && keys(a, ['kind', 'draws']) && Array.isArray(a.draws) && a.draws.length <= 8) {
     const draws: { targetId: string; draw: number }[] = [];
     for (const d of a.draws) { if (!record(d) || !keys(d, ['targetId', 'draw']) || !id(d.targetId) || !uint(d.draw, 200)) return undefined; draws.push({ targetId: d.targetId, draw: d.draw }); }
@@ -149,9 +247,13 @@ function commandFrom(v: unknown): Command | undefined {
   } else if (a.kind === 'FireCast' && keys(a, ['kind', 'casterId', 'cellId', 'fireId', 'roll', 'durationDraw'])
     && id(a.casterId) && id(a.cellId) && id(a.fireId) && uint(a.roll, 99) && uint(a.durationDraw, 99)) {
     action = { kind: a.kind, casterId: a.casterId, cellId: a.cellId, fireId: a.fireId, roll: a.roll, durationDraw: a.durationDraw };
-  } else if (a.kind === 'Move' && keys(a, ['kind', 'actorId', 'path']) && id(a.actorId)
+  } else if (a.kind === 'Move' && (keys(a, ['kind', 'actorId', 'path']) || keys(a,['kind','actorId','path','terrainDraws','fireDraws'])) && id(a.actorId)
     && Array.isArray(a.path) && a.path.length > 0 && a.path.length <= 16 && a.path.every(id)) {
-    action = { kind: a.kind, actorId: a.actorId, path: [...a.path] };
+    const terrainDraws=a.terrainDraws??[],fireDraws=a.fireDraws??[];
+    if(!Array.isArray(terrainDraws)||terrainDraws.length>16||!terrainDraws.every(v=>uint(v,199))||!Array.isArray(fireDraws)||fireDraws.length>16)return undefined;
+    const parsed:FireVisitDraw[]=[];
+    for(const d of fireDraws){if(!record(d)||!keys(d,['pathIndex','cellId','fireId','draw'])||!uint(d.pathIndex,15)||!id(d.cellId)||!id(d.fireId)||!uint(d.draw,200))return undefined;parsed.push({pathIndex:d.pathIndex,cellId:d.cellId,fireId:d.fireId,draw:d.draw});}
+    action = { kind: a.kind, actorId: a.actorId, path: [...a.path], ...(Object.hasOwn(a,'terrainDraws')?{terrainDraws:[...terrainDraws],fireDraws:parsed}:{}) };
   } else if (a.kind === 'Deploy' && keys(a, ['kind', 'actorId', 'troops', 'energy']) && id(a.actorId)
     && uint(a.troops, 1000000) && a.troops > 0 && uint(a.energy, 100)) {
     action = { kind: a.kind, actorId: a.actorId, troops: a.troops, energy: a.energy };
@@ -177,11 +279,16 @@ function fireProjection(cells: readonly string[], roster: readonly Unit[], fires
   return session;
 }
 function effectProjection(roster: readonly Unit[]) {
-  return createInferredStrategyEffects(roster.map(u => ({ id: u.id, troops: u.troops, acted: u.acted, confusedTurns: u.confusedTurns })));
+  return createInferredStrategyEffects(roster.map(u => ({ id: u.id, troops: u.troops, acted: u.acted, confusedTurns: u.condition.kind==='confused'?u.condition.remaining:0 })));
 }
+function hazardRoster(roster:readonly Unit[]) {return roster.map(u=>({id:u.id,cellId:u.cellId,troops:u.troops,energy:u.energy,acted:u.acted,status:u.condition.kind,remaining:u.condition.remaining}));}
+function condition(status:'normal'|'confused'|'false-report',remaining:number):Condition{return status==='normal'?{kind:'normal',remaining:0}:{kind:status,remaining};}
 /** Proposal replay only: city inventory/actor eligibility is a mandatory outer-world check. */
 function replay(input: unknown) {
-  if (!record(input) || !keys(input, ['schema', 'cells', 'templates', 'movementMap', 'movementProfiles', 'cultivationBaseline', 'commands']) || input.schema !== 'inferred-cultivated-mobile-field-v4'
+  const hadEncounter=record(input)&&Object.hasOwn(input,'encounterConfig'),hadHazard=record(input)&&Object.hasOwn(input,'hazardConfig');
+  if (record(input) && !Object.hasOwn(input, 'encounterConfig')) input = {...input, encounterConfig:null};
+  if (record(input) && !Object.hasOwn(input, 'hazardConfig')) input = {...input,hazardConfig:null};
+  if (!record(input) || !keys(input, ['schema', 'cells', 'templates', 'movementMap', 'movementProfiles', 'cultivationBaseline', 'encounterConfig', 'hazardConfig', 'commands']) || input.schema !== 'inferred-cultivated-mobile-field-v4'
     || !Array.isArray(input.cells) || input.cells.length < 1 || input.cells.length > 16 || !input.cells.every(id) || new Set(input.cells).size !== input.cells.length
     || !Array.isArray(input.templates) || input.templates.length < 1 || input.templates.length > 8 || !Array.isArray(input.commands) || input.commands.length > 32) return fail('invalid-field');
   const cells: string[] = [...input.cells], templates: Template[] = [], ids = new Set<string>();
@@ -224,8 +331,32 @@ function replay(input: unknown) {
     movementProfiles.push({ actorId: t.id, landEquipmentId: p.landEquipmentId, navalEquipmentId: p.navalEquipmentId, turnBudget: p.turnBudget });
   }
   const movementMap: MovementMap = { id: input.movementMap.id, cells: mapCells };
+  const homeTemplates = [...templates], homeProfiles = [...movementProfiles], homeFacts = [...cultivationBaseline];
+  const encounterConfig = encounterFrom(input.encounterConfig, cells, templates, movementProfiles, movementMap);
+  if (encounterConfig === undefined) return fail('invalid-encounter-config');
+  let hazardConfig:HazardConfig|null=null;
+  if(input.hazardConfig!==null){
+    if(!record(input.hazardConfig)||!keys(input.hazardConfig,['rockfalls'])||!Array.isArray(input.hazardConfig.rockfalls)||input.hazardConfig.rockfalls.length>16)return fail('invalid-hazard-config');
+    const rockfalls:{id:string;footprint:string[]}[]=[];
+    for(const h of input.hazardConfig.rockfalls){if(!record(h)||!keys(h,['id','footprint'])||!id(h.id)||rockfalls.some(x=>x.id===h.id)
+      ||!Array.isArray(h.footprint)||h.footprint.length<1||h.footprint.length>16||!h.footprint.every(v=>id(v)&&mapCells.some(c=>c.id===v&&!c.blocked&&!c.unsupportedContext&&!c.facilityPresent))||new Set(h.footprint).size!==h.footprint.length)return fail('invalid-rockfall-genesis');
+      rockfalls.push({id:h.id,footprint:[...h.footprint] as string[]});}
+    hazardConfig={rockfalls};
+  }
+  const usedRockfalls=new Set<string>();
+  const homeIds = new Set(homeTemplates.map(t => t.id));
+  if (encounterConfig) {
+    for (const enemy of encounterConfig.enemyActors) {
+      templates.push(enemy.template); movementProfiles.push(enemy.movementProfile); currentFacts.push(enemy.facts);
+    }
+  }
+  if(hazardConfig && templates.some(t=>mapCells.find(c=>c.id===t.entryCellId)!.terrainInfoU32!==0))return fail('hazard-recovery-requires-plain-entry');
   // Residents have no troop or energy balance. Stable identities survive all role changes.
-  let roles: Role[] = templates.map(a => ({ role: 'resident', id: a.id, acted: false }));
+  let roles: Role[] = templates.map(a => {
+    const enemy = encounterConfig?.enemyActors.find(e => e.template.id === a.id);
+    return enemy ? {role:'deployed',id:a.id,cellId:a.entryCellId,troops:enemy.troops,energy:enemy.energy,acted:false,condition:{kind:'normal',remaining:0},
+      movementBudget:enemy.movementProfile.turnBudget} : {role:'resident',id:a.id,acted:false};
+  });
   let fires: Fire[] = [], turn = 0, fireDamageEvents = 0;
   const commands: Command[] = [], usedCommands = new Set<string>(), usedFires = new Set<string>(), receipts = [];
   for (const raw of input.commands) {
@@ -237,11 +368,11 @@ function replay(input: unknown) {
     const factsBefore = [...currentFacts];
     if (step) {
       for (const job of step.completionJobs) {
-        if (usedCultivationJobs.has(job.jobId) || roles.find(r => r.id === job.actorId)?.role !== 'resident') return fail('cultivation-completion-mismatch');
+        if (!homeIds.has(job.actorId) || usedCultivationJobs.has(job.jobId) || roles.find(r => r.id === job.actorId)?.role !== 'resident') return fail('cultivation-completion-mismatch');
       }
       for (const update of step.factsUpdates) {
         const index = currentFacts.findIndex(f => f.actorId === update.before.actorId);
-        if (index < 0 || !sameFacts(currentFacts[index]!, update.before)) return fail('owner-facts-before-mismatch');
+        if (!homeIds.has(update.before.actorId) || index < 0 || !sameFacts(currentFacts[index]!, update.before)) return fail('owner-facts-before-mismatch');
         const metadataChanged = update.before.skillKey !== update.after.skillKey
           || APTITUDES.some(k => update.before.aptitudes[k] !== update.after.aptitudes[k]);
         if (metadataChanged && !step.completionJobs.some(j => j.actorId === update.before.actorId)) return fail('metadata-requires-completion');
@@ -249,27 +380,57 @@ function replay(input: unknown) {
       }
     }
     let roster: Unit[] = roles.filter((u): u is Role & Unit => u.role === 'deployed').map(u =>
-      ({ id: u.id, cellId: u.cellId, troops: u.troops, energy: u.energy, acted: u.acted, confusedTurns: u.confusedTurns, movementBudget: u.movementBudget }));
+      ({ id: u.id, cellId: u.cellId, troops: u.troops, energy: u.energy, acted: u.acted, condition:{...u.condition}, movementBudget: u.movementBudget }));
     if (a === null) {
       receipts.push({commandId: command.id, kind: 'OwnerFactsOnly', turn});
     } else if (a.kind === 'Deploy' || a.kind === 'Return') {
       const index = templates.findIndex(t => t.id === a.actorId), config = templates[index], current = roles[index];
-      if (!config || !current || current.acted) return fail('role-change-not-eligible');
+      if (!homeIds.has(a.actorId) || !config || !current || current.acted) return fail('role-change-not-eligible');
       if (a.kind === 'Deploy') {
-        if (current.role !== 'resident' || !config.available) return fail('actor-not-deployable');
+        if (current.role !== 'resident' || !config.available || roster.some(u => u.cellId === config.entryCellId) || fires.some(f => f.cellId === config.entryCellId)) return fail('actor-not-deployable');
         roles[index] = { role: 'deployed', id: current.id, cellId: config.entryCellId, troops: a.troops,
-          energy: a.energy, acted: true, confusedTurns: 0, movementBudget: movementProfiles[index]!.turnBudget };
+          energy: a.energy, acted: true, condition:{kind:'normal',remaining:0}, movementBudget: movementProfiles[index]!.turnBudget };
         receipts.push({ commandId: command.id, kind: a.kind, turn, actorId: current.id,
           transferProposal: { direction: 'city-to-field', troops: a.troops, morale: a.energy }, before, after: roles.map(u => ({ ...u })) });
       } else {
-        if (current.role !== 'deployed' || current.confusedTurns !== 0 || current.cellId !== config.entryCellId) return fail('actor-not-returnable');
+        if (current.role !== 'deployed' || current.condition.kind !== 'normal' || current.cellId !== config.entryCellId) return fail('actor-not-returnable');
         roles[index] = { role: 'resident', id: current.id, acted: true };
         receipts.push({ commandId: command.id, kind: a.kind, turn, actorId: current.id,
           transferProposal: { direction: 'field-to-city', troops: current.troops, morale: current.energy }, before, after: roles.map(u => ({ ...u })) });
       }
+  } else if (a.kind === 'Attack' || a.kind === 'FalseReport') {
+      if (!encounterConfig || !templates.find(t=>t.id===a.actorId)?.available || (a.kind==='FalseReport'&&!hazardConfig)) return fail('encounter-or-hazard-not-enabled');
+      // The complete neutral projection cannot erase learned or cross-unit supporting skills.
+      if(roster.some(u=>currentFacts.find(f=>f.actorId===u.id)!.skillKey!==null))return fail('unsupported-neutral-skill-context');
+      if(a.kind==='FalseReport'&&[a.actorId,a.targetId].some(actorId=>{const t=templates.find(t=>t.id===actorId)!;return t.immune||t.guaranteed||t.beautyBonus;}))return fail('unsupported-neutral-strategy-flags');
+      const ownerTechniques=encounterConfig.foodRaidMode?step?.combatTechniquesByOwner:
+        [{ownerId:encounterConfig.homeOwnerId,techniques:[]},{ownerId:encounterConfig.enemyOwnerId,techniques:[]}];
+      if(!ownerTechniques||ownerTechniques.length!==2||!ownerTechniques.some(t=>t.ownerId===encounterConfig.homeOwnerId)
+        ||!ownerTechniques.some(t=>t.ownerId===encounterConfig.enemyOwnerId))return fail('actual-owner-techniques-required');
+      if(encounterConfig.foodRaidMode&&JSON.stringify([...(ownerTechniques.find(t=>t.ownerId===encounterConfig.enemyOwnerId)!.techniques)].sort((a,b)=>a-b))!==JSON.stringify([...(encounterConfig.enemyTechniqueIds!)].sort((a,b)=>a-b)))return fail('enemy-techniques-not-fixed-genesis');
+      if(!encounterConfig.foodRaidMode&&step?.combatTechniquesByOwner?.some(t=>t.techniques.length))return fail('actual-techniques-require-explicit-profile');
+      const projected = projectNeutralFieldAction({ encounter: {id:encounterConfig.id,
+        ownerIds:[encounterConfig.homeOwnerId,encounterConfig.enemyOwnerId],map:encounterConfig.combatMap,actors:encounterConfig.combatActors},
+        roster:roster.map(u=>({id:u.id,cellId:u.cellId,troops:u.troops,energy:u.energy,acted:u.acted,status:u.condition.kind,remaining:u.condition.remaining,
+          ownerId:homeIds.has(u.id)?encounterConfig.homeOwnerId:encounterConfig.enemyOwnerId,
+          intelligence:currentFacts.find(f=>f.actorId===u.id)!.stats.intelligence,charisma:currentFacts.find(f=>f.actorId===u.id)!.stats.charisma})),
+        round:turn,command:{id:command.id,actorId:a.actorId,targetId:a.targetId,kind:a.kind==='Attack'?a.attackKind:'false-report-status'},draws:a.kind==='Attack'?(a.draws??[]):a.draws,ownerTechniques,foodRaidMode:encounterConfig.foodRaidMode??null });
+      if (!projected.ok) return projected;
+      roles = roles.map(u=>{if(u.role==='resident')return u;const patch=projected.patches.find(p=>p.id===u.id)!;return {...u,troops:patch.troops,energy:patch.energy,acted:patch.acted,condition:condition(patch.status,patch.remaining)};});
+      receipts.push({commandId:command.id,kind:a.kind,turn,before,after:roles.map(u=>({...u})),combatReceipt:projected.receipt,...(projected.receipt.foodRaidRequest?{pendingFoodRaidRequest:projected.receipt.foodRaidRequest,requiresExternalFoodSettlement:true as const}:{})});
+    } else if (a.kind === 'Rockfall') {
+      const h=hazardConfig?.rockfalls.find(h=>h.id===a.hazardId);
+      if(!h||usedRockfalls.has(h.id))return fail('rockfall-not-enabled-or-consumed');
+      const hit=projectRosterRockfall({map:movementMap,roster:hazardRoster(roster),activeFireCellIds:fires.map(f=>f.cellId),footprint:h.footprint,
+        traits:roster.map(u=>({actorId:u.id,pathbreaker:false})),draws:a.draws,eventsUsed:fireDamageEvents});
+      if(!hit.ok)return hit;
+      roles=roles.map(u=>u.role==='resident'?u:{...u,troops:hit.patches.find(p=>p.id===u.id)!.troops});
+      fireDamageEvents=hit.eventsUsed;usedRockfalls.add(h.id);
+      receipts.push({commandId:command.id,kind:a.kind,turn,hazardId:h.id,footprint:h.footprint,damageReceipts:hit.receipts,before,after:roles.map(u=>({...u}))});
     } else if (a.kind === 'Move') {
+      const terrainDraws=a.terrainDraws??[],fireDraws=a.fireDraws??[];
       const current = roster.find(u => u.id === a.actorId), profile = movementProfiles.find(p => p.actorId === a.actorId);
-      if (!current || !profile || current.acted || current.confusedTurns !== 0) return fail('mover-not-eligible');
+      if (!current || !profile || current.acted || current.condition.kind !== 'normal') return fail('mover-not-eligible');
       const visited = [current.cellId, ...a.path];
       if (visited.some(cellId => { const cell = mapCells.find(c => c.id === cellId);
         return !cell || cell.facilityPresent || cell.unsupportedContext; })) return fail('movement-context-excluded');
@@ -280,10 +441,27 @@ function replay(input: unknown) {
           landEquipmentId: profile.landEquipmentId, navalEquipmentId: profile.navalEquipmentId, transport: false },
         path: a.path, policy: GUIDE_REFERENCE_MOVEMENT_POLICY });
       if (!moved.ok) return fail(`movement:${moved.reason}`);
-      roles = roles.map(u => u.id === current.id ? { role: 'deployed', ...current, cellId: moved.state.cellId,
+      let entryPatch={troops:current.troops,energy:current.energy};let entryReceipt:unknown=null;
+      if(hazardConfig){
+        const hasFire=[current.cellId,...a.path].some(c=>fires.some(f=>f.cellId===c));
+        if(hasFire){
+          if(terrainDraws.length)return fail('mixed-fire-terrain-not-supported');
+          const entry=projectNeutralFireEntry({map:movementMap,roster:hazardRoster(roster),fires,actorId:current.id,path:a.path,draws:fireDraws,
+            eventsUsed:fireDamageEvents,modifiers:{fireGod:false,rattan:false,explosives:false,critical:false}});
+          if(!entry.ok)return entry;entryPatch={troops:entry.patch.troops,energy:entry.patch.energy};fireDamageEvents=entry.eventsUsed;entryReceipt=entry;
+        }else{
+          if(fireDraws.length)return fail('extra-fire-draws');
+          const entry=projectRosterTerrainEntry({map:movementMap,roster:hazardRoster(roster),activeFireCellIds:[],actorId:current.id,
+            traits:{traverse:false,antidote:false,difficultMarch:false},path:a.path,draws:terrainDraws});
+          if(!entry.ok)return entry;
+          if(fireDamageEvents+terrainDraws.length>256)return fail('cumulative-hazard-budget');
+          entryPatch={troops:entry.patch.troops,energy:entry.patch.energy};fireDamageEvents+=terrainDraws.length;entryReceipt=entry;
+        }
+      }else if(terrainDraws.length||fireDraws.length)return fail('hazard-not-enabled');
+      roles = roles.map(u => u.id === current.id ? { role: 'deployed', ...current,...entryPatch, cellId: moved.state.cellId,
         movementBudget: moved.state.budget, acted: true } : u);
       receipts.push({ commandId: command.id, kind: a.kind, turn, before, after: roles.map(u => ({ ...u })),
-        movementReceipt: moved, firesBefore, firesAfter: fires });
+        movementReceipt: moved, entryReceipt, firesBefore, firesAfter: fires });
     } else if (a.kind === 'FieldTick') {
       if (roster.length === 0) {
         if (a.draws.length !== 0) return fail('empty-field-requires-empty-draws');
@@ -297,11 +475,20 @@ function replay(input: unknown) {
           action: { kind: 'Tick', draws: a.draws } });
         if (!burned.ok) return burned;
         const proposed = roster.map(u => ({ ...u, troops: burned.targets.find(t => t.id === u.id)!.value }));
-        const effects = effectProjection(proposed); if (!effects.ok) return effects;
-        const advanced = executeInferredStrategyEffects(effects.state, { kind: 'advance', id: 'synthetic-field-recovery', expectedRevision: 0 });
-        if (!advanced.ok) return advanced;
-        roster = proposed.map(u => { const v = advanced.units.find(t => t.id === u.id)!;
-          return { ...u, troops: v.troops, acted: v.acted, confusedTurns: v.confusedTurns, movementBudget: movementProfiles.find(p => p.actorId === u.id)!.turnBudget }; });
+        if(hazardConfig){
+          const recovery=projectRosterRecoveryAfterFire({map:movementMap,roster:hazardRoster(proposed),activeFireCellIds:burned.fires.map(f=>f.cellId),
+            goals:proposed.map(u=>({actorId:u.id,cellId:templates.find(t=>t.id===u.id)!.entryCellId})),turn,
+            settledFirePhase:{turn,actorIds:proposed.map(u=>u.id),actorTroops:proposed.map(u=>({id:u.id,troops:u.troops})),remainingFireCellIds:burned.fires.map(f=>f.cellId)}});
+          if(!recovery.ok)return recovery;
+          roster=proposed.map(u=>{const v=recovery.roster.find(v=>v.id===u.id)!;return {...u,cellId:v.cellId,acted:v.acted,condition:condition(v.status,v.remaining),movementBudget:movementProfiles.find(p=>p.actorId===u.id)!.turnBudget};});
+          receipts.push({commandId:command.id,kind:'AfterFireRecovery',turn,recovery});
+        }else{
+          const effects = effectProjection(proposed); if (!effects.ok) return effects;
+          const advanced = executeInferredStrategyEffects(effects.state, { kind: 'advance', id: 'synthetic-field-recovery', expectedRevision: 0 });
+          if (!advanced.ok) return advanced;
+          roster = proposed.map(u => { const v = advanced.units.find(t => t.id === u.id)!;
+            return { ...u, troops: v.troops, acted: v.acted, condition:condition(v.confusedTurns>0?'confused':'normal',v.confusedTurns), movementBudget: movementProfiles.find(p => p.actorId === u.id)!.turnBudget }; });
+        }
         fires = burned.fires; fireDamageEvents += affected;
       }
       roles = roles.map(u => { if (u.role === 'resident') return { ...u, acted: false };
@@ -311,10 +498,10 @@ function replay(input: unknown) {
     } else {
       const casterIndex = roster.findIndex(x => x.id === a.casterId), config = templates.find(t => t.id === a.casterId), caster = roster[casterIndex];
       const selectedStrategy = a.kind === 'FireCast' ? 'fire' : a.strategy;
-      if (!config || !caster || !config.available || !config.strategies.includes(selectedStrategy) || caster.acted || caster.confusedTurns > 0) return fail('caster-not-eligible');
+      if (!config || !caster || !config.available || !config.strategies.includes(selectedStrategy) || caster.acted || caster.condition.kind !== 'normal') return fail('caster-not-eligible');
       const cost = COST[selectedStrategy]; if (caster.energy < cost) return fail('insufficient-energy');
       const targetIds = a.kind === 'FireCast' ? roster.filter(u => u.cellId === a.cellId).map(u => u.id) : a.targets;
-      if (targetIds.some(target => !roster.some(u => u.id === target))) return fail('target-not-deployed');
+      if (targetIds.some(target => !roster.some(u => u.id === target) || (a.kind==='Cast' && roster.find(u=>u.id===target)!.condition.kind==='false-report'))) return fail('target-not-deployed');
       if (a.kind === 'FireCast' && (!cells.includes(a.cellId) || a.cellId === caster.cellId || usedFires.has(a.fireId) || fires.some(f => f.cellId === a.cellId))) return fail('invalid-fire-target-or-id');
       const targets = targetIds.map(target => templates.find(t => t.id === target)!);
       const targetIntelligence = targets.length ? Math.max(...targets.map(t => currentFacts.find(f => f.actorId === t.id)!.stats.intelligence)) : 0, immune = targets.some(t => t.immune);
@@ -342,7 +529,7 @@ function replay(input: unknown) {
         const acted = executeInferredStrategyEffects(cast.state, { kind: 'act', id: 'synthetic-field-act', expectedRevision: cast.revision, targetId: caster.id });
         if (!acted.ok) return acted;
         proposed = roster.map(u => { const v = acted.units.find(t => t.id === u.id)!;
-          return { ...u, troops: v.troops, acted: v.acted, confusedTurns: v.confusedTurns }; });
+          return { ...u, troops: v.troops, acted: v.acted, condition:v.confusedTurns>0?{kind:'confused' as const,remaining:v.confusedTurns}:u.condition }; });
         proposed[casterIndex] = { ...proposed[casterIndex]!, energy: caster.energy - cost }; roster = proposed;
         roles = roles.map(u => u.role === 'resident' ? u : ({ role: 'deployed', ...roster.find(t => t.id === u.id)! }));
         receipts.push({ commandId: command.id, kind: a.kind, turn, cost, before, after: roles.map(u => ({ ...u })), firesBefore, firesAfter: fires, effectReceipt: cast.receipts[0] });
@@ -360,19 +547,19 @@ function replay(input: unknown) {
       }
       receipts.push({commandId: command.id, kind: 'OuterStep', sourceOuterCommandId: step.sourceOuterCommandId,
         factsBefore, factsAfter: [...currentFacts], completionJobs: step.completionJobs,
-        consumedAttributes: ['intelligence'], metadataOnlyAttributes: ['leadership', 'war', 'politics', 'charisma', 'aptitudes', 'skillKey'],
+        consumedAttributes: encounterConfig ? ['intelligence', 'charisma'] : ['intelligence'], metadataOnlyAttributes: encounterConfig ? ['leadership', 'war', 'politics', 'aptitudes', 'skillKey'] : ['leadership', 'war', 'politics', 'charisma', 'aptitudes', 'skillKey'],
         after: roles.map(r => ({...r}))});
     }
     commands.push(command); usedCommands.add(command.id);
   }
-  const state: State = { schema: 'inferred-cultivated-mobile-field-v4', cells, templates, movementMap, movementProfiles, cultivationBaseline, commands };
+  const state: State = { schema: 'inferred-cultivated-mobile-field-v4', cells, templates:homeTemplates, movementMap, movementProfiles:homeProfiles, cultivationBaseline:homeFacts, ...(hadEncounter?{encounterConfig}:{}), ...(hadHazard?{hazardConfig}:{}), commands };
   if (JSON.stringify(state).length > 100000) return fail('save-budget');
-  return frozen({ ok: true as const, state, revision: commands.length, turn, roster: roles, currentFacts, fires, fireDamageEvents, receipts,
+  return frozen({ ok: true as const, state, revision: commands.length, turn, roster: roles.map(u=>u.role==='resident'?u:{...u,confusedTurns:u.condition.kind==='confused'?u.condition.remaining:0}), currentFacts, homeActorIds:[...homeIds], enemyActorIds:encounterConfig?.enemyActors.map(e=>e.template.id) ?? [], enemyInitialTroopBudget:encounterConfig?.enemyTroopBudget ?? 0, fires, fireDamageEvents, hazardEvents:fireDamageEvents, consumedRockfallIds:[...usedRockfalls], receipts,
     policyId: 'inferred-cultivated-mobile-field-proposal-v4' as const, proposalOnly: true as const,
     cityConservationVerified: false as const, campaignWorldWritten: false as const, nativeWorldVerified: false as const });
 }
 export function readInferredCultivatedMobileField(input: unknown) { try { return replay(detach(input)); } catch { return fail('invalid-data-input'); } }
-export function createInferredCultivatedMobileField(cells: unknown, templates: unknown, movementMap: unknown, movementProfiles: unknown, cultivationBaseline: unknown) { return readInferredCultivatedMobileField({ schema: 'inferred-cultivated-mobile-field-v4', cells, templates, movementMap, movementProfiles, cultivationBaseline, commands: [] }); }
+export function createInferredCultivatedMobileField(cells: unknown, templates: unknown, movementMap: unknown, movementProfiles: unknown, cultivationBaseline: unknown, encounterConfig?: unknown, hazardConfig?:unknown) { return readInferredCultivatedMobileField({ schema: 'inferred-cultivated-mobile-field-v4', cells, templates, movementMap, movementProfiles, cultivationBaseline, ...(encounterConfig===undefined?{}:{encounterConfig}), ...(hazardConfig===undefined?{}:{hazardConfig}), commands: [] }); }
 export function executeInferredCultivatedMobileField(input: unknown, rawCommand: unknown) {
   const current = readInferredCultivatedMobileField(input); if (!current.ok) return current;
   let clean: unknown; try { clean = detach(rawCommand); } catch { return fail('invalid-data-command'); }

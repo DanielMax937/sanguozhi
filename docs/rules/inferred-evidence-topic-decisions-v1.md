@@ -289,3 +289,47 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T40 统一world实际路由AssignOffices与Deploy容量校验（2026-10-30）
 
 [规则](inferred-unified-office-owner-v1.md)：旧默认不变，无第二工资账本；静态未运行，title固定场景事实 历史确认与证据原文保留。
+
+## T01 显式敌我初值预算与同roster普通正值Attack真实接world（2026-10-30）
+
+[规则](unified-field-composition-v3.md)：中性已核技能域；actual techniques不清空；拒终结，无敌AI或同城人物冒充敌 历史确认与证据原文保留。
+
+## T04 真实FalseReport caller与唯一condition/逐Tick退却接入（2026-10-30）
+
+[规则](unified-field-composition-v3.md)：完整stage tape、失败费用行动；退却入场plain支持域前置，非真实入城finalizer 历史确认与证据原文保留。
+
+## T05 野战唯一粮分配随部署返城与逐Tick消费（2026-10-30）
+
+[规则](unified-field-composition-v3.md)：粮0仅报告不写兵损；不冒称原生饥饿伤亡 历史确认与证据原文保留。
+
+## T06 同路径火入格与驻留/状态恢复组合（2026-10-30）
+
+[规则](unified-field-composition-v3.md)：火入格per-visit为具名中性推断；混合地形火路径明确拒，非原生caller证明 历史确认与证据原文保留。
+
+## T09 实际普通攻击及正值反击同一原子事务（2026-10-30）
+
+[规则](unified-field-composition-v3.md)：不运行Closing、奖励、零兵终结；未映射被动显式拒 历史确认与证据原文保留。
+
+## T12 固定单次Rockfall全footprint目标与抽样接同roster（2026-10-30）
+
+[规则](unified-field-composition-v3.md)：环境触发为明确场景配置，非武将法术/任意灾害生成 历史确认与证据原文保留。
+
+## T20 野战配粮返粮与food-only相邻ManualSupply同库存（2026-10-30）
+
+[规则](unified-field-composition-v3.md)：敌粮为独立显式创世预算；transport固定位置推断，不含兵金装备补给 历史确认与证据原文保留。
+
+## T21 真实正伤枪兵技巧请求由同次粮owner原子消费（2026-10-30）
+
+[规则](unified-field-composition-v3.md)：actual tech damage保留，0伤无请求为具名保守推断；无独立偷粮命令/重复事件消费 历史确认与证据原文保留。
+
+## T32 普通Attack真实反击与同状态火后恢复（2026-10-30）
+
+[规则](unified-field-composition-v3.md)：仅正值战斗；耐久实体维修未作为兵气替代 历史确认与证据原文保留。
+
+## T37 Move实际路径预算与当前占位/地形火入格组合（2026-10-30）
+
+[规则](unified-field-composition-v3.md)：有限图及支持域，不冒充全原生地图/入城结算 历史确认与证据原文保留。
+
+## T40 F/H/G同唯一field owner与WorldTick组合（2026-10-30）
+
+[规则](unified-field-composition-v3.md)：旧默认保留；所有下游失败含粮兵行动原子拒，静态未运行 历史确认与证据原文保留。
