@@ -1,4 +1,4 @@
-import { projectNeutralFieldAction, projectNeutralFieldActionWithResearchedEnergy } from './internal/synthetic-neutral-field-action.ts';
+import { projectNeutralFieldAction, projectNeutralFieldActionWithResearchedEnergy, projectNeutralFieldActionWithEffectiveAttributes } from './internal/synthetic-neutral-field-action.ts';
 import { projectRosterTerrainEntry, projectRosterRockfall, projectRosterTerrainEntryWithEnergyCaps, projectRosterRockfallWithEnergyCaps } from './internal/synthetic-roster-hazard-leaves.ts';
 import { projectNeutralFireEntry, projectNeutralFireEntryWithEnergyCaps } from './internal/synthetic-neutral-fire-entry.ts';
 import { projectRosterRecoveryAfterFire, projectRosterRecoveryAfterFireWithEnergyCaps } from './internal/synthetic-roster-recovery-after-fire.ts';
@@ -7,7 +7,7 @@ import { qualifyPkStatTraining } from './pk-stat-training.ts';
 import { createInferredFireLifecycle, executeInferredFireLifecycle } from './inferred-fire-lifecycle.ts';
 import { createInferredStrategyEffects, executeInferredStrategyEffects } from './inferred-strategy-effects.ts';
 import { moveOnSuppliedMap, GUIDE_REFERENCE_MOVEMENT_POLICY } from './supplied-map-movement.ts';
-import { decideInferredStrategyHit } from './inferred-combat-requests.ts';
+import { decideInferredStrategyHit, decideInferredStrategyHitEffective255 } from './inferred-combat-requests.ts';
 type Strategy = 'fire' | 'ambush' | 'discord' | 'sorcery';
 type Template = Readonly<{ id: string; entryCellId: string; intelligence: number; strategies: readonly Strategy[];
   available: boolean; immune: boolean; guaranteed: boolean; beautyBonus: boolean }>;
@@ -36,11 +36,13 @@ type NormalAction = Readonly<{kind:'FalseReport';actorId:string;targetId:string;
   | Readonly<{ kind: 'Return'; actorId: string }>
   | Readonly<{ kind: 'Cast'; casterId: string; strategy: Exclude<Strategy, 'fire'>; targets: readonly string[]; roll: number }>
   | Readonly<{ kind: 'FireCast'; casterId: string; cellId: string; fireId: string; roll: number; durationDraw: number }>;
+type EffectiveFacts = Readonly<{actorId:string;stats:Readonly<Record<Stat,number>>}>;
+type EffectiveProfile = Readonly<{profile:'live-equipment-effective255-v1';effectiveBaseline:readonly EffectiveFacts[]}>;
 type EnergyProfile = Readonly<{profile:'researched-morale120-v1';homeOwnerId:string;homeTechniqueIds:readonly number[];enemyTechniqueIds:readonly number[]}>;
-type OwnerStep = Readonly<{ kind: 'OuterStep'; sourceOuterCommandId: string; fieldAction: NormalAction | null; factsUpdates: readonly { before: Facts; after: Facts }[]; completionJobs: readonly { jobId: string; actorId: string }[];energyHomeTechniquesAfter?:readonly number[];combatTechniquesByOwner?:readonly {ownerId:string;techniques:readonly number[]}[] }>;
+type OwnerStep = Readonly<{ kind: 'OuterStep'; sourceOuterCommandId: string; fieldAction: NormalAction | null; factsUpdates: readonly { before: Facts; after: Facts }[]; completionJobs: readonly { jobId: string; actorId: string }[];effectiveFactsUpdates?:readonly {before:EffectiveFacts;after:EffectiveFacts}[];energyHomeTechniquesAfter?:readonly number[];combatTechniquesByOwner?:readonly {ownerId:string;techniques:readonly number[]}[] }>;
 type Action = NormalAction | OwnerStep;
 type Command = Readonly<{ id: string; expectedRevision: number; action: Action }>;
-type State = Readonly<{ schema: 'inferred-cultivated-mobile-field-v4'; cells: readonly string[]; templates: readonly Template[]; movementMap: MovementMap; movementProfiles: readonly MovementProfile[]; cultivationBaseline: readonly Facts[]; encounterConfig?: Encounter | null; hazardConfig?:HazardConfig|null; energyProfile?:EnergyProfile; commands: readonly Command[] }>;
+type State = Readonly<{ schema: 'inferred-cultivated-mobile-field-v4'; cells: readonly string[]; templates: readonly Template[]; movementMap: MovementMap; movementProfiles: readonly MovementProfile[]; cultivationBaseline: readonly Facts[]; encounterConfig?: Encounter | null; hazardConfig?:HazardConfig|null; energyProfile?:EnergyProfile; effectiveProfile?:EffectiveProfile; commands: readonly Command[] }>;
 const COST = Object.freeze({ fire: 10, ambush: 10, discord: 20, sorcery: 30 });
 const fail = (reason: string) => Object.freeze({ ok: false as const, reason });
 const uint = (v: unknown, max: number): v is number => typeof v === 'number' && Number.isSafeInteger(v) && !Object.is(v, -0) && v >= 0 && v <= max;
@@ -104,6 +106,13 @@ function factsFrom(v: unknown): Facts | undefined {
   return { actorId: v.actorId, stats: Object.fromEntries(STATS.map(k => [k, stats[k]])) as Record<Stat, number>,
     aptitudes: Object.fromEntries(APTITUDES.map(k => [k, aptitudes[k]])) as Record<Aptitude, Grade>, skillKey: v.skillKey };
 }
+function effectiveFactsFrom(value:unknown):EffectiveFacts|undefined {
+  if(!record(value)||!keys(value,['actorId','stats'])||!id(value.actorId)||!record(value.stats)||!keys(value.stats,STATS))return undefined;
+  const stats=value.stats;
+  if(!STATS.every(k=>uint(stats[k],255)))return undefined;
+  return {actorId:value.actorId,stats:Object.fromEntries(STATS.map(k=>[k,stats[k]])) as Record<Stat,number>};
+}
+function sameEffective(a:EffectiveFacts,b:EffectiveFacts){return a.actorId===b.actorId&&STATS.every(k=>a.stats[k]===b.stats[k]);}
 function techniqueIds(value:unknown):number[]|undefined {
   return Array.isArray(value)&&value.length<=36&&value.every(t=>uint(t,35))&&new Set(value).size===value.length ? [...value] : undefined;
 }
@@ -197,7 +206,7 @@ export function resolveSyntheticCultivationFacts(input: unknown) {
 function commandFrom(v: unknown): Command | undefined {
   if (!record(v) || !keys(v, ['id', 'expectedRevision', 'action']) || !id(v.id) || !uint(v.expectedRevision, 31) || !record(v.action)) return undefined;
   const a = v.action; let action: Action;
-  if (a.kind === 'OuterStep' && keys(a, ['kind','sourceOuterCommandId','fieldAction','factsUpdates','completionJobs',...(Object.hasOwn(a,'combatTechniquesByOwner')?['combatTechniquesByOwner']:[]),...(Object.hasOwn(a,'energyHomeTechniquesAfter')?['energyHomeTechniquesAfter']:[])])
+  if (a.kind === 'OuterStep' && keys(a, ['kind','sourceOuterCommandId','fieldAction','factsUpdates','completionJobs',...(Object.hasOwn(a,'combatTechniquesByOwner')?['combatTechniquesByOwner']:[]),...(Object.hasOwn(a,'energyHomeTechniquesAfter')?['energyHomeTechniquesAfter']:[]),...(Object.hasOwn(a,'effectiveFactsUpdates')?['effectiveFactsUpdates']:[])])
     && a.sourceOuterCommandId === v.id && Array.isArray(a.factsUpdates) && a.factsUpdates.length <= 8
     && Array.isArray(a.completionJobs) && a.completionJobs.length <= 8) {
     let fieldAction: NormalAction | null = null;
@@ -229,9 +238,19 @@ function commandFrom(v: unknown): Command | undefined {
         ||!Array.isArray(t.techniques)||t.techniques.length>36||!t.techniques.every(x=>uint(x,35))||new Set(t.techniques).size!==t.techniques.length)return undefined;
         combatTechniquesByOwner.push({ownerId:t.ownerId,techniques:[...t.techniques] as number[]});}
     }
+    const effectiveFactsUpdates:{before:EffectiveFacts;after:EffectiveFacts}[]=[];
+    if(Object.hasOwn(a,'effectiveFactsUpdates')){
+      if(!Array.isArray(a.effectiveFactsUpdates)||a.effectiveFactsUpdates.length>8)return undefined;
+      for(const row of a.effectiveFactsUpdates){
+        if(!record(row)||!keys(row,['before','after']))return undefined;
+        const before=effectiveFactsFrom(row.before),after=effectiveFactsFrom(row.after);
+        if(!before||!after||before.actorId!==after.actorId||effectiveFactsUpdates.some(x=>x.before.actorId===before.actorId))return undefined;
+        effectiveFactsUpdates.push({before,after});
+      }
+    }
     const energyHomeTechniquesAfter=Object.hasOwn(a,'energyHomeTechniquesAfter')?techniqueIds(a.energyHomeTechniquesAfter):undefined;
     if(Object.hasOwn(a,'energyHomeTechniquesAfter')&&!energyHomeTechniquesAfter)return undefined;
-    action = {kind: a.kind, ...(energyHomeTechniquesAfter?{energyHomeTechniquesAfter}:{}), ...(Object.hasOwn(a,'combatTechniquesByOwner')?{combatTechniquesByOwner}:{}), sourceOuterCommandId: a.sourceOuterCommandId as string, fieldAction, factsUpdates, completionJobs};
+    action = {kind: a.kind, ...(Object.hasOwn(a,'effectiveFactsUpdates')?{effectiveFactsUpdates}:{}), ...(energyHomeTechniquesAfter?{energyHomeTechniquesAfter}:{}), ...(Object.hasOwn(a,'combatTechniquesByOwner')?{combatTechniquesByOwner}:{}), sourceOuterCommandId: a.sourceOuterCommandId as string, fieldAction, factsUpdates, completionJobs};
   } else if (a.kind === 'FalseReport' && keys(a,['kind','actorId','targetId','draws']) && id(a.actorId)&&id(a.targetId)&&a.actorId!==a.targetId
     && Array.isArray(a.draws)&&a.draws.length<=3) {
     const draws:StageDraw[]=[];
@@ -290,20 +309,21 @@ function fireProjection(cells: readonly string[], roster: readonly Unit[], fires
   }
   return session;
 }
-function effectProjection(roster: readonly Unit[]) {
-  return createInferredStrategyEffects(roster.map(u => ({ id: u.id, troops: u.troops, acted: u.acted, confusedTurns: u.condition.kind==='confused'?u.condition.remaining:0 })));
+function effectProjection(roster: readonly Unit[], effectiveAttributes=false) {
+  return createInferredStrategyEffects(roster.map(u => ({ id: u.id, troops: u.troops, acted: u.acted, confusedTurns: u.condition.kind==='confused'?u.condition.remaining:0 })), effectiveAttributes?'same-formula-intelligence255-v1':undefined);
 }
 function hazardRoster(roster:readonly Unit[]) {return roster.map(u=>({id:u.id,cellId:u.cellId,troops:u.troops,energy:u.energy,acted:u.acted,status:u.condition.kind,remaining:u.condition.remaining}));}
 function condition(status:'normal'|'confused'|'false-report',remaining:number):Condition{return status==='normal'?{kind:'normal',remaining:0}:{kind:status,remaining};}
 /** Proposal replay only: city inventory/actor eligibility is a mandatory outer-world check. */
 function replay(input: unknown) {
+  const hasEffective=record(input)&&Object.hasOwn(input,'effectiveProfile');
   const hasEnergy=record(input)&&Object.hasOwn(input,'energyProfile');
   const energyProfile=hasEnergy&&record(input)?energyProfileFrom(input.energyProfile):undefined;
   if(hasEnergy&&!energyProfile)return fail('invalid-energy-profile');
   const hadEncounter=record(input)&&Object.hasOwn(input,'encounterConfig'),hadHazard=record(input)&&Object.hasOwn(input,'hazardConfig');
   if (record(input) && !Object.hasOwn(input, 'encounterConfig')) input = {...input, encounterConfig:null};
   if (record(input) && !Object.hasOwn(input, 'hazardConfig')) input = {...input,hazardConfig:null};
-  if (!record(input) || !keys(input, ['schema', 'cells', 'templates', 'movementMap', 'movementProfiles', 'cultivationBaseline', 'encounterConfig', 'hazardConfig', 'commands',...(hasEnergy?['energyProfile']:[])]) || input.schema !== 'inferred-cultivated-mobile-field-v4'
+  if (!record(input) || !keys(input, ['schema', 'cells', 'templates', 'movementMap', 'movementProfiles', 'cultivationBaseline', 'encounterConfig', 'hazardConfig', 'commands',...(hasEnergy?['energyProfile']:[]),...(hasEffective?['effectiveProfile']:[])]) || input.schema !== 'inferred-cultivated-mobile-field-v4'
     || !Array.isArray(input.cells) || input.cells.length < 1 || input.cells.length > 16 || !input.cells.every(id) || new Set(input.cells).size !== input.cells.length
     || !Array.isArray(input.templates) || input.templates.length < 1 || input.templates.length > 8 || !Array.isArray(input.commands) || input.commands.length > 32) return fail('invalid-field');
   const cells: string[] = [...input.cells], templates: Template[] = [], ids = new Set<string>();
@@ -352,6 +372,18 @@ function replay(input: unknown) {
   if(energyProfile && (cells.includes(energyProfile.homeOwnerId)||templates.some(t=>t.id===energyProfile.homeOwnerId)
     || (encounterConfig ? energyProfile.homeOwnerId!==encounterConfig.homeOwnerId
       || !sameTechniques(energyProfile.enemyTechniqueIds,encounterConfig.enemyTechniqueIds??[]) : energyProfile.enemyTechniqueIds.length!==0)))return fail('energy-owner-or-enemy-genesis-mismatch');
+  let effectiveProfile:EffectiveProfile|undefined;
+  if(hasEffective){
+    const ep=input.effectiveProfile;
+    if(!record(ep)||!keys(ep,['profile','effectiveBaseline'])||ep.profile!=='live-equipment-effective255-v1'||!Array.isArray(ep.effectiveBaseline)||ep.effectiveBaseline.length!==homeTemplates.length)return fail('invalid-effective-profile');
+    const baseline:EffectiveFacts[]=[];
+    for(let i=0;i<ep.effectiveBaseline.length;i++){
+      const fact=effectiveFactsFrom(ep.effectiveBaseline[i]);
+      if(!fact||fact.actorId!==homeTemplates[i]!.id)return fail('invalid-effective-baseline');
+      baseline.push(fact);
+    }
+    effectiveProfile={profile:ep.profile,effectiveBaseline:baseline};
+  }
   let homeEnergyTechniques=[...(energyProfile?.homeTechniqueIds??[])];
 
   let hazardConfig:HazardConfig|null=null;
@@ -370,6 +402,10 @@ function replay(input: unknown) {
       templates.push(enemy.template); movementProfiles.push(enemy.movementProfile); currentFacts.push(enemy.facts);
     }
   }
+  let currentEffectiveFacts:EffectiveFacts[]=effectiveProfile
+    ? [...effectiveProfile.effectiveBaseline,...(encounterConfig?.enemyActors.map(e=>({actorId:e.template.id,stats:{...e.facts.stats}}))??[])]
+    : currentFacts.map(f=>({actorId:f.actorId,stats:{...f.stats}}));
+  const readStats=(actorId:string)=>effectiveProfile?currentEffectiveFacts.find(f=>f.actorId===actorId)!.stats:currentFacts.find(f=>f.actorId===actorId)!.stats;
   if(hazardConfig && templates.some(t=>mapCells.find(c=>c.id===t.entryCellId)!.terrainInfoU32!==0))return fail('hazard-recovery-requires-plain-entry');
   // Residents have no troop or energy balance. Stable identities survive all role changes.
   let roles: Role[] = templates.map(a => {
@@ -383,20 +419,27 @@ function replay(input: unknown) {
   const rockfallWithCaps=(v:unknown)=>energyProfile?projectRosterRockfallWithEnergyCaps(v,energyCaps()):projectRosterRockfall(v);
   const fireEntryWithCaps=(v:unknown)=>energyProfile?projectNeutralFireEntryWithEnergyCaps(v,energyCaps()):projectNeutralFireEntry(v);
   const recoveryWithCaps=(v:unknown)=>energyProfile?projectRosterRecoveryAfterFireWithEnergyCaps(v,energyCaps()):projectRosterRecoveryAfterFire(v);
-  const combatWithCaps=(v:unknown)=>energyProfile?projectNeutralFieldActionWithResearchedEnergy(v):projectNeutralFieldAction(v);
+  const combatWithCaps=(v:unknown)=>effectiveProfile?projectNeutralFieldActionWithEffectiveAttributes(v,Boolean(energyProfile)):energyProfile?projectNeutralFieldActionWithResearchedEnergy(v):projectNeutralFieldAction(v);
   let fires: Fire[] = [], turn = 0, fireDamageEvents = 0;
   const commands: Command[] = [], usedCommands = new Set<string>(), usedFires = new Set<string>(), receipts = [];
   for (const raw of input.commands) {
     const command = commandFrom(raw);
     if (!command || command.expectedRevision !== commands.length || usedCommands.has(command.id)) return fail('invalid-command-history');
     const step = command.action.kind === 'OuterStep' ? command.action : null;
+    if(effectiveProfile){
+      if(!step?.effectiveFactsUpdates)return fail('effective-owner-step-required');
+      for(const update of step.effectiveFactsUpdates){
+        const prior=currentEffectiveFacts.find(f=>f.actorId===update.before.actorId);
+        if(!homeIds.has(update.before.actorId)||!prior||!sameEffective(prior,update.before))return fail('effective-before-mismatch');
+      }
+    }else if(step?.effectiveFactsUpdates)return fail('effective-profile-not-enabled');
     if(energyProfile){
       if(!step?.energyHomeTechniquesAfter || homeEnergyTechniques.some(t=>!step.energyHomeTechniquesAfter!.includes(t)))return fail('actual-monotonic-energy-techniques-required');
     }else if(step?.energyHomeTechniquesAfter)return fail('energy-profile-not-enabled');
     if(roles.some(u=>u.role==='deployed'&&!uint(u.energy,capFor(u.id))))return fail('energy-exceeds-current-researched-cap');
     const a = step ? step.fieldAction : command.action as NormalAction, before = roles.map(u => ({ ...u })), firesBefore = fires, turnBefore = turn;
     // Owner-defined order: field action/tick, effective facts, completion action lock.
-    const factsBefore = [...currentFacts];
+    const factsBefore = [...currentFacts], effectiveBefore = [...currentEffectiveFacts];
     if (step) {
       for (const job of step.completionJobs) {
         if (!homeIds.has(job.actorId) || usedCultivationJobs.has(job.jobId) || roles.find(r => r.id === job.actorId)?.role !== 'resident') return fail('cultivation-completion-mismatch');
@@ -447,7 +490,7 @@ function replay(input: unknown) {
         ownerIds:[encounterConfig.homeOwnerId,encounterConfig.enemyOwnerId],map:encounterConfig.combatMap,actors:encounterConfig.combatActors},
         roster:roster.map(u=>({id:u.id,cellId:u.cellId,troops:u.troops,energy:u.energy,acted:u.acted,status:u.condition.kind,remaining:u.condition.remaining,
           ownerId:homeIds.has(u.id)?encounterConfig.homeOwnerId:encounterConfig.enemyOwnerId,
-          intelligence:currentFacts.find(f=>f.actorId===u.id)!.stats.intelligence,charisma:currentFacts.find(f=>f.actorId===u.id)!.stats.charisma})),
+          intelligence:readStats(u.id).intelligence,charisma:readStats(u.id).charisma})),
         round:turn,command:{id:command.id,actorId:a.actorId,targetId:a.targetId,kind:a.kind==='Attack'?a.attackKind:'false-report-status'},draws:a.kind==='Attack'?(a.draws??[]):a.draws,ownerTechniques,foodRaidMode:encounterConfig.foodRaidMode??null });
       if (!projected.ok) return projected;
       roles = roles.map(u=>{if(u.role==='resident')return u;const patch=projected.patches.find(p=>p.id===u.id)!;return {...u,troops:patch.troops,energy:patch.energy,acted:patch.acted,condition:condition(patch.status,patch.remaining)};});
@@ -517,7 +560,7 @@ function replay(input: unknown) {
           roster=proposed.map(u=>{const v=recovery.roster.find(v=>v.id===u.id)!;return {...u,cellId:v.cellId,acted:v.acted,condition:condition(v.status,v.remaining),movementBudget:movementProfiles.find(p=>p.actorId===u.id)!.turnBudget};});
           receipts.push({commandId:command.id,kind:'AfterFireRecovery',turn,recovery});
         }else{
-          const effects = effectProjection(proposed); if (!effects.ok) return effects;
+          const effects = effectProjection(proposed,Boolean(effectiveProfile)); if (!effects.ok) return effects;
           const advanced = executeInferredStrategyEffects(effects.state, { kind: 'advance', id: 'synthetic-field-recovery', expectedRevision: 0 });
           if (!advanced.ok) return advanced;
           roster = proposed.map(u => { const v = advanced.units.find(t => t.id === u.id)!;
@@ -538,10 +581,10 @@ function replay(input: unknown) {
       if (targetIds.some(target => !roster.some(u => u.id === target) || (a.kind==='Cast' && roster.find(u=>u.id===target)!.condition.kind==='false-report'))) return fail('target-not-deployed');
       if (a.kind === 'FireCast' && (!cells.includes(a.cellId) || a.cellId === caster.cellId || usedFires.has(a.fireId) || fires.some(f => f.cellId === a.cellId))) return fail('invalid-fire-target-or-id');
       const targets = targetIds.map(target => templates.find(t => t.id === target)!);
-      const targetIntelligence = targets.length ? Math.max(...targets.map(t => currentFacts.find(f => f.actorId === t.id)!.stats.intelligence)) : 0, immune = targets.some(t => t.immune);
+      const targetIntelligence = targets.length ? Math.max(...targets.map(t => readStats(t.id).intelligence)) : 0, immune = targets.some(t => t.immune);
       let proposed = roster.map(u => ({ ...u })), proposedFires = fires;
       if (a.kind === 'FireCast') {
-        const decision = decideInferredStrategyHit('fire', currentFacts.find(f => f.actorId === config.id)!.stats.intelligence, targetIntelligence, a.roll, true, immune, config.guaranteed, config.beautyBonus);
+        const decision = (effectiveProfile?decideInferredStrategyHitEffective255:decideInferredStrategyHit)('fire', readStats(config.id).intelligence, targetIntelligence, a.roll, true, immune, config.guaranteed, config.beautyBonus);
         if (!decision.ok) return decision;
         if (decision.hit) {
           const session = fireProjection(cells, roster, fires); if (!session.ok) return session;
@@ -555,9 +598,9 @@ function replay(input: unknown) {
         roles = roles.map(u => u.role === 'resident' ? u : ({ role: 'deployed', ...roster.find(t => t.id === u.id)! }));
         receipts.push({ commandId: command.id, kind: a.kind, turn, decision, cost, before, after: roles.map(u => ({ ...u })), firesBefore, firesAfter: fires });
       } else {
-        const effects = effectProjection(roster); if (!effects.ok) return effects;
+        const effects = effectProjection(roster,Boolean(effectiveProfile)); if (!effects.ok) return effects;
         const cast = executeInferredStrategyEffects(effects.state, { kind: 'cast', id: 'synthetic-field-cast', expectedRevision: 0, strategy: a.strategy,
-          targets: a.targets, intelligence: currentFacts.find(f => f.actorId === config.id)!.stats.intelligence, targetIntelligence, roll: a.roll, immune, guaranteed: config.guaranteed,
+          targets: a.targets, intelligence: readStats(config.id).intelligence, targetIntelligence, roll: a.roll, immune, guaranteed: config.guaranteed,
           beautyBonus: config.beautyBonus, eligibilityConfirmed: true });
         if (!cast.ok) return cast;
         const acted = executeInferredStrategyEffects(cast.state, { kind: 'act', id: 'synthetic-field-act', expectedRevision: cast.revision, targetId: caster.id });
@@ -579,8 +622,11 @@ function replay(input: unknown) {
         if (!role || role.role !== 'resident') return fail('completion-cannot-deploy-or-return');
         roles[index] = {...role, acted: true}; usedCultivationJobs.add(job.jobId);
       }
+      if(effectiveProfile)for(const update of step.effectiveFactsUpdates!){
+        const index=currentEffectiveFacts.findIndex(f=>f.actorId===update.after.actorId);currentEffectiveFacts[index]=update.after;
+      }
       receipts.push({commandId: command.id, kind: 'OuterStep', sourceOuterCommandId: step.sourceOuterCommandId,
-        factsBefore, factsAfter: [...currentFacts], completionJobs: step.completionJobs,
+        factsBefore, factsAfter: [...currentFacts], ...(effectiveProfile?{effectiveBefore,effectiveAfter:[...currentEffectiveFacts]}:{}), completionJobs: step.completionJobs,
         consumedAttributes: encounterConfig ? ['intelligence', 'charisma'] : ['intelligence'], metadataOnlyAttributes: encounterConfig ? ['leadership', 'war', 'politics', 'aptitudes', 'skillKey'] : ['leadership', 'war', 'politics', 'charisma', 'aptitudes', 'skillKey'],
         after: roles.map(r => ({...r}))});
     }
@@ -588,14 +634,14 @@ function replay(input: unknown) {
     if(roles.some(u=>u.role==='deployed'&&!uint(u.energy,capFor(u.id))))return fail('result-energy-exceeds-researched-cap');
     commands.push(command); usedCommands.add(command.id);
   }
-  const state: State = { schema: 'inferred-cultivated-mobile-field-v4', cells, templates:homeTemplates, movementMap, movementProfiles:homeProfiles, cultivationBaseline:homeFacts, ...(hadEncounter?{encounterConfig}:{}), ...(hadHazard?{hazardConfig}:{}), ...(energyProfile?{energyProfile}:{}), commands };
+  const state: State = { schema: 'inferred-cultivated-mobile-field-v4', cells, templates:homeTemplates, movementMap, movementProfiles:homeProfiles, cultivationBaseline:homeFacts, ...(hadEncounter?{encounterConfig}:{}), ...(hadHazard?{hazardConfig}:{}), ...(energyProfile?{energyProfile}:{}), ...(effectiveProfile?{effectiveProfile}:{}), commands };
   if (JSON.stringify(state).length > 100000) return fail('save-budget');
-  return frozen({ ok: true as const, state, revision: commands.length, turn, roster: roles.map(u=>u.role==='resident'?u:{...u,confusedTurns:u.condition.kind==='confused'?u.condition.remaining:0}), currentFacts, homeActorIds:[...homeIds], enemyActorIds:encounterConfig?.enemyActors.map(e=>e.template.id) ?? [], enemyInitialTroopBudget:encounterConfig?.enemyTroopBudget ?? 0, fires, fireDamageEvents, hazardEvents:fireDamageEvents, consumedRockfallIds:[...usedRockfalls], receipts, ...(energyProfile?{currentEnergyTechniquesByOwner:[{ownerId:energyProfile.homeOwnerId,techniques:[...homeEnergyTechniques]},...(encounterConfig?[{ownerId:encounterConfig.enemyOwnerId,techniques:[...energyProfile.enemyTechniqueIds]}]:[])],energyCapsByActor:templates.map(t=>({actorId:t.id,cap:capFor(t.id)}))}:{}),
+  return frozen({ ok: true as const, state, revision: commands.length, turn, roster: roles.map(u=>u.role==='resident'?u:{...u,confusedTurns:u.condition.kind==='confused'?u.condition.remaining:0}), currentFacts, ...(effectiveProfile?{currentEffectiveFacts}:{}), homeActorIds:[...homeIds], enemyActorIds:encounterConfig?.enemyActors.map(e=>e.template.id) ?? [], enemyInitialTroopBudget:encounterConfig?.enemyTroopBudget ?? 0, fires, fireDamageEvents, hazardEvents:fireDamageEvents, consumedRockfallIds:[...usedRockfalls], receipts, ...(energyProfile?{currentEnergyTechniquesByOwner:[{ownerId:energyProfile.homeOwnerId,techniques:[...homeEnergyTechniques]},...(encounterConfig?[{ownerId:encounterConfig.enemyOwnerId,techniques:[...energyProfile.enemyTechniqueIds]}]:[])],energyCapsByActor:templates.map(t=>({actorId:t.id,cap:capFor(t.id)}))}:{}),
     policyId: 'inferred-cultivated-mobile-field-proposal-v4' as const, proposalOnly: true as const,
     cityConservationVerified: false as const, campaignWorldWritten: false as const, nativeWorldVerified: false as const });
 }
 export function readInferredCultivatedMobileField(input: unknown) { try { return replay(detach(input)); } catch { return fail('invalid-data-input'); } }
-export function createInferredCultivatedMobileField(cells: unknown, templates: unknown, movementMap: unknown, movementProfiles: unknown, cultivationBaseline: unknown, encounterConfig?: unknown, hazardConfig?:unknown, energyProfile?:unknown) { return readInferredCultivatedMobileField({ schema: 'inferred-cultivated-mobile-field-v4', cells, templates, movementMap, movementProfiles, cultivationBaseline, ...(encounterConfig===undefined?{}:{encounterConfig}), ...(hazardConfig===undefined?{}:{hazardConfig}), ...(energyProfile===undefined?{}:{energyProfile}), commands: [] }); }
+export function createInferredCultivatedMobileField(cells: unknown, templates: unknown, movementMap: unknown, movementProfiles: unknown, cultivationBaseline: unknown, encounterConfig?: unknown, hazardConfig?:unknown, energyProfile?:unknown, effectiveProfile?:unknown) { return readInferredCultivatedMobileField({ schema: 'inferred-cultivated-mobile-field-v4', cells, templates, movementMap, movementProfiles, cultivationBaseline, ...(encounterConfig===undefined?{}:{encounterConfig}), ...(hazardConfig===undefined?{}:{hazardConfig}), ...(energyProfile===undefined?{}:{energyProfile}), ...(effectiveProfile===undefined?{}:{effectiveProfile}), commands: [] }); }
 export function executeInferredCultivatedMobileField(input: unknown, rawCommand: unknown) {
   const current = readInferredCultivatedMobileField(input); if (!current.ok) return current;
   let clean: unknown; try { clean = detach(rawCommand); } catch { return fail('invalid-data-command'); }

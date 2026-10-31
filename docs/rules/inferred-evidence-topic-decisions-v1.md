@@ -369,3 +369,23 @@ T37/T40/T45 新增 [旅行世界 v1](inferred-travel-world-v1.md)：源42城战�
 ## T40 唯一morale/field energy完整120消费者链（2026-10-30）
 
 [规则](unified-researched-morale120-v3.md)：原公式费用行动与加权回城不重置，旧default保持；静态未运行 历史确认与证据原文保留。
+
+## T28 当前装备effective实际供城务/forge/研究/官职/Train/field智魅/火粮（2026-10-30）
+
+[规则](unified-live-equipment-effective-v3.md)：永久PK才华XP与临时有效视图分离且允许收回后下降；固定物理panels/未知被动不伪造重算 历史确认与证据原文保留。
+
+## T23 Train真实calculateTraining消费effective WAR且资格奖励原proposal一次写回（2026-10-30）
+
+[规则](unified-live-equipment-effective-v3.md)：不伪造warBase/XP过校验；实际技巧16已120贯通；21旬有限非全战役 历史确认与证据原文保留。
+
+## T15 永久成长与装备派生双视图由同root历史维护（2026-10-30）
+
+[规则](unified-live-equipment-effective-v3.md)：0..255智力扩域及高政治非负火粮为具名推断，非原生caller证实 历史确认与证据原文保留。
+
+## T02 当前effective智魅接实际/既有推断策略核且完整上下游扩域（2026-10-30）
+
+[规则](unified-live-equipment-effective-v3.md)：旧100默认与原样本费用保留；高防御负fraction按原clip，不冒称全原生单调公式 历史确认与证据原文保留。
+
+## T40 统一owner每命令同步装备读视图且不改历史job参数（2026-10-30）
+
+[规则](unified-live-equipment-effective-v3.md)：完整action/资源/物品/有效视图同事务；旧默认保留，运行未验/原生资料仍待证 历史确认与证据原文保留。

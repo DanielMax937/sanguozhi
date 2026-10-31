@@ -81,6 +81,13 @@
         "scope": "FireCast资格/智力/气力10/行动从唯一roster读取，命中实际生成火、miss同样扣费；原三策略复用同兵力/气力/acted/混乱。FieldTick原子推进驻留火伤、寿命及行动混乱恢复，原始抽样由outerhistory保留；临时旧消费者仅投影，不保存双份兵力。固定战术格与部署，不含移动/真人/零终结/原生全资格。",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "unifiedEffectiveAttributesFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-live-equipment-effective-v3.md",
+        "scope": "旧100默认与原样本费用保留；高防御负fraction按原clip，不冒称全原生单调公式",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -426,6 +433,13 @@
         "scope": "不增第二AP或独立人物账本；零值与Closing仍排除",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "unifiedEffectiveAttributesFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-live-equipment-effective-v3.md",
+        "scope": "0..255智力扩域及高政治非负火粮为具名推断，非原生caller证实",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -656,6 +670,13 @@
         "scope": "显式profile由唯一研究成果派生cap；学习不发气力，旧100默认不变",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
+      },
+      "unifiedEffectiveAttributesFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-live-equipment-effective-v3.md",
+        "scope": "不伪造warBase/XP过校验；实际技巧16已120贯通；21旬有限非全战役",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
       }
     },
     {
@@ -821,6 +842,13 @@
         "module": "packages/engine/src/inferred-mobile-resource-world.ts",
         "rule": "docs/rules/inferred-unified-technique-owner-v1.md",
         "scope": "Train/field其他公式尚未全部消费有效加成，不能伪造base或夹值。与现Grant/Confiscate/自然忠诚保持单一持有关系；运行未验收。",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
+      },
+      "unifiedEffectiveAttributesFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-live-equipment-effective-v3.md",
+        "scope": "永久PK才华XP与临时有效视图分离且允许收回后下降；固定物理panels/未知被动不伪造重算",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
       }
@@ -1248,6 +1276,13 @@
         "module": "packages/engine/src/inferred-mobile-resource-world.ts",
         "rule": "docs/rules/unified-researched-morale120-v3.md",
         "scope": "原公式费用行动与加权回城不重置，旧default保持；静态未运行",
+        "nativeEvidenceClosed": false,
+        "runtimeVerified": false
+      },
+      "unifiedEffectiveAttributesFollowup": {
+        "module": "packages/engine/src/inferred-mobile-resource-world.ts",
+        "rule": "docs/rules/unified-live-equipment-effective-v3.md",
+        "scope": "完整action/资源/物品/有效视图同事务；旧默认保留，运行未验/原生资料仍待证",
         "nativeEvidenceClosed": false,
         "runtimeVerified": false
       }
