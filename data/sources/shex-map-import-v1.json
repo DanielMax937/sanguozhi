@@ -34,5 +34,53 @@
   ],
   "nativeDataRecovered": false,
   "sourceProgramsExecuted": false,
-  "candidateExecuted": false
+  "candidateExecuted": false,
+  "followups": [
+    {
+      "checkedAt": "2026-11-01T01:37:47Z",
+      "path": "Build/Content/Scenario/Scenario.json",
+      "commit": "ba3839939cf30b1ef4ab3d575563e1b530d818f1",
+      "blob": "ed04d4321d2e0b6cf4d111bd314f8643f2fa05f8",
+      "read": true,
+      "method": "GitHub read-only fetch_blob; complete UTF-8 JSON parsed as data, no upstream or candidate execution",
+      "previousFileAccessObservation": "2026-11-01 fetch_file lines1..30 still returned empty content; historical 2026-10-28 limitation retained above.",
+      "observations": {
+        "rootName": "测试剧本-英雄集结",
+        "infoId": 999,
+        "mapType": "DefaultMap",
+        "cityRecords": 87,
+        "corpsRecords": 42,
+        "forceRecords": 42,
+        "personRecords": 850,
+        "buildingTypeRawCounts": {
+          "1": 42,
+          "2": 10,
+          "3": 35
+        },
+        "coordinateRange": {
+          "x": [
+            33,
+            215
+          ],
+          "y": [
+            44,
+            219
+          ]
+        },
+        "recordsOutsideNative200SquareDomain": 11,
+        "example": {
+          "record": "citySet.1",
+          "name": "襄平",
+          "x": 202,
+          "y": 44
+        }
+      },
+      "decision": "Readable remake test-scenario evidence only; no native authentication or coordinate transform established.",
+      "nativeDataRecovered": false,
+      "sourceDataCopiedIntoRepository": false,
+      "sourceProgramsExecuted": false,
+      "candidateExecuted": false
+    }
+  ]
 }
+
