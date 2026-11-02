@@ -61,6 +61,15 @@ initial slotIds固定，允许在同一现有ID上读取owner当前completion/le
 
 owner的incomeFacilities()/current施設view必须应用同一metadata tombstones，不改immutable economicFacilities genesis，也不能同时保留另一份可消费农场。收入、展示及后续消费者复用该当前视图；非候选设施/角色/历史完全不动。
 
-## 交付状态
+## 纯叶阶段交付状态（历史记录）
 
 只完成纯叶候选及对应规则，未执行tests/typecheck/build或候选，未远端写。需唯一owner实际接WorldTick、postIncome调用、TP/food patch、harvest单输入、tombstone当前视图，再独立静态审阅；此前不宣称T33世界闭环完成。
+
+## 2026-11-01：当前集成与发布状态（静态核实）
+
+以上纯叶交付说明保留为该阶段的历史状态，不表示当前仍未接线。[PR #177](https://github.com/DanielMax937/sanguozhi/pull/177) 已于2026-10-31 03:23:22 UTC（北京时间11:23:22）合并，merge commit 为 `fb6bf7468f47352d0fc56e707d1d8bdfef775dcb`。本次核对的 main 为 `ebf85bd84d51a022ef37db9dae6c4bc451cfe1d4`；后续提交未移除该接线。
+
+当前有限 owner 合同见 [unified-safe-season-owner-v3.md](unified-safe-season-owner-v3.md)。实际 [WorldTick 内部阶段](https://github.com/DanielMax937/sanguozhi/blob/ebf85bd84d51a022ef37db9dae6c4bc451cfe1d4/packages/engine/src/bounded-city-piece-clock.ts#L1690-L1703) 从同一城市当前粮、TP、设施和居家角色构造 PreIncome 输入，核对并应用粮/TP patch，再调用既有收入阶段，最后在 awaiting-income 时调用 PostIncome。现态不是“只存在未接线纯叶”；也不新增第二个季节时钟或资源账本。
+
+“已集成、已合并”只说明这一有界蝗灾/丰收能力的代码与发布状态。原生概率、RNG与总调度顺序未因此得到认证；whole-season、瘟疫/健康、真人归属伤亡、零终结、P078及Closing继续排除。本次仅远端源码/PR状态静态对照，未运行测试、typecheck、build或候选，运行验收仍未完成。
+

@@ -1,6 +1,6 @@
 # T33 safe locust/harvest inside the existing WorldTick
 
-This finite owner capability is based on the frozen F/H/G owner candidate over main `d417ecce59ef4860753428f5d6c6592baf58a6b6`. Publication must first reconcile the exact predecessor reviewed/merged source. It extends the same mobile-resource-world-v3 and private city timeline, not an independent seasonal world. No whole city-season service or health/plague branch is imported or called.
+Historical implementation baseline: this finite owner capability was based on the frozen F/H/G owner candidate over main `d417ecce59ef4860753428f5d6c6592baf58a6b6`. The predecessor reconciliation requirement applied before publication; it is not an outstanding publication gate today. It extends the same mobile-resource-world-v3 and private city timeline, not an independent seasonal world. No whole city-season service or health/plague branch is imported or called.
 
 ## Explicit genesis and one harvest source
 
@@ -25,3 +25,10 @@ Any later failure—including insufficient TP during a selected farm removal, in
 The helper validates complete farm1/farm3 only; farm2 or incomplete farm configurations are rejected explicitly, not silently treated as immune. Monthly locust rate, farm sampling/TP cost, generation probabilities, duration and RNG rejection arithmetic are the previously documented simulation leaves, not claimed original constants. Food0 remains allowed and does not invoke starvation, troop loss, illness or death. TP insufficiency rejects, not clamps or skips the selected farm. Safe RNG is its own explicitly configured stream with full draw history, not native RNG or a promise to match the omitted plague branch's sequence.
 
 The existing finite horizon, 32 outer/field entries, 64 city entries, byte/node budgets and completion-tail reservations still apply. No new income/salary/resource duplicate, real-person ownership change, P078, Closing, zero termination or full campaign equivalence is introduced. Only static inspection/editing was performed; no tests, build, typecheck or candidate runtime execution.
+
+## Publication status checked 2026-11-01
+
+[PR #177](https://github.com/DanielMax937/sanguozhi/pull/177) merged on 2026-10-31 at 03:23:22 UTC (11:23:22 Asia/Shanghai), commit `fb6bf7468f47352d0fc56e707d1d8bdfef775dcb`. Current checked main is `ebf85bd84d51a022ef37db9dae6c4bc451cfe1d4`. The [current private timeline](https://github.com/DanielMax937/sanguozhi/blob/ebf85bd84d51a022ef37db9dae6c4bc451cfe1d4/packages/engine/src/bounded-city-piece-clock.ts#L1690-L1703) retains PreIncome → same-owner patches → existing income → PostIncome; this is no longer an unpublished owner proposal. The [pure-leaf document](synthetic-safe-season-leaf-v1.md) preserves its earlier stage status separately from this current state.
+
+This update changes documentation only. Merged source and static call-order inspection do not establish runtime acceptance, original-game equivalence, or a complete campaign. No tests, typecheck, build, or candidate execution were performed for this status update; all finite-policy and excluded-result boundaries above remain unchanged.
+
