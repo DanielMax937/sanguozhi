@@ -197,3 +197,10 @@ ceil按非负整数`(numerator + denominator − 1) / denominator`的整数商�
 本实现使用具名经验lookup和provisional整数writer/容量/资格/奖励/AP/调度政策。来源身份/135条listing完整性不等于三helper闭合，更不等于stock或原生执行认证。nativeExecution=false、stockVerified=false；确切PC-PK1.1/Vanilla跨版本、原生价格更新、商人发生、AP公式与地图/owner/helper仍开放。
 
 O10-A与B合计只是O10能力的有限覆盖，不是“全部财政完成”。原43组未决证据主题分母不变，P078及相关capture/ownership/mission/return/俘虏欠薪仍排除。旧经济页§8保留原证据与未知，本页描述新增独立服务规则，不覆盖其历史来源等级。
+
+## 2026-11-02 来源后续：三个算术helper已静态取证
+
+上述§10保留2026-10-17的历史证据状态。本次从固定公开IDB的ID1字节区取得三个helper本体，并与005CA620的331字节公开listing逐字节核对；新增独立 [S1 raw已解析输入报价](merchant-raw-quote-s1-resolved-v1.md)。其乘低64、带符号除法向零、signed64界限裁剪只绑定MOD关联source profile，不认证clean-stock。
+
+这不改变本页的UI3..7、经验锚点、ceil/floor、库存/AP/奖励和保存协议。raw价格到UI尺度、实际caller资格/getter/世界writer和跨版本证据仍未知。新纯核未接入此商人服务或统一world；旧报价不可悄悄替换。没有运行测试或候选。
+
