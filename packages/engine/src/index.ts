@@ -1392,3 +1392,7 @@ export { readInferredMobileResourceWorld, createInferredMobileResourceWorld, exe
 export { readInferredMobileField, createInferredMobileField, executeInferredMobileField, saveInferredMobileField, loadInferredMobileField } from './inferred-mobile-field.ts';
 
 export { createInferredPracticeMobileSlice } from './inferred-practice-mobile-slice.ts';
+
+export { calculateMerchantRawQuote, MERCHANT_RAW_QUOTE_PROFILE } from './merchant-raw-quote.ts';
+export type { MerchantRawQuoteInput, MerchantRawQuoteReason } from './merchant-raw-quote.ts';
+

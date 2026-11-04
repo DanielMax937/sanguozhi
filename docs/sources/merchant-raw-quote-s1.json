@@ -1,0 +1,94 @@
+{
+  "id": "merchant-raw-quote-s1-resolved-v1",
+  "checkedAtUTC": "2026-11-02T05:30:00Z",
+  "repository": "sjn4048/311MemoryResearch",
+  "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+  "archivePath": "IDA Related/san11pk.zip",
+  "archiveBytes": 16416420,
+  "archiveGitBlob": "a6689f01a228d272c66abb376bcfa0044ff767ef",
+  "archiveSHA256": "47beee4ac990869694a5e6f7577947cd6b34a41aefe60bace3af3350c682ce5a",
+  "member": {
+    "name": "san11pk.idb",
+    "bytes": 680704119,
+    "version": 6,
+    "id1SectionHeaderOffset": 41369861,
+    "sectionCompression": 0,
+    "sectionBytes": 639262720,
+    "signature": "VA*\\0",
+    "flagDataRelativeOffset": 8192,
+    "segments": [
+      [
+        "0x400000",
+        "0x9c62000"
+      ],
+      [
+        "0x9c7c000",
+        "0x9c83000"
+      ]
+    ],
+    "byteExtraction": "little-endian uint32 flags, low8 bits; four bytes per represented address"
+  },
+  "sourceIdentity": "Database input path names 血色5.0公测/san11pk.exe; MOD-associated, not clean stock authentication.",
+  "ranges": [
+    {
+      "start": "0x5ca5b0",
+      "endInclusive": "0x5ca5e2",
+      "bytes": 51,
+      "sha256": "50d7fe22907401549f880bea08685e0cfe62b5fe57a2b0d81aa12b5c3b3c0778",
+      "hex": "8b4c24108b5424083bca568b7424107f0a8b4424087c1a3bf076168b54241c3bd17f0a8b4424187c083bc676048bc68bd15ec3"
+    },
+    {
+      "start": "0x70a280",
+      "endInclusive": "0x70a329",
+      "bytes": 170,
+      "sha256": "8964dcf0d769cb61dd4354feac00491ae8c1b34eb9627a4c5ec2d4350243d395",
+      "hex": "57565333ff8b4424140bc07d14478b542410f7d8f7da83d80089442414895424108b44241c0bc07d14478b542418f7d8f7da83d8008944241c895424180bc075188b4c24188b44241433d2f7f18bd88b442410f7f18bd3eb418bd88b4c24188b5424148b442410d1ebd1d9d1ead1d80bdb75f4f7f18bf0f764241c8bc88b442418f7e603d1720e3b542414770872073b44241076014e33d28bc64f7507f7daf7d883da005b5e5fc21000"
+    },
+    {
+      "start": "0x70a330",
+      "endInclusive": "0x70a363",
+      "bytes": 52,
+      "sha256": "3d0898d998acc8af3ea17032ff56fd1b963c685b072f669c52d4b8267f9d0a78",
+      "hex": "8b4424088b4c24100bc88b4c240c75098b442404f7e1c2100053f7e18bd88b442408f764241403d88b442408f7e103d35bc21000"
+    },
+    {
+      "start": "0x5ca620",
+      "endInclusive": "0x5ca76a",
+      "bytes": 331,
+      "sha256": "b5e9b8f9d2a813e2c4c2e106c41709f78d53aecca79c9b231aeb958779d8f99f",
+      "hex": "83ec08568b74241056e80200ebff83c40485c00f842b0100006a008bcee81ec0ebff85c00f841a010000578b7c241885ff75085f33c05e83c408c356b958192007e80a71ecff85c07c0583f8297e0383c8ff50b958192007e89363ecff8bf056e8abffeaff83c40485c074c78b44241c85c074bf33c985c00f9fc185c0894c24087d06f7d88944241c53555733dbe87dffeaff83c40485c0740a8bcfe8dfe9ebff0fb6d80fb6467c998bf0b8c20100002bc38bfa998bd88b44241085c08b4424248bea99742c55535250e841fc13006a006a0a5250e836fc13006a00689001000057568bd88beae824fc130052505553eb2d6aff6880f3ffff5250e810fc13005756558bca5389442424894c2420e8fdfb130052508b442418508b44242050e83cfb13006a0068ffffff7f52506aff6800000080e857feffff83c4185d5b5f5e83c408c333c05e83c408c3"
+    }
+  ],
+  "callerListing": "内存资料/整理/Func-内政05-计算交易收支.txt",
+  "callerListingBytesMatch": 331,
+  "sourceProgramsExecuted": false,
+  "candidateExecuted": false,
+  "stockVerified": false,
+  "uiScaleVerified": false,
+  "unknown": [
+    "raw TradePrice to UI mapping",
+    "native pointer/getter/eligibility gates",
+    "transaction writers/rewards/scheduler",
+    "clean-stock and cross-version equivalence"
+  ],
+  "engineeringDomain": {
+    "politicsByte": "0..255",
+    "rawTradePriceByte": "1..255",
+    "signedFoodQuantity": "-2147483647..2147483647",
+    "zeroPrice": "reject; do not emulate division fault",
+    "intMinQuantity": "reject; do not claim NEG overflow semantics"
+  },
+  "parserReferences": [
+    "https://github.com/williballenthin/python-idb/blob/master/idb/fileformat.py",
+    "https://github.com/nlitsme/idbutil/blob/master/IDB-FORMAT.md"
+  ],
+  "sourceIdentityOffsets": {
+    "memberOffsets": [
+      19143734,
+      37542710
+    ],
+    "encoding": "UTF-8",
+    "text": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+    "independentlyRead": true
+  }
+}
