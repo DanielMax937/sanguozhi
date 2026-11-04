@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "profile": "same-abnormal-duration-s1-resolved-v1",
+  "researchDateUTC": "2026-11-04",
+  "classification": "mod-associated-idb-source-profile",
+  "stockVerified": false,
+  "nativeExecution": false,
+  "source": {
+    "repository": "sjn4048/311MemoryResearch",
+    "commit": "66e167e40c3440929ec016f3872aefc3486434c1",
+    "path": "IDA Related/san11pk.zip",
+    "url": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/IDA%20Related/san11pk.zip",
+    "gitBlob": "a6689f01a228d272c66abb376bcfa0044ff767ef",
+    "archiveSha256": "47beee4ac990869694a5e6f7577947cd6b34a41aefe60bace3af3350c682ce5a",
+    "member": "san11pk.idb",
+    "id1SectionOffset": 41369861,
+    "flagsStart": 41378062,
+    "firstSegmentStart": "0x400000",
+    "bytesPerFlag": 4,
+    "extraction": "Take low byte of each little-endian 32-bit ID1 flag. Independent reviewer parsed ZIP header/ID1 and re-extracted all eight ranges; hashes and byte-presence flags match."
+  },
+  "modAssociation": {
+    "memberOffsets": [
+      19143734,
+      37542710
+    ],
+    "encoding": "UTF-8",
+    "observedText": "D:\\Games\\三国志11\\血色5.0公测\\san11pk.exe",
+    "meaning": "Identifies MOD-associated source profile; does not prove which function differs from stock."
+  },
+  "ranges": [
+    {
+      "ea": "0x46ef80",
+      "size": 10,
+      "idbOffset": 43196174,
+      "sha256": "ca61dd78194c3ba8c719ba2f6af7a08994f210654e77739e8b26e3bf365977ae",
+      "fullByteFlagsPresent": true
+    },
+    {
+      "ea": "0x472150",
+      "size": 52,
+      "idbOffset": 43247182,
+      "sha256": "82bef9b78dc532adc5b0405a42da040048639dfee9ff2be22ed8d043c21140d0",
+      "fullByteFlagsPresent": true
+    },
+    {
+      "ea": "0x496350",
+      "size": 28,
+      "idbOffset": 43839054,
+      "sha256": "109618e6d93f8352e00cbd954dd59b06f80c9cbe3cdace7747e5f270d408f071",
+      "fullByteFlagsPresent": true
+    },
+    {
+      "ea": "0x4ae5d0",
+      "size": 87,
+      "idbOffset": 44234830,
+      "sha256": "1d5496612a8dbd4026996e2b5cf1e2537fc62446c6bd050d279036b93a69aa87",
+      "fullByteFlagsPresent": true
+    },
+    {
+      "ea": "0x4aea70",
+      "size": 717,
+      "idbOffset": 44239566,
+      "sha256": "3da7739da4b86cb222e30f26489d1e06a151f5c68beef2f6d92618779efb8340",
+      "fullByteFlagsPresent": true
+    },
+    {
+      "ea": "0x5917d0",
+      "size": 578,
+      "idbOffset": 47956046,
+      "sha256": "f9ee3df715a19408d02143b8954c9ef2d3f11fb644ba1a7eac8c3d4365cf5051",
+      "fullByteFlagsPresent": true
+    },
+    {
+      "ea": "0x591a20",
+      "size": 578,
+      "idbOffset": 47958414,
+      "sha256": "24c1d64345eb01f0231c86d6f32811c984a047c718abf686bfced0cfca260a74",
+      "fullByteFlagsPresent": true
+    },
+    {
+      "ea": "0x5933a0",
+      "size": 784,
+      "idbOffset": 47984526,
+      "sha256": "7d80b7bb45d5330b844f962514f16bb0f106f3b377078b352857117d60142c66",
+      "fullByteFlagsPresent": true
+    }
+  ],
+  "dispatcherComparison": {
+    "instructionCount": 237,
+    "bytes": 603,
+    "allMatch": true,
+    "mismatches": []
+  },
+  "dispatcherUrl": "https://github.com/sjn4048/311MemoryResearch/blob/66e167e40c3440929ec016f3872aefc3486434c1/内存资料/函数[计策施放全过程].txt",
+  "claims": {
+    "criticalParameter": "0059342C sets EBX from critical result; 005934A7/005934C3 pushes EBX as third argument to false report/disturb. Callee [esp+0x3F4] at duration branch is third entry argument.",
+    "successParameter": "EBP holds success at00593407, pushed second at005934A8/005934C4.",
+    "durationBranches": [
+      "00591912..00591932",
+      "00591B62..00591B82"
+    ],
+    "ordinary": "zero-extended AX of00472150(2)+1",
+    "critical": "constant3, no duration RNG call",
+    "sameStatusBranch": "004AEACF compares requested status to [target+0x24], equal jumps004AEC56",
+    "durationClamp": "004AEC56..004AED25 clamps low argument byte1..5",
+    "remainingAccumulator": "004AE5D0 reads[target+0x28], adds increment, clamps0..5, writes through00496350; returned value is new-old",
+    "rng": "00472150 for parameter2 advances uint32 seed by multiplier0x6C078965 and addend0x3039, returns high16 modulo2; no measured distribution claimed"
+  },
+  "scope": {
+    "successfulApplication": true,
+    "sameStatusOnly": [
+      1,
+      2
+    ],
+    "currentRemaining": [
+      0,
+      5
+    ],
+    "ordinaryResolvedRng": [
+      0,
+      1
+    ],
+    "criticalNoDurationRng": true,
+    "crossStatusSupported": false,
+    "legacyFallbackChanged": false,
+    "rootExportsAdded": false,
+    "worldWrites": false
+  },
+  "unknown": [
+    "clean-stock and cross-version equivalence",
+    "cross-status presentation and other call side effects",
+    "runtime seed distribution/global RNG consumption",
+    "full eligibility/success/critical-rate caller validation",
+    "runtime acceptance"
+  ],
+  "verification": {
+    "staticReview": "completed-static-only",
+    "testsRun": false,
+    "typecheckRun": false,
+    "buildRun": false,
+    "candidateExecuted": false,
+    "remoteMutation": false,
+    "independentChecks": [
+      "ZIP SHA256 and IDB header/ID1/8 ranges re-extracted",
+      "two MOD-associated member path offsets",
+      "237 dispatcher instructions/603 bytes match",
+      "8 candidate assembly ranges contiguous and hashes match",
+      "candidate formula/input domain/pure outputs and four-file manifest",
+      "fixed-base bounded-data helper text reviewed"
+    ],
+    "runtimeAcceptance": false
+  }
+}
